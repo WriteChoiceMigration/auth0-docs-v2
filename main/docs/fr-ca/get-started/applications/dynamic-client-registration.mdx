@@ -1,13 +1,13 @@
 ---
 title: "Enregistrement dynamique d'applications"
 permalink: "dynamic-client-registration"
+'description': "Apprenez à enregistrer dynamiquement des applications avec Auth0 en utilisant Management API."
 'og:title': "Enregistrement dynamique d'applications"
 'og:description': "Apprenez à enregistrer dynamiquement des applications avec Auth0 en utilisant Management API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Enregistrement dynamique d'applications"
 'twitter:description': "Apprenez à enregistrer dynamiquement des applications avec Auth0 en utilisant Management API."
 ---
-# Enregistrement dynamique d'applications
 
 Vous pouvez enregistrer dynamiquement des applications tierces pour votre locataire. Cette fonctionnalité est basée sur la spécification [Enregistrement dynamique du client OpenID Connect](https://openid.net/specs/openid-connect-registration-1_0.html).
 
@@ -23,18 +23,18 @@ Par défaut, l’enregistrement dynamique d'applications est désactivé pour to
 
 Pour ce faire, accédez à [Dashboard > Settings (Paramètres) > Advanced (Avancé)](https://manage.auth0.com/#/tenant/advanced) et activez l’option **Enregistrement dynamique de l’application OIDC**.
 
-Vous pouvez également mettre à jour cet indicateur en utilisant le point de terminaison de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip> [`/Tenant/patch_settings`](/docs/api/management/v2#!/Tenants/patch_settings).
+Vous pouvez également mettre à jour cet indicateur en utilisant le point de terminaison de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip> [`/Tenant/patch_settings`](/docs/fr-ca/api/management/v2#!/Tenants/patch_settings).
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/tenants/settings' \
 --header 'authorization: Bearer API2_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "flags": { "enable_dynamic_client_registration": true } }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/tenants/settings");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -44,7 +44,7 @@ request.AddParameter("application/json", "{ \"flags\": { \"enable_dynamic_client
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -65,8 +65,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/settings")
 .header("content-type", "application/json")
 .header("authorization", "Bearer API2_ACCESS_TOKEN")
@@ -75,7 +75,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/setti
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -92,8 +92,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer API2_ACCESS_TOKEN",
@@ -119,7 +119,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/tenants/settings",
@@ -144,8 +144,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"flags\": { \"enable_dynamic_client_registration\": true } }"
@@ -160,7 +160,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -175,8 +175,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"flags\": { \"enable_dynamic_client_registration\": true } }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -217,13 +217,13 @@ Pour enregistrer dynamiquement une application avec Auth0, vous devez envoyer un
 Pour créer une application portant le nom `Mon application dynamique` et les URL de rappel `https://application.example.com/callback` et `https://application.example.com/callback2`, utilisez l’extrait de code suivant :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oidc/register' \
 --header 'content-type: application/json' \
 --data '{"client_name":"My Dynamic Application","redirect_uris": ["https://application.example.com/callback", "https://application.example.com/callback2"]}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oidc/register");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -231,7 +231,7 @@ request.AddParameter("application/json", "{\"client_name\":\"My Dynamic Applicat
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -250,15 +250,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oidc/register")
 .header("content-type", "application/json")
 .body("{\"client_name\":\"My Dynamic Application\",\"redirect_uris\": [\"https://application.example.com/callback\", \"https://application.example.com/callback2\"]}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -277,8 +277,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"client_name": @"My Dynamic Application",
@@ -303,7 +303,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oidc/register",
@@ -326,8 +326,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"client_name\":\"My Dynamic Application\",\"redirect_uris\": [\"https://application.example.com/callback\", \"https://application.example.com/callback2\"]}"
@@ -338,7 +338,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -351,8 +351,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"client_name\":\"My Dynamic Application\",\"redirect_uris\": [\"https://application.example.com/callback\", \"https://application.example.com/callback2\"]}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = [
@@ -388,7 +388,7 @@ Vous pouvez aussi définir une valeur pour `token_endpoint_auth_method`, qui peu
 
 La réponse comprend les informations de base sur l’application.
 
-```
+```json lines
 HTTP/1.1 201 Created
 Content-Type: application/json
 {
@@ -406,7 +406,7 @@ Content-Type: application/json
 Où :
 
 * **client_id** : identifiant unique du client. Il s’agit de l’identifiant que vous utiliserez lors de la configuration de vos applications pour utiliser Auth0. Il est généré par le système et ne peut être modifié.
-* **client_secret** : secret client alphanumérique de 64 bits. Cette valeur est utilisée par les applications pour s’authentifier auprès de l’Authentication API [`/token`](/docs/api/authentication#get-token) et pour signer et valider les jetons d’ID.
+* **client_secret** : secret client alphanumérique de 64 bits. Cette valeur est utilisée par les applications pour s’authentifier auprès de l’Authentication API [`/token`](/docs/fr-ca/api/authentication#get-token) et pour signer et valider les jetons d’ID.
 * **client_secret_expires_at**: heure à laquelle le `client_secret` expirera. Pour Auth0, cette valeur sera toujours égale à zéro (`0`), ce qui signifie que l’application n’expire jamais.
 
 Notez l’ID et le secret client, car ce sont les éléments les plus importants pour l’exécution des flux d’authentification et d’autorisation. Pour en savoir plus, lisez [Flux d’authentification et d’autorisation](/docs/fr-ca/get-started/authentication-and-authorization-flow).
@@ -421,7 +421,7 @@ Nous allons voir un exemple simple, qui montre comment appeler une API à partir
 
 Tout d’abord, vous devez configurer votre application pour envoyer l’utilisateur à l’URL d’autorisation :
 
-```
+``` lines
 https://{yourDomain}/authorize?
   audience={API_AUDIENCE}&
   scope={SCOPE}&
@@ -444,7 +444,7 @@ Où :
 
 Par exemple :
 
-```
+```html lines
 <a href="https://{yourDomain}/authorize?scope=appointments%20contacts&audience=appointments:api&response_type=id_token%20token&client_id={yourClientId}&redirect_uri={https://yourApp/callback}">
   Sign In
 </a>

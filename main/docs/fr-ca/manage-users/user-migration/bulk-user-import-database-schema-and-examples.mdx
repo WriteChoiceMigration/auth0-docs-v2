@@ -1,13 +1,13 @@
 ---
 title: "Schéma de base données pour importation d’utilisateurs en lots et exemples"
 permalink: "bulk-user-import-database-schema-and-examples"
+'description': "Apprenez comment performer importations d’utilisateurs en masse avec Management API."
 'og:title': "Schéma de base données pour importation d’utilisateurs en lots et exemples"
 'og:description': "Apprenez comment performer importations d’utilisateurs en masse avec Management API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Schéma de base données pour importation d’utilisateurs en lots et exemples"
 'twitter:description': "Apprenez comment performer importations d’utilisateurs en masse avec Management API."
 ---
-# Schéma de base données pour importation d’utilisateurs en lots et exemples
 
 Le fichier des utilisateurs doit contenir un tableau avec les informations des utilisateurs au format JSON.
 
@@ -21,7 +21,7 @@ La limite de la taille des fichiers pour une importation en bloc est de 500 Ko.
 
 Le schéma JSON suivant décrit les utilisateurs valides :
 
-```json
+```json lines
 {
   "type": "object",
 	"properties": {
@@ -309,91 +309,91 @@ Vous pouvez importer des utilisateurs ayant les propriétés suivantes :
 </thead>
 <tbody>
 <tr>
-<td><code>app_metadata</code></td>
+<td>`app_metadata`</td>
 <td>objet</td>
-<td>Données qui peuvent avoir une incidence sur les principales fonctionnalités de l’application ou sur ce à quoi l’utilisateur peut accéder. Les données stockées dans <code>app_metadata</code> ne peuvent pas être modifiées par les utilisateurs. Cela peut inclure des éléments tels que les plans d’assistance, les rôles ou les groupes d’accès.</td>
+<td>Données qui peuvent avoir une incidence sur les principales fonctionnalités de l’application ou sur ce à quoi l’utilisateur peut accéder. Les données stockées dans `app_metadata` ne peuvent pas être modifiées par les utilisateurs. Cela peut inclure des éléments tels que les plans d’assistance, les rôles ou les groupes d’accès.</td>
 <td>Oui</td>
 </tr>
 <tr>
-<td><code>blocked</code></td>
+<td>`blocked`</td>
 <td>booléen</td>
 <td>Indique si l’utilisateur a été bloqué.</td>
 <td>Non</td>
 </tr>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>chaîne</td>
 <td>L’adresse courriel de l’utilisateur.</td>
 <td>Non</td>
 </tr>
 <tr>
-<td><code>email_verified</code></td>
+<td>`email_verified`</td>
 <td>booléen</td>
-<td>Indique si l’utilisateur a vérifié son adresse courriel. Défini sur <code>false</code> par défaut si <code>email</code> est mis à jour par upsert, mais pas par <code>email_verified</code>.</td>
+<td>Indique si l’utilisateur a vérifié son adresse courriel. Défini sur `false` par défaut si `email` est mis à jour par upsert, mais pas par `email_verified`.</td>
 <td>Oui</td>
 </tr>
 <tr>
-<td><code>family_name</code></td>
+<td>`family_name`</td>
 <td>chaîne</td>
 <td>Le nom de famille de l’utilisateur.</td>
 <td>Oui</td>
 </tr>
 <tr>
-<td><code>given_name</code></td>
+<td>`given_name`</td>
 <td>chaîne</td>
 <td>Le nom de l’utilisateur.</td>
 <td>Oui</td>
 </tr>
 <tr>
-<td><code>name</code></td>
+<td>`name`</td>
 <td>chaîne</td>
 <td>Le nom complet de l’utilisateur.</td>
 <td>Oui</td>
 </tr>
 <tr>
-<td><code>nickname</code></td>
+<td>`nickname`</td>
 <td>chaîne</td>
 <td>Le pseudo de l’utilisateur.</td>
 <td>Oui</td>
 </tr>
 <tr>
-<td><code>picture</code></td>
+<td>`picture`</td>
 <td>chaîne</td>
 <td>URL pointant sur l’image du profil de l’utilisateur.</td>
 <td>Oui</td>
 </tr>
 <tr>
-<td><code>user_id</code></td>
+<td>`user_id`</td>
 <td>chaîne</td>
 <td>L’identifiant unique de l’utilisateur. Cela sera précédé par la stratégie de connexion.</td>
 <td>Non</td>
 </tr>
 <tr>
-<td><code>user_metadata</code></td>
+<td>`user_metadata`</td>
 <td>objet</td>
 <td>Données qui n’ont pas d’incidence sur ce que les utilisateurs peuvent ou ne peuvent pas consulter, comme l’adresse professionnelle, l’adresse personnelle ou les préférences de l’utilisateur.</td>
 <td>Oui</td>
 </tr>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>chaîne</td>
 <td>Le nom d’utilisateur de l’utilisateur.</td>
 <td>Non</td>
 </tr>
 <tr>
-<td><code>password_hash</code></td>
+<td>`password_hash`</td>
 <td>chaîne</td>
 <td>Mot de passe haché pour la connexion de l’utilisateur. Lorsque des utilisateurs sont créés, Auth0 utilise <a href="https://auth0.com/blog/hashing-in-action-understanding-bcrypt/">bcrypt</a> pour sécuriser le mot de passe. L’importation de mots de passe hachés permet aux utilisateurs de conserver leurs mots de passe pour une expérience plus fluide. Les mots de passe compatibles doivent être hachés à l’aide de bcrypt $2a$ ou $2b$ et comporter 10 saltRounds. Cette propriété ne peut être fournie que lorsque l’utilisateur est importé pour la première fois et ne peut pas être mise à jour ultérieurement.</td>
 <td>Non</td>
 </tr>
 <tr>
-<td><code>custom_password_hash</code></td>
+<td>`custom_password_hash`</td>
 <td>objet</td>
-<td>Une façon plus générique de fournir le mot de passe haché de l’utilisateur. Cette valeur peut être utilisée à la place du champ <code>password_hash</code> lorsque le mot de passe a été créé avec un algorithme alternatif. Pendant le processus d’importation en bloc, vous pouvez mettre à jour le <code>custom_password_hash</code> si l’utilisateur ne s’est pas connecté en utilisant le <code>custom_password_hash</code> initialement importé.</td>
+<td>Une façon plus générique de fournir le mot de passe haché de l’utilisateur. Cette valeur peut être utilisée à la place du champ `password_hash` lorsque le mot de passe a été créé avec un algorithme alternatif. Pendant le processus d’importation en bloc, vous pouvez mettre à jour le `custom_password_hash` si l’utilisateur ne s’est pas connecté en utilisant le `custom_password_hash` initialement importé.</td>
 <td>Oui</td>
 </tr>
 <tr>
-<td><code>mfa_factors</code></td>
+<td>`mfa_factors`</td>
 <td>tableau</td>
 <td>Les facteurs MFA qui peuvent être utilisés pour authentifier cet utilisateur</td>
 <td>Non</td>
@@ -441,89 +441,89 @@ L’objet `user.custom_password_hash` possède les propriétés suivantes :
 </thead>
 <tbody>
 <tr>
-<td><code>algorithm</code></td>
+<td>`algorithm`</td>
 <td>chaîne</td>
-<td>L’algorithme utilisé pour hacher le mot de passe. Doit être l’un des suivants : <ul><li><code>argon2</code></li><li><code>bcrypt</code></li><li><code>hmac</code></li><li><code>ldap</code></li><li><code>md4</code></li><li><code>md5</code></li><li><code>sha1</code></li><li><code>sha256</code></li><li><code>sha512</code></li><li><code>pbkdf2</code></li><li><code>scrypt</code></li></ul></td>
+<td>L’algorithme utilisé pour hacher le mot de passe. Doit être l’un des suivants : <ul><li>`argon2`</li><li>`bcrypt`</li><li>`hmac`</li><li>`ldap`</li><li>`md4`</li><li>`md5`</li><li>`sha1`</li><li>`sha256`</li><li>`sha512`</li><li>`pbkdf2`</li><li>`scrypt`</li></ul></td>
 </tr>
 <tr>
-<td><code>hash</code></td>
+<td>`hash`</td>
 <td>objet</td>
 <td></td>
 </tr>
 <tr>
-<td><code>hash.value</code></td>
+<td>`hash.value`</td>
 <td>chaîne</td>
 <td>Le hachage du mot de passe.</td>
 </tr>
 <tr>
-<td><code>hash.encoding</code></td>
+<td>`hash.encoding`</td>
 <td>chaîne</td>
-<td>Le codage du hachage fourni. Doit être l’un des suivants : <ul><li><code>base64</code></li><li><code>hex</code></li><li><code>utf8</code></li></ul>Les variantes hexagonales majuscules et minuscules sont prises en charge, ainsi que la base64 encodé pour URL.</td>
+<td>Le codage du hachage fourni. Doit être l’un des suivants : <ul><li>`base64`</li><li>`hex`</li><li>`utf8`</li></ul>Les variantes hexagonales majuscules et minuscules sont prises en charge, ainsi que la base64 encodé pour URL.</td>
 </tr>
 <tr>
-<td><code>hash.digest</code></td>
+<td>`hash.digest`</td>
 <td>chaîne</td>
-<td>L’algorithme utilisé pour générer le hachage HMAC. Doit être l’un des suivants : <ul><li><code>md4</code></li><li><code>md5</code></li><li><code>ripemd160</code></li><li><code>sha1</code></li><li><code>sha224</code></li><li><code>sha256</code></li><li><code>sha384</code></li><li><code>sha512</code></li><li><code>whirlpool</code></li></ul></td>
+<td>L’algorithme utilisé pour générer le hachage HMAC. Doit être l’un des suivants : <ul><li>`md4`</li><li>`md5`</li><li>`ripemd160`</li><li>`sha1`</li><li>`sha224`</li><li>`sha256`</li><li>`sha384`</li><li>`sha512`</li><li>`whirlpool`</li></ul></td>
 </tr>
 <tr>
-<td><code>hash.key</code></td>
+<td>`hash.key`</td>
 <td>objet</td>
 <td>La clé utilisée pour générer le hachage HMAC.</td>
 </tr>
 <tr>
-<td><code>hash.key.value</code></td>
+<td>`hash.key.value`</td>
 <td>chaîne</td>
 <td>La valeur de la clé.</td>
 </tr>
 <tr>
-<td><code>hash.key.encoding</code></td>
+<td>`hash.key.encoding`</td>
 <td>chaîne</td>
-<td>L’encodage de la clé. Doit être l’un des suivants : <ul><li><code>base64</code></li><li><code>hex</code></li><li><code>utf8</code></li></ul>Par défaut, <code>hash.key.encoding</code> est <code>utf8</code>.</td>
+<td>L’encodage de la clé. Doit être l’un des suivants : <ul><li>`base64`</li><li>`hex`</li><li>`utf8`</li></ul>Par défaut, `hash.key.encoding` est `utf8`.</td>
 </tr>
 <tr>
-<td><code>salt</code></td>
+<td>`salt`</td>
 <td>objet</td>
 <td></td>
 </tr>
 <tr>
-<td><code>salt.value</code></td>
+<td>`salt.value`</td>
 <td>chaîne</td>
 <td>La valeur de salage utilisée pour générer le hachage.</td>
 </tr>
 <tr>
-<td><code>salt.encoding</code></td>
+<td>`salt.encoding`</td>
 <td>chaîne</td>
-<td>Le codage de la valeur de salage fournie. Doit être l’un des suivants : <ul><li><code>base64</code></li><li><code>hex</code></li><li><code>utf8</code></li></ul> Les variantes hexagonales majuscules et minuscules sont prises en charge, ainsi que la base64 encodé pour URL. Par défaut, <code>salt.encoding</code> est <code>utf8</code>.</td>
+<td>Le codage de la valeur de salage fournie. Doit être l’un des suivants : <ul><li>`base64`</li><li>`hex`</li><li>`utf8`</li></ul> Les variantes hexagonales majuscules et minuscules sont prises en charge, ainsi que la base64 encodé pour URL. Par défaut, `salt.encoding` est `utf8`.</td>
 </tr>
 <tr>
-<td><code>salt.position</code></td>
+<td>`salt.position`</td>
 <td>chaîne</td>
-<td>La position de la valeur de salage lors du calcul du hachage. Par défaut, <code>salt.position</code> est <code>prefix</code>.</td>
+<td>La position de la valeur de salage lors du calcul du hachage. Par défaut, `salt.position` est `prefix`.</td>
 </tr>
 <tr>
-<td><code>password.encoding</code></td>
+<td>`password.encoding`</td>
 <td>chaîne</td>
-<td>Le codage du mot de passe utilisé pour générer le hachage. Doit être l’un des suivants : <ul><li><code>ascii</code></li><li><code>utf8</code></li><li><code>utf16le</code></li><li><code>ucs2</code></li><li><code>latin1</code></li><li><code>binary</code></li></ul> Lors de la connexion, le mot de passe fourni par l’utilisateur sera transcodé à partir de <code>password.encoding</code> avant d’être vérifié par rapport au hachage fourni. Par exemple, si votre hachage a été généré à partir d’une chaîne encodée <code>ucs2</code>, alors vous devriez définir : <code> "encoding": "ucs2"</code></td>
+<td>Le codage du mot de passe utilisé pour générer le hachage. Doit être l’un des suivants : <ul><li>`ascii`</li><li>`utf8`</li><li>`utf16le`</li><li>`ucs2`</li><li>`latin1`</li><li>`binary`</li></ul> Lors de la connexion, le mot de passe fourni par l’utilisateur sera transcodé à partir de `password.encoding` avant d’être vérifié par rapport au hachage fourni. Par exemple, si votre hachage a été généré à partir d’une chaîne encodée `ucs2`, alors vous devriez définir : ` "encoding": "ucs2"`</td>
 </tr>
 <tr>
-<td><code>keylen</code></td>
+<td>`keylen`</td>
 <td>entier</td>
-<td>Longueur de clé souhaitée en octets pour le hachage scrypt. Doit être un nombre entier supérieur à zéro. <br/>Ce paramètre est requis lorsque <code>algorithm</code> est fixé à <code>scrypt</code>.</td>
+<td>Longueur de clé souhaitée en octets pour le hachage scrypt. Doit être un nombre entier supérieur à zéro. <br/>Ce paramètre est requis lorsque `algorithm` est fixé à `scrypt`.</td>
 </tr>
 <tr>
-<td><code>cost</code></td>
+<td>`cost`</td>
 <td>entier</td>
-<td>Paramètre de coût processeur/mémoire utilisé pour le hachage scrypt. Doit être une puissance de deux supérieure à un. Par défaut, <code>cost</code> est 16384.<br/>Ce paramètre n’est utilisé que lorsque <code>algorithm</code> est fixé à <code>scrypt</code>.</td>
+<td>Paramètre de coût processeur/mémoire utilisé pour le hachage scrypt. Doit être une puissance de deux supérieure à un. Par défaut, `cost` est 16384.<br/>Ce paramètre n’est utilisé que lorsque `algorithm` est fixé à `scrypt`.</td>
 </tr>
 <tr>
-<td><code>blockSize</code></td>
+<td>`blockSize`</td>
 <td>entier</td>
-<td>Paramètre de taille de bloc utilisé pour le hachage scrypt. Doit être un nombre entier positif. Par défaut, <code>blockSize</code> est 8.<br/>Ce paramètre n’est utilisé que lorsque <code>algorithm</code> est fixé à <code>scrypt</code>.</td>
+<td>Paramètre de taille de bloc utilisé pour le hachage scrypt. Doit être un nombre entier positif. Par défaut, `blockSize` est 8.<br/>Ce paramètre n’est utilisé que lorsque `algorithm` est fixé à `scrypt`.</td>
 </tr>
 <tr>
-<td><code>parallelization</code></td>
+<td>`parallelization`</td>
 <td>entier</td>
-<td>Paramètre de parallélisation utilisé pour le hachage scrypt. Doit être un nombre entier positif. Par défaut, <code>parallelization</code> est 1.<br/>Ce paramètre n’est utilisé que lorsque <code>algorithm</code> est fixé à <code>scrypt</code>.</td>
+<td>Paramètre de parallélisation utilisé pour le hachage scrypt. Doit être un nombre entier positif. Par défaut, `parallelization` est 1.<br/>Ce paramètre n’est utilisé que lorsque `algorithm` est fixé à `scrypt`.</td>
 </tr>
 </tbody>
 </table>
@@ -532,7 +532,7 @@ L’objet `user.custom_password_hash` possède les propriétés suivantes :
 
 Pendant le processus d’importation en bloc, vous pouvez mettre à jour le `Mot de passe haché personnalisé` si l’utilisateur ne s’est pas connecté en utilisant le `custom_password_hash.` initialement importé. Vous pouvez, par exemple, envoyer deux fois le fichier JSON ci-dessous au point de terminaison[`/api/v2/jobs/users-imports`](https://auth0.com/docs/api/management/v2?_ga=2.169020323.346193905.1601302257-746691936.1587131255#!/Jobs/post_users_imports) avec des valeurs différentes pour `custom_password_hash`. Au deuxième envoi, attribuez la valeur `upsert` à l’indicateur `true`.
 
-```json
+```javascript lines
 [
     {
     	"user_id": "2000",
@@ -702,34 +702,34 @@ Le tableau `user.mfa_factors` contient les inscriptions à <Tooltip data-tooltip
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>objet</td>
 <td></td>
 </tr>
 <tr>
-<td><code>email.value</code></td>
+<td>`email.value`</td>
 <td>chaîne de caractères</td>
 <td>L’adresse courriel pour l’authentificaton MFA.</td>
 </tr>
 <tr>
-<td><code>phone</code></td>
+<td>`phone`</td>
 <td>objet</td>
 <td></td>
 </tr>
 <tr>
-<td><code>phone.value</code></td>
+<td>`phone.value`</td>
 <td>chaîne de caractères</td>
-<td>Le numéro de téléphone pour l’authentification MFA par SMS. Il doit comporter un code pays et commencer par <code>+</code>, comme par exemple : <code>"+12125550001"</code></td>
+<td>Le numéro de téléphone pour l’authentification MFA par SMS. Il doit comporter un code pays et commencer par `+`, comme par exemple : `"+12125550001"`</td>
 </tr>
 <tr>
-<td><code>totp</code></td>
+<td>`totp`</td>
 <td>objet</td>
 <td></td>
 </tr>
 <tr>
-<td><code>totp.secret</code></td>
+<td>`totp.secret`</td>
 <td>chaîne de caractères</td>
-<td>Le secret OTP pour l’authentification MFA avec les applications d’authentification (Google Authenticator, Microsoft Authenticator, Authy, 1Password, LastPass). Doit être encodé en Base32 sans remplissage, par exemple : <code>"JBTWY3DPEHPK3PNP"</code></td>
+<td>Le secret OTP pour l’authentification MFA avec les applications d’authentification (Google Authenticator, Microsoft Authenticator, Authy, 1Password, LastPass). Doit être encodé en Base32 sans remplissage, par exemple : `"JBTWY3DPEHPK3PNP"`</td>
 </tr>
 </tbody>
 </table>
@@ -740,7 +740,7 @@ Le tableau `user.mfa_factors` contient les inscriptions à <Tooltip data-tooltip
 
 Un fichier dont le contenu est le suivant est valide :
 
-```json
+```json lines
 [
   {
     "email": "john.doe@contoso.com",
@@ -760,7 +760,7 @@ Un fichier dont le contenu est le suivant est valide :
 
 Quelques exemples d’utilisateurs avec des hachages fournis :
 
-```json
+```json lines
 [
     {
         "email": "antoinette@contoso.com",
@@ -886,7 +886,7 @@ Comme vous vous en doutez, le tableau `user.mfa_factors` vous permet de fournir 
 
 Quelques exemples d’utilisateurs utilisant des facteurs MFA :
 
-```json
+```json lines
 [
     {
         "email": "antoinette@contoso.com",

@@ -1,13 +1,13 @@
 ---
 title: "Envoyer des invitations d’adhésion à une organisation"
 permalink: "send-membership-invitations"
+'description': "Découvrez comment envoyer des invitations d’adhésion aux organisation à l’aide du Auth0 Dashboard ou de Management API."
 'og:title': "Envoyer des invitations d’adhésion à une organisation"
 'og:description': "Découvrez comment envoyer des invitations d’adhésion aux organisation à l’aide du Auth0 Dashboard ou de Management API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Envoyer des invitations d’adhésion à une organisation"
 'twitter:description': "Découvrez comment envoyer des invitations d’adhésion aux organisation à l’aide du Auth0 Dashboard ou de Management API."
 ---
-# Envoyer des invitations d’adhésion à une organisation
 
 Vous pouvez envoyer des invitations d’adhésion à une [organisation](/docs/fr-ca/manage-users/organizations/organizations-overview) aux utilisateurs à l’aide du <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip> ou de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>.
 
@@ -36,7 +36,7 @@ Si vous exposez la fonctionnalité d’invitation depuis un tableau de bord d’
 Pour inviter des membres via Management API :
 Réalisez un appel `POST` au point de terminaison Créer des invitations d’organisation. Assurez-vous de remplacer les valeurs des espaces réservés `ORG_ID`, `MGMT_API_ACCESS_TOKEN`, `NAME_OF_USER`, `EMAIL_ADDRESS`, `CLIENT_ID`, `CONNECTION_ID`, `EXP_TIME`, `ROLE_ID`, et `SEND_INVITATION_EMAIL_OPTION` avec l’identification de votre organisation, le jeton d’accès à Management API, le nom de l’utilisateur invité, l’adresse courriel de l’utilisateur invité, l’ID client, l’identification de la connexion, le temps d’expiration, et l’identification du rôle..
 
-```json
+```json lines
 {
   "method": "POST",
   "url": "https://YOUR_AUTH0_DOMAIN/api/v2/organizations/ORG_ID/invitations",
@@ -70,40 +70,40 @@ Si vous utilisez des domaines personnalisés, votre domaine est le nom de votre 
 </thead>
 <tbody>
 <tr>
-<td><code>ORG_ID</code></td>
+<td>`ORG_ID`</td>
 <td>ID de l’organisation à laquelle vous souhaitez attribuer l’adhésion.</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><a href="/docs/tokens/management-api-access-tokens">Jeton d’accès pour Management API</a> avec la permission <code>create:organization_invitations</code>.</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td><a href="/docs/fr-ca/tokens/management-api-access-tokens">Jeton d’accès pour Management API</a> avec la permission `create:organization_invitations`.</td>
 </tr>
 <tr>
-<td><code>NAME_OF_USER</code></td>
+<td>`NAME_OF_USER`</td>
 <td>Nom de l’utilisateur à qui vous voulez envoyer l’invitation. 300 caractères au maximum.</td>
 </tr>
 <tr>
-<td><code>EMAIL_ADDRESS</code></td>
+<td>`EMAIL_ADDRESS`</td>
 <td>Adresse courriel à laquelle l’invitation doit être envoyée.</td>
 </tr>
 <tr>
-<td><code>CLIENT_ID</code></td>
+<td>`CLIENT_ID`</td>
 <td>ID de l’application à laquelle l’utilisateur invité doit s’authentifier.</td>
 </tr>
 <tr>
-<td><code>CONNECTION_ID</code></td>
+<td>`CONNECTION_ID`</td>
 <td>ID de la connexion via laquelle le membre invité doit s’authentifier.</td>
 </tr>
 <tr>
-<td><code>EXP_TIME</code></td>
+<td>`EXP_TIME`</td>
 <td>Nombre de secondes avant l’expiration de l’invitation. Si le délai n’est pas précisé, ou s’il est défini sur 0, la valeur par défaut est 604 800 secondes (7 jours). Le délai maximum est de 2 592 000 secondes (30 jours).</td>
 </tr>
 <tr>
-<td><code>ROLE_ID</code></td>
+<td>`ROLE_ID`</td>
 <td>Identifiant du ou des rôles que vous souhaitez attribuer à l’utilisateur invité pour l’organisation spécifiée. Maximum de 50 rôles par membre.</td>
 </tr>
 <tr>
-<td><code>SEND_INVITATION_EMAIL_OPTION</code></td>
-<td>Indique si Auth0 doit envoyer le courriel. Les valeurs sont <code>true</code> ou <code>false</code>. Lorsque la valeur est définie sur <code>false</code>, Auth0 générera une URL d’invitation que vous pourrez envoyer aux utilisateurs par votre propre service de messagerie.</td>
+<td>`SEND_INVITATION_EMAIL_OPTION`</td>
+<td>Indique si Auth0 doit envoyer le courriel. Les valeurs sont `true` ou `false`. Lorsque la valeur est définie sur `false`, Auth0 générera une URL d’invitation que vous pourrez envoyer aux utilisateurs par votre propre service de messagerie.</td>
 </tr>
 </tbody>
 </table>
@@ -122,85 +122,85 @@ Les codes d’état de réponse possibles sont les suivants  :
 </thead>
 <tbody>
 <tr>
-<td><code>200</code></td>
+<td>`200`</td>
 <td></td>
 <td>Invitation créée avec succès.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_body</code></td>
+<td>`400`</td>
+<td>`invalid_body`</td>
 <td>Le client_id indiqué n’existe pas.</td>
 <td>La charge utile de la requête n’est pas valide.</td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_body</code></td>
+<td>`400`</td>
+<td>`invalid_body`</td>
 <td>La connexion indiquée n’existe pas.</td>
 <td>La charge utile de la requête est invalide.</td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_body</code></td>
+<td>`400`</td>
+<td>`invalid_body`</td>
 <td>Les connexions sans mot de passe ne sont pas prises en charge.</td>
 <td>La charge utile de la requête est invalide.</td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_body</code></td>
-<td>Une route connexion par défaut est requise pour générer l’URL de l’invitation. Pour en apprendre davantage, consultez <a href="/docs/universal-login/configure-default-login-routes">Configurer les routes de connexion par défaut</a>.</td>
+<td>`400`</td>
+<td>`invalid_body`</td>
+<td>Une route connexion par défaut est requise pour générer l’URL de l’invitation. Pour en apprendre davantage, consultez <a href="/docs/fr-ca/universal-login/configure-default-login-routes">Configurer les routes de connexion par défaut</a>.</td>
 <td>La charge utile de la requête est invalide..</td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_body</code></td>
+<td>`400`</td>
+<td>`invalid_body`</td>
 <td>Un ou plusieurs des rôles indiqués n’existent pas : role1, role2’.</td>
 <td>La charge utile de la requête est invalide..</td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_body</code></td>
+<td>`400`</td>
+<td>`invalid_body`</td>
 <td>Corps de la requête invalide. Le message variera selon la cause.</td>
 <td>La charge utile de la requête est invalide..</td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_query_string</code></td>
+<td>`400`</td>
+<td>`invalid_query_string`</td>
 <td>Chaîne de la requête invalide. Le message variera selon la cause..</td>
 <td>La chaîne de la requête est invalide.</td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Jeton invalide.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Signature non valide reçue pour la validation du jeton Web JSON.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Le client n’est pas global.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>403</code></td>
-<td><code>insufficient_scope</code></td>
-<td>Permission insuffisante; étaient attendus l’un des éléments suivants : <code>create:organization_invitations</code>.</td>
+<td>`403`</td>
+<td>`insufficient_scope`</td>
+<td>Permission insuffisante; étaient attendus l’un des éléments suivants : `create:organization_invitations`.</td>
 <td>Tentative de lecture/écriture sur un champ qui n’est pas autorisé avec les permissions de jeton du porteur fourni.</td>
 </tr>
 <tr>
-<td><code>404</code></td>
+<td>`404`</td>
 <td></td>
 <td>Aucune Organization correspondant à cet identifiant trouvée.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>429</code></td>
+<td>`429`</td>
 <td></td>
 <td>Trop de requêtes. Vérifiez les en-têtes X-RateLimit-Limit, X-RateLimit-Remaining et X-RateLimit-Reset.</td>
 <td></td>

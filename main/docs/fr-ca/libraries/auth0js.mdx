@@ -1,15 +1,15 @@
 ---
 title: "Référence Auth0.js v9"
 permalink: "auth0js"
+'description': "Comment installer, initiatiser et utiliser auth0.js v9"
 'og:title': "Référence Auth0.js v9"
 'og:description': "Comment installer, initiatiser et utiliser auth0.js v9"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Référence Auth0.js v9"
 'twitter:description': "Comment installer, initiatiser et utiliser auth0.js v9"
 ---
-# Référence Auth0.js v9
 
-Auth0.js est une bibliothèque du côté client d’Auth0. Il est recommandé de l’utiliser en conjonction avec la [connexion universelle](/docs/universal-login), qui devrait être utilisée chaque fois que possible. Utiliser auth0.js dans votre SPA rend plus facile l’authentification et l’autorisation avec Auth0.
+Auth0.js est une bibliothèque du côté client d’Auth0. Il est recommandé de l’utiliser en conjonction avec la [connexion universelle](/docs/fr-ca/universal-login), qui devrait être utilisée chaque fois que possible. Utiliser auth0.js dans votre SPA rend plus facile l’authentification et l’autorisation avec Auth0.
 
 La documentation complète API pour la bibliothèque est accessible [ici](https://auth0.github.io/auth0.js/index.html).
 
@@ -43,7 +43,7 @@ Vous avez quelques options pour utiliser auth0.js dans vos projets. Choisissez l
 
 Installation via [npm](https://npmjs.org) ou [yarn](https://yarnpkg.com) :
 
-```
+``` lines
 npm install auth0-js
 
 yarn add auth0-js
@@ -51,13 +51,13 @@ yarn add auth0-js
 
 Après avoir installé le module `auth0-js`, vous devrez le regrouper avec toutes ses dépendances, ou l’importer à l’aide de :
 
-```
+```python lines
 import auth0 from 'auth0-js';
 ```
 
 Alternativemet, incluez le script via notre CDN :
 
-```
+```javascript lines
 <script src="https://cdn.auth0.com/js/auth0/9.18/auth0.min.js"></script>
 ```
 
@@ -65,7 +65,7 @@ Alternativemet, incluez le script via notre CDN :
 
 initialisez une nouvelle requête de l’application Auth0, tel que suit :
 
-```
+```html lines
 <script type="text/javascript">
   var webAuth = new auth0.WebAuth({
     domain:       '{yourDomain}',
@@ -88,48 +88,48 @@ Deux paramètres obligatoires doivent être transmis dans l’objet `options` lo
 <tbody>
 <tr>
 <td></td>
-<td><code>domain</code></td>
+<td>`domain`</td>
 <td>obligatoire</td>
 </tr>
 <tr>
-<td><code>clientID</code></td>
+<td>`clientID`</td>
 <td>obligatoire</td>
 <td>(Chaîne) Votre ID client Auth0</td>
 </tr>
 <tr>
-<td><code>redirectUri</code></td>
+<td>`redirectUri`</td>
 <td>optional*</td>
-<td>(Chaîne) Le <code>redirectUri</code> par défaut utilisé. La valeur par défaut est une chaîne vide (aucune). <strong>Si vous ne fournissez pas une valeur<code>redirectUri</code> globale ici, vous devrez fournir une valeur <code>redirectUri</code> pour <em>chaque</em> méthode que vous utilisez.</strong></td>
+<td>(Chaîne) Le `redirectUri` par défaut utilisé. La valeur par défaut est une chaîne vide (aucune). <strong>Si vous ne fournissez pas une valeur`redirectUri` globale ici, vous devrez fournir une valeur `redirectUri` pour <em>chaque</em> méthode que vous utilisez.</strong></td>
 </tr>
 <tr>
-<td><code>scope</code></td>
+<td>`scope`</td>
 <td>facultatif</td>
 <td>(Chaîne) La valeur par défaut de/des <dfn id="react-containers-DefinitionTooltip-0"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">permission(s)</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn> utilisé(es) par l’application. L’utilisation de permissions peut vous permettre de renvoyer des réclamations spécifiques pour des champs spécifiques de votre demande. Pour plus de détails, veuillez consulter notre [documentation sur les permissions] (/scopes).</td>
 </tr>
 <tr>
-<td><code>audience</code></td>
+<td>`audience`</td>
 <td>facultatif</td>
 <td>(Chaîne) L’audience par défaut à utiliser pour demander l’accès à l’API.</td>
 </tr>
 <tr>
-<td><code>responseType</code></td>
+<td>`responseType`</td>
 <td>facultatif*</td>
-<td>(Chaîne) La valeur par défaut de <code>responseType</code> est utilisée. Il peut s’agir de n’importe quelle liste de valeurs séparées par des espaces <code>code</code>, <code>token</code>, <code>id_token</code>. La valeur par défaut est <code>'token'</code>, à moins qu’un <code>redirectUri</code> ne soit fourni, auquel cas la valeur par défaut est <code>'code'</code>. <strong>Si vous ne fournissez pas une valeur <code>responseType</code> globale, vous devrez fournir une valeur <code>responseType</code> pour <em>chaque</em> méthode que vous utilisez.</strong></td>
+<td>(Chaîne) La valeur par défaut de `responseType` est utilisée. Il peut s’agir de n’importe quelle liste de valeurs séparées par des espaces `code`, `token`, `id_token`. La valeur par défaut est `'token'`, à moins qu’un `redirectUri` ne soit fourni, auquel cas la valeur par défaut est `'code'`. <strong>Si vous ne fournissez pas une valeur `responseType` globale, vous devrez fournir une valeur `responseType` pour <em>chaque</em> méthode que vous utilisez.</strong></td>
 </tr>
 <tr>
-<td><code>responseMode</code></td>
+<td>`responseMode`</td>
 <td>facultatif</td>
-<td>(Chaîne) Cette option est omise par défaut. Peut être définie sur <code>'form_post'</code> afin d’envoyer le jeton ou le code au <code>'redirectUri'</code> via POST. Les valeurs prises en charge sont <code>query</code>, <code>fragment</code> et <code>form_post</code>.</td>
+<td>(Chaîne) Cette option est omise par défaut. Peut être définie sur `'form_post'` afin d’envoyer le jeton ou le code au `'redirectUri'` via POST. Les valeurs prises en charge sont `query`, `fragment` et `form_post`.</td>
 </tr>
 <tr>
-<td><code>leeway</code></td>
+<td>`leeway`</td>
 <td>facultatif</td>
 <td>(Entier) Une valeur en secondes; une marge de tolérance pour compenser les écarts d’horloge en ce qui concerne les temps d’expiration des jetons d’ID (ID Token).</td>
 </tr>
 <tr>
-<td><code>_disableDeprecationWarnings</code></td>
+<td>`_disableDeprecationWarnings`</td>
 <td>facultatif</td>
-<td>(Booléen) Désactive les avertissements d’obsolescence, la valeur par défaut est <code>false</code>.</td>
+<td>(Booléen) Désactive les avertissements d’obsolescence, la valeur par défaut est `false`.</td>
 </tr>
 </tbody>
 </table>
@@ -167,44 +167,44 @@ La méthode `authorize()` peut être utilisée pour connecter les utilisateurs a
 </thead>
 <tbody>
 <tr>
-<td><code>audience</code></td>
+<td>`audience`</td>
 <td>facultatif</td>
 <td>(Chaîne)  Le public par défaut à utiliser pour demander l’accès à l’API.</td>
 </tr>
 <tr>
-<td><code>connection</code></td>
+<td>`connection`</td>
 <td>facultatif</td>
 <td>(Chaîne) Spécifie la connexion à utiliser plutôt que de présenter toutes les connexions disponibles pour l’application.</td>
 </tr>
 <tr>
-<td><code>scope</code></td>
+<td>`scope`</td>
 <td>facultatif</td>
-<td>(Chaîne) Les permissions pour lesquels vous voulez demander l’autorisation. Ces valeurs doivent être séparées par un espace. Vous pouvez demander n’importe quelle permission standard d’OIDC sur les utilisateurs, comme <code>profile</code> et <code>email</code>, les demandes personnalisées qui doivent être <a href="/docs/tokens/guides/create-namespaced-custom-claims">conforme à un format d’espace de noms</a>, ou toute permission prise en charge par l’API cible (par exemple, <code>read:contacts</code>). Inclure <code>offline_access</code> pour obtenir un <dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">jeton d’actualisation</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>.</td>
+<td>(Chaîne) Les permissions pour lesquels vous voulez demander l’autorisation. Ces valeurs doivent être séparées par un espace. Vous pouvez demander n’importe quelle permission standard d’OIDC sur les utilisateurs, comme `profile` et `email`, les demandes personnalisées qui doivent être <a href="/docs/fr-ca/tokens/guides/create-namespaced-custom-claims">conforme à un format d’espace de noms</a>, ou toute permission prise en charge par l’API cible (par exemple, `read:contacts`). Inclure `offline_access` pour obtenir un <dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">jeton d’actualisation</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>.</td>
 </tr>
 <tr>
-<td><code>responseType</code></td>
+<td>`responseType`</td>
 <td>facultatif</td>
-<td>(Chaîne) Il peut s’agir de n’importe quelle liste de valeur séparée par des espaces <code>code</code>, <code>token</code>, <code>id_token</code>.  Il est défini par défaut sur <code>’token’</code>, à moins qu’un <code>redirectUri</code> ne soit fourni, alors il est défini par défaut sur <code>’code’</code>.</td>
+<td>(Chaîne) Il peut s’agir de n’importe quelle liste de valeur séparée par des espaces `code`, `token`, `id_token`.  Il est défini par défaut sur `’token’`, à moins qu’un `redirectUri` ne soit fourni, alors il est défini par défaut sur `’code’`.</td>
 </tr>
 <tr>
-<td><code>clientID</code></td>
+<td>`clientID`</td>
 <td>facultatif</td>
 <td>(Chaîne)  Votre ID client Auth0.</td>
 </tr>
 <tr>
-<td><code>redirectUri</code></td>
+<td>`redirectUri`</td>
 <td>facultatif</td>
 <td>(Chaîne) L’URL vers laquelle Auth0 redirigera le navigateur après que l’autorisation a été accordée à l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>state</code></td>
+<td>`state`</td>
 <td>facultatif</td>
-<td>(Chaîne)  Une valeur arbitraire qui devrait être maintenue dans les redirections. Il est utile pour atténuer les attaques CSRF et pour toute information contextuelle (par exemple, une URL de retour) dont vous pourriez avoir besoin après le processus d’authentification. Pour plus d’informations, consultez <a href="/docs/protocols/oauth2/oauth-state">Paramètres d’état</a>. auth0.js, lorsqu’il est utilisé dans les applications à page unique, gère la génération et la validation d’état automatiquement si elle n’est pas spécifiée.</td>
+<td>(Chaîne)  Une valeur arbitraire qui devrait être maintenue dans les redirections. Il est utile pour atténuer les attaques CSRF et pour toute information contextuelle (par exemple, une URL de retour) dont vous pourriez avoir besoin après le processus d’authentification. Pour plus d’informations, consultez <a href="/docs/fr-ca/protocols/oauth2/oauth-state">Paramètres d’état</a>. auth0.js, lorsqu’il est utilisé dans les applications à page unique, gère la génération et la validation d’état automatiquement si elle n’est pas spécifiée.</td>
 </tr>
 <tr>
-<td><code>prompt</code></td>
+<td>`prompt`</td>
 <td>facultatif</td>
-<td>(Chaîne) Une valeur de <code>login</code> forcera l’affichage de la page de connexion, quelle que soit la session en cours. Une valeur de <code>none</code> tentera de contourner les invites de connexion si une session existe déjà (voir la documentation sur l’<a href="/docs/sso/current/single-page-apps#silent-authentication">authentification silencieuse</a> pour plus de détails).</td>
+<td>(Chaîne) Une valeur de `login` forcera l’affichage de la page de connexion, quelle que soit la session en cours. Une valeur de `none` tentera de contourner les invites de connexion si une session existe déjà (voir la documentation sur l’<a href="/docs/fr-ca/sso/current/single-page-apps#silent-authentication">authentification silencieuse</a> pour plus de détails).</td>
 </tr>
 </tbody>
 </table>
@@ -225,7 +225,7 @@ Pour l’authentification par fenêtre contextuelle, la méthode `popup.authoriz
 
 Autorisation par défaut avec fenêtre contextuelle (les utilisateurs voient la Connexion universelle Auth0) :
 
-```
+```javascript lines
 webAuth.popup.authorize({
   responseType: 'token'
   redirectUri: 'https://{yourApp}/popup_response_handler.html'
@@ -237,7 +237,7 @@ webAuth.popup.authorize({
 
 Et pour les connexions par réseau social avec fenêtre contextuelle utilisant `authorize` :
 
-```
+```javascript lines
 webAuth.popup.authorize({
   responseType: 'token'
   redirectUri: 'https://{yourApp}/popup_response_handler.html',
@@ -251,7 +251,7 @@ webAuth.popup.authorize({
 
 Lorsque vous utilisez l’authentification par fenêtre contextuelle, vous devez fournir un `redirectUri` où la page de destination communique les résultats de l’autorisation au rappel en utilisant la méthode `webAuth.popup.callback`. Une simple mise en oeuvre ressemblerait à ceci :
 
-```
+```html lines
 <!-- popup_response_handler.html -->
 <html>
   <body>
@@ -289,29 +289,29 @@ La méthode `login` permet une [authentification cross-origin](/docs/fr-ca/authe
 </thead>
 <tbody>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>optionnel</td>
-<td>(Chaîne) Le nom d’utilisateur à présenter pour l’authentification. <strong>Le</strong> <code>username</code> ou <code>email</code> doit être présent.</td>
+<td>(Chaîne) Le nom d’utilisateur à présenter pour l’authentification. <strong>Le</strong> `username` ou `email` doit être présent.</td>
 </tr>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>optionnel</td>
-<td>(Chaîne) Le courriel à présenter pour authentification. <strong>Le</strong> <code>username</code> ou <code>email</code> doit être présent.</td>
+<td>(Chaîne) Le courriel à présenter pour authentification. <strong>Le</strong> `username` ou `email` doit être présent.</td>
 </tr>
 <tr>
-<td><code>password</code></td>
+<td>`password`</td>
 <td>requis</td>
 <td>(Chaîne) Le mot de passe à présenter pour l’authentification.</td>
 </tr>
 <tr>
-<td><code>realm</code></td>
+<td>`realm`</td>
 <td>requis</td>
 <td>(Chaîne) Le nom de la connexion à la base de données dans laquelle l’authentification est effectuée.</td>
 </tr>
 </tbody>
 </table>
 
-```
+```javascript lines
 webAuth.login({
   realm: 'tests',
   username: 'testuser',
@@ -329,7 +329,7 @@ La méthode `buildAuthorizeUrl` peut être utilisée pour créer l’URL `/autho
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 // Calculate URL to redirect to
 var url = webAuth.client.buildAuthorizeUrl({
   clientID: '{yourClientId}', // string
@@ -352,7 +352,7 @@ Les applications avec connexion intégrée doivent remplir deux critères afin d
 1. Les deux applications tentant d’utiliser la SSO doivent être des applications de première partie. La SSO avec des applications tierces ne fonctionnera pas.
 2. Elles doivent utiliser des domaines personnalisés et avoir à la fois les applications qui souhaitent bénéficier de la SSO et le locataire Auth0 sur le même domaine. Traditionnellement, les domaines Auth0 sont au format `foo.auth0.com`, mais les domaines personnalisés vous permettent d’utiliser le même domaine pour chacune des applications en question, ainsi que pour votre client Auth0, ce qui évite le risque d’attaques CSRF (Cross-Site Request Forgery).
 
-Nous recommandons d’utiliser une connexion universelle au lieu de configurer la SSO dans des scénarios de connexion intégrée. La connexion universelle est la manière la plus fiable et stable de mettre en place la SSO, et c’est la seule option si vous devez utiliser plusieurs domaines pour vos applications, ou si vous utilisez des [applications tiers](/docs/get-started/applications/confidential-and-public-applications/enable-third-party-applications).
+Nous recommandons d’utiliser une connexion universelle au lieu de configurer la SSO dans des scénarios de connexion intégrée. La connexion universelle est la manière la plus fiable et stable de mettre en place la SSO, et c’est la seule option si vous devez utiliser plusieurs domaines pour vos applications, ou si vous utilisez des [applications tiers](/docs/fr-ca/get-started/applications/confidential-and-public-applications/enable-third-party-applications).
 
 ## Connexion sans mot de passe
 
@@ -362,7 +362,7 @@ De manière à pouvoir utiliser l’authentification sans mot de passe, vous dev
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 var webAuth = new auth0.WebAuth({
   clientID: '{yourClientId}',
   domain: '{yourDomain}',
@@ -384,22 +384,22 @@ La première étape de l’authentification sans mot de passe avec auth0.js est 
 </thead>
 <tbody>
 <tr>
-<td><code>connection</code></td>
+<td>`connection`</td>
 <td>requis</td>
-<td>(Chaîne) Spécifie comment envoyer le code/lien à l’utilisateur. La valeur doit être soit <code>email</code> ou <code>sms</code>.</td>
+<td>(Chaîne) Spécifie comment envoyer le code/lien à l’utilisateur. La valeur doit être soit `email` ou `sms`.</td>
 </tr>
 <tr>
-<td><code>send</code></td>
+<td>`send`</td>
 <td>requis</td>
-<td>(Chaîne) La valeur doit être soit <code>code</code>, ou <code>link</code>. Si <code>null</code>, un lien sera envoyé.</td>
+<td>(Chaîne) La valeur doit être soit `code`, ou `link`. Si `null`, un lien sera envoyé.</td>
 </tr>
 <tr>
-<td><code>phoneNumber</code></td>
+<td>`phoneNumber`</td>
 <td>optionnel</td>
 <td>(Chaîne) Le numéro de téléphone de l’utilisateur pour l’envoi d’un code ou d’un lien par SMS.</td>
 </tr>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>optionnel</td>
 <td>(Chaîne) Le courriel de l’utilisateur pour l’envoi d’un code ou d’un lien par courriel.</td>
 </tr>
@@ -408,7 +408,7 @@ La première étape de l’authentification sans mot de passe avec auth0.js est 
 
 Notez qu’un seul des paramètres facultatifs `phoneNumber` et `email` doit être envoyé pour lancer la transaction sans mot de passe.
 
-```
+```javascript lines
 webAuth.passwordlessStart({
     connection: 'email',
     send: 'code',
@@ -432,22 +432,22 @@ Si vous envoyez un code, vous devrez alors envoyer une demande à l’utilisateu
 </thead>
 <tbody>
 <tr>
-<td><code>connection</code></td>
+<td>`connection`</td>
 <td>requis</td>
-<td>(Chaîne) Spécifie comment envoyer le code/lien à l’utilisateur. La valeur doit être soit <code>email</code> soit <code>sms</code> et identique à la valeur transmise à <code>passwordlessStart</code>.</td>
+<td>(Chaîne) Spécifie comment envoyer le code/lien à l’utilisateur. La valeur doit être soit `email` soit `sms` et identique à la valeur transmise à `passwordlessStart`.</td>
 </tr>
 <tr>
-<td><code>verificationCode</code></td>
+<td>`verificationCode`</td>
 <td>requis</td>
 <td>(Chaîne) Le code envoyé à l’utilisateur, soit sous forme de code, soit intégré dans un lien.</td>
 </tr>
 <tr>
-<td><code>phoneNumber</code></td>
+<td>`phoneNumber`</td>
 <td>facultatif</td>
 <td>(Chaîne) Le numéro de téléphone de l’utilisateur auquel le code ou le lien a été envoyé par SMS.</td>
 </tr>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>facultatif</td>
 <td>(Chaîne) Le courriel de l’utilisateur auquel le code ou le lien a été envoyé par courriel.</td>
 </tr>
@@ -458,7 +458,7 @@ Comme pour `passwordlessStart`, un seul des paramètres facultatifs `phoneNumber
 
 Pour pouvoir utiliser la méthode `passwordlessLogin`, les options `redirectUri` et `responseType` doivent être précisées au moment d’initialiser WebAuth.
 
-```
+```javascript lines
 webAuth.passwordlessLogin({
     connection: 'email',
     email: 'foo@bar.com',
@@ -484,19 +484,19 @@ La méthode `parseHash` accepte un objet `options` qui contient les paramètres 
 </thead>
 <tbody>
 <tr>
-<td><code>state</code></td>
+<td>`state`</td>
 <td>optionnel</td>
 <td>(Chaîne) Une valeur opaque que l’application ajoute à la requête initiale que Auth0 inclut lors de la redirection vers l’application. Cette valeur est utilisée par auth0.js pour empêcher les attaques CSRF.</td>
 </tr>
 <tr>
-<td><dfn id="react-containers-DefinitionTooltip-4"><span class="tooltip-portal-underlined-word" data-react-universal-portal=""><code>nonce</code></span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn></td>
+<td><dfn id="react-containers-DefinitionTooltip-4"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">`nonce`</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn></td>
 <td>optionnel</td>
 <td>(Chaîne) Utilisé pour vérifier le jeton d’ID</td>
 </tr>
 <tr>
-<td><code>hash</code></td>
+<td>`hash`</td>
 <td>optionnel</td>
-<td>(Chaîne) L’URL de hachage (si non fourni, <code>window.location.hash</code> sera utilisé par défaut)</td>
+<td>(Chaîne) L’URL de hachage (si non fourni, `window.location.hash` sera utilisé par défaut)</td>
 </tr>
 </tbody>
 </table>
@@ -511,21 +511,21 @@ Le contenu de l’objet authResult renvoyé par la méthode `parseHash` dépend 
 </thead>
 <tbody>
 <tr>
-<td><code>accessToken</code></td>
-<td>Un <dfn id="react-containers-DefinitionTooltip-5"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">jeton d’accès</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn> pour l’API, spécifié par <code>audience</code></td>
+<td>`accessToken`</td>
+<td>Un <dfn id="react-containers-DefinitionTooltip-5"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">jeton d’accès</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn> pour l’API, spécifié par `audience`</td>
 </tr>
 <tr>
-<td><code>expiresIn</code></td>
-<td>Chaîne contenant le délai d’expiration (en secondes) du <code>accessToken</code></td>
+<td>`expiresIn`</td>
+<td>Chaîne contenant le délai d’expiration (en secondes) du `accessToken`</td>
 </tr>
 <tr>
-<td><code>idToken</code></td>
+<td>`idToken`</td>
 <td>Un jeton d’ID JWT contenant des informations du profil utilisateur</td>
 </tr>
 </tbody>
 </table>
 
-```
+```javascript lines
 webAuth.parseHash({ hash: window.location.hash }, function(err, authResult) {
   if (err) {
     return console.log(err);
@@ -539,7 +539,7 @@ webAuth.parseHash({ hash: window.location.hash }, function(err, authResult) {
 
 Comme indiqué ci-dessus, la méthode `client.userInfo` peut être appelée en transmettant l’`accessToken` renvoyé. Elle fera une requête au point de terminaison `/userinfo` et retournera l’objet `user`, qui contient les informations de l’utilisateur, au format similaire à celui de l’exemple ci-dessous.
 
-```json
+```json lines
 {
     "sub": "auth0|123456789012345678901234",
     "nickname": "johnfoo",
@@ -562,7 +562,7 @@ webAuth.parseHash({nonce: ’1234’}, callback);`
 
 Si vous appelez `webAuth.checkSession` au lieu de `webAuth.authorize`, il vous suffit de définir votre `nonce` personnalisé en tant qu’option de `checkSession` :
 
-```
+```javascript lines
 webAuth.checkSession({
   nonce: '1234',
 }, function (err, authResult) {
@@ -652,7 +652,7 @@ Pour déconnecter un utilisateur, utilisez la méthode `logout()`. Cette méthod
 
 Si le paramètre `clientID` est inclus, l’URL `returnTo` qui est fournie doit être listée dans les **URL de déconnexion autorisées** de l’application dans [Auth0 Dashboard](https://manage.auth0.com/#). Toutefois, si le paramètre `clientID` n’est pas inclus, l’URL `returnTo` doit figurer dans les **URL de déconnexion autorisées**.
 
-```
+```javascript lines
 webAuth.logout({
   returnTo: 'some url here',
   clientID: 'some client ID here'
@@ -672,36 +672,36 @@ Pour enregistrer un utilisateur, utilisez la méthode `signup`. Cette méthode a
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>requis</td>
 <td>(Chaîne) Adresse courriel utilisateur</td>
 </tr>
 <tr>
-<td><code>password</code></td>
+<td>`password`</td>
 <td>requis</td>
 <td>(Chaîne) Mot de passe souhaité par l’utilisateur</td>
 </tr>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>required*</td>
 <td>(Chaîne) Mot de passe souhaité par l’utilisateur. <br/>*Requis si vous utilisez une connexion vers une base de données et vous avez activé<strong>Requiert un mot de passe</strong></td>
 </tr>
 <tr>
-<td><code>connection</code></td>
+<td>`connection`</td>
 <td>requis</td>
 <td>(Chaîne) Le nom de connexion de base de données dans votre application au moment de tenter la création du compte utilisateur</td>
 </tr>
 <tr>
-<td><code>user_metadata</code></td>
+<td>`user_metadata`</td>
 <td>optionnel</td>
-<td>(objet JSON) Attributs additionnels utilisés pour les informations de l'utilisateur. Ils seront stockés dans <a href="/docs/users/concepts/overview-user-metadata">user_metadata</a></td>
+<td>(objet JSON) Attributs additionnels utilisés pour les informations de l'utilisateur. Ils seront stockés dans <a href="/docs/fr-ca/users/concepts/overview-user-metadata">user_metadata</a></td>
 </tr>
 </tbody>
 </table>
 
 Les enregistrements devraient être pour les connexions de bases de données. Voici un exemple de la méthode `signup` et un exemple de code pour un formulaire.
 
-```
+```html lines
 <h2>Signup Database Connection</h2>
 <input class="signup-email" />
 <input type="password" class="signup-password" />
@@ -728,7 +728,7 @@ La méthode `checkSession` vous permet d’acquérir un nouveau jeton auprès d�
 
 L’appel à `checkSession` peut être utilisé pour obtenir un nouveau jeton pour l’API définie en tant qu'<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-8" tip="">audience</Tooltip> lors de l’initialisation de `webAuth` :
 
-```
+```javascript lines
 webAuth.checkSession({}, function (err, authResult) {
   // err if automatic parseHash fails
   ...
@@ -739,7 +739,7 @@ Consultez [Effectuer une extraction de AuthResult et obtenir des informations ut
 
 Sinon, le jeton peut être acquis pour une API différente que celle utilisée au moment d’initialiser `webAuth` en précisant un `audience` et une `scope` :
 
-```
+```javascript lines
 webAuth.checkSession(
   {
     audience: `https://mydomain/another-api/˜`,
@@ -774,7 +774,7 @@ L’intervalle d’interrogation entre les vérifications de `checkSession()` 
 
 Si vous essayez de mettre en place une fonctionnalité de réinitialisation du mot de passe, vous utiliserez la méthode `changePassword` et transmettrez un objet « options », avec un paramètre « connexion » et un paramètre « courriel ».
 
-```
+```javascript lines
 $('.change_password').click(function () {
     webAuth.changePassword({
       connection: 'db-conn',
@@ -799,7 +799,7 @@ Pour débuter, vous avez d’abord besoin d’un Jeton d’accès à utiliser av
 
 Si vous utilisez des [domaines personnalisés](/docs/fr-ca/customize/custom-domains), vous devrez instancier une nouvelle copie de `webAuth` en utilisant votre domaine Auth0 plutôt que votre domaine personnalisé, pour l’utiliser avec les appels de Management API, car elle ne fonctionne qu’avec les domaines Auth0.
 
-```javascript
+```javascript lines
 var webAuth = new auth0.WebAuth({
   clientID: '{yourClientId}',
   domain: '{yourDomain}',
@@ -812,7 +812,7 @@ var webAuth = new auth0.WebAuth({
 
 Vous pouvez également le faire à l’aide de `checkSession()` :
 
-```
+```javascript lines
 webAuth.checkSession(
   {
     audience: `https://{yourDomain}/api/v2/`,
@@ -835,7 +835,7 @@ Vous devez spécifier les permissions qui vous sont nécessaires. Vous pouvez de
 
 Une fois que vous avez le jeton d’accès, vous pouvez créer une nouvelle instance `auth0.Management` en le passant par le domaine Auth0 du compte et le jeton d’accès.
 
-```javascript
+```javascript lines
 var auth0Manage = new auth0.Management({
   domain: '{yourDomain}',
   token: 'ACCESS_TOKEN'
@@ -856,7 +856,7 @@ Pour mettre à jour les métadonnées d’un utilisateur, vous devez d’abord c
 
 Associer les comptes utilisateur permettra à l’utilisateur de communiquer avec ses comptes et, peu importe lequel ils utilisent, toujours être devant le même profil après connexion. Auth0 traite ces comptes de manière séparée par défaut; si vous souhaitez que les comptes d’un utilisateur soient associées, c’est la seule façon.
 
-La méthode `linkUser` accepte deux paramètres,`userId` principal et le jeton d’ID de l’utilisateur secondaire (le jeton obtenu après la connexion avec cette identité). L’ID utilisateur en question est un identifiant unique pour le compte utilisateur primaire. Si vous utilisez cette méthode, l’identifiant doit être transmis avec le préfixe du fournisseur, par exemple `auth0|1234567890` ou `facebook|1234567890`. Consultez [Association de comptes d’utilisateur](/docs/users/concepts/overview-user-account-linking) pour plus de renseignements.
+La méthode `linkUser` accepte deux paramètres,`userId` principal et le jeton d’ID de l’utilisateur secondaire (le jeton obtenu après la connexion avec cette identité). L’ID utilisateur en question est un identifiant unique pour le compte utilisateur primaire. Si vous utilisez cette méthode, l’identifiant doit être transmis avec le préfixe du fournisseur, par exemple `auth0|1234567890` ou `facebook|1234567890`. Consultez [Association de comptes d’utilisateur](/docs/fr-ca/users/concepts/overview-user-account-linking) pour plus de renseignements.
 `auth0Manage.linkUser(userId, secondaryUserToken, cb);`
 
 Après avoir associé les comptes, un second compte n’existera plus en tant qu’entité séparée au niveau de la base de données utilisateur; il ne sera accessible qu’en tant que partie du compte primaire.

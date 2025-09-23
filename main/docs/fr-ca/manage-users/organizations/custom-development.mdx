@@ -1,13 +1,13 @@
 ---
 title: "Développement personnalisé avec les Organizations"
 permalink: "custom-development"
+'description': "Apprendre à utiliser les actions et les trousses SDK avec les organisations Auth0."
 'og:title': "Développement personnalisé avec les Organizations"
 'og:description': "Apprendre à utiliser les actions et les trousses SDK avec les organisations Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Développement personnalisé avec les Organizations"
 'twitter:description': "Apprendre à utiliser les actions et les trousses SDK avec les organisations Auth0."
 ---
-# Développement personnalisé avec les Organizations
 
 Vous pouvez étendre les capacités d’Auth0 à l’aide des métadonnées des [organizations](/docs/fr-ca/manage-users/organizations/organizations-overview) et des actions, ou vous pouvez utiliser nos API et trousses SDK pour créer des tableaux de bord de gestion des organizations pour vos utilisateurs.
 
@@ -37,7 +37,7 @@ Vous trouverez ci-dessous des exemples de tâches que vous pourriez vouloir effe
 
 L’exemple ci-après renvoie à la demande `org_id` disponible par défaut dans les jetons d’accès et d’ID. Cependant, vous pouvez configurer votre locataire pour permettre l’utilisation de noms d’organisation dans la Authentication API. Cela a pour résultat des jetons contenant à la fois les demandes `org_id`  et `org_name`. Si elle existe, validez la demande `org_name` en plus de `org_id` pour vous assurer que les valeurs reçues correspondent à une entité de confiance.
 
-En général, utiliser des ID d’organisation est une méthode préférable pour la validation des jetons. Cependant, les noms d’organisation peuvent être utilisés s’ils sont plus appropriés pour votre cas d’utilisation. Pour comprendre les implications potentielles d’utilisation de noms d’organisation pour valider des jetons, voir [Utiliser des noms d’organisation dans la Authentication API](/docs/manage-users/organizations/configure-organizations/use-org-name-authentication-api).
+En général, utiliser des ID d’organisation est une méthode préférable pour la validation des jetons. Cependant, les noms d’organisation peuvent être utilisés s’ils sont plus appropriés pour votre cas d’utilisation. Pour comprendre les implications potentielles d’utilisation de noms d’organisation pour valider des jetons, voir [Utiliser des noms d’organisation dans la Authentication API](/docs/fr-ca/manage-users/organizations/configure-organizations/use-org-name-authentication-api).
 
 </Note>
 
@@ -67,7 +67,7 @@ Si l’utilisateur a été authentifié à l’aide d’une organisation et qu�
 
 Elle peut être validée en même temps que les autres demandes dans le système dorsal, comme dans l’exemple suivant pour Ruby :
 
-```
+```ruby lines
 class JsonWebToken
   def self.verify(token)
     decoded = JWT.decode(token, nil,

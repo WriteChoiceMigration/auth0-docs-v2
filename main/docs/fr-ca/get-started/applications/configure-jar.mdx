@@ -1,13 +1,13 @@
 ---
 title: "Configurer les demandes d’autorisation sécurisées par JWT (JAR)"
 permalink: "configure-jar"
+'description': "Découvrez comment configurer des demandes d’autorisation sécurisées par JWT (JAR) pour une application."
 'og:title': "Configurer les demandes d’autorisation sécurisées par JWT (JAR)"
 'og:description': "Découvrez comment configurer des demandes d’autorisation sécurisées par JWT (JAR) pour une application."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer les demandes d’autorisation sécurisées par JWT (JAR)"
 'twitter:description': "Découvrez comment configurer des demandes d’autorisation sécurisées par JWT (JAR) pour une application."
 ---
-# Configurer les demandes d’autorisation sécurisées par JWT (JAR)
 
 <Note>
 
@@ -41,11 +41,11 @@ Utilisez Auth0 Dashboard pour configurer votre application afin qu’elle utilis
 4. Dans la section **Authorization Requests (Demandes d’autorisation)**, activez **Require JWT-Secured Authorization (Exiger l’autorisation sécurisée par JWT)**.
 5. Si aucun identifiant n’est attribué et que des identifiants sont disponibles, vous serez invité à attribuer un identifiant existant.
 
-   <Frame>![Dashboard > Application > Settings > Assign Existing Credentials](//images.ctfassets.net/cdy7uua7fh8z/HQHhFWTtdfNa5TnZ1dwx6/76bce36d82d24a38eeb0ae617f34b36e/Existing_Creds_-_French.png)</Frame>
+   <Frame>![Dashboard > Application > Settings > Assign Existing Credentials](/images/fr-ca/cdy7uua7fh8z/HQHhFWTtdfNa5TnZ1dwx6/76bce36d82d24a38eeb0ae617f34b36e/Existing_Creds_-_French.png)</Frame>
 
 6. Vous aurez également la possibilité d’attribuer un nouvel identiifant.
 
-   <Frame>![Auth0 Dashboard > Applications > Settings > Assign New Credentials](//images.ctfassets.net/cdy7uua7fh8z/7JfsCBwytWO6Q7hUvdtSwJ/45b2bd194982fc08c87ecae761cfd340/New_Creds_-_French.png)</Frame>
+   <Frame>![Auth0 Dashboard > Applications > Settings > Assign New Credentials](/images/fr-ca/cdy7uua7fh8z/7JfsCBwytWO6Q7hUvdtSwJ/45b2bd194982fc08c87ecae761cfd340/New_Creds_-_French.png)</Frame>
 
 7. Ajoutez et attribuez un nouvel identifiant en téléversant une paire de clés RSA déjà générées. Lorsque vous y êtes invité, entrez ce qui suit :
 
@@ -73,7 +73,7 @@ Vous pouvez configurer JAR pour une nouvelle application ou pour une application
 
 Lorsque vous créez une nouvelle application, configurez JAR en envoyant une demande POST contenant `signed_request_object`. Dans cette demande, vous pouvez aussi enregistrer l’identifiant client correspondant (par exemple la clé PEM) :
 
-```
+```json lines
 POST https://{yourTenant}.auth0.com/api/v2/clients
 Authorization: Bearer [YOUR ACCESS TOKEN]
 Content-Type: application/json
@@ -100,7 +100,7 @@ Lors de la mise à jour d’une application existante, vous devez d’abord cré
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```json lines
 POST https://{yourTenant}.auth0.com/api/v2/clients/{yourClientId}/credentials
 Authorization: Bearer [YOUR ACCESS TOKEN]
 Content-Type: application/json
@@ -122,7 +122,7 @@ Attribuez ensuite les identifiants client à la configuration client `signed_req
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```json lines
 PATCH https://{yourTenant}.auth0.com/api/v2/clients/{yourClientId}
 Authorization: Bearer [YOUR ACCESS TOKEN]
 Content-Type: application/json

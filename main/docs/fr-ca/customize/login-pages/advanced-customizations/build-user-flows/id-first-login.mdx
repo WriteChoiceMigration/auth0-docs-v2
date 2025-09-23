@@ -1,13 +1,13 @@
 ---
 title: "Développer une connexion Identifier First avec mot de passe"
 permalink: "id-first-login"
+'description': "Guide d’implémentation ACUL pour le flux de connexion ID First"
 'og:title': "Développer une connexion Identifier First avec mot de passe"
 'og:description': "Guide d’implémentation ACUL pour le flux de connexion ID First"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Développer une connexion Identifier First avec mot de passe"
 'twitter:description': "Guide d’implémentation ACUL pour le flux de connexion ID First"
 ---
-# Développer une connexion Identifier First avec mot de passe
 
 <Card title="Before you start">
 
@@ -31,7 +31,7 @@ Exécutez une application à page unique pour créer des écrans de connexion pe
 
 Installez la [trousse SDK ACUL](/docs/fr-ca/customize/login-pages/advanced-customizations/getting-started/sdk-quickstart). Après avoir cloné l’exemple d’application, allez dans le dossier `auth0-acul-react-boilerplate` et installez la trousse SDK.
 
-```javascript
+```javascript lines
 //Clone the ACUL sample application into the root folder of your project
 
 git clone https://github.com/auth0-samples/auth0-acul-samples.git
@@ -53,7 +53,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Identifiant de la connexion Exemple d’écran pour l’identifiant de la connexion">
 
-```
+```javascript lines
 import { ChangeEvent } from "react";
 import { LoginId as ScreenProvider } from "@auth0/auth0-acul-js";
 
@@ -147,7 +147,7 @@ export default function LoginId() {
 
 Dans le dossier `auth0-acul-react-boilerplate/src`, créez un sous-dossier appelé `screens` et un fichier appelé `Login.tsx`. Importez la trousse SDK et, dans le composant React, initialisez la trousse SDK pour l’écran.
 
-```
+```javascript lines
 import { LoginId as ScreenProvider } from "@auth0/auth0-acul-js";
 
 export default function LoginId() {
@@ -163,7 +163,7 @@ export default function LoginId() {
 
 Pour en savoir plus sur les données de contexte, lisez Données de contexte de la connexion universelle.
 
-```
+```javascript lines
 <CardContent>
     <div className="mb-2 space-y-2">
       <Label htmlFor="identifier">
@@ -192,7 +192,7 @@ Pour en savoir plus sur les données de contexte, lisez Données de contexte de 
 
 À l’aide de la trousse SDK, soumettez les données capturées à l’écran vers le serveur. Lors de la prochaine étape du flux, le serveur traitera ces données et les enverra à l’utilisateur. En cas d’erreur, cet écran est rechargé pour vous permettre d’afficher l’erreur à l’utilisateur. L’accès aux erreurs se fait depuis la trousse SDK.
 
-```javascript
+```javascript lines
 const formSubmitHandler = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -218,7 +218,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Mot de passe de connexion">
 
-```
+```javascript lines
 import { ChangeEvent } from "react";
 import { LoginPassword as ScreenProvider } from "@auth0/auth0-acul-js";
 
@@ -322,7 +322,7 @@ export default function LoginPassword() {
 
 Dans le dossier `auth0-acul-react-boilerplate/src`, créez un sous-dossier appelé `screens` et un fichier appelé `Login.tsx`. Importez la trousse SDK et, dans le composant React, initialisez la trousse SDK pour l’écran.
 
-```
+```javascript lines
 import { LoginPassword as ScreenProvider } from "@auth0/auth0-acul-js";
 
 export default function LoginPassword() {
@@ -338,7 +338,7 @@ export default function LoginPassword() {
 
 Pour en savoir plus sur les données de contexte, lisez Données de contexte de la connexion universelle.
 
-```
+```javascript lines
 <CardContent>
         <Text className="mb-4 text-large">
           <span className="inline-block">
@@ -378,7 +378,7 @@ Pour en savoir plus sur les données de contexte, lisez Données de contexte de 
 
 À l’aide de la trousse SDK, soumettez les données capturées à l’écran vers le serveur. Lors de la prochaine étape du flux, le serveur traitera ces données et les enverra à l’utilisateur. En cas d’erreur, cet écran est rechargé pour vous permettre d’afficher l’erreur à l’utilisateur. L’accès aux erreurs se fait depuis la trousse SDK.
 
-```javascript
+```javascript lines
 const formSubmitHandler = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -406,7 +406,7 @@ Utilisez l’interface de ligne de commande Auth0, Terraform ou Management API 
 
 Dans le répertoire racine de votre projet, créez un dossier `settings` et incluez-y un fichier `{SCREENNAME}.json`.
 
-```javascript
+```javascript lines
 //settings.json
 {
   "rendering_mode": "advanced",
@@ -438,7 +438,7 @@ Dans le répertoire racine de votre projet, créez un dossier `settings` et incl
 
  Activer ACUL avec l’interface de ligne de commande Auth0 :
 
-```
+```javascript lines
 auth0 ul customize --rendering-mode advanced --prompt {SCREENNAME} --screen {SCREENNAME} --settings-file ./settings/{SCREENNAME}.json
 ```
 
@@ -446,7 +446,7 @@ auth0 ul customize --rendering-mode advanced --prompt {SCREENNAME} --screen {SCR
 
 Dans le répertoire racine de votre projet, créez un fichier `login-id.json` :
 
-```javascript
+```javascript lines
 //login-id.json
 {
   "rendering_mode": "advanced",
@@ -478,7 +478,7 @@ Dans le répertoire racine de votre projet, créez un fichier `login-id.json` :
 
 Activer ACUL avec Auth0 Terraform
 
-```
+```javascript lines
 prompts:
   identifier_first: true
   universal_login_experience: classic
@@ -494,7 +494,7 @@ prompts:
 
 Vous pouvez utiliser Auth0 Management API pour activer ACUL.
 
-```bash
+```javascript lines
 curl --location --request PATCH 'https://{YOUR-CUSTOM-DOMAIN}/api/v2/prompts/{YOUR-PROMPT}/screen/{YOUR-SCREEN}/rendering' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <API TOKEN>' \
@@ -544,7 +544,7 @@ curl --location --request PATCH 'https://{YOUR-CUSTOM-DOMAIN}/api/v2/prompts/{YO
 
 ACUL exige que les ressources soient hébergées sur une URL publique. Exécutez un serveur local et testez vos ressources avant de les déployer.
 
-```javascript
+```javascript lines
 // Creates the local assets 
 
 npm run build 
@@ -571,15 +571,15 @@ Pour en savoir plus sur le déploiement d’ACUL dans votre locataire, lisez [Co
 </thead>
 <tbody>
 <tr>
-<td><a href="/docs/customize/login-pages/advanced-customizations">Personnalisations avancées pour la connexion universelle</a></td>
+<td><a href="/docs/fr-ca/customize/login-pages/advanced-customizations">Personnalisations avancées pour la connexion universelle</a></td>
 <td>Fonctionnement des personnalisations avancées.</td>
 </tr>
 <tr>
-<td><a href="/docs/customize/login-pages/advanced-customizations/getting-started">Mise en route des personnalisations avancées</a></td>
+<td><a href="/docs/fr-ca/customize/login-pages/advanced-customizations/getting-started">Mise en route des personnalisations avancées</a></td>
 <td>Notions de base pour la mise en route des personnalisations avancées</td>
 </tr>
 <tr>
-<td><a href="/docs/customize/login-pages/advanced-customizations/screens">Personnalisations avancées pour la connexion universelle : Écrans</a></td>
+<td><a href="/docs/fr-ca/customize/login-pages/advanced-customizations/screens">Personnalisations avancées pour la connexion universelle : Écrans</a></td>
 <td>Une liste de tous les écrans proposés pour les personnalisations avancées.</td>
 </tr>
 </tbody>

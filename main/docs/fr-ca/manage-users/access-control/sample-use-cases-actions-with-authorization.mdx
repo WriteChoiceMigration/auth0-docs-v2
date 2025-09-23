@@ -1,13 +1,13 @@
 ---
 title: "Exemples de cas d’utilisation : actions avec autorisation"
 permalink: "sample-use-cases-actions-with-authorization"
+'description': "Apprenez à utiliser les actions avec le contrôle d’accès basé sur les rôles (RBAC)."
 'og:title': "Exemples de cas d’utilisation : actions avec autorisation"
 'og:description': "Apprenez à utiliser les actions avec le contrôle d’accès basé sur les rôles (RBAC)."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Exemples de cas d’utilisation : actions avec autorisation"
 'twitter:description': "Apprenez à utiliser les actions avec le contrôle d’accès basé sur les rôles (RBAC)."
 ---
-# Exemples de cas d’utilisation : actions avec autorisation
 
 Les [actions](/docs/fr-ca/customize/actions) Auth0 vous permettent de modifier ou de compléter le résultat de la décision prise par une [politique d’autorisation](/docs/fr-ca/manage-users/access-control/authorization-policies) préconfigurée afin que vous puissiez gérer des cas plus compliqués qu’avec le [contrôle d'accès basé sur les rôles (RBAC)](/docs/fr-ca/manage-users/access-control/rbac) seul. En fonction de leur ordre d’exécution, les actions peuvent modifier le résultat d’une décision d’autorisation avant que les autorisations ne soient ajoutées au jeton d’accès. Elles peuvent également vous permettre de personnaliser le contenu de vos jetons.
 
@@ -15,7 +15,7 @@ Les [actions](/docs/fr-ca/customize/actions) Auth0 vous permettent de modifier 
 
 Supposons que vous ayez une application que vous souhaitez ne rendre accessible que pendant les jours ouvrables. Allez à[Créer une nouvelle action](/docs/fr-ca/customize/actions/write-your-first-action) et sélectionnez le déclencheur `Connexion/Post-connexion` pour ajouter l’action au flux de connexion. Copiez le code suivant dans l’éditeur de code d’actions :
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   if (event.client.name === "APP_NAME") {
     const d = new Date().getDay();
@@ -35,7 +35,7 @@ Si un utilisateur tente d’accéder à l’application pendant la fin de semain
 
 Supposons que vous souhaitiez autoriser l’accès à une application, mais uniquement pour les utilisateurs qui accèdent à l’application depuis le réseau de votre entreprise. Allez à[Créer une nouvelle action](/docs/fr-ca/customize/actions/write-your-first-action) et sélectionnez le déclencheur `Login / Post Login` pour ajouter l’action au flux de connexion. Copiez le code suivant dans l’éditeur de code d’actions :
 
-```javascript
+```javascript lines
 const ipaddr = require("ipaddr.js");
 
 exports.onExecutePostLogin = async (event, api) => {
@@ -62,7 +62,7 @@ Pour utiliser une bibliothèque `npm` telle que `ipaddr.js`, vous devez ajouter 
 
 Supposons que vous souhaitiez refuser l’accès à tous les utilisateurs qui appellent une API. Cela signifie que vous devez refuser l’accès en fonction de la valeur de l’`identifiant` de votre API, que vous pouvez trouver dans le champ **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Audience</Tooltip> de l’API** de votre API dans [Tableau de bord Auth0 > Applications > API](https://manage.auth0.com/#/apis). Allez à[Créer une nouvelle action](/docs/fr-ca/customize/actions/write-your-first-action) et sélectionnez le déclencheur `Connexion/Post-connexion` pour ajouter l’action au flux de connexion. Copiez le code suivant dans l’éditeur de code d’actions :
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   // In Actions, an API will be referred to as a Resource Server.
   const { identifier } = event.resource_server || {};
@@ -80,7 +80,7 @@ Dans ce cas la valeur de l’`identifier` pour l’API est `https://api.example.
 
 Pour ajouter des rôles d’utilisateur aux jetons émis par Auth0, utilisez l’objet `event.authorization` avec les méthodes `api.idToken.setCustomClaim` et `api.accessToken.setCustomClaim`. Allez à[Créer une nouvelle action](/docs/fr-ca/customize/actions/write-your-first-action) et sélectionnez le déclencheur `Login / Post Login` pour ajouter l’action au flux de connexion. Copiez le code suivant dans l’éditeur de code d’actions :
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const namespace = 'https://my-app.example.com';
   if (event.authorization) {

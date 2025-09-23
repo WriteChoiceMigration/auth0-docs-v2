@@ -1,19 +1,19 @@
 ---
 title: "Envoi d’invitations par courriel pour l’inscription à une application"
 permalink: "send-email-invitations-for-application-signup"
+'description': "Explique comment adapter le processus d’inscription pour encourager les utilisateurs à s’inscrire sur une application Auth0 particulière."
 'og:title': "Envoi d’invitations par courriel pour l’inscription à une application"
 'og:description': "Explique comment adapter le processus d’inscription pour encourager les utilisateurs à s’inscrire sur une application Auth0 particulière."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Envoi d’invitations par courriel pour l’inscription à une application"
 'twitter:description': "Explique comment adapter le processus d’inscription pour encourager les utilisateurs à s’inscrire sur une application Auth0 particulière."
 ---
-# Envoi d’invitations par courriel pour l’inscription à une application
 
 Pour limiter le nombre d’inscriptions d’utilisateurs ou créer des comptes en masse, l’application peut envoyer des invitations.
 
 <Warning>
 
-Le processus d’invitation des membres d’une organization diffère de celui des utilisateurs présenté dans cet article. Cet article explique comment générer des invitations à s’inscrire à un compte dans le contexte d’une application spécifique. Si vous travaillez avec des organizations et souhaitez découvrir comment inviter des membres à des organizations par courriel, consultez plutôt la section [Inviter les membres de l’Organization](/docs/manage-users/organizations/configure-organizations/invite-members).
+Le processus d’invitation des membres d’une organization diffère de celui des utilisateurs présenté dans cet article. Cet article explique comment générer des invitations à s’inscrire à un compte dans le contexte d’une application spécifique. Si vous travaillez avec des organizations et souhaitez découvrir comment inviter des membres à des organizations par courriel, consultez plutôt la section [Inviter les membres de l’Organization](/docs/fr-ca/manage-users/organizations/configure-organizations/invite-members).
 
 </Warning>
 
@@ -32,9 +32,9 @@ En réalité, une invitation pour un utilisateur est un lien permettant de modif
 * [Personnaliser un modèle de courriel](/docs/fr-ca/customize/email/email-templates) et l’utiliser pour [envoyer un courriel de modification du mot de passe](/docs/fr-ca/customize/email/manage-email-flow).
 * Créer un ticket de modification de mot de passe.
 
-Vous pouvez autoriser un utilisateur à accéder à un compte existant que vous avez créé en son nom. Ensuite, envoyez à l’utilisateur un lien unique pour qu’il puisse définir son mot de passe. Vous générez le lien unique en créant un ticket de modification de mot de passe dans lequel votre application d’invitation appelle le point de terminaison `/password-change`[Management API](/docs/api/management/v2/#!/Tickets/post_password_change). Vous aurez besoin de :
+Vous pouvez autoriser un utilisateur à accéder à un compte existant que vous avez créé en son nom. Ensuite, envoyez à l’utilisateur un lien unique pour qu’il puisse définir son mot de passe. Vous générez le lien unique en créant un ticket de modification de mot de passe dans lequel votre application d’invitation appelle le point de terminaison `/password-change`[Management API](/docs/fr-ca/api/management/v2/#!/Tickets/post_password_change). Vous aurez besoin de :
 
-* [Créer un utilisateur de la base de données Auth0](/docs/fr-ca/authenticate/database-connections) avec le paramètre `user.email_verified` défini sur `false`. Vous pouvez utiliser le point de terminaison [Créer un utilisateur](/docs/api/management/v2/#!/Users/post_users).
+* [Créer un utilisateur de la base de données Auth0](/docs/fr-ca/authenticate/database-connections) avec le paramètre `user.email_verified` défini sur `false`. Vous pouvez utiliser le point de terminaison [Créer un utilisateur](/docs/fr-ca/api/management/v2/#!/Users/post_users).
 * Avoir accès à un [service de courriel externe et le configurer](/docs/fr-ca/customize/email/smtp-email-providers).
 * [Obtenir un jeton d’accès à Management API](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-testing).
 
@@ -47,7 +47,7 @@ Vous pouvez autoriser un utilisateur à accéder à un compte existant que vous 
 
 Pour en savoir plus, consultez [Configuration des itinéraires de connexion par défaut](/docs/fr-ca/authenticate/login/auth0-universal-login/configure-default-login-routes).
 
-```bash
+```json lines
 curl -- request POST \
   --url 'https://{yourAuth0Tenant}/api/v2/tickets/password-change' \
   --header "Content-Type: application/json" \
@@ -60,13 +60,13 @@ Vous pouvez ajouter des paramètres de requête à l’URL pour personnaliser l�
 
 Ajoutez un paramètre pour préciser un ensemble de mots de passe pour l’interface utilisateur du flux de production. Exemple :
 
-```
+```html lines
 #type=invite
 ```
 
 Ajoutez un paramètre pour identifer l’application cible. Exemple :
 
-```
+```html lines
 #app=AppName
 ```
 
@@ -80,7 +80,7 @@ Le courriel d’invitation doit être envoyé avec votre fournisseur de services
 
 Par exemple, lors de la création de l’utilisateur à inviter, vous pouvez ajouter une propriété à `user.app_metadata` qui indique que ce compte utilisateur a été invité. Ensuite, dans votre modèle de courriel, vous pouvez rechercher cette propriété :
 
-```json
+```javascript lines
 {% if user.app_metadata.invitedToMyApp == true %}
   // user invitation email
 {% else %}

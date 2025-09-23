@@ -1,13 +1,13 @@
 ---
 title: "Afficher les résultats de la recherche par page"
 permalink: "view-search-results-by-page"
+'description': "Découvrez comment afficher les résultats de la recherche page par page et inclure les totaux."
 'og:title': "Afficher les résultats de la recherche par page"
 'og:description': "Découvrez comment afficher les résultats de la recherche page par page et inclure les totaux."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Afficher les résultats de la recherche par page"
 'twitter:description': "Découvrez comment afficher les résultats de la recherche page par page et inclure les totaux."
 ---
-# Afficher les résultats de la recherche par page
 
 Pour paginer les résultats de la recherche de l’utilisateur, utilisez les paramètres `page`, `per_page` et `include_totals` dans votre demande.
 
@@ -19,16 +19,16 @@ Pour paginer les résultats de la recherche de l’utilisateur, utilisez les par
 </thead>
 <tbody>
 <tr>
-<td><code>page</code></td>
+<td>`page`</td>
 <td>Le numéro de page, basé sur zéro. Si ce paramètre n’est pas défini, nous renvoyons un maximum de 50 enregistrements, quel que soit le nombre d’enregistrements existants.</td>
 </tr>
 <tr>
-<td><code>per_page</code></td>
+<td>`per_page`</td>
 <td>Le nombre d’utilisateurs par page.</td>
 </tr>
 <tr>
-<td><code>include_totals</code></td>
-<td>Défini à <code>true</code> pour inclure un résumé de la requête dans le résultat.</td>
+<td>`include_totals`</td>
+<td>Défini à `true` pour inclure un résumé de la requête dans le résultat.</td>
 </tr>
 </tbody>
 </table>
@@ -36,19 +36,19 @@ Pour paginer les résultats de la recherche de l’utilisateur, utilisez les par
 ## Exemple de demande
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/users?q=logins_count%3A%5B100%20TO%20200%5D&page=2&per_page=10&include_totals=true&search_engine=v3' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users?q=logins_count%3A%5B100%20TO%20200%5D&page=2&per_page=10&include_totals=true&search_engine=v3");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -65,14 +65,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/users?q=logins_count%3A%5B100%20TO%20200%5D&page=2&per_page=10&include_totals=true&search_engine=v3")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -91,8 +91,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users?q=logins_count%3A%5B100%20TO%20200%5D&page=2&per_page=10&include_totals=true&search_engine=v3"]
@@ -113,7 +113,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users?q=logins_count%3A%5B100%20TO%20200%5D&page=2&per_page=10&include_totals=true&search_engine=v3",
@@ -135,8 +135,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -146,7 +146,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -158,8 +158,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users?q=logins_count%3A%5B100%20TO%20200%5D&page=2&per_page=10&include_totals=true&search_engine=v3")! as URL,
@@ -184,7 +184,7 @@ dataTask.resume()
 
 Un exemple de corps de réponse pour les valeurs définies dans l’exemple de demande ci-dessus est le suivant :
 
-```json
+```json lines
 {
     "start": 20,
     "limit": 10,
@@ -204,4 +204,4 @@ Auth0 limite le nombre total d’utilisateurs que vous pouvez récupérer à 1 0
 
 ## Poursuivre la lecture
 
-Pour en savoir plus sur les paramètres `page`, `per_page` et autres, consultez la documentation de [Management API Explorer](/docs/api/management/v2#!/Users/get_users).
+Pour en savoir plus sur les paramètres `page`, `per_page` et autres, consultez la documentation de [Management API Explorer](/docs/fr-ca/api/management/v2#!/Users/get_users).

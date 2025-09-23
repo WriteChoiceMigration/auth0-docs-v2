@@ -1,13 +1,13 @@
 ---
 title: "RGPD : Suivre le consentement avec Lock"
 permalink: "gdpr-track-consent-with-lock"
+'description': "Décrit comment vous pouvez personnaliser Lock pour capturer les informations de consentement"
 'og:title': "RGPD : Suivre le consentement avec Lock"
 'og:description': "Décrit comment vous pouvez personnaliser Lock pour capturer les informations de consentement"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "RGPD : Suivre le consentement avec Lock"
 'twitter:description': "Décrit comment vous pouvez personnaliser Lock pour capturer les informations de consentement"
 ---
-# RGPD : Suivre le consentement avec Lock
 
 Dans ce tutoriel, nous allons expliquer comment utiliser Lock pour obtenir des informations sur le consentement, puis enregistrer ces informations dans les métadonnées de l’utilisateur. Pour en savoir plus, consultez [Comprendre le fonctionnement des métadonnées dans les profils utilisateurs](/docs/fr-ca/manage-users/user-accounts/metadata).
 
@@ -25,7 +25,7 @@ Le contenu de ces documents ne constitue pas un avis juridique et ne doit pas ê
 
 Nous allons configurer une application JavaScript à page unique simple et une connexion par base de données (nous utiliserons l’infrastructure Auth0 au lieu de configurer notre propre base de données).
 
-Au lieu de créer une application de zéro, nous allons [utiliser l’exemple Guide rapide JavaScript](/docs/quickstart/spa/vanillajs) d’Auth0. Nous utiliserons d’autre part les pages <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Universal Login</Tooltip> (Connexion universelle) d’Auth0 afin de pouvoir implémenter une expérience de connexion universelle au lieu d’intégrer la connexion dans notre application. Pour en savoir plus sur la connexion universelle, consultez [Connexion universelle Auth0](/docs/fr-ca/authenticate/login/auth0-universal-login). Pour en savoir plus sur les différences entre la connexion universelle et la connexion intégrée, consultez [Connexion universelle centralisée par rapport à la Connexion intégrée](/docs/fr-ca/authenticate/login/universal-vs-embedded-login).
+Au lieu de créer une application de zéro, nous allons [utiliser l’exemple Guide rapide JavaScript](/docs/fr-ca/quickstart/spa/vanillajs) d’Auth0. Nous utiliserons d’autre part les pages <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Universal Login</Tooltip> (Connexion universelle) d’Auth0 afin de pouvoir implémenter une expérience de connexion universelle au lieu d’intégrer la connexion dans notre application. Pour en savoir plus sur la connexion universelle, consultez [Connexion universelle Auth0](/docs/fr-ca/authenticate/login/auth0-universal-login). Pour en savoir plus sur les différences entre la connexion universelle et la connexion intégrée, consultez [Connexion universelle centralisée par rapport à la Connexion intégrée](/docs/fr-ca/authenticate/login/universal-vs-embedded-login).
 
 Nous capturerons les informations de consentement dans divers scénarios et les enregistrerons dans les métadonnées de l’utilisateur.
 
@@ -36,7 +36,7 @@ Tous les scénarios enregistreront les propriétés suivantes dans les métadonn
 
 Par exemple :
 
-```json
+```json lines
 {
   "consentGiven": "true"
   "consentTimestamp": "1525101183"
@@ -58,7 +58,7 @@ Nous allons voir trois implémentations différentes :
 3. Copiez les valeurs **ID client** et **Domaine**. Vous en aurez bientôt besoin.
 4. Accédez à [Auth0 Dashboard > Authentification > Base de données](https://manage.auth0.com/#/connections/database) et créez à nouveau une connexion. Cliquez sur **Créer une connexion par base de données**, choisissez un nom pour la nouvelle connexion, puis cliquez sur **Enregistrer**. Vous pouvez aussi activer une connexion par les réseaux sociaux dans [Auth0 Dashboard > Authentification > Social](https://manage.auth0.com/#/connections/social) (nous activerons la connexion par Google pour les besoins de ce tutoriel).
 5. Accédez à l’onglet **Applications** de la connexion et vérifiez que l’application que vous venez de créer est bien activée.
-6. [Téléchargez l’exemple d’application JavaScript à page unique](/docs/quickstart/spa/vanillajs).
+6. [Téléchargez l’exemple d’application JavaScript à page unique](/docs/fr-ca/quickstart/spa/vanillajs).
 
 ## Option 1 : Afficher le lien vers les Conditions d’utilisation
 
@@ -71,7 +71,7 @@ Cela concerne les connexions par bases de données et les connexions par réseau
 3. Repérez le menu déroulant **Modèles par défaut** et sélectionnez `Lock`. Le bloc de code sera prérempli.
 4. Pour ajouter un champ pour les métadonnées `consentGiven`, choisissez l’option `mustAcceptTerms`. Pour inclure des liens dans vos pages Conditions d’utilisation et/ou Politique de confidentialité, utilisez l’option `languageDictionary`. Pour en savoir plus, lisez [Configuration de Lock](/docs/fr-ca/libraries/lock/lock-configuration). L’exemple ci-dessous affiche le texte `J’accepte les conditions de service et la politique de confidentialité` (avec des liens à ces deux pages) se rapportant au drapeau :
 
-   ```javascript
+   ```javascript lines
    //code reducted for simplicity
        var lock = new Auth0Lock(config.clientID, config.auth0Domain, {
          auth: {
@@ -93,7 +93,7 @@ Cela concerne les connexions par bases de données et les connexions par réseau
 5. Cette option oblige les utilisateurs à accepter les conditions avant de s’inscrire, mais elle ne définit aucune métadonnée. Pour enregistrer la sélection de l’utilisateur dans la propriété de métadonnée `consentGiven`, [créez une nouvelle action](/docs/fr-ca/customize/actions/write-your-first-action). Saisissez un **Nom** descriptif pour votre Action (par exemple, `Set consent flag upon signup`), sélectionnez le déclencheur `Login / Post Login` car vous allez ajouter l’Action au flux de connexion, puis sélectionnez **Créer**.
 6. L’écran suivant présente l’éditeur de code des actions. Copiez le code JavaScript suivant à l’intérieur et sélectionnez **Enregistrer le brouillon** pour enregistrer vos modifications :
 
-   ```
+   ``` lines
    exports.onExecutePostLogin = async (event, api) => {
      const { consentGiven } = event.user.user_metadata || {};
 
@@ -130,7 +130,7 @@ Cela ne concerne que les connexions par bases de données. Pour les connexions p
 3. Repérez le menu déroulant **Modèles par défaut** et sélectionnez `Lock`. Le bloc de code sera prérempli.
 4. Pour ajouter un champ pour les métadonnées `consentGiven`, choisissez l’option `additionalSignUpFields`. Pour en savoir plus, lisez [Configuration de Lock](/docs/fr-ca/libraries/lock/lock-configuration). L’exemple ci-dessous définit le type sur `checkbox` (un drapeau est donc créé), le libellé sur `I consent to data processing` et la valeur par défaut sur `checked`.
 
-   ```javascript
+   ```javascript lines
    //code reducted for simplicity
        var lock = new Auth0Lock(config.clientID, config.auth0Domain, {
          auth: {
@@ -166,7 +166,7 @@ Pour des raisons de simplicité, nous utiliserons un [exemple de formulaire de 
    * **Valeur** : `your-consent-form-url.com` (veillez à fournir l’URL de votre formulaire de consentement accessible publiquement).
 3. Copiez le code JavaScript suivant dans l’éditeur de code des actions, puis sélectionnez **Enregistrer le brouillon** pour enregistrer vos modifications :
 
-   ```
+   ``` lines
    exports.onExecutePostLogin = async (event, api) => {
        const { consentGiven } = event.user.user_metadata || {};
 
@@ -209,7 +209,7 @@ Nous avons terminé la partie configuration, passons au test!
 
 1. Accédez au dossier où vous avez téléchargé l’application et exécutez-la.
 
-   ```
+   ``` lines
    npm install
        npm run
    ```
@@ -225,7 +225,7 @@ Nous avons terminé la partie configuration, passons au test!
 
    Si vous ne cochez pas l’option **J’accepte** avant de cliquer sur **Soumettre**, vous verrez s’afficher l’erreur contextuelle `Unauthorized. Check the console for details`. Sur la console, vous verrez ce JSON :
 
-   ```json
+   ```json lines
    {
          error: "unauthorized", 
          errorDescription: "User did not consent!", 
@@ -241,7 +241,7 @@ Nous avons terminé la partie configuration, passons au test!
 6. Accédez à [Auth0 Dashboard > Gestion des utilisateurs > Utilisateurs](https://manage.auth0.com/#/users), et recherchez le nouvel utilisateur.
 7. Accédez à **Détails de l’utilisateur** et faites défiler l’écran vers le bas jusqu’à la section **Métadonnées**. Dans la zone de texte **user_metadata**, vous devriez voir ce qui suit :
 
-   ```json
+   ```json lines
    {
          "consentGiven": "true"
          "consentTimestamp": "1525101183"

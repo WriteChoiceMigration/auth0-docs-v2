@@ -1,13 +1,13 @@
 ---
 title: "Ajouter la détection de robots aux pages de connexion personnalisées"
 permalink: "bot-detection-custom-login-pages"
+'description': "Comment activer et configurer la détection des robots lors de l’utilisation de pages de connexion personnalisées créées avec la bibliothèque auth0.js."
 'og:title': "Ajouter la détection de robots aux pages de connexion personnalisées"
 'og:description': "Comment activer et configurer la détection des robots lors de l’utilisation de pages de connexion personnalisées créées avec la bibliothèque auth0.js."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Ajouter la détection de robots aux pages de connexion personnalisées"
 'twitter:description': "Comment activer et configurer la détection des robots lors de l’utilisation de pages de connexion personnalisées créées avec la bibliothèque auth0.js."
 ---
-# Ajouter la détection de robots aux pages de connexion personnalisées
 
 Si vous créez une page de connexion personnalisée à l’aide de la bibliothèque auth0.js, vous pouvez activer la détection de robots pour afficher une étape CAPTCHA dans les scénarios où une demande est déterminée comme présentant un risque élevé par Auth0.
 
@@ -27,13 +27,13 @@ Auth0 fournit un modèle que vous pouvez utiliser avec du code pour gérer les c
 2. Cliquez sur l’onglet **Connection (Connexion)** et activez le commutateur **Customize Login Page (Personnaliser la page de connexion)** s’il n’est pas déjà activé.
 3. Localisez le menu déroulant **Default Templates (Modèles par défaut)** et sélectionnez **Custom Login Form (Formulaire de connexion personnalisé)**.
 
-   <Frame>![Dashboard Branding Universal Login Classic Login Tab Custom Login Form](//images.ctfassets.net/cdy7uua7fh8z/4m3WA0sKMoR0C1KVnVmZ1G/9eb874ba2619b71f57e7fff80f84cc01/2025-02-26_15-23-14.png)</Frame>
+   <Frame>![Dashboard Branding Universal Login Classic Login Tab Custom Login Form](/images/fr-ca/cdy7uua7fh8z/4m3WA0sKMoR0C1KVnVmZ1G/9eb874ba2619b71f57e7fff80f84cc01/2025-02-26_15-23-14.png)</Frame>
 
 4. Utilisez le modèle fourni pour commencer à personnaliser votre page de connexion.
 
    <Note>
 
-   Nous vous recommandons d’utiliser un logiciel de contrôle des versions pour gérer le code source de vos pages de connexion personnalisées. Pour en savoir plus, lisez [Contrôle des versions des pages de connexion classiques](/docs/customize/login-pages/classic-login/version-control).
+   Nous vous recommandons d’utiliser un logiciel de contrôle des versions pour gérer le code source de vos pages de connexion personnalisées. Pour en savoir plus, lisez [Contrôle des versions des pages de connexion classiques](/docs/fr-ca/customize/login-pages/classic-login/version-control).
 
    </Note>
 
@@ -50,7 +50,7 @@ Si vous souhaitez prendre en charge la détection de robots, vous devez utiliser
 1. Ajoutez un élément pour afficher le CAPTCHA sous votre mot de passe saisi et au-dessus de vos boutons d’inscription et de connexion. Par exemple : `<div class="captcha-container"></div>`
 2. Initialiser les composants `loginCaptcha` et `signupCaptcha` après le constructeur `WebAuth`.
 
-   ```javascript
+   ```javascript lines
    var webAuth = new auth0.WebAuth(params);
 
    var loginCaptcha = webAuth.renderCaptcha(
@@ -79,7 +79,7 @@ Si vous souhaitez prendre en charge la détection de robots, vous devez utiliser
    
 3. Lorsque vous appelez la méthode `login`, affectez à la propriété `captcha` la valeur `loginCaptcha.getValue()` :
 
-   ```
+   ``` lines
    webAuth.login({
        realm: connection,
        username: username,
@@ -98,7 +98,7 @@ Si vous souhaitez prendre en charge la détection de robots, vous devez utiliser
    Pour en savoir plus sur le paramètre de fonction de la méthode de Callback `login`, (`cb`), veuillez consulter la [Documentation de WebAuth sur auth0.js](https://auth0.github.io/auth0.js/global.html#login).
 4. Lorsque vous appelez la méthode `signupAndLogin`, affectez à la propriété `captcha` la valeur `signupCaptcha.getValue()` :
 
-   ```
+   ``` lines
    webAuth.redirect.signupAndLogin({
        connection: databaseConnection,
        email: email,
@@ -117,7 +117,7 @@ Si vous souhaitez prendre en charge la détection de robots, vous devez utiliser
    Pour en savoir plus sur le paramètre de fonction de la méthode de Callback `signupAndLogin`, (`cb`), veuillez consulter la [Documentation de WebAuth sur auth0.js](https://auth0.github.io/auth0.js/global.html#login).
 5. Recharger les composants `loginCaptcha` et `signupCaptcha` de votre logique de gestion des erreurs générique.
 
-   ```javascript
+   ```javascript lines
    function displayError(err) {
      loginCaptcha.reload();
      signupCaptcha.reload();
@@ -146,35 +146,35 @@ La propriété `templates` dans le paramètre `options` prend en charge les prop
 </thead>
 <tbody>
 <tr>
-<td><code>auth0</code></td>
+<td>`auth0`</td>
 <td>Fonction modèle recevant le défi-réponse et renvoyant une chaîne.</td>
 </tr>
 <tr>
-<td><code>recaptcha_v2</code></td>
+<td>`recaptcha_v2`</td>
 <td>Fonction modèle recevant le défi-réponse et renvoyant une chaîne.</td>
 </tr>
 <tr>
-<td><code>recaptcha_enterprise</code></td>
+<td>`recaptcha_enterprise`</td>
 <td>Fonction modèle recevant le défi-réponse et renvoyant une chaîne.</td>
 </tr>
 <tr>
-<td><code>hcaptcha</code></td>
+<td>`hcaptcha`</td>
 <td>Fonction modèle recevant le défi-réponse et renvoyant une chaîne.</td>
 </tr>
 <tr>
-<td><code>friendly_captcha</code></td>
+<td>`friendly_captcha`</td>
 <td>Fonction modèle recevant le défi-réponse et renvoyant une chaîne.</td>
 </tr>
 <tr>
-<td><code>arkose</code></td>
+<td>`arkose`</td>
 <td>Fonction modèle recevant le défi-réponse et renvoyant une chaîne.</td>
 </tr>
 <tr>
-<td><code>auth0_v2</code></td>
+<td>`auth0_v2`</td>
 <td>Fonction modèle recevant le défi-réponse et renvoyant une chaîne.</td>
 </tr>
 <tr>
-<td><code>error</code></td>
+<td>`error`</td>
 <td>Fonction modèle renvoyant un message d’erreur personnalisé lorsque le défi-réponse n’a pas pu être récupéré, reçoit l’erreur comme premier argument.</td>
 </tr>
 </tbody>
@@ -191,7 +191,7 @@ Si vous souhaitez prendre en charge la détection de robots pour les flux sans m
 1. Ajoutez un élément pour afficher le CAPTCHA au-dessus du bouton de soumission. Si vous prenez également en charge une connexion par nom d’utilisateur/mot de passe, un élément distinct doit être créé pour le CAPTCHA sans mot de passe. Par exemple : `<div class="passwordless-captcha-container"></div>`
 2. Initialisez le composant CAPTCHA pour les flux sans mot de passe après le constructeur WebAuth.
 
-   ```javascript
+   ```javascript lines
    var passwordlessCaptcha = webAuth.renderPasswordlessCaptcha(
      document.querySelector('.passwordless-captcha-container')
    );
@@ -202,7 +202,7 @@ Si vous souhaitez prendre en charge la détection de robots pour les flux sans m
    
 3. Ajoutez la propriété captcha à l’appel sans mot de passe et rechargez le composant CAPTCHA en cas d’erreurs.
 
-   ```
+   ``` lines
    webAuth.passwordlessStart({
      connection: 'email',
      send: 'code',

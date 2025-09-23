@@ -1,13 +1,13 @@
 ---
 title: "Associer des comptes d’utilisateurs"
 permalink: "link-user-accounts"
+'description': "Découvrez comment associer des comptes d’utilisateurs à partir de différents fournisseurs d’identité, afin que vos utilisateurs puissent s’authentifier à partir de n’importe quel compte et être reconnus par votre application."
 'og:title': "Associer des comptes d’utilisateurs"
 'og:description': "Découvrez comment associer des comptes d’utilisateurs à partir de différents fournisseurs d’identité, afin que vos utilisateurs puissent s’authentifier à partir de n’importe quel compte et être reconnus par votre application."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Associer des comptes d’utilisateurs"
 'twitter:description': "Découvrez comment associer des comptes d’utilisateurs à partir de différents fournisseurs d’identité, afin que vos utilisateurs puissent s’authentifier à partir de n’importe quel compte et être reconnus par votre application."
 ---
-# Associer des comptes d’utilisateurs
 
 Associer des comptes d’utilisateurs en formant une relation primaire et secondaire. Si l’association est réussie, le point de terminaison renvoie le nouveau tableau des identités du compte primaire.
 
@@ -35,9 +35,9 @@ Accédez aux onglets ci-dessous pour voir les détails de chaque option.
 
 ## Extension de lien de compte
 
-Installez et configurez l’extension [Account Link Extension](/docs/extensions/account-link) dans le tableau de bord pour inviter les utilisateurs qui peuvent avoir créé un deuxième compte à lier le nouveau compte à leur ancien lors de leur première connexion. L’utilisateur peut choisir de lier les deux comptes ou de les garder séparés si cela était intentionnel.
+Installez et configurez l’extension [Account Link Extension](/docs/fr-ca/extensions/account-link) dans le tableau de bord pour inviter les utilisateurs qui peuvent avoir créé un deuxième compte à lier le nouveau compte à leur ancien lors de leur première connexion. L’utilisateur peut choisir de lier les deux comptes ou de les garder séparés si cela était intentionnel.
 
-## Point de terminaison de Management API Management API Auth0 fournit le point de terminaison [Link a user account](/docs/api/v2#!/Users/post_identities), lequel peut être invoqué de deux façons : \* Liaison de compte initiée par l’utilisateur à l’aide de jetons d’accès avec la permission `update:current_user_identities` \* Liaison de compte côté serveur à l’aide d’un jeton d’accès contenant la permission `update:users` ### Liaison de compte côté client initiée par l’utilisateur Pour la liaison de compte initiée par l’utilisateur à partir du code côté client, utilisez un jeton d’accès qui contient les éléments suivants dans la charge utile : - permission `update:current_user_identites` - `user_id` du compte principal dans le cadre de l’URL- Le jeton d’ID du compte secondaire doit être signé avec `RS256` et une demande `aud` identifiant le client qui correspond à la valeur `azp` du jeton d’accès de la demande.
+## Point de terminaison de Management API Management API Auth0 fournit le point de terminaison [Link a user account](/docs/fr-ca/api/v2#!/Users/post_identities), lequel peut être invoqué de deux façons : \* Liaison de compte initiée par l’utilisateur à l’aide de jetons d’accès avec la permission `update:current_user_identities` \* Liaison de compte côté serveur à l’aide d’un jeton d’accès contenant la permission `update:users` ### Liaison de compte côté client initiée par l’utilisateur Pour la liaison de compte initiée par l’utilisateur à partir du code côté client, utilisez un jeton d’accès qui contient les éléments suivants dans la charge utile : - permission `update:current_user_identites` - `user_id` du compte principal dans le cadre de l’URL- Le jeton d’ID du compte secondaire doit être signé avec `RS256` et une demande `aud` identifiant le client qui correspond à la valeur `azp` du jeton d’accès de la demande.
 
 Un jeton d’accès qui contient la permission `update:current_user_identities` peut **seulement** être utilisé pour mettre à jour l’information de l’utilisateur actuellement connecté. Par conséquent, cette méthode convient mieux aux scénarios dans lesquels l’utilisateur initie le processus de liaisons. `js { "method": "POST", "url": "https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities", "httpVersion": "HTTP/1.1", "headers": [{ "name": "Authorization", "value": "Bearer ACCESS_TOKEN" }, { "name": "content-type", "value": "application/json" }], "postData" : { "mimeType": "application/json", "text": "{\"link_with\":\"SECONDARY_ACCOUNT_ID_TOKEN\"}" } }`  ### Liaison de compte côté serveur pour la liaison de compte côté serveur, utilisez un jeton d’accès qui contient les éléments suivants dans la charge utile : - permission `update:users` - `user_id` du compte principal comme partie de l’URL- `user_id` du compte secondaire - Le jeton d’ID du compte secondaire doit être signé avec `RS256` et une demande `aud` identifiant le client qui correspond à la valeur `azp` du jeton d’accès de la demande.
 
@@ -45,13 +45,13 @@ Jetons d’accès qui contiennent la permission `update:user` peut être utilis�
 
 Plutôt que `provider` et `user_id`, vous pouvez envoyer le jeton d’ID du compte secondaire dans le cadre de la charge utile : `js { "method": "POST", "url": "https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities", "httpVersion": "HTTP/1.1", "headers": [{ "name": "Authorization", "value": "Bearer ACCESS_TOKEN" }, { "name": "content-type", "value": "application/json" }], "postData" : { "mimeType": "application/json", "text": "{\"link_with\":\"SECONDARY_ACCOUNT_ID_TOKEN\"}" } }`
 
-## Bibliothèque Auth0.js Vous pouvez utiliser la bibliothèque [Auth0.js](/docs/libraries/auth0js).
+## Bibliothèque Auth0.js Vous pouvez utiliser la bibliothèque [Auth0.js](/docs/fr-ca/libraries/auth0js).
 
 Premièrement, vous devez obtenir un jeton d’accès à utiliser avec Management API. Vous pouvez l’obtenir en spécifiant l'audience `https://{yourDomain}/api/v2/` lorsque vous initialisez Auth0.js. Vous obtiendrez le jeton d’accès dans le cadre du flux d’authentification. Alternativement, vous pouvez utiliser la méthode `checkSession`.
 
 Une fois que vous avez le jeton d’accès, vous pouvez créer une nouvelle instance `auth0.Management` en le passant par le domaine Auth0 du compte, et le jeton d’accès.
 
-Pour en savoir davantage, lisez [Auth0.js > User management](/docs/libraries/auth0js/v9#user-management).
+Pour en savoir davantage, lisez [Auth0.js > User management](/docs/fr-ca/libraries/auth0js/v9#user-management).
 
 ## Ajoutez les informations manquantes avec les règles
 
@@ -59,7 +59,7 @@ Lorsqu’un utilisateur se connecte, les applications reçoivent des information
 
 Pour ajouter des informations manquantes aux identités principales avec des informations provenant d’identités secondaires, vous pouvez élaborer une règle comme dans l’exemple suivant :
 
-```javascript
+```javascript lines
 function(user, context, callback) {
   
   const propertiesToComplete = ["given_name", "family_name", "name"];
@@ -116,7 +116,7 @@ L’utilisateur principal doit lancer le flux de connexion afin d’associer ave
 
 Pour effectuer ces étapes, un exemple d’Action post-connexion peut contenir les éléments suivants :
 
-```javascript
+```javascript lines
 // @ts-check
 const { ManagementClient } = require("auth0");
 

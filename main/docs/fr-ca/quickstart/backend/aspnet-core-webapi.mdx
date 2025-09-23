@@ -1,12 +1,14 @@
 ---
 title: "Auth0"
 permalink: "aspnet-core-webapi"
+'description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:title': "Auth0"
 'og:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0"
 'twitter:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 ---
+
 # ASP.NET Core Web API: Authorization
 
 <Frame>![Gravatar for damien.guard@auth0.com](//www.gravatar.com/avatar/3afad8f8d76c39d8b5b82578f030c53f?d=mm&r=g&s=50)</Frame>
@@ -38,7 +40,7 @@ System requirements: .NET 6.0 | .NET 7.0 | .NET 8.0
 
 <Note>
 
-**New to Auth0?** Learn [how Auth0 works](/docs/overview) and read about [implementing API authentication and authorization](/docs/api-auth)  using the OAuth 2.0 framework.
+**New to Auth0?** Learn [how Auth0 works](/docs/fr-ca/overview) and read about [implementing API authentication and authorization](/docs/fr-ca/api-auth)  using the OAuth 2.0 framework.
 
 </Note>
 
@@ -50,7 +52,7 @@ In the [APIs](https://manage.auth0.com/#/apis) section of the Auth0 dashboard, c
 
 <Frame>![Create API](https://cdn2.auth0.com/docs/1.14567.0/media/articles/server-apis/create-api.png)</Frame>
 
-By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
+By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/fr-ca/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
 
 ### Define permissions
 
@@ -69,13 +71,13 @@ This example uses the `read:messages` scope.
 This example demonstrates:
 
 * How to check for a JSON Web Token (JWT) in the `Authorization` header of an incoming HTTP request.
-* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/tokens/guides/validate-access-tokens).
+* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/fr-ca/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/fr-ca/tokens/guides/validate-access-tokens).
 
 ## Configure the Sample Project
 
 The sample code has an `appsettings.json` file which configures it to use the correct Auth0 **Domain** and **API Identifier** for your API. If you download the code from this page while logged in, it will be automatically filled. If you use the example from Github, you will need to fill it yourself.
 
-```json
+```json lines
 {
   "Auth0": {
     "Domain": "{yourDomain}",
@@ -91,7 +93,7 @@ The sample code has an `appsettings.json` file which configures it to use the co
 The seed project already contains a reference to the `Microsoft.AspNetCore.Authentication.JwtBearer`, which is needed in order to validate Access Tokens.
 However, if you are not using the seed project, add the package to your application by installing it using Nuget:
 
-```
+``` lines
 Install-Package Microsoft.AspNetCore.Authentication.JwtBearer
 ```
 
@@ -104,7 +106,7 @@ In your application, register the authentication services:
 1. Make a call to the `AddAuthentication` method. Configure `JwtBearerDefaults.AuthenticationScheme` as the default schemes.
 2. Make a call to the `AddJwtBearer` method to register the JWT Bearer authentication scheme. Configure your Auth0 domain as the authority, and your Auth0 API identifier as the audience. In some cases the access token will not have a `sub` claim which will lead to `User.Identity.Name` being `null`. If you want to map a different claim to `User.Identity.Name` then add it to `options.TokenValidationParameters` within the `AddAuthentication()` call.
 
-```javascript
+```csharp lines
 // Program.cs
 var builder = WebApplication.CreateBuilder(args);
 var domain = $"https://{builder.Configuration["Auth0:Domain"]}/";
@@ -122,7 +124,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 To add the authentication and authorization middleware to the middleware pipeline, add a call to the `UseAuthentication` and `UseAuthorization` methods in your Program.cs file:
 
-```javascript
+```csharp lines
 // Program.cs
 var app = builder.Build();
 
@@ -140,7 +142,7 @@ To make sure that an Access Token contains the correct scope, use the [Policy-Ba
 
 Create a new authorization requirement called `HasScopeRequirement`. This requirement checks if the `scope` claim issued by your Auth0 tenant is present. If the `scope` claim exists, the requirement checks if the `scope` claim contains the requested scope.
 
-```javascript
+```csharp lines
 // HasScopeRequirement.cs
 
 public class HasScopeRequirement : IAuthorizationRequirement
@@ -156,7 +158,7 @@ public class HasScopeRequirement : IAuthorizationRequirement
 }
 ```
 
-```javascript
+```csharp lines
 // HasScopeHandler.cs
 
 public class HasScopeHandler : AuthorizationHandler<HasScopeRequirement>
@@ -181,7 +183,7 @@ public class HasScopeHandler : AuthorizationHandler<HasScopeRequirement>
 
 In your Program.cs file, add a call to the `AddAuthorization` method. To add policies for the scopes, call `AddPolicy` for each scope. Also ensure that you register the `HasScopeHandler` as a singleton:
 
-```javascript
+```csharp lines
 // Program.cs
 
 builder.Services.AddAuthorization(options =>
@@ -199,7 +201,7 @@ The JWT middleware integrates with the standard ASP.NET Core [Authentication](ht
 
 To secure an endpoint, you need to add the `[Authorize]` attribute to your controller action:
 
-```javascript
+```csharp lines
 // Controllers/ApiController.cs
 
 [Route("api")]
@@ -220,7 +222,7 @@ public class ApiController : ControllerBase
 
 To secure endpoints that require specific scopes, we need to make sure that the correct scope is present in the `access_token`. To do that, add the `Authorize` attribute to the `Scoped` action and pass `read:messages` as the `policy` parameter.
 
-```javascript
+```csharp lines
 // Controllers/ApiController.cs
 
 [Route("api")]
@@ -240,7 +242,7 @@ public class ApiController : Controller
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

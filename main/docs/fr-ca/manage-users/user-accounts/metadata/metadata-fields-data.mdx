@@ -1,13 +1,13 @@
 ---
 title: "Noms des champs de métadonnées et types de données"
 permalink: "metadata-fields-data"
+'description': "Décrit les métadonnées de l’utilisateur, les métadonnées de l’application et les métadonnées de l’application (client), les noms des champs, les types de données, les limitations et les restrictions."
 'og:title': "Noms des champs de métadonnées et types de données"
 'og:description': "Décrit les métadonnées de l’utilisateur, les métadonnées de l’application et les métadonnées de l’application (client), les noms des champs, les types de données, les limitations et les restrictions."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Noms des champs de métadonnées et types de données"
 'twitter:description': "Décrit les métadonnées de l’utilisateur, les métadonnées de l’application et les métadonnées de l’application (client), les noms des champs, les types de données, les limitations et les restrictions."
 ---
-# Noms des champs de métadonnées et types de données
 
 Auth0 distingue trois types de métadonnées utilisées pour stocker des informations déterminées.
 
@@ -27,17 +27,17 @@ Les métadonnées Auth0 ne sont pas un magasin de données sécurisé et ne doiv
 <tbody>
 <tr>
 <td><strong>Informations de l’utilisateur</strong></td>
-<td><code>user_metadata</code></td>
+<td>`user_metadata`</td>
 <td>Stocke les attributs de l’utilisateur tels que les préférences qui n’ont pas d’impact sur la fonctionnalité de base de l’utilisateur. Ces données <strong>peuvent</strong> être modifiées par les utilisateurs connectés si vous créez un formulaire en utilisant Management API et ne devraient <strong>pas</strong> être utilisées comme un magasin de données sécurisé.</td>
 </tr>
 <tr>
 <td><strong>Informations d’accès</strong></td>
-<td><code>app_metadata</code></td>
+<td>`app_metadata`</td>
 <td>Stocke des informations telles que les autorisations, le plan Auth0 et les identifiants externes qui peuvent avoir un impact sur l’accès de l’utilisateur aux fonctionnalités. Ces données ** ne peuvent pas** être modifiées par les utilisateurs et il existe des restrictions sur ce qui peut être stocké dans ce champ.</td>
 </tr>
 <tr>
 <td><strong>Informations sur l’application</strong></td>
-<td><code>client_metadata</code> dans l’objet <code>Client</code>, <code>context.clientMetadata</code> dans les règles, et <code>event.client.metadata</code> dans les actions post-connexion.</td>
+<td>`client_metadata` dans l’objet `Client`, `context.clientMetadata` dans les règles, et `event.client.metadata` dans les actions post-connexion.</td>
 <td>Stocke les informations à propos d’une application (ou <em>client</em> dans la terminologie OIDC OAuth2). Par exemple, l’URL de la page d’accueil de l’application (toute valeur qu’Auth0 ne définit pas dans les paramètres de l’application).</td>
 </tr>
 </tbody>
@@ -51,7 +51,7 @@ Les noms de champs ne doivent pas contenir les caractères `.` (point) ou `$`(sy
 
 Par exemple, ceci n’est pas autorisé :
 
-```json
+```json lines
 {
   "preference.color": "pink"
 }
@@ -59,7 +59,7 @@ Par exemple, ceci n’est pas autorisé :
 
 Mais vous pouvez l’étendre comme suit :
 
-```json
+```json lines
 {
     "preference": { 
         "color": "pink" 
@@ -73,7 +73,7 @@ Les noms des champs doivent être statiques. Les noms de champs dynamiques rédu
 
 Au lieu de faire ceci :
 
-```json
+```json lines
 {
     "participants": [
         "Alice": {
@@ -88,7 +88,7 @@ Au lieu de faire ceci :
 
 Faites ceci :
 
-```json
+```json lines
 {
     "participants": [
         {
@@ -109,7 +109,7 @@ Faites ceci :
 
 Par exemple, si un utilisateur a un champ `groups`dans son profil racine (renvoyé par un fournisseur d’identité <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip>) et un champ `groups` dans `app_metadata`, son profil peut ressembler à ceci :
 
-```json
+```json lines
 {
     "user_id": "samlp|example-samlp-connection|username@domain.com",
     "groups": [
@@ -154,8 +154,8 @@ Si vous devez gérer des données détaillées associées au profil des utilisat
 
 ### Limites de taille et stockage
 
-* Les données utilisateur qui peuvent être indexées, interrogées et renvoyées par le [point de terminaison de recherche utilisateur](https://auth0.com/docs/api/management/v2/users/get-users) sont limitées à 1 Mo par utilisateur. Si le profil utilisateur dépasse 1 Mo, toute valeur d’attribut supérieure à 256 caractères dans `app_metadata (métadonnées de l’application)` et `user_metadata (métadonnées de l’utilisateur)` ne pourra pas être recherchée ou renvoyée dans un résultat de recherche. Si le profil utilisateur dépasse toujours 1 Mo après l’omission de ces grandes valeurs, aucun des attributs `app_metadata (métadonnées de l’application)` et `user_metadata (métadonnées de l’utilisateur)` ne pourra être recherché ou renvoyé pour cet utilisateur. Auth0 capture et enregistre les cas où un profil utilisateur dépasse encore 1 Mo après des omissions sous le [code d’événement](/docs/deploy-monitor/logs/log-event-type-codes)`wum`. Le [point de terminaison get user](https://auth0.com/docs/api/management/v2/users/get-users-by-id) doit être utilisé pour récupérer tous les attributs de métadonnées pour les profils utilisateurs surdimensionnés.
-* Lorsque vous définissez le champ `user_metadata` à l’aide du [point de terminaison d’inscription de l’API d’Auth0 Authentication](/docs/api/authentication?javascript#signup), vous pouvez inclure un maximum de 10 champs de type chaîne dont les valeurs ne dépassent pas 500 caractères chacune. Pour un exemple de travail avec des métadonnées au cours d’une procédure d’inscription personnalisée, consultez [Inscription personnalisée](/docs/fr-ca/libraries/custom-signup).
+* Les données utilisateur qui peuvent être indexées, interrogées et renvoyées par le [point de terminaison de recherche utilisateur](https://auth0.com/docs/api/management/v2/users/get-users) sont limitées à 1 Mo par utilisateur. Si le profil utilisateur dépasse 1 Mo, toute valeur d’attribut supérieure à 256 caractères dans `app_metadata (métadonnées de l’application)` et `user_metadata (métadonnées de l’utilisateur)` ne pourra pas être recherchée ou renvoyée dans un résultat de recherche. Si le profil utilisateur dépasse toujours 1 Mo après l’omission de ces grandes valeurs, aucun des attributs `app_metadata (métadonnées de l’application)` et `user_metadata (métadonnées de l’utilisateur)` ne pourra être recherché ou renvoyé pour cet utilisateur. Auth0 capture et enregistre les cas où un profil utilisateur dépasse encore 1 Mo après des omissions sous le [code d’événement](/docs/fr-ca/deploy-monitor/logs/log-event-type-codes)`wum`. Le [point de terminaison get user](https://auth0.com/docs/api/management/v2/users/get-users-by-id) doit être utilisé pour récupérer tous les attributs de métadonnées pour les profils utilisateurs surdimensionnés.
+* Lorsque vous définissez le champ `user_metadata` à l’aide du [point de terminaison d’inscription de l’API d’Auth0 Authentication](/docs/fr-ca/api/authentication?javascript#signup), vous pouvez inclure un maximum de 10 champs de type chaîne dont les valeurs ne dépassent pas 500 caractères chacune. Pour un exemple de travail avec des métadonnées au cours d’une procédure d’inscription personnalisée, consultez [Inscription personnalisée](/docs/fr-ca/libraries/custom-signup).
 * Le champ `métadonnées du client` peut avoir un maximum de 10 clés. Ses clés et ses valeurs ont une longueur maximale de 255 caractères chacune et ne peuvent pas contenir de caractères spéciaux UTF-8.
 
 ### Restrictions

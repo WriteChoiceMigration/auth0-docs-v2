@@ -1,12 +1,14 @@
 ---
 title: "Calling an API"
 permalink: "02-calling-an-api"
+'description': "This tutorial demonstrates how to make API calls for protected resources on your server."
 'og:title': "Calling an API"
 'og:description': "This tutorial demonstrates how to make API calls for protected resources on your server."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/html5.png"
 'twitter:title': "Calling an API"
 'twitter:description': "This tutorial demonstrates how to make API calls for protected resources on your server."
 ---
+
 # JavaScript: Calling an API
 
 <Frame>![Gravatar for steve.hobbs@auth0.com](//www.gravatar.com/avatar/f771aa7b7fa0220130cb6a9f243d7327?d=mm&r=g&s=50)</Frame>
@@ -33,13 +35,13 @@ Get a sample configured with your account settings or check it out on Github.
 
 Log In & Download Sample[View on Github](https://github.com/auth0-samples/auth0-javascript-samples/tree/master/02-Calling-an-API)
 
-Most single-page apps use resources from data APIs. You may want to restrict access to those resources, so that only authenticated users with sufficient privileges can access them. Auth0 lets you manage access to these resources using [API Authorization](/docs/api-auth).
+Most single-page apps use resources from data APIs. You may want to restrict access to those resources, so that only authenticated users with sufficient privileges can access them. Auth0 lets you manage access to these resources using [API Authorization](/docs/fr-ca/api-auth).
 
 This tutorial shows you how to access protected resources in your API.
 
 <Note>
 
-This tutorial does not show you how to add protection to your API. Read the [Backend/API quickstart documentation](/docs/quickstart/backend) for instructions on how to protect your API.
+This tutorial does not show you how to add protection to your API. Read the [Backend/API quickstart documentation](/docs/fr-ca/quickstart/backend) for instructions on how to protect your API.
 
 </Note>
 
@@ -59,13 +61,13 @@ In this section, you will modify the [ExpressJS](https://expressjs.com) that you
 
 To begin, let's install an NPM package that will be used to validate incoming tokens to the server. From the terminal:
 
-```
+```bash lines
 npm install express-oauth2-jwt-bearer
 ```
 
 Next, open `server.js` and bring in these libraries as imports at the top of the file. Also bring in the `auth_config.json` file so that the script can get access to the authentication credentials that have been configured:
 
-```javascript
+```javascript lines
 // .. other imports
 
 const { auth } = require("express-oauth2-jwt-bearer");
@@ -76,7 +78,7 @@ const authConfig = require("./auth_config.json");
 
 Then add a call to `auth()`, which creates the middleware needed in order to validate and parse incoming access tokens. This should go after the `require` statements but before any routes are defined in your app:
 
-```javascript
+```javascript lines
 // create the JWT middleware
 const checkJwt = auth({
   audience: authConfig.audience,
@@ -88,7 +90,7 @@ This code configures the `express-oauth2-jwt-bearer` middleware with the setting
 
 Next, open the `auth_config.json` file and modify the data so that the `audience` appears as a key within the JSON, using the value that you just used when creating the API:
 
-```json
+```json lines
 {
   "domain": "{yourDomain}",
   "clientId": "{yourClientId}",
@@ -102,7 +104,7 @@ As `auth_config.json` is served publicly, this file should **never** contain sen
 
 </Note>
 
-The values for `domain` and `clientId` should have already been specified as part of the [Login tutorial](/docs/quickstarts/spa/vanillajs/01-login). They should point to the Domain and Client ID values for your Auth0 app respectively.
+The values for `domain` and `clientId` should have already been specified as part of the [Login tutorial](/docs/fr-ca/quickstarts/spa/vanillajs/01-login). They should point to the Domain and Client ID values for your Auth0 app respectively.
 
 ### Add a protected endpoint
 
@@ -110,7 +112,7 @@ The last thing to do on the server side is to add an API endpoint that requires 
 
 Open `server.js` and add a new route for `/api/external` above the other routes that returns some JSON:
 
-```javascript
+```javascript lines
 // ..
 
 app.get("/api/external", checkJwt, (req, res) => {
@@ -129,7 +131,7 @@ Note that `checkJwt` is used as the second argument here. This causes `checkJwt`
 
 Finally, add an error handler so that a JSON response is returned from your API in the event of a missing or invalid token:
 
-```javascript
+```javascript lines
 // ..
 
 app.use(function(err, req, res, next) {
@@ -145,7 +147,7 @@ app.use(function(err, req, res, next) {
 
 At the end, your `server.js` file will look something like the following:
 
-```javascript
+```javascript lines
 const express = require("express");
 const { auth } = require("express-oauth2-jwt-bearer");
 const { join } = require("path");
@@ -196,13 +198,13 @@ module.exports = app;
 
 With this in place, run the application using `npm run dev`. In another terminal window, use the `curl` tool to make a request to this API endpoint and observe the results:
 
-```bash
+```bash lines
 curl -I localhost:3000/api/external
 ```
 
 You should find that a 401 Unauthorized result is returned, because it requires a valid access token:
 
-```
+```bash lines
 HTTP/1.1 401 Unauthorized
 X-DNS-Prefetch-Control: off
 X-Frame-Options: SAMEORIGIN
@@ -223,7 +225,7 @@ Now you can turn your attention to the front-end application. You will update th
 
 Open `index.html` and add a new button that will invoke the API call, as well as a `pre` element with an ID of `api-call-result` to show the result of the API call in the browser:
 
-```
+```html lines
 <button id="btn-call-api" disabled="true" onclick="callApi()">Call Api</button>
 
 <!-- Add a container to hold the response from the call -->
@@ -232,7 +234,7 @@ Open `index.html` and add a new button that will invoke the API call, as well as
 
 Next, open `public/js/app.js`. Configure the `auth0` client object to specify the audience value that was added earlier to the `auth_config.json` file:
 
-```javascript
+```javascript lines
 const configureClient = async () => {
   const response = await fetchAuthConfig();
   const config = await response.json();
@@ -249,7 +251,7 @@ const configureClient = async () => {
 
 Add a new function called `callApi` to `app.js`, with the following content:
 
-```javascript
+```javascript lines
 const callApi = async () => {
   try {
 
@@ -281,7 +283,7 @@ const callApi = async () => {
 
 Finally, find the `updateUI` function within `app.js` and modify it so that the button for calling the API is enabled when the user logs in:
 
-```javascript
+```javascript lines
 // public/js/app.js
 
 const updateUI = async () => {
@@ -303,7 +305,7 @@ When the application starts, log in. Then, press the **Call API** button to make
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

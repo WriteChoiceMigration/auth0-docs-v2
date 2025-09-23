@@ -1,12 +1,14 @@
 ---
 title: "Login"
 permalink: "01-login"
+'description': "This tutorial demonstrates how to add user login to an Angular application using Auth0."
 'og:title': "Login"
 'og:description': "This tutorial demonstrates how to add user login to an Angular application using Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/angular.png"
 'twitter:title': "Login"
 'twitter:description': "This tutorial demonstrates how to add user login to an Angular application using Auth0."
 ---
+
 # Angular: Login
 
 <Frame>![Gravatar for steve.hobbs@auth0.com](//www.gravatar.com/avatar/f771aa7b7fa0220130cb6a9f243d7327?d=mm&r=g&s=50)</Frame>
@@ -45,7 +47,7 @@ Visit the [Angular Authentication By Example](https://developer.auth0.com/resour
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Single-Page Applications](/docs/architecture-scenarios/application/spa-api) and which [protocol](/docs/flows/concepts/auth-code-pkce) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/fr-ca/overview), how it [integrates with Single-Page Applications](/docs/fr-ca/architecture-scenarios/application/spa-api) and which [protocol](/docs/fr-ca/flows/concepts/auth-code-pkce) it uses.
 
 </Note>
 
@@ -108,7 +110,7 @@ If you are following along with the sample project you downloaded from the top o
 
 Run the following command within your project directory to install the Auth0 Angular SDK:
 
-```
+```bash lines
 npm install @auth0/auth0-angular
 ```
 
@@ -123,7 +125,7 @@ The SDK exports `provideAuth0`, which is a provide function that contains all th
 3. Add `provideAuth0` to the application by adding it to the `providers` inside `bootstrapApplication`.
 4. Inject `AuthService` into `AppComponent`.
 
-```
+```javascript lines
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAuth0 } from '@auth0/auth0-angular';
 import { AppComponent } from './app.component';
@@ -145,7 +147,7 @@ The `provideAuth0` function takes the properties `domain` and `clientId`; the va
 
 <Note>
 
-If you are using a [custom domain with Auth0](/docs/custom-domains), the value of the domain property is the value of your custom domain instead of the value reflected in the "Settings" tab.
+If you are using a [custom domain with Auth0](/docs/fr-ca/custom-domains), the value of the domain property is the value of your custom domain instead of the value reflected in the "Settings" tab.
 
 </Note>
 
@@ -155,9 +157,9 @@ Now that you have imported `AuthModule`, run your application to verify that the
 
 ## Add Login to Your Application
 
-The Auth0 Angular SDK gives you tools to quickly implement user authentication in your Angular application, such as creating a [login](/docs/login) button using the `loginWithRedirect()` method from the `AuthService` service class. Executing `loginWithRedirect()` redirects your users to the Auth0 Universal Login Page, where Auth0 can authenticate them. Upon successful authentication, Auth0 will redirect your users back to your application.
+The Auth0 Angular SDK gives you tools to quickly implement user authentication in your Angular application, such as creating a [login](/docs/fr-ca/login) button using the `loginWithRedirect()` method from the `AuthService` service class. Executing `loginWithRedirect()` redirects your users to the Auth0 Universal Login Page, where Auth0 can authenticate them. Upon successful authentication, Auth0 will redirect your users back to your application.
 
-```
+```javascript lines
 import { Component } from '@angular/core';
 
 // Import the AuthService type from the SDK
@@ -184,17 +186,17 @@ Once that's complete, verify that Auth0 redirects back to your application's hom
 
 <Note>
 
-Auth0 enables the Google social provider by default on new tenants and offers you developer keys to test logging in with [social identity providers](/docs/connections/identity-providers-social). However, these developer keys have some limitations that may cause your application to behave differently. For more details on what this behavior may look like and how to fix it, consult the [Test Social Connections with Auth0 Developer Keys](/docs/connections/social/devkeys#limitations-of-developer-keys) document.
+Auth0 enables the Google social provider by default on new tenants and offers you developer keys to test logging in with [social identity providers](/docs/fr-ca/connections/identity-providers-social). However, these developer keys have some limitations that may cause your application to behave differently. For more details on what this behavior may look like and how to fix it, consult the [Test Social Connections with Auth0 Developer Keys](/docs/fr-ca/connections/social/devkeys#limitations-of-developer-keys) document.
 
 </Note>
 
 ## Add Logout to Your Application
 
-Now that you can log in to your Angular application, you need [a way to log out](/docs/logout/guides/logout-auth0). You can create a logout button using the `logout()` method from the `AuthService` service. Executing `logout()` redirects your users to your [Auth0 logout endpoint](/docs/api/authentication?javascript#logout) (`https://YOUR_DOMAIN/v2/logout`) and then immediately redirects them to your application.
+Now that you can log in to your Angular application, you need [a way to log out](/docs/fr-ca/logout/guides/logout-auth0). You can create a logout button using the `logout()` method from the `AuthService` service. Executing `logout()` redirects your users to your [Auth0 logout endpoint](/docs/fr-ca/api/authentication?javascript#logout) (`https://YOUR_DOMAIN/v2/logout`) and then immediately redirects them to your application.
 
 Here is a modified version of the `AuthButtonComponent` component above that uses both `loginWithRedirect()` and `logout()`, as well as checking the authentication state using the `isAuthenticated$` observable:
 
-```
+```javascript lines
 import { Component, Inject } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { DOCUMENT } from '@angular/common';
@@ -233,9 +235,9 @@ Add a button to the component template that logs the user out of your applicatio
 
 ## Show User Profile Information
 
-The Auth0 Angular SDK helps you retrieve the [profile information](/docs/users/concepts/overview-user-profile) associated with logged-in users quickly in whatever component you need, such as their name or profile picture, to personalize the user interface. The profile information is available through the `user$` observable exposed by the `AuthService` service. Take this `Profile` component as an example of how to use it:
+The Auth0 Angular SDK helps you retrieve the [profile information](/docs/fr-ca/users/concepts/overview-user-profile) associated with logged-in users quickly in whatever component you need, such as their name or profile picture, to personalize the user interface. The profile information is available through the `user$` observable exposed by the `AuthService` service. Take this `Profile` component as an example of how to use it:
 
-```
+```javascript lines
 import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
@@ -257,11 +259,11 @@ The `user$` observable contains sensitive information and artifacts related to t
 
 ### Checkpoint
 
-Verify that you can display the `user.name` or [any other `user` property](/docs/users/references/user-profile-structure#user-profile-attributes) within a component correctly after you have logged in.
+Verify that you can display the `user.name` or [any other `user` property](/docs/fr-ca/users/references/user-profile-structure#user-profile-attributes) within a component correctly after you have logged in.
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

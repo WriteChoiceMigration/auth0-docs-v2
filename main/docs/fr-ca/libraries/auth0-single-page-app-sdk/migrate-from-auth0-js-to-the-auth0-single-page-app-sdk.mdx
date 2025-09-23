@@ -1,13 +1,13 @@
 ---
 title: "Migration de Auth0.js vers la trousse SDK Auth0 pour les applications à page unique (SPA)"
 permalink: "migrate-from-auth0-js-to-the-auth0-single-page-app-sdk"
+'description': "Comment migrer les applications à page unique de Auth0.js vers la trousse SDK Auth0 pour les applications à page unique (SPA)"
 'og:title': "Migration de Auth0.js vers la trousse SDK Auth0 pour les applications à page unique (SPA)"
 'og:description': "Comment migrer les applications à page unique de Auth0.js vers la trousse SDK Auth0 pour les applications à page unique (SPA)"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Migration de Auth0.js vers la trousse SDK Auth0 pour les applications à page unique (SPA)"
 'twitter:description': "Comment migrer les applications à page unique de Auth0.js vers la trousse SDK Auth0 pour les applications à page unique (SPA)"
 ---
-# Migration de Auth0.js vers la trousse SDK Auth0 pour les applications à page unique (SPA)
 
 Dans cet article, nous verrons comment migrer votre application à page unique de [auth0.js](/docs/fr-ca/libraries/auth0js) à [auth0-spa-js](/docs/fr-ca/libraries/auth0-single-page-app-sdk). Voici une liste de scénarios basés sur auth0.js et le code équivalent auth0-spa-js.
 
@@ -39,7 +39,7 @@ Lors de l’utilisation de auth0-spa-js, les paramètres personnalisés **ne son
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 import { WebAuth } from 'auth0.js';
 
 window.addEventListener('load', () => {
@@ -58,7 +58,7 @@ window.addEventListener('load', () => {
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 import createAuth0Client from '@auth0/auth0-spa-js';
 
 window.addEventListener('load', () => {
@@ -76,7 +76,7 @@ window.addEventListener('load', () => {
 
 * [authorize()](https://auth0.github.io/auth0.js/WebAuth.html#authorize)
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', () => {
   auth0.authorize();
 });
@@ -87,7 +87,7 @@ document.getElementById('login').addEventListener('click', () => {
 * [Auth0Client.loginWithRedirect()](https://auth0.github.io/auth0-spa-js/classes/Auth0Client.html#loginWithRedirect)
 * [RedirectLoginOptions](https://auth0.github.io/auth0-spa-js/interfaces/RedirectLoginOptions.html)
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', async () => {
   await auth0.loginWithRedirect();
 });
@@ -99,7 +99,7 @@ document.getElementById('login').addEventListener('click', async () => {
 
 * [parseHash()](https://auth0.github.io/auth0.js/WebAuth.html#parseHash)
 
-```
+```javascript lines
 window.addEventListener('load', () => {
   auth0.parseHash({ hash: window.location.hash }, function(err, authResult) {
     if (err) {
@@ -114,7 +114,7 @@ window.addEventListener('load', () => {
 
 * [Auth0Client.handleRedirectCallback()](https://auth0.github.io/auth0-spa-js/classes/Auth0Client.html#handleRedirectCallback)
 
-```
+```javascript lines
 window.addEventListener('load', async () => {
   await auth0.handleRedirectCallback();
 });
@@ -128,7 +128,7 @@ La fonction `userInfo()` appelle le [point de terminaison`/userinfo`](https://au
 
 * [userInfo()](https://auth0.github.io/auth0.js/Authentication.html#userInfo)
 
-```
+```javascript lines
 window.addEventListener('load', () => {
   auth0.client.userInfo(accessToken, function(err, user) {
     console.log(user)
@@ -142,7 +142,7 @@ Contrairement à auth0.js, la trousse SDK Auth0 pour les applications à page un
 
 * [Auth0Client.getUser()](https://auth0.github.io/auth0-spa-js/classes/Auth0Client.html#getUser)
 
-```
+```javascript lines
 window.addEventListener('load', async () => {
   const user = await auth0.getUser();
   console.log(user);
@@ -153,7 +153,7 @@ window.addEventListener('load', async () => {
 
 ### auth0.js
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', () => {
   auth0.popup.authorize();
 });
@@ -164,7 +164,7 @@ document.getElementById('login').addEventListener('click', () => {
 * [Auth0Client.loginWithPopup()](https://auth0.github.io/auth0-spa-js/classes/Auth0Client.html#loginWithPopup)
 * [PopupLoginOptions](https://auth0.github.io/auth0-spa-js/interfaces/PopupLoginOptions.html)
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', async () => {
   await auth0.loginWithPopup();
 });
@@ -176,7 +176,7 @@ document.getElementById('login').addEventListener('click', async () => {
 
 * [checkSession()](https://auth0.github.io/auth0.js/WebAuth.html#checkSession)
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', () => {
   auth0.checkSession({}, function(err, authResult) {
     // Authentication tokens or error
@@ -190,7 +190,7 @@ La trousse SDK Auth0 pour les applications à page unique (SPA) gère l’actual
 
 * [Auth0Client.getTokenSilently()](https://auth0.github.io/auth0-spa-js/classes/Auth0Client.html#getTokenSilently)
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', async () => {
   await auth0.getTokenSilently();
 });
@@ -202,7 +202,7 @@ document.getElementById('login').addEventListener('click', async () => {
 
 * [checkSession()](https://auth0.github.io/auth0.js/WebAuth.html#checkSession)
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', () => {
   auth0.checkSession({
     audience: 'https://mydomain/another-api/',
@@ -220,7 +220,7 @@ La trousse SDK Auth0 pour les applications à page unique (SPA) gère l’actual
 * [Auth0Client.getTokenSilently()](https://auth0.github.io/auth0-spa-js/classes/Auth0Client.html#getTokenSilently)
 * [GetTokenSilentlyOptions](https://auth0.github.io/auth0-spa-js/interfaces/GetTokenSilentlyOptions.html)
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', async () => {
   await auth0.getTokenSilently({
     audience: 'https://mydomain/another-api/',
@@ -231,7 +231,7 @@ document.getElementById('login').addEventListener('click', async () => {
 
 Utiliser la fonction [getTokenWithPopup](https://auth0.github.io/auth0-spa-js/classes/Auth0Client.html#getTokenWithPopup) pour ouvrir une fenêtre contextuelle et permettre à l’utilisateur d’accepter la nouvelle API :
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', async () => {
   await auth0.getTokenWithPopup({
     audience: 'https://mydomain/another-api/',

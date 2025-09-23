@@ -1,13 +1,13 @@
 ---
 title: "Applications serveur avec API"
 permalink: "server-application-api"
+'description': "Cet article fournit un exemple d’architecture avec une communication de serveur à serveur et des appels sécurisés à une API (serveur de ressources) au nom de l’application."
 'og:title': "Applications serveur avec API"
 'og:description': "Cet article fournit un exemple d’architecture avec une communication de serveur à serveur et des appels sécurisés à une API (serveur de ressources) au nom de l’application."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Applications serveur avec API"
 'twitter:description': "Cet article fournit un exemple d’architecture avec une communication de serveur à serveur et des appels sécurisés à une API (serveur de ressources) au nom de l’application."
 ---
-# Applications serveur avec API
 
 Dans ce scénario, nous allons créer une API de feuilles de temps pour une entreprise fictive appelée ExampleCo. L’API permettra à un employé ou un sous-traitant d’ajouter des entrées supplémentaires dans les feuilles de temps.
 
@@ -15,12 +15,12 @@ Nous allons également créer une tâche Cron qui traitera, à l’aide de l’A
 
 ### TL;DR
 
-* Auth0 fournit l’authentification et l’autorisation API comme moyens de sécuriser l’accès aux points de terminaison de l’API (voir [Authentification et autorisation API](/docs/get-started/architecture-scenarios/server-application-api/part-1#api-authentication-and-authorization))
-* Pour autoriser une application de communication entre machines (une interface ligne de commande, un service ou un démon sans interaction avec l’utilisateur), Auth0 prend en charge l’octroi Identifiants Client (voir [Octroi Identifiants Client](/docs/get-started/architecture-scenarios/server-application-api/part-1#client-credentials-grant) )
-* L’application de communication entre machines et l’API doivent être configurées dans Auth0 Dashboard (voir [Configuration Auth0](/docs/get-started/architecture-scenarios/server-application-api/part-2))
-* L’API sera sécurisée en s’assurant qu’un jeton d’accès valide (qui est implémenté comme un jeton Web JSON) est transmis dans l’en-tête d’autorisation HTTP lors des appels à l’API (voir [Mettre en œuvre l’API](/docs/architecture-scenarios/serveur-api/partie-3))
-* En cas d’autorisation réussie, un jeton d’accès est délivré à l’application de communication entre machines (voir [Obtenir un jeton d’accès](/docs/architecture-scenarios/server-api/part-3#get-an-access-token))
-* L’application de communication entre machines peut à son tour utiliser ce jeton d’accès pour le transmettre en tant qu’en-tête d’autorisation HTTP afin d’authentifier les appels aux points de terminaison de l’API (voir [Appeler l’API](/docs/architecture-scenarios/server-api/part-3#invoke-the-api) ) :::
+* Auth0 fournit l’authentification et l’autorisation API comme moyens de sécuriser l’accès aux points de terminaison de l’API (voir [Authentification et autorisation API](/docs/fr-ca/get-started/architecture-scenarios/server-application-api/part-1#api-authentication-and-authorization))
+* Pour autoriser une application de communication entre machines (une interface ligne de commande, un service ou un démon sans interaction avec l’utilisateur), Auth0 prend en charge l’octroi Identifiants Client (voir [Octroi Identifiants Client](/docs/fr-ca/get-started/architecture-scenarios/server-application-api/part-1#client-credentials-grant) )
+* L’application de communication entre machines et l’API doivent être configurées dans Auth0 Dashboard (voir [Configuration Auth0](/docs/fr-ca/get-started/architecture-scenarios/server-application-api/part-2))
+* L’API sera sécurisée en s’assurant qu’un jeton d’accès valide (qui est implémenté comme un jeton Web JSON) est transmis dans l’en-tête d’autorisation HTTP lors des appels à l’API (voir [Mettre en œuvre l’API](/docs/fr-ca/architecture-scenarios/serveur-api/partie-3))
+* En cas d’autorisation réussie, un jeton d’accès est délivré à l’application de communication entre machines (voir [Obtenir un jeton d’accès](/docs/fr-ca/architecture-scenarios/server-api/part-3#get-an-access-token))
+* L’application de communication entre machines peut à son tour utiliser ce jeton d’accès pour le transmettre en tant qu’en-tête d’autorisation HTTP afin d’authentifier les appels aux points de terminaison de l’API (voir [Appeler l’API](/docs/fr-ca/architecture-scenarios/server-api/part-3#invoke-the-api) ) :::
 
 ## Les prémisses
 

@@ -1,13 +1,13 @@
 ---
 title: "Dépannage du plugiciel WordPress Login by Auth0"
 permalink: "troubleshoot-login-by-auth0"
+'description': "Cette page explique les problèmes les plus courants liés au plugiciel WordPress Login by Auth0."
 'og:title': "Dépannage du plugiciel WordPress Login by Auth0"
 'og:description': "Cette page explique les problèmes les plus courants liés au plugiciel WordPress Login by Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Dépannage du plugiciel WordPress Login by Auth0"
 'twitter:description': "Cette page explique les problèmes les plus courants liés au plugiciel WordPress Login by Auth0."
 ---
-# Dépannage du plugiciel WordPress Login by Auth0
 
 Voici quelques questions courantes de dépannage. Si les éléments ci-dessous ne résolvent pas votre problème, envisagez les alternatives suivantes :
 
@@ -28,7 +28,7 @@ Pour connaître les solutions possibles, consultez [Migration des utilisateurs d
 
 Cela est généralement dû au fait que le serveur est réglé sur une heure incorrecte. Si le message d’erreur indique « used too early » (utilisé trop tôt), cela signifie que l’heure de votre serveur est réglée sur le futur. S’il indique que le jeton a expiré, c’est que l’heure du serveur est réglée trop loin dans le passé. Une différence de temps entre deux serveurs est courante. Générez le résultat de la commande `echo date(DateTime::ISO8601)` en PHP sur votre serveur et comparez le résultat, y compris les secondes, à l’heure UTC actuelle. Si l’heure de votre serveur est décalée de plus de 60 secondes (la marge par défaut) par rapport à l’heure UTC, vous devrez définir une marge plus longue pour tenir compte de l’asymétrie de l’horloge de votre serveur. Vous pouvez coller le code ci-dessous dans le fichier `functions.php` de votre thème ou à tout autre endroit où il sera exécuté après le chargement du plugiciel et avant l’exécution du appel de connexion :
 
-```
+```php lines
 add_filter( 'auth0_jwt_leeway', function( $default_leeway ) { return 120; } );
 ```
 
@@ -110,7 +110,7 @@ Cela est généralement dû à une page mise en cache après la connexion. Consu
 
 C’est parce que l’URL de rappel n’a pas été ajoutée à la Liste blanche. Essayez d’ajouter ce code au filtre `my_forcelogin_whitelist` :
 
-```javascript
+```php lines
 function wp_auth0_forcelogin_whitelist( $whitelist ) {
   if ( ! empty( $_GET['auth0'] ) ) {
     $whitelist[] = site_url($_SERVER['REQUEST_URI']);
@@ -142,9 +142,9 @@ Le code court redirige automatiquement vers la page où l’utilisateur se trouv
 
 La version actuelle du plugiciel ne permet pas de migrer automatiquement les utilisateurs vers Auth0, mais vous avez quelques options :
 
-* Le plugiciel expose deux points de terminaison pour marquer votre connexion de base de données personnalisée pour le mode **import to Auth0 (importation vers Auth0)**. Pour en savoir plus sur les points de terminaison, lisez [Configurer la migration automatique à partir de votre base de données](/docs/connections/database/migrating). Vous pouvez [utiliser ces scripts de plugiciel](https://github.com/auth0/wp-auth0/blob/master/lib/WP_Auth0_CustomDBLib.php) pour configurer votre connexion.
-* Exportez vos données utilisateur vers un fichier JSON et téléversez-le pour l’importer par lot dans Auth0. Initialement, vos utilisateurs devront réinitialiser leurs mots de passe lorsqu’ils se connecteront en utilisant Auth0 parce qu’il n’y a aucun moyen pour Auth0 de décrypter les mots de passe WordPress pendant la migration. Pour savoir comment générer le fichier JSON, consultez [Importations d’utilisateurs par lot](/docs/fr-ca/manage-users/user-migration/bulk-user-imports). Ensuite, vous devrez téléverser le fichier en utilisant le point de terminaison [Importer des utilisateurs](/docs/api/v2#!/Jobs/post_users_imports) de Management API Auth0.
-* [Utilisez ce script](https://gist.github.com/glena/b31716e3c8fe48927be2) et le point de terminaison XML-RPC de WordPress pour configurer le flux de migration en utilisant une connexion de base de données personnalisée. Pour en savoir plus sur la configuration du flux de migration, consultez [Configurer la migration automatique à partir de votre base de données](/docs/connections/database/migrating). Pour en savoir plus sur le point de terminaison XML-RPC de WordPress, lisez [Prise en charge XML-RPC sur wordpress.org](https://codex.wordpress.org/XML-RPC_Support).
+* Le plugiciel expose deux points de terminaison pour marquer votre connexion de base de données personnalisée pour le mode **import to Auth0 (importation vers Auth0)**. Pour en savoir plus sur les points de terminaison, lisez [Configurer la migration automatique à partir de votre base de données](/docs/fr-ca/connections/database/migrating). Vous pouvez [utiliser ces scripts de plugiciel](https://github.com/auth0/wp-auth0/blob/master/lib/WP_Auth0_CustomDBLib.php) pour configurer votre connexion.
+* Exportez vos données utilisateur vers un fichier JSON et téléversez-le pour l’importer par lot dans Auth0. Initialement, vos utilisateurs devront réinitialiser leurs mots de passe lorsqu’ils se connecteront en utilisant Auth0 parce qu’il n’y a aucun moyen pour Auth0 de décrypter les mots de passe WordPress pendant la migration. Pour savoir comment générer le fichier JSON, consultez [Importations d’utilisateurs par lot](/docs/fr-ca/manage-users/user-migration/bulk-user-imports). Ensuite, vous devrez téléverser le fichier en utilisant le point de terminaison [Importer des utilisateurs](/docs/fr-ca/api/v2#!/Jobs/post_users_imports) de Management API Auth0.
+* [Utilisez ce script](https://gist.github.com/glena/b31716e3c8fe48927be2) et le point de terminaison XML-RPC de WordPress pour configurer le flux de migration en utilisant une connexion de base de données personnalisée. Pour en savoir plus sur la configuration du flux de migration, consultez [Configurer la migration automatique à partir de votre base de données](/docs/fr-ca/connections/database/migrating). Pour en savoir plus sur le point de terminaison XML-RPC de WordPress, lisez [Prise en charge XML-RPC sur wordpress.org](https://codex.wordpress.org/XML-RPC_Support).
 
 ## Le paramètre form_title est ignoré lorsque je configure le paramètre dict
 
@@ -152,7 +152,7 @@ En interne, le plugiciel utilise le paramètre dict pour changer le titre du gad
 
 Pour modifier le form_title dans ce cas, vous devez ajouter l’attribut suivant au JSON du dict :
 
-```json
+```json lines
 {
     "signin": {
         "title": "The desired form title"

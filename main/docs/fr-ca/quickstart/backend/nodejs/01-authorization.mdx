@@ -1,12 +1,14 @@
 ---
 title: "Authorization"
 permalink: "01-authorization"
+'description': "This tutorial demonstrates how to add authorization to an Express.js API."
 'og:title': "Authorization"
 'og:description': "This tutorial demonstrates how to add authorization to an Express.js API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/node.png"
 'twitter:title': "Authorization"
 'twitter:description': "This tutorial demonstrates how to add authorization to an Express.js API."
 ---
+
 # Node (Express) API: Authorization
 
 <Frame>![Gravatar for david.patrick@auth0.com](//www.gravatar.com/avatar/94167463a175f9bb522a432acef01351?d=mm&r=g&s=50)</Frame>
@@ -37,7 +39,7 @@ System requirements: express-oauth2-jwt-bearer 1.0.0
 
 <Note>
 
-**New to Auth0?** Learn [how Auth0 works](/docs/overview) and read about [implementing API authentication and authorization](/docs/api-auth)  using the OAuth 2.0 framework.
+**New to Auth0?** Learn [how Auth0 works](/docs/fr-ca/overview) and read about [implementing API authentication and authorization](/docs/fr-ca/api-auth)  using the OAuth 2.0 framework.
 
 </Note>
 
@@ -49,11 +51,11 @@ In the [APIs](https://manage.auth0.com/#/apis) section of the Auth0 dashboard, c
 
 <Frame>![Create API](https://cdn2.auth0.com/docs/1.14567.0/media/articles/server-apis/create-api.png)</Frame>
 
-By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
+By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/fr-ca/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
 
 <Note>
 
-We recommend using the default RS256 [signing algorithm](/docs/tokens/concepts/signing-algorithms) for your API. If you need to use the HS256 algorithm, see the [HS256 integration sample](https://github.com/auth0-samples/auth0-express-api-samples/tree/master/02-Authorization-HS256).
+We recommend using the default RS256 [signing algorithm](/docs/fr-ca/tokens/concepts/signing-algorithms) for your API. If you need to use the HS256 algorithm, see the [HS256 integration sample](https://github.com/auth0-samples/auth0-express-api-samples/tree/master/02-Authorization-HS256).
 
 </Note>
 
@@ -74,7 +76,7 @@ This example uses the `read:messages` scope.
 This example demonstrates:
 
 * How to check for a JSON Web Token (JWT) in the `Authorization` header of an incoming HTTP request.
-* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/tokens/guides/validate-access-tokens).
+* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/fr-ca/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/fr-ca/tokens/guides/validate-access-tokens).
 
 ## Validate Access Tokens
 
@@ -84,7 +86,7 @@ This guide shows you how to protect an Express API using the [express-oauth2-jwt
 
 First install the SDK using npm.
 
-```
+```bash lines
 npm install --save express-oauth2-jwt-bearer
 ```
 
@@ -92,7 +94,7 @@ npm install --save express-oauth2-jwt-bearer
 
 Configure `express-oauth2-jwt-bearer` with your Domain and API Identifier.
 
-```javascript
+```javascript lines
 // server.js
 
 const express = require('express');
@@ -119,7 +121,7 @@ The routes shown below are available for the following requests:
 
 To protect an individual route that requires a valid JWT, configure the route with the `checkJwt` `express-oauth2-jwt-bearer` middleware.
 
-```javascript
+```javascript lines
 // server.js
 
 // This route doesn't need authentication
@@ -141,7 +143,7 @@ You can configure individual routes to look for a particular scope. To achieve t
 
 Pass the `checkJwt` and `requiredScopes` middlewares to the route you want to protect.
 
-```javascript
+```javascript lines
 // server.js
 const { requiredScopes } = require('express-oauth2-jwt-bearer');
 
@@ -158,7 +160,7 @@ In this configuration, only Access Tokens with the `read:messages` scope can acc
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

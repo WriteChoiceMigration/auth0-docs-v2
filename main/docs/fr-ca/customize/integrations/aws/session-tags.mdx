@@ -1,13 +1,13 @@
 ---
 title: "Utiliser les balises de session Amazon Web Services pour le contrôle d'accès basé sur les rôles (RBAC)"
 permalink: "session-tags"
+'description': "Comment utiliser les balises de session Amazon Web Services (AWS) pour implémenter le contrôle d’accès basé sur les rôles (RBAC) pour les API et ressources AWS."
 'og:title': "Utiliser les balises de session Amazon Web Services pour le contrôle d'accès basé sur les rôles (RBAC)"
 'og:description': "Comment utiliser les balises de session Amazon Web Services (AWS) pour implémenter le contrôle d’accès basé sur les rôles (RBAC) pour les API et ressources AWS."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Utiliser les balises de session Amazon Web Services pour le contrôle d'accès basé sur les rôles (RBAC)"
 'twitter:description': "Comment utiliser les balises de session Amazon Web Services (AWS) pour implémenter le contrôle d’accès basé sur les rôles (RBAC) pour les API et ressources AWS."
 ---
-# Utiliser les balises de session Amazon Web Services pour le contrôle d'accès basé sur les rôles (RBAC)
 
 Avec les balises de session Amazon Web Services (AWS), vous pouvez marquer les ressources et attribuer aux utilisateurs des paires clé/valeur, ce qui vous permet de mettre en œuvre un contrôle d’accès basé sur les rôles (RBAC) pour les API et les ressources AWS.
 
@@ -41,15 +41,15 @@ You should have created three instances. Add the following tags:
 <tbody>
 <tr>
 <td>1</td>
-<td>Clé : <code>CostCenter</code>, Valeur : <code>marketing</code>.<br/>Clé : <code>Project</code>, Valeur : <code>website</code>.</td>
+<td>Clé : `CostCenter`, Valeur : `marketing`.<br/>Clé : `Project`, Valeur : `website`.</td>
 </tr>
 <tr>
 <td>2</td>
-<td>Clé: <code>CostCenter</code>, Valeur : <code>engineering</code>.<br/>Clé : <code>Project</code>, Valeur : <code>management_dashboard</code>.</td>
+<td>Clé: `CostCenter`, Valeur : `engineering`.<br/>Clé : `Project`, Valeur : `management_dashboard`.</td>
 </tr>
 <tr>
 <td>3</td>
-<td>Clé : <code>CostCenter</code>, Valeur : <code>marketing</code>.<br/>Clé : <code>Project</code>, Valeur : <code>community_site</code>.</td>
+<td>Clé : `CostCenter`, Valeur : `marketing`.<br/>Clé : `Project`, Valeur : `community_site`.</td>
 </tr>
 </tbody>
 </table>
@@ -69,14 +69,14 @@ While setting up your role, make sure you use the following parameters:
 <tbody>
 <tr>
 <td>Fournisseur SAML</td>
-<td>Nom du fournisseur d’identité que vous avez créé dans les prérequis, par exemple <code>auth0SamlProvider</code>. Sélectionnez <strong>Allow programmatic and AWS Management Console access (Autoriser l’accès programmatique et l’accès à la console de gestion AWS)</strong>.</td>
+<td>Nom du fournisseur d’identité que vous avez créé dans les prérequis, par exemple `auth0SamlProvider`. Sélectionnez <strong>Allow programmatic and AWS Management Console access (Autoriser l’accès programmatique et l’accès à la console de gestion AWS)</strong>.</td>
 </tr>
 </tbody>
 </table>
 
 When asked to **Attach permissions policies**, create a policy with the following JSON and name it `VirtualMachineAccessByCostCenter`.
 
-```json
+```json lines
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -117,7 +117,7 @@ When reviewing your settings, make sure you use the following parameters:
 <tbody>
 <tr>
 <td>Nom du rôle</td>
-<td>Nom descriptif de votre rôle, tel que <code>AccessByCostCenter</code>.</td>
+<td>Nom descriptif de votre rôle, tel que `AccessByCostCenter`.</td>
 </tr>
 <tr>
 <td>Description du rôle</td>
@@ -136,7 +136,7 @@ Remplacez la valeur de la variable `awsAccount` avec celle de votre propre numé
 
 </Note>
 
-```javascript
+```javascript lines
 function(user, context, callback) {
   var awsAccount = '013823792818';
   var rolePrefix = `arn:aws:iam::` + awsAccount; 

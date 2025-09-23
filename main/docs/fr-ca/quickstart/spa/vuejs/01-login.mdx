@@ -1,12 +1,14 @@
 ---
 title: "Login"
 permalink: "01-login"
+'description': "This quickstart demonstrates how to add user login to a Vue.JS application using Auth0."
 'og:title': "Login"
 'og:description': "This quickstart demonstrates how to add user login to a Vue.JS application using Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/vue.png"
 'twitter:title': "Login"
 'twitter:description': "This quickstart demonstrates how to add user login to a Vue.JS application using Auth0."
 ---
+
 # Vue: Login
 
 <Frame>![Gravatar for frederik.prijck@auth0.com](//www.gravatar.com/avatar/b74fc62fbaf2a93d1db3c549f62d4d9a?d=mm&r=g&s=50)</Frame>
@@ -51,7 +53,7 @@ This quickstart is designed for using [Auth0 Vue](https://github.com/auth0/auth0
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Single-Page Applications](/docs/architecture-scenarios/application/spa-api) and which [protocol](/docs/flows/concepts/auth-code-pkce) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/fr-ca/overview), how it [integrates with Single-Page Applications](/docs/fr-ca/architecture-scenarios/application/spa-api) and which [protocol](/docs/fr-ca/flows/concepts/auth-code-pkce) it uses.
 
 </Note>
 
@@ -114,7 +116,7 @@ If you are following along with the sample project you downloaded from the top o
 
 Install the [Auth0 Vue SDK](https://github.com/auth0/auth0-vue) using npm:
 
-```
+```bash lines
 npm install @auth0/auth0-vue
 ```
 
@@ -122,7 +124,7 @@ npm install @auth0/auth0-vue
 
 To use the SDK in your Vue application, register the plugin with your Vue application by passing the return value of `createAuth0` to `app.use()`.
 
-```
+```javascript lines
 import { createAuth0 } from '@auth0/auth0-vue';
 
 const app = createApp(App);
@@ -146,7 +148,7 @@ The plugin will register the SDK using both `provide` and `app.config.globalProp
 
 To add login to your application, use the `loginWithRedirect` function that is exposed on the return value of `useAuth0`, which you can access in your component's `setup` function.
 
-```
+```html lines
 <template>
   <div>
     <button @click="login">Log in</button>
@@ -175,7 +177,7 @@ The `loginWithRedirect` function will redirect the user to Auth0, and redirect t
 
 If you are using the Options API, you can use the same `loginWithRedirect` method from the global `$auth0` property through the `this` accessor.
 
-```
+```html lines
 <template>
   <div>
     <button @click="login">Log in</button>
@@ -197,7 +199,7 @@ If you are using the Options API, you can use the same `loginWithRedirect` metho
 
 Use the `logout` function that is exposed on the return value of `useAuth0`, which you can access in your component's `setup` function, to log the user out of your application.
 
-```
+```html lines
 <template>
   <div>
     <button @click="logout">Log out</button>
@@ -232,7 +234,7 @@ To log the user out of your application but not from Auth0, use `logout({ localO
 
 If you're using the Options API, you can use the same `logout` method from the global `$auth0` property through the `this` accessor.
 
-```
+```html lines
 <template>
   <div>
     <button @click="logout">Log out</button>
@@ -254,7 +256,7 @@ If you're using the Options API, you can use the same `logout` method from the g
 
 Once the user authenticates, the SDK extracts the user's profile information and stores it in memory. It can be accessed by using the reactive `user` property exposed by the return value of `useAuth0`, which you can access in your component's `setup` function.
 
-```
+```html lines
 <template>
   <div>
     <h2>User Profile</h2>
@@ -293,7 +295,7 @@ Ensure the user is authenticated by implementing login in your application befor
 
 If you're using the Options API, you can use the same reactive `user` property from the global `$auth0` property through the `this` accessor.
 
-```
+```html lines
 <template>
   <div>
     <h2>User Profile</h2>
@@ -322,7 +324,7 @@ If you're using the Options API, you can use the same reactive `user` property f
 
 ##### What can you do next?
 
-[* Part 2: Calling an API using an access token](/docs/quickstart/spa/vuejs/02-calling-an-api)
+[* Part 2: Calling an API using an access token](/docs/fr-ca/quickstart/spa/vuejs/02-calling-an-api)
 
 ---
 

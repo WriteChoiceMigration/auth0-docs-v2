@@ -1,13 +1,13 @@
 ---
 title: "Universal Logout"
 permalink: "universal-logout"
+'description': "Comment configurer la révocation globale des jetons pour les connexions Auth0."
 'og:title': "Universal Logout"
 'og:description': "Comment configurer la révocation globale des jetons pour les connexions Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Universal Logout"
 'twitter:description': "Comment configurer la révocation globale des jetons pour les connexions Auth0."
 ---
-# Universal Logout
 
 Auth0 prend en charge les intégrations Universal Logout avec Okta Workforce Identity Cloud, qui déconnecte les utilisateurs des applications lorsqu’un événement administratif ou de sécurité se produit.
 
@@ -23,7 +23,7 @@ Le point de terminaison de révocation globale de jetons Auth0 suit le profil do
 
 Lorsque Auth0 reçoit une demande de déconnexion d’un utilisateur, il valide la demande à l’aide du même jeu de clés que celui utilisé pour valider les jetons d’ID ou les assertionsº<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip> émises par Okta Workforce Identity Cloud. Il met ensuite fin à toutes les [sessions Auth0](/docs/fr-ca/manage-users/sessions/session-layers) pour l’utilisateur, révoque les [jetons d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens) émis par Auth0 et, si elle est configurée, déclenche la [déconnexion par canal d’appui OpenID Connect](/docs/fr-ca/authenticate/login/logout/back-channel-logout) pour révoquer les sessions d’application.
 
-<Frame>![User workflow using Universal Logout](//images.ctfassets.net/cdy7uua7fh8z/4tcRn1VmydyBGORCHlKuvt/725b95df1cddae8ed3b2d36f0c3495bb/universal_logout_flow_diagram.png)</Frame>
+<Frame>![User workflow using Universal Logout](/images/fr-ca/cdy7uua7fh8z/4tcRn1VmydyBGORCHlKuvt/725b95df1cddae8ed3b2d36f0c3495bb/universal_logout_flow_diagram.png)</Frame>
 
 Le temps nécessaire pour que l’utilisateur d’une application perde l’accès dépend du type d’application et de la manière dont elle est intégrée à Auth0. Auth0 accepte un large éventail d’[architectures d’application](/docs/fr-ca/get-started/applications) grâce à la prise en charge des normes d’identité OIDC et <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">OAuth</Tooltip> 2.0 et aux [Guides de démarrages rapides et trousses SDK](https://auth0.com/docs/quickstarts) d’Auth0. Cela inclut :
 
@@ -60,7 +60,7 @@ Nous recommandons fortement d’utiliser le type de connexion **Okta Workforce**
 
 </Note>
 
-1. Dans Auth0 Dashboard, naviguez vers [**Authentification > Entreprise > OpenID Connect**](/docs/%24manage_url#/connections/enterprise/oidc)**.** Sélectionnez votre connexion et choisissez **Settings (Paramètres)**.
+1. Dans Auth0 Dashboard, naviguez vers [**Authentification > Entreprise > OpenID Connect**](/docs/fr-ca/%24manage_url#/connections/enterprise/oidc)**.** Sélectionnez votre connexion et choisissez **Settings (Paramètres)**.
 2. Copiez l’**Revocation Endpoint URL (URL du point de terminaison) de révocation** que vous fournirez à l’administrateur d’Okta Workforce.
 
 ### SAML
@@ -97,7 +97,7 @@ Activez Universal Logout dans une [organization Okta Workforce](/docs/fr-ca/au
 2. Sélectionnez l’application que vous avez enregistrée pour l’intégration Auth0.
 3. Sous l’onglet **General (Général)**, sélectionnez **Logout (Déconnexion) > Edit (Modifier)**.
 
-   <Frame>![Okta Dashboard image for Universal Logout configuration](//images.ctfassets.net/cdy7uua7fh8z/M957prYUhjyMxXgpdA8pB/224812ce3a76ac9d032abe50c4be3a1d/2025-01-23_13-03-21.png)</Frame>
+   <Frame>![Okta Dashboard image for Universal Logout configuration](/images/fr-ca/cdy7uua7fh8z/M957prYUhjyMxXgpdA8pB/224812ce3a76ac9d032abe50c4be3a1d/2025-01-23_13-03-21.png)</Frame>
 
 4. Choisissez **Okta system or admin initiates logout (Système Okta ou administrateur à l’origine de la déconnexion)**.
 5. Saisissez l’URL copiée depuis Auth0 dans **Logout Endpoint URL (URL du point de terminaison de déconnexion)**.
@@ -112,7 +112,7 @@ Testez Universal Logout dans Okta Workforce Identity Cloud en révoquant les
 2. Sélectionnez un utilisateur connecté à une application Auth0.
 3. Sélectionnez **More Actions (Autres actions) > Clear User Sessions (Supprimer les sessions d’utilisateur)**.
 
-   <Frame>![Test Universal Logout in Okta Dashboard](//images.ctfassets.net/cdy7uua7fh8z/Z8an5lN6WAlSAdgiBkKLa/fde264f71615c5eb7e07e0c48d8426bf/2025-01-23_13-08-29.png)</Frame>
+   <Frame>![Test Universal Logout in Okta Dashboard](/images/fr-ca/cdy7uua7fh8z/Z8an5lN6WAlSAdgiBkKLa/fde264f71615c5eb7e07e0c48d8426bf/2025-01-23_13-08-29.png)</Frame>
 
 4. Dans la boîte de dialogue, sélectionnez **Also include logout enabled apps and Okta API tokens (Inclure aussi les applications avec déconnexion activée et les jetons d’API Okta)**.
 5. Sélectionnez **Clear and Revoke (Effacer et révoquer)**.
@@ -136,7 +136,7 @@ Pour les connexions SAML, outre le partage de l’URL du point de terminaison, 
 
 Vous pouvez utiliser ces attributs dans les appels Management API pour [mettre à jour](https://auth0.com/docs/api/management/v2#!/Connections/patch_connections_by_id) ou [créer](https://auth0.com/docs/api/management/v2/connections/post-connections) des connexions SAML. Examinez l’exemple JSON suivant pour créer une requête :
 
-```json
+```json lines
 {
 	"strategy": "samlp",
   	"name": "CONNECTION_NAME",

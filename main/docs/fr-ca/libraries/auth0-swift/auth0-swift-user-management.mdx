@@ -1,13 +1,13 @@
 ---
 title: "Auth0.swift: User Management"
 permalink: "auth0-swift-user-management"
+'description': "Gestion des utilisateurs avec Auth0.Swift"
 'og:title': "Auth0.swift: User Management"
 'og:description': "Gestion des utilisateurs avec Auth0.Swift"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0.swift: User Management"
 'twitter:description': "Gestion des utilisateurs avec Auth0.Swift"
 ---
-# Auth0.swift: User Management
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip> fournit l'[Association de comptes d’utilisateur](/docs/fr-ca/manage-users/user-accounts/user-account-linking), qui vous permet de lier et de dissocier des comptes utilisateurs distincts provenant de différents fournisseurs, en les liant à un profil unique. Elle vous permet également de mettre à jour les métadonnées de l’utilisateur et d’autres informations de profil.
 
@@ -17,7 +17,7 @@ Linking user accounts will allow a user to authenticate from any of their accoun
 
 La méthode `link` accepte deux paramètres : l'ID utilisateur du profil primaire et le jeton d’accès du profil secondaire (le jeton obtenu après la connexion avec cette identité). L'ID utilisateur en question est l’identifiant unique de ce compte utilisateur. Si l’ID est au format `facebook|1234567890`, l’ID requis est la partie située après la barre de séparation (dans ce cas, `1234567890`).
 
-```
+```swift lines
 Auth0
    .users(token: "user-scoped access token")
    .link(userId, withOtherUserToken: "another user token")
@@ -36,7 +36,7 @@ Auth0
 Unlinking users is a similar process to linking users. The `unlink` method takes three parameters: the secondary profile’s user ID, the secondary profile’s provider (the connection’s <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">identity provider</Tooltip>), and the primary profile’s user ID.
 The parameters read, essentially: "Unlink this **secondary user** (with this **provider**) from this **primary user**".
 
-```
+```swift lines
 Auth0
    .users(token: "user-scoped access token")
    .unlink(identityId: identifier, provider: provider, fromUserId:userId)
@@ -54,7 +54,7 @@ When accounts are linked, the metadata from the secondary account’s profile is
 
 ## Récupérer les métadonnées de l’utilisateur
 
-```
+```swift lines
 Auth0
     .users(token: "user-scoped access token")
     .get(userId, fields: ["user_metadata"], include: true)
@@ -72,7 +72,7 @@ Auth0
 
 When updating user metadata, you will create a `userMetadata` object and then call the `patch` method, passing it the user ID and the `userMetadata` object. Les valeurs de cet objet vont remplacer les valeurs de la même clé, et en ajouter de nouvelles pour la même clé, encore en ajouter qui n’existent pas encore pour les métadonnées utilisateur.
 
-```
+```swift lines
 Auth0
     .users(token: "user-scoped access token")
     .patch("user identifier", userMetadata: ["first_name": "John", "last_name": "Doe"])

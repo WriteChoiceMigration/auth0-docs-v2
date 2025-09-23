@@ -1,17 +1,19 @@
 ---
 title: "Ajouter une connexion à votre application iOS ou macOS"
 permalink: "interactive"
+'description': "Ce guide explique comment intégrer Auth0 à n’importe quelle application iOS/macOS à l’aide du SDK Auth0.swift."
 'og:title': "Ajouter une connexion à votre application iOS ou macOS"
 'og:description': "Ce guide explique comment intégrer Auth0 à n’importe quelle application iOS/macOS à l’aide du SDK Auth0.swift."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/ios.png"
 'twitter:title': "Ajouter une connexion à votre application iOS ou macOS"
 'twitter:description': "Ce guide explique comment intégrer Auth0 à n’importe quelle application iOS/macOS à l’aide du SDK Auth0.swift."
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -72,21 +74,21 @@ Ajoutez les URL suivantes aux **URL de rappel** et **URL de déconnexion**, selo
 
 #### iOS
 
-```
+``` lines
 https://{yourDomain}/ios/YOUR_BUNDLE_IDENTIFIER/callback,
 YOUR_BUNDLE_IDENTIFIER://{yourDomain}/ios/YOUR_BUNDLE_IDENTIFIER/callback
 ```
 
 #### macOS
 
-```
+``` lines
 https://{yourDomain}/macos/YOUR_BUNDLE_IDENTIFIER/callback,
 YOUR_BUNDLE_IDENTIFIER://{yourDomain}/macos/YOUR_BUNDLE_IDENTIFIER/callback
 ```
 
 Par exemple, si l’identifiant de votre ensemble iOS est `com.example.MyApp` et votre domaine Auth0 est `example.us.auth0.com`, cette valeur sera alors :
 
-```
+``` lines
 https://example.us.auth0.com/ios/com.example.MyApp/callback,
 com.example.MyApp://example.us.auth0.com/ios/com.example.MyApp/callback
 ```
@@ -103,7 +105,7 @@ Cette étape nécessite un compte Apple Developer payant. Il est nécessaire d�
 
 Allez à la [page des paramètres](https://manage.auth0.com/dashboard/us/#/applications/) de votre application Auth0, faites défiler jusqu’en bas, et ouvrez **Advanced Settings (Paramètres avancés) > (Paramètres de l’appareil)**. Dans la section **iOS**, définissez **Team ID** sur votre Apple [Apple Team ID](https://developer.apple.com/help/account/manage-your-team/locate-your-team-id/) et **App ID** sur l’identifiant de l’ensemble de votre application.
 
-![Auth0 Dashboard> Applications > Applications > [Native App] > Settings tab (Onglet des paramètres) > Advanced Settings (Paramètres avancés) > Device Settings tab (Onglet des paramètres de l’appareil)](//images.ctfassets.net/cdy7uua7fh8z/62v9bB3bUVMw9XLND5lcMI/a44aa1441c4a91d615accddb0c23ea80/IOS_Settings_-_French.png)
+![Auth0 Dashboard> Applications > Applications > [Native App] > Settings tab (Onglet des paramètres) > Advanced Settings (Paramètres avancés) > Device Settings tab (Onglet des paramètres de l’appareil)](/images/fr-ca/cdy7uua7fh8z/62v9bB3bUVMw9XLND5lcMI/a44aa1441c4a91d615accddb0c23ea80/IOS_Settings_-_French.png)
 
 Cette action ajoutera votre application au fichier `apple-app-site-association` de votre locataire Auth0.
 
@@ -111,11 +113,11 @@ Cette action ajoutera votre application au fichier `apple-app-site-association` 
 
 Dans Xcode, allez à l’[onglet](https://developer.apple.com/documentation/xcode/adding-capabilities-to-your-app#Add-a-capability)**Signing and Capabilities (Signature et capacités)** des paramètres cibles de votre application, puis appuyez sur le bouton **+ Capability (Capacité)**. Sélectionnez ensuite **Associated Domains (Domaines associés)**.
 
-<Frame>![Xcode> Onglet Signing and Capabilities (Signature et capacités) > Add New (Ajouter nouveau) > Associated Domains (Domaines associés)](//images.ctfassets.net/cdy7uua7fh8z/72eVE104zKB5Q4NPnx6MCa/66c81ee64f104583bd00b9916778f989/ios-xcode-capabilities.png)</Frame>
+<Frame>![Xcode> Onglet Signing and Capabilities (Signature et capacités) > Add New (Ajouter nouveau) > Associated Domains (Domaines associés)](/images/fr-ca/cdy7uua7fh8z/72eVE104zKB5Q4NPnx6MCa/66c81ee64f104583bd00b9916778f989/ios-xcode-capabilities.png)</Frame>
 
 Ajoutez l’[entry](https://developer.apple.com/documentation/xcode/configuring-an-associated-domain#Define-a-service-and-its-associated-domain) suivante sous **Associated Domains (Domaines associés)** :
 
-```
+``` lines
 webcredentials:labs-fundtraining.us.auth0.com
 ```
 
@@ -139,7 +141,7 @@ Ouvrez l’élément de menu suivant dans Xcode :
 
 Dans la zone de recherche **Search or Enter Package URL (Rechercher ou saisir l’URL du package)** entrez cette URL :
 
-```
+``` lines
 https://github.com/auth0/Auth0.swift
 ```
 
@@ -155,7 +157,7 @@ Pour plus d’informations sur SPM consultez la  [documentation officielle](htt
 
 Ajoutez la ligne suivante à votre `Podfile` :
 
-```
+```ruby lines
 pod 'Auth0', '~> 2.0'
 ```
 
@@ -171,7 +173,7 @@ Pour plus d’informations sur CocoaPods, consultez la [documentation officielle
 
 Ajoutez la ligne suivante à votre `Cartfile` :
 
-```
+```swift lines
 github "auth0/Auth0.swift" ~> 2.0
 ```
 
@@ -218,7 +220,7 @@ Vous pouvez utiliser async/await ou Combine au lieu de l’API basée sur les ra
 
 </Note>
 
-<Frame>![Un exemple d’écran de connexion universelle pour une application iOS.](//images.ctfassets.net/cdy7uua7fh8z/3ZRDXpjlUXEcQpXq6Q00L1/f3a4616c28881bbb5a3711fcbbf1f7b1/Staff0_Login_screen_-_French.png)</Frame>
+<Frame>![Un exemple d’écran de connexion universelle pour une application iOS.](/images/fr-ca/cdy7uua7fh8z/3ZRDXpjlUXEcQpXq6Q00L1/f3a4616c28881bbb5a3711fcbbf1f7b1/Staff0_Login_screen_-_French.png)</Frame>
 
 ##### checkpoint.header
 
@@ -285,7 +287,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/native/ios-swift/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

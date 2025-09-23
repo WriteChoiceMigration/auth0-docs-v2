@@ -1,13 +1,13 @@
 ---
 title: "Trousse SDK Guardian pour Android"
 permalink: "guardian-for-android-sdk"
+'description': "Décrit comment installer, configurer et utiliser les options de la trousse SDK Gardien Auth0 pour Android."
 'og:title': "Trousse SDK Guardian pour Android"
 'og:description': "Décrit comment installer, configurer et utiliser les options de la trousse SDK Gardien Auth0 pour Android."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Trousse SDK Guardian pour Android"
 'twitter:description': "Décrit comment installer, configurer et utiliser les options de la trousse SDK Gardien Auth0 pour Android."
 ---
-# Trousse SDK Guardian pour Android
 
 La [trousse SDK Guardian pour Android](https://github.com/auth0/Guardian.Android) vous aide à créer des applications Android avec la fonctionnalité Guardian, offrant un accès sécurisé à l’authentification multifacteur (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>) avec des notifications poussées. Avec cette boîte à outils, vous pouvez créer votre propre version personnalisée de l’application Guardian qui correspond à l’image de votre organization. Pour en savoir plus, consultez [Configurer les notifications poussées pour la MFA](https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-push-notifications-for-mfa#configure-push-notifications-for-apple-using-apn-).
 
@@ -27,7 +27,7 @@ Guardian est disponible sur [Maven Central](http://search.maven.org/) et [JCente
 1. Allez à [Dashboard > Sécurité > Authentification multifacteur > Notifications poussées via Gardien Auth0.](https://manage.auth0.com/#/security/mfa/guardian)
 2. Basculez le commutateur vers le haut pour l’activer.
 
-<Frame>![Auth0 Dashboard > Security > Multi-factor Auth > Guardian > Custom > Amazon SNS](//images.ctfassets.net/cdy7uua7fh8z/6PKSyH99GJ2CalJoG38sfZ/fbe7229dcc6f7d303a582520001b3dc1/Amazon_SNS.png)</Frame>
+<Frame>![Auth0 Dashboard > Security > Multi-factor Auth > Guardian > Custom > Amazon SNS](/images/fr-ca/cdy7uua7fh8z/6PKSyH99GJ2CalJoG38sfZ/fbe7229dcc6f7d303a582520001b3dc1/Amazon_SNS.png)</Frame>
 
 3. [Configurer les notifications poussées](https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-push-notifications-for-mfa#configure-push-notifications-for-android-using-fcm).
 
@@ -35,7 +35,7 @@ Guardian est disponible sur [Maven Central](http://search.maven.org/) et [JCente
 
 Guardian est la portion centrale de la trousse SDK. Vous devrez créer une instance de cette classe pour l’URL de votre locataire spécifique.
 
-```
+```javascript lines
 Uri url = Uri.parse("https://<tenant>.<region>.auth0.com");
 
 Guardian guardian = new Guardian.Builder()
@@ -45,7 +45,7 @@ Guardian guardian = new Guardian.Builder()
 
 ou
 
-```
+```javascript lines
 String domain = "<tenant>.<region>.auth0.com";
 
 Guardian guardian = new Guardian.Builder()
@@ -59,7 +59,7 @@ Le lien entre le deuxième facteur (une instance de votre application sur un app
 
 Vous pouvez créer une inscription à l’aide de la fonction `Guardian.enroll`, mais vous devrez d’abord créer une nouvelle paire de clés RSA pour celle-ci. La clé privée sera utilisée pour signer les demandes d’autorisation ou de rejet d’une connexion. La clé publique sera envoyée pendant le processus d’inscription afin que le serveur puisse vérifier la signature de la demande par la suite.
 
-```
+```javascript lines
 KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
 keyPairGenerator.initialize(2048); // you MUST use at least 2048 bit keys
 KeyPair keyPair = keyPairGenerator.generateKeyPair();
@@ -67,7 +67,7 @@ KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
 Ensuite, obtenez les informations d’inscription en balayant le code QR de Guardian et utilisez-le pour inscrire le compte :
 
-```
+```javascript lines
 Uri enrollmentUriFromQr = ...; // the URI obtained from a Guardian QR code
 
 CurrentDevice device = new CurrentDevice(context, "fcmToken", "deviceName");
@@ -79,7 +79,7 @@ Enrollment enrollment = guardian
 
 Vous pouvez également exécuter la requête dans un thread en arrière-plan :
 
-```
+```javascript lines
 guardian
     .enroll(enrollmentUriFromQr, device, keyPair)
     .start(new Callback<Enrollment> {
@@ -105,11 +105,11 @@ Vous devez fournir les données suivantes :
 </thead>
 <tbody>
 <tr>
-<td><code>deviceName</code></td>
+<td>`deviceName`</td>
 <td>Nom de l’inscription présentée à l’utilisateur lorsqu’un deuxième facteur d’authentification est requis.</td>
 </tr>
 <tr>
-<td><code>fcmToken</code></td>
+<td>`fcmToken`</td>
 <td>Jeton pour pour le service de notification poussée FCM (Firebase Cloud Messaging). Consultez <a href="https://firebase.google.com/docs/cloud-messaging/android/client#sample-register" title="sample register">Exemple de registre</a> pour en savoir plus.</td>
 </tr>
 </tbody>
@@ -119,7 +119,7 @@ Vous devez fournir les données suivantes :
 
 Pour désactiver la MFA, vous pouvez supprimer l’inscription :
 
-```
+```javascript lines
 guardian
     .delete(enrollment)
     .execute(); // or start(new Callback<> ...)
@@ -131,7 +131,7 @@ Une fois l’inscription en place, vous recevrez une notification poussée FCM c
 
 Guardian procure une méthode pour analyser les données `Map (Carte) <String, String >` dans le [RemoteMessage](https://firebase.google.com/docs/reference/android/com/google/firebase/messaging/RemoteMessage) reçu du FCM et retourner une instance de `Notification` prête à être utilisée.
 
-```javascript
+```javascript lines
 // at the FCM listener you receive a RemoteMessage
 @Override
 public void onMessageReceived(RemoteMessage message) {
@@ -148,7 +148,7 @@ public void onMessageReceived(RemoteMessage message) {
 
 Une fois que vous disposez de l’instance de notification, vous pouvez utiliser la méthode `Allow (Autoriser)` pour approuver la demande d’authentification. Vous aurez également besoin de l’inscription que vous avez obtenue précédemment. S’il y a plusieurs inscriptions, assurez-vous d’utiliser celle qui a le même `id` que la notification (la propriété `enrollmentId`).
 
-```
+```javascript lines
 guardian
     .allow(notification, enrollment)
     .execute(); // or start(new Callback<> ...)
@@ -158,7 +158,7 @@ guardian
 
 Pour refuser une demande d’authentification, utilisez plutôt  `reject (rejeter)`. Vous pouvez également ajouter un motif facultatif de rejet, qui sera disponible dans les journaux de Guardian.
 
-```
+```javascript lines
 guardian
     .reject(notification, enrollment) // or reject(notification, enrollment, reason)
     .execute(); // or start(new Callback<> ...)
@@ -178,7 +178,7 @@ Vous pouvez connecter une ressource à partir du Auth0 Dashboard ou de la trouss
 
 1. Accédez à l’invite de connexion Auth0 et copiez le code fourni ou une clé codée en base32 similaire obtenue à partir d’une autre source.
 
-   <Frame>![An example login prompt displaying a one-time code](//images.ctfassets.net/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/6fabccc27455fbc5251928812e12475c/OTP_Challenge_2_-_French.png)</Frame>
+   <Frame>![An example login prompt displaying a one-time code](/images/fr-ca/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/6fabccc27455fbc5251928812e12475c/OTP_Challenge_2_-_French.png)</Frame>
 
 2. Après avoir obtenu votre code, ajoutez-le à la trousse SDK Guardian :
 
@@ -196,7 +196,7 @@ Premièrement, ajoutez la classe `LoginCodeGenerator`  à votre projet. Ensuite,
 
 **Java**
 
-```
+```java lines
 public class LoginCodeGenerator {
 
    private static final int TOTP_LENGTH = 6;
@@ -230,7 +230,7 @@ public class LoginCodeGenerator {
 
 **Kotlin**
 
-```
+```kotlin lines
 class LoginCodeGenerator {
 
    fun getCode(copiedCode: String): String {
@@ -270,7 +270,7 @@ class LoginCodeGenerator {
 
 Saisissez le mot de passe à usage unique généré par `getCode()` dans l’invite de connexion Auth0.
 
-<Frame>![An example login prompt displaying a one-time code](//images.ctfassets.net/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/6fabccc27455fbc5251928812e12475c/OTP_Challenge_2_-_French.png)</Frame>
+<Frame>![An example login prompt displaying a one-time code](/images/fr-ca/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/6fabccc27455fbc5251928812e12475c/OTP_Challenge_2_-_French.png)</Frame>
 
 Après avoir sélectionné Continue (Continuer), un message s’affiche indiquant que votre application a été ajoutée comme facteur d’authentification pour votre utilisateur.
 
@@ -278,13 +278,13 @@ Après avoir sélectionné Continue (Continuer), un message s’affiche indiquan
 
 Une fois le facteur inscrit, votre utilisateur peut se connecter à l’aide de votre application. Tout d’abord, choisissez l’application Guardian comme méthode d’authentification.
 
-<Frame>![The authentication method selection screen](//images.ctfassets.net/cdy7uua7fh8z/1k7IsU9kfP5mrXU2jfGHuT/452742661982cf772868f02040dd682b/MFA_-_Begin_Enrollment.png)</Frame>
+<Frame>![The authentication method selection screen](/images/fr-ca/cdy7uua7fh8z/1k7IsU9kfP5mrXU2jfGHuT/452742661982cf772868f02040dd682b/MFA_-_Begin_Enrollment.png)</Frame>
 
 Pour générer le code à usage unique, appelez `getCode(copiedCode: String)`  à l’aide du code copié de l’invite de connexion Auth0.
 
 Ensuite, saisissez le code à usage unique dans l’invite de connexion pour vérifier votre identité.
 
-<Frame>![The Verify Your Identity screen prompting the user for a one-time code](//images.ctfassets.net/cdy7uua7fh8z/S6uTieLjtuNUrQRMh8uch/143543634427803da8af2f0b7fb4c88d/OTP_Challenge_-_French.png)</Frame>
+<Frame>![The Verify Your Identity screen prompting the user for a one-time code](/images/fr-ca/cdy7uua7fh8z/S6uTieLjtuNUrQRMh8uch/143543634427803da8af2f0b7fb4c88d/OTP_Challenge_-_French.png)</Frame>
 
 ## En savoir plus
 

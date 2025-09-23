@@ -1,17 +1,19 @@
 ---
 title: "Flux d’autorisation d’appareil"
 permalink: "interactive"
+'description': "Ce tutoriel explique comment appeler votre API à partir d’un appareil dont les entrées sont limitées, à l’aide du flux d’autorisation d’appareil."
 'og:title': "Flux d’autorisation d’appareil"
 'og:description': "Ce tutoriel explique comment appeler votre API à partir d’un appareil dont les entrées sont limitées, à l’aide du flux d’autorisation d’appareil."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/device.svg"
 'twitter:title': "Flux d’autorisation d’appareil"
 'twitter:description': "Ce tutoriel explique comment appeler votre API à partir d’un appareil dont les entrées sont limitées, à l’aide du flux d’autorisation d’appareil."
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -57,22 +59,22 @@ Pour une expérience interactive, vous pouvez utiliser [Terrain de jeu du flux d
 
 Lorsque l’utilisateur démarre l’application de l’appareil et souhaite l’autoriser, votre application doit demander un code d’appareil à Auth0 Authentication API pour l’associer à la session de l’utilisateur.
 
-Pour obtenir le code de l’appareil, votre application doit appeler le [Authorize endpoint (Point de terminaison d’autorisation)](/docs/api/authentication#-post-oauth-device-code-) d’Authentication API du flux d’autorisation de l’appareil :
+Pour obtenir le code de l’appareil, votre application doit appeler le [Authorize endpoint (Point de terminaison d’autorisation)](/docs/fr-ca/api/authentication#-post-oauth-device-code-) d’Authentication API du flux d’autorisation de l’appareil :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request post \
 --url 'https://{yourDomain}/oauth/device/code' \
 --header 'content-type: application/x-www-form-urlencoded'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/device/code");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -89,14 +91,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/device/code")
 .header("content-type", "application/x-www-form-urlencoded")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'post',
@@ -108,8 +110,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/device/code"]
@@ -130,7 +132,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/device/code",
@@ -152,8 +154,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'content-type': "application/x-www-form-urlencoded" }
@@ -163,7 +165,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -175,8 +177,8 @@ request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/x-www-form-urlencoded'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/device/code")! as URL,
@@ -203,7 +205,7 @@ dataTask.resume()
 
 L’application de l’appareil devrait recevoir une réponse HTTP 200 et une charge utile similaire à celle-ci :
 
-```json
+```json lines
 {
 "device_code": "GmRh...k9eS",
 "user_code": "WDJB-MJHT",
@@ -220,7 +222,7 @@ L’application de l’appareil devrait recevoir une réponse HTTP 200 et une 
 
 Après avoir reçu le `device_code` et le `user_code`, votre application doit demander à l’utilisateur de se rendre au `verification_uri` et de saisir le `user_code`.
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/3Q9q41wocl6SojRoiGefXT/a98582a3c86740aaeb3d957f2dc4afe6/request-device-activation.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/3Q9q41wocl6SojRoiGefXT/a98582a3c86740aaeb3d957f2dc4afe6/request-device-activation.png)</Frame>
 
 <Warning>
 
@@ -238,7 +240,7 @@ Lorsque vous créez une CLI, vous pouvez ignorer cette étape et ouvrir directem
 
 ## Interrogation du point de terminaison du jeton](#interrogation-du-point-de-terminaison-du-jeton)
 
-Pendant que votre application attend que l’utilisateur l’active, elle doit appeler le [point de terminaison POST /oauth/token](/docs/api/authentication#-post-oauth-token-) d’Authentication API de manière intermittente et traiter la réponse de manière appropriée.
+Pendant que votre application attend que l’utilisateur l’active, elle doit appeler le [point de terminaison POST /oauth/token](/docs/fr-ca/api/authentication#-post-oauth-token-) d’Authentication API de manière intermittente et traiter la réponse de manière appropriée.
 
 <Note>
 
@@ -246,7 +248,7 @@ Assurez-vous que votre application attend la durée de `interval` (en secondes) 
 
 </Note>
 
-```bash
+```bash lines
 curl --request POST \ 
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -261,11 +263,11 @@ curl --request POST \
 
 L’utilisateur peut soit balayer le code QR, soit ouvrir la page d’activation et saisir le code d’utilisateur :
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/7IwrVX4s5a36CvfY95rKCo/e0d5c2d9f1cb83993ee77d6e9499cfa7/Device_Activation_-_French.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/7IwrVX4s5a36CvfY95rKCo/e0d5c2d9f1cb83993ee77d6e9499cfa7/Device_Activation_-_French.png)</Frame>
 
 Une page de confirmation s’affiche pour que l’utilisateur confirme qu’il s’agit du bon appareil :
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/5dwhOyM1HRNwfV3Co4Da2o/cb6d7a9cbf5c43baece40b0d394fc522/Device_Confirmation_-_French.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/5dwhOyM1HRNwfV3Co4Da2o/cb6d7a9cbf5c43baece40b0d394fc522/Device_Confirmation_-_French.png)</Frame>
 
 L’utilisateur terminera la transaction en se connectant. Cette étape peut comprendre un ou plusieurs des procédés suivant :
 
@@ -274,11 +276,11 @@ L’utilisateur terminera la transaction en se connectant. Cette étape peut com
 * Vérification des sessions actives d’authentification unique (SSO)
 * Obtenir le consentement de l’utilisateur pour l’appareil, à moins qu’il n’ait été donné au préalable
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/3GqqaNB7sjcAYTQiTnEEsn/15dcb8ab5d7979ad360f9ab96e9a7fa1/Login_screen_-_French.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/3GqqaNB7sjcAYTQiTnEEsn/15dcb8ab5d7979ad360f9ab96e9a7fa1/Login_screen_-_French.png)</Frame>
 
 Une fois l’authentification et le consentement obtenus, la demande de confirmation s’affiche :
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/2TsQpMa8fzifiojuEXLvDo/3335aa9e4e17d63a97b5240884193dd2/Success_message_-_French.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/2TsQpMa8fzifiojuEXLvDo/3335aa9e4e17d63a97b5240884193dd2/Success_message_-_French.png)</Frame>
 
 À ce stade, l’utilisateur s’est authentifié et l’appareil a été autorisé.
 
@@ -288,7 +290,7 @@ Une fois l’authentification et le consentement obtenus, la demande de confirma
 
 Une fois que l’utilisateur a autorisé l’application, celle-ci reçoit une réponse HTTP 200 et la charge utile suivante :
 
-```json
+```json lines
 {
 "access_token": "eyJz93a...k4laUWw",
 "refresh_token": "GEbRxBN...edjnXbL",
@@ -304,9 +306,9 @@ Vous devez valider vos jetons avant de les enregistrer. Pour en savoir plus, con
 
 </Warning>
 
-Les jetons d’accès sont utilisés pour appeler le [point de terminaison Get User Info](/docs/api/authentication#get-user-info) de Authentication API (si l’application de votre appareil a demandé la permission `openid`) ou l’API définie par le paramètre `audience`. Si vous appelez votre propre API, votre application doit vérifier le jeton d’accès avant de l’utiliser.
+Les jetons d’accès sont utilisés pour appeler le [point de terminaison Get User Info](/docs/fr-ca/api/authentication#get-user-info) de Authentication API (si l’application de votre appareil a demandé la permission `openid`) ou l’API définie par le paramètre `audience`. Si vous appelez votre propre API, votre application doit vérifier le jeton d’accès avant de l’utiliser.
 
-Les jetons d’ID contiennent des informations sur l’utilisateur qui doivent être [décodées et extraites](/docs/tokens/id-tokens#id-token-payload). Authentication API ne renvoie un `id_token` que si l’application de votre appareil a demandé la permission `openid`.
+Les jetons d’ID contiennent des informations sur l’utilisateur qui doivent être [décodées et extraites](/docs/fr-ca/tokens/id-tokens#id-token-payload). Authentication API ne renvoie un `id_token` que si l’application de votre appareil a demandé la permission `openid`.
 
 Les jetons d’actualisation sont utilisés pour obtenir un nouveau jeton d’accès ou un nouveau jeton d’ID après l’expiration du précédent. Authentication API ne renvoie un `refresh_token` que si le paramètre **Autoriser l’accès hors ligne** est activé pour l’API indiquée par le paramètre `public` et que l’application de votre appareil a demandé la permission `offline_access`.
 
@@ -316,7 +318,7 @@ Les jetons d’actualisation sont utilisés pour obtenir un nouveau jeton d’ac
 
 Pour appeler votre API, votre application doit transmettre le jeton d’accès en tant que jeton de porteur dans l’en-tête `Authorization` de votre requête HTTP.
 
-```bash
+```bash lines
 curl --request GET \
 --url https://myapi.com/api \
 --header 'authorization: Bearer AUTH0_API_ACCESS_TOKEN' \
@@ -327,9 +329,9 @@ curl --request GET \
 
 ## Jetons d’actualisation](#jetons-d-actualisation)
 
-Pour obtenir un nouveau jeton d’accès pour un utilisateur, l’application de votre appareil peut appeler [le point de terminaison POST /oauth/token](/docs/api/authentication#-post-oauth-token-) de l’API d’authentication avec le paramètre `refresh_token`.
+Pour obtenir un nouveau jeton d’accès pour un utilisateur, l’application de votre appareil peut appeler [le point de terminaison POST /oauth/token](/docs/fr-ca/api/authentication#-post-oauth-token-) de l’API d’authentication avec le paramètre `refresh_token`.
 
-```bash
+```bash lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -341,7 +343,7 @@ curl --request POST \
 
 Si la requête a réussi, l’application de votre appareil reçoit une réponse HTTP 200 avec la charge utile suivante :
 
-```json
+```json lines
 {
 "access_token": "eyJ...MoQ",
 "expires_in": 86400,
@@ -368,27 +370,27 @@ Les journaux de locataires sont créés pour toutes les interactions qui ont lie
 </thead>
 <tbody>
 <tr>
-<td><code>fdeaz</code></td>
+<td>`fdeaz`</td>
 <td>Échec de la demande d’autorisation de l’appareil</td>
 <td></td>
 </tr>
 <tr>
-<td><code>fdeac</code></td>
+<td>`fdeac`</td>
 <td>Échec de l’activation de l’appareil</td>
 <td></td>
 </tr>
 <tr>
-<td><code>fdecc</code></td>
+<td>`fdecc`</td>
 <td>L’utilisateur a annulé la confirmation de l’appareil</td>
 <td></td>
 </tr>
 <tr>
-<td><code>fede</code></td>
+<td>`fede`</td>
 <td>Échec de l’échange</td>
 <td>Code d’appareil contre un jeton d’accès</td>
 </tr>
 <tr>
-<td><code>sede</code></td>
+<td>`sede`</td>
 <td>Échange réussi</td>
 <td>code d’appareil contre un jeton d’accès</td>
 </tr>
@@ -403,7 +405,7 @@ Il est possible de recevoir plusieurs réponses HTTP 4xx différentes pendant 
 
 Vous verrez cette erreur pendant que vous attendez que l’utilisateur agisse. Poursuivez l’interrogation en utilisant `interval` suggéré dans l’étape précédente de ce tutoriel.
 
-```
+``` lines
 `HTTP 403`
 {
 "error": "authorization_pending",
@@ -415,7 +417,7 @@ Vous verrez cette erreur pendant que vous attendez que l’utilisateur agisse. P
 
 L’interrogation est trop rapide. Ralentissez et utilisez l’intervalle suggéré dans l’étape précédente de ce tutoriel. Pour éviter de recevoir cette erreur en raison de la latence du réseau, vous devez commencer à compter chaque intervalle après la réception de la réponse de la dernière demande d’interrogation.
 
-```
+``` lines
 `HTTP 429`
 {
 "error": "slow_down",
@@ -433,7 +435,7 @@ Le `expired_token` n’est renvoyé qu’une seule fois. Ensuite, le point de te
 
 </Note>
 
-```
+``` lines
 `HTTP 403`
 {
 "error": "expired_token",
@@ -445,7 +447,7 @@ Le `expired_token` n’est renvoyé qu’une seule fois. Ensuite, le point de te
 
 Si l’accès est refusé, vous recevez :
 
-```
+``` lines
 `HTTP 403`
 {
 "error": "access_denied",
@@ -477,8 +479,8 @@ Pour utiliser le flux d’autorisation de l’appareil, l’application de l’a
 
 * Prendre en charge l’indication du nom du serveur (SNI)
 * Être une Native Application (Application native)
-* Avoir la [Authentication Method](/docs/secure/application-credentials#application-authentication-methods) définie sur **None**
-* Être [OIDC-conformant (conforme à l’OIDC)](/docs/dashboard/reference/settings-application#oauth)
+* Avoir la [Authentication Method](/docs/fr-ca/secure/application-credentials#application-authentication-methods) définie sur **None**
+* Être [OIDC-conformant (conforme à l’OIDC)](/docs/fr-ca/dashboard/reference/settings-application#oauth)
 * Ne pas être créée au moyen de Dynamic Client Registration (Enregistrement dynamique des clients)
 
 En outre, le flux d’autorisation de l’appareil ne permet pas :
@@ -503,7 +505,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/native/device/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

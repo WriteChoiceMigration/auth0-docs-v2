@@ -1,13 +1,13 @@
 ---
 title: "Exporter des données utilisateur vers Marketo"
 permalink: "marketo"
+'description': "Apprenez à exporter vos données d’utilisateur Auth0 et à les importer dans Marketo."
 'og:title': "Exporter des données utilisateur vers Marketo"
 'og:description': "Apprenez à exporter vos données d’utilisateur Auth0 et à les importer dans Marketo."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Exporter des données utilisateur vers Marketo"
 'twitter:description': "Apprenez à exporter vos données d’utilisateur Auth0 et à les importer dans Marketo."
 ---
-# Exporter des données utilisateur vers Marketo
 
 Dans cet article, vous découvrirez comment exporter des données utilisateur depuis Auth0 vers un fichier CSV, puis les importer dans Marketo à l’aide du point de terminaison [Prospects en vrac](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#/Bulk_Leads) de l’API REST de Marketo.
 
@@ -27,19 +27,19 @@ En haut de la section **Champs,** indiquez un **Champ utilisateur** et **Nom de 
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>Adresse courriel</td>
 </tr>
 <tr>
-<td><code>created_at</code></td>
+<td>`created_at`</td>
 <td>Créé à</td>
 </tr>
 <tr>
-<td><code>given_name</code></td>
+<td>`given_name`</td>
 <td>Prenom</td>
 </tr>
 <tr>
-<td><code>family_name</code></td>
+<td>`family_name`</td>
 <td>Nom de famile</td>
 </tr>
 </tbody>
@@ -54,14 +54,14 @@ Avant de commencer, vous pouvez obtenir de plus amples informations en consultan
 Pour importer le fichier de données utilisateur dans Marketo, effectuez une requête POST au point de terminaison [Prospects en vrac](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#/Bulk_Leads). Définissez l’en-tête Content-Type de la demande à `multipart/form-data` et incluez un paramètre `file` avec votre fichier CSV exporté ainsi qu’un paramètre format défini à `csv`. Par exemple :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url https://marketo_rest_api_base_url/bulk/v1/leads.json \
 --header 'authorization: Bearer {MARKETO_ACCESS_TOKEN}' \
 --form file=@auth0_users.csv \
 --form format=csv
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://marketo_rest_api_base_url/bulk/v1/leads.json");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer {MARKETO_ACCESS_TOKEN}");
@@ -70,7 +70,7 @@ request.AddParameter("multipart/form-data; boundary=---011000010111000001101001"
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -90,8 +90,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://marketo_rest_api_base_url/bulk/v1/leads.json")
 .header("authorization", "Bearer {MARKETO_ACCESS_TOKEN}")
 .header("content-type", "multipart/form-data; boundary=---011000010111000001101001")
@@ -99,7 +99,7 @@ HttpResponse response = Unirest.post("https://marketo_rest_api_base_url/bulk/v1/
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -115,8 +115,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {MARKETO_ACCESS_TOKEN}",
 @"content-type": @"multipart/form-data; boundary=---011000010111000001101001" };
@@ -160,7 +160,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://marketo_rest_api_base_url/bulk/v1/leads.json",
@@ -184,8 +184,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("marketo_rest_api_base_url")
 payload = "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"file\"; filename=\"auth0_users.csv\"\r\nContent-Type: text/csv\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"format\"\r\nContent-Type: text/plan\r\n\r\ncsv\r\n-----011000010111000001101001--\r\n"
@@ -199,7 +199,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -213,8 +213,8 @@ request["content-type"] = 'multipart/form-data; boundary=---01100001011100000110
 request.body = "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"file\"; filename=\"auth0_users.csv\"\r\nContent-Type: text/csv\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"format\"\r\nContent-Type: text/plan\r\n\r\ncsv\r\n-----011000010111000001101001--\r\n"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {MARKETO_ACCESS_TOKEN}",
@@ -273,7 +273,7 @@ dataTask.resume()
 
 La réponse devrait ressembler à ceci :
 
-```json
+```json lines
 {
     "requestId": "e42b#14272d07d78",
     "success": true,
@@ -284,22 +284,22 @@ La réponse devrait ressembler à ceci :
 }
 ```
 
-Vous pouvez vérifier l’état de votre importation en utilisant l’API [Obtenir l’état de l’importation d’un prospect](/docs/)et le `batchId` de votre tâche d’importation. Par exemple :
+Vous pouvez vérifier l’état de votre importation en utilisant l’API [Obtenir l’état de l’importation d’un prospect](/docs/fr-ca/)et le `batchId` de votre tâche d’importation. Par exemple :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url https://marketo_rest_api_base_url/bulk/v1/leads/batch/BATCH_ID.json \
 --header 'authorization: Bearer {MARKETO_ACCESS_TOKEN}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://marketo_rest_api_base_url/bulk/v1/leads/batch/BATCH_ID.json");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {MARKETO_ACCESS_TOKEN}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -316,14 +316,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://marketo_rest_api_base_url/bulk/v1/leads/batch/BATCH_ID.json")
 .header("authorization", "Bearer {MARKETO_ACCESS_TOKEN}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -335,8 +335,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {MARKETO_ACCESS_TOKEN}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://marketo_rest_api_base_url/bulk/v1/leads/batch/BATCH_ID.json"]
@@ -357,7 +357,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://marketo_rest_api_base_url/bulk/v1/leads/batch/BATCH_ID.json",
@@ -379,8 +379,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("marketo_rest_api_base_url")
 headers = { 'authorization': "Bearer {MARKETO_ACCESS_TOKEN}" }
@@ -390,7 +390,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -402,8 +402,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {MARKETO_ACCESS_TOKEN}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {MARKETO_ACCESS_TOKEN}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://marketo_rest_api_base_url/bulk/v1/leads/batch/BATCH_ID.json")! as URL,
@@ -426,7 +426,7 @@ dataTask.resume()
 
 Et la réponse :
 
-```json
+```json lines
 {
     "requestId": "8136#146daebc2ed",
     "success": true,

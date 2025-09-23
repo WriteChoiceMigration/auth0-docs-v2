@@ -1,13 +1,13 @@
 ---
 title: "Dépannage des erreurs d’état non valide des plugins WordPress"
 permalink: "troubleshoot-wordpress-plugin-invalid-state-errors"
+'description': "Dépannage des erreurs d’état non valide dans le plugin WordPress Login by Auth0"
 'og:title': "Dépannage des erreurs d’état non valide des plugins WordPress"
 'og:description': "Dépannage des erreurs d’état non valide dans le plugin WordPress Login by Auth0"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Dépannage des erreurs d’état non valide des plugins WordPress"
 'twitter:description': "Dépannage des erreurs d’état non valide dans le plugin WordPress Login by Auth0"
 ---
-# Dépannage des erreurs d’état non valide des plugins WordPress
 
 Nous avons ajouté la validation des états à la version 3.6.0 du plugiciel WordPress, qui se trouve dans le [dépôt GitHub wp-auth0](https://github.com/auth0/wp-auth0/releases/tag/3.6.0). Cette mesure de sécurité permet d’atténuer les attaques CSRF en garantissant que la réponse correspond à une demande initiée par le même utilisateur. Pour en savoir plus, consultez [Prévenir les attaques et rediriger les utilisateurs avec le paramètre d’état OAuth 2.0](/docs/fr-ca/secure/attack-protection/state-parameters).
 
@@ -97,7 +97,7 @@ Les étapes de dépannage suivantes nécessitent des modifications du plugin qui
 
 12. Dans `lib/WP_Auth0_LoginManager.php`, affichez les valeurs de l’état stocké et de l’état retourné et arrêtez le processus une fois terminé. Juste avant la [ligne 148](https://github.com/auth0/wp-auth0/blob/master/lib/WP_Auth0_LoginManager.php#L148), ajoutez :
 
-```
+```php lines
 echo '<h1>$_REQUEST</h1>'; var_dump($_REQUEST); echo '<h1>$_COOKIE</h1>'; var_dump($_COOKIE); die('<h1>Done</h1>');
 ```
 

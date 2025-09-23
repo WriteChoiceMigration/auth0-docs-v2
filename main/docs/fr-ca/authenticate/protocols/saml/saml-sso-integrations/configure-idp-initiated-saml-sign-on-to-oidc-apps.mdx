@@ -1,13 +1,13 @@
 ---
 title: "Configurer la connexion SAML initiée par IdP aux applications OIDC"
 permalink: "configure-idp-initiated-saml-sign-on-to-oidc-apps"
+'description': "Découvrez comment configurer une connexion SAML Auth0 pour soutenir la connexion initiée par le fournisseur d’identité à un fournisseur d’identité SAML pour les applications OIDC."
 'og:title': "Configurer la connexion SAML initiée par IdP aux applications OIDC"
 'og:description': "Découvrez comment configurer une connexion SAML Auth0 pour soutenir la connexion initiée par le fournisseur d’identité à un fournisseur d’identité SAML pour les applications OIDC."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer la connexion SAML initiée par IdP aux applications OIDC"
 'twitter:description': "Découvrez comment configurer une connexion SAML Auth0 pour soutenir la connexion initiée par le fournisseur d’identité à un fournisseur d’identité SAML pour les applications OIDC."
 ---
-# Configurer la connexion SAML initiée par IdP aux applications OIDC
 
 Auth0 fournit une méthode pour traduire une réponse <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip> initiée par le fournisseur d’identité (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">IdP</Tooltip>) en une réponse <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">OpenID</Tooltip> Connect (OIDC) pour une application.
 
@@ -29,7 +29,7 @@ Si vous souhaitez implémenter cette méthode, vous devez :
 
 ## Fonctionnement
 
-<Frame>![Diagramme de flux de connexion aux applications OIDC via SAML initié par fournisseur d’identité](//images.ctfassets.net/cdy7uua7fh8z/5vinAB4pSSwaKDgliTkAhh/3b39f7c011ca7a8b971e04204c283d1b/idp-provider-init-saml-sign-in0.png)</Frame>
+<Frame>![Diagramme de flux de connexion aux applications OIDC via SAML initié par fournisseur d’identité](/images/fr-ca/cdy7uua7fh8z/5vinAB4pSSwaKDgliTkAhh/3b39f7c011ca7a8b971e04204c283d1b/idp-provider-init-saml-sign-in0.png)</Frame>
 
 1. L’utilisateur accède au point de terminaison de connexion du fournisseur d’identité SAML.
 2. Le fournisseur d’identité SAML renvoie la page de connexion.
@@ -56,7 +56,7 @@ Nous vous recommandons d’associer le gestionnaire de route de connexion person
 
 <Warning>
 
-Si vous n’utilisez pas une trousse SDK Auth0 pour gérer l’authentification, vous devez vous assurer que la méthode de connexion de votre application transmet une valeur de paramètre `state`(état) au point de terminaison `/authorize` (Autoriser) et valide le paramètre `state` (état) dans la réponse du fournisseur d’identité pour se protéger contre les attaques CSRF. Pour en savoir plus,consultez [Prevent Attacks and Redirect Users with OAuth 2.0 State Parameters (Prévenir les attaques et rediriger les utilisateurs avec les paramètres d’état d’OAuth 2.0)](/docs/secure/attack-protection/state-parameters).
+Si vous n’utilisez pas une trousse SDK Auth0 pour gérer l’authentification, vous devez vous assurer que la méthode de connexion de votre application transmet une valeur de paramètre `state`(état) au point de terminaison `/authorize` (Autoriser) et valide le paramètre `state` (état) dans la réponse du fournisseur d’identité pour se protéger contre les attaques CSRF. Pour en savoir plus,consultez [Prevent Attacks and Redirect Users with OAuth 2.0 State Parameters (Prévenir les attaques et rediriger les utilisateurs avec les paramètres d’état d’OAuth 2.0)](/docs/fr-ca/secure/attack-protection/state-parameters).
 
 </Warning>
 
@@ -64,7 +64,7 @@ Si vous n’utilisez pas une trousse SDK Auth0 pour gérer l’authentification,
 
 Si vous utilisez la [trousse SDK pour applications à page unique d’Auth0](https://auth0.com/docs/libraries/auth0-single-page-app-sdk), vous pouvez ajouter un gestionnaire de route de connexion personnalisé et mettre à jour la méthode de connexion pour prendre en charge le paramètre de connexion comme ceci :
 
-```javascript
+```javascript lines
 const router = {
   "/": () => showContent("content-home"),
   "/profile": () =>

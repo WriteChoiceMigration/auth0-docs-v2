@@ -1,15 +1,15 @@
 ---
 title: "Intégration avec SharePoint 2010/2013"
 permalink: "sharepoint-2010-2013"
+'description': "Comment intégrer SharePoint 2010/2013, y compris la configuration, le dépannage, l’accès aux journaux et les étapes suivantes."
 'og:title': "Intégration avec SharePoint 2010/2013"
 'og:description': "Comment intégrer SharePoint 2010/2013, y compris la configuration, le dépannage, l’accès aux journaux et les étapes suivantes."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Intégration avec SharePoint 2010/2013"
 'twitter:description': "Comment intégrer SharePoint 2010/2013, y compris la configuration, le dépannage, l’accès aux journaux et les étapes suivantes."
 ---
-# Intégration avec SharePoint 2010/2013
 
-Auth0 peut aider à simplifier radicalement le processus d’authentification pour SharePoint. Dans ce didacticiel, vous apprendrez à ajouter l’authentification unique (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SSO</Tooltip>) à Sharepoint à l’aide d’Auth0. Vos utilisateurs pourront se connecter en utilisant n’importe lequel de nos [fournisseurs d’identité sociale](/docs/connections/identity-providers-social) (Facebook, X, Github, etc.), [fournisseurs d’entreprise](/docs/connections/identity-providers-enterprise) (LDAP, Entra, ADFS, etc.) ou avec un nom d’utilisateur et un mot de passe.
+Auth0 peut aider à simplifier radicalement le processus d’authentification pour SharePoint. Dans ce didacticiel, vous apprendrez à ajouter l’authentification unique (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SSO</Tooltip>) à Sharepoint à l’aide d’Auth0. Vos utilisateurs pourront se connecter en utilisant n’importe lequel de nos [fournisseurs d’identité sociale](/docs/fr-ca/connections/identity-providers-social) (Facebook, X, Github, etc.), [fournisseurs d’entreprise](/docs/fr-ca/connections/identity-providers-enterprise) (LDAP, Entra, ADFS, etc.) ou avec un nom d’utilisateur et un mot de passe.
 
 <Note>
 
@@ -35,19 +35,19 @@ Sur l’onglet **Réglages**, vous devrez saisir l’URL de l’application Web 
 
 La documentation en direct commencera par l’installation des CmdLets Auth0 pour SharePoint :
 
-<Frame>![SharePoint Management Shell - cmdlets installation](//images.ctfassets.net/cdy7uua7fh8z/10GyFjDBJS0PoXITPeh30v/4304616303b13441c0b306be2291271f/sharepoint-cmdlets-installation.png)</Frame>
+<Frame>![SharePoint Management Shell - cmdlets installation](/images/fr-ca/cdy7uua7fh8z/10GyFjDBJS0PoXITPeh30v/4304616303b13441c0b306be2291271f/sharepoint-cmdlets-installation.png)</Frame>
 
 Une fois ceux-ci installés, vous pourrez activer/désactiver Auth0 et le fournisseur de demandes pour les différentes applications Web. Vous devrez activer l’authentification avec Auth0 :
 
-<Frame>![SharePoint Management Shell - Auth0 install - Enable Authentication](//images.ctfassets.net/cdy7uua7fh8z/e3WetoxFwzfQ2uo7Rhum4/f53189f6fd8247ba2f472dbc10abe5dc/sharepoint-auth-installation.png)</Frame>
+<Frame>![SharePoint Management Shell - Auth0 install - Enable Authentication](/images/fr-ca/cdy7uua7fh8z/e3WetoxFwzfQ2uo7Rhum4/f53189f6fd8247ba2f472dbc10abe5dc/sharepoint-auth-installation.png)</Frame>
 
 Ensuite, installez le fournisseur de demandes pour vous assurer que le People Picker (Sélecteur de personnes) et les autorisations fonctionnent correctement :
 
-<Frame>![SharePoint Management Shell - install claims provider](//images.ctfassets.net/cdy7uua7fh8z/2WYY6vJdeRqFZUS9LfgzK5/5b35393140b7c818fc811afd0ddc3220/sharepoint-cp-installation.png)</Frame>
+<Frame>![SharePoint Management Shell - install claims provider](/images/fr-ca/cdy7uua7fh8z/2WYY6vJdeRqFZUS9LfgzK5/5b35393140b7c818fc811afd0ddc3220/sharepoint-cp-installation.png)</Frame>
 
 Une fois ces scripts exécutés, vous terminerez la configuration dans l’Administration centrale :
 
-<Frame>![SharePoint central admin - complete configuration](//images.ctfassets.net/cdy7uua7fh8z/3VgxRGBz9YNbFaJP7Sgz8T/64673af31849333bf370c3f46b9687f1/sharepoint-central-admin.png)</Frame>
+<Frame>![SharePoint central admin - complete configuration](/images/fr-ca/cdy7uua7fh8z/3VgxRGBz9YNbFaJP7Sgz8T/64673af31849333bf370c3f46b9687f1/sharepoint-central-admin.png)</Frame>
 
 Veuillez noter que l’appel à `Enable-Auth0` peut être adapté à :
 
@@ -57,7 +57,7 @@ Veuillez noter que l’appel à `Enable-Auth0` peut être adapté à :
 
 L’exemple suivant ajoute également la demande de Rôle au mappage de demandes et autorise l’authentification Windows :
 
-```
+``` lines
 Enable-Auth0
   -auth0Domain:"fabrikam.auth0.com"
   -clientId:"bOFty3tWgpijnwMcltysNFqHgO1ziz1I"
@@ -77,9 +77,9 @@ Vous avez configuré SharePoint pour utiliser Auth0 comme intermédiaire SSO. Lo
 
 En fonction des demandes qui ont été mappées lors de l’installation du fournisseur de demandes, ces informations supplémentaires seront également disponibles dans la page des paramètres personnels de l’utilisateur :
 
-<Frame>![SharePoint - user information](//images.ctfassets.net/cdy7uua7fh8z/7h2QeT1ama9IqZ2kDr4KT/5f689e49311471736c74a3eb5468c390/sharepoint-user-info.png)</Frame>
+<Frame>![SharePoint - user information](/images/fr-ca/cdy7uua7fh8z/7h2QeT1ama9IqZ2kDr4KT/5f689e49311471736c74a3eb5468c390/sharepoint-user-info.png)</Frame>
 
-<Frame>![SharePoint central admin - complete configuration](//images.ctfassets.net/cdy7uua7fh8z/3VgxRGBz9YNbFaJP7Sgz8T/64673af31849333bf370c3f46b9687f1/sharepoint-central-admin.png)</Frame>
+<Frame>![SharePoint central admin - complete configuration](/images/fr-ca/cdy7uua7fh8z/3VgxRGBz9YNbFaJP7Sgz8T/64673af31849333bf370c3f46b9687f1/sharepoint-central-admin.png)</Frame>
 
 Veuillez noter que vous pouvez adapter l’appel à `Enable-Auth0` pour :
 
@@ -89,7 +89,7 @@ Veuillez noter que vous pouvez adapter l’appel à `Enable-Auth0` pour :
 
 L’exemple suivant ajoute également la demande de Rôle au mappage de demandes et autorise l’authentification Windows :
 
-```
+``` lines
 Enable-Auth0
   -auth0Domain:"fabrikam.auth0.com"
   -clientId:"bOFty3tWgpijnwMcltysNFqHgO1ziz1I"
@@ -115,13 +115,13 @@ Une façon de procéder consiste à utiliser jQuery pour modifier le gadget logi
 
 Vous devez ajouter une référence à jQuery en haut de la `<body>` section de la page de connexion personnalisée.
 
-```
+```html lines
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 ```
 
 Avant d’appeler `lock.show()`, ajoutez le code pour modifier le DOM HTML qui ajoute le lien.
 
-```javascript
+```javascript lines
 // construct Lock
 // var lock = ...
 [...]
@@ -152,7 +152,7 @@ if (sharepointClientIDs.indexOf(config.clientID) >= 0) {
     $('.auth0-lock-tabs-container') 
     .after('<div><p class="auth0-lock-alternative" style="padding:5px 0;">' + 
       '<a class="auth0-lock-alternative-link" ' + 
-      'href="/docs/'+ windowsAuthURL + '">' + 
+      'href="/docs/fr-ca/'+ windowsAuthURL + '">' + 
       'Login with Windows Authentication!!!</a>' + 
       '</p><p><span>or</span></p></div>').attr('href','https://nowhere');
   });
@@ -189,7 +189,7 @@ Lorsque David se connecte à l’aide de son compte Entra ID (et que l’attribu
 
 Si nous voulons rendre ces groupes disponibles en tant que Rôles dans SharePoint, nous devrons élaborer une [Rule (Règle)](https://manage.auth0.com/#/rules) qui ajoute ceci à la configuration <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>. Cette règle ne s’exécutera que pour l’application nommée **Fabrikam Intranet (SharePoint) (Intranet de Fabrikam)**.
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   if (context.clientName === 'Fabrikam Intranet (SharePoint)') {
     context.samlConfiguration.mappings = {
@@ -211,7 +211,7 @@ Elle ajoutera une demande sortante supplémentaire `http://schemas.microsoft.com
 
 Lors de l’installation du fournisseur de revendications, nous devons autoriser la transmission de la demande de Rôle à SharePoint, en l’ajoutant à la liste de mappage des demandes :
 
-```
+``` lines
 Enable-Auth0
   -auth0Domain:"fabrikam.auth0.com"
   ...
@@ -227,7 +227,7 @@ Par défaut, un utilisateur n’aura pas accès au site.
 
 Désormais, au lieu d’ajouter cet utilisateur spécifique à un groupe SharePoint (par ex. : Contributeurs) nous pouvons maintenant ajouter un **Rôle** à un groupe SharePoint. Voici un exemple de script PowerShell qui montre comment ajouter des membres « Fabrikam HR » au groupe Contributeurs :
 
-```
+```bash lines
 $webName = "http://fabrikam-sp"
 $groupName = "Contributors"
 $roleClaim = "Fabrikam HR"
@@ -250,7 +250,7 @@ Par défaut, SharePoint est capable de synchroniser les informations de profil u
 
 Une première approche consisterait à créer une tâche de minuterie qui s’exécute toutes les quelques heures, interroge le point de terminaison des utilisateurs d’Auth0 et synchronise les informations de profil pour ces utilisateurs.
 
-```
+```csharp lines
 using System;
 
 using Microsoft.SharePoint;
@@ -284,7 +284,7 @@ namespace UserProfileSync
 
 Alternativement, cette logique pourrait également être implémentée sous la forme d’un HttpModule qui s’exécute à chaque fois que l’utilisateur se connecte :
 
-```
+```csharp lines
 public class PersistUserClaimsHttpModule : IHttpModule
 {
     private SPFederationAuthenticationModule FederationModule

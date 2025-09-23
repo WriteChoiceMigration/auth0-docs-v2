@@ -1,17 +1,17 @@
 ---
 title: "Extension d’administration déléguée v3"
 permalink: "delegated-administration-extension"
+'description': "Apprenez à utiliser l’extension d’administration déléguée (DAE) pour présenter la section Users (Utilisateurs) du Auth0 Dashboard (Tableau de bord Auth0) à un groupe d’utilisateurs sélectionnés sans leur permettre d’accéder au reste du tableau de bord."
 'og:title': "Extension d’administration déléguée v3"
 'og:description': "Apprenez à utiliser l’extension d’administration déléguée (DAE) pour présenter la section Users (Utilisateurs) du Auth0 Dashboard (Tableau de bord Auth0) à un groupe d’utilisateurs sélectionnés sans leur permettre d’accéder au reste du tableau de bord."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Extension d’administration déléguée v3"
 'twitter:description': "Apprenez à utiliser l’extension d’administration déléguée (DAE) pour présenter la section Users (Utilisateurs) du Auth0 Dashboard (Tableau de bord Auth0) à un groupe d’utilisateurs sélectionnés sans leur permettre d’accéder au reste du tableau de bord."
 ---
-# Extension d’administration déléguée v3
 
 <Note>
 
-Auth0 recommande d’utiliser les paramètres des membres locataires pour désigner les capacités d’utilisation des locataires à d’autres utilisateurs et administrateurs dans votre organisation. Pour en savoir plus, consultez [Accès au Dashboard](/docs/get-started/manage-dashboard-access).
+Auth0 recommande d’utiliser les paramètres des membres locataires pour désigner les capacités d’utilisation des locataires à d’autres utilisateurs et administrateurs dans votre organisation. Pour en savoir plus, consultez [Accès au Dashboard](/docs/fr-ca/get-started/manage-dashboard-access).
 
 </Note>
 
@@ -58,13 +58,13 @@ Pour continuer, vous devez [créer au moins un utilisateur](/docs/fr-ca/manage-u
 
 <Note>
 
-Bien que [Delegated Administration Extension (DAE) (Extension d’administration déléguée)](/docs/fr-ca/customize/extensions/delegated-administration-extension) et l’ensemble de fonctionnalités [Authorization Core](/docs/fr-ca/manage-users/access-control/rbac) soient des fonctionnalités complètement distinctes, vous pouvez utiliser l’ensemble de fonctionnalités Authorization Core pour créer et gérer des rôles pour la DAE à l’aide d’actions. Pour en savoir plus, consultez [Exemples de cas d’utilisation : actions avec Authorization](/docs/manage-users/access-control/sample-use-cases-actions-with-authorization).
+Bien que [Delegated Administration Extension (DAE) (Extension d’administration déléguée)](/docs/fr-ca/customize/extensions/delegated-administration-extension) et l’ensemble de fonctionnalités [Authorization Core](/docs/fr-ca/manage-users/access-control/rbac) soient des fonctionnalités complètement distinctes, vous pouvez utiliser l’ensemble de fonctionnalités Authorization Core pour créer et gérer des rôles pour la DAE à l’aide d’actions. Pour en savoir plus, consultez [Exemples de cas d’utilisation : actions avec Authorization](/docs/fr-ca/manage-users/access-control/sample-use-cases-actions-with-authorization).
 
 </Note>
 
 <Note>
 
-Lorsque vous vous connectez en tant qu’utilisateur à l’aide d’organizations dotées de l’extension Delegated Administration (DAE), vos rôles d’utilisateur ne seront pas disponibles. Seuls les rôles de membre de votre organization seront disponibles dans `event.authorization.roles`. Pour ajouter des rôles aux membres de l’organisation, consultez [Ajouter des rôles aux membres de l’organisation](/docs/manage-users/organizations/configure-organizations/add-member-roles).
+Lorsque vous vous connectez en tant qu’utilisateur à l’aide d’organizations dotées de l’extension Delegated Administration (DAE), vos rôles d’utilisateur ne seront pas disponibles. Seuls les rôles de membre de votre organization seront disponibles dans `event.authorization.roles`. Pour ajouter des rôles aux membres de l’organisation, consultez [Ajouter des rôles aux membres de l’organisation](/docs/fr-ca/manage-users/organizations/configure-organizations/add-member-roles).
 
 </Note>
 
@@ -78,19 +78,19 @@ Auth0 accorde l’accès à l’extension DAE aux utilisateurs associés à votr
 </thead>
 <tbody>
 <tr>
-<td><code>Delegated Admin - User</code></td>
+<td>`Delegated Admin - User`</td>
 <td>Rechercher des utilisateurs, créer des utilisateurs, ouvrir des utilisateurs et exécuter des actions sur les utilisateurs (telles que supprimer ou bloquer).</td>
 </tr>
 <tr>
-<td><code>Delegated Admin - Administrator</code></td>
+<td>`Delegated Admin - Administrator`</td>
 <td>Effectuer tout ce que l’administrateur délégué - Utilisateur peut effectuer, plus afficher tous les journaux du locataire et configurer les hooks.</td>
 </tr>
 <tr>
-<td><code>Delegated Admin - Auditor</code></td>
+<td>`Delegated Admin - Auditor`</td>
 <td>Rechercher des utilisateurs et afficher les informations des utilisateurs, mais ne pas apporter de modifications. Les boutons basés sur l’action ne sont pas visibles pour ce rôle.</td>
 </tr>
 <tr>
-<td><code>Delegated Admin - Operator</code></td>
+<td>`Delegated Admin - Operator`</td>
 <td>Accéder à la gestion des utilisateurs et aux journaux, mais pas à la section de configuration des extensions.</td>
 </tr>
 </tbody>
@@ -102,7 +102,7 @@ Lorsque vous travaillez avec des rôles, nous vous recommandons d’utiliser l�
 2. [Attribuer manuellement des rôles DAE à un utilisateur](/docs/fr-ca/manage-users/access-control/configure-core-rbac/rbac-users/assign-roles-to-users).
 3. Ajoutez des rôles d’utilisateur à l’espace de noms DAE dans le jeton d’ID à l’aide des [actions](/docs/fr-ca/customize/actions)**:**
 
-   ```
+   ``` lines
    exports.onExecutePostLogin = async (event, api) => {
      const namespace = `https://{yourTenant}/auth0-delegated-admin`;
      if (event.client.client_id === 'CLIENT_ID' && event.authorization) {
@@ -121,7 +121,7 @@ Pour en savoir plus sur la créations d’actions, consulter [Créer votre premi
 
 <Warning>
 
-Auth0 renvoie les informations de profil contenues dans un format de demande structuré tel que défini par la [spécification OpenID Connect (OIDC)](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims). Cela signifie que les demandes personnalisées ajoutées aux jetons d’ID ou aux jetons d’accès doivent [respecter des directives et des restrictions](/docs/secure/tokens/json-web-tokens/create-custom-claims) pour éviter d’éventuels conflits.
+Auth0 renvoie les informations de profil contenues dans un format de demande structuré tel que défini par la [spécification OpenID Connect (OIDC)](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims). Cela signifie que les demandes personnalisées ajoutées aux jetons d’ID ou aux jetons d’accès doivent [respecter des directives et des restrictions](/docs/fr-ca/secure/tokens/json-web-tokens/create-custom-claims) pour éviter d’éventuels conflits.
 
 </Warning>
 
@@ -157,37 +157,37 @@ Naviguez vers l’extension en utilisant le lien de connexion approprié pour vo
 <tr>
 <td>Australie</td>
 <td>AU</td>
-<td><code>https://{yourTenant}.au.webtask.io/auth0-delegated-admin</code></td>
+<td>`https://{yourTenant}.au.webtask.io/auth0-delegated-admin`</td>
 </tr>
 <tr>
 <td>Europe</td>
 <td>EU</td>
-<td><code>https://{yourTenant}.eu.webtask.io/auth0-delegated-admin</code></td>
+<td>`https://{yourTenant}.eu.webtask.io/auth0-delegated-admin`</td>
 </tr>
 <tr>
 <td>Europe</td>
 <td>EU-2</td>
-<td><code>https://{yourTenant}.eu.webtask.run/auth0-delegated-admin</code></td>
+<td>`https://{yourTenant}.eu.webtask.run/auth0-delegated-admin`</td>
 </tr>
 <tr>
 <td>Japon</td>
 <td>JP-1</td>
-<td><code>https://{yourTenant}.jp.webtask.run/auth0-delegated-admin</code></td>
+<td>`https://{yourTenant}.jp.webtask.run/auth0-delegated-admin`</td>
 </tr>
 <tr>
 <td>UK</td>
 <td>UK</td>
-<td><code>https://{yourTenant}.uk.webtask.run/auth0-delegated-admin</code></td>
+<td>`https://{yourTenant}.uk.webtask.run/auth0-delegated-admin`</td>
 </tr>
 <tr>
 <td>États-Unis</td>
 <td>US-1</td>
-<td><code>https://{yourTenant}.us.webtask.io/auth0-delegated-admin</code></td>
+<td>`https://{yourTenant}.us.webtask.io/auth0-delegated-admin`</td>
 </tr>
 <tr>
 <td>États-Unis</td>
 <td>US-3</td>
-<td><code>https://{yourTenant}.us.webtask.run/auth0-delegated-admin</code></td>
+<td>`https://{yourTenant}.us.webtask.run/auth0-delegated-admin`</td>
 </tr>
 </tbody>
 </table>

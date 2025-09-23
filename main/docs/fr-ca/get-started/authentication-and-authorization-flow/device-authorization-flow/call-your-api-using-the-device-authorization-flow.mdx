@@ -1,13 +1,13 @@
 ---
 title: "Appeler une API à l’aide du flux d’autorisation d’appareil"
 permalink: "call-your-api-using-the-device-authorization-flow"
+'description': "Découvrez comment appeler votre API à partir d’un appareil dont les entrées sont limitées, à l’aide du flux d’autorisation d’appareil."
 'og:title': "Appeler une API à l’aide du flux d’autorisation d’appareil"
 'og:description': "Découvrez comment appeler votre API à partir d’un appareil dont les entrées sont limitées, à l’aide du flux d’autorisation d’appareil."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Appeler une API à l’aide du flux d’autorisation d’appareil"
 'twitter:description': "Découvrez comment appeler votre API à partir d’un appareil dont les entrées sont limitées, à l’aide du flux d’autorisation d’appareil."
 ---
-# Appeler une API à l’aide du flux d’autorisation d’appareil
 
 <Note>
 
@@ -17,7 +17,7 @@ Ce tutoriel vous aidera à appeler votre propre API à partir d’un appareil à
 
 Auth0 permet à votre application d’implémenter facilement le flux d’autorisation d’appareil en utilisant :
 
-* [Authentication API](/docs/api/authentication) : Poursuivez la lecture pour savoir comment appeler votre API directement. Pour une expérience interactive, veuillez consulter [Terrain de jeu du flux d’appareil](https://auth0.github.io/device-flow-playground/).
+* [Authentication API](/docs/fr-ca/api/authentication) : Poursuivez la lecture pour savoir comment appeler votre API directement. Pour une expérience interactive, veuillez consulter [Terrain de jeu du flux d’appareil](https://auth0.github.io/device-flow-playground/).
 
 ## Prérequis
 
@@ -32,7 +32,7 @@ Avant de commencer ce tutoriel :
   + Assurez-vous que les **Grant Types (Types d’autorisation)** de l’application comprennent le **Device Code (Code de l’appareil)**. Pour en savoir plus, lisez [Mettre à jour les types d’autorisation](/docs/fr-ca/get-started/applications/update-grant-types).
   + Si vous souhaitez que votre application puisse utiliser des jetons d’actualisation, assurez-vous que les **Types d’autorisation** de l’application comprennent le **Jeton d’actualisation**. Pour en savoir plus, lisez [Mettre à jour les types d’autorisation](/docs/fr-ca/get-started/applications/update-grant-types). Pour en savoir plus sur les jetons d’actualisation, lisez [Jetons d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens).
 * Configurez et activez au moins une connexion pour l’application : [Database connections (Connexions aux bases de données)](/docs/fr-ca/get-started/applications/set-up-database-connections), [Social connections (Connexions sociales)](/docs/fr-ca/authenticate/identity-providers/social-identity-providers)
-* [Enregistrez votre application avec Auth0](/docs/architecture-scenarios/mobile-api/part-2#create-the-api)
+* [Enregistrez votre application avec Auth0](/docs/fr-ca/architecture-scenarios/mobile-api/part-2#create-the-api)
 
   + Si vous souhaitez que votre API reçoive des jetons d’actualisation afin d’obtenir de nouveaux jetons lorsque les précédents expirent, activez **Autoriser l’accès hors ligne**. Pour en savoir plus sur les jetons d’actualisation, consultez [Jetons d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens).
 * [Configure Device User Code Settings (Configurez les paramètres du code utilisateur de l’appareil)](/docs/fr-ca/get-started/tenant-settings/configure-device-user-code-settings) pour définir le jeu de caractères, le format et la longueur de votre code utilisateur généré de manière aléatoire.
@@ -55,20 +55,20 @@ Facultatif : [Dépanner](#troubleshoot).
 
 Une fois que l’utilisateur a démarré l’application de son appareil et souhaite autoriser l’appareil, vous devrez obtenir un code d’appareil. Lorsque l’utilisateur démarre sa session sur son appareil basé sur un navigateur, ce code sera lié à cette session.
 
-Pour obtenir le code de l’appareil, votre application doit demander un code à partir de l’[URLdu code d’appareil](/docs/api/authentication#get-device-code), notamment l’ID client.
+Pour obtenir le code de l’appareil, votre application doit demander un code à partir de l’[URLdu code d’appareil](/docs/fr-ca/api/authentication#get-device-code), notamment l’ID client.
 
 #### Exemple POST vers l’URL de code d’appareil
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/device/code' \
 --header 'content-type: application/x-www-form-urlencoded' \
 --data 'client_id={yourClientId}' \
 --data 'scope={scope}' \
 --data 'audience={audience}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/device/code");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -76,7 +76,7 @@ request.AddParameter("application/x-www-form-urlencoded", "client_id={yourClient
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -95,15 +95,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/device/code")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("client_id={yourClientId}&scope=%7Bscope%7D&audience=%7Baudience%7D")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -116,8 +116,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"client_id={yourClientId}" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -142,7 +142,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/device/code",
@@ -165,8 +165,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "client_id={yourClientId}&scope=%7Bscope%7D&audience=%7Baudience%7D"
@@ -177,7 +177,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -190,8 +190,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "client_id={yourClientId}&scope=%7Bscope%7D&audience=%7Baudience%7D"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "client_id={yourClientId}".data(using: String.Encoding.utf8)!)
@@ -237,15 +237,15 @@ Si votre application ne demande un jeton d’accès que pour récupérer des inf
 </thead>
 <tbody>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>L’ID client de votre application. Vous pouvez trouver cette valeur dans vos <a href="https://manage.auth0.com/#/Applications/{yourClientId}/settings">Paramètres d’application</a>.</td>
 </tr>
 <tr>
-<td><code>scope</code></td>
-<td>Les <a href="/docs/scopes">permissions</a> pour lesquels vous souhaitez demander une autorisation. Ceux-ci doivent être séparés par un espace. Vous pouvez demander n’importe laquelle des <a href="https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims">permissions OIDC standard</a> concernant les utilisateurs, telles que <code>profile</code> et <code>email</code>, des <a href="/docs/tokens/concepts/jwt-claims#custom-claims">demandes personnalisées</a> conformes à un <a href="/docs/tokens/guides/create-namespaced-custom-claims">format d’espace de noms</a>, ou n’importe quelle <a href="/docs/scopes/current/api-scopes">permission prise en charge par l’API cible</a> (par exemple, <code>read:contacts</code>. Incluez <code>openid</code> pour obtenir un jeton d’ID ou pour pouvoir utiliser le <a href="/docs/api/authentication#user-profile">point de terminaison /userinfo</a> pour récupérer les informations de profil de l’utilisateur. Incluez <code>offline_access</code> pour obtenir un jeton d’actualisation (assurez-vous que le champ <strong>Autoriser l’accès hors ligne</strong> est activé dans les <a href="https://manage.auth0.com/#/apis">Paramètres de l’API</a>). Notez que cela doit être codé par URL.</td>
+<td>`scope`</td>
+<td>Les <a href="/docs/fr-ca/scopes">permissions</a> pour lesquels vous souhaitez demander une autorisation. Ceux-ci doivent être séparés par un espace. Vous pouvez demander n’importe laquelle des <a href="https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims">permissions OIDC standard</a> concernant les utilisateurs, telles que `profile` et `email`, des <a href="/docs/fr-ca/tokens/concepts/jwt-claims#custom-claims">demandes personnalisées</a> conformes à un <a href="/docs/fr-ca/tokens/guides/create-namespaced-custom-claims">format d’espace de noms</a>, ou n’importe quelle <a href="/docs/fr-ca/scopes/current/api-scopes">permission prise en charge par l’API cible</a> (par exemple, `read:contacts`. Incluez `openid` pour obtenir un jeton d’ID ou pour pouvoir utiliser le <a href="/docs/fr-ca/api/authentication#user-profile">point de terminaison /userinfo</a> pour récupérer les informations de profil de l’utilisateur. Incluez `offline_access` pour obtenir un jeton d’actualisation (assurez-vous que le champ <strong>Autoriser l’accès hors ligne</strong> est activé dans les <a href="https://manage.auth0.com/#/apis">Paramètres de l’API</a>). Notez que cela doit être codé par URL.</td>
 </tr>
 <tr>
-<td><code>audience</code></td>
+<td>`audience`</td>
 <td>L’identifiant unique de l’API à laquelle votre application souhaite accéder. Utilisez la valeur <strong>Identifier</strong> dans l’onglet <a href="https://manage.auth0.com/#/apis">Paramètres</a> pour l’API que vous avez créée dans le cadre des prérequis de ce tutoriel. Notez que cela doit être codé par URL.</td>
 </tr>
 </tbody>
@@ -255,7 +255,7 @@ Si votre application ne demande un jeton d’accès que pour récupérer des inf
 
 Si tout se passe bien, vous recevrez une réponse `HTTP 200` avec une charge utile contenant les valeurs `device_code`, `user_code`, `verification_uri`, `expires_in`, `interval` et `verification_uri_complete`
 
-```json
+```json lines
 {
   "device_code": "Ag_EE...ko1p",
   "user_code": "QTZL-MCBW",
@@ -298,7 +298,7 @@ Pour empêcher les attaques en force brute, nous imposons les limites suivantes 
 
 Une fois que vous avez reçu un `device_code` et un `user_code` vous devez demander à l’utilisateur d’accéder à `verification_uri` sur son ordinateur portable ou téléphone intelligent et saisir le `user_code` :
 
-<Frame>![Auth0 Flows Device Authorization Request, sample page showing two activation methods, user_code and QR code](//images.ctfassets.net/cdy7uua7fh8z/2WzaeNXIYCVduRuzyRd0Sb/cdb4d59b657166d0a9a555a662b9ed63/request-device-activation.png)</Frame>
+<Frame>![Auth0 Flows Device Authorization Request, sample page showing two activation methods, user_code and QR code](/images/fr-ca/cdy7uua7fh8z/2WzaeNXIYCVduRuzyRd0Sb/cdb4d59b657166d0a9a555a662b9ed63/request-device-activation.png)</Frame>
 
 Le `device_code` n’est pas destiné directement à l’utilisateur et ne doit pas être affiché pendant l’interaction afin de ne pas créer de confusion chez l’utilisateur.
 
@@ -310,22 +310,22 @@ Lorsque vous créez une interface de ligne de commande, vous pouvez ignorer cett
 
 ### Demander des jetons
 
-Pendant que vous attendez que l’utilisateur active l’appareil, commencez à interroger l’URL de jeton pour demander un jeton d’accès. En utilisant l’intervalle d’interrogation (`interval`) extrait de l’étape précédente, vous devrez `POST` sur [l’URL de jeton](/docs/api/authentication#device-auth) en l’envoyant avec le `device_code`.
+Pendant que vous attendez que l’utilisateur active l’appareil, commencez à interroger l’URL de jeton pour demander un jeton d’accès. En utilisant l’intervalle d’interrogation (`interval`) extrait de l’étape précédente, vous devrez `POST` sur [l’URL de jeton](/docs/fr-ca/api/authentication#device-auth) en l’envoyant avec le `device_code`.
 
 Pour éviter des erreurs dues à la latence du réseau, vous devez commencer à compter chaque intervalle après la réception de la réponse de la dernière demande d’interrogation.
 
 #### Exemple de demande POST de jeton vers l’URL de jeton.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
 --data grant_type=urn:ietf:params:oauth:grant-type:device_code \
 --data 'device_code={yourDeviceCode}' \
 --data 'client_id={yourClientId}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -333,7 +333,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=urn%3Aietf
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -352,15 +352,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=%7ByourDeviceCode%7D&client_id={yourClientId}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -377,8 +377,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=urn:ietf:params:oauth:grant-type:device_code" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -403,7 +403,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -426,8 +426,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=%7ByourDeviceCode%7D&client_id={yourClientId}"
@@ -438,7 +438,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -451,8 +451,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=%7ByourDeviceCode%7D&client_id={yourClientId}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=urn:ietf:params:oauth:grant-type:device_code".data(using: String.Encoding.utf8)!)
@@ -487,15 +487,15 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>grant_type</code></td>
+<td>`grant_type`</td>
 <td>Définir cette option sur « urn:ietf:params:oauth:grant-type:device_code ». Il s’agit d’un type de subvention d’extension (tel que défini par la section 4.5 de <a href="https://tools.ietf.org/html/rfc6749#section-4.5">RFC6749</a>). Notez que cela doit être encodé en URL.</td>
 </tr>
 <tr>
-<td><code>device_code</code></td>
-<td>Le <code>device_code</code> récupéré à l’étape précédente de ce tutoriel.</td>
+<td>`device_code`</td>
+<td>Le `device_code` récupéré à l’étape précédente de ce tutoriel.</td>
 </tr>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>L’ID client de votre application. Vous pouvez également trouver cette valeur dans les <a href="https://manage.auth0.com/#/Applications/{yourClientId}/settings">Paramètres de l’application</a>.</td>
 </tr>
 </tbody>
@@ -509,7 +509,7 @@ Il est possible de recevoir plusieurs réponses `HTTP 4xx` différentes pendan
 
 Vous verrez cette erreur pendant que vous attendez que l’utilisateur agisse. Poursuivez l’interrogation en utilisant interval suggéré dans l’étape précédente de ce tutoriel.
 
-```
+```json lines
 HTTP/1.1 403 Forbidden
 {
   "error": "authorization_pending",
@@ -521,7 +521,7 @@ HTTP/1.1 403 Forbidden
 
 L’interrogation est trop rapide. Ralentissez et utilisez l’intervalle suggéré dans l’étape précédente de ce tutoriel. Pour éviter de recevoir cette erreur en raison de la latence du réseau, vous devez commencer à compter chaque intervalle après la réception de la réponse de la dernière demande d’interrogation.
 
-```
+```json lines
 HTTP/1.1 429 Too Many Requests
 {
   "error": "slow_down",
@@ -539,7 +539,7 @@ L’erreur`expired_token` sera renvoyée exactement une fois. Après cela, `inva
 
 </Warning>
 
-```
+```json lines
 HTTP/1.1 403 Bad Request
 { 
   "error": "expired_token",
@@ -551,7 +551,7 @@ HTTP/1.1 403 Bad Request
 
 Enfin, si l’accès est refusé, vous recevrez :
 
-```
+```json lines
 HTTP/1.1 403 Forbidden
 {
   "error": "access_denied",
@@ -569,11 +569,11 @@ Cela peut se produire pour diverses raisons, notamment :
 
 L’utilisateur peut soit balayer le code QR, soit ouvrir la page d’activation et saisir le code d’utilisateur :
 
-<Frame>![Auth0 Flows Device Authorization prompt directing the user to enter the code displayed on their device](//images.ctfassets.net/cdy7uua7fh8z/7KRZGb2QcksaEVewXK5bc2/b688b813428f0750ea76b7bcac418bba/enter-user-code__1_.png)</Frame>
+<Frame>![Auth0 Flows Device Authorization prompt directing the user to enter the code displayed on their device](/images/fr-ca/cdy7uua7fh8z/7KRZGb2QcksaEVewXK5bc2/b688b813428f0750ea76b7bcac418bba/enter-user-code__1_.png)</Frame>
 
 Une page de confirmation s’affiche pour que l’utilisateur confirme qu’il s’agit du bon appareil :
 
-<Frame>![Auth0 Flows Device Authorization sample confirmation prompt directing the user to confirm the code](//images.ctfassets.net/cdy7uua7fh8z/4udH69PJSo20QyK8cwhhtc/193488ee0f689f0724345a40dcdb6478/confirm-device__1_.png)</Frame>
+<Frame>![Auth0 Flows Device Authorization sample confirmation prompt directing the user to confirm the code](/images/fr-ca/cdy7uua7fh8z/4udH69PJSo20QyK8cwhhtc/193488ee0f689f0724345a40dcdb6478/confirm-device__1_.png)</Frame>
 
 L’utilisateur terminera la transaction en se connectant. Cette étape peut comprendre un ou plusieurs des procédés suivant :
 
@@ -582,11 +582,11 @@ L’utilisateur terminera la transaction en se connectant. Cette étape peut com
 * Vérification des sessions actives d’authentification unique (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>);
 * Obtenir le consentement de l’utilisateur pour l’appareil, à moins qu’il n’ait été donné au préalable.
 
-<Frame>![Auth0 Flows Device Authorization User authorization prompt directing the user to log in with email and password or with Google or another identity](//images.ctfassets.net/cdy7uua7fh8z/4UbIdGQMucMhoaXxvFLcki/8c1616d7f28bbd37c253a0145a93a17d/user-auth__1_.png)</Frame>
+<Frame>![Auth0 Flows Device Authorization User authorization prompt directing the user to log in with email and password or with Google or another identity](/images/fr-ca/cdy7uua7fh8z/4UbIdGQMucMhoaXxvFLcki/8c1616d7f28bbd37c253a0145a93a17d/user-auth__1_.png)</Frame>
 
 Une fois l’authentification et le consentement obtenus, la demande de confirmation s’affiche :
 
-<Frame>![Flows - Device Authorization - Congratulations notification for user](//images.ctfassets.net/cdy7uua7fh8z/7ze8nZU4b0q3YOzLQSJ6nJ/48ef5170035a200cebb821c581cec9bb/user-confirmation__1_.png)</Frame>
+<Frame>![Flows - Device Authorization - Congratulations notification for user](/images/fr-ca/cdy7uua7fh8z/7ze8nZU4b0q3YOzLQSJ6nJ/48ef5170035a200cebb821c581cec9bb/user-confirmation__1_.png)</Frame>
 
 À ce stade, l’utilisateur s’est authentifié et l’appareil a été autorisé.
 
@@ -596,7 +596,7 @@ Pendant que l’utilisateur authentifiait et autorisait l’appareil, l’applic
 
 Une fois que l’utilisateur a autorisé l’appareil avec succès, vous recevrez une réponse `HTTP 200` avec une charge utile contenant les valeurs suivantes `access_token`, `refresh_token` (en option), `id_token` (en option), `token_type`, et `expires_in` :
 
-```json
+```json lines
 {
   "access_token":"eyJz93a...k4laUWw",
   "refresh_token":"GEbRxBN...edjnXbL",
@@ -608,11 +608,11 @@ Une fois que l’utilisateur a autorisé l’appareil avec succès, vous recevre
 
 <Warning>
 
-Validez vos jetons avant de les enregistrer. Pour en savoir plus, lisez [Valider les jetons d’ID](/docs/secure/tokens/id-tokens/validate-id-tokens) et [Valider les jetons d’accès](/docs/fr-ca/secure/tokens/access-tokens/validate-access-tokens).
+Validez vos jetons avant de les enregistrer. Pour en savoir plus, lisez [Valider les jetons d’ID](/docs/fr-ca/secure/tokens/id-tokens/validate-id-tokens) et [Valider les jetons d’accès](/docs/fr-ca/secure/tokens/access-tokens/validate-access-tokens).
 
 </Warning>
 
-Les jetons d’accès sont utilisés pour appeler le point de terminaison [`/userinfo` de](/docs/api/authentication#get-user-info) Auth0 Authentication API ou d’une autre API. Pour en savoir plus sur les jetons d’accès, veuillez consulter [Jetons d’accès](/docs/fr-ca/secure/tokens/access-tokens). Vous pourrez utiliser le jeton d’accès pour appeler `/userinfo` uniquement si vous avez inclus la permission `openid`. Si vous appelez votre propre API, la première chose que votre API devra faire est [vérifier le jeton d’accès](/docs/fr-ca/secure/tokens/access-tokens/validate-access-tokens).
+Les jetons d’accès sont utilisés pour appeler le point de terminaison [`/userinfo` de](/docs/fr-ca/api/authentication#get-user-info) Auth0 Authentication API ou d’une autre API. Pour en savoir plus sur les jetons d’accès, veuillez consulter [Jetons d’accès](/docs/fr-ca/secure/tokens/access-tokens). Vous pourrez utiliser le jeton d’accès pour appeler `/userinfo` uniquement si vous avez inclus la permission `openid`. Si vous appelez votre propre API, la première chose que votre API devra faire est [vérifier le jeton d’accès](/docs/fr-ca/secure/tokens/access-tokens/validate-access-tokens).
 
 Les jetons d’ID contiennent des informations de l’utilisateur qui doivent être décodées et extraites. (Pour en savoir plus sur les [jetons d’ID](/docs/fr-ca/secure/tokens/id-tokens), veuillez consulter la section correspondante) Le `id_token` ne sera présent dans la réponse que si vous avez inclus la permission `openid`
 
@@ -629,13 +629,13 @@ Les jetons d’actualisation doivent être stockés en toute sécurité car ils 
 Pour appeler votre API, l’application doit transmettre le jeton d’accès récupéré en tant que jeton du porteur dans l’en-tête d’autorisation de votre requête HTTP.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url https://myapi.com/api \
 --header 'authorization: Bearer ACCESS_TOKEN' \
 --header 'content-type: application/json'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://myapi.com/api");
 var request = new RestRequest(Method.GET);
 request.AddHeader("content-type", "application/json");
@@ -643,7 +643,7 @@ request.AddHeader("authorization", "Bearer ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -661,15 +661,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://myapi.com/api")
 .header("content-type", "application/json")
 .header("authorization", "Bearer ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -681,8 +681,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer ACCESS_TOKEN" };
@@ -704,7 +704,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://myapi.com/api",
@@ -727,8 +727,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("myapi.com")
 headers = {
@@ -741,7 +741,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -754,8 +754,8 @@ request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -784,7 +784,7 @@ dataTask.resume()
 Vous avez déjà reçu un jeton d’actualisation si vous avez suivi ce tutoriel et complété ce qui suit :
 
 * configuré votre API pour autoriser l’accès hors ligne
-* inclus la permission `offline_access` lorsque vous avez lancé la demande d’authentification via le [authorize endpoint (point de terminaison d’autorisation)](/docs/api/authentication/reference#authorize-application)
+* inclus la permission `offline_access` lorsque vous avez lancé la demande d’authentification via le [authorize endpoint (point de terminaison d’autorisation)](/docs/fr-ca/api/authentication/reference#authorize-application)
 
 Vous pouvez utiliser le jeton d’actualisation pour obtenir un nouveau jeton d’accès. Généralement, un utilisateur aura besoin d’un nouveau jeton d’accès uniquement après l’expiration du précédent ou lorsqu’il accède à une nouvelle ressource pour la première fois. Il est déconseillé d’appeler le point de terminaison pour obtenir un nouveau jeton d’accès à chaque fois que vous appelez une API, et Auth0 impose des limites anti-attaques qui réduiront la quantité de requêtes au point de terminaison pouvant être exécutées en utilisant le même jeton depuis la même adresse IP.
 
@@ -793,7 +793,7 @@ Pour actualiser votre jeton, effectuez une requête `POST` au point de terminais
 #### Exemple de jeton d’actualisation POST vers l’URL de jeton.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -801,8 +801,8 @@ curl --request POST \
 --data 'client_id={yourClientId}' \
 --data 'client_secret={yourClientSecret}' \
 --data 'refresh_token={yourRefreshToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -810,7 +810,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=refresh_to
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -829,15 +829,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=refresh_token&client_id={yourClientId}&client_secret={yourClientSecret}&refresh_token=%7ByourRefreshToken%7D")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -855,8 +855,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=refresh_token" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -882,7 +882,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -905,8 +905,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=refresh_token&client_id={yourClientId}&client_secret={yourClientSecret}&refresh_token=%7ByourRefreshToken%7D"
@@ -917,7 +917,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -930,8 +930,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=refresh_token&client_id={yourClientId}&client_secret={yourClientSecret}&refresh_token=%7ByourRefreshToken%7D"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=refresh_token".data(using: String.Encoding.utf8)!)
@@ -967,23 +967,23 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>grant_type</code></td>
+<td>`grant_type`</td>
 <td>Définissez sur « refresh_token ».</td>
 </tr>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>L’ID client de votre application. Vous pouvez trouver cette valeur dans [Paramètres de l’application] (https://manage.auth0.com/#/Applications/{yourClientId}/settings).</td>
 </tr>
 <tr>
-<td><code>client_secret</code></td>
+<td>`client_secret`</td>
 <td>Le secret client de votre application. Vous pouvez trouver cette valeur dans [Paramètres de l’application] (https://manage.auth0.com/#/Applications/{yourClientSecret}/settings).</td>
 </tr>
 <tr>
-<td><code>refresh_token</code></td>
+<td>`refresh_token`</td>
 <td>Le jeton d’actualisation à utiliser.</td>
 </tr>
 <tr>
-<td><code>scope</code></td>
+<td>`scope`</td>
 <td>(Facultatif) Une liste délimitée par des espaces des autorisations de permissions requises. Si elles ne sont pas envoyées, les permissions d’origine seront utilisées; sinon, vous pouvez demander un ensemble réduit de permissions. Veuillez noter que cela doit être codé URL.</td>
 </tr>
 </tbody>
@@ -993,7 +993,7 @@ dataTask.resume()
 
 Si tout se passe bien, vous recevrez une réponse `HTTP 200` avec une charge utile contenant un nouveau `access_token`, `id_token` (en option), durée de vie du jeton en secondes (`expires_in`), valeurs de `scope` accordées et `token_type` :
 
-```json
+```json lines
 {
   "access_token": "eyJ...MoQ",
   "expires_in": 86400,
@@ -1005,7 +1005,7 @@ Si tout se passe bien, vous recevrez une réponse `HTTP 200` avec une charge uti
 
 <Warning>
 
-Validez vos jetons avant de les enregistrer. Pour en savoir plus, lisez [Valider les jetons d’ID](/docs/secure/tokens/id-tokens/validate-id-tokens) et [Valider les jetons d’accès](/docs/fr-ca/secure/tokens/access-tokens/validate-access-tokens).
+Validez vos jetons avant de les enregistrer. Pour en savoir plus, lisez [Valider les jetons d’ID](/docs/fr-ca/secure/tokens/id-tokens/validate-id-tokens) et [Valider les jetons d’accès](/docs/fr-ca/secure/tokens/access-tokens/validate-access-tokens).
 
 </Warning>
 
@@ -1015,7 +1015,7 @@ Validez vos jetons avant de les enregistrer. Pour en savoir plus, lisez [Valider
 
 Vous pouvez utiliser des règles pour détecter si la transaction en cours utilise le flux d’autorisation d’appareil. (Pour en savoir plus sur les règles, lisez l’article [Règles d'Auth0](/docs/fr-ca/customize/rules)). Pour cela, vérifiez la propriété `protocol` de l’objet `context` :
 
-```javascript
+```javascript lines
 function (user, context, callback) {
    if (context.protocol === 'oauth2-device-code') {
       ...
@@ -1046,27 +1046,27 @@ Les journaux de locataires sont créés pour toutes les interactions qui ont lie
 </thead>
 <tbody>
 <tr>
-<td><code>fdeaz</code></td>
+<td>`fdeaz`</td>
 <td>Échec de la demande d’autorisation de l’appareil</td>
 <td></td>
 </tr>
 <tr>
-<td><code>fdeac</code></td>
+<td>`fdeac`</td>
 <td>Échec de l’activation de l’appareil</td>
 <td></td>
 </tr>
 <tr>
-<td><code>fdecc</code></td>
+<td>`fdecc`</td>
 <td>L’utilisateur a annulé la confirmation de l’appareil</td>
 <td></td>
 </tr>
 <tr>
-<td><code>fede</code></td>
+<td>`fede`</td>
 <td>Échec de l’échange du code de l’appareil contre le jeton d’accès</td>
 <td></td>
 </tr>
 <tr>
-<td><code>sede</code></td>
+<td>`sede`</td>
 <td>Réussite de l’échange</td>
 <td>Code de l’appareil pour le jeton d’accès</td>
 </tr>

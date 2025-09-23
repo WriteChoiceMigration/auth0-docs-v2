@@ -1,13 +1,13 @@
 ---
 title: "Appeler votre API à l’aide du flux de code d’autorisation"
 permalink: "call-your-api-using-the-authorization-code-flow"
+'description': "Apprenez à appeler votre propre API à partir d’applications Web standard à l’aide du flux de code d’autorisation."
 'og:title': "Appeler votre API à l’aide du flux de code d’autorisation"
 'og:description': "Apprenez à appeler votre propre API à partir d’applications Web standard à l’aide du flux de code d’autorisation."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Appeler votre API à l’aide du flux de code d’autorisation"
 'twitter:description': "Apprenez à appeler votre propre API à partir d’applications Web standard à l’aide du flux de code d’autorisation."
 ---
-# Appeler votre API à l’aide du flux de code d’autorisation
 
 <Note>
 
@@ -17,8 +17,8 @@ Ce tutoriel vous aidera à appeler votre propre API en utilisant le flux de code
 
 Auth0 permet à votre application d’implémenter facilement le <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Code d’autorisation</Tooltip> flux à l’aide de(s) :
 
-* [Guides de démarrage rapide pour applications Web classiques](/docs/quickstart/webapp) : la manière la plus simple d’implémenter le flux.
-* [Authentication API](/docs/api/authentication) : Si vous préférez créer votre propre solution, continuez à lire pour savoir comment appeler notre API directement.
+* [Guides de démarrage rapide pour applications Web classiques](/docs/fr-ca/quickstart/webapp) : la manière la plus simple d’implémenter le flux.
+* [Authentication API](/docs/fr-ca/api/authentication) : Si vous préférez créer votre propre solution, continuez à lire pour savoir comment appeler notre API directement.
 
 ## Prérequis
 
@@ -47,11 +47,11 @@ Cette étape peut comprendre un ou plusieurs des procédés suivant :
 * Vérification des sessions actives d’authentification unique (SSO)
 * Obtenir le consentement de l’utilisateur pour le niveau de permission demandé, sauf si obtenu précédemment.
 
-Pour autoriser l’utilisateur, votre application doit le rediriger vers [l’URL d’autorisation](/docs/api/authentication#authorization-code-grant).
+Pour autoriser l’utilisateur, votre application doit le rediriger vers [l’URL d’autorisation](/docs/fr-ca/api/authentication#authorization-code-grant).
 
 #### Exemple d’URL d’autorisation
 
-```
+``` lines
 https://{yourDomain}/authorize?
     response_type=code&
     client_id={yourClientId}&
@@ -76,43 +76,43 @@ Notez que pour autoriser un utilisateur lors de l’appel d’une API personnali
 </thead>
 <tbody>
 <tr>
-<td><code>response_type</code></td>
-<td>Jeton le type d’identifiant qu’Auth0 va retourner (<code>code</code> ou <code>token</code>). Pour ce flux, la valeur doit être <code>code</code>.</td>
+<td>`response_type`</td>
+<td>Jeton le type d’identifiant qu’Auth0 va retourner (`code` ou `token`). Pour ce flux, la valeur doit être `code`.</td>
 </tr>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>L’ID client de votre application. Vous pouvez trouver cette valeur dans vos <a href="https://manage.auth0.com/#/Applications/{yourClientId}/settings">Paramètres d’application</a>.</td>
 </tr>
 <tr>
-<td><code>redirect_uri</code></td>
-<td>L’URL vers laquelle Auth0 redirigera le navigateur après que l’autorisation a été accordée par l’utilisateur. Le code d’autorisation sera indiqué dans le paramètre URL <code>code</code>. Vous devez définir cette URL comme une URL de rappel valide dans vos [Paramètres d’application](https://manage.auth0.com/#/Applications/{yourClientId}/settings). <br/> <br/> <strong>Avertissement :</strong> Selon la <a href="https://tools.ietf.org/html/rfc6749#section-3.1.2">Spécification OAuth 2.0</a>, Auth0 supprime tout ce qui se trouve après le hachage et n’honore <em>pas</em> les fragments.</td>
+<td>`redirect_uri`</td>
+<td>L’URL vers laquelle Auth0 redirigera le navigateur après que l’autorisation a été accordée par l’utilisateur. Le code d’autorisation sera indiqué dans le paramètre URL `code`. Vous devez définir cette URL comme une URL de rappel valide dans vos [Paramètres d’application](https://manage.auth0.com/#/Applications/{yourClientId}/settings). <br/> <br/> <strong>Avertissement :</strong> Selon la <a href="https://tools.ietf.org/html/rfc6749#section-3.1.2">Spécification OAuth 2.0</a>, Auth0 supprime tout ce qui se trouve après le hachage et n’honore <em>pas</em> les fragments.</td>
 </tr>
 <tr>
-<td><code>scope</code></td>
-<td>Précise les <a href="/docs/scopes">permissions</a> pour lesquelles vous souhaitez demander une autorisation, ce qui dicte les permissions (ou attributs utilisateur) que vous souhaitez voir renvoyées. Elles doivent être séparées par un espace. Vous pouvez demander n’importe lequel des <a href="https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims">scopes standard OpenID Connect (OIDC)</a> sur les utilisateurs, comme <code>profile</code> ou <code>email</code>, <a href="/docs/tokens/concepts/jwt-claims#custom-claims">demandes personnalisées</a> conforme à un <a href="/docs/tokens/guides/create-namespaced-custom-claims">format d'espace de noms</a>, ou n’importe quelle permission prise en charge par l’API cible (p. ex., <code>read:contacts</code>). Incluez <code>offline_access</code> pour obtenir un <dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">Jeton d’actualisation</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn> (assurez-vous que le champ <strong>Allow Offline Access</strong> est activé dans les <a href="https://manage.auth0.com/#/applications">Paramètres de l’application</a>).</td>
+<td>`scope`</td>
+<td>Précise les <a href="/docs/fr-ca/scopes">permissions</a> pour lesquelles vous souhaitez demander une autorisation, ce qui dicte les permissions (ou attributs utilisateur) que vous souhaitez voir renvoyées. Elles doivent être séparées par un espace. Vous pouvez demander n’importe lequel des <a href="https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims">scopes standard OpenID Connect (OIDC)</a> sur les utilisateurs, comme `profile` ou `email`, <a href="/docs/fr-ca/tokens/concepts/jwt-claims#custom-claims">demandes personnalisées</a> conforme à un <a href="/docs/fr-ca/tokens/guides/create-namespaced-custom-claims">format d'espace de noms</a>, ou n’importe quelle permission prise en charge par l’API cible (p. ex., `read:contacts`). Incluez `offline_access` pour obtenir un <dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">Jeton d’actualisation</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn> (assurez-vous que le champ <strong>Allow Offline Access</strong> est activé dans les <a href="https://manage.auth0.com/#/applications">Paramètres de l’application</a>).</td>
 </tr>
 <tr>
-<td><code>audience</code></td>
+<td>`audience`</td>
 <td>L’identifiant unique de l’API à laquelle votre application Web veut accéder. Utilisez la valeur <strong>Identifiant</strong> dans l’onglet <a href="https://manage.auth0.com/#/apis">Settings (Paramètres)</a> pour l’API que vous avez déterminée dans le cadre des prérequis pour ce tutoriel.</td>
 </tr>
 <tr>
-<td><code>state</code></td>
-<td>(recommandé) Une chaîne alphanumérique arbitraire opaque que votre application ajoute à la requête initiale qu’Auth0 inclut lorsqu’elle redirige vers votre application. Pour voir comment utiliser cette valeur pour prévenir les attaques de falsification de requête intersites (CSRF), consultez <a href="/docs/protocols/oauth2/mitigate-csrf-attacks">Atténuer les attaques CSRF avec les paramètres d’état</a>.</td>
+<td>`state`</td>
+<td>(recommandé) Une chaîne alphanumérique arbitraire opaque que votre application ajoute à la requête initiale qu’Auth0 inclut lorsqu’elle redirige vers votre application. Pour voir comment utiliser cette valeur pour prévenir les attaques de falsification de requête intersites (CSRF), consultez <a href="/docs/fr-ca/protocols/oauth2/mitigate-csrf-attacks">Atténuer les attaques CSRF avec les paramètres d’état</a>.</td>
 </tr>
 <tr>
-<td><code>organization</code></td>
+<td>`organization`</td>
 <td>(facultatif) Identifiant de l’organisation à utiliser lors de l’authentification d’un utilisateur. S’il n’est pas fourni, si votre application est configurée pour <strong>afficher l’invite de l’organisation</strong>, l’utilisateur pourra saisir le nom de l’organisation lors de l’authentification.</td>
 </tr>
 <tr>
-<td><code>invitation</code></td>
-<td>(facultatif) Identifiant de l’invitation à l’organisation. Lors de l’<a href="/docs/organizations/invite-members">invitation d’un membre à une organisation</a>, votre application doit gérer l’acceptation de l’invitation en transmettant les paires clé-valeur <code>invitation</code> et <code>organization</code> lorsque l’utilisateur accepte l’invitation.</td>
+<td>`invitation`</td>
+<td>(facultatif) Identifiant de l’invitation à l’organisation. Lors de l’<a href="/docs/fr-ca/organizations/invite-members">invitation d’un membre à une organisation</a>, votre application doit gérer l’acceptation de l’invitation en transmettant les paires clé-valeur `invitation` et `organization` lorsque l’utilisateur accepte l’invitation.</td>
 </tr>
 </tbody>
 </table>
 
 Par exemple, votre extrait HTML pour l’URL d’autorisation lors de l’ajout de l’enregistrement à votre application peut avoir l’air de ce qui suit :
 
-```
+```html lines
 <a href="https://{yourDomain}/authorize?
   response_type=code&
   client_id={yourClientId}&
@@ -128,7 +128,7 @@ Par exemple, votre extrait HTML pour l’URL d’autorisation lors de l’ajout 
 
 Si tout se passe bien, vous recevrez une réponse `HTTP 302`. Le code d’autorisation est compris à la fin de cette URL :
 
-```
+``` lines
 HTTP/1.1 302 Found
 Location: {https://yourApp/callback}?code={authorizationCode}&state=xyzABC123
 ```
@@ -137,12 +137,12 @@ Location: {https://yourApp/callback}?code={authorizationCode}&state=xyzABC123
 
 <Accordion title="2 Demander des jetons">
 
-Maintenant que vous avez un code d’authentification, vous pouvez l’échanger pour des jetons. En utilisant le code d’autorisation (`code`) extrait de l’étape précédente, vous devrez `POST` sur [l’URL du jeton](/docs/api/authentication#authorization-code).
+Maintenant que vous avez un code d’authentification, vous pouvez l’échanger pour des jetons. En utilisant le code d’autorisation (`code`) extrait de l’étape précédente, vous devrez `POST` sur [l’URL du jeton](/docs/fr-ca/api/authentication#authorization-code).
 
 #### Exemple d’un POST à une URL de jeton
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -151,8 +151,8 @@ curl --request POST \
 --data 'client_secret={yourClientSecret}' \
 --data 'code=yourAuthorizationCode}' \
 --data 'redirect_uri={https://yourApp/callback}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -160,7 +160,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=authorizat
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -179,15 +179,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=authorization_code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&code=yourAuthorizationCode%7D&redirect_uri={https://yourApp/callback}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -206,8 +206,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=authorization_code" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -234,7 +234,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -257,8 +257,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=authorization_code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&code=yourAuthorizationCode%7D&redirect_uri={https://yourApp/callback}"
@@ -269,7 +269,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -282,8 +282,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=authorization_code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&code=yourAuthorizationCode%7D&redirect_uri={https://yourApp/callback}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=authorization_code".data(using: String.Encoding.utf8)!)
@@ -320,24 +320,24 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>grant_type</code></td>
-<td>Définir sur <code>authorization_code</code>.</td>
+<td>`grant_type`</td>
+<td>Définir sur `authorization_code`.</td>
 </tr>
 <tr>
-<td><code>code</code></td>
-<td><code>authorization_code</code> récupéré à l’étape précédente de ce tutoriel.</td>
+<td>`code`</td>
+<td>`authorization_code` récupéré à l’étape précédente de ce tutoriel.</td>
 </tr>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>L’ID client de votre application. Vous pouvez trouver cette valeur dans les <a href="https://manage.auth0.com/#/Applications/{yourClientId}/settings">paramètres de votre application</a>.</td>
 </tr>
 <tr>
-<td><code>client_secret</code></td>
-<td>Le secret client de votre application. Vous pouvez trouver cette valeur dans les <a href="https://manage.auth0.com/#/Applications/{yourClientId}/settings">paramètres de votre application</a>.  Pour en savoir plus sur les méthodes d’authentification d’application disponibles, lisez <a href="/docs/secure/application-credentials">Identifiants d’applications</a>.</td>
+<td>`client_secret`</td>
+<td>Le secret client de votre application. Vous pouvez trouver cette valeur dans les <a href="https://manage.auth0.com/#/Applications/{yourClientId}/settings">paramètres de votre application</a>.  Pour en savoir plus sur les méthodes d’authentification d’application disponibles, lisez <a href="/docs/fr-ca/secure/application-credentials">Identifiants d’applications</a>.</td>
 </tr>
 <tr>
-<td><code>redirect_uri</code></td>
-<td>L’URL de rappel valide définie dans les paramètres de votre Application. Cela doit correspondre exactement à <code>redirect_uri</code> passé à l’ URL d’autorisation à l’étape précédente de ce tutoriel. Notez que cela doit être codé URL.</td>
+<td>`redirect_uri`</td>
+<td>L’URL de rappel valide définie dans les paramètres de votre Application. Cela doit correspondre exactement à `redirect_uri` passé à l’ URL d’autorisation à l’étape précédente de ce tutoriel. Notez que cela doit être codé URL.</td>
 </tr>
 </tbody>
 </table>
@@ -346,7 +346,7 @@ dataTask.resume()
 
 Si tout se passe bien, vous recevrez une réponse `HTTP 200` avec une charge utile contenant les valeurs `access_token`, `refresh_token`, `id_token` et `token_type` :
 
-```json
+```javascript lines
 {
   "access_token": "eyJz93a...k4laUWw",
   "refresh_token": "GEbRxBN...edjnXbL",
@@ -357,15 +357,15 @@ Si tout se passe bien, vous recevrez une réponse `HTTP 200` avec une charge uti
 
 <Warning>
 
-Validez vos jetons avant de les enregistrer. Pour en savoir plus, lisez [Valider les jetons d’ID](/docs/secure/tokens/id-tokens/validate-id-tokens) et [Valider les jetons d’accès](/docs/secure/tokens/access-tokens/validate-access-tokens).
+Validez vos jetons avant de les enregistrer. Pour en savoir plus, lisez [Valider les jetons d’ID](/docs/fr-ca/secure/tokens/id-tokens/validate-id-tokens) et [Valider les jetons d’accès](/docs/fr-ca/secure/tokens/access-tokens/validate-access-tokens).
 
 </Warning>
 
-Les [Jetons d’ID](/docs/secure/tokens/id-tokens) contiennent des informations de l’utilisateur qui doivent être décodées et extraites.
+Les [Jetons d’ID](/docs/fr-ca/secure/tokens/id-tokens) contiennent des informations de l’utilisateur qui doivent être décodées et extraites.
 
-Les [jetons d’accès](/docs/secure/tokens/access-tokens) sont utilisés pour appeler le [point de terminaison /userinfo de l’Authentication API Auth0](/docs/api/authentication#get-user-info) ou une autre API. Si vous appelez votre propre API, la première chose que votre API devra faire est de [vérifier le jeton d’accès](/docs/secure/tokens/access-tokens/validate-access-tokens).
+Les [jetons d’accès](/docs/fr-ca/secure/tokens/access-tokens) sont utilisés pour appeler le [point de terminaison /userinfo de l’Authentication API Auth0](/docs/fr-ca/api/authentication#get-user-info) ou une autre API. Si vous appelez votre propre API, la première chose que votre API devra faire est de [vérifier le jeton d’accès](/docs/fr-ca/secure/tokens/access-tokens/validate-access-tokens).
 
-Les [jetons d’actualisation](/docs/secure/tokens/refresh-tokens) sont utilisés pour obtenir un nouveau jeton d’accès ou un nouveau jeton d’ID après l’expiration du précédent. Le `refresh_token` ne sera présent dans la réponse que si vous avez inclus la permission `offline_access` et activé **Autoriser l’accès hors ligne** pour votre API dans le Dashboard.
+Les [jetons d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens) sont utilisés pour obtenir un nouveau jeton d’accès ou un nouveau jeton d’ID après l’expiration du précédent. Le `refresh_token` ne sera présent dans la réponse que si vous avez inclus la permission `offline_access` et activé **Autoriser l’accès hors ligne** pour votre API dans le Dashboard.
 
 <Warning>
 
@@ -380,13 +380,13 @@ Les jetons d’actualisation doivent être stockés en toute sécurité car ils 
 Pour appeler votre API à partir d’une application web ordinaire, l’application doit transmettre le jeton d’accès récupéré en tant que jeton du porteur dans l’en-tête Authorization (Autorisation) de votre requête HTTP.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url https://myapi.com/api \
 --header 'authorization: Bearer {accessToken}' \
 --header 'content-type: application/json'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://myapi.com/api");
 var request = new RestRequest(Method.GET);
 request.AddHeader("content-type", "application/json");
@@ -394,7 +394,7 @@ request.AddHeader("authorization", "Bearer {accessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -412,15 +412,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://myapi.com/api")
 .header("content-type", "application/json")
 .header("authorization", "Bearer {accessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -432,8 +432,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer {accessToken}" };
@@ -455,7 +455,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://myapi.com/api",
@@ -478,8 +478,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("myapi.com")
 headers = {
@@ -492,7 +492,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -505,8 +505,8 @@ request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer {accessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -534,10 +534,10 @@ dataTask.resume()
 
 <Accordion title="4 Échange de jetons d’actualisation">
 
-Vous avez déjà reçu un [jeton d’actualisation](/docs/secure/tokens/refresh-tokens) si vous avez suivi ce tutoriel et complété ce qui suit :
+Vous avez déjà reçu un [jeton d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens) si vous avez suivi ce tutoriel et complété ce qui suit :
 
 * configuré votre API pour autoriser l’accès hors ligne
-* inclus la permission `offline_access` lorsque vous avez lancé la demande d’authentification via le [point de terminaison d’autorisation](/docs/api/authentication/reference#authorize-application).
+* inclus la permission `offline_access` lorsque vous avez lancé la demande d’authentification via le [point de terminaison d’autorisation](/docs/fr-ca/api/authentication/reference#authorize-application).
 
 Vous pouvez utiliser le jeton d’actualisation pour obtenir le nouveau jeton d’accès. Généralement, un utilisateur aura besoin d’un nouveau jeton d’accès uniquement après l’expiration du précédent ou lorsqu’il accède à une nouvelle ressource pour la première fois. Il est déconseillé d’appeler le point de terminaison pour obtenir un nouveau jeton d’accès à chaque fois que vous appelez une API, et Auth0 impose des limites anti-attaques qui réduiront la quantité de requêtes au point de terminaison pouvant être exécutées en utilisant le même jeton depuis la même adresse IP.
 
@@ -546,15 +546,15 @@ Pour actualiser votre jeton, effectuez une requête `POST` au point de terminais
 ##### Exemple de requête POST à une URL de jeton
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
 --data grant_type=refresh_token \
 --data 'client_id={yourClientId}' \
 --data 'refresh_token={yourRefreshToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -562,7 +562,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=refresh_to
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -581,15 +581,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=refresh_token&client_id={yourClientId}&refresh_token=%7ByourRefreshToken%7D")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -606,8 +606,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=refresh_token" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -632,7 +632,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -655,8 +655,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=refresh_token&client_id={yourClientId}&refresh_token=%7ByourRefreshToken%7D"
@@ -667,7 +667,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -680,8 +680,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=refresh_token&client_id={yourClientId}&refresh_token=%7ByourRefreshToken%7D"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=refresh_token".data(using: String.Encoding.utf8)!)
@@ -716,19 +716,19 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>grant_type</code></td>
-<td>Définir ce paramètre à <code>refresh_token</code>.</td>
+<td>`grant_type`</td>
+<td>Définir ce paramètre à `refresh_token`.</td>
 </tr>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>L’ID client de votre application. Vous pouvez trouver cette valeur dans vos <a href="https://manage.auth0.com/#/Applications/{yourClientId}/settings">Paramètres d’application</a>.</td>
 </tr>
 <tr>
-<td><code>refresh_token</code></td>
+<td>`refresh_token`</td>
 <td>Le jeton d’actualisation à utiliser.</td>
 </tr>
 <tr>
-<td><code>scope</code></td>
+<td>`scope`</td>
 <td>(facultatif) Une liste délimitée par des espaces des permissions demandées. Si elle n’est pas envoyée, les permissions originales seront utilisées; sinon vous pouvez demander un ensemble réduit de permissions. Veuillez noter que cela doit être codé URL.</td>
 </tr>
 </tbody>
@@ -738,7 +738,7 @@ dataTask.resume()
 
 Si tout se passe bien, vous recevrez une réponse `HTTP 200` avec une charge utile contenant un nouveau `access_token`, sa durée de vie en secondes (`expires_in`), les valeurs de `permissions` accordées et le `token_type` . Si la permission du jeton initial incluait `openid`, alors la réponse inclura également un nouveau `id_token` :
 
-```json
+```json lines
 {
   "access_token": "eyJ...MoQ",
   "expires_in": 86400,
@@ -750,7 +750,7 @@ Si tout se passe bien, vous recevrez une réponse `HTTP 200` avec une charge uti
 
 <Warning>
 
-Validez vos jetons avant de les enregistrer. Pour en savoir plus, lisez [Valider les jetons d’ID](/docs/secure/tokens/id-tokens/validate-id-tokens) et [Valider les jetons d’accès](/docs/secure/tokens/access-tokens/validate-access-tokens).
+Validez vos jetons avant de les enregistrer. Pour en savoir plus, lisez [Valider les jetons d’ID](/docs/fr-ca/secure/tokens/id-tokens/validate-id-tokens) et [Valider les jetons d’accès](/docs/fr-ca/secure/tokens/access-tokens/validate-access-tokens).
 
 </Warning>
 
@@ -764,7 +764,7 @@ Vous pouvez utiliser Auth0 Actions pour modifier les permissions d'un jeton d'ac
 
 Pour ce faire, ajoutez l’Action post-connexion suivante, qui s’exécutera après l’authentification de l’utilisateur :
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   // Add custom claims to Access Token and ID Token
   api.accessToken.setCustomClaim('https://foo/bar', 'value');
@@ -778,7 +778,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 <Warning>
 
-Auth0 renvoie les informations de profil contenues dans un format de demande structuré tel que défini par la [spécification OpenID Connect (OIDC)](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims). Cela signifie que les demandes personnalisées ajoutées aux jetons d’ID ou aux jetons d’accès doivent [respecter des directives et des restrictions](/docs/secure/tokens/json-web-tokens/create-custom-claims) pour éviter d’éventuels conflits.
+Auth0 renvoie les informations de profil contenues dans un format de demande structuré tel que défini par la [spécification OpenID Connect (OIDC)](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims). Cela signifie que les demandes personnalisées ajoutées aux jetons d’ID ou aux jetons d’accès doivent [respecter des directives et des restrictions](/docs/fr-ca/secure/tokens/json-web-tokens/create-custom-claims) pour éviter d’éventuels conflits.
 
 </Warning>
 

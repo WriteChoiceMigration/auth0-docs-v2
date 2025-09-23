@@ -1,13 +1,13 @@
 ---
 title: "Flux de code d’autorisation avec demandes d’autorisation poussées (RAR)"
 permalink: "authorization-code-flow-with-rar"
+'description': "Apprenez à utiliser les demandes d’autorisation poussées avec le flux de code d’autorisation."
 'og:title': "Flux de code d’autorisation avec demandes d’autorisation poussées (RAR)"
 'og:description': "Apprenez à utiliser les demandes d’autorisation poussées avec le flux de code d’autorisation."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Flux de code d’autorisation avec demandes d’autorisation poussées (RAR)"
 'twitter:description': "Apprenez à utiliser les demandes d’autorisation poussées avec le flux de code d’autorisation."
 ---
-# Flux de code d’autorisation avec demandes d’autorisation poussées (RAR)
 
 <Note>
 
@@ -27,7 +27,7 @@ Dans l’ensemble, les RAR sont une extension puissante du protocole OAuth2 qui
 
 Après avoir [configuré des RAR](/docs/fr-ca/get-started/apis/configure-rich-authorization-requests) pour votre API, vous pouvez ajouter le paramètre `authorization_details` à une demande transmise au point de terminaison `/par`. Le paramètre est un tableau d’objets. Chaque objet doit avoir un champ de type, mais les types n’ont pas besoin d’être uniques dans le tableau. Voici un exemple utilisant le flux de code d’autorisation :
 
-```bash
+```bash lines
 curl --location 'https://$tenant/oauth/par' \
 --request POST \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -49,7 +49,7 @@ Chaque élément `authorization_details` peut être entièrement personnalisé t
 
 Lorsque vous échangez votre code d’autorisation au point de terminaison `/oauth/token`, comme l’illustre l’exemple de code suivant :
 
-```
+```bash lines
 POST https://$tenant/oauth/token
 Content-Type: application/x-www-form-urlencoded
 
@@ -58,7 +58,7 @@ grant_type=authorization_code&client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET
 
 Vous recevez une réponse contenant le jeton d’accès et le tableau `authorization_details` :
 
-```json
+```json lines
 {
   "access_token": "ey...ZQ",
   "expires_in": 86400,
@@ -80,7 +80,7 @@ Le tableau `authorization_details` aide le client à comprendre la permission de
 
 Si l'<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">audience</Tooltip> demandée est une API configurée pour utiliser des [jetons d’accès JWE](/docs/fr-ca/secure/tokens/json-web-tokens), tous les champs à l’exception de `type` seront supprimés des éléments `authorization_details` dans la réponse du point de terminaison `/oauth/token`. Les demandes de jetons d’accès ne sont pas affectées.
 
-```json
+```json lines
 {
   "iss": "https://my_tenant.auth0.com/",
   "sub": "auth0|me",

@@ -1,17 +1,19 @@
 ---
 title: "Ajouter une connexion à votre application Laravel"
 permalink: "interactive"
+'description': "Ce guide montre comment intégrer Auth0 avec une nouvelle (ou existante) application Laravel 9 ouº10."
 'og:title': "Ajouter une connexion à votre application Laravel"
 'og:description': "Ce guide montre comment intégrer Auth0 avec une nouvelle (ou existante) application Laravel 9 ouº10."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/php.png"
 'twitter:title': "Ajouter une connexion à votre application Laravel"
 'twitter:description': "Ce guide montre comment intégrer Auth0 avec une nouvelle (ou existante) application Laravel 9 ouº10."
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -75,7 +77,7 @@ Ensuite, authentifiez la CLI avec votre compte Auth0 en choisissant « as a us
 
 Ensuite, créez une nouvelle application avec Auth0 :
 
-```
+```bash lines
 ./auth0 apps create \
 --name "My Laravel Application" \
 --type "regular" \
@@ -89,7 +91,7 @@ Ensuite, créez une nouvelle application avec Auth0 :
 
 Vous devez également créer une nouvelle API :
 
-```
+```bash lines
 ./auth0 apis create \
 --name "My Laravel Application's API" \
 --identifier "https://github.com/auth0/laravel-auth0" \
@@ -118,15 +120,15 @@ La trousse SDK enregistre automatiquement toutes les routes nécessaires pour qu
 </thead>
 <tbody>
 <tr>
-<td><code>/login</code></td>
+<td>`/login`</td>
 <td>Initie le flux d’authentification.</td>
 </tr>
 <tr>
-<td><code>/logout</code></td>
+<td>`/logout`</td>
 <td>Déconnecte l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>/callback</code></td>
+<td>`/callback`</td>
 <td>Gère le rappel de Auth0.</td>
 </tr>
 </tbody>
@@ -142,7 +144,7 @@ Les installations d’authentification de Laravel utilisent des « gardes » p
 
 Pour exiger que les utilisateurs s’authentifient avant d’accéder à une route, vous pouvez utiliser l’intergiciel `auth` de Laravel.
 
-```
+```php lines
 Route::get('/private', function () {
 return response('Welcome! You are logged in.');
 })->middleware('auth');
@@ -150,7 +152,7 @@ return response('Welcome! You are logged in.');
 
 Vous pouvez également exiger que les utilisateurs authentifiés aient des [autorisations](https://auth0.com/docs/manage-users/access-control/rbac) spécifiques en combinant cela avec l'intergiciel `can` de Laravel.
 
-```
+```php lines
 Route::get('/scope', function () {
 return response('You have `read:messages` permission, and can therefore access this resource.');
 
@@ -165,7 +167,7 @@ Les renseignements de l’utilisateur authentifié sont accessibles à partir de
 
 Par exemple, pour récupérer l’identificateur et l’adresse courriel de l’utilisateur :
 
-```
+```php lines
 Route::get('/', function () {
 if (! auth()->check()) {
 return response('You are not logged in.');
@@ -184,11 +186,11 @@ return response("Hello {$name}! Your email address is {$email}.");
 
 Vous pouvez mettre à jour les informations utilisateur en utilisant la [Auth0 Management API](https://github.com/auth0/laravel-auth0/blob/main/docs/Management.md). Tous les terminaux de gestion sont accessibles via la méthode `management()` de la trousse SDK.
 
-**Avant de faire des appels à la Management API, vous devez permettre à votre application de communiquer avec la Management API.** Cela peut être fait à partir de la [page API du Auth0 Dashboard](/docs/%24%7Bmanage_url%7D#/apis), en choisissant la `Auth0 Management API` et en sélectionnant l’onglet Machine to Machine Applications (Communication entre machines). Autoriser votre application Laravel, puis cliquez sur la flèche vers le bas pour choisir les permissions que vous souhaitez accorder.
+**Avant de faire des appels à la Management API, vous devez permettre à votre application de communiquer avec la Management API.** Cela peut être fait à partir de la [page API du Auth0 Dashboard](/docs/fr-ca/%24%7Bmanage_url%7D#/apis), en choisissant la `Auth0 Management API` et en sélectionnant l’onglet Machine to Machine Applications (Communication entre machines). Autoriser votre application Laravel, puis cliquez sur la flèche vers le bas pour choisir les permissions que vous souhaitez accorder.
 
 Pour l’exemple suivant, dans lequel nous allons mettre à jour les métadonnées d’un utilisateur et attribuer une couleur préférée aléatoire, vous devez accorder les permissions `read:users` et `update:users`. Une liste des points de terminaison API et les permissions requises peuvent être trouvées dans [la documentation de la Management API](https://auth0.com/docs/api/management/v2).
 
-```
+```php lines
 use Auth0\Laravel\Facade\Auth0;
 Route::get('/colors', function () {
 $endpoint = Auth0::management()->users();
@@ -262,7 +264,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/webapp/laravel/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

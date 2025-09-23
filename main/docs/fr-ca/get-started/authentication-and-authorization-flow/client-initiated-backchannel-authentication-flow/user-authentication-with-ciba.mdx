@@ -1,13 +1,13 @@
 ---
 title: "Authentification des utilisateurs avec CIBA"
 permalink: "user-authentication-with-ciba"
+'description': "Apprenez à authentifier les utilisateurs à l’aide du flux d’authentification par canal d’appui initié par le client."
 'og:title': "Authentification des utilisateurs avec CIBA"
 'og:description': "Apprenez à authentifier les utilisateurs à l’aide du flux d’authentification par canal d’appui initié par le client."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Authentification des utilisateurs avec CIBA"
 'twitter:description': "Apprenez à authentifier les utilisateurs à l’aide du flux d’authentification par canal d’appui initié par le client."
 ---
-# Authentification des utilisateurs avec CIBA
 
 <Note>
 
@@ -19,7 +19,7 @@ L’authentification par canal d’appui initiée par le client (CIBA) ne repose
 
 Le schéma de séquences suivant illustre une mise en œuvre du flux CIBA :
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/2Q0CVn6C9pjoxx9pG10Kqi/9333a725fafbb4b5a5d27b0e73451ab3/Screenshot_2025-01-16_at_10.11.19_AM.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/2Q0CVn6C9pjoxx9pG10Kqi/9333a725fafbb4b5a5d27b0e73451ab3/Screenshot_2025-01-16_at_10.11.19_AM.png)</Frame>
 
 Deux éléments sont définis : un utilisateur autorisant et un utilisateur initiant. L’utilisateur autorisant et l’utilisateur initiant peuvent être deux personnes différentes, par exemple un utilisateur qui appelle un centre d’appel et un agent d’un centre d’appel. Dans d’autres cas d’utilisation, il peut s’agir de la même personne, par exemple un utilisateur qui s’authentifie auprès d’un kiosque de vente au détail ou d’un autre appareil connecté.
 
@@ -39,21 +39,21 @@ Les sections suivantes expliquent étape par étape comment fonctionne l’authe
 
 Pour initier une requête CIBA poussée, l’utilisateur autorisant doit être inscrit à la <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">MFA</Tooltip> en utilisant les notifications poussées. Pour vérifier dans <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Auth0 Dashboard</Tooltip>, naviguez vers **User Management (Gestion des utilisateurs) > Users (Utilisateurs)** et cliquez sur l’utilisateur :
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/21qtk4F1cOQHMpbXxXYu75/51ba9c5fd1457ffee3f73893acf3c97f/Screenshot_2025-01-13_at_4.13.44_PM.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/21qtk4F1cOQHMpbXxXYu75/51ba9c5fd1457ffee3f73893acf3c97f/Screenshot_2025-01-13_at_4.13.44_PM.png)</Frame>
 
 Si vous avez défini l’authentification multifacteur (MFA) comme obligatoire pour votre locataire, les utilisateurs sont invités à s’inscrire à la MFA lors de leur prochaine connexion. Vous pouvez également utiliser des [Actions](https://auth0.com/blog/using-actions-to-customize-your-mfa-factors/) pour demander l’inscription à la MFA.
 
-Les notifications poussées pour la MFA sont généralement mises en œuvre dans une application mobile personnalisée qui intègre la trousse SDK Guardian. Pour en savoir plus, lisez [Configurer une authentification par canal d’appui initiée par le client](/docs/get-started/applications/configure-client-initiated-backchannel-authentication).
+Les notifications poussées pour la MFA sont généralement mises en œuvre dans une application mobile personnalisée qui intègre la trousse SDK Guardian. Pour en savoir plus, lisez [Configurer une authentification par canal d’appui initiée par le client](/docs/fr-ca/get-started/applications/configure-client-initiated-backchannel-authentication).
 
 ## Étape 1 - L’application client initie une demande CIBA
 
 Utilisez les [User Search API (API de recherche d’utilisateurs)](https://auth0.com/docs/manage-users/user-search) pour trouver l’utilisateur autorisé pour lequel vous souhaitez lancer une demande CIBA et obtenir son identifiant utilisateur.
 
-Une fois que vous avez l’identifiant de l’utilisateur autorisant, utilisez l’Authentication API ou nos [trousses SDK](/docs/libraries) pour envoyer une demande CIBA au point de terminaison `/bc-authorize` :
+Une fois que vous avez l’identifiant de l’utilisateur autorisant, utilisez l’Authentication API ou nos [trousses SDK](/docs/fr-ca/libraries) pour envoyer une demande CIBA au point de terminaison `/bc-authorize` :
 
 <Tabs><Tab title="cURL">
 
-```bash
+```bash lines
 curl --location 'https://$tenant.auth0.com/bc-authorize' \
   --header 'Content-Type: application/x-www-form-urlencoded' \
   --data-urlencode 'client_id=$client_id' \
@@ -65,7 +65,7 @@ curl --location 'https://$tenant.auth0.com/bc-authorize' \
 
 </Tab><Tab title="C#">
 
-```javascript
+```csharp lines
 var response = await authenticationApiClient.ClientInitiatedBackchannelAuthorization(
             new ClientInitiatedBackchannelAuthorizationRequest()
             {
@@ -85,7 +85,7 @@ var response = await authenticationApiClient.ClientInitiatedBackchannelAuthoriza
 
 </Tab><Tab title="Go">
 
-```
+```go lines
 resp, err := authAPI.CIBA.Initiate(context.Background(), ciba.Request{
 		ClientID:     mgmtClientID,
 		ClientSecret: mgmtClientSecret,
@@ -101,7 +101,7 @@ resp, err := authAPI.CIBA.Initiate(context.Background(), ciba.Request{
 
 </Tab><Tab title="Java">
 
-```javascript
+```java lines
 //Creating AuthClient Instance
 AuthAPI auth = AuthAPI.newBuilder(domain, clientId, clientSecret).build();
 
@@ -139,11 +139,11 @@ BackChannelAuthorizeResponse resp = request.execute().getBody();
 </tr>
 <tr>
 <td>SCOPE</td>
-<td>Doit inclure un <code>openid</code>.<br/><br/>La permission peut inclure <code>offline_access</code> en option pour demander un jeton d’actualisation. Cependant, pour l’autorisation à usage unique d’une transaction avec le flux CIBA, un jeton d’actualisation n’est pas nécessaire et n’a aucune signification dans ce contexte.<br/></td>
+<td>Doit inclure un `openid`.<br/><br/>La permission peut inclure `offline_access` en option pour demander un jeton d’actualisation. Cependant, pour l’autorisation à usage unique d’une transaction avec le flux CIBA, un jeton d’actualisation n’est pas nécessaire et n’a aucune signification dans ce contexte.<br/></td>
 </tr>
 <tr>
 <td>USER ID</td>
-<td>Identifiant utilisateur pour l’utilisateur faisant autorité qui est passé dans la structure <code>login_hint</code>.<br/><br/>L’identifiant utilisateur d’une connexion fédérée peut avoir un format différent.<br/></td>
+<td>Identifiant utilisateur pour l’utilisateur faisant autorité qui est passé dans la structure `login_hint`.<br/><br/>L’identifiant utilisateur d’une connexion fédérée peut avoir un format différent.<br/></td>
 </tr>
 <tr>
 <td>EXPIRY</td>
@@ -151,7 +151,7 @@ BackChannelAuthorizeResponse resp = request.execute().getBody();
 </tr>
 <tr>
 <td>BINDING MESSAGE</td>
-<td>Message utilisé pour lier le flux CIBA entre les dispositifs d’authentification et de consommation. Le message de liaison est requis et peut contenir jusqu’à 64 caractères. Utilisez uniquement les caractères alphanumériques et <code>+-_.,:#</code></td>
+<td>Message utilisé pour lier le flux CIBA entre les dispositifs d’authentification et de consommation. Le message de liaison est requis et peut contenir jusqu’à 64 caractères. Utilisez uniquement les caractères alphanumériques et `+-_.,:#`</td>
 </tr>
 <tr>
 <td>AUDIENCE</td>
@@ -170,7 +170,7 @@ Il existe une limite anti-attaques spécifique à l’utilisateur, selon laquell
 
 Si le locataire Auth0 reçoit avec succès la requête POST, vous devriez recevoir une réponse contenant un `auth-req-id` qui référence la requête :
 
-```json
+```json lines
 {
     "auth_req_id": "eyJh...",
     "expires_in": 300,
@@ -182,11 +182,11 @@ La valeur `auth_req_id` est transmise au point de terminaison `/token` pour vér
 
 ## Étape 3 - L’application client demande une réponse
 
-Utilisez l’Authentication API ou nos [trousses SDK](/docs/libraries) pour appeler le point de terminaison `/token` en utilisant le type d’autorisation `urn:openid:params:grant-type:ciba` et le `auth_req_id` que vous avez reçu du point de terminaison `/bc-authorize` :
+Utilisez l’Authentication API ou nos [trousses SDK](/docs/fr-ca/libraries) pour appeler le point de terminaison `/token` en utilisant le type d’autorisation `urn:openid:params:grant-type:ciba` et le `auth_req_id` que vous avez reçu du point de terminaison `/bc-authorize` :
 
 <Tabs><Tab title="cURL">
 
-```bash
+```bash lines
 curl --location 'https://$tenant.auth0.com/oauth/token' \
   --header 'Content-Type: application/x-www-form-urlencoded' \
   --data-urlencode 'client_id=$client_id' \
@@ -197,7 +197,7 @@ curl --location 'https://$tenant.auth0.com/oauth/token' \
 
 </Tab><Tab title="C#">
 
-```javascript
+```csharp lines
 var token = await authenticationApiClient.GetTokenAsync(
             new ClientInitiatedBackchannelAuthorizationTokenRequest()
             {
@@ -210,7 +210,7 @@ var token = await authenticationApiClient.GetTokenAsync(
 
 </Tab><Tab title="Go">
 
-```
+```go lines
 token, err := authAPI.OAuth.LoginWithGrant(context.Background(),
 			"urn:openid:params:grant-type:ciba",
 			url.Values{
@@ -223,7 +223,7 @@ token, err := authAPI.OAuth.LoginWithGrant(context.Background(),
 
 </Tab><Tab title="Java">
 
-```
+```java lines
 Request<BackChannelTokenResponse> tokenRequest = auth.getBackChannelLoginStatus(authReqId, "grant-type");
 
 BackChannelTokenResponse tokenResponse = tokenRequest.execute().getBody();
@@ -233,7 +233,7 @@ BackChannelTokenResponse tokenResponse = tokenRequest.execute().getBody();
 
 Jusqu’à ce que l’utilisateur autorisant la transaction l’approuve, vous devriez recevoir la réponse suivante :
 
-```json
+```json lines
 {
     "error": "authorization_pending",
     "error_description": "The end-user authorization is pending"
@@ -242,7 +242,7 @@ Jusqu’à ce que l’utilisateur autorisant la transaction l’approuve, vous d
 
 L’intervalle d’attente pour la demande est d’environ cinq secondes. Si vous interrogez trop fréquemment, vous recevrez la réponse suivante, dont la description varie en fonction de l’intervalle d’attente :
 
-```json
+```json lines
 {
 "error": "slow_down",
 "error_description": "You are polling faster than allowed. Try again in 10 seconds."
@@ -253,13 +253,13 @@ Pour résoudre l’erreur, attendez le prochain intervalle (en secondes) pour in
 
 ## Étape 4 - L’application mobile reçoit la notification poussée
 
-Auth0 envoie une notification poussée à l’application mobile ou à l’appareil enregistré de l’utilisateur. La [trousse SDK Guardian](/docs/secure/multi-factor-authentication/auth0-guardian) fournit des méthodes pour analyser les données reçues de la notification poussée et retourner une instance `Notification` prête à l’emploi. L’instance `Notification` comprend un identifiant de liaison de transaction, ou `txlinkid`, que l’application mobile utilise pour récupérer les détails du consentement auprès d’Auth0.
+Auth0 envoie une notification poussée à l’application mobile ou à l’appareil enregistré de l’utilisateur. La [trousse SDK Guardian](/docs/fr-ca/secure/multi-factor-authentication/auth0-guardian) fournit des méthodes pour analyser les données reçues de la notification poussée et retourner une instance `Notification` prête à l’emploi. L’instance `Notification` comprend un identifiant de liaison de transaction, ou `txlinkid`, que l’application mobile utilise pour récupérer les détails du consentement auprès d’Auth0.
 
 Les exemples de code suivants sont des exemples d’implémentations de notifications poussées mobiles iOS et Android utilisant la trousse SDK Guardian :
 
 <Tabs><Tab title="iOS">
 
-```javascript
+```swift lines
 //implementing UNUserNotificationCenterDelegate
 func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
     let userInfo = notification.request.content.userInfo
@@ -272,7 +272,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent noti
 
 </Tab><Tab title="Android">
 
-```javascript
+```java lines
 // at the FCM listener you receive a RemoteMessage
 @Override
 public void onMessageReceived(RemoteMessage message) {
@@ -296,7 +296,7 @@ Les exemples de code suivants sont des exemples d’implémentations iOS et Andr
 
 <Tabs><Tab title="iOS">
 
-```
+```swift lines
 let device: AuthenticationDevice = // the object you obtained during the initial Guardian SDK enrollment process and stored locally
 if let consentId = notification.transactionLinkingId {
     Guardian
@@ -315,7 +315,7 @@ if let consentId = notification.transactionLinkingId {
 
 </Tab><Tab title="Android">
 
-```
+```java lines
 Enrollment enrollment = // the object you obtained during the initial Guardian SDK enrollment process and stored locally
 if (notification.getTransactionLinkingId() != null) {
     guardian
@@ -341,7 +341,7 @@ L’Auth0 Consent API envoie à l’application mobile une réponse contenant le
 
 L’exemple de code suivant est un exemple de réponse de l’Auth0 Consent API :
 
-```json
+```json lines
 {
   "id": "cns_abc123",
   "requested_details": {
@@ -366,7 +366,7 @@ Les exemples de code suivants sont des implémentations iOS et Android qui trait
 
 <Tabs><Tab title="iOS">
 
-```
+```swift lines
 Guardian
     .authentication(forDomain: "{yourTenantDomain}", device: device)
     .allow(notification: notification)
@@ -383,7 +383,7 @@ Guardian
 
 </Tab><Tab title="Android">
 
-```
+```java lines
 guardian
     .allow(notification, enrollment)
     .execute(); // or start(new Callback<> ...)
@@ -395,7 +395,7 @@ guardian
 
 <Tabs><Tab title="iOS">
 
-```
+```swift lines
 Guardian
         .authentication(forDomain: "{yourTenantDomain}", device: device)
         .reject(notification: notification)
@@ -412,7 +412,7 @@ Guardian
 
 </Tab><Tab title="Android">
 
-```
+```java lines
 guardian
     .reject(notification, enrollment) // or reject(notification, enrollment, reason)
     .execute(); // or start(new Callback<> ...)
@@ -426,7 +426,7 @@ L’application client termine l’interrogation après avoir reçu une réponse
 
 Si l’utilisateur rejette la requête poussée, vous devriez recevoir la réponse suivante :
 
-```json
+```json lines
 {
     "error": "access_denied",
     "error_description": "The end-user denied the authorization request or it has been expired"
@@ -435,7 +435,7 @@ Si l’utilisateur rejette la requête poussée, vous devriez recevoir la répon
 
 Si l’utilisateur approuve la requête poussée, vous devriez recevoir la réponse suivante :
 
-```json
+```json lines
 {
     "access_token": "eyJh...",
     "id_token": "eyJh...",

@@ -1,13 +1,13 @@
 ---
 title: "Initiateurs de déconnexion par canal d’appui OIDC"
 permalink: "oidc-back-channel-logout-initiators"
+'description': "Découvrez le fonctionnement des initiateurs de déconnexion par canal d’appui OIDC et la manière de les configurer pour votre ou vos applications"
 'og:title': "Initiateurs de déconnexion par canal d’appui OIDC"
 'og:description': "Découvrez le fonctionnement des initiateurs de déconnexion par canal d’appui OIDC et la manière de les configurer pour votre ou vos applications"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Initiateurs de déconnexion par canal d’appui OIDC"
 'twitter:description': "Découvrez le fonctionnement des initiateurs de déconnexion par canal d’appui OIDC et la manière de les configurer pour votre ou vos applications"
 ---
-# Initiateurs de déconnexion par canal d’appui OIDC
 
 Les initiateurs de déconnexion par canal d’appui OIDC vous permettent de déconnecter à distance les utilisateurs de leurs applications en fonction des événements de fin de session. Les initiateurs de déconnexion par canal d’appui OIDC fonctionnent à travers les protocoles, par exemple, une requête de déconnexion <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip> initiée par le fournisseur d’identité (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">IdP</Tooltip>), et ne sont pas touchés par les restrictions des témoins tiers.
 
@@ -27,7 +27,7 @@ Les initiateurs ne contrôlent pas la gestion de session de votre locataire, not
 
 Le diagramme suivant illustre le fonctionnement d’un initiateur de déconnexion par canal d’appui OIDC pour un événement de changement de mot de passe :
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/2GwtCTwecxYONxL1DbewxO/e3ceaf196490d36bb62a9a44f574a856/OIDC_Back-Channel_Logout_Initiators_Diagram.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/2GwtCTwecxYONxL1DbewxO/e3ceaf196490d36bb62a9a44f574a856/OIDC_Back-Channel_Logout_Initiators_Diagram.png)</Frame>
 
 ## Configuration des initiateurs de déconnexion par canal d’appui OIDC
 
@@ -42,7 +42,7 @@ Vous pouvez configurer les initiateurs de déconnexion par canal d’appui OIDC
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```
+   ``` lines
    PATCH /api/v2/clients/{yourClientId}
    {
      ...
@@ -76,18 +76,18 @@ L’objet `backchannel_logout_initiators` prend en charge les propriétés suiva
 </thead>
 <tbody>
 <tr>
-<td><code>mode</code></td>
+<td>`mode`</td>
 <td>chaîne</td>
 <td>Requis</td>
 <td>Méthode de configuration pour l’activation des initiateurs.</td>
-<td><code>custom</code>, <code>all</code></td>
+<td>`custom`, `all`</td>
 </tr>
 <tr>
-<td><code>selected_initiators</code></td>
+<td>`selected_initiators`</td>
 <td>array</td>
-<td>Requis si <code>mode</code> est <code>custom</code></td>
+<td>Requis si `mode` est `custom`</td>
 <td>Liste des initiateurs à activer.</td>
-<td><code>rp-logout</code>, <code>idp-logout</code>, <code>password-changed</code>, <code>session-expired</code>, <code>session-revoked</code>, <code>account-deleted</code>, <code>email-identifier-changed</code></td>
+<td>`rp-logout`, `idp-logout`, `password-changed`, `session-expired`, `session-revoked`, `account-deleted`, `email-identifier-changed`</td>
 </tr>
 </tbody>
 </table>
@@ -108,11 +108,11 @@ La propriété `mode` prend en charge les valeurs suivantes :
 </thead>
 <tbody>
 <tr>
-<td><code>custom</code></td>
-<td>N’active que les initiateurs répertoriés dans le tableau <code>selected_initiators</code>.</td>
+<td>`custom`</td>
+<td>N’active que les initiateurs répertoriés dans le tableau `selected_initiators`.</td>
 </tr>
 <tr>
-<td><code>all</code></td>
+<td>`all`</td>
 <td>Active automatiquement tous les initiateurs présents et futurs.</td>
 </tr>
 </tbody>
@@ -132,31 +132,31 @@ La propriété `selected_initiators` prend en charge les valeurs suivantes :
 </thead>
 <tbody>
 <tr>
-<td><code>rp-logout</code></td>
+<td>`rp-logout`</td>
 <td>La demande a été initiée par une partie se fiant à la signature (RP, relying party).</td>
 </tr>
 <tr>
-<td><code>idp-logout</code></td>
+<td>`idp-logout`</td>
 <td>La demande a été initiée par un fournisseur d’identité externe (IdP).</td>
 </tr>
 <tr>
-<td><code>password-changed</code></td>
+<td>`password-changed`</td>
 <td>La demande a été initiée par un changement de mot de passe.</td>
 </tr>
 <tr>
-<td><code>session-expired</code></td>
+<td>`session-expired`</td>
 <td>La demande a été initiée par l’expiration de la session.</td>
 </tr>
 <tr>
-<td><code>session-revoked</code></td>
+<td>`session-revoked`</td>
 <td>La demande a été initiée par la suppression d’une session.</td>
 </tr>
 <tr>
-<td><code>account-deleted</code></td>
+<td>`account-deleted`</td>
 <td>La demande a été initiée par la suppression d’un compte.</td>
 </tr>
 <tr>
-<td><code>email-identifier-changed</code></td>
+<td>`email-identifier-changed`</td>
 <td>La demande a été initiée par un changement d’identifiant de courriel.</td>
 </tr>
 </tbody>
@@ -168,7 +168,7 @@ La propriété `selected_initiators` prend en charge les valeurs suivantes :
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```json lines
 PATCH /api/v2/clients/{yourClientId}
 
 {
@@ -187,7 +187,7 @@ PATCH /api/v2/clients/{yourClientId}
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```json lines
 PATCH /api/v2/clients/{yourClientId}
 
 {
@@ -207,7 +207,7 @@ PATCH /api/v2/clients/{yourClientId}
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```json lines
 PATCH /api/v2/clients/{yourClientId}
 
 {
@@ -223,7 +223,7 @@ PATCH /api/v2/clients/{yourClientId}
 
 La fonction de déconnexion par canal d’appui d’<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">OpenID</Tooltip> Connect peut être configurée en même temps que le reste des paramètres de votre application. Cette fonctionnalité s’active automatiquement dès qu’un URI de déconnexion par canal d’appui est fourni.
 
-<Frame>![Dashboard > Applications > Application Settings](//images.ctfassets.net/cdy7uua7fh8z/vgN0wudP38zgRZNL59Mhy/8de2d7fd6fabe28b1f33f1f4337a057a/Backchannel_Logout_Settings.png)</Frame>
+<Frame>![Dashboard > Applications > Application Settings](/images/fr-ca/cdy7uua7fh8z/vgN0wudP38zgRZNL59Mhy/8de2d7fd6fabe28b1f33f1f4337a057a/Backchannel_Logout_Settings.png)</Frame>
 
 #### Initiateurs sélectionnés uniquement
 

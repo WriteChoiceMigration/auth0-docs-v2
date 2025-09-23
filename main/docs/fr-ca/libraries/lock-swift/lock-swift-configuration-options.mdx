@@ -1,13 +1,13 @@
 ---
 title: "Lock.swift : Options de configuration"
 permalink: "lock-swift-configuration-options"
+'description': "Options de configuration du comportement disponibles avec Lock.Swift"
 'og:title': "Lock.swift : Options de configuration"
 'og:description': "Options de configuration du comportement disponibles avec Lock.Swift"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Lock.swift : Options de configuration"
 'twitter:description': "Options de configuration du comportement disponibles avec Lock.Swift"
 ---
-# Lock.swift : Options de configuration
 
 Il existe de nombreuses options pour configurer le comportement de Lock, énumérées ci-dessous. En outre, il existe également de nombreuses options disponibles pour modifier l’apparence et le style de Lock dans la page [Options de personnalisation du style](/docs/fr-ca/lock-swift-customization).
 
@@ -15,7 +15,7 @@ Il existe de nombreuses options pour configurer le comportement de Lock, énumé
 
 Des options de configuration peuvent être ajoutées à votre initialisation de Lock à l’aide de `withOptions`.
 
-```
+```swift lines
 Lock
   .classic()
   .withOptions {
@@ -32,7 +32,7 @@ Lock
 
 Permet à Lock d’être rejeté par l’utilisateur. Par défaut, cette valeur est définie comme `false`.
 
-```
+```swift lines
 .withOptions {
   $0.closable = true
 }
@@ -42,7 +42,7 @@ Permet à Lock d’être rejeté par l’utilisateur. Par défaut, cette valeur 
 
 Permission utilisée pour l’authentification. La valeur par défaut est `openid`. Elle retournera non seulement le **Jeton d’accès**, mais aussi un **Jeton d’ID** qui est un jeton Web JSON (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JWT</Tooltip>) contenant des informations sur l’utilisateur. Veuillez consulter la documentation sur les [Permissions](/docs/fr-ca/get-started/apis/scopes) pour plus d’informations sur les permissions d’authentification.
 
-```
+```swift lines
 .withOptions {
   $0.scope = "openid name email picture"
 }
@@ -50,13 +50,13 @@ Permission utilisée pour l’authentification. La valeur par défaut est `openi
 
 #### Jetons d’actualisation
 
-Spécifier la permission `offline_access` dans vos options Lock permettra à un [Jeton d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens) d’être retourné avec l’access_token et l’id_token. Les jetons d’actualisation peuvent être enregistrés et utilisés pour acquérir un nouveau jeton d’accès lorsque l’ancien jeton expire. Pour plus d’informations sur l’utilisation des jetons d’actualisation pour l’authentification Auth0, veuillez consulter la documentation de référence pour la trousse [SDK pour Auth0.Swift](/docs/fr-ca/libraries/auth0-swift), que vous utiliseriez pour implémenter des jetons d’actualisation, ou le [Swift Quickstart Guide (Guide de démarrage rapide de Swift)](/docs/quickstart/native/ios-swift/03-user-sessions), qui fournit un exemple complet d’utilisation d’Auth0 dans le développement Swift, y compris la gestion des jetons d’actualisation.
+Spécifier la permission `offline_access` dans vos options Lock permettra à un [Jeton d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens) d’être retourné avec l’access_token et l’id_token. Les jetons d’actualisation peuvent être enregistrés et utilisés pour acquérir un nouveau jeton d’accès lorsque l’ancien jeton expire. Pour plus d’informations sur l’utilisation des jetons d’actualisation pour l’authentification Auth0, veuillez consulter la documentation de référence pour la trousse [SDK pour Auth0.Swift](/docs/fr-ca/libraries/auth0-swift), que vous utiliseriez pour implémenter des jetons d’actualisation, ou le [Swift Quickstart Guide (Guide de démarrage rapide de Swift)](/docs/fr-ca/quickstart/native/ios-swift/03-user-sessions), qui fournit un exemple complet d’utilisation d’Auth0 dans le développement Swift, y compris la gestion des jetons d’actualisation.
 
 ### termsOfService
 
 Par défaut, Lock utilisera les [Conditions d’utilisation](https://auth0.com/terms) et la [Politique de confidentialité](https://auth0.com/privacy) d’Auth0, mais d’autres URL peuvent être renseignées pour créer un lien vers d’autres conditions et politiques.
 
-```
+```swift lines
 .withOptions {
   $0.termsOfService = "https://mycompany.com/terms"
   $0.privacyPolicy = "https://mycompany.com/privacy"
@@ -67,7 +67,7 @@ Par défaut, Lock utilisera les [Conditions d’utilisation](https://auth0.com/t
 
 Les connexions à la base de données affichent la boîte de dialogue Conditions d’utilisation. La valeur par défaut est `true`. Veuillez noter que les Conditions d’utilisation seront toujours affichées si le drapeau `mustAcceptTerms` est activé.
 
-```
+```swift lines
 .withOptions {
     $0.showTerms = true
 }
@@ -77,7 +77,7 @@ Les connexions à la base de données affichent la boîte de dialogue Conditions
 
 La connexion à la base de données nécessite l’acceptation explicite des Conditions d’utilisation.
 
-```
+```swift lines
 .withOptions {
     $0.mustAcceptTerms = true
 }
@@ -89,7 +89,7 @@ La connexion à la base de données nécessite l’acceptation explicite des Con
 
 Décalage d’horloge utilisé pour la validation du jeton d’ID. Il élargit la fenêtre temporelle dans laquelle le jeton d’ID sera toujours considéré comme valide, pour tenir compte de la différence entre l’heure du serveur et l’heure du client. Par défaut elle est de **60 000 millisecondes** (60 secondes).
 
-```
+```swift lines
 .withOptions {
   $0.leeway = 30000 // 30 seconds
 }
@@ -99,7 +99,7 @@ Décalage d’horloge utilisé pour la validation du jeton d’ID. Il élargit l
 
 Temps écoulé autorisé (en millisecondes) depuis la dernière authentification de l’utilisateur. Utilisé pour la validation du jeton d’ID. Si défini, le jeton d’ID contiendra une demande `auth_time` avec l’horodatage d’authentification. Par défaut `nil`.
 
-```
+```swift lines
 .withOptions {
   $0.maxAge = 86400000 // 1 day
 }
@@ -111,7 +111,7 @@ Temps écoulé autorisé (en millisecondes) depuis la dernière authentification
 
 Quels écrans de base de données seront accessibles; la valeur par défaut est d’activer tous les écrans tels que `.Login, .Signup, .ResetPassword`.
 
-```
+```swift lines
 .withOptions {
   $0.allow = [.Login, .ResetPassword]
 }
@@ -121,7 +121,7 @@ Quels écrans de base de données seront accessibles; la valeur par défaut est 
 
 Le premier écran à présenter à l’utilisateur. La valeur par défaut est `.Login`, d’autres options incluent `.Signup` et `.ResetPassword`.
 
-```
+```swift lines
 .withOptions {
   $0.initialScreen = .Login
 }
@@ -131,7 +131,7 @@ Le premier écran à présenter à l’utilisateur. La valeur par défaut est `.
 
 Spécifie le type d’identifiant dont la connexion aura besoin. La valeur par défaut est : `[.Username, .Email]`, mais peut également accepter `[.Username]` ou `[.Email]`. Cependant, il est important de noter que cette option n’est active que si vous avez défini le drapeau `requires_username` sur `true` dans votre [Auth0 Dashboard](https://manage.auth0.com/#/).
 
-```
+```swift lines
 .withOptions {
   $0.usernameStyle = [.Username]
 }
@@ -141,7 +141,7 @@ Spécifie le type d’identifiant dont la connexion aura besoin. La valeur par d
 
 Lors de l’inscription, les informations requises par défaut sont l’adresse courriel et le mot de passe de l’utilisateur. Vous pouvez élargir vos exigences en matière de capture de données selon vos besoins. La capture de champs supplémentaires lors de l’inscription stockera ces valeurs dans la bibliothèque `user_metadata`, dont vous trouverez plus d’informations dans les [métadonnées](/docs/fr-ca/manage-users/user-accounts/metadata). Veuillez noter que vous devez spécifier l’icône à utiliser avec votre champ de texte personnalisé.
 
-```
+```swift lines
 .withOptions {
   $0.customSignupFields = [
     CustomTextField(name: "first_name", placeholder: "First Name", icon: LazyImage(name: "ic_person", bundle: Lock.bundle)),
@@ -161,7 +161,7 @@ Il existe également des options de configuration spécifiques aux connexions En
 
 Par défaut, les connexions Entreprise utiliseront l’authentification Web. Cependant, vous pouvez spécifier quelles connexions utiliseront alternativement l’authentification par informations d’identification et demanderont un nom d’utilisateur et un mot de passe.
 
-```
+```swift lines
 .withOptions {
   $0.enterpriseConnectionUsingActiveAuth = ["enterprisedomain.com"]
 }
@@ -171,7 +171,7 @@ Par défaut, les connexions Entreprise utiliseront l’authentification Web. Cep
 
 En mode d’authentification par identifiants, l’utilisateur doit-il utiliser son adresse courriel comme identifiant? La valeur par défaut est `false`, et nécessite plutôt un nom d’utilisateur.
 
-```
+```swift lines
 .withOptions {
   $0.activeDirectoryEmailAsUsername = true
 }
@@ -185,7 +185,7 @@ Lock propose des options qui permettent d’activer et de désactiver facilement
 
 Par défaut, la valeur est `.off`, les niveaux de journalisation Syslog sont pris en charge.
 
-```
+```swift lines
 .withOptions {
   $0.logLevel = .all
 }
@@ -195,7 +195,7 @@ Par défaut, la valeur est `.off`, les niveaux de journalisation Syslog sont pr
 
 S’il faut ou non enregistrer les requêtes API Auth0.swift. Par défaut, cette valeur est `false`.
 
-```
+```swift lines
 .withOptions {
   $0.logHttpRequest = true
 }
@@ -205,7 +205,7 @@ S’il faut ou non enregistrer les requêtes API Auth0.swift. Par défaut, cette
 
 Spécifiez le gestionnaire de logger output, par défaut, il utilise la déclaration `print`.
 
-```
+```swift lines
 .withOptions {
   $0.loggerOutput = CleanroomLockLogger()
 }
@@ -213,7 +213,7 @@ Spécifiez le gestionnaire de logger output, par défaut, il utilise la déclara
 
 Dans le code ci-dessus, le loggerOutput a été défini pour utiliser [CleanroomLogger](https://github.com/emaloney/CleanroomLogger). Cela peut être réalisé en mettant en œuvre le protocole loggerOutput. Vous pouvez bien sûr utiliser votre bibliothèque de journalisation préférée. Vous trouverez ci-dessous un exemple d’utilisation de la gestion de journaux avec CleanroomLogger.
 
-```
+```swift lines
 class CleanroomLockLogger: LoggerOutput {
   func message(_ message: String, level: LoggerLevel, filename: String, line: Int) {
     let channel: LogChannel?

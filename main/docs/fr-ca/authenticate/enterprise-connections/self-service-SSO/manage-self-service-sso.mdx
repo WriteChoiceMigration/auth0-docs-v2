@@ -1,13 +1,13 @@
 ---
 title: "Authentification unique en libre-service (1)"
 permalink: "manage-self-service-sso"
+'description': "Apprenez à utiliser l’authentification unique en libre-service pour déléguer la configuration de la SSO à vos clients interentreprises (B2B). "
 'og:title': "Authentification unique en libre-service (1)"
 'og:description': "Apprenez à utiliser l’authentification unique en libre-service pour déléguer la configuration de la SSO à vos clients interentreprises (B2B). "
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Authentification unique en libre-service (1)"
 'twitter:description': "Apprenez à utiliser l’authentification unique en libre-service pour déléguer la configuration de la SSO à vos clients interentreprises (B2B). "
 ---
-# Authentification unique en libre-service (1)
 
 L’authentification unique (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SSO</Tooltip>) en libre-service fournit aux clients interentreprises les outils nécessaires pour déléguer la configuration de la SSO à leurs clients Entreprise. En déléguant cette tâche, vous pouvez simplifier votre processus d’intégration et donner aux clients plus d’autonomie sur leur expérience de connexion. Vous pouvez également réduire le temps et les coûts associés à la gestion de la SSO pour l’ensemble de votre clientèle.
 
@@ -42,7 +42,7 @@ LA SSO en libre-service utilise les composants suivants pour déléguer la conf
 4. Votre administrateur client lance l’assistant de configuration de la SSO et suit les étapes indiquées pour créer une application avec son fournisseur d’identité.
 5. Une nouvelle connexion Entreprise pointant vers l’application du client est ajoutée à votre locataire Auth0.
 
-<Frame>![Diagramme de flux de production pour la fonction SSO en libre-service.](//images.ctfassets.net/cdy7uua7fh8z/3uW0vtLnF2O362NCxJSbqc/060c72298199283c4078fb000cdd58fe/SS-SSO_Diagram_-_Border__1_.png)</Frame>
+<Frame>![Diagramme de flux de production pour la fonction SSO en libre-service.](/images/fr-ca/cdy7uua7fh8z/3uW0vtLnF2O362NCxJSbqc/060c72298199283c4078fb000cdd58fe/SS-SSO_Diagram_-_Border__1_.png)</Frame>
 
 Cliquez sur le diagramme pour l’agrandir.
 
@@ -81,7 +81,7 @@ Pour créer un profil en libre-service, appelez d’abord le point de terminaiso
 
 #### Créer un profil libre-service :
 
-1. Effectuez un appel POST au point de terminaison [Self-Service Profiles (Profils en libre-service)](/docs/api/management/v2/self-service-profiles/post-self-service-profiles).
+1. Effectuez un appel POST au point de terminaison [Self-Service Profiles (Profils en libre-service)](/docs/fr-ca/api/management/v2/self-service-profiles/post-self-service-profiles).
 2. Spécifier les paramètres suivants dans le corps de la requête, au besoin :
 
 <table class="table"><thead>
@@ -92,55 +92,55 @@ Pour créer un profil en libre-service, appelez d’abord le point de terminaiso
 </thead>
 <tbody>
 <tr>
-<td><code>name</code></td>
+<td>`name`</td>
 <td>Chaîne. La longueur maximale est de 100.<br/><br/>Un nom convivial pour le profil en libre-service.<br/><br/>Ce paramètre est obligatoire.</td>
 </tr>
 <tr>
-<td><code>description</code></td>
+<td>`description`</td>
 <td>Chaîne. La longueur maximale est de 140.<br/><br/>Une description du profil de service.<br/><br/>Ce paramètre est facultatif.</td>
 </tr>
 <tr>
-<td><code>allowed_strategies</code></td>
-<td>Matrice. <br/><br/>Un ou plusieurs fournisseurs d’identité que les administrateurs clients peuvent utiliser pour mettre en œuvre l’authentification unique. Si aucun paramètre n’est sélectionné, tous sont passés par défaut. Les options incluent : <br/><br/><ul><li><code>okta</code> pour Okta Workforce Identity Cloud</li><li><code>waad</code>pour Entra ID</li><li><code>google-apps</code> pour Google Workspace</li><li><code>keycloak-samlp</code> pour Keycloak</li><li><code>adfs</code> pour Microsoft Active Directory Federation Services</li><li><code>pingfederate</code> pour PingFederate</li><li><code>oidc</code> pour OIDC générique</li><li><code>samlp</code> pour SAML générique</li></ul></td>
+<td>`allowed_strategies`</td>
+<td>Matrice. <br/><br/>Un ou plusieurs fournisseurs d’identité que les administrateurs clients peuvent utiliser pour mettre en œuvre l’authentification unique. Si aucun paramètre n’est sélectionné, tous sont passés par défaut. Les options incluent : <br/><br/><ul><li>`okta` pour Okta Workforce Identity Cloud</li><li>`waad`pour Entra ID</li><li>`google-apps` pour Google Workspace</li><li>`keycloak-samlp` pour Keycloak</li><li>`adfs` pour Microsoft Active Directory Federation Services</li><li>`pingfederate` pour PingFederate</li><li>`oidc` pour OIDC générique</li><li>`samlp` pour SAML générique</li></ul></td>
 </tr>
 <tr>
-<td><code>user_attributes</code></td>
+<td>`user_attributes`</td>
 <td>Objet. La longueur maximale est de 20.<br/><br/>Stocke les informations de mappage présentées aux administrateurs du client pendant le flux de l’assistant de configuration. Les administrateurs du client sont invités à mapper ces attributs à leur fournisseur d’identité pour s’assurer que les attributs spécifiés sont transmis à Auth0.<br/><br/>Ce paramètre est facultatif.</td>
 </tr>
 <tr>
-<td><code>user_attributes[].name</code></td>
-<td>Chaîne. La longueur maximale est de 255.<br/><br/>Nom de l’attribut utilisateur dans Auth0.<br/><br/>Ce paramètre est obligatoire lors de la définition de <code>user_attributes</code>.</td>
+<td>`user_attributes[].name`</td>
+<td>Chaîne. La longueur maximale est de 255.<br/><br/>Nom de l’attribut utilisateur dans Auth0.<br/><br/>Ce paramètre est obligatoire lors de la définition de `user_attributes`.</td>
 </tr>
 <tr>
-<td><code>user_attributes[].description</code></td>
-<td>Chaîne. La longueur maximale est de 255.<br/><br/>Description lisible de l’attribut utilisateur. <br/><br/>Ce paramètre est obligatoire lors de la définition de <code>user_attributes</code>.</td>
+<td>`user_attributes[].description`</td>
+<td>Chaîne. La longueur maximale est de 255.<br/><br/>Description lisible de l’attribut utilisateur. <br/><br/>Ce paramètre est obligatoire lors de la définition de `user_attributes`.</td>
 </tr>
 <tr>
-<td><code>user_attributes[].is_optional</code></td>
-<td>Booléen.<br/><br/>Indique si un attribut est facultatif ou requis par le client pour que l’application fonctionne.<br/><br/><ul><li>Pour définir un attribut comme étant obligatoire, utiliser <code>true</code>.</li><li>Pour définir un attribut comme étant facultatif, utiliser <code>false</code>.</li></ul><br/>Ce paramètre est obligatoire lors de la définition de <code>user_attributes</code>.</td>
+<td>`user_attributes[].is_optional`</td>
+<td>Booléen.<br/><br/>Indique si un attribut est facultatif ou requis par le client pour que l’application fonctionne.<br/><br/><ul><li>Pour définir un attribut comme étant obligatoire, utiliser `true`.</li><li>Pour définir un attribut comme étant facultatif, utiliser `false`.</li></ul><br/>Ce paramètre est obligatoire lors de la définition de `user_attributes`.</td>
 </tr>
 <tr>
-<td><code>branding</code></td>
+<td>`branding`</td>
 <td>Objet.<br/><br/>Permet de personnaliser le style de l’assistant de configuration de l’authentification unique présenté aux administrateurs du client.<br/><br/>Ce paramètre est facultatif.</td>
 </tr>
 <tr>
-<td><code>branding.logo_url</code></td>
+<td>`branding.logo_url`</td>
 <td>Chaîne. La longueur maximale est de 1024.<br/><br/>URL HTTPS pointant vers un logo. Le cas échéant, ce logo s’affiche en haut à droite de l’assistant de configuration SSO.<br/><br/>Ce paramètre est facultatif.</td>
 </tr>
 <tr>
-<td><code>branding.colors</code></td>
+<td>`branding.colors`</td>
 <td>Objet.<br/><br/>Permet de définir une couleur principale pour certains éléments de l’assistant de configuration de l’authentification unique, tels que les boutons interactifs.<br/><br/>Ce paramètre est facultatif.</td>
 </tr>
 <tr>
-<td><code>branding.colors.primary</code></td>
-<td>Chaîne.<br/><br/>Spécifie la valeur hexadécimale de la couleur principale utilisée pour l’assistant de configuration SSO.<br/><br/>Ce paramètre est obligatoire lors de la définition de <code>branding.colors</code>.</td>
+<td>`branding.colors.primary`</td>
+<td>Chaîne.<br/><br/>Spécifie la valeur hexadécimale de la couleur principale utilisée pour l’assistant de configuration SSO.<br/><br/>Ce paramètre est obligatoire lors de la définition de `branding.colors`.</td>
 </tr>
 </tbody>
 </table>
 
 **Example Request Body (Exemple de corps de requête)**
 
-```json
+```json lines
 {
   "name": "Example Profile",
   "description": "An example profile for all customers",
@@ -167,7 +167,7 @@ Lorsqu’un administrateur client accède à l’assistant de configuration SSO,
 
 « Il ne vous reste plus que quelques étapes simples pour finir de configurer la SSO. Ce processus de configuration va apporter quelques changements à votre fournisseur d’identité. Avant de commencer, ouvrez votre fournisseur d’identité dans un onglet ou une fenêtre de navigateur distinct. »
 
-Vous pouvez modifier ce texte en effectuant un appel PUT au point de terminaison [Custom Text for Self-Service Profiles (Texte personnalisé pour les profils en libre-service)](/docs/api/management/v2/self-service-profiles/put-self-service-profile-custom-text).
+Vous pouvez modifier ce texte en effectuant un appel PUT au point de terminaison [Custom Text for Self-Service Profiles (Texte personnalisé pour les profils en libre-service)](/docs/fr-ca/api/management/v2/self-service-profiles/put-self-service-profile-custom-text).
 
 <Warning>
 
@@ -190,8 +190,8 @@ Sachez que cet appel écrase tout message actuellement défini pour le profil en
 </thead>
 <tbody>
 <tr>
-<td><code>introduction</code></td>
-<td>Chaîne. La longueur maximale est de 2000.<br/><br/>Texte d’introduction complet à afficher sur la page d’accueil de l’assistant de configuration SSO. Le texte peut inclure des options de mise en forme de base, telles que la mise en gras ou des liens hypertexte.<br/><br/>Le texte personnalisé fourni par ce paramètre écrase complètement tous les messages précédents. Pour de meilleurs résultats, assurez-vous de fournir le message complet que vous souhaitez afficher aux administrateurs des clients.<br/><br/>L’envoi d’un corps vide <code>{}</code> réinitialise tout message personnalisé au texte par défaut.</td>
+<td>`introduction`</td>
+<td>Chaîne. La longueur maximale est de 2000.<br/><br/>Texte d’introduction complet à afficher sur la page d’accueil de l’assistant de configuration SSO. Le texte peut inclure des options de mise en forme de base, telles que la mise en gras ou des liens hypertexte.<br/><br/>Le texte personnalisé fourni par ce paramètre écrase complètement tous les messages précédents. Pour de meilleurs résultats, assurez-vous de fournir le message complet que vous souhaitez afficher aux administrateurs des clients.<br/><br/>L’envoi d’un corps vide `{}` réinitialise tout message personnalisé au texte par défaut.</td>
 </tr>
 </tbody>
 </table>
@@ -199,7 +199,7 @@ Sachez que cet appel écrase tout message actuellement défini pour le profil en
 
 **Example Call (Exemple d’appel)**
 
-```
+```json lines
 PUT /api/v2/self-service-profiles/ssp_1234567890/custom-text/en/get-started
 
 {
@@ -209,7 +209,7 @@ PUT /api/v2/self-service-profiles/ssp_1234567890/custom-text/en/get-started
 
 **Example Response (Exemple de réponse)**
 
-```json
+```json lines
 {
   introduction: "Welcome! With <b>only a few steps</b>, you'll be able to setup your new connection. For assistance, contact <a href="https://www.examplesupportsite.com"> our support team </a>." 
 }
@@ -228,8 +228,8 @@ Après avoir créé au moins un profil en libre-service, vous pouvez générer d
 
 Pour générer un ticket d’accès en libre-service :
 
-1. Récupérez l’identifiant du profil de libre-service que vous souhaitez associer au ticket d’accès à partir du point de terminaison [Récupérer les profils de libre-service](/docs/api/management/v2/self-service-profiles/get-self-service-profiles).
-2. Appelez le point de terminaison [Ticket d’accès SSO](/docs/api/management/v2/self-service-profiles/post-sso-ticket) en utilisant l’identifiant du profil libre-service approprié :
+1. Récupérez l’identifiant du profil de libre-service que vous souhaitez associer au ticket d’accès à partir du point de terminaison [Récupérer les profils de libre-service](/docs/fr-ca/api/management/v2/self-service-profiles/get-self-service-profiles).
+2. Appelez le point de terminaison [Ticket d’accès SSO](/docs/fr-ca/api/management/v2/self-service-profiles/post-sso-ticket) en utilisant l’identifiant du profil libre-service approprié :
 
 `POST  /api/v2/self-service-profiles/{id}/sso-ticket`
 
@@ -242,7 +242,7 @@ Les tickets d’accès libre-service permettent aux administrateurs clients d’
 * Lors de la génération d’un ticket d’accès pour une nouvelle connexion, vous pouvez utiliser les paramètres `connection_config` pour définir les détails clés sur la connexion à authentification unique résultante.
 * Lorsque vous créez un ticket d’accès pour une connexion existante, vous devez plutôt utiliser le paramètre `connection_id`.
 
-Vous ne pouvez pas mettre à jour les détails de `connection_config` pour une connexion existante par l’intermédiaire du point de terminaison du [ticket d’accès à authentification unique](/docs/api/management/v2/self-service-profiles/post-sso-ticket). Si vous devez modifier ces informations pour une connexion existante, utilisez plutôt le point de terminaison [Mettre à jour une connexion](/docs/api/management/v2/connections/patch-connections-by-id).
+Vous ne pouvez pas mettre à jour les détails de `connection_config` pour une connexion existante par l’intermédiaire du point de terminaison du [ticket d’accès à authentification unique](/docs/fr-ca/api/management/v2/self-service-profiles/post-sso-ticket). Si vous devez modifier ces informations pour une connexion existante, utilisez plutôt le point de terminaison [Mettre à jour une connexion](/docs/fr-ca/api/management/v2/connections/patch-connections-by-id).
 
 </Note>
 
@@ -254,67 +254,67 @@ Vous ne pouvez pas mettre à jour les détails de `connection_config` pour une c
 </thead>
 <tbody>
 <tr>
-<td><code>connection_id</code></td>
-<td>Chaîne.<br/><br/>Fournir cette option lors de la génération d’un ticket pour <strong>mettre à jour</strong> une connexion à authentification unique existante.<br/><br/>Identifiant de la connexion qu’un administrateur client mettra à jour par l’intermédiaire de l’assistant de configuration de l’authentification unique. Les administrateurs clients peuvent modifier le certificat SAML, l’identifiant OIDC ou le secret de la connexion associée.<br/><br/> Les identifiants de connexion peuvent être récupérés via la section Authentication de <a href="https://manage.auth0.com/#/connections/enterprise">Auth0 Dashboard</a> ou le point de terminaison <a href="/docs/api/management/v2/connections/get-connections">Get All Connections (Obtenir toutes les connexions)</a>.<br/><br/><code>connection_id</code> ne peut pas être utilisé conjointement avec <code>connection_config</code>.</td>
+<td>`connection_id`</td>
+<td>Chaîne.<br/><br/>Fournir cette option lors de la génération d’un ticket pour <strong>mettre à jour</strong> une connexion à authentification unique existante.<br/><br/>Identifiant de la connexion qu’un administrateur client mettra à jour par l’intermédiaire de l’assistant de configuration de l’authentification unique. Les administrateurs clients peuvent modifier le certificat SAML, l’identifiant OIDC ou le secret de la connexion associée.<br/><br/> Les identifiants de connexion peuvent être récupérés via la section Authentication de <a href="https://manage.auth0.com/#/connections/enterprise">Auth0 Dashboard</a> ou le point de terminaison <a href="/docs/fr-ca/api/management/v2/connections/get-connections">Get All Connections (Obtenir toutes les connexions)</a>.<br/><br/>`connection_id` ne peut pas être utilisé conjointement avec `connection_config`.</td>
 </tr>
 <tr>
-<td><code>connection_config</code></td>
-<td>Objet.<br/><br/>Fournir cette option lors de la génération d’un ticket d’accès pour <strong>créer une nouvelle</strong> connexion à authentification unique. Les administrateurs du client pourront modifier des éléments clés de la connexion, comme le certificat SAML, l’identifiant OIDC ou le secret. <br/><br/><code>connection_config</code> ne peut pas être utilisé conjointement avec <code>connection_id</code>.</td>
+<td>`connection_config`</td>
+<td>Objet.<br/><br/>Fournir cette option lors de la génération d’un ticket d’accès pour <strong>créer une nouvelle</strong> connexion à authentification unique. Les administrateurs du client pourront modifier des éléments clés de la connexion, comme le certificat SAML, l’identifiant OIDC ou le secret. <br/><br/>`connection_config` ne peut pas être utilisé conjointement avec `connection_id`.</td>
 </tr>
 <tr>
-<td><code>connection_config.name</code></td>
-<td>Chaîne. La longueur maximale est de 128 caractères.<br/><br/>Nom de la connexion créée par l’assistant de configuration SSO.<br/><br/>Ce paramètre est requis lors de l’utilisation de <code>connection_config</code>.</td>
+<td>`connection_config.name`</td>
+<td>Chaîne. La longueur maximale est de 128 caractères.<br/><br/>Nom de la connexion créée par l’assistant de configuration SSO.<br/><br/>Ce paramètre est requis lors de l’utilisation de `connection_config`.</td>
 </tr>
 <tr>
-<td><code>connection_config.display_name</code></td>
-<td>Chaîne. La longueur maximale est de 128 caractères.<br/><br/>Nom convivial pour la connexion créée par l’assistant de configuration SSO. Ce nom s’affiche sur les invites de connexion universelle.<br/><br/>Ce paramètre est optionnel lors de l’utilisation de <code>connection_config</code>.</td>
+<td>`connection_config.display_name`</td>
+<td>Chaîne. La longueur maximale est de 128 caractères.<br/><br/>Nom convivial pour la connexion créée par l’assistant de configuration SSO. Ce nom s’affiche sur les invites de connexion universelle.<br/><br/>Ce paramètre est optionnel lors de l’utilisation de `connection_config`.</td>
 </tr>
 <tr>
-<td><code>connection_config.is_domain_connection</code></td>
-<td>Booléen.<br/><br/>La valeur de ce paramètre est <code>true</code> si la connexion est au niveau du domaine.<br/><br/>Ce paramètre est optionnel lors de l’utilisation de <code>connection_config</code>.</td>
+<td>`connection_config.is_domain_connection`</td>
+<td>Booléen.<br/><br/>La valeur de ce paramètre est `true` si la connexion est au niveau du domaine.<br/><br/>Ce paramètre est optionnel lors de l’utilisation de `connection_config`.</td>
 </tr>
 <tr>
-<td><code>connection_config.show_as_button</code></td>
-<td>Booléen.<br/><br/>Si <code>true</code>, la connexion s’affiche comme une option d’authentification sur l’écran de connexion de votre application. <br/><br/>Ce paramètre est optionnel lors de l’utilisation de <code>connection_config</code>.</td>
+<td>`connection_config.show_as_button`</td>
+<td>Booléen.<br/><br/>Si `true`, la connexion s’affiche comme une option d’authentification sur l’écran de connexion de votre application. <br/><br/>Ce paramètre est optionnel lors de l’utilisation de `connection_config`.</td>
 </tr>
 <tr>
-<td><code>connection_config.metadata</code></td>
-<td>Objet[].<br/><br/>Métadonnées associées à la connexion résultante. L’objet peut contenir jusqu’à 10 paires clé-valeur. Les valeurs des chaînes ne peuvent excéder 255 caractères.<br/><br/>Ce paramètre est optionnel lors de l’utilisation de <code>connection_config</code>.</td>
+<td>`connection_config.metadata`</td>
+<td>Objet[].<br/><br/>Métadonnées associées à la connexion résultante. L’objet peut contenir jusqu’à 10 paires clé-valeur. Les valeurs des chaînes ne peuvent excéder 255 caractères.<br/><br/>Ce paramètre est optionnel lors de l’utilisation de `connection_config`.</td>
 </tr>
 <tr>
-<td><code>connection_config.options</code></td>
-<td>Objet[].<br/><br/>Options pour la connexion résultante, incluant <code>icon_url</code> et <code>domain_aliases[]</code>.<br/><br/>Ce paramètre est optionnel lors de l’utilisation de <code>connection_config</code>.</td>
+<td>`connection_config.options`</td>
+<td>Objet[].<br/><br/>Options pour la connexion résultante, incluant `icon_url` et `domain_aliases[]`.<br/><br/>Ce paramètre est optionnel lors de l’utilisation de `connection_config`.</td>
 </tr>
 <tr>
-<td><code>enabled_clients</code></td>
+<td>`enabled_clients`</td>
 <td>Chaîne[].<br/><br/>Liste des identifiants clients de l’application à associer à la SSO.</td>
 </tr>
 <tr>
-<td><code>enabled_organizations</code></td>
+<td>`enabled_organizations`</td>
 <td>Objet[].<br/><br/>Liste des organisations à associer à la connexion SSO.</td>
 </tr>
 <tr>
-<td><code>enabled_organizations[].organization_id</code></td>
-<td>Identifiant d’une organisation particulière à associer à la SSO.<br/><br/>Vous pouvez récupérer les identifiants dans la section Organisations d’<a href="https://manage.auth0.com/#/organizations">Auth0 Dashboard</a>, le point de terminaison <a href="/docs/api/management/v2/organizations/get-organizations">Get Organizations</a>, ou le point de terminaison <a href="/docs/api/management/v2/organizations/get-name-by-name">Get Organization by Name</a>. <br/><br/> Ce paramètre est requis lors de l’utilisation de <code>enabled_organizations</code>.</td>
+<td>`enabled_organizations[].organization_id`</td>
+<td>Identifiant d’une organisation particulière à associer à la SSO.<br/><br/>Vous pouvez récupérer les identifiants dans la section Organisations d’<a href="https://manage.auth0.com/#/organizations">Auth0 Dashboard</a>, le point de terminaison <a href="/docs/fr-ca/api/management/v2/organizations/get-organizations">Get Organizations</a>, ou le point de terminaison <a href="/docs/fr-ca/api/management/v2/organizations/get-name-by-name">Get Organization by Name</a>. <br/><br/> Ce paramètre est requis lors de l’utilisation de `enabled_organizations`.</td>
 </tr>
 <tr>
-<td><code>enabled_organizations[].assign_membership_on_login</code></td>
-<td>Booléen.<br/><br/>Lorsque ce paramètre est <code>true</code>, les utilisateurs qui se connectent à l’aide de la connexion associée se voient automatiquement accorder le statut de membre de l’organisation indiquée.<br/><br/> Ce paramètre est optionnel lors de l’utilisation de <code>enabled_organizations</code>.</td>
+<td>`enabled_organizations[].assign_membership_on_login`</td>
+<td>Booléen.<br/><br/>Lorsque ce paramètre est `true`, les utilisateurs qui se connectent à l’aide de la connexion associée se voient automatiquement accorder le statut de membre de l’organisation indiquée.<br/><br/> Ce paramètre est optionnel lors de l’utilisation de `enabled_organizations`.</td>
 </tr>
 <tr>
-<td><code>enabled_organizations[].show_as_button</code></td>
-<td>Booléen.<br/><br/>Lorsque ce paramètre est <code>true</code>, la connexion associée s’affiche en tant qu’option d’authentification sur l’écran de connexion de l’organisation pour votre application. Cette option ne peut être activée que pour les connexions d’entreprise.<br/><br/> Ce paramètre est optionnel lors de l’utilisation de <code>enabled_organizations</code>.</td>
+<td>`enabled_organizations[].show_as_button`</td>
+<td>Booléen.<br/><br/>Lorsque ce paramètre est `true`, la connexion associée s’affiche en tant qu’option d’authentification sur l’écran de connexion de l’organisation pour votre application. Cette option ne peut être activée que pour les connexions d’entreprise.<br/><br/> Ce paramètre est optionnel lors de l’utilisation de `enabled_organizations`.</td>
 </tr>
 <tr>
-<td><code>ttl_sec</code></td>
-<td>Nombre.<br/><br/>Nombre de secondes pendant lesquelles le ticket d’accès reste valide avant expiration. S’il n’est pas spécifié ou s’il vaut <code>0</code>, la valeur par défaut est <code>432000</code> (ce qui équivaut à 5 jours).</td>
+<td>`ttl_sec`</td>
+<td>Nombre.<br/><br/>Nombre de secondes pendant lesquelles le ticket d’accès reste valide avant expiration. S’il n’est pas spécifié ou s’il vaut `0`, la valeur par défaut est `432000` (ce qui équivaut à 5 jours).</td>
 </tr>
 </tbody>
 </table>
 
 **Exemple de corps de requête**
 
-```json
+```json lines
 {
    "connection_config":{
       "name":"string",
@@ -358,7 +358,7 @@ Vous ne pouvez pas mettre à jour les détails de `connection_config` pour une c
 
 En réponse, vous recevez une URL pour le ticket d’accès en libre-service :
 
-```json
+```json lines
 {
   "ticket": "https://{domain}/self-service/connections-flow?ticket={id}"
 }
@@ -384,7 +384,7 @@ Lorsqu’un ticket d’accès est révoqué, son URL devient immédiatement inva
 
 Pour révoquer un ticket d’accès :
 
-1. Récupérez l’identifiant du profil de libre-service associé au ticket d’accès en utilisant le point de terminaison [Récupérer les profils de libre-service](/docs/api/management/v2/self-service-profiles/get-self-service-profiles).
+1. Récupérez l’identifiant du profil de libre-service associé au ticket d’accès en utilisant le point de terminaison [Récupérer les profils de libre-service](/docs/fr-ca/api/management/v2/self-service-profiles/get-self-service-profiles).
 2. Localisez l’identifiant du ticket d’accès que vous souhaitez révoquer. Les identifiants se trouvent à la fin de l’URL des tickets d’accès.
 3. Appelez le point de terminaison Révoquer le ticket d’accès en utilisant les identifiants appropriés :
 
@@ -396,16 +396,16 @@ En réponse, un `202 Accepted` est renvoyé.
 
 ### API
 
-Pour gérer la SSO en libre-service, les points de terminaison suivants de [Management API](/docs/api/management/v2/introduction) sont proposés :
+Pour gérer la SSO en libre-service, les points de terminaison suivants de [Management API](/docs/fr-ca/api/management/v2/introduction) sont proposés :
 
-* [Accéder aux profils en libre-service](/docs/api/management/v2/self-service-profiles/get-self-service-profiles)
-* [Créer un profil en libre-service](/docs/api/management/v2/self-service-profiles/post-self-service-profiles)
-* [Accéder à un profil en libre-service par identifiant](/docs/api/management/v2/self-service-profiles/get-self-service-profiles-by-id)
-* [Supprimer un profil en libre-service par identifiant](/docs/api/management/v2/self-service-profiles/delete-self-service-profiles-by-id)
-* [Mettre à jour un profil libre-service](/docs/api/management/v2/self-service-profiles/patch-self-service-profiles-by-id)
-* [Obtenir un texte personnalisé pour un profil de libre-service](/docs/api/management/v2/self-service-profiles/get-self-service-profile-custom-text)
-* [Définir un texte personnalisé pour un profil de libre-service](/docs/api/management/v2/self-service-profiles/put-self-service-profile-custom-text)
-* [Créer un ticket d’accès SSO pour initier le flux de la SSO en libre-service](/docs/api/management/v2/self-service-profiles/post-sso-ticket)
+* [Accéder aux profils en libre-service](/docs/fr-ca/api/management/v2/self-service-profiles/get-self-service-profiles)
+* [Créer un profil en libre-service](/docs/fr-ca/api/management/v2/self-service-profiles/post-self-service-profiles)
+* [Accéder à un profil en libre-service par identifiant](/docs/fr-ca/api/management/v2/self-service-profiles/get-self-service-profiles-by-id)
+* [Supprimer un profil en libre-service par identifiant](/docs/fr-ca/api/management/v2/self-service-profiles/delete-self-service-profiles-by-id)
+* [Mettre à jour un profil libre-service](/docs/fr-ca/api/management/v2/self-service-profiles/patch-self-service-profiles-by-id)
+* [Obtenir un texte personnalisé pour un profil de libre-service](/docs/fr-ca/api/management/v2/self-service-profiles/get-self-service-profile-custom-text)
+* [Définir un texte personnalisé pour un profil de libre-service](/docs/fr-ca/api/management/v2/self-service-profiles/put-self-service-profile-custom-text)
+* [Créer un ticket d’accès SSO pour initier le flux de la SSO en libre-service](/docs/fr-ca/api/management/v2/self-service-profiles/post-sso-ticket)
 
 ### Limites anti-attaques
 
@@ -421,22 +421,22 @@ Lors de l’utilisation de la SSO en libre-service, les limites anti-attaques s
 <tbody>
 <tr>
 <td>Gérer les profils SSO</td>
-<td><code>/api/v2/self-service-profiles</code></td>
-<td>Passez en revue les <a href="/docs/troubleshoot/customer-support/operational-policies/rate-limit-policy/rate-limit-configurations">limites de taux du Management API</a> pour votre type d’abonnement.</td>
+<td>`/api/v2/self-service-profiles`</td>
+<td>Passez en revue les <a href="/docs/fr-ca/troubleshoot/customer-support/operational-policies/rate-limit-policy/rate-limit-configurations">limites de taux du Management API</a> pour votre type d’abonnement.</td>
 </tr>
 <tr>
 <td>Créer un ticket d’accès</td>
-<td><code>/api/v2/self-service-profiles/{id}/sso-ticket</code></td>
-<td>Passez en revue les <a href="/docs/troubleshoot/customer-support/operational-policies/rate-limit-policy/rate-limit-configurations">limites de taux du Management API</a> pour votre type d’abonnement.</td>
+<td>`/api/v2/self-service-profiles/{id}/sso-ticket`</td>
+<td>Passez en revue les <a href="/docs/fr-ca/troubleshoot/customer-support/operational-policies/rate-limit-policy/rate-limit-configurations">limites de taux du Management API</a> pour votre type d’abonnement.</td>
 </tr>
 <tr>
 <td>Consommer un ticket d’accès</td>
-<td><code>/self-service/connection-flows?ticket={id}</code></td>
+<td>`/self-service/connection-flows?ticket={id}`</td>
 <td>6 / min / IP</td>
 </tr>
 <tr>
 <td>Charger l’application Web (qui comprend l’assistant de configuration) et les points de terminaison de l’application Web</td>
-<td><code>/self-service/*</code></td>
+<td>`/self-service/*`</td>
 <td>50 / min / IP<br/>90 / min / locataire</td>
 </tr>
 </tbody>

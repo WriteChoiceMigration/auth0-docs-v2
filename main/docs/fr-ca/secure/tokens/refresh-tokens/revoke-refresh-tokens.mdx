@@ -1,13 +1,13 @@
 ---
 title: "Révoquer les jetons d'actualisation"
 permalink: "revoke-refresh-tokens"
+'description': "Comment révoquer un jeton d’actualisation compromis à l’aide d’Authentication API, de Management API ou d’Auth0 Dashboard."
 'og:title': "Révoquer les jetons d'actualisation"
 'og:description': "Comment révoquer un jeton d’actualisation compromis à l’aide d’Authentication API, de Management API ou d’Auth0 Dashboard."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Révoquer les jetons d'actualisation"
 'twitter:description': "Comment révoquer un jeton d’actualisation compromis à l’aide d’Authentication API, de Management API ou d’Auth0 Dashboard."
 ---
-# Révoquer les jetons d'actualisation
 
 Vous pouvez révoquer les jetons d’actualisation si ceux-ci sont compromis. Auth0 s’occupe de révoquer les jetons comme s’ils avaient été potentiellement compromis par des entités malveillantes.
 
@@ -52,13 +52,13 @@ Pour révoquer un jeton d’actualisation, envoyez une demande `POST` à `https:
 Le point de terminaison `/oauth/revoke` révoque toute l’autorisation, pas seulement un jeton en particulier. Utilisez le point de terminaison `/api/v2/device-credentials` pour révoquer les jetons d’actualisation. L’API valide d’abord les identifiants de l’application, puis vérifie si le jeton a été fourni à l’application qui fait la demande de révocation. Si cette validation échoue, la demande est refusée et l’application est informée de l’erreur. Ensuite, l’API invalide le jeton. L’invalidation a lieu immédiatement et le jeton ne peut plus être utilisé après la révocation. Chaque demande de révocation invalide tous les jetons qui ont été émis pour la même autorisation.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/revoke' \
 --header 'content-type: application/json' \
 --data '{ "client_id": "{yourClientId}", "client_secret": "{yourClientSecret}", "token": "{yourRefreshToken}" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/revoke");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -66,7 +66,7 @@ request.AddParameter("application/json", "{ \"client_id\": \"{yourClientId}\", \
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -85,15 +85,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/revoke")
 .header("content-type", "application/json")
 .body("{ \"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"token\": \"{yourRefreshToken}\" }")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -110,8 +110,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"client_id": @"{yourClientId}",
@@ -137,7 +137,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/revoke",
@@ -160,8 +160,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"token\": \"{yourRefreshToken}\" }"
@@ -172,7 +172,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -185,8 +185,8 @@ request["content-type"] = 'application/json'
 request.body = "{ \"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"token\": \"{yourRefreshToken}\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = [
@@ -224,15 +224,15 @@ Où :
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><code>client_id</code> <br/><span class="label label-danger">Requis</span></td>
+<td style="text-align:left">`client_id` <br/><span class="label label-danger">Requis</span></td>
 <td style="text-align:left">L’ID client de votre application. L’application doit correspondre à celle pour laquelle le jeton d’actualisation a été émis.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>client_secret</code></td>
-<td style="text-align:left">Le secret client de votre application. Requis pour les <a href="/docs/applications/concepts/app-types-confidential-public#confidential-applications">applications confidentielles</a>.</td>
+<td style="text-align:left">`client_secret`</td>
+<td style="text-align:left">Le secret client de votre application. Requis pour les <a href="/docs/fr-ca/applications/concepts/app-types-confidential-public#confidential-applications">applications confidentielles</a>.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>token</code> <br/><span class="label label-danger">Required</span></td>
+<td style="text-align:left">`token` <br/><span class="label label-danger">Required</span></td>
 <td style="text-align:left">Le jeton d’actualisation que vous souhaitez révoquer.</td>
 </tr>
 </tbody>
@@ -246,7 +246,7 @@ Pour les applications qui ne peuvent pas garder le secret du client en sécurit�
 
 Si la demande est valide, le jeton d’actualisation est révoqué et la réponse est `HTTP 200`, avec un corps de réponse vide. Dans le cas contraire, le corps de la réponse contient le code d’erreur et la description.
 
-```json
+```json lines
 {
       "error": "invalid_request|invalid_client",
       "error_description": "Description of the error"
@@ -268,20 +268,20 @@ Réponses possibles :
 </tr>
 <tr>
 <td>400</td>
-<td>Les paramètres requis n’ont pas été envoyés dans la requête (<code>"error": "invalid_request"</code>).</td>
+<td>Les paramètres requis n’ont pas été envoyés dans la requête (`"error": "invalid_request"`).</td>
 </tr>
 <tr>
 <td>401</td>
-<td>La requête n’est pas autorisée (<code> "error" : "invalid_request") : "invalid_client"</code>). Vérifiez que les informations d’identification de l’application (<code>client_id</code> et <code>client_secret</code>) sont présentes dans la requête et qu’elles ont des valeurs valides.</td>
+<td>La requête n’est pas autorisée (` "error" : "invalid_request") : "invalid_client"`). Vérifiez que les informations d’identification de l’application (`client_id` et `client_secret`) sont présentes dans la requête et qu’elles ont des valeurs valides.</td>
 </tr>
 </tbody>
 </table>
 
 ## Utiliser Management API
 
-Pour révoquer un jeton d’actualisation à l’aide d’Auth0 Management API, vous avez besoin de l’`id` du jeton d’actualisation que vous souhaitez révoquer. Pour obtenir la liste des jetons d’actualisation existants, appelez [le point de terminaison](/docs/api/management/v2#!/Device_Credentials/get_device_credentials)`/api/v2/device-credentials`, en indiquant `type=refresh_token` et `user_id` avec un jeton d’accès contenant la permission `read:device_credentials`. Pour limiter les résultats, vous pouvez également indiquer le `client_id` associé au jeton (s’il est connu).
+Pour révoquer un jeton d’actualisation à l’aide d’Auth0 Management API, vous avez besoin de l’`id` du jeton d’actualisation que vous souhaitez révoquer. Pour obtenir la liste des jetons d’actualisation existants, appelez [le point de terminaison](/docs/fr-ca/api/management/v2#!/Device_Credentials/get_device_credentials)`/api/v2/device-credentials`, en indiquant `type=refresh_token` et `user_id` avec un jeton d’accès contenant la permission `read:device_credentials`. Pour limiter les résultats, vous pouvez également indiquer le `client_id` associé au jeton (s’il est connu).
 
-```
+```json lines
 GET https://{yourDomain}/api/v2/device-credentials?
       type=refresh_token
       &client_id=
@@ -294,7 +294,7 @@ GET https://{yourDomain}/api/v2/device-credentials?
 
 Le corps de la réponse:
 
-```json
+```json lines
 [
       {
     "id": "dcr_dFJiaAxbEroQ5xxx",
@@ -305,7 +305,7 @@ Le corps de la réponse:
 
 Pour révoquer un jeton d’actualisation, appelez le point de terminaison `/api/v2/device-credentials` avec un jeton d’accès contenant la permission `delete:device_credentials` et la valeur de l’ID obtenu plus haut :
 
-```
+```javascript lines
 DELETE https://{yourDomain}/api/v2/device-credentials/{id}
     
     {
@@ -321,8 +321,8 @@ Avec le [flux d’autorisation d’appareil](/docs/fr-ca/get-started/authenticat
 
 Avec la [rotation des jetons d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens/refresh-token-rotation), si un jeton déjà invalidé est utilisé, tous les autres jetons d’actualisation émis après qu’il ait été invalidé seront immédiatement révoqués, exigeant ainsi une nouvelle authentification de la part de l’utilisateur final.
 
-* Utilisez le [point de terminaison](/docs/api/authentication#revoke-refresh-token)`/oauth/revoke` d’Authentication API pour révoquer un jeton d’actualisation. Ce point de terminaison ne supprime pas l’autorisation sous-jacente. Vous pouvez modifier ce comportement pour supprimer également l’autorisation sous-jacente dans Dashboard : [Dashboard > Paramètres du locataire > Avancés](https://manage.auth0.com/#/tenant/advanced). Faites défiler jusqu’à **Paramètres** et activez l’option **La révocation du jeton d’actualisation supprime l’autorisation**.
-* Utilisez le [point de terminaison](/docs/api/management/v2#!/Device_Credentials/get_device_credentials)`/api/v2/device-credentials` de Management API pour révoquer des jetons d’actualisation.
+* Utilisez le [point de terminaison](/docs/fr-ca/api/authentication#revoke-refresh-token)`/oauth/revoke` d’Authentication API pour révoquer un jeton d’actualisation. Ce point de terminaison ne supprime pas l’autorisation sous-jacente. Vous pouvez modifier ce comportement pour supprimer également l’autorisation sous-jacente dans Dashboard : [Dashboard > Paramètres du locataire > Avancés](https://manage.auth0.com/#/tenant/advanced). Faites défiler jusqu’à **Paramètres** et activez l’option **La révocation du jeton d’actualisation supprime l’autorisation**.
+* Utilisez le [point de terminaison](/docs/fr-ca/api/management/v2#!/Device_Credentials/get_device_credentials)`/api/v2/device-credentials` de Management API pour révoquer des jetons d’actualisation.
 
 ## En savoir plus
 

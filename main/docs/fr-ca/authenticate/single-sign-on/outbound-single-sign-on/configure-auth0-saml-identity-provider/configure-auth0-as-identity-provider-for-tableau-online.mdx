@@ -1,13 +1,13 @@
 ---
 title: "Configurer Tableau Online en tant que fournisseur de services SAML"
 permalink: "configure-auth0-as-identity-provider-for-tableau-online"
+'description': "Découvrez comment configurer Auth0 en tant que fournisseur d’identité à l’aide du module d’extension SAML2 Web App pour Tableau Online."
 'og:title': "Configurer Tableau Online en tant que fournisseur de services SAML"
 'og:description': "Découvrez comment configurer Auth0 en tant que fournisseur d’identité à l’aide du module d’extension SAML2 Web App pour Tableau Online."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer Tableau Online en tant que fournisseur de services SAML"
 'twitter:description': "Découvrez comment configurer Auth0 en tant que fournisseur d’identité à l’aide du module d’extension SAML2 Web App pour Tableau Online."
 ---
-# Configurer Tableau Online en tant que fournisseur de services SAML
 
 Utilisez la configuration <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip> suivante pour Tableau Online.
 
@@ -15,11 +15,11 @@ Utilisez la configuration <Tooltip data-tooltip-id="react-containers-DefinitionT
 2. Accédez à l’onglet **Modules complémentaires** et activez **Application Web SAML2**.
 3. Dans l’onglet **Paramètres**, définissez l’**l’URL de rappel de l'application** à : `https://sso.online.tableau.com/public/sp/SSO/{yourTableauAlias}`.
 
-   <Frame>![Dashboard (Tableau de bord) Applications Applications Onglet Addons (Modules complémentaires) Onglet SAML2 Web App Settings (Paramètres d’application Web SAML2)](//images.ctfassets.net/cdy7uua7fh8z/6dJgYkcOgMZ73HVTkAWt1x/340580795787c0f4455f3f00c89a1719/2025-02-27_13-57-54.png)</Frame>
+   <Frame>![Dashboard (Tableau de bord) Applications Applications Onglet Addons (Modules complémentaires) Onglet SAML2 Web App Settings (Paramètres d’application Web SAML2)](/images/fr-ca/cdy7uua7fh8z/6dJgYkcOgMZ73HVTkAWt1x/340580795787c0f4455f3f00c89a1719/2025-02-27_13-57-54.png)</Frame>
 
 4. Collez le code suivant dans la zone de texte **Paramètres** et cliquez sur **Déboguer**.
 
-   ```json
+   ```json lines
    {
         "audience":  "https://sso.online.tableau.com/public/sp/metadata?alias={yourTableauAlias}",
         "recipient": "https://sso.online.tableau.com/public/sp/SSO/{yourTableauAlias}",
@@ -48,5 +48,5 @@ Utilisez la configuration <Tooltip data-tooltip-id="react-containers-DefinitionT
 5. Faites défiler vers le bas de la page et cliquez sur **Activer**.
 6. Dans l’onglet **Utilisation**, recherchez **Métadonnées du fournisseur d’identité** et cliquez sur **Télécharger** pour télécharger le fichier de métadonnées. Vous en aurez besoin lorsque vous configurerez Auth0 comme fournisseur d’identité.
 
-   <Frame>![Dashboard (Tableau de bord) Applications Applications Onglet Addons (Modules complémentaires) SAML2 Web App (Application Web SAML2) Onglet Usage (Utilisation)](//images.ctfassets.net/cdy7uua7fh8z/3T90BDpyTXFUWDp1JkncBU/0ab90c4e732c6b472c6224edd8ad5273/2025-02-27_13-46-16.png)</Frame>
+   <Frame>![Dashboard (Tableau de bord) Applications Applications Onglet Addons (Modules complémentaires) SAML2 Web App (Application Web SAML2) Onglet Usage (Utilisation)](/images/fr-ca/cdy7uua7fh8z/3T90BDpyTXFUWDp1JkncBU/0ab90c4e732c6b472c6224edd8ad5273/2025-02-27_13-46-16.png)</Frame>
 

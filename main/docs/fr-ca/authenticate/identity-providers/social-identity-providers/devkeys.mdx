@@ -1,13 +1,13 @@
 ---
 title: "Tester les connexions sociales avec des clés de développeur Auth0"
 permalink: "devkeys"
+'description': "Ce qu’il faut savoir pour bien utiliser les clés de développeur Auth0 avec des fournisseurs d’identité sociale."
 'og:title': "Tester les connexions sociales avec des clés de développeur Auth0"
 'og:description': "Ce qu’il faut savoir pour bien utiliser les clés de développeur Auth0 avec des fournisseurs d’identité sociale."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Tester les connexions sociales avec des clés de développeur Auth0"
 'twitter:description': "Ce qu’il faut savoir pour bien utiliser les clés de développeur Auth0 avec des fournisseurs d’identité sociale."
 ---
-# Tester les connexions sociales avec des clés de développeur Auth0
 
 <Card title="Overview">
 
@@ -47,7 +47,7 @@ Les clés de développeur Auth0 doivent être utilisées à des fins de test. Il
 
 Lorsque vous utilisez les clés de développeur Auth0, le flux d’authentification des différents fournisseurs d’identité peut afficher le nom, le logo et les informations d’Auth0 pour vos utilisateurs. Lorsque vous enregistrez votre propre application, vous avez la possibilité d’utiliser votre propre logo et d’autres informations relatives à l’application.
 
-<Frame>![Consent screen](//images.ctfassets.net/cdy7uua7fh8z/5YcLIDCt3RaAkmK1cTeCJL/e85e16195e84aa52f7675faacd126853/consent-screen.png)</Frame>
+<Frame>![Consent screen](/images/fr-ca/cdy7uua7fh8z/5YcLIDCt3RaAkmK1cTeCJL/e85e16195e84aa52f7675faacd126853/consent-screen.png)</Frame>
 
 ## Limitations des clés de développeur lors de la connexion universelle
 
@@ -58,6 +58,6 @@ Si vous utilisez l’[Expérience de connexion classique](/docs/fr-ca/authentica
    Ce résultat a pour conséquence que le témoin SSO (Authentification unique) n’est pas défini sur votre propre domaine de locataire. Ainsi, la prochaine fois qu’un utilisateur s’authentifiera, aucun témoin SSO ne sera détecté, même si vous avez configuré votre application pour **utiliser Auth0 au lieu du fournisseur d’identité pour effectuer l’authentification unique** (anciens locataires uniquement).
 3. [Redirection des utilisateurs à partir des Règles](/docs/fr-ca/customize/rules/redirect-users) ne fonctionnera pas correctement. Cela est dû au fait que les règles de redirection sont réactivées au point de terminaison `https://{yourDomain}/continue`. Lors de l’utilisation des clés de développeur Auth0, la session est établie sur un point de terminaison spécial qui est générique et indépendant du locataire, et faire un appel `/continue` ne trouvera pas votre session précédente, ce qui entraînera une erreur.
 4. [Déconnexion fédérée](/docs/fr-ca/authenticate/login/logout) ne fonctionne pas. Lors de l’utilisation des clés de développeur Auth0, l’appel `/v2/logout?federated` déconnectera l’utilisateur d’Auth0, mais pas du fournisseur d’identité sociale.
-5. `prompt=none` ne fonctionnera pas sur le point de terminaison [/authorize](/docs/api/authentication/reference#social). La méthode checkSession() [Auth0.js](/docs/fr-ca/libraries/auth0js) utilise `prompt=none` en interne, donc cela ne fonctionnera pas non plus.
+5. `prompt=none` ne fonctionnera pas sur le point de terminaison [/authorize](/docs/fr-ca/api/authentication/reference#social). La méthode checkSession() [Auth0.js](/docs/fr-ca/libraries/auth0js) utilise `prompt=none` en interne, donc cela ne fonctionnera pas non plus.
 6. Si Auth0 agit en tant que fournisseur d’identité SAML et que vous utilisez une connexion sociale avec les clés de développeur Auth0, la réponse SAML générée contiendra des erreurs, comme un attribut `InResponseTo` manquant ou un élément `AudienceRestriction` vide.
 7. L’[authentification multifacteur (MFA)](/docs/fr-ca/secure/multi-factor-authentication) ne fonctionnera pas correctement. Lorsque l’authentification multifacteur fonctionne, un message est généré dans `https://{yourDomain}/mf`. Lors de l’utilisation des clés de développeur Auth0, la session est établie sur un point de terminaison spécial qui est générique et indépendant du locataire, et faire un appel `/mf` ne trouvera pas votre session précédente, ce qui entraînera une erreur.

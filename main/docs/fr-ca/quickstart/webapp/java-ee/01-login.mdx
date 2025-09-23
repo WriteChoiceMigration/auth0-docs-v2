@@ -1,12 +1,14 @@
 ---
 title: "Login"
 permalink: "01-login"
+'description': "This tutorial demonstrates how to add user login to a Java EE web application."
 'og:title': "Login"
 'og:description': "This tutorial demonstrates how to add user login to a Java EE web application."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/java.png"
 'twitter:title': "Login"
 'twitter:description': "This tutorial demonstrates how to add user login to a Java EE web application."
 ---
+
 # Java EE
 
 <Frame>![Gravatar for jim.anderson@auth0.com](//www.gravatar.com/avatar/4fc3c0e33c1da40d889d1628519048ab?d=mm&r=g&s=50)</Frame>
@@ -41,7 +43,7 @@ System requirements: Java 11
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Regular Web Applications](/docs/architecture-scenarios/web-app-sso) and which [protocol](/docs/flows) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/fr-ca/overview), how it [integrates with Regular Web Applications](/docs/fr-ca/architecture-scenarios/web-app-sso) and which [protocol](/docs/fr-ca/flows) it uses.
 
 </Note>
 
@@ -97,7 +99,7 @@ To integrate your Java EE application with Auth0, add the following dependencies
 
 If you are using Maven, add these dependencies to your `pom.xml`:
 
-```
+```xml lines
 <!-- pom.xml -->
 
 <dependency>
@@ -121,7 +123,7 @@ If you are using Maven, add these dependencies to your `pom.xml`:
 
 If you are using Gradle, add them to your `build.gradle`:
 
-```javascript
+```java lines
 // build.gradle
 
 providedCompile 'javax:javaee-api:8.0.1'
@@ -139,7 +141,7 @@ The sample that accompanies this tutorial is written using JSP and tested with t
 
 Your Java EE application needs some information in order to authenticate users with your Auth0 application. The deployment descriptor `web.xml` file can be used to store this information, though you could store them in a different secured location. The required information is:
 
-```
+```xml lines
 <!-- `src/main/webapp/WEB-INF/web.xml`-->
 
 <env-entry>
@@ -183,7 +185,7 @@ To authenticate with Auth0, provide custom implementations of the following inte
 
 First, make your Auth0 settings available to the application by creating an `@ApplicationScoped` bean to retrieve the values from the web context and make them available via getters:
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/security/Auth0AuthenticationConfig.java
 
 @ApplicationScoped
@@ -233,7 +235,7 @@ public class Auth0AuthenticationConfig {
 
 Next, create a custom `CallerPrincipal` that represents the caller of the current request:
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/security/Auth0JwtPrincipal.java
 
 public class Auth0JwtPrincipal extends CallerPrincipal {
@@ -252,7 +254,7 @@ public class Auth0JwtPrincipal extends CallerPrincipal {
 
 You can now implement a custom `Credential` that will be used to represent the user's credentials. It will hold information about the principal:
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/security/Auth0JwtCredential.java
 
 class Auth0JwtCredential implements Credential {
@@ -271,7 +273,7 @@ class Auth0JwtCredential implements Credential {
 
 You now have defined the classes that represent a calling principal and credential. Next, create a custom implementation of `IdentityStore`. This class will be responsible for validating the user's credentials:
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/security/Auth0JwtIdentityStore.java
 
 @ApplicationScoped
@@ -304,7 +306,7 @@ To learn more about the available signing algorithms, refer to the [documentatio
 
 The sample below shows how to configure the `AuthenticationController` for use with the **RS256 signing algorithm**:
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/security/Auth0AuthenticationProvider.java
 
 @ApplicationScoped
@@ -322,7 +324,7 @@ public class Auth0AuthenticationProvider {
 
 Finally, implement a custom `HttpAuthenticationMechanism`
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/security/Auth0AuthenticationMechanism.java
 
 @ApplicationScoped
@@ -379,7 +381,7 @@ Finally, note that the `@AutoApplySession` annotation has been added to allow th
 
 To enable a user to log in, create a Servlet that will handle requests to the `/login` path:
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/web/LoginServlet.java
 
 @WebServlet(urlPatterns = "/login")
@@ -417,7 +419,7 @@ The `LoginController` is responsible for redirecting the request to the proper a
 
 Once the user has entered their credentials and authorized the requested permissions, Auth0 will issue a request to the `callbackUrl`, and include a `code` query parameter which can be exchanged for an ID token and an access token. Recall that the `Auth0HttpAuthenticationMechanism` created above handles this exchange so that it can notify the application container of authentication status. This allows the Servlet that handles requests to the `/callback` path to simply forward the request on to the originally requested resource prior to logging in, or simply redirect to the home page:
 
-```javascript
+```java lines
 // src/main/com/auth0/example/web/CallbackServlet.java
 
 @WebServlet(urlPatterns = {"/callback"})
@@ -437,7 +439,7 @@ public class CallbackServlet extends HttpServlet {
 
 You can use the `Auth0JwtPrincipal` to get profile information for the authenticated user. The following code sample demonstrates how to use the claims on the [ID token](https://auth0.com/docs/tokens/id-token) to set profile data as a request attribute:
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/web/HomeServlet.java
 
 @WebServlet(urlPatterns = "")
@@ -458,7 +460,7 @@ public class HomeServlet extends HttpServlet {
 
 You can then use that profile information in your view to display information about the user:
 
-```
+```html lines
 <!-- src/main/webapp/WEB-INF/jsp/fragments/navbar.jspf -->
 
 <c:choose>
@@ -493,7 +495,7 @@ To log a user out, you should clear the application session and log the user out
 
 First, clear the session by calling `request.getSession().invalidate()`. Then construct the logout URL, being sure to include the `returnTo` query parameter, which is where the user will be redirected to after logging out. Finally, redirect the response to the application's logout URL:
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/web/LogoutServlet.java
 
 @WebServlet(urlPatterns = "/logout")
@@ -549,13 +551,13 @@ To build and run the sample, execute the `wildfly:run` Maven goal to start an em
 
 If you are using Linux or MacOS:
 
-```
+```bash lines
 ./mvnw clean wildfly:run
 ```
 
 Windows:
 
-```
+```bash lines
 mvnw.cmd clean wildfly:run
 ```
 
@@ -567,7 +569,7 @@ Upon successful login, you will see the user's profile picture and a drop-down m
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

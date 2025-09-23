@@ -1,17 +1,17 @@
 ---
 title: "Trousse SDK Auth0 pour les applications à page unique (SPA)"
 permalink: "auth0-single-page-app-sdk"
+'description': "Trousse SDK Auth0 pour les applications à page unique utilisant le flux Autorisation de codes d’autorisation avec PKCE."
 'og:title': "Trousse SDK Auth0 pour les applications à page unique (SPA)"
 'og:description': "Trousse SDK Auth0 pour les applications à page unique utilisant le flux Autorisation de codes d’autorisation avec PKCE."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Trousse SDK Auth0 pour les applications à page unique (SPA)"
 'twitter:description': "Trousse SDK Auth0 pour les applications à page unique utilisant le flux Autorisation de codes d’autorisation avec PKCE."
 ---
-# Trousse SDK Auth0 pour les applications à page unique (SPA)
 
 La trousse SDK Auth0 pour les applications à page unique (SPA) est une nouvelle bibliothèque JavaScript pour la implémentation de l’authentification et de l’autorisation dans les applications à page unique (SPA) avec Auth0. Il fournit une API de haut niveau et gère une grande partie des détails afin que vous puissiez sécuriser les SPA en utilisant les meilleures pratiques, tout en écrivant moins de code.
 
-La trousse SDK Auth0 pour les applications à page unique (SPA) gère les détails de l’autorisation et du protocole, l’expiration et le renouvellement des jetons, ainsi que le stockage et la mise en cache des jetons. En arrière-plan, il met en œuvre la [connexion universelle](/docs/universal-login) et le [flux d’octroi de code d’autorisation avec PKCE](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce).
+La trousse SDK Auth0 pour les applications à page unique (SPA) gère les détails de l’autorisation et du protocole, l’expiration et le renouvellement des jetons, ainsi que le stockage et la mise en cache des jetons. En arrière-plan, il met en œuvre la [connexion universelle](/docs/fr-ca/universal-login) et le [flux d’octroi de code d’autorisation avec PKCE](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce).
 
 La [bibliothèque](https://github.com/auth0/auth0-spa-js) et la [documentation de l’API](https://auth0.github.io/auth0-spa-js/) sont hébergées sur GitHub.
 
@@ -39,7 +39,7 @@ L’utilisation de `createAuth0Client` permet de réaliser plusieurs choses auto
 
 #### Utiliser async/await
 
-```
+```javascript lines
 import { createAuth0Client } from '@auth0/auth0-spa-js';
 
 const auth0 = await createAuth0Client({
@@ -50,7 +50,7 @@ const auth0 = await createAuth0Client({
 
 #### Utiliser les promesses
 
-```
+```javascript lines
 createAuth0Client({
   domain: '{yourDomain}',
   clientId: '{yourClientId}'
@@ -65,7 +65,7 @@ Vous pouvez également créer le client directement en utilisant le constructeur
 * Effectuer une gestion personnalisée des erreurs.
 * Initialiser la trousse SDK de manière synchrone.
 
-```
+```javascript lines
 import { Auth0Client } from '@auth0/auth0-spa-js';
 
 const auth0 = new Auth0Client({
@@ -84,7 +84,7 @@ Ensuite, créez un bouton sur lequel les utilisateurs peuvent cliquer pour comme
 
 #### Utiliser async/await
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', async () => {
   await auth0.loginWithRedirect({
     authorizationParams: {
@@ -99,7 +99,7 @@ document.getElementById('login').addEventListener('click', async () => {
 
 #### Utiliser les promesses
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', () => {
   auth0.loginWithRedirect({
     authorizationParams: {
@@ -122,7 +122,7 @@ Pour appeler votre API, commencez par obtenir le jeton d’accès de l’utilisa
 
 #### Utiliser async/await
 
-```
+```javascript lines
 document.getElementById('callApi').addEventListener('click', async () => {
   const accessToken = await auth0.getTokenSilently();
   const result = await fetch('https://exampleco.com/api', {
@@ -138,7 +138,7 @@ document.getElementById('callApi').addEventListener('click', async () => {
 
 #### Utiliser les promesses
 
-```
+```javascript lines
 document.getElementById('callApi').addEventListener('click', () => {
   auth0
     .getTokenSilently()
@@ -163,7 +163,7 @@ Ajoutez un bouton sur lequel les utilisateurs peuvent cliquer pour se déconnect
 
 `<button id="logout">Déconnexion</button>`
 
-```
+```javascript lines
 $('#logout').click(async () => {
   auth0.logout({
     logoutParams: {
@@ -181,13 +181,13 @@ Par défaut, la trousse SDK Auth0 pour les applications à page unique (SPA) sto
 
 Le stockage des jetons dans la mémoire locale du navigateur assure la persistance des jetons à travers les actualisations de pages et les onglets du navigateur. Toutefois, si un attaquant parvient à exécuter le JavaScript dans l’application Web monopage (SPA) à l’aide des scripts intersites (XSS), il peut récupérer les jetons stockés dans la mémoire locale. La vulnérabilité menant à une attaque XSS réussie peut se trouver soit dans le code source de l’application Web monopage (SPA), soit dans tout code JavaScript tiers (tel que bootstrap, jQuery ou Google Analytics) inclus dans la SPA.
 
-Informez-vous davantage sur la question du [Stockage de jetons](/docs/secure/tokens/token-best-practices).
+Informez-vous davantage sur la question du [Stockage de jetons](/docs/fr-ca/secure/tokens/token-best-practices).
 
 </Warning>
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 const auth0 = await createAuth0Client({
   domain: '{yourDomain}',
   clientId: '{yourClientId}',
@@ -203,7 +203,7 @@ Pour ce faire, configurez la trousse SDK en définissant `useRefreshTokens` sur 
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 const auth0 = await createAuth0Client({
   domain: '{yourDomain}',
   clientId: '{yourClientId}',
@@ -225,9 +225,9 @@ Vous trouverez ci-dessous des exemples d’utilisation des différentes méthode
 
 ### Connexion avec redirection
 
-Redirigez vers le point de terminaison `/authorize` à Auth0, en démarrant le flux de [connexion universelle](/docs/universal-login) :
+Redirigez vers le point de terminaison `/authorize` à Auth0, en démarrant le flux de [connexion universelle](/docs/fr-ca/universal-login) :
 
-```
+```javascript lines
 $('#loginRedirect').click(async () => {
   await auth0.loginWithRedirect({
     authorizationParams: {
@@ -241,7 +241,7 @@ $('#loginRedirect').click(async () => {
 
 Utilisez une fenêtre contextuelle pour vous connecter à l’aide de la page de Connexion universelle :
 
-```
+```javascript lines
 $('#loginPopup').click(async () => {
   await auth0.loginWithPopup();
 });
@@ -251,7 +251,7 @@ Si l’utilisateur prend plus de temps que le délai par défaut de 60 secondes 
 
 Suggérez à l’utilisateur de réessayer et de fermer la fenêtre contextuelle manuellement en utilisant `error.popup.close` :
 
-```
+```javascript lines
 $('#loginPopup').click(async () => {
   try {
     await auth0.loginWithPopup();
@@ -265,7 +265,7 @@ $('#loginPopup').click(async () => {
 
 Ou créez une option `popup` personnalisée dans l’objet `options` :
 
-```
+```javascript lines
 $('#loginPopup').click(async () => {
   const popup = window.open(
     '',
@@ -286,7 +286,7 @@ $('#loginPopup').click(async () => {
 
 Lorsque le navigateur est redirigé d’Auth0 vers votre application monopage, `handleRedirectCallback` doit être appelé afin de compléter le flux de connexion :
 
-```
+```javascript lines
 $('#loginRedirectCallback').click(async () => {
   await auth0.handleRedirectCallback();
 });
@@ -304,7 +304,7 @@ Obtenir un jeton d’accès en mode silencieux sans utiliser de jetons d’actua
 
 Si le stockage en mémoire (par défaut) et les jetons d’actualisation sont utilisés, les nouveaux jetons sont récupérés à l’aide d’un agent web sur les navigateurs pris en charge :
 
-```
+```javascript lines
 $('#getToken').click(async () => {
   const token = await auth0.getTokenSilently();
 });
@@ -316,7 +316,7 @@ La méthode `getTokenSilently()` nécessite que **Autoriser le contournement du 
 
 Les jetons d’accès peuvent également être récupérés à l’aide d’une fenêtre contextuelle. Contrairement à `getTokenSilently`, cette méthode de récupération d’un jeton d’accès fonctionnera dans les navigateurs dont les témoins tiers sont bloqués par défaut :
 
-```
+```javascript lines
 $('#getTokenPopup').click(async () => {
   const token = await auth0.getTokenWithPopup({
     authorizationParams: {
@@ -337,7 +337,7 @@ Ne fonctionne que si vous n’utilisez pas de jetons d’actualisation (`useRefr
 
 </Note>
 
-```
+```javascript lines
 $('#getToken_audience').click(async () => {
   const differentAudienceOptions = {
     authorizationParams: {
@@ -354,7 +354,7 @@ $('#getToken_audience').click(async () => {
 
 Vous pouvez obtenir les données de profil de l’utilisateur authentifié en appelant la méthode `getUser` :
 
-```
+```javascript lines
 $('#getUser').click(async () => {
   const user = await auth0.getUser();
 });
@@ -364,7 +364,7 @@ $('#getUser').click(async () => {
 
 Vous pouvez obtenir les demandes du jeton d’ID de l’utilisateur authentifié en appelant la méthode `getIdTokenClaims` :
 
-```
+```javascript lines
 $('#getIdTokenClaims').click(async () => {
   const claims = await auth0.getIdTokenClaims();
   // if you need the raw id_token, you can access it
@@ -377,7 +377,7 @@ $('#getIdTokenClaims').click(async () => {
 
 Vous pouvez lancer une action de déconnexion en appelant la méthode `logout` :
 
-```
+```javascript lines
 $('#logout').click(async () => {
   auth0.logout({
     logoutParams: {
@@ -391,7 +391,7 @@ $('#logout').click(async () => {
 
 Vous pouvez lancer une action de déconnexion sans spécifier d’ID client en appelant la méthode `logout` et en incluant `clientId:null` :
 
-```
+```javascript lines
 $('#logoutNoClientId').click(async () => {
   auth0.logout({
     clientId: null,

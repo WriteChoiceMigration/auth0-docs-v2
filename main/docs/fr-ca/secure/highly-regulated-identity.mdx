@@ -1,13 +1,13 @@
 ---
 title: "Identité très réglementée (HRI)"
 permalink: "highly-regulated-identity"
+'description': "Découvrez l'identité très réglementée, la solution Financial-Grade Identity d’Auth0."
 'og:title': "Identité très réglementée (HRI)"
 'og:description': "Découvrez l'identité très réglementée, la solution Financial-Grade Identity d’Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Identité très réglementée (HRI)"
 'twitter:description': "Découvrez l'identité très réglementée, la solution Financial-Grade Identity d’Auth0."
 ---
-# Identité très réglementée (HRI)
 
 <Note>
 
@@ -38,11 +38,11 @@ Auth0 est un fournisseur FAPI certifié. Pour en savoir plus sur les améliorati
 
 Pour plus d’informations sur FAPI, veuillez consulter OpenID [Open Banking, Open Data et les API de qualité financière](https://openid.net/wordpress-content/uploads/2022/03/OIDF-Whitepaper_Open-Banking-Open-Data-and-Financial-Grade-APIs_2022-03-16.pdf) livre blanc et [Spécifications du groupe de travail FAPI](https://openid.net/wg/fapi/specifications/).
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/20iajPMtmICMORUfaVQH7a/c60bf1e023c77d57fc11cda524960e73/image17.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/20iajPMtmICMORUfaVQH7a/c60bf1e023c77d57fc11cda524960e73/image17.png)</Frame>
 
 ## Authentification forte du client (SCA)
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/3JDIerJcevImoIDRd7OfIy/0f276ae94273aba30c62c5264345f7cd/image14.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/3JDIerJcevImoIDRd7OfIy/0f276ae94273aba30c62c5264345f7cd/image14.png)</Frame>
 
 Introduite par la [Directive sur les services de paiement (PSD2)](https://www.europeanpaymentscouncil.eu/sites/default/files/infographic/2018-04/EPC_Infographic_PSD2_April%202018.pdf)d’Europe, l’authentification forte du client impose l’utilisation d’au moins deux facteurs d’authentification distincts parmi les trois suivants :
 
@@ -59,7 +59,7 @@ Pour favoriser la conformité avec l’Authentification forte du client, Auth0 p
 * Courriel
 * WebAuthn
 
-En utilisant [Actions](/docs/fr-ca/customize/actions), vous pouvez déterminer dynamiquement les facteurs d’authentification à utiliser. Cela vous donne la flexibilité de personnaliser la logique de votre code. Par exemple, vous pouvez ajouter un deuxième facteur d’authentification pour les paiements supérieurs à 10 USD. Pour en savoir plus, veuillez consulter [Appliquer la politique dynamique](/docs/secure/highly-regulated-identity/transactional-authorization-with-contextual-sca#apply-dynamic-policy).
+En utilisant [Actions](/docs/fr-ca/customize/actions), vous pouvez déterminer dynamiquement les facteurs d’authentification à utiliser. Cela vous donne la flexibilité de personnaliser la logique de votre code. Par exemple, vous pouvez ajouter un deuxième facteur d’authentification pour les paiements supérieurs à 10 USD. Pour en savoir plus, veuillez consulter [Appliquer la politique dynamique](/docs/fr-ca/secure/highly-regulated-identity/transactional-authorization-with-contextual-sca#apply-dynamic-policy).
 
 ## Liens dynamiques
 
@@ -67,7 +67,7 @@ La Directive sur les services de paiement (DSP2) exige que les prestataires de s
 
 Pour activer la liaison dynamique, vous pouvez utiliser Demandes d’autorisation riches (RAR) pour transmettre des informations détaillées sur les autorisations de transaction au point de terminaison <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OAuth</Tooltip>. L’exemple de code suivant montre un objet JSON, `authorization_details` qui contient des informations telles que le type de paiement, le montant, la devise et le destinataire :
 
-```
+``` lines
 "authorization_details": [
  {
    "type": "one_time_payment",
@@ -127,7 +127,7 @@ Pour en savoir plus sur JWE, veuillez consulter [Chiffrement Web JSON](/docs/fr-
 
 Pour renforcer la sécurité de l’authentification de votre application, l’Identité très réglementée propose deux alternatives distinctes dans le cadre du profil de sécurité avancé FAPI 1 :
 
-* [Clé privée JWT](http://tools.ietf.org/html/draft-ietf-oauth-jwt-bearer) : implique la génération d’une paire de clés publique-privée à utiliser comme informations d’identification pour authentifier une application. La Clé privée JWT est déjà disponible pour les clients du plan Enterprise. Pour en savoir plus, veuillez consulter [Authentification par clé privée JWT](/docs/secure/application-credentials#private-key-jwt-authentication).
+* [Clé privée JWT](http://tools.ietf.org/html/draft-ietf-oauth-jwt-bearer) : implique la génération d’une paire de clés publique-privée à utiliser comme informations d’identification pour authentifier une application. La Clé privée JWT est déjà disponible pour les clients du plan Enterprise. Pour en savoir plus, veuillez consulter [Authentification par clé privée JWT](/docs/fr-ca/secure/application-credentials#private-key-jwt-authentication).
 * [mTLS pour OAuth](https://datatracker.ietf.org/doc/html/rfc8705) : implique l’enregistrement d’un certificat X.509 standard lié à une application sur votre locataire. Le certificat peut être émis par une autorité de certification ou auto-signé. En suivant les procédures standard de mTLS, la clé privée associée au certificat est utilisée par le client pour établir le tunnel mTLS lorsqu’il envoie des requêtes à vos points de terminaison de locataire Auth0. Par conséquent, Auth0 peut authentifier l’application sans transmettre de secrets sur le réseau. Pour en savoir plus, veuillez consulter [mTLS pour OAuth](/docs/fr-ca/get-started/authentication-and-authorization-flow/authenticate-with-mtls).
 
 Avec les deux, la clé privée JWT et OAuth 2.0 mTLS, vous pouvez effectuer une rotation des informations d’identification sans interruption en conservant temporairement deux clés et/ou certificats actifs simultanément pour une application donnée.
@@ -142,7 +142,7 @@ La prise en charge de mTLS permet également d’utiliser la liaison de jeton ou
 
 Il est crucial de prendre en compte l’expérience utilisateur lors de la conception de solutions visant une sécurité de niveau financier. L’ajustement dynamique en fonction des détails des transactions et des cas d’utilisation est plus efficace que l’application de flux d’authentification uniformes pour toutes les transactions.
 
-Vous pouvez personnaliser votre flux d’authentification à l’aide d’[actions](/docs/fr-ca/customize/actions). Par exemple, après que l’utilisateur se soit connecté, vous pouvez examiner les détails de la transaction reçus via RAR, vérifier les facteurs d’authentification enregistrés et validés de l’utilisateur, et utiliser des services externes, comme des moteurs d’évaluation des risques, pour déterminer le facteur d’authentification à utiliser ensuite. Pour en savoir plus, veuillez consulter [Appliquer la politique dynamique](/docs/secure/highly-regulated-identity/transactional-authorization-with-contextual-sca#apply-dynamic-policy).
+Vous pouvez personnaliser votre flux d’authentification à l’aide d’[actions](/docs/fr-ca/customize/actions). Par exemple, après que l’utilisateur se soit connecté, vous pouvez examiner les détails de la transaction reçus via RAR, vérifier les facteurs d’authentification enregistrés et validés de l’utilisateur, et utiliser des services externes, comme des moteurs d’évaluation des risques, pour déterminer le facteur d’authentification à utiliser ensuite. Pour en savoir plus, veuillez consulter [Appliquer la politique dynamique](/docs/fr-ca/secure/highly-regulated-identity/transactional-authorization-with-contextual-sca#apply-dynamic-policy).
 
 Les nouveaux modèles de connexion universelle vous offrent également la possibilité de personnaliser les attributs affichés à l’écran d’approbation des transactions, en fonction du type de transaction et des autres détails d’autorisation. Pour en savoir plus, veuillez consulter [Configuration des demandes d’autorisation riches (RAR)](/docs/fr-ca/get-started/apis/configure-rich-authorization-requests).
 

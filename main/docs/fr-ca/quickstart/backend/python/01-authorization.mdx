@@ -1,12 +1,14 @@
 ---
 title: "Authorization"
 permalink: "01-authorization"
+'description': "This tutorial demonstrates how to add authorization to a Python API built with Flask."
 'og:title': "Authorization"
 'og:description': "This tutorial demonstrates how to add authorization to a Python API built with Flask."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/python.png"
 'twitter:title': "Authorization"
 'twitter:description': "This tutorial demonstrates how to add authorization to a Python API built with Flask."
 ---
+
 # Python API: Authorization
 
 <Frame>![Gravatar for luciano.balmaceda@auth0.com](//www.gravatar.com/avatar/da735b48d8300a97640149156b650305?d=mm&r=g&s=50)</Frame>
@@ -37,7 +39,7 @@ System requirements: Python 3.6 and up | Flask 2.0 | Authlib 1.0
 
 <Note>
 
-**New to Auth0?** Learn [how Auth0 works](/docs/overview) and read about [implementing API authentication and authorization](/docs/api-auth)  using the OAuth 2.0 framework.
+**New to Auth0?** Learn [how Auth0 works](/docs/fr-ca/overview) and read about [implementing API authentication and authorization](/docs/fr-ca/api-auth)  using the OAuth 2.0 framework.
 
 </Note>
 
@@ -49,7 +51,7 @@ In the [APIs](https://manage.auth0.com/#/apis) section of the Auth0 dashboard, c
 
 <Frame>![Create API](https://cdn2.auth0.com/docs/1.14567.0/media/articles/server-apis/create-api.png)</Frame>
 
-By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
+By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/fr-ca/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
 
 ### Define permissions
 
@@ -68,7 +70,7 @@ This example uses the `read:messages` scope.
 This example demonstrates:
 
 * How to check for a JSON Web Token (JWT) in the `Authorization` header of an incoming HTTP request.
-* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/tokens/guides/validate-access-tokens).
+* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/fr-ca/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/fr-ca/tokens/guides/validate-access-tokens).
 
 ## Validate Access Tokens
 
@@ -76,7 +78,7 @@ This example demonstrates:
 
 Add the following dependencies to your `requirements.txt`:
 
-```
+```python lines
 # /requirements.txt
 
 flask
@@ -90,7 +92,7 @@ six
 
 Create a `server.py` file and initialize the [Flask](http://flask.pocoo.org/) application. Set the domain, audience and the error handling.
 
-```
+```python lines
 # /server.py
 
 import json
@@ -124,7 +126,7 @@ def handle_auth_error(ex):
 
 Add a decorator which verifies the Access Token against your JWKS.
 
-```
+```python lines
 # /server.py
 
 # Format error response and append status code
@@ -209,7 +211,7 @@ def requires_auth(f):
 
 Individual routes can be configured to look for a particular `scope` in the Access Token by using the following:
 
-```
+```python lines
 # /server.py
 
 def requires_scope(required_scope):
@@ -237,7 +239,7 @@ The routes shown below are available for the following requests:
 
 You can use the decorators and functions define above in the corresponding endpoints.
 
-```
+```python lines
 # Controllers API
 
 # This doesn't need authentication
@@ -271,7 +273,7 @@ def private_scoped():
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

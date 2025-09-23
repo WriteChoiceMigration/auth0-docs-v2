@@ -1,13 +1,13 @@
 ---
 title: "Variables et fonctions utilitaires"
 permalink: "variables"
+'description': "Apprenez à utiliser les variables dans les Formulaires pour les Actions."
 'og:title': "Variables et fonctions utilitaires"
 'og:description': "Apprenez à utiliser les variables dans les Formulaires pour les Actions."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Variables et fonctions utilitaires"
 'twitter:description': "Apprenez à utiliser les variables dans les Formulaires pour les Actions."
 ---
-# Variables et fonctions utilitaires
 
 Les variables vous permettent d’accéder aux données contenues dans les Formulaires et les Flux pour créer une logique commerciale et des automatismes personnalisés.
 
@@ -32,31 +32,31 @@ Vous pouvez utiliser différents types de variables pour référencer et transfo
 <tbody>
 <tr>
 <td>Contexte</td>
-<td><code>{{contexte.*}}</code></td>
+<td>`{{contexte.*}}`</td>
 <td>Formes / Flux</td>
 <td>Données contextuelles de référence de la transaction en cours</td>
 </tr>
 <tr>
 <td>Champs de formulaire</td>
-<td><code>{{fields. *}}</code></td>
+<td>`{{fields. *}}`</td>
 <td>Formulaires / Flux</td>
 <td>Données de référence des champs de votre formulaire et des champs cachés</td>
 </tr>
 <tr>
 <td>Variables partagées</td>
-<td><code>{{vars.*}}</code></td>
+<td>`{{vars.*}}`</td>
 <td>Formulaires / Flux</td>
 <td>Données de référence stockées en tant que variables partagées</td>
 </tr>
 <tr>
 <td>Sortie des actions de flux</td>
-<td><code>{{actions. *}}</code></td>
+<td>`{{actions. *}}`</td>
 <td>Flux</td>
 <td>Données de référence de la réponse de sortie des actions de flux précédentes</td>
 </tr>
 <tr>
 <td>Fonctions d’aide</td>
-<td><code>{{fonctions.*}}</code></td>
+<td>`{{fonctions.*}}`</td>
 <td>Formulaires / Flux</td>
 <td>Fonctions d’aide pour transformer les données</td>
 </tr>
@@ -107,7 +107,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Exemple d’objet contextuel">
 
-```json
+```json lines
 {
   "user": {
     "user_id": "auth0|658409...",
@@ -147,25 +147,25 @@ accordion.expand_all/accordion.collapse_all
 
 Par exemple :  `{{context.user.user_id}}` référence `user_id` de l’objet `user`.
 
-<Frame>![Dashboard > Forms > Flows](//images.ctfassets.net/cdy7uua7fh8z/3B8DRhXO2wGqeqSFb8KbQv/0a61cdbbb7f1d290950a2ddb9857aac3/Contex-variable.png)</Frame>
+<Frame>![Dashboard > Forms > Flows](/images/fr-ca/cdy7uua7fh8z/3B8DRhXO2wGqeqSFb8KbQv/0a61cdbbb7f1d290950a2ddb9857aac3/Contex-variable.png)</Frame>
 
 ### Variables des champs du formulaire
 
 Les variables de champ contiennent les données recueillies auprès de l’utilisateur dans les champs de saisie du formulaire et les données des champs cachés. Les données de chaque champ varient en fonction du type de champ. Par exemple : `{{fields.first_name}}` référence la valeur saisie dans le champ ayant l’ID `first_name`.
 
-<Frame>![Dashboard > Actions > Forms > Form](//images.ctfassets.net/cdy7uua7fh8z/4D42A6ww4XvFxweoxh04Rd/016c2ed9d25bc2267ed3ed31bf8b2bf6/form-fields-variable.png)</Frame>
+<Frame>![Dashboard > Actions > Forms > Form](/images/fr-ca/cdy7uua7fh8z/4D42A6ww4XvFxweoxh04Rd/016c2ed9d25bc2267ed3ed31bf8b2bf6/form-fields-variable.png)</Frame>
 
 ### Variables des actions de sortie de flux
 
 Lorsqu’une action de flux est exécutée, elle génère un objet qui peut être référencé dans les actions suivantes. Par exemple : `{{actions.generate_otp.code}}` référence le code résultant de l’action avec l’ID`generate_otp`.
 
-<Frame>![Dashboard > Actions > Forms > Flows](//images.ctfassets.net/cdy7uua7fh8z/6jYtEdYqSGXm3DDv0mxQ0o/2d48012629745e07137bf6ba42f4d829/flow-output-variable.png)</Frame>
+<Frame>![Dashboard > Actions > Forms > Flows](/images/fr-ca/cdy7uua7fh8z/6jYtEdYqSGXm3DDv0mxQ0o/2d48012629745e07137bf6ba42f4d829/flow-output-variable.png)</Frame>
 
 ### Variables partagées
 
 Vous pouvez stocker des variables à partager avec des flux ultérieurs ou même avec des composants de formulaire dans la même transaction. Les variables partagées sont éphémères et sont associées à un parcours de formulaire spécifique. Leurs valeurs ne sont pas accessibles en dehors de ce parcours. Par exemple : `{{vars.external_id}}` référence la valeur d’une variable partagée avec l’ID `external_id`.
 
-<Frame>![Dashboard > Actions > Forms > Flows](//images.ctfassets.net/cdy7uua7fh8z/4571ExRTHL0KZKJKX9pNwj/abb631b8608a6356b0e5b3784cf8b02f/flow-shared-variable.png)</Frame>
+<Frame>![Dashboard > Actions > Forms > Flows](/images/fr-ca/cdy7uua7fh8z/4571ExRTHL0KZKJKX9pNwj/abb631b8608a6356b0e5b3784cf8b02f/flow-shared-variable.png)</Frame>
 
 <Warning>
 
@@ -180,7 +180,7 @@ Variables partagées :
 
 Les fonctions utilitaires permettent de transformer les données et d’effectuer des opérations simples. Par exemple : `{{functions.toString(fields.privacy_policies)}}` transforme la valeur du champ ayant l’ID `privacy_policies` utilisant la fonction `toString()`.
 
-<Frame>![Dashboard > Actions > Forms > Flows](//images.ctfassets.net/cdy7uua7fh8z/1gyox33XJEtdkT43NppblT/0e878cc5ae2bde11b4207e105bbac6c5/flow-helper-functions.png)</Frame>
+<Frame>![Dashboard > Actions > Forms > Flows](/images/fr-ca/cdy7uua7fh8z/1gyox33XJEtdkT43NppblT/0e878cc5ae2bde11b4207e105bbac6c5/flow-helper-functions.png)</Frame>
 
 Les fonctions utilitaires disponibles sont les suivantes :
 
@@ -335,7 +335,7 @@ Si vous constatez une valeur de variable inattendue, utilisez l’aperçu [**Exe
 
 Le menu de remplissage automatique vous aide à localiser et à référencer correctement les variables existantes.
 
-<Frame>![Dashboard > Actions > Forms > Flows](//images.ctfassets.net/cdy7uua7fh8z/3SKnDuaMzSImxZtDDAoZaz/9ea800fad29ef71d1ded3c72b87660a4/Autocomplete-flows.png)</Frame>
+<Frame>![Dashboard > Actions > Forms > Flows](/images/fr-ca/cdy7uua7fh8z/3SKnDuaMzSImxZtDDAoZaz/9ea800fad29ef71d1ded3c72b87660a4/Autocomplete-flows.png)</Frame>
 
-<Frame>![Dashboard > Actions > Forms > Form](//images.ctfassets.net/cdy7uua7fh8z/2kjRKozVgrd2a7UJXOANaN/ee5452d7210cd2f13b0e97763f11c82a/Autocomplete-forms.png)</Frame>
+<Frame>![Dashboard > Actions > Forms > Form](/images/fr-ca/cdy7uua7fh8z/2kjRKozVgrd2a7UJXOANaN/ee5452d7210cd2f13b0e97763f11c82a/Autocomplete-forms.png)</Frame>
 

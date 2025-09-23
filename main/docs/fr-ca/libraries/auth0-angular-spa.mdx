@@ -1,13 +1,13 @@
 ---
 title: "Trousse SDK Auth0 pour Angular pour les applications à page unique"
 permalink: "auth0-angular-spa"
+'description': "Décrit la trousse SDK Auth0 pour Angular pour les applications à page unique"
 'og:title': "Trousse SDK Auth0 pour Angular pour les applications à page unique"
 'og:description': "Décrit la trousse SDK Auth0 pour Angular pour les applications à page unique"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Trousse SDK Auth0 pour Angular pour les applications à page unique"
 'twitter:description': "Décrit la trousse SDK Auth0 pour Angular pour les applications à page unique"
 ---
-# Trousse SDK Auth0 pour Angular pour les applications à page unique
 
 La trousse SDK Auth0 pour Angular est une bibliothèque JavaScript permettant de mettre en œuvre l’authentification et l’autorisation dans les applications Angular avec Auth0. Elle fournit un service, un garde d’authentification et un intercepteur HTTP pour vous permettre d’effectuer des tâches d’authentification courantes dans vos applications Angular.
 
@@ -31,7 +31,7 @@ Utilisez le [Angular CLI](https://cli.angular.io/) pour installer la trousse SDK
 
 Commencez à intégrer la trousse SDK en important `AuthModule` dans votre projet et en le configurant pour votre application client Auth0 :
 
-```
+```javascript lines
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -65,7 +65,7 @@ La trousse SDK prend entièrement en charge le système d’injection de dépend
 
 Ensuite, pour lancer la connexion de l’utilisateur, utilisez la méthode `loginWithRedirect` ou `loginWithPopup` sur le service :
 
-```
+```javascript lines
 import { Component } from '@angular/core';
 
 // Import the AuthService type from the SDK
@@ -91,7 +91,7 @@ export class LoginComponent {
 
 Utilisez `déconnexion` pour déconnecter vos utilisateurs. Assurez-vous que `returnTo` est spécifié dans **URL de déconnexion autorisées**dans votre <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>.
 
-```
+```javascript lines
 import { Component } from '@angular/core';
 
 // Import the AuthService type from the SDK
@@ -121,7 +121,7 @@ export class LogoutComponent {
 
 L’état de l’authentification est exposé via l’observable `isAuthenticated$` :
 
-```
+```html lines
 <div *ngIf="auth.isAuthenticated$ | async">
   <app-login></app-login>
 </div>
@@ -131,7 +131,7 @@ L’état de l’authentification est exposé via l’observable `isAuthenticate
 
 Le profil utilisateur de l’utilisateur authentifié est exposé via l’observable `user$` :
 
-```
+```html lines
 <ul *ngIf="auth.user$ | async as user">
   <li>{{ user.name }}</li>
   <li>{{ user.email }}</li>
@@ -146,7 +146,7 @@ Protégez un composant d’une route à l’aide de la fonction intégrée `Auth
 
 Le garde d’authentification doit être ajouté à une définition de route à l’aide du hook `canActivate` (ou `canActivateChild` si vous utilisez des routes enfants) :
 
-```
+```javascript lines
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './unprotected/unprotected.component';
@@ -189,7 +189,7 @@ Vous devez configurer la trousse SDK pour spécifier à quelles routes vers l’
 
 Pour commencer, importez les types dont vous aurez besoin pour intégrer l’intercepteur HTTP Auth0 dans votre application :
 
-```javascript
+```javascript lines
 // Import the interceptor module and the Angular types you'll need
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
@@ -220,7 +220,7 @@ Il existe différentes manières de configurer l’intercepteur en fonction de v
 
 Cet exemple montre des méthodes courantes pour indiquer à la trousse SDK quelles routes doivent avoir un en-tête `Authorization` :
 
-```javascript
+```javascript lines
 // Modify your existing SDK configuration to include the httpInterceptor config
 AuthModule.forRoot({
   domain: 'YOUR_AUTH0_DOMAIN',
@@ -283,7 +283,7 @@ AuthModule.forRoot({
 
 Effectuez votre appel API en utilisant le service `HttpClient` d’Angular. Les jetons d’accès doivent être automatiquement inclus via l’en-tête `Authorization` pour les routes qui correspondent à la configuration.
 
-```
+```javascript lines
 export class MyComponent {
   constructor(private http: HttpClient) {}
 

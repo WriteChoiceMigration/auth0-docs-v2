@@ -1,13 +1,13 @@
 ---
 title: "Dépanner les domaines personnalisés"
 permalink: "troubleshoot-custom-domains"
+'description': "Découvrez comment résoudre les problèmes liés aux domaines personnalisés."
 'og:title': "Dépanner les domaines personnalisés"
 'og:description': "Découvrez comment résoudre les problèmes liés aux domaines personnalisés."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Dépanner les domaines personnalisés"
 'twitter:description': "Découvrez comment résoudre les problèmes liés aux domaines personnalisés."
 ---
-# Dépanner les domaines personnalisés
 
 Regardez la vidéo suivante sur les problèmes courants liés aux domaines personnalisés et reportez-vous aux sections ci-dessous pour connaître les étapes de dépannage pour des scénarios spécifiques.
 
@@ -44,7 +44,7 @@ Si vous voyez cette erreur lors de la configuration d’un domaine personnalisé
 
 Si votre application émet une requête /authorize avec `audience=https://login.northwind.com/userinfo`, le serveur renverra une erreur `Service introuvable : https://login.northwind.com/userinfo`. Ceci survient puisque même si vous définissez un domaine personnalisé, l’identifiant API du point de terminaison `/userinfo` reste `https://{yourOriginalAuth0Domain}/userinfo`.
 
-De même, l’utilisation de votre domaine personnalisé dans les appels à l’[Auth0 Management API](/docs/api/management/v2) entraînera une erreur pour la même raison.
+De même, l’utilisation de votre domaine personnalisé dans les appels à l’[Auth0 Management API](/docs/fr-ca/api/management/v2) entraînera une erreur pour la même raison.
 
 Pour résoudre ceci, votre application devrait plutôt utiliser `audience=https://{yourOriginalAuth0Domain}/userinfo`. Vous pouvez également retirer complètement ce paramètre `audience=[...]/userinfo` si votre application est indiquée comme étant **OIDC-Conformant** sous l’onglet **OAuth2** des **paramètres avancés** de l’application.
 

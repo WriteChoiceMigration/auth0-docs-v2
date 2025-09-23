@@ -1,13 +1,13 @@
 ---
 title: "Déclencheurs d’actions : post-connexion – Objet d’événement"
 permalink: "post-login-event-object"
+'description': "Découvrez l’objet d’événement du déclencheur d’action post-connexion, qui fournit des informations contextuelles sur un utilisateur unique se connectant via Auth0."
 'og:title': "Déclencheurs d’actions : post-connexion – Objet d’événement"
 'og:description': "Découvrez l’objet d’événement du déclencheur d’action post-connexion, qui fournit des informations contextuelles sur un utilisateur unique se connectant via Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Déclencheurs d’actions : post-connexion – Objet d’événement"
 'twitter:description': "Découvrez l’objet d’événement du déclencheur d’action post-connexion, qui fournit des informations contextuelles sur un utilisateur unique se connectant via Auth0."
 ---
-# Déclencheurs d’actions : post-connexion – Objet d’événement
 
 L’objet `event` pour le déclencheur d’actions post-connexion fournit des informations contextuelles sur un utilisateur unique se connectant via Auth0.
 
@@ -21,7 +21,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <tbody>
 <tr>
 <td>
-<p><code>event.authentication</code></p>
+<p>`event.authentication`</p>
 <p><em>(Facultatif)</em></p>
 </td>
 <td>
@@ -31,7 +31,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>methods</code> <em>Tableau d’objets</em>.
+`methods` <em>Tableau d’objets</em>.
             <p>
               Contient les méthodes d’authentification utilisées par un utilisateur
               au cours de sa session.
@@ -45,61 +45,61 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Un objet avec les propriétés suivantes :</p>
 <ul>
 <li>
-<code>name</code> <em>Chaîne</em>.
+`name` <em>Chaîne</em>.
                         <p>
                           Le nom du premier facteur qui a été complété.
                           Les valeurs comprennent :
                         </p>
 <ul>
 <li>
-<code>"federated"</code> Une connexion sociale ou
+`"federated"` Une connexion sociale ou
                             d’entreprise a été utilisée pour authentifier
                             l’utilisateur en tant que premier facteur.
                           </li>
 <li>
-<code>"pwd"</code> Un mot de passe a été utilisé pour
+`"pwd"` Un mot de passe a été utilisé pour
                             authentifier un utilisateur de connexion de base de données comme premier
                             facteur.
                           </li>
 <li>
-<code>"passkey"</code> Une clé d’identification a été utilisée pour
+`"passkey"` Une clé d’identification a été utilisée pour
                             authentifier un utilisateur de connexion de base de
                             données comme premier facteur.
                           </li>
 <li>
-<code>"sms"</code> Une connexion SMS sans mot de passe a été utilisée pour
+`"sms"` Une connexion SMS sans mot de passe a été utilisée pour
                             authentifier l’utilisateur en tant que premier facteur.
                           </li>
 <li>
-<code>"email"</code> Une connexion courriel sans mot de passe
+`"email"` Une connexion courriel sans mot de passe
                             a été utilisée pour authentifier l’utilisateur en tant
                             que premier facteur ou vérifier le courriel pour la réinitialisation du mot de passe.
                           </li>
 <li>
-<code>"phone_number"</code> Un numéro de téléphone a été utilisé
+`"phone_number"` Un numéro de téléphone a été utilisé
                             pour la réinitialisation du mot de passe.
                           </li>
 <li>
-<code>"mock"</code> Utilisé pour les tests internes.
+`"mock"` Utilisé pour les tests internes.
                           </li>
 <li>
-<code>string</code> Méthode d’authentification personnalisée
+`string` Méthode d’authentification personnalisée
                             indiquée par une URL (comme deuxième facteur ou facteur ultérieur).
                           </li>
 </ul>
 </li>
-<li><code>timestamp</code> <em>Chaîne</em>.</li>
+<li>`timestamp` <em>Chaîne</em>.</li>
 </ul>
 </li>
 <li>
 <p>Un objet avec les propriétés suivantes :</p>
 <ul>
 <li>
-<code>name</code> <em>La valeur « mfa »</em>.
+`name` <em>La valeur « mfa »</em>.
                         <span>L’utilisateur a procédé à une authentification multifacteur
                             (deuxième facteur ou facteurs ultérieurs).</span>
 </li>
-<li><code>timestamp</code> <em>Chaîne</em>.</li>
+<li>`timestamp` <em>Chaîne</em>.</li>
 </ul>
 </li>
 </ul>
@@ -107,7 +107,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </ul>
 </li>
 <li>
-<code>riskAssessment</code> <em>Objet facultatif</em>.
+`riskAssessment` <em>Objet facultatif</em>.
             <p>
               Détails sur les évaluations de risques obtenues lors du processus
               de connexion ou de réinitialisation du mot de passe.
@@ -115,11 +115,11 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>assessments</code> <em>Objet</em>.
+`assessments` <em>Objet</em>.
                 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>ImpossibleTravel</code> <em>Objet facultatif</em>.
+`ImpossibleTravel` <em>Objet facultatif</em>.
                     <p>
                       Détermine si l’utilisateur se connecte à partir d’un lieu
                       signalant un trajet impossible.
@@ -127,86 +127,86 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>code</code> <em>Chaîne</em>.
+`code` <em>Chaîne</em>.
                         <p>Valeurs possibles :</p>
 <ul>
-<li><code>minimal_travel_from_last_login</code></li>
-<li><code>travel_from_last_login</code></li>
+<li>`minimal_travel_from_last_login`</li>
+<li>`travel_from_last_login`</li>
 <li>
-<code>substantial_travel_from_last_login</code>
+`substantial_travel_from_last_login`
 </li>
 <li>
-<code>impossible_travel_from_last_login</code>
+`impossible_travel_from_last_login`
 </li>
-<li><code>invalid_travel</code></li>
-<li><code>missing_geoip</code></li>
-<li><code>anonymous_proxy</code></li>
-<li><code>unknown_location</code></li>
-<li><code>initial_login</code></li>
-<li><code>location_history_not_found</code></li>
-<li><code>assessment_not_available</code></li>
+<li>`invalid_travel`</li>
+<li>`missing_geoip`</li>
+<li>`anonymous_proxy`</li>
+<li>`unknown_location`</li>
+<li>`initial_login`</li>
+<li>`location_history_not_found`</li>
+<li>`assessment_not_available`</li>
 </ul>
 </li>
 <li>
-<code>confidence</code> <em>Chaîne</em>.
+`confidence` <em>Chaîne</em>.
                         <p>Valeurs possibles :</p>
 <ul>
-<li><code>low</code></li>
-<li><code>medium</code></li>
-<li><code>high</code></li>
-<li><code>neutral</code></li>
+<li>`low`</li>
+<li>`medium`</li>
+<li>`high`</li>
+<li>`neutral`</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<code>NewDevice</code> <em>Objet facultatif</em>.
+`NewDevice` <em>Objet facultatif</em>.
                     <p>
                       Détermine si l’utilisateur se connecte à partir d’un appareil connu.
                     </p>
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>code</code> <em>Chaîne</em>.
+`code` <em>Chaîne</em>.
                         <p>Valeurs possibles :</p>
 <ul>
-<li><code>match</code></li>
-<li><code>partial_match</code></li>
-<li><code>no_match</code></li>
-<li><code>initial_login</code></li>
-<li><code>unknown_device</code></li>
-<li><code>no_device_history</code></li>
-<li><code>assessment_not_available</code></li>
+<li>`match`</li>
+<li>`partial_match`</li>
+<li>`no_match`</li>
+<li>`initial_login`</li>
+<li>`unknown_device`</li>
+<li>`no_device_history`</li>
+<li>`assessment_not_available`</li>
 </ul>
 </li>
 <li>
-<code>confidence</code> <em>Chaîne</em>.
+`confidence` <em>Chaîne</em>.
                         <p>Valeurs possibles :</p>
 <ul>
-<li><code>low</code></li>
-<li><code>medium</code></li>
-<li><code>high</code></li>
-<li><code>neutral</code></li>
+<li>`low`</li>
+<li>`medium`</li>
+<li>`high`</li>
+<li>`neutral`</li>
 </ul>
 </li>
 <li>
-<code>details</code> <em>Objet facultatif</em>.
+`details` <em>Objet facultatif</em>.
                         <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>device</code> <em>Chaîne facultative</em>.
+`device` <em>Chaîne facultative</em>.
                             <p>Valeurs possibles :</p>
 <ul>
-<li><code>known</code></li>
-<li><code>unknown</code></li>
+<li>`known`</li>
+<li>`unknown`</li>
 </ul>
 </li>
 <li>
-<code>useragent</code> <em>Chaîne facultative</em>.
+`useragent` <em>Chaîne facultative</em>.
                             <p>Valeurs possibles :</p>
 <ul>
-<li><code>known</code></li>
-<li><code>unknown</code></li>
+<li>`known`</li>
+<li>`unknown`</li>
 </ul>
 </li>
 </ul>
@@ -214,7 +214,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </ul>
 </li>
 <li>
-<code>UntrustedIP</code> <em>Objet facultatif</em>.
+`UntrustedIP` <em>Objet facultatif</em>.
                     <p>
                       Indique si l’IP a été trouvée dans le répertoire Auth0 des
                       IP à faible réputation.
@@ -222,40 +222,40 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>code</code> <em>Chaîne</em>.
+`code` <em>Chaîne</em>.
                         <p>Valeurs possibles :</p>
 <ul>
-<li><code>not_found_on_deny_list</code></li>
-<li><code>found_on_deny_list</code></li>
-<li><code>invalid_ip_address</code></li>
-<li><code>assessment_not_available</code></li>
+<li>`not_found_on_deny_list`</li>
+<li>`found_on_deny_list`</li>
+<li>`invalid_ip_address`</li>
+<li>`assessment_not_available`</li>
 </ul>
 </li>
 <li>
-<code>confidence</code> <em>Chaîne</em>.
+`confidence` <em>Chaîne</em>.
                         <p>Valeurs possibles :</p>
 <ul>
-<li><code>low</code></li>
-<li><code>medium</code></li>
-<li><code>high</code></li>
-<li><code>neutral</code></li>
+<li>`low`</li>
+<li>`medium`</li>
+<li>`high`</li>
+<li>`neutral`</li>
 </ul>
 </li>
 <li>
-<code>details</code> <em>Objet facultatif</em>.
+`details` <em>Objet facultatif</em>.
                         <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>category</code> <em>Chaîne facultative</em>.
+`category` <em>Chaîne facultative</em>.
                           </li>
 <li>
-<code>ip</code> <em>Chaîne facultative</em>.
+`ip` <em>Chaîne facultative</em>.
                             <span>L’adresse IP à l’origine de la demande.</span>
 </li>
 <li>
-<code>matches</code> <em>Chaîne facultative</em>.
+`matches` <em>Chaîne facultative</em>.
                           </li>
-<li><code>source</code> <em>Chaîne facultative</em>.</li>
+<li>`source` <em>Chaîne facultative</em>.</li>
 </ul>
 </li>
 </ul>
@@ -263,17 +263,17 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </ul>
 </li>
 <li>
-<code>confidence</code> <em>Chaîne</em>.
+`confidence` <em>Chaîne</em>.
                 <p>Score de risque global</p>
 <p>Valeurs possibles :</p>
 <ul>
-<li><code>low</code></li>
-<li><code>medium</code></li>
-<li><code>high</code></li>
-<li><code>neutral</code></li>
+<li>`low`</li>
+<li>`medium`</li>
+<li>`high`</li>
+<li>`neutral`</li>
 </ul>
 </li>
-<li><code>version</code> <em>Chaîne</em>.</li>
+<li>`version` <em>Chaîne</em>.</li>
 </ul>
 </li>
 </ul>
@@ -281,7 +281,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </tr>
 <tr>
 <td>
-<p><code>event.authorization</code></p>
+<p>`event.authorization`</p>
 <p><em>(Facultatif)</em></p>
 </td>
 <td>
@@ -292,7 +292,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>roles</code> <em>Tableau de chaînes</em>.
+`roles` <em>Tableau de chaînes</em>.
             <span>Tableau contenant les noms des rôles attribués à un utilisateur.</span>
 </li>
 </ul>
@@ -300,7 +300,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </tr>
 <tr>
 <td>
-<p><code>event.client</code></p>
+<p>`event.client`</p>
 </td>
 <td>
 <p>
@@ -310,15 +310,15 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>client_id</code> <em>Chaîne</em>.
+`client_id` <em>Chaîne</em>.
             <span>L’ID client de l’application à laquelle l’utilisateur se connecte.</span>
 </li>
 <li>
-<code>metadata</code> <em>Dictionnaire</em>.
+`metadata` <em>Dictionnaire</em>.
             <span>Un objet qui contient les autres propriétés d’une application.</span>
 </li>
 <li>
-<code>name</code> <em>Chaîne</em>.
+`name` <em>Chaîne</em>.
             <span>Le nom de l’application (tel que défini dans Dashboard).</span>
 </li>
 </ul>
@@ -326,7 +326,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </tr>
 <tr>
 <td>
-<p><code>event.connection</code></p>
+<p>`event.connection`</p>
 </td>
 <td>
 <p>
@@ -335,25 +335,25 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>id</code> <em>Chaîne</em>.
+`id` <em>Chaîne</em>.
             <span>L’identifiant unique de la connexion.</span>
 </li>
 <li>
-<code>metadata</code> <em>Dictionnaire facultatif</em>.
+`metadata` <em>Dictionnaire facultatif</em>.
             <span>Métadonnées associées à la connexion.</span>
 </li>
 <li>
-<code>name</code> <em>Chaîne</em>.
+`name` <em>Chaîne</em>.
             <span>Le nom de la connexion utilisée pour authentifier l’utilisateur (tel que
-              <code>twitter</code> ou <code>some-g-suite-domain</code>).</span>
+              `twitter` ou `some-g-suite-domain`).</span>
 </li>
 <li>
-<code>strategy</code> <em>Chaîne</em>.
+`strategy` <em>Chaîne</em>.
             <span>Le type de connexion. Pour les connexions sociales,
-              <code>event.connection.strategy === event.connection.name</code>
+              `event.connection.strategy === event.connection.name`
               Pour les connexions d’entreprise, la stratégie est
-              <code>waad</code> (Windows Entra ID), <code>ad</code> (Active
-              Directory/LDAP), <code>auth0</code> (connexions de bases de données),
+              `waad` (Windows Entra ID), `ad` (Active
+              Directory/LDAP), `auth0` (connexions de bases de données),
               etc.</span>
 </li>
 </ul>
@@ -361,7 +361,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </tr>
 <tr>
 <td>
-<p><code>event.organization</code></p>
+<p>`event.organization`</p>
 <p><em>(Facultatif)</em></p>
 </td>
 <td>
@@ -372,19 +372,19 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>display_name</code> <em>Chaîne</em>.
+`display_name` <em>Chaîne</em>.
             <span>Le nom convivial de l’Organization.</span>
 </li>
 <li>
-<code>id</code> <em>Chaîne</em>.
+`id` <em>Chaîne</em>.
             <span>L’identifiant de l’Organization.</span>
 </li>
 <li>
-<code>metadata</code> <em>Dictionnaire</em>.
+`metadata` <em>Dictionnaire</em>.
             <span>Métadonnées associées à l’Organization.</span>
 </li>
 <li>
-<code>name</code> <em>Chaîne</em>.
+`name` <em>Chaîne</em>.
             <span>Le nom de l’Organization.</span>
 </li>
 </ul>
@@ -392,7 +392,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </tr>
 <tr>
 <td>
-<p><code>event.prompt</code></p>
+<p>`event.prompt`</p>
 <p><em>(Facultatif)</em></p>
 </td>
 <td>
@@ -400,12 +400,12 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>fields</code> <em>Dictionnaire facultatif</em>.
+`fields` <em>Dictionnaire facultatif</em>.
             <span>Champs et données de champs masqués.</span>
 </li>
-<li><code>id</code> <em>Chaîne</em>. <span>L’ID de l’invite.</span></li>
+<li>`id` <em>Chaîne</em>. <span>L’ID de l’invite.</span></li>
 <li>
-<code>vars</code> <em>Dictionnaire facultatif</em>.
+`vars` <em>Dictionnaire facultatif</em>.
             <span>Données de variables partagées.</span>
 </li>
 </ul>
@@ -413,7 +413,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </tr>
 <tr>
 <td>
-<p><code>event.refresh_token</code></p>
+<p>`event.refresh_token`</p>
 <p><em>(Facultatif)</em></p>
 </td>
 <td>
@@ -421,97 +421,97 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>client_id</code> <em>Chaîne facultative</em>.
+`client_id` <em>Chaîne facultative</em>.
             <span>[Clients Enterprise] L’ID du client associé au
               jeton d’actualisation.</span>
 </li>
 <li>
-<code>created_at</code> <em>Chaîne</em>.
+`created_at` <em>Chaîne</em>.
             <span>[Clients Enterprise] Horodatage du moment de la création du
               jeton d’actualisation.</span>
 </li>
 <li>
-<code>device</code> <em>Objet facultatif</em>.
+`device` <em>Objet facultatif</em>.
             <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>initial_asn</code> <em>Chaîne facultative</em>.
+`initial_asn` <em>Chaîne facultative</em>.
                 <span>[Clients Enterprise] Premier numéro de système autonome
                   associé à ce jeton d’actualisation.</span>
 </li>
 <li>
-<code>initial_ip</code> <em>Chaîne facultative</em>.
+`initial_ip` <em>Chaîne facultative</em>.
                 <span>[Clients Enterprise] Première adresse IP associée à ce
               jeton d’actualisation.</span>
 </li>
 <li>
-<code>initial_user_agent</code> <em>Chaîne facultative</em>.
+`initial_user_agent` <em>Chaîne facultative</em>.
                 <span>[Clients Enterprise] Premier agent utilisateur de l’appareil
               associé au jeton d’actualisation.</span>
 </li>
 <li>
-<code>last_asn</code> <em>Chaîne facultative</em>.
+`last_asn` <em>Chaîne facultative</em>.
                 <span>[Clients Enterprise] Dernier numéro de système autonome à partir
                   duquel ce jeton d’actualisation a été échangé pour la dernière fois.</span>
 </li>
 <li>
-<code>last_ip</code> <em>Chaîne facultative</em>.
+`last_ip` <em>Chaîne facultative</em>.
                 <span>[Clients Enterprise] Dernière adresse IP à partir de laquelle ce
                   jeton d’actualisation a été échangé pour la dernière fois.</span>
 </li>
 <li>
-<code>last_user_agent</code> <em>Chaîne facultative</em>.
+`last_user_agent` <em>Chaîne facultative</em>.
                 <span>[Clients Enterprise] Dernier agent utilisateur autonome de l’appareil
                   à partir duquel ce jeton d’actualisation a été échangé pour la dernière fois.</span>
 </li>
 </ul>
 </li>
 <li>
-<code>expires_at</code> <em>Chaîne facultative</em>.
+`expires_at` <em>Chaîne facultative</em>.
             <span>[Clients Enterprise] Horodatage de l’expiration absolue du
               jeton d’actualisation.</span>
 </li>
 <li>
-<code>id</code> <em>Chaîne</em>.
+`id` <em>Chaîne</em>.
             <span>[Clients Enterprise] L’ID du jeton d’actualisation.</span>
 </li>
 <li>
-<code>idle_expires_at</code> <em>Chaîne facultative</em>.
+`idle_expires_at` <em>Chaîne facultative</em>.
             <span>[Clients Enterprise] Horodatage de l’expiration à l’inactivité du
               jeton d’actualisation</span>
 </li>
 <li>
-<code>last_exchanged_at</code> <em>Chaîne facultative</em>.
+`last_exchanged_at` <em>Chaîne facultative</em>.
             <span>[Clients Enterprise] Horodatage du dernier succès d’échange du
               jeton d’actualisation.</span>
 </li>
 <li>
-<code>resource_servers</code> <em>Tableau facultatif d’objets</em>.
+`resource_servers` <em>Tableau facultatif d’objets</em>.
             <p>Les éléments comprennent les propriétés suivantes :</p>
 <ul>
 <li>
-<code>audience</code> <em>Chaîne</em>.
+`audience` <em>Chaîne</em>.
                 <span>[Clients Enterprise ] L’<dfn id="react-containers-DefinitionTooltip-0"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">audience</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn> du jeton
                   d’actualisation.</span>
 </li>
 <li>
-<code>scopes</code> <em>Chaîne</em>.
+`scopes` <em>Chaîne</em>.
                 <span>[Clients Enterprise] Permissions du jeton d’actualisation.</span>
 </li>
 </ul>
 </li>
 <li>
-<code>rotating</code> <em>Booléen facultatif </em>.
+`rotating` <em>Booléen facultatif </em>.
             <span>[Clients Enterprise] Si le jeton d’actualisation est un jeton
               d’actualisation rotatif.</span>
 </li>
 <li>
-<code>session_id</code> <em>Chaîne facultative</em>.
+`session_id` <em>Chaîne facultative</em>.
             <span>[Clients Enterprise] L’ID de la session liée au
               jeton d’actualisation.</span>
 </li>
 <li>
-<code>user_id</code> <em>Chaîne facultative</em>.
+`user_id` <em>Chaîne facultative</em>.
             <span>[Clients Enterprise] L’ID de l’utilisateur lié au
               jeton d’actualisation.</span>
 </li>
@@ -520,64 +520,64 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </tr>
 <tr>
 <td>
-<p><code>event.request</code></p>
+<p>`event.request`</p>
 </td>
 <td>
 <p>Détails sur la demande qui a initié la transaction.</p>
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>asn</code> <em>Chaîne facultative</em>.
+`asn` <em>Chaîne facultative</em>.
             <span>NSA (numéro de système autonome) de l’agent utilisateur qui fait
               la demande.</span>
 </li>
 <li>
-<code>body</code> <em>Dictionnaire</em>.
+`body` <em>Dictionnaire</em>.
             <span>Le corps de la requête POST. Ces données ne seront disponibles
               que pendant les flux d’échange de jetons d’actualisation et d’identifiants de clients, ainsi que lors de
               l’action post-connexion.</span>
 </li>
 <li>
-<code>geoip</code> <em>Objet</em>.
+`geoip` <em>Objet</em>.
             <p>Comprend les propriétés suivantes :</p>
 <ul>
-<li><code>cityName</code> <em>Chaîne facultative</em>.</li>
-<li><code>continentCode</code> <em>Chaîne facultative</em>.</li>
-<li><code>countryCode</code> <em>Chaîne facultative</em>.</li>
-<li><code>countryCode3</code> <em>Chaîne facultative</em>.</li>
-<li><code>countryName</code> <em>Chaîne facultative</em>.</li>
-<li><code>latitude</code> <em>Nombre facultatif</em>.</li>
-<li><code>longitude</code> <em>Nombre facultatif</em>.</li>
-<li><code>subdivisionCode</code> <em>Chaîne facultative</em>.</li>
-<li><code>subdivisionName</code> <em>Chaîne facultative</em>.</li>
-<li><code>timeZone</code> <em>Chaîne facultative</em>.</li>
+<li>`cityName` <em>Chaîne facultative</em>.</li>
+<li>`continentCode` <em>Chaîne facultative</em>.</li>
+<li>`countryCode` <em>Chaîne facultative</em>.</li>
+<li>`countryCode3` <em>Chaîne facultative</em>.</li>
+<li>`countryName` <em>Chaîne facultative</em>.</li>
+<li>`latitude` <em>Nombre facultatif</em>.</li>
+<li>`longitude` <em>Nombre facultatif</em>.</li>
+<li>`subdivisionCode` <em>Chaîne facultative</em>.</li>
+<li>`subdivisionName` <em>Chaîne facultative</em>.</li>
+<li>`timeZone` <em>Chaîne facultative</em>.</li>
 </ul>
 </li>
 <li>
-<code>hostname</code> <em>Chaîne facultative</em>.
+`hostname` <em>Chaîne facultative</em>.
             <span>Le nom d’hôte utilisé pour le flux
               d’authentification.</span>
 </li>
 <li>
-<code>ip</code> <em>Chaîne</em>.
+`ip` <em>Chaîne</em>.
             <span>L’adresse IP à l’origine de la demande.</span>
 </li>
 <li>
-<code>language</code> <em>Chaîne facultative</em>.
+`language` <em>Chaîne facultative</em>.
             <span>La langue demandée par le navigateur.</span>
 </li>
 <li>
-<code>method</code> <em>Chaîne</em>.
+`method` <em>Chaîne</em>.
             <span>La méthode HTTP utilisée pour la demande</span>
 </li>
 <li>
-<code>query</code> <em>Dictionnaire</em>.
+`query` <em>Dictionnaire</em>.
             <span>Les paramètres de la chaîne de requête envoyés à la demande
               d’autorisation.</span>
 </li>
 <li>
-<code>user_agent</code> <em>Chaîne facultative</em>.
-            <span>La valeur de l’en-tête <code>User-Agent</code> reçu lors du
+`user_agent` <em>Chaîne facultative</em>.
+            <span>La valeur de l’en-tête `User-Agent` reçu lors du
               lancement de la transaction.</span>
 </li>
 </ul>
@@ -585,7 +585,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </tr>
 <tr>
 <td>
-<p><code>event.resource_server</code></p>
+<p>`event.resource_server`</p>
 <p><em>(Facultatif)</em></p>
 </td>
 <td>
@@ -596,16 +596,16 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>identifier</code> <em>Chaîne</em>.
+`identifier` <em>Chaîne</em>.
             <span>L’identifiant du serveur de ressources. Par exemple :
-              <code>https://your-api.example.com</code>.</span>
+              `https://your-api.example.com`.</span>
 </li>
 </ul>
 </td>
 </tr>
 <tr>
 <td>
-<p><code>event.session</code></p>
+<p>`event.session`</p>
 <p><em>(Facultatif)</em></p>
 </td>
 <td>
@@ -613,30 +613,30 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>authenticated_at</code> <em>Chaîne facultative</em>.
+`authenticated_at` <em>Chaîne facultative</em>.
             <span>[Clients Enterprise] Date et heure de la dernière authentification
               de la session.</span>
 </li>
 <li>
-<code>clients</code> <em>Tableau facultatif d’objets</em>.
+`clients` <em>Tableau facultatif d’objets</em>.
             <p>
               [Clients Enterprise] Liste des détails du client pour cette session.
             </p>
 <p>Les éléments comprennent les propriétés suivantes :</p>
 <ul>
 <li>
-<code>client_id</code> <em>Chaîne</em>.
+`client_id` <em>Chaîne</em>.
                 <span>[Clients Enterprise] ID du client pour cette session.</span>
 </li>
 </ul>
 </li>
 <li>
-<code>created_at</code> <em>Chaîne facultative</em>.
+`created_at` <em>Chaîne facultative</em>.
             <span>[Clients Enterprise] Date et heure de la création de la
               session.</span>
 </li>
 <li>
-<code>device</code> <em>Objet facultatif</em>.
+`device` <em>Objet facultatif</em>.
             <p>
               [Clients Enterprise] Métadonnées relatives à l’appareil utilisé lors de
               la session.
@@ -644,63 +644,63 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>initial_asn</code> <em>Chaîne facultative</em>.
+`initial_asn` <em>Chaîne facultative</em>.
                 <span>[Clients Enterprise] Premier numéro de système autonome
                   associé à cette session.</span>
 </li>
 <li>
-<code>initial_ip</code> <em>Chaîne facultative</em>.
+`initial_ip` <em>Chaîne facultative</em>.
                 <span>[Clients Enterprise] Première adresse IP associée à cette
                   session.</span>
 </li>
 <li>
-<code>initial_user_agent</code> <em>Chaîne facultative</em>.
+`initial_user_agent` <em>Chaîne facultative</em>.
                 <span>[Clients Enterprise] Premier agent utilisateur de l’appareil
                   associé à cette session.</span>
 </li>
 <li>
-<code>last_asn</code> <em>Chaîne facultative</em>.
+`last_asn` <em>Chaîne facultative</em>.
                 <span>[Clients Enterprise] Dernier numéro de système autonome à partir
                   duquel cet utilisateur s’est connecté.</span>
 </li>
 <li>
-<code>last_ip</code> <em>Chaîne facultative</em>.
+`last_ip` <em>Chaîne facultative</em>.
                 <span>[Clients Enterprise] Dernière adresse IP à partir de laquelle cet
                   utilisateur s’est connecté.</span>
 </li>
 <li>
-<code>last_user_agent</code> <em>Chaîne facultative</em>.
+`last_user_agent` <em>Chaîne facultative</em>.
                 <span>[Clients Enterprise] Dernier agent utilisateur de l’appareil à partir
                   duquel cet utilisateur s’est connecté.</span>
 </li>
 </ul>
 </li>
 <li>
-<code>expires_at</code> <em>Chaîne facultative</em>.
+`expires_at` <em>Chaîne facultative</em>.
             <span>[Clients Enterprise] Date et heure de l’expiration de la
               session.</span>
 </li>
 <li>
-<code>id</code> <em>Chaîne</em>.
+`id` <em>Chaîne</em>.
             <span>L’ID de la session en cours.</span>
 </li>
 <li>
-<code>idle_expires_at</code> <em>Chaîne facultative</em>.
+`idle_expires_at` <em>Chaîne facultative</em>.
             <span>[Clients Enterprise] Date et heure de l’expiration à l’inactivité de la
               session.</span>
 </li>
 <li>
-<code>last_interacted_at</code> <em>Chaîne facultative</em>.
+`last_interacted_at` <em>Chaîne facultative</em>.
             <span>[Clients Enterprise] Date et heure de la dernière interaction
               avec la session.</span>
 </li>
 <li>
-<code>updated_at</code> <em>Chaîne facultative</em>.
+`updated_at` <em>Chaîne facultative</em>.
             <span>[Clients Enterprise] Date et heure de la dernière mise à jour
               de la session.</span>
 </li>
 <li>
-<code>user_id</code> <em>Chaîne facultative</em>.
+`user_id` <em>Chaîne facultative</em>.
             <span>[Clients Enterprise] ID de l’utilisateur qui peut être utilisé lors
               de l’interaction avec d’autres API.</span>
 </li>
@@ -709,14 +709,14 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </tr>
 <tr>
 <td>
-<p><code>event.stats</code></p>
+<p>`event.stats`</p>
 </td>
 <td>
 <p>Statistiques de connexion pour l’utilisateur actuel.</p>
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>logins_count</code> <em>Nombre</em>.
+`logins_count` <em>Nombre</em>.
             <span>Le nombre de connexions de l’utilisateur.</span>
 </li>
 </ul>
@@ -724,14 +724,14 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </tr>
 <tr>
 <td>
-<p><code>event.tenant</code></p>
+<p>`event.tenant`</p>
 </td>
 <td>
 <p>Informations à propos du locataire associé à la transaction en cours.</p>
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>id</code> <em>Chaîne</em>.
+`id` <em>Chaîne</em>.
             <span>Le nom du locataire.</span>
 </li>
 </ul>
@@ -739,7 +739,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </tr>
 <tr>
 <td>
-<p><code>event.transaction</code></p>
+<p>`event.transaction`</p>
 <p><em>(Facultatif)</em></p>
 </td>
 <td>
@@ -747,105 +747,105 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>acr_values</code> <em>Tableau de chaînes</em>.
+`acr_values` <em>Tableau de chaînes</em>.
             <span>Toutes les acr_values fournies dans la demande d’authentification
               initiale.</span>
 </li>
 <li>
-<code>linking_id</code> <em>Chaîne facultative</em>.
+`linking_id` <em>Chaîne facultative</em>.
             <span>ID de liaison dynamique qui permet aux développeurs de référencer
               cette transaction.</span>
 </li>
 <li>
-<code>locale</code> <em>Chaîne</em>.
+`locale` <em>Chaîne</em>.
             <span>La langue locale à utiliser pour cette transaction, déterminée en
               comparant les langues demandées par le navigateur aux
               paramètres linguistiques du locataire.</span>
 </li>
 <li>
-<code>login_hint</code> <em>Chaîne facultative</em>.
+`login_hint` <em>Chaîne facultative</em>.
             <span>Indication au serveur d’autorisations de l’identifiant de connexion
               que l’utilisateur final pourrait utiliser pour se connecter (si nécessaire).</span>
 </li>
 <li>
-<code>prompt</code> <em>Tableau facultatif de chaînes</em>.
+`prompt` <em>Tableau facultatif de chaînes</em>.
             <span>Liste d’instructions indiquant si l’utilisateur peut être invité à
               s’authentifier à nouveau et à donner son consentement.</span>
 </li>
 <li>
-<code>protocol</code> <em>Chaîne facultative</em>.
+`protocol` <em>Chaîne facultative</em>.
             <p>Valeurs possibles :</p>
 <ul>
 <li>
-<code>oidc-basic-profile</code>
+`oidc-basic-profile`
 <span>Connexion la plus utilisée, basée sur le web.</span>
 </li>
 <li>
-<code>oidc-ciba</code>
+`oidc-ciba`
 <span>Utilisée pour le flux d’authentification de canal d’appui initié par le client (CIBA).</span>
 </li>
 <li>
-<code>oidc-implicit-profile</code>
+`oidc-implicit-profile`
 <span>Utilisée sur les appareils mobiles et les applications à page unique.</span>
 </li>
 <li>
-<code>oidc-hybrid-profile</code>
+`oidc-hybrid-profile`
 <span>Permet à votre application d’avoir un accès immédiat à un jeton
                   d’ID tout en assurant une récupération
                   sécurisée des jetons d’accès et d’actualisation.</span>
 </li>
 <li>
-<code>samlp</code> <span>Protocole SAML utilisé avec les applications SaaS.</span>
+`samlp` <span>Protocole SAML utilisé avec les applications SaaS.</span>
 </li>
 <li>
-<code>wsfed</code>
+`wsfed`
 <span>WS-Federation utilisé sur les produits Microsoft comme
                   Office365.</span>
 </li>
 <li>
-<code>wstrust-usernamemixed</code>
+`wstrust-usernamemixed`
 <span>Connexion utilisateur/mot de passe WS-trust utilisée sur CRM et Office365.</span>
 </li>
 <li>
-<code>oauth2-device-code</code>
+`oauth2-device-code`
 <span>Transaction utilisant le flux d’autorisation d’appareil.</span>
 </li>
 <li>
-<code>oauth2-resource-owner</code>
+`oauth2-resource-owner`
 <span>Connexion utilisateur/mot de passe généralement utilisée pour les
                   connexions de base de données.</span>
 </li>
 <li>
-<code>oauth2-resource-owner-jwt-bearer</code>
+`oauth2-resource-owner-jwt-bearer`
 <span>Connexion utilisant un JWT du porteur signé par la clé privée de
                   l’utilisateur.</span>
 </li>
 <li>
-<code>oauth2-password</code>
+`oauth2-password`
 <span>Connexion utilisant l’échange de mots de passe.</span>
 </li>
 <li>
-<code>oauth2-webauthn</code>
+`oauth2-webauthn`
 <span>Connexion utilisant l’échange webauthn.</span>
 </li>
 <li>
-<code>oauth2-access-token</code>
+`oauth2-access-token`
 <span>Actualisation d’un jeton à l’aide de l’échange de jetons d’actualisation.</span>
 </li>
 <li>
-<code>oauth2-refresh-token</code>
+`oauth2-refresh-token`
 <span>Actualisation d’un jeton à l’aide de l’échange de jetons d’actualisation.</span>
 </li>
-<li><code>oauth2-token-exchange</code></li>
+<li>`oauth2-token-exchange`</li>
 </ul>
 </li>
 <li>
-<code>redirect_uri</code> <em>Chaîne facultative</em>.
+`redirect_uri` <em>Chaîne facultative</em>.
             <span>URL vers laquelle Auth0 redirigera le navigateur une fois la
               transaction terminée.</span>
 </li>
 <li>
-<code>requested_authorization_details</code>
+`requested_authorization_details`
 <em>Tableau facultatif d’objets</em>.
             <p>
               Les détails d’une demande d’autorisation riche conformément à la
@@ -855,7 +855,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Les éléments comprennent les propriétés suivantes :</p>
 <ul>
 <li>
-<code>type</code> <em>Chaîne</em>.
+`type` <em>Chaîne</em>.
                 <span>Le type de détails d’autorisation sous forme de chaîne. La valeur du
               champ type détermine le contenu autorisé de l’objet qui le
               contient.</span>
@@ -863,41 +863,41 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </ul>
 </li>
 <li>
-<code>requested_scopes</code> <em>Tableau de chaînes</em>.
+`requested_scopes` <em>Tableau de chaînes</em>.
             <span>Les permissions demandées (le cas échéant) lors du lancement de ce
               flux d’authentification.</span>
 </li>
 <li>
-<code>response_mode</code> <em>Chaîne facultative</em>.
+`response_mode` <em>Chaîne facultative</em>.
             <p>
               Informe le serveur d’autorisations du mécanisme à utiliser pour
               renvoyer les paramètres du point de terminaison d’autorisation.
             </p>
 <p>Valeurs possibles :</p>
 <ul>
-<li><code>query</code></li>
-<li><code>fragment</code></li>
-<li><code>form_post</code></li>
-<li><code>web_message</code></li>
+<li>`query`</li>
+<li>`fragment`</li>
+<li>`form_post`</li>
+<li>`web_message`</li>
 </ul>
 </li>
 <li>
-<code>response_type</code> <em>Tableau facultatif de chaînes</em>.
+`response_type` <em>Tableau facultatif de chaînes</em>.
             <p>Valeurs possibles :</p>
 <ul>
-<li><code>code</code></li>
-<li><code>token</code></li>
-<li><code>id_token</code></li>
+<li>`code`</li>
+<li>`token`</li>
+<li>`id_token`</li>
 </ul>
 </li>
 <li>
-<code>state</code> <em>Chaîne facultative</em>.
+`state` <em>Chaîne facultative</em>.
             <span>Une chaîne alphanumérique arbitraire et opaque que votre application
               ajoute à la requête initiale qu’Auth0 inclut lors de la
               redirection vers votre application.</span>
 </li>
 <li>
-<code>ui_locales</code> <em>Tableau de chaînes</em>.
+`ui_locales` <em>Tableau de chaînes</em>.
             <span>Les ui_locales fournies dans la demande d’authentification
               initiale.</span>
 </li>
@@ -906,7 +906,7 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 </tr>
 <tr>
 <td>
-<p><code>event.user</code></p>
+<p>`event.user`</p>
 </td>
 <td>
 <p>
@@ -916,27 +916,27 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>app_metadata</code> <em>Dictionnaire</em>.
+`app_metadata` <em>Dictionnaire</em>.
             <span>Champs personnalisés qui stockent des informations sur un utilisateur
               qui influencent l’accès de l’utilisateur, comme le plan de
               support, les rôles de sécurité ou les groupes de contrôle d’accès.</span>
 </li>
 <li>
-<code>created_at</code> <em>Chaîne</em>.
+`created_at` <em>Chaîne</em>.
             <span>Horodatage indiquant la date de création du profil de
               l’utilisateur.</span>
 </li>
 <li>
-<code>email</code> <em>Chaîne facultative</em>.
+`email` <em>Chaîne facultative</em>.
             <span>(unique) Adresse de courriel de l’utilisateur.</span>
 </li>
 <li>
-<code>email_verified</code> <em>Booléen</em>.
+`email_verified` <em>Booléen</em>.
             <span>Indique si l’utilisateur a vérifié son adresse
               courriel.</span>
 </li>
 <li>
-<code>enrolledFactors</code> <em>Tableau facultatif d’objets</em>.
+`enrolledFactors` <em>Tableau facultatif d’objets</em>.
             <p>
               Un tableau des facteurs d’authentification que l’utilisateur a enregistrés.
             </p>
@@ -950,32 +950,32 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Comprend les propriétés suivantes :</p>
 <ul>
 <li>
-<code>options</code> <em>Dictionnaire facultatif</em>.
+`options` <em>Dictionnaire facultatif</em>.
                     <span>Options supplémentaires décrivant cette instance du
                       facteur enrôlé.</span>
 </li>
 <li>
-<code>type</code> <em>Chaîne</em>.
+`type` <em>Chaîne</em>.
                     <span>Le type de facteur d’authentification, tel que
-                      <code>push-notification</code>, <code>phone</code>,
-                      <code>email</code>, <code>otp</code>,
-                      <code>webauthn-roaming</code> et
-                      <code>webauthn-platform</code>.</span>
+                      `push-notification`, `phone`,
+                      `email`, `otp`,
+                      `webauthn-roaming` et
+                      `webauthn-platform`.</span>
 </li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<code>family_name</code> <em>Chaîne facultative</em>.
+`family_name` <em>Chaîne facultative</em>.
             <span>Nom de famille de l’utilisateur.</span>
 </li>
 <li>
-<code>given_name</code> <em>Chaîne facultative</em>.
+`given_name` <em>Chaîne facultative</em>.
             <span>Prénom de l’utilisateur.</span>
 </li>
 <li>
-<code>identities</code> <em>Tableau d’objets</em>.
+`identities` <em>Tableau d’objets</em>.
             <p>
               Contient des informations récupérées auprès du fournisseur d’identité
               auprès duquel l’utilisateur s’est authentifié à l’origine. Les utilisateurs peuvent également lier leur profil
@@ -986,82 +986,82 @@ L’objet `event` pour le déclencheur d’actions post-connexion fournit des in
 <p>Les éléments comprennent les propriétés suivantes :</p>
 <ul>
 <li>
-<code>connection</code> <em>Chaîne facultative</em>.
+`connection` <em>Chaîne facultative</em>.
                 <span>Nom de la connexion Auth0 utilisée pour authentifier
                   l’utilisateur.</span>
 </li>
 <li>
-<code>isSocial</code> <em>Booléen facultatif</em>.
+`isSocial` <em>Booléen facultatif</em>.
                 <span>Indique s’il s’agit d’une connexion sociale.</span>
 </li>
 <li>
-<code>profileData</code> <em>Dictionnaire facultatif</em>.
+`profileData` <em>Dictionnaire facultatif</em>.
                 <span>Informations sur l’utilisateur associées à la connexion. Lorsque
                   des profils sont liés, ils sont complétés par les informations
                   sur les utilisateurs associés aux comptes secondaires.</span>
 </li>
 <li>
-<code>provider</code> <em>Chaîne facultative</em>.
+`provider` <em>Chaîne facultative</em>.
                 <span>Nom de l’entité qui authentifie l’utilisateur, par exemple
                   Facebook, Google, SAML ou votre propre fournisseur.</span>
 </li>
 <li>
-<code>user_id</code> <em>Chaîne facultative</em>.
+`user_id` <em>Chaîne facultative</em>.
                 <span>Identifiant unique de l’utilisateur pour cette connexion/ce fournisseur.</span>
 </li>
 </ul>
 </li>
 <li>
-<code>last_password_reset</code> <em>Chaîne facultative</em>.
+`last_password_reset` <em>Chaîne facultative</em>.
             <span>Horodatage indiquant la dernière fois que le mot de passe de
               l’utilisateur a été réinitialisé/modifié. Lors de la création de l’utilisateur, ce champ n’existe pas. Cette
               propriété n’est disponible que pour les connexions de base de données.</span>
 </li>
 <li>
-<code>multifactor</code> <em>Tableau facultatif de chaînes</em>.
+`multifactor` <em>Tableau facultatif de chaînes</em>.
             <span>Liste des fournisseurs d’authentification multifacteur (MFA) auprès
               desquels l’utilisateur est inscrit. Ce tableau est mis à jour lorsque l’utilisateur s’inscrit à
               la MFA et lorsqu’un administrateur réinitialise les inscriptions
               à la MFA d’un utilisateur.</span>
 </li>
 <li>
-<code>name</code> <em>Chaîne facultative</em>.
+`name` <em>Chaîne facultative</em>.
             <span>Nom complet de l’utilisateur.</span>
 </li>
 <li>
-<code>nickname</code> <em>Chaîne facultative</em>.
+`nickname` <em>Chaîne facultative</em>.
             <span>Pseudonyme de l’utilisateur.</span>
 </li>
 <li>
-<code>phone_number</code> <em>Chaîne facultative</em>.
+`phone_number` <em>Chaîne facultative</em>.
             <span>Numéro de téléphone de l’utilisateur.</span>
 </li>
 <li>
-<code>phone_verified</code> <em>Booléen facultatif</em>.
+`phone_verified` <em>Booléen facultatif</em>.
             <span>Indique si l’utilisateur a vérifié son numéro de téléphone.</span>
 </li>
 <li>
-<code>picture</code> <em>Chaîne facultative</em>.
+`picture` <em>Chaîne facultative</em>.
             <span>URL pointant vers la
               <a href="https://auth0.com/docs/users/change-user-picture">photo de profil de l’utilisateur</a>.</span>
 </li>
 <li>
-<code>updated_at</code> <em>Chaîne</em>.
+`updated_at` <em>Chaîne</em>.
             <span>Horodatage indiquant la date de la dernière mise à jour/modification
               du profil de l’utilisateur.</span>
 </li>
 <li>
-<code>user_id</code> <em>Chaîne</em>.
+`user_id` <em>Chaîne</em>.
             <span>(unique) Identifiant unique de l’utilisateur.</span>
 </li>
 <li>
-<code>user_metadata</code> <em>Dictionnaire</em>.
+`user_metadata` <em>Dictionnaire</em>.
             <span>Champs personnalisés qui stockent des informations sur un utilisateur
               qui n’ont pas d’incidence sur les données auxquelles il peut
               ou ne peut pas accéder, comme l’adresse professionnelle, l’adresse personnelle ou les préférences de l’utilisateur.</span>
 </li>
 <li>
-<code>username</code> <em>Chaîne facultative</em>.
+`username` <em>Chaîne facultative</em>.
             <span>(unique) Nom d’utilisateur de l’utilisateur.</span>
 </li>
 </ul>

@@ -1,13 +1,13 @@
 ---
 title: "Modèles de script de suppression"
 permalink: "delete"
+'description': "Cet article décrit les modèles de scripts d’action personnalisés des bases de données pour la suppression des utilisateurs."
 'og:title': "Modèles de script de suppression"
 'og:description': "Cet article décrit les modèles de scripts d’action personnalisés des bases de données pour la suppression des utilisateurs."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Modèles de script de suppression"
 'twitter:description': "Cet article décrit les modèles de scripts d’action personnalisés des bases de données pour la suppression des utilisateurs."
 ---
-# Modèles de script de suppression
 
 Le script de suppression met en œuvre la fonction définie pour supprimer un utilisateur donné d’une base de données externe. Il est recommandé de nommer cette fonction `deleteUser`.
 
@@ -25,7 +25,7 @@ La fonction `deleteUser` permet de :
 
 La fonction `deleteUser` accepte deux paramètres et renvoie une fonction de `callback` :
 
-```
+```javascript lines
 deleteUser(id, callback): function
 ```
 
@@ -38,12 +38,12 @@ deleteUser(id, callback): function
 </thead>
 <tbody>
 <tr>
-<td><code>id</code></td>
+<td>`id`</td>
 <td>Chaîne</td>
-<td>Identité de l’utilisateur <code>user_id</code>. Ne commence pas par <code>auth0</code>.</td>
+<td>Identité de l’utilisateur `user_id`. Ne commence pas par `auth0`.</td>
 </tr>
 <tr>
-<td><code>callback</code></td>
+<td>`callback`</td>
 <td>Fonction</td>
 <td>Utilisée pour transmettre les données d’erreur ou de profil dans le pipeline.</td>
 </tr>
@@ -54,7 +54,7 @@ deleteUser(id, callback): function
 
 Voici un exemple fictif en JavaScript de la manière dont vous pourriez implémenter la fonction  `deleteUser`. Pour voir des exemples propres à une langue, consulter [Exemples de scripts propres à une langue](https://auth0.com/docs/authenticate/database-connections/custom-db/templates/delete#language-specific-script-examples).
 
-```javascript
+```javascript lines
 function deleteUser(id, callback) {
   // Send user identifier to external database API
   let options = {
@@ -82,7 +82,7 @@ La fonction de `callback` accepte un paramètre et renvoie une fonction.
 
 ### Définition
 
-```
+```javascript lines
 callback(error): function
 ```
 
@@ -96,7 +96,7 @@ callback(error): function
 </thead>
 <tbody>
 <tr>
-<td><code>error</code></td>
+<td>`error`</td>
 <td>Objet</td>
 <td>Requis</td>
 <td>Contient des données d’erreur.</td>
@@ -110,7 +110,7 @@ Si l’utilisateur a été correctement supprimé dans votre base de données ex
 
 #### Exemple
 
-```
+```javascript lines
 return callback(null);
 ```
 
@@ -120,7 +120,7 @@ Si une erreur survient, renvoyez la fonction de `callback`, et transmettez l’i
 
 #### Exemple
 
-```
+```javascript lines
 return callback(new Error("My custom error message."));
 ```
 
@@ -139,7 +139,7 @@ Auth0 fournit des exemples de scripts à utiliser avec les langages/technologies
 
 ### JavaScript
 
-```javascript
+```javascript lines
 function remove (id, callback) {
   // This script remove a user from your existing database.
   // It is executed whenever a user is deleted from the Management API or Auth0 dashboard.
@@ -157,7 +157,7 @@ function remove (id, callback) {
 
 ### Fournisseur d’appartenances ASP.NET (MVC3 – Fournisseurs universels)
 
-```javascript
+```javascript lines
 function remove(id, callback) {
   const sqlserver = require('tedious@1.11.0');
   const Connection = sqlserver.Connection;
@@ -204,7 +204,7 @@ function remove(id, callback) {
 
 ### Fournisseur d’appartenances ASP.NET (MVC4 – Appartenance simple)
 
-```javascript
+```javascript lines
 function remove(id, callback) {
   const sqlserver = require('tedious@1.11.0');
   const Connection = sqlserver.Connection;
@@ -251,7 +251,7 @@ function remove(id, callback) {
 
 ### MongoDB
 
-```javascript
+```javascript lines
 function remove(id, callback) {
   const MongoClient = require('mongodb@3.1.4').MongoClient;
   const client = new MongoClient('mongodb://user:pass@mymongoserver.com');
@@ -270,7 +270,7 @@ function remove(id, callback) {
 
 ### MySQL
 
-```javascript
+```javascript lines
 function remove(id, callback) {
   const mysql = require('mysql');
   const connection = mysql({
@@ -290,7 +290,7 @@ function remove(id, callback) {
 
 ### PostgreSQL
 
-```javascript
+```javascript lines
 function remove(id, callback) {
   //this example uses the "pg" library
   //more info here: https://github.com/brianc/node-postgres
@@ -311,7 +311,7 @@ function remove(id, callback) {
 
 ### Serveur SQL
 
-```javascript
+```javascript lines
 function remove(id, callback) {
   // this example uses the "tedious" library
   // more info here: http://pekim.github.io/tedious/index.html
@@ -349,7 +349,7 @@ function remove(id, callback) {
 
 ### Base de données SQL de Windows Azure
 
-```javascript
+```javascript lines
 function remove (id, callback) {
   // this example uses the "tedious" library
   // more info here: http://pekim.github.io/tedious/index.html

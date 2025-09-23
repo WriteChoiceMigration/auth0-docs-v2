@@ -1,13 +1,13 @@
 ---
 title: "Cadre d’applications Authorization OAuth 2.0"
 permalink: "oauth"
+'description': "Découvrez comment Auth0 fonctionne avec le cadre d’applications Authorization OAuth 2.0."
 'og:title': "Cadre d’applications Authorization OAuth 2.0"
 'og:description': "Découvrez comment Auth0 fonctionne avec le cadre d’applications Authorization OAuth 2.0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Cadre d’applications Authorization OAuth 2.0"
 'twitter:description': "Découvrez comment Auth0 fonctionne avec le cadre d’applications Authorization OAuth 2.0."
 ---
-# Cadre d’applications Authorization OAuth 2.0
 
 <Card title="Overview">
 
@@ -62,31 +62,31 @@ Les paramètres de requête du point de terminaison `/authorize` sont les suivan
 </thead>
 <tbody>
 <tr>
-<td><code>response_type</code></td>
+<td>`response_type`</td>
 <td>Indique au serveur d’autorisation quel type d’autorisation accorder.</td>
 </tr>
 <tr>
-<td><code>response_mode</code></td>
-<td>(facultatif) Comment est formaté le résultat de la requête d’autorisation. Valeurs : <br/>- <code>query</code> : pour l’octroi du code d’autorisation. <code>302 Found</code> déclenche une redirection. <br/>- <code>fragment</code> : pour un octroi implicite. <code>302 Found</code> déclenche une redirection. <br/>- <code>form_post</code> : <code>200 OK</code> avec des paramètres de réponse intégrés dans un formulaire HTML en tant que paramètres cachés. <br/>- <code>web_message</code> : Pour l’authentification silencieuse. Utilise la messagerie web HTML5.</td>
+<td>`response_mode`</td>
+<td>(facultatif) Comment est formaté le résultat de la requête d’autorisation. Valeurs : <br/>- `query` : pour l’octroi du code d’autorisation. `302 Found` déclenche une redirection. <br/>- `fragment` : pour un octroi implicite. `302 Found` déclenche une redirection. <br/>- `form_post` : `200 OK` avec des paramètres de réponse intégrés dans un formulaire HTML en tant que paramètres cachés. <br/>- `web_message` : Pour l’authentification silencieuse. Utilise la messagerie web HTML5.</td>
 </tr>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>L’identifiant de l’application qui demande l’autorisation.</td>
 </tr>
 <tr>
-<td><code>redirect_uri</code></td>
+<td>`redirect_uri`</td>
 <td>Contient une URL. Une réponse positive de ce point de terminaison entraîne une redirection vers cette URL.</td>
 </tr>
 <tr>
-<td><code>scope</code></td>
+<td>`scope`</td>
 <td>Une liste d’autorisations délimitées par des espaces dont a besoin l’application.</td>
 </tr>
 <tr>
-<td><code>state</code></td>
+<td>`state`</td>
 <td>Une valeur opaque, utilisée à des fins de sécurité. Si ce paramètre de requête est défini dans la requête, il est renvoyé à l’application en tant que partie du « redirect_uri ».</td>
 </tr>
 <tr>
-<td><code>connection</code></td>
+<td>`connection`</td>
 <td>Spécifie le type de connexion pour les connexions sans mot de passe</td>
 </tr>
 </tbody>
@@ -120,19 +120,19 @@ La spécification [Pratiques d’encodage des types de réponses multiples OAuth
 </thead>
 <tbody>
 <tr>
-<td><code>query</code></td>
-<td>C’est la valeur par défaut pour l’octroi du code d’autorisation. Une réponse réussie est <code>302 Found</code> qui déclenche une redirection vers le <code>redirect_uri</code>. Les paramètres de réponse sont intégrés dans le composant de requête (la partie après <code>?</code>) du <code>redirect_uri</code> dans l’en-tête <code>Location</code>. <br/>Par exemple : <br/><code>HTTP/1.1 302 Found</code> <br/><code>Location : https://my-redirect-uri.callback?code=js89p2x1</code> où le code d’autorisation est <code>js89p21</code>.</td>
+<td>`query`</td>
+<td>C’est la valeur par défaut pour l’octroi du code d’autorisation. Une réponse réussie est `302 Found` qui déclenche une redirection vers le `redirect_uri`. Les paramètres de réponse sont intégrés dans le composant de requête (la partie après `?`) du `redirect_uri` dans l’en-tête `Location`. <br/>Par exemple : <br/>`HTTP/1.1 302 Found` <br/>`Location : https://my-redirect-uri.callback?code=js89p2x1` où le code d’autorisation est `js89p21`.</td>
 </tr>
 <tr>
-<td><code>fragment</code></td>
-<td>Il s’agit de la valeur par défaut de l’autorisation implicite. Une réponse réussie est <code>302 Found</code>, qui déclenche une redirection vers le <code>redirect_uri</code> (qui est un paramètre de requête). Les paramètres de réponse sont intégrés dans le composant fragment (la partie après <code>#</code>) du <code>redirect_uri</code> dans l’en-tête <code>Location</code>. <br/>Par exemple : <br/><code>HTTP/1.1 302 Found</code><br/><code>Location : https://my-redirect-uri/callback#access_token=eyB...78f&amp;token_type=Bearer&amp;expires_in=3600</code>.</td>
+<td>`fragment`</td>
+<td>Il s’agit de la valeur par défaut de l’autorisation implicite. Une réponse réussie est `302 Found`, qui déclenche une redirection vers le `redirect_uri` (qui est un paramètre de requête). Les paramètres de réponse sont intégrés dans le composant fragment (la partie après `#`) du `redirect_uri` dans l’en-tête `Location`. <br/>Par exemple : <br/>`HTTP/1.1 302 Found`<br/>`Location : https://my-redirect-uri/callback#access_token=eyB...78f&amp;token_type=Bearer&amp;expires_in=3600`.</td>
 </tr>
 <tr>
-<td><code>form_post</code></td>
-<td>Le mode de réponse est défini par la spécification <a href="https://openid.net/specs/oauth-v2-form-post-response-mode-1_0.html">OAuth 2.0 Form Post Response Mode</a>. Une réponse réussie est <code>200 OK</code> et les paramètres sont intégrés dans un formulaire HTML en tant que paramètres dissimulés. L’action du formulaire est le <code>redirect_uri</code> et l’attribut <code>onload</code> est configuré pour soumettre le formulaire. Une fois que le HTML est chargé par le navigateur, une redirection vers le <code>redirect_uri</code> est effectuée.</td>
+<td>`form_post`</td>
+<td>Le mode de réponse est défini par la spécification <a href="https://openid.net/specs/oauth-v2-form-post-response-mode-1_0.html">OAuth 2.0 Form Post Response Mode</a>. Une réponse réussie est `200 OK` et les paramètres sont intégrés dans un formulaire HTML en tant que paramètres dissimulés. L’action du formulaire est le `redirect_uri` et l’attribut `onload` est configuré pour soumettre le formulaire. Une fois que le HTML est chargé par le navigateur, une redirection vers le `redirect_uri` est effectuée.</td>
 </tr>
 <tr>
-<td><code>web_message</code></td>
+<td>`web_message`</td>
 <td>Ce mode de réponse est défini dans <a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00">Spécification du mode de réponse aux messages Web OAuth 2.0</a>. Il utilise la messagerie Web HTML5 au lieu de la redirection pour la réponse d’autorisation du point de terminaison /authorization. Ceci est particulièrement utile lors de l’utilisation de l’authentification silencieuse. Pour utiliser ce mode de réponse, vous devez enregistrer l’URL de votre application dans le champ <strong>Origines Web autorisées</strong> de vos <a href="https://manage.auth0.com/#/applications/{yourClientId}/settings">paramètres d’application</a> Auth0.</td>
 </tr>
 </tbody>

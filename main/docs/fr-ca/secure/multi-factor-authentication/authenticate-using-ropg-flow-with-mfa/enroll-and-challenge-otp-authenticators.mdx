@@ -1,13 +1,13 @@
 ---
 title: "Inscription et défi des authentificateurs OTP"
 permalink: "enroll-and-challenge-otp-authenticators"
+'description': "Cette section décrit comment créer vos propres flux MFA en utilisant un mot de passe à usage unique (OTP) comme facteur d’authentification."
 'og:title': "Inscription et défi des authentificateurs OTP"
 'og:description': "Cette section décrit comment créer vos propres flux MFA en utilisant un mot de passe à usage unique (OTP) comme facteur d’authentification."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Inscription et défi des authentificateurs OTP"
 'twitter:description': "Cette section décrit comment créer vos propres flux MFA en utilisant un mot de passe à usage unique (OTP) comme facteur d’authentification."
 ---
-# Inscription et défi des authentificateurs OTP
 
 Auth0 offre un flux intégré d’enregistrement et d’authentification <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip> en utilisant la [connexion universelle](/docs/fr-ca/authenticate/login/auth0-universal-login). Cependant, si vous souhaitez créer votre propre interface utilisateur, vous pouvez utiliser [l’API MFA](/docs/fr-ca/secure/multi-factor-authentication/multi-factor-authentication-developer-resources/mfa-api) pour ce faire.
 
@@ -15,7 +15,7 @@ Auth0 offre un flux intégré d’enregistrement et d’authentification <Toolt
 
 Avant de pouvoir utiliser les API MFA, vous devrez activer le type d’autorisation MFA pour votre application. Accédez à [Auth0 Dashboard > Applications > Paramètres avancés > Types d’autorisation](https://manage.auth0.com/#/applications) et sélectionnez **MFA**.
 
-* [Configurez OTP](/docs/fr-ca/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-otp-notifications-for-mfa) comme facteur d’authentification dans Dashboard ou à l’aide de la [Management API](/docs/api/management/v2#!/Guardian/put_factors_by_name).
+* [Configurez OTP](/docs/fr-ca/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-otp-notifications-for-mfa) comme facteur d’authentification dans Dashboard ou à l’aide de la [Management API](/docs/fr-ca/api/management/v2#!/Guardian/put_factors_by_name).
 
 ## S’inscrire avec OTP
 
@@ -33,14 +33,14 @@ Faites une demande `POST (PUBLIER)` au point de terminaison d’association MFA 
 Pour vous inscrire avec OTP, définissez le paramètre `authenticator_types` sur `[otp]`.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/mfa/associate' \
 --header 'authorization: Bearer MFA_TOKEN' \
 --header 'content-type: application/json' \
 --data '{ "authenticator_types": ["otp"] }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/mfa/associate");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer MFA_TOKEN");
@@ -49,7 +49,7 @@ request.AddParameter("application/json", "{ \"authenticator_types\": [\"otp\"] }
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -69,8 +69,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/mfa/associate")
 .header("authorization", "Bearer MFA_TOKEN")
 .header("content-type", "application/json")
@@ -78,7 +78,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/mfa/associate")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -91,8 +91,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MFA_TOKEN",
 @"content-type": @"application/json" };
@@ -117,7 +117,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/mfa/associate",
@@ -141,8 +141,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"authenticator_types\": [\"otp\"] }"
@@ -156,7 +156,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -170,8 +170,8 @@ request["content-type"] = 'application/json'
 request.body = "{ \"authenticator_types\": [\"otp\"] }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer MFA_TOKEN",
@@ -200,7 +200,7 @@ dataTask.resume()
 
 Si l’étape réussie, vous recevez une réponse comme celle-ci :
 
-```json
+```json lines
 {
   "authenticator_type": "otp",
   "secret": "EN...S",
@@ -220,7 +220,7 @@ Pour confirmer l’inscription, l’utilisateur final devra entrer le code secre
 Après que l’utilisateur a entré le code secret, l’application OTP affichera un code à 6 chiffres que l’utilisateur devra entrer dans votre application. L’application doit ensuite effectuer une requête `POST` vers le point de terminaison du jeton <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OAuth</Tooltip>, en incluant cette valeur `otp`.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -229,8 +229,8 @@ curl --request POST \
 --data 'mfa_token={mfaToken}' \
 --data 'client_secret={yourClientSecret}' \
 --data 'otp={userOtpCode}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -238,7 +238,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=http%3A%2F
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -257,15 +257,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&mfa_token=%7BmfaToken%7D&client_secret=%7ByourClientSecret%7D&otp=%7BuserOtpCode%7D")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -284,8 +284,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=http://auth0.com/oauth/grant-type/mfa-otp" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -312,7 +312,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -335,8 +335,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&mfa_token=%7BmfaToken%7D&client_secret=%7ByourClientSecret%7D&otp=%7BuserOtpCode%7D"
@@ -347,7 +347,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -360,8 +360,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&mfa_token=%7BmfaToken%7D&client_secret=%7ByourClientSecret%7D&otp=%7BuserOtpCode%7D"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=http://auth0.com/oauth/grant-type/mfa-otp".data(using: String.Encoding.utf8)!)
@@ -390,7 +390,7 @@ dataTask.resume()
 
 Si l’appel ne réussi pas, vous recevrez une réponse dans le format suivant, contenant le jeton d’accès :
 
-```json
+```json lines
 {
   "id_token": "eyJ...i",
   "access_token": "eyJ...i",
@@ -415,13 +415,13 @@ Obtenez un jeton MFA en suivant les étapes décrites dans [Autorisation par mot
 Vous pouvez énumérer toutes les authentifications à l’aide du point de terminaison des facteurs d’authentification MFA :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/mfa/authenticators' \
 --header 'authorization: Bearer MFA_TOKEN' \
 --header 'content-type: application/json'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/mfa/authenticators");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer MFA_TOKEN");
@@ -429,7 +429,7 @@ request.AddHeader("content-type", "application/json");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -447,15 +447,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/mfa/authenticators")
 .header("authorization", "Bearer MFA_TOKEN")
 .header("content-type", "application/json")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -467,8 +467,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MFA_TOKEN",
 @"content-type": @"application/json" };
@@ -490,7 +490,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/mfa/authenticators",
@@ -513,8 +513,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = {
@@ -527,7 +527,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -540,8 +540,8 @@ request["authorization"] = 'Bearer MFA_TOKEN'
 request["content-type"] = 'application/json'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer MFA_TOKEN",
@@ -567,7 +567,7 @@ dataTask.resume()
 
 Vous obtiendrez une liste de facteurs d’authentification avec le format suivant :
 
-```json
+```json lines
 [
     {
         "id": "recovery-code|dev_qpOkGUOxBpw6R16t",
@@ -589,7 +589,7 @@ L’utilisateur obtiendra un mot de passe à usage unique, que vous récupérere
 Vous pouvez vérifier le code et obtenir des jetons d’authentification en utilisant le point de terminaison du jeton Oauth0, tout en précisant le mot de passe à usage unique dans le paramètre `otp`.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -598,8 +598,8 @@ curl --request POST \
 --data 'client_secret={yourClientSecret}' \
 --data 'mfa_token={mfaToken}' \
 --data 'otp={userOtpCode}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -607,7 +607,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=http%3A%2F
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -626,15 +626,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&otp=%7BuserOtpCode%7D")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -653,8 +653,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=http://auth0.com/oauth/grant-type/mfa-otp" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -681,7 +681,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -704,8 +704,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&otp=%7BuserOtpCode%7D"
@@ -716,7 +716,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -729,8 +729,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&otp=%7BuserOtpCode%7D"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=http://auth0.com/oauth/grant-type/mfa-otp".data(using: String.Encoding.utf8)!)
@@ -759,7 +759,7 @@ dataTask.resume()
 
 Si l’appel réussi, vous recevrez une réponse dans le format ci-dessous, contenant le jeton d’accès :
 
-```json
+```json lines
 {
   "id_token": "eyJ...i",
   "access_token": "eyJ...i",

@@ -1,13 +1,13 @@
 ---
 title: "Authentifier et autoriser des appareils en utilisant MQTT avec Auth0"
 permalink: "authenticate-devices-using-mqtt"
+'description': "Comment authentifier et autoriser des appareils en utilisant MQTT avec Auth0."
 'og:title': "Authentifier et autoriser des appareils en utilisant MQTT avec Auth0"
 'og:description': "Comment authentifier et autoriser des appareils en utilisant MQTT avec Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Authentifier et autoriser des appareils en utilisant MQTT avec Auth0"
 'twitter:description': "Comment authentifier et autoriser des appareils en utilisant MQTT avec Auth0."
 ---
-# Authentifier et autoriser des appareils en utilisant MQTT avec Auth0
 
 MQTT est un protocole léger souvent utilisé par les appareils pour communiquer avec d’autres systèmes. Il est conçu pour le modèle de messagerie **publication/abonnement**. Vous pouvez en savoir plus sur [MQTT](https://en.wikipedia.org/wiki/MQ_Telemetry_Transport) sur Wikipedia.
 
@@ -23,7 +23,7 @@ Le protocole MQTT prend en charge un mécanisme d’authentification de base ba
 
 Cet article montre une intégration entre un agent MQTT basé sur nodejs : [mosca](https://github.com/mcollina/mosca) et [Auth0](https://auth0.com). Dans cet exemple, Auth0 est utilisé pour **authentifier** les `publishers` et `subscribers` auprès de l’agent, puis pour **autoriser** l’acheminement des messages.
 
-<Frame>![Diagramme de flux de données MQTT](//images.ctfassets.net/cdy7uua7fh8z/1BAQm0lXvF7A3VqIciOagV/df7a6093017c7df53b7538d4053804b3/2023-09-22_13-15-29.png)</Frame>
+<Frame>![Diagramme de flux de données MQTT](/images/fr-ca/cdy7uua7fh8z/1BAQm0lXvF7A3VqIciOagV/df7a6093017c7df53b7538d4053804b3/2023-09-22_13-15-29.png)</Frame>
 
 ## Composants de la solution
 
@@ -31,7 +31,7 @@ Cet article montre une intégration entre un agent MQTT basé sur nodejs : [mo
 
 **mosca** est facile à héberger et peut être intégré à d’autres serveurs. Pour les besoins de cet exemple, nous nous contentons d’héberger nous-mêmes un serveur **mosca** :
 
-```javascript
+```javascript lines
 var mosca = require('mosca')
 var Auth0Mosca = require('auth0mosca');
 
@@ -70,7 +70,7 @@ Dans cet exemple, nous utilisons un module très simple, `auth0mosca`, pour exé
 
 Ce petit [module](https://www.npmjs.org/package/auth0mosca) fiournit les quatre fonctions utilisées par **mosca**, `authenticateWithCredentials`, `authenticateWithJWT`, `authorizePublish` et `authorizeSubscribe` :
 
-```javascript
+```javascript lines
 var request = require('request');
 var jwt = require('jsonwebtoken');
 
@@ -170,7 +170,7 @@ Les fonctionnalités `authorizePublish` et `authorizeSubscribe` vérifient simpl
 3. `mosca` valide le JWT
 4. Les messages sont envoyés et retransmis aux abonnés
 
-<Frame>![MQTT JSON Web Token Data Flow ](//images.ctfassets.net/cdy7uua7fh8z/38KV0HggAdQDkLxqZuAOph/e134f43c290d432064f288e549a59789/2023-09-22_13-15-47.png)</Frame>
+<Frame>![MQTT JSON Web Token Data Flow ](/images/fr-ca/cdy7uua7fh8z/38KV0HggAdQDkLxqZuAOph/e134f43c290d432064f288e549a59789/2023-09-22_13-15-47.png)</Frame>
 
 Les éditeurs et les abonnés obtiendront le JWT d’une manière ou d’une autre. Notez que l’agent n’a plus besoin de communiquer avec Auth0. Les JWT sont des artefacts autonomes qui peuvent être validés à l’aide du secret utilisé pour les signer.
 
@@ -178,7 +178,7 @@ Les éditeurs et les abonnés obtiendront le JWT d’une manière ou d’une au
 
 Pour cet exemple, l’éditeur est un simple programme nodejs qui utilise le module `mqtt`, et ajoute les bons identifiants :
 
-```javascript
+```javascript lines
 var mqtt = require('mqtt')
   , host = 'localhost'
   , port = '9999';
@@ -213,7 +213,7 @@ Bien entendu, le `username` et le `password` devront correspondre à ceux stock�
 
 L’abonné est très similaire à l’éditeur :
 
-```javascript
+```javascript lines
 var mqtt = require('mqtt')
   , host = 'localhost'
   , port = '9999';
@@ -245,7 +245,7 @@ client.on('message', function(topic, message) {
 
 Cela montre à quel point il est facile d’utiliser Auth0 dans différents scénarios. Le magasin d’utilisateurs d’Auth0 est utilisé pour gérer les appareils. Bien entendu, des règles d’autorisation beaucoup plus sophistiquées pourraient être élaborées sur la base d’autres conditions : heure, lieu, device_id, etc. Toutes ces règles seraient très simples à mettre en œuvre, soit au moyen d’attributs de profil supplémentaires, soit au moyen de règles. Cela montre également comment le profil Auth0 flexible peut être étendu pour prendre en charge des artefacts arbitraires (tels que les `topics` dans l’exemple).
 
-Pour en savoir plus sur les règles, consultez [Règles d'Auth0](/docs/rules).
+Pour en savoir plus sur les règles, consultez [Règles d'Auth0](/docs/fr-ca/rules).
 
 Il n’est jamais bon d’envoyer des identifiants (`username`/`password`) sur des réseaux non sécurisés. Il existe d’autres implémentations qui fournissent une sécurité au niveau du transport qui empêcherait le contenu des messages d’être révélé. **mosca** prend en charge TLS par exemple. Il est probable qu’un déploiement en production privilégie cette solution, à moins que tout le trafic se fasse dans un réseau fermé.
 

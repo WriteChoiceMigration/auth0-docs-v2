@@ -1,12 +1,14 @@
 ---
 title: "Login"
 permalink: "01-login"
+'description': "This tutorial demonstrates how to call your API from an input-constrained device using the Device Authorization flow."
 'og:title': "Login"
 'og:description': "This tutorial demonstrates how to call your API from an input-constrained device using the Device Authorization flow."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/device.svg"
 'twitter:title': "Login"
 'twitter:description': "This tutorial demonstrates how to call your API from an input-constrained device using the Device Authorization flow."
 ---
+
 # Device Authorization Flow
 
 <Frame>![Gravatar for rachel.khoriander@auth0.com](//www.gravatar.com/avatar/36c8a1120563bcbdb2ebdb2ab63b7139?d=mm&r=g&s=50)</Frame>
@@ -35,7 +37,7 @@ Log In & Download Sample[View on Github](https://github.com/undefined/undefined/
 
 <Note>
 
-This tutorial will help you call your own API from an input-constrained device using the Device Authorization Flow. If you want to learn how the flow works and why you should use it, see [Device Authorization Flow](/docs/flows/concepts/device-auth).
+This tutorial will help you call your own API from an input-constrained device using the Device Authorization Flow. If you want to learn how the flow works and why you should use it, see [Device Authorization Flow](/docs/fr-ca/flows/concepts/device-auth).
 
 </Note>
 
@@ -48,18 +50,18 @@ Auth0 makes it easy for your app to implement the Device Authorization flow usin
 **Before beginning this tutorial:**
 
 * Check [limitations](#limitations) to be sure the Device Authorization flow is suitable for your implementation.
-* [Register the Application with Auth0](/docs/dashboard/guides/applications/register-app-native).
+* [Register the Application with Auth0](/docs/fr-ca/dashboard/guides/applications/register-app-native).
 
   + Select an **Application Type** of **Native**.
   + If necessary, set **Allowed Web Origins**. You can use this to allow localhost as an origin for local development, or to set an allowed origin for specific TV software with architecture subject to CORS (eg: HTML5 + JS). Most applications will not use this setting.
   + Ensure that the **OIDC Conformant** toggle is enabled. This setting is in the [Dashboard](https://manage.auth0.com/#) under **Application Settings > Advanced > OAuth**.
-  + Make sure the Application's **[Grant Types](/docs/dashboard/guides/applications/update-grant-types)** include **Device Code**. This is also in the [Dashboard](https://manage.auth0.com/#), under **Application Settings > Advanced > Grant Types**.
-  + If you want your Application to be able to use [Refresh Tokens](/docs/tokens/concepts/refresh-tokens), make sure the Application's **[Grant Types](/docs/dashboard/guides/applications/update-grant-types)** include **Refresh Token**.
-* Set up and enable at least one connection for the Application: [Database connections](/docs/dashboard/guides/connections/set-up-connections-database), [Social connections](/docs/dashboard/guides/connections/set-up-connections-social)
-* [Register your API with Auth0](/docs/architecture-scenarios/mobile-api/part-2#create-the-api)
+  + Make sure the Application's **[Grant Types](/docs/fr-ca/dashboard/guides/applications/update-grant-types)** include **Device Code**. This is also in the [Dashboard](https://manage.auth0.com/#), under **Application Settings > Advanced > Grant Types**.
+  + If you want your Application to be able to use [Refresh Tokens](/docs/fr-ca/tokens/concepts/refresh-tokens), make sure the Application's **[Grant Types](/docs/fr-ca/dashboard/guides/applications/update-grant-types)** include **Refresh Token**.
+* Set up and enable at least one connection for the Application: [Database connections](/docs/fr-ca/dashboard/guides/connections/set-up-connections-database), [Social connections](/docs/fr-ca/dashboard/guides/connections/set-up-connections-social)
+* [Register your API with Auth0](/docs/fr-ca/architecture-scenarios/mobile-api/part-2#create-the-api)
 
-  + If you want your API to receive [Refresh Tokens](/docs/tokens/concepts/refresh-tokens) to allow it to obtain new tokens when the previous ones expire, enable **Allow Offline Access**.
-* [Configure Device User Code Settings](/docs/dashboard/guides/tenants/configure-device-user-code-settings) to define the character set, format, and length of your randomly-generated user code.
+  + If you want your API to receive [Refresh Tokens](/docs/fr-ca/tokens/concepts/refresh-tokens) to allow it to obtain new tokens when the previous ones expire, enable **Allow Offline Access**.
+* [Configure Device User Code Settings](/docs/fr-ca/dashboard/guides/tenants/configure-device-user-code-settings) to define the character set, format, and length of your randomly-generated user code.
 
 ## Steps
 
@@ -79,20 +81,20 @@ Optional: [Troubleshooting](#troubleshooting)
 
 Once the user has started their device app and wants to authorize the device, you'll need to get a device code. When the user begins their session in their browser-based device, this code will be bound to that session.
 
-To get the device code, your app must request a code from the [device code URL](/docs/api/authentication#get-device-code), including the Client ID.
+To get the device code, your app must request a code from the [device code URL](/docs/fr-ca/api/authentication#get-device-code), including the Client ID.
 
 ### Example POST to device code URL
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/device/code' \
 --header 'content-type: application/x-www-form-urlencoded' \
 --data 'client_id={yourClientId}' \
 --data scope=SCOPE \
 --data audience=AUDIENCE
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/device/code");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -100,7 +102,7 @@ request.AddParameter("application/x-www-form-urlencoded", "client_id=%24%7Baccou
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -119,15 +121,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/device/code")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("client_id=%24%7Baccount.clientId%7D&scope=SCOPE&audience=AUDIENCE")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -140,8 +142,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"client_id={yourClientId}" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -166,7 +168,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/device/code",
@@ -189,8 +191,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "client_id=%24%7Baccount.clientId%7D&scope=SCOPE&audience=AUDIENCE"
@@ -201,7 +203,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -214,8 +216,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "client_id=%24%7Baccount.clientId%7D&scope=SCOPE&audience=AUDIENCE"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "client_id={yourClientId}".data(using: String.Encoding.utf8)!)
@@ -261,15 +263,15 @@ If your app wants an Access Token only to retrieve info about the authenticated 
 </thead>
 <tbody>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>Your application's Client ID. You can find this value in your <a href="https://manage.auth0.com/#/Applications/{yourClientId}/settings">Application Settings</a>.</td>
 </tr>
 <tr>
-<td><code>scope</code></td>
-<td>The <a href="/docs/scopes">scopes</a> for which you want to request authorization. These must be separated by a space. You can request any of the <a href="https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims">standard OIDC scopes</a> about users, such as <code>profile</code> and <code>email</code>, <a href="/docs/tokens/concepts/jwt-claims#custom-claims">custom claims</a> conforming to a <a href="/docs/tokens/guides/create-namespaced-custom-claims">namespaced format</a>, or any <a href="/docs/scopes/current/api-scopes">scopes supported by the target API</a> (e.g., <code>read:contacts</code>). Include <code>openid</code> to get an ID Token or to be able to use the <a href="/docs/api/authentication#user-profile">/userinfo endpoint</a> to retrieve profile information for the user. Include <code>offline_access</code> to get a Refresh Token (make sure that the <strong>Allow Offline Access</strong> field is enabled in the <a href="https://manage.auth0.com/#/apis">API Settings</a>). Note that this must be URL encoded.</td>
+<td>`scope`</td>
+<td>The <a href="/docs/fr-ca/scopes">scopes</a> for which you want to request authorization. These must be separated by a space. You can request any of the <a href="https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims">standard OIDC scopes</a> about users, such as `profile` and `email`, <a href="/docs/fr-ca/tokens/concepts/jwt-claims#custom-claims">custom claims</a> conforming to a <a href="/docs/fr-ca/tokens/guides/create-namespaced-custom-claims">namespaced format</a>, or any <a href="/docs/fr-ca/scopes/current/api-scopes">scopes supported by the target API</a> (e.g., `read:contacts`). Include `openid` to get an ID Token or to be able to use the <a href="/docs/fr-ca/api/authentication#user-profile">/userinfo endpoint</a> to retrieve profile information for the user. Include `offline_access` to get a Refresh Token (make sure that the <strong>Allow Offline Access</strong> field is enabled in the <a href="https://manage.auth0.com/#/apis">API Settings</a>). Note that this must be URL encoded.</td>
 </tr>
 <tr>
-<td><code>audience</code></td>
+<td>`audience`</td>
 <td>The unique identifier of the API your app wants to access. Use the <strong>Identifier</strong> value on the <a href="https://manage.auth0.com/#/apis">Settings</a> tab for the API you created as part of the prerequisites for this tutorial.  Note that this must be URL encoded.</td>
 </tr>
 </tbody>
@@ -279,7 +281,7 @@ If your app wants an Access Token only to retrieve info about the authenticated 
 
 If all goes well, you'll receive an HTTP 200 response with a payload containing `device_code`, `user_code`, `verification_uri`, and `expires_in`, `interval`, and `verification_uri_complete` values:
 
-```json
+```json lines
 {
   "device_code": "Ag_EE...ko1p",
   "user_code": "QTZL-MCBW",
@@ -299,7 +301,7 @@ If all goes well, you'll receive an HTTP 200 response with a payload containing 
 
 <Note>
 
-You can [configure the character set, format, and length of your randomly-generated user code](/docs/dashboard/guides/tenants/configure-device-user-code-settings) in your tenant settings.
+You can [configure the character set, format, and length of your randomly-generated user code](/docs/fr-ca/dashboard/guides/tenants/configure-device-user-code-settings) in your tenant settings.
 
 To prevent brute force attacks, we enforce the following limits on `user_code`:
 
@@ -334,22 +336,22 @@ When building a CLI, you could skip this step and immediately open the browser w
 
 ## Request Tokens
 
-While you are waiting for the user to activate the device, begin polling the token URL to request an Access Token. Using the extracted polling interval (`interval`) from the previous step, you will need to `POST` to the [token URL](/docs/api/authentication#device-auth) sending along the `device_code`.
+While you are waiting for the user to activate the device, begin polling the token URL to request an Access Token. Using the extracted polling interval (`interval`) from the previous step, you will need to `POST` to the [token URL](/docs/fr-ca/api/authentication#device-auth) sending along the `device_code`.
 
 To avoid errors due to network latency, you should start counting each interval after receipt of the last polling request's response.
 
 ### Example request token POST to token URL
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
 --data grant_type=urn:ietf:params:oauth:grant-type:device_code \
 --data device_code=YOUR_DEVICE_CODE \
 --data 'client_id={yourClientId}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -357,7 +359,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=urn%3Aietf
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -376,15 +378,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=YOUR_DEVICE_CODE&client_id=%24%7Baccount.clientId%7D")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -401,8 +403,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=urn:ietf:params:oauth:grant-type:device_code" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -427,7 +429,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -450,8 +452,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=YOUR_DEVICE_CODE&client_id=%24%7Baccount.clientId%7D"
@@ -462,7 +464,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -475,8 +477,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=YOUR_DEVICE_CODE&client_id=%24%7Baccount.clientId%7D"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=urn:ietf:params:oauth:grant-type:device_code".data(using: String.Encoding.utf8)!)
@@ -511,15 +513,15 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>grant_type</code></td>
+<td>`grant_type`</td>
 <td>Set this to "urn:ietf:params:oauth:grant-type:device_code". This is an extension grant type (as defined by Section 4.5 of <a href="https://tools.ietf.org/html/rfc6749#section-4.5">RFC6749</a>). Note that this must be URL encoded.</td>
 </tr>
 <tr>
-<td><code>device_code</code></td>
-<td>The <code>device_code</code> retrieved in the previous step of this tutorial.</td>
+<td>`device_code`</td>
+<td>The `device_code` retrieved in the previous step of this tutorial.</td>
 </tr>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>Your application's Client ID. You can find this value in your <a href="https://manage.auth0.com/#/Applications/{yourClientId}/settings">Application Settings</a>.</td>
 </tr>
 </tbody>
@@ -533,7 +535,7 @@ While you wait for the user to authorize the device, you may receive a few diffe
 
 You will see this error while waiting for the user to take action. Continue polling using the suggested interval retrieved in the previous step of this tutorial.
 
-```
+```json lines
 `HTTP 403`
 
 {
@@ -546,7 +548,7 @@ You will see this error while waiting for the user to take action. Continue poll
 
 You are polling too fast. Slow down and use the suggested interval retrieved in the previous step of this tutorial. To avoid receiving this error due to network latency, you should start counting each interval after receipt of the last polling request's response.
 
-```
+```json lines
 `HTTP 429`
 
 {
@@ -565,7 +567,7 @@ Then `expired_token` error will be returned exactly once; after that, the dreade
 
 </Note>
 
-```
+```json lines
 `HTTP 403`
 
 { 
@@ -578,7 +580,7 @@ Then `expired_token` error will be returned exactly once; after that, the dreade
 
 Finally, if access is denied, you will receive:
 
-```
+```json lines
 `HTTP 403`
 
 {
@@ -591,7 +593,7 @@ This can occur for a variety of reasons, including:
 
 * the user refused to authorize the device
 * the authorization server denied the transaction
-* a configured [Rule](/docs/rules) denied access
+* a configured [Rule](/docs/fr-ca/rules) denied access
 
 ## User Authorization
 
@@ -624,7 +626,7 @@ While the user has been authenticating and authorizing the device, the device ap
 
 Once the user has successfully authorized the device, you'll receive an `HTTP 200` response with a payload containing `access_token`, `refresh_token` (optionally), `id_token` (optionally), `token_type`, and `expires_in` values:
 
-```json
+```json lines
 {
   "access_token":"eyJz93a...k4laUWw",
   "refresh_token":"GEbRxBN...edjnXbL",
@@ -636,15 +638,15 @@ Once the user has successfully authorized the device, you'll receive an `HTTP 20
 
 <Warning>
 
-You should validate your tokens before saving them. To learn how, see [Validate Access Tokens](/docs/tokens/guides/validate-access-tokens) and [Validate ID Tokens](/docs/tokens/guides/validate-id-tokens).
+You should validate your tokens before saving them. To learn how, see [Validate Access Tokens](/docs/fr-ca/tokens/guides/validate-access-tokens) and [Validate ID Tokens](/docs/fr-ca/tokens/guides/validate-id-tokens).
 
 </Warning>
 
-[Access Tokens](/docs/tokens/concepts/access-token) are used to call the [Auth0 Authentication API's `/userinfo` endpoint](/docs/api/authentication#get-user-info) or another API. You will be able to use the Access Token to call `/userinfo` only if you included the `openid` scope. If you are calling your own API, the first thing your API will need to do is [verify the Access Token](/docs/tokens/guides/validate-access-tokens).
+[Access Tokens](/docs/fr-ca/tokens/concepts/access-token) are used to call the [Auth0 Authentication API's `/userinfo` endpoint](/docs/fr-ca/api/authentication#get-user-info) or another API. You will be able to use the Access Token to call `/userinfo` only if you included the `openid` scope. If you are calling your own API, the first thing your API will need to do is [verify the Access Token](/docs/fr-ca/tokens/guides/validate-access-tokens).
 
-[ID Tokens](/docs/tokens/concepts/id-tokens) contain user information that must be [decoded and extracted](/docs/tokens/id-tokens#id-token-payload). The `id_token` will only be present in the response if you included the `openid` scope.
+[ID Tokens](/docs/fr-ca/tokens/concepts/id-tokens) contain user information that must be [decoded and extracted](/docs/fr-ca/tokens/id-tokens#id-token-payload). The `id_token` will only be present in the response if you included the `openid` scope.
 
-[Refresh Tokens](/docs/tokens/concepts/refresh-tokens) are used to obtain a new Access Token or ID Token after the previous one has expired. The `refresh_token` will only be present in the response if you included the `offline_access` scope and enabled **Allow Offline Access** for your API in the Dashboard.
+[Refresh Tokens](/docs/fr-ca/tokens/concepts/refresh-tokens) are used to obtain a new Access Token or ID Token after the previous one has expired. The `refresh_token` will only be present in the response if you included the `offline_access` scope and enabled **Allow Offline Access** for your API in the Dashboard.
 
 <Warning>
 
@@ -657,13 +659,13 @@ Refresh Tokens must be stored securely since they allow a user to remain authent
 To call your API, the application must pass the retrieved Access Token as a Bearer token in the Authorization header of your HTTP request.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url https://myapi.com/api \
 --header 'authorization: Bearer ACCESS_TOKEN' \
 --header 'content-type: application/json'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://myapi.com/api");
 var request = new RestRequest(Method.GET);
 request.AddHeader("content-type", "application/json");
@@ -671,7 +673,7 @@ request.AddHeader("authorization", "Bearer ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -689,15 +691,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://myapi.com/api")
 .header("content-type", "application/json")
 .header("authorization", "Bearer ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -709,8 +711,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer ACCESS_TOKEN" };
@@ -732,7 +734,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://myapi.com/api",
@@ -755,8 +757,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("myapi.com")
 headers = {
@@ -769,7 +771,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -782,8 +784,8 @@ request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -809,10 +811,10 @@ dataTask.resume()
 
 ## Refresh Tokens
 
-You have already received a [Refresh Token](/docs/tokens/concepts/refresh-tokens) if you've been following this tutorial and completed the following:
+You have already received a [Refresh Token](/docs/fr-ca/tokens/concepts/refresh-tokens) if you've been following this tutorial and completed the following:
 
 * configured your API to allow offline access
-* included the `offline_access` scope when you initiated the authentication request through the [authorize](/docs/api/authentication/reference#authorize-application) endpoint
+* included the `offline_access` scope when you initiated the authentication request through the [authorize](/docs/fr-ca/api/authentication/reference#authorize-application) endpoint
 
 You can use the Refresh Token to get a new Access Token. Usually, a user will need a new Access Token only after the previous one expires or when gaining access to a new resource for the first time. It's bad practice to call the endpoint to get a new Access Token every time you call an API, and Auth0 maintains rate limits that will throttle the amount of requests to the endpoint that can be executed using the same token from the same IP.
 
@@ -821,7 +823,7 @@ To refresh your token, make a `POST` request to the `/oauth/token` endpoint in t
 ### Example refresh token POST to token URL
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -829,8 +831,8 @@ curl --request POST \
 --data 'client_id={yourClientId}' \
 --data 'client_secret={yourClientSecret}' \
 --data refresh_token=YOUR_REFRESH_TOKEN
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -838,7 +840,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=refresh_to
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -857,15 +859,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=refresh_token&client_id=%24%7Baccount.clientId%7D&client_secret=%24%7Baccount.clientSecret%7D&refresh_token=YOUR_REFRESH_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -883,8 +885,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=refresh_token" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -910,7 +912,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -933,8 +935,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=refresh_token&client_id=%24%7Baccount.clientId%7D&client_secret=%24%7Baccount.clientSecret%7D&refresh_token=YOUR_REFRESH_TOKEN"
@@ -945,7 +947,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -958,8 +960,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=refresh_token&client_id=%24%7Baccount.clientId%7D&client_secret=%24%7Baccount.clientSecret%7D&refresh_token=YOUR_REFRESH_TOKEN"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=refresh_token".data(using: String.Encoding.utf8)!)
@@ -995,23 +997,23 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>grant_type</code></td>
+<td>`grant_type`</td>
 <td>Set this to "refresh_token".</td>
 </tr>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>Your application's Client ID. You can find this value in your <a href="https://manage.auth0.com/#/Applications/{yourClientId}/settings">Application Settings</a>.</td>
 </tr>
 <tr>
-<td><code>client_secret</code></td>
+<td>`client_secret`</td>
 <td>Your application's Client Secret. You can find this value in your <a href="https://manage.auth0.com/#/Applications/{yourClientSecret}/settings">Application Settings</a>.</td>
 </tr>
 <tr>
-<td><code>refresh_token</code></td>
+<td>`refresh_token`</td>
 <td>The Refresh Token to use.</td>
 </tr>
 <tr>
-<td><code>scope</code></td>
+<td>`scope`</td>
 <td>(Optional) A space-delimited list of requested scope permissions. If not sent, the original scopes will be used; otherwise you can request a reduced set of scopes. Note that this must be URL encoded.</td>
 </tr>
 </tbody>
@@ -1021,7 +1023,7 @@ dataTask.resume()
 
 If all goes well, you'll receive an `HTTP 200` response with a payload containing a new `access_token`, `id_token` (optionally), token lifetime in seconds (`expires_in`), granted `scope` values, and `token_type`:
 
-```json
+```json lines
 {
   "access_token": "eyJ...MoQ",
   "expires_in": 86400,
@@ -1033,7 +1035,7 @@ If all goes well, you'll receive an `HTTP 200` response with a payload containin
 
 <Warning>
 
-You should validate your tokens before saving them. To learn how, see [Validate Access Tokens](/docs/tokens/guides/validate-access-tokens) and [Validate ID Tokens](/docs/tokens/guides/validate-id-tokens).
+You should validate your tokens before saving them. To learn how, see [Validate Access Tokens](/docs/fr-ca/tokens/guides/validate-access-tokens) and [Validate ID Tokens](/docs/fr-ca/tokens/guides/validate-id-tokens).
 
 </Warning>
 
@@ -1041,9 +1043,9 @@ You should validate your tokens before saving them. To learn how, see [Validate 
 
 ### Detect Device Authorization Flow Use
 
-You can use [Rules](/docs/rules) to detect whether the current transaction is using the Device Authorization Flow. To do so, check the `context` object's `protocol` property:
+You can use [Rules](/docs/fr-ca/rules) to detect whether the current transaction is using the Device Authorization Flow. To do so, check the `context` object's `protocol` property:
 
-```javascript
+```javascript lines
 function (user, context, callback) {
    if (context.protocol === 'oauth2-device-code') {
       ...
@@ -1061,7 +1063,7 @@ function (user, context, callback) {
 
 # Troubleshooting
 
-[Tenant logs](/docs/logs) are created for any interaction that takes place and can be used to troubleshoot issues.
+[Tenant logs](/docs/fr-ca/logs) are created for any interaction that takes place and can be used to troubleshoot issues.
 
 ## Error codes
 
@@ -1074,27 +1076,27 @@ function (user, context, callback) {
 </thead>
 <tbody>
 <tr>
-<td><code>fdeaz</code></td>
+<td>`fdeaz`</td>
 <td>Failed device authorization request</td>
 <td></td>
 </tr>
 <tr>
-<td><code>fdeac</code></td>
+<td>`fdeac`</td>
 <td>Failed device activation</td>
 <td></td>
 </tr>
 <tr>
-<td><code>fdecc</code></td>
+<td>`fdecc`</td>
 <td>User canceled the device confirmation</td>
 <td></td>
 </tr>
 <tr>
-<td><code>fede</code></td>
+<td>`fede`</td>
 <td>Failed Exchange</td>
 <td>Device Code for Access Token</td>
 </tr>
 <tr>
-<td><code>sede</code></td>
+<td>`sede`</td>
 <td>Success Exchange</td>
 <td>Device Code for Access Token</td>
 </tr>
@@ -1106,24 +1108,24 @@ function (user, context, callback) {
 To use the Device Authorization Flow, devices must:
 
 * Support Server Name Indication (SNI)
-* Have an [Auth0 application type](/docs/applications) of **Native**
-* Have the [**Token Endpoint Authentication Method**](/docs/dashboard/reference/settings-application) set to **None**
-* Be [OIDC-conformant](/docs/dashboard/reference/settings-application#oauth)
-* Not be created through [Dynamic Client Registration](/docs/api-auth/dynamic-client-registration)
+* Have an [Auth0 application type](/docs/fr-ca/applications) of **Native**
+* Have the [**Token Endpoint Authentication Method**](/docs/fr-ca/dashboard/reference/settings-application) set to **None**
+* Be [OIDC-conformant](/docs/fr-ca/dashboard/reference/settings-application#oauth)
+* Not be created through [Dynamic Client Registration](/docs/fr-ca/api-auth/dynamic-client-registration)
 
 In addition, the Device Authorization Flow does not allow:
 
-* [Social Connections](/docs/connections) using [Auth0 developer keys](/docs/connections/social/devkeys) unless you are using new [New Universal Login Experience](/docs/universal-login/new).
+* [Social Connections](/docs/fr-ca/connections) using [Auth0 developer keys](/docs/fr-ca/connections/social/devkeys) unless you are using new [New Universal Login Experience](/docs/fr-ca/universal-login/new).
 * Query string parameters to be accessed from hosted login page or rules
 
 We support the full [Draft 15](https://tools.ietf.org/html/draft-ietf-oauth-device-flow-15), except for confidential Clients.
 
 ## Keep reading
 
-* [The OAuth 2.0 protocol](/docs/protocols/oauth2)
-* [The OpenID Connect protocol](/docs/protocols/oidc)
-* [Tokens](/docs/tokens)
-* [Tenant Logs for Devices](/docs/logs)
+* [The OAuth 2.0 protocol](/docs/fr-ca/protocols/oauth2)
+* [The OpenID Connect protocol](/docs/fr-ca/protocols/oidc)
+* [Tokens](/docs/fr-ca/tokens)
+* [Tenant Logs for Devices](/docs/fr-ca/logs)
 
 Did it work?
 

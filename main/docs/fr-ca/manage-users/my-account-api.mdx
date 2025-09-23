@@ -1,19 +1,19 @@
 ---
 title: "My Account API"
 permalink: "my-account-api"
+'description': "Learn how you can empower your users to manage their own account information with the My Account API."
 'og:title': "My Account API"
 'og:description': "Learn how you can empower your users to manage their own account information with the My Account API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "My Account API"
 'twitter:description': "Learn how you can empower your users to manage their own account information with the My Account API."
 ---
-# My Account API
 
 <Warning>
 
 **The My Account API is available in Limited Early Access.**
 
-By using this feature, you agree to the applicable Free Trial terms in Okta’s [Master Subscription Agreement](https://www.okta.com/legal).To learn more about Auth0's product release cycle, read [Product Release Stages](/docs/troubleshoot/product-lifecycle/product-release-stages). To participate in this program, contact [Auth0 Support](https://support.auth0.com) or your Technical Account Manager.
+By using this feature, you agree to the applicable Free Trial terms in Okta’s [Master Subscription Agreement](https://www.okta.com/legal).To learn more about Auth0's product release cycle, read [Product Release Stages](/docs/fr-ca/troubleshoot/product-lifecycle/product-release-stages). To participate in this program, contact [Auth0 Support](https://support.auth0.com) or your Technical Account Manager.
 
 </Warning>
 
@@ -43,9 +43,9 @@ You can activate the My Account API for your tenant in the <Tooltip data-tooltip
 2. Locate the **MyAccount API** banner.
 3. Select **Activate**.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/DGkDQNIHcegN8vtQyEvF3/a2e98b06867701a66fa1f1b3df1c996b/My_Account_API_-_Activate.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/DGkDQNIHcegN8vtQyEvF3/a2e98b06867701a66fa1f1b3df1c996b/My_Account_API_-_Activate.png)</Frame>
 
-By default, the My Account API is created with the following [application API access policies](/docs/get-started/apis/api-access-policies-for-applications):
+By default, the My Account API is created with the following [application API access policies](/docs/fr-ca/get-started/apis/api-access-policies-for-applications):
 
 * `require_client_grant` for user flows
 * `deny_all` for client (machine-to-machine) flows
@@ -54,15 +54,15 @@ For an application to access the My Account API on the user’s behalf, you must
 
 Because the My Account API exposes sensitive information and operations, Auth0 does notrecommendusing `allow_all` for user access flows. You should follow a least privilege principle with the My Account API to ensure applications only get access to what they truly need, minimizing potential security risks.
 
-The final permissions granted to the application will be determined by the intersection of the scopes allowed by the application API access policy, the [Role-Based Access Control (RBAC)](/docs/manage-users/access-control/rbac) permissions assigned to the end user, and any [user consent given](/docs/get-started/applications/confidential-and-public-applications/user-consent-and-third-party-applications) (if applicable).
+The final permissions granted to the application will be determined by the intersection of the scopes allowed by the application API access policy, the [Role-Based Access Control (RBAC)](/docs/fr-ca/manage-users/access-control/rbac) permissions assigned to the end user, and any [user consent given](/docs/fr-ca/get-started/applications/confidential-and-public-applications/user-consent-and-third-party-applications) (if applicable).
 
 <Note>
 
-You cannot update the application API policy for client access to the My Account API, which means you cannot access the My Account API using the [Client Credentials Flow](/docs/get-started/authentication-and-authorization-flow/client-credentials-flow).
+You cannot update the application API policy for client access to the My Account API, which means you cannot access the My Account API using the [Client Credentials Flow](/docs/fr-ca/get-started/authentication-and-authorization-flow/client-credentials-flow).
 
 </Note>
 
-To learn more about how to manage application API access policies and their associated client grants, read [Application Access to APIs: Client Grants](/docs/get-started/applications/application-access-to-apis-client-grants).
+To learn more about how to manage application API access policies and their associated client grants, read [Application Access to APIs: Client Grants](/docs/fr-ca/get-started/applications/application-access-to-apis-client-grants).
 
 ## Get an access token
 
@@ -70,7 +70,7 @@ You can get an <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" t
 
 <Note>
 
-If you’re going to allow the My Account API to perform sensitive operations (such as enrolling an authentication method), we strongly recommend that you use [step-up authentication](/docs/secure/multi-factor-authentication/step-up-authentication) to enforce additional security policies through [multi-factor authentication (MFA)](/docs/secure/multi-factor-authentication).
+If you’re going to allow the My Account API to perform sensitive operations (such as enrolling an authentication method), we strongly recommend that you use [step-up authentication](/docs/fr-ca/secure/multi-factor-authentication/step-up-authentication) to enforce additional security policies through [multi-factor authentication (MFA)](/docs/fr-ca/secure/multi-factor-authentication).
 
 </Note>
 
@@ -82,7 +82,7 @@ If you’re using <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2
 If you’re using embedded login, read the following articles:
 
 * [Call Your API Using Resource Owner Password Flow](/docs/fr-ca/get-started/authentication-and-authorization-flow/resource-owner-password-flow/call-your-api-using-resource-owner-password-flow)
-* [Login Flow with Native Passkeys API](/docs/native-passkeys-api#login-flow)
+* [Login Flow with Native Passkeys API](/docs/fr-ca/native-passkeys-api#login-flow)
 
 ### Audience
 
@@ -100,23 +100,23 @@ The My Account API supports the following scopes:
 </thead>
 <tbody>
 <tr>
-<td><code>create:me:authentication_methods</code></td>
+<td>`create:me:authentication_methods`</td>
 <td>Allows the user to enroll a new authentication method.</td>
 </tr>
 <tr>
-<td><code>read:me:authentication_methods</code></td>
+<td>`read:me:authentication_methods`</td>
 <td>Allows the user to view existing authentication methods.</td>
 </tr>
 <tr>
-<td><code>updated:me:authentication_methods</code></td>
+<td>`updated:me:authentication_methods`</td>
 <td>Allows the user to modify existing authentication methods.</td>
 </tr>
 <tr>
-<td><code>delete:me:authentication_methods</code></td>
+<td>`delete:me:authentication_methods`</td>
 <td>Allows the user to remove existing authentication methods.</td>
 </tr>
 <tr>
-<td><code>read:me:factors</code></td>
+<td>`read:me:factors`</td>
 <td>Allows the user to view the factors they can enroll.</td>
 </tr>
 </tbody>
@@ -129,17 +129,17 @@ The My Account API supports the following scopes:
 ##### Step 1: Request authorization code
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F");
 var request = new RestRequest(Method.GET);
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -155,13 +155,13 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -180,8 +180,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F"]
 cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -200,7 +200,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F",
@@ -219,8 +219,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 conn.request("GET", "/{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F")
@@ -229,7 +229,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -240,8 +240,8 @@ http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 request = Net::HTTP::Get.new(url)
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F")! as URL,
 cachePolicy: .useProtocolCachePolicy,
@@ -263,13 +263,13 @@ dataTask.resume()
 ##### Step 2: Exchange code for access token
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/json' \
 --data '{"grant_type": "authorization_code","client_id": "{yourClientId}","client_secret": "{yourClientId}","code": "{yourAuthorizationCode}","redirect_uri": "{yourRedirectUri}","audience": "{yourAudience}","scope": "create:me:authentication_methods","offline_access": ""}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -277,7 +277,7 @@ request.AddParameter("application/json", "{\"grant_type\": \"authorization_code\
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -296,15 +296,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/json")
 .body("{\"grant_type\": \"authorization_code\",\"client_id\": \"{yourClientId}\",\"client_secret\": \"{yourClientId}\",\"code\": \"{yourAuthorizationCode}\",\"redirect_uri\": \"{yourRedirectUri}\",\"audience\": \"{yourAudience}\",\"scope\": \"create:me:authentication_methods\",\"offline_access\": \"\"}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -326,8 +326,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"grant_type": @"authorization_code",
@@ -358,7 +358,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -381,8 +381,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"grant_type\": \"authorization_code\",\"client_id\": \"{yourClientId}\",\"client_secret\": \"{yourClientId}\",\"code\": \"{yourAuthorizationCode}\",\"redirect_uri\": \"{yourRedirectUri}\",\"audience\": \"{yourAudience}\",\"scope\": \"create:me:authentication_methods\",\"offline_access\": \"\"}"
@@ -393,7 +393,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -406,8 +406,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"grant_type\": \"authorization_code\",\"client_id\": \"{yourClientId}\",\"client_secret\": \"{yourClientId}\",\"code\": \"{yourAuthorizationCode}\",\"redirect_uri\": \"{yourRedirectUri}\",\"audience\": \"{yourAudience}\",\"scope\": \"create:me:authentication_methods\",\"offline_access\": \"\"}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = [
@@ -445,13 +445,13 @@ dataTask.resume()
 ##### Step 1: Request login challenge
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/passkey/challenge' \
 --header 'content-type: application/json' \
 --data '{"client_id": "{yourDomain}"}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/passkey/challenge");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -459,7 +459,7 @@ request.AddParameter("application/json", "{\"client_id\": \"{yourDomain}\"}", Pa
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -478,15 +478,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/passkey/challenge")
 .header("content-type", "application/json")
 .body("{\"client_id\": \"{yourDomain}\"}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -499,8 +499,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"client_id": @"{yourDomain}" };
@@ -524,7 +524,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/passkey/challenge",
@@ -547,8 +547,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"client_id\": \"{yourDomain}\"}"
@@ -559,7 +559,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -572,8 +572,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"client_id\": \"{yourDomain}\"}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = ["client_id": "{yourDomain}"] as [String : Any]
@@ -600,13 +600,13 @@ dataTask.resume()
 ##### Step 2: Authenticate existing user
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/json' \
 --data '{ "grant_type": "urn:okta:params:oauth:grant-type:webauthn", "client_id": "{yourClientId}", "scope": "create:me:authentication_methods offline_access", "audience": "https://{yourDomain}/me/" "auth_session": "{sessionIdFromTheFirstRequest}", "authn_response": "{authenticatorResponse}"}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -614,7 +614,7 @@ request.AddParameter("application/json", "{ \"grant_type\": \"urn:okta:params:oa
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -633,15 +633,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/json")
 .body("{ \"grant_type\": \"urn:okta:params:oauth:grant-type:webauthn\", \"client_id\": \"{yourClientId}\", \"scope\": \"create:me:authentication_methods offline_access\", \"audience\": \"https://{yourDomain}/me/\" \"auth_session\": \"{sessionIdFromTheFirstRequest}\", \"authn_response\": \"{authenticatorResponse}\"}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -654,8 +654,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSData \*postData = [[NSData alloc] initWithData:[@"{ "grant_type": "urn:okta:params:oauth:grant-type:webauthn", "client_id": "{yourClientId}", "scope": "create:me:authentication_methods offline_access", "audience": "https://{yourDomain}/me/" "auth_session": "{sessionIdFromTheFirstRequest}", "authn_response": "{authenticatorResponse}"}" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -678,7 +678,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -701,8 +701,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"grant_type\": \"urn:okta:params:oauth:grant-type:webauthn\", \"client_id\": \"{yourClientId}\", \"scope\": \"create:me:authentication_methods offline_access\", \"audience\": \"https://{yourDomain}/me/\" \"auth_session\": \"{sessionIdFromTheFirstRequest}\", \"authn_response\": \"{authenticatorResponse}\"}"
@@ -713,7 +713,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -726,8 +726,8 @@ request["content-type"] = 'application/json'
 request.body = "{ \"grant_type\": \"urn:okta:params:oauth:grant-type:webauthn\", \"client_id\": \"{yourClientId}\", \"scope\": \"create:me:authentication_methods offline_access\", \"audience\": \"https://{yourDomain}/me/\" \"auth_session\": \"{sessionIdFromTheFirstRequest}\", \"authn_response\": \"{authenticatorResponse}\"}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let postData = NSData(data: "{ "grant_type": "urn:okta:params:oauth:grant-type:webauthn", "client_id": "{yourClientId}", "scope": "create:me:authentication_methods offline_access", "audience": "https://{yourDomain}/me/" "auth_session": "{sessionIdFromTheFirstRequest}", "authn_response": "{authenticatorResponse}"}".data(using: String.Encoding.utf8)!)

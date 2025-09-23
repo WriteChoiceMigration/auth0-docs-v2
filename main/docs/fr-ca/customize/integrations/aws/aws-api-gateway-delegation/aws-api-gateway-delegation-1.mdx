@@ -1,13 +1,13 @@
 ---
 title: "Tutoriel sur la passerelle API AWS – Étape 1"
 permalink: "aws-api-gateway-delegation-1"
+'description': "Étape 1 du tutoriel sur la passerelle API Amazon"
 'og:title': "Tutoriel sur la passerelle API AWS – Étape 1"
 'og:description': "Étape 1 du tutoriel sur la passerelle API Amazon"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Tutoriel sur la passerelle API AWS – Étape 1"
 'twitter:description': "Étape 1 du tutoriel sur la passerelle API Amazon"
 ---
-# Tutoriel sur la passerelle API AWS – Étape 1
 
 <Warning>
 
@@ -28,7 +28,7 @@ Avant de commencer, veuillez installer [Node.js](https://nodejs.org/).
 
 Dans la [console Amazon DynamoDB](https://console.aws.amazon.com/dynamodb), cliquez sur **Créer une table**.
 
-<Frame>![DynamoDB Console - Create Table](//images.ctfassets.net/cdy7uua7fh8z/2ZPhi7Ddx4TznSXEEhUSDK/52a06412f7c5e6d0ef0d13c6ffe17611/dynamodb-create-table.png)</Frame>
+<Frame>![DynamoDB Console - Create Table](/images/fr-ca/cdy7uua7fh8z/2ZPhi7Ddx4TznSXEEhUSDK/52a06412f7c5e6d0ef0d13c6ffe17611/dynamodb-create-table.png)</Frame>
 
 Configurez les variables associées à la table :
 
@@ -39,13 +39,13 @@ Configurez les variables associées à la table :
 * **Unités de capacité de lecture** : 3
 * **Unités de capacité d’écriture** : 3
 
-<Frame>![DynamoDB Console - Configure Newly Created Table](//images.ctfassets.net/cdy7uua7fh8z/6MYJV97Xa3DxajG8DYj2dx/e428ab2ce137176d7771c61a9c528f7c/configure-newly-created-table.png)</Frame>
+<Frame>![DynamoDB Console - Configure Newly Created Table](/images/fr-ca/cdy7uua7fh8z/6MYJV97Xa3DxajG8DYj2dx/e428ab2ce137176d7771c61a9c528f7c/configure-newly-created-table.png)</Frame>
 
 Cliquez sur **Créer** pour créer la table avec les paramètres fournis.
 
 Pendant la création de la table, prenez note du nom de la ressource Amazon affichée sur la ligne Amazon Resource Name (ARN) dans la section Détails de la table. Vous aurez en effet besoin de l’ARN de la table à l’étape suivante.
 
-<Frame>![DynamoDB Console - Table Details - Amazon Resource Name](//images.ctfassets.net/cdy7uua7fh8z/4ZFemddtUD8tRi0NUvzXJ2/38abd951974cad385ef7417f48adf359/table-arn.png)</Frame>
+<Frame>![DynamoDB Console - Table Details - Amazon Resource Name](/images/fr-ca/cdy7uua7fh8z/4ZFemddtUD8tRi0NUvzXJ2/38abd951974cad385ef7417f48adf359/table-arn.png)</Frame>
 
 ### 2. Création de la politique qui accorde aux fonctions AWS Lambda l’accès à la table DynamoDB Animaux de compagnie
 
@@ -53,13 +53,13 @@ Accédez à la [console AWS IAM](https://console.aws.amazon.com/iam).
 
 Cliquez sur **Rôles** dans le menu de gauche, puis cliquez sur le bouton **Créer un nouveau rôle**.
 
-<Frame>![IAM Console - Roles - Create New Roles](//images.ctfassets.net/cdy7uua7fh8z/4mgCTXLpycHLA8RbYoEFim/5d9eb81be979355aa9cd10d476ead515/roles.png)</Frame>
+<Frame>![IAM Console - Roles - Create New Roles](/images/fr-ca/cdy7uua7fh8z/4mgCTXLpycHLA8RbYoEFim/5d9eb81be979355aa9cd10d476ead515/roles.png)</Frame>
 
 Nommez le rôle `APIGatewayLambdaExecRole`, puis cliquez sur **Étape suivante**.
 
 Sélectionnez le type de rôle. Sous la section Rôles de service AWS, sélectionnez AWS Lambda.
 
-<Frame>![IAM Console - Select the Role Type - Service Roles - AWS Lambda](//images.ctfassets.net/cdy7uua7fh8z/326kKGbahlvIwVFTi61Gfw/026d1fc0c8c6e3a489ec4fb840f551da/select-role-type.png)</Frame>
+<Frame>![IAM Console - Select the Role Type - Service Roles - AWS Lambda](/images/fr-ca/cdy7uua7fh8z/326kKGbahlvIwVFTi61Gfw/026d1fc0c8c6e3a489ec4fb840f551da/select-role-type.png)</Frame>
 
 L’écran Joindre une politique s’affiche. Ignorez cette étape en cliquant sur **Étape suivante**. Passez maintenant en revue les informations que vous avez fournies. Si tout semble correct, cliquez sur **Créer le rôle**. Lorsque vous avez terminé, vous devriez voir votre rôle répertorié sur la page d’accueil IAM.
 
@@ -67,7 +67,7 @@ Sélectionnez le rôle **APIGatewayLambdaExecRole** que vous venez de créer. Cl
 
 Sélectionnez Politique personnalisée, puis cliquez sur **Sélectionner**. Nommez la politique `LogAndDynamoDBAccess` et ajoutez le code suivant comme document de politique (assurez-vous d’abord de mettre à jour le nom de la ressource Amazon (ARN) pour votre table DynamoDB). Cliquez sur **Appliquer la politique**.
 
-```json
+```json lines
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -113,7 +113,7 @@ Remplissez les champs appropriés avec les informations suivantes :
 
 Collez le code suivant pour lire les informations des animaux de compagnie dans la table DynamoDB dans la zone du **code de la fonction Lambda**.
 
-```javascript
+```javascript lines
 var AWS = require('aws-sdk');
 var DOC = require('dynamodb-doc');
 var dynamo = new DOC.DynamoDB();
@@ -146,7 +146,7 @@ Cliquez sur **Tester**, en laissant l’événement de test d’entrée à sa va
 
 Répétez les instructions suivies pour créer la fonction `GetPetInfo`, mais utilisez plutôt les éléments suivants comme code de fonction :
 
-```javascript
+```javascript lines
 var AWS = require('aws-sdk');
 var DOC = require('dynamodb-doc');
 var dynamo = new DOC.DynamoDB();
@@ -170,7 +170,7 @@ exports.handler = function(event, context) {
 
 Pour tester la fonction, cliquez sur la liste déroulante Actions et choisissez **Configurer l’exemple d’événement**. Entrez le code ci-dessous pour ajouter des exemples de données, puis cliquez sur **Soumettre** :
 
-```json
+```json lines
 {
   "pets": [{
     "id": 1,
@@ -190,7 +190,7 @@ Vous allez créer une fonction Lambda supplémentaire. Bien que cette fonction n
 
 En suivant les étapes décrites ci-dessus, créez une fonction Lambda nommée `NoOp`. Le code de la fonction sera le suivant :
 
-```
+```javascript lines
 exports.handler = function(event, context) {
     context.succeed('');
 }
@@ -242,7 +242,7 @@ Cliquez sur **Enregistrer**, puis sur **OK** lorsque vous êtes invité dans la 
 
 Cliquez sur **Tester** et collez le code ci-dessous dans le corps de la demande :
 
-```json
+```javascript lines
 {"pets": [
     {"id": 1, "type": "dog", "price": 249.99},
     {"id": 2, "type": "cat", "price": 124.99}
@@ -254,7 +254,7 @@ Vous devriez voir un résultat de retour vide (`{}`).
 
 Retournez à la méthode GET et cliquez à nouveau sur **Tester** pour voir si le corps de la réponse indique maintenant qu’il y a deux animaux de compagnie répertoriés dans la table :
 
-```json
+```json lines
 [
   {
     "id": 1,

@@ -1,28 +1,28 @@
 ---
 title: "Ajouter des attributs d’utilisateur à la liste rouge"
 permalink: "denylist"
+'description': "Décrit comment identifier les attributs utilisateur que vous ne souhaitez pas enregistrer dans les bases de données Auth0."
 'og:title': "Ajouter des attributs d’utilisateur à la liste rouge"
 'og:description': "Décrit comment identifier les attributs utilisateur que vous ne souhaitez pas enregistrer dans les bases de données Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Ajouter des attributs d’utilisateur à la liste rouge"
 'twitter:description': "Décrit comment identifier les attributs utilisateur que vous ne souhaitez pas enregistrer dans les bases de données Auth0."
 ---
-# Ajouter des attributs d’utilisateur à la liste rouge
 
 S’il existe des champs utilisateur qui ne doivent pas être stockés dans les bases de données Auth0 pour des raisons de confidentialité, vous pouvez les ajouter à la liste rouge. Pour ajouter des attributs à la liste rouge, effectuez un appel `PATCH` au point de terminaison de connexion de mise à jour de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>.
 
-1. Obtenez un jeton d’accès valide pour accéder au [point de terminaison](/docs/api/management/v2#!/Connections/patch_connections_by_id)`/patch_connections_by_id`. Le jeton doit inclure la permission `update:connections`. Pour plus de détails, veuillez consulter [Jetons d’accès à Management API](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens).
+1. Obtenez un jeton d’accès valide pour accéder au [point de terminaison](/docs/fr-ca/api/management/v2#!/Connections/patch_connections_by_id)`/patch_connections_by_id`. Le jeton doit inclure la permission `update:connections`. Pour plus de détails, veuillez consulter [Jetons d’accès à Management API](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens).
 2. Avec le jeton d’accès et la liste des attributs à refuser, appelez l’API. Voici un exemple de requête HTTP qui refuse deux attributs : l’origine ethnique et le genre. Gardez à l’esprit que vous devez récupérer l’objet options et envoyer l’objet entier dans votre requête PATCH, car il n’y a pas de « fusion » si vous ne mettez à jour qu’une ou deux valeurs.
 
    <CodeGroup>
-```bash curl.sh
+```bash cURL lines
    curl --request PATCH \
    --url 'https://{yourDomain}/api/v2/connections/YOUR_CONNECTION_ID' \
    --header 'authorization: Bearer YOUR_TOKEN' \
    --header 'content-type: application/json' \
    --data '{"options": {"non_persistent_attrs": ["ethnicity", "gender"]}}'
-   ```
-   ```csharp c_.cs
+   ``` lines
+   ```csharp C# lines
    var client = new RestClient("https://{yourDomain}/api/v2/connections/YOUR_CONNECTION_ID");
    var request = new RestRequest(Method.PATCH);
    request.AddHeader("authorization", "Bearer YOUR_TOKEN");
@@ -31,7 +31,7 @@ S’il existe des champs utilisateur qui ne doivent pas être stockés dans les 
    IRestResponse response = client.Execute(request);
    ```
 
-   ```go go.go
+   ```go Go lines
    package main
    import (
    "fmt"
@@ -51,8 +51,8 @@ S’il existe des champs utilisateur qui ne doivent pas être stockés dans les 
    fmt.Println(res)
    fmt.Println(string(body))
    }
-   ```
-   ```java java.java
+   ``` lines
+   ```java Java lines
    HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/connections/YOUR_CONNECTION_ID")
    .header("authorization", "Bearer YOUR_TOKEN")
    .header("content-type", "application/json")
@@ -60,7 +60,7 @@ S’il existe des champs utilisateur qui ne doivent pas être stockés dans les 
    .asString();
    ```
 
-   ```javascript node_js.js
+   ```javascript Node.JS lines
    var axios = require("axios").default;
    var options = {
    method: 'PATCH',
@@ -73,8 +73,8 @@ S’il existe des champs utilisateur qui ne doivent pas être stockés dans les 
    }).catch(function (error) {
    console.error(error);
    });
-   ```
-   ```obj-c obj-c.obj-c
+   ``` lines
+   ```obj-c Obj-C lines
    #import 
    NSDictionary \*headers = @{ @"authorization": @"Bearer YOUR_TOKEN",
    @"content-type": @"application/json" };
@@ -99,7 +99,7 @@ S’il existe des champs utilisateur qui ne doivent pas être stockés dans les 
    [dataTask resume];
    ```
 
-   ```php php.php
+   ```php PHP lines
    $curl = curl_init();
    curl_setopt_array($curl, [
    CURLOPT_URL => "https://{yourDomain}/api/v2/connections/YOUR_CONNECTION_ID",
@@ -123,8 +123,8 @@ S’il existe des champs utilisateur qui ne doivent pas être stockés dans les 
    } else {
    echo $response;
    }
-   ```
-   ```python python.py
+   ``` lines
+   ```python Python lines
    import http.client
    conn = http.client.HTTPSConnection("")
    payload = "{\"options\": {\"non_persistent_attrs\": [\"ethnicity\", \"gender\"]}}"
@@ -138,7 +138,7 @@ S’il existe des champs utilisateur qui ne doivent pas être stockés dans les 
    print(data.decode("utf-8"))
    ```
 
-   ```ruby ruby.rb
+   ```ruby Ruby lines
    require 'uri'
    require 'net/http'
    require 'openssl'
@@ -152,8 +152,8 @@ S’il existe des champs utilisateur qui ne doivent pas être stockés dans les 
    request.body = "{\"options\": {\"non_persistent_attrs\": [\"ethnicity\", \"gender\"]}}"
    response = http.request(request)
    puts response.read_body
-   ```
-   ```swift swift.swift
+   ``` lines
+   ```swift Swift lines
    import Foundation
    let headers = [
    "authorization": "Bearer YOUR_TOKEN",

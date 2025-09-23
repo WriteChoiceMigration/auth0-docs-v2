@@ -1,17 +1,17 @@
 ---
 title: "Configuration des notifications SMS et vocales pour l’authentification multifacteur (MFA)"
 permalink: "configure-sms-voice-notifications-mfa"
+'description': "Décrit comment configurer des notifications SMS et vocales pour l’authentification multifacteur (MFA)"
 'og:title': "Configuration des notifications SMS et vocales pour l’authentification multifacteur (MFA)"
 'og:description': "Décrit comment configurer des notifications SMS et vocales pour l’authentification multifacteur (MFA)"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configuration des notifications SMS et vocales pour l’authentification multifacteur (MFA)"
 'twitter:description': "Décrit comment configurer des notifications SMS et vocales pour l’authentification multifacteur (MFA)"
 ---
-# Configuration des notifications SMS et vocales pour l’authentification multifacteur (MFA)
 
 <Warning>
 
-L’expérience téléphonique unifiée centralise toutes les configurations de votre fournisseur de services téléphoniques au même endroit dans votre locataire. Vous n’avez donc pas besoin de configurer plusieurs fois le même fournisseur pour différents facteurs d’authentification. Pour en savoir plus, consultez [Configurer l’expérience téléphonique unifiée pour l’authentification multifacteurs (MFA)](/docs/customize/phone-messages/unified-phone/use-auth0s-unified-phone-experience-for-multi-factor-authentication).
+L’expérience téléphonique unifiée centralise toutes les configurations de votre fournisseur de services téléphoniques au même endroit dans votre locataire. Vous n’avez donc pas besoin de configurer plusieurs fois le même fournisseur pour différents facteurs d’authentification. Pour en savoir plus, consultez [Configurer l’expérience téléphonique unifiée pour l’authentification multifacteurs (MFA)](/docs/fr-ca/customize/phone-messages/unified-phone/use-auth0s-unified-phone-experience-for-multi-factor-authentication).
 
 </Warning>
 
@@ -29,11 +29,11 @@ L’implémentation propre à votre connexion et votre plan Auth0 ou accord pers
 
 Lorsque les SMS et la voix sont activés, les utilisateurs ont la possibilité de s’inscrire en recevant le code envoyé par SMS ou par voix :
 
-<Frame>![Configure SMS and Voice for MFA User Experience Voice](//images.ctfassets.net/cdy7uua7fh8z/2Q4BViGl71sdrytUDgNJ10/0594feaeff5f1bc25ce48f7498de6868/mfa-sms-voice.png)</Frame>
+<Frame>![Configure SMS and Voice for MFA User Experience Voice](/images/fr-ca/cdy7uua7fh8z/2Q4BViGl71sdrytUDgNJ10/0594feaeff5f1bc25ce48f7498de6868/mfa-sms-voice.png)</Frame>
 
 Lorsque vous activez uniquement les SMS, le flux est plus simple :
 
-<Frame>![Configure SMS and Voice for MFA User Experience SMS](//images.ctfassets.net/cdy7uua7fh8z/64PgR0CO1Wjfie2Hxy1Ptw/4de524c5759f68ca30f8dfe11cfde158/mfa-sms.png)</Frame>
+<Frame>![Configure SMS and Voice for MFA User Experience SMS](/images/fr-ca/cdy7uua7fh8z/64PgR0CO1Wjfie2Hxy1Ptw/4de524c5759f68ca30f8dfe11cfde158/mfa-sms.png)</Frame>
 
 Une fois les utilisateurs inscrits, la prochaine fois qu’ils s’authentifieront, ils recevront un un appel ou un SMS sur leur téléphone enregistré.
 
@@ -81,14 +81,14 @@ Vous pouvez personnaliser vos modèles de SMS et de messages vocaux. Pour en sa
 Vous pouvez utiliser Management API pour configurer les méthodes de livraison de messages activées à l’aide du point de terminaison  `/api/v2/guardian/factors/phone/message-types`. Le paramètre `message_types` est un tableau qui peut contenir `["sms"]`, `["voice"]`, or `["sms", "voice"]`. Vous avez besoin d’un [Jeton d’accès à Management API)](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens) avec la permission `update:guardian_factors` en tant que jeton du porteur pour appeler l’API :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PUT \
 --url 'https://{yourDomain}/api/v2/guardian/factors/phone/message-types' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: application/json' \
 --data '{ "message_types": ["sms", "voice"] }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/guardian/factors/phone/message-types");
 var request = new RestRequest(Method.PUT);
 request.AddHeader("content-type", "application/json");
@@ -97,7 +97,7 @@ request.AddParameter("application/json", "{ \"message_types\": [\"sms\", \"voice
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -117,8 +117,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/guardian/factors/phone/message-types")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -126,7 +126,7 @@ HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/guardian/factor
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PUT',
@@ -142,8 +142,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
@@ -168,7 +168,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/guardian/factors/phone/message-types",
@@ -192,8 +192,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"message_types\": [\"sms\", \"voice\"] }"
@@ -207,7 +207,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -221,8 +221,8 @@ request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 request.body = "{ \"message_types\": [\"sms\", \"voice\"] }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",

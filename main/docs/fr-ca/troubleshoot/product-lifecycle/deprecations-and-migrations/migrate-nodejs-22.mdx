@@ -1,13 +1,13 @@
 ---
 title: "Migrer depuis Node 18 vers Node 22"
 permalink: "migrate-nodejs-22"
+'description': "Décrit les éléments Auth0 Actions affectées par Node.js 18"
 'og:title': "Migrer depuis Node 18 vers Node 22"
 'og:description': "Décrit les éléments Auth0 Actions affectées par Node.js 18"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Migrer depuis Node 18 vers Node 22"
 'twitter:description': "Décrit les éléments Auth0 Actions affectées par Node.js 18"
 ---
-# Migrer depuis Node 18 vers Node 22
 
 Depuis le 15 janvier 2025, l’environnement d’exécution de l’extensibilité de la version 22 de Node est généralement disponible sur l’ensemble de notre suite d’offres d’extensibilité. Cela inclut les Actions, Règles, Hooks, scripts de base de données et connexions personnalisées avec les réseaux sociaux. Nous vous encourageons vivement à mettre à jour vers Node 22 dès que possible pour adhérer aux meilleures pratiques de sécurité du code.
 
@@ -22,11 +22,11 @@ Depuis le 15 janvier 2025, l’environnement d’exécution de l’extensibilit�
 
 #### Intégrations des connexions avec les réseaux sociaux
 
-Utilisez [Management API](/docs/api/management/v2) pour identifier une liste complète des connexions avec les réseaux sociaux qu’un changement de version de l’environnement d’exécution de Node peut affecter. Plus particulièrement, toutes les connexions avec les réseaux sociaux potentiellement affectées, qu’elles soient explicitement créées en tant que connexion avec les réseaux sociaux personnalisée ou initialement ajoutées par la place du marché, ont une valeur `strategy` établie sur `oauth1` ou `oauth2`.
+Utilisez [Management API](/docs/fr-ca/api/management/v2) pour identifier une liste complète des connexions avec les réseaux sociaux qu’un changement de version de l’environnement d’exécution de Node peut affecter. Plus particulièrement, toutes les connexions avec les réseaux sociaux potentiellement affectées, qu’elles soient explicitement créées en tant que connexion avec les réseaux sociaux personnalisée ou initialement ajoutées par la place du marché, ont une valeur `strategy` établie sur `oauth1` ou `oauth2`.
 
-Vous pouvez ensuite paginer à travers toutes les connexions personnalisées avec les réseaux sociaux existantes dans un locataire donné à l’aide du point de terminaison [GET all connections](/docs/api/management/v2#!/Connections/get_connections). Par exemple, les options de requête suivantes renvoient les noms et identifiants d’un maximum de 100 connexions personnalisées avec les réseaux sociaux :
+Vous pouvez ensuite paginer à travers toutes les connexions personnalisées avec les réseaux sociaux existantes dans un locataire donné à l’aide du point de terminaison [GET all connections](/docs/fr-ca/api/management/v2#!/Connections/get_connections). Par exemple, les options de requête suivantes renvoient les noms et identifiants d’un maximum de 100 connexions personnalisées avec les réseaux sociaux :
 
-```
+``` lines
 /api/v2/connections?strategy=oauth1&strategy=oauth2&include_totals=true&fields=name&per_page=100
 ```
 
@@ -45,7 +45,7 @@ Pour créer une nouvelle action personnalisée avec la version de Node 22 par l
 
 ### Mettre à niveau des actions personnalisées existantes
 
-Vous pouvez mettre à niveau individuellement les Actions personnalisées existantes construites sur la version 12, 12 ou 18 de Node vers Node 22, puis [revenir à la version précédente](/docs/customize/actions/manage-versions#revert-actions) en utilisant l’ancien environnement d’exécution. Mettez à jour les Actions vers la version de Node 22 en créant et en déployant une nouvelle version de l’implémentation actuelle pour utiliser Node 22 comme environnement d’exécution.
+Vous pouvez mettre à niveau individuellement les Actions personnalisées existantes construites sur la version 12, 12 ou 18 de Node vers Node 22, puis [revenir à la version précédente](/docs/fr-ca/customize/actions/manage-versions#revert-actions) en utilisant l’ancien environnement d’exécution. Mettez à jour les Actions vers la version de Node 22 en créant et en déployant une nouvelle version de l’implémentation actuelle pour utiliser Node 22 comme environnement d’exécution.
 
 ### Choisissez la version 22 de Node pour les autres produits d’extensibilité
 

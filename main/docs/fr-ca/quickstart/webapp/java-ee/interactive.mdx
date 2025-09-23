@@ -1,17 +1,19 @@
 ---
 title: "Ajouter une connexion à votre application web Java EE"
 permalink: "interactive"
+'description': "Ce tutoriel montre comment ajouter une connexion utilisateur à une application web Java EE."
 'og:title': "Ajouter une connexion à votre application web Java EE"
 'og:description': "Ce tutoriel montre comment ajouter une connexion utilisateur à une application web Java EE."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/java.png"
 'twitter:title': "Ajouter une connexion à votre application web Java EE"
 'twitter:description': "Ce tutoriel montre comment ajouter une connexion utilisateur à une application web Java EE."
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -53,7 +55,7 @@ Ce tutoriel et le projet d’exemple ont été testés avec les éléments suiva
 
 Après votre inscription à Auth0, une nouvelle application a été créée pour vous, ou vous avez pu en créer une. Vous aurez besoin de quelques informations sur cette application pour communiquer avec Auth0. Vous pouvez obtenir ces détails dans la section [Paramètres de l’application](https://manage.auth0.com/#/applications) d’Auth0 Dashboard.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/1NtemqhRTHLFgWkGyAVSC6/ae66506a56ffab891e8a36e1344e6376/uwp.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/1NtemqhRTHLFgWkGyAVSC6/ae66506a56ffab891e8a36e1344e6376/uwp.png)</Frame>
 
 Les informations suivantes sont nécessaires :
 
@@ -101,7 +103,7 @@ Pour intégrer votre application Java EE avec Auth0, ajoutez les dépendances su
 
 Si vous utilisez Maven, ajoutez les dépendances à votre `pom.xml` :
 
-```
+```xml lines
 <!-- pom.xml -->
 <dependency>
 <groupId>com.auth0</groupId>
@@ -124,7 +126,7 @@ Si vous utilisez Maven, ajoutez les dépendances à votre `pom.xml` :
 
 Si vous utilisez Gradle, ajoutez-les à votre `build.gradle` :
 
-```javascript
+```powershell lines
 // build.gradle
 providedCompile 'javax:javaee-api:8.0.1'
 providedCompile 'javax.security.enterprise:javax.security.enterprise-api:1.0'
@@ -150,7 +152,7 @@ Ces informations seront utilisées pour configurer la bibliothèque **auth0-java
 </thead>
 <tbody>
 <tr>
-<td>Si vous avez téléchargé cet exemple en utilisant le bouton **Download Sample**, les attributs <code>domain</code>, <code>clientId</code> et <code>clientSecret</code> seront remplis pour vous. Vous devez vérifier que les valeurs sont correctes, surtout si vous avez plusieurs applications Auth0 dans votre compte.</td>
+<td>Si vous avez téléchargé cet exemple en utilisant le bouton **Download Sample**, les attributs `domain`, `clientId` et `clientSecret` seront remplis pour vous. Vous devez vérifier que les valeurs sont correctes, surtout si vous avez plusieurs applications Auth0 dans votre compte.</td>
 </tr>
 </tbody>
 </table>
@@ -172,7 +174,7 @@ Tout d’abord, mettez vos paramètres Auth0 à la disposition de l’applicatio
 
 Ensuite, créez un `CallerPrincipal` personnalisé qui représente l’appelant de la requête en cours :
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/security/Auth0JwtPrincipal.java
 public class Auth0JwtPrincipal extends CallerPrincipal {
 private final DecodedJWT idToken;
@@ -196,7 +198,7 @@ public DecodedJWT getIdToken() {
 
 Vous pouvez maintenant mettre en œuvre un `Credential` personnalisé qui sera utilisé pour représenter les identifiants de l’utilisateur. Il contiendra des informations sur le principal :
 
-```javascript
+```javascript lines
 // src/main/java/com/auth0/example/security/Auth0JwtCredential.java
 class Auth0JwtCredential implements Credential {
 private Auth0JwtPrincipal auth0JwtPrincipal;
@@ -220,7 +222,7 @@ Auth0JwtPrincipal getAuth0JwtPrincipal() {
 
 Vous avez maintenant défini les classes qui représentent le principal et l’identifiant d’un appelant. Ensuite, créez une implémentation personnalisée de `IdentityStore`. Cette classe sera chargée de valider les identifiants de l’utilisateur :
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/security/Auth0JwtIdentityStore.java
 @ApplicationScoped
 public class Auth0JwtIdentityStore implements IdentityStore {
@@ -260,7 +262,7 @@ Pour en savoir plus sur les algorithmes de signature disponibles, consultez la [
 
 L’exemple ci-dessous montre comment configurer le `AuthenticationController` pour l’utiliser avec l’algorithme de signature **RS256** :
 
-```javascript
+```javascript lines
 // src/main/java/com/auth0/example/security/Auth0AuthenticationProvider.java
 @ApplicationScoped
 public class Auth0AuthenticationProvider {
@@ -283,7 +285,7 @@ public AuthenticationController authenticationController(Auth0AuthenticationConf
 
 Enfin, mettez en œuvre un `HttpAuthenticationMechanism` personnalisé
 
-```javascript
+```javascript lines
 // src/main/java/com/auth0/example/security/Auth0AuthenticationMechanism.java
 @ApplicationScoped
 @AutoApplySession
@@ -368,7 +370,7 @@ Le `LoginController` est responsable de rediriger la requête vers l’URL d’a
 
 Une fois que l’utilisateur a entré ses identifiants et autorisé les permissions demandées, Auth0 enverra une requête au `callbackUrl`, incluant un paramètre de requête `code` qui peut être échangé contre un jeton d’ID et un jeton d’accès. Rappelons que le `Auth0HttpAuthenticationMechanism` créé ci-dessus gère cet échange afin qu’il puisse notifier le conteneur d’applications du statut d’authentification. Cela permet au Servlet qui gère les requêtes vers le chemin `/callback` de simplement transférer la requête à la ressource initialement demandée avant de se connecter, ou simplement de rediriger vers la page d’accueil :
 
-```javascript
+```javascript lines
 // src/main/com/auth0/example/web/CallbackServlet.java
 @WebServlet(urlPatterns = {"/callback"})
 public class CallbackServlet extends HttpServlet {
@@ -395,7 +397,7 @@ Vous pouvez utiliser `Auth0JwtPrincipal` pour obtenir des informations sur le pr
 
 Vous pouvez ensuite utiliser ces informations de profil dans votre vue pour afficher des informations sur l’utilisateur :
 
-```
+```html lines
 <!-- src/main/webapp/WEB-INF/jsp/fragments/navbar.jspf -->
 <c:choose>
 <c:when test="{empty profile}">
@@ -439,19 +441,19 @@ Pour construire et exécuter l’exemple, exécutez l’objectif Maven wildfly:r
 
 Si vous utilisez Linux ou MacOS :
 
-```
+```powershell lines
 ./mvnw clean wildfly:run
 ```
 
 Windows :
 
-```
+```powershell lines
 mvnw.cmd clean wildfly:run
 ```
 
 Pointez votre navigateur sur `http:``//localhost:3000.` Suivez le lien **Log In (Connexion)** pour vous connecter ou vous inscrire à votre locataire Auth0.
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/5Lp4Zahxd2v6wSJmy9JaM4/2fc68529fe5299c1fc514e3f28a8c998/Login_Screen_-_French.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/5Lp4Zahxd2v6wSJmy9JaM4/2fc68529fe5299c1fc514e3f28a8c998/Login_Screen_-_French.png)</Frame>
 
 Une fois la connexion réussie, vous verrez l’image du profil de l’utilisateur et un menu déroulant à l’endroit où se trouvait le lien Log In (Connexion). Vous pouvez alors consulter la page de profil de l’utilisateur en cliquant sur le lien **Profile (Profil)**. Vous pouvez vous déconnecter en cliquant sur le lien **Logout (Déconnexion)** dans le menu déroulant.
 
@@ -473,7 +475,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/webapp/java-ee/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

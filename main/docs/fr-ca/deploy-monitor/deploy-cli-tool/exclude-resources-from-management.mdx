@@ -1,13 +1,13 @@
 ---
 title: "Exclure des ressources de la gestion"
 permalink: "exclude-resources-from-management"
+'description': "Découvrez comment exclure des ressources de la gestion avec l’outil Auth0 Deploy CLI."
 'og:title': "Exclure des ressources de la gestion"
 'og:description': "Découvrez comment exclure des ressources de la gestion avec l’outil Auth0 Deploy CLI."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Exclure des ressources de la gestion"
 'twitter:description': "Découvrez comment exclure des ressources de la gestion avec l’outil Auth0 Deploy CLI."
 ---
-# Exclure des ressources de la gestion
 
 Dans certains cas, il peut être utile d’exclure des ressources de la gestion. Par exemple si votre locataire possède une ressource en grande quantité, difficile à gérer, ou que votre flux de développement ne concerne qu’un sous-ensemble particulier de ressources et que vous aimeriez omettre toutes les autres ressources pour des raisons de performance. Quoi qu’il en soit, plusieurs options sont proposées pour exclure des ressources lors de l’utilisation de l’outil Deploy CLI.
 
@@ -27,7 +27,7 @@ Toutes les valeurs de ressources prises en charge pour l’exclusion : `actions
 
 L’exemple suivant montre comment exclure des `clients`, des `connexions`, des `base de données` et des `organizations` de la gestion par l’outil Deploy CLI.
 
-```json
+```json lines
 {
   "AUTH0_DOMAIN": "example-site.us.auth0.com",
   "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>",
@@ -39,7 +39,7 @@ L’exemple suivant montre comment exclure des `clients`, des `connexions`, des 
 
 L’exemple suivant montre comment indiquer de ne gérer que des `actions`, des `clients` et des`connexions` avec l’outil Deploy CLI.
 
-```json
+```json lines
 {
   "AUTH0_DOMAIN": "example-site.us.auth0.com",
   "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>",
@@ -55,7 +55,7 @@ Cette méthode est prise en charge pour les règles, les clients, les bases de d
 
 ### Exemple
 
-```json
+```json lines
 {
   "AUTH0_DOMAIN": "example-site.us.auth0.com",
   "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>",
@@ -82,7 +82,7 @@ Il n’y a pas de concept d’omission pour l’exportation. Sauf exclusion spé
 
 #### Exemple
 
-```
+```yaml lines
 roles: # roles configuration is not omitted
   - name: Admin
     description: Can read and write things
@@ -101,7 +101,7 @@ Pour les configurations de ressources non basées sur des ensembles, comme les l
 
 #### Exemple de vide
 
-```
+```yaml lines
 hooks: [] # Empty hooks
 connections: [] # Empty connections
 tenant: {} # Effectively a no-op, emptiness does not apply to non-set resource config

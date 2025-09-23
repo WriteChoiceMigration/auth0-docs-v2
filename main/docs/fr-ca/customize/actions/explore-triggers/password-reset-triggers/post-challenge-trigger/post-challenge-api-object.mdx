@@ -1,13 +1,13 @@
 ---
 title: "Déclencheurs d’actions : après le défi-réponse - Objet API"
 permalink: "post-challenge-api-object"
+'description': "En savoir plus sur l’objet API comme déclencheur de l’Action post défi-réponse de la réinitialisation du mot de passe."
 'og:title': "Déclencheurs d’actions : après le défi-réponse - Objet API"
 'og:description': "En savoir plus sur l’objet API comme déclencheur de l’Action post défi-réponse de la réinitialisation du mot de passe."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Déclencheurs d’actions : après le défi-réponse - Objet API"
 'twitter:description': "En savoir plus sur l’objet API comme déclencheur de l’Action post défi-réponse de la réinitialisation du mot de passe."
 ---
-# Déclencheurs d’actions : après le défi-réponse - Objet API
 
 L’objet API pour le déclencheur d’Actions `post-challenge` comprend :
 
@@ -32,7 +32,7 @@ Renvoie une référence à l’objet `api`.
 </thead>
 <tbody>
 <tr>
-<td><code>reason</code></td>
+<td>`reason`</td>
 <td>
 <p>
 <em>Chaîne</em>. Une explication lisible par l’homme du rejet de la
@@ -68,7 +68,7 @@ Lorsqu’un défi multifacteur est demandé, les actions suivantes ne seront pas
 </thead>
 <tbody>
 <tr>
-<td><code>factor</code></td>
+<td>`factor`</td>
 <td>
 <p>
 <em>FactorSelector</em>. Objet décrivant le type de facteur (et ses options) à utiliser pour l’épreuve initiale.
@@ -76,10 +76,10 @@ Lorsqu’un défi multifacteur est demandé, les actions suivantes ne seront pas
 </td>
 </tr>
 <tr>
-<td><code>options</code></td>
+<td>`options`</td>
 <td>
 <p>
-            Objet facultatif. Options supplémentaires qui peuvent également spécifier <code>additionalFactors</code> en tant que propriété.
+            Objet facultatif. Options supplémentaires qui peuvent également spécifier `additionalFactors` en tant que propriété.
           </p>
 </td>
 </tr>
@@ -106,7 +106,7 @@ Lorsqu’un défi multifacteur est demandé, les actions suivantes ne seront pas
 </thead>
 <tbody>
 <tr>
-<td><code>factor</code></td>
+<td>`factor`</td>
 <td>
 <p>
 <em>FactorSelector[]</em>. Un tableau de facteurs.
@@ -137,7 +137,7 @@ En cas d’erreur, l’objet renvoyé comprend une propriété `code` qui indiqu
 </thead>
 <tbody>
 <tr>
-<td><code>key</code></td>
+<td>`key`</td>
 <td>
 <p><em>Chaîne</em>. La clé de l’enregistrement est stockée dans le cache.</p>
 </td>
@@ -169,7 +169,7 @@ Ce cache est conçu pour des données de courte durée et éphémères. Les él�
 </thead>
 <tbody>
 <tr>
-<td><code>key</code></td>
+<td>`key`</td>
 <td>
 <p><em>Chaîne</em>. La clé de l’enregistrement est stockée dans le cache.</p>
 </td>
@@ -183,12 +183,12 @@ Stockez ou mettez à jour une valeur de chaîne dans le cache à la clé spécif
 
 Les valeurs stockées dans ce cache sont limitées au déclencheur dans lequel elles sont définies.
 Elles sont soumises aux
-[Limites de cache des actions](/docs/customize/actions/limitations).
+[Limites de cache des actions](/docs/fr-ca/customize/actions/limitations).
 
 Les valeurs stockées de cette manière peuvent avoir des durées de vie allant jusqu’aux valeurs spécifiées
 `ttl` ou `expires_at`. Si aucune durée de vie
 n’est spécifiée, une durée de vie de 15 minutes est utilisée par défaut. Les durées de vie ne peuvent pas dépasser la durée maximale indiquée dans les
-[Limites de cache des actions](/docs/customize/actions/limitations).
+[Limites de cache des actions](/docs/fr-ca/customize/actions/limitations).
 
 <table class="table">
 <thead>
@@ -199,44 +199,44 @@ n’est spécifiée, une durée de vie de 15 minutes est utilisée par défaut.
 </thead>
 <tbody>
 <tr>
-<td><code>key</code></td>
+<td>`key`</td>
 <td>
 <p><em>Chaîne</em>. La clé de l’enregistrement est stockée dans le cache.</p>
 </td>
 </tr>
 <tr>
-<td><code>value</code></td>
+<td>`value`</td>
 <td>
 <p><em>Chaîne</em>. La valeur de l’enregistrement à stocker.</p>
 </td>
 </tr>
 <tr>
-<td><code>options</code></td>
+<td>`options`</td>
 <td>
 <p><em>Objet facultatif</em>. Options permettant d’ajuster le comportement du cache.</p>
 </td>
 </tr>
 <tr>
-<td><code>options.expires_at</code></td>
+<td>`options.expires_at`</td>
 <td>
 <p>
 <em>Numéro facultatif</em>. Le temps d’expiration absolu en millisecondes
-            depuis l’époque Unix. Bien que les enregistrements mis en cache puissent être expulsés plus tôt, ils ne resteront jamais au-delà du             <code>expires_at</code>.
+            depuis l’époque Unix. Bien que les enregistrements mis en cache puissent être expulsés plus tôt, ils ne resteront jamais au-delà du             `expires_at`.
           </p>
 <p>
-<strong>Remarque :</strong> Cette valeur ne doit pas être fournie si la valeur <code>ttl</code> est fournie. Si des valeurs sont fournies pour les deux options, c’est l’échéance la plus ancienne qui est retenue.
+<strong>Remarque :</strong> Cette valeur ne doit pas être fournie si la valeur `ttl` est fournie. Si des valeurs sont fournies pour les deux options, c’est l’échéance la plus ancienne qui est retenue.
           </p>
 </td>
 </tr>
 <tr>
-<td><code>options.ttl</code></td>
+<td>`options.ttl`</td>
 <td>
 <p>
 <em>Numéro facultatif</em>. Valeur de la durée de vie de cette entrée de cache
-            en millisecondes. Bien que les valeurs mises en cache puissent être expulsées plus tôt, elles ne resteront jamais au-delà de la durée de validité <code>ttl</code>.
+            en millisecondes. Bien que les valeurs mises en cache puissent être expulsées plus tôt, elles ne resteront jamais au-delà de la durée de validité `ttl`.
           </p>
 <p>
-<strong>Remarque :</strong> Cette valeur ne doit pas être fournie si la valeur <code>expires_at</code> est fournie. Si des valeurs sont fournies pour les deux options, c’est l’échéance la plus ancienne qui est retenue.
+<strong>Remarque :</strong> Cette valeur ne doit pas être fournie si la valeur `expires_at` est fournie. Si des valeurs sont fournies pour les deux options, c’est l’échéance la plus ancienne qui est retenue.
           </p>
 </td>
 </tr>
@@ -262,7 +262,7 @@ Renvoie une chaîne JWT.
 </thead>
 <tbody>
 <tr>
-<td><code>options</code></td>
+<td>`options`</td>
 <td>
 <p>
 <em>Options</em>. Configurer la manière dont les données sensibles sont encodées dans les
@@ -271,7 +271,7 @@ Renvoie une chaîne JWT.
 </td>
 </tr>
 <tr>
-<td><code>options.expiresInSeconds</code></td>
+<td>`options.expiresInSeconds`</td>
 <td>
 <p>
 <em>Numéro</em>. Nombre de secondes avant l’expiration du jeton. La valeur par défaut est 900. 
@@ -279,7 +279,7 @@ Renvoie une chaîne JWT.
 </td>
 </tr>
 <tr>
-<td><code>options.payload</code></td>
+<td>`options.payload`</td>
 <td>
 <p>
 <em>Options</em>. Données destinées à être transmises à la cible de
@@ -289,12 +289,12 @@ Renvoie une chaîne JWT.
 </td>
 </tr>
 <tr>
-<td><code>options.secret</code></td>
+<td>`options.secret`</td>
 <td>
 <p>
 <em>Chaîne</em>. Un secret qui sera utilisé pour signer un JWT partagé avec la cible de la redirection. Cette valeur doit être stockée
               en tant que secret et récupérée à l’aide de
-              <code>event.secrets['SECRET_NAME']</code>.
+              `event.secrets['SECRET_NAME']`.
             </p>
 </td>
 </tr>
@@ -317,13 +317,13 @@ Renvoie une référence à l’objet `api`.
 </thead>
 <tbody>
 <tr>
-<td><code>url</code></td>
+<td>`url`</td>
 <td>
 <p><em>Chaîne</em>. L’URL cible de la redirection.</p>
 </td>
 </tr>
 <tr>
-<td><code>options</code></td>
+<td>`options`</td>
 <td>
 <p>
 <em>Options</em>. Un objet représentant tout paramètre de chaîne de requête supplémentaire ajouté à l’URL de redirection.
@@ -331,7 +331,7 @@ Renvoie une référence à l’objet `api`.
 </td>
 </tr>
 <tr>
-<td><code>options.query</code></td>
+<td>`options.query`</td>
 <td>
 <p>
 <em>Options</em>. Paramètres supplémentaires de la chaîne de requête à ajouter à l’URL de redirection.
@@ -357,28 +357,28 @@ Renvoie la charge utile du jeton JWT.
 </thead>
 <tbody>
 <tr>
-<td><code>options</code></td>
+<td>`options`</td>
 <td>
 <p>
 <em>Options</em>. Options pour récupérer les données encodées dans un jeton JWT
-              transmis au point de terminaison <code>/continue</code> à la suite d’une 
+              transmis au point de terminaison `/continue` à la suite d’une 
               redirection.
             </p>
 </td>
 </tr>
 <tr>
-<td><code>options.secret</code></td>
+<td>`options.secret`</td>
 <td>
 <p><em>Chaîne</em>. Secret utilisé pour encoder le jeton.</p>
 </td>
 </tr>
 <tr>
-<td><code>options.tokenParameterName</code></td>
+<td>`options.tokenParameterName`</td>
 <td>
 <p>
 <em>Chaîne</em>. Le nom du paramètre de la requête ou du corps qui a été
-              envoyé au point de terminaison <code>/continue</code>. La valeur par défaut est
-              <code>session_token</code>.
+              envoyé au point de terminaison `/continue`. La valeur par défaut est
+              `session_token`.
             </p>
 </td>
 </tr>
@@ -400,7 +400,7 @@ Déclenchez une redirection du navigateur vers l’`url` cible après que l’ut
 </thead>
 <tbody>
 <tr>
-<td><code>url</code></td>
+<td>`url`</td>
 <td>
 <p>
 <em>Chaîne</em>. L’URL vers laquelle un utilisateur est dirigé après avoir mis à jour son mot de passe. Validez cette URL et assurez-vous qu’elle est sécurisée pour les utilisateurs finaux. 
@@ -408,7 +408,7 @@ Déclenchez une redirection du navigateur vers l’`url` cible après que l’ut
 </td>
 </tr>
 <tr>
-<td><code>options</code></td>
+<td>`options`</td>
 <td>
 <p>
 <em>Options</em>. Un objet représentant tout paramètre de chaîne de requête supplémentaire ajouté à l’URL cible. 
@@ -416,7 +416,7 @@ Déclenchez une redirection du navigateur vers l’`url` cible après que l’ut
 </td>
 </tr>
 <tr>
-<td><code>options.query</code></td>
+<td>`options.query`</td>
 <td>
 <p>
 <em>Options</em>. Paramètres supplémentaires de la chaîne de requête à ajouter à l’URL cible. 

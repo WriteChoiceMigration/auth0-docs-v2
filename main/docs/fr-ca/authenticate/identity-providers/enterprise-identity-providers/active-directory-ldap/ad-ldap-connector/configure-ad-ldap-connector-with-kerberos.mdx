@@ -1,13 +1,13 @@
 ---
 title: "Configurer l’authentification connecteur AD/LDAP avec Kerberos"
 permalink: "configure-ad-ldap-connector-with-kerberos"
+'description': "Décrit comment configurer le connecteur AD/LDAP pour la fédération avec l’authentification Kerberos."
 'og:title': "Configurer l’authentification connecteur AD/LDAP avec Kerberos"
 'og:description': "Décrit comment configurer le connecteur AD/LDAP pour la fédération avec l’authentification Kerberos."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer l’authentification connecteur AD/LDAP avec Kerberos"
 'twitter:description': "Décrit comment configurer le connecteur AD/LDAP pour la fédération avec l’authentification Kerberos."
 ---
-# Configurer l’authentification connecteur AD/LDAP avec Kerberos
 
 Vous pouvez fédérer avec Active Directory au moyen du connecteur AD/LDAP. Le connecteur AD/LDAP simplifie l’authentification de vos utilisateurs lorsqu’ils sont sur une machine reliée à un domaine, au sein du réseau de l’entreprise.
 
@@ -29,13 +29,13 @@ Selon l’emplacement des utilisateurs, le flux d’authentification sera diffé
 
 Pour que cela fonctionne, le réseau doit autoriser les utilisateurs à se connecter au connecteur AD/LDAP à partir du port configuré dans le fichier `config.json`. Dans des déploiements haute disponibilité du connecteur, l’adresse à laquelle les utilisateurs se connecteront est celle de l’équilibreur de charge réseau, situé devant toutes les instances du connecteur.
 
-<Frame>![Configure AD/LDAP Connector Authentication with Kerberos Flow Diagram](//images.ctfassets.net/cdy7uua7fh8z/1EUZhFx2w5FjDeIoMySERC/fc50869b131faf3257cfe429c96f68d1/2023-09-22_14-28-30.png)</Frame>
+<Frame>![Configure AD/LDAP Connector Authentication with Kerberos Flow Diagram](/images/fr-ca/cdy7uua7fh8z/1EUZhFx2w5FjDeIoMySERC/fc50869b131faf3257cfe429c96f68d1/2023-09-22_14-28-30.png)</Frame>
 
 Pour en savoir plus, veuillez consulter [Déployement des connecteurs AD/LDAP pour les environnements haute disponibilité.](/docs/fr-ca/authenticate/identity-providers/enterprise-identity-providers/active-directory-ldap/ad-ldap-connector/ad-ldap-high-availability)
 
 En revanche, lorsque les utilisateurs ne se trouvent pas sur le réseau de l’entreprise (p. ex., sur un site client ou travaillant à domicile sans VPN), ils ne pourront pas accéder directement au connecteur AD/LDAP. Dans ce cas, ils devront saisir leur nom d’utilisateur et leur mot de passe, et Auth0 validera ces informations d’identification avec le connecteur AD/LDAP, qui se chargera à son tour de les authentifier au moyen d’Active Directory.
 
-<Frame>![Configure AD/LDAP Connector Authentication with Kerberos Credentials Flow Diagram](//images.ctfassets.net/cdy7uua7fh8z/7xo1cIdF6GmSowlVB8kjQn/4b55f555977742af3f3df94c5b3a0a9b/2023-09-22_14-29-00.png)</Frame>
+<Frame>![Configure AD/LDAP Connector Authentication with Kerberos Credentials Flow Diagram](/images/fr-ca/cdy7uua7fh8z/7xo1cIdF6GmSowlVB8kjQn/4b55f555977742af3f3df94c5b3a0a9b/2023-09-22_14-29-00.png)</Frame>
 
 ## Connexion automatique avec Lock
 
@@ -49,7 +49,7 @@ Lorsque qu’une application utilise Lock 10 ou 11 sur la page de connexion h�
 
 Dans certaines situations, il peut être nécessaire de connecter automatiquement l’utilisateur si Kerberos est possible (en fonction de l’adresse IP de l’utilisateur final). Les modifications suivantes peuvent être apportées à la page de connexion Auth0 afin de permettre cette connexion automatique lorsque Kerberos est possible :
 
-```
+```html lines
 <script src="https://cdn.auth0.com/js/lock/11.x.x/lock.min.js"></script>
 <script src="https://cdn.auth0.com/js/auth0/9.x/auth0.min.js"></script>
 <script src="https://cdn.auth0.com/js/polyfills/1.0/object-assign.min.js"></script>
@@ -109,7 +109,7 @@ Dans certaines situations, il peut être nécessaire de connecter automatiquemen
 
 Vous pouvez désactiver l’utilisation de Kerberos, même si l’utilisateur se connecte depuis une adresse IP incluse dans la plage configurée dans les paramètres de connexion, en passant l’option `rememberLastLogin: false` to `lock.show()`.
 
-```javascript
+```javascript lines
 function useKerberos() {
       // return true to use Kerberos, false to bypass
     };

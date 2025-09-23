@@ -1,13 +1,13 @@
 ---
 title: "Configurer les Services Web Amazon pour l’authentification unique (SSO)"
 permalink: "configure-amazon-web-services-for-sso"
+'description': "Apprenez comment configurer l’authentification unique (SSO) pour Auth0 avec les Services Web Amazon (AWS)."
 'og:title': "Configurer les Services Web Amazon pour l’authentification unique (SSO)"
 'og:description': "Apprenez comment configurer l’authentification unique (SSO) pour Auth0 avec les Services Web Amazon (AWS)."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer les Services Web Amazon pour l’authentification unique (SSO)"
 'twitter:description': "Apprenez comment configurer l’authentification unique (SSO) pour Auth0 avec les Services Web Amazon (AWS)."
 ---
-# Configurer les Services Web Amazon pour l’authentification unique (SSO)
 
 En intégrant Auth0 à AWS, vous permettrez à vos utilisateurs de se connecter à AWS en utilisant le fournisseur d’identité.
 
@@ -71,7 +71,7 @@ Pour utiliser le fournisseur, vous devez créer un rôle IAM en utilisant le fo
 
 <Note>
 
-Pour voir un exemple de définition d’une règle côté serveur qui attribue un rôle dans un cas d’utilisation avancé, voir le [tutoriel Amazon API Gateway](/docs/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-5).
+Pour voir un exemple de définition d’une règle côté serveur qui attribue un rôle dans un cas d’utilisation avancé, voir le [tutoriel Amazon API Gateway](/docs/fr-ca/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-5).
 
 </Note>
 
@@ -79,7 +79,7 @@ Les **rôles AWS** indiqués seront associés à une **autorisation IAM** qui 
 
 1. Pour mapper un rôle AWS pour un utilisateur, créez une [règle](/docs/fr-ca/customize/rules) :
 
-   ```javascript
+   ```javascript lines
    function (user, context, callback) {
 
      user.awsRole = 'arn:aws:iam::951887872838:role/TestSAML,arn:aws:iam::951887872838:saml-provider/MyAuth0';
@@ -127,7 +127,7 @@ Vous pouvez également attribuer un tableau au mappage de rôles (vous auriez do
 
 Par exemple, disons que vous disposez de groupes Active Directory avec la structure suivante :
 
-```javascript
+```javascript lines
 var user = {
   app_metadata: {
     ad_groups: {
@@ -141,7 +141,7 @@ var user = {
 
 Votre règle pourrait donc ressembler à ceci :
 
-```javascript
+```javascript lines
 function (user, context, callback) {
 
   var userGroups = user.app_metadata.ad_groups;
@@ -173,7 +173,7 @@ Pour prolonger le délai autorisé avant l’expiration de la session AWS (3 6
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 function (user, context, callback) {
     if(context.clientID !== '{yourClientId}'){
       return callback(null, user, context);

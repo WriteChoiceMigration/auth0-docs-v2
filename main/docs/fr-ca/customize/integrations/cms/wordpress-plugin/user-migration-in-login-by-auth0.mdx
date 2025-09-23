@@ -1,13 +1,13 @@
 ---
 title: "Migration des utilisateurs dans le plugiciel Login by Auth0 pour WordPress"
 permalink: "user-migration-in-login-by-auth0"
+'description': "Décrit la fonctionnalité de migration des utilisateurs du plugiciel Login by Auth0 pour WordPress."
 'og:title': "Migration des utilisateurs dans le plugiciel Login by Auth0 pour WordPress"
 'og:description': "Décrit la fonctionnalité de migration des utilisateurs du plugiciel Login by Auth0 pour WordPress."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Migration des utilisateurs dans le plugiciel Login by Auth0 pour WordPress"
 'twitter:description': "Décrit la fonctionnalité de migration des utilisateurs du plugiciel Login by Auth0 pour WordPress."
 ---
-# Migration des utilisateurs dans le plugiciel Login by Auth0 pour WordPress
 
 La fonctionnalité de migration des utilisateurs utilise une fonctionnalité centrale d’Auth0 appelée Custom Databases combinée à des points de terminaison d’URL dans le plugiciel Login by Auth0 pour permettre aux utilisateurs de s’authentifier avec des comptes d’utilisateurs WordPress existants. Pour en savoir plus sur les bases de données personnalisées, lisez [Connexions de base de données personnalisées](/docs/fr-ca/authenticate/database-connections/custom-db).
 
@@ -47,7 +47,7 @@ Si l’assistant de configuration de la migration des utilisateurs n’a pas pu 
     - `migrationToken` défini sur la valeur du jeton de sécurité de l’étape 4 ci-dessus.
     - `userNamespace` défini sur votre nom d’application dans Auth0 ou toute autre valeur comprenant uniquement des lettres, des chiffres et des tirets.
 
-    <Frame>![WordPress Plugin custom database settings](//images.ctfassets.net/cdy7uua7fh8z/1icr0yX47nODUrzP7B6Xl2/b43621c3b6641f68bcb14ac38b237c11/auth0-custom-database-config.png)</Frame>
+    <Frame>![WordPress Plugin custom database settings](/images/fr-ca/cdy7uua7fh8z/1icr0yX47nODUrzP7B6Xl2/b43621c3b6641f68bcb14ac38b237c11/auth0-custom-database-config.png)</Frame>
 
 13. Cliquez sur le bouton **Essayer** en haut et utilisez un compte utilisateur WordPress valide dans le formulaire qui apparaît. Vous devriez voir apparaître le message « Le profil est », suivi des données de l’utilisateur. Si ce n’est pas le cas, lisez la section **Dépannage** ci-dessous.
 14. Sélectionnez la vue **Obtenir l’utilisateur**, effacez le code existant, [copiez le code db-get-user.js du référentiel GitHub](https://raw.githubusercontent.com/auth0/wp-auth0/4.4.0/lib/scripts-js/db-get-user.js), et collez-le dans l’éditeur de code.
@@ -118,11 +118,11 @@ Cela signifie que les points de terminaison de la migration sont désactivés da
 
 Cela signifie que la liste des IP autorisées pour la migration est activée, mais que l’adresse IP entrante ne figure pas sur la liste. Juste en dessous du script de connexion, vous devriez voir une liste d’adresses IP :
 
-<Frame>![WordPress User Migration - Auth0 IP Addresses](//images.ctfassets.net/cdy7uua7fh8z/3RnxoRlvXm8FmNfu02fXVn/3672806c9cbf2bfe28503be8b8a63eda/auth0-incoming-ip-addresses.png)</Frame>
+<Frame>![WordPress User Migration - Auth0 IP Addresses](/images/fr-ca/cdy7uua7fh8z/3RnxoRlvXm8FmNfu02fXVn/3672806c9cbf2bfe28503be8b8a63eda/auth0-incoming-ip-addresses.png)</Frame>
 
 Assurez-vous que toutes ces adresses IP apparaissent dans WordPress sous **Auth0 > Paramètres > Avancé** dans le plugiciel :
 
-<Frame>![WordPress User Migration - IP Whitelist](//images.ctfassets.net/cdy7uua7fh8z/3w6C1IrsSC9hoivpSY122l/d117857524ef8d7872f364d3a7dbabda/migration-ip-whitelist-setting-field.png)</Frame>
+<Frame>![WordPress User Migration - IP Whitelist](/images/fr-ca/cdy7uua7fh8z/3w6C1IrsSC9hoivpSY122l/d117857524ef8d7872f364d3a7dbabda/migration-ip-whitelist-setting-field.png)</Frame>
 
 Si une ou plusieurs des adresses IP listées dans Auth0 n’apparaissent pas dans WordPress, ajoutez les adresses manquantes dans le champ et sauvegardez la page de réglages. De plus, [créez un message dans la communauté Auth0](https://community.auth0.com/tags/wordpress) (et marquez-le « wordpress ») qui contient les adresses IP manquantes, afin que nous puissions résoudre le problème.
 

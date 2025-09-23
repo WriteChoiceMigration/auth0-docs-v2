@@ -1,12 +1,14 @@
 ---
 title: "Auth0"
 permalink: "java"
+'description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:title': "Auth0"
 'og:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0"
 'twitter:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 ---
+
 # Java
 
 <Frame>![Gravatar for jim.anderson@auth0.com](//www.gravatar.com/avatar/4fc3c0e33c1da40d889d1628519048ab?d=mm&r=g&s=50)</Frame>
@@ -41,7 +43,7 @@ System requirements: Java 8 | Gradle 3.3 and up
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Regular Web Applications](/docs/architecture-scenarios/web-app-sso) and which [protocol](/docs/flows) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/fr-ca/overview), how it [integrates with Regular Web Applications](/docs/fr-ca/architecture-scenarios/web-app-sso) and which [protocol](/docs/fr-ca/flows) it uses.
 
 </Note>
 
@@ -92,11 +94,11 @@ If you are following along with the sample project you downloaded from the top o
 To integrate your Java application with Auth0, add the following dependencies:
 
 * **javax.servlet-api**: is the library that allows you to create Java Servlets. You then need to add a Server dependency like Tomcat or Gretty, which one is up to you. Check our sample code for more information.
-* **auth0-java-mvc-commons**: is the [Java library](https://github.com/auth0/auth0-java-mvc-common) that allows you to use Auth0 with Java for server-side MVC web apps. It generates the Authorize URL that you need to call in order to authenticate and validates the result received on the way back to finally obtain the [Auth0 Tokens](/docs/tokens) that identify the user.
+* **auth0-java-mvc-commons**: is the [Java library](https://github.com/auth0/auth0-java-mvc-common) that allows you to use Auth0 with Java for server-side MVC web apps. It generates the Authorize URL that you need to call in order to authenticate and validates the result received on the way back to finally obtain the [Auth0 Tokens](/docs/fr-ca/tokens) that identify the user.
 
 If you are using Gradle, add them to your `build.gradle`:
 
-```javascript
+```java lines
 // build.gradle
 
 compile 'javax.servlet:javax.servlet-api:3.1.0'
@@ -105,7 +107,7 @@ compile 'com.auth0:mvc-auth-commons:1.+'
 
 If you are using Maven, add them to your `pom.xml`:
 
-```
+```xml lines
 <!-- pom.xml -->
 
 <dependency>
@@ -124,7 +126,7 @@ If you are using Maven, add them to your `pom.xml`:
 
 Your Java App needs some information in order to authenticate against your Auth0 account. The samples read this information from the deployment descriptor file `src/main/webapp/WEB-INF/web.xml`, but you could store them anywhere else. The required information is:
 
-```
+```xml lines
 <!-- src/main/webapp/WEB-INF/web.xml -->
 
 <context-param>
@@ -153,7 +155,7 @@ If you downloaded this sample using the **Download Sample** button, the `domain`
 
 The Login project sample has the following structure:
 
-```
+``` lines
 - src
 -- main
 ---- java
@@ -196,7 +198,7 @@ The `AuthenticationController` does not store any context, and is inteded to be 
 
 </Note>
 
-```
+```java lines
 class AuthenticationControllerProvider {
 
     private AuthenticationControllerProvider() {}
@@ -229,7 +231,7 @@ class AuthenticationControllerProvider {
 
 To enable users to login, your application will redirect them to the [Universal Login](https://auth0.com/docs/universal-login) page. Using the `AuthenticationController` instance, you can generate the redirect URL by calling the `buildAuthorizeUrl(HttpServletRequest request, HttpServletResponse response, String redirectUrl)` method. The redirect URL must be the URL that was added to the **Allowed Callback URLs** of your Auth0 Application.
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/LoginServlet.java
 
 @Override
@@ -250,7 +252,7 @@ After the user logs in, the result will be received in our `CallbackServlet` via
 
 The request holds the call context that the library previously set by generating the Authorize URL with the `AuthenticationController`. When passed to the controller, you get back either a valid `Tokens` instance or an Exception indicating what went wrong. In the case of a successful call, you need to save the credentials somewhere to access them later. You can use the `HttpSession` of the request by using the `SessionsUtils` class included in the library.
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/CallbackServlet.java
 
 @Override
@@ -287,7 +289,7 @@ It is recommended to store the time in which we requested the tokens and the rec
 
 Now that the user is authenticated (the tokens exists), the `Auth0Filter` will allow them to access our protected resources. In the `HomeServlet` we obtain the tokens from the request's session and set them as the `userId` attribute so they can be used from the JSP code:
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/HomeServlet.java
 
 protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -308,7 +310,7 @@ To properly handle logout, we need to clear the session and log the user out of 
 
 First, we clear the session by calling `request.getSession().invalidate()`. We then construct the logout URL, being sure to include the `returnTo` query parameter, which is where the user will be redirected to after logging out. Finally, we redirect the response to our logout URL.
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/LogoutServlet.java
 
 @Override
@@ -339,7 +341,7 @@ protected void doGet(final HttpServletRequest request, final HttpServletResponse
 
 To run the sample from a terminal, change the directory to the root folder of the project and execute the following line:
 
-```
+```bash lines
 ./gradlew clean appRun
 ```
 
@@ -355,7 +357,7 @@ Log out by clicking the **Logout** button at the top right of the home page.
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

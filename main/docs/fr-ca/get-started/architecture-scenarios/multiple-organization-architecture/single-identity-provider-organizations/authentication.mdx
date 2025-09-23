@@ -1,13 +1,13 @@
 ---
 title: "Fournisseur d’identité unique : Authentication (Authentification)"
 permalink: "authentication"
+'description': "En savoir plus sur l’authentification des utilisateurs par le biais d’organisations pour les architectures à locataires multiples."
 'og:title': "Fournisseur d’identité unique : Authentication (Authentification)"
 'og:description': "En savoir plus sur l’authentification des utilisateurs par le biais d’organisations pour les architectures à locataires multiples."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Fournisseur d’identité unique : Authentication (Authentification)"
 'twitter:description': "En savoir plus sur l’authentification des utilisateurs par le biais d’organisations pour les architectures à locataires multiples."
 ---
-# Fournisseur d’identité unique : Authentication (Authentification)
 
 Dans nos scénarios d’architecture, nous fournissons des recommandations générales sur  [B2B Authentication (authentification C3E)](/docs/fr-ca/get-started/architecture-scenarios/business-to-business/authentication), y compris l’utilisation de la [Universal Login (Connexion universelle)](/docs/fr-ca/authenticate/login/auth0-universal-login) en tant que meilleure pratique. Nous vous recommandons d’y réfléchir tout en prenant connaissance des conseils donnés ici.
 
@@ -15,7 +15,7 @@ Dans nos scénarios d’architecture, nous fournissons des recommandations gén�
 
 **Meilleure pratique**
 
-Bien que de nombreux flux d’authentification soient pris en charge dans Auth0, les flux utilisant la connexion universelle Auth0 sont considérés à la fois comme meilleures pratiques de l’industrie et d’Auth0 parce qu’ils fournissent des [fonctionnalités d’authentification et de sécurité](/docs/authenticate/login/universal-vs-embedded-login). En particulier, la connexion universelle dispose de la [SSO (Connexion unique) prête à l’emploi](https://auth0.com/learn/how-to-implement-single-sign-on/) et contribue à repousser les cyber-attaques de type [hameçonnage](https://auth0.com/blog/all-you-need-to-know-about-the-google-docs-phishing-attack/) et [bucket brigade](/docs/fr-ca/secure/security-guidance/prevent-threats), c’est pourquoi elle devrait être privilégiée lorsque l’utilisateur fournit un mot de passe. Qui plus est, la [nouvelle expérience de connexion universelle](/docs/fr-ca/authenticate/login/auth0-universal-login/universal-login-vs-classic-login/universal-experience) est le seul mécanisme pris en charge lors de l’utilisation de la fonctionnalité Auth0 Organizations.
+Bien que de nombreux flux d’authentification soient pris en charge dans Auth0, les flux utilisant la connexion universelle Auth0 sont considérés à la fois comme meilleures pratiques de l’industrie et d’Auth0 parce qu’ils fournissent des [fonctionnalités d’authentification et de sécurité](/docs/fr-ca/authenticate/login/universal-vs-embedded-login). En particulier, la connexion universelle dispose de la [SSO (Connexion unique) prête à l’emploi](https://auth0.com/learn/how-to-implement-single-sign-on/) et contribue à repousser les cyber-attaques de type [hameçonnage](https://auth0.com/blog/all-you-need-to-know-about-the-google-docs-phishing-attack/) et [bucket brigade](/docs/fr-ca/secure/security-guidance/prevent-threats), c’est pourquoi elle devrait être privilégiée lorsque l’utilisateur fournit un mot de passe. Qui plus est, la [nouvelle expérience de connexion universelle](/docs/fr-ca/authenticate/login/auth0-universal-login/universal-login-vs-classic-login/universal-experience) est le seul mécanisme pris en charge lors de l’utilisation de la fonctionnalité Auth0 Organizations.
 
 </Note>
 
@@ -31,7 +31,7 @@ Auth0 ne prend en charge qu’un seul contexte d’utilisateur authentifié par 
 
 Prenons l’exemple de Hoekstra & Associates, et voyons comment cette implémentation d’authentification pourrait se dérouler avec un utilisateur authentifié au moyen d’une connexion de base de données d’Auth0; ici aussi, la plus grande partie du flux de travail décrit sera généralement gérée avec la trousse SDK Auth0 pertinente ou la bibliothèque associée à votre infrastructure technologique :
 
-<Frame>![Architecture Scenarios - MOA - Isolated Users, Shared Apps, Database Login Flow](//images.ctfassets.net/cdy7uua7fh8z/4ZdA61Ar4ijowOLLGCgLKx/fb71991702bf5f223f5ea184f7b6e693/Isolated_Users__Shared_Apps__Database_Login_Flow.png)</Frame>
+<Frame>![Architecture Scenarios - MOA - Isolated Users, Shared Apps, Database Login Flow](/images/fr-ca/cdy7uua7fh8z/4ZdA61Ar4ijowOLLGCgLKx/fb71991702bf5f223f5ea184f7b6e693/Isolated_Users__Shared_Apps__Database_Login_Flow.png)</Frame>
 
 1. Jennifer de Hoekstra & Associates ouvre un navigateur et se rend sur l’instance Hoekstra & Associates de Travel0 Corporate Booking.
 
@@ -72,7 +72,7 @@ Prenons l’exemple de Hoekstra & Associates, et voyons comment cette implément
 
 L’authentification par le biais d’une connexion d’entreprise suit un processus très similaire. Prenons l’exemple de MetaHexa Bank, et voyons comment cette implémentation d’authentification pourrait se dérouler avec un utilisateur authentifié au moyen d’une connexion d’entreprise à MetaHexa Bank; encore une fois, la plupart du flux de travail décrit sera généralement géré à l’aide de la trousse SDK Auth0 pertinente ou de la bibliothèque associée à votre infrastructure technologique.
 
-<Frame>![Architecture Scenarios - MOA - Isolated Users, Shared Apps, Enterprise Login Flow](//images.ctfassets.net/cdy7uua7fh8z/11D1vMSKQcxyhfdDZzLprD/a8b0b85363ebbe6af3c67ba5ba90fc8b/Isolated_Users__Shared_Apps__Enterpise_Login_Flow.png)</Frame>
+<Frame>![Architecture Scenarios - MOA - Isolated Users, Shared Apps, Enterprise Login Flow](/images/fr-ca/cdy7uua7fh8z/11D1vMSKQcxyhfdDZzLprD/a8b0b85363ebbe6af3c67ba5ba90fc8b/Isolated_Users__Shared_Apps__Enterpise_Login_Flow.png)</Frame>
 
 1. Marie de MetaHexa Bank ouvre son navigateur et se rend sur l’instance MetaHexa Bank de Travel0 Corporate Booking.
 
@@ -127,4 +127,4 @@ Les connexions sociales Auth0 sont définies au niveau du locataire. En règle g
 
 </Warning>
 
-Avec les connexions via les réseaux sociaux, l’isolement des utilisateurs ne peut pas être modélisé de manière cohérente pour chaque organisation. Bien qu’il puisse être tentant de le modéliser en créant plusieurs connexions à un fournisseur de réseau social, par exemple à l’aide de [connexions sociales personnalisées](/docs/connections/social/oauth2), vous devriez vous abstenir de le faire; une telle stratégie peut entraîner la création du même identifiant d’utilisateur dans plusieurs définitions de connexion, ce qui entraînerait forcément des problèmes à terme.
+Avec les connexions via les réseaux sociaux, l’isolement des utilisateurs ne peut pas être modélisé de manière cohérente pour chaque organisation. Bien qu’il puisse être tentant de le modéliser en créant plusieurs connexions à un fournisseur de réseau social, par exemple à l’aide de [connexions sociales personnalisées](/docs/fr-ca/connections/social/oauth2), vous devriez vous abstenir de le faire; une telle stratégie peut entraîner la création du même identifiant d’utilisateur dans plusieurs définitions de connexion, ce qui entraînerait forcément des problèmes à terme.

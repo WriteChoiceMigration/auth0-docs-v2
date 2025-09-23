@@ -1,13 +1,13 @@
 ---
 title: "Appeler une API de fournisseur d’identité"
 permalink: "calling-an-external-idp-api"
+'description': "Décrit comment appeler l’API d’un fournisseur d’identité externe."
 'og:title': "Appeler une API de fournisseur d’identité"
 'og:description': "Décrit comment appeler l’API d’un fournisseur d’identité externe."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Appeler une API de fournisseur d’identité"
 'twitter:description': "Décrit comment appeler l’API d’un fournisseur d’identité externe."
 ---
-# Appeler une API de fournisseur d’identité
 
 Lorsque vous authentifiez avec succès un utilisateur auprès d’un fournisseur d’identité externe (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>), tel que Facebook ou GitHub, l’IdP inclut souvent un jeton d’accès dans le profil utilisateur qu’il renvoie à Auth0.
 
@@ -30,17 +30,17 @@ Lorsque vous authentifiez un utilisateur, l’IdP inclut souvent un jeton d’ac
 
 Pour des raisons de sécurité et de conformité, Auth0 n’envoie pas ce jeton à votre application dans le cadre du profil utilisateur. Pour l’obtenir, vous devez accéder à <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip> d’Auth0 et récupérer le profil complet de l’utilisateur.
 
-1. Obtenez un jeton d’accès qui vous permet d’appeler la [Management API d’Auth0](/docs/api/management/v2).
-2. Appelez le point de terminaison [Obtenir les utilisateurs selon leurs ID](/docs/api/management/v2#!/Users/get_users_by_id) du Management API d’Auth0 à l’aide du jeton d’accès obtenu à la première étape. Ce point final renvoie le profil complet de l’utilisateur, qui contient le jeton d’accès à l’IdP.
+1. Obtenez un jeton d’accès qui vous permet d’appeler la [Management API d’Auth0](/docs/fr-ca/api/management/v2).
+2. Appelez le point de terminaison [Obtenir les utilisateurs selon leurs ID](/docs/fr-ca/api/management/v2#!/Users/get_users_by_id) du Management API d’Auth0 à l’aide du jeton d’accès obtenu à la première étape. Ce point final renvoie le profil complet de l’utilisateur, qui contient le jeton d’accès à l’IdP.
 3. Extraire le jeton d’accès de l’IdP de la réponse et l’utiliser pour appeler l’API de l’IdP.
 
 ### Étape 1 : Obtenir un jeton
 
-Vous aurez besoin d’un jeton d’accès pour appeler la [Management API](/docs/api/management/v2).
+Vous aurez besoin d’un jeton d’accès pour appeler la [Management API](/docs/fr-ca/api/management/v2).
 
 #### Créer une application d’essai pour Management API
 
-Si c’est la première fois que vous demandez un [Jeton Management APIv2](/docs/api/management/v2/tokens), vous devrez créer et configurer une application qui peut être utilisée pour appeler Management API :
+Si c’est la première fois que vous demandez un [Jeton Management APIv2](/docs/fr-ca/api/management/v2/tokens), vous devrez créer et configurer une application qui peut être utilisée pour appeler Management API :
 
 1. Naviguez vers [Auth0 Dashboard > Applications > API](https://manage.auth0.com/#/apis), et sélectionnez [Auth0 Management API](https://manage.auth0.com/#/apis/management/authorized-clients).
 2. Sélectionnez la vue **Explorateur d’API** et cliquez sur **Créer et autoriser une application d’essai**.
@@ -61,13 +61,13 @@ Si vous ne voyez pas ce bouton, cela signifie que vous avez au moins une autre a
 
 <Warning>
 
-Pour des raisons de sécurité, nous vous conseillons de n’attribuer que les permissions nécessaires à votre application. Pour ce cas particulier, les permissions nécessaires sont : `read:users`, `read:user_idp_tokens`. Les permissions nécessaires sont répertoriées pour chaque point de terminaison dans [Explorateur de Management API](/docs/api/management/v2).
+Pour des raisons de sécurité, nous vous conseillons de n’attribuer que les permissions nécessaires à votre application. Pour ce cas particulier, les permissions nécessaires sont : `read:users`, `read:user_idp_tokens`. Les permissions nécessaires sont répertoriées pour chaque point de terminaison dans [Explorateur de Management API](/docs/fr-ca/api/management/v2).
 
 </Warning>
 
 Pour accorder ou supprimer des permissions de Management API d’Auth0 [enregistrée](https://manage.auth0.com/#/apis/management/authorized-clients), sélectionnez la [**vue**Machine to Machine Applications (Applications de communication entre machines)](https://manage.auth0.com/#/apis/management/authorized-clients) :
 
-<Frame>![Modifier les permissions accordées à l'application](//images.ctfassets.net/cdy7uua7fh8z/6nuMjQMrTWhoVqtRwJBQz7/edd19556e26c988d313878a04c4a1618/2025-02-25_11-14-55.png)</Frame>
+<Frame>![Modifier les permissions accordées à l'application](/images/fr-ca/cdy7uua7fh8z/6nuMjQMrTWhoVqtRwJBQz7/edd19556e26c988d313878a04c4a1618/2025-02-25_11-14-55.png)</Frame>
 
 #### Obtenir le jeton de Management API
 
@@ -80,7 +80,7 @@ Vous avez maintenant terminé la configuration et êtes prêt à obtenir votre j
 
 <Card title="À quoi servent les snippets?">
 
-Les snippets font une opération `POST` au point de terminaison [/oauth/token de l’Auth0 Authentication API (API d’authentification Auth0)](/docs/api/authentication#client-credentials) à l’aide de l’autorisation **OAuth 2.0 Client Credentials (Authentifiants client OAuth 2.0)**. Il s’agit de l’autorisation que les processus machine-machine utilisent pour accéder à une API. Pour en savoir plus sur le flux, lisez [Flux des identifiants client](/docs/fr-ca/get-started/authentication-and-authorization-flow/client-credentials-flow).
+Les snippets font une opération `POST` au point de terminaison [/oauth/token de l’Auth0 Authentication API (API d’authentification Auth0)](/docs/fr-ca/api/authentication#client-credentials) à l’aide de l’autorisation **OAuth 2.0 Client Credentials (Authentifiants client OAuth 2.0)**. Il s’agit de l’autorisation que les processus machine-machine utilisent pour accéder à une API. Pour en savoir plus sur le flux, lisez [Flux des identifiants client](/docs/fr-ca/get-started/authentication-and-authorization-flow/client-credentials-flow).
 
 </Card>
 
@@ -101,22 +101,22 @@ Ces jetons**ne peuvent pas être révoqués**. Pour minimiser les risques, nous 
 
 ### Étape 2 : Obtenir le profil utilisateur complet
 
-Pour obtenir le profil d’un utilisateur, appelez le point de terminaison [Obtenir un utilisateur](/docs/api/management/v2#!/Users/get_users_by_id) du Management API en utilisant le jeton d’accès que vous avez extrait dans la section précédente.
+Pour obtenir le profil d’un utilisateur, appelez le point de terminaison [Obtenir un utilisateur](/docs/fr-ca/api/management/v2#!/Users/get_users_by_id) du Management API en utilisant le jeton d’accès que vous avez extrait dans la section précédente.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/users/%7BuserId%7D' \
 --header 'authorization: Bearer {yourAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/%7BuserId%7D");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -133,14 +133,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/users/%7BuserId%7D")
 .header("authorization", "Bearer {yourAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -152,8 +152,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users/%7BuserId%7D"]
@@ -174,7 +174,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/%7BuserId%7D",
@@ -196,8 +196,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourAccessToken}" }
@@ -207,7 +207,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -219,8 +219,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users/%7BuserId%7D")! as URL,
@@ -250,7 +250,7 @@ Remplacer ces valeurs :
 
 * À des fins de test, vous pouvez trouver un ID utilisateur dans [Auth0 Dashboard > Gestion des utilisateurs > Utilisateurs](https://manage.auth0.com/#/users). Localisez un utilisateur, et copiez la valeur du champ **user_id**.
 
-* Pour votre implémentation, vous pouvez soit extraire l’ID utilisateur de la demande `sub` dans le [jeton d’ID](/docs/secure/tokens/id-tokens), soit appeler le [point de terminaison /userinfo](/docs/api/authentication#get-user-info) de l’Authentication API et l’extraire de la propriété de réponse `user_id`.
+* Pour votre implémentation, vous pouvez soit extraire l’ID utilisateur de la demande `sub` dans le [jeton d’ID](/docs/fr-ca/secure/tokens/id-tokens), soit appeler le [point de terminaison /userinfo](/docs/fr-ca/api/authentication#get-user-info) de l’Authentication API et l’extraire de la propriété de réponse `user_id`.
 
 </Card>
 
@@ -260,7 +260,7 @@ Vous pouvez trouver le jeton d’accès utilisé pour appeler l’API de l’IdP
 
 <Note>
 
-Pour certains fournisseurs d’identités, Auth0 stocke également un jeton d’actualisation, que vous pouvez utiliser pour obtenir un nouveau jeton d’accès pour l’IdP. Compatible avec : BitBucket, Google (OAuth 2.0), OAuth 2.0, SharePoint et Azure AD. Pour en savoir plus, consultez [Jetons d’accès de fournisseur d’identités](/docs/secure/tokens/access-tokens/identity-provider-access-tokens).
+Pour certains fournisseurs d’identités, Auth0 stocke également un jeton d’actualisation, que vous pouvez utiliser pour obtenir un nouveau jeton d’accès pour l’IdP. Compatible avec : BitBucket, Google (OAuth 2.0), OAuth 2.0, SharePoint et Azure AD. Pour en savoir plus, consultez [Jetons d’accès de fournisseur d’identités](/docs/fr-ca/secure/tokens/access-tokens/identity-provider-access-tokens).
 
 </Note>
 
@@ -268,7 +268,7 @@ Dans la plupart des cas, l’utilisateur n’aura qu’une seule identité, mais
 
 Dans cet exemple de réponse, nous voyons que notre utilisateur n’a qu’une seule identité : `google-oauth2`.
 
-```json
+```json lines
 {
   "email": "john.doe@test.com",
   "email_verified": true,
@@ -332,9 +332,9 @@ Ensuite, vous appelerez l’API de votre proxy à partir de votre application pu
 
 <Card title="Montrez-moi comment">
 
-Si vous ne l’avez pas encore implémenté, vous pourriez trouver notre scénario d’architecture de [Applications à page unique avec API](/docs/get-started/architecture-scenarios/spa-api) utile. Il couvre un scénario différent, mais explique comment configurer Auth0, comment faire une requête à une API depuis une SPA et comment implémenter des validations API. Il inclut un exemple qui utilise [Angular 2](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-spa/angular) et [Node.js](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-api/node).
+Si vous ne l’avez pas encore implémenté, vous pourriez trouver notre scénario d’architecture de [Applications à page unique avec API](/docs/fr-ca/get-started/architecture-scenarios/spa-api) utile. Il couvre un scénario différent, mais explique comment configurer Auth0, comment faire une requête à une API depuis une SPA et comment implémenter des validations API. Il inclut un exemple qui utilise [Angular 2](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-spa/angular) et [Node.js](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-api/node).
 
-Nous offrons également une variation avec [Applications mobiles avec API](/docs/get-started/architecture-scenarios/mobile-api) (l’exemple utilise [Android](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-mobile/android) et [Node.js](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-api/node)).
+Nous offrons également une variation avec [Applications mobiles avec API](/docs/fr-ca/get-started/architecture-scenarios/mobile-api) (l’exemple utilise [Android](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-mobile/android) et [Node.js](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-api/node)).
 
 </Card>
 

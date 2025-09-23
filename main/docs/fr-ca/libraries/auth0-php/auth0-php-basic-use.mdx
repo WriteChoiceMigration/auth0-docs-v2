@@ -1,13 +1,13 @@
 ---
 title: "PHP : Connexion, déconnexion et restitution des profils utilisateurs avec Auth0-PHP"
 permalink: "auth0-php-basic-use"
+'description': "Intégrez une expérience de connexion et d’inscription fluide pour vos applications PHP."
 'og:title': "PHP : Connexion, déconnexion et restitution des profils utilisateurs avec Auth0-PHP"
 'og:description': "Intégrez une expérience de connexion et d’inscription fluide pour vos applications PHP."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "PHP : Connexion, déconnexion et restitution des profils utilisateurs avec Auth0-PHP"
 'twitter:description': "Intégrez une expérience de connexion et d’inscription fluide pour vos applications PHP."
 ---
-# PHP : Connexion, déconnexion et restitution des profils utilisateurs avec Auth0-PHP
 
 La trousse SDK Auth0 pour PHP regroupe trois classes principales : `Auth0\SDK\Auth0`, `Auth0\SDK\API\Authentication` et `Auth0\SDK\API\Management`, chacune offrant des interfaces pour différentes fonctionnalités des API d’Auth0. Si vous créez une application Web avec état qui doit garder une trace des sessions des utilisateurs, la classe de base `Auth0` est celle avec laquelle vous travaillerez le plus. Elle fournit des méthodes permettant de gérer les tâches courantes d’authentification et de session, telles que la connexion et la déconnexion, la récupération des informations d’identification de l’utilisateur, la vérification de la disponibilité d’une session et la gestion des rappels. Ces tâches sont expliquées ci-dessous.
 
@@ -36,7 +36,7 @@ Auth0-PHP gère la plupart de ces étapes automatiquement pour vous. Votre appli
 
 Une simple mise en œuvre de ces étapes ressemble à ceci :
 
-```javascript
+```php lines
 // 👆 We're continuing from the "getting started" guide linked in "Prerequisites" above. Append this to the index.php file you created there.
 
 // getExchangeParameters() can be used on your callback URL to verify all the necessary parameters are present for post-authentication code exchange.
@@ -69,7 +69,7 @@ Enfin, vous devrez ajouter l’URL de votre application au champ « URL de rappe
 
 Maintenant que nous avons authentifié un utilisateur, nous pouvons travailler avec ses données de session conservées pour accomplir des tâches telles que l’affichage des profils utilisateurs.
 
-```javascript
+```php lines
 // 👆 We're continuing from code above. Append this to the index.php file.
 
 printf(
@@ -79,7 +79,7 @@ printf(
 </p>
     <p><strong>Last update:</strong> %s</p>
     <p><strong>Contact:</strong> %s %s</p>
-    <p><a href="/docs/logout.php">Logout</a></p>',
+    <p><a href="/docs/fr-ca/logout.php">Logout</a></p>',
     isset($session->user['nickname']) ? strip_tags($session->user['nickname']) : '[unknown]',
     isset($session->user['picture']) ? filter_var($session->user['picture'], FILTER_SANITIZE_URL) : 'https://gravatar.com/avatar/',
     isset($session->user['updated_at']) ? date('j/m/Y', strtotime($session->user['updated_at'])) : '[unknown]',
@@ -92,7 +92,7 @@ printf(
 
 Outre la connexion, nous voulons également que les utilisateurs puissent se déconnecter. Lorsque les utilisateurs se déconnectent, ils doivent invalider leur session pour l’application. Pour cette trousse SDK, cela signifie détruire leurs données utilisateur et jeton conservées :
 
-```javascript
+```php lines
 // Log out of the application.
 header("Location: $auth0->logout());
 ```

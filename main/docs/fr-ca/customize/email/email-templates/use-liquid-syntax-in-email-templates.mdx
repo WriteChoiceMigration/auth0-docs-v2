@@ -1,13 +1,13 @@
 ---
 title: "Utilisation de la syntaxe Liquid dans les modèles de courriel"
 permalink: "use-liquid-syntax-in-email-templates"
+'description': "Cette section décrit comment utiliser la syntaxe Liquid dans vos modèles de courriel."
 'og:title': "Utilisation de la syntaxe Liquid dans les modèles de courriel"
 'og:description': "Cette section décrit comment utiliser la syntaxe Liquid dans vos modèles de courriel."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Utilisation de la syntaxe Liquid dans les modèles de courriel"
 'twitter:description': "Cette section décrit comment utiliser la syntaxe Liquid dans vos modèles de courriel."
 ---
-# Utilisation de la syntaxe Liquid dans les modèles de courriel
 
 Lorsque vous utilisez les [modèles de courriel](https://manage.auth0.com/#/branding/email_templates) disponibles sur <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>, vous avez la possibilité d’utiliser le langage de modèle Liquid pour sélectionner les données appropriées et formater vos courriels. Liquid est un langage de création de modèles open-source qui étend la fonctionnalité de HTML et que vous pouvez utiliser pour générer dynamiquement vos courriels afin d’y inclure diverses informations. Pour en savoir plus, veuillez consulter [Liquid for Designers](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)  sur Github.
 
@@ -42,159 +42,159 @@ Les filtres suivants sont pris en charge :
 </thead>
 <tbody>
 <tr>
-<td><code>append</code></td>
+<td>`append`</td>
 <td>Ajouter une chaîne</td>
-<td><code>{{ 'foo' | append:'bar' }} #=&gt; 'foobar'</code></td>
+<td>`{{ 'foo' | append:'bar' }} #=&gt; 'foobar'`</td>
 </tr>
 <tr>
-<td><code>capitalize</code></td>
+<td>`capitalize`</td>
 <td>Mettre en majuscule les mots de la phrase d’entrée</td>
-<td><code>{{ "my great title" | capitalize }} #=&gt; My great title</code></td>
+<td>`{{ "my great title" | capitalize }} #=&gt; My great title`</td>
 </tr>
 <tr>
-<td><code>date</code></td>
+<td>`date`</td>
 <td>Reformater une date (<a href="http://docs.shopify.com/themes/liquid-documentation/filters/additional-filters#date">syntax reference (référence sur la syntaxe)</a>)</td>
 <td></td>
 </tr>
 <tr>
-<td><code>default</code></td>
+<td>`default`</td>
 <td>Renvoie la variable donnée sauf si elle est null ou la chaîne vide, quand il retournera la valeur donnée</td>
-<td><code>{{ undefined_variable | default: "Default value" }} #=&gt; "Default value"</code></td>
+<td>`{{ undefined_variable | default: "Default value" }} #=&gt; "Default value"`</td>
 </tr>
 <tr>
-<td><code>divided_by</code></td>
+<td>`divided_by`</td>
 <td>Division entière</td>
-<td><code>{{ 10 | divided_by:3 }} #=&gt; 3</code></td>
+<td>`{{ 10 | divided_by:3 }} #=&gt; 3`</td>
 </tr>
 <tr>
-<td><code>downcase</code></td>
+<td>`downcase`</td>
 <td>Convertir une chaîne de caractères en minuscules,</td>
-<td><code>{{ "Parker Moore" | downcase }} #=&gt; parker moore</code></td>
+<td>`{{ "Parker Moore" | downcase }} #=&gt; parker moore`</td>
 </tr>
 <tr>
-<td><code>escape</code></td>
+<td>`escape`</td>
 <td>HTML échappe une chaîne</td>
-<td><code>{{ "Avez-vous lu 'James &amp; the Giant Peach'?" | escape }} #=&gt; Avez-vous lu 'James &amp; the Giant Peach'?</code></td>
+<td>`{{ "Avez-vous lu 'James &amp; the Giant Peach'?" | escape }} #=&gt; Avez-vous lu 'James &amp; the Giant Peach'?`</td>
 </tr>
 <tr>
-<td><code>escape_once</code></td>
+<td>`escape_once`</td>
 <td>Renvoie une version HTML échappée sans affecter les entités échappées existantes</td>
-<td><code>{{ "1 &lt; 2 &amp; 3" | escape_once }} #=&gt; 1 &lt; 2 &amp; 3</code></td>
+<td>`{{ "1 &lt; 2 &amp; 3" | escape_once }} #=&gt; 1 &lt; 2 &amp; 3`</td>
 </tr>
 <tr>
-<td><code>first</code></td>
+<td>`first`</td>
 <td>Obtenir le premier élément du tableau passé</td>
 <td></td>
 </tr>
 <tr>
-<td><code>join</code></td>
+<td>`join`</td>
 <td>Joindre des éléments du tableau avec un certain caractère entre eux</td>
 <td></td>
 </tr>
 <tr>
-<td><code>last</code></td>
+<td>`last`</td>
 <td>Obtenir le dernier élément du tableau passé</td>
 <td></td>
 </tr>
 <tr>
-<td><code>map</code></td>
+<td>`map`</td>
 <td>Mapper/collecter un tableau sur une propriété donnée</td>
 <td></td>
 </tr>
 <tr>
-<td><code>minus</code></td>
+<td>`minus`</td>
 <td>Soustraction</td>
-<td><code>{{ 4 | minus:2 }} #=&gt; 2</code></td>
+<td>`{{ 4 | minus:2 }} #=&gt; 2`</td>
 </tr>
 <tr>
-<td><code>modulo</code></td>
+<td>`modulo`</td>
 <td>Reste</td>
-<td><code>{{ 3 | modulo:2 }} #=&gt; 1</code></td>
+<td>`{{ 3 | modulo:2 }} #=&gt; 1`</td>
 </tr>
 <tr>
-<td><code>newline_to_br</code></td>
+<td>`newline_to_br`</td>
 <td>Remplacer chaque nouvelle ligne (\n) par une séparation HTML</td>
 <td></td>
 </tr>
 <tr>
-<td><code>plus</code></td>
+<td>`plus`</td>
 <td>Addition</td>
-<td><code>{{ '1' | plus:'1' }} #=&gt; 2</code>, <code>{{ 1 | plus:1 }} #=&gt; 2</code></td>
+<td>`{{ '1' | plus:'1' }} #=&gt; 2`, `{{ 1 | plus:1 }} #=&gt; 2`</td>
 </tr>
 <tr>
-<td><code>prepend</code></td>
+<td>`prepend`</td>
 <td>Préfixer une chaîne</td>
-<td><code>{{ 'bar' | prepend:'foo' }} #=&gt; 'foobar'</code></td>
+<td>`{{ 'bar' | prepend:'foo' }} #=&gt; 'foobar'`</td>
 </tr>
 <tr>
-<td><code>remove</code></td>
+<td>`remove`</td>
 <td>Supprimer chaque occurrence</td>
-<td><code>{{ 'foobarfoobar' | remove:'foo' }} #=&gt; 'barbar'</code></td>
+<td>`{{ 'foobarfoobar' | remove:'foo' }} #=&gt; 'barbar'`</td>
 </tr>
 <tr>
-<td><code>remove_first</code></td>
+<td>`remove_first`</td>
 <td>Supprimer la première occurrence</td>
-<td><code>{{ 'barbar' | remove_first:'bar' }} #=&gt; 'bar'</code></td>
+<td>`{{ 'barbar' | remove_first:'bar' }} #=&gt; 'bar'`</td>
 </tr>
 <tr>
-<td><code>replace</code></td>
+<td>`replace`</td>
 <td>Remplacer chaque occurrence</td>
-<td><code>{{ 'foofoo' | replace:'foo','bar' }} #=&gt; 'barbar'</code></td>
+<td>`{{ 'foofoo' | replace:'foo','bar' }} #=&gt; 'barbar'`</td>
 </tr>
 <tr>
-<td><code>replace_first</code></td>
+<td>`replace_first`</td>
 <td>Remplacer la première occurrence</td>
-<td><code>{{ 'barbar' | replace_first:'bar','foo' }} #=&gt; 'foobar'</code></td>
+<td>`{{ 'barbar' | replace_first:'bar','foo' }} #=&gt; 'foobar'`</td>
 </tr>
 <tr>
-<td><code>round</code></td>
+<td>`round`</td>
 <td>Arrondit l’entrée au nombre entier le plus proche ou au nombre spécifié de décimales</td>
-<td><code>{{ 4.5612 | round: 2 }} #=&gt; 4.56</code></td>
+<td>`{{ 4.5612 | round: 2 }} #=&gt; 4.56`</td>
 </tr>
 <tr>
-<td><code>size</code></td>
+<td>`size`</td>
 <td>Renvoie la taille d’un tableau ou d’une chaîne</td>
-<td><code>{{ "Ground control to Major Tom." | size }} #=&gt; 28</code></td>
+<td>`{{ "Ground control to Major Tom." | size }} #=&gt; 28`</td>
 </tr>
 <tr>
-<td><code>sort</code></td>
+<td>`sort`</td>
 <td>Trier les éléments du tableau</td>
 <td></td>
 </tr>
 <tr>
-<td><code>split</code></td>
+<td>`split`</td>
 <td>Diviser une chaîne sur un motif correspondant</td>
-<td><code>{{ "a~b" | split:"~" }} #=&gt; ['a','b']</code></td>
+<td>`{{ "a~b" | split:"~" }} #=&gt; ['a','b']`</td>
 </tr>
 <tr>
-<td><code>strip_html</code></td>
+<td>`strip_html`</td>
 <td>Supprimer HTML à partir de la chaîne</td>
-<td><code>{{ "How &lt;em&gt;are&lt;/em&gt; you?" | strip_html }} #=&gt; How are you?</code></td>
+<td>`{{ "How &lt;em&gt;are&lt;/em&gt; you?" | strip_html }} #=&gt; How are you?`</td>
 </tr>
 <tr>
-<td><code>strip_newlines</code></td>
+<td>`strip_newlines`</td>
 <td>Supprimer toutes les nouvelles lignes (\n) de la chaîne</td>
 <td></td>
 </tr>
 <tr>
-<td><code>times</code></td>
+<td>`times`</td>
 <td>Multiplication</td>
-<td><code>{{ 5 | times:4 }} #=&gt; 20</code></td>
+<td>`{{ 5 | times:4 }} #=&gt; 20`</td>
 </tr>
 <tr>
-<td><code>truncate</code></td>
+<td>`truncate`</td>
 <td>Tronquer une chaîne jusqu’à x caractères. Accepte également un deuxième paramètre qui s’ajoutera à la chaîne</td>
-<td><code>{{ 'foobarfoobar' | truncate: 5, '.' }} #=&gt; 'foob.'</code></td>
+<td>`{{ 'foobarfoobar' | truncate: 5, '.' }} #=&gt; 'foob.'`</td>
 </tr>
 <tr>
-<td><code>truncatewords</code></td>
+<td>`truncatewords`</td>
 <td>Tronquer une chaîne jusqu’à x mots.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>upcase</code></td>
+<td>`upcase`</td>
 <td>Convertir une chaîne saisie en majuscule</td>
-<td><code>{{ "Parker Moore" | upcase }} #=&gt; PARKER MOORE</code></td>
+<td>`{{ "Parker Moore" | upcase }} #=&gt; PARKER MOORE`</td>
 </tr>
 </tbody>
 </table>

@@ -1,13 +1,13 @@
 ---
 title: "Sessions avec actions"
 permalink: "manage-sessions-actions"
+'description': "En savoir plus sur la gestion des sessions avec Actions"
 'og:title': "Sessions avec actions"
 'og:description': "En savoir plus sur la gestion des sessions avec Actions"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Sessions avec actions"
 'twitter:description': "En savoir plus sur la gestion des sessions avec Actions"
 ---
-# Sessions avec actions
 
 L’utilisation des sessions avec des [Actions](/docs/fr-ca/customize/actions) vous permet de configurer des capacités de détection et de réponse aux risques post-authentification afin de protéger vos applications et vos utilisateurs contre le détournement de session. Vous pouvez également personnaliser dynamiquement [les limites de durée de vie de la session](/docs/fr-ca/manage-users/sessions/configure-session-lifetime-settings).
 
@@ -98,7 +98,7 @@ Vous pouvez utiliser les [Actions](/docs/fr-ca/customize/actions) pour configure
 
 Vous pouvez utiliser les propriétés de l’objet post-connexion, `event.session.device.initial_asn` et `event.request.asn` pour lier les transactions de session à un réseau [autonomous system number (ASN)](https://www.arin.net/resources/guide/asn/) spécifique pour leur durée et nécessiter une réauthentification si le réseau ASN change.
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const sessionInitialAsn = event.session?.device?.initial_asn;
   const sessionCurrentAsn = event.request.asn;
@@ -125,7 +125,7 @@ Dans cet exemple, une vérification se produit au début de l’Action pour vér
 
 Vous pouvez utiliser les propriétés de l’objet post-connexion `event.session.device.initial_ip` et `event.request.ip` pour vous assurer qu’une transaction de session conserve la même adresse IP pendant toute sa durée. Dans ce scénario, tout changement d’adresse IP est considéré comme un risque et l’utilisateur sera invité à se réauthentifier.
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const sessionInitialIp = event.session?.device?.initial_ip;
   const sessionCurrentIp = event.request.ip;
@@ -161,7 +161,7 @@ Vous pouvez utiliser les propriétés d’objet post-connexion suivantes pour d�
 
 Et vous pouvez utiliser la [Management API](https://auth0.com/docs/api/management/v2/connections/patch-connections-by-id) d‘Auth0 pour créer une métadonnée de connexion, `event.connection.metadata.session_timeout define` un délai d’expiration de connexion spécifique.
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const created = Date.parse(event.session?.created_at ?? "");
 
@@ -181,7 +181,7 @@ Dans cet exemple, une vérification se produit au début de l’Action pour vér
 
 Vous pouvez définir une variable `current_time` et utiliser une nouvelle métadonnée d’Organization appelée `idle_session_timeout` pour définir le délai d’inactivité souhaité pour une organization.
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   // The Organization metadata is configured with a shorter idle timeout for sessions (in milliseconds)
   const idle_organization_lifetime =

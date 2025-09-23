@@ -1,13 +1,13 @@
 ---
 title: "Add Sign In with Google to Native Android Apps"
 permalink: "google-native"
+'description': "Learn how you can implement Sign In with Google for native mobile applications."
 'og:title': "Add Sign In with Google to Native Android Apps"
 'og:description': "Learn how you can implement Sign In with Google for native mobile applications."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Add Sign In with Google to Native Android Apps"
 'twitter:description': "Learn how you can implement Sign In with Google for native mobile applications."
 ---
-# Add Sign In with Google to Native Android Apps
 
 [Sign in with Google](https://developers.google.com/identity/gsi/web/guides/overview) allows users to authenticate with an active Google Account, providing users with a seamless login experience for your application. You can implement this feature for your native Android applications using the Credential Manager for Android with Auth0.
 
@@ -17,7 +17,7 @@ Review the sections below to learn more about the steps and methods required for
 
 This feature uses Android's Credential Manager to facilitate Sign in with Google in your Auth0-protected Android application. The steps below demonstrate the general user workflow for Sign in with Google.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/6WofMhOOH7GU0NwEcyebiZ/4d4adcb20b74215c7026c1bc9c95be6c/Google_Sign_In_diagram.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/6WofMhOOH7GU0NwEcyebiZ/4d4adcb20b74215c7026c1bc9c95be6c/Google_Sign_In_diagram.png)</Frame>
 
 1. A user opens your Android application and chooses to log in with Google.
 2. Your Android application uses the Credential Manager to request Sign in with Google.
@@ -83,9 +83,9 @@ To update the application through the Auth0 Dashboard, follow the steps below:
 
 </Tab><Tab title="Management API">
 
-To update your application through the Management API, call the [Update a client](/docs/api/management/v2/clients/patch-clients-by-id) endpoint as follows:
+To update your application through the Management API, call the [Update a client](/docs/fr-ca/api/management/v2/clients/patch-clients-by-id) endpoint as follows:
 
-```
+```json lines
 PATCH /api/v2/clients/{id}
 
 { 
@@ -109,7 +109,7 @@ PATCH /api/v2/clients/{id}
 
 The following example can complement the web flow used for non-Google authentications, such as Microsoft, username and password, or enterprise federations.
 
-```
+```java lines
 auth0Client.loginWithNativeSocialToken(
   googleCredential.idToken.toString(),
   "http://auth0.com/oauth/token-type/google-id-token")
@@ -129,7 +129,7 @@ auth0Client.loginWithNativeSocialToken(
 
 Obtaining the Google `googleCredential` requires the native application code to invoke the Google library. For details, refer to [Google's Credential Manager documentation](https://developer.android.com/training/sign-in/credential-manager).
 
-```javascript
+```java lines
 // Generate a nonce for token replay protection
 val randomNonce = UUID.randomUUID().toString()
 
@@ -179,7 +179,7 @@ If you require the use of enterprise federation, redirecting the user to the web
 
 To do so, decode the Google <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">JWT</Tooltip> token and pass the `email` provided in the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">ID token</Tooltip> as a `login_hint`. This prevents the end user from having to re-enter their email address in the web flow.
 
-```
+``` lines
 if (error.isAccessDenied && reason == "Enterprise Domain") {
 WebAuthProvider.login(account)
 	.withParameters(mapOf("login_hint" to email))
@@ -193,7 +193,7 @@ Auth0 returns an error to the application during token exchange when the Google 
 
 When the above error occurs, your application can use WebAuth with the enriched context available in the Google `id_token`. In this scenario, the end user will only see the MFA screen.
 
-```
+``` lines
 if (error.isMultifactorRequired) {
 WebAuthProvider.login(account)
 	.withParameters(mapOf(

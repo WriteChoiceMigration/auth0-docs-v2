@@ -1,13 +1,13 @@
 ---
 title: "Migrations passées"
 permalink: "past-migrations"
+'description': "Liste des mises à jour d’Auth0 déjà activées pour tous les clients."
 'og:title': "Migrations passées"
 'og:description': "Liste des mises à jour d’Auth0 déjà activées pour tous les clients."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Migrations passées"
 'twitter:description': "Liste des mises à jour d’Auth0 déjà activées pour tous les clients."
 ---
-# Migrations passées
 
 Ce sont des migrations qui ont déjà été activées pour tous les clients. Si vous avez des questions, créez un ticket dans notre [Centre d’assistance](https://support.auth0.com).
 
@@ -17,7 +17,7 @@ Ce sont des migrations qui ont déjà été activées pour tous les clients. Si 
 
 **Fin de vie** : 5 août 2024
 
-L’accès pour consulter les [Tickets d’abonnement](/docs/troubleshoot/customer-support/open-and-manage-support-tickets) dans le Centre d’assistance Auth0 change le 5 août 2024. Pour continuer à pouvoir consulter et gérer tous les tickets d’assistance créés par tous les utilisateurs d’un locataire, le nouveau rôle Accès au soutien élevé est requis.
+L’accès pour consulter les [Tickets d’abonnement](/docs/fr-ca/troubleshoot/customer-support/open-and-manage-support-tickets) dans le Centre d’assistance Auth0 change le 5 août 2024. Pour continuer à pouvoir consulter et gérer tous les tickets d’assistance créés par tous les utilisateurs d’un locataire, le nouveau rôle Accès au soutien élevé est requis.
 
 ## Liens de réinitialisation de mot de passe et de vérification de l’adresse courriel dans les journaux de locataires
 
@@ -245,13 +245,13 @@ La périphérie de réseau héritée Auth0 cessera de fonctionner sur le nuage p
 
 Après le 26 janvier 2021, les requêtes adressées aux points de terminaison de Management API v2 renverront un maximum de 50 éléments pour les locataires du nuage public. Pour récupérer plus d’éléments, vous devez inclure les paramètres `page` et `per_page`. À partir du 21 juillet 2020, Auth0 affichera les journaux des locataires et une bascule de migration pour vous aider à vous préparer à ce changement.
 
-* [`GET /api/v2/clients`](/docs/api/management/v2#!/Clients/get_clients)
-* [`GET /api/v2/client-grants`](/docs/api/management/v2#!/Clients/client_grants)
-* [`GET /api/v2/grants`](/docs/api/management/v2#!/Clients/grants)
-* [`GET /api/v2/connections`](/docs/api/management/v2#!/Clients/connections)
-* [`GET /api/v2/device-crecentials`](/docs/api/management/v2#!/Clients/device_credentials)(lorsque le paramètre de requête `type` est utilisé)
-* [`GET /api/v2/resource-servers`](/docs/api/management/v2#!/Clients/resource_servers)
-* [`GET /api/v2/rules`](/docs/api/management/v2#!/Clients/rules)
+* [`GET /api/v2/clients`](/docs/fr-ca/api/management/v2#!/Clients/get_clients)
+* [`GET /api/v2/client-grants`](/docs/fr-ca/api/management/v2#!/Clients/client_grants)
+* [`GET /api/v2/grants`](/docs/fr-ca/api/management/v2#!/Clients/grants)
+* [`GET /api/v2/connections`](/docs/fr-ca/api/management/v2#!/Clients/connections)
+* [`GET /api/v2/device-crecentials`](/docs/fr-ca/api/management/v2#!/Clients/device_credentials)(lorsque le paramètre de requête `type` est utilisé)
+* [`GET /api/v2/resource-servers`](/docs/fr-ca/api/management/v2#!/Clients/resource_servers)
+* [`GET /api/v2/rules`](/docs/fr-ca/api/management/v2#!/Clients/rules)
 
 Tous les locataires de nuage public sont concernés s’ils sont créés avant le 21 juillet 2020 et appellent activement les points de terminaison concernés sans passer le paramètre `per_page` pour les requêtes qui peuvent renvoyer plus d’un résultat. Les locataires ne sont pas concernés s’ils sont créés après le 21 juillet 2020, n’utilisent pas les points de terminaison concernés, utilisent les points de terminaison concernés et transmettent le paramètre `per_page` ou effectuent des requêtes qui ne renvoient toujours qu’un seul résultat. Pour en savoir plus, consultez [Migrer vers les requêtes paginées des points de terminaison de Management API v2](/docs/fr-ca/troubleshoot/product-lifecycle/past-migrations/migrate-to-paginated-queries).
 
@@ -311,7 +311,7 @@ Auth0 a déconseillé l’utilisation de la [bibliothèque auth0-analytics.js](h
 
 **Fin de vie** : 17 décembre 2020
 
-Auth0 exige maintenant que vous fournissiez le paramètre `user_id` lorsque vous utilisez le [point de terminaison GET /api/v2/device-credentials](/docs/api/management/v2/#!/Device_Credentials/get_device_credentials). Si votre demande ne fournit pas de paramètre `user_id`, un code d’état 400 sera renvoyé. Vérifiez le code `depnote` dans vos journaux de locataire pour voir si vous êtes concerné par cette obsolescence. Pour en savoir plus, consultez [Vérifier les erreurs d’obsolescence](/docs/fr-ca/troubleshoot/basic-issues/check-deprecation-errors).
+Auth0 exige maintenant que vous fournissiez le paramètre `user_id` lorsque vous utilisez le [point de terminaison GET /api/v2/device-credentials](/docs/fr-ca/api/management/v2/#!/Device_Credentials/get_device_credentials). Si votre demande ne fournit pas de paramètre `user_id`, un code d’état 400 sera renvoyé. Vérifiez le code `depnote` dans vos journaux de locataire pour voir si vous êtes concerné par cette obsolescence. Pour en savoir plus, consultez [Vérifier les erreurs d’obsolescence](/docs/fr-ca/troubleshoot/basic-issues/check-deprecation-errors).
 
 Auth0 a déterminé les locataires concernés par cette obsolescence et a communiqué avec les administrateurs de ces locataires. Si votre locataire effectue actuellement des demandes sans `user_id`, vous devez effectuer la modification dès que possible.
 
@@ -329,7 +329,7 @@ Auth0 a déterminé les locataires concernés par cette obsolescence et a commun
 
 Auth0 définissait précédemment le champ `email_verified` sur true dans les connexions Azure AD et ADFS. Si vous utilisiez des connexions Azure AD et ADFS avec cette date d’obsolescence, vous disposez d’un paramètre de locataire qui remplace le paramètre de connexion pour la vérification de l’adresse courriel et qui conserve le comportement précédent.
 
-Le 18 mai 2021, dans le nuage public et dans la version de juin du nuage privé (v2106), Auth0 commencera à utiliser la propriété de connexion pour toutes les connexions Azure AD et ADFS. Vous devez vous assurer que toutes vos connexions sont correctement configurées avant cette date. Pour en savoir plus, consultez [Vérification des courriels pour Azure AD et ADFS](/docs/connections/azuread-adfs-email-verification).
+Le 18 mai 2021, dans le nuage public et dans la version de juin du nuage privé (v2106), Auth0 commencera à utiliser la propriété de connexion pour toutes les connexions Azure AD et ADFS. Vous devez vous assurer que toutes vos connexions sont correctement configurées avant cette date. Pour en savoir plus, consultez [Vérification des courriels pour Azure AD et ADFS](/docs/fr-ca/connections/azuread-adfs-email-verification).
 
 ## Modifications de l’attribut témoin samesite
 

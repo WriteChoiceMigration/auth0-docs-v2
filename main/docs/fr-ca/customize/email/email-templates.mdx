@@ -1,13 +1,13 @@
 ---
 title: "Personnaliser les modèles de courriels"
 permalink: "email-templates"
+'description': "Apprenez à personnaliser vos courriels à l’aide de la syntaxe Liquid Templating."
 'og:title': "Personnaliser les modèles de courriels"
 'og:description': "Apprenez à personnaliser vos courriels à l’aide de la syntaxe Liquid Templating."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Personnaliser les modèles de courriels"
 'twitter:description': "Apprenez à personnaliser vos courriels à l’aide de la syntaxe Liquid Templating."
 ---
-# Personnaliser les modèles de courriels
 
 <Note>
 
@@ -142,7 +142,7 @@ Si vous avez déjà un enregistrement SPF, vous pouvez simplement ajouter `inclu
 
 Configurez le DKIM en ajoutant un enregistrement TXT au fichier de zone de votre domaine. Ce domaine doit être celui que vous utilisez pour envoyer des courriels. Par exemple, si vous utilisez [Mandrill](https://www.mandrill.com/signup/), vous allez devoir définir le nom d’hôte de cet enregistrement comme `mandrill._domainkey` et la valeur comme :
 
-```
+```javascript lines
 v=DKIM1; k=rsa; 
 p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrLHiExVd55zd/IQ/J/mRwSRMAocV/hMB3jXwaHH36d9NaVynQFYV8NaWi69c1veUtRzGt7yAioXqLj7Z4TeEUoOLgrKsn8YnckGs9i3B3tVFB+Ch/4mPhXWiNfNdynHWBcPcbJ8kjEQ2U8y78dHZj1YeRXXVvWob2OaKynO8/lQIDAQAB;
 ```
@@ -164,7 +164,7 @@ La langue sélectionnée par l’utilisateur peut être stockée dans `user.user
 
 Par exemple :
 
-```json
+```javascript lines
 {% assign language = request_language %}
   {% if language %}
     {% assign language = request_language | slice: 0,2 %}
@@ -238,7 +238,7 @@ Pour les applications web à page unique (SPA), l’URL de **redirection** peut 
 
 Ce qui entraînera la redirection de l’utilisateur vers l’URL suivante :
 
-```
+``` lines
 http://localhost:3000/?supportSignUp=true
   &supportForgotPassword=true
   &email=john.doe%40exampleco.com
@@ -254,7 +254,7 @@ Pour contourner cette limitation des cadres d’applications SPA, il est recomma
    `http://localhost:3001/register?route=register`
 2. Créez un contrôleur de chemin côté serveur qui lit le `chemin` et les autres paramètres de l’URL, puis redirige vers la route de l’application Web monopage indiquée dans le paramètre de `chemin`. N’oubliez pas d’ajouter les autres paramètres reçus d’Auth0.
 
-   ```javascript
+   ```javascript lines
    var express = require('express');
    var router = express.Router();
    var qs = require('qs'); // to read query string params and stringify them

@@ -1,13 +1,13 @@
 ---
 title: "Meilleures pratiques de la gestion des erreurs"
 permalink: "error-handling-best-practices"
+'description': "Découvrez les meilleures pratiques en matière de gestion des erreurs."
 'og:title': "Meilleures pratiques de la gestion des erreurs"
 'og:description': "Découvrez les meilleures pratiques en matière de gestion des erreurs."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Meilleures pratiques de la gestion des erreurs"
 'twitter:description': "Découvrez les meilleures pratiques en matière de gestion des erreurs."
 ---
-# Meilleures pratiques de la gestion des erreurs
 
 Les conditions d’erreur renvoyées par les appels d’API doivent être gérées et traitées de manière appropriée. Le non-respect de cette consigne peut entraîner des exceptions non gérées, provoquant l’interruption prématurée de l’exécution du pipeline et, par conséquent, une erreur d’authentification.
 
@@ -39,7 +39,7 @@ Les conditions d’erreur inattendues, telles que les exceptions JavaScript non 
 
 Pour les situations impliquant des opérations asynchrones, vous devez utiliser un gestionnaire `catch` lors de l’utilisation du traitement d’objets `Promise`. Le traitement d’objets `Promise` peut également être efficace pour la gestion des erreurs lors d’opérations non-asynchrones. Comme illustré ci-dessous, un objet `Promise` peut être utilisé pour encapsuler, par exemple, un appel de fonction synchrone, ce qui facilite la mise en œuvre de la gestion des erreurs en cascade via l’utilisation du chaînage de Promise et autres. Pour en savoir plus sur l’objet Promise, veuillez consulter [Promise dans MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). Pour en savoir plus sur le chaînage de Promise, veuillez consulter [Gestion des erreurs avec Promise sur javascript.info](https://javascript.info/promise-error-handling).
 
-```
+```javascript lines
 return new Promise(function(resolve, reject) {
     jwt.verify(
       token,

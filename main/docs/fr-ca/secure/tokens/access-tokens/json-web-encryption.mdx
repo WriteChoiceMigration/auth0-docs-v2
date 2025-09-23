@@ -1,13 +1,13 @@
 ---
 title: "Chiffrement Web JSON (JWE)"
 permalink: "json-web-encryption"
+'description': "Apprenez à sécuriser les jetons d’accès en utilisant le chiffrement Web JSON (JWE)."
 'og:title': "Chiffrement Web JSON (JWE)"
 'og:description': "Apprenez à sécuriser les jetons d’accès en utilisant le chiffrement Web JSON (JWE)."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Chiffrement Web JSON (JWE)"
 'twitter:description': "Apprenez à sécuriser les jetons d’accès en utilisant le chiffrement Web JSON (JWE)."
 ---
-# Chiffrement Web JSON (JWE)
 
 le chiffrement Web JSON (JWE) est une [norme IETF](https://datatracker.ietf.org/doc/html/rfc7516) pour représenter du contenu chiffré en utilisant JSON. Dans Auth0, vous pouvez configurer des API pour chiffrer les détails au sein d’un jeton d’accès en utilisant le format JWE.
 
@@ -17,7 +17,7 @@ Lorsque JWE est utilisé, Auth0 génère un jeton d’accès <Tooltip data-toolt
 
 [Configurez JWE pour chaque API](/docs/fr-ca/get-started/apis/configure-json-web-encryption). En supposant que vous avez configuré `apiIdentifier` pour qu’il utilise JWE, l’exemple de code demande un jeton d’accès chiffré via l’autorisation des identifiants du client pour une application de communication entre machines (machine-to-machine/M2M). JWE est disponible pour tous les types d’autorisation pris en charge par Auth0.
 
-```bash
+```bash lines
 curl -X POST --location "https://{domain}/oauth/token" \
     -H "Content-Type: application/x-www-form-urlencoded" \
     -d "client_id={clientId}&client_secret={clientSecret}&audience={apiIdentifier}&grant_type=client_credentials"
@@ -25,7 +25,7 @@ curl -X POST --location "https://{domain}/oauth/token" \
 
 Une réponse positive contient un jeton d’accès chiffré :
 
-```json
+```json lines
 {
   "access_token": "eyJ…XAw",
   "expires_in": 86400,
@@ -36,7 +36,7 @@ Une réponse positive contient un jeton d’accès chiffré :
 Lorsque le jeton d’accès est utilisé, le serveur de ressources doit déchiffrer et valider le jeton JWE.
 L’en-tête du jeton JWE contient des métadonnées qui décrivent l’algorithme de chiffrement ([`alg`](https://datatracker.ietf.org/doc/html/rfc7516#section-4.1.1)), l’algorithme de chiffrement de contenu ([`enc`](https://datatracker.ietf.org/doc/html/rfc7516#section-4.1.2)), et, s’il est fourni lors de la [configuration de l’API](/docs/fr-ca/get-started/apis/configure-json-web-encryption), l’ID de la clé (`kid`) utilisés pour chiffrer la charge utile.
 
-```json
+```json lines
 {
   …
   "alg": "A256GCM",

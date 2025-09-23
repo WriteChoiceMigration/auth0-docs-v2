@@ -1,13 +1,13 @@
 ---
 title: "Implémentation des applications (Applications serveur + API)"
 permalink: "part-3"
+'description': "Implémentation de l’application pour le scénario d’architecture serveur + API"
 'og:title': "Implémentation des applications (Applications serveur + API)"
 'og:description': "Implémentation de l’application pour le scénario d’architecture serveur + API"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Implémentation des applications (Applications serveur + API)"
 'twitter:description': "Implémentation de l’application pour le scénario d’architecture serveur + API"
 ---
-# Implémentation des applications (Applications serveur + API)
 
 Dans cette section du tutoriel, nous allons examiner en détail notre API et l’application de communication entre machines qui lui est associée. Pour commencer, lisez [Applications serveur avec API](/docs/fr-ca/get-started/architecture-scenarios/server-application-api).
 
@@ -34,14 +34,14 @@ Pour l’API Timesheets (feuilles de temps) de ExampleCo, vous devrez configurer
 </thead>
 <tbody>
 <tr>
-<td><code>POST</code></td>
-<td><code>/timesheets/upload</code></td>
+<td>`POST`</td>
+<td>`/timesheets/upload`</td>
 <td>Crée une nouvelle entrée de feuille de temps</td>
 </tr>
 </tbody>
 </table>
 
-```json
+```json lines
 {
   'user_id': '007',
   'date': '2017-05-10T17:40:20.095Z',
@@ -52,7 +52,7 @@ Pour l’API Timesheets (feuilles de temps) de ExampleCo, vous devrez configurer
 
 Si l’API traite la demande avec succès, elle envoie une réponse avec un code d’état `HTTP 201 Created` et un corps contenant un objet JSON avec une propriété message qui décrit la feuille de temps nouvellement créée :
 
-```json
+```json lines
 {
 "message": "Created timesheet 14 for employee 007."
 }
@@ -60,7 +60,7 @@ Si l’API traite la demande avec succès, elle envoie une réponse avec un code
 
 <Note>
 
-Voir l’implémentation dans [Node.js](/docs/get-started/architecture-scenarios/server-application-api/api-implementation-nodejs#1-define-the-api-endpoint).
+Voir l’implémentation dans [Node.js](/docs/fr-ca/get-started/architecture-scenarios/server-application-api/api-implementation-nodejs#1-define-the-api-endpoint).
 
 </Note>
 
@@ -70,7 +70,7 @@ Pour sécuriser le ou les points de terminaison de votre API, vous devez implém
 
 Si tous les critères sont remplis, l’application API répond par le message indiqué précédemment. En cas de problème avec le jeton d’accès fourni (ou s’il n’est pas fourni du tout), l’application API envoie une réponse avec le code d’état `HTTP 401 Unauthorized`.
 
-**Voir l’implémentation dans**[**Node.js**](/docs/get-started/architecture-scenarios/server-application-api/api-implementation-nodejs#2-secure-the-api-endpoint)**.**
+**Voir l’implémentation dans**[**Node.js**](/docs/fr-ca/get-started/architecture-scenarios/server-application-api/api-implementation-nodejs#2-secure-the-api-endpoint)**.**
 
 #### Obtenir un jeton d’accès
 
@@ -78,7 +78,7 @@ Pour obtenir un jeton d’accès sans utiliser notre exemple d’implémentation
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```json
+```json lines
 {
   audience: "{yourApiIdentifier}",
   grant_type: "client_credentials",
@@ -91,11 +91,11 @@ codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
 Nous avons maintenant sécurisé le point de terminaison de notre API avec un jeton d’accès, mais nous ne nous sommes toujours pas assurés que le processus appelant l’API a le droit de publier une nouvelle entrée de feuille de temps.
 
-Comme indiqué précédemment, chaque jeton d’accès peut inclure une liste de permissions accordées à l’application. Ces autorisations sont définies à l’aide du paramètre de requête `scope`. Consultez le paragraphe [Configurer les permissions](/docs/get-started/architecture-scenarios/server-application-api/part-3#configure-the-scopes) pour savoir comment procéder à cette configuration.
+Comme indiqué précédemment, chaque jeton d’accès peut inclure une liste de permissions accordées à l’application. Ces autorisations sont définies à l’aide du paramètre de requête `scope`. Consultez le paragraphe [Configurer les permissions](/docs/fr-ca/get-started/architecture-scenarios/server-application-api/part-3#configure-the-scopes) pour savoir comment procéder à cette configuration.
 
 Pour notre point de terminaison, nous aurons besoin de la permission `batch:upload`.
 
-**Voir l’implémentation dans**[**Node.js**](/docs/get-started/architecture-scenarios/server-application-api/api-implementation-nodejs#3-check-the-client-permissions)**.**
+**Voir l’implémentation dans**[**Node.js**](/docs/fr-ca/get-started/architecture-scenarios/server-application-api/api-implementation-nodejs#3-check-the-client-permissions)**.**
 
 ### Implémentation de l’application de communication entre machines
 
@@ -116,7 +116,7 @@ Notre implémentation doit effectuer une opération `POST`  vers le point de t
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```json
+```json lines
 {
   "audience": "{yourApiIdentifier}",
   "grant_type": "client_credentials",
@@ -127,7 +127,7 @@ codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
 Pour en savoir plus, consultez [Appeler votre API à l’aide du Flux des identifiants client](/docs/fr-ca/get-started/authentication-and-authorization-flow/client-credentials-flow/call-your-api-using-the-client-credentials-flow).
 
-**Voir l’implémentation dans**[**Python**](/docs/get-started/architecture-scenarios/server-application-api/cron-implementation-python#get-an-access-token).
+**Voir l’implémentation dans**[**Python**](/docs/fr-ca/get-started/architecture-scenarios/server-application-api/cron-implementation-python#get-an-access-token).
 
 ## Invoquer l’API
 
@@ -140,4 +140,4 @@ Pour ce faire, nous allons effectuer les opérations suivantes :
 * Effectuer la demande HTTP `POST`.
 * Analyser la réponse et l’imprimer dans le terminal (facultatif).
 
-**Voir l’implémentation dans**[**Python**](/docs/get-started/architecture-scenarios/server-application-api/cron-implementation-python#invoke-the-api).
+**Voir l’implémentation dans**[**Python**](/docs/fr-ca/get-started/architecture-scenarios/server-application-api/cron-implementation-python#invoke-the-api).

@@ -1,13 +1,13 @@
 ---
 title: "Configurer Cloudflare en tant que proxy inverse"
 permalink: "configure-cloudflare-for-use-as-reverse-proxy"
+'description': "Apprenez à configurer Cloudflare pour l’utiliser comme proxy de domaine personnalisé pour Auth0."
 'og:title': "Configurer Cloudflare en tant que proxy inverse"
 'og:description': "Apprenez à configurer Cloudflare pour l’utiliser comme proxy de domaine personnalisé pour Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer Cloudflare en tant que proxy inverse"
 'twitter:description': "Apprenez à configurer Cloudflare pour l’utiliser comme proxy de domaine personnalisé pour Auth0."
 ---
-# Configurer Cloudflare en tant que proxy inverse
 
 <Card title="La disponibilité varie selon le plan Auth0">
 
@@ -65,7 +65,7 @@ Pour configurer Cloudflare en tant que proxy inverse, vous devrez créer un enre
 </tr>
 <tr>
 <td>État de proxy</td>
-<td><code>Proxied</code></td>
+<td>`Proxied`</td>
 </tr>
 </tbody>
 </table>
@@ -84,7 +84,7 @@ Pour configurer Cloudflare en tant que proxy inverse, vous devrez créer un enre
 </tr>
 <tr>
 <td>True-Client-IP</td>
-<td><code>Enable</code></td>
+<td>`Enable`</td>
 </tr>
 </tbody>
 </table>
@@ -104,7 +104,7 @@ Pour configurer Cloudflare en tant que proxy inverse, vous devrez créer un enre
 <tbody>
 <tr>
 <td>Nom de l’en-tête</td>
-<td><code>cname-api-key</code></td>
+<td>`cname-api-key`</td>
 </tr>
 <tr>
 <td>Valeur</td>
@@ -124,7 +124,7 @@ Bien qu’il soit possible d’utiliser Cloudflare Workers au lieu des règles P
 
 Appelez le point de terminaison [Mettre à jour la configuration du domaine personnalisé](https://auth0.com/docs/api/management/v2#!/Custom_Domains/patch_custom_domains_by_id) d’Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip> avec la charge utile suivante dans le corps de la requête :
 
-```json
+```javascript lines
 {
   "custom_client_ip_header": "true-client-ip"
 }

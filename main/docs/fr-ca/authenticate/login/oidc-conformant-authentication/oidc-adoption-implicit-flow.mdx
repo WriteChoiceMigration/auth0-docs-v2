@@ -1,13 +1,13 @@
 ---
 title: "Flux implicite avec OIDC"
 permalink: "oidc-adoption-implicit-flow"
+'description': "Découvrez comment le pipeline conforme à l’OIDC affecte le flux implicite."
 'og:title': "Flux implicite avec OIDC"
 'og:description': "Découvrez comment le pipeline conforme à l’OIDC affecte le flux implicite."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Flux implicite avec OIDC"
 'twitter:description': "Découvrez comment le pipeline conforme à l’OIDC affecte le flux implicite."
 ---
-# Flux implicite avec OIDC
 
 Traditionnellement, le [Flux implicite](/docs/fr-ca/get-started/authentication-and-authorization-flow/implicit-flow-with-form-post) était utilisé par les applications qui étaient incapables de stocker des secrets en toute sécurité. L’utilisation de ce flux n’est plus considérée comme meilleure pratique pour la demande de jetons d’accès; les nouvelles implémentations devraient utiliser le [Flux de code d’autorisation avec PKCE](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce). Toutefois, lorsqu’il est utilisé avec le mode de réponse Form Post, le Flux implicite offre un flux de travail simplifié si l’application n’a besoin que d’un jeton d’ID pour effectuer l’authentification des utilisateurs; dans ces cas, il serait utilisé dans le cadre du [Flux hybride](/docs/fr-ca/get-started/authentication-and-authorization-flow/hybrid-flow).
 
@@ -19,7 +19,7 @@ En outre, le pipeline Conforme à l’OIDC affecte le flux implicite dans les do
 
 ### Héritage
 
-```
+``` lines
 GET /authorize?
     response_type=token
     &scope=openid email favorite_color offline_access
@@ -33,7 +33,7 @@ Le paramètre `device` n’est nécessaire que si vous demandez un jeton d’act
 
 ### Conforme à OIDC
 
-```
+``` lines
 GET /authorize?
     response_type=token id_token
     &scope=openid email
@@ -54,7 +54,7 @@ GET /authorize?
 
 ### Héritage
 
-```
+``` lines
 HTTP/1.1 302 Found
 Location: https://app.example.com/#
     access_token=SlAV32hkKG
@@ -65,12 +65,12 @@ Location: https://app.example.com/#
     &token_type=Bearer
 ```
 
-* Le jeton d’accès retourné est valide pour appeler le point de terminaison [`/userinfo`](/docs/api/authentication#get-user-info).
+* Le jeton d’accès retourné est valide pour appeler le point de terminaison [`/userinfo`](/docs/fr-ca/api/authentication#get-user-info).
 * Un jeton d’actualisation sera retourné uniquement si un paramètre `device` a été passé et que la permission `offline_access` a été demandée.
 
 ### Conforme à OIDC
 
-```
+``` lines
 HTTP/1.1 302 Found
 Location: https://app.example.com/#
     access_token=eyJ...
@@ -80,7 +80,7 @@ Location: https://app.example.com/#
     &token_type=Bearer
 ```
 
-* Le jeton d’accès retourné est valide pour appeler le point de terminaison [`/userinfo`](/docs/api/authentication#get-user-info) (à condition que l’API spécifiée par le paramètre `audience` utilise `RS256` comme [algorithme de signature](/docs/fr-ca/get-started/applications/signing-algorithms)) et éventuellement le serveur de ressources spécifié par le paramètre `audience`.
+* Le jeton d’accès retourné est valide pour appeler le point de terminaison [`/userinfo`](/docs/fr-ca/api/authentication#get-user-info) (à condition que l’API spécifiée par le paramètre `audience` utilise `RS256` comme [algorithme de signature](/docs/fr-ca/get-started/applications/signing-algorithms)) et éventuellement le serveur de ressources spécifié par le paramètre `audience`.
 * Si vous utilisez `response_type=id_token`, Auth0 ne retournera qu’un jeton d’ID.
   Les jetons d’actualisation ne sont pas autorisés dans l’autorisation implicite. Utilisez `prompt=none` à la place.
 
@@ -88,7 +88,7 @@ Location: https://app.example.com/#
 
 ### Héritage
 
-```json
+```json lines
 {
     "sub": "auth0|alice",
     "iss": "https://{yourDomain}/",
@@ -103,7 +103,7 @@ Location: https://app.example.com/#
 
 ### Conforme à OIDC
 
-```json
+```json lines
 {
     "sub": "auth0|alice",
     "iss": "https://{yourDomain}/",
@@ -124,7 +124,7 @@ Location: https://app.example.com/#
 
 ### Héritage
 
-```
+```json lines
 SlAV32hkKG
 ```
 
@@ -132,7 +132,7 @@ Le jeton d'accès renvoyé est opaque et n'est valide que pour appeler le point 
 
 ### Conforme à OIDC
 
-```json
+```json lines
 {
     "sub": "auth0|alice",
     "iss": "https://{yourDomain}/",

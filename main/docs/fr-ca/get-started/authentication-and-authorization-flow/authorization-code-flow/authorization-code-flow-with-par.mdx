@@ -1,13 +1,13 @@
 ---
 title: "Flux de code d’autorisation avec les demandes d’autorisation poussées"
 permalink: "authorization-code-flow-with-par"
+'description': "Apprenez à utiliser les demandes d’autorisation poussées avec le flux de code d’autorisation."
 'og:title': "Flux de code d’autorisation avec les demandes d’autorisation poussées"
 'og:description': "Apprenez à utiliser les demandes d’autorisation poussées avec le flux de code d’autorisation."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Flux de code d’autorisation avec les demandes d’autorisation poussées"
 'twitter:description': "Apprenez à utiliser les demandes d’autorisation poussées avec le flux de code d’autorisation."
 ---
-# Flux de code d’autorisation avec les demandes d’autorisation poussées
 
 <Note>
 
@@ -21,7 +21,7 @@ Pour utiliser les fonctionnalités de l’identité très réglementée (HRI), v
 
 La demande PAR permet à votre application d’envoyer les paramètres des demandes d’autorisation <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OAuth 2.0</Tooltip> directement au point de terminaison PAR du serveur d’autorisation **(1)**. En réponse, le serveur d’autorisation envoie une valeur d’URI de demande, `request_uri` **(2)**, à utiliser lorsque vous appelez le point de terminaison `/authorize`**(3)**. Le `request_uri` est une référence aux demandes d’autorisation stockées au point de terminaison `/par`, de sorte que ces demandes ne sont pas exposées **(4)**. Pour en savoir plus, lisez [Configurer les demandes d’autorisation Push](/docs/fr-ca/get-started/applications/configure-par).
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/6ivWNzZR7pnV79AXtjhJca/5adaff0719cfa1be13e80812f941ce71/Template_for_Docs_-_Authorization_Code_Flow_with_PAR.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/6ivWNzZR7pnV79AXtjhJca/5adaff0719cfa1be13e80812f941ce71/Template_for_Docs_-_Authorization_Code_Flow_with_PAR.png)</Frame>
 
 ## Avantages
 
@@ -67,7 +67,7 @@ Si vous utilisez des paramètres d’autorisation personnalisés dans des Action
 
 ### Exemple de demande PAR
 
-```bash
+```bash lines
 curl --location --request POST https://$tenant/oauth/par \
   -H "content-type: application/x-www-form-urlencoded" \
   -d "client_id=CLIENT_ID"\
@@ -85,7 +85,7 @@ Dans l’exemple de réponse PAR suivant :
 * Le `request_uri` est une référence pour les demandes d’autorisation stockées. Les valeurs de la demande sont transmises au point de terminaison GET `/authorize` en tant que paramètre `request_uri`.
 * Le paramètre `expires_in` correspond au nombre de secondes pendant lesquelles le paramètre `request_uri` est valide. Après ce délai, le `request_uri` expire s’il n’est pas utilisé. Le délai d’expiration de trente secondes est une valeur statique qui ne peut pas être configurée.
 
-```
+``` lines
 HTTP/1.1 201 Created
  Content-Type: application/json
 
@@ -106,7 +106,7 @@ Votre application utilise la valeur `request_uri` renvoyée par le point de term
 
 L’exemple suivant demande à l’agent utilisateur d’effectuer la requête HTTP suivante :
 
-```
+``` lines
 GET /authorize?client_id=CLIENT_ID&request_uri=urn%3Aietf%3Aparam...qrwSI HTTP/1.1 Host: TENANT.auth0.com
 ```
 

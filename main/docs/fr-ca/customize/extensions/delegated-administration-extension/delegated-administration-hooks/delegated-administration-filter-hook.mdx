@@ -1,20 +1,20 @@
 ---
 title: "Administration déléguée : Hook de filtrage"
 permalink: "delegated-administration-filter-hook"
+'description': "Apprenez à utiliser le hook de filtrage avec l’extension Delegated Administration."
 'og:title': "Administration déléguée : Hook de filtrage"
 'og:description': "Apprenez à utiliser le hook de filtrage avec l’extension Delegated Administration."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Administration déléguée : Hook de filtrage"
 'twitter:description': "Apprenez à utiliser le hook de filtrage avec l’extension Delegated Administration."
 ---
-# Administration déléguée : Hook de filtrage
 
 Par défaut, les utilisateurs ayant le rôle **Administrateur délégué - Utilisateur** voient tous les utilisateurs associés au compte Auth0. Cependant, vous pouvez filtrer les données que les utilisateurs voient en utilisant le **Hook de filtrage**.
 
 ## Contrat Hook
 
 * **ctx** : Objet de contexte.
-* **callback(error, query)**: Callback auquel vous pouvez renvoyer une erreur ou la requête lucene utilisée lors du filtrage des utilisateurs. L’extension enverra cette requête au point de terminaison [**Obtenir les utilisateurs** de Management API.](/docs/api/management/v2#!/Users/get_users)
+* **callback(error, query)**: Callback auquel vous pouvez renvoyer une erreur ou la requête lucene utilisée lors du filtrage des utilisateurs. L’extension enverra cette requête au point de terminaison [**Obtenir les utilisateurs** de Management API.](/docs/fr-ca/api/management/v2#!/Users/get_users)
 
 Pour en savoir plus sur la requête lucene, consultez [Syntaxe de la requête de recherche d’utilisateur](/docs/fr-ca/manage-users/user-search/user-search-query-syntax).
 
@@ -22,7 +22,7 @@ Pour en savoir plus sur la requête lucene, consultez [Syntaxe de la requête de
 
 Kelly gère le département des finances; elle ne doit voir que les utilisateurs qui font également partie du service financier. Nous filtrerons les utilisateurs en fonction du service de l’utilisateur actuel (qui, dans ce cas, est le service financier et Kelly, respectivement).
 
-```javascript
+```javascript lines
 function(ctx, callback) {
   // Get the department from the current user's metadata.
   var department = ctx.request.user.app_metadata && ctx.request.user.app_metadata.department;
@@ -44,7 +44,7 @@ function(ctx, callback) {
 
 Vous pouvez remplacer le moteur de recherche par défaut en précisant votre choix dans la réponse.
 
-```javascript
+```javascript lines
 // Return the lucene query.
 return callback(null, { query: 'app_metadata.department:"' + department + '"', searchEngine: 'v2' });
 ```

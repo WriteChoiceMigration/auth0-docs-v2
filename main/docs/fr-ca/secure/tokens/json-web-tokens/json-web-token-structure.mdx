@@ -1,13 +1,13 @@
 ---
 title: "Structure du jeton Web JSON"
 permalink: "json-web-token-structure"
+'description': "Décrit la structure des jetons Web JSON avec les signatures web JSON (JWS)."
 'og:title': "Structure du jeton Web JSON"
 'og:description': "Décrit la structure des jetons Web JSON avec les signatures web JSON (JWS)."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Structure du jeton Web JSON"
 'twitter:description': "Décrit la structure des jetons Web JSON avec les signatures web JSON (JWS)."
 ---
-# Structure du jeton Web JSON
 
 Tous les <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JWT</Tooltip> émis par Auth0 ont [une signature Web JSON (JWS)](https://tools.ietf.org/html/rfc7515), ce qui signifie qu’ils sont signés plutôt que chiffrés. Une signature Web JSON (JWS) représente un contenu sécurisé par des signatures numériques ou des codes d’authentification des messages (MAC) à l’aide de structures de données basées sur JSON.
 
@@ -19,17 +19,17 @@ Une JWS bien formée se compose de trois chaînes concaténées codées en Base6
 
 Un JWT ressemble généralement à ceci :
 
-<Frame>![JSON Web Token](//images.ctfassets.net/cdy7uua7fh8z/7FI79jeM55zrNGd6QFdxnc/80a18597f06faf96da649f86560cbeab/encoded-jwt3.png)</Frame>
+<Frame>![JSON Web Token](/images/fr-ca/cdy7uua7fh8z/7FI79jeM55zrNGd6QFdxnc/80a18597f06faf96da649f86560cbeab/encoded-jwt3.png)</Frame>
 
 Pour voir directement ce que contient un JWT, utilisez [le débogueur JWT.io](http://jwt.io). Il vous permet de vérifier rapidement qu’un JWT est bien formé et d’inspecter manuellement les valeurs des différentes demandes.
 
-<Frame>![JWT Debugger](//images.ctfassets.net/cdy7uua7fh8z/5U3Azt2AReuNzNuQqkRs5/9629ab9924a0212b74bee0b8fa88c295/legacy-app-auth-5.png)</Frame>
+<Frame>![JWT Debugger](/images/fr-ca/cdy7uua7fh8z/5U3Azt2AReuNzNuQqkRs5/9629ab9924a0212b74bee0b8fa88c295/legacy-app-auth-5.png)</Frame>
 
 ## En-tête JOSE
 
 Objet JSON contenant les paramètres décrivant les opérations de chiffrement et les paramètres utilisés. L’en-tête JOSE (JSON Object Signing and Encryption) se compose d’un ensemble de paramètres d’en-tête qui consistent généralement en une paire nom/valeur : l’algorithme de hachage utilisé (par ex., HMAC SHA256 ou RSA) et le type de JWT.
 
-```json
+```json lines
 {
       "alg": "HS256",
       "typ": "JWT"
@@ -40,7 +40,7 @@ Objet JSON contenant les paramètres décrivant les opérations de chiffrement e
 
 La charge utile contient des déclarations sur l’entité (en général, l’utilisateur) et des attributs supplémentaires de l’entité, appelés demandes. Dans cet exemple, l’entité est un utilisateur.
 
-```json
+```json lines
 {
       "sub": "1234567890",
       "name": "John Doe",
@@ -58,7 +58,7 @@ Pour créer la signature, l’en-tête et la charge utile encodés en Base64 son
 
 Par exemple, si vous créez une signature pour un jeton à l’aide de l’algorithme HMAC SHA256, vous devez procéder comme suit :
 
-```
+```json lines
 HMACSHA256(
       base64UrlEncode(header) + "." +
       base64UrlEncode(payload),

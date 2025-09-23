@@ -1,12 +1,14 @@
 ---
 title: "Auth0"
 permalink: "android"
+'description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:title': "Auth0"
 'og:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0"
 'twitter:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 ---
+
 # Android: Login
 
 <Frame>![Gravatar for luciano.balmaceda@auth0.com](//www.gravatar.com/avatar/da735b48d8300a97640149156b650305?d=mm&r=g&s=50)</Frame>
@@ -39,7 +41,7 @@ System requirements: Android Studio 4.1.0 | Android SDK 30 | Emulator - Android 
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Native Applications](/docs/architecture-scenarios/application/mobile-api) and which [protocol](/docs/api-auth/grant/authorization-code-pkce) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/fr-ca/overview), how it [integrates with Native Applications](/docs/fr-ca/architecture-scenarios/application/mobile-api) and which [protocol](/docs/fr-ca/api-auth/grant/authorization-code-pkce) it uses.
 
 </Note>
 
@@ -100,7 +102,7 @@ Add the [Auth0 Android](https://github.com/auth0/Auth0.Android) SDK into your pr
 
 In your app's `build.gradle` dependencies section, add the following:
 
-```
+``` lines
 dependencies {
   // Add the Auth0 Android SDK
   implementation 'com.auth0.android:auth0:2.+'
@@ -109,7 +111,7 @@ dependencies {
 
 In the android section, target Java 8 byte code for Android and Kotlin plugins respectively.
 
-```
+``` lines
 android {
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
@@ -135,7 +137,7 @@ We've used a value of `demo` for `auth0Scheme` here, so that a custom URL scheme
 
 To add the manifest placeholders, add the next line:
 
-```javascript
+```javascript lines
 // app/build.gradle
 
 apply plugin: 'com.android.application'
@@ -162,7 +164,7 @@ You do not need to declare a specific `intent-filter` for your activity, because
 
 Finally, ensure that the `android.permissions.INTERNET` permission is specified in the `AndroidManifest.xml` file:
 
-```
+```xml lines
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
@@ -176,11 +178,11 @@ For more information about using Gradle, check the [Gradle official documentatio
 
 ## Add Login to your App
 
-[Universal Login](/docs/hosted-pages/login) is the easiest way to set up authentication in your application. We recommend using it for the best experience, best security and the fullest array of features.
+[Universal Login](/docs/fr-ca/hosted-pages/login) is the easiest way to set up authentication in your application. We recommend using it for the best experience, best security and the fullest array of features.
 
 In the `onCreate` method, create a new instance of the `Auth0` class to hold user credentials:
 
-```javascript
+```kotlin lines
 // Import the parts needed by the SDK
 import com.auth0.android.Auth0
 import com.auth0.android.provider.WebAuthProvider
@@ -209,7 +211,7 @@ We suggest you do not hardcode the values for `clientId` and `domain` as you may
 
 Finally, create a `loginWithBrowser` method and use the `WebAuthProvider` class to authenticate with any connection you enabled on your application in the [Auth0 dashboard](https://manage.auth0.com/#/). Here, you can pass the scheme value that was used in the `auth0Scheme` manifest placeholder as part of the initial configuration:
 
-```
+```kotlin lines
 private fun loginWithBrowser() {
     // Setup the WebAuthProvider, using the custom scheme and scope.
 
@@ -237,7 +239,7 @@ After you call the `WebAuthProvider#start` function, the browser launches and sh
 
 <Note>
 
-There are many options to customize the authentication with the `WebAuthProvider` builder. You can read about them in the [Auth0 SDK for Android documentation](/docs/libraries/auth0-android).
+There are many options to customize the authentication with the `WebAuthProvider` builder. You can read about them in the [Auth0 SDK for Android documentation](/docs/fr-ca/libraries/auth0-android).
 
 <Frame>![Universal Login](https://cdn2.auth0.com/docs/1.14567.0/media/articles/native-platforms/android/login-android.png)</Frame>
 
@@ -255,7 +257,7 @@ Use `WebAuthProvider` to remove the cookie set by the Browser at authentication 
 
 Add a `logout` method to your app to remove the user's session and log them out of the app. Here, you can pass the scheme value that was used in the `auth0Scheme` manifest placeholder as part of the initial configuration:
 
-```
+```kotlin lines
 private fun logout() {
   WebAuthProvider.logout(account)
     .withScheme("demo")
@@ -294,7 +296,7 @@ This quickstart sets the `openid profile email` scopes by default during the log
 
 The following demonstrates a function that can be used to retrieve the user's profile and show it on the screen:
 
-```
+```kotlin lines
 private fun showUserProfile(accessToken: String) {
   var client = AuthenticationAPIClient(account)
 
@@ -320,7 +322,7 @@ Call the `showUserProfile` function after login and verify that the user's profi
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

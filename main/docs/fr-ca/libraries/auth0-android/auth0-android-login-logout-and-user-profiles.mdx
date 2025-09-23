@@ -1,19 +1,19 @@
 ---
 title: "Connexion et déconnexion et profils utilisateurs Auth0.Android"
 permalink: "auth0-android-login-logout-and-user-profiles"
+'description': "Apprenez à ajouter la connexion, la déconnexion et à lire le profil utilisateur à l'aide de la trousse SDK Android."
 'og:title': "Connexion et déconnexion et profils utilisateurs Auth0.Android"
 'og:description': "Apprenez à ajouter la connexion, la déconnexion et à lire le profil utilisateur à l'aide de la trousse SDK Android."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Connexion et déconnexion et profils utilisateurs Auth0.Android"
 'twitter:description': "Apprenez à ajouter la connexion, la déconnexion et à lire le profil utilisateur à l'aide de la trousse SDK Android."
 ---
-# Connexion et déconnexion et profils utilisateurs Auth0.Android
 
 ## Ajouter la connexion à votre application Android
 
 Vous pouvez connecter l'utilisateur à l'aide de la méthode `WebAuthProvider.login` :
 
-```
+```kotlin lines
 WebAuthProvider.login(account)
   .withScheme(getString(R.string.com_auth0_scheme))
   .withScope("openid profile email")
@@ -44,7 +44,7 @@ Si la déconnexion est annulée, il pourrait être souhaitable de ramener l’ut
 
 </Note>
 
-```
+```kotlin lines
 WebAuthProvider.logout(account)
   .withScheme("demo")
   .start(this, object: Callback<Void?, AuthenticationException> {
@@ -68,7 +68,7 @@ Utilisez la classe `AuthenticationAPIClient` pour récupérer le profil utilisat
 
 Cet exemple montre une fonction qui récupère le profil de l'utilisateur et l'affiche à l'écran :
 
-```javascript
+```kotlin lines
 var client = AuthenticationAPIClient(account)
 
 // Use the received access token to call `userInfo` and get the profile from Auth0.

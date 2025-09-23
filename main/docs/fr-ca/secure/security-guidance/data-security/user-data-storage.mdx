@@ -1,13 +1,13 @@
 ---
 title: "Stockage de données utilisateur"
 permalink: "user-data-storage"
+'description': "Découvrez les différences entre l’utilisation du magasin de données Auth0 et d’une base de données externe pour stocker les données utilisateur."
 'og:title': "Stockage de données utilisateur"
 'og:description': "Découvrez les différences entre l’utilisation du magasin de données Auth0 et d’une base de données externe pour stocker les données utilisateur."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Stockage de données utilisateur"
 'twitter:description': "Découvrez les différences entre l’utilisation du magasin de données Auth0 et d’une base de données externe pour stocker les données utilisateur."
 ---
-# Stockage de données utilisateur
 
 Auth0 stocke les informations des utilisateurs de votre locataire dans une base de données hébergée dans le nuage, ou vous pouvez choisir de stocker les données des utilisateurs dans votre propre base de données externe personnalisée.
 
@@ -28,9 +28,9 @@ Lorsque vous externalisez l’authentification des utilisateurs, il n’est gén
 
 ## Exemple de scénario de stockage de données utilisateur
 
-Auth0 fournit un exemple d’application, une application de musique mobile, qui reflète l’expérience utilisateur de bout en bout lors de l’utilisation d’Auth0 avec une base de données externe personnalisée. Cet exemple d’application est une application iOS créée à l’aide du [projet seed Auth0 iOS](/docs/quickstart/native/ios-swift). Le système dorsal utilise l’[API Node.js](/docs/quickstart/backend/nodejs).
+Auth0 fournit un exemple d’application, une application de musique mobile, qui reflète l’expérience utilisateur de bout en bout lors de l’utilisation d’Auth0 avec une base de données externe personnalisée. Cet exemple d’application est une application iOS créée à l’aide du [projet seed Auth0 iOS](/docs/fr-ca/quickstart/native/ios-swift). Le système dorsal utilise l’[API Node.js](/docs/fr-ca/quickstart/backend/nodejs).
 
-Pour une visualisation de la structure globale de l’application, voir le [scénario d’architecture Mobile + API.](/docs/architecture-scenarios/application/mobile-api)
+Pour une visualisation de la structure globale de l’application, voir le [scénario d’architecture Mobile + API.](/docs/fr-ca/architecture-scenarios/application/mobile-api)
 
 ### Métadonnées
 
@@ -56,7 +56,7 @@ Nous pouvons permettre à l’utilisateur de modifier son `displayName`, qui est
 
 Pour afficher l’identifiant choisi par l’utilisateur à chaque fois qu’il se connecte, nous utilisons une règle pour obtenir la valeur `user.user_metadata`.
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.user_metadata = user.user_metadata || {};
   user.user_metadata.displayName = user.user_metadata.displayName || "user";
@@ -73,24 +73,24 @@ function(user, context, callback){
 
 Voici un aperçu de l’écran que l’utilisateur utiliserait pour modifier son `displayName` :
 
-<Frame>![Écran des paramètres de l'application iOS avec option de mise à jour du nom d'affichage.](//images.ctfassets.net/cdy7uua7fh8z/33YxGQKYztHY3OM6mxJ4jN/0a06103e6b6455c2e1962a1f738b663a/4-settings.png)</Frame>
+<Frame>![Écran des paramètres de l'application iOS avec option de mise à jour du nom d'affichage.](/images/fr-ca/cdy7uua7fh8z/33YxGQKYztHY3OM6mxJ4jN/0a06103e6b6455c2e1962a1f738b663a/4-settings.png)</Frame>
 
-pour enregistrer les modifications dans la base de données, l’application appelle le point de terminaison [Obtenir un utilisateur](/docs/api/management/v2#!/Users/get_users_by_id) de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip> pour identifier l’utilisateur approprié :
+pour enregistrer les modifications dans la base de données, l’application appelle le point de terminaison [Obtenir un utilisateur](/docs/fr-ca/api/management/v2#!/Users/get_users_by_id) de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip> pour identifier l’utilisateur approprié :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id \
 --header 'authorization: Bearer {yourIdToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourIdToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -107,14 +107,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id")
 .header("authorization", "Bearer {yourIdToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -126,8 +126,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourIdToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id"]
@@ -148,7 +148,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id",
@@ -170,8 +170,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourIdToken}" }
@@ -181,7 +181,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -193,8 +193,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourIdToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourIdToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id")! as URL,
@@ -215,17 +215,17 @@ dataTask.resume()
 ```
 </CodeGroup>
 
-cet appel est suivi d’un appel au point de terminaison [Mettre à jour un utilisateur](/docs/api/management/v2#!/Users/patch_users_by_id) pour mettre à jour le champ `user_metadata` :
+cet appel est suivi d’un appel au point de terminaison [Mettre à jour un utilisateur](/docs/fr-ca/api/management/v2#!/Users/patch_users_by_id) pour mettre à jour le champ `user_metadata` :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/users/user_id' \
 --header 'authorization: Bearer {yourAccessToken}' \
 --header 'content-type: application/json' \
 --data '{"user_metadata": {"displayName": "J-vald3z"}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/user_id");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("authorization", "Bearer {yourAccessToken}");
@@ -234,7 +234,7 @@ request.AddParameter("application/json", "{\"user_metadata\": {\"displayName\": 
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -254,8 +254,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/user_id")
 .header("authorization", "Bearer {yourAccessToken}")
 .header("content-type", "application/json")
@@ -263,7 +263,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/user_id
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -276,8 +276,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourAccessToken}",
 @"content-type": @"application/json" };
@@ -301,7 +301,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/user_id",
@@ -325,8 +325,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"user_metadata\": {\"displayName\": \"J-vald3z\"}"
@@ -340,7 +340,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -354,8 +354,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"user_metadata\": {\"displayName\": \"J-vald3z\"}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {yourAccessToken}",
@@ -381,7 +381,7 @@ dataTask.resume()
 ```
 </CodeGroup>
 
-vous devez remplacer `{yourAccessToken}` par un [jeton d’accès à Management API](/docs/api/management/v2/concepts/tokens).
+vous devez remplacer `{yourAccessToken}` par un [jeton d’accès à Management API](/docs/fr-ca/api/management/v2/concepts/tokens).
 
 ### Règles d’autorisation des données utilisateur
 
@@ -391,7 +391,7 @@ Utilisez des [rules](/docs/fr-ca/customize/rules) pour mettre en place des autor
 
 La première règle envoie une demande à notre API Node, qui interroge ensuite la base de données connectée à Heroku pour vérifier le nombre de lectures de la liste de lecture de l’utilisateur. Si le nombre est égal ou supérieur à 100, nous attribuons la valeur `playlist_editor` au tableau `roles` dans `app_metadata`.
 
-```javascript
+```javascript lines
 function (user, context, callback) {
 
   var request = require('request');
@@ -461,7 +461,7 @@ function (user, context, callback) {
 
 La deuxième règle récupère le champ `app_metadata` et affecte le tableau des `roles` à un champ de l’objet utilisateur afin qu’il soit accessible sans appeler `app_metadata` sur l’application. Le paramètre `scope` peut alors spécifier les `roles` lors de la connexion de l’utilisateur sans inclure tout ce qui se trouve dans `app_metadata` dans l’objet utilisateur :
 
-```javascript
+```javascript lines
 function(user, context, callback) {
    if (user.app_metadata) {
       user.roles = user.app_metadata.roles;
@@ -473,7 +473,7 @@ function(user, context, callback) {
 
 Après avoir implémenté ces deux règles, l’application reconnaît si l’utilisateur est un éditeur de liste de lecture ou non et modifie l’écran d’accueil en conséquence. Si `playlist_editor` figure dans le tableau des `roles` stocké dans les `app_metadata` de l’utilisateur, ce dernier sera accueilli en tant que **ÉDITEUR** après s’être connecté :
 
-<Frame>![Example of user profile page with editor role.](//images.ctfassets.net/cdy7uua7fh8z/1WEKC4eWvm8GPK2BlodGFk/3eb36843f22518ace800fc1507bd5816/3-home.png)</Frame>
+<Frame>![Example of user profile page with editor role.](/images/fr-ca/cdy7uua7fh8z/1WEKC4eWvm8GPK2BlodGFk/3eb36843f22518ace800fc1507bd5816/3-home.png)</Frame>
 
 #### Associer la musique d’un utilisateur à l’utilisateur
 
@@ -499,11 +499,11 @@ L’identifiant unique de l’utilisateur est le `user_id`. Voici un exemple de 
 
 Le système dorsal Node.js authentifie les demandes adressées à l’URI associé à l’obtention des données personnelles de l’utilisateur à partir de la base de données en validant un jeton Web JSON.
 
-[En savoir plus sur l’authentification basée sur un jeton et comment mettre en œuvre le JWT dans vos applications.](/docs/tokens/concepts/jwts)
+[En savoir plus sur l’authentification basée sur un jeton et comment mettre en œuvre le JWT dans vos applications.](/docs/fr-ca/tokens/concepts/jwts)
 
 Voici le code mettant en œuvre la validation <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">JWT</Tooltip> à partir du projet Node.js seed :
 
-```javascript
+```javascript lines
 var genres = require('./routes/genres');
 var songs = require('./routes/songs');
 var playlists = require('./routes/playlists');
@@ -522,7 +522,7 @@ app.use('/displayName', authenticate, displayName);
 
 Nous pouvons ajouter des fonctionnalités pour gérer différentes demandes de données à partir de notre application. Par exemple, si nous recevons une demande `GET` à `/secured/getFavGenre`, l’API appelle la fonction `queryGenre()`, qui interroge la base de données et répond avec le genre préféré de l’utilisateur.
 
-```
+```swift lines
 @IBAction func getGenre(sender: AnyObject) {
         let request = buildAPIRequest("/genres/getFav", type:"GET")
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {[unowned self](data, response, error) in
@@ -539,7 +539,7 @@ La fonction `buildAPIRequest()` prend le chemin et la méthode HTTP de la demand
 
 Dans l’application, la fonction `getGenre()` fait une demande à l’API et modifie l’interface de l’application pour afficher la réponse à la demande `/genres/getFav`. Le système dorsal récupère les données nécessaires à cette action en utilisant la fonction `queryGenre()` et renvoie les résultats à l’application.
 
-```javascript
+```javascript lines
 function queryGenre(user_id, res){
 
   db.connect(process.env.DATABASE_URL, function(err, client) {

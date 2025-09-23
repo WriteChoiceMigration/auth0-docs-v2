@@ -1,13 +1,13 @@
 ---
 title: "Tutoriel AWS API Gateway - Étape 5"
 permalink: "aws-api-gateway-delegation-5"
+'description': "Étape 5 du tutoriel Amazon API Gateway"
 'og:title': "Tutoriel AWS API Gateway - Étape 5"
 'og:description': "Étape 5 du tutoriel Amazon API Gateway"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Tutoriel AWS API Gateway - Étape 5"
 'twitter:description': "Étape 5 du tutoriel Amazon API Gateway"
 ---
-# Tutoriel AWS API Gateway - Étape 5
 
 <Warning>
 
@@ -40,11 +40,11 @@ Il existe plusieurs façons d’ajouter les informations d’un utilisateur au J
 
 #### Règles d’utilisation
 
-Une façon d’ajouter l’adresse courriel d’un utilisateur au JWT est d’utiliser une [règle](/docs/rules). Il s’agit d’une bonne approche si vous voulez vous assurer que cette valeur est toujours disponible dans le JWT pour un utilisateur qui s’authentifie.
+Une façon d’ajouter l’adresse courriel d’un utilisateur au JWT est d’utiliser une [règle](/docs/fr-ca/rules). Il s’agit d’une bonne approche si vous voulez vous assurer que cette valeur est toujours disponible dans le JWT pour un utilisateur qui s’authentifie.
 
 Dans `login.js`, vous pouvez voir cette permission spécifiée dans les paramètres passés à `auth.signin` :
 
-```
+```javascript lines
 $scope.login = function() {
     var params = {
         authParams: {
@@ -87,7 +87,7 @@ Pour plus d’informations sur la vérification des jetons, consultez [Protocole
 
 Mettez à jour `auth0-variables.js` avec votre clé secrète, qui peut être trouvée dans l’onglet Paramètres de votre application dans l’<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Auth0 Dashboard</Tooltip> :
 
-```javascript
+```javascript lines
 var env={};
 env.AUTH0_SECRET='{yourAuth0Secret}';
 module.exports = env;
@@ -97,7 +97,7 @@ Exécutez **npm install** depuis le répertoire où se trouvent vos fichiers, zi
 
 Regardez la logique dans `index.js`. Vous verrez la logique autour de la ligne 60 qui valide le jeton et extrait les informations décodées qui contiennent les informations d’identité utilisées pour la logique d’achat :
 
-```
+```javascript lines
 if(event.authToken) {
      jwt.verify(event.authToken, secret, function(err, decoded) {
          if(err) {
@@ -135,7 +135,7 @@ Si vous choisissez d’utiliser un en-tête personnalisé, vous devrez égalemen
 
 Pour simplifier le processus de validation, transmettez le JWT dans le corps du message à la fonction AWS Lambda. Pour ce faire, mettez à jour la méthode `buyPet` dans `home.js` en supprimant le `userName` du corps et en ajoutant `authToken` comme suit :
 
-```javascript
+```javascript lines
 function buyPet(user, id) {
     var apigClient = getSecureApiClient();
     var body = {

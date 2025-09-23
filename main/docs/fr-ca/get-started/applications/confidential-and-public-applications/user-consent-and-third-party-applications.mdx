@@ -1,13 +1,13 @@
 ---
 title: "User Consent and Third-Party Applications (Consentement de l’utilisateur et applications tierces)"
 permalink: "user-consent-and-third-party-applications"
+'description': "Apprenez à découpler les API des applications qui les utilisent et à définir les applications tierces que vous ne contrôlez pas ou auxquelles vous ne faites pas confiance."
 'og:title': "User Consent and Third-Party Applications (Consentement de l’utilisateur et applications tierces)"
 'og:description': "Apprenez à découpler les API des applications qui les utilisent et à définir les applications tierces que vous ne contrôlez pas ou auxquelles vous ne faites pas confiance."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "User Consent and Third-Party Applications (Consentement de l’utilisateur et applications tierces)"
 'twitter:description': "Apprenez à découpler les API des applications qui les utilisent et à définir les applications tierces que vous ne contrôlez pas ou auxquelles vous ne faites pas confiance."
 ---
-# User Consent and Third-Party Applications (Consentement de l’utilisateur et applications tierces)
 
 Le pipeline d’authentification conforme à l’[OIDC](/docs/fr-ca/authenticate/protocols/openid-connect-protocol) prend charge la définition des serveurs de ressources (tels que les API) en tant qu’entités distinctes des applications. Cela vous permet de découpler les API des applications qui les consomment, et vous permet également de définir des [applications tierces](/docs/fr-ca/get-started/applications/confidential-and-public-applications/first-party-and-third-party-applications) permettant à des tiers d’accéder en toute sécurité à des ressources protégées derrière votre API.
 
@@ -17,7 +17,7 @@ Si un utilisateur s’authentifie par l’intermédiaire d’une application tie
 
 Par exemple, cette demande :
 
-```
+``` lines
 GET /authorize?
 client_id=some_third_party_client
 &redirect_uri=https://fabrikam.com/contoso_social
@@ -30,7 +30,7 @@ client_id=some_third_party_client
 
 Le dialogue de consentement de l’utilisateur s’affiche :
 
-<Frame>![Authorization (Autorisation) - User consent and applications (Applications et consentement utilisateur) - consent-dialog (Dialogue de consentement)](//images.ctfassets.net/cdy7uua7fh8z/5Cz3aZKw8RRVlMkc5Zl6x7/04e3b4f29cf44e23d39d96c1cf84e10e/2025-02-28_14-56-45.png)</Frame>
+<Frame>![Authorization (Autorisation) - User consent and applications (Applications et consentement utilisateur) - consent-dialog (Dialogue de consentement)](/images/fr-ca/cdy7uua7fh8z/5Cz3aZKw8RRVlMkc5Zl6x7/04e3b4f29cf44e23d39d96c1cf84e10e/2025-02-28_14-56-45.png)</Frame>
 
 Si l’utilisateur autorise la demande de l’application, cela crée une autorisation de l’utilisateur, laquelle représente le consentement de l’utilisateur à cette combinaison d’application, de serveur de ressources et de permissions demandées. L’application reçoit alors une réponse d’authentification réussie de la part d’Auth0, comme d’habitude.
 
@@ -40,7 +40,7 @@ Une fois le consentement donné, l’utilisateur ne verra plus la boîte de dial
 
 Par défaut, la page de consentement utilisera les noms des champs d’application pour demander le consentement de l’utilisateur. Comme indiqué ci-dessous, vous devez définir les permissions à l’aide du format **action:resource_name**.
 
-<Frame>![Authorization (Autorisation) - User consent and applications (Applications et consentement utilisateur) - Consent scopes (Champs d’application du consentement)](//images.ctfassets.net/cdy7uua7fh8z/3Z4Ofbj5yF7eg5cLfcauh9/c4f4e9e7065e29d1ae94cf71b1e8bc02/2025-02-28_15-01-05.png)</Frame>
+<Frame>![Authorization (Autorisation) - User consent and applications (Applications et consentement utilisateur) - Consent scopes (Champs d’application du consentement)](/images/fr-ca/cdy7uua7fh8z/3Z4Ofbj5yF7eg5cLfcauh9/c4f4e9e7065e29d1ae94cf71b1e8bc02/2025-02-28_15-01-05.png)</Frame>
 
 La page de consentement regroupe les permissions d’une même ressource et affiche toutes les actions relatives à cette ressource sur une seule ligne. Par exemple, la configuration ci-dessus se traduirait par **Messages : consultez et écrivez vos messages**.
 
@@ -49,15 +49,15 @@ Si vous souhaitez afficher le champ **Description** à la place, vous pouvez le 
 Pour définir l’indicateur **use_scope_descriptions_for_consent** vous devrez faire la requête appropriée à l’API :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/tenants/settings' \
 --header 'authorization: Bearer API2_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "flags": { "use_scope_descriptions_for_consent": true } }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/tenants/settings");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -67,7 +67,7 @@ request.AddParameter("application/json", "{ \"flags\": { \"use_scope_description
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -88,8 +88,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/settings")
 .header("content-type", "application/json")
 .header("authorization", "Bearer API2_ACCESS_TOKEN")
@@ -98,7 +98,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/setti
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -115,8 +115,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer API2_ACCESS_TOKEN",
@@ -142,7 +142,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/tenants/settings",
@@ -167,8 +167,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"flags\": { \"use_scope_descriptions_for_consent\": true } }"
@@ -183,7 +183,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -198,8 +198,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"flags\": { \"use_scope_descriptions_for_consent\": true } }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -231,7 +231,7 @@ dataTask.resume()
 
 Si un utilisateur décide de refuser le consentement à l’application, il sera redirigé vers le `redirect_uri` spécifié dans la demande avec une erreur `access_denied` :
 
-```
+``` lines
 HTTP/1.1 302 Found
 Location: https://fabrikam.com/contoso_social#
     error=access_denied

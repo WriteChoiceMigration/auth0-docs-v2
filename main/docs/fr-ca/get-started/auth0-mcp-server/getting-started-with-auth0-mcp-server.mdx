@@ -1,13 +1,13 @@
 ---
 title: "Getting Started with Auth0 Model Context Protocol (MCP) Server"
 permalink: "getting-started-with-auth0-mcp-server"
+'description': "Integrate Auth0 Model Context Protocol (MCP) Server with your AI clients."
 'og:title': "Getting Started with Auth0 Model Context Protocol (MCP) Server"
 'og:description': "Integrate Auth0 Model Context Protocol (MCP) Server with your AI clients."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Getting Started with Auth0 Model Context Protocol (MCP) Server"
 'twitter:description': "Integrate Auth0 Model Context Protocol (MCP) Server with your AI clients."
 ---
-# Getting Started with Auth0 Model Context Protocol (MCP) Server
 
 <Card title="Before you start">
 
@@ -25,19 +25,19 @@ Install Auth0 MCP Server by running one of these commands in your terminal:
 
 ### For Claude Desktop (default)
 
-```
+```javascript lines
 npx @auth0/auth0-mcp-server init
 ```
 
 ### For Cursor
 
-```
+```javascript lines
 npx @auth0/auth0-mcp-server init --client cursor
 ```
 
 ### For Windsurf
 
-```
+```javascript lines
 npx @auth0/auth0-mcp-server init --client windsurf
 ```
 
@@ -45,7 +45,7 @@ npx @auth0/auth0-mcp-server init --client windsurf
 
 To use Auth0 MCP Server with any other MCP Client, you can manually add this configuration to the client and restart for changes to take effect:
 
-```json
+```json lines
 {
   "mcpServers": {
     "auth0": {
@@ -102,7 +102,7 @@ Most connection issues can be resolved by configuring the Auth0 MCP server and r
 
 View a list of supported commands and usage examples with:
 
-```
+```javascript lines
 npx @auth0/auth0-mcp-server help
 ```
 
@@ -110,7 +110,7 @@ npx @auth0/auth0-mcp-server help
 
 Ensure correct permissions in your Auth0 tenant and try re-initializing with:
 
-```
+```javascript lines
 npx @auth0/auth0-mcp-server init
 ```
 
@@ -118,7 +118,7 @@ npx @auth0/auth0-mcp-server init
 
 1. Confirm the MCP server is actively running with:
 
-   ```
+   ```javascript lines
    ps aux | grep auth0-mcp
    ```
 
@@ -132,7 +132,7 @@ npx @auth0/auth0-mcp-server init
 1. Restart Claude Desktop after installation.
 2. Check that the server is running with:
 
-   ```
+   ```javascript lines
    ps aux | grep auth0-mcp
    ```
 
@@ -150,7 +150,7 @@ Check your Auth0 token permissions and expiration. Enable debug mode (see below)
 
 Enable debug mode to view detailed logs:
 
-```
+```bash lines
 export DEBUG=auth0-mcp
 ```
 
@@ -158,14 +158,14 @@ export DEBUG=auth0-mcp
 
 Get detailed MCP client logs from Claude Desktop:
 
-```
+```bash lines
 # Follow logs in real-time
 tail -n 20 -F ~/Library/Logs/Claude/mcp*.log
 ```
 
 Get detailed MCP server logs by running the Auth0 MCP Server in debug mode:
 
-```
+```bash lines
 DEBUG=auth0-mcp npx @auth0/auth0-mcp-server run
 ```
 
@@ -173,7 +173,7 @@ DEBUG=auth0-mcp npx @auth0/auth0-mcp-server run
 
 For advanced troubleshooting, use the MCP Inspector:
 
-```
+```javascript lines
 npx @modelcontextprotocol/inspector -e DEBUG='auth0-mcp' @auth0/auth0-mcp-server run__text in bold__
 ```
 

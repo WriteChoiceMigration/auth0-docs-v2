@@ -1,13 +1,13 @@
 ---
 title: "Installer et configurer le connecteur AD/LDAP"
 permalink: "install-configure-ad-ldap-connector"
+'description': "Décrit comment installer et configurer le connecteur AD/LDAP."
 'og:title': "Installer et configurer le connecteur AD/LDAP"
 'og:description': "Décrit comment installer et configurer le connecteur AD/LDAP."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Installer et configurer le connecteur AD/LDAP"
 'twitter:description': "Décrit comment installer et configurer le connecteur AD/LDAP."
 ---
-# Installer et configurer le connecteur AD/LDAP
 
 ## Prérequis
 
@@ -31,13 +31,13 @@ Exécutez le programme d’installation et suivez les instructions.
 
 Le **connecteur AD/LDAP** est installé en tant que service Windows.
 
-<Frame>![AD/LDAP Connector Services](//images.ctfassets.net/cdy7uua7fh8z/MPMfLmJsXoPAzpPQhGAv5/25fb39ac7cef7a125110b8fa9f2dff01/adldap-connector-services.png)</Frame>
+<Frame>![AD/LDAP Connector Services](/images/fr-ca/cdy7uua7fh8z/MPMfLmJsXoPAzpPQhGAv5/25fb39ac7cef7a125110b8fa9f2dff01/adldap-connector-services.png)</Frame>
 
 ### Lien vers Auth0
 
 Une fois l’installation terminée, vous verrez un écran dans un navigateur pointant vers localhost :
 
-<Frame>![AD/LDAP Connector Admin Ticket](//images.ctfassets.net/cdy7uua7fh8z/3biSuxJYQ4swMGJkOZtC3R/cab77cb763ad3b9ff47710bc406c527b/adldap-connector-admin-ticket.png)</Frame>
+<Frame>![AD/LDAP Connector Admin Ticket](/images/fr-ca/cdy7uua7fh8z/3biSuxJYQ4swMGJkOZtC3R/cab77cb763ad3b9ff47710bc406c527b/adldap-connector-admin-ticket.png)</Frame>
 
 Saisissez le **TICKET URL** fourni lorsque vous avez configuré la connexion. Le **TICKET URL** définit de manière unique ce connecteur dans Auth0. Le connecteur l’utilisera pour communiquer avec le serveur Auth0 et pour terminer automatiquement la configuration.
 
@@ -45,7 +45,7 @@ Saisissez le **TICKET URL** fourni lorsque vous avez configuré la connexion. Le
 
 Saisissez les paramètres LDAP :
 
-<Frame>![adldap-connector-admin-settings](//images.ctfassets.net/cdy7uua7fh8z/2mHaknek0qyBxGmsanb30L/600b0259ed6db3fe9c526aa9f57a76bd/adldap-connector-admin-settings.png)</Frame>
+<Frame>![adldap-connector-admin-settings](/images/fr-ca/cdy7uua7fh8z/2mHaknek0qyBxGmsanb30L/600b0259ed6db3fe9c526aa9f57a76bd/adldap-connector-admin-settings.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -56,15 +56,15 @@ Saisissez les paramètres LDAP :
 <tbody>
 <tr>
 <td><strong>Chaîne de connexion LDAP</strong></td>
-<td>Par exemple, <code>ldap://ldap.internal.contoso.com</code>. Il s’agit du protocole + le nom de domaine ou l’adresse IP de votre serveur LDAP. Votre serveur LDAP est le contrôleur de domaine local sur lequel Entra ID est installé. Le protocole peut être <code>ldap</code> ou <code>ldaps</code>. Si vous devez utiliser le protocole <code>ldaps</code>, assurez-vous que le certificat est valide sur le serveur actuel.</td>
+<td>Par exemple, `ldap://ldap.internal.contoso.com`. Il s’agit du protocole + le nom de domaine ou l’adresse IP de votre serveur LDAP. Votre serveur LDAP est le contrôleur de domaine local sur lequel Entra ID est installé. Le protocole peut être `ldap` ou `ldaps`. Si vous devez utiliser le protocole `ldaps`, assurez-vous que le certificat est valide sur le serveur actuel.</td>
 </tr>
 <tr>
 <td><strong>DN de base</strong></td>
-<td>Par exemple, <code>dc=Contoso,dc=com</code>. Il s’agit du conteneur de base pour toutes les requêtes effectuées par le connecteur.</td>
+<td>Par exemple, `dc=Contoso,dc=com`. Il s’agit du conteneur de base pour toutes les requêtes effectuées par le connecteur.</td>
 </tr>
 <tr>
 <td><strong>Nom d’utilisateur</strong></td>
-<td>Par exemple, <code>cn=svcauth0,DC=services,DC=contoso,DC=com</code> Le nom distinctif complet d’un utilisateur pour effectuer des requêtes.</td>
+<td>Par exemple, `cn=svcauth0,DC=services,DC=contoso,DC=com` Le nom distinctif complet d’un utilisateur pour effectuer des requêtes.</td>
 </tr>
 <tr>
 <td><strong>Mot de passe</strong></td>
@@ -75,7 +75,7 @@ Saisissez les paramètres LDAP :
 
 Une fois que vous aurez soumis les informations ci-dessus, le connecteur effectuera une série de tests pour valider les informations que vous avez saisies. Les résultats sont affichés sous **Journal de configuration** dans l’écran de la console.
 
-<Frame>![adldap-connector-admin-settings-ok](//images.ctfassets.net/cdy7uua7fh8z/7kezId8mhvyYDbuovvi9FM/c2f3b2188fdfebc460458daf7247c124/adldap-connector-admin-settings-ok.png)</Frame>
+<Frame>![adldap-connector-admin-settings-ok](/images/fr-ca/cdy7uua7fh8z/7kezId8mhvyYDbuovvi9FM/c2f3b2188fdfebc460458daf7247c124/adldap-connector-admin-settings-ok.png)</Frame>
 
 Assurez-vous que tous les tests sont verts.
 
@@ -117,7 +117,7 @@ Assurez-vous que tous les tests sont verts.
    **Exemple de curl :**
 2. Développez le package et installez ses dépendances :
 
-   ```
+   ``` lines
    mkdir /opt/auth0-adldap
    tar -xzf /tmp/adldap.tar.gz -C /opt/auth0-adldap --strip-components=1
    cd /opt/auth0-adldap
@@ -131,7 +131,7 @@ Assurez-vous que tous les tests sont verts.
    `node server.js`Lorsque vous êtes invité à saisir le numéro de ticket, saisissez l’URL complète du ticket URL dans l’onglet **Paramètres** de l’écran **Configuration du connecteur AD/LDAP** dans l'Auth0 Management Dashboard.
 4. Vous serez invité à modifier le fichier de configuration `config.json` avec vos détails de connexion et d’authentification LDAP :
 
-   ```
+   ``` lines
    "LDAP_URL": "ldap://{yourLdapServerFqdn}",
        "LDAP_BASE": "dc={yourDomain},dc=com",
        "LDAP_BIND_USER":"{yourLdapUser}",
@@ -144,7 +144,7 @@ Assurez-vous que tous les tests sont verts.
 5. Exécutez à nouveau `node server.js` pour démarrer le connecteur. Notez que la ligne `LDAP_BIND_PASSWORD` dans `config.json` est remplacée par `LDAP_BIND_CREDENTIALS` à ce stade.
 6. Une fois que le connecteur est en cours d’exécution, vous devrez appliquer la fonction deamon sur le connecteur (si vous n’avez pas déjà sélectionné d’outil, vous pouvez envisager la commande [upstart](http://upstart.ubuntu.com/) ou [systemd](https://www.freedesktop.org/wiki/Software/systemd/)). Par exemple, pour utiliser systemd avec Ubuntu Xenial, le fichier `/lib/systemd/system/auth0-adldap.service` peut contenir les éléments suivants :
 
-   ```json
+   ```json lines
    [Unit]
    Description=Auth0 AD LDAP Agent
    After=network.target

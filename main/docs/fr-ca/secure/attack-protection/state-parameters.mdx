@@ -1,13 +1,13 @@
 ---
 title: "Prévenir les attaques et rediriger les utilisateurs avec les paramètres d’état OAuth 2.0"
 permalink: "state-parameters"
+'description': "Explique comment utiliser le paramètre « state » dans les demandes d’authentification afin de prévenir les attaques CSRF et de restaurer l’état."
 'og:title': "Prévenir les attaques et rediriger les utilisateurs avec les paramètres d’état OAuth 2.0"
 'og:description': "Explique comment utiliser le paramètre « state » dans les demandes d’authentification afin de prévenir les attaques CSRF et de restaurer l’état."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Prévenir les attaques et rediriger les utilisateurs avec les paramètres d’état OAuth 2.0"
 'twitter:description': "Explique comment utiliser le paramètre « state » dans les demandes d’authentification afin de prévenir les attaques CSRF et de restaurer l’état."
 ---
-# Prévenir les attaques et rediriger les utilisateurs avec les paramètres d’état OAuth 2.0
 
 Les protocoles d’autorisation fournissent un paramètre `state` qui vous permet de rétablir l’état précédent de votre application. Le paramètre `state` préserve certains objets d’état définis par le client dans la demande d’autorisation et les met à la disposition du client dans la réponse.
 
@@ -25,7 +25,7 @@ La plupart des trousses SDK OIDC et <Tooltip data-tooltip-id="react-containers-D
 
 1. Avant de rediriger une demande vers le fournisseur d’identité (IdP), demandez à l’application de générer une chaîne aléatoire. Par exemple :
 
-   ```
+   ``` lines
    xyzABC123
    ```
 
@@ -36,7 +36,7 @@ La plupart des trousses SDK OIDC et <Tooltip data-tooltip-id="react-containers-D
    la longueur autorisée pour l’état n’est pas illimitée. Si vous obtenez l’erreur `414 Request-URI Too Large`, essayez une valeur plus petite.
 2. Enregistrez la chaîne localement. Par exemple :
 
-   ```
+   ``` lines
    storeStateLocally(xyzABC123)
    ```
 
@@ -45,7 +45,7 @@ La plupart des trousses SDK OIDC et <Tooltip data-tooltip-id="react-containers-D
    
 3. Ajoutez le paramètre `state` à la demande (encodage d’URL si nécessaire). Par exemple :
 
-   ```javascript
+   ```javascript lines
    // Encode the String   
    tenant.auth0.com/authorize?...&state=xyzABC123
    ```
@@ -56,7 +56,7 @@ La plupart des trousses SDK OIDC et <Tooltip data-tooltip-id="react-containers-D
 
    Une fois la demande envoyée, Auth0 redirige l’utilisateur vers l’application. La valeur `state` sera incluse dans cette redirection. Notez qu’en fonction du type de connexion utilisée, cette valeur peut se trouver dans le corps de la requête ou dans la chaîne de requête.
 
-   ```
+   ``` lines
    /callback?...&state=xyzABC123
    ```
 
@@ -65,7 +65,7 @@ La plupart des trousses SDK OIDC et <Tooltip data-tooltip-id="react-containers-D
    
 4. Récupérez la valeur `state` renvoyée et comparez-la à celle que vous avez enregistrée précédemment. Si les valeurs correspondent, approuvez la réponse d’authentification, sinon refusez-la.
 
-   ```javascript
+   ```javascript lines
    // Decode the String
    var decodedString = Base64.decode(encodedString);
    if(receivedState === retrieveStateStoredLocally()) {
@@ -91,7 +91,7 @@ Générez et stockez un nombre aléatoire localement (dans les témoins, la sess
 1. Définissez la valeur du paramètre d’état nombre aléatoire que vous avez utilisé pour atténuer les attaques CSRF comme expliqué ci-dessus.
 2. Stockez le nombre aléatoire localement, en l’utilisant comme clé pour stocker toutes les autres informations relatives à l’état de l’application, comme l’URL où l’utilisateur a l’intention de se rendre. Par exemple :
 
-   ```json
+   ```json lines
    {
      "xyzABC123" : {
        redirectUrl: '/protectedResource',

@@ -1,23 +1,23 @@
 ---
 title: "Classes d’écran authentification multifacteur (MFA) par courriel"
 permalink: "mfa-email"
+'description': "Découvrez les classes d’écran ACUL authentification multifacteur (MFA) par courriel"
 'og:title': "Classes d’écran authentification multifacteur (MFA) par courriel"
 'og:description': "Découvrez les classes d’écran ACUL authentification multifacteur (MFA) par courriel"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Classes d’écran authentification multifacteur (MFA) par courriel"
 'twitter:description': "Découvrez les classes d’écran ACUL authentification multifacteur (MFA) par courriel"
 ---
-# Classes d’écran authentification multifacteur (MFA) par courriel
 
 ## Classe d’écran Défi-réponse de la MFA par courriel
 
 La classe d’écran Défi-réponse de la <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip> par courriel permet aux utilisateurs de vérifier leur adresse courriel à l’aise de la MFA.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/2MOpok82dGPfHvpb8hy1Yc/fda2d95621af85e0ea6ff73d51d815ad/Screenshot_2025-02-20_at_13.11.50.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/2MOpok82dGPfHvpb8hy1Yc/fda2d95621af85e0ea6ff73d51d815ad/Screenshot_2025-02-20_at_13.11.50.png)</Frame>
 
 Importez et instanciez la classe d’écran Défi-réponse de la MFA par courriel:
 
-```
+```javascript lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 const mfaEmailChallengeManager = new MfaEmailChallenge();
 
@@ -39,7 +39,7 @@ Propriétés de la classe d’écran Défi-réponse de la MFA par courriel :
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -74,7 +74,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -86,7 +86,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -105,7 +105,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -113,7 +113,7 @@ interface prompt{
 
 </Tab><Tab title="écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -138,7 +138,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -149,7 +149,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -182,7 +182,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -202,7 +202,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -238,7 +238,7 @@ Méthodes de la classe d’écran Défi-réponse de la MFA par courriel :
 
 Cette méthode continue le défi-réponse par courriel à l’aide du code fourni.
 
-```
+```javascript lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 
 const mfaEmailChallenge = new MfaEmailChallenge();
@@ -258,19 +258,19 @@ await mfaEmailChallenge.continue({
 </thead>
 <tbody>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>chaîne</td>
 <td>oui</td>
 <td>Code saisi par l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>rememberDevice</code></td>
+<td>`rememberDevice`</td>
 <td>booléen</td>
 <td>Non</td>
 <td>Mémoriser l’appareil de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données facultatives collectées auprès de l’utilisateur.</td>
@@ -282,7 +282,7 @@ await mfaEmailChallenge.continue({
 
 Cette méthode permet à l’utilisateur de sélectionner d’autres adresses courriel, le cas échéant.
 
-```
+```javascript lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 
 const mfaEmailChallenge = new MfaEmailChallenge();
@@ -299,7 +299,7 @@ await mfaEmailChallenge.pickEmail();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>string | number | boolean | undefined</td>
 <td>No</td>
 <td>Optional data collected to user.</td>
@@ -311,7 +311,7 @@ await mfaEmailChallenge.pickEmail();
 
 Cette méthode renvoie le code courriel.
 
-```
+```javascript lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 
 const mfaEmailChallenge = new MfaEmailChallenge();
@@ -328,7 +328,7 @@ await mfaEmailChallenge.resendCode();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>string | number | boolean | undefined</td>
 <td>No</td>
 <td>Optional data collected to user.</td>
@@ -340,7 +340,7 @@ await mfaEmailChallenge.resendCode();
 
 Cette méthode permet à l’utilisateur de sélectionner une autre option de MFA.
 
-```
+```javascript lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 
 const mfaEmailChallenge = new MfaEmailChallenge();
@@ -357,7 +357,7 @@ await mfaEmailChallenge.tryAnotherMethod();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>string | number | boolean | undefined</td>
 <td>No</td>
 <td>Optional data collected to user.</td>
@@ -369,11 +369,11 @@ await mfaEmailChallenge.tryAnotherMethod();
 
 La classe d’écran Liste d’adresses courriel MFA permet aux utilisateurs de sélectionner une adresse courriel inscrite à la MFA.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/7d8tt9q970YJ4gT5C0kNhx/dfbaefcd9d913b41addc7b652d3bf63d/Screenshot_2025-02-20_at_15.43.19.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/7d8tt9q970YJ4gT5C0kNhx/dfbaefcd9d913b41addc7b652d3bf63d/Screenshot_2025-02-20_at_15.43.19.png)</Frame>
 
 Importez et instanciez la classe d’écran Liste d’adresses courriel MFA :
 
-```
+```javascript lines
 import MfaEmailList from '@auth0/auth0-acul-js/mfa-email-list';
 const mfaEmailList = new MfaEmailList();
 
@@ -393,7 +393,7 @@ Propriétés de la classe d’écran Liste d’adresses courriel MFA :
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -428,7 +428,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -440,7 +440,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -459,7 +459,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -467,7 +467,7 @@ interface prompt{
 
 </Tab><Tab title="écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -514,7 +514,7 @@ interface PasskeyCreate {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -525,7 +525,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -558,7 +558,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -578,7 +578,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -614,7 +614,7 @@ Méthodes de la classe d’écran Liste d’adresses courriel MFA :
 
 Cette méthode permet à l’utilisateur d’aller à l’écran précédent.
 
-```
+```javascript lines
 import MfaEmailList from '@auth0/auth0-acul-js/mfa-email-list';
 
 const mfaEmailList = new MfaEmailList();
@@ -631,7 +631,7 @@ await mfaEmailList.goBack();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>string | number | boolean | undefined</td>
 <td>No</td>
 <td>Optional data collected to user.</td>
@@ -643,7 +643,7 @@ await mfaEmailList.goBack();
 
 Cette méthode permet à l’utilisateur d’effectuer une sélection dans la liste des adresses courriel inscrites.
 
-```
+```javascript lines
 import MfaEmailList from '@auth0/auth0-acul-js/mfa-email-list';
 
 const mfaEmailList = new MfaEmailList();
@@ -662,13 +662,13 @@ await mfaEmailList.selectMfaEmail({
 </thead>
 <tbody>
 <tr>
-<td><code>index</code></td>
+<td>`index`</td>
 <td>nombre</td>
 <td>Oui</td>
 <td>L’index de l’adresse courriel à sélectionner.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données facultatives collectées auprès de l’utilisateur.</td>

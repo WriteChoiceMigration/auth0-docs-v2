@@ -1,13 +1,13 @@
 ---
 title: "Rediriger les utilisateurs avec une déconnexion alternative"
 permalink: "redirect-users-after-logout"
+'description': "Décrit comment rediriger les utilisateurs avec le point de terminaison hérité de déconnexion."
 'og:title': "Rediriger les utilisateurs avec une déconnexion alternative"
 'og:description': "Décrit comment rediriger les utilisateurs avec le point de terminaison hérité de déconnexion."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Rediriger les utilisateurs avec une déconnexion alternative"
 'twitter:description': "Décrit comment rediriger les utilisateurs avec le point de terminaison hérité de déconnexion."
 ---
-# Rediriger les utilisateurs avec une déconnexion alternative
 
 Vous pouvez rediriger les utilisateurs vers une URL spécifique après leur déconnexion. Vous devrez enregistrer l’URL de redirection dans les paramètres de votre locataire ou de votre application. Auth0 redirige uniquement vers les URL présentes dans la liste d’URL autorisées après la déconnexion. Si vous avez besoin de redirections différentes pour chaque application, vous pouvez ajouter les URL à la liste d’URL autorisées dans les paramètres de votre application.
 
@@ -19,11 +19,11 @@ Vous pouvez rediriger les utilisateurs vers une URL spécifique après leur déc
 
      Pour ajouter une liste d’URL vers lesquelles l’utilisateur peut être redirigé après s’être déconnecté au niveau du locataire, allez à [Paramètres du locataire > Avancé](https://manage.auth0.com/#/tenant/advanced) de Auth0 Dashboard.
 
-     <Frame>![Auth0 Dashboard (Tableau de bord Auth0) Paramètres Avancé Onglet Connexion et Déconnexion](//images.ctfassets.net/cdy7uua7fh8z/77s6AWMuzH78ABObR3lg0o/d8fa6804852065de531aef6f8e04fde5/2025-02-27_11-13-53.png)</Frame>
+     <Frame>![Auth0 Dashboard (Tableau de bord Auth0) Paramètres Avancé Onglet Connexion et Déconnexion](/images/fr-ca/cdy7uua7fh8z/77s6AWMuzH78ABObR3lg0o/d8fa6804852065de531aef6f8e04fde5/2025-02-27_11-13-53.png)</Frame>
 
    * **Paramètres de l’application Auth0** : Pour les demandes de déconnexion qui incluent le paramètre `client_id`, vous devez ajouter l’URL `returnTo` à la liste **URL de déconnexion autorisées** dans l’onglet **Paramètres** de la ou des application(s) Auth0 associée(s).
 
-     <Frame>![Tableau de bord Applications Paramètres d’application URIs de l’application](//images.ctfassets.net/cdy7uua7fh8z/1QhW2i4fTCCp8owey2tMPI/3f30e9b32339ee2a416bdb981d9f238b/App_URIs_-_FR.png)</Frame>
+     <Frame>![Tableau de bord Applications Paramètres d’application URIs de l’application](/images/fr-ca/cdy7uua7fh8z/1QhW2i4fTCCp8owey2tMPI/3f30e9b32339ee2a416bdb981d9f238b/App_URIs_-_FR.png)</Frame>
 
 Lorsque vous fournissez la liste des URL, vous pouvez :
 
@@ -68,7 +68,7 @@ Tous les fournisseurs d’identité ne prennent pas en charge le paramètre `ret
 
 Pour Facebook, l’exemple de code ci-dessous utilise le paramètre `returnTo` et spécifie un site Web pour la redirection.
 
-```
+``` lines
 https://{yourDomain}/v2/logout?federated&
       returnTo=https://{yourDomain}/logout?returnTo=http://www.example.com
       &access_token={facebookAccessToken}

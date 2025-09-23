@@ -1,13 +1,13 @@
 ---
 title: "Configurer la conformité avec FAPI"
 permalink: "configure-fapi-compliance"
+'description': "Apprenez à configurer la conformité FAPI pour un locataire Auth0."
 'og:title': "Configurer la conformité avec FAPI"
 'og:description': "Apprenez à configurer la conformité FAPI pour un locataire Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer la conformité avec FAPI"
 'twitter:description': "Apprenez à configurer la conformité FAPI pour un locataire Auth0."
 ---
-# Configurer la conformité avec FAPI
 
 <Note>
 
@@ -25,7 +25,7 @@ La conformité à un profil FAPI nécessite un certain nombre de modifications d
 
 Par exemple, les deux niveaux de conformité `fapi1_adv_pkj_par` et `fapi1_adv_mtls_par` nécessitent PAR. Si l’un de ces niveaux de conformité est sélectionné, PAR est requis quelle que soit la valeur du paramètre `require_pushed_authorization_requests`. Toute tentative d’autorisation sans utiliser PAR entraînera la réponse d’erreur suivante :
 
-```json
+```json lines
 {
   “error”: “invalid_request”,
   “error_description”: “Pushed Authorization Requests are required by the configured compliance level” 
@@ -39,13 +39,13 @@ Les tableaux suivants résument les règles de validation supplémentaires et le
 <table class="table"><thead>
 <tr>
 <th><strong>Validation</strong></th>
-<th><code>fapi1_adv_pkj_par</code></th>
-<th><code>fapi1_adv_mtls_par</code></th>
+<th>`fapi1_adv_pkj_par`</th>
+<th>`fapi1_adv_mtls_par`</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Empêche l’utilisation de jetons d’accès dans la requête URL lors de l’appel à <code>/userinfo</code>. Les jetons d’accès doivent être placés dans l’en-tête Authorization (autorisation) à la place.</td>
+<td>Empêche l’utilisation de jetons d’accès dans la requête URL lors de l’appel à `/userinfo`. Les jetons d’accès doivent être placés dans l’en-tête Authorization (autorisation) à la place.</td>
 <td>Y</td>
 <td>Y</td>
 </tr>
@@ -85,7 +85,7 @@ Les tableaux suivants résument les règles de validation supplémentaires et le
 <td>Y</td>
 </tr>
 <tr>
-<td>Garantit que le client a défini la propriété <code>oidc_conformant</code> sur <code>true</code>.</td>
+<td>Garantit que le client a défini la propriété `oidc_conformant` sur `true`.</td>
 <td>Y</td>
 <td>Y</td>
 </tr>
@@ -105,8 +105,8 @@ Les tableaux suivants résument les règles de validation supplémentaires et le
 <table class="table"><thead>
 <tr>
 <th><strong>Comportement Auth0 mis à jour</strong></th>
-<th><code>fapi1_adv_pkj_par</code></th>
-<th><code>fapi1_adv_mtls_par</code></th>
+<th>`fapi1_adv_pkj_par`</th>
+<th>`fapi1_adv_mtls_par`</th>
 </tr>
 </thead>
 <tbody>
@@ -116,7 +116,7 @@ Les tableaux suivants résument les règles de validation supplémentaires et le
 <td>O</td>
 </tr>
 <tr>
-<td>Lorsque la permission du profil est demandée, la réclamation <code>update_at</code> contient un horodatage unix conforme à l’OIDC plutôt qu’une chaîne.</td>
+<td>Lorsque la permission du profil est demandée, la réclamation `update_at` contient un horodatage unix conforme à l’OIDC plutôt qu’une chaîne.</td>
 <td>O</td>
 <td>O</td>
 </tr>
@@ -150,7 +150,7 @@ Les options pour configurer la conformité FAPI sont les suivantes :
 
 Utilisez [Management API](https://auth0.com/docs/api/management/v2) pour définir la propriété `compliance_level` et y ajouter une demande POST ou PATCH :
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://$tenant/api/v2/clients/$client_id' \
   --header 'Authorization: Bearer $management_access_token' \
   --header 'Content-Type: application/json' \
@@ -161,7 +161,7 @@ curl --location --request PATCH 'https://$tenant/api/v2/clients/$client_id' \
 
 Pour renvoyer la propriété `compliance_level`, utilisez une demande GET :
 
-```bash
+```bash lines
 curl --location 'https://$tenant/api/v2/clients/$client_id \
   --header 'Authorization: Bearer $management_access_token'
 ```

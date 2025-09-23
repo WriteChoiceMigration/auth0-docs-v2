@@ -1,13 +1,13 @@
 ---
 title: "Installer la trousse SDK Guardian"
 permalink: "install-guardian-sdk"
+'description': "Décrit comment installer, configurer les options et utiliser la trousse SDK Guardian."
 'og:title': "Installer la trousse SDK Guardian"
 'og:description': "Décrit comment installer, configurer les options et utiliser la trousse SDK Guardian."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Installer la trousse SDK Guardian"
 'twitter:description': "Décrit comment installer, configurer les options et utiliser la trousse SDK Guardian."
 ---
-# Installer la trousse SDK Guardian
 
 La trousse SDK Guardian fournit un client sans interface utilisateur pour Guardian.
 
@@ -21,7 +21,7 @@ La trousse SDK Guardian fournit un client sans interface utilisateur pour Guardi
 
 ## Configurer Guardian
 
-```javascript
+```javascript lines
 var auth0GuardianJS = require('auth0-guardian-js')({
 	// For US tenants: https://{name}.guardian.auth0.com
  	// For AU tenants: https://{name}.guardian.au.auth0.com
@@ -52,7 +52,7 @@ L’utilisation d’un `requestToken` ou d’un `ticket` dépend de la méthode 
 
 Si vous avez configuré un domaine personnalisé pour votre locataire Auth0, vous devrez mettre à jour la propriété `serviceUrl` pour qu’elle pointe vers le point de terminaison Guardian.
 
-```javascript
+```javascript lines
 var auth0GuardianJS = require('auth0-guardian-js')({
     // For custom domains
     serviceUrl: "https://{yourCustomDomain}/guardian/",
@@ -72,7 +72,7 @@ L’inscription d’appareils comprend les étapes suivantes :
 
 Certaines étapes peuvent être omises, dépendant de la méthode. Nous fournissons la même interface pour toutes les méthodes afin que vous puissiez écrire un code uniforme. Certaines méthodes complètent l’authentification, tandis que d’autres nécessitent une étape d’authentification supplémentaire. Vous pouvez le déterminer en écoutant l’événement `enrollment-complete`.
 
-```javascript
+```javascript lines
 function enroll(transaction, method) {
 	if (transaction.isEnrolled()) {
 		console.log('You are already enrolled');
@@ -165,7 +165,7 @@ Certaines étapes peuvent être omises en fonction de la méthode; nous fourniss
 
 Vous pouvez également recevoir `auth-rejected` si la notification poussée a été reçue.
 
-```javascript
+```javascript lines
 function authenticate(method) {
 	auth0GuardianJS.start(function (err, transaction) {
 		if (err) {

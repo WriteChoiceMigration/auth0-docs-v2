@@ -1,13 +1,13 @@
 ---
 title: "Protocole Web Services Federation"
 permalink: "ws-fed-protocol"
+'description': "Décrit le fonctionnement d’Auth0 avec le protocole Web Services Federation (WS-Fed)."
 'og:title': "Protocole Web Services Federation"
 'og:description': "Décrit le fonctionnement d’Auth0 avec le protocole Web Services Federation (WS-Fed)."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Protocole Web Services Federation"
 'twitter:description': "Décrit le fonctionnement d’Auth0 avec le protocole Web Services Federation (WS-Fed)."
 ---
-# Protocole Web Services Federation
 
 Le protocole Web Services Federation (WS-Federation ou <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">WS-Fed</Tooltip>) s’inscrit dans le cadre d’applications plus large de WS-Security et constitue une extension des fonctionnalités de WS-Trust. Les fonctionnalités de WS-Federation peuvent être utilisées directement par les applications SOAP et les services web. WS-Fed est un protocole qui permet de négocier l’émission d’un jeton. Vous pouvez utiliser ce protocole pour vos applications (comme une application basée sur Windows Identity Foundation) et pour les fournisseurs d’identité (comme Active Directory Federation Services ou Azure AppFabric Access Control Service).
 
@@ -35,28 +35,28 @@ Lorsque vous redirigez vos utilisateurs vers votre point de terminaison WS-Fed, 
 </thead>
 <tbody>
 <tr>
-<td><code>wa=wsignin1.0</code></td>
+<td>`wa=wsignin1.0`</td>
 <td>Si Auth0 doit émettre un jeton pour la partie de confiance (par défaut)</td>
 </tr>
 <tr>
-<td><code>wa=wsignout1.0</code></td>
+<td>`wa=wsignout1.0`</td>
 <td>Si Auth0 doit effacer la session utilisateur/déconnecter l’utilisateur</td>
 </tr>
 <tr>
-<td><code>wreply={callback_URL}</code></td>
+<td>`wreply={callback_URL}`</td>
 <td>Où la réponse doit être envoyée</td>
 </tr>
 <tr>
-<td><code>wctx={state}</code></td>
+<td>`wctx={state}`</td>
 <td>L’état de votre application</td>
 </tr>
 <tr>
-<td><code>whr={connection_name}</code></td>
+<td>`whr={connection_name}`</td>
 <td>Connexion à utiliser (permet aux utilisateurs d’ignorer la page de connexion Auth0)</td>
 </tr>
 <tr>
-<td><code>wfresh=0</code></td>
-<td>Si l’utilisateur doit se réauthentifier, même s’il existe une session en place (<code>0</code> nécessite une réauthentification)</td>
+<td>`wfresh=0`</td>
+<td>Si l’utilisateur doit se réauthentifier, même s’il existe une session en place (`0` nécessite une réauthentification)</td>
 </tr>
 </tbody>
 </table>
@@ -76,7 +76,7 @@ Si vous utilisez Auth0 avec un fournisseur d’identité qui utilise le protocol
 
 Lors de la mise en place d’une connexion basée sur ADFS, vous pouvez importer les paramètres requis en fournissant à Auth0 le point de terminaison des métadonnées de fédération ou en important/téléversant votre fichier de métadonnées de fédération.
 
-<Frame>![Protocoles WS-Fed Importation Fédération Fichier de métadonnées Écran de connexion ADFS](//images.ctfassets.net/cdy7uua7fh8z/35pGg8AnNcx2ZIfQIixt1J/347e75c1394bd51055614eceb448396c/ADFS_-_FR.png)</Frame>
+<Frame>![Protocoles WS-Fed Importation Fédération Fichier de métadonnées Écran de connexion ADFS](/images/fr-ca/cdy7uua7fh8z/35pGg8AnNcx2ZIfQIixt1J/347e75c1394bd51055614eceb448396c/ADFS_-_FR.png)</Frame>
 
 Vous recevrez les instructions nécessaires pour terminer la configuration de l’intégration.
 

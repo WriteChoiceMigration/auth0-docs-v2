@@ -1,13 +1,13 @@
 ---
 title: "mTLS Sender Constraining"
 permalink: "mtls-sender-constraining"
+'description': "Learn how to sender constrain tokens using mTLS in Auth0."
 'og:title': "mTLS Sender Constraining"
 'og:description': "Learn how to sender constrain tokens using mTLS in Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "mTLS Sender Constraining"
 'twitter:description': "Learn how to sender constrain tokens using mTLS in Auth0."
 ---
-# mTLS Sender Constraining
 
 <Note>
 
@@ -31,7 +31,7 @@ To implement mTLS sender constraining, you must:
 
 This section outlines the process of obtaining and using an mTLS-bound access token.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/Nrf2Jm8Gq1yuMlS35jqDR/3972d735b883ea1ce5ae0999b678db2f/Screenshot_2025-07-30_at_4.07.34â__PM.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/Nrf2Jm8Gq1yuMlS35jqDR/3972d735b883ea1ce5ae0999b678db2f/Screenshot_2025-07-30_at_4.07.34â__PM.png)</Frame>
 
 ## Phase 1: Request an mTLS-bound access token
 
@@ -59,7 +59,7 @@ When the Auth0 Authorization Server receives the token request over an mTLS conn
 
 The following code sample is an example payload of an mTLS certificate-bound access token:
 
-```json
+```json lines
 {
   "iss": "https://server.example.com",
   "sub": "ty.webb@example.com",
@@ -81,7 +81,7 @@ In the mTLS certificate-bound access token example, `x5t#S256` indicates that th
 * During this mTLS handshake, the client application presents the same client certificate that was used to obtain the access token again.
 * The client application then includes the mTLS-bound access token in the Authorization header of the API request using the DPoP authentication scheme:
 
-```
+```bash lines
 Authorization: DPoP {your_mtls_bound_access_token}
 ```
 

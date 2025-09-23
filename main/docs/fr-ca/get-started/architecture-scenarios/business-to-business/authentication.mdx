@@ -1,13 +1,13 @@
 ---
 title: "Authentification (B2B)"
 permalink: "authentication"
+'description': "Fonctionnement de l’authentification dans votre mise en œuvre IAM interentreprises (B2B)."
 'og:title': "Authentification (B2B)"
 'og:description': "Fonctionnement de l’authentification dans votre mise en œuvre IAM interentreprises (B2B)."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Authentification (B2B)"
 'twitter:description': "Fonctionnement de l’authentification dans votre mise en œuvre IAM interentreprises (B2B)."
 ---
-# Authentification (B2B)
 
 Vous devez être en mesure d’identifier vos utilisateurs pour pouvoir leur fournir des services. Ce processus est appelé authentification de l’utilisateur. Il existe plusieurs façons d’effectuer l’authentification d’un utilisateur, que ce soit via des comptes de médias sociaux, un nom d’utilisateur et un mot de passe ou encore sans mot de passe. De plus, il est souvent recommandé d’aller au-delà d’un premier facteur d’authentification de l’utilisateur en activant l’authentification multifacteur (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>).
 
@@ -35,7 +35,7 @@ Il y a un certain nombre d’éléments que vous voudrez prendre en compte lors 
 
 La [connexion universelle](#universal-login) Auth0 offre aux utilisateurs une expérience sûre et sécurisée indépendamment du fait que vous choisissiez de fournir un identifiant et un mot de passe pour l’ouverture de session ou d’autoriser les scénarios dits « Apportez votre propre identité » fournis par la [connexion via un réseau social](https://auth0.com/learn/social-login/). La centralisation de l’expérience d’ouverture de session avec la connexion universelle présente également des avantages sur le plan de la reconnaissance de la marque, même si vous prévoyez également d’avoir des exigences en matière de [marque](/docs/fr-ca/get-started/architecture-scenarios/business-to-consumer/branding) propres à chaque produit. Les widgets Auth0 IU généralement utilisés avec la connexion universelle offrent également une prise en charge prête à l’emploi en ce qui concerne l’[internationalisation](/docs/fr-ca/customize/internationalization-and-localization/universal-login-internationalization) pour les utilisateurs ayant des exigences linguistiques différentes. Par ailleurs, la prise en charge prête à l’emploi des fonctionnalités Auth0 telles que [MFA](#multi-factor-authentication-mfa-) et la [protection contre les attaques](#anomaly-detection) vous permet de mettre en place des barrières afin d’empêcher les pirates informatiques d’accéder aux comptes des utilisateurs.
 
-En permettant aux utilisateurs de se connecter à l’aide d’un identifiant et d’un mot de passe, vous n’êtes pas dépendant de l’état des fournisseurs d’identité tiers pour que vos utilisateurs puissent accéder à votre système. Vous avez également les moyens d’exiger que les identifiants utilisés soient conformes à vos politiques d’entreprise. Auth0 vous aide dans cette tâche en vous proposant plusieurs options pour les connexions par identifiant et mot de passe, et les [conseils offerts](#username-and-password-authentication) vous aideront à comprendre comment vous pouvez tirer parti de ces options. L’ajout de la prise en charge des [réseaux sociaux](#social-authentication) à un moment donné, en tant que facteur d’authentification principal supplémentaire, vous offre une flexibilité accrue et peut vous aider à mieux comprendre vos utilisateurs sans qu’il soit nécessaire de les interroger davantage en exploitant les informations déjà stockées par les différents [fournisseurs](/docs/connections/identity-providers-social) de connexions aux réseaux sociaux.
+En permettant aux utilisateurs de se connecter à l’aide d’un identifiant et d’un mot de passe, vous n’êtes pas dépendant de l’état des fournisseurs d’identité tiers pour que vos utilisateurs puissent accéder à votre système. Vous avez également les moyens d’exiger que les identifiants utilisés soient conformes à vos politiques d’entreprise. Auth0 vous aide dans cette tâche en vous proposant plusieurs options pour les connexions par identifiant et mot de passe, et les [conseils offerts](#username-and-password-authentication) vous aideront à comprendre comment vous pouvez tirer parti de ces options. L’ajout de la prise en charge des [réseaux sociaux](#social-authentication) à un moment donné, en tant que facteur d’authentification principal supplémentaire, vous offre une flexibilité accrue et peut vous aider à mieux comprendre vos utilisateurs sans qu’il soit nécessaire de les interroger davantage en exploitant les informations déjà stockées par les différents [fournisseurs](/docs/fr-ca/connections/identity-providers-social) de connexions aux réseaux sociaux.
 
 Si vous disposez d’un magasin d’identités hérité, vous devez également consulter la rubrique [Migration des utilisateurs](/docs/fr-ca/get-started/architecture-scenarios/business-to-consumer/provisioning). Cette section présente les avantages de la migration vers le stockage d’identités géré par Auth0 en termes de sûreté et de sécurité.
 
@@ -80,7 +80,7 @@ Si c’est le cas pour votre ou vos applications, la découverte du domaine d’
 
 Si l’utilisateur est partagé entre plusieurs organisations utilisant une identité unique, vous devez prendre en charge la [découverte du domaine d’accueil sur la page de connexion universelle](#hrd-through-universal-login). Cela permettra à la connexion universelle de déterminer d’abord l’utilisateur, puis de présenter les domaines appropriés à cet utilisateur, ce qui améliorera son expérience.
 
-L’envoi des paramètres de l’organisation ou de la connexion peut être réalisé en les ajoutant comme paramètre de requête lorsque vous redirigez l’utilisateur vers le point de terminaison `/authorize`. Pour plus d’informations, consultez la documentation relative à la [Authentication API](/docs/api/authentication#authorization-code-flow). Cependant, vous le ferez généralement en utilisant la trousse SDK pour le langage dans lequel votre application est écrite.
+L’envoi des paramètres de l’organisation ou de la connexion peut être réalisé en les ajoutant comme paramètre de requête lorsque vous redirigez l’utilisateur vers le point de terminaison `/authorize`. Pour plus d’informations, consultez la documentation relative à la [Authentication API](/docs/fr-ca/api/authentication#authorization-code-flow). Cependant, vous le ferez généralement en utilisant la trousse SDK pour le langage dans lequel votre application est écrite.
 
 ### HRD via la connexion universelle
 
@@ -125,7 +125,7 @@ L’autre option consiste à permettre à vos utilisateurs de choisir dans une l
 
 Presque toutes les applications de commerce électronique de détail (B2C) offrent à leurs clients la possibilité de créer de nouveaux identifiants. Il s’agit d’une forme d’authentification courante que tous les utilisateurs connaissent.
 
-L’authentification par nom d’utilisateur et mot de passe se présente sous plusieurs formes avec Auth0. Si votre application est nouvelle et n’a pas de base d’utilisateurs existante, une simple [connexion Auth0 à la base de données](/docs/connections/database) vous fournira tout ce dont vous avez besoin pour commencer à authentifier vos utilisateurs. Toutefois, si vous disposez d’un système hérité (comme votre propre base de données d’utilisateurs ou un système LDAP existant), vous avez plusieurs possibilités pour migrer vos utilisateurs, comme indiqué dans notre guide sur la [migration des utilisateurs](/docs/fr-ca/get-started/architecture-scenarios/business-to-business/provisioning).
+L’authentification par nom d’utilisateur et mot de passe se présente sous plusieurs formes avec Auth0. Si votre application est nouvelle et n’a pas de base d’utilisateurs existante, une simple [connexion Auth0 à la base de données](/docs/fr-ca/connections/database) vous fournira tout ce dont vous avez besoin pour commencer à authentifier vos utilisateurs. Toutefois, si vous disposez d’un système hérité (comme votre propre base de données d’utilisateurs ou un système LDAP existant), vous avez plusieurs possibilités pour migrer vos utilisateurs, comme indiqué dans notre guide sur la [migration des utilisateurs](/docs/fr-ca/get-started/architecture-scenarios/business-to-business/provisioning).
 
 Quelle que soit la manière dont vous provisionnez les utilisateurs pour votre connexion à la base de données, l’authentification de ces utilisateurs est assez similaire. Elle requiert que vous présentiez aux utilisateurs un formulaire leur permettant de saisir leur nom d’utilisateur et leur mot de passe. Comme indiqué dans les lignes directrices concernant la [connexion universelle](#universal-login), le moyen le plus simple et le plus sûr d’authentifier les utilisateurs avec un nom d’utilisateur et un mot de passe est de les rediriger vers une page de connexion centralisée et d’y recueillir leur nom d’utilisateur et leur mot de passe. Cela permet à Auth0 de déterminer s’ils se sont déjà authentifiés et de ne pas afficher le formulaire de connexion lorsqu’il n’est pas nécessaire.
 
@@ -155,7 +155,7 @@ Il est important de prendre en compte l’expérience de l’utilisateur quand c
   + la personne a-t-elle déjà accédé à une autre application qui utilise le même locataire Auth0?
   + S’est-elle déjà authentifiée (ou peut-être pas depuis longtemps) sur cet appareil ou ce navigateur?
 
-Lorsqu’un utilisateur anonyme accède à votre application, il peut souvent être préférable que l’application découvre si l’utilisateur s’est déjà connecté à une autre application de la même famille, ou qu’elle se souvienne de cet utilisateur même si l’application est une [application Web monopage (SPA)](/docs/quickstart/spa) sans état. Par exemple, si vous pouvez déterminer que l’utilisateur est déjà connecté, vous pouvez décider que l’en-tête de l’interface utilisateur de l’application n’affiche pas de bouton de connexion et propose à la place un menu de compte ou de profil pour l’utilisateur. Pour ce faire, vous devez utiliser l’« [authentification silencieuse](/docs/fr-ca/authenticate/login/configure-silent-authentication) ». L’authentification silencieuse vous permet de vérifier si l’utilisateur est connecté sans l’inviter à se connecter s’il ne l’est pas. L’application peut ensuite présenter un bouton de connexion si nécessaire. Toutefois, si l’utilisateur est déjà connecté, vous recevrez des jetons et n’aurez pas à lui présenter à nouveau un bouton de connexion.
+Lorsqu’un utilisateur anonyme accède à votre application, il peut souvent être préférable que l’application découvre si l’utilisateur s’est déjà connecté à une autre application de la même famille, ou qu’elle se souvienne de cet utilisateur même si l’application est une [application Web monopage (SPA)](/docs/fr-ca/quickstart/spa) sans état. Par exemple, si vous pouvez déterminer que l’utilisateur est déjà connecté, vous pouvez décider que l’en-tête de l’interface utilisateur de l’application n’affiche pas de bouton de connexion et propose à la place un menu de compte ou de profil pour l’utilisateur. Pour ce faire, vous devez utiliser l’« [authentification silencieuse](/docs/fr-ca/authenticate/login/configure-silent-authentication) ». L’authentification silencieuse vous permet de vérifier si l’utilisateur est connecté sans l’inviter à se connecter s’il ne l’est pas. L’application peut ensuite présenter un bouton de connexion si nécessaire. Toutefois, si l’utilisateur est déjà connecté, vous recevrez des jetons et n’aurez pas à lui présenter à nouveau un bouton de connexion.
 
 <Warning>
 
@@ -186,7 +186,7 @@ L’authentification est le processus qui consiste à déterminer l’identité 
 
 <Warning>
 
-Avant de passer en direct, vous devrez vous assurer que  **seules** les autorisations que vous utilisez pour chaque application sont activées dans votre [configuration pour votre application](/docs/get-started/applications/update-grant-types).
+Avant de passer en direct, vous devrez vous assurer que  **seules** les autorisations que vous utilisez pour chaque application sont activées dans votre [configuration pour votre application](/docs/fr-ca/get-started/applications/update-grant-types).
 
 </Warning>
 
@@ -198,7 +198,7 @@ Si votre trousse SDK ne prend en charge que l’octroi d’un code d’autorisat
 
 Bien qu’Auth0 prenne en charge l’utilisation de l’octroi implicite pour les applications basées sur un navigateur ne nécessitant qu’un jeton d’ID, il est conseillé d’utiliser l’octroi de code d’autorisation avec [PKCE](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce). Pour des informations détaillées, veuillez consulter [Octroi implicite OAuth2 et SPA](https://auth0.com/blog/oauth2-implicit-grant-and-spa/) sur le blog Auth0.
 
-Si vous avez besoin d’un [Jeton d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens) pour obtenir un nouveau jeton d’accès ou jeton d’ID sans avoir à réauthentifier l’utilisateur, vous devez alors utiliser l’[octroi de code d’autorisation](/docs/get-started/authentication-and-authorization-flow/authorization-code-flow/call-your-api-using-the-authorization-code-flow).
+Si vous avez besoin d’un [Jeton d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens) pour obtenir un nouveau jeton d’accès ou jeton d’ID sans avoir à réauthentifier l’utilisateur, vous devez alors utiliser l’[octroi de code d’autorisation](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow/call-your-api-using-the-authorization-code-flow).
 
 </Warning>
 
@@ -208,14 +208,14 @@ La raison pour laquelle les systèmes d’authentification sont importants est q
 
 ### Meilleure pratique
 
-La détection d’anomalies est gérée en coulisses par Auth0 et constitue une excellente fonction de sécurité pour votre produit. Si vous comptez l’utiliser, assurez-vous d’avoir configuré votre [Fournisseur de courriel](/docs/architecture-scenarios/b2b/operations#email-provider-setup) et vos [Modèles de courriel](/docs/architecture-scenarios/b2b/branding#email-template-customization) avant d’activer l’envoi de courriels à vos utilisateurs.
+La détection d’anomalies est gérée en coulisses par Auth0 et constitue une excellente fonction de sécurité pour votre produit. Si vous comptez l’utiliser, assurez-vous d’avoir configuré votre [Fournisseur de courriel](/docs/fr-ca/architecture-scenarios/b2b/operations#email-provider-setup) et vos [Modèles de courriel](/docs/fr-ca/architecture-scenarios/b2b/branding#email-template-customization) avant d’activer l’envoi de courriels à vos utilisateurs.
 
 ## SSO avec les systèmes hérités
 
 Lors d’une restructuration à grande échelle, il n’est pas toujours possible ni pratique de mettre à jour toutes vos applications en même temps. En fait, la meilleure pratique que nous recommandons est de prévoir une approche de style itératif lorsqu’il s’agit d’intégrer Auth0. Si vos applications prennent déjà en charge l’authentification unique (SSO) et que votre système hérité prend en charge des protocoles tels que OIDC ou <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">SAML</Tooltip>, plusieurs options s’offrent à vous si vous souhaitez continuer à assurer l’authentification unique lors de l’intégration avec Auth0 :
 
 * Mettez à jour votre fournisseur d’identité existant dans votre système hérité de SSO pour rediriger vers Auth0 pour la connexion (p. ex., en utilisant [SAML](/docs/fr-ca/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider)), ou
-* faites en sorte qu’Auth0 redirige vers votre système SSO hérité pour la connexion. Pour ce faire, vous devez configurer votre système hérité en tant qu’IdP dans Auth0 (c’est-à-dire en utilisant [SAML](/docs/fr-ca/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-service-provider) ou [OIDC](/docs/connections/identity-providers-social)).
+* faites en sorte qu’Auth0 redirige vers votre système SSO hérité pour la connexion. Pour ce faire, vous devez configurer votre système hérité en tant qu’IdP dans Auth0 (c’est-à-dire en utilisant [SAML](/docs/fr-ca/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-service-provider) ou [OIDC](/docs/fr-ca/connections/identity-providers-social)).
 
 ### Meilleure pratique La prise en charge d’une expérience d’authentification unique (SSO) avec votre système hérité peut ajouter de la complexité, mais cela peut en valoir la peine pour offrir une expérience utilisateur plus fluide lors de l’intégration avec Auth0. Si vous envisagez de suivre cette voie, planifier cela tôt peut aider à garantir d’y parvenir. Si vous ne disposez pas déjà d’un service centralisé pour l’authentification unique (SSO), la complexité de son intégration risque de ne pas justifier les avantages. :::
 
@@ -223,7 +223,7 @@ Il s’agit d’un sujet complexe qui nécessitera probablement des recherches s
 
 ## Connexion d’entreprise
 
-Le scénario « apportez votre propre identité » est devenu incontournable pour presque toutes les applications B2B. La plupart des entreprises s’attendent à pouvoir intégrer leur IdP dans votre application afin que leur personnel n’ait pas besoin de stocker un autre ensemble d’identifiants. Il s’agit là d’un moyen efficace de simplifier l’authentification des utilisateurs sans compromettre la sécurité, et l’utilisation de la [connexion universelle](#universal-login) permet d’ajouter facilement la prise en charge des [connexions d’entreprise](/docs/connections/identity-providers-enterprise) avec un minimum de perturbations.
+Le scénario « apportez votre propre identité » est devenu incontournable pour presque toutes les applications B2B. La plupart des entreprises s’attendent à pouvoir intégrer leur IdP dans votre application afin que leur personnel n’ait pas besoin de stocker un autre ensemble d’identifiants. Il s’agit là d’un moyen efficace de simplifier l’authentification des utilisateurs sans compromettre la sécurité, et l’utilisation de la [connexion universelle](#universal-login) permet d’ajouter facilement la prise en charge des [connexions d’entreprise](/docs/fr-ca/connections/identity-providers-enterprise) avec un minimum de perturbations.
 
 ### Meilleure pratique
 

@@ -1,13 +1,13 @@
 ---
 title: "Rediriger avec des actions"
 permalink: "redirect-with-actions"
+'description': "Découvrez comment utiliser les actions post-connexion pour rediriger les utilisateurs avant la fin de la transaction d’authentification."
 'og:title': "Rediriger avec des actions"
 'og:description': "Découvrez comment utiliser les actions post-connexion pour rediriger les utilisateurs avant la fin de la transaction d’authentification."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Rediriger avec des actions"
 'twitter:description': "Découvrez comment utiliser les actions post-connexion pour rediriger les utilisateurs avant la fin de la transaction d’authentification."
 ---
-# Rediriger avec des actions
 
 Vous pouvez utiliser les actions post-connexion pour rediriger les utilisateurs avant la fin de la transaction d’authentification. Cela vous permet de mettre en œuvre des flux d’authentification personnalisés qui nécessitent une interaction supplémentaire avec l’utilisateur au-delà du formulaire de connexion standard.
 
@@ -33,7 +33,7 @@ Les redirections sont généralement utilisées pour effectuer une [authentifica
 
 Appelez la fonction `api.redirect.sendUserTo()` comme suit :
 
-```javascript
+```javascript lines
 /**
 * @param {Event} event - Details about the user and the context in which they are logging in.
 * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -71,7 +71,7 @@ Dans cet exemple,`THE_ORIGINAL_STATE` est la valeur générée par Auth0 et envo
 
 Lorsqu’un utilisateur a été redirigé vers le point de terminaison `/continue`, le pipeline d’actions recommence à la même action qui a invoqué la redirection en appelant la fonction `onContinuePostLogin`. Pour que les redirections fonctionnent correctement, vous devez créer une fonction avec la signature suivante dans l’action qui a invoqué la redirection :
 
-```javascript
+```javascript lines
 /**
 * @param {Event} event - Details about the user and the context in which they are logging in.
 * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -93,7 +93,7 @@ exports.onContinuePostLogin = async (event, api) => {
 
 Pour transmettre des données au site externe, nous recommandons de coder ces données dans un [JWT](/docs/fr-ca/secure/tokens/json-web-tokens) signé afin que votre application puisse s’assurer qu’elles n’ont pas été altérées pendant le transfert. Cela est possible grâce aux actions avec les fonctions `api.redirect.encodeToken` et `api.redirect.sendUserTo` :
 
-```javascript
+```javascript lines
 /**
 * @param {Event} event - Details about the user and the context in which they are logging in.
 * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -132,31 +132,31 @@ Le code ci-dessus ajoute un paramètre de chaîne de requête `session_token` à
 </thead>
 <tbody>
 <tr>
-<td><code>sub</code></td>
-<td>Auth0 <code>user_id</code>  de l’utilisateur.</td>
+<td>`sub`</td>
+<td>Auth0 `user_id`  de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>iss</code></td>
-<td>Nom d’hôte de votre domaine locataire Auth0 (par exemple, <code>example.auth0.com</code>).</td>
+<td>`iss`</td>
+<td>Nom d’hôte de votre domaine locataire Auth0 (par exemple, `example.auth0.com`).</td>
 </tr>
 <tr>
-<td><code>exp</code></td>
-<td>Heure d’expiration (en secondes) spécifiée avec le paramètre <code>expiresInSeconds</code>. Doit être aussi court que possible pour éviter la réutilisation du jeton. La valeur par défaut est 900 secondes (15 minutes).</td>
+<td>`exp`</td>
+<td>Heure d’expiration (en secondes) spécifiée avec le paramètre `expiresInSeconds`. Doit être aussi court que possible pour éviter la réutilisation du jeton. La valeur par défaut est 900 secondes (15 minutes).</td>
 </tr>
 <tr>
-<td><code>ip</code></td>
+<td>`ip`</td>
 <td>Adresse IP de la demande d’authentification d’origine.</td>
 </tr>
 <tr>
-<td><code>email</code></td>
-<td>Demande personnalisée avec une valeur spécifiée dans le paramètre <code>payload.email</code>.</td>
+<td>`email`</td>
+<td>Demande personnalisée avec une valeur spécifiée dans le paramètre `payload.email`.</td>
 </tr>
 <tr>
-<td><code>externalUserId</code></td>
-<td>Réclamation personnalisée avec une valeur spécifiée dans le paramètre <code>payload.externalUserId</code>.</td>
+<td>`externalUserId`</td>
+<td>Réclamation personnalisée avec une valeur spécifiée dans le paramètre `payload.externalUserId`.</td>
 </tr>
 <tr>
-<td><code>signature</code></td>
+<td>`signature`</td>
 <td>Utilisant le secret spécifié ci-dessus, le jeton sera signé avec l’algorithme HS256.</td>
 </tr>
 </tbody>
@@ -188,7 +188,7 @@ La transmission d’informations dans les deux sens sur le canal frontal ouvre u
 
 Un jeton de session signé est nécessaire pour renvoyer des informations sensibles à Auth0. Vous pouvez facilement valider ce jeton dans une Action à l’aide du code suivant :
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -218,27 +218,27 @@ Le jeton sera validé pour s’assurer que :
 </thead>
 <tbody>
 <tr>
-<td><code>sub</code></td>
-<td>Auth0  <code>user_id</code>  de l’utilisateur.</td>
+<td>`sub`</td>
+<td>Auth0  `user_id`  de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>iss</code></td>
+<td>`iss`</td>
 <td>Application ciblée pour la redirection.</td>
 </tr>
 <tr>
-<td><code>exp</code></td>
+<td>`exp`</td>
 <td>Doit être aussi court que possible pour éviter la réutilisation du jeton.</td>
 </tr>
 <tr>
-<td><code>state</code></td>
+<td>`state`</td>
 <td>Paramètre d’état envoyé au site distant dans le cadre de la redirection. Doit être inclus dans le jeton pour éviter les attaques par réinsertion.</td>
 </tr>
 <tr>
-<td><code>other</code></td>
-<td>Toutes les autres demandes personnalisées seront exposées comme <code>payload</code> dans le code ci-dessus.</td>
+<td>`other`</td>
+<td>Toutes les autres demandes personnalisées seront exposées comme `payload` dans le code ci-dessus.</td>
 </tr>
 <tr>
-<td><code>signature</code></td>
+<td>`signature`</td>
 <td>Le jeton doit être signé avec l’algorithme HS256.</td>
 </tr>
 </tbody>
@@ -260,7 +260,7 @@ Votre flux de travail peut exiger que la méthode personnalisée soit ré-exécu
 
 L’exemple ci-dessous compare l’horodatage d’un enregistrement existant pour déterminer quand exécuter à nouveau la méthode personnalisée :
 
-```javascript
+```javascript lines
 const CUSTOM_METHOD_URL = "https://path.to.prompt";
 const PROMPT_TTL = 1000 * 60 * 60 * 24; // 24h
 

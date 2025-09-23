@@ -1,13 +1,13 @@
 ---
 title: "Personnaliser les invites de consentement"
 permalink: "customize-consent-prompts"
+'description': "Décrit comment personnaliser l’invite de consentement présentée aux utilisateurs lors de l’autorisation."
 'og:title': "Personnaliser les invites de consentement"
 'og:description': "Décrit comment personnaliser l’invite de consentement présentée aux utilisateurs lors de l’autorisation."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Personnaliser les invites de consentement"
 'twitter:description': "Décrit comment personnaliser l’invite de consentement présentée aux utilisateurs lors de l’autorisation."
 ---
-# Personnaliser les invites de consentement
 
 Lorsqu’une application tierce demande des permissions, les utilisateurs voient une invite de consentement. Par défaut, cette invite utilise le **nom** de la permission pour générer du texte et regroupe toutes les permissions d’une ressource, en affichant les actions de la ressource sur une seule ligne.
 
@@ -29,15 +29,15 @@ Cette modification est effectuée au niveau du locataire, de sorte qu’elle aff
 Définissez l’indicateur **use_scope_descriptions_for_consent** de votre locataire sur `true` en effectuant l’appel d’API suivant :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/tenants/settings' \
 --header 'authorization: Bearer API_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "flags": { "use_scope_descriptions_for_consent": true } }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/tenants/settings");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -47,7 +47,7 @@ request.AddParameter("application/json", "{ \"flags\": { \"use_scope_description
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -68,8 +68,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/settings")
 .header("content-type", "application/json")
 .header("authorization", "Bearer API_ACCESS_TOKEN")
@@ -78,7 +78,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/setti
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -95,8 +95,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer API_ACCESS_TOKEN",
@@ -122,7 +122,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/tenants/settings",
@@ -147,8 +147,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"flags\": { \"use_scope_descriptions_for_consent\": true } }"
@@ -163,7 +163,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -178,8 +178,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"flags\": { \"use_scope_descriptions_for_consent\": true } }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -212,15 +212,15 @@ dataTask.resume()
 Définissez l’indicateur **use_scope_descriptions_for_consent** de votre locataire sur `false` en effectuant l’appel d’API suivant :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/tenants/settings' \
 --header 'authorization: Bearer API_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "flags": { "use_scope_descriptions_for_consent": false } }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/tenants/settings");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -230,7 +230,7 @@ request.AddParameter("application/json", "{ \"flags\": { \"use_scope_description
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -251,8 +251,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/settings")
 .header("content-type", "application/json")
 .header("authorization", "Bearer API_ACCESS_TOKEN")
@@ -261,7 +261,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/setti
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -278,8 +278,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer API_ACCESS_TOKEN",
@@ -305,7 +305,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/tenants/settings",
@@ -330,8 +330,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"flags\": { \"use_scope_descriptions_for_consent\": false } }"
@@ -346,7 +346,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -361,8 +361,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"flags\": { \"use_scope_descriptions_for_consent\": false } }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",

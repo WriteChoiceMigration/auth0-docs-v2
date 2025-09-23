@@ -1,13 +1,13 @@
 ---
 title: "Ajouter la détection des robots aux applications natives"
 permalink: "bot-detection-native-apps"
+'description': "Découvrez comment ajouter une protection et une détection des robots à votre application native qui utilise Auth0.Swift, Auth0.Android, Lock.Swift et Lock.Android."
 'og:title': "Ajouter la détection des robots aux applications natives"
 'og:description': "Découvrez comment ajouter une protection et une détection des robots à votre application native qui utilise Auth0.Swift, Auth0.Android, Lock.Swift et Lock.Android."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Ajouter la détection des robots aux applications natives"
 'twitter:description': "Découvrez comment ajouter une protection et une détection des robots à votre application native qui utilise Auth0.Swift, Auth0.Android, Lock.Swift et Lock.Android."
 ---
-# Ajouter la détection des robots aux applications natives
 
 Vous pouvez ajouter la [détection des robots](/docs/fr-ca/secure/attack-protection/bot-detection) à vos applications natives avec peu ou pas de configuration supplémentaire en fonction de la trousse SDK et du flux d’authentification que vous utilisez.
 
@@ -25,15 +25,15 @@ Si vous n’utilisez pas la connexion universelle, la détection des robots est 
 
 ### Exemple Auth0.swift
 
-Si votre application effectue une connexion/inscription à la base de données via l’[Authentication API](/docs/api/authentication), vous devez gérer l’erreur `isVerificationRequired`. Cette erreur indique que la demande a été signalée comme suspecte et qu’une étape de vérification supplémentaire est nécessaire pour authentifier l’utilisateur.
+Si votre application effectue une connexion/inscription à la base de données via l’[Authentication API](/docs/fr-ca/api/authentication), vous devez gérer l’erreur `isVerificationRequired`. Cette erreur indique que la demande a été signalée comme suspecte et qu’une étape de vérification supplémentaire est nécessaire pour authentifier l’utilisateur.
 
 <Note>
 
-Cette étape de vérification est basée sur le web, vous devez donc utiliser [Connexion universelle](/docs/authenticate/login/auth0-universal-login) pour l’effectuer.
+Cette étape de vérification est basée sur le web, vous devez donc utiliser [Connexion universelle](/docs/fr-ca/authenticate/login/auth0-universal-login) pour l’effectuer.
 
 </Note>
 
-```
+```swift lines
 Auth0
     .authentication()
     .login(usernameOrEmail: email, 
@@ -74,11 +74,11 @@ Si votre application effectue une connexion/inscription à la base de données p
 
 <Note>
 
-Cette étape de vérification est basée sur le web, vous devez donc utiliser [Connexion universelle](/docs/authenticate/login/auth0-universal-login) pour l’effectuer.
+Cette étape de vérification est basée sur le web, vous devez donc utiliser [Connexion universelle](/docs/fr-ca/authenticate/login/auth0-universal-login) pour l’effectuer.
 
 </Note>
 
-```
+```javascript lines
 final String email = "username@domain.com";
 final String password = "a secret password";
 final String realm = "my-database-connection";

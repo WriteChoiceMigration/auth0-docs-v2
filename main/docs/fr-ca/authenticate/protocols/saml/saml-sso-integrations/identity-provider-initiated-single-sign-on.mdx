@@ -1,13 +1,13 @@
 ---
 title: "Configurer l’authentification unique initiée par le fournisseur d’identité SAML"
 permalink: "identity-provider-initiated-single-sign-on"
+'description': "Explique comment configurer l’authentification unique (SSO) initiée par le fournisseur d’identité SAML."
 'og:title': "Configurer l’authentification unique initiée par le fournisseur d’identité SAML"
 'og:description': "Explique comment configurer l’authentification unique (SSO) initiée par le fournisseur d’identité SAML."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer l’authentification unique initiée par le fournisseur d’identité SAML"
 'twitter:description': "Explique comment configurer l’authentification unique (SSO) initiée par le fournisseur d’identité SAML."
 ---
-# Configurer l’authentification unique initiée par le fournisseur d’identité SAML
 
 De nombreuses instructions pour la mise en place d’une fédération <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip> commencent par l’authentification unique (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>) initiée par le fournisseur de services. Le fournisseur de services redirige l’utilisateur vers le fournisseur d’identité (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">IdP</Tooltip>) à des fins d’authentification. Ce processus est couramment utilisé pour les scénarios orientés vers le consommateur.
 
@@ -33,13 +33,13 @@ Une autre approche consiste à demander aux utilisateurs de démarrer le flux de
 
 Lorsque vous utilisez le SSO initié par le fournisseur d’identité, assurez-vous d’inclure le paramètre de connexion dans l’URL de post-back :
 
-```
+``` lines
 https://{yourDomain}/login/callback?connection={yourConnectionName}
 ```
 
 Si vous utilisez la fonctionnalité [Organizations](https://auth0.com/docs/manage-users/organizations), vous pouvez éventuellement inclure un paramètre d’organization contenant l’ID de l’organization souhaitée :
 
-```
+``` lines
 https://{yourDomain}/login/callback?connection={yourConnectionName}&organization={yourCustomersOrganizationId}
 ```
 
@@ -55,7 +55,7 @@ Si votre application est de type monopage et utilise Lock ou Auth0.js pour trait
 
 Si vous utilisez Auth0.js, vous devez mettre à jour `webAuth.parseHash` de la bibliothèque et définir l’indicateur `__enableIdPInitiatedLogin` à `true`.
 
-```javascript
+```javascript lines
 var data = webAuth.parseHash(
       {
         ...
@@ -81,7 +81,7 @@ Notez que l’indicateur `enableIdPInitiatedLogin` est précédé d’un trait d
 1. Accédez à [Dashboard > Authentification > Entreprise](https://manage.auth0.com/#/connections/enterprise) et choisissez **SAMLP Identity Provider (Fournisseur d’identité SAMLP)**.
 2. Sous **Settings (Paramètres)**, vous pouvez voir la configuration de l’authentification unique initiée par un fournisseur d’identité.
 
-   <Frame>![Protocoles Authentification unique (SSO) initiée par un fournisseur d’identité (IdP) Écran de configuration](//images.ctfassets.net/cdy7uua7fh8z/1HORCAp4fZQg0BOoIopvoS/92e0dcbf8a1d48b9abd842eacaf1bf33/2025-02-27_14-12-13.png)</Frame>
+   <Frame>![Protocoles Authentification unique (SSO) initiée par un fournisseur d’identité (IdP) Écran de configuration](/images/fr-ca/cdy7uua7fh8z/1HORCAp4fZQg0BOoIopvoS/92e0dcbf8a1d48b9abd842eacaf1bf33/2025-02-27_14-12-13.png)</Frame>
 
 * **Comportement d’authentification unique initié par un fournisseur d’identité** : cette option vous permet d’activer les connexions initiées par un fournisseur d’identité pour la connexion SAML. Sélectionnez **Accept Requests (Accepter les demandes)** et remplissez tous les champs requis.
 * **Application par défaut :** lorsque la connexion initiée par IdP réussit, les utilisateurs sont acheminés vers cette application. Ce paramètre affiche les applications disponibles activées pour cette connexion. Sélectionnez dans le menu déroulant l’application pour laquelle vous souhaitez que les utilisateurs se connectent à l’aide du fournisseur d’identité. Une seule application peut être sélectionnée pour une connexion initiée par un fournisseur d’identité par connexion SAML.
@@ -96,8 +96,8 @@ Notez que l’indicateur `enableIdPInitiatedLogin` est précédé d’un trait d
 </thead>
 <tbody>
 <tr>
-<td><code>redirect_uri</code></td>
-<td>Lorsque la connexion initiée par l’IdP est terminée, la demande est ensuite redirigée vers la première URL répertoriée dans les <strong>URL de rappel autorisées</strong> pour l’application. Cependant, si vous définissez un <code>redirect_uri</code>, l’IdP redirigera vers cette URL. Cela ajoute de la flexibilité au cas où, par exemple, vous avez un schéma de sous-domaine défini avec un caractère générique et que vous souhaitez uniquement rediriger vers un sous-domaine spécifique.</td>
+<td>`redirect_uri`</td>
+<td>Lorsque la connexion initiée par l’IdP est terminée, la demande est ensuite redirigée vers la première URL répertoriée dans les <strong>URL de rappel autorisées</strong> pour l’application. Cependant, si vous définissez un `redirect_uri`, l’IdP redirigera vers cette URL. Cela ajoute de la flexibilité au cas où, par exemple, vous avez un schéma de sous-domaine défini avec un caractère générique et que vous souhaitez uniquement rediriger vers un sous-domaine spécifique.</td>
 </tr>
 </tbody>
 </table>
@@ -118,7 +118,7 @@ Notez que l’indicateur `enableIdPInitiatedLogin` est précédé d’un trait d
 
 Si vous souhaitez sélectionner une application comme **application par défaut** dans l’authentification unique (SSO) initiée par un fournisseur d’identité (IdP), et que l’application ne figure pas dans les 100 premières applications répertoriées dans la liste déroulante de votre locataire, vous devez utiliser <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Management API</Tooltip> pour sélectionner cette application. Vous devez exécuter un correctif :
 
-```json
+```javascript lines
 {
 "options": {
 "signInEndpoint": "yourIdpSignInUrl",

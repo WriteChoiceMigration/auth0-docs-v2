@@ -1,13 +1,13 @@
 ---
 title: "Créer des connexions de base de données personnalisée"
 permalink: "create-db-connection"
+'description': "Apprenez à créer une connexion de base de données."
 'og:title': "Créer des connexions de base de données personnalisée"
 'og:description': "Apprenez à créer une connexion de base de données."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Créer des connexions de base de données personnalisée"
 'twitter:description': "Apprenez à créer une connexion de base de données."
 ---
-# Créer des connexions de base de données personnalisée
 
 <Card title="La disponibilité varie selon le plan Auth0">
 
@@ -19,7 +19,7 @@ Si vous disposez de votre propre base de données d’utilisateurs, vous pouvez 
 
 <Note>
 
-Assurez-vous que votre base de données possède les champs appropriés pour stocker les attributs des profils utilisateurs, tels que `id`, `nickname`, `email`, and `password`. Pour en savoir plus sur le schéma de profil utilisateur d’Auth0, consultez [Profils utilisateurs normalisés](/docs/manage-users/user-accounts/user-profiles/normalized-user-profiles). Pour en savoir plus sur la mise à jour des profils utilisateurs, consultez [Mise à jour des profils utilisateurs à l’aide de votre base de données](/docs/manage-users/user-accounts/user-profiles/update-user-profiles-using-your-database).
+Assurez-vous que votre base de données possède les champs appropriés pour stocker les attributs des profils utilisateurs, tels que `id`, `nickname`, `email`, and `password`. Pour en savoir plus sur le schéma de profil utilisateur d’Auth0, consultez [Profils utilisateurs normalisés](/docs/fr-ca/manage-users/user-accounts/user-profiles/normalized-user-profiles). Pour en savoir plus sur la mise à jour des profils utilisateurs, consultez [Mise à jour des profils utilisateurs à l’aide de votre base de données](/docs/fr-ca/manage-users/user-accounts/user-profiles/update-user-profiles-using-your-database).
 
 </Note>
 
@@ -79,7 +79,7 @@ Si vous êtes derrière un pare-feu, cette fonctionnalité pourrait exiger que v
    * Applications
 3. Sélectionnez l’aperçu **Custom Database (Base de données personnalisée)**, puis faites glisser le bouton **Use my own database (Utiliser ma propre base de données)**.
 
-   <Frame>![Activer l’option Base de données personnalisée Utiliser ma propre base de données](//images.ctfassets.net/cdy7uua7fh8z/3kgHDpBFdVWNq9XOfhsTXI/a27aa55ef8e71938040d3046f8416540/2025-02-25_10-19-18.png)</Frame>
+   <Frame>![Activer l’option Base de données personnalisée Utiliser ma propre base de données](/images/fr-ca/cdy7uua7fh8z/3kgHDpBFdVWNq9XOfhsTXI/a27aa55ef8e71938040d3046f8416540/2025-02-25_10-19-18.png)</Frame>
 
 ## Créer les scripts d’action de la base de données.
 
@@ -100,32 +100,32 @@ Les scripts d’action de base de données incluent :
 <tr>
 <td><strong>Connexion</strong> <br/><span class="label label-danger">Requis</span></td>
 <td>S’exécute chaque fois qu’un utilisateur tente de se connecter.</td>
-<td><code>email</code>, <code>password</code></td>
+<td>`email`, `password`</td>
 </tr>
 <tr>
 <td><strong>Créer</strong></td>
 <td>S’exécute lorsqu’un utilisateur s’inscrit.</td>
-<td><code>user</code></td>
+<td>`user`</td>
 </tr>
 <tr>
 <td><strong>Vérifier</strong></td>
 <td>S’exécute lorsqu’un utilisateur a suivi le lien de vérification.</td>
-<td><code>email</code></td>
+<td>`email`</td>
 </tr>
 <tr>
 <td><strong>Changer le mot de passe</strong></td>
 <td>S’exécute lorsqu’un utilisateur clique sur le lien de confirmation après une demande de réinitialisation du mot de passe.</td>
-<td><code>email</code>, <code>newPassword</code></td>
+<td>`email`, `newPassword`</td>
 </tr>
 <tr>
 <td><strong>Obtenir l’utilisateur</strong></td>
 <td>Récupère un profil utilisateur de votre base de données sans authentifier l’utilisateur.</td>
-<td><code>email</code></td>
+<td>`email`</td>
 </tr>
 <tr>
 <td><strong>Supprimer</strong></td>
 <td>S’exécute lorsqu’un utilisateur est supprimé à l’aide de l’API ou de Auth0 Dashboard.</td>
-<td><code>id</code></td>
+<td>`id`</td>
 </tr>
 </tbody>
 </table>
@@ -138,7 +138,7 @@ Pour en savoir plus sur les scripts, consultez [Modèles de script d’action de
 
 La propriété `id` (ou `user_id`) dans le profil utilisateur retourné sera utilisée par Auth0 pour identifier l’utilisateur.
 
-Si vous utilisez plusieurs connexions de base de données personnalisées, la valeur `id` doit être unique dans toutes les connexions de bases de données personnalisées pour éviter les collisions d’ID utilisateurs. Notre recommandation est d’ajouter le nom de la connexion (sans espace) en préfixe à la valeur de `id`. Pour en savoir plus à propos des ID utilisateurs, lisez [Identifier les utilisateurs](/docs/manage-users/user-accounts/identify-users).
+Si vous utilisez plusieurs connexions de base de données personnalisées, la valeur `id` doit être unique dans toutes les connexions de bases de données personnalisées pour éviter les collisions d’ID utilisateurs. Notre recommandation est d’ajouter le nom de la connexion (sans espace) en préfixe à la valeur de `id`. Pour en savoir plus à propos des ID utilisateurs, lisez [Identifier les utilisateurs](/docs/fr-ca/manage-users/user-accounts/identify-users).
 
 </Card>
 
@@ -147,7 +147,7 @@ Les étapes suivantes utilisent un exemple de script pour se connecter à la bas
 1. Après avoir fait glisser le bouton bascule **Use my own database (Utiliser ma propre base de données)**, la zone **Database Action Scripts (Scripts d’action de base de données)** s’active. Assurez-vous que vous êtes sur l’onglet **Login (Connexion)**.
 2. Utilisez le menu déroulant de **Modèles** pour sélectionner le modèle de script de base de données MySQL.
 
-   ```javascript
+   ```javascript lines
    function login(email, password, callback) {
      var bcrypt = require('bcrypt');
      var mysql = require('mysql');
@@ -194,7 +194,7 @@ Les étapes suivantes utilisent un exemple de script pour se connecter à la bas
 3. Cliquez sur **Save and Try (Enregistrer et essayer)**.
 4. Dans la fenêtre modale, saisissez votre adresse courriel et votre mot de passe, puis cliquez sur **Try (Essayer)**. Cette fonctionnalité propose un menu déroulant pour choisir parmi une liste de temps d’exécution possibles, avec votre temps d’exécution actuel en tête de liste.
 
-   <Frame>![Modal to try the login script.](//images.ctfassets.net/cdy7uua7fh8z/8uBGZhHYZwOcO19ljJNNp/38bf4fa49cfe3b98c21a78ade1871245/Try_the_Login_Script_-_French.png)</Frame>
+   <Frame>![Modal to try the login script.](/images/fr-ca/cdy7uua7fh8z/8uBGZhHYZwOcO19ljJNNp/38bf4fa49cfe3b98c21a78ade1871245/Try_the_Login_Script_-_French.png)</Frame>
 
 Les modèles de script ne sont pas utilisés par Auth0 tant que vous n’avez pas cliqué sur **Save (Enregistrer)** ou **Try (Essayer)**. Ceci est vrai même si vous n’avez modifié qu’un seul script, sans toucher aux autres. Vous devez cliquer sur **Save (Enregistrer)** au moins une fois pour que tous les scripts soient en place.
 
@@ -220,7 +220,7 @@ Une fois que vous avez activé l’objet de contexte sur le Dashboard, vous pouv
 
 <Tabs><Tab title="Connexion">
 
-```json
+```json lines
 {
     "organization": {
         "display_name": "My Organization",
@@ -235,7 +235,7 @@ Une fois que vous avez activé l’objet de contexte sur le Dashboard, vous pouv
 
 </Tab><Tab title="Créer">
 
-```json
+```json lines
 {
     "organization": {
         "display_name": "My Organization",
@@ -250,7 +250,7 @@ Une fois que vous avez activé l’objet de contexte sur le Dashboard, vous pouv
 
 </Tab><Tab title="Vérifier">
 
-```json
+```json lines
 {
     "organization": {
         "display_name": "My Organization",
@@ -265,7 +265,7 @@ Une fois que vous avez activé l’objet de contexte sur le Dashboard, vous pouv
 
 </Tab><Tab title="Modifier le mot de passe">
 
-```json
+```json lines
 {
     "organization": {
         "display_name": "My Organization",
@@ -280,7 +280,7 @@ Une fois que vous avez activé l’objet de contexte sur le Dashboard, vous pouv
 
 </Tab><Tab title="Obtenir l’utilisateur">
 
-```json
+```json lines
 {
     "organization": {
         "display_name": "My Organization",
@@ -307,7 +307,7 @@ Vous pouvez stocker des paramètres, tels que les identifiants client requis pou
 
 Utilisez les paramètres ajoutés dans vos scripts pour configurer la connexion. Vous pouvez par exemple ajouter ce qui suit au script de connexion MySQL :
 
-```javascript
+```javascript lines
 function login (username, password, callback) {
   var mysql = require('mysql');
   var connection = mysql.createConnection({

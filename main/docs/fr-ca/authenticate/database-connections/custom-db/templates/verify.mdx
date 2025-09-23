@@ -1,13 +1,13 @@
 ---
 title: "Modèles de scripts Verify"
 permalink: "verify"
+'description': "Décrit les modèles de scripts d’action de base de données personnalisés pour la vérification de l’adresse de courriel d’un utilisateur."
 'og:title': "Modèles de scripts Verify"
 'og:description': "Décrit les modèles de scripts d’action de base de données personnalisés pour la vérification de l’adresse de courriel d’un utilisateur."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Modèles de scripts Verify"
 'twitter:description': "Décrit les modèles de scripts d’action de base de données personnalisés pour la vérification de l’adresse de courriel d’un utilisateur."
 ---
-# Modèles de scripts Verify
 
 Le script Verify implémente la fonction exécutée pour marquer l’état de vérification de l’adresse courriel d’un utilisateur dans une base de données externe. Nous recommandons de nommer cette fonction `verify`.
 
@@ -27,7 +27,7 @@ La fonction `verify` doit effectuer ce qui suit :
 
 La fonction `verify` accepte deux paramètres et renvoie une fonction de `callback` :
 
-```
+```javascript lines
 verify(email, callback): function
 ```
 
@@ -40,12 +40,12 @@ verify(email, callback): function
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>chaîne</td>
 <td>adresse courriel de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>callback</code></td>
+<td>`callback`</td>
 <td>Fonction</td>
 <td>Utilisé pour transmettre des données d’erreur ou de profil par le pipeline.</td>
 </tr>
@@ -56,7 +56,7 @@ verify(email, callback): function
 
 Il s’agit d’un exemple pseudo-JavaScript de la manière dont vous pourriez implémenter la fonction `login`. Pour des exemples spécifiques à un langage, consultez [Exemples de scripts spécifiques à un langage](https://auth0.com/docs/authenticate/database-connections/custom-db/templates/verify#language-specific-script-examples).
 
-```javascript
+```javascript lines
 function verify(email, callback) {
   // Send email to external database API
   let options = {
@@ -86,7 +86,7 @@ La fonction `callback` sert à transmettre les données de profil utilisateur o
 
 La fonction `callback` accepte deux paramètres et renvoie une fonction :
 
-```
+```javascript lines
 callback(error, [verified]): function
 ```
 
@@ -100,16 +100,16 @@ callback(error, [verified]): function
 </thead>
 <tbody>
 <tr>
-<td><code>error</code></td>
+<td>`error`</td>
 <td>Objet</td>
 <td>Requis</td>
 <td>Contient des données d’erreur.</td>
 </tr>
 <tr>
-<td><code>verified</code></td>
+<td>`verified`</td>
 <td>Booléen</td>
 <td>Facultatif</td>
-<td>Contient des valeurs qui représentent le statut de vérification de l’utilisateur dans la base de données externe (<code>true</code> ou <code>false</code>). Requis uniquement si la valeur est <code>true</code>.</td>
+<td>Contient des valeurs qui représentent le statut de vérification de l’utilisateur dans la base de données externe (`true` ou `false`). Requis uniquement si la valeur est `true`.</td>
 </tr>
 </tbody>
 </table>
@@ -128,7 +128,7 @@ Pour mettre à jour l’attribut `email_verified` dans le profil Auth0 de l’ut
 
 #### Exemple
 
-```
+```javascript lines
 callback(null, true);
 ```
 
@@ -138,7 +138,7 @@ Si une erreur se produit, le paramètre `error` doit contenir des informations
 
 #### Exemple
 
-```
+```javascript lines
 return callback(new Error("My custom error message."));
 ```
 
@@ -157,7 +157,7 @@ Auth0 fournit des exemples de scripts à utiliser pour les langages/technologies
 
 ### JavaScript
 
-```javascript
+```javascript lines
 function verify(email, callback) {
   // This script should mark the current user's email address as verified in
   // your database.
@@ -186,7 +186,7 @@ function verify(email, callback) {
 
 ### ASP.NET Membership Provider (MVC3 - Universal Providers)
 
-```javascript
+```javascript lines
 function verify(email, callback) {
   const sqlserver = require('tedious@1.11.0');
   const Connection = sqlserver.Connection;
@@ -236,7 +236,7 @@ function verify(email, callback) {
 
 ### ASP.NET Membership Provider (MVC4 - Simple Membership)
 
-```javascript
+```javascript lines
 function verify (email, callback) {
   const sqlserver = require('tedious@1.11.0');
   const Connection = sqlserver.Connection;
@@ -300,7 +300,7 @@ function verify (email, callback) {
 
 ### MongoDB
 
-```javascript
+```javascript lines
 function verify (email, callback) {
   const MongoClient = require('mongodb@3.1.4').MongoClient;
   const client = new MongoClient('mongodb://user:pass@mymongoserver.com');
@@ -320,7 +320,7 @@ function verify (email, callback) {
 
 ### MySQL
 
-```javascript
+```javascript lines
 function verify(email, callback) {
   const mysql = require('mysql');
   const connection = mysql({
@@ -340,7 +340,7 @@ function verify(email, callback) {
 
 ### PostgreSQL
 
-```javascript
+```javascript lines
 function verify (email, callback) {
   //this example uses the "pg" library
   //more info here: https://github.com/brianc/node-postgres
@@ -361,7 +361,7 @@ function verify (email, callback) {
 
 ### SQL Server
 
-```javascript
+```javascript lines
 function verify (email, callback) {
   //this example uses the "tedious" library
   //more info here: http://pekim.github.io/tedious/index.html
@@ -399,7 +399,7 @@ function verify (email, callback) {
 
 ### Base de données Azure SQL Windows
 
-```javascript
+```javascript lines
 function verify (email, callback) {
   //this example uses the "tedious" library
   //more info here: http://pekim.github.io/tedious/index.html

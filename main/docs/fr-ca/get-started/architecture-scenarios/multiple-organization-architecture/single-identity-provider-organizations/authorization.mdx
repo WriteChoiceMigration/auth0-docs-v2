@@ -1,13 +1,13 @@
 ---
 title: "Fournisseur d’identité unique : Autorisation"
 permalink: "authorization"
+'description': "Apprenez à autoriser les utilisateurs pour les organisations dans les architectures multilocataires."
 'og:title': "Fournisseur d’identité unique : Autorisation"
 'og:description': "Apprenez à autoriser les utilisateurs pour les organisations dans les architectures multilocataires."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Fournisseur d’identité unique : Autorisation"
 'twitter:description': "Apprenez à autoriser les utilisateurs pour les organisations dans les architectures multilocataires."
 ---
-# Fournisseur d’identité unique : Autorisation
 
 Pour ce qui est de l’autorisation, vous devez généralement réfléchir à la manière dont vous déterminez ce qu’une personne est autorisée à faire et à la manière dont vous communiquez ces informations à vos applications et/ou à vos API. Selon les applications que vous utilisez, vous pouvez être concerné par l’un de ces problèmes, ou même les deux. Dans nos scénarios d’architecture, nous fournissons des orientations générales sur [l’autorisation B2B](/docs/fr-ca/get-started/architecture-scenarios/business-to-business/authorization), que nous recommandons d’examiner en même temps que les orientations fournies ici.
 
@@ -17,7 +17,7 @@ Pour ce qui est de l’autorisation, vous devez généralement réfléchir à la
 
 **Meilleure pratique**
 
-Vous pouvez tirer parti du [contrôle d’accès basé sur les rôles (RBAC) Auth0](/docs/fr-ca/manage-users/access-control/rbac) via la fonctionnalité [Auth0 Authorization Core](/docs/fr-ca/manage-users/access-control/configure-core-rbac) pour définir les autorisations d’accès, qui peuvent être automatiquement appliquées aux jetons d’accès. Pour en savoir plus, consultez [Activer le contrôle d’accès basé sur les rôles pour les API](/docs/get-started/apis/enable-role-based-access-control-for-apis).
+Vous pouvez tirer parti du [contrôle d’accès basé sur les rôles (RBAC) Auth0](/docs/fr-ca/manage-users/access-control/rbac) via la fonctionnalité [Auth0 Authorization Core](/docs/fr-ca/manage-users/access-control/configure-core-rbac) pour définir les autorisations d’accès, qui peuvent être automatiquement appliquées aux jetons d’accès. Pour en savoir plus, consultez [Activer le contrôle d’accès basé sur les rôles pour les API](/docs/fr-ca/get-started/apis/enable-role-based-access-control-for-apis).
 
 La fonctionnalité RBAC d’Auth0 peut également fournir des informations que vous pouvez ajouter en tant que demandes personnalisées aux jetons d’ID (et aux jetons d’accès, si vous préférez une application manuelle). Les organisations Auth0 peuvent exploiter la fonctionnalité RBAC d’Auth0 via un ou plusieurs rôles attribués aux membres. Pour en savoir plus, consultez [Ajout de rôles aux membres d’une organisation](/docs/fr-ca/manage-users/organizations/configure-organizations/add-member-roles).
 
@@ -30,7 +30,7 @@ La fonctionnalité RBAC d’Auth0 peut également fournir des informations que 
 
 **Meilleure pratique**
 
-Auth0 Organizations fournit des règles d'Auth0 avec accès à des informations centrées sur l’organisation qui peuvent être consultées lors de l’authentification d’un utilisateur. Ces informations sont disponibles via l’objet `organization` contenu dans l’objet contextuel `Rules` (règles). L’objet `organization` permet également d’accéder à toutes les métadonnées fournies pour une définition Organization dans Auth0. Pour en savoir plus, consultez [Développement personnalisé pour les organisations](/docs/manage-users/organizations/custom-development).
+Auth0 Organizations fournit des règles d'Auth0 avec accès à des informations centrées sur l’organisation qui peuvent être consultées lors de l’authentification d’un utilisateur. Ces informations sont disponibles via l’objet `organization` contenu dans l’objet contextuel `Rules` (règles). L’objet `organization` permet également d’accéder à toutes les métadonnées fournies pour une définition Organization dans Auth0. Pour en savoir plus, consultez [Développement personnalisé pour les organisations](/docs/fr-ca/manage-users/organizations/custom-development).
 
 </Note>
 
@@ -38,7 +38,7 @@ Auth0 Organizations fournit des règles d'Auth0 avec accès à des informations 
 
 En général, les demandes peuvent être ajoutées aux jetons d’ID, comme indiqué dans notre guide des meilleures pratiques en matière de [demandes de jetons d’ID](/docs/fr-ca/get-started/architecture-scenarios/business-to-consumer/authorization). Lorsque vous utilisez la fonctionnalité Auth0 Organizations, une demande `org_id` est automatiquement ajoutée à tout jeton d’ID (pour un exemple, consulter [Travailler avec des jetons et Organizations](/docs/fr-ca/manage-users/organizations/using-tokens)) émis pour les utilisateurs membres d’une organisation. Ce paramètre est validé par les trousses SDK Auth0. Vous pouvez également ajouter des informations supplémentaires associées à une organisation Auth0 en ajoutant une demande personnalisée au jeton d’ID :
 
-```
+```javascript lines
 context.idToken['http://travel0.net/multifactor'] = context.multifactor;
 ```
 
@@ -48,7 +48,7 @@ context.idToken['http://travel0.net/multifactor'] = context.multifactor;
 
 Bien que la fonction Auth0 Organization ne prenne pas en charge les applications <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>, une affirmation SAML générée par un fournisseur d’identités (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">IdP</Tooltip>) en amont peut être configurée pour alimenter des demandes standard ou personnalisées dans un jeton d’ID consommé en aval. Par exemple, vous pouvez définir la section Mappages d’une connexion d’entreprise SAML :
 
-```json
+```json lines
 { 
   "user_id": [
     "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
@@ -66,7 +66,7 @@ Bien que la fonction Auth0 Organization ne prenne pas en charge les applications
 }
 ```
 
-Dans cet exemple, chaque champ se verra attribuer une valeur dans l’objet `user` d’une Règle, qui correspondra aux demandes standard d’un jeton d’ID ou pourra être mis en correspondance à l’aide de demandes personnalisées. Pour en savoir plus sur la personnalisation des mappages SAML, consulter [Connecter votre application aux fournisseurs d’identité SAML : Configurer les mappages](/docs/connections/enterprise/saml#set-up-mappings).
+Dans cet exemple, chaque champ se verra attribuer une valeur dans l’objet `user` d’une Règle, qui correspondra aux demandes standard d’un jeton d’ID ou pourra être mis en correspondance à l’aide de demandes personnalisées. Pour en savoir plus sur la personnalisation des mappages SAML, consulter [Connecter votre application aux fournisseurs d’identité SAML : Configurer les mappages](/docs/fr-ca/connections/enterprise/saml#set-up-mappings).
 
 ## Demandes relatives au jeton d’accès
 
@@ -74,7 +74,7 @@ En plus des autres demandes que vous ajoutez à votre jeton d’accès pour les 
 
 Comme pour le jeton d’ID, lorsque vous utilisez la fonctionnalité Auth0 Organizations, la demande `org_id` est automatiquement ajoutée à tout jeton d’accès (pour un exemple, voir [Travailler avec des jetons et Organizations](/docs/fr-ca/manage-users/organizations/using-tokens)) émis pour les utilisateurs membres d’une organisation. Vous pouvez également ajouter des informations supplémentaires associées à une organisation Auth0 en ajoutant une demande personnalisée au jeton d’accès :
 
-```
+```javascript lines
 context.accessToken['http://travel0.net/multifactor'] = context.multifactor;
 ```
 
@@ -109,7 +109,7 @@ La fonction Auth0 Organizations prend également en charge le [Contrôle d’acc
 
 <Note>
 
-Vous pouvez [activer Auth0 Authorization Core RBAC pour une API](/docs/get-started/apis/enable-role-based-access-control-for-apis), ce qui entraînera l’activation de la demande de `permission` par défaut dans des jetons d’accès en cours de modification automatique et l’ajout d’une demande `d’autorisation` par défaut (pour obtenir un exemple, consultez [Travailler avec des jetons et Organizations](/docs/fr-ca/manage-users/organizations/using-tokens)). Vous pouvez également ajouter des informations sur les rôles aux jetons d’ID en tant que demandes personnalisées en accédant à l’objet `d’autorisation` disponible dans l’objet `context` des règles. Pour en savoir plus, consultez [Règles avec autorisation - Exemples de cas d’utilisation : Ajouter des rôles d’utilisateur aux jetons](/docs/manage-users/access-control/sample-use-cases-rules-with-authorization).
+Vous pouvez [activer Auth0 Authorization Core RBAC pour une API](/docs/fr-ca/get-started/apis/enable-role-based-access-control-for-apis), ce qui entraînera l’activation de la demande de `permission` par défaut dans des jetons d’accès en cours de modification automatique et l’ajout d’une demande `d’autorisation` par défaut (pour obtenir un exemple, consultez [Travailler avec des jetons et Organizations](/docs/fr-ca/manage-users/organizations/using-tokens)). Vous pouvez également ajouter des informations sur les rôles aux jetons d’ID en tant que demandes personnalisées en accédant à l’objet `d’autorisation` disponible dans l’objet `context` des règles. Pour en savoir plus, consultez [Règles avec autorisation - Exemples de cas d’utilisation : Ajouter des rôles d’utilisateur aux jetons](/docs/fr-ca/manage-users/access-control/sample-use-cases-rules-with-authorization).
 
 </Note>
 

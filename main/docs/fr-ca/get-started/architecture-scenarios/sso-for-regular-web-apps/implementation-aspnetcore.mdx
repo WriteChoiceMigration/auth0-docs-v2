@@ -1,13 +1,13 @@
 ---
 title: "Mise en œuvre d’ASP.NET Core (Web Apps + SSO)"
 permalink: "implementation-aspnetcore"
+'description': "L’implémentation d’ASP.NET Core pour le scénario d’architecture d’authentification unique (SSO) pour les applications Web classiques"
 'og:title': "Mise en œuvre d’ASP.NET Core (Web Apps + SSO)"
 'og:description': "L’implémentation d’ASP.NET Core pour le scénario d’architecture d’authentification unique (SSO) pour les applications Web classiques"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Mise en œuvre d’ASP.NET Core (Web Apps + SSO)"
 'twitter:description': "L’implémentation d’ASP.NET Core pour le scénario d’architecture d’authentification unique (SSO) pour les applications Web classiques"
 ---
-# Mise en œuvre d’ASP.NET Core (Web Apps + SSO)
 
 Le code source complet de l’implémentation ASP.NET Core se trouve dans [ce répertoire GitHub](https://github.com/auth0-samples/auth0-pnp-webapp-oidc).
 
@@ -15,14 +15,14 @@ Le code source complet de l’implémentation ASP.NET Core se trouve dans [ce r�
 
 Pour les besoins de ce guide, nous utiliserons une simple connexion hébergée. Vous pouvez utiliser le témoin standard et le logiciel médiateur OIDC qui est disponible avec ASP.NET Core, assurez-vous donc d’installer les paquets NuGet.
 
-```
+``` lines
 Install-Package Microsoft.AspNetCore.Authentication.Cookies
 Install-Package Microsoft.AspNetCore.Authentication.OpenIdConnect
 ```
 
 Configurez ensuite le logiciel médiateur OIDC et le témoin dans le pipeline du logiciel médiateur de votre application.
 
-```
+```csharp lines
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
@@ -87,19 +87,19 @@ Vous pouvez contrôler à la fois la session de l’application et la session Au
 
 Par exemple, pour se déconnecter du logiciel médiateur de gestion des témoins, et ainsi effacer le témoin d’authentification de votre application, vous pouvez effectuer l’appel suivant :
 
-```
+```csharp lines
 await HttpContext.Authentication.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 ```
 
 De même, vous pouvez déconnecter l’utilisateur d'Auth0 en appelant la méthode `SignOutAsync` et en transmettant `Auth0` comme schéma d’authentification à déconnecter.
 
-```
+```csharp lines
 await HttpContext.Authentication.SignOutAsync("Auth0");
 ```
 
 Pour que cela fonctionne, vous devrez cependant ajouter une configuration supplémentaire lors de l’enregistrement du logiciel médiateur OIDC en gérant l’événement `OnRedirectToIdentityProviderForSignOut`. Dans cet événement, vous devrez rediriger vers [le point de terminaison de déconnexion Auth0](https://auth0.com/docs/api/authentication/reference#logout), ce qui effacera le témoin Auth0.
 
-```
+```csharp lines
 app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions("Auth0")
 {
     // Some code omitted for brevity
@@ -122,7 +122,7 @@ Vous devrez également vous assurer que vous ajoutez l’URL de votre applicatio
 
 La manière la plus simple d’intégrer les groupes dans une application ASP.NET Core est d’utiliser l’autorisation intégrée [Autorisation basée sur les rôles](https://docs.asp.net/en/latest/security/authorization/roles.html) disponible dans ASP.NET Core. Pour ce faire, nous devrons ajouter une Demande de type
 
-```
+``` lines
 http://schemas.microsoft.com/ws/2008/06/identity/claims/role
 ```
 
@@ -132,7 +132,7 @@ Une fois les demandes ajoutées, nous pouvons facilement nous assurer qu’une a
 
 Le logiciel médiateur ASP.NET OIDC ajoutera automatiquement toutes les demandes renvoyées dans le <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">JWT</Tooltip> en tant que demandes à l’identité `ClaimsIdentity`. Nous devrions donc extraire les informations de la demande `authorization`, désérialiser le corps JSON de la demande et, pour chacun des groupes, ajouter une demande `http://schemas.microsoft.com/ws/2008/06/identity/claims/role` à `ClaimsIdentity`.
 
-```
+```csharp lines
 app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions("Auth0")
 {
     // Some configuration omitted for brevity
@@ -170,7 +170,7 @@ app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions("Auth0")
 
 Ensuite, nous pouvons ajouter une action qui permet aux Administrateurs d’approuver les feuilles de temps :
 
-```json
+```csharp lines
 [Authorize(Roles = "Admin")]
 public IActionResult TimesheetApproval()
 {          

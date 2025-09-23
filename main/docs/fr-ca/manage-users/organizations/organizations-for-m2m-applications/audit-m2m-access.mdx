@@ -1,15 +1,15 @@
 ---
 title: "Auditer l’accès M2M"
 permalink: "audit-m2m-access"
+'description': "Découvrez comment auditer l’accès M2M pour une application."
 'og:title': "Auditer l’accès M2M"
 'og:description': "Découvrez comment auditer l’accès M2M pour une application."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auditer l’accès M2M"
 'twitter:description': "Découvrez comment auditer l’accès M2M pour une application."
 ---
-# Auditer l’accès M2M
 
-L’accès entre machines à Organizations peut être accordé en associant directement une autorisation client à une organisation ou en autorisant l’accès à toute organisation dans les paramètres d’autorisation client. Les deux scénarios peuvent être audités par l’<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip> ou <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>, où vous pouvez afficher ou récupérer une liste des autorisations de clients associées à une organisation pour une application. Pour en savoir plus sur le fonctionnement de l’accès M2M aux autorisations des organisations, veuillez lire les articles [Configurer votre application pour l’accès M2M](/docs/manage-users/organizations/organizations-for-m2m-applications/configure-your-application-for-m2m-access) et [Autoriser l’accès M2M](/docs/manage-users/organizations/organizations-for-m2m-applications/authorize-m2m-access).
+L’accès entre machines à Organizations peut être accordé en associant directement une autorisation client à une organisation ou en autorisant l’accès à toute organisation dans les paramètres d’autorisation client. Les deux scénarios peuvent être audités par l’<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip> ou <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>, où vous pouvez afficher ou récupérer une liste des autorisations de clients associées à une organisation pour une application. Pour en savoir plus sur le fonctionnement de l’accès M2M aux autorisations des organisations, veuillez lire les articles [Configurer votre application pour l’accès M2M](/docs/fr-ca/manage-users/organizations/organizations-for-m2m-applications/configure-your-application-for-m2m-access) et [Autoriser l’accès M2M](/docs/fr-ca/manage-users/organizations/organizations-for-m2m-applications/authorize-m2m-access).
 
 ## Accès accordé par association directe
 
@@ -23,20 +23,20 @@ Pour consulter les autorisations d’accès à l’application client qui ont é
 2. Sélectionnez l’onglet **Accès de communication entre machines**. Vous obtiendrez une liste paginée de toutes les applications qui peuvent accéder à une API pour cette organisation via une association directe.
 3. Choisissez une applicationpour passer en revue les API autorisées répertoriées pour cette application.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/5FVJzuu5yq8IHwpQKdYYU6/4f596be1a92877270cb2c79460c07990/Orgs_-_Acme_M2M.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/5FVJzuu5yq8IHwpQKdYYU6/4f596be1a92877270cb2c79460c07990/Orgs_-_Acme_M2M.png)</Frame>
 
 </Tab><Tab title="Management API">
 
-Les autorisations des clients associées à une organisation peuvent être récupérées via le point de terminaison [Autorisations client pour l’organisation](/docs/api/management/v2/organizations/get-organization-client-grants) de l’API :
+Les autorisations des clients associées à une organisation peuvent être récupérées via le point de terminaison [Autorisations client pour l’organisation](/docs/fr-ca/api/management/v2/organizations/get-organization-client-grants) de l’API :
 
-```bash
+```bash lines
 curl -X GET --location "https://{YOUR_DOMAIN}/api/v2/organizations/{ORG_id}/client-grants/" \
   --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
 ```
 
-Sinon, si vous souhaitez obtenir des informations sur les applications qui peuvent accéder à au moins une des API d’une organisation, vous pouvez utiliser le paramètre de requête `q` du point de terminaison [Obtenir les clients](/docs/api/management/v2/clients/get-clients) de l’API avec le terme de recherche `client_grant.organization_id:{organization_id}`. Utilisez la syntaxe Lucene, qui est similaire à la [Syntaxe de requête de recherche d’utilisateur](/docs/manage-users/user-search/user-search-query-syntax).
+Sinon, si vous souhaitez obtenir des informations sur les applications qui peuvent accéder à au moins une des API d’une organisation, vous pouvez utiliser le paramètre de requête `q` du point de terminaison [Obtenir les clients](/docs/fr-ca/api/management/v2/clients/get-clients) de l’API avec le terme de recherche `client_grant.organization_id:{organization_id}`. Utilisez la syntaxe Lucene, qui est similaire à la [Syntaxe de requête de recherche d’utilisateur](/docs/fr-ca/manage-users/user-search/user-search-query-syntax).
 
-```bash
+```bash lines
 curl -X GET --location "https://{YOUR_DOMAIN}/api/v2/clients?q=client_grant.organization_id%3Aorganization_id" \
   --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
 ```
@@ -53,20 +53,20 @@ Utilisez l’[Auth0 Dashboard](https://manage.auth0.com/) et la [Management API]
 2. Sélectionnez l’onglet **Accès via communication entre machines**. Vous obtiendrez une liste paginée de toutes les applications qui peuvent accéder à au moins une API pour une organisation.
 3. Choisissez une application pour passer en revue les API autorisées répertoriées pour cette application.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/4H3VjVTz0ZGDvV5za9y33m/21ffc94b0fcd383e2c0385ca10a79800/Organizations_-_M2M_tab.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/4H3VjVTz0ZGDvV5za9y33m/21ffc94b0fcd383e2c0385ca10a79800/Organizations_-_M2M_tab.png)</Frame>
 
 </Tab><Tab title="Management API">
 
 Les autorisations des clients avec le paramètre `allow_any_organization` peuvent être récupérées via le point de terminaison [Obtenir les autorisations client](https://auth0.com/docs/api/management/v2/client-grants/get-client-grants) de l’API :
 
-```bash
+```bash lines
 curl -X GET --location "https://{YOUR_DOMAIN}/api/v2/client-grants?allow_any_organization=true" \
   --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
 ```
 
 Sinon, si vous souhaitez obtenir des informations sur les applications qui peuvent accéder à au moins une des API de n’importe quelle organisation, vous pouvez utiliser le paramètre de requête `q` du point de terminaison [Obtenir les autorisations client](https://auth0.com/docs/api/management/v2/client-grants/get-client-grants) de l’API avec le terme de recherche `client_grant.allow_any_organization:true`. Utilisez la syntaxe Lucene, qui est similaire à la [Syntaxe de requête de recherche d’utilisateur](https://auth0.com/docs/manage-users/user-search/user-search-query-syntax).
 
-```bash
+```bash lines
 curl -X GET --location "https://{YOUR_DOMAIN}/api/v2/clients?q=client_grant.allow_any_organization%3Atrue" \
   --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
 ```
@@ -91,11 +91,11 @@ Le tableau suivant montre les termes de recherche pris en charge pour interroger
 </thead>
 <tbody>
 <tr>
-<td><code>client_grant.organization_id:{organization_id}</code></td>
+<td>`client_grant.organization_id:{organization_id}`</td>
 <td>Permet de rechercher des applications pouvant accéder à au moins une des API d’une organisation.</td>
 </tr>
 <tr>
-<td><code>client_grant.allow_any_organization:true</code></td>
+<td>`client_grant.allow_any_organization:true`</td>
 <td>Permet de rechercher des applications pouvant accéder à au moins une des API d’une organisation.</td>
 </tr>
 </tbody>
@@ -107,7 +107,7 @@ L’accès entre machines pour les organisations se reflète également dans les
 
 L’exemple de code suivant est un exemple de journal de locataire `seccft` avec des informations sur l’organisation :
 
-```json
+```json lines
 {
   "date": "2024-10-24T19:06:17.460Z",
   "type": "seccft",

@@ -1,17 +1,19 @@
 ---
 title: "Ajouter une connexion à votre application .NET Android ou iOS"
 permalink: "interactive"
+'description': "Ce tutoriel explique comment ajouter une connexion utilisateur avec Auth0 à une application .NET Android ou iOS"
 'og:title': "Ajouter une connexion à votre application .NET Android ou iOS"
 'og:description': "Ce tutoriel explique comment ajouter une connexion utilisateur avec Auth0 à une application .NET Android ou iOS"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/xamarin.png"
 'twitter:title': "Ajouter une connexion à votre application .NET Android ou iOS"
 'twitter:description': "Ce tutoriel explique comment ajouter une connexion utilisateur avec Auth0 à une application .NET Android ou iOS"
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -100,12 +102,12 @@ Utilisez le gestionnaire de packages NuGet (Tools (Outils) -> Library Package Ma
 
 Sinon, vous pouvez utiliser la Console du gestionnaire de packages NuGet (`Install-Package`) ou le `dotnet` CLI (`dotnet add`).
 
-```
+``` lines
 Install-Package Auth0.OidcClient.AndroidX
 Install-Package Auth0.OidcClient.iOS
 ```
 
-```
+``` lines
 dotnet add Auth0.OidcClient.AndroidX
 dotnet add Auth0.OidcClient.iOS
 ```
@@ -116,7 +118,7 @@ dotnet add Auth0.OidcClient.iOS
 
 Pour intégrer Auth0 dans votre application, instanciez une instance de la classe `Auth0Client` en passant une instance de `Auth0ClientOptions` qui contient votre domaine Auth0 et votre identificateur client.
 
-```
+```csharp lines
 using Auth0.OidcClient;
 var client = new Auth0Client(new Auth0ClientOptions {
 Domain = "{yourDomain}",
@@ -147,7 +149,7 @@ Assurez-vous de remplacer `YOUR_ANDROID_PACKAGE_NAME` dans l’exemple de code p
 
 De plus, vous devez gérer l’intention dans l’événement `OnNewIntent` dans votre classe `Activity`. Vous devez notifier le client OIDC Auth0 pour terminer le flux d’authentification en appelant la méthode `Send` du singleton `ActivityMediator`, en transmettant l’URL qui a été envoyée.
 
-```
+```csharp lines
 protected override void OnNewIntent(Intent intent)
 {
 
@@ -172,7 +174,7 @@ Pour gérer la callback sur les appareils iOS :
 
 Voici un exemple de la représentation XML de votre fichier `Info.plist` après avoir ajouté le type d’URL :
 
-```
+```xml lines
 <key>CFBundleURLTypes</key>
 <array>
 <dict>
@@ -196,7 +198,7 @@ De plus, vous devez gérer l’URL de rappel dans l’événement `OpenUrl` dans
 
 À présent que vous avez configuré votre application Auth0 et la trousse SDK Auth0, vous devez configurer la connexion pour votre projet. Pour ce faire, vous utiliserez la méthode `LoginAsync()` de la trousse SDK pour créer un bouton de connexion qui redirige les utilisateurs vers la page de connexion universelle Auth0.
 
-```javascript
+```csharp lines
 var loginResult = await client.LoginAsync();
 ```
 
@@ -220,7 +222,7 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 Les utilisateurs qui se connectent à votre projet auront également besoin d’un moyen de se déconnecter. Créez un bouton de déconnexion en utilisant la méthode `LogoutAsync()` de la trousse SDK. Lorsque les utilisateurs se déconnectent, ils seront redirigés vers votre point de terminaison de déconnexion Auth0, qui par la suite les redirigera immédiatement vers l’URL de déconnexion que vous avez configurée précédemment dans ce démarrage rapide.
 
-```
+```csharp lines
 await client.LogoutAsync();
 ```
 
@@ -241,7 +243,7 @@ Vu que vos utilisateurs peuvent désormais se connecter et se déconnecter, vous
 
 La trousse SDK Auth0 pour Android et iOS fournit des informations sur l’utilisateur via la propriété `LoginResult.User`.
 
-```
+```swift lines
 if loginResult.IsError == false {
 var user = loginResult.User
 var name = user.FindFirst(c => c.Type == "name")?.Value
@@ -268,7 +270,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/native/net-android-ios/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

@@ -1,13 +1,13 @@
 ---
 title: "Modifier le modèle de script de courriel"
 permalink: "change-email"
+'description': "Décrit le script d’action personnalisé de la base de données permettant de modifier l’adresse courriel d’un utilisateur."
 'og:title': "Modifier le modèle de script de courriel"
 'og:description': "Décrit le script d’action personnalisé de la base de données permettant de modifier l’adresse courriel d’un utilisateur."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Modifier le modèle de script de courriel"
 'twitter:description': "Décrit le script d’action personnalisé de la base de données permettant de modifier l’adresse courriel d’un utilisateur."
 ---
-# Modifier le modèle de script de courriel
 
 Le script Change Email (Modifier le courriel) met en œuvre la fonction définie lorsque l’adresse de courriel d’un utilisateur ou son statut de vérification de l’adresse courriel change. Nous recommandons de nommer cette fonction `changeEmail` (Modifier le courriel).
 
@@ -36,7 +36,7 @@ La fonction changeEmail devrait :
 
 La fonction `changeEmail` accepte quatre paramètres et renvoi à une fonction de `callback` :
 
-```
+```javascript lines
 changeEmail(email, newEmail, verified, callback): function
 ```
 
@@ -49,22 +49,22 @@ changeEmail(email, newEmail, verified, callback): function
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>Chaîne</td>
 <td>Adresse courriel actuelle de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>newEmail</code></td>
+<td>`newEmail`</td>
 <td>Chaîne</td>
 <td>Valeur à définir comme nouvelle adresse courriel de l’utilisateur dans la base de données externe.</td>
 </tr>
 <tr>
-<td><code>verified</code></td>
+<td>`verified`</td>
 <td>Boolean</td>
 <td>Statut de vérification du courriel de la nouvelle adresse courriel.</td>
 </tr>
 <tr>
-<td><code>callback</code></td>
+<td>`callback`</td>
 <td>Fonctionnalité</td>
 <td>Utilisée pour transmettre les données d’erreur à travers le pipeline.</td>
 </tr>
@@ -75,7 +75,7 @@ changeEmail(email, newEmail, verified, callback): function
 
 Il s’agit d’un exemple pseudo-JavaScript de la manière dont vous pourriez implémenter la fonction `changeEmail` :
 
-```javascript
+```javascript lines
 function (email, newEmail, verified, callback) {
   // Prepare the API call
   let options = {
@@ -109,7 +109,7 @@ La fonction de `callback` accepte deux paramètres et renvoie une fonction.
 
 ### Définition
 
-```
+```javascript lines
 callback(error, operationResult): function
 ```
 
@@ -123,13 +123,13 @@ callback(error, operationResult): function
 </thead>
 <tbody>
 <tr>
-<td><code>error</code></td>
+<td>`error`</td>
 <td>Objet</td>
 <td>Requis</td>
 <td>Contient des données d’erreur.</td>
 </tr>
 <tr>
-<td><code>operationResult</code></td>
+<td>`operationResult`</td>
 <td>Booléen</td>
 <td>Facultatif</td>
 <td>Indique le résultat de l’opération de modification de courriel.</td>
@@ -141,7 +141,7 @@ callback(error, operationResult): function
 
 Si l’opération de modification de courriel est réussie, renvoyez la fonction de `callback`, et passez à une valeur `null` comme paramètre d’`error` et une valeur `true` comme paramètre `operationResult` :
 
-```
+```javascript lines
 return callback(null, true);
 ```
 
@@ -149,7 +149,7 @@ return callback(null, true);
 
 Si l’opération de modification du courriel a échoué, renvoyez la fonction de `callback`, et passez à une valeur `null` comme paramètre d’`error` et une valeur `false` comme paramètre `operationResult` :
 
-```
+```javascript lines
 return callback(null, false);
 ```
 
@@ -157,7 +157,7 @@ return callback(null, false);
 
 Si une erreur survient, renvoyez la fonction de `callback`, et passer l’information pertinente concernant l’erreur comme paramètre `error` :
 
-```
+```javascript lines
 return callback(new Error("My custom error message."));
 ```
 

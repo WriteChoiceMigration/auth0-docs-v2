@@ -1,20 +1,20 @@
 ---
 title: "Ajouter une connexion avec le flux de code d’autorisation avec une clé de preuve pour l’échange de code (PKCE)"
 permalink: "add-login-using-the-authorization-code-flow-with-pkce"
+'description': "Comment ajouter une connexion à votre application native, mobile ou à page unique en utilisant le flux de code d’autorisation avec Proof Key for Code Exchange (PKCE)."
 'og:title': "Ajouter une connexion avec le flux de code d’autorisation avec une clé de preuve pour l’échange de code (PKCE)"
 'og:description': "Comment ajouter une connexion à votre application native, mobile ou à page unique en utilisant le flux de code d’autorisation avec Proof Key for Code Exchange (PKCE)."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Ajouter une connexion avec le flux de code d’autorisation avec une clé de preuve pour l’échange de code (PKCE)"
 'twitter:description': "Comment ajouter une connexion à votre application native, mobile ou à page unique en utilisant le flux de code d’autorisation avec Proof Key for Code Exchange (PKCE)."
 ---
-# Ajouter une connexion avec le flux de code d’autorisation avec une clé de preuve pour l’échange de code (PKCE)
 
 Vous pouvez ajouter une connexion à votre application native, mobile ou à page unique en utilisant le flux de code d’autorisation avec PKCE. Pour savoir comment fonctionne le flux et pourquoi vous devriez l’utiliser, consultez [Flux de code d’autorisation avec Proof Key for Code Exchange (PKCE)](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce). Pour apprendre à appeler votre API à partir d’une application native, mobile ou à page unique, consultez [Appeler votre API en utilisant le flux de code d’autorisation avec PKCE](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce/call-your-api-using-the-authorization-code-flow-with-pkce).
 
 Pour implémenter le flux de code d’autorisation avec Proof Key for Code Exchange (PKCE), consultez les ressources suivantes :
 
-* [Trousses SDK Auth0 Mobile](/docs/fr-ca/libraries) et [Trousse SDK Auth0 pour applications à page unique](/docs/fr-ca/libraries/auth0-single-page-app-sdk) : Manière la plus simple d’implémenter le flux, qui fera le gros du travail à votre place. Nos [Démarrages rapides Mobile](/docs/quickstart/native) et [Démarrages rapides pour applications à page unique](/docs/quickstart/spa) vous guideront tout au long du processus.
-* [Authentication API](/docs/api/authentication) : Si vous préférez créer votre propre solution, poursuivez la lecture pour savoir comment appeler notre API directement.
+* [Trousses SDK Auth0 Mobile](/docs/fr-ca/libraries) et [Trousse SDK Auth0 pour applications à page unique](/docs/fr-ca/libraries/auth0-single-page-app-sdk) : Manière la plus simple d’implémenter le flux, qui fera le gros du travail à votre place. Nos [Démarrages rapides Mobile](/docs/fr-ca/quickstart/native) et [Démarrages rapides pour applications à page unique](/docs/fr-ca/quickstart/spa) vous guideront tout au long du processus.
+* [Authentication API](/docs/fr-ca/api/authentication) : Si vous préférez créer votre propre solution, poursuivez la lecture pour savoir comment appeler notre API directement.
 
 Une fois la connexion réussie, votre application aura accès au jeton d’ID et au jeton d’accès de l’utilisateur. Le jeton d’ID contient des informations de base sur le profil utilisateur, et le jeton d’accès peut être utilisé pour appeler le point de terminaison Auth0 `/userinfo` ou vos propres API protégées. Pour en savoir plus sur les jetons d’ID, consultez [Jetons d’ID](/docs/fr-ca/secure/tokens/id-tokens). Pour en savoir plus sur les jetons d’accès, consultez [Jetons d’accès](/docs/fr-ca/secure/tokens/access-tokens).
 
@@ -23,7 +23,7 @@ Une fois la connexion réussie, votre application aura accès au jeton d’ID et
 Enregistrez votre application auprès d’Auth0. Pour en apprendre davantage, consultez [Enregistrement d’applications natives](/docs/fr-ca/get-started/auth0-overview/create-applications/native-apps) ou [Enregistrement d’applications Web à page unique](/docs/fr-ca/get-started/auth0-overview/create-applications/single-page-web-apps).
 
 * Sélectionnez un **type d’applicationnative** ou **à page unique**, selon le type de votre application.
-* Ajoutez une **URL de rappel autorisée** de `VOTRE_URL_RAPPEL`. Le format de l’URL de rappel varie en fonction du type d’application et de la plateforme. Pour plus de détails sur le format correspondant à votre type d’application et à votre plateforme, consultez [Démarrages rapides Native/Mobile](/docs/quickstart/native) et [Démarrages rapides Application à page unique](/docs/quickstart/spa).
+* Ajoutez une **URL de rappel autorisée** de `VOTRE_URL_RAPPEL`. Le format de l’URL de rappel varie en fonction du type d’application et de la plateforme. Pour plus de détails sur le format correspondant à votre type d’application et à votre plateforme, consultez [Démarrages rapides Native/Mobile](/docs/fr-ca/quickstart/native) et [Démarrages rapides Application à page unique](/docs/fr-ca/quickstart/spa).
 * Assurez-vous que les **Grant Types (Types d’autorisation)** de votre application comprennent le **code d’autorisation**. Pour en savoir plus, lisez [Mettre à jour les types d’autorisation](/docs/fr-ca/get-started/applications/update-grant-types).
 
 ## Créer un vérificateur de code
@@ -34,7 +34,7 @@ Pour en savoir plus sur l’algorithme de création du `code_verifier`, consulte
 
 ### Exemple JavaScript
 
-```javascript
+```javascript lines
 // Dependency: Node.js crypto module
 // https://nodejs.org/api/crypto.html#crypto_crypto
 function base64URLEncode(str) {
@@ -48,7 +48,7 @@ var verifier = base64URLEncode(crypto.randomBytes(32));
 
 ### Exemple Java
 
-```javascript
+```java lines
 // Dependency: Apache Commons Codec
 // https://commons.apache.org/proper/commons-codec/
 // Import the Base64 class.
@@ -61,7 +61,7 @@ String verifier = Base64.getUrlEncoder().withoutPadding().encodeToString(code);
 
 ### Exemple Android
 
-```javascript
+```java lines
 // Dependency: Apache Commons Codec
 // https://commons.apache.org/proper/commons-codec/
 // Import the Base64 class.
@@ -74,7 +74,7 @@ String verifier = Base64.encodeToString(code, Base64.URL_SAFE | Base64.NO_WRAP |
 
 ### Échantillon Swift 5
 
-```javascript
+```swift lines
 var buffer = [UInt8](repeating: 0, count: 32)
 _ = SecRandomCopyBytes(kSecRandomDefault, buffer.count, &buffer)
 let verifier = Data(buffer).base64EncodedString()
@@ -85,7 +85,7 @@ let verifier = Data(buffer).base64EncodedString()
 
 ### Exemple Objective-C
 
-```
+```objective-c lines
 NSMutableData *data = [NSMutableData dataWithLength:32];
 int result __attribute__((unused)) = SecRandomCopyBytes(kSecRandomDefault, 32, data.mutableBytes);
 NSString *verifier = [[[[data base64EncodedStringWithOptions:0]
@@ -102,7 +102,7 @@ Pour en savoir plus sur la façon dont le `code_challenge` est dérivé du `code
 
 ### Exemple JavaScript
 
-```javascript
+```javascript lines
 // Dependency: Node.js crypto module
 // https://nodejs.org/api/crypto.html#crypto_crypto
 function sha256(buffer) {
@@ -113,7 +113,7 @@ var challenge = base64URLEncode(sha256(verifier));
 
 ### Exemple Java
 
-```javascript
+```java lines
 // Dependency: Apache Commons Codec
 // https://commons.apache.org/proper/commons-codec/
 // Import the Base64 class.
@@ -127,7 +127,7 @@ String challenge = Base64.encodeBase64URLSafeString(digest);
 
 ### Échantillon Swift 5
 
-```
+```swift lines
 import CommonCrypto
 
 // ...
@@ -146,7 +146,7 @@ let challenge = hash.base64EncodedString()
 
 ### Exemple Objective-C
 
-```javascript
+```objective-c lines
 // Dependency: Apple Common Crypto library
 // http://opensource.apple.com//source/CommonCrypto
 u_int8_t buffer[CC_SHA256_DIGEST_LENGTH * sizeof(u_int8_t)];
@@ -168,14 +168,14 @@ Une fois que vous avez créé le `code_verifier` et le `code_challenge`, vous de
 
 \* Authentification de l’utilisateur;
 \* Rediriger l’utilisateur vers un fournisseur d’identité pour gérer l’authentification;
-\* Vérification des sessions [d’authentification unique (SSO)](/docs/authenticate/single-sign-on) actives;
+\* Vérification des sessions [d’authentification unique (SSO)](/docs/fr-ca/authenticate/single-sign-on) actives;
 \* Obtention du consentement de l’utilisateur pour le niveau d’autorisation demandé, sauf si le consentement a été préalablement donné.
 
-Pour autoriser l’utilisateur, votre application doit envoyer l’utilisateur vers [l’URL d’autorisation](/docs/api/authentication#authorization-code-grant-pkce-), y compris le `code_challenge` que vous avez généré à l’étape précédente et la méthode que vous avez utilisée pour générer le `code_challenge`.
+Pour autoriser l’utilisateur, votre application doit envoyer l’utilisateur vers [l’URL d’autorisation](/docs/fr-ca/api/authentication#authorization-code-grant-pkce-), y compris le `code_challenge` que vous avez généré à l’étape précédente et la méthode que vous avez utilisée pour générer le `code_challenge`.
 
 ### Exemple d’URL d’autorisation
 
-```
+``` lines
 https://{yourDomain}/authorize?
     response_type=code&
     code_challenge={codeChallenge}&
@@ -196,55 +196,55 @@ https://{yourDomain}/authorize?
 </thead>
 <tbody>
 <tr>
-<td><code>response_type</code></td>
-<td>Indique le type d’identifiant qu’Auth0 va retourner (<code>code</code> ou <code>jeton</code>). Pour ce flux, la valeur doit être <code>code</code></td>
+<td>`response_type`</td>
+<td>Indique le type d’identifiant qu’Auth0 va retourner (`code` ou `jeton`). Pour ce flux, la valeur doit être `code`</td>
 </tr>
 <tr>
-<td><code>code_challenge</code></td>
-<td>Défi généré à partir du <code>code_verifier</code>.</td>
+<td>`code_challenge`</td>
+<td>Défi généré à partir du `code_verifier`.</td>
 </tr>
 <tr>
-<td><code>code_challenge_method</code></td>
-<td>Méthode utilisée pour générer le défi (par exemple, S256). La spécification PKCE définit deux méthodes, <code>S256</code> et <code>plain</code>, la première étant utilisée dans cet exemple et la <strong>seule</strong> prise en charge par Auth0 puisque la seconde est déconseillée.</td>
+<td>`code_challenge_method`</td>
+<td>Méthode utilisée pour générer le défi (par exemple, S256). La spécification PKCE définit deux méthodes, `S256` et `plain`, la première étant utilisée dans cet exemple et la <strong>seule</strong> prise en charge par Auth0 puisque la seconde est déconseillée.</td>
 </tr>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>L’ID client de votre application. Vous pouvez trouver cette valeur dans les <a href="https://manage.auth0.com/#/Applications/{yourClientId}/settings">paramètres de l’application</a>.</td>
 </tr>
 <tr>
-<td><code>redirect_uri</code></td>
+<td>`redirect_uri`</td>
 <td>URL vers laquelle Auth0 redirigera le navigateur une fois que l’autorisation aura été accordée par l’utilisateur. Vous devez spécifier cette URL en tant qu’URL de rappel valide dans les <a href="https://manage.auth0.com/#/Applications/{yourClientId}/settings">paramètre de l’application</a>. &lt;br /&amp;gt ; &lt;br /&amp;gt ; <strong>Attention:</strong> Conformément à la <a href="https://tools.ietf.org/html/rfc6749#section-3.1.2">spécification OAuth 2.0</a>, Auth0 supprime tout ce qui se trouve après le hachage et n’accepte <em>pas</em> les fragments.</td>
 </tr>
 <tr>
-<td><code>scope</code></td>
-<td>Indique les <a href="/docs/permissions">permissions</a> pour lesquels vous souhaitez demander une autorisation, ce qui dicte les demandes (ou les attributs d’utilisateur) que vous souhaitez voir renvoyées. Ils doivent être séparés par un espace. Pour obtenir un jeton d’ID dans la réponse, vous devez spécifier une permission d’au moins <code>openid</code>. Si vous voulez récupérer le profil complet de l’utilisateur, vous pouvez demander <code>openid profile</code>. Vous pouvez demander n’importe lequel des <a href="https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims">permissions standards d’OpenID Connect (OIDC)</a> sur les utilisateurs, comme <code>email</code> (adresse courriel), ou des <a href="/docs/tokens/concepts/jwt-claims#custom-claims">demandes personnalisées</a> conformes à un <a href="/docs/tokens/guides/create-namespaced-custom-claims">format espace de nom</a>.</td>
+<td>`scope`</td>
+<td>Indique les <a href="/docs/fr-ca/permissions">permissions</a> pour lesquels vous souhaitez demander une autorisation, ce qui dicte les demandes (ou les attributs d’utilisateur) que vous souhaitez voir renvoyées. Ils doivent être séparés par un espace. Pour obtenir un jeton d’ID dans la réponse, vous devez spécifier une permission d’au moins `openid`. Si vous voulez récupérer le profil complet de l’utilisateur, vous pouvez demander `openid profile`. Vous pouvez demander n’importe lequel des <a href="https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims">permissions standards d’OpenID Connect (OIDC)</a> sur les utilisateurs, comme `email` (adresse courriel), ou des <a href="/docs/fr-ca/tokens/concepts/jwt-claims#custom-claims">demandes personnalisées</a> conformes à un <a href="/docs/fr-ca/tokens/guides/create-namespaced-custom-claims">format espace de nom</a>.</td>
 </tr>
 <tr>
-<td>Incluez <code>offline_access</code> pour obtenir un <dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">Jeton d’actualisation</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn> (assurez-vous que le champ <strong>Allow Offline Access</strong> est activé dans les <a href="https://manage.auth0.com/#/applications">paramètres de l’application</a>).</td>
+<td>Incluez `offline_access` pour obtenir un <dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">Jeton d’actualisation</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn> (assurez-vous que le champ <strong>Allow Offline Access</strong> est activé dans les <a href="https://manage.auth0.com/#/applications">paramètres de l’application</a>).</td>
 <td></td>
 </tr>
 <tr>
-<td><code>state</code></td>
-<td>(recommandé) Une chaîne alphanumérique arbitraire opaque que votre application ajoute à la requête initiale qu’Auth0 inclut lorsqu’elle redirige vers votre application. Pour voir comment utiliser cette valeur pour prévenir les attaques par falsification de requête intersites , voir la section <a href="/docs/protocols/oauth2/mitigate-csrf-attacks">Atténuer les attaques par falsification de requête intersites avec les paramètres d’état</a>.</td>
+<td>`state`</td>
+<td>(recommandé) Une chaîne alphanumérique arbitraire opaque que votre application ajoute à la requête initiale qu’Auth0 inclut lorsqu’elle redirige vers votre application. Pour voir comment utiliser cette valeur pour prévenir les attaques par falsification de requête intersites , voir la section <a href="/docs/fr-ca/protocols/oauth2/mitigate-csrf-attacks">Atténuer les attaques par falsification de requête intersites avec les paramètres d’état</a>.</td>
 </tr>
 <tr>
-<td><code>connection</code></td>
-<td>( facultatif) Force l’utilisateur à se connecter avec une connexion spécifique. Par exemple, vous pouvez transmettre une valeur de <code>github</code> pour envoyer l’utilisateur directement à GitHub pour qu’il se connecte avec son compte. Si la valeur n’est pas spécifiée, l’utilisateur voit l’écran de verrouillage Auth0 avec toutes les connexions configurées. Vous pouvez voir une liste de vos connexions configurées dans l’onglet <strong>Connections</strong> (connexions) de votre application.</td>
+<td>`connection`</td>
+<td>( facultatif) Force l’utilisateur à se connecter avec une connexion spécifique. Par exemple, vous pouvez transmettre une valeur de `github` pour envoyer l’utilisateur directement à GitHub pour qu’il se connecte avec son compte. Si la valeur n’est pas spécifiée, l’utilisateur voit l’écran de verrouillage Auth0 avec toutes les connexions configurées. Vous pouvez voir une liste de vos connexions configurées dans l’onglet <strong>Connections</strong> (connexions) de votre application.</td>
 </tr>
 <tr>
-<td><code>organization</code></td>
+<td>`organization`</td>
 <td>(facultatif) Identifiant de l’organisation à utiliser pour authentifier un utilisateur. S’il n’est pas fourni et que votre application est configurée pour <strong>afficher l’invite de l’organisation</strong>, l’utilisateur pourra entrer le nom de l’organisation lors de l’authentification.</td>
 </tr>
 <tr>
-<td><code>invitation</code></td>
-<td>(facultatif) Identifiant du ticket d’invitation de l’organization. Lorsque vous <a href="/docs/organizations/invite-members">invitez un membre à rejoindre une organisation</a>, votre application doit gérer l’acceptation de l’invitation en transmettant les combinaisons de valeurs clés <code>invitation</code> et <code>organization</code> quand l’utilisateur accepte l’invitation.</td>
+<td>`invitation`</td>
+<td>(facultatif) Identifiant du ticket d’invitation de l’organization. Lorsque vous <a href="/docs/fr-ca/organizations/invite-members">invitez un membre à rejoindre une organisation</a>, votre application doit gérer l’acceptation de l’invitation en transmettant les combinaisons de valeurs clés `invitation` et `organization` quand l’utilisateur accepte l’invitation.</td>
 </tr>
 </tbody>
 </table>
 
 Par exemple, votre snippet HTML pour l’URL d’autorisation lors de l’ajout d’une connexion à votre application pourrait ressembler à ceci :
 
-```
+```html lines
 <a href="https://{yourDomain}/authorize?
   response_type=code&
   code_challenge=E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM&
@@ -261,7 +261,7 @@ Par exemple, votre snippet HTML pour l’URL d’autorisation lors de l’ajout 
 
 Si tout se passe bien, vous recevrez une réponse `HTTP 302`. Le code d’autorisation est ajouté à la fin de l’URL :
 
-```
+``` lines
 HTTP/1.1 302 Found
 Location: {yourCallbackUrl}?code={authorizationCode}&state=xyzABC123
 ```
@@ -270,12 +270,12 @@ Location: {yourCallbackUrl}?code={authorizationCode}&state=xyzABC123
 
 Échangez votre `authorization_code` et `code_verifier` pour des jetons.
 
-Maintenant que vous avez un code d’authentification, vous pouvez l’échanger pour des jetons. En utilisant le code d’autorisation (`code`) extrait de l’étape précédente, vous devrez `POST` sur [l’URL du jeton](/docs/api/authentication#authorization-code-pkce-) en l’envoyant avec le `code_verifier`.
+Maintenant que vous avez un code d’authentification, vous pouvez l’échanger pour des jetons. En utilisant le code d’autorisation (`code`) extrait de l’étape précédente, vous devrez `POST` sur [l’URL du jeton](/docs/fr-ca/api/authentication#authorization-code-pkce-) en l’envoyant avec le `code_verifier`.
 
 ### Exemple d’URL « POST to token »
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -284,8 +284,8 @@ curl --request POST \
 --data 'code_verifier={yourGeneratedCodeVerifier}' \
 --data 'code={yourAuthorizationCode}' \
 --data 'redirect_uri={https://yourApp/callback}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -293,7 +293,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=authorizat
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -312,15 +312,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=authorization_code&client_id={yourClientId}&code_verifier=%7ByourGeneratedCodeVerifier%7D&code=%7ByourAuthorizationCode%7D&redirect_uri={https://yourApp/callback}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -339,8 +339,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=authorization_code" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -367,7 +367,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -390,8 +390,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=authorization_code&client_id={yourClientId}&code_verifier=%7ByourGeneratedCodeVerifier%7D&code=%7ByourAuthorizationCode%7D&redirect_uri={https://yourApp/callback}"
@@ -402,7 +402,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -415,8 +415,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=authorization_code&client_id={yourClientId}&code_verifier=%7ByourGeneratedCodeVerifier%7D&code=%7ByourAuthorizationCode%7D&redirect_uri={https://yourApp/callback}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=authorization_code".data(using: String.Encoding.utf8)!)
@@ -453,24 +453,24 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>grant_type</code></td>
+<td>`grant_type`</td>
 <td>Définissez sur « authorization_code ».</td>
 </tr>
 <tr>
-<td><code>code_verifier</code></td>
+<td>`code_verifier`</td>
 <td>La clé de chiffrement aléatoire qui a été générée à la première étape de ce tutoriel.</td>
 </tr>
 <tr>
-<td><code>code</code></td>
-<td>Le <code>authorization_code</code> récupéré à l’étape précédente de ce tutoriel.</td>
+<td>`code`</td>
+<td>Le `authorization_code` récupéré à l’étape précédente de ce tutoriel.</td>
 </tr>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>L’ID client de votre application. Vous pouvez trouver cette valeur dans [Paramètres de l’application] (https://manage.auth0.com/#/Applications/{yourClientId}/settings).</td>
 </tr>
 <tr>
-<td><code>redirect_uri</code></td>
-<td>L’URL de rappel valide défini dans les paramètres de votre application. Cela doit correspondre exactement au <code>redirect_uri</code> transmis à l’URL d’autorisation à l’étape précédente de ce tutoriel. Notez que cela doit être codé URL.</td>
+<td>`redirect_uri`</td>
+<td>L’URL de rappel valide défini dans les paramètres de votre application. Cela doit correspondre exactement au `redirect_uri` transmis à l’URL d’autorisation à l’étape précédente de ce tutoriel. Notez que cela doit être codé URL.</td>
 </tr>
 </tbody>
 </table>
@@ -479,7 +479,7 @@ dataTask.resume()
 
 Si tout se passe bien, vous recevrez une réponse HTTP 200 avec une charge utile contenant les valeurs `access_token`, `refresh_token`, `id_token`, et `token_type` :
 
-```json
+```json lines
 {
   "access_token":"eyJz93a...k4laUWw",
   "refresh_token":"GEbRxBN...edjnXbL",
@@ -491,13 +491,13 @@ Si tout se passe bien, vous recevrez une réponse HTTP 200 avec une charge uti
 
 <Warning>
 
-Validez vos jetons avant de les enregistrer. Pour en savoir plus, lisez [Valider les jetons d’ID](/docs/secure/tokens/id-tokens/validate-id-tokens) et [Valider les jetons d’accès](/docs/fr-ca/secure/tokens/access-tokens/validate-access-tokens).
+Validez vos jetons avant de les enregistrer. Pour en savoir plus, lisez [Valider les jetons d’ID](/docs/fr-ca/secure/tokens/id-tokens/validate-id-tokens) et [Valider les jetons d’accès](/docs/fr-ca/secure/tokens/access-tokens/validate-access-tokens).
 
 </Warning>
 
 Les [Jetons d’ID](/docs/fr-ca/secure/tokens/id-tokens) contiennent des informations de l’utilisateur qui doivent être décodées et extraites.
 
-Les [jetons d’accès](/docs/fr-ca/secure/tokens/access-tokens) sont utilisés pour appeler le [point de terminaison /userinfo de l’Authentication API Auth0](/docs/api/authentication#get-user-info) ou une autre API. Si vous appelez votre propre API, la première chose que votre API devra faire est de [vérifier le jeton d’accès](/docs/fr-ca/secure/tokens/access-tokens/validate-access-tokens).
+Les [jetons d’accès](/docs/fr-ca/secure/tokens/access-tokens) sont utilisés pour appeler le [point de terminaison /userinfo de l’Authentication API Auth0](/docs/fr-ca/api/authentication#get-user-info) ou une autre API. Si vous appelez votre propre API, la première chose que votre API devra faire est de [vérifier le jeton d’accès](/docs/fr-ca/secure/tokens/access-tokens/validate-access-tokens).
 
 Les [jetons d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens) sont utilisés pour obtenir un nouveau jeton d’accès ou un nouveau jeton d’ID après l’expiration du précédent. Le `refresh_token` ne sera présent dans la réponse que si vous avez inclus la permission `offline_access` et activé **Autoriser l’accès hors ligne** pour votre API dans le Dashboard.
 
@@ -513,7 +513,7 @@ Les jetons d’actualisation doivent être stockés en toute sécurité car ils 
 
 Cet exemple montre la requête la plus basique que vous pouvez faire lorsque vous autorisez l’utilisateur à l’étape 1. L’écran de connexion Auth0 permet à l’utilisateur de se connecter avec l’une des connexions configurées.
 
-```
+``` lines
 https://{yourDomain}/authorize?
     response_type=code&
     code_challenge={codeChallenge}&
@@ -525,7 +525,7 @@ https://{yourDomain}/authorize?
 
 Désormais, lorsque vous demanderez des jetons, votre jeton d’ID contiendra les autorisations les plus élémentaires. Lorsque vous décodez le jeton d’ID, il ressemble à ce qui suit :
 
-```json
+```json lines
 {
   "iss": "https://auth0pnp.auth0.com/",
   "sub": "auth0|581...",
@@ -541,7 +541,7 @@ Outre l’authentification habituelle de l’utilisateur, cet exemple montre com
 
 Pour demander le nom et la photo de l’utilisateur, vous devez ajouter les permissions appropriées lors de l’autorisation de l’utilisateur :
 
-```
+``` lines
 https://{yourDomain}/authorize?
     response_type=code&
     code_challenge={codeChallenge}&
@@ -554,7 +554,7 @@ https://{yourDomain}/authorize?
 
 Désormais, lorsque vous demanderez des jetons, votre jeton d’ID contiendra le nom et la photo demandés. Lorsque vous décodez le jeton d’ID, il ressemble à ce qui suit :
 
-```json
+```json lines
 {
   "name": "auth0user@...",
   "picture": "https://example.com/profile-pic.png",
@@ -572,7 +572,7 @@ En plus de l’authentification habituelle des utilisateurs, cet exemple montre 
 
 Pour envoyer les utilisateurs directement à l’écran de connexion de GitHub, vous devez passer le paramètre `connection` et définir sa valeur au nom de la connexion (dans ce cas, `github`) lors de l’autorisation de l’utilisateur :
 
-```
+``` lines
 https://{yourDomain}/authorize?
     response_type=code&
     code_challenge={codeChallenge}&
@@ -586,7 +586,7 @@ https://{yourDomain}/authorize?
 
 Désormais, lorsque vous demandez des jetons, votre jeton d’ID contiendra une demande `sub` avec l’ID unique de l’utilisateur renvoyé par GitHub. Lorsque vous décodez le jeton d’ID, il ressemble à ce qui suit :
 
-```json
+```json lines
 {
   "name": "John Smith",
   "picture": "https://avatars.example.com",

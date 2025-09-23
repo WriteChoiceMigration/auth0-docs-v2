@@ -1,13 +1,13 @@
 ---
 title: "Dépanner des configurations SAML"
 permalink: "troubleshoot-saml-configurations"
+'description': "Cette partie explique le dépannage des problèmes de configuration SAML."
 'og:title': "Dépanner des configurations SAML"
 'og:description': "Cette partie explique le dépannage des problèmes de configuration SAML."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Dépanner des configurations SAML"
 'twitter:description': "Cette partie explique le dépannage des problèmes de configuration SAML."
 ---
-# Dépanner des configurations SAML
 
 Lors du dépannage, il est important de comprendre votre configuration.
 
@@ -94,13 +94,13 @@ Cette erreur se produit lorsque l’attribut `InResponseTo` dans la réponse SAM
 
 Si votre locataire utilise un domaine personnalisé, vous pourriez avoir une incohérence si le flux de connexion commence sur le domaine personnalisé et se termine sur le domaine canonique. Par exemple, l’utilisateur commence sur le domaine personnalisé :
 
-```
+``` lines
 https://auth.{yourDomain}.com/authorize?client_id=abc123&redirect_uri=https://jwt.io&response_type=code&scope=openid&audience=https://example.com&connection=mysamlconnection
 ```
 
 Mais le fournisseur d’identité est configuré pour renvoyer la réponse SAML à l’URL ACS sur le domaine canonique :
 
-```
+``` lines
 https://{yourTenant}.auth0.com/login/callback
 ```
 
@@ -181,7 +181,7 @@ Les sections suivantes décrivent comment vérifier chaque étape et comment ide
 2. Localisez votre connexion et sélectionnez son icône **Try (Essayer)** (triangle/jouer) pour tester l’interaction entre Auth0 et l’IdP distant. Si la connexion **ne** fonctionne pas, poursuivez avec les étapes détaillées dans cette section. Si c’est le cas, passez à la section suivante.
 3. À côté de la connexion SAML, cliquez sur **Settings (Paramètres)** (représenté par l’icône d’engrenage).
 
-   <Frame>![Dashboard Authentication Enterprise SAML Connection Settings](//images.ctfassets.net/cdy7uua7fh8z/6s8p4aMck06YnPStr493sA/86cf45f919a2b75376a5ee6474b71cb1/2025-02-27_15-56-22.png)</Frame>
+   <Frame>![Dashboard Authentication Enterprise SAML Connection Settings](/images/fr-ca/cdy7uua7fh8z/6s8p4aMck06YnPStr493sA/86cf45f919a2b75376a5ee6474b71cb1/2025-02-27_15-56-22.png)</Frame>
 
 4. Vérifiez et confirmez ce qui suit avec l’administrateur de l’IdP :
 
@@ -234,27 +234,27 @@ Dans ce cas, l’utilisateur se connecte avec succès au fournisseur d’identit
 <tbody>
 <tr>
 <td>Destination</td>
-<td>Vérifiez que la destination de l’assertion SAML est le bon locataire Auth0 et la bonne connexion (<code>https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}</code>).</td>
+<td>Vérifiez que la destination de l’assertion SAML est le bon locataire Auth0 et la bonne connexion (`https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}`).</td>
 </tr>
 <tr>
 <td>Status Field (Champ d’état)</td>
-<td>Ce champ doit indiquer la réussite. (<code>&lt;samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/&gt;</code>).</td>
+<td>Ce champ doit indiquer la réussite. (`&lt;samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/&gt;`).</td>
 </tr>
 <tr>
 <td>Destinataire</td>
-<td>Vérifiez que l’élément Méthode <code>&lt;saml:SubjectConfirmation</code> contient le bon locataire et la bonne connexion dans le champ “Recipient” (<code>https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}</code>).</td>
+<td>Vérifiez que l’élément Méthode `&lt;saml:SubjectConfirmation` contient le bon locataire et la bonne connexion dans le champ “Recipient” (`https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}`).</td>
 </tr>
 <tr>
 <td>Public</td>
-<td>Vérifiez que le champ de restriction de public SAML contient les bonnes informations sur le locataire et sur la connexion (<code>&lt;saml:AudienceRestriction&gt;&lt;saml:Audience&gt;urn:auth0:{TENANT}:{CONNECTION}&lt;/saml:audience&gt;</code>).</td>
+<td>Vérifiez que le champ de restriction de public SAML contient les bonnes informations sur le locataire et sur la connexion (`&lt;saml:AudienceRestriction&gt;&lt;saml:Audience&gt;urn:auth0:{TENANT}:{CONNECTION}&lt;/saml:audience&gt;`).</td>
 </tr>
 <tr>
 <td>Dénomination</td>
-<td>L’attribut identifié par le champ <code>NameIdentifier</code> doit être connu de l’application. Si ce n’est pas le cas, l’identifiant doit être un autre attribut dans l’assertion (tel qu’un identifiant IdP interne pour l’utilisateur ou une adresse courriel).</td>
+<td>L’attribut identifié par le champ `NameIdentifier` doit être connu de l’application. Si ce n’est pas le cas, l’identifiant doit être un autre attribut dans l’assertion (tel qu’un identifiant IdP interne pour l’utilisateur ou une adresse courriel).</td>
 </tr>
 <tr>
 <td>Clé de signature</td>
-<td>Vérifiez que la valeur indiquée par l’élément <code>X509Certificate</code> correspond à la valeur fournie à votre connexion.</td>
+<td>Vérifiez que la valeur indiquée par l’élément `X509Certificate` correspond à la valeur fournie à votre connexion.</td>
 </tr>
 <tr>
 <td>Certificat</td>
@@ -277,7 +277,7 @@ Vérifiez si le profil Auth0 de l’utilisateur est correctement rempli :
    1. Pour activer le débogage pour la connexion, accédez à [Authentification (Authentification) > Enterprise (Entreprise)](https://manage.auth0.com/#/connections/enterprise).
    2. Ouvrez la liste des connexions de l’IdP **SAML** , cliquez sur **Settings (Paramètres)**, et activez **Debug Mode (Mode débogage)**.
 
-      <Frame>![Troubleshoot SAML Connections Enable Debug Mode screen](//images.ctfassets.net/cdy7uua7fh8z/1F6npTHy1P0c0ygXfbndBD/a8f34635de6282df5062c2f951ee3177/2025-02-27_15-33-50.png)</Frame>
+      <Frame>![Troubleshoot SAML Connections Enable Debug Mode screen](/images/fr-ca/cdy7uua7fh8z/1F6npTHy1P0c0ygXfbndBD/a8f34635de6282df5062c2f951ee3177/2025-02-27_15-33-50.png)</Frame>
 
    3. Avec **Debug Mode (Mode débogage)** activé, les entrées de journal **Warning During Login (Avertissement lors de la connexion)**[dans le Dashboard](https://manage.auth0.com/#/logs) contiennent une propriété `original_profile` répertoriant chaque attribut inclus dans l’assertion SAML par le fournisseur d’identité. Vous pouvez utiliser cette liste pour voir les informations que l’IdP envoie et pour pouvoir créer les mappages. Si l’attribut manquant n’est pas du tout présent dans l’assertion, veuillez travailler avec l’IdP pour vous assurer qu’il est inclus.
 5. Si une valeur d’attribut existe dans le profil utilisateur Auth0, mais n’est pas mappée au bon attribut, vous pouvez corriger cela via la fonctionnalité de mappage de connexion.
@@ -285,7 +285,7 @@ Vérifiez si le profil Auth0 de l’utilisateur est correctement rempli :
    1. Vous pouvez le faire en accédant à [Authentication (Authentification) > Enterprise (Entreprise)](https://manage.auth0.com/#/connections/enterprise).
    2. Ouvrez la liste des connexions de l’IdP **SAML** et allez à l’onglet **Mappages**.
 
-      <Frame>![Troubleshoot SAML Connections Mappings Tab Screen](//images.ctfassets.net/cdy7uua7fh8z/BPMjuhqE17E5vWcHukcKf/2ddef4b5c2e30abde00e2f9504799c20/2025-02-27_14-14-14.png)</Frame>
+      <Frame>![Troubleshoot SAML Connections Mappings Tab Screen](/images/fr-ca/cdy7uua7fh8z/BPMjuhqE17E5vWcHukcKf/2ddef4b5c2e30abde00e2f9504799c20/2025-02-27_14-14-14.png)</Frame>
 
    3. Dans l’éditeur fourni, il y a un extrait JSON que vous pouvez modifier pour configurer vos mappages Le nom à gauche est l’attribut du profil utilisateur Auth0 auquel la valeur de l’assertion sera mappée. La valeur à droite est l’identifiant dans l’assertion SAML d’où provient l’attribut. Lorsque Auth0 intègre des attributs SAML non mappés dans le profil utilisateur, les identifiants d’attribut contenant des points `.` sont remplacés par les deux points `:`. Lors de la configuration de vos mappages, assurez-vous que les identifiants que vous fournissez correspondent à ceux de l’assertion SAML.
 
@@ -334,27 +334,27 @@ Dans ce cas, l’utilisateur se connecte à l’IdP avec succès, les journaux d
 <tbody>
 <tr>
 <td>Destination</td>
-<td>Vérifiez que la destination de l’assertion SAML est le bon locataire Auth0 et la bonne connexion (<code>https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}</code>).</td>
+<td>Vérifiez que la destination de l’assertion SAML est le bon locataire Auth0 et la bonne connexion (`https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}`).</td>
 </tr>
 <tr>
 <td>Status Field (Champ d’état)</td>
-<td>Ce champ doit indiquer la réussite. (<code>&lt;samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/&gt;</code>).</td>
+<td>Ce champ doit indiquer la réussite. (`&lt;samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/&gt;`).</td>
 </tr>
 <tr>
 <td>Destinataire</td>
-<td>Vérifiez que l’élément Méthode <code>&lt;saml:SubjectConfirmation</code> contient le bon locataire et la bonne connexion dans le champ “Recipient” (<code>https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}</code>).</td>
+<td>Vérifiez que l’élément Méthode `&lt;saml:SubjectConfirmation` contient le bon locataire et la bonne connexion dans le champ “Recipient” (`https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}`).</td>
 </tr>
 <tr>
 <td>Public</td>
-<td>Vérifiez que le champ de restriction de public SAML contient les bonnes informations sur le locataire et sur la connexion (<code>&lt;saml:AudienceRestriction&gt;&lt;saml:Audience&gt;urn:auth0:{TENANT}:{CONNECTION}&lt;/saml:audience&gt;</code>).</td>
+<td>Vérifiez que le champ de restriction de public SAML contient les bonnes informations sur le locataire et sur la connexion (`&lt;saml:AudienceRestriction&gt;&lt;saml:Audience&gt;urn:auth0:{TENANT}:{CONNECTION}&lt;/saml:audience&gt;`).</td>
 </tr>
 <tr>
 <td>Dénomination</td>
-<td>L’attribut identifié par le champ <code>NameIdentifier</code> doit être connu de l’application. Si ce n’est pas le cas, l’identifiant doit être un autre attribut dans l’assertion (tel qu’un identifiant IdP interne pour l’utilisateur ou une adresse courriel).</td>
+<td>L’attribut identifié par le champ `NameIdentifier` doit être connu de l’application. Si ce n’est pas le cas, l’identifiant doit être un autre attribut dans l’assertion (tel qu’un identifiant IdP interne pour l’utilisateur ou une adresse courriel).</td>
 </tr>
 <tr>
 <td>Clé de signature</td>
-<td>Vérifiez que la valeur indiquée par l’élément <code>X509Certificate</code> correspond à la valeur fournie à votre connexion.</td>
+<td>Vérifiez que la valeur indiquée par l’élément `X509Certificate` correspond à la valeur fournie à votre connexion.</td>
 </tr>
 <tr>
 <td>Certificat</td>
@@ -474,27 +474,27 @@ Dans ce cas, l’utilisateur se connecte à l’IdP avec succès, un événement
 <tbody>
 <tr>
 <td>Destination</td>
-<td>Vérifiez que la destination de l’assertion SAML est le bon locataire Auth0 et la bonne connexion (<code>https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}</code>).</td>
+<td>Vérifiez que la destination de l’assertion SAML est le bon locataire Auth0 et la bonne connexion (`https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}`).</td>
 </tr>
 <tr>
 <td>Status Field (Champ d’état)</td>
-<td>Ce champ doit indiquer la réussite. (<code>&lt;samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/&gt;</code>).</td>
+<td>Ce champ doit indiquer la réussite. (`&lt;samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/&gt;`).</td>
 </tr>
 <tr>
 <td>Destinataire</td>
-<td>Vérifiez que l’élément Méthode <code>&lt;saml:SubjectConfirmation</code> contient le bon locataire et la bonne connexion dans le champ “Recipient” (<code>https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}</code>).</td>
+<td>Vérifiez que l’élément Méthode `&lt;saml:SubjectConfirmation` contient le bon locataire et la bonne connexion dans le champ “Recipient” (`https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}`).</td>
 </tr>
 <tr>
 <td>Public</td>
-<td>Vérifiez que le champ de restriction de public SAML contient les bonnes informations sur le locataire et sur la connexion (<code>&lt;saml:AudienceRestriction&gt;&lt;saml:Audience&gt;urn:auth0:{TENANT}:{CONNECTION}&lt;/saml:audience&gt;</code>).</td>
+<td>Vérifiez que le champ de restriction de public SAML contient les bonnes informations sur le locataire et sur la connexion (`&lt;saml:AudienceRestriction&gt;&lt;saml:Audience&gt;urn:auth0:{TENANT}:{CONNECTION}&lt;/saml:audience&gt;`).</td>
 </tr>
 <tr>
 <td>Dénomination</td>
-<td>L’attribut identifié par le champ <code>NameIdentifier</code> doit être connu de l’application. Si ce n’est pas le cas, l’identifiant doit être un autre attribut dans l’assertion (tel qu’un identifiant IdP interne pour l’utilisateur ou une adresse courriel).</td>
+<td>L’attribut identifié par le champ `NameIdentifier` doit être connu de l’application. Si ce n’est pas le cas, l’identifiant doit être un autre attribut dans l’assertion (tel qu’un identifiant IdP interne pour l’utilisateur ou une adresse courriel).</td>
 </tr>
 <tr>
 <td>Clé de signature</td>
-<td>Vérifiez que la valeur indiquée par l’élément <code>X509Certificate</code> correspond à la valeur fournie à votre connexion.</td>
+<td>Vérifiez que la valeur indiquée par l’élément `X509Certificate` correspond à la valeur fournie à votre connexion.</td>
 </tr>
 <tr>
 <td>Certificat</td>

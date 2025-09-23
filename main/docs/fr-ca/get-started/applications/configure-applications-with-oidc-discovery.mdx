@@ -1,13 +1,13 @@
 ---
 title: "Configurer des applications avec OIDC Discovery"
 permalink: "configure-applications-with-oidc-discovery"
+'description': "Décrit comment utiliser la découverte OpenID Connect (OIDC) pour configurer des applications avec Auth0 à l’aide des trousses SDK."
 'og:title': "Configurer des applications avec OIDC Discovery"
 'og:description': "Décrit comment utiliser la découverte OpenID Connect (OIDC) pour configurer des applications avec Auth0 à l’aide des trousses SDK."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer des applications avec OIDC Discovery"
 'twitter:description': "Décrit comment utiliser la découverte OpenID Connect (OIDC) pour configurer des applications avec Auth0 à l’aide des trousses SDK."
 ---
-# Configurer des applications avec OIDC Discovery
 
 Les documents [OpenID Connect (OIDC) Discovery (Découverte OpenID Connect)](https://openid.net/specs/openid-connect-discovery-1_0-final.html#RFC5785)  contiennent des métadonnées sur le fournisseur d’identité (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>). L’ajout de la découverte à votre trousse SDK pour pointer votre application vers le point de terminaison `./wellknown` pour consommer des informations sur votre IdP pourrait aider à configurer votre intégration avec l’IdP.
 
@@ -21,7 +21,7 @@ Vous pouvez configurer des applications avec les documents de découverte <Toolt
 
 ### Exemple de réponse
 
-```json
+```json lines
 {
   "issuer": "https://{yourDomain}.us.auth0.com/",
   "authorization_endpoint": "https://{yourDomain}.us.auth0.com/authorize",
@@ -116,7 +116,7 @@ Par exemple, voici comment configurer le logiciel médiateur OIDC pour Katana v3
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```
+   ``` lines
    app.UseCookieAuthentication(new CookieAuthenticationOptions
    {
        AuthenticationType = CookieAuthenticationDefaults.AuthenticationType

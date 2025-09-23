@@ -1,20 +1,20 @@
 ---
 title: "Configuration de déconnexion du canal d’appui OIDC"
 permalink: "configure-back-channel-logout"
+'description': "Décrit comment configurer la déconnexion du canal d’appui OIDC avec vos services Auth0."
 'og:title': "Configuration de déconnexion du canal d’appui OIDC"
 'og:description': "Décrit comment configurer la déconnexion du canal d’appui OIDC avec vos services Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configuration de déconnexion du canal d’appui OIDC"
 'twitter:description': "Décrit comment configurer la déconnexion du canal d’appui OIDC avec vos services Auth0."
 ---
-# Configuration de déconnexion du canal d’appui OIDC
 
 <Card title="Before you start">
 
 Pour utiliser la déconnexion du canal d'appui, votre application doit respecter les exigences suivantes :
 
 * Votre point de terminaison URI de déconnexion par canal d’appui OIDC doit être exposé sur Internet pour autoriser l’accès de votre locataire Auth0.
-* Les applications prêtes pour la production doivent utiliser TLS. Pour en savoir plus, lisez [Versions et suites cryptographiques TLS (SSL)](/docs/customize/custom-domains/self-managed-certificates/tls-ssl).
+* Les applications prêtes pour la production doivent utiliser TLS. Pour en savoir plus, lisez [Versions et suites cryptographiques TLS (SSL)](/docs/fr-ca/customize/custom-domains/self-managed-certificates/tls-ssl).
 * L’application doit être capable de stocker l’identifiant de session fourni (`sid`) et l’associer avec les sessions d’utilisateur qu’elle crée. Nous recommandons l’utilisation d’un stockage de session durable pour les applications de production.
 * L’application doit être capable de récupérer une session existante par le `sid` pendant le processus de déconnexion, sans utiliser de témoins côté client. Les témoins sont présents dans le navigateur et ne sont pas accessibles par le point de terminaison de rappel de déconnexion.
 
@@ -24,7 +24,7 @@ Pour utiliser la déconnexion du canal d'appui, votre application doit respecter
 
 La déconnexion du canal d’appui OIDC est disponible pour tous les clients du plan Enterprise. Vous devez vérifier le point de terminaison de métadonnées `/.well-known/*` de la norme OIDC pour déterminer si votre application satisfait aux exigences.
 
-```
+```javascript lines
 GET https://acme.eu.auth0.com/.well-known/openid-configuration
 
 HTTP 200
@@ -59,7 +59,7 @@ Enregistrez votre application pour recevoir des jetons de déconnexion via Auth0
 4. Sous **Déconnexion par canal d'appui OpenID Connect > URI de déconnexion du canal d'appui**, ajoutez l’URI de déconnexion de l’application qui recevra les logout_tokens
 5. Quand vous aurez terminé, sélectionnez **Save Changes (Enregistrer les modifications)**.
 
-   <Frame>![Auth0 Dashboard > Applications > Settings](//images.ctfassets.net/cdy7uua7fh8z/19uQRkVswdmaO8gHTVTXCc/7a95b6aaf756f308fd289d996a77e2c1/Back_Channel_Logout_-_FR_.png)</Frame>
+   <Frame>![Auth0 Dashboard > Applications > Settings](/images/fr-ca/cdy7uua7fh8z/19uQRkVswdmaO8gHTVTXCc/7a95b6aaf756f308fd289d996a77e2c1/Back_Channel_Logout_-_FR_.png)</Frame>
 
 #### Se désabonner des applications
 
@@ -74,7 +74,7 @@ Pour désabonner l’application, supprimez l’URL de déconnexion du canal d�
 5. Retirez l’URL du canal d'appui.
 6. Quand vous aurez terminé, sélectionnez **Save Changes (Enregistrer les modifications)**.
 
-   <Frame>![Auth0 Dashboard > Applications > Settings](//images.ctfassets.net/cdy7uua7fh8z/5SlrBhwrNbJx0Wdw2kQ19t/21c47557293714368c47ece7ad1f3cc3/Back_Channel_Logout_-_FR_.png)</Frame>
+   <Frame>![Auth0 Dashboard > Applications > Settings](/images/fr-ca/cdy7uua7fh8z/5SlrBhwrNbJx0Wdw2kQ19t/21c47557293714368c47ece7ad1f3cc3/Back_Channel_Logout_-_FR_.png)</Frame>
 
 À des fins de vérification, le service consigne toujours les URL de déconnexion par canal d’appui pour les abonnements ou les désabonnements dans les journaux des locataires d’Auth0 comme des `événements d’opération d’API`. Pour en apprendre plus, lisez [Journaux](/docs/fr-ca/deploy-monitor/logs).
 
@@ -84,7 +84,7 @@ Pour désabonner l’application, supprimez l’URL de déconnexion du canal d�
 
 Ajoutez la propriété `oidc_logout` pour effectuer une demande `PATCH` pour un client par l’entremise de Management API :
 
-```
+```javascript lines
 PATCH /api/v2/clients/{id}
 "oidc_logout": {
   "backchannel_logout_urls": ["http://acme.eu.auth0.com/events"]
@@ -101,7 +101,7 @@ La requête peut comprendre les autres paramètres d’application.
 
 Supprimez le paramètre `oidc_logout` :
 
-```
+```javascript lines
 PATCH https://acme.eu.auth0.com/api/v2/clients/{id}
 {
   "oidc_logout": {
@@ -137,7 +137,7 @@ Une fois que vous avez configuré la déconnexion par canal d’appui via Auth0�
 
 Charge utile codée de jeton :
 
-```
+```javascript lines
 POST /backchannel-logout HTTP/1.1
 Host: rp.example.org
 Content-Type: application/x-www-form-urlencoded
@@ -153,7 +153,7 @@ Le délai d’expiration d’un jeton est de 2 minutes (120 sec).
 
 Charge utile décodée de jeton :
 
-```json
+```javascript lines
 {
   "iss": "https://artex-dev.eu.auth0.com/",
   "sub": "auth0|602e93db83fa6f00749a23e6",

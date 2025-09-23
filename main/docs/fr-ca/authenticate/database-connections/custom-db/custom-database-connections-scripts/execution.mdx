@@ -1,13 +1,13 @@
 ---
 title: "Meilleures pratiques pour les bases de données personnalisées et l’exécution des scripts d’action"
 permalink: "execution"
+'description': "Apprenez les meilleures pratiques pour l’exécution des scripts d’action des bases de données personnalisées."
 'og:title': "Meilleures pratiques pour les bases de données personnalisées et l’exécution des scripts d’action"
 'og:description': "Apprenez les meilleures pratiques pour l’exécution des scripts d’action des bases de données personnalisées."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Meilleures pratiques pour les bases de données personnalisées et l’exécution des scripts d’action"
 'twitter:description': "Apprenez les meilleures pratiques pour l’exécution des scripts d’action des bases de données personnalisées."
 ---
-# Meilleures pratiques pour les bases de données personnalisées et l’exécution des scripts d’action
 
 Un type de connexion à une base de données personnalisée vous permet de configurer des scripts d’action, qui contiennent le code personnalisé qu’Auth0 utilise pour assurer l’interface avec votre magasin d’identité hérité. Les scripts d’action sont des fonctions JavaScript nommées qui acceptent un ensemble prédéfini de paramètres.
 
@@ -33,7 +33,7 @@ Auth0 prend en charge l’utilisation d’objets [Promise](https://developer.moz
 
 Cet exemple utilise la méthode intégrée JavaScript `fetch`, qui obtient une ressource à partir d’un réseau et renvoie un objet Promise, écrit à l’aide de [chaînes Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
-```javascript
+```javascript lines
 function login(userNameOrEmail, password, callback) {
 	const hashedPassword = hash(password);
 	const apiEndpoint = 'https://example.com/api/authenticate';
@@ -75,7 +75,7 @@ function login(userNameOrEmail, password, callback) {
 
 Cet exemple utilise la méthode intégrée JavaScript `fetch`, qui obtient une ressource d’un réseau et renvoie un objet Promise, écrit à l’aide de [fonctions asynchrones](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function).
 
-```
+```javascript lines
 async function login(userNameOrEmail, password, callback) {
 	const hashedPassword = hash(password);
 	const apiEndpoint = 'https://example.com/api/authenticate';
@@ -142,7 +142,7 @@ Les scripts d’action peuvent être mis en œuvre sous forme de fonctions anony
 
 Transmettez un objet `Error` à la fonction `callback` avec un message descriptif de l’erreur :
 
-```
+```javascript lines
 return callback(new Error('My custom error message'));
 ```
 
@@ -160,7 +160,7 @@ Si votre magasin d’identité hérité ne dispose pas d’une API et qu’il n�
 
 Si l’objet `user` renvoie les propriétés `access_token` et `refresh_token`, Auth0 les traite différemment des autres types d’informations utilisateur. Auth0 les stocke dans la propriété `identities` de l’objet `user` :
 
-```json
+```json lines
 {
     "email": "you@example.com",
     "updated_at": "2019-03-15T15:56:44.577Z",

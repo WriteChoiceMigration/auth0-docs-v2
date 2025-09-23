@@ -1,13 +1,13 @@
 ---
 title: "Use Cases"
 permalink: "use-cases"
+'description': "Learn about the different use cases for the Tenant Access Control List feature."
 'og:title': "Use Cases"
 'og:description': "Learn about the different use cases for the Tenant Access Control List feature."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Use Cases"
 'twitter:description': "Learn about the different use cases for the Tenant Access Control List feature."
 ---
-# Use Cases
 
 Tenant Access Control List (ACL) provides the power and flexibility needed to handle a large variety of scenarios.
 
@@ -20,9 +20,9 @@ Here is an example of a Tenant ACL rule that blocks incoming traffic from a spec
 To create this Tenant ACL rule with the Management API:
 
 1. [Get a Management API access token](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-production) with the `create:network_acls` scope.
-2. Call the Management API [Create access control list](/docs/api/management/v2/network-acls/post-network-acls) endpoint with the following body:
+2. Call the Management API [Create access control list](/docs/fr-ca/api/management/v2/network-acls/post-network-acls) endpoint with the following body:
 
-   ```json
+   ```json lines
    {
      "description": "Example of blocking a request",
      "active": true,
@@ -47,7 +47,7 @@ To create this Tenant ACL rule with the Management API:
 
 </Tab><Tab title="Go SDK">
 
-```
+```go lines
 package main
 
 import (
@@ -89,7 +89,7 @@ func main() {
 
 </Tab><Tab title="Node SDK">
 
-```javascript
+```javascript lines
 const createNetworkAclPayload: Management.CreateNetworkAclRequestContent = {
   description: "Example of blocking a request",
   active: true,
@@ -110,7 +110,7 @@ const createNetworkAcl = await client.networkAcls.create(createNetworkAclPayload
 
 </Tab><Tab title="Terraform">
 
-```
+``` lines
 resource "auth0_network_acl" "example_blocking_request_acl" {
     description = "Example of blocking a request"
     active = true
@@ -129,7 +129,7 @@ resource "auth0_network_acl" "example_blocking_request_acl" {
 
 </Tab><Tab title="Deploy CLI">
 
-```
+``` lines
 networkACLs:
   - description: Example of blocking a request
     active: true
@@ -145,7 +145,7 @@ networkACLs:
 
 </Tab><Tab title="Auth0 CLI">
 
-```
+``` lines
 auth0 network-acl create \
 --description "Example of blocking a request" \
 --active true \
@@ -157,7 +157,7 @@ auth0 network-acl create \
 
 ### Example of a block page
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/34bruOvQ9n8CpMW1DndkYn/fb87ec4a0c9218caed2e0c49d1a7459a/Tenant_ACL_-_Block_page_example.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/34bruOvQ9n8CpMW1DndkYn/fb87ec4a0c9218caed2e0c49d1a7459a/Tenant_ACL_-_Block_page_example.png)</Frame>
 
 ## Allow a request
 
@@ -168,9 +168,9 @@ Here is an example of a Tenant ACL rule that allows traffic only from a specific
 To create this Tenant ACL rule with the Management API:
 
 1. [Get a Management API access token](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-production) with the `create:network_acls` scope.
-2. Call the Management API [Create access control list](/docs/api/management/v2/network-acls/post-network-acls) endpoint with the following body:
+2. Call the Management API [Create access control list](/docs/fr-ca/api/management/v2/network-acls/post-network-acls) endpoint with the following body:
 
-   ```json
+   ```json lines
    {
      "description": "Example of allowing a request",
      "active": true,
@@ -195,7 +195,7 @@ To create this Tenant ACL rule with the Management API:
 
 </Tab><Tab title="Go SDK">
 
-```
+```go lines
 package main
 
 import (
@@ -237,7 +237,7 @@ func main() {
 
 </Tab><Tab title="Node SDK">
 
-```javascript
+```javascript lines
 const createNetworkAclPayload: Management.CreateNetworkAclRequestContent = {
   description: "Example of allowing a request",
   active: true,
@@ -258,7 +258,7 @@ const createNetworkAcl = await client.networkAcls.create(createNetworkAclPayload
 
 </Tab><Tab title="Terraform">
 
-```
+``` lines
 resource "auth0_network_acl" "example_allowing_request_acl" {
     description = "Example of allowing a request"
     active = true
@@ -277,7 +277,7 @@ resource "auth0_network_acl" "example_allowing_request_acl" {
 
 </Tab><Tab title="Deploy CLI">
 
-```
+``` lines
 networkACLs:
   - description: Example of allowing a request
     active: true
@@ -293,7 +293,7 @@ networkACLs:
 
 </Tab><Tab title="Auth0 CLI">
 
-```
+``` lines
 auth0 network-acl create \
 --description "Example of allowing a request" \
 --active true \
@@ -312,9 +312,9 @@ Here is an example of a Tenant ACL rule that redirects all traffic from a specif
 To create this Tenant ACL rule with the Management API:
 
 1. [Get a Management API access token](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-production) with the `create:network_acls` scope.
-2. Call the Management API [Create access control list](/docs/api/management/v2/network-acls/post-network-acls) endpoint with the following body:
+2. Call the Management API [Create access control list](/docs/fr-ca/api/management/v2/network-acls/post-network-acls) endpoint with the following body:
 
-   ```json
+   ```json lines
    {
      "description": "Example of redirecting a request",
      "active": true,
@@ -340,7 +340,7 @@ To create this Tenant ACL rule with the Management API:
 
 </Tab><Tab title="Go SDK">
 
-```
+```go lines
 package main
 
 import (
@@ -383,7 +383,7 @@ func main() {
 
 </Tab><Tab title="Node SDK">
 
-```javascript
+```javascript lines
 const createNetworkAclPayload: Management.CreateNetworkAclRequestContent = {
   description: "Example of redirecting a request",
   active: true,
@@ -405,7 +405,7 @@ const createNetworkAcl = await client.networkAcls.create(createNetworkAclPayload
 
 </Tab><Tab title="Terraform">
 
-```
+``` lines
 resource "auth0_network_acl" "example_redirecting_request_acl" {
     description = "Example of redirecting a request"
     active = true
@@ -425,7 +425,7 @@ resource "auth0_network_acl" "example_redirecting_request_acl" {
 
 </Tab><Tab title="Deploy CLI">
 
-```
+``` lines
 networkACLs:
   - description: Example of redirecting a request
     active: true
@@ -442,7 +442,7 @@ networkACLs:
 
 </Tab><Tab title="Auth0 CLI">
 
-```
+``` lines
 auth0 network-acl create \
 --description "Example of redirecting a request" \
 --active true \
@@ -463,9 +463,9 @@ Here is an example of a Tenant ACL rule that evaluates the `geo_country_code` an
 To create this Tenant ACL rule with the Management API:
 
 1. [Get a Management API access token](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-production) with the `create:network_acls` scope.
-2. Call the Management API [Create access control list](/docs/api/management/v2/network-acls/post-network-acls) endpoint with the following body:
+2. Call the Management API [Create access control list](/docs/fr-ca/api/management/v2/network-acls/post-network-acls) endpoint with the following body:
 
-   ```json
+   ```json lines
    {
      "description": "Example of a complex comparison",
      "active": true,
@@ -495,7 +495,7 @@ To create this Tenant ACL rule with the Management API:
 
 </Tab><Tab title="Go SDK">
 
-```
+```go lines
 package main
 
 import (
@@ -540,7 +540,7 @@ func main() {
 
 </Tab><Tab title="Node SDK">
 
-```javascript
+```javascript lines
 const createNetworkAclPayload: Management.CreateNetworkAclRequestContent = {
   description: "Example of a complex comparison",
   active: true,
@@ -564,7 +564,7 @@ const createNetworkAcl = await client.networkAcls.create(createNetworkAclPayload
 
 </Tab><Tab title="Terraform">
 
-```
+``` lines
 resource "auth0_network_acl" "example_complex_comparison_acl" {
     description = "Example of a complex comparison"
     active = true
@@ -586,7 +586,7 @@ resource "auth0_network_acl" "example_complex_comparison_acl" {
 
 </Tab><Tab title="Deploy CLI">
 
-```
+``` lines
 networkACLs:
   - description: Example of a complex comparison
     active: true
@@ -605,7 +605,7 @@ networkACLs:
 
 </Tab><Tab title="Auth0 CLI">
 
-```
+``` lines
 auth0 network-acl create \
 --description "Example of a complex comparison" \
 --active true \

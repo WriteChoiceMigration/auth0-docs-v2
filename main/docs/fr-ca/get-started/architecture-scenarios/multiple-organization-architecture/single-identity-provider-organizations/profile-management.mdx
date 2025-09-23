@@ -1,19 +1,19 @@
 ---
 title: "Fournisseur d’identité unique : Gestion des profils"
 permalink: "profile-management"
+'description': "Découvrez la gestion des profils utilisateurs pour les organisations dans les architectures multilocataires."
 'og:title': "Fournisseur d’identité unique : Gestion des profils"
 'og:description': "Découvrez la gestion des profils utilisateurs pour les organisations dans les architectures multilocataires."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Fournisseur d’identité unique : Gestion des profils"
 'twitter:description': "Découvrez la gestion des profils utilisateurs pour les organisations dans les architectures multilocataires."
 ---
-# Fournisseur d’identité unique : Gestion des profils
 
 La gestion des profils dans les scénarios basés sur des organizations est généralement similaire à celle des autres scénarios d’architecture. Dans nos scénarios d’architecture, nous fournissons des conseils généraux sur [B2B Profile Management (gestion des profils C3E)](/docs/fr-ca/get-started/architecture-scenarios/business-to-business/profile-management), que nous recommandons de consulter en parallèle des directives fournies ici.
 
 <Warning>
 
-Avant de pouvoir gérer les rôles associés à un utilisateur, un compte utilisateur doit exister dans Auth0. Ce principe est vrai même si vous utilisez la [capacité de rôle des organizations Auth0 associée à l’adhésion](/docs/fr-ca/manage-users/organizations/configure-organizations/add-member-roles). Cependant, les comptes d’utilisateurs qui sont fournis via le flux de production [user invitation](/docs/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/provisioning) peuvent se voir attribuer un rôle automatiquement dans le cadre du processus d’invitation. Pour plus d’informations, consultez [Inviter les membres d’une organization](/docs/fr-ca/manage-users/organizations/configure-organizations/invite-members). Si vous préenregistrez un utilisateur à l’aide d’un autre mécanisme, vous devez alors stocker les informations relatives au rôle en dehors d’Auth0 et y accéder/les copier par l’intermédiaire de l’extensibilité (p. ex., dans le cadre d’une [Règle](/docs/fr-ca/customize/rules) lors de la première authentification).
+Avant de pouvoir gérer les rôles associés à un utilisateur, un compte utilisateur doit exister dans Auth0. Ce principe est vrai même si vous utilisez la [capacité de rôle des organizations Auth0 associée à l’adhésion](/docs/fr-ca/manage-users/organizations/configure-organizations/add-member-roles). Cependant, les comptes d’utilisateurs qui sont fournis via le flux de production [user invitation](/docs/fr-ca/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/provisioning) peuvent se voir attribuer un rôle automatiquement dans le cadre du processus d’invitation. Pour plus d’informations, consultez [Inviter les membres d’une organization](/docs/fr-ca/manage-users/organizations/configure-organizations/invite-members). Si vous préenregistrez un utilisateur à l’aide d’un autre mécanisme, vous devez alors stocker les informations relatives au rôle en dehors d’Auth0 et y accéder/les copier par l’intermédiaire de l’extensibilité (p. ex., dans le cadre d’une [Règle](/docs/fr-ca/customize/rules) lors de la première authentification).
 
 </Warning>
 
@@ -23,7 +23,7 @@ Votre application peut être associée à un ensemble spécifique d’attributs 
 
 **Meilleure pratique**
 
-Dans les scénarios de type organisation, les adresses courriel doivent toujours être vérifiées. Par conséquent, vous devez fournir une fonctionnalité de vérification de l’adresse électronique en libre-service pour les situations dans lesquelles l’adresse courriel d’un utilisateur ne peut pas être vérifiée d’une autre manière. Pour en savoir plus, consultez [Vérification de l’adresse électronique](/docs/manage-users/user-accounts/verify-emails).
+Dans les scénarios de type organisation, les adresses courriel doivent toujours être vérifiées. Par conséquent, vous devez fournir une fonctionnalité de vérification de l’adresse électronique en libre-service pour les situations dans lesquelles l’adresse courriel d’un utilisateur ne peut pas être vérifiée d’une autre manière. Pour en savoir plus, consultez [Vérification de l’adresse électronique](/docs/fr-ca/manage-users/user-accounts/verify-emails).
 
 </Note>
 
@@ -37,7 +37,7 @@ Vous pouvez également envisager de fournir quelques éléments en libre-service
 * changer les numéros de téléphone associés
 * changer leur nom d’utilisateur
 * déprovisionner leurs comptes dans le cadre de la conformité réglementaire [comme le Règlement général sur la protection des données (RGPD)]
-* procéder au changement de leur mot de passe. Pour cela, nous conseillons généralement la méthode de [password reset (réinitialisation du mot de passe)](/docs/connections/database/password-change#trigger-an-interactive-password-reset-flow), qui s’appuiera le plus souvent sur la stratégie de marque propre à l’organisation décrite dans la section [Branding: Password Reset Page (Marque : Page de réinitialisation du mot de passe)](/docs/fr-ca/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/branding).
+* procéder au changement de leur mot de passe. Pour cela, nous conseillons généralement la méthode de [password reset (réinitialisation du mot de passe)](/docs/fr-ca/connections/database/password-change#trigger-an-interactive-password-reset-flow), qui s’appuiera le plus souvent sur la stratégie de marque propre à l’organisation décrite dans la section [Branding: Password Reset Page (Marque : Page de réinitialisation du mot de passe)](/docs/fr-ca/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/branding).
 
 <Note>
 

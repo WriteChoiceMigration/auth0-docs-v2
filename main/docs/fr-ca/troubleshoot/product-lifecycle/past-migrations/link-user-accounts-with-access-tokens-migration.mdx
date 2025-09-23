@@ -1,13 +1,13 @@
 ---
 title: "Migrate to Access Tokens for Account Linking (Migrer vers des jetons d’accès pour associer les comptes)"
 permalink: "link-user-accounts-with-access-tokens-migration"
+'description': "Décrit comment passer des jetons d’ID aux jetons d’accès lors de l’association de comptes d’utilisateurs."
 'og:title': "Migrate to Access Tokens for Account Linking (Migrer vers des jetons d’accès pour associer les comptes)"
 'og:description': "Décrit comment passer des jetons d’ID aux jetons d’accès lors de l’association de comptes d’utilisateurs."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Migrate to Access Tokens for Account Linking (Migrer vers des jetons d’accès pour associer les comptes)"
 'twitter:description': "Décrit comment passer des jetons d’ID aux jetons d’accès lors de l’association de comptes d’utilisateurs."
 ---
-# Migrate to Access Tokens for Account Linking (Migrer vers des jetons d’accès pour associer les comptes)
 
 Auparavant, il était possible d’utiliser des jetons d’ID pour associer et désassocier des comptes d’utilisateurs dans certains cas d’utilisation. Auth0 supprime cette fonctionnalité. Vous devrez désormais utiliser des jetons d’accès dans tous les cas.
 
@@ -40,39 +40,39 @@ Il existe plusieurs façons de lier et de dissocier des comptes. Dans la liste s
 </thead>
 <tbody>
 <tr>
-<td>Utilisez le point de terminaison de Management API <code>POST /api/v2/users/{id}/identities</code> et envoyez le jeton d’ID du compte principal dans l’en-tête <code>Authorization</code>.</td>
+<td>Utilisez le point de terminaison de Management API `POST /api/v2/users/{id}/identities` et envoyez le jeton d’ID du compte principal dans l’en-tête `Authorization`.</td>
 <td>Affecté</td>
 </tr>
 <tr>
-<td>Utilisez le point de terminaison de Management API <code>POST /api/v2/users/{id}/identities</code> et envoyez un jeton d’accès (avec la permission <code>update:users</code>) dans l’en-tête <code>authorization</code> et le <code>user_id</code>  du compte secondaire dans la charge utile.</td>
+<td>Utilisez le point de terminaison de Management API `POST /api/v2/users/{id}/identities` et envoyez un jeton d’accès (avec la permission `update:users`) dans l’en-tête `authorization` et le `user_id`  du compte secondaire dans la charge utile.</td>
 <td>Non affecté</td>
 </tr>
 <tr>
-<td>Utilisez le point de terminaison de Management API <code>POST /api/v2/users/{id}/identities</code> et envoyez un jeton d’accès (avec la permission <code>update:current_user_identities</code>) dans l’en-tête <code>Authorization</code> et le <code>user_id</code> du compte secondaire dans la charge utile.</td>
+<td>Utilisez le point de terminaison de Management API `POST /api/v2/users/{id}/identities` et envoyez un jeton d’accès (avec la permission `update:current_user_identities`) dans l’en-tête `Authorization` et le `user_id` du compte secondaire dans la charge utile.</td>
 <td>Affecté</td>
 </tr>
 <tr>
-<td>Utilisez le point de terminaison de Management API <code>POST /api/v2/users/{id}/identities</code> et envoyez un jeton d’accès dans l’en-tête <code>Authorization</code> et l’ID du compte secondaire dans la charge utile.</td>
+<td>Utilisez le point de terminaison de Management API `POST /api/v2/users/{id}/identities` et envoyez un jeton d’accès dans l’en-tête `Authorization` et l’ID du compte secondaire dans la charge utile.</td>
 <td>Nouveau cas d’utilisation</td>
 </tr>
 <tr>
-<td>Utilisez la bibliothèque auth0.js et le jeton d’ID du compte principal pour instancier <code>auth0.Management</code>.</td>
+<td>Utilisez la bibliothèque auth0.js et le jeton d’ID du compte principal pour instancier `auth0.Management`.</td>
 <td>Affecté</td>
 </tr>
 <tr>
-<td>Utilisez la bibliothèque auth0.js et un jeton d’accès (avec la permission <code>update:users</code>) pour instancier <code>auth0.Management</code>.</td>
+<td>Utilisez la bibliothèque auth0.js et un jeton d’accès (avec la permission `update:users`) pour instancier `auth0.Management`.</td>
 <td>Non affecté</td>
 </tr>
 <tr>
-<td>Utilisez la bibliothèque auth0.js et un jeton d’accès (avec la permission <code>update:current_user_identities</code>) pour instancier <code>auth0.Management</code>.</td>
+<td>Utilisez la bibliothèque auth0.js et un jeton d’accès (avec la permission `update:current_user_identities`) pour instancier `auth0.Management`.</td>
 <td>Affecté</td>
 </tr>
 <tr>
-<td>Utilisez le point de terminaison de Management API <code>DELETE	/api/v2/users/{id}/identities/{provider}/{user_id}</code> et envoyez le jeton d’ID du compte principal dans l’en-tête <code>Authorization</code>.</td>
+<td>Utilisez le point de terminaison de Management API `DELETE	/api/v2/users/{id}/identities/{provider}/{user_id}` et envoyez le jeton d’ID du compte principal dans l’en-tête `Authorization`.</td>
 <td>Affecté</td>
 </tr>
 <tr>
-<td>Utilisez le point de terminaison de Management API <code>DELETE	/api/v2/users/{id}/identities/{provider}/{user_id}</code> et envoyez un jeton d’accès dans l’en-tête <code>Authorization</code>.</td>
+<td>Utilisez le point de terminaison de Management API `DELETE	/api/v2/users/{id}/identities/{provider}/{user_id}` et envoyez un jeton d’accès dans l’en-tête `Authorization`.</td>
 <td>Non affecté</td>
 </tr>
 </tbody>
@@ -80,7 +80,7 @@ Il existe plusieurs façons de lier et de dissocier des comptes. Dans la liste s
 
 ## Actions
 
-Passez en revue tous vos appels au [point de terminaison Identities](/docs/api/management/v2/#!/Users/post_identities) d’association de comptes et mettez à jour ceux qui utilisent le flux vulnérable décrit ci-dessus. Vous pouvez mettre à jour vos requêtes en choisissant l’une des options suivantes :
+Passez en revue tous vos appels au [point de terminaison Identities](/docs/fr-ca/api/management/v2/#!/Users/post_identities) d’association de comptes et mettez à jour ceux qui utilisent le flux vulnérable décrit ci-dessus. Vous pouvez mettre à jour vos requêtes en choisissant l’une des options suivantes :
 
 * **Scénarios d’association côté client / à l’initiative de l’utilisateur :** pour les scénarios d’association côté client, faites l’appel au point de terminaison Identities en utilisant un jeton d’accès avec la permission `update:current_user_identities`, et fournissez le jeton d’ID du compte secondaire dans la charge utile (`link_with`). Ce jeton d’ID doit être obtenu par un flux conforme à <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OAuth</Tooltip>/OIDC.
 * **Scénarios d’association côté serveur****:** pour les scénarios d’association côté serveur, appelez le point de terminaison Identities à l’aide d’un jeton d’accès avec la permission `update:users` et fournissez le `user_id` du compte secondaire dans la charge utile.
@@ -104,7 +104,7 @@ Désormais, vous devez obtenir un jeton d’accès (contenant la permission `upd
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
          scope=openid
          &response_type=id_token
@@ -122,7 +122,7 @@ Désormais, vous devez obtenir un jeton d’accès (contenant la permission `upd
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
          audience=https://{yourDomain}/api/v2/
          &scope=update:current_user_identities
@@ -166,7 +166,7 @@ Désormais, vous devez obtenir un jeton d’accès (contenant la permission `upd
    2. La demande `aud` dans le jeton d’ID du compte secondaire doit identifier le client et avoir la même valeur que la demande `azp` du jeton d’accès utilisé pour effectuer la demande.
 5. Une fois que vous avez le jeton d’accès, vous pouvez l’utiliser pour associer des comptes d’utilisateurs. Cette partie reste inchangée, rien d’autre ne change dans la demande, à l’exception de la valeur utilisée comme jeton `Bearer`. La réponse reste également la même.
 
-   ```json
+   ```json lines
    {
          "method": "POST",
          "url": "https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities",
@@ -199,7 +199,7 @@ Si vous utilisez la [bibliothèque auth0.js](/docs/fr-ca/libraries/auth0js) pour
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```javascript
+   ```javascript lines
    // get an ID Token
        var webAuth = new auth0.WebAuth({
          clientID: '{yourClientId}',
@@ -223,7 +223,7 @@ Si vous utilisez la [bibliothèque auth0.js](/docs/fr-ca/libraries/auth0js) pour
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```javascript
+   ```javascript lines
    // get an Access Token
        var webAuth = new auth0.WebAuth({
          clientID: '{yourClientId}',
@@ -244,9 +244,9 @@ Si vous utilisez la [bibliothèque auth0.js](/docs/fr-ca/libraries/auth0js) pour
 
    
 
-   1. Demande un jeton d’ID et un jeton d’accès en réponse (`` responseType: `token id_token` ``).
-   2. Définit Management API comme public cible du jeton (`` audience: `https://{yourDomain}/api/v2/` ``).
-   3. Demande la permission requise (`` scope: `update:current_user_identities` ``).
+   1. Demande un jeton d’ID et un jeton d’accès en réponse (`responseType: `token id_token``).
+   2. Définit Management API comme public cible du jeton (`audience: `https://{yourDomain}/api/v2/``).
+   3. Demande la permission requise (`scope: `update:current_user_identities``).
    4. S’authentifie auprès de Management API à l’aide du jeton d’accès.
 
 #### Associer n’importe quel compte d’utilisateur à Management API
@@ -256,14 +256,14 @@ Si vous obtenez un jeton d’accès pour l’association de comptes qui contient
 Toutefois, cette nouvelle méthode offre une alternative. Vous utiliserez toujours un jeton d’accès contenant la permission `update:users` pour vous authentifier auprès de l’API, mais dans la charge utile de la demande, vous pouvez envoyer le jeton d’ID du compte secondaire (au lieu du `user_id` et du `provider`).
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities' \
 --header 'authorization: Bearer ACCESS_TOKEN' \
 --header 'content-type: application/json' \
 --data '{"link_with":"SECONDARY_ACCOUNT_ID_TOKEN"}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer ACCESS_TOKEN");
@@ -272,7 +272,7 @@ request.AddParameter("application/json", "{\"link_with\":\"SECONDARY_ACCOUNT_ID_
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -292,8 +292,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities")
 .header("authorization", "Bearer ACCESS_TOKEN")
 .header("content-type", "application/json")
@@ -301,7 +301,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/users/PRIMARY_
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -314,8 +314,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer ACCESS_TOKEN",
 @"content-type": @"application/json" };
@@ -340,7 +340,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities",
@@ -364,8 +364,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"link_with\":\"SECONDARY_ACCOUNT_ID_TOKEN\"}"
@@ -379,7 +379,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -393,8 +393,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"link_with\":\"SECONDARY_ACCOUNT_ID_TOKEN\"}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer ACCESS_TOKEN",
@@ -435,7 +435,7 @@ Si vous utilisez des jetons d’ID pour dissocier des comptes, vous devez mettre
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
          scope=openid
          &response_type=id_token
@@ -453,7 +453,7 @@ Si vous utilisez des jetons d’ID pour dissocier des comptes, vous devez mettre
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
          audience=https://{yourDomain}/api/v2/
          &scope=update:current_user_identities
@@ -496,7 +496,7 @@ Si vous utilisez des jetons d’ID pour dissocier des comptes, vous devez mettre
 4. Une fois que vous avez le jeton d’accès, vous pouvez appeler le [point de terminaison Dissocier l’identité d’un utilisateur](https://auth0.com/docs/api/management/v2#!/Users/delete_user_identity_by_user_id) de Management API, en l’utilisant dans l’en-tête `Autorisation`.
 5. En utilisant la méthode précédente, votre requête ressemblera à ceci :
 
-   ```
+   ``` lines
    DELETE https://YOUR_DOMAIN/api/v2/users/{primaryAccountUserId}/identities/{secondaryAccountProvider}/{secondaryAccountUserId}
        Authorization: 'Bearer {yourIdTokenOrMgmtApiAccessToken}'
    ```
@@ -507,7 +507,7 @@ Si vous utilisez des jetons d’ID pour dissocier des comptes, vous devez mettre
 
    En utilisant la nouvelle méthode, votre requête ressemblera à ceci :
 
-   ```
+   ``` lines
    DELETE https://{yourDomain}/api/v2/users/{primaryAccountUserId}/identities/{secondaryAccountProvider}/{secondaryAccountUserId}
        Authorization: 'Bearer {yourMgmtApiAccessToken}'
    ```

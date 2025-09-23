@@ -1,12 +1,14 @@
 ---
 title: "Authorization"
 permalink: "01-authorization"
+'description': "This tutorial demonstrates how to add authorization to a Ruby on Rails API."
 'og:title': "Authorization"
 'og:description': "This tutorial demonstrates how to add authorization to a Ruby on Rails API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/rails.png"
 'twitter:title': "Authorization"
 'twitter:description': "This tutorial demonstrates how to add authorization to a Ruby on Rails API."
 ---
+
 # Ruby On Rails API: Authorization
 
 <Frame>![Gravatar for josh.cunningham@auth0.com](//www.gravatar.com/avatar/ae098a33ae2acd0fd647f48749f8630c?d=mm&r=g&s=50)</Frame>
@@ -37,7 +39,7 @@ System requirements: Ruby 2.1.8 | Rails 4.2.5
 
 <Note>
 
-**New to Auth0?** Learn [how Auth0 works](/docs/overview) and read about [implementing API authentication and authorization](/docs/api-auth)  using the OAuth 2.0 framework.
+**New to Auth0?** Learn [how Auth0 works](/docs/fr-ca/overview) and read about [implementing API authentication and authorization](/docs/fr-ca/api-auth)  using the OAuth 2.0 framework.
 
 </Note>
 
@@ -49,11 +51,11 @@ In the [APIs](https://manage.auth0.com/#/apis) section of the Auth0 dashboard, c
 
 <Frame>![Create API](https://cdn2.auth0.com/docs/1.14567.0/media/articles/server-apis/create-api.png)</Frame>
 
-By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
+By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/fr-ca/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
 
 <Note>
 
-We recommend using the default RS256 [signing algorithm](/docs/tokens/concepts/signing-algorithms) for your API. If you need to use the HS256 algorithm, see the [HS256 integration sample](https://github.com/auth0-samples/auth0-rubyonrails-api-samples/tree/OIDC/02-Authentication-HS256).
+We recommend using the default RS256 [signing algorithm](/docs/fr-ca/tokens/concepts/signing-algorithms) for your API. If you need to use the HS256 algorithm, see the [HS256 integration sample](https://github.com/auth0-samples/auth0-rubyonrails-api-samples/tree/OIDC/02-Authentication-HS256).
 
 </Note>
 
@@ -74,7 +76,7 @@ This example uses the `read:messages` scope.
 This example demonstrates:
 
 * How to check for a JSON Web Token (JWT) in the `Authorization` header of an incoming HTTP request.
-* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/tokens/guides/validate-access-tokens).
+* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/fr-ca/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/fr-ca/tokens/guides/validate-access-tokens).
 
 ## Validate Access Tokens
 
@@ -84,7 +86,7 @@ This tutorial performs access token validation using the **[jwt](https://github.
 
 Install the **jwt** Gem.
 
-```
+```bash lines
 gem 'jwt'
 bundle install
 ```
@@ -93,7 +95,7 @@ bundle install
 
 Create a class called `Auth0Client` which decodes and verifies the incoming access token taken from the `Authorization` header of the request. The public key for your Auth0 tenant can be fetched to verify the token.
 
-```
+```ruby lines
 # app/lib/auth0_client.rb
 
 # frozen_string_literal: true
@@ -153,7 +155,7 @@ end
 
 Create a Concern called `Secured` which looks for the access token in the `Authorization` header of an incoming request. If the token is present, it should be passed to `Auth0Client.validate_token`.
 
-```
+```ruby lines
 # app/controllers/concerns/secured.rb
 
 # frozen_string_literal: true
@@ -211,7 +213,7 @@ To look for a particular `scope` in an access token, create a new struct in your
 
 Go to the `Auth0Client` class. Add the new `Token` struct and update the return value of the `validate_token` method as follows:
 
-```
+```ruby lines
 # app/lib/auth0_client.rb
 
 # frozen_string_literal: true
@@ -261,7 +263,7 @@ Next, in the `Secured` concern, define a new error constant `INSUFFICIENT_PERMIS
 
 Apply these changes in your `Secured` concern by adding the following code:
 
-```
+```ruby lines
 # app/controllers/concerns/secured.rb
 
 # frozen_string_literal: true
@@ -313,7 +315,7 @@ The routes shown below are available for the following requests:
 
 Add the `Secured` concern to the `ApplicationController`:
 
-```
+```ruby lines
 class ApplicationController < ActionController::API
   include Secured
 end
@@ -321,7 +323,7 @@ end
 
 You only ned to protect the `PrivateController` as follows:
 
-```
+```ruby lines
 class PrivateController < ApplicationController
   before_action :authorize
 
@@ -331,7 +333,7 @@ end
 
 In order to check that your access token has the right permissions, call the `validate_permissions` method as follows in the `private-scoped` action:
 
-```
+```ruby lines
 class PrivateController < ApplicationController
   before_action :authorize
 
@@ -349,7 +351,7 @@ end
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

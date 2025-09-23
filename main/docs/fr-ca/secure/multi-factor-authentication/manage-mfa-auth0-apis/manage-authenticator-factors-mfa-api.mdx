@@ -1,21 +1,21 @@
 ---
 title: "Gérer les facteurs d’authentification avec l’Authentication API"
 permalink: "manage-authenticator-factors-mfa-api"
+'description': "Décrit la façon de gérer les inscriptions de facteurs d’authentification MFA pour les applications en utilisant l’API MFA Auth0."
 'og:title': "Gérer les facteurs d’authentification avec l’Authentication API"
 'og:description': "Décrit la façon de gérer les inscriptions de facteurs d’authentification MFA pour les applications en utilisant l’API MFA Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Gérer les facteurs d’authentification avec l’Authentication API"
 'twitter:description': "Décrit la façon de gérer les inscriptions de facteurs d’authentification MFA pour les applications en utilisant l’API MFA Auth0."
 ---
-# Gérer les facteurs d’authentification avec l’Authentication API
 
 <Card title="Before you start">
 
-* Activez le type d’autorisation **MFA** pour votre application. Pour en savoir plus, lisez [Mettre à jour les types d’autorisation](/docs/get-started/applications/update-grant-types).
+* Activez le type d’autorisation **MFA** pour votre application. Pour en savoir plus, lisez [Mettre à jour les types d’autorisation](/docs/fr-ca/get-started/applications/update-grant-types).
 
 </Card>
 
-Auth0 fournit plusieurs [Points de terminaison API](/docs/api/authentication#multi-factor-authentication) pour vous aider à gérer les authentifiants que vous utilisez avec une application pour l’authentification multifacteur (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>). Vous pouvez utiliser ces points de terminaison pour créer une interface utilisateur complète permettant aux utilisateurs de gérer leurs facteurs d’authentification.
+Auth0 fournit plusieurs [Points de terminaison API](/docs/fr-ca/api/authentication#multi-factor-authentication) pour vous aider à gérer les authentifiants que vous utilisez avec une application pour l’authentification multifacteur (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>). Vous pouvez utiliser ces points de terminaison pour créer une interface utilisateur complète permettant aux utilisateurs de gérer leurs facteurs d’authentification.
 
 ## Obtention des jetons d’accès API MFA
 
@@ -57,15 +57,15 @@ Lorsque vous demandez un jeton pour l'audience MFA, vous pouvez demander les per
 </thead>
 <tbody>
 <tr>
-<td><code>enroll</code></td>
+<td>`enroll`</td>
 <td>Pour inscrire un nouvel authentificateur.</td>
 </tr>
 <tr>
-<td><code>read:authenticators</code></td>
+<td>`read:authenticators`</td>
 <td>Pour répertorier les authentificateurs existants.</td>
 </tr>
 <tr>
-<td><code>remove:authenticators</code></td>
+<td>`remove:authenticators`</td>
 <td>Pour supprimer un authentificateur.</td>
 </tr>
 </tbody>
@@ -76,19 +76,19 @@ Lorsque vous demandez un jeton pour l'audience MFA, vous pouvez demander les per
 Pour obtenir une liste des authentifiants pour un utilisateur, vous pouvez appeler le point de terminaison des authentifiants MFA :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/mfa/authenticators' \
 --header 'authorization: Bearer MFA_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/mfa/authenticators");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer MFA_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -105,14 +105,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/mfa/authenticators")
 .header("authorization", "Bearer MFA_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -124,8 +124,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MFA_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/mfa/authenticators"]
@@ -146,7 +146,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/mfa/authenticators",
@@ -168,8 +168,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MFA_TOKEN" }
@@ -179,7 +179,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -191,8 +191,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer MFA_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MFA_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/mfa/authenticators")! as URL,
@@ -215,7 +215,7 @@ dataTask.resume()
 
 Dans la réponse, vous devriez recevoir des informations concernant le(s) type(s) d’authentifiants :
 
-```json
+```json lines
 [
   {
     "authenticator_type": "recovery-code",
@@ -281,19 +281,19 @@ Pour supprimer un authentifiant associé, envoyez une demande `DELETE` au point 
 Si un `mfa_token` a été utilisé pour répertorier les authentifiants, les utilisateurs devront [compléter MFA pour obtenir un jeton d’accès](https://auth0.com/docs/fr-ca/api/authentication/muti-factor-authentication/verify-mfa-with-otp) avec une audience de `https://{yourDomain}/mfa/` afin de supprimer un authentifiant.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request DELETE \
 --url 'https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID' \
 --header 'authorization: Bearer ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID");
 var request = new RestRequest(Method.DELETE);
 request.AddHeader("authorization", "Bearer ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -310,14 +310,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.delete("https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID")
 .header("authorization", "Bearer ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'DELETE',
@@ -329,8 +329,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID"]
@@ -351,7 +351,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID",
@@ -373,8 +373,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer ACCESS_TOKEN" }
@@ -384,7 +384,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -396,8 +396,8 @@ request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID")! as URL,
@@ -429,19 +429,19 @@ Pour supprimer un code de récupération et en générer un nouveau, obtenez un 
 Pour supprimer un code de récupération et en générer un nouveau, obtenez un [Jeton d’accès à Management API](https://auth0.com/docs/api/management/v2/tokens) et utiliser le [point de terminaison de régénération](https://auth0.com/docs/api/management/v2/#!/Users/post_recovery_code_regeneration) Management API.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration' \
 --header 'authorization: Bearer MANAGEMENT_API_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer MANAGEMENT_API_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -458,14 +458,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration")
 .header("authorization", "Bearer MANAGEMENT_API_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -477,8 +477,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MANAGEMENT_API_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration"]
@@ -499,7 +499,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration",
@@ -521,8 +521,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MANAGEMENT_API_TOKEN" }
@@ -532,7 +532,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -544,8 +544,8 @@ request = Net::HTTP::Post.new(url)
 request["authorization"] = 'Bearer MANAGEMENT_API_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MANAGEMENT_API_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration")! as URL,
@@ -568,7 +568,7 @@ dataTask.resume()
 
 Vous obtiendrez un nouveau code de récupération que l’utilisateur final devra enregistrer, par exemple :
 
-```json
+```json lines
 {  
    "recovery_code": "FA45S1Z87MYARX9RG6EVMAPE"
 }

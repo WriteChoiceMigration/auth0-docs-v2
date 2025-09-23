@@ -1,17 +1,17 @@
 ---
 title: "Déclencheur de connexion"
 permalink: "login-trigger"
+'description': "Découvrez le flux de connexion des Actions et le déclencheur d’Action post-connexion, qui est exécuté après qu’un utilisateur se connecte et lorsqu’un jeton d’actualisation est demandé."
 'og:title': "Déclencheur de connexion"
 'og:description': "Découvrez le flux de connexion des Actions et le déclencheur d’Action post-connexion, qui est exécuté après qu’un utilisateur se connecte et lorsqu’un jeton d’actualisation est demandé."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Déclencheur de connexion"
 'twitter:description': "Découvrez le flux de connexion des Actions et le déclencheur d’Action post-connexion, qui est exécuté après qu’un utilisateur se connecte et lorsqu’un jeton d’actualisation est demandé."
 ---
-# Déclencheur de connexion
 
 Le déclencheur de connexion s’exécute lorsqu’un utilisateur s’authentifie avec succès auprès d’une application sur un locataire Auth0. Cela inclut également l’authentification post-inscription.
 
-<Frame>![Diagram showing the Actions Login Flow.](//images.ctfassets.net/cdy7uua7fh8z/2SkfIOm4fFOJ8N0GNJwam8/77230cdb4411b2383751b037fb56fe29/2024-09-30_10-01-42.png)</Frame>
+<Frame>![Diagram showing the Actions Login Flow.](/images/fr-ca/cdy7uua7fh8z/2SkfIOm4fFOJ8N0GNJwam8/77230cdb4411b2383751b037fb56fe29/2024-09-30_10-01-42.png)</Frame>
 
 Les Actions de ce déclencheur sont bloquantes (synchrones), ce qui signifie qu’elles s’exécutent dans le cadre du processus d’un déclencheur et empêchent le reste du pipeline Auth0 de s’exécuter jusqu’à ce que l’Action soit terminée.
 
@@ -32,7 +32,7 @@ Le déclencheur `post-login` est une fonction exécutée après la connexion d�
 
 Une Action post-connexion peut être utilisée pour fournir une logique personnalisée utilisée pour refuser l’accès à un utilisateur qui tente d’accéder à une application :
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -48,7 +48,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 si vous avez une application et que vous souhaitez vous assurer qu’elle ne soit accessible qu’en semaine, vous pouvez créer l’Action suivante :
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -68,7 +68,7 @@ si vous avez une application et que vous souhaitez vous assurer qu’elle ne soi
 
 Supposons que vous souhaitiez refuser l’accès à tous les utilisateurs qui appellent une API. Cela signifie que vous devez refuser l’accès en fonction de la valeur <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">audience</Tooltip> de votre API, que vous pouvez trouver dans le champ **API de public** de votre API dans [Dashboard > Applications > API](https://manage.auth0.com/#/apis). Pour cela, vous devez créer l’Action suivante :
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -85,7 +85,7 @@ Supposons que vous souhaitiez refuser l’accès à tous les utilisateurs qui ap
 
 Pour ajouter des rôles d’utilisateur aux jetons émis par Auth0, utilisez l’objet `event.authorization` avec les méthodes `api.idToken.setCustomClaim` et `api.accessToken.setCustomClaim` :
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -106,7 +106,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 Auth0 fournit un système complet de stockage des métadonnées dans un [Profil utilisateur](/docs/fr-ca/manage-users/user-accounts/user-profiles/normalized-user-profiles). Afin de définir `user_metadata` ou `app_metadata` sur le profil d’un utilisateur lors de sa connexion, utilisez les fonctions`api.user.setUserMetadata` ou `api.user.setAppMetadata`.
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -122,7 +122,7 @@ Une fois toutes les actions post-connexion exécutées, Actions mettra à jour l
 
 Une Action post-connexion peut être utilisée pour exiger dynamiquement l’authentification multifacteur (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">MFA</Tooltip>) pour un utilisateur en fonction des besoins de votre application.
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -141,7 +141,7 @@ Un fournisseur de MFA doit être configuré pour activer la MFA lors d’une con
 
 Une Action post-connexion peut être utilisée pour réduire les frictions en ignorant dynamiquement l’authentification multifacteur pour un utilisateur qui s’est authentifié avec une clé d’identification.
 
-```javascript
+```javascript lines
 /**
 * Handler that will be called during the execution of a PostLogin flow.
 *
@@ -167,7 +167,7 @@ La connexion doit avoir les clés d’identification et l’authentification mul
 
 De façon similaire à [Règles de redirection](/docs/fr-ca/customize/rules/redirect-users), une Action post-connexion peut être utilisée pour envoyer l’utilisateur vers un site externe. Une fois terminée, l’utilisateur peut être redirigé vers Auth0 pour continuer son flux de connexion. Dans l’exemple ci-dessous, une Action de redirection est utilisée pour inviter l’utilisateur à fournir sa couleur préférée.
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -219,7 +219,7 @@ Lorsque vous modifiez les permissions associées à un jeton d’accès, assurez
 * Vérifiez toujours l'audience attendue avant d’ajouter des permissions.
 * Empêchez l’utilisation d’entrées non fiables lors de l’ajout de permissions.
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.

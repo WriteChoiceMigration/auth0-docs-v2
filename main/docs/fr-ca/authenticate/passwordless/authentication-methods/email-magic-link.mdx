@@ -1,13 +1,13 @@
 ---
 title: "Authentification sans mot de passe par Liens magiques"
 permalink: "email-magic-link"
+'description': "Apprenez à utiliser des connexions sans mot de passe avec le facteur d’authentification par lien magique."
 'og:title': "Authentification sans mot de passe par Liens magiques"
 'og:description': "Apprenez à utiliser des connexions sans mot de passe avec le facteur d’authentification par lien magique."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Authentification sans mot de passe par Liens magiques"
 'twitter:description': "Apprenez à utiliser des connexions sans mot de passe avec le facteur d’authentification par lien magique."
 ---
-# Authentification sans mot de passe par Liens magiques
 
 Vous pouvez configurer une connexion sans mot de passe pour envoyer un lien magique à un utilisateur par courriel, afin d’achever l’authentification.
 
@@ -27,7 +27,7 @@ Par exemple, l’utilisateur pourrait faire la demande initiale en utilisant le 
 
 ### Flux de connexion classique avec des liens magiques.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/yYsZhaG5uzmVg1MwVCRix/cfb27925f0e0085b5e38e306cec74fe1/Magic_Link_Flow.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/yYsZhaG5uzmVg1MwVCRix/cfb27925f0e0085b5e38e306cec74fe1/Magic_Link_Flow.png)</Frame>
 
 L’utilisateur clique ensuite sur le bouton ou le lien dans le courriel et est automatiquement connecté à votre application.
 
@@ -58,7 +58,7 @@ La zone **Message** accepte la syntaxe Liquid. Vous pouvez utiliser cette syntax
 
 Par exemple, vous pouvez référencer le paramètre `request_language` pour changer la langue du message :
 
-```json
+```json lines
 {% if request_language contains 'dutch' %}
    Hier is uw verificatie code: {{ code }}
 {% endif %}
@@ -77,19 +77,19 @@ Les paramètres suivants sont disponibles lors de la définition du modèle de m
 </thead>
 <tbody>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>Le mot de passe à utiliser.</td>
 </tr>
 <tr>
-<td><code>link</code></td>
+<td>`link`</td>
 <td>Le lien de connexion généré.</td>
 </tr>
 <tr>
-<td><code>application.name</code></td>
+<td>`application.name`</td>
 <td>Le nom de l’application avec laquelle l’utilisateur s’inscrit.</td>
 </tr>
 <tr>
-<td><code>request_language</code></td>
+<td>`request_language`</td>
 <td>La langue demandée pour le contenu du message.</td>
 </tr>
 </tbody>
@@ -103,7 +103,7 @@ Si vous utilisez la connexion classique pour votre application, vous devez mettr
 2. Passez à la vue **Login (Connexion)** localisez le menu déroulant **Default Templates (Modèles par défaut)** et sélectionnez **Lock (passwordless) (sans mot de passe).**
 3. Ensuite, mettez à jour la section de code `Auth0LockPasswordless` avec un nouveau paramètre. Ajoutez `passwordlessMethod` à votre modèle.
 
-   ```
+   ```javascript lines
    passwordlessMethod: 'link',
    ```
 

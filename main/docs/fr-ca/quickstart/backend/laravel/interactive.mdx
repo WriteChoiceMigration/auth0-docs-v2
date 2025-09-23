@@ -1,17 +1,19 @@
 ---
 title: "Ajouter l’autorisation à votre application Laravel"
 permalink: "interactive"
+'description': "Ce guide explique comment intégrer Auth0 avec une nouvelle (ou existante) application Laravel 9 ou 10."
 'og:title': "Ajouter l’autorisation à votre application Laravel"
 'og:description': "Ce guide explique comment intégrer Auth0 avec une nouvelle (ou existante) application Laravel 9 ou 10."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/php.png"
 'twitter:title': "Ajouter l’autorisation à votre application Laravel"
 'twitter:description': "Ce guide explique comment intégrer Auth0 avec une nouvelle (ou existante) application Laravel 9 ou 10."
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -53,13 +55,13 @@ Comme leur nom l’indique, les [jetons d’accès](https://auth0.com/docs/secur
 
 **Si vous n’avez pas déjà configuré une application Laravel**, ouvrez un shell dans un répertoire approprié pour un nouveau projet et exécutez la commande suivante :
 
-```
+```bash lines
 composer create-project --prefer-dist laravel/laravel auth0-laravel-api ^9.0
 ```
 
 Toutes les commandes de ce guide supposent que vous les exécutez à partir de la racine de votre projet Laravel, donc vous devez bous placer `cd` dans le nouveau répertoire du projet :
 
-```bash
+```bash lines
 cd auth0-laravel-api
 ```
 
@@ -69,13 +71,13 @@ cd auth0-laravel-api
 
 Exécutez la commande suivante dans le répertoire de votre projet pour installer la [trousse SDK Laravel Auth0](https://github.com/auth0/laravel-auth0) :
 
-```
+```bash lines
 composer require auth0/login:^7.8 --update-with-all-dependencies
 ```
 
 Générez ensuite un fichier de configuration de la trousse SDK pour votre application :
 
-```
+```bash lines
 php artisan vendor:publish --tag auth0
 ```
 
@@ -85,19 +87,19 @@ php artisan vendor:publish --tag auth0
 
 Exécuter la commande suivante à partir du répertoire de votre projet pour télécharger le [Interface de ligne de commande (CLI) Auth0](https://github.com/auth0/auth0-cli) :
 
-```bash
+```bash lines
 curl -sSfL https://raw.githubusercontent.com/auth0/auth0-cli/main/install.sh | sh -s -- -b .
 ```
 
 Authentifiez ensuite la CLI avec votre compte Auth0 en choisissant « as a user (en tant qu’utilisateur) » lorsque vous y êtes invité :
 
-```
+```bash lines
 ./auth0 login
 ```
 
 Puis créez une nouvelle application avec Auth0 :
 
-```
+```bash lines
 ./auth0 apps create \
 --name "My Laravel Backend" \
 --type "regular" \
@@ -111,7 +113,7 @@ Puis créez une nouvelle application avec Auth0 :
 
 Vous devez également créer une nouvelle API :
 
-```
+```bash lines
 ./auth0 apis create \
 --name "My Laravel Backend API" \
 --identifier "https://github.com/auth0/laravel-auth0" \
@@ -124,7 +126,7 @@ Cela produit deux fichiers qui configurent la trousse SDK dans votre répertoir
 
 Comme ces fichiers contiennent des renseignements personnels, il est important de les traiter comme étant sensibles. Vous devez vous assurer de ne pas les soumettre au contrôle de version. Si vous utilisez Git, vous devez les ajouter à votre fichier `.gitignore` :
 
-```
+```bash lines
 echo ".auth0.*.json" >> .gitignore
 ```
 
@@ -144,7 +146,7 @@ Vous pouvez utiliser la protection d’autorisation de la trousse SDK Auth0 pour
 
 Pour rejeter les demandes qui ne contiennent pas de jeton d’accès valide dans l’en-tête `Authorization`, vous pouvez utiliser le logiciel médiateur `auth` de Laravel :
 
-```
+```php lines
 Route::get('/private', function () {
 return response()->json([
 'message' => 'Your token is valid; you are authorized.',
@@ -154,7 +156,7 @@ return response()->json([
 
 Vous pouvez également exiger que le jeton fourni dispose des [permissions](https://auth0.com/docs/manage-users/access-control/rbac) spécifiques en le combinant avec le logiciel médiateur `can` de Laravel :
 
-```
+```php lines
 Route::get('/scope', function () {
 return response()->json([
 'message' => 'Your token is valid and has the read:messages permission; you are authorized.',
@@ -170,7 +172,7 @@ Les informations sur le jeton d’accès fourni sont disponibles via la façade 
 
 Par exemple, pour récupérer l’identificateur et l’adresse courriel de l’utilisateur :
 
-```
+```php lines
 Route::get('/', function () {
 if (! auth()->check()) {
 return response()->json([
@@ -195,7 +197,7 @@ Vous pouvez récupérer des informations sur l’utilisateur créateur du jeton 
 
 Dans l’exemple suivant, vous devez accorder la permission `read:users`. Une liste des points de terminaison API et les permissions requises peuvent être trouvées dans la [documentation de Management API](https://auth0.com/docs/api/management/v2).
 
-```
+```php lines
 use Auth0\Laravel\Facade\Auth0;
 Route::get('/me', function () {
 $user = auth()->id();
@@ -227,7 +229,7 @@ return response()->json([
 
 Vous êtes maintenant prêt à lancer votre application Laravel, de sorte qu’elle puisse accepter les demandes :
 
-```
+```php lines
 php artisan serve
 ```
 
@@ -285,7 +287,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/backend/laravel/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

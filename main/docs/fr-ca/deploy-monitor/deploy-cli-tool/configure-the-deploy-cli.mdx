@@ -1,13 +1,13 @@
 ---
 title: "Configurer l’outil Deploy CLI"
 permalink: "configure-the-deploy-cli"
+'description': "Découvrez comment configurer l’outil Auth0 Deploy CLI en fonction de vos besoins."
 'og:title': "Configurer l’outil Deploy CLI"
 'og:description': "Découvrez comment configurer l’outil Auth0 Deploy CLI en fonction de vos besoins."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer l’outil Deploy CLI"
 'twitter:description': "Découvrez comment configurer l’outil Auth0 Deploy CLI en fonction de vos besoins."
 ---
-# Configurer l’outil Deploy CLI
 
 La configuration de l’outil Deploy CLI est essentielle pour établir les identifiants Auth0 ainsi que pour modifier généralement le comportement de l’outil en fonction de vos besoins particuliers. Il existe deux façons de configurer l’outil Deploy CLI :
 
@@ -20,7 +20,7 @@ Un fichier JSON autonome peut être utilisé pour configurer l’outil Deploy 
 
 ### Exemple
 
-```json
+```javascript lines
 {
   "AUTH0_DOMAIN": "<YOUR_TENANT_DOMAIN>",
   "AUTH0_CLIENT_ID": "<YOUR_CLIENT_ID>",
@@ -46,7 +46,7 @@ Pour désactiver la consommation des variables d’environnement pour les comman
 
 #### Déployer la configuration pour les formats YAML sans fichier config.json
 
-```
+```php lines
 $ export AUTH0_DOMAIN=<YOUR_AUTH0_DOMAIN>
 $ export AUTH0_CLIENT_ID=<YOUR_CLIENT_ID>
 $ export AUTH0_CLIENT_SECRET=<YOUR_CLIENT_SECRET>
@@ -55,13 +55,13 @@ $ a0deploy import --input_file=local/tenant.yaml
 
 #### Désactiver l’ingestion de variables d’environnement
 
-```
+```php lines
 $ a0deploy export -c=config.json --format=yaml --output_folder=local --env=false
 ```
 
 #### Valeurs de configuration non primitives
 
-```
+```php lines
 $ export AUTH0_EXCLUDED='["actions","organizations"]'
 $ export AUTH0_KEYWORD_REPLACE_MAPPINGS='{"ENVIRONMENT":"dev"}'
 $ a0deploy export -c=config.json --format=yaml --output_folder=local
@@ -109,7 +109,7 @@ Valeurs possibles : `actions`, `attackProtection`, `branding`, `clientGrants`, 
 
 #### Exemple
 
-```json
+```json lines
 {
   "AUTH0_EXCLUDED": ["organizations", "connections", "hooks"]
 }
@@ -125,7 +125,7 @@ Valeurs possibles : `actions`, `attackProtection`, `branding`, `clientGrants`, 
 
 #### Exemple
 
-```json
+```json lines
 {
   "AUTH0_INCLUDED_ONLY": ["clients", "connections", "tenant", "branding"]
 }
@@ -137,7 +137,7 @@ Cartographie de mots-clés spécifiques au remplacement dynamique des installati
 
 #### Exemple
 
-```json
+```javascript lines
 {
   "ENVIRONMENT": "DEV",
   "ALLOWED_ORIGINS": ["https://dev.test-site.com", "localhost"]
@@ -162,7 +162,7 @@ Offre la possibilité d’exclure de la gestion toutes les propriétés indésir
 
 #### Exemple
 
-```json
+```javascript lines
 {
   "connections": ["options.twilio_token"]
 }

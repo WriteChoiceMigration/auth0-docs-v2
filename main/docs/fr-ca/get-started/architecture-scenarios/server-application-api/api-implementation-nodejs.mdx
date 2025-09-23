@@ -1,13 +1,13 @@
 ---
 title: "Applications serveur + API : Implémentation de l’API en Node.js"
 permalink: "api-implementation-nodejs"
+'description': "L’implémentation Node.js de l’API pour le scénario d’architecture Serveur Client + API"
 'og:title': "Applications serveur + API : Implémentation de l’API en Node.js"
 'og:description': "L’implémentation Node.js de l’API pour le scénario d’architecture Serveur Client + API"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Applications serveur + API : Implémentation de l’API en Node.js"
 'twitter:description': "L’implémentation Node.js de l’API pour le scénario d’architecture Serveur Client + API"
 ---
-# Applications serveur + API : Implémentation de l’API en Node.js
 
 Dans le cadre du [scénario d’architecture serveur + API](https://auth0.com/docs/architecture-scenarios/application/server-api), nous allons implémenter l’API Feuilles de temps dans Node.js. Veuillez vous référer au scénario pour obtenir des informations sur la solution implémentation.
 
@@ -25,7 +25,7 @@ Laissez les paramètres par défaut ou modifiez-les selon votre convenance.
 
 Le `package.json` de notre échantillon ressemble à ce qui suit :
 
-```json
+```json lines
 {
   "name": "timesheets-api",
   "version": "1.0.0",
@@ -58,7 +58,7 @@ Ensuite, nous devons définir nos dépendances. Nous utiliserons les modules sui
 
 Pour installer ces dépendances, procédez comme suit :
 
-```
+```bash lines
 npm install express express-jwt jwks-rsa body-parser --save
 ```
 
@@ -73,7 +73,7 @@ Ouvrez votre Directory API et créez un fichier `server.js` . Votre code doit
 
 Voici notre exemple d’implémentation :
 
-```javascript
+```javascript lines
 // set dependencies
 const express = require('express');
 const app = express();
@@ -115,7 +115,7 @@ Les étapes que nous suivrons dans notre code sont :
 
 C’est également le bon moment pour implémenter la logique d’enregistrement des entrées de la feuille de temps dans une base de données locale, ou tout autre mécanisme de stockage que vous préférez. Voici notre exemple d’implémentation (certains codes sont omis en raison aux fins de concision) :
 
-```javascript
+```javascript lines
 // set dependencies - code omitted
 
 // enable the use of request body parsing middleware - code omitted
@@ -162,13 +162,13 @@ Pour tester également le scénario de fonctionnement, nous devons :
 
 Pour y parvenir, nous utilisons le paquet `express-jwt-authz` Node.js, donc ajoutez-le à votre projet :
 
-```
+```bash lines
 npm install express-jwt-authz --save
 ```
 
 Maintenant, ajoutez un appel à `jwtAuthz(...)` à votre logiciel médiateur pour vous assurer que le jeton JWT contient une permission particulière afin d’exécuter un point de terminaison particulier. Voici notre exemple d’implémentation (certains codes sont omis en raison aux fins de concision) :
 
-```javascript
+```javascript lines
 // set dependencies - some code omitted
 const jwtAuthz = require('express-jwt-authz');
 

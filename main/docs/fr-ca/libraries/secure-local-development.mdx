@@ -1,13 +1,13 @@
 ---
 title: "HTTPS en développement"
 permalink: "secure-local-development"
+'description': "Sécuriser les serveurs de développement locaux pour travailler avec des témoins SameSite"
 'og:title': "HTTPS en développement"
 'og:description': "Sécuriser les serveurs de développement locaux pour travailler avec des témoins SameSite"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "HTTPS en développement"
 'twitter:description': "Sécuriser les serveurs de développement locaux pour travailler avec des témoins SameSite"
 ---
-# HTTPS en développement
 
 Les environnements de développement locaux fonctionnent généralement (c’est-à-dire : http://localhost) par défaut sur HTTP. Ce guide portera sur des situations où vous devez exécuter un serveur local sur HTTPS et comment configurer HTTPS sur localhost.
 
@@ -41,7 +41,7 @@ Exécutez le serveur de développement local de votre application comme d’habi
 
 Repérez l’emplacement de votre binaire Caddy téléchargé et exécutez la commande suivante pour créer un proxy inverse et diriger les requêtes du port 443 (le port par défaut utilisé pour HTTPS) vers le port de votre application (dans ce cas, 3000) :
 
-```
+```bash lines
 /path/to/caddy reverse-proxy --from localhost:443 --to localhost:3000
 ```
 

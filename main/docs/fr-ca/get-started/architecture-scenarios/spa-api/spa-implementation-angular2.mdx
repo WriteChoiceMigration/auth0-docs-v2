@@ -1,13 +1,13 @@
 ---
 title: "Implémentation de SPA Angular 2 (SPA + API)"
 permalink: "spa-implementation-angular2"
+'description': "L’implémentation d’Angular 2 de SPA pour le scénario d’architecture SPA + API"
 'og:title': "Implémentation de SPA Angular 2 (SPA + API)"
 'og:description': "L’implémentation d’Angular 2 de SPA pour le scénario d’architecture SPA + API"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Implémentation de SPA Angular 2 (SPA + API)"
 'twitter:description': "L’implémentation d’Angular 2 de SPA pour le scénario d’architecture SPA + API"
 ---
-# Implémentation de SPA Angular 2 (SPA + API)
 
 Ce document fait partie du scénario d’architecture SPA + API et explique comment mettre en œuvre une SPA dans Angular 2. Veuillez vous référer au scénario pour obtenir des informations sur la solution mise en œuvre.
 
@@ -17,7 +17,7 @@ Le code source complet de la mise en œuvre dans Angular 2 de la SPA se trouve 
 
 Votre application nécessitera certaines informations de configuration. Avant de poursuivre avec le reste de la mise en œuvre, créez une interface `AuthConfig` qui contiendra diverses valeurs de configuration. Placez cette interface dans un fichier appelé `auth0-variables.ts`.
 
-```
+```javascript lines
 interface AuthConfig {
   clientID: string;
   domain: string;
@@ -39,7 +39,7 @@ export const AUTH_CONFIG: AuthConfig = {
 
 La meilleure façon de gérer et de coordonner les tâches nécessaires à l’authentification de l’utilisateur est de créer un service réutilisable. Une fois le service en place, vous serez capable d’appeler ses méthodes dans toute votre application. Une instance de l’objet `WebAuth` de [auth0.js](https://auth0.com/docs/libraries/auth0js) peut être créée dans le service.
 
-```
+```javascript lines
 import { Injectable } from '@angular/core';
 import { AUTH_CONFIG } from './auth0-variables';
 import { Router } from '@angular/router';
@@ -135,7 +135,7 @@ Lorsqu’un utilisateur s’authentifie via la connexion universelle et est ensu
 
 Appelez `handleAuthentication` dans le composant de base de votre application afin que le fragment de hash d’authentification puisse être traité lorsque l’application se charge pour la première fois après que l’utilisateur y a été redirigé.
 
-```javascript
+```javascript lines
 // src/app/app.component.ts
 
 import { Component } from '@angular/core';
@@ -166,7 +166,7 @@ Vous pouvez choisir de faire revenir les utilisateurs vers n’importe quelle UR
 
 Créez un composant nommé `CallbackComponent` et remplissez-le avec un indicateur de chargement.
 
-```
+```html lines
 <!-- app/callback/callback.html -->
 
 <div class="loading">
@@ -189,7 +189,7 @@ Cette section démontre comment récupérer les informations de l’utilisateur 
 
 Pour obtenir le profil de l’utilisateur, mettez à jour la classe `AuthService` existante. Ajoutez une fonction `getProfile` qui extraira le jeton d’accès de l’utilisateur du stockage local, puis appellera la fonction `userInfo` pour récupérer les informations de l’utilisateur.
 
-```javascript
+```javascript lines
 // Existing code from the AuthService class is omitted in this code sample for brevity
 @Injectable()
 export class AuthService {
@@ -214,7 +214,7 @@ Désormais, vous pouvez simplement appeler cette fonction depuis n’importe que
 
 Par exemple, vous pouvez choisir de créer un nouveau composant pour afficher les informations de profil de l’utilisateur :
 
-```
+```javascript lines
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../auth/auth.service';
 
@@ -243,7 +243,7 @@ export class ProfileComponent implements OnInit {
 
 Le modèle de ce composant est le suivant :
 
-```
+```html lines
 <div class="panel panel-default profile-area">
   <div class="panel-heading">
     <h3>Profile</h3>
@@ -268,7 +268,7 @@ Si la `scope` retournée dans `authResult` est vide, cela signifie que l’u
 
 Voici le code que nous avons écrit en amont pour la fonction `setSession` qui effectue cette vérification :
 
-```
+```javascript lines
 private setSession(authResult): void {
   // Set the time that the Access Token will expire at
   const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
@@ -289,7 +289,7 @@ private setSession(authResult): void {
 
 Ensuite, nous devons ajouter une fonction à la classe `AuthService` que nous pouvons appeler pour déterminer si un utilisateur a reçu une permission particulère :
 
-```
+```javascript lines
 @Injectable()
 export class AuthService {
   // some code omitted for brevity
@@ -303,7 +303,7 @@ export class AuthService {
 
 Vous pouvez faire appel à cette méthode pour déterminer si nous devons afficher un élément d’interface utilisateur spécifique ou non. Par exemple, nous ne voulons afficher le lien **Approuver les feuilles de temps** que si l’utilisateur a la permission `approve:timesheets` . Notez dans le code ci-dessous que nous avons ajouté un appel à la fonction `userHasScopes` pour déterminer si ce lien doit être affiché ou non.
 
-```
+```html lines
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -317,8 +317,8 @@ Vous pouvez faire appel à cette méthode pour déterminer si nous devons affich
         <li><a *ngIf="auth.isAuthenticated() && auth.userHasScopes(['approve:timesheets'])" routerLink="/approval">Approve Timesheets</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a *ngIf="!auth.isAuthenticated()" href="/docs/javascript:void(0)" (click)="auth.login()">Log In</a></li>
-        <li><a *ngIf="auth.isAuthenticated()" href="/docs/javascript:void(0)" (click)="auth.logout()">Log Out</a></li>
+        <li><a *ngIf="!auth.isAuthenticated()" href="/docs/fr-ca/javascript:void(0)" (click)="auth.login()">Log In</a></li>
+        <li><a *ngIf="auth.isAuthenticated()" href="/docs/fr-ca/javascript:void(0)" (click)="auth.logout()">Log Out</a></li>
       </ul>
     </div>
   </div>
@@ -333,7 +333,7 @@ Vous pouvez faire appel à cette méthode pour déterminer si nous devons affich
 
 Nous devons également protéger une route pour empêcher la navigation vers celle-ci si un utilisateur n’a pas reçu des permissions appropriées. Pour cela, nous pouvons ajouter une nouvelle classe de service `ScopeGuardService`,
 
-```
+```javascript lines
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 import { AuthService } from './auth.service';
@@ -359,7 +359,7 @@ export class ScopeGuardService implements CanActivate {
 
 Ensuite, l’utiliser lors de la configuration des routes pour déterminer si une route peut être activée. Remarquez l’utilisation du nouveau `ScopeGuardService` dans la définition de la route `approval` ci-dessous :
 
-```javascript
+```javascript lines
 // app.routes.ts
 
 import { Routes, CanActivate } from '@angular/router';
@@ -389,7 +389,7 @@ Le module [angular2-jwt](https://github.com/auth0/angular2-jwt) peut être uti
 
 Installer `angular2-jwt`:
 
-```
+``` lines
 # installation with npm
 npm install --save angular2-jwt
 
@@ -399,7 +399,7 @@ yarn add angular2-jwt
 
 Créez une fonction de fabrique avec quelques valeurs de configuration pour `angular2-jwt` et ajoutez-la au tableau `providers` dans le `@NgModule`de votre application. La fonction de fabrique doit avoir une fonction `tokenGetter` qui récupère le `access_token` du stockage local.
 
-```
+```javascript lines
 import { Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
@@ -426,7 +426,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
 Après la configuration de `angular2-jwt` ,vous pouvez utiliser la classe `AuthHttp` pour effectuer des appels sécurisés à votre API à partir de n’importe quel endroit dans l’application. Pour ce faire, injectez `AuthHttp` dans n’importe quel composant ou service où il est nécessaire et utilisez-le comme vous utiliseriez la classe `Http` régulière d’Angular.
 
-```
+```javascript lines
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
@@ -453,7 +453,7 @@ export class TimesheetsService {
 
 Le renouvellement du jeton d’accès de l’utilisateur nécessite de mettre à jour la SPA Angular. Ajoutez une méthode à `AuthService` qui appelle la méthode `checkSession` de auth0.js. Si le renouvellement est réussi, utilisez la méthode `setSession` existante pour enregistrer les nouveaux jetons dans le stockage local.
 
-```
+```javascript lines
 public renewToken() {
   this.auth0.checkSession({
     audience: AUTH_CONFIG.apiUrl
@@ -467,7 +467,7 @@ public renewToken() {
 
 Dans la classe `AuthService` , ajoutez une méthode appelée `scheduleRenewal` pour définir un moment où l’authentification doit être renouvelée en silence. Dans l’exemple ci-dessous, cela est configuré pour se produire 30 secondes avant l’expiration réelle du jeton. Ajoutez également une méthode appelée `unscheduleRenewal` qui se désinscrira de l’Observable.
 
-```
+```javascript lines
 public scheduleRenewal() {
   if (!this.isAuthenticated()) return;
 

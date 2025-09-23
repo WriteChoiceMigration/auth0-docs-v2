@@ -1,13 +1,13 @@
 ---
 title: "Configuration de l’environnement de test du connecteur AD/LDAP"
 permalink: "ad-ldap-connector-test-environment"
+'description': "Explique comment créer et tester un contrôleur de domaine Active Directory."
 'og:title': "Configuration de l’environnement de test du connecteur AD/LDAP"
 'og:description': "Explique comment créer et tester un contrôleur de domaine Active Directory."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configuration de l’environnement de test du connecteur AD/LDAP"
 'twitter:description': "Explique comment créer et tester un contrôleur de domaine Active Directory."
 ---
-# Configuration de l’environnement de test du connecteur AD/LDAP
 
 Vous pouvez configurer un environnement de test en créant une installation minimale de contrôleur de domaine AD sur une machine virtuelle (VM) déployée dans le nuage. Vous pouvez faire fonctionner votre VM sur n’importe quelle plateforme en nuage. Cet exemple montre comment en configurer une sur Microsoft Azure.
 
@@ -20,7 +20,7 @@ Vous pouvez configurer un environnement de test en créant une installation mini
 7. Lorsque vous êtes invité à saisir le **SafeModeAdministratorPassword**, saisissez le mot de passe de l’administrateur que vous avez utilisé lors de la création de la VM. Cliquez sur Entrée pour continuer. Le script de promotion s’exécute et la VM redémarrera automatiquement.
 8. Ajoutez des groupes et des utilisateurs de test. Connectez-vous à la VM à l’aide du client Remote Desktop et ouvrez l’invite de commande PowerShell. Exécutez le script suivant :
 
-   ```
+   ``` lines
    > New-ADGroup -Name "Accounting" -GroupScope "DomainLocal"
        > New-ADGroup -Name "IT" -GroupScope "DomainLocal"
        
@@ -61,7 +61,7 @@ Pour s’assurer que tout fonctionne avec votre compte Auth0, nous allons config
 5. Sous **Entreprise**, activez la connexion `auth0-test-ad`**Active Directory/LDAP**.
 6. Testez le flux d’authentification en ouvrant le lien suivant dans votre navigateur :
 
-   ```
+   ```html lines
    https://{yourDomain}/authorize?response_type=token&scope=openid%20profile&client_id={yourClientId}&redirect_uri=http://jwt.io&connection=auth0-test-ad
    ```
 

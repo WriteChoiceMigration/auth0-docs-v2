@@ -1,13 +1,13 @@
 ---
 title: "Configurer Salesforce comme fournisseur d’identité SAML"
 permalink: "configure-salesforce-as-saml-identity-provider"
+'description': "Cet article explique comment configurer Salesforce comme fournisseur d’identité SAML pour une utilisation avec Auth0."
 'og:title': "Configurer Salesforce comme fournisseur d’identité SAML"
 'og:description': "Cet article explique comment configurer Salesforce comme fournisseur d’identité SAML pour une utilisation avec Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer Salesforce comme fournisseur d’identité SAML"
 'twitter:description': "Cet article explique comment configurer Salesforce comme fournisseur d’identité SAML pour une utilisation avec Auth0."
 ---
-# Configurer Salesforce comme fournisseur d’identité SAML
 
 Configurez Salesforce en tant que fournisseur d’identité <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip> en procédant comme suit :
 
@@ -53,11 +53,11 @@ Configurez Auth0 en tant que fournisseur de services pour communiquer avec le fo
 </tr>
 <tr>
 <td><strong>Domaines de messagerie</strong></td>
-<td>Entrez le nom de domaine de messagerie à partir duquel vos utilisateurs se connecteront. Par exemple, si vos utilisateurs ont un domaine de messagerie <code>abc-example.com</code>, entrez-le dans ce champ. Vous pouvez entrer plusieurs domaines.</td>
+<td>Entrez le nom de domaine de messagerie à partir duquel vos utilisateurs se connecteront. Par exemple, si vos utilisateurs ont un domaine de messagerie `abc-example.com`, entrez-le dans ce champ. Vous pouvez entrer plusieurs domaines.</td>
 </tr>
 <tr>
 <td><strong>URL de connexion</strong></td>
-<td>Ouvrez le fichier de métadonnées que vous avez téléchargé depuis Salesforce et localisez la ligne qui contient la liaison <code>SingleSignOnService</code>. La valeur de l’attribut <code>location</code> sur cette ligne est votre URL de connexion. Elle devrait ressembler à quelque chose comme : <code>https://{sf-account-name}.my.salesforce.com/idp/endpoint/HttpRedirect</code> où <code>{sf-account-name}</code> est votre nom de domaine Salesforce.</td>
+<td>Ouvrez le fichier de métadonnées que vous avez téléchargé depuis Salesforce et localisez la ligne qui contient la liaison `SingleSignOnService`. La valeur de l’attribut `location` sur cette ligne est votre URL de connexion. Elle devrait ressembler à quelque chose comme : `https://{sf-account-name}.my.salesforce.com/idp/endpoint/HttpRedirect` où `{sf-account-name}` est votre nom de domaine Salesforce.</td>
 </tr>
 <tr>
 <td><strong>URL de déconnexion</strong></td>
@@ -92,23 +92,23 @@ Configurez Salesforce avec les métadonnées Auth0. Il pourra ainsi recevoir et 
 <tbody>
 <tr>
 <td><strong>Identifiant entité</strong></td>
-<td><code>urn:auth0:YOUR_TENANT:YOUR_CONNECTION_NAME</code></td>
+<td>`urn:auth0:YOUR_TENANT:YOUR_CONNECTION_NAME`</td>
 </tr>
 <tr>
 <td><strong>ACS URL</strong></td>
-<td><code>https://{yourDomain}/login/callback</code></td>
+<td>`https://{yourDomain}/login/callback`</td>
 </tr>
 <tr>
 <td><strong>Type de sujet</strong></td>
-<td><code>Persistent ID</code></td>
+<td>`Persistent ID`</td>
 </tr>
 <tr>
 <td><strong>Format de l’identifiant de nom</strong></td>
-<td>Choisissez-en un avec <code>emailAddress</code></td>
+<td>Choisissez-en un avec `emailAddress`</td>
 </tr>
 <tr>
 <td><strong>Émetteur</strong></td>
-<td><code>https://{your-saleforce-domain}.my.salesforce.com</code></td>
+<td>`https://{your-saleforce-domain}.my.salesforce.com`</td>
 </tr>
 </tbody>
 </table>
@@ -136,7 +136,7 @@ Configurez Salesforce avec les métadonnées Auth0. Il pourra ainsi recevoir et 
    1. Si la configuration SAML fonctionne, votre navigateur sera redirigé vers une page Auth0 indiquant **« Ça marche ! »**. Cette page affiche le contenu de l’assertion d’authentification SAML envoyée par l’IDP Salesforce à Auth0.
    2. Si cela ne fonctionne pas, vérifiez à nouveau les étapes ci-dessus et consultez la section **Dépannage** ci-dessous.
 
-Lors du dépannage de l’authentification unique, il est souvent utile de capturer une trace HTTP de l’interaction et de l’enregistrer dans un fichier HAR. Pour en savoir plus, lisez [Générer et analyser des fichiers HAR](/docs/troubleshoot/guides/generate-har-files).
+Lors du dépannage de l’authentification unique, il est souvent utile de capturer une trace HTTP de l’interaction et de l’enregistrer dans un fichier HAR. Pour en savoir plus, lisez [Générer et analyser des fichiers HAR](/docs/fr-ca/troubleshoot/guides/generate-har-files).
 
 <Warning>
 

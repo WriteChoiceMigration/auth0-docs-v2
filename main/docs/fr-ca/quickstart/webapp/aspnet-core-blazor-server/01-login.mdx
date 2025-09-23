@@ -1,12 +1,14 @@
 ---
 title: "Add Login to your ASP.NET Core Blazor Server application"
 permalink: "01-login"
+'description': "This tutorial demonstrates how to add user login to an ASP.NET Core Blazor Server application."
 'og:title': "Add Login to your ASP.NET Core Blazor Server application"
 'og:description': "This tutorial demonstrates how to add user login to an ASP.NET Core Blazor Server application."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/asp.png"
 'twitter:title': "Add Login to your ASP.NET Core Blazor Server application"
 'twitter:description': "This tutorial demonstrates how to add user login to an ASP.NET Core Blazor Server application."
 ---
+
 # ASP.NET Core Blazor Server
 
 <Frame>![Gravatar for frederik.prijck@auth0.com](//www.gravatar.com/avatar/b74fc62fbaf2a93d1db3c549f62d4d9a?d=mm&r=g&s=50)</Frame>
@@ -75,13 +77,13 @@ If you are following along with the sample project you downloaded from the top o
 
 ## Integrate Auth0
 
-[Universal Login](/docs/hosted-pages/login) is the easiest way to set up authentication in your application. We recommend using it for the best experience, security, and the most complete array of features. This guide uses Universal Login to provide a way for your users to log in to your Blazor Server application.
+[Universal Login](/docs/fr-ca/hosted-pages/login) is the easiest way to set up authentication in your application. We recommend using it for the best experience, security, and the most complete array of features. This guide uses Universal Login to provide a way for your users to log in to your Blazor Server application.
 
 ### Install dependencies
 
 To integrate Auth0 with Blazor Server you can use our SDK by installing the `Auth0.AspNetCore.Authentication` Nuget package to your application.
 
-```
+```bash lines
 Install-Package Auth0.AspNetCore.Authentication
 ```
 
@@ -91,7 +93,7 @@ To enable authentication in your Blazor Server application, use the middleware p
 
 Ensure to configure the `Domain` and `ClientId`, these are required fields to ensure the SDK knows which Auth0 tenant and application it should use.
 
-```javascript
+```csharp lines
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAuth0WebAppAuthentication(options =>
@@ -105,7 +107,7 @@ var app = builder.Build();
 
 Make sure you have enabled authentication and authorization in your Program.cs file:
 
-```
+```csharp lines
 app.UseAuthentication();
 app.UseAuthorization();
 ```
@@ -118,7 +120,7 @@ Inside the `LoginModel`'s `OnGet` method, call `HttpContext.ChallengeAsync()` an
 
 After successfully calling `HttpContext.ChallengeAsync()`, the user will be redirected to Auth0 and signed in to both the OIDC middleware and the cookie middleware upon being redirected back to your application. This will allow the users to be authenticated on subsequent requests.
 
-```
+```csharp lines
 public class LoginModel : PageModel
 {
     public async Task OnGet(string redirectUri)
@@ -138,7 +140,7 @@ After the middleware has successfully retrieved the tokens from Auth0, it will e
 
 You can create a custom user profile page for displaying the user's name, as well as additional claims (such as email and picture), by retrieving the corresponding information from the `AuthenticationState`'s `User` property and passing it to the view from inside Blazor code.
 
-```
+```csharp lines
 @page "/Profile"
 @attribute [Authorize]
 
@@ -183,7 +185,7 @@ When only logging the user out from your own application but not from Auth0, ens
 
 </Note>
 
-```json
+```csharp lines
 [Authorize]
 public class LogoutModel : PageModel
 {

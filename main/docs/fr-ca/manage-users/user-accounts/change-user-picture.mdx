@@ -1,13 +1,13 @@
 ---
 title: "Changer les images utilisateur"
 permalink: "change-user-picture"
+'description': "Apprenez à utiliser les métadonnées utilisateur pour modifier le champ d’image d’un utilisateur et comment changer la photo par défaut pour tous les utilisateurs."
 'og:title': "Changer les images utilisateur"
 'og:description': "Apprenez à utiliser les métadonnées utilisateur pour modifier le champ d’image d’un utilisateur et comment changer la photo par défaut pour tous les utilisateurs."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Changer les images utilisateur"
 'twitter:description': "Apprenez à utiliser les métadonnées utilisateur pour modifier le champ d’image d’un utilisateur et comment changer la photo par défaut pour tous les utilisateurs."
 ---
-# Changer les images utilisateur
 
 Auth0 normalise les propriétés de profil commun dans le profil utilisateur : `name`, `picture`, etc. Le champ relatif à l’image est alimenté soit par l’image de profil du fournisseur social, soit par l’image Gravatar associée à l’adresse courriel de l’utilisateur.
 
@@ -20,14 +20,14 @@ L’attribut `user.picture` n’est pas directement modifiable lorsqu’il est f
 Alternativement, vous pouvez utiliser des métadonnées pour stocker l’attribut d’image pour les utilisateurs. Par exemple, si votre application permet de télécharger des photos de profil, une fois la photo téléchargée, vous pouvez définir l’URL de l’image dans `user.user_metadata.picture` :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/users/USER_ID' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: application/json' \
 --data '{"user_metadata": {"picture": "https://example.com/some-image.png"}}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/USER_ID");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
@@ -36,7 +36,7 @@ request.AddParameter("application/json", "{\"user_metadata\": {\"picture\": \"ht
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -56,8 +56,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/USER_ID")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .header("content-type", "application/json")
@@ -65,7 +65,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/USER_ID
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -81,8 +81,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
 @"content-type": @"application/json" };
@@ -107,7 +107,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/USER_ID",
@@ -131,8 +131,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"user_metadata\": {\"picture\": \"https://example.com/some-image.png\"}}"
@@ -146,7 +146,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -160,8 +160,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"user_metadata\": {\"picture\": \"https://example.com/some-image.png\"}}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer MGMT_API_ACCESS_TOKEN",
@@ -196,7 +196,7 @@ Pour s’assurer que l’image des `user_metadata` est renvoyée dans le jeton
 2. Saisissez un **Name (Nom)** descriptif pour votre Action (par exemple, `changer l’image des utilisateurs`, sélectionnez le déclencheur `Login/Post Login` (connexion/post-connexion), car vous allez ajouter l’Action au flux de connexion, puis sélectionnez **Create (Créer)**.
 3. Repérez l’éditeur de code des actions, copiez le code JavaScript suivant dans celui-ci, puis sélectionnez **Save Draft (Enregistrer le brouillon)**  pour enregistrer vos modifications :
 
-   ```
+   ``` lines
    exports.onExecutePostLogin = async (event, api) => {
      const { picture } = event.user.user_metadata;
      if (picture) {
@@ -218,7 +218,7 @@ Enfin, ajoutez l’Action que vous avez créée dans le [flux de connexion](http
 
 Pour changer l’image par défaut de tous les utilisateurs qui n’ont pas défini d’image de profil, vous pouvez utiliser une action. Par exemple :
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const DEFAULT_PROFILE_IMAGE = '{yourDefaultImageUrl}';
   api.idToken.setCustomClaim("picture", {defaultProfileImage});

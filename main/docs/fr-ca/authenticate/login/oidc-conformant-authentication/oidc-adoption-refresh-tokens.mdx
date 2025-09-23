@@ -1,26 +1,26 @@
 ---
 title: "Jetons d’actualisation avec OIDC"
 permalink: "oidc-adoption-refresh-tokens"
+'description': "Découvrez comment le pipeline conforme à l’OIDC affecte votre utilisation des jetons d’actualisation."
 'og:title': "Jetons d’actualisation avec OIDC"
 'og:description': "Découvrez comment le pipeline conforme à l’OIDC affecte votre utilisation des jetons d’actualisation."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Jetons d’actualisation avec OIDC"
 'twitter:description': "Découvrez comment le pipeline conforme à l’OIDC affecte votre utilisation des jetons d’actualisation."
 ---
-# Jetons d’actualisation avec OIDC
 
 Avec le pipeline conforme à l’OIDC, les jetons d’actualisation :
 
 * Ne seront plus renvoyés lors de l’utilisation de l’[autorisation implicite](/docs/fr-ca/get-started/authentication-and-authorization-flow/implicit-flow-with-form-post) pour l’authentification.
 * Peuvent être utilisés pour les [applications confidentielles](/docs/fr-ca/get-started/applications/confidential-and-public-applications).
 * Peuvent être utilisés avec la [Rotation des jetons d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens/refresh-token-rotation) par les applications publiques lors de l’utilisation du flux Code d’autorisation avec PKCE.
-* Doit utiliser le point de terminaison [`/oauth/token`](/docs/api/authentication#refresh-token) pour obtenir de nouveaux jetons car le point de terminaison [`/delegation`](/docs/api/authentication#delegation) est déconseillé.
+* Doit utiliser le point de terminaison [`/oauth/token`](/docs/fr-ca/api/authentication#refresh-token) pour obtenir de nouveaux jetons car le point de terminaison [`/delegation`](/docs/fr-ca/api/authentication#delegation) est déconseillé.
 
 De plus, il existe des différences dans la structure des jetons d’actualisation. Pour en savoir plus, veuillez consulter [Jetons d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens).
 
 ## Héritage (délégation)
 
-```
+``` lines
 POST /delegation
 Content-Type: 'application/json'
 {
@@ -33,7 +33,7 @@ Content-Type: 'application/json'
 
 ## OIDC-conforme (point de terminaison du jeton)
 
-```
+``` lines
 POST /oauth/token
 Content-Type: application/x-www-form-urlencoded
 grant_type=refresh_token&refresh_token=123&client_id=123&client_secret=123&scope=openid+profile&audience=https%3A%2F%2Fapi.example.com

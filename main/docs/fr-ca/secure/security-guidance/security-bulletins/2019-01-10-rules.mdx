@@ -1,13 +1,13 @@
 ---
 title: "Bulletin de sécurité pour les règles Auth0"
 permalink: "2019-01-10-rules"
+'description': "Cas où un code de règle personnalisée inappropriée peut créer des vulnérabilités dans le flux d'authentification."
 'og:title': "Bulletin de sécurité pour les règles Auth0"
 'og:description': "Cas où un code de règle personnalisée inappropriée peut créer des vulnérabilités dans le flux d'authentification."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Bulletin de sécurité pour les règles Auth0"
 'twitter:description': "Cas où un code de règle personnalisée inappropriée peut créer des vulnérabilités dans le flux d'authentification."
 ---
-# Bulletin de sécurité pour les règles Auth0
 
 **Date de publication** : 10 janvier 2019
 
@@ -35,7 +35,7 @@ Toutefois, si la MFA est ajoutée au processus d’authentification silencieuse,
 
 La logique conditionnelle basée sur l’authentification silencieuse pour contourner la MFA ne doit pas être utilisée comme solution de contournement. Les règles de ce type permettent de contourner complètement la MFA et ne doivent pas être utilisées :
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   if (context.request.query && context.request.query.prompt === 'none') {
   // skip MFA for silent token requests
@@ -49,7 +49,7 @@ function (user, context, callback) {
 
 Les règles qui déterminent si la redirection vers l’authentification multifacteur (MFA) personnalisée basée sur l’authentification silencieuse peut permettre de contourner la MFA dans certaines circonstances inhabituelles. Par exemple, évitez les situations suivantes :
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   if (context.request.query && context.request.query.prompt === 'none') {
   //redirect to custom MFA
@@ -70,7 +70,7 @@ Les exemples ci-dessous illustrent des vérifications incorrectes qui peuvent en
 
 #### Empreinte digitale de l’appareil
 
-```javascript
+```javascript lines
 function (user, context, callback) {
 
   var crypto = require('crypto');
@@ -97,7 +97,7 @@ function (user, context, callback) {
 
 #### Indicatif de pays
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   user.app_metadata = user.app_metadata || {};
 
@@ -122,7 +122,7 @@ Si vous utilisez l’une des logiques de règles illustrées précédemment, une
 
 Pour éviter de demander trop souvent à l’utilisateur d’utiliser l’authentification multifacteur, vous pouvez définir le paramètre `allowRememberBrowser` sur true, ce qui permettra aux utilisateurs finaux de cocher une case de sorte à ne recevoir une invite à l’authentification multifacteur (MFA) que tous les 30 jours. Par exemple :
 
-```
+```javascript lines
 context.multi-factor = {
     provider: 'guardian',
     allowRememberBrowser: true
@@ -168,7 +168,7 @@ Probablement. La modification recommandée pour les règles dont la logique est 
 
 Si vous avez une logique de règle qui envoie l’objet de contexte Auth0 à un service externe, vous exposez des éléments tels que `id_token` ou `access_token` associés à la demande. Par exemple :
 
-```
+```javascript lines
 request.post({
     url: 'http://requestbin.fullcontact.com/YourBinUrl',
     json: {
@@ -202,7 +202,7 @@ Non. La règle impactée était le plus souvent utilisée à des fins de déboga
 
 Si vous avez une logique de règles qui implique un service payant, tel que l’envoi de messages SMS via Twillio, dans le cadre du processus d’authentification, vous pourriez être vulnérable à une augmentation des coûts car une personne malveillante disposant d’un nom d’utilisateur et d’un mot de passe valides pourrait être en mesure de déclencher un appel au service et d’engager des coûts sans avoir à suivre l’ensemble du processus d’authentification spécifié par les règles. Par exemple :
 
-```javascript
+```javascript lines
 //Sends user SMS via Twilio
   function notifyUser(done) {
     const request = require('request');
@@ -250,7 +250,7 @@ Les répercussions sur les utilisateurs finaux dépendent de l’option décrite
 
 Si vous avez une logique de règles qui exige un contrôle d’accès basé sur une adresse électronique particulière ou un domaine de messagerie, sans vérifier si l’utilisateur a vérifié son adresse électronique, un adversaire pourrait potentiellement obtenir des privilèges supplémentaires en utilisant un deuxième type de connexion. Par exemple :
 
-```javascript
+```javascript lines
 var userHasAccess = allowList.some(function (email) {
     return email === user.email;
   });
@@ -266,7 +266,7 @@ Seuls les clients qui utilisent la logique conditionnelle dans les règles décr
 
 Lorsque vous accordez une autorisation sur la base d’adresses courriel, commencez toujours la règle par la logique suivante :
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   // Access should only be granted to verified users.
   if (!user.email || !user.email_verified) {

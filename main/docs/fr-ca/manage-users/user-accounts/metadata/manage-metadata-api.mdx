@@ -1,13 +1,13 @@
 ---
 title: "Gérer les métadonnées à l’aide de Management API"
 permalink: "manage-metadata-api"
+'description': "Apprenez à créer, mettre à jour, fusionner et supprimer des métadonnées avec Management API."
 'og:title': "Gérer les métadonnées à l’aide de Management API"
 'og:description': "Apprenez à créer, mettre à jour, fusionner et supprimer des métadonnées avec Management API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Gérer les métadonnées à l’aide de Management API"
 'twitter:description': "Apprenez à créer, mettre à jour, fusionner et supprimer des métadonnées avec Management API."
 ---
-# Gérer les métadonnées à l’aide de Management API
 
 ## Métadonnées de l’utilisateur
 
@@ -15,7 +15,7 @@ permalink: "manage-metadata-api"
 
 Pour créer un utilisateur avec les détails de profil suivants :
 
-```json
+```json lines
 {
     "email": "jane.doe@example.com",
     "user_metadata": {
@@ -27,17 +27,17 @@ Pour créer un utilisateur avec les détails de profil suivants :
 }
 ```
 
-Effectuez l’appel `POST` suivant au point de terminaison <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip> [`/post_users`](/docs/api/management/v2#!/Users/post_users) pour créer l’utilisateur et définir les valeurs des propriétés :
+Effectuez l’appel `POST` suivant au point de terminaison <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip> [`/post_users`](/docs/fr-ca/api/management/v2#!/Users/post_users) pour créer l’utilisateur et définir les valeurs des propriétés :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/users' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: application/json' \
 --data '{"email": "jane.doe@example.com", "user_metadata": {"hobby": "surfing"}, "app_metadata": {"plan": "full"}}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
@@ -46,7 +46,7 @@ request.AddParameter("application/json", "{\"email\": \"jane.doe@example.com\", 
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -66,8 +66,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/users")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .header("content-type", "application/json")
@@ -75,7 +75,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/users")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -95,8 +95,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
 @"content-type": @"application/json" };
@@ -123,7 +123,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users",
@@ -147,8 +147,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"email\": \"jane.doe@example.com\", \"user_metadata\": {\"hobby\": \"surfing\"}, \"app_metadata\": {\"plan\": \"full\"}}"
@@ -162,7 +162,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -176,8 +176,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"email\": \"jane.doe@example.com\", \"user_metadata\": {\"hobby\": \"surfing\"}, \"app_metadata\": {\"plan\": \"full\"}}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer MGMT_API_ACCESS_TOKEN",
@@ -210,11 +210,11 @@ dataTask.resume()
 
 ### Mettre à jour les métadonnées d’un utilisateur
 
-Vous pouvez mettre à jour les métadonnées d’un utilisateur en effectuant un appel `PATCH` au point de terminaison [`/patch_users_by_id`](/docs/api/management/v2#!/Users/patch_users_by_id) de Management API.
+Vous pouvez mettre à jour les métadonnées d’un utilisateur en effectuant un appel `PATCH` au point de terminaison [`/patch_users_by_id`](/docs/fr-ca/api/management/v2#!/Users/patch_users_by_id) de Management API.
 
 Supposons que vous ayez créé un utilisateur avec les valeurs de métadonnées suivantes :
 
-```json
+```json lines
 {
     "email": "jane.doe@example.com",
     "user_metadata": {
@@ -228,7 +228,7 @@ Supposons que vous ayez créé un utilisateur avec les valeurs de métadonnées 
 
 To update `user_metadata` and add the user’s home address as a second-level property:
 
-```json
+```json lines
 {
     "addresses": {
         "home": "123 Main Street, Anytown, ST 12345"
@@ -239,14 +239,14 @@ To update `user_metadata` and add the user’s home address as a second-level pr
 Vous feriez l’appel `PATCH` suivant :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/users/user_id' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: application/json' \
 --data '{"user_metadata": {"addresses": {"home": "123 Main Street, Anytown, ST 12345"}}}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/user_id");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
@@ -255,7 +255,7 @@ request.AddParameter("application/json", "{\"user_metadata\": {\"addresses\": {\
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -275,8 +275,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/user_id")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .header("content-type", "application/json")
@@ -284,7 +284,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/user_id
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -300,8 +300,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
 @"content-type": @"application/json" };
@@ -326,7 +326,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/user_id",
@@ -350,8 +350,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"user_metadata\": {\"addresses\": {\"home\": \"123 Main Street, Anytown, ST 12345\"}}}"
@@ -365,7 +365,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -379,8 +379,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"user_metadata\": {\"addresses\": {\"home\": \"123 Main Street, Anytown, ST 12345\"}}}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer MGMT_API_ACCESS_TOKEN",
@@ -409,7 +409,7 @@ dataTask.resume()
 
 The user’s profile will now appear as follows:
 
-```json
+```json lines
 {
     "email": "jane.doe@example.com",
     "user_metadata": {
@@ -436,7 +436,7 @@ Seules les propriétés du niveau racine sont fusionnées dans l’objet. Toutes
 
 For example, to add a user’s work address as an additional inner property, you would have to include the complete contents of the `addresses` property. Since the `addresses` object is a root-level property, it will be merged into the final JSON object representing the user, but its sub-properties will not.
 
-```json
+```json lines
 {
   "user_metadata": {
     "addresses": {
@@ -450,14 +450,14 @@ For example, to add a user’s work address as an additional inner property, you
 Par conséquent, l’appel `PATCH` correspondant à l’API serait :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/users/user_id' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: application/json' \
 --data '{"user_metadata": {"addresses": {"home": "123 Main Street, Anytown, ST 12345", "work": "100 Industrial Way, Anytown, ST 12345"}}}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/user_id");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
@@ -466,7 +466,7 @@ request.AddParameter("application/json", "{\"user_metadata\": {\"addresses\": {\
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -486,8 +486,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/user_id")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .header("content-type", "application/json")
@@ -495,7 +495,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/user_id
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -518,8 +518,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
 @"content-type": @"application/json" };
@@ -544,7 +544,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/user_id",
@@ -568,8 +568,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"user_metadata\": {\"addresses\": {\"home\": \"123 Main Street, Anytown, ST 12345\", \"work\": \"100 Industrial Way, Anytown, ST 12345\"}}}"
@@ -583,7 +583,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -597,8 +597,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"user_metadata\": {\"addresses\": {\"home\": \"123 Main Street, Anytown, ST 12345\", \"work\": \"100 Industrial Way, Anytown, ST 12345\"}}}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer MGMT_API_ACCESS_TOKEN",
@@ -632,7 +632,7 @@ dataTask.resume()
 
 Vous pouvez supprimer les `user_metadata` :
 
-```json
+```json lines
 {
   "user_metadata": {}
 }
@@ -642,7 +642,7 @@ Vous pouvez supprimer les `user_metadata` :
 
 Corriger les métadonnées avec un objet vide supprime entièrement celles-ci. Par exemple, l’envoi de ce corps supprime tout ce qui se trouve dans les `app_metadata` :
 
-```json
+```json lines
 {
   "app_metadata": {}
 }
@@ -660,11 +660,11 @@ Les métadonnées client sont incluses dans la réponse aux points de terminaiso
 
 ### Mettre à jour les métadonnées client
 
-Les métadonnées client peuvent être mises à jour en utilisant le point de terminaison [`PATCH /api/v2/clients/{id}`](/docs/api/management/v2#!/Users/patch_users_by_id), en fournissant un objet d’application avec la propriété `clientMetadata property`, dont la valeur consiste en un objet contenant les métadonnées que vous souhaitez modifier.
+Les métadonnées client peuvent être mises à jour en utilisant le point de terminaison [`PATCH /api/v2/clients/{id}`](/docs/fr-ca/api/management/v2#!/Users/patch_users_by_id), en fournissant un objet d’application avec la propriété `clientMetadata property`, dont la valeur consiste en un objet contenant les métadonnées que vous souhaitez modifier.
 
 **Application avant :**
 
-```json
+```json lines
 {
   ...
   "name": "myclient",
@@ -678,13 +678,13 @@ Les métadonnées client peuvent être mises à jour en utilisant le point de te
 
 Requête : `PATCH /api/v2/client/myclientid123` avec corps :
 
-```json
+```json lines
 { "client_metadata": { "mycolor": "blue" } }
 ```
 
 **Application après :**
 
-```json
+```json lines
 {
   "name": "myclient",
   "client_metadata": {
@@ -697,7 +697,7 @@ Requête : `PATCH /api/v2/client/myclientid123` avec corps :
 
 ### Supprimer les propriétés et les valeurs des métadonnées client
 
-Les clés de métadonnées client peuvent être supprimées en émettant un PATCH, comme décrit dans « Mettre à jour les métadonnées de l’application » ci-dessus, mais en fournissant `null` pour la valeur de la clé. Ce comportement correspond à celui des propriétés `user_metadata` et `app_metadata` du point de terminaison `PATCH`[/api/v2/users/{id}](/docs/api/management/v2#!/Users/patch_users_by_id).
+Les clés de métadonnées client peuvent être supprimées en émettant un PATCH, comme décrit dans « Mettre à jour les métadonnées de l’application » ci-dessus, mais en fournissant `null` pour la valeur de la clé. Ce comportement correspond à celui des propriétés `user_metadata` et `app_metadata` du point de terminaison `PATCH`[/api/v2/users/{id}](/docs/fr-ca/api/management/v2#!/Users/patch_users_by_id).
 
 ## En savoir plus
 

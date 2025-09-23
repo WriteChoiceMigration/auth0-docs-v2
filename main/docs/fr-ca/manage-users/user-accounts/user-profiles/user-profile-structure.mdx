@@ -1,13 +1,13 @@
 ---
 title: "Structure du profil utilisateur"
 permalink: "user-profile-structure"
+'description': "Liste les attributs disponibles pour le profil utilisateur Auth0"
 'og:title': "Structure du profil utilisateur"
 'og:description': "Liste les attributs disponibles pour le profil utilisateur Auth0"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Structure du profil utilisateur"
 'twitter:description': "Liste les attributs disponibles pour le profil utilisateur Auth0"
 ---
-# Structure du profil utilisateur
 
 Le profil utilisateur normalisé d’Auth0 se compose de plusieurs éléments :
 
@@ -22,25 +22,25 @@ Si certains champs utilisateur ne doivent pas être stockés par Auth0 pour des 
 
 Par défaut, les attributs du profil utilisateur fournis par des fournisseurs d’identité autres qu’Auth0 (tels que Google, Facebook ou X) ne sont pas directement modifiables, car ils sont mis à jour par le fournisseur d’identité à chaque fois que l’utilisateur se connecte.
 
-Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_name` ou les attributs racine de `l’image` sur le profil utilisateur normalisé, vous devez [configurer votre synchronisation de connexion avec Auth0](/docs/manage-users/user-accounts/user-profiles/configure-connection-sync-with-auth0) de manière à ce que les attributs de l’utilisateur soient mis à jour à partir du fournisseur d’identité uniquement lors de la création du profil utilisateur. Ces attributs racine seront alors disponibles à l’édition individuelle ou par importation en grande quantité.
+Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_name` ou les attributs racine de `l’image` sur le profil utilisateur normalisé, vous devez [configurer votre synchronisation de connexion avec Auth0](/docs/fr-ca/manage-users/user-accounts/user-profiles/configure-connection-sync-with-auth0) de manière à ce que les attributs de l’utilisateur soient mis à jour à partir du fournisseur d’identité uniquement lors de la création du profil utilisateur. Ces attributs racine seront alors disponibles à l’édition individuelle ou par importation en grande quantité.
 
 <table class="table"><thead>
 <tr>
 <th>Nom</th>
 <th>Type</th>
 <th>Description</th>
-<th><a href="/docs/users/search">Recherche?</a></th>
-<th><a href="/docs/api/management/guides/users/update-root-attributes-users">Mise à jour?</a></th>
-<th><a href="/docs/users/guides/bulk-user-imports">Importation? </a></th>
-<th><a href="/docs/users/guides/bulk-user-imports#request-bulk-import">Mise à jour pendant l’importation?</a></th>
-<th><a href="/docs/users/guides/bulk-user-exports">Export?</a></th>
+<th><a href="/docs/fr-ca/users/search">Recherche?</a></th>
+<th><a href="/docs/fr-ca/api/management/guides/users/update-root-attributes-users">Mise à jour?</a></th>
+<th><a href="/docs/fr-ca/users/guides/bulk-user-imports">Importation? </a></th>
+<th><a href="/docs/fr-ca/users/guides/bulk-user-imports#request-bulk-import">Mise à jour pendant l’importation?</a></th>
+<th><a href="/docs/fr-ca/users/guides/bulk-user-exports">Export?</a></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>app_metadata</code></td>
+<td>`app_metadata`</td>
 <td>objet</td>
-<td>Champs personnalisés qui stockent des informations sur un utilisateur qui influencent l’accès de l’utilisateur, comme le plan d’assistance, les rôles de sécurité (si vous n’utilisez pas l’ensemble de fonctionnalités Authorization Core) ou les groupes de contrôle d’accès. Pour en savoir plus, veuillez consulter <a href="/docs/users/concepts/overview-user-metadata">Présentation des métadonnées</a>.</td>
+<td>Champs personnalisés qui stockent des informations sur un utilisateur qui influencent l’accès de l’utilisateur, comme le plan d’assistance, les rôles de sécurité (si vous n’utilisez pas l’ensemble de fonctionnalités Authorization Core) ou les groupes de contrôle d’accès. Pour en savoir plus, veuillez consulter <a href="/docs/fr-ca/users/concepts/overview-user-metadata">Présentation des métadonnées</a>.</td>
 <td>O</td>
 <td>O</td>
 <td>O</td>
@@ -48,7 +48,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>blocked</code></td>
+<td>`blocked`</td>
 <td>booléen</td>
 <td>Indique si l’utilisateur a été bloqué. L’importation permet aux abonnés de s’assurer que les utilisateurs restent bloqués lors de la migration vers Auth0.</td>
 <td>O</td>
@@ -58,7 +58,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>blocked_for</code></td>
+<td>`blocked_for`</td>
 <td>tableau (objet)</td>
 <td>Adresses IP qui ont été bloquées en raison d’un soupçon d’attaque par force brute.</td>
 <td>N</td>
@@ -68,7 +68,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>N</td>
 </tr>
 <tr>
-<td><code>created_at</code></td>
+<td>`created_at`</td>
 <td>date heure</td>
 <td>Horodatage indiquant la date de création du profil utilisateur.</td>
 <td>O</td>
@@ -78,7 +78,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>texte</td>
 <td>(unique) L’adresse courriel de l’utilisateur.</td>
 <td>O</td>
@@ -88,7 +88,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>email_verified</code></td>
+<td>`email_verified`</td>
 <td>booléen</td>
 <td>Indique si l’utilisateur a vérifié son adresse courriel.</td>
 <td>O</td>
@@ -98,7 +98,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>family_name</code></td>
+<td>`family_name`</td>
 <td>texte</td>
 <td>Le nom de famille de l’utilisateur.</td>
 <td>O</td>
@@ -108,7 +108,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>given_name</code></td>
+<td>`given_name`</td>
 <td>texte</td>
 <td>Le nom donné à l’utilisateur.</td>
 <td>O</td>
@@ -118,7 +118,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>guardian_authenticators</code></td>
+<td>`guardian_authenticators`</td>
 <td>array (object)</td>
 <td>Informations détaillées sur les méthodes d’autorisation de sauvegarde du tuteur que l’utilisateur a configurées, y compris les SMS et les codes de récupération.</td>
 <td>N</td>
@@ -128,9 +128,9 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>N</td>
 </tr>
 <tr>
-<td><code>identities</code></td>
+<td>`identities`</td>
 <td>array (object)</td>
-<td><p>Contient des informations récupérées auprès du fournisseur d’identité avec lequel l’utilisateur s’authentifie à l’origine. Les utilisateurs peuvent également <a href="/docs/users/concepts/overview-user-account-linking">lier leur profil à plusieurs fournisseurs d’identité</a>; ces identités apparaîtront alors également dans ce tableau. Le contenu d’un objet de fournisseur d’identité individuel varie selon le fournisseur, mais il comprendra généralement les éléments suivants : </p><ul><li><code>connection</code> (texte) : nom de la connexion Auth0 utilisée pour authentifier l’utilisateur.</li><li><code>isSocial</code> (booléen) : indique si la connexion est sociale.</li><li><code>provider</code> (texte) : nom de l’entité qui authentifie l’utilisateur, comme Facebook, Google, SAML ou votre propre fournisseur.</li><li><code>user_id</code> (texte) : identifiant unique de l’utilisateur pour cette connexion/ce fournisseur.</li><li><code>profileData</code> (objet) : informations utilisateur associées à la connexion. Lorsque les profils sont liés, ils sont renseignés avec les informations utilisateur associées aux comptes secondaires.</li></ul> dans certains cas, cela inclura également un jeton d’accès API à utiliser avec le fournisseur.</td>
+<td><p>Contient des informations récupérées auprès du fournisseur d’identité avec lequel l’utilisateur s’authentifie à l’origine. Les utilisateurs peuvent également <a href="/docs/fr-ca/users/concepts/overview-user-account-linking">lier leur profil à plusieurs fournisseurs d’identité</a>; ces identités apparaîtront alors également dans ce tableau. Le contenu d’un objet de fournisseur d’identité individuel varie selon le fournisseur, mais il comprendra généralement les éléments suivants : </p><ul><li>`connection` (texte) : nom de la connexion Auth0 utilisée pour authentifier l’utilisateur.</li><li>`isSocial` (booléen) : indique si la connexion est sociale.</li><li>`provider` (texte) : nom de l’entité qui authentifie l’utilisateur, comme Facebook, Google, SAML ou votre propre fournisseur.</li><li>`user_id` (texte) : identifiant unique de l’utilisateur pour cette connexion/ce fournisseur.</li><li>`profileData` (objet) : informations utilisateur associées à la connexion. Lorsque les profils sont liés, ils sont renseignés avec les informations utilisateur associées aux comptes secondaires.</li></ul> dans certains cas, cela inclura également un jeton d’accès API à utiliser avec le fournisseur.</td>
 <td>O</td>
 <td>N</td>
 <td>N</td>
@@ -138,7 +138,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>last_ip</code></td>
+<td>`last_ip`</td>
 <td>texte</td>
 <td>Adresse IP associée à la dernière connexion de l’utilisateur.</td>
 <td>O</td>
@@ -148,9 +148,9 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>last_login</code></td>
+<td>`last_login`</td>
 <td>date heure</td>
-<td>Horodatage indiquant la dernière fois que l’utilisateur s’est connecté. Si un utilisateur est bloqué et se connecte, la session bloquée met à jour <code>last_login</code>. Si vous utilisez cette propriété depuis l’intérieur d’une <a href="/docs/rules">Règle</a> à l’aide de l’objet <code>user&lt;</code>, sa valeur sera associée à la connexion qui a déclenché la règle; ceci est dû au fait que les règles s’exécutent après la connexion.</td>
+<td>Horodatage indiquant la dernière fois que l’utilisateur s’est connecté. Si un utilisateur est bloqué et se connecte, la session bloquée met à jour `last_login`. Si vous utilisez cette propriété depuis l’intérieur d’une <a href="/docs/fr-ca/rules">Règle</a> à l’aide de l’objet `user&lt;`, sa valeur sera associée à la connexion qui a déclenché la règle; ceci est dû au fait que les règles s’exécutent après la connexion.</td>
 <td>O</td>
 <td>N</td>
 <td>N</td>
@@ -158,7 +158,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>last_password_reset</code></td>
+<td>`last_password_reset`</td>
 <td>date heure</td>
 <td>Horodatage indiquant la dernière fois que le mot de passe de l’utilisateur a été réinitialisé/modifié. Lors de la création de l’utilisateur, ce champ n’existe pas. Cette propriété n’est disponible que pour les connexions à la base de données.</td>
 <td>N</td>
@@ -168,9 +168,9 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>logins_count</code></td>
+<td>`logins_count`</td>
 <td>entier</td>
-<td>Nombre de fois que l’utilisateur s’est connecté. Si un utilisateur est bloqué et se connecte, la session bloquée est comptabilisée dans <code>logins_count</code>.</td>
+<td>Nombre de fois que l’utilisateur s’est connecté. Si un utilisateur est bloqué et se connecte, la session bloquée est comptabilisée dans `logins_count`.</td>
 <td>O</td>
 <td>N</td>
 <td>N</td>
@@ -178,7 +178,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>multifactor</code></td>
+<td>`multifactor`</td>
 <td>tableau (chaîne)</td>
 <td>Liste des fournisseurs multifacteur auprès desquels l’utilisateur est inscrit.</td>
 <td>N</td>
@@ -188,7 +188,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>multifactor_last_modified</code></td>
+<td>`multifactor_last_modified`</td>
 <td>date heure</td>
 <td>Date et heure de la dernière mise à jour de l’authentification multifacteur (MFA) d’un utilisateur.</td>
 <td>N</td>
@@ -198,7 +198,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>name</code></td>
+<td>`name`</td>
 <td>texte</td>
 <td>Le nom complet de l’utilisateur.</td>
 <td>O</td>
@@ -208,7 +208,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>nickname</code></td>
+<td>`nickname`</td>
 <td>texte</td>
 <td>Le surnom de l’utilisateur.</td>
 <td>O</td>
@@ -218,7 +218,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>phone_number</code></td>
+<td>`phone_number`</td>
 <td>texte</td>
 <td>Le numéro de téléphone de l’utilisateur. Valable uniquement pour les utilisateurs avec des connexions SMS.</td>
 <td>O</td>
@@ -228,7 +228,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>phone_verified</code></td>
+<td>`phone_verified`</td>
 <td>booléen</td>
 <td>Indique si le numéro de téléphone de l’utilisateur a été vérifié. Valable uniquement pour les utilisateurs avec des connexions SMS.</td>
 <td>O</td>
@@ -238,7 +238,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>picture</code></td>
+<td>`picture`</td>
 <td>texte</td>
 <td>URL pointant vers [l’image de profil de l’utilisateur] (/users/guides/change-user-pictures).</td>
 <td>N</td>
@@ -248,7 +248,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>tenant</code></td>
+<td>`tenant`</td>
 <td>texte</td>
 <td>Nom du locataire utilisé.</td>
 <td>N</td>
@@ -258,9 +258,9 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>N</td>
 </tr>
 <tr>
-<td><code>updated_at</code></td>
+<td>`updated_at`</td>
 <td>date heure</td>
-<td>Horodatage indiquant la dernière mise à jour/modification du profil de l’utilisateur. Les modifications apportées à <code>last_login</code> sont considérées comme des mises à jour, donc la plupart du temps, <code>updated_at</code> correspondra à <code>last_login</code>.</td>
+<td>Horodatage indiquant la dernière mise à jour/modification du profil de l’utilisateur. Les modifications apportées à `last_login` sont considérées comme des mises à jour, donc la plupart du temps, `updated_at` correspondra à `last_login`.</td>
 <td>O</td>
 <td>N</td>
 <td>N</td>
@@ -268,7 +268,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>user_id</code></td>
+<td>`user_id`</td>
 <td>texte</td>
 <td>(unique) L’identifiant de l’utilisateur. L’importation permet de synchroniser les enregistrements des utilisateurs entre plusieurs systèmes sans utiliser de tables de correspondance.</td>
 <td>O</td>
@@ -278,9 +278,9 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>user_metadata</code></td>
+<td>`user_metadata`</td>
 <td>objet</td>
-<td>Champs personnalisés stockant des informations sur un utilisateur qui n’ont pas d’impact sur les informations auxquelles il peut ou ne peut pas accéder, comme l’adresse professionnelle, l’adresse personnelle ou les préférences de l’utilisateur. Pour en savoir plus, veuillez consulter <a href="/docs/users/concepts/overview-user-metadata">Présentation des métadonnées</a>.</td>
+<td>Champs personnalisés stockant des informations sur un utilisateur qui n’ont pas d’impact sur les informations auxquelles il peut ou ne peut pas accéder, comme l’adresse professionnelle, l’adresse personnelle ou les préférences de l’utilisateur. Pour en savoir plus, veuillez consulter <a href="/docs/fr-ca/users/concepts/overview-user-metadata">Présentation des métadonnées</a>.</td>
 <td>O</td>
 <td>O</td>
 <td>O</td>
@@ -288,7 +288,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 <td>O</td>
 </tr>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>texte</td>
 <td>(unique) Le nom d’utilisateur de l’utilisateur.</td>
 <td>O</td>
@@ -322,7 +322,7 @@ Cette règle s’applique à toutes les connexions à la base de données Auth0.
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>courriel</td>
 <td>La longueur maximale est de 64 caractères pour la partie utilisateur/locale et de 256 caractères pour la partie domaine.</td>
 <td><a href="https://json-schema.org/understanding-json-schema/reference/string#email-addresses">Schéma de validation JSON</a>.</td>
@@ -334,37 +334,37 @@ Cette règle s’applique à toutes les connexions à la base de données Auth0.
 <td></td>
 </tr>
 <tr>
-<td><code>phone_number</code></td>
+<td>`phone_number`</td>
 <td>téléphone</td>
 <td>Format standardisé <br/> Les numéros de téléphone doivent être au format E.164</td>
 <td>Regex : ^\N-[0-9]{1,15}$ <br/></td>
 </tr>
 <tr>
-<td><code>password</code></td>
+<td>`password`</td>
 <td>chaîne</td>
 <td>La longueur minimale du mot de passe que vous pouvez définir est de 1 octet, tandis que la longueur maximale est de 72 octets.</td>
 <td>Caractères standardisés : les caractères ASCII compris entre 33 et 126 sont valides, y compris:<br/> les majuscules de A à Z, <br/> les minuscules de a à z, <br/> les caractères numériques de 0 à 9, <br/> les caractères spéciaux autorisés. <br/></td>
 </tr>
 <tr>
-<td><code>nom</code></td>
+<td>`nom`</td>
 <td>chaîne de caractères</td>
 <td>1 à 150 caractères</td>
 <td>Tous les caractères UTF-8 sont pris en charge</td>
 </tr>
 <tr>
-<td><code>nom_de_famille</code></td>
+<td>`nom_de_famille`</td>
 <td>chaîne de caractères</td>
 <td>1 à 350 caractères</td>
 <td>Tous les caractères UTF-8 sont pris en charge.</td>
 </tr>
 <tr>
-<td><code>nom_de_famille</code></td>
+<td>`nom_de_famille`</td>
 <td>chaîne</td>
 <td>1 à 150 caractères</td>
 <td>Tous les caractères UTF-8 sont pris en charge</td>
 </tr>
 <tr>
-<td><code>given_name</code></td>
+<td>`given_name`</td>
 <td>chaîne de caractères</td>
 <td>1 à 150 caractères</td>
 <td>Tous les caractères UTF-8 sont pris en charge</td>

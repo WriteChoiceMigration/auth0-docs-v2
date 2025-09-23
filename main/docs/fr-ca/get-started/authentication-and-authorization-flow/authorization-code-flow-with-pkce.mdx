@@ -1,13 +1,13 @@
 ---
 title: "Flux de code d’autorisation avec Proof Key for Code Exchange (PKCE)"
 permalink: "authorization-code-flow-with-pkce"
+'description': "Découvrez comment fonctionne le flux de code d’autorisation avec Proof Key for Code Exchange (PKCE) et pourquoi vous devriez l’utiliser pour les applications natives et mobiles."
 'og:title': "Flux de code d’autorisation avec Proof Key for Code Exchange (PKCE)"
 'og:description': "Découvrez comment fonctionne le flux de code d’autorisation avec Proof Key for Code Exchange (PKCE) et pourquoi vous devriez l’utiliser pour les applications natives et mobiles."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Flux de code d’autorisation avec Proof Key for Code Exchange (PKCE)"
 'twitter:description': "Découvrez comment fonctionne le flux de code d’autorisation avec Proof Key for Code Exchange (PKCE) et pourquoi vous devriez l’utiliser pour les applications natives et mobiles."
 ---
-# Flux de code d’autorisation avec Proof Key for Code Exchange (PKCE)
 
 <Card title="Overview">
 
@@ -38,15 +38,15 @@ Le flux de code d’autorisation amélioré par la PKCE introduit un secret cré
 
 Étant donné que le flux de code d’autorisation amélioré par la PKCE s’appuie sur le [flux de code d’autorisation standard](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow) , les étapes sont très similaires.
 
-<Frame>![Flux - Code d’autorisation avec PKCE - Schéma de séquence d’autorisation](//images.ctfassets.net/cdy7uua7fh8z/3pstjSYx3YNSiJQnwKZvm5/191f94844f90a7385b84d4e99d9c538e/auth-sequence-auth-code-pkce.png)</Frame>
+<Frame>![Flux - Code d’autorisation avec PKCE - Schéma de séquence d’autorisation](/images/fr-ca/cdy7uua7fh8z/3pstjSYx3YNSiJQnwKZvm5/191f94844f90a7385b84d4e99d9c538e/auth-sequence-auth-code-pkce.png)</Frame>
 
 1. L’utilisateur clique sur **Connexion** dans l’application.
 2. La trousse SDK Auth0 crée un `code_verifier` à chiffrement aléatoire et génère à partir de celui-ci un `code_challenge`.
-3. La trousse SDK Auth0 redirige l’utilisateur vers le serveur d’autorisation Auth0 ([`/authorize`](/docs/api/authentication#authorization-code-grant-pkce-)) avec le `code_challenge`.
+3. La trousse SDK Auth0 redirige l’utilisateur vers le serveur d’autorisation Auth0 ([`/authorize`](/docs/fr-ca/api/authentication#authorization-code-grant-pkce-)) avec le `code_challenge`.
 4. Votre serveur d’autorisations Auth0 redirige l’utilisateur vers l’invite de connexion et d’autorisation.
 5. L’utilisateur s’authentifie en choisissant l’une des options de connexion configurées et peut voir apparaître une page de consentement énumérant les autorisations qu’Auth0 accordera à l’application.
 6. Votre serveur d’autorisations Auth0 stocke le `code_challenge` et redirige l’utilisateur vers l’application avec un `code` d’autorisation, qui est valable pour une seule utilisation.
-7. La trousse SDK Auth0 envoie ce `code` et le `code_verifier` (créé à l’étape 2) au serveur d’autorisations Auth0 `(`[`/oauth/token`](/docs/api/authentication?http#authorization-code-flow-with-pkce44)).
+7. La trousse SDK Auth0 envoie ce `code` et le `code_verifier` (créé à l’étape 2) au serveur d’autorisations Auth0 `(`[`/oauth/token`](/docs/fr-ca/api/authentication?http#authorization-code-flow-with-pkce44)).
 8. Votre serveur d’autorisations Auth0 vérifie le `code_challenge` et le `code_verifier`.
 9. Votre serveur d’autorisations Auth0 répond avec un jeton d’ID et un jeton d’accès (et éventuellement un jeton d’actualisation).
 10. Votre application peut utiliser le jeton d’accès pour appeler une API afin d’accéder aux informations concernant l’utilisateur.
@@ -60,7 +60,7 @@ Si la [Rotation des jetons d’actualisation](/docs/fr-ca/secure/tokens/refresh-
 
 ## Comment la mettre en œuvre?
 
-La manière la plus simple de mettre en œuvre le flux de code d’autorisation avec PKCE est de [suivre notre Guide rapide pour applications natives](/docs/quickstart/native) ou de [suivre notre Guide rapide pour applications monopages](/docs/quickstart/spa).
+La manière la plus simple de mettre en œuvre le flux de code d’autorisation avec PKCE est de [suivre notre Guide rapide pour applications natives](/docs/fr-ca/quickstart/native) ou de [suivre notre Guide rapide pour applications monopages](/docs/fr-ca/quickstart/spa).
 
 En fonction de l’application que vous souhaitez utiliser, vous pouvez également recourir à nos trousses SDK pour applications mobiles ou pour applications à page unique :
 

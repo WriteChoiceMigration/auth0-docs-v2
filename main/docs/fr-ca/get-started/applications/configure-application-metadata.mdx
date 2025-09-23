@@ -1,13 +1,13 @@
 ---
 title: "Configurer les métadonnées de l’application"
 permalink: "configure-application-metadata"
+'description': "Apprenez comment configurer, mettre à jour et supprimer les métadonnées de l’application (client_metadata et clientMetadata) dans les paramètres avancés des applications de l’Auh0 Dashboard."
 'og:title': "Configurer les métadonnées de l’application"
 'og:description': "Apprenez comment configurer, mettre à jour et supprimer les métadonnées de l’application (client_metadata et clientMetadata) dans les paramètres avancés des applications de l’Auh0 Dashboard."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer les métadonnées de l’application"
 'twitter:description': "Apprenez comment configurer, mettre à jour et supprimer les métadonnées de l’application (client_metadata et clientMetadata) dans les paramètres avancés des applications de l’Auh0 Dashboard."
 ---
-# Configurer les métadonnées de l’application
 
 Les métadonnées d’application sont facultatives et consistent en des clés et des valeurs personnalisables (255 caractères maximum chacune), que vous pouvez définir pour chaque application. Les métadonnées sont exposées dans l’objet `Client` sous la forme `client_metadata`, et dans les règles sous la forme `context.clientMetadata`. Vous pouvez par exemple stocker l’URL correspondant à la page d’accueil de l’application (un champ qu’Auth0 ne fournit pas par défaut dans les paramètres de l’application).
 
@@ -33,7 +33,7 @@ Les applications existantes n’ont pas de valeur pour cette propriété.
 
 Vous pouvez accéder aux métadonnées d’application dans [Actions](/docs/fr-ca/customize/actions) :
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   if (event.client.metadata.SKIP_VERIFICATION === "yes"){
     return;
@@ -44,7 +44,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 ... ou dans [Règles](/docs/fr-ca/customize/rules) :
 
-```javascript
+```javascript lines
 function applicationMetadataExample (user, context, callback){
   context.clientMetadata = context.clientMetadata || {};
   if (context.clientMetadata.SKIP_VERIFICATION === "yes"){
@@ -62,7 +62,7 @@ Vous pouvez lire et ajouter des métadonnées d’application à l’aide du Tab
 2. Faites défiler vers le bas et cliquez sur **Paramètres avancés**.
 3. Dans l’onglet **Métadonnées de l’application**, saisissez le nom et la valeur de la clé, puis cliquez sur **Ajouter**.
 
-   <Frame>![Dashboard (Tableau de bord) Applications Onglet Application Settings (Paramètres d’application) Advanced Settings (Paramètres avancés) Onglet Application Metadata (Métadonnées d’application)](//images.ctfassets.net/cdy7uua7fh8z/7GWHyQloNihda3fuYiVEWQ/90328936eaee7a89b43f5b41acfdc994/2025-02-28_13-43-37.png)</Frame>
+   <Frame>![Dashboard (Tableau de bord) Applications Onglet Application Settings (Paramètres d’application) Advanced Settings (Paramètres avancés) Onglet Application Metadata (Métadonnées d’application)](/images/fr-ca/cdy7uua7fh8z/7GWHyQloNihda3fuYiVEWQ/90328936eaee7a89b43f5b41acfdc994/2025-02-28_13-43-37.png)</Frame>
 
 4. Cliquez sur **Enregistrer les modifications**.
 

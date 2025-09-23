@@ -1,13 +1,13 @@
 ---
 title: "Défi-réponse avec les codes de récupération"
 permalink: "challenge-with-recovery-codes"
+'description': "Décrit comment utiliser l’API MFA pour lancer un défi-réponse aux utilisateurs qui perdent l’accès à leur appareil ou à leur compte à l’aide de codes de récupération."
 'og:title': "Défi-réponse avec les codes de récupération"
 'og:description': "Décrit comment utiliser l’API MFA pour lancer un défi-réponse aux utilisateurs qui perdent l’accès à leur appareil ou à leur compte à l’aide de codes de récupération."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Défi-réponse avec les codes de récupération"
 'twitter:description': "Décrit comment utiliser l’API MFA pour lancer un défi-réponse aux utilisateurs qui perdent l’accès à leur appareil ou à leur compte à l’aide de codes de récupération."
 ---
-# Défi-réponse avec les codes de récupération
 
 Lorsque les [codes de récupération sont activés](/docs/fr-ca/secure/multi-factor-authentication/configure-recovery-codes-for-mfa) pour votre locataire, Auth0 les génère automatiquement lorsqu’un utilisateur s’inscrit avec l’authentification multifacteur (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>). L’utilisateur doit enregistrer le code de récupération. Ce code pourra être utilisé ultérieurement si l’utilisateur perd l’accès à l’appareil ou au compte utilisé pour la MFA.
 
@@ -33,18 +33,18 @@ Vous pouvez autoriser les utilisateurs à s’authentifier avec un code de récu
 </thead>
 <tbody>
 <tr>
-<td><code>grant_type</code></td>
-<td><code>http://auth0.com/oauth/grant-type/mfa-recovery-code</code></td>
+<td>`grant_type`</td>
+<td>`http://auth0.com/oauth/grant-type/mfa-recovery-code`</td>
 </tr>
 <tr>
-<td><code>recovery_code</code></td>
+<td>`recovery_code`</td>
 <td>Le code de récupération fourni par l’utilisateur.</td>
 </tr>
 </tbody>
 </table>
 
    <CodeGroup>
-```bash curl.sh
+```bash cURL lines
    curl --request POST \
    --url 'https://{yourDomain}/oauth/token' \
    --header 'content-type: application/x-www-form-urlencoded' \
@@ -53,8 +53,8 @@ Vous pouvez autoriser les utilisateurs à s’authentifier avec un code de récu
    --data 'client_secret={yourClientSecret}' \
    --data 'mfa_token={mfaToken}' \
    --data 'recovery_code={recoveryCode}'
-   ```
-   ```csharp c_.cs
+   ``` lines
+   ```csharp C# lines
    var client = new RestClient("https://{yourDomain}/oauth/token");
    var request = new RestRequest(Method.POST);
    request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -62,7 +62,7 @@ Vous pouvez autoriser les utilisateurs à s’authentifier avec un code de récu
    IRestResponse response = client.Execute(request);
    ```
 
-   ```go go.go
+   ```go Go lines
    package main
    import (
    "fmt"
@@ -81,15 +81,15 @@ Vous pouvez autoriser les utilisateurs à s’authentifier avec un code de récu
    fmt.Println(res)
    fmt.Println(string(body))
    }
-   ```
-   ```java java.java
+   ``` lines
+   ```java Java lines
    HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
    .header("content-type", "application/x-www-form-urlencoded")
    .body("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-recovery-code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&recovery_code=%7BrecoveryCode%7D")
    .asString();
    ```
 
-   ```javascript node_js.js
+   ```javascript Node.JS lines
    var axios = require("axios").default;
    var options = {
    method: 'POST',
@@ -108,8 +108,8 @@ Vous pouvez autoriser les utilisateurs à s’authentifier avec un code de récu
    }).catch(function (error) {
    console.error(error);
    });
-   ```
-   ```obj-c obj-c.obj-c
+   ``` lines
+   ```obj-c Obj-C lines
    #import 
    NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
    NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=http://auth0.com/oauth/grant-type/mfa-recovery-code" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -136,7 +136,7 @@ Vous pouvez autoriser les utilisateurs à s’authentifier avec un code de récu
    [dataTask resume];
    ```
 
-   ```php php.php
+   ```php PHP lines
    $curl = curl_init();
    curl_setopt_array($curl, [
    CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -159,8 +159,8 @@ Vous pouvez autoriser les utilisateurs à s’authentifier avec un code de récu
    } else {
    echo $response;
    }
-   ```
-   ```python python.py
+   ``` lines
+   ```python Python lines
    import http.client
    conn = http.client.HTTPSConnection("")
    payload = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-recovery-code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&recovery_code=%7BrecoveryCode%7D"
@@ -171,7 +171,7 @@ Vous pouvez autoriser les utilisateurs à s’authentifier avec un code de récu
    print(data.decode("utf-8"))
    ```
 
-   ```ruby ruby.rb
+   ```ruby Ruby lines
    require 'uri'
    require 'net/http'
    require 'openssl'
@@ -184,8 +184,8 @@ Vous pouvez autoriser les utilisateurs à s’authentifier avec un code de récu
    request.body = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-recovery-code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&recovery_code=%7BrecoveryCode%7D"
    response = http.request(request)
    puts response.read_body
-   ```
-   ```swift swift.swift
+   ``` lines
+   ```swift Swift lines
    import Foundation
    let headers = ["content-type": "application/x-www-form-urlencoded"]
    let postData = NSMutableData(data: "grant_type=http://auth0.com/oauth/grant-type/mfa-recovery-code".data(using: String.Encoding.utf8)!)
@@ -214,7 +214,7 @@ Vous pouvez autoriser les utilisateurs à s’authentifier avec un code de récu
 
 3. Invitez l’utilisateur à recueillir le code de récupération. Si l’appel réussit, vous obtiendrez les jetons d’authentification et un nouveau code de récupération :
 
-   ```json
+   ```json lines
    {
        "access_token": "O3...H4",
        "id_token": "eyJh...w",

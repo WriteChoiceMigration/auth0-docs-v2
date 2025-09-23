@@ -1,17 +1,19 @@
 ---
 title: "Ajouter une fonctionnalité de connexion à votre application Spring Web"
 permalink: "interactive"
+'description': "Ce guide explique comment intégrer Auth0 à une application Spring Boot à l’aide de la trousse SDK Spring Boot Auth0."
 'og:title': "Ajouter une fonctionnalité de connexion à votre application Spring Web"
 'og:description': "Ce guide explique comment intégrer Auth0 à une application Spring Boot à l’aide de la trousse SDK Spring Boot Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/spring.png"
 'twitter:title': "Ajouter une fonctionnalité de connexion à votre application Spring Web"
 'twitter:description': "Ce guide explique comment intégrer Auth0 à une application Spring Boot à l’aide de la trousse SDK Spring Boot Auth0."
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -97,7 +99,7 @@ Ce guide utilise [Thymeleaf](https://www.thymeleaf.org/) et le [module d’inté
 
 Si vous utilisez Gradle, vous pouvez inclure ces dépendances comme indiqué ci-dessous.
 
-```
+```javascript lines
 plugins {
 id 'java'
 id 'org.springframework.boot' version '3.1.4'
@@ -112,7 +114,7 @@ implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 
 Si vous utilisez Maven :
 
-```
+```xml lines
 <parent>
 <groupId>org.springframework.boot</groupId>
 <artifactId>spring-boot-starter-parent</artifactId>
@@ -154,7 +156,7 @@ Si vous utilisez Maven :
 
 Okta Spring Boot Starter facilite la configuration de votre application avec Auth0. L’exemple ci-dessous utilise un fichier `application.yml`, mais vous pouvez également utiliser des fichiers de propriétés ou tout autre [mécanisme d’externalisation pris en charge](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config).
 
-```
+``` lines
 #src/main/resources/application.yml
 okta:
 oauth2:
@@ -183,7 +185,7 @@ Vous pouvez configurer l’instance [HttpSecurity](https://docs.spring.io/spring
 
 `http`
 
-```
+``` lines
 .authorizeHttpRequests(authorize -&gt; authorize
 
     .requestMatchers(&quot;/&quot;).permitAll()
@@ -209,7 +211,7 @@ Lorsque vous cliquez sur le lien de connexion, vérifiez que l’application vou
 
 checkpoint.itWorked checkpoint.somethingNotRight
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/7L6lZ6xCi1L7sJBFZUPb9g/215ad0b724c138290b0b217edb5ddf96/Login_Screen_-_French.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/7L6lZ6xCi1L7sJBFZUPb9g/215ad0b724c138290b0b217edb5ddf96/Login_Screen_-_French.png)</Frame>
 
 Auth0 active le fournisseur social Google par défaut sur les nouveaux locataires et vous offre des clés de développeur pour tester la connexion avec des fournisseurs d’identité sociale. Toutefois, ces clés de développeur présentent certaines limitations qui peuvent entraîner un comportement différent de votre application. Pour plus de détails sur ce comportement et comment le résoudre, consultez le document Tester les connexions sociales avec des clés de développeur Auth0.
 
@@ -243,7 +245,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/webapp/java-spring-boot/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

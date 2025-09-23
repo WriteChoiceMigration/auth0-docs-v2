@@ -1,23 +1,23 @@
 ---
 title: "Multi-Factor Authentication Phone screen classes"
 permalink: "mfa-phone"
+'description': "Learn about the ACUL Multi-Factor Authentication Phone screen classes"
 'og:title': "Multi-Factor Authentication Phone screen classes"
 'og:description': "Learn about the ACUL Multi-Factor Authentication Phone screen classes"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Multi-Factor Authentication Phone screen classes"
 'twitter:description': "Learn about the ACUL Multi-Factor Authentication Phone screen classes"
 ---
-# Multi-Factor Authentication Phone screen classes
 
 ## MFA Phone Challenge screen class
 
 The <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip> Phone Challenge screen class provides methods associated with the mfa-phone-challenge screen. This screen is displayed when the user needs to receive a code to verity their identity.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/n4liCJdxEsE43xLVB5oEy/664d4afa0a2ede835f54aa622f893a04/Screenshot_2025-04-23_at_17.07.25.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/n4liCJdxEsE43xLVB5oEy/664d4afa0a2ede835f54aa622f893a04/Screenshot_2025-04-23_at_17.07.25.png)</Frame>
 
 Import and instantiate the MFA Phone Challenge screen class:
 
-```
+```javascript lines
 import MfaPhoneChallenge from '@auth0/auth0-acul-js/mfa-phone-challenge';
 const mfaPhoneChallenge = new MfaPhoneChallenge();
 
@@ -38,7 +38,7 @@ The MFA Phone Challenge screen class properties are:
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -73,7 +73,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -85,7 +85,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -104,7 +104,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -112,7 +112,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -134,7 +134,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -145,7 +145,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -178,7 +178,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -206,7 +206,7 @@ The MFA Phone Challenge screen class methods are:
 
 This method submits the user's choice of receiving the MFA code via SMS or voice call. It uses the phone number from the class screen property.
 
-```javascript
+```javascript lines
 const mfaPhoneChallenge = new MfaPhoneChallenge();
 
 // Request code via SMS
@@ -226,7 +226,7 @@ await mfaPhoneChallenge.continue({ type: 'voice' });
 </thead>
 <tbody>
 <tr>
-<td><code>type</code></td>
+<td>`type`</td>
 <td>sms | voice</td>
 <td>Yes</td>
 <td>define the method to receive the verification code.</td>
@@ -238,7 +238,7 @@ await mfaPhoneChallenge.continue({ type: 'voice' });
 
 This method redirects the user to a phone selection screen.
 
-```javascript
+```javascript lines
 const mfaPhoneChallenge = new MfaPhoneChallenge();
 await mfaPhoneChallenge.pickPhone();
 ```
@@ -247,7 +247,7 @@ await mfaPhoneChallenge.pickPhone();
 
 This method redirects the user to the authenticator selection screen.
 
-```javascript
+```javascript lines
 const mfaPhoneChallenge = new MfaPhoneChallenge();
 await mfaPhoneChallenge.tryAnotherMethod();
 ```
@@ -256,11 +256,11 @@ await mfaPhoneChallenge.tryAnotherMethod();
 
 The Device Code Confirmation screen class provides methods associated with the mfa-phone-enrollment screen. This screen is displayed when a user needs to confirm the device code.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/3o4ohXUXfkVaaZy0992sgL/a84b54fa31fcbf2b0695c9ff08357887/Screenshot_2025-04-23_at_17.36.28.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/3o4ohXUXfkVaaZy0992sgL/a84b54fa31fcbf2b0695c9ff08357887/Screenshot_2025-04-23_at_17.36.28.png)</Frame>
 
 Import and instantiate the MFA Phone Enrollment screen class:
 
-```
+```javascript lines
 import MfaPhoneEnrollment from '@auth0/auth0-acul-js/mfa-phone-enrollment';
 const mfaPhoneEnrollment = new MfaPhoneEnrollment();
 
@@ -277,7 +277,7 @@ The MFA Phone Enrollment screen class properties are:
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -312,7 +312,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -324,7 +324,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -343,7 +343,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -351,7 +351,7 @@ interface prompt{
 
 </Tab><Tab title="écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -398,7 +398,7 @@ interface PasskeyCreate {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -409,7 +409,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -442,7 +442,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -462,7 +462,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -498,7 +498,7 @@ The MFA Phone Enrollment screen class methods are:
 
 This method continues the enrollment process with the provided phone number and selected type SMS or voice.
 
-```javascript
+```javascript lines
 const mfaPhoneEnrollment = new MfaPhoneEnrollment();
 
 // Call the continueEnrollment method with a phone number and type
@@ -518,13 +518,13 @@ mfaPhoneEnrollment.continueEnrollment({
 </thead>
 <tbody>
 <tr>
-<td><code>phone</code></td>
+<td>`phone`</td>
 <td>string</td>
 <td>Yes</td>
 <td>The user's phone number.</td>
 </tr>
 <tr>
-<td><code>type</code></td>
+<td>`type`</td>
 <td>sms | voice</td>
 <td>Yes</td>
 <td>define the method to receive the verification code.</td>
@@ -536,7 +536,7 @@ mfaPhoneEnrollment.continueEnrollment({
 
 This method allows users to pick their country code.
 
-```javascript
+```javascript lines
 const mfaPhoneEnrollment = new MfaPhoneEnrollment();
 
 // Call the pickCountryCode method
@@ -547,7 +547,7 @@ mfaPhoneEnrollment.pickCountryCode();
 
 This method asks users to try another MFA method.
 
-```javascript
+```javascript lines
 const mfaPhoneEnrollment = new MfaPhoneEnrollment();
 
 // Call the tryAnotherMethod

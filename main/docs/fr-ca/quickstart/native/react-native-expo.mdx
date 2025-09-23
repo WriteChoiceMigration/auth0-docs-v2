@@ -1,12 +1,14 @@
 ---
 title: "Auth0"
 permalink: "react-native-expo"
+'description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:title': "Auth0"
 'og:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0"
 'twitter:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 ---
+
 # Expo
 
 <Frame>![Gravatar for poovamraj.thanganadarthigarajan@okta.com](//www.gravatar.com/avatar/07148307403a01ebb66e37aa66026a24?d=mm&r=g&s=50)</Frame>
@@ -48,7 +50,7 @@ This SDK is not compatible with "Expo Go" app. It is compatible only with Custom
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Native Applications](/docs/architecture-scenarios/application/mobile-api) and which [protocol](/docs/api-auth/grant/authorization-code-pkce) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/fr-ca/overview), how it [integrates with Native Applications](/docs/fr-ca/architecture-scenarios/application/mobile-api) and which [protocol](/docs/fr-ca/api-auth/grant/authorization-code-pkce) it uses.
 
 </Note>
 
@@ -89,7 +91,7 @@ Please refer to the [official documentation](https://docs.expo.dev/) for additio
 
 ### Yarn
 
-```
+```bash lines
 yarn add react-native-auth0
 ```
 
@@ -101,11 +103,11 @@ For further reference on yarn, check [their official documentation](https://yarn
 
 ### npm
 
-```
+```bash lines
 npm install react-native-auth0 --save
 ```
 
-The first step in adding authentication to your application is to provide a way for your users to log in. The fastest, most secure, and most feature-rich way to do this with Auth0 is to use the hosted [login page](/docs/hosted-pages/login).
+The first step in adding authentication to your application is to provide a way for your users to log in. The fastest, most secure, and most feature-rich way to do this with Auth0 is to use the hosted [login page](/docs/fr-ca/hosted-pages/login).
 
 <Frame>![Universal Login](https://cdn2.auth0.com/docs/1.14567.0/media/articles/native-platforms/ios-swift/login-ios.png)</Frame>
 
@@ -117,7 +119,7 @@ The Auth0 package runs custom native code that needs to be configured at build t
 
 Add the `react-native-auth0` plugin to the [Expo config](https://docs.expo.dev/workflow/configuration/) file at `app.json` or `app.config.js`.
 
-```json
+```json lines
 {
   "expo": {
     ...
@@ -137,13 +139,13 @@ Add the `react-native-auth0` plugin to the [Expo config](https://docs.expo.dev/w
 
 You must generate the native code for the above configuration to be set. To do this, run the following command:
 
-```
+```bash lines
 expo prebuild
 ```
 
 You will be prompted to provide the [Android package](https://github.com/expo/fyi/blob/main/android-package.md) and [iOS bundle identifier](https://github.com/expo/fyi/blob/main/bundle-identifier.md) if they are not already present in the Expo config:
 
-```
+```bash lines
 ? What would you like your Android package name to be? > com.auth0samples # or your desired package name
 
 ? What would you like your iOS bundle identifier to be? > com.auth0samples # or your desired bundle identifier
@@ -151,7 +153,7 @@ You will be prompted to provide the [Android package](https://github.com/expo/fy
 
 These values are found in the Expo config file at `app.json` or `app.config.js`. It will be used in the callback and logout URLs:
 
-```json
+```json lines
 {
     ...
     "android": {
@@ -170,17 +172,17 @@ The callback and logout URLs are the URLs that Auth0 invokes to redirect back to
 
 If the callback and logout URLs are not set, users will be unable to log in and out of the application and will get an error.
 
-Go to the settings page of your [Auth0 application](https://manage.auth0.com/#/applications/{yourClientId}/settings) and add the corresponding URL to **Allowed Callback URLs** and **Allowed Logout URLs**, according to the platform of your application. If you are using a [custom domain](/docs/customize/custom-domains), use the value of your custom domain instead of the Auth0 domain from the settings page.
+Go to the settings page of your [Auth0 application](https://manage.auth0.com/#/applications/{yourClientId}/settings) and add the corresponding URL to **Allowed Callback URLs** and **Allowed Logout URLs**, according to the platform of your application. If you are using a [custom domain](/docs/fr-ca/customize/custom-domains), use the value of your custom domain instead of the Auth0 domain from the settings page.
 
 #### iOS
 
-```
+``` lines
 BUNDLE_IDENTIFIER.auth0://{yourDomain}/ios/BUNDLE_IDENTIFIER/callback
 ```
 
 #### Android
 
-```
+``` lines
 PACKAGE_NAME.auth0://{yourDomain}/android/PACKAGE_NAME/callback
 ```
 
@@ -197,13 +199,13 @@ If you are following along with our sample project, set this
 
 First, import the `useAuth0` hook and the `Auth0Provider` component from the `react-native-auth0` package.
 
-```
+```javascript lines
 import {useAuth0, Auth0Provider} from 'react-native-auth0';
 ```
 
 Next, wrap your application in the `Auth0Provider` component, providing your Auth0 domain and Client ID values:
 
-```javascript
+```javascript lines
 const App = () => {
   return (
     <Auth0Provider domain={"{yourDomain}"} clientId={"{yourClientId}"}>
@@ -215,7 +217,7 @@ const App = () => {
 
 Finally, present the hosted login screen using the `authorize` method from the `useAuth0` hook. See this usage example showing logging in on a button click:
 
-```javascript
+```javascript lines
 const LoginButton = () => {
     const {authorize} = useAuth0();
 
@@ -241,7 +243,7 @@ To log the user out, redirect them to the Auth0 log out endpoint by importing an
 
 See this usage example of a button that logs the user out of the app when clicked:
 
-```javascript
+```javascript lines
 const LogoutButton = () => {
     const {clearSession} = useAuth0();
 
@@ -267,7 +269,7 @@ The `useAuth0` hook exposes a `user` object that contains information about the 
 
 If a user has not been authenticated, this property will be `null`.
 
-```javascript
+```javascript lines
 const Profile = () => {
     const {user, error} = useAuth0();
 
@@ -287,7 +289,7 @@ Add a component to your app that uses the `user` prop to display information abo
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

@@ -1,15 +1,15 @@
 ---
 title: "Autorisation transactionnelle avec authentification contextuelle forte du client"
 permalink: "transactional-authorization-with-authorization-code-flow"
+'description': "Découvrez comment l’identité très réglementée permet l’autorisation transactionnelle avec l’authentification contextuelle forte du client."
 'og:title': "Autorisation transactionnelle avec authentification contextuelle forte du client"
 'og:description': "Découvrez comment l’identité très réglementée permet l’autorisation transactionnelle avec l’authentification contextuelle forte du client."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Autorisation transactionnelle avec authentification contextuelle forte du client"
 'twitter:description': "Découvrez comment l’identité très réglementée permet l’autorisation transactionnelle avec l’authentification contextuelle forte du client."
 ---
-# Autorisation transactionnelle avec authentification contextuelle forte du client
 
-L’identité très réglementée permet l’autorisation transactionnelle avec l’authentification contextuelle forte du client (SCA) en appliquant l’authentification renforcée par étapes SCA et la [liaison dynamique](/docs/secure/highly-regulated-identity#dynamic-linking) pour autoriser une transaction spécifique. Il demande à l’utilisateur un deuxième facteur d’authentification pour autoriser explicitement les détails de la transaction d’une opération ponctuelle. Cette méthode est utile pour les cas d’utilisation suivants qui requièrent une sécurité de niveau financier :
+L’identité très réglementée permet l’autorisation transactionnelle avec l’authentification contextuelle forte du client (SCA) en appliquant l’authentification renforcée par étapes SCA et la [liaison dynamique](/docs/fr-ca/secure/highly-regulated-identity#dynamic-linking) pour autoriser une transaction spécifique. Il demande à l’utilisateur un deuxième facteur d’authentification pour autoriser explicitement les détails de la transaction d’une opération ponctuelle. Cette méthode est utile pour les cas d’utilisation suivants qui requièrent une sécurité de niveau financier :
 
 * Sécurisation des opérations sensibles exécutées à partir de vos propres services, telles que l’approbation des virements bancaires, l’accès à l’historique des opérations et la modification des identifiants d’accès.
 * Sécurisation des opérations sensibles demandées à des services tiers, telles que l’approbation des paiements numériques et l’autorisation d’un accès unique pour la vérification d’un compte.
@@ -44,7 +44,7 @@ Le diagramme suivant montre le flux de bout en bout de l’autorisation transact
 3. Mettre au défi l’utilisateur avec un deuxième facteur d’authentification et afficher les détails de la transaction pour que l’utilisateur l’approuve explicitement. Cette étape dépend du facteur d’authentification que vous avez choisi d’appliquer à l’aide des Actions.
 4. Obtenez le jeton d’accès et procédez à l’opération sensible. Votre API valide les détails de la transaction approuvée associés au jeton d’accès.
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/6VYcY5YJRT9Ngaomj5f9yi/c32c9320e654d5add2116174ad45ca7b/HRI_diagrams_-_transactional_authorization_sca_end_to_end_flow_digram.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/6VYcY5YJRT9Ngaomj5f9yi/c32c9320e654d5add2116174ad45ca7b/HRI_diagrams_-_transactional_authorization_sca_end_to_end_flow_digram.png)</Frame>
 
 Nous examinerons chaque phase en détail dans les sections suivantes.
 
@@ -56,7 +56,7 @@ Pour répondre aux normes de sécurité financière, l’identité très réglem
 
 Dans le corps de la requête PAR, les détails de la transaction sont envoyés dans le cadre de l’objet JSON `authorization_details` :
 
-```
+``` lines
 "authorization_details": [
  {
    "type": "money_transfer",
@@ -83,13 +83,13 @@ Après avoir reçu une réponse positive à votre requête PAR, redirigez l’ut
 
 ### Appliquer une politique dynamique
 
-Lorsque l’utilisateur se connecte sans utiliser le <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SSO</Tooltip> et que le navigateur accède au point de terminaison `/authorize` de votre locataire Auth0, Auth0 tente d’authentifier l’utilisateur. Dans notre exemple d’approbation d’un virement bancaire, Auth0 a déjà authentifié l’utilisateur pour accéder à votre application Web. Cependant, lorsqu’un tiers redirige l’utilisateur, par exemple pour un paiement numérique, Auth0 présente un écran de connexion à l’utilisateur. Pour en savoir plus sur le flux d’authentification, consultez la documentation [Authentifier](/docs/authenticate).
+Lorsque l’utilisateur se connecte sans utiliser le <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SSO</Tooltip> et que le navigateur accède au point de terminaison `/authorize` de votre locataire Auth0, Auth0 tente d’authentifier l’utilisateur. Dans notre exemple d’approbation d’un virement bancaire, Auth0 a déjà authentifié l’utilisateur pour accéder à votre application Web. Cependant, lorsqu’un tiers redirige l’utilisateur, par exemple pour un paiement numérique, Auth0 présente un écran de connexion à l’utilisateur. Pour en savoir plus sur le flux d’authentification, consultez la documentation [Authentifier](/docs/fr-ca/authenticate).
 
 Une fois que Auth0 a authentifié avec succès l’utilisateur, Auth0 déclenche des [Actions](/docs/fr-ca/customize/actions) post-connexion, qui exposent les détails de la transaction concernant l’utilisateur, l’application, le(s) facteur(s) d’authentification utilisé(s), et plus encore dans [l’objet événement post-login](/docs/fr-ca/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/post-login-event-object). Dans l’objet événement post-connexion, la propriété `event.transaction.requested_authorization_details` contient des détails sur la demande d’autorisation reçue à l’étape précédente.
 
 Utilisez l’objet événement [post-connexion](/docs/fr-ca/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/post-login-event-object) pour décider de la manière dont vous souhaitez poursuivre la transaction. Par exemple, vous pouvez envoyer les détails de la transaction à un moteur de risque externe et, après avoir évalué le niveau de risque, déterminer s’il convient de demander une authentification renforcée par SMS, comme l’illustre l’exemple de code suivant.
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   if (event.transaction?.requested_authorization_details.some(e => e.type === 'money_transfer')) {
       const axios = require('axios');
@@ -119,7 +119,7 @@ exports.onExecutePostLogin = async (event, api) => {
 };
 ```
 
-L’action post-connexion expose également `event.transaction.linking_id`, qui contient un identifiant universel unique (UUID) de la transaction. Plus tard, lorsque Auth0 demande à l’utilisateur d’approuver la transaction, `linking_id` fournit une référence pour [Liaison dynamique](/docs/secure/highly-regulated-identity#dynamic-linking). Vous pouvez également ajouter le `linking_id` au jeton d’accès en tant que [demande personnalisée](/docs/fr-ca/secure/tokens/json-web-tokens/create-custom-claims) pour associer les détails d’autorisation d’une transaction spécifique aux appels API de votre côté. Cela facilite la traçabilité, car Auth0 inclut le `linking_id` dans les journaux du locataire.
+L’action post-connexion expose également `event.transaction.linking_id`, qui contient un identifiant universel unique (UUID) de la transaction. Plus tard, lorsque Auth0 demande à l’utilisateur d’approuver la transaction, `linking_id` fournit une référence pour [Liaison dynamique](/docs/fr-ca/secure/highly-regulated-identity#dynamic-linking). Vous pouvez également ajouter le `linking_id` au jeton d’accès en tant que [demande personnalisée](/docs/fr-ca/secure/tokens/json-web-tokens/create-custom-claims) pour associer les détails d’autorisation d’une transaction spécifique aux appels API de votre côté. Cela facilite la traçabilité, car Auth0 inclut le `linking_id` dans les journaux du locataire.
 
 ### Mettre au défi l’utilisateur pour obtenir l’approbation des détails de la transaction
 
@@ -133,11 +133,11 @@ Les sections suivantes expliquent les différents facteurs d’authentification 
 
 Envoyez une notification poussée à l’appareil mobile enrôlé d’un utilisateur pendant qu’Auth0 invite l’utilisateur à afficher l’écran d’attente de l’authentification multifacteur (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">MFA</Tooltip>) sur l’appareil utilisé (par exemple, l’ordinateur portable d’où provient la transaction).
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/4mEJTT4VsAAAb6I0HhJI6r/4b3ed736999cd455cacd452914bd1365/Mobile_Push_-_French.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/4mEJTT4VsAAAb6I0HhJI6r/4b3ed736999cd455cacd452914bd1365/Mobile_Push_-_French.png)</Frame>
 
 Pour les notifications poussées, l’application mobile est chargée de montrer les détails de la transaction à l’utilisateur pour approbation explicite. Pour ce faire, à l’aide d’Actions, stockez les détails de la transaction que vous souhaitez montrer à l’utilisateur avec le `linking_id` sur un serveur ou un point de terminaison externe et mettez-les à disposition pendant quelques minutes seulement. Ensuite, invitez l’utilisateur à envoyer une notification poussée, comme illustré dans l’exemple de code suivant. N’oubliez pas d’interdire la possibilité de revenir à la saisie manuelle d’un mot de passe à usage unique (OTP) en ajoutant l’option `otpFallback: false`.
 
-```
+``` lines
 exports.onExecutePostLogin = async (event, api) => {
   if (event.transaction?.requested_authorization_details.some(e => e.type === 'money_transfer')) {
       const axios = require('axios');
@@ -183,7 +183,7 @@ Vous pouvez également configurer le téléphone, le courriel ou WebAuthn comme 
 
 Pour le facteur d’authentification par téléphone, Auth0 envoie un code de vérification à l’utilisateur par SMS ou vocalement. La capture d’écran suivante montre l’écran d’attente de la MFA après qu’Auth0 a envoyé le code par SMS :
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/kYn2A0p2jTY5CUn1FsjVf/20602f70df44f09c161e97124b1ef1ed/Phone_Challenge_-_French.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/kYn2A0p2jTY5CUn1FsjVf/20602f70df44f09c161e97124b1ef1ed/Phone_Challenge_-_French.png)</Frame>
 
 <Note>
 
@@ -211,7 +211,7 @@ Si vous ne demandez pas à l’utilisateur un deuxième facteur d’authentifica
 
 Pour compléter l’opération, Auth0 suit le Flux de code d’autorisation standard. Si la transaction est approuvée, le navigateur de l’utilisateur est redirigé vers votre application avec un code d’autorisation, qui est ensuite échangé contre un jeton d’accès chiffré à l’aide du [Chiffrement Web JSON](/docs/fr-ca/secure/tokens/access-tokens/json-web-encryption). Le jeton d’accès contient les `authorization_details` que vous avez transmis à l’origine. L’exemple de code suivant montre le contenu d’un jeton d’accès déchiffré :
 
-```json
+```json lines
 {
  "iss": "https://my_tenant.auth0.com/",
  "sub": "auth0|me",

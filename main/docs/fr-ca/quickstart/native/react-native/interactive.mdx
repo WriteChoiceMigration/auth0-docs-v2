@@ -1,17 +1,19 @@
 ---
 title: "Ajouter une connexion à votre application React Native"
 permalink: "interactive"
+'description': "Ce tutoriel explique comment ajouter la connexion utilisateur à une application React Native à l’aide d’Auth0."
 'og:title': "Ajouter une connexion à votre application React Native"
 'og:description': "Ce tutoriel explique comment ajouter la connexion utilisateur à une application React Native à l’aide d’Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/react.png"
 'twitter:title': "Ajouter une connexion à votre application React Native"
 'twitter:description': "Ce tutoriel explique comment ajouter la connexion utilisateur à une application React Native à l’aide d’Auth0."
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -59,13 +61,13 @@ Ajoutez l’URL correspondante aux **URL de rappel** et aux **URL de déconnexio
 
 #### iOS
 
-```
+``` lines
 BUNDLE_IDENTIFIER.auth0://{yourDomain}/ios/BUNDLE_IDENTIFIER/callback
 ```
 
 #### Android
 
-```
+``` lines
 PACKAGE_NAME.auth0://{yourDomain}/android/PACKAGE_NAME/callback
 ```
 
@@ -96,7 +98,7 @@ Veuillez vous référer à la [documentation officielle](https://facebook.github
 
 ### Yarn
 
-```
+``` lines
 yarn add react-native-auth0
 ```
 
@@ -108,7 +110,7 @@ Pour en savoir plus sur yarn, consultez la  [documentation officielle](https://y
 
 ### npm
 
-```
+``` lines
 npm install react-native-auth0 --save
 ```
 
@@ -116,7 +118,7 @@ npm install react-native-auth0 --save
 
 Notre trousse SDK nécessite au minimum une cible de déploiement iOS 13.0. Dans le `ios/Podfile`` de votre profil, vérifiez que la cible de votre plateforme est 13.0.
 
-```
+``` lines
 platform :ios '13.0'
 ```
 
@@ -124,7 +126,7 @@ CocoaPods est l’outil de gestion de package iOS que le framework React Native
 
 Placez-vous dans le dossier `ios` et exécutez `pod install`.
 
-```bash
+```ruby lines
 cd ios
 pod install
 ```
@@ -135,13 +137,13 @@ pod install
 
 Au préalable, vous devez fournir un moyen pour vos utilisateurs de se connecter. Nous recommandons d’utiliser la page de connexionhébergée par Auth0.
 
-<Frame>![Un exemple d’écran de connexion universelle pour une application iOS.](//images.ctfassets.net/cdy7uua7fh8z/3ZRDXpjlUXEcQpXq6Q00L1/f3a4616c28881bbb5a3711fcbbf1f7b1/Staff0_Login_screen_-_French.png)</Frame>
+<Frame>![Un exemple d’écran de connexion universelle pour une application iOS.](/images/fr-ca/cdy7uua7fh8z/3ZRDXpjlUXEcQpXq6Q00L1/f3a4616c28881bbb5a3711fcbbf1f7b1/Staff0_Login_screen_-_French.png)</Frame>
 
 ### Configurer Android
 
 Ouvrez le fichier `build.gradle` dans le répertoire de votre application (généralement dans `android/app/build.gradle`) et ajoutez les placeholders du manifeste suivants. La valeur de `auth0Domain` doit contenir les paramètres de l’application Auth0 tels qu’ils sont configurés ci-dessus.
 
-```
+``` lines
 android {
 defaultConfig {
 
@@ -166,7 +168,7 @@ Au moment de l’exécution, la valeur `applicationId` se mettra automatiquement
 
 Dans le fichier `ios/<YOUR PROJECT>/AppDelegate.mm`, ajoutez ce qui suit :
 
-```
+```python lines
 #import <React/RCTLinkingManager.h>
 
 (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
@@ -187,14 +189,14 @@ Ensuite, ajoutez un URLScheme à l’aide de l’identifiant de l’ensemble de
 
 Dans le dossier `ios`, ouvrez le fichier `Info.plist` et localisez la valeur de `CFBundleIdentifier`.
 
-```
+```xml lines
 <key>CFBundleIdentifier</key>
 <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 ```
 
 Sous cette valeur, enregistrez une entrée de type URL en utilisant la valeur de `CFBundleIdentifier` comme valeur pour `CFBundleURLSchemes`.
 
-```
+```xml lines
 <key>CFBundleURLTypes</key>
 <array>
 <dict>
@@ -232,7 +234,7 @@ L’appel `useAuth0` s’appuie sur un contexte React pour fournir une gestion d
 
 Importer l’appel `useAuth0` et le composant `Auth0Provider` du package `react-native-auth0` :
 
-```
+```javascript lines
 import {useAuth0, Auth0Provider} from 'react-native-auth0';
 ```
 
@@ -308,7 +310,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/native/react-native/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

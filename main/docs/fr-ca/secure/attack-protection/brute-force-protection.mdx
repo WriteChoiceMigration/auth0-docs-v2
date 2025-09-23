@@ -1,13 +1,13 @@
 ---
 title: "Protection contre les attaques exhaustives"
 permalink: "brute-force-protection"
+'description': "Découvrez comment fonctionne la protection contre les attaques exhaustives dans Auth0 et comment configurer les réponses."
 'og:title': "Protection contre les attaques exhaustives"
 'og:description': "Découvrez comment fonctionne la protection contre les attaques exhaustives dans Auth0 et comment configurer les réponses."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Protection contre les attaques exhaustives"
 'twitter:description': "Découvrez comment fonctionne la protection contre les attaques exhaustives dans Auth0 et comment configurer les réponses."
 ---
-# Protection contre les attaques exhaustives
 
 La protection contre les attaques exhaustives permet d’éviter qu’une seule adresse IP n’attaque un seul compte d’utilisateur. Lorsqu’une adresse IP donnée essaie et échoue plusieurs fois à se connecter en tant que même utilisateur, une protection contre les attaques exhaustives est mise en place :
 
@@ -22,7 +22,7 @@ Les mesures de protection contre les attaques par force brute s’appliquent à 
 
 Si une adresse IP est bloquée en raison d’une protection contre les attaques exhaustives, elle reste bloquée jusqu’à ce que l’un des événements suivants se produise :
 
-* Un administrateur [supprime le blocage](/docs/api/management/v2/#!/User_Blocks/get_user_blocks).
+* Un administrateur [supprime le blocage](/docs/fr-ca/api/management/v2/#!/User_Blocks/get_user_blocks).
 * Un administrateur augmente le **Seuil de protection contre les attaques exhaustives** décrit ci-dessous.
 * Trente (30) jours se sont écoulés depuis la dernière tentative de connexion échouée.
 * L’utilisateur concerné sélectionne le lien de déblocage dans la notification par courriel (si elle est configurée).
@@ -40,7 +40,7 @@ Auth0 recommande vivement de ne pas désactiver la protection contre les attaque
 
 <Warning>
 
-Si vous activez les fonctionnalités de protection contre les attaques sans activer de paramètres de réponse, vous activez le mode de supervision, qui enregistre les événements connexes dans le journal de votre locataire uniquement. Pour en savoir plus, consultez [Voir les événements de journaux de la protection contre les attaques](/docs/attack-protection/view-attack-protection-events).
+Si vous activez les fonctionnalités de protection contre les attaques sans activer de paramètres de réponse, vous activez le mode de supervision, qui enregistre les événements connexes dans le journal de votre locataire uniquement. Pour en savoir plus, consultez [Voir les événements de journaux de la protection contre les attaques](/docs/fr-ca/attack-protection/view-attack-protection-events).
 
 </Warning>
 
@@ -74,7 +74,7 @@ Par défaut, les notifications par courriel contiennent un lien qui permet à l�
 
 Comme la protection contre les attaques par force brute dépend de l’adresse IP de l’utilisateur, les cas d’utilisation suivants nécessitent une configuration supplémentaire :
 
-* **(<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Resource Owner</Tooltip> Password Grant - ROPG (Subvention du Propriétaire de la Ressource) sur le système dorsal** : L’utilisation de cette requête ne permet pas d’obtenir l’adresse IP de l’utilisateur; cependant, pour que la protection contre les attaques exhaustives fonctionne correctement, vous pouvez configurer votre application et envoyer [l’adresse IP de l’utilisateur dans le cadre de la requête](/docs/authorization/avoid-common-issues-with-resource-owner-password-flow-and-attack-protection#configure-your-application-to-trust-the-ip-address).
+* **(<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Resource Owner</Tooltip> Password Grant - ROPG (Subvention du Propriétaire de la Ressource) sur le système dorsal** : L’utilisation de cette requête ne permet pas d’obtenir l’adresse IP de l’utilisateur; cependant, pour que la protection contre les attaques exhaustives fonctionne correctement, vous pouvez configurer votre application et envoyer [l’adresse IP de l’utilisateur dans le cadre de la requête](/docs/fr-ca/authorization/avoid-common-issues-with-resource-owner-password-flow-and-attack-protection#configure-your-application-to-trust-the-ip-address).
 * **Authentification de l’utilisateur à partir de la même adresse IP :** Les utilisateurs qui se trouvent derrière un proxy sont plus susceptibles d’atteindre les limites fixées et de déclencher une protection contre les attaques exhaustives.
 
 Pour en apprendre davantage, veuillez consulter [Éviter les problèmes courants liés au flux de mot de passe du propriétaire de ressource et à la protection contre les attaques](/docs/fr-ca/get-started/authentication-and-authorization-flow/resource-owner-password-flow/avoid-common-issues-with-resource-owner-password-flow-and-attack-protection).

@@ -1,13 +1,13 @@
 ---
 title: "La classe d’écran interstitiel Captcha"
 permalink: "interstitial-captcha-screen-class"
+'description': "En savoir plus sur la classe d’écran interstitiel Captcha"
 'og:title': "La classe d’écran interstitiel Captcha"
 'og:description': "En savoir plus sur la classe d’écran interstitiel Captcha"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "La classe d’écran interstitiel Captcha"
 'twitter:description': "En savoir plus sur la classe d’écran interstitiel Captcha"
 ---
-# La classe d’écran interstitiel Captcha
 
 La classe d’écran interstitiel Captcha fait partie du flux d’[authentification Identifier First](/docs/fr-ca/authenticate/login/auth0-universal-login/identifier-first) et est présentée en fonction des paramètres du locataire. Pour plus de détails, consultez la section [Détection des robots](/docs/fr-ca/secure/attack-protection/bot-detection).
 
@@ -17,7 +17,7 @@ La classe d’écran interstitiel Captcha fait partie du flux d’[authentifica
 
 Importer et instancier la classe d’écran interstitiel Captcha :
 
-```
+```javascript lines
 import InterstitialCaptcha from "@auth0/auth0-acul-js/interstitial-captcha";
 const interstitialCaptcha = new InterstitialCaptcha();
 
@@ -36,7 +36,7 @@ Les propriétés de la classe d’écran interstitiel Captcha sont :
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -71,7 +71,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -83,7 +83,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -102,7 +102,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -110,7 +110,7 @@ interface prompt{
 
 </Tab><Tab title="Écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -142,7 +142,7 @@ interface PhonePrefix {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -153,7 +153,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -186,7 +186,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -206,7 +206,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -242,7 +242,7 @@ La méthode de la classe d’écran interstitiel Captcha est :
 
 Cette méthode vérifie la réponse captcha et dirige l’utilisateur à l’étape suivante.
 
-```
+```javascript lines
 interstitialCaptchaManager.submitCaptcha({
   captcha: <CaptchaCodeResponse>
 });
@@ -258,13 +258,13 @@ interstitialCaptchaManager.submitCaptcha({
 </thead>
 <tbody>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>chaîne</td>
 <td>Oui</td>
 <td>Code captcha ou réponse du fournisseur de captcha.</td>
 </tr>
 <tr>
-<td><code>[clé: chaîne]</code></td>
+<td>`[clé: chaîne]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données supplémentaires collectées auprès de l’utilisateur.</td>

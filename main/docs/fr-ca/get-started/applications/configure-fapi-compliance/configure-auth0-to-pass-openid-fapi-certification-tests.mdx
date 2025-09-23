@@ -1,21 +1,21 @@
 ---
 title: "Configurer Auth0 pour passer les tests de certification OpenID FAPI."
 permalink: "configure-auth0-to-pass-openid-fapi-certification-tests"
+'description': "Apprenez à configurer Auth0 pour passer les tests de certification OpenID FAPI."
 'og:title': "Configurer Auth0 pour passer les tests de certification OpenID FAPI."
 'og:description': "Apprenez à configurer Auth0 pour passer les tests de certification OpenID FAPI."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer Auth0 pour passer les tests de certification OpenID FAPI."
 'twitter:description': "Apprenez à configurer Auth0 pour passer les tests de certification OpenID FAPI."
 ---
-# Configurer Auth0 pour passer les tests de certification OpenID FAPI.
 
 Cette section contient des conseils sur la façon de configurer votre client si vous souhaitez tester votre solution à l’aide des [tests de conformité OpenID FAPI](https://openid.net/certification/certification-fapi_op_testing/).
 
 Pour passer les tests de conformité <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OpenID</Tooltip> FAPI, configurez premièrement les éléments suivants :
 
 * Définissez la propriété `compliance_level` sur le profil souhaité, soit `fapi1_adv_pkj_par` soit `fapi1_adv_mtls_par`
-* Soit [Configurez mTLS](/docs/fr-ca/get-started/applications/configure-mtls) (y compris [les alias mTLS](/docs/get-started/applications/configure-mtls/configure-mtls-for-a-tenant#enable-mtls-aliases)) soit [Configurez la clé privée JWT](/docs/fr-ca/get-started/applications/configure-private-key-jwt)
-* [Configurez la liaison de jeton mTLS](/docs/get-started/applications/configure-mtls/configure-mtls-for-a-client#enable-token-binding)
+* Soit [Configurez mTLS](/docs/fr-ca/get-started/applications/configure-mtls) (y compris [les alias mTLS](/docs/fr-ca/get-started/applications/configure-mtls/configure-mtls-for-a-tenant#enable-mtls-aliases)) soit [Configurez la clé privée JWT](/docs/fr-ca/get-started/applications/configure-private-key-jwt)
+* [Configurez la liaison de jeton mTLS](/docs/fr-ca/get-started/applications/configure-mtls/configure-mtls-for-a-client#enable-token-binding)
 
 Suivez ensuite les instructions ci-dessous pour compléter la configuration de vos tests de conformité OpenID FAPI :
 
@@ -28,7 +28,7 @@ Suivez ensuite les instructions ci-dessous pour compléter la configuration de v
 
 Vous devez vous assurer qu’Auth0 demande le consentement des utilisateurs. Vous pouvez ignorer cette étape si le client est configuré en tant qu’application de premier niveau, et si le serveur de ressources ou l’API permet de sauter le consentement pour les applications de premier niveau. Pour vous assurer qu’Auth0 demande le consentement des utilisateurs, définissez la propriété `is_first_party` du client sur `false`:
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://$tenant/api/v2/clients/$client_id' \
   --header 'Authorization: Bearer $management_access_token' \
   --header 'Content-Type: application/json' \
@@ -39,7 +39,7 @@ curl --location --request PATCH 'https://$tenant/api/v2/clients/$client_id' \
 
 Ensuite, promouvez votre connexion au niveau du domaine :
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://$tenant/api/v2/connections/$connection_id' \
   --header 'Authorization: Bearer $management_access_token' \
   --header 'Content-Type: application/json' \
@@ -52,7 +52,7 @@ curl --location --request PATCH 'https://$tenant/api/v2/connections/$connection_
 
 Les tests FAPI passent une valeur ACR requise de `urn:mace:incommon:iap:silver`. Pour inclure la valeur ACR requise dans le jeton d’ID, ajoutez `urn:mace:incommon:iap:silver` à la liste des valeurs ACR prises en charge pour le locataire :
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://$tenant/api/v2/tenants/settings' \
   --header 'Authorization: Bearer $management_access_token' \
   --header 'Content-Type: application/json' \
@@ -65,7 +65,7 @@ curl --location --request PATCH 'https://$tenant/api/v2/tenants/settings' \
 
 Pour permettre l’utilisation de clés avec plusieurs algorithmes, et pas seulement RS256, supprimez la propriété `alg` du locataire de la sortie du point de terminaison `/.well-known/jwks.json` :
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://$tenant/api/v2/tenants/settings' \
   --header 'Authorization: Bearer $management_access_token' \
   --header 'Content-Type: application/json' \
@@ -82,7 +82,7 @@ Par défaut, Auth0 autorise les requêtes sans permission, en prenant la permiss
 
 Ajoutez l’Action suivante pour appliquer les restrictions nécessaires sur la permission et `redirect_uri` :
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   if (!event.request.body || !event.request.body.refresh_token) {
     // Require a scope

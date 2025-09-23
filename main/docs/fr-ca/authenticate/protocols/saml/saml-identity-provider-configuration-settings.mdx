@@ -1,13 +1,13 @@
 ---
 title: "Paramètres de configuration du fournisseur d’identités SAML"
 permalink: "saml-identity-provider-configuration-settings"
+'description': "Décrit les paramètres de configuration du fournisseur d’identités SAML."
 'og:title': "Paramètres de configuration du fournisseur d’identités SAML"
 'og:description': "Décrit les paramètres de configuration du fournisseur d’identités SAML."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Paramètres de configuration du fournisseur d’identités SAML"
 'twitter:description': "Décrit les paramètres de configuration du fournisseur d’identités SAML."
 ---
-# Paramètres de configuration du fournisseur d’identités SAML
 
 ## Paramètres communs
 
@@ -15,7 +15,7 @@ Il s’agit des paramètres utilisés pour configurer un fournisseur d’identit
 
 <Note>
 
-Si vous avez configuré un [domaine personnalisé](/docs/customize/custom-domains), vous devez utiliser le CNAME de votre domaine personnalisé à la place du domaine Auth0. Pour en savoir plus, consultez [Configurer les fonctionnalités pour utiliser les domaines personnalisés](https://auth0.com/docs/customize/custom-domains/configure-features-to-use-custom-domains#configure-saml-identity-providers).
+Si vous avez configuré un [domaine personnalisé](/docs/fr-ca/customize/custom-domains), vous devez utiliser le CNAME de votre domaine personnalisé à la place du domaine Auth0. Pour en savoir plus, consultez [Configurer les fonctionnalités pour utiliser les domaines personnalisés](https://auth0.com/docs/customize/custom-domains/configure-features-to-use-custom-domains#configure-saml-identity-providers).
 
 </Note>
 
@@ -23,13 +23,13 @@ Si vous avez configuré un [domaine personnalisé](/docs/customize/custom-domain
 
 Lorsque vous utilisez la <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SSO</Tooltip> initié par le fournisseur d’identité, assurez-vous d’inclure le paramètre de connexion dans l’URL de renvoi :
 
-```
+``` lines
 https://{yourDomain}/login/callback?connection={yourConnectionName}
 ```
 
 Si vous utilisez la fonctionnalité [Organizations](https://auth0.com/docs/manage-users/organizations), vous pouvez éventuellement inclure un paramètre d’organization contenant l’ID de l’organization souhaitée :
 
-```
+``` lines
 https://{yourDomain}/login/callback?connection={yourConnectionName}&organization={yourCustomersOrganizationId}
 ```
 
@@ -43,28 +43,28 @@ Pour garantir la connexion à l’aide de cette méthode, la connexion doit êtr
 
 L’identifiant du fournisseur de services est le suivant :
 
-```
+``` lines
 urn:auth0:{yourTenant}:{yourConnectionName}
 ```
 
-Vous pouvez créer un identifiant d’entité personnalisé à l’aide de la propriété `connection.options.entityId`. Pour en savoir plus, lisez [Indiquer un identifiant d’entité personnalisé](/docs/connections/enterprise/saml#specify-a-custom-entity-id).
+Vous pouvez créer un identifiant d’entité personnalisé à l’aide de la propriété `connection.options.entityId`. Pour en savoir plus, lisez [Indiquer un identifiant d’entité personnalisé](/docs/fr-ca/connections/enterprise/saml#specify-a-custom-entity-id).
 
 Vous pouvez obtenir la valeur de l’identifiant d’entité personnalisée en utilisant le point de terminaison Obtenir une connexion :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D' \
 --header 'authorization: Bearer {yourAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -81,14 +81,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D")
 .header("authorization", "Bearer {yourAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -100,8 +100,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D"]
@@ -122,7 +122,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D",
@@ -144,8 +144,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourAccessToken}" }
@@ -155,7 +155,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -167,8 +167,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D")! as URL,
@@ -197,22 +197,22 @@ Remplacer la valeur de l’en-tête `ACCESS_TOKEN` par un jeton d’accès de Ma
 
 <table class="table"><thead>
 <tr>
-<th><code>connection.options.protocolBinding</code> value</th>
+<th>`connection.options.protocolBinding` value</th>
 <th>Valeur de liaison de requêtes SAML</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Valeur vide ("") ou absente</td>
-<td><code>HTTP-Redirect</code></td>
+<td>`HTTP-Redirect`</td>
 </tr>
 <tr>
-<td><code>urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect</code></td>
-<td><code>HTTP-Redirect</code></td>
+<td>`urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect`</td>
+<td>`HTTP-Redirect`</td>
 </tr>
 <tr>
-<td><code>urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST</code></td>
-<td><code>HTTP-POST</code></td>
+<td>`urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`</td>
+<td>`HTTP-POST`</td>
 </tr>
 </tbody>
 </table>
@@ -235,7 +235,7 @@ L’affirmation SAML et la réponse SAML peuvent être signées individuelleme
 
 C’est ici que le fournisseur d’identités SAML enverra les demandes de déconnexion et les réponses :
 
-```
+``` lines
 https://{yourDomain}/logout
 ```
 
@@ -261,7 +261,7 @@ Pour en savoir plus sur la connexion unique initiée par l’IdP, consultez [Con
 
 Certains fournisseurs d’identité SAML peuvent accepter d’importer directement des métadonnées contenant toutes les informations requises. Vous pouvez accéder aux métadonnées de votre connexion dans Auth0 ici :
 
-```
+``` lines
 https://{yourDomain}/samlp/metadata?connection={yourConnectionName}
 ```
 
@@ -269,7 +269,7 @@ https://{yourDomain}/samlp/metadata?connection={yourConnectionName}
 
 Utilisez l’URL ACS de votre organization dans l’IdP fédéré pour lancer le flux de connexion d’Organizations.
 
-```
+``` lines
 https://{yourDomain}/samlp?connection={yourConnectionName}&organization=${yourOrgID}
 ```
 

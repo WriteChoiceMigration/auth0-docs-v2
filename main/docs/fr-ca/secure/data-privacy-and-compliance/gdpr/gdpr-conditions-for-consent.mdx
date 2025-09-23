@@ -1,13 +1,13 @@
 ---
 title: "RGPD : Conditions de consentement"
 permalink: "gdpr-conditions-for-consent"
+'description': "Décrit les fonctionnalités d’Auth0 qui peuvent vous aider à vous conformer aux conditions de consentement des exigences du RGPD."
 'og:title': "RGPD : Conditions de consentement"
 'og:description': "Décrit les fonctionnalités d’Auth0 qui peuvent vous aider à vous conformer aux conditions de consentement des exigences du RGPD."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "RGPD : Conditions de consentement"
 'twitter:description': "Décrit les fonctionnalités d’Auth0 qui peuvent vous aider à vous conformer aux conditions de consentement des exigences du RGPD."
 ---
-# RGPD : Conditions de consentement
 
 Conformément à l’article 7 du RGPD, vous devez demander aux utilisateurs de consentir au traitement de leurs données personnelles sous une forme claire et facilement accessible. Vous devez également montrer que l’utilisateur a consenti et lui fournir un moyen facile de retirer son consentement à tout moment.
 
@@ -35,19 +35,19 @@ Vous pouvez personnaliser l’interface utilisateur Lock pour afficher des liens
 
 Une fois que l’utilisateur accepte et s’inscrit, enregistrez les informations de consentement dans `user_metadata` à l’aide d’une règle qui s’exécutera lors de la première connexion. Pour en savoir plus sur les Règles, lisez [Règles d'Auth0](/docs/fr-ca/customize/rules).
 
-Si vous utilisez des connexions à des réseaux sociaux, l’ajout de champs personnalisés n’est pas une option, mais vous pouvez rediriger l’utilisateur vers une autre page où vous demandez son consentement et des informations supplémentaires, puis vous le redirigez pour terminer la transaction d’authentification. Cela peut être fait avec des règles de redirection. Pour en savoir plus, veuillez consulter l’article [Redirect Users from Within Rules (Rediriger les utilisateurs à partir des règles)](/docs/fr-ca/customize/rules/redirect-users). Une fois le processus d’inscription terminé, enregistrez les informations de consentement dans `user_metadata` en appelant le [point de terminaison **Mise à jour de l’utilisateur**](/docs/api/management/v2#!/Users/patch_users_by_id) de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>.
+Si vous utilisez des connexions à des réseaux sociaux, l’ajout de champs personnalisés n’est pas une option, mais vous pouvez rediriger l’utilisateur vers une autre page où vous demandez son consentement et des informations supplémentaires, puis vous le redirigez pour terminer la transaction d’authentification. Cela peut être fait avec des règles de redirection. Pour en savoir plus, veuillez consulter l’article [Redirect Users from Within Rules (Rediriger les utilisateurs à partir des règles)](/docs/fr-ca/customize/rules/redirect-users). Une fois le processus d’inscription terminé, enregistrez les informations de consentement dans `user_metadata` en appelant le [point de terminaison **Mise à jour de l’utilisateur**](/docs/fr-ca/api/management/v2#!/Users/patch_users_by_id) de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>.
 
-Si vous utilisez des connexions à des réseaux sociaux, l’ajout de champs personnalisés n’est pas une option, mais vous pouvez rediriger l’utilisateur vers une autre page où vous demandez son consentement et des informations supplémentaires, puis vous le redirigez pour terminer la transaction d’authentification. Cela peut être fait avec des règles de redirection. Pour en savoir plus, veuillez consulter l’article [Rediriger les utilisateurs à partir des règles](/docs/fr-ca/customize/rules/redirect-users). Une fois le processus d’inscription terminé, enregistrez les informations de consentement dans `user_metadata` en appelant le [point de terminaison **Mise à jour de l’utilisateur**](/docs/api/management/v2#!/Users/patch_users_by_id) de Management API.
+Si vous utilisez des connexions à des réseaux sociaux, l’ajout de champs personnalisés n’est pas une option, mais vous pouvez rediriger l’utilisateur vers une autre page où vous demandez son consentement et des informations supplémentaires, puis vous le redirigez pour terminer la transaction d’authentification. Cela peut être fait avec des règles de redirection. Pour en savoir plus, veuillez consulter l’article [Rediriger les utilisateurs à partir des règles](/docs/fr-ca/customize/rules/redirect-users). Une fois le processus d’inscription terminé, enregistrez les informations de consentement dans `user_metadata` en appelant le [point de terminaison **Mise à jour de l’utilisateur**](/docs/fr-ca/api/management/v2#!/Users/patch_users_by_id) de Management API.
 
 Pour savoir comment mettre en place l’un de ces scénarios, consultez [RGPD : Suivre le consentement avec Lock](/docs/fr-ca/secure/data-privacy-and-compliance/gdpr/gdpr-track-consent-with-lock).
 
 ### Utiliser l’interface utilisateur personnalisée
 
-Si vous utilisez un formulaire d’inscription personnalisé avec une connexion à une base de données, vous devez ajouter un champ supplémentaire à l’écran d’inscription afin de recueillir le consentement de l’utilisateur. Ensuite, appelez le [point de terminaison **Inscription**](/docs/api/authentication#signup) de l’Authentication API afin de créer l’utilisateur dans Auth0. À ce stade, vous pouvez définir les informations de consentement dans le cadre de `user_metadata`.
+Si vous utilisez un formulaire d’inscription personnalisé avec une connexion à une base de données, vous devez ajouter un champ supplémentaire à l’écran d’inscription afin de recueillir le consentement de l’utilisateur. Ensuite, appelez le [point de terminaison **Inscription**](/docs/fr-ca/api/authentication#signup) de l’Authentication API afin de créer l’utilisateur dans Auth0. À ce stade, vous pouvez définir les informations de consentement dans le cadre de `user_metadata`.
 
-Si vous utilisez un formulaire d’inscription personnalisé avec des fournisseurs de réseaux sociaux, vous ne pouvez pas définir les informations de consentement de l’utilisateur lors de l’inscription, mais vous pouvez les mettre à jour dès que l’utilisateur est créé. Enregistrez les informations de consentement dans `user_metadata` en appelant le [point de terminaison **Update User (Mise à jour de l’utilisateur)**](/docs/api/management/v2#!/Users/patch_users_by_id) de Management API.
+Si vous utilisez un formulaire d’inscription personnalisé avec des fournisseurs de réseaux sociaux, vous ne pouvez pas définir les informations de consentement de l’utilisateur lors de l’inscription, mais vous pouvez les mettre à jour dès que l’utilisateur est créé. Enregistrez les informations de consentement dans `user_metadata` en appelant le [point de terminaison **Update User (Mise à jour de l’utilisateur)**](/docs/fr-ca/api/management/v2#!/Users/patch_users_by_id) de Management API.
 
-Si vous utilisez un formulaire d’inscription personnalisé avec des fournisseurs de réseaux sociaux, vous ne pouvez pas définir les informations de consentement de l’utilisateur lors de l’inscription, mais vous pouvez les mettre à jour dès que l’utilisateur est créé. Une fois le processus d’inscription terminé, enregistrez les informations de consentement dans `user_metadata` en appelant le [point de terminaison **Mise à jour de l’utilisateur**](/docs/api/management/v2#!/Users/patch_users_by_id) de la Management API.
+Si vous utilisez un formulaire d’inscription personnalisé avec des fournisseurs de réseaux sociaux, vous ne pouvez pas définir les informations de consentement de l’utilisateur lors de l’inscription, mais vous pouvez les mettre à jour dès que l’utilisateur est créé. Une fois le processus d’inscription terminé, enregistrez les informations de consentement dans `user_metadata` en appelant le [point de terminaison **Mise à jour de l’utilisateur**](/docs/fr-ca/api/management/v2#!/Users/patch_users_by_id) de la Management API.
 
 Pour savoir comment mettre en place l’un de ces scénarios, consultez [RGPD : Suivre le consentement avec l’interface utilisateur personnalisée](/docs/fr-ca/secure/data-privacy-and-compliance/gdpr/gdpr-track-consent-with-custom-ui).
 
@@ -79,19 +79,19 @@ Définissez le paramètre de requête **fields** sur `user_metadata` afin de lim
 Exemple de demande :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/users-by-email?email=USER_EMAIL_ADDRESS&fields=user_metadata' \
 --header 'authorization: Bearer YOUR_MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users-by-email?email=USER_EMAIL_ADDRESS&fields=user_metadata");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer YOUR_MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -108,14 +108,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/users-by-email?email=USER_EMAIL_ADDRESS&fields=user_metadata")
 .header("authorization", "Bearer YOUR_MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -128,8 +128,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer YOUR_MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users-by-email?email=USER_EMAIL_ADDRESS&fields=user_metadata"]
@@ -150,7 +150,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users-by-email?email=USER_EMAIL_ADDRESS&fields=user_metadata",
@@ -172,8 +172,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer YOUR_MGMT_API_ACCESS_TOKEN" }
@@ -183,7 +183,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -195,8 +195,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer YOUR_MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer YOUR_MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users-by-email?email=USER_EMAIL_ADDRESS&fields=user_metadata")! as URL,
@@ -219,7 +219,7 @@ dataTask.resume()
 
 Exemple de réponse :
 
-```json
+```json lines
 [
   {},
   {
@@ -243,19 +243,19 @@ Définissez le paramètre de requête **fields** sur `user_metadata` afin de lim
 Exemple de demande :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/users/%7ByourUserID%7D?fields=user_metadata' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/%7ByourUserID%7D?fields=user_metadata");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -272,14 +272,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/users/%7ByourUserID%7D?fields=user_metadata")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -292,8 +292,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users/%7ByourUserID%7D?fields=user_metadata"]
@@ -314,7 +314,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/%7ByourUserID%7D?fields=user_metadata",
@@ -336,8 +336,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -347,7 +347,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -359,8 +359,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users/%7ByourUserID%7D?fields=user_metadata")! as URL,
@@ -383,7 +383,7 @@ dataTask.resume()
 
 Exemple de réponse :
 
-```json
+```json lines
 {
   "user_metadata": {
     "consent": {
@@ -397,13 +397,13 @@ Exemple de réponse :
 
 ### Mise à jour de l’information de consentement
 
-Pour mettre à jour la valeur des `user_metadata` d’un utilisateur, utilisez le [point de terminaison **Mettre à jour un utilisateur**](/docs/api/management/v2#!/Users/patch_users_by_id).
+Pour mettre à jour la valeur des `user_metadata` d’un utilisateur, utilisez le [point de terminaison **Mettre à jour un utilisateur**](/docs/fr-ca/api/management/v2#!/Users/patch_users_by_id).
 
 La façon dont vous structurez votre demande dépend de la façon dont vous avez structuré vos métadonnées : en tant que racine ou en tant que propriétés internes.
 
 Si vos métadonnées sont stockées en tant que propriétés racines :
 
-```json
+```json lines
 {
   "consentGiven": true,
   "consentDetails": "some-url"
@@ -412,7 +412,7 @@ Si vos métadonnées sont stockées en tant que propriétés racines :
 
 Si vos métadonnées sont stockées en tant que propriétés internes :
 
-```json
+```json lines
 {
   "consent": {
     "given": true,
@@ -426,14 +426,14 @@ Si vos métadonnées sont stockées en tant que propriétés internes :
 Les mises à jour des propriétés de niveau racine sont fusionnées, il vous suffit donc d’envoyer la valeur du champ que vous souhaitez mettre à jour. Par exemple, supposons que nous voulions ajouter une date de consentement et la définir sur `2018-01-23`.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/users/USER_ID' \
 --header 'authorization: Bearer YOUR_MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: application/json' \
 --data '{"user_metadata":{"consentDate":"01/24/2018"}}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/USER_ID");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("authorization", "Bearer YOUR_MGMT_API_ACCESS_TOKEN");
@@ -442,7 +442,7 @@ request.AddParameter("application/json", "{\"user_metadata\":{\"consentDate\":\"
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -462,8 +462,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/USER_ID")
 .header("authorization", "Bearer YOUR_MGMT_API_ACCESS_TOKEN")
 .header("content-type", "application/json")
@@ -471,7 +471,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/USER_ID
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -487,8 +487,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer YOUR_MGMT_API_ACCESS_TOKEN",
 @"content-type": @"application/json" };
@@ -513,7 +513,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/USER_ID",
@@ -537,8 +537,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"user_metadata\":{\"consentDate\":\"01/24/2018\"}}"
@@ -552,7 +552,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -566,8 +566,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"user_metadata\":{\"consentDate\":\"01/24/2018\"}}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer YOUR_MGMT_API_ACCESS_TOKEN",
@@ -596,7 +596,7 @@ dataTask.resume()
 
 Ceci ajoutera une nouvelle propriété au profil utilisateur, **user_metadata.consentDate**, qui contiendra la date à laquelle le client a donné son consentement. La réponse sera le profil utilisateur complet. Les métadonnées mises à jour se présenteront comme suit :
 
-```json
+```json lines
 {
   "consentGiven": true,
   "consentDate": "01/23/2018",
@@ -611,14 +611,14 @@ Pour mettre à jour une propriété interne, vous devez envoyer l’ensemble de 
 Ajoutons une propriété interne pour la date de consentement et fixons-la à `2018-01-23`.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/users/USER_ID' \
 --header 'authorization: Bearer YOUR_MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: application/json' \
 --data '{"user_metadata":{"consent": {"given":true, "date":"01/23/2018", "text_details":"some-url"}}}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/USER_ID");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("authorization", "Bearer YOUR_MGMT_API_ACCESS_TOKEN");
@@ -627,7 +627,7 @@ request.AddParameter("application/json", "{\"user_metadata\":{\"consent\": {\"gi
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -647,8 +647,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/USER_ID")
 .header("authorization", "Bearer YOUR_MGMT_API_ACCESS_TOKEN")
 .header("content-type", "application/json")
@@ -656,7 +656,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/USER_ID
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -674,8 +674,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer YOUR_MGMT_API_ACCESS_TOKEN",
 @"content-type": @"application/json" };
@@ -700,7 +700,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/USER_ID",
@@ -724,8 +724,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"user_metadata\":{\"consent\": {\"given\":true, \"date\":\"01/23/2018\", \"text_details\":\"some-url\"}}}"
@@ -739,7 +739,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -753,8 +753,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"user_metadata\":{\"consent\": {\"given\":true, \"date\":\"01/23/2018\", \"text_details\":\"some-url\"}}}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer YOUR_MGMT_API_ACCESS_TOKEN",
@@ -793,7 +793,7 @@ Pour exporter une liste de vos utilisateurs à l’aide de Management API, utili
 
 Pour exporter une liste de vos utilisateurs à l’aide de Management API, utilisez le point de terminaison [**User Export**](/docs/fr-ca/manage-users/user-search/user-search-best-practices).
 
-Ce point de terminaison crée une tâche qui exporte tous les utilisateurs associés à une connexion. Vous aurez besoin de l’ID de la connexion. Pour trouver cet ID, utilisez le [point de terminaison **Obtenir les connexions**](/docs/api/management/v2#!/Connections/get_connections). Vous pouvez définir le paramètre **name** sur le nom de la connexion pour récupérer uniquement celle-ci.
+Ce point de terminaison crée une tâche qui exporte tous les utilisateurs associés à une connexion. Vous aurez besoin de l’ID de la connexion. Pour trouver cet ID, utilisez le [point de terminaison **Obtenir les connexions**](/docs/fr-ca/api/management/v2#!/Connections/get_connections). Vous pouvez définir le paramètre **name** sur le nom de la connexion pour récupérer uniquement celle-ci.
 
 Une fois que vous disposez de l’ID de connexion et d’un jeton d’accès pour Management API, vous êtes prêt à commencer à exporter des utilisateurs. Pour voir un exemple de requête et de réponse, veuillez consulter l’article [Importer et exporter des utilisateurs](/docs/fr-ca/manage-users/user-migration). Pour savoir comment obtenir un jeton d’accès pour Management API, veuillez consulter l’article [Jetons d’accès à Management API](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens).
 
@@ -810,22 +810,22 @@ Tout d’abord, vous devez décider comment vous allez gérer le retrait du cons
 
 ### Supprimer un utilisateur
 
-Pour supprimer un utilisateur, utilisez le [point de terminaison **Supprimer un utilisateur**](/docs/api/management/v2#!/Users/delete_users_by_id).
+Pour supprimer un utilisateur, utilisez le [point de terminaison **Supprimer un utilisateur**](/docs/fr-ca/api/management/v2#!/Users/delete_users_by_id).
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request DELETE \
 --url 'https://{yourDomain}/api/v2/users/USER_ID' \
 --header 'authorization: Bearer YOUR_MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/USER_ID");
 var request = new RestRequest(Method.DELETE);
 request.AddHeader("authorization", "Bearer YOUR_MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -842,14 +842,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.delete("https://{yourDomain}/api/v2/users/USER_ID")
 .header("authorization", "Bearer YOUR_MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'DELETE',
@@ -861,8 +861,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer YOUR_MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users/USER_ID"]
@@ -883,7 +883,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/USER_ID",
@@ -905,8 +905,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer YOUR_MGMT_API_ACCESS_TOKEN" }
@@ -916,7 +916,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -928,8 +928,8 @@ request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer YOUR_MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer YOUR_MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users/USER_ID")! as URL,
@@ -954,7 +954,7 @@ Le corps de la réponse de ce point de terminaison est vide. Ainsi, si vous souh
 
 ### Marquer l’utilisateur comme supprimé
 
-Si vous ne souhaitez pas supprimer l’utilisateur, marquez son profil comme supprimé à l’aide du [point de terminaison **app_metadata**](/docs/api/management/v2#!/Users/patch_users_by_id). Ajoutez ensuite du code qui fera échouer le processus d’authentification pour tout utilisateur dont le profil est marqué comme supprimé.
+Si vous ne souhaitez pas supprimer l’utilisateur, marquez son profil comme supprimé à l’aide du [point de terminaison **app_metadata**](/docs/fr-ca/api/management/v2#!/Users/patch_users_by_id). Ajoutez ensuite du code qui fera échouer le processus d’authentification pour tout utilisateur dont le profil est marqué comme supprimé.
 
 Cela vous permet de conserver un enregistrement des utilisateurs supprimés pour une utilisation ultérieure.
 
@@ -962,17 +962,17 @@ Cela vous permet de conserver un enregistrement des utilisateurs supprimés pour
 
 Pour marquer un utilisateur comme supprimé, utilisez app_metadata. Dans l’exemple suivant, nous allons vous montrer comment ajouter une propriété appelée **supprimée** au champ **app_metadata**. Cela vous permet de configurer le processus d’authentification pour traiter toutes les utilisations avec la propriété supprimée définie sur true.
 
-Pour mettre à jour les métadonnées d’un utilisateur, utilisez le [point de terminaison **Mettre à jour un utilisateur**](/docs/api/management/v2#!/Users/patch_users_by_id).
+Pour mettre à jour les métadonnées d’un utilisateur, utilisez le [point de terminaison **Mettre à jour un utilisateur**](/docs/fr-ca/api/management/v2#!/Users/patch_users_by_id).
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/users/USER_ID' \
 --header 'authorization: Bearer YOUR_MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: application/json' \
 --data '{"app_metadata":{"deleted":true}}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/USER_ID");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("authorization", "Bearer YOUR_MGMT_API_ACCESS_TOKEN");
@@ -981,7 +981,7 @@ request.AddParameter("application/json", "{\"app_metadata\":{\"deleted\":true}}"
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -1001,8 +1001,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/USER_ID")
 .header("authorization", "Bearer YOUR_MGMT_API_ACCESS_TOKEN")
 .header("content-type", "application/json")
@@ -1010,7 +1010,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/USER_ID
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -1026,8 +1026,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer YOUR_MGMT_API_ACCESS_TOKEN",
 @"content-type": @"application/json" };
@@ -1052,7 +1052,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/USER_ID",
@@ -1076,8 +1076,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"app_metadata\":{\"deleted\":true}}"
@@ -1091,7 +1091,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -1105,8 +1105,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"app_metadata\":{\"deleted\":true}}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer YOUR_MGMT_API_ACCESS_TOKEN",
@@ -1140,7 +1140,7 @@ Ensuite, vous devez désactiver la connexion pour les utilisateurs marqués comm
 1. Accédez à [Auth0 Dashboard > Auth Pipeline Règles](https://manage.auth0.com/#/rules) et créez une règle,
 2. Copiez le script ci-dessous :
 
-   ```javascript
+   ```javascript lines
    function (user, context, callback) {
      user.app_metadata = user.app_metadata || {};
      if (user.app_metadata.deleted){

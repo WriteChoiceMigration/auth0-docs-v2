@@ -1,19 +1,19 @@
 ---
 title: "Récupérer des Organisations"
 permalink: "retrieve-organizations"
+'description': "Apprenez à récupérer des Organisations en utilisant l’Auth0 Dashboard et Management API."
 'og:title': "Récupérer des Organisations"
 'og:description': "Apprenez à récupérer des Organisations en utilisant l’Auth0 Dashboard et Management API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Récupérer des Organisations"
 'twitter:description': "Apprenez à récupérer des Organisations en utilisant l’Auth0 Dashboard et Management API."
 ---
-# Récupérer des Organisations
 
 Lorsque vous travaillez avec [organizations](/docs/fr-ca/manage-users/organizations/organizations-overview) de manière programmatique, vous pouvez avoir besoin de récupérer soit une liste de toutes les organisations, soit des organisations individuellement par nom ou par ID.
 
 <Warning>
 
-Vous ne devez accéder à Management API qu’à l’aide d’un client confidentiel. Son utilisation est soumise aux [limites anti-attaques de Management API Auth0](/docs/troubleshoot/customer-support/operational-policies/rate-limit-policy/management-api-endpoint-rate-limits).
+Vous ne devez accéder à Management API qu’à l’aide d’un client confidentiel. Son utilisation est soumise aux [limites anti-attaques de Management API Auth0](/docs/fr-ca/troubleshoot/customer-support/operational-policies/rate-limit-policy/management-api-endpoint-rate-limits).
 
 </Warning>
 
@@ -23,26 +23,26 @@ Vous pouvez récupérer toutes les organisations d’un locataire via <Tooltip d
 
 <Warning>
 
-Pour récupérer plus de 1000 résultats, vous devez utiliser la méthode de pagination par points de contrôle. Pour en savoir plus, consultez [Obtenir le point de terminaison de l’organisation](/docs/api/management/v2#!/Organizations/get_organizations) dans notre API Explorer.
+Pour récupérer plus de 1000 résultats, vous devez utiliser la méthode de pagination par points de contrôle. Pour en savoir plus, consultez [Obtenir le point de terminaison de l’organisation](/docs/fr-ca/api/management/v2#!/Organizations/get_organizations) dans notre API Explorer.
 
 </Warning>
 
 Effectuez un appel `GET` au point de terminaison`Get Organizations`. Veillez à remplacer la valeur de remplacement `MGMT_API_ACCESS_TOKEN` par votre jeton d’accès au Management API.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/organizations' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/organizations");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -59,14 +59,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/organizations")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -78,8 +78,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/organizations"]
@@ -100,7 +100,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/organizations",
@@ -122,8 +122,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MGMT_API_ACCESS_TOKEN" }
@@ -133,7 +133,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -145,8 +145,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/organizations")! as URL,
@@ -185,8 +185,8 @@ Si vous utilisez des domaines personnalisés, votre domaine est le nom de votre 
 </thead>
 <tbody>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><a href="/docs/tokens/management-api-access-tokens">Jeton d’accès à Management API</a> avec la permission <code>read:organizations</code>.</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td><a href="/docs/fr-ca/tokens/management-api-access-tokens">Jeton d’accès à Management API</a> avec la permission `read:organizations`.</td>
 </tr>
 </tbody>
 </table>
@@ -205,49 +205,49 @@ Les codes d’état de réponse possibles sont les suivants :
 </thead>
 <tbody>
 <tr>
-<td><code>200</code></td>
+<td>`200`</td>
 <td></td>
 <td>Organisations récupérées avec succès.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_paging</code></td>
+<td>`400`</td>
+<td>`invalid_paging`</td>
 <td>La page demandée dépasse le maximum autorisé de 1000 enregistrements.</td>
 <td>L’API a été limitée à ne renvoyer qu’un maximum de 1000 enregistrements.</td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_query_string</code></td>
+<td>`400`</td>
+<td>`invalid_query_string`</td>
 <td>Chaîne de requête non valide. Le message varie selon la cause.</td>
 <td>La chaîne de requête n’est pas valide.</td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Jeton non valide.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Signature non valide reçue pour la validation du jeton Web JSON.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Le client n’est pas global.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>403</code></td>
-<td><code>insufficient_scope</code></td>
-<td>Permission insuffisante; permission attendue : <code>read:organizations</code>.</td>
+<td>`403`</td>
+<td>`insufficient_scope`</td>
+<td>Permission insuffisante; permission attendue : `read:organizations`.</td>
 <td>Tentative de lire/écrire un champ qui n’est pas autorisé avec les permissions de jeton du porteur fourni.</td>
 </tr>
 <tr>
-<td><code>429</code></td>
+<td>`429`</td>
 <td></td>
 <td>Trop de requêtes. Vérifiez les en-têtes X-RateLimit-Limit, X-RateLimit-Remaining et X-RateLimit-Reset.</td>
 <td></td>
@@ -262,19 +262,19 @@ Vous pouvez récupérer une organisation par son identifiant via Management API.
 Effectuez un appel `GET` au point de terminaison`Get Organization`. Veillez à remplacer les valeurs de remplacement `ORG_ID` et `MGMT_API_ACCESS_TOKEN` par l’identifiant de votre organisation et le jeton d’accès à Management API, respectivement.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/organizations/ORG_ID' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/organizations/ORG_ID");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -291,14 +291,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/organizations/ORG_ID")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -310,8 +310,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/organizations/ORG_ID"]
@@ -332,7 +332,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/organizations/ORG_ID",
@@ -354,8 +354,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MGMT_API_ACCESS_TOKEN" }
@@ -365,7 +365,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -377,8 +377,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/organizations/ORG_ID")! as URL,
@@ -417,12 +417,12 @@ Si vous utilisez des domaines personnalisés, votre domaine est le nom de votre 
 </thead>
 <tbody>
 <tr>
-<td><code>ORG_ID</code></td>
+<td>`ORG_ID`</td>
 <td>ID de l’organisation que vous souhaitez récupérer.</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><a href="/docs/tokens/management-api-access-tokens">Jeton d’accès à Management API</a> avec la permission <code>read:organizations</code>.</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td><a href="/docs/fr-ca/tokens/management-api-access-tokens">Jeton d’accès à Management API</a> avec la permission `read:organizations`.</td>
 </tr>
 </tbody>
 </table>
@@ -441,43 +441,43 @@ Les codes d’état de réponse possibles sont les suivants :
 </thead>
 <tbody>
 <tr>
-<td><code>200</code></td>
+<td>`200`</td>
 <td></td>
 <td>Organisation récupérée avec succès.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_query_string</code></td>
+<td>`400`</td>
+<td>`invalid_query_string`</td>
 <td>Chaîne de requête de demande non valide. Le message variera en fonction de la cause.</td>
 <td>La chaîne de requête n’est pas valide.</td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Jeton non valide.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Signature non valide reçue pour la validation du jeton Web JSON.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Le client n’est pas global.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>403</code></td>
-<td><code>insufficient_scope</code></td>
-<td>Permission insuffisante; on s’attend à l’un des éléments suivants : <code>read:organizations</code>.</td>
+<td>`403`</td>
+<td>`insufficient_scope`</td>
+<td>Permission insuffisante; on s’attend à l’un des éléments suivants : `read:organizations`.</td>
 <td>Tentative de lire/écrire un champ qui n’est pas autorisé avec les permissions de jeton du porteur fourni.</td>
 </tr>
 <tr>
-<td><code>429</code></td>
+<td>`429`</td>
 <td></td>
 <td>Trop de requêtes. Vérifiez les en-têtes X-RateLimit-Limit, X-RateLimit-Remaining et X-RateLimit-Reset.</td>
 <td></td>
@@ -492,19 +492,19 @@ Vous pouvez récupérer une organisation par son nom via Management API.
 Effectuez un appel `GET` au point de terminaison`Get Organization by Name`. Veillez à remplacer les valeurs fictives `ORG_NAME` et `MGMT_API_ACCESS_TOKEN` par l’identifiant de votre organisation et le jeton d’accès à Management API, respectivement.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/organizations/name/ORG_NAME' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/organizations/name/ORG_NAME");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -521,14 +521,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/organizations/name/ORG_NAME")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -540,8 +540,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/organizations/name/ORG_NAME"]
@@ -562,7 +562,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/organizations/name/ORG_NAME",
@@ -584,8 +584,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MGMT_API_ACCESS_TOKEN" }
@@ -595,7 +595,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -607,8 +607,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/organizations/name/ORG_NAME")! as URL,
@@ -647,12 +647,12 @@ Si vous utilisez des domaines personnalisés, votre domaine est le nom de votre 
 </thead>
 <tbody>
 <tr>
-<td><code>ORG_ NAME</code></td>
+<td>`ORG_ NAME`</td>
 <td>Nom de l’organisation à récupérer. Longueur maximum : 50 caractères.</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><a href="/docs/tokens/management-api-access-tokens">Jeton d’accès à Management API</a> avec la permission <code>read:organizations</code>.</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td><a href="/docs/fr-ca/tokens/management-api-access-tokens">Jeton d’accès à Management API</a> avec la permission `read:organizations`.</td>
 </tr>
 </tbody>
 </table>
@@ -671,43 +671,43 @@ Les codes d’état de réponse possibles sont les suivants :
 </thead>
 <tbody>
 <tr>
-<td><code>200</code></td>
+<td>`200`</td>
 <td></td>
 <td>Organisations récupérées avec succès.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_query_string</code></td>
+<td>`400`</td>
+<td>`invalid_query_string`</td>
 <td>Chaîne de requête de demande non valide. Le message variera en fonction de la cause.</td>
 <td>La chaîne de requête n’est pas valide.</td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Jeton non valide.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Signature non valide reçue pour la validation du jeton Web JSON.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Le client n’est pas global.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>403</code></td>
-<td><code>insufficient_scope</code></td>
-<td>Permission insuffisante; on s’attend à l’un des éléments suivants : <code>read:organizations</code>.</td>
+<td>`403`</td>
+<td>`insufficient_scope`</td>
+<td>Permission insuffisante; on s’attend à l’un des éléments suivants : `read:organizations`.</td>
 <td>Tentative de lire/écrire un champ qui n’est pas autorisé avec les permissions de jeton du porteur fourni.</td>
 </tr>
 <tr>
-<td><code>429</code></td>
+<td>`429`</td>
 <td></td>
 <td>Trop de requêtes. Vérifiez les en-têtes X-RateLimit-Limit, X-RateLimit-Remaining et X-RateLimit-Reset.</td>
 <td></td>

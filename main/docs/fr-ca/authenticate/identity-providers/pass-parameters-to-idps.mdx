@@ -1,13 +1,13 @@
 ---
 title: "Transmettre les paramètres aux fournisseurs d’identité"
 permalink: "pass-parameters-to-idps"
+'description': "Décrit comment passer des paramètres à une API de fournisseur d’identité."
 'og:title': "Transmettre les paramètres aux fournisseurs d’identité"
 'og:description': "Décrit comment passer des paramètres à une API de fournisseur d’identité."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Transmettre les paramètres aux fournisseurs d’identité"
 'twitter:description': "Décrit comment passer des paramètres à une API de fournisseur d’identité."
 ---
-# Transmettre les paramètres aux fournisseurs d’identité
 
 Vous pouvez passer des paramètres propres au fournisseur à un fournisseur d’identité (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>) lors de l’authentification. Les valeurs peuvent être statiques par connexion ou dynamiques par utilisateur.
 
@@ -33,16 +33,16 @@ Pour suivre cet exemple, vous aurez besoin d’une [connexion WordPress via rés
 
 #### Obtenir la connexion
 
-Appeler le point de terminaison [Get a connection (Obtenir une connexion)](/docs/api/management/v2#!/Connections/get_connections_by_id) de Management API pour récupérer les valeurs existantes de l’objet `options` :
+Appeler le point de terminaison [Get a connection (Obtenir une connexion)](/docs/fr-ca/api/management/v2#!/Connections/get_connections_by_id) de Management API pour récupérer les valeurs existantes de l’objet `options` :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --header 'content-type: application/json'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -50,7 +50,7 @@ request.AddHeader("content-type", "application/json");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -68,15 +68,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .header("content-type", "application/json")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -91,8 +91,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}",
 @"content-type": @"application/json" };
@@ -114,7 +114,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D",
@@ -137,8 +137,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = {
@@ -151,7 +151,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -164,8 +164,8 @@ request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request["content-type"] = 'application/json'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {yourMgmtApiAccessToken}",
@@ -191,7 +191,7 @@ dataTask.resume()
 
 L’objet `options` ressemblera à ceci :
 
-```json
+```json lines
 {
   "options": {
     "client_id": "", 
@@ -205,7 +205,7 @@ L’objet `options` ressemblera à ceci :
 
 Copier l’objet `options` existant, puis ajouter l’objet `upstream_params` avec le champ `blog` comme attribut :
 
-```json
+```json lines
 {
   "options": {
     "client_id": "", 
@@ -221,14 +221,14 @@ Copier l’objet `options` existant, puis ajouter l’objet `upstream_params` av
 Appelez le point de terminaison [Mettre à jour une connexion](https://auth0.com/docs/api/management/v2/#!/Connections/patch_connections_by_id) de Management API avec l’objet `options` dans le corps.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --header 'content-type: application/json' \
 --data '{"options":{"client_id":"","profile":true,"scope":["profile"],"upstream_params":{"blog":{"value":"myblog.wordpress.com"}}}}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -237,7 +237,7 @@ request.AddParameter("application/json", "{\"options\":{\"client_id\":\"\",\"pro
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -257,8 +257,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .header("content-type", "application/json")
@@ -266,7 +266,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/connections/%
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -289,8 +289,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}",
 @"content-type": @"application/json" };
@@ -315,7 +315,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D",
@@ -339,8 +339,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"options\":{\"client_id\":\"\",\"profile\":true,\"scope\":[\"profile\"],\"upstream_params\":{\"blog\":{\"value\":\"myblog.wordpress.com\"}}}}"
@@ -354,7 +354,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -368,8 +368,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"options\":{\"client_id\":\"\",\"profile\":true,\"scope\":[\"profile\"],\"upstream_params\":{\"blog\":{\"value\":\"myblog.wordpress.com\"}}}}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {yourMgmtApiAccessToken}",
@@ -411,7 +411,7 @@ Pour configurer les paramètres dynamiques, appelez le point de terminaison d’
 
 Voici un exemple d’objet `options` que nous revisiterons plus tard dans l’exemple X :
 
-```json
+```json lines
 {
   "options": {
     "upstream_params": {
@@ -448,16 +448,16 @@ Pour suivre cet exemple, vous aurez besoin d’une [Connexion via réseau social
 
 #### Obtenir la connexion
 
-Appeler le point de terminaison [Get a connection (Obtenir une connexion)](/docs/api/management/v2#!/Connections/get_connections_by_id) de Management API pour récupérer les valeurs existantes de l’objet `options` :
+Appeler le point de terminaison [Get a connection (Obtenir une connexion)](/docs/fr-ca/api/management/v2#!/Connections/get_connections_by_id) de Management API pour récupérer les valeurs existantes de l’objet `options` :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --header 'content-type: application/json'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -465,7 +465,7 @@ request.AddHeader("content-type", "application/json");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -483,15 +483,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .header("content-type", "application/json")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -506,8 +506,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}",
 @"content-type": @"application/json" };
@@ -529,7 +529,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D",
@@ -552,8 +552,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = {
@@ -566,7 +566,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -579,8 +579,8 @@ request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request["content-type"] = 'application/json'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {yourMgmtApiAccessToken}",
@@ -606,7 +606,7 @@ dataTask.resume()
 
 L’objet `options` ressemblera à ceci :
 
-```
+```json lines
 "options": {
   "client_id": "thisismyid",
   "client_secret": "thisismysecret",
@@ -618,7 +618,7 @@ L’objet `options` ressemblera à ceci :
 
 Copier l’objet `options` existant, ajouter l’objet `upstream_params` avec le champ `screen_name` comme attribut, puis définir l’attribut `alias` sur `login_hint` :
 
-```json
+```json lines
 {
   "options": {
     "client_id": "", 
@@ -636,14 +636,14 @@ Copier l’objet `options` existant, ajouter l’objet `upstream_params` avec le
 Appelez le point de terminaison [Mettre à jour une connexion](https://auth0.com/docs/api/management/v2/#!/Connections/patch_connections_by_id) de Management API avec l’objet `options` dans le corps.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --header 'content-type: application/json' \
 --data '{"options": {"client_id": "{clientId}", "client_secret": "{clientSecret}", "profile": true, "upstream_params": {"screen_name": {"alias": "login_hint"}}}}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -652,7 +652,7 @@ request.AddParameter("application/json", "{\"options\": {\"client_id\": \"{clien
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -672,8 +672,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .header("content-type", "application/json")
@@ -681,7 +681,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/connections/%
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -704,8 +704,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}",
 @"content-type": @"application/json" };
@@ -730,7 +730,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D",
@@ -754,8 +754,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"options\": {\"client_id\": \"{clientId}\", \"client_secret\": \"{clientSecret}\", \"profile\": true, \"upstream_params\": {\"screen_name\": {\"alias\": \"login_hint\"}}}}"
@@ -769,7 +769,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -783,8 +783,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"options\": {\"client_id\": \"{clientId}\", \"client_secret\": \"{clientSecret}\", \"profile\": true, \"upstream_params\": {\"screen_name\": {\"alias\": \"login_hint\"}}}}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {yourMgmtApiAccessToken}",
@@ -820,7 +820,7 @@ dataTask.resume()
 
 Lorsque vous appelez le [point de terminaison de connexion](https://auth0.com/docs/api/authentication#login) de l’Authentication API pour un utilisateur, vous pouvez transmettre son adresse courriel au paramètre `login_hint` :
 
-```
+``` lines
 https://{yourDomain}/authorize
   ?client_id={yourClientId}
   &response_type=token
@@ -831,7 +831,7 @@ https://{yourDomain}/authorize
 
 Cette valeur sera ensuite transmise au point de terminaison d’autorisation X sous forme de paramètre `screen_name` :
 
-```
+``` lines
 https://api.twitter.com/oauth/authorize
   ?oauth_token={yourXAuthToken}
   &screen_name=user@domain.com

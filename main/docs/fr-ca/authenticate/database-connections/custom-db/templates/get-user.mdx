@@ -1,13 +1,13 @@
 ---
 title: "Modèles de script Get User"
 permalink: "get-user"
+'description': "Décrit les modèles de scripts d’action de base de données personnalisés pour la recherche des utilisateurs."
 'og:title': "Modèles de script Get User"
 'og:description': "Décrit les modèles de scripts d’action de base de données personnalisés pour la recherche des utilisateurs."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Modèles de script Get User"
 'twitter:description': "Décrit les modèles de scripts d’action de base de données personnalisés pour la recherche des utilisateurs."
 ---
-# Modèles de script Get User
 
 Le script Get User permet d’implémenter la fonction exécutée pour déterminer l’état actuel d’existence d’un utilisateur. Nous recommandons de nommer cette fonction `getUser`.
 
@@ -38,7 +38,7 @@ La fonction `getUser` devrait :
 
 La fonction `getUser` accepte deux paramètres et renvoie une fonction `callback` :
 
-```
+```javascript lines
 getUser(email, callback): function
 ```
 
@@ -51,12 +51,12 @@ getUser(email, callback): function
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>String</td>
 <td>L’adresse courriel de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>callback</code></td>
+<td>`callback`</td>
 <td>Fonction</td>
 <td>Utilisé pour transmettre des données d’erreur ou de profil par le pipeline.</td>
 </tr>
@@ -67,7 +67,7 @@ getUser(email, callback): function
 
 Voici un exemple fictif en JavaScript de la manière dont vous pourriez implémenter la fonction `getUser`. Pour voir des exemples propres à un langage, veuillez consulter [Exemples de scripts propres à une langue](#language-specific-script-examples).
 
-```javascript
+```javascript lines
 function getUser(email, callback) {
   // Send user identifier to external database API
   let options = {
@@ -106,7 +106,7 @@ La fonction `callback` est utilisée pour transmettre les données du profil uti
 
 La fonction `callback` (rappel) accepte jusqu’à deux paramètres et renvoie une fonction :
 
-```
+```javascript lines
 callback(error[,profile]): function
 ```
 
@@ -120,13 +120,13 @@ callback(error[,profile]): function
 </thead>
 <tbody>
 <tr>
-<td><code>error</code></td>
+<td>`error`</td>
 <td>Objet</td>
 <td>Requis</td>
 <td>Contient des données d’erreur.</td>
 </tr>
 <tr>
-<td><code>profile</code></td>
+<td>`profile`</td>
 <td>Objet</td>
 <td>Facultatif</td>
 <td>Contient les données du profil de l’utilisateur.</td>
@@ -146,7 +146,7 @@ Si l’utilisateur est trouvé, transmettez une valeur `nul` au paramètre `erro
 
 #### Exemple
 
-```
+```javascript lines
 return callback(null, {
     username: "username",
     user_id: "my-custom-db|username@domain.com",
@@ -174,7 +174,7 @@ Si l’utilisateur n’est pas trouvé, transmettez une valeur `null` au paramè
 
 #### Exemple
 
-```
+```javascript lines
 return callback(null);
 ```
 
@@ -184,7 +184,7 @@ Si une erreur se produit, transmettez les données d’erreur au paramètre `err
 
 #### Exemple
 
-```
+```javascript lines
 return callback(new Error("My custom error message."));
 ```
 
@@ -205,7 +205,7 @@ Auth0 fournit des exemples de scripts à utiliser avec les langages/technologies
 
 ### JavaScript
 
-```javascript
+```javascript lines
 function getByEmail(email, callback) {
   // This script should retrieve a user profile from your existing database,
   // without authenticating the user.
@@ -228,7 +228,7 @@ function getByEmail(email, callback) {
 
 ### Fournisseur d’appartenances ASP.NET (MVC3 – Fournisseurs universels)
 
-```javascript
+```javascript lines
 function getByEmail(email, callback) {
   const sqlserver = require('tedious@1.11.0');
   const Connection = sqlserver.Connection;
@@ -278,7 +278,7 @@ function getByEmail(email, callback) {
 
 ### Fournisseur d’appartenances ASP.NET (MVC4 – Appartenance simple)
 
-```javascript
+```javascript lines
 function getByEmail(email, callback) {
   const sqlserver = require('tedious@1.11.0');
   const Connection = sqlserver.Connection;
@@ -327,7 +327,7 @@ function getByEmail(email, callback) {
 
 ### MongoDB
 
-```javascript
+```javascript lines
 function getByEmail(email, callback) {
   const MongoClient = require('mongodb@5.1.0').MongoClient;
   const client = new MongoClient('mongodb://user:pass@mymongoserver.com');
@@ -351,7 +351,7 @@ function getByEmail(email, callback) {
 
 ### MySQL
 
-```javascript
+```javascript lines
 function getByEmail(email, callback) {
   const mysql = require('mysql');
   const connection = mysql({
@@ -376,7 +376,7 @@ function getByEmail(email, callback) {
 
 ### PostgreSQL
 
-```javascript
+```javascript lines
 function loginByEmail(email, callback) {
   //this example uses the "pg" library
   //more info here: https://github.com/brianc/node-postgres
@@ -403,7 +403,7 @@ function loginByEmail(email, callback) {
 
 ### Serveur SQL
 
-```javascript
+```javascript lines
 function getByEmail(email, callback) {
   //this example uses the "tedious" library
   //more info here: http://pekim.github.io/tedious/index.html
@@ -445,7 +445,7 @@ function getByEmail(email, callback) {
 
 ### Base de données SQL de Windows Azure
 
-```javascript
+```javascript lines
 function getByEmail (name, callback) {
   var profile = {
     user_id:     "103547991597142817347",
@@ -461,7 +461,7 @@ function getByEmail (name, callback) {
 
 ### Axios
 
-```
+```javascript lines
 async function getUserAsync(email, callback) {
   //should be updated as new versions of axios are made available (https://auth0-extensions.github.io/canirequire/#axios)
   const axios = require("axios@0.22.0");
@@ -513,7 +513,7 @@ async function getUserAsync(email, callback) {
 
 ### Stormpath
 
-```javascript
+```javascript lines
 function getByEmail(email, callback) {
   // Replace the {yourStormpathClientId} with your Stormpath ID
   var url = 'https://api.stormpath.com/v1/applications/{yourStormpathClientId}/accounts';

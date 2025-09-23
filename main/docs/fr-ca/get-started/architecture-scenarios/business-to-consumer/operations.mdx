@@ -1,13 +1,13 @@
 ---
 title: "Opérations (Commerce de détail)"
 permalink: "operations"
+'description': "Comment rendre les environnements de vos locataires Auth0 opérationnels."
 'og:title': "Opérations (Commerce de détail)"
 'og:description': "Comment rendre les environnements de vos locataires Auth0 opérationnels."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Opérations (Commerce de détail)"
 'twitter:description': "Comment rendre les environnements de vos locataires Auth0 opérationnels."
 ---
-# Opérations (Commerce de détail)
 
 La mise en œuvre opérationnelle nécessite la configuration ou la mise en place d’une infrastructure pour soutenir l’opération évolutive, mesurable et quantifiable nécessaire à la continuité de l’activité. Dans Auth0, il s’agit notamment de configurer les services de soutien (tels que les fournisseurs de messagerie), de surveiller les services pour votre déploiement, de détecter les situations anormales et de vous préparer à une reprise rapide et facile en cas de problème dans un environnement de production.
 
@@ -63,7 +63,7 @@ Les équipes de développement peuvent utiliser les fichiers de journalisation p
 
 ### Limites de débit et autres erreurs
 
-Auth0 fournit un code d’erreur unique pour les erreurs signalées lorsque la [limite d’utilisation est dépassée](/docs/fr-ca/troubleshoot/customer-support/operational-policies/rate-limit-policy). Vous devriez configurer l’analyse automatique des journaux pour vérifier les erreurs de limite d’utilisation afin de pouvoir traiter de manière proactive les activités qui dépassent ces limites avant qu’elles ne gênent trop vos utilisateurs. Auth0 publie également des codes d’erreur pour d’autres types d’erreurs. Il vous sera donc utile de rechercher dans les journaux les [erreurs d’authentification](/docs/fr-ca/libraries/common-auth0-library-authentication-errors) ainsi que les erreurs liées aux appels vers Management API (les codes d’erreur de Management API sont affichés sous chaque appel dans [l’explorateur de Management API](/docs/api/management/v2)).
+Auth0 fournit un code d’erreur unique pour les erreurs signalées lorsque la [limite d’utilisation est dépassée](/docs/fr-ca/troubleshoot/customer-support/operational-policies/rate-limit-policy). Vous devriez configurer l’analyse automatique des journaux pour vérifier les erreurs de limite d’utilisation afin de pouvoir traiter de manière proactive les activités qui dépassent ces limites avant qu’elles ne gênent trop vos utilisateurs. Auth0 publie également des codes d’erreur pour d’autres types d’erreurs. Il vous sera donc utile de rechercher dans les journaux les [erreurs d’authentification](/docs/fr-ca/libraries/common-auth0-library-authentication-errors) ainsi que les erreurs liées aux appels vers Management API (les codes d’erreur de Management API sont affichés sous chaque appel dans [l’explorateur de Management API](/docs/fr-ca/api/management/v2)).
 
 ### Meilleures pratiques L’appel à Management API pour récupérer des informations sur le profil utilisateur à partir d’une règle est une cause fréquente d’erreurs de limite anti-attaque, car ces appels API peuvent être exécutés pour chaque connexion ainsi que pour des vérifications périodiques de la session :::
 
@@ -73,7 +73,7 @@ Vous devez mettre en place des mécanismes de [contrôle des implémentations A
 
 ### Meilleures pratiques
 
-Vous devez mettre en place la possibilité d’envoyer des transactions de connexion synthétiques pour faciliter le contrôle de bout en bout de l’authentification. Vous pouvez le faire avec une application simple qui utilise le [Octroi du mot de passe du propriétaire de la ressource](/docs/api-auth/tutorials/password-grant) en combinaison avec un utilisateur test qui n’a pas de privilèges, et n’oubliez pas les [Politiques de limitation de taux d’Auth0](/docs/policies/rate-limits) également.
+Vous devez mettre en place la possibilité d’envoyer des transactions de connexion synthétiques pour faciliter le contrôle de bout en bout de l’authentification. Vous pouvez le faire avec une application simple qui utilise le [Octroi du mot de passe du propriétaire de la ressource](/docs/fr-ca/api-auth/tutorials/password-grant) en combinaison avec un utilisateur test qui n’a pas de privilèges, et n’oubliez pas les [Politiques de limitation de taux d’Auth0](/docs/fr-ca/policies/rate-limits) également.
 
 ## Notifications
 

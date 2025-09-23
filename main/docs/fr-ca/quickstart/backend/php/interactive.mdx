@@ -1,17 +1,19 @@
 ---
 title: "Ajouter une autorisation à votre application PHP"
 permalink: "interactive"
+'description': "Ce guide explique comment intégrer Auth0, ajouter une autorisation basée sur un jeton et protéger les routes de l’application en utilisant la trousse SDK Auth0 pour PHP."
 'og:title': "Ajouter une autorisation à votre application PHP"
-'og:description': "Ce guide explique comment intégrer Auth0, ajouter une autorisation basée sur un jeton et protéger les routes de l’application en utilisant la trousse SDK Auth0 PHP."
-'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/php.png"
+'og:description': "Ce guide explique comment intégrer Auth0, ajouter une autorisation basée sur un jeton et protéger les routes de l’application en utilisant la trousse SDK Auth0 pour PHP."
+'og:image': "/docs/media/platforms/php.png"
 'twitter:title': "Ajouter une autorisation à votre application PHP"
-'twitter:description': "Ce guide explique comment intégrer Auth0, ajouter une autorisation basée sur un jeton et protéger les routes de l’application en utilisant la trousse SDK Auth0 PHP."
+'twitter:description': "Ce guide explique comment intégrer Auth0, ajouter une autorisation basée sur un jeton et protéger les routes de l’application en utilisant la trousse SDK Auth0 pour PHP."
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -35,12 +37,12 @@ permalink: "interactive"
 
 # Ajouter une autorisation à votre application PHP
 
-Auth0 vous permet d’ajouter rapidement une autorisation de point de terminaison basée sur un jeton à presque tous les types d’application. Ce guide explique comment intégrer Auth0, ajouter une autorisation basée sur un jeton et protéger les routes de l’application en utilisant la trousse SDK Auth0 PHP.
+Auth0 vous permet d’ajouter rapidement une autorisation de point de terminaison basée sur un jeton à presque tous les types d’application. Ce guide explique comment intégrer Auth0, ajouter une autorisation basée sur un jeton et protéger les routes de l’application en utilisant la trousse SDK Auth0 pour PHP.
 
 Pour utiliser ce guide rapide, vous devez :
 
 * Vous inscrire à un compte Auth0 gratuit ou vous connecter à Auth0.
-* Avoir un projet PHP fonctionnel que vous souhaitez intégrer à Auth0. Vous pouvez également consulter ou télécharger une application faisant office d’exemple lorsque vous vous connectez.
+* Avoir un projet PHP fonctionnel que vous souhaitez intégrer à Auth0. Vous pouvez également consulter ou télécharger une application faisant office d’exemple après la connexion.
 
 [1
 
@@ -50,7 +52,7 @@ Pour utiliser les services Auth0, vous devez avoir une application enregistrée 
 
 ### Configurer une application
 
-Utilisez le sélecteur interactif pour créer une nouvelle application Auth0 ou sélectionnez une application existante qui représente le projet que vous souhaitez intégrer. Dans Auth0, il est attribué à chaque application un identificateur client unique alphanumérique que votre code d’application utilise pour appeler les API Auth0 via la trousse SDK.
+Utilisez le sélecteur interactif pour créer une nouvelle application Auth0 ou sélectionnez une application existante qui représente le projet que vous souhaitez intégrer. Dans Auth0, il est attribué à chaque application un ID client unique alphanumérique que votre code d’application utilise pour appeler les API Auth0 via la trousse SDK.
 
 Tous les paramètres que vous configurez à l’aide de ce guide rapide seront automatiquement mis à jour pour votre application dans le [Dashboard](https://manage.auth0.com/#/), qui est l’endroit où vous pourrez gérer vos applications à l’avenir.
 
@@ -58,24 +60,24 @@ Si vous préférez explorer une configuration complète, consultez plutôt un ex
 
 ### Configurer une API
 
-De même, vous devez créer une nouvelle API Auth0 ou utiliser une API existante qui représente le projet que vous intégrez à partir du [Dashboard](https://manage.auth0.com/#/). Choisissez un identificateur unique pour l’API et notez-le. Cet identificateur vous sera nécessaire pour configurer votre application ci-dessous.
+De même, vous devez créer une nouvelle API Auth0 ou utiliser une API existante qui représente le projet que vous intégrez à partir du [Dashboard](https://manage.auth0.com/#/). Choisissez un identifiant unique pour l’API et notez-le. Cet identifiant vous sera nécessaire pour configurer votre application ci-dessous.
 
 [2
 
-## Installer la trousse SDK PHP Auth0](#installer-la-trousse-sdk-php-auth0)
+## Installer la trousse SDK Auth0 pour PHP](#installer-la-trousse-sdk-auth0-pour-php)
 
-Auth0 fournit une trousse [SDK PHP](https://github.com/auth0/auth0-PHP) (Auth0-PHP) pour simplifier le processus de mise en œuvre de l’authentification et de l’autorisation Auth0 dans les applications PHP.
+Auth0 fournit une trousse [SDK pour PHP](https://github.com/auth0/auth0-PHP) (Auth0-PHP) pour simplifier le processus de mise en œuvre de l’authentification et de l’autorisation Auth0 dans les applications PHP.
 
-La trousse SDK PHP Auth0 nécessite l’installation des bibliothèques HTTP compatibles [PSR-17](https://www.php-fig.org/psr/psr-17/) et [PSR-18](https://www.php-fig.org/psr/psr-18/) pour la gestion des requêtes réseau. Si vous ne disposez pas de bibliothèques disponibles, vous pouvez installer des choix fiables en exécutant les commandes suivantes dans votre terminal :
+La trousse SDK Auth0 pour PHP nécessite l’installation des bibliothèques HTTP compatibles [PSR-17](https://www.php-fig.org/psr/psr-17/) et [PSR-18](https://www.php-fig.org/psr/psr-18/) pour la gestion des requêtes réseau. Si vous ne disposez pas de bibliothèques disponibles, vous pouvez installer des choix fiables en exécutant les commandes suivantes dans votre terminal :
 
-```bash
+```powershell lines
 cd <your-project-directory>
 composer require symfony/http-client nyholm/psr7
 ```
 
-Installez maintenant la trousse SDK PHP Auth0 en exécutant la commande suivante dans votre terminal :
+Installez maintenant la trousse SDK Auth0 pour PHP en exécutant la commande suivante dans votre terminal :
 
-```
+```powershell lines
 composer require auth0/auth0-php
 ```
 
@@ -83,13 +85,13 @@ composer require auth0/auth0-php
 
 Pour que la trousse SDK fonctionne correctement, vous devez définir les propriétés suivantes dans la trousse SDK Auth0 lors de l’initialisation :
 
-* `strategy` : La stratégie aide à orienter le comportement du SDK en ce qui concerne l’utilisation de votre application. Dans ce cas, vous souhaitez la définir sur la constante
+* `strategy` : La stratégie aide à orienter le comportement de la troousse SDK en ce qui concerne l’utilisation de votre application. Dans ce cas, vous souhaitez la définir sur la constante
 
   `Auth0\SDK\Configuration\SdkConfiguration::STRATEGY_API`
 * domain : Le domaine de votre locataire Auth0. En général, vous le trouverez dans Auth0 Dashboard dans Application Settings (Paramètres d’application) dans le champ Domain (Domaine). Si vous utilisez un domaine personnalisé, définissez-le plutôt sur la valeur de votre domaine personnalisé.
-* clientId : L’identifiant de l’application Auth0 que vous avez configurée précédemment dans le démarrage rapide. Vous pouvez le trouver dans Auth0 Dashboard, dans la rubrique des paramètres de votre application, dans le champ Client ID (ID client).
+* clientId : L’identifiant de l’application Auth0 que vous avez configurée précédemment dans le démarrage rapide. Celui-ci figure dans Auth0 Dashboard, sous les paramètres de votre application, dans le champ ID client.
 * clientSecret : Le secret de l’application Auth0 que vous avez créée plus tôt dans le démarrage rapide. Le secret client se trouve dans Auth0 Dashboard, dans Application Settings (Paramètres d’application) dans le champ Client Secret (Secret client).
-* public : L’identificateur de l’API Auth0 que vous avez enregistré ci-dessus. Il doit être fourni sous la forme d’un tableau.
+* public : L’identifiant de l’API Auth0 que vous avez enregistré ci-dessus. Il doit être fourni sous la forme d’un tableau.
 
 ##### checkpoint.header
 
@@ -106,7 +108,7 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 Développez ensuite votre application pour récupérer et traiter les jetons de porteur. Les jetons de porteur sont des jetons d’accès fournis à votre API avec des demandes de clients au nom d’un utilisateur. Les jetons d’accès approuvent ou refusent l’accès aux routes de votre application. C’est ce que l’on appelle l’autorisation de point de terminaison.
 
-La méthode la plus simple pour récupérer les jetons d’accès à partir d’une requête est la méthode `getBearerToken()` de la trousse SDK PHP. Cette méthode récupère les jetons à partir des paramètres GET, des corps POST, des en-têtes de requête et d’autres sources. Dans ce cas, la trousse SDK PHP traite les jetons transmis par les requêtes GET dans le paramètre `token` ou dans l’en-tête HTTP `Authorization`.
+La méthode la plus simple pour récupérer les jetons d’accès à partir d’une requête est la méthode `getBearerToken()` de la trousse SDK pour PHP. Cette méthode récupère les jetons à partir des paramètres GET, des corps POST, des en-têtes de requête et d’autres sources. Dans ce cas, la trousse SDK pour PHP traite les jetons transmis par les requêtes GET dans le paramètre `token` ou dans l’en-tête HTTP `Authorization`.
 
 [4
 
@@ -114,7 +116,7 @@ La méthode la plus simple pour récupérer les jetons d’accès à partir d’
 
 Maintenant, installez une bibliothèque de routage pour aider à diriger les requêtes entrantes vers votre application. Cette étape n’est pas obligatoire, mais elle simplifie la structure de l’application pour les besoins de ce guide rapide.
 
-```
+```powershell lines
 composer require steampixel/simple-php-router
 ```
 
@@ -124,7 +126,7 @@ Créez un nouveau fichier dans votre application appelé `router.php` pour défi
 
 ## Configurer l’autorisation des points de terminaison](#configurer-l-autorisation-des-points-de-terminaison)
 
-Maintenant que vous avez configuré votre application Auth0, la trousse SDK PHP Auth0, et que votre application récupère les jetons de porteur des requêtes, l’étape suivante est de configurer l’autorisation des points de terminaison pour votre projet. La méthode `getBearerToken()` que vous avez mise en œuvre ci-dessus renvoie une classe `Token` qui contient des informations sur l’accès à la requête.
+Maintenant que vous avez configuré votre application Auth0, la trousse SDK Auth0 pour PHP, et que votre application récupère les jetons de porteur des requêtes, l’étape suivante est de configurer l’autorisation des points de terminaison pour votre projet. La méthode `getBearerToken()` que vous avez mise en œuvre ci-dessus renvoie une classe `Token` qui contient des informations sur l’accès à la requête.
 
 Étant donné que la méthode `getBearerToken()` valide et vérifie automatiquement la requête entrante, votre application détermine les détails du jeton d’accès en évaluant la réponse de la méthode. Si la réponse est nulle, c’est qu’aucun jeton valide n’a été fourni. Dans le cas contraire, inspectez le contenu de la réponse pour en savoir plus sur la demande.
 
@@ -154,7 +156,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/backend/php/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

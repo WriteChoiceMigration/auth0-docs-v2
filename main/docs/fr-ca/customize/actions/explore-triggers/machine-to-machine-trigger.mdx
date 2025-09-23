@@ -1,17 +1,17 @@
 ---
 title: "Déclencheur machine à machine"
 permalink: "machine-to-machine-trigger"
+'description': "Découvrez le flux d’actions machine à machine et le déclencheur d’action d’échange d’identifiants, qui s’exécute dans le cadre du flux machine à machine."
 'og:title': "Déclencheur machine à machine"
 'og:description': "Découvrez le flux d’actions machine à machine et le déclencheur d’action d’échange d’identifiants, qui s’exécute dans le cadre du flux machine à machine."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Déclencheur machine à machine"
 'twitter:description': "Découvrez le flux d’actions machine à machine et le déclencheur d’action d’échange d’identifiants, qui s’exécute dans le cadre du flux machine à machine."
 ---
-# Déclencheur machine à machine
 
 Le déclencheur communication entre machines s’exécute lorsqu’un jeton d’accès est délivré par le biais du [Flux des identifiants client](/docs/fr-ca/get-started/authentication-and-authorization-flow/client-credentials-flow).
 
-<Frame>![Diagram showing the Actions Machine to Machine Flow and when the triggers inside of it run.](//images.ctfassets.net/cdy7uua7fh8z/1JPl54LFWCUh5StuglZS2o/41f89372526574c3b8cdac4d5ba38072/Machine_to_Machine_Flow.png)</Frame>
+<Frame>![Diagram showing the Actions Machine to Machine Flow and when the triggers inside of it run.](/images/fr-ca/cdy7uua7fh8z/1JPl54LFWCUh5StuglZS2o/41f89372526574c3b8cdac4d5ba38072/Machine_to_Machine_Flow.png)</Frame>
 
 Les actions de ce flux bloquent (synchrones), ce qui signifie qu’elles s’exécutent dans le cadre du processus d’un déclencheur et qu’elles empêcheront le reste du pipeline Auth0 de s’exécuter jusqu’à ce que l’action soit complétée.
 
@@ -32,7 +32,7 @@ Le déclencheur `credentials-exchange` est une fonction exécutée avant que le 
 
 Une action d’échange d’identifiants peut être utilisée pour refuser un jeton d’accès en fonction de la logique personnalisée.
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about client credentials grant request.
  * @param {CredentialsExchangeAPI} api - Interface whose methods can be used to change the behavior of client credentials grant.
@@ -48,7 +48,7 @@ exports.onExecuteCredentialsExchange = async (event, api) => {
 
 Une action d’échange d’identifiants peut être utilisée pour ajouter des demandes personnalisées à un jeton d’accès.
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about client credentials grant request.
  * @param {CredentialsExchangeAPI} api - Interface whose methods can be used to change the behavior of client credentials grant.

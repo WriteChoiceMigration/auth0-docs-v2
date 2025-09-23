@@ -1,15 +1,15 @@
 ---
 title: "Exportations d’utilisateurs en masse"
 permalink: "bulk-user-exports"
+'description': "Apprenez à exporter des listes d’utilisateurs et leurs métadonnées."
 'og:title': "Exportations d’utilisateurs en masse"
 'og:description': "Apprenez à exporter des listes d’utilisateurs et leurs métadonnées."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Exportations d’utilisateurs en masse"
 'twitter:description': "Apprenez à exporter des listes d’utilisateurs et leurs métadonnées."
 ---
-# Exportations d’utilisateurs en masse
 
-Vous pouvez utiliser le point de terminaison `POST /api/v2/jobs/users-exports` pour créer une tâche qui exporte tous les utilisateurs associés à une [connexion](/docs/identityproviders), ou tous les utilisateurs du locataire.
+Vous pouvez utiliser le point de terminaison `POST /api/v2/jobs/users-exports` pour créer une tâche qui exporte tous les utilisateurs associés à une [connexion](/docs/fr-ca/identityproviders), ou tous les utilisateurs du locataire.
 
 Pour une liste des champs de profil utilisateur qui peuvent être importés et exportés, consultez [Structure du profil utilisateur](/docs/fr-ca/manage-users/user-accounts/user-profiles/user-profile-structure).
 
@@ -20,13 +20,13 @@ Lorsque vous créez votre tâche, vous devez fournir ce qui suit :
 * Nombre maximum d’enregistrements d’utilisateurs à exporter (facultatif, tous les enregistrements seront exportés si cette information n’est pas fournie).
 * Champs associés aux utilisateurs (ID ou nom) que vous voulez inclure dans l’exportation.
 
-Vous aurez également besoin d’un [jeton d’accès à Management API](/docs/api/management/v2/tokens) valide.
+Vous aurez également besoin d’un [jeton d’accès à Management API](/docs/fr-ca/api/management/v2/tokens) valide.
 
 ## Créer le corps d’une demande
 
 (Facultatif) Recherchez le `connection_id` et le nom de domaine de votre locataire Auth0 dans <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>. Créez un nouveau fichier texte avec le corps de la demande suivant :
 
-```json
+```json lines
 {
    "connection_id":"connection_id",
    "format":"csv",
@@ -52,14 +52,14 @@ Mettez à jour le `connection_id` avec votre ID de connexion à la base de donn�
 Permissions requises : `read:users`
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/jobs/users-exports' \
 --header 'authorization: Bearer {yourMgmtAPIAccessToken}' \
 --header 'content-type: application/json' \
 --data '{"connection_id": "{yourConnectionId}", "format": "csv", "limit": 5, "fields": [{"name": "email"}, { "name": "identities[0].connection", "export_as": "provider" }]}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/jobs/users-exports");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer {yourMgmtAPIAccessToken}");
@@ -68,7 +68,7 @@ request.AddParameter("application/json", "{\"connection_id\": \"{yourConnectionI
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -88,8 +88,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/jobs/users-exports")
 .header("authorization", "Bearer {yourMgmtAPIAccessToken}")
 .header("content-type", "application/json")
@@ -97,7 +97,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/jobs/users-exp
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -118,8 +118,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtAPIAccessToken}",
 @"content-type": @"application/json" };
@@ -147,7 +147,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/jobs/users-exports",
@@ -171,8 +171,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"connection_id\": \"{yourConnectionId}\", \"format\": \"csv\", \"limit\": 5, \"fields\": [{\"name\": \"email\"}, { \"name\": \"identities[0].connection\", \"export_as\": \"provider\" }]}"
@@ -186,7 +186,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -200,8 +200,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"connection_id\": \"{yourConnectionId}\", \"format\": \"csv\", \"limit\": 5, \"fields\": [{\"name\": \"email\"}, { \"name\": \"identities[0].connection\", \"export_as\": \"provider\" }]}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {yourMgmtAPIAccessToken}",
@@ -241,7 +241,7 @@ dataTask.resume()
 
 La réponse devrait ressembler à ceci :
 
-```json
+```json lines
 {
   "type": "users_export",
   "status": "pending",
@@ -287,7 +287,7 @@ Comme vous ne pouvez exporter que jusqu’à 30 champs, l’utilisation du forma
 
 Par exemple, pour des métadonnées structurées comme ceci.
 
-```json
+```json lines
 {
   "consent": {
       "given": true,
@@ -300,14 +300,14 @@ Par exemple, pour des métadonnées structurées comme ceci.
 La demande d’exportation (pour les trois champs) ressemblerait à ceci.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/jobs/users-exports' \
 --header 'authorization: Bearer {yourMgmtAPIAccessToken}' \
 --header 'content-type: application/json' \
 --data '{"connection_id": "{yourConnectionId}", "format": "csv", "limit": 5, "fields": [{"name": "email"}, {"name": "user_metadata.consent.given"}, {"name": "user_metadata.consent.date"}, {"name": "user_metadata.consent.text_details"}]}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/jobs/users-exports");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer {yourMgmtAPIAccessToken}");
@@ -316,7 +316,7 @@ request.AddParameter("application/json", "{\"connection_id\": \"{yourConnectionI
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -336,8 +336,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/jobs/users-exports")
 .header("authorization", "Bearer {yourMgmtAPIAccessToken}")
 .header("content-type", "application/json")
@@ -345,7 +345,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/jobs/users-exp
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -371,8 +371,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtAPIAccessToken}",
 @"content-type": @"application/json" };
@@ -400,7 +400,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/jobs/users-exports",
@@ -424,8 +424,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"connection_id\": \"{yourConnectionId}\", \"format\": \"csv\", \"limit\": 5, \"fields\": [{\"name\": \"email\"}, {\"name\": \"user_metadata.consent.given\"}, {\"name\": \"user_metadata.consent.date\"}, {\"name\": \"user_metadata.consent.text_details\"}]}"
@@ -439,7 +439,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -453,8 +453,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"connection_id\": \"{yourConnectionId}\", \"format\": \"csv\", \"limit\": 5, \"fields\": [{\"name\": \"email\"}, {\"name\": \"user_metadata.consent.given\"}, {\"name\": \"user_metadata.consent.date\"}, {\"name\": \"user_metadata.consent.text_details\"}]}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {yourMgmtAPIAccessToken}",
@@ -509,14 +509,14 @@ Avant de pouvoir importer des utilisateurs en utilisant un export généré par 
 Dans ce cas, pour le même exemple que nous avons utilisé précédemment, la requête ressemblerait à ceci :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/jobs/users-exports' \
 --header 'authorization: Bearer {yourMgmtAPIAccessToken}' \
 --header 'content-type: application/json' \
 --data '{"connection_id": "{yourConnectionId}", "format": "json", "limit": 5, "fields": [{"name": "email"}, {"name": "user_metadata.consent"}]}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/jobs/users-exports");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer {yourMgmtAPIAccessToken}");
@@ -525,7 +525,7 @@ request.AddParameter("application/json", "{\"connection_id\": \"{yourConnectionI
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -545,8 +545,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/jobs/users-exports")
 .header("authorization", "Bearer {yourMgmtAPIAccessToken}")
 .header("content-type", "application/json")
@@ -554,7 +554,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/jobs/users-exp
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -575,8 +575,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtAPIAccessToken}",
 @"content-type": @"application/json" };
@@ -604,7 +604,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/jobs/users-exports",
@@ -628,8 +628,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"connection_id\": \"{yourConnectionId}\", \"format\": \"json\", \"limit\": 5, \"fields\": [{\"name\": \"email\"}, {\"name\": \"user_metadata.consent\"}]}"
@@ -643,7 +643,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -657,8 +657,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"connection_id\": \"{yourConnectionId}\", \"format\": \"json\", \"limit\": 5, \"fields\": [{\"name\": \"email\"}, {\"name\": \"user_metadata.consent\"}]}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {yourMgmtAPIAccessToken}",
@@ -692,26 +692,26 @@ dataTask.resume()
 
 ## Vérifier le statut de l’exportation
 
-Une fois que vous avez créé votre job pour exporter vos utilisateurs, vous pouvez vérifier son statut en utilisant le [point de terminaison Get a Job](/docs/api/management/v2#!/Jobs/get_jobs_by_id).
+Une fois que vous avez créé votre job pour exporter vos utilisateurs, vous pouvez vérifier son statut en utilisant le [point de terminaison Get a Job](/docs/fr-ca/api/management/v2#!/Jobs/get_jobs_by_id).
 
 Indiquez l’ID de la tâche (que vous avez reçu dans la réponse lors de la création de la tâche). Si vous utilisez l’exemple de demande ci-dessous, remplacez le paramètre fictif `{yourJobId}` par la valeur de l’ID.
 
 Permissions requises : `create:users`, `read:users`, `create:passwords_checking_job`
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/jobs/%7ByourJobId%7D' \
 --header 'authorization: Bearer {yourMgmtAPIAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/jobs/%7ByourJobId%7D");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtAPIAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -728,14 +728,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/jobs/%7ByourJobId%7D")
 .header("authorization", "Bearer {yourMgmtAPIAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -747,8 +747,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtAPIAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/jobs/%7ByourJobId%7D"]
@@ -769,7 +769,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/jobs/%7ByourJobId%7D",
@@ -791,8 +791,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtAPIAccessToken}" }
@@ -802,7 +802,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -814,8 +814,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtAPIAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtAPIAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/jobs/%7ByourJobId%7D")! as URL,
@@ -838,7 +838,7 @@ dataTask.resume()
 
 Vous devriez obtenir une réponse similaire à :
 
-```json
+```json lines
 {
   "type": "users_export",
   "status": "completed",

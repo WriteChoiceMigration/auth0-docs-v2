@@ -1,15 +1,15 @@
 ---
 title: "Composants de champ personnalisé"
 permalink: "custom-field-components"
+'description': "Apprenez à utiliser les composants personnalisés pour créer des champs qui nécessitent une logique ou une interface utilisateur spécifique en utilisant JavaScript, HTML et CSS."
 'og:title': "Composants de champ personnalisé"
 'og:description': "Apprenez à utiliser les composants personnalisés pour créer des champs qui nécessitent une logique ou une interface utilisateur spécifique en utilisant JavaScript, HTML et CSS."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Composants de champ personnalisé"
 'twitter:description': "Apprenez à utiliser les composants personnalisés pour créer des champs qui nécessitent une logique ou une interface utilisateur spécifique en utilisant JavaScript, HTML et CSS."
 ---
-# Composants de champ personnalisé
 
-<Frame>![Dashboard > Actions > Forms > Custom field](//images.ctfassets.net/cdy7uua7fh8z/3bZUItvx7VQG1AUuTah1V0/6ba3b7e9909d189f418cdc85a5ed53b9/custom-field.png)</Frame>
+<Frame>![Dashboard > Actions > Forms > Custom field](/images/fr-ca/cdy7uua7fh8z/3bZUItvx7VQG1AUuTah1V0/6ba3b7e9909d189f418cdc85a5ed53b9/custom-field.png)</Frame>
 
 En utilisant les champs personnalisés, vous pouvez étendre l’aspect et la convivialité de vos formulaires et ajouter une logique puissante avec JavaScript, HTML et CSS.
 
@@ -40,7 +40,7 @@ Les configurations de champ personnalisées sont :
 
 Ajoutez des paires clé-valeur à référencer dans le code source du champ personnalisé. Les paires clé-valeur peuvent inclure des [variables](/docs/fr-ca/customize/forms/variables) de champ de formulaire.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/6VEtliKd20ZF4MJKhvB5Z0/e1b3b5df4860d013d1e3eb79d1174b35/params.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/6VEtliKd20ZF4MJKhvB5Z0/e1b3b5df4860d013d1e3eb79d1174b35/params.png)</Frame>
 
 <Note>
 
@@ -52,7 +52,7 @@ Les valeurs des paramètres ne sont disponibles qu’après que le formulaire a 
 
 Dans l’exemple ci-dessous, les configurations de champ personnalisé sont remplies avec les paires clé-valeur `symbol=\{\{fields.symbol}}` et `separator=,`
 
-```javascript
+```javascript lines
 function CustomComponent(context) {
   const input = document.createElement('input');
   let mask = null;
@@ -89,11 +89,11 @@ function CustomComponent(context) {
 
 Ajoutez votre code Javascript au champ personnalisé.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/TMuY21ILSxBiBWv792cTB/97e9855145d7b52fc33ed60249e86642/source-code.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/TMuY21ILSxBiBWv792cTB/97e9855145d7b52fc33ed60249e86642/source-code.png)</Frame>
 
 **Exemple** :
 
-```javascript
+```javascript lines
 function customInput() {
   const input = document.createElement('input');
   input.type = 'text';
@@ -122,11 +122,11 @@ function customInput() {
 
 Par défaut, le champ personnalisé accepte n’importe quel format de valeur. Cependant, vous pouvez utiliser [JSON Schema](https://json-schema.org/) pour valider les valeurs côté serveur.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/5iQfwWq8Scx11s1fcSONvK/d7af907f575095d66558ee2631c73113/json-schema.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/5iQfwWq8Scx11s1fcSONvK/d7af907f575095d66558ee2631c73113/json-schema.png)</Frame>
 
 **Exemple** :
 
-```json
+```json lines
 {
   "type": "array",
   "items": {
@@ -142,7 +142,7 @@ Pour répondre à des exigences de validation complexes, vous pouvez utiliser un
 
 Ajoutez vos styles CSS au champ personnalisé.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/lC4w1THpVDD32Ke6IsXrl/e1371beeed09d5f12b6656d397c3b692/css.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/lC4w1THpVDD32Ke6IsXrl/e1371beeed09d5f12b6656d397c3b692/css.png)</Frame>
 
 ## Gestionnaires de champs personnalisés
 
@@ -163,7 +163,7 @@ Renvoie un élément HTML, une chaîne ou aucune valeur.
 </thead>
 <tbody>
 <tr>
-<td><code>params</code></td>
+<td>`params`</td>
 <td>
 <p>
 <em>Objet facultatif</em>. Paramètres pris à partir des réglages des champs personnalisés.
@@ -175,7 +175,7 @@ Renvoie un élément HTML, une chaîne ou aucune valeur.
 
 **Exemple** :
 
-```javascript
+```javascript lines
 const input = document.createElement('input');
 input.type = 'text';
 
@@ -199,7 +199,7 @@ Cette option est utile lorsque vous devez restituer la logique de l’interface 
 </thead>
 <tbody>
 <tr>
-<td><code>params</code></td>
+<td>`params`</td>
 <td>
 <p>
 <em>Objet facultatif</em>. Paramètres pris à partir des réglages des champs personnalisés.
@@ -223,7 +223,7 @@ Invoquée lorsque le formulaire doit obtenir la valeur du champ personnalisé un
 
 **Exemple** :
 
-```javascript
+```javascript lines
 function customTextInput() {
   const input = document.createElement('input');
   input.type = 'text';
@@ -258,7 +258,7 @@ Renvoie une liste d’URL que les garanties de formulaire auront fini de charger
 
 **Exemple** :
 
-```
+```javascript lines
 getScripts() {
   return ['https://example.com/script_a.js', 'https://example.com/script_b.js'];
 }
@@ -280,7 +280,7 @@ Définit une valeur pour le champ personnalisé actuel.
 
 **Exemple** :
 
-```javascript
+```javascript lines
 function customInput(context) {
   const input = document.createElement('input');
   input.type = 'text';
@@ -303,7 +303,7 @@ Renvoie un identifiant unique pour le champ personnalisé actuel.
 
 **Exemple** :
 
-```javascript
+```javascript lines
 function customInput(context) {
   const input = document.createElement('input');
   input.type = 'text';
@@ -333,7 +333,7 @@ Les valeurs des paramètres ne sont disponibles qu’après que le formulaire a 
 
 **Exemple** :
 
-```javascript
+```javascript lines
 function customInput(context) {
   // Accessing parameters on the root of the function does NOT work
   // const { defaultValue } = context.custom.getParams();
@@ -405,7 +405,7 @@ Définit une valeur pour le champ masqué.
 </thead>
 <tbody>
 <tr>
-<td><code>id</code></td>
+<td>`id`</td>
 <td>
 <p>
 <em>Chaîne</em>. L’ID du champ masqué.
@@ -413,7 +413,7 @@ Définit une valeur pour le champ masqué.
 </td>
 </tr>
 <tr>
-<td><code>value</code></td>
+<td>`value`</td>
 <td>
 <p>
 <em>Chaîne</em>. La valeur du champ masqué.
@@ -444,7 +444,7 @@ Renvoie une instance pour le champ spécifié.
 </thead>
 <tbody>
 <tr>
-<td><code>id</code></td>
+<td>`id`</td>
 <td>
 <p>
 <em>Chaîne</em>. La valeur de l’ID du champ.
@@ -456,7 +456,7 @@ Renvoie une instance pour le champ spécifié.
 
 **Exemple** :
 
-```javascript
+```javascript lines
 const fullName = context.form.getField('full_name');
 const fullNameValue = fullName.getValue();
 console.log(fullNameValue); // John Doe
@@ -476,11 +476,11 @@ Les sections suivantes offrent des exemples de champs personnalisées que vous p
 
 Un champ personnalisé qui renvoie une valeur à partir d’une plage prédéterminée.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/4afLZWM9MAXXti4F3Cuc3D/c6c6d33c650b7b9fde3de011feb82192/range-input-custom-field.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/4afLZWM9MAXXti4F3Cuc3D/c6c6d33c650b7b9fde3de011feb82192/range-input-custom-field.png)</Frame>
 
 **Code source** :
 
-```javascript
+```javascript lines
 function rangeInput() {
   const input = document.createElement('input');
   input.type = 'range';
@@ -504,11 +504,11 @@ function rangeInput() {
 
 Un champ personnalisé qui renvoie une valeur hexadécimale de couleur.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/5HAWLZJmCRlyl3dIrgzgWv/c602ccc1662d40d03898dcaa94d213dc/color-input-custom-field.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/5HAWLZJmCRlyl3dIrgzgWv/c602ccc1662d40d03898dcaa94d213dc/color-input-custom-field.png)</Frame>
 
 **Code source** :
 
-```javascript
+```javascript lines
 function colorInput() {
   const input = document.createElement('input');
   input.type = 'color';
@@ -530,11 +530,11 @@ function colorInput() {
 
 Un champ personnalisé qui renvoie une valeur de remplissage automatique à l’aide d’une API tierce.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/l0lvyJgPLrHrLT8rpR6IF/800868d966ef5b64effbb6a3b0cabf94/autocomplete-api.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/l0lvyJgPLrHrLT8rpR6IF/800868d966ef5b64effbb6a3b0cabf94/autocomplete-api.png)</Frame>
 
 **Code source** :
 
-```javascript
+```javascript lines
 function textInputWithAutocomplete(context) {
   const input = document.createElement('input');
   input.type = 'text';
@@ -569,11 +569,11 @@ function textInputWithAutocomplete(context) {
 
 Champ personnalisé qui renvoie une valeur à partir d’une liste déroulante dynamique à l’aide d’une API tierce.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/6gwOMuZaYi3dh0bkrxnKy9/33172d00e3933c74954a8ac3befaff7f/dropdowncustomfield.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/6gwOMuZaYi3dh0bkrxnKy9/33172d00e3933c74954a8ac3befaff7f/dropdowncustomfield.png)</Frame>
 
 **Code source** :
 
-```javascript
+```javascript lines
 function dynamicDropdown() {
   const select = document.createElement('select');
   select.classList.add('af-stringField-input');
@@ -621,11 +621,11 @@ function dynamicDropdown() {
 
 Un champ personnalisé qui permet aux utilisateurs d’ajouter des champs supplémentaires.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/7xM41qqb1zYjLAPG16wxGc/a33a3dd624222643e3f967ff35acbbac/Screenshot_2024-09-12_at_09.32.35.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/7xM41qqb1zYjLAPG16wxGc/a33a3dd624222643e3f967ff35acbbac/Screenshot_2024-09-12_at_09.32.35.png)</Frame>
 
 **Code source** :
 
-```javascript
+```javascript lines
 function DynamicInputs(context) {
   const DEFAULT_INITIAL_INPUTS = 2;
   const DEFAULT_PLACEHOLDER = 'jane.doe@example.com';
@@ -765,7 +765,7 @@ function DynamicInputs(context) {
 
 **Code CSS :**
 
-```
+```csharp lines
 .af-button.af-dynamic-input-remove-button {
   width: 48px;
   color: var(--button-font-color);

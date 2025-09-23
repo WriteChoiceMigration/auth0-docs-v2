@@ -1,19 +1,19 @@
 ---
 title: "Create an Event Stream"
 permalink: "create-an-event-stream"
+'description': "Learn how you can create event streams using AWS EventBridge or webhooks. "
 'og:title': "Create an Event Stream"
 'og:description': "Learn how you can create event streams using AWS EventBridge or webhooks. "
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Create an Event Stream"
 'twitter:description': "Learn how you can create event streams using AWS EventBridge or webhooks. "
 ---
-# Create an Event Stream
 
 <Warning>
 
-**Events are currently available in** [Early Access](/docs/troubleshoot/product-lifecycle/product-release-stages). By using this feature, you agree to the applicable Free Trial terms in Okta’s [Master Subscription Agreement](https://www.okta.com/legal/?_gl=1*agihqh*_gcl_au*NjM2NjA1MDg4LjE3NTM5ODE4NjY.*_ga*MTgyNDA4MjM2Ny4xNzE1MTAyMjQy*_ga_QKMSDV5369*czE3NTQ0NzQ3NTAkbzM1MyRnMSR0MTc1NDQ3NjU5MCRqNiRsMCRoMA..).
+**Events are currently available in** [Early Access](/docs/fr-ca/troubleshoot/product-lifecycle/product-release-stages). By using this feature, you agree to the applicable Free Trial terms in Okta’s [Master Subscription Agreement](https://www.okta.com/legal/?_gl=1*agihqh*_gcl_au*NjM2NjA1MDg4LjE3NTM5ODE4NjY.*_ga*MTgyNDA4MjM2Ny4xNzE1MTAyMjQy*_ga_QKMSDV5369*czE3NTQ0NzQ3NTAkbzM1MyRnMSR0MTc1NDQ3NjU5MCRqNiRsMCRoMA..).
 
-To learn more about Auth0's product release cycle, review [Product Release Stages](/docs/troubleshoot/product-lifecycle/product-release-stages).
+To learn more about Auth0's product release cycle, review [Product Release Stages](/docs/fr-ca/troubleshoot/product-lifecycle/product-release-stages).
 
 </Warning>
 
@@ -26,7 +26,7 @@ You can create an event stream using either AWS EventBridge or webhooks. The sec
 
 ## Access Management API (optional)
 
-Event streams can either be provisioned using the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 dashboard</Tooltip> or the [Auth0 Management API](/docs/api/management/v2). If using the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>, before you can set up an event stream, you need to create a machine-to-machine (M2M) application and authenticate with a Management API token. For more information, review [Management API Access Tokens](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens).
+Event streams can either be provisioned using the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 dashboard</Tooltip> or the [Auth0 Management API](/docs/fr-ca/api/management/v2). If using the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>, before you can set up an event stream, you need to create a machine-to-machine (M2M) application and authenticate with a Management API token. For more information, review [Management API Access Tokens](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens).
 
 1. Navigate to [Dashboard > Applications > Applications](https://manage.auth0.com/#/applications) and select **Create Application**.
 2. Enter a descriptive name for your application and choose **Machine to Machine Applications**. Then, select **Create**.
@@ -68,13 +68,13 @@ Before setting up an event stream, you need to identify the [event types](/docs/
 
 This example uses the Auth0 CLI to create an event stream that subscribes to the `user.created` event, which triggers whenever a new user is registered in your tenant.
 
-```
+``` lines
 auth0 events create --name ng-demo-eventbridge --type eventbridge --subscriptions "user.created" --configuration '{"aws_account_id":"<your-aws-account-id>","aws_region":"<your-aws-region>"}'
 ```
 
 If successful, this call returns the following JSON with your event stream `id`. New event streams are enabled by default.
 
-```json
+```json lines
 {
   "id": "est_8of6RXoM1997qikH7NS11h",
   "status": "enabled",
@@ -150,7 +150,7 @@ Ensure you have the following installed to properly write your webhook handler:
 2. Install `dotenv` to your root directory to use a `.env` file for storing environment variables.
 3. Create a `webhook.js` fle to receive the `user.created` event and store it in a database.
 
-   ```javascript
+   ```javascript lines
    const express = require('express');
    const app = express();
 
@@ -232,7 +232,7 @@ Ensure you have the following installed to properly write your webhook handler:
    
 4. In the root of your project, create a `.env` file and add your API token using:
 
-   ```
+   ``` lines
    API_TOKEN=`openssl rand -hex 32`
    echo "API_TOKEN=$API_TOKEN" > .env
    ```
@@ -242,7 +242,7 @@ Ensure you have the following installed to properly write your webhook handler:
    
 5. Start your server:
 
-   ```
+   ``` lines
    node webhook.js
    ```
 
@@ -251,7 +251,7 @@ Ensure you have the following installed to properly write your webhook handler:
    
 6. To test the Webhook, expose your webhook handler using a tool like ngrok:
 
-   ```
+   ``` lines
    ngrok http 3000
    ```
 
@@ -261,7 +261,7 @@ Ensure you have the following installed to properly write your webhook handler:
 
    This provides a public URL for your local webhook handler, for example:
 
-   ```
+   ``` lines
    http://localhost:3000
    ```
 
@@ -279,7 +279,7 @@ Before setting up an event stream, you need to identify the [event types](/docs/
 
 This example uses the Auth0 CLI to create an event stream that subscribes to the `user.created` event, which triggers whenever a new user is registered in your tenant. The event data is then forwarded to a webhook endpoint for further processing.
 
-```
+``` lines
 source .env # Make sure you are in the webhook directory where you created your .env file
 WEBHOOK_URL="<ngrok URL>/webhook"
 
@@ -288,7 +288,7 @@ auth0 events create -n my-event1 -t webhook -s "user.created" -c '{"webhook_endp
 
 If successful, this returns the following JSON with your event stream `id`. New event streams are enabled by default.
 
-```json
+```json lines
 {
   "id": "est_8of6RXoM1997qikH7NS11h",
   "status": "enabled",
@@ -316,7 +316,7 @@ If successful, this returns the following JSON with your event stream `id`. New 
 
 After you create an event stream, you can verify that the event stream exists using the following command:
 
-```
+``` lines
 auth0 events show <EVENT_STREAM_ID>
 ```
 

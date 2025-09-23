@@ -1,13 +1,13 @@
 ---
 title: "Lock.Android: Champs personnalisés à l’inscription"
 permalink: "lock-android-custom-fields-at-signup"
+'description': "Ajout de champs supplémentaires au moment de l’inscription avec Lock.Android"
 'og:title': "Lock.Android: Champs personnalisés à l’inscription"
 'og:description': "Ajout de champs supplémentaires au moment de l’inscription avec Lock.Android"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Lock.Android: Champs personnalisés à l’inscription"
 'twitter:description': "Ajout de champs supplémentaires au moment de l’inscription avec Lock.Android"
 ---
-# Lock.Android: Champs personnalisés à l’inscription
 
 **Lock.Android** vous permet de spécifier des champs supplémentaires que l’utilisateur doit remplir avant de créer un nouveau compte. Les champs supplémentaires seront affichés sur un deuxième écran après que l’utilisateur a complété les champs de base (courriel, nom d’utilisateur, mot de passe).
 
@@ -24,7 +24,7 @@ In addition, you can specify where the field is going to be stored on the user�
 
 Vous pouvez également créer des champs qui ne seront pas présentés à l’utilisateur, mais qui peuvent être utilisés pour inclure des métadonnées supplémentaires de manière dynamique après l’inscription.
 
-```javascript
+```kotlin lines
 // Regular field
 val nameField = CustomField(R.drawable.ic_name, FieldType.TYPE_NAME, "first_name", R.string.hint_first_name, CustomField.Storage.PROFILE_ROOT)
 
@@ -40,7 +40,7 @@ Répétez les étapes ci-dessus autant de fois que nécessaire pour les champs d
 
 Passez la liste des champs personnalisés à l’instance Lock lors de sa création, en utilisant la méthode `withSignUpFields()`.
 
-```
+```kotlin lines
 val lock = Lock.newBuilder(auth0, callback)
               .withSignUpFields(customFields)
               //...
@@ -69,4 +69,4 @@ Options disponibles :
 * PROFILE_ROOT
 * USER_METADATA (défaut)
 
-Pour que les champs soient enregistrés au niveau de base du profil de l’utilisateur, leurs clés doivent correspondre à celles énumérées dans la [Documentation des points de terminaison](/docs/api/authentication#signup).
+Pour que les champs soient enregistrés au niveau de base du profil de l’utilisateur, leurs clés doivent correspondre à celles énumérées dans la [Documentation des points de terminaison](/docs/fr-ca/api/authentication#signup).

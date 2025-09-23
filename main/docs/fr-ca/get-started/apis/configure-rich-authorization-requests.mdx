@@ -1,13 +1,13 @@
 ---
 title: "Configurer les Demandes d’autorisation enrichies (RAR)"
 permalink: "configure-rich-authorization-requests"
+'description': "Découvrez comment configurer les demandes d’autorisation enrichies (RAR) pour une API."
 'og:title': "Configurer les Demandes d’autorisation enrichies (RAR)"
 'og:description': "Découvrez comment configurer les demandes d’autorisation enrichies (RAR) pour une API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer les Demandes d’autorisation enrichies (RAR)"
 'twitter:description': "Découvrez comment configurer les demandes d’autorisation enrichies (RAR) pour une API."
 ---
-# Configurer les Demandes d’autorisation enrichies (RAR)
 
 <Note>
 
@@ -20,7 +20,7 @@ Pour utiliser les fonctionnalités de l’identité très réglementée (HRI), v
 Avant de configurer les RAR pour une API, il faut d’abord configurer :
 
 * Un [domaine personnalisé](/docs/fr-ca/customize/custom-domains).
-* Un modèle de [pages de connexion universelles personnalisées](/docs/fr-ca/customize/login-pages/universal-login/customize-templates). Consultez le document [Modèles de pages API](/docs/customize/universal-login-pages/universal-login-page-templates#page-templates-api) pour savoir comment personnaliser un modèle de page de connexion universelle à l’aide du <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>.
+* Un modèle de [pages de connexion universelles personnalisées](/docs/fr-ca/customize/login-pages/universal-login/customize-templates). Consultez le document [Modèles de pages API](/docs/fr-ca/customize/universal-login-pages/universal-login-page-templates#page-templates-api) pour savoir comment personnaliser un modèle de page de connexion universelle à l’aide du <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>.
 
 ## Configurer le serveur de ressources
 
@@ -36,8 +36,8 @@ La politique de consentement par défaut est `null` ou non définie. Auth0 prend
 <tr>
 <th><strong>Est-ce une demande d’autorisation riche?</strong></th>
 <th><strong>MFA requise?</strong></th>
-<th><strong><code>null</code> ou non défini (par défaut)</strong></th>
-<th><code>transactional-authorization-with-mfa</code></th>
+<th><strong>`null` ou non défini (par défaut)</strong></th>
+<th>`transactional-authorization-with-mfa`</th>
 </tr>
 </thead>
 <tbody>
@@ -50,19 +50,19 @@ La politique de consentement par défaut est `null` ou non définie. Auth0 prend
 <tr>
 <td>Oui</td>
 <td>Non</td>
-<td>La demande d’autorisation est rejetée avec <code>invalid_request</code>.</td>
+<td>La demande d’autorisation est rejetée avec `invalid_request`.</td>
 <td>Le consentement personnalisé est affiché indépendamment des accès précédemment accordés.</td>
 </tr>
 <tr>
 <td>Oui</td>
 <td>Oui, avec un facteur d’authentification qui n’est pas une notification poussée</td>
-<td>La demande d’autorisation est rejetée avec <code>invalid_request</code>.</td>
+<td>La demande d’autorisation est rejetée avec `invalid_request`.</td>
 <td>Le consentement personnalisé est affiché une fois que l’utilisateur a répondu aux défis MFA.</td>
 </tr>
 <tr>
 <td>Oui</td>
 <td>Oui, avec un facteur de notification poussée</td>
-<td>La demande d’autorisation est rejetée avec <code>invalid_request</code>.</td>
+<td>La demande d’autorisation est rejetée avec `invalid_request`.</td>
 <td>Aucun consentement n’est affiché. Le consentement est traité dans l’application mobile qui a reçu le défi de notification poussée.</td>
 </tr>
 </tbody>
@@ -77,13 +77,13 @@ Définissez la politique de consentement dans vos paramètres d’API à l’aid
 3. Sous **Paramètres d’accès**, sélectionnez **Autorisation de transaction avec la MFA**.
 4. Enregistrez vos modifications.
 
-<Frame>![Dashboard > Applications > APIs > Settings > Access Settings](//images.ctfassets.net/cdy7uua7fh8z/3gr8Sf98gh8CUkjnlodNk/5262ab6330b4284087a7f87a719efd16/Access_Settings_-_API.png)</Frame>
+<Frame>![Dashboard > Applications > APIs > Settings > Access Settings](/images/fr-ca/cdy7uua7fh8z/3gr8Sf98gh8CUkjnlodNk/5262ab6330b4284087a7f87a719efd16/Access_Settings_-_API.png)</Frame>
 
 </Tab><Tab title="Management API">
 
 La demande PATCH suivante envoyée au point de terminaison [Mettre à jour un serveur de ressources](https://auth0.com/docs/api/management/v2/resource-servers/patch-resource-servers-by-id) de Management API définit la politique de consentement avec la valeur `transactional-authorization-with-mfa` pour un serveur de ressources existant :
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://$tenant/api/v2/resource-servers/$resource-server-id' \ --header 'Authorization: Bearer $management_access_token' \ --header 'Content-Type: application/json' \ --data-raw '{ "consent_policy": "standard" }'
 ```
 
@@ -118,7 +118,7 @@ Vous pouvez ajouter des `authorization_details` dans Auth0 Dashboard.
 
 La demande PATCH suivante envoyée au point de terminaison [Mettre à jour un serveur de ressources](https://auth0.com/docs/api/management/v2/resource-servers/patch-resource-servers-by-id) de Management API enregistre `payment_initiation` et `money_transfer` comme types de `authorization_details` pour un serveur de ressources existant :
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://$tenant/api/v2/resource-servers/$resource-server-id' \
   --header 'Authorization: Bearer $management_access_token' \
   --header 'Content-Type: application/json' \
@@ -133,7 +133,7 @@ curl --location --request PATCH 'https://$tenant/api/v2/resource-servers/$resour
 
 La requête POST suivante crée et configure un serveur de ressources pour recevoir des demandes RAR :
 
-```bash
+```bash lines
 curl --location --request POST 'https://$tenant/api/v2/resource-servers' \
   --header 'Authorization: Bearer $management_access_token' \
   --header 'Content-Type: application/json' \
@@ -151,7 +151,7 @@ Pour afficher les détails de l’autorisation d’une demande RAR dans l’écr
 
 La demande PUT suivante configure les éléments partiels du consentement personnalisé :
 
-```bash
+```bash lines
 curl --location --request PUT "https://$tenant/api/v2/prompts/customized-consent/partials" \
     --header "Authorization: Bearer $management_access_token" \
     --header "Content-Type: application/json" \

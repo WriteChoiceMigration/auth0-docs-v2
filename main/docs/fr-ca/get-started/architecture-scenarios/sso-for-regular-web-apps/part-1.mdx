@@ -1,13 +1,13 @@
 ---
 title: "Présentation de la solution (applications Web + SSO)"
 permalink: "part-1"
+'description': "Vue d’ensemble de la solution pour le scénario des applications Web classiques."
 'og:title': "Présentation de la solution (applications Web + SSO)"
 'og:description': "Vue d’ensemble de la solution pour le scénario des applications Web classiques."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Présentation de la solution (applications Web + SSO)"
 'twitter:description': "Vue d’ensemble de la solution pour le scénario des applications Web classiques."
 ---
-# Présentation de la solution (applications Web + SSO)
 
 Dans cette section, nous aborderons la solution que nous mettons en œuvre, y compris les détails sur la gestion des identités, les protocoles à utiliser et le flux d'authentification requis.
 
@@ -57,7 +57,7 @@ Le flux de connexion est le suivant :
 4. L’application envoie le code d’autorisation à Auth0, ainsi que les informations d’identification de l’application (client_id et client_secret), et demande un jeton.
 5. Auth0 authentifie l’application (à l’aide de l’identifiant et du secret du client) et valide le code d’autorisation. S’il est valide, Auth0 répond par un jeton d’identification.
 
-<Frame>![undefined](//images.ctfassets.net/cdy7uua7fh8z/5qO4QJH0YW34apsypLXnIk/e27a8cf1469c00d948cc476b11b54300/authz-code-flow.png)</Frame>
+<Frame>![undefined](/images/fr-ca/cdy7uua7fh8z/5qO4QJH0YW34apsypLXnIk/e27a8cf1469c00d948cc476b11b54300/authz-code-flow.png)</Frame>
 
 ### Mode de réponse à l’envoi d’un formulaire Une autre option est d’utiliser le __OAuth 2.0 Form Post Response Mode__ avec `response_type=id_token&response_mode=form_post`. En raison du paramètre de requête `response_type=id_token`, la réponse contient directement le jeton d’ID, au lieu du code d’autorisation, tandis que le paramètre `response_mode=form_post` encode le jeton d’ID avec le reste des paramètres de la réponse d’autorisation en tant que valeurs de formulaire HTML qui sont soumises automatiquement dans le User Agent. De cette façon, vous pouvez avoir un flux d’authentification optimisé (pas besoin d’échanger le code pour un jeton d’ID), mais vous devez vous assurer qu’il est pris en charge par la technologie que vous utilisez pour mettre en œuvre votre application (le logiciel médiateur ASP .NET Core le prend en charge). Pour plus de détails, consultez la [spécification Mode de réponse à l’envoi d’un formulaire OAuth 2.0] (https://openid.net/specs/oauth-v2-form-post-response-mode-1_0.html). :::
 

@@ -1,13 +1,13 @@
 ---
 title: "Personnaliser les messages texte et vocaux de l’authentification multifacteur (MFA)"
 permalink: "customize-sms-or-voice-messages"
+'description': "Apprenez à personnaliser les SMS et les messages vocaux envoyés par Auth0 lors de l’inscription et de la vérification."
 'og:title': "Personnaliser les messages texte et vocaux de l’authentification multifacteur (MFA)"
 'og:description': "Apprenez à personnaliser les SMS et les messages vocaux envoyés par Auth0 lors de l’inscription et de la vérification."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Personnaliser les messages texte et vocaux de l’authentification multifacteur (MFA)"
 'twitter:description': "Apprenez à personnaliser les SMS et les messages vocaux envoyés par Auth0 lors de l’inscription et de la vérification."
 ---
-# Personnaliser les messages texte et vocaux de l’authentification multifacteur (MFA)
 
 Vous pouvez personnaliser les SMS et les messages vocaux envoyés par Auth0 lors de l’inscription (lorsque vous associez un appareil à Guardian) et la vérification (lorsqu’un message d’authentification est envoyé à l’appareil) :
 
@@ -31,23 +31,23 @@ La syntaxe [Liquid](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)
 </thead>
 <tbody>
 <tr>
-<td><code>message_type</code></td>
-<td>Indique quel type de message est envoyé ; <code>sms</code> ou <code>voice</code>.</td>
+<td>`message_type`</td>
+<td>Indique quel type de message est envoyé ; `sms` ou `voice`.</td>
 </tr>
 <tr>
-<td><code>code</code></td>
-<td>Code d’inscription/vérification. Lors de l’envoi de messages vocaux. Les valeurs des variables sont séparées par des points entre les chiffres (<code>1.2.3.4.5</code>) afin qu’elles puissent être prononcées avec précision par les fournisseurs de messagerie vocale.</td>
+<td>`code`</td>
+<td>Code d’inscription/vérification. Lors de l’envoi de messages vocaux. Les valeurs des variables sont séparées par des points entre les chiffres (`1.2.3.4.5`) afin qu’elles puissent être prononcées avec précision par les fournisseurs de messagerie vocale.</td>
 </tr>
 <tr>
-<td><code>locale</code></td>
+<td>`locale`</td>
 <td>Pour la connexion universelle ou l’API MFA. Désigne la langue.</td>
 </tr>
 <tr>
-<td><code>requestInfo.lang</code></td>
-<td>Pour la localisation de la connexion classique. En-tête de langue acceptée par le navigateur. Par exemple : <code>es-AR,es;q=8.0</code>, <code>en-US,en</code>.</td>
+<td>`requestInfo.lang`</td>
+<td>Pour la localisation de la connexion classique. En-tête de langue acceptée par le navigateur. Par exemple : `es-AR,es;q=8.0`, `en-US,en`.</td>
 </tr>
 <tr>
-<td><code>tenant.friendlyName</code></td>
+<td>`tenant.friendlyName`</td>
 <td>Le <strong>Nom convivial</strong> défini dans <strong>Dashboard &gt; Tenant Settings (Paramètres du locataire)</strong>.</td>
 </tr>
 </tbody>
@@ -55,7 +55,7 @@ La syntaxe [Liquid](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)
 
 ## Exemple
 
-```json
+```json lines
 {% if message_type == "voice" %}
   {% if locale contains "fr" %}
   Bonjour, vous avez demandé à recevoir un code de vérification pour vous enregister avec {{tenant.friendly_name}}. Votre code est: {{pause}} {{code}}. Je répète, votre code est: {{pause}}{{code}}.
@@ -77,7 +77,7 @@ La syntaxe [Liquid](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)
 
 ## Localisation (traduction)
 
-Les points de terminaison supportent l’en-tête `x-request-language` et vous pouvez l’utiliser pour envoyer le lieu. Consultez [Prise en charge de plusieurs langues](/docs/connections/passwordless/guides/sms-otp#multi-language-support) pour plus de détails.
+Les points de terminaison supportent l’en-tête `x-request-language` et vous pouvez l’utiliser pour envoyer le lieu. Consultez [Prise en charge de plusieurs langues](/docs/fr-ca/connections/passwordless/guides/sms-otp#multi-language-support) pour plus de détails.
 
 Cette fonction est également prise en charge dans les points de terminaison API <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip> (`POST /mfa/associate` et `POST /mfa/challenge`). Lorsqu’il est envoyé, ce paramètre régional sera disponible dans la variable `locale` du modèle voix /SMS MFA.
 

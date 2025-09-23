@@ -1,13 +1,13 @@
 ---
 title: "Créer des rôles"
 permalink: "create-roles"
+'description': "Découvrez comment créer un rôle à l’aide d’Auth0 Dashboard ou de Management API."
 'og:title': "Créer des rôles"
 'og:description': "Découvrez comment créer un rôle à l’aide d’Auth0 Dashboard ou de Management API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Créer des rôles"
 'twitter:description': "Découvrez comment créer un rôle à l’aide d’Auth0 Dashboard ou de Management API."
 ---
-# Créer des rôles
 
 Vous pouvez créer des [rôles](/docs/fr-ca/manage-users/access-control/rbac) à l'aide d'Auth0 Dashboard ou de Management API. Les rôles peuvent être utilisés avec l'ensemble de fonctionnalités API Authorization Core.
 
@@ -27,15 +27,15 @@ Vous pouvez créer des [rôles](/docs/fr-ca/manage-users/access-control/rbac) à
 Faites un appel `POST` au [point de terminaison Créer un rôle](https://auth0.com/docs/api/management/v2#!/Roles/post_roles). Assurez-vous de remplacer les valeurs des paramètres fictifs `MGMT_API_ACCESS_TOKEN`, `ROLE_NAME` et `ROLE_DESC` par votre jeton d’accès à Management API, le nom et la description de votre rôle, respectivement.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/roles' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "name": "ROLE_NAME", "description": "ROLE_DESC" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/roles");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -45,7 +45,7 @@ request.AddParameter("application/json", "{ \"name\": \"ROLE_NAME\", \"descripti
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -66,8 +66,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/roles")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -76,7 +76,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/roles")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -93,8 +93,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
@@ -121,7 +121,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/roles",
@@ -146,8 +146,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"name\": \"ROLE_NAME\", \"description\": \"ROLE_DESC\" }"
@@ -162,7 +162,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -177,8 +177,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"name\": \"ROLE_NAME\", \"description\": \"ROLE_DESC\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -217,15 +217,15 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><a href="https://auth0.com/docs/api/management/v2/tokens">Jeton d’accès à Management API</a> avec la permission <code>create:roles</code>.</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td><a href="https://auth0.com/docs/api/management/v2/tokens">Jeton d’accès à Management API</a> avec la permission `create:roles`.</td>
 </tr>
 <tr>
-<td><code>ROLE_NAME</code></td>
+<td>`ROLE_NAME`</td>
 <td>Nom du rôle que vous souhaitez créer.</td>
 </tr>
 <tr>
-<td><code>ROLE_DESC</code></td>
+<td>`ROLE_DESC`</td>
 <td>Description conviviale du rôle.</td>
 </tr>
 </tbody>

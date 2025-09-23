@@ -1,13 +1,13 @@
 ---
 title: "Flux de code d’autorisation avec les demandes d’autorisation sécurisées par JWT (JAR)"
 permalink: "authorization-code-flow-with-jar"
+'description': "Apprenez à utiliser les demandes d’autorisation sécurisées par JWT (JAR) avec le flux de code d’autorisation."
 'og:title': "Flux de code d’autorisation avec les demandes d’autorisation sécurisées par JWT (JAR)"
 'og:description': "Apprenez à utiliser les demandes d’autorisation sécurisées par JWT (JAR) avec le flux de code d’autorisation."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Flux de code d’autorisation avec les demandes d’autorisation sécurisées par JWT (JAR)"
 'twitter:description': "Apprenez à utiliser les demandes d’autorisation sécurisées par JWT (JAR) avec le flux de code d’autorisation."
 ---
-# Flux de code d’autorisation avec les demandes d’autorisation sécurisées par JWT (JAR)
 
 <Note>
 
@@ -63,7 +63,7 @@ De plus, le JWT peut contenir les demandes facultatives suivantes :
 
 L’exemple de code JavaScript suivant montre comment générer et signer un JWT en utilisant JavaScript [bibliothèque jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken?activeTab=readme). Il produit le JWT généré dans la console :
 
-```javascript
+```javascript lines
 const jwt = require('jsonwebtoken');
 const crypto = require("crypto");
 const fs = require('fs');
@@ -98,7 +98,7 @@ console.log(requestObject);
 
 Pour appeler le point de terminaison `/authorize` à l’aide de votre JWT signé, ouvrez une nouvelle fenêtre de navigateur. Transmettez votre ID client comme paramètre `client_id` et le JWT signé et encodé en URL comme paramètre `request`.
 
-```
+``` lines
 # MacOS
 open "https://your_tenant.auth0.com/authorize?client_id=[YOUR CLIENT ID]&request=[URL ENCODED JWT]"
 

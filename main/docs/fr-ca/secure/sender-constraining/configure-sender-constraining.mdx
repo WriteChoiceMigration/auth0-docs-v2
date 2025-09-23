@@ -1,13 +1,13 @@
 ---
 title: "Configurer la restriction de l’expéditeur"
 permalink: "configure-sender-constraining"
+'description': "Aperçu de la façon de configurer la restriction de l’expéditeur pour votre locataire Auth0."
 'og:title': "Configurer la restriction de l’expéditeur"
 'og:description': "Aperçu de la façon de configurer la restriction de l’expéditeur pour votre locataire Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer la restriction de l’expéditeur"
 'twitter:description': "Aperçu de la façon de configurer la restriction de l’expéditeur pour votre locataire Auth0."
 ---
-# Configurer la restriction de l’expéditeur
 
 <Note>
 
@@ -26,7 +26,7 @@ L’identité très réglementée offre des capacités de restriction de jeton v
 
 <Note>
 
-Seuls les [clients confidentiels](/docs/get-started/applications/confidential-and-public-applications#confidential-applications) prennent en charge la liaison de jeton pour le protocole mTLS.
+Seuls les [clients confidentiels](/docs/fr-ca/get-started/applications/confidential-and-public-applications#confidential-applications) prennent en charge la liaison de jeton pour le protocole mTLS.
 
 </Note>
 
@@ -34,7 +34,7 @@ Après avoir [configuré votre application pour mTLS](/docs/fr-ca/get-started/ap
 
 L’exemple de code suivant représente la charge utile d’un jeton d’accès lié à un certificat :
 
-```json
+```json lines
 {
   "iss": "https://server.example.com",
   "sub": "ty.webb@example.com",
@@ -54,7 +54,7 @@ Pour vérifier que l’application est autorisée à utiliser le jeton d’accè
 
 Si l’application n’envoie pas le certificat du client dans la requête, ou si l’empreinte du certificat du client ne correspond pas, le serveur de ressources rejette la requête en utilisant un code d’état `HTTP 401` et un code d’erreur `invalid_token`.
 
-Le tableau suivant indique si les jetons d’accès émis sont limités par l’expéditeur en fonction de la configuration mTLS pour l’[application](/docs/get-started/applications/configure-mtls/configure-mtls-for-a-client) (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OAuth</Tooltip> client ) et l’[API](/docs/get-started/applications/configure-mtls/set-up-resource-server-for-token-binding) (serveur de ressources OAuth). Le tableau couvre les scénarios suivants :
+Le tableau suivant indique si les jetons d’accès émis sont limités par l’expéditeur en fonction de la configuration mTLS pour l’[application](/docs/fr-ca/get-started/applications/configure-mtls/configure-mtls-for-a-client) (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OAuth</Tooltip> client ) et l’[API](/docs/fr-ca/get-started/applications/configure-mtls/set-up-resource-server-for-token-binding) (serveur de ressources OAuth). Le tableau couvre les scénarios suivants :
 
 * Le type d'<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">audience</Tooltip> demandée : `userinfo` uniquement ou une audience personnalisée pouvant inclure `userinfo`.
 * Si la contrainte d’expéditeur est `required` (requise) par le client.
@@ -65,5 +65,5 @@ Le tableau suivant indique si les jetons d’accès émis sont limités par l’
   + `required` : La contrainte d’expéditeur est requise pour le serveur de ressources, ce qui signifie que les jetons d’accès doivent être soumis à une contrainte d’expéditeur pour une application. Exige une méthode de contrainte d’expéditeur.
 * Si l’application cliente a envoyé une assertion de preuve de possession dans la demande de jeton.
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/3NRnK4mzW0hBosq9ovUdw1/a7307aad5ba79ad4c1dd964e5a1447ff/Screenshot_2024-05-28_at_11.56.40_AM.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/3NRnK4mzW0hBosq9ovUdw1/a7307aad5ba79ad4c1dd964e5a1447ff/Screenshot_2024-05-28_at_11.56.40_AM.png)</Frame>
 

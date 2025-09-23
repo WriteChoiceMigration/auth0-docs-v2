@@ -1,13 +1,13 @@
 ---
 title: "Flux de code d’autorisation avec OIDC"
 permalink: "oidc-adoption-auth-code-flow"
+'description': "Découvrez comment le pipeline conforme à l’OIDC affecte le Flux de code d’autorisation."
 'og:title': "Flux de code d’autorisation avec OIDC"
 'og:description': "Découvrez comment le pipeline conforme à l’OIDC affecte le Flux de code d’autorisation."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Flux de code d’autorisation avec OIDC"
 'twitter:description': "Découvrez comment le pipeline conforme à l’OIDC affecte le Flux de code d’autorisation."
 ---
-# Flux de code d’autorisation avec OIDC
 
 Le [Flux de code d’autorisation](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow) est utilisé par les applications côté serveur capables de stocker des secrets en toute sécurité, ou par les applications natives via le [Flux de code d’autorisation avec PKCE](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce).
 
@@ -24,7 +24,7 @@ Le pipeline conforme à l’OIDC affecte le flux de code d’autorisation dans l
 
 ### Comportement ancien
 
-```
+``` lines
 GET /authorize?
     response_type=code
     &scope=openid email favorite_color offline_access
@@ -38,7 +38,7 @@ Le paramètre `device` n’est nécessaire que si vous demandez un jeton d’act
 
 ### Conformité OIDC
 
-```
+``` lines
 GET /authorize?
     response_type=code
     &scope=openid email offline_access
@@ -56,7 +56,7 @@ GET /authorize?
 
 La réponse d’Auth0 est identique dans les deux pipelines :
 
-```
+``` lines
 HTTP/1.1 302 Found
 Location: https://app.example.com/callback?
     code=SplxlOBeZQQYbYS6WxSbIA
@@ -68,7 +68,7 @@ Location: https://app.example.com/callback?
 Un code d’autorisation peut être échangé de la même manière dans les deux pipelines :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -77,8 +77,8 @@ curl --request POST \
 --data client_secret=YOUR_CLIENT_SECRET \
 --data code=YOUR_AUTHORIZATION_CODE \
 --data 'redirect_uri={https://yourApp/callback}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -86,7 +86,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=authorizat
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -105,15 +105,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=authorization_code&client_id={yourClientId}&client_secret=YOUR_CLIENT_SECRET&code=YOUR_AUTHORIZATION_CODE&redirect_uri={https://yourApp/callback}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -132,8 +132,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=authorization_code" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -160,7 +160,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -183,8 +183,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=authorization_code&client_id={yourClientId}&client_secret=YOUR_CLIENT_SECRET&code=YOUR_AUTHORIZATION_CODE&redirect_uri={https://yourApp/callback}"
@@ -195,7 +195,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -208,8 +208,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=authorization_code&client_id={yourClientId}&client_secret=YOUR_CLIENT_SECRET&code=YOUR_AUTHORIZATION_CODE&redirect_uri={https://yourApp/callback}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=authorization_code".data(using: String.Encoding.utf8)!)
@@ -241,7 +241,7 @@ dataTask.resume()
 Un code d’autorisation peut être échangé de la même manière dans les deux pipelines :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -250,8 +250,8 @@ curl --request POST \
 --data code_verifier=YOUR_GENERATED_CODE_VERIFIER \
 --data code=YOUR_AUTHORIZATION_CODE \
 --data 'redirect_uri={https://yourApp/callback}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -259,7 +259,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=authorizat
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -278,15 +278,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=authorization_code&client_id={yourClientId}&code_verifier=YOUR_GENERATED_CODE_VERIFIER&code=YOUR_AUTHORIZATION_CODE&redirect_uri={https://yourApp/callback}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -305,8 +305,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=authorization_code" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -333,7 +333,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -356,8 +356,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=authorization_code&client_id={yourClientId}&code_verifier=YOUR_GENERATED_CODE_VERIFIER&code=YOUR_AUTHORIZATION_CODE&redirect_uri={https://yourApp/callback}"
@@ -368,7 +368,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -381,8 +381,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=authorization_code&client_id={yourClientId}&code_verifier=YOUR_GENERATED_CODE_VERIFIER&code=YOUR_AUTHORIZATION_CODE&redirect_uri={https://yourApp/callback}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=authorization_code".data(using: String.Encoding.utf8)!)
@@ -413,7 +413,7 @@ dataTask.resume()
 
 ### Comportement ancien
 
-```
+```json lines
 HTTP/1.1 200 OK
 Content-Type: application/json
 Cache-Control: no-store
@@ -427,12 +427,12 @@ Pragma: no-cache
 }
 ```
 
-* Le jeton d’accès renvoyé n’est valable que pour appeler le point de terminaison [`/userinfo`](/docs/api/authentication#get-user-info).
+* Le jeton d’accès renvoyé n’est valable que pour appeler le point de terminaison [`/userinfo`](/docs/fr-ca/api/authentication#get-user-info).
 * Un jeton d’actualisation sera retourné uniquement si un paramètre `device` a été passé et que la permission `offline_access` a été demandée.
 
 ### Conformité OIDC
 
-```
+```json lines
 HTTP/1.1 200 OK
 Content-Type: application/json
 Cache-Control: no-store
@@ -446,14 +446,14 @@ Pragma: no-cache
 }
 ```
 
-* Le jeton d’accès renvoyé est valable pour appeler éventuellement l’API spécifiée dans le paramètre `audience` et le point de terminaison [`/userinfo`](/docs/api/authentication#get-user-info) (à condition que l’API utilise `RS256` comme [algorithme de signature](/docs/fr-ca/get-started/applications/signing-algorithms) et que `openid` soit utilisé comme paramètre `scope` (permission)). Si vous ne mettez pas en œuvre votre propre serveur de ressources (API), vous pouvez utiliser `https://{$account.namespace}/userinfo` comme paramètre `audience`, lequel renverra un jeton d’accès opaque.
+* Le jeton d’accès renvoyé est valable pour appeler éventuellement l’API spécifiée dans le paramètre `audience` et le point de terminaison [`/userinfo`](/docs/fr-ca/api/authentication#get-user-info) (à condition que l’API utilise `RS256` comme [algorithme de signature](/docs/fr-ca/get-started/applications/signing-algorithms) et que `openid` soit utilisé comme paramètre `scope` (permission)). Si vous ne mettez pas en œuvre votre propre serveur de ressources (API), vous pouvez utiliser `https://{$account.namespace}/userinfo` comme paramètre `audience`, lequel renverra un jeton d’accès opaque.
 * Un jeton d’actualisation sera renvoyé uniquement si la permission `offline_access` a été accordée.
 
 ## structure des jetons d’ID
 
 ### Comportement ancien
 
-```json
+```json lines
 {
     "sub": "auth0|alice",
     "iss": "https://{yourDomain}/",
@@ -468,7 +468,7 @@ Pragma: no-cache
 
 ### Conformité OIDC
 
-```json
+```json lines
 {
     "sub": "auth0|alice",
     "iss": "https://{yourDomain}/",
@@ -487,15 +487,15 @@ La demande `favorite_color` doit être ajoutée par le biais d’une action Auth
 
 ### Comportement ancien
 
-```
+```json lines
 SlAV32hkKG
 ```
 
-Le jeton d’accès renvoyé est opaque et n’est valable que pour appeler le point de terminaison [`/userinfo`](/docs/api/authentication#get-user-info).
+Le jeton d’accès renvoyé est opaque et n’est valable que pour appeler le point de terminaison [`/userinfo`](/docs/fr-ca/api/authentication#get-user-info).
 
 ### Conformité OIDC
 
-```json
+```json lines
 {
     "sub": "auth0|alice",
     "iss": "https://{yourDomain}/",
@@ -510,7 +510,7 @@ Le jeton d’accès renvoyé est opaque et n’est valable que pour appeler le p
 }
 ```
 
-Le jeton d’accès renvoyé est valable pour appeler facultativement l’API spécifiée dans le paramètre `audience` et le point de terminaison [`/userinfo`](/docs/api/authentication#get-user-info) (à condition que l’API utilise `RS256` comme algorithme de signature et que `openid` soit utilisé comme paramètre `scope`).
+Le jeton d’accès renvoyé est valable pour appeler facultativement l’API spécifiée dans le paramètre `audience` et le point de terminaison [`/userinfo`](/docs/fr-ca/api/authentication#get-user-info) (à condition que l’API utilise `RS256` comme algorithme de signature et que `openid` soit utilisé comme paramètre `scope`).
 
 Si vous n’implémentez pas votre propre serveur de ressources (API), vous pouvez utiliser `https://{$account.namespace}/userinfo` comme paramètre `audience`, qui renverra un jeton d’accès opaque.
 

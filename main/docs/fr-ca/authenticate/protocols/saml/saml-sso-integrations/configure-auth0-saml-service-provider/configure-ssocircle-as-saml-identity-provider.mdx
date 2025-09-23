@@ -1,13 +1,13 @@
 ---
 title: "Configuration SSOCircle en tant que fournisseur d’identité SAML"
 permalink: "configure-ssocircle-as-saml-identity-provider"
+'description': "Apprenez comment configurer une application pour utiliser Auth0 pour l’authentification unique (SSO) SAML, pour authentifier les utilisateurs auprès de SSOCircle."
 'og:title': "Configuration SSOCircle en tant que fournisseur d’identité SAML"
 'og:description': "Apprenez comment configurer une application pour utiliser Auth0 pour l’authentification unique (SSO) SAML, pour authentifier les utilisateurs auprès de SSOCircle."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configuration SSOCircle en tant que fournisseur d’identité SAML"
 'twitter:description': "Apprenez comment configurer une application pour utiliser Auth0 pour l’authentification unique (SSO) SAML, pour authentifier les utilisateurs auprès de SSOCircle."
 ---
-# Configuration SSOCircle en tant que fournisseur d’identité SAML
 
 Configurez SSOCircle en tant que fournisseur d’identité <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip> en procédant comme suit :
 
@@ -45,23 +45,23 @@ Vous devez disposer d’un compte [SSOCircle](https://idp.ssocircle.com/).
 <tr>
 <td>Connection name</td>
 <td>Nom de connexion Auth0.</td>
-<td><code>myoktaconnection</code></td>
+<td>`myoktaconnection`</td>
 </tr>
 <tr>
 <td>Sign In URL</td>
 <td>URL Okta où les demandes de connexion des utilisateurs sont envoyées.<br/><br/>Il s’agit de la valeur _<strong>Authentification unique du fournisseur d’identité</strong> que vous avez enregistrée précédemment.</td>
-<td><code>https://my_okta_tenant_name.okta.com/app/</code> <code>my_okta_tenant_namemy_okta_saml_app_integration_name/</code> <code>dakflkbzevu5i5zBi939/sso/saml</code></td>
+<td>`https://my_okta_tenant_name.okta.com/app/` `my_okta_tenant_namemy_okta_saml_app_integration_name/` `dakflkbzevu5i5zBi939/sso/saml`</td>
 </tr>
 <tr>
 <td>X509 Signing Certificate</td>
 <td>Certificat de signature de clé publique de locataire Okta.<br/><br/>Téléversez le certificat __X509 __ que vous avez téléchargé précédemment.</td>
-<td><code>myOktaTenantSigningCertificate.pem</code></td>
+<td>`myOktaTenantSigningCertificate.pem`</td>
 </tr>
 </tbody>
 </table>
 3. Lors de la configuration des mappages, utilisez le JSON suivant pour mapper correctement les attributs SAML de SSO Circle :
 
-   ```json
+   ```json lines
    {
          "email": "EmailAddress",
          "given_name": "FirstName",
@@ -97,11 +97,11 @@ Vous devrez fournir ces métadonnées à SSOCircle à l’étape suivante.
 <tbody>
 <tr>
 <td><strong>FQDN du fournisseur de services</strong></td>
-<td><code>auth0.com</code></td>
+<td>`auth0.com`</td>
 </tr>
 <tr>
 <td><strong>Attributs à envoyer dans l’assertion</strong></td>
-<td>Cochez la case pour <code>EmailAddress</code></td>
+<td>Cochez la case pour `EmailAddress`</td>
 </tr>
 <tr>
 <td><strong>Insert your metadata information:</strong></td>

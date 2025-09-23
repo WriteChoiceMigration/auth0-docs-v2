@@ -1,13 +1,13 @@
 ---
 title: "Supprimer les autorisations de l’API"
 permalink: "delete-api-permissions"
+'description': "Apprenez à supprimer les autorisations des API à l’aide d’Auth0 Dashboard ou de Management API."
 'og:title': "Supprimer les autorisations de l’API"
 'og:description': "Apprenez à supprimer les autorisations des API à l’aide d’Auth0 Dashboard ou de Management API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Supprimer les autorisations de l’API"
 'twitter:description': "Apprenez à supprimer les autorisations des API à l’aide d’Auth0 Dashboard ou de Management API."
 ---
-# Supprimer les autorisations de l’API
 
 Vous pouvez supprimer les autorisations d’une API à l’aide d’Auth0 Dashboard ou de Management API.
 
@@ -15,26 +15,26 @@ Vous pouvez supprimer les autorisations d’une API à l’aide d’Auth0 Dash
 
 1. Rendez-vous dans [Dashboard > Applications > API](https://manage.auth0.com/#/apis) et cliquez sur le nom de l’API pour l’afficher.
 
-   <Frame>![Liste des API d’applications Dashboard](//images.ctfassets.net/cdy7uua7fh8z/3rhmhghYZDSi6YWHRA5yMQ/29b5fc5ca1dcedd82e9e7fff1fc8ecc8/2025-02-27_10-28-06.png)</Frame>
+   <Frame>![Liste des API d’applications Dashboard](/images/fr-ca/cdy7uua7fh8z/3rhmhghYZDSi6YWHRA5yMQ/29b5fc5ca1dcedd82e9e7fff1fc8ecc8/2025-02-27_10-28-06.png)</Frame>
 
 2. Rendez-vous dans l’onglet **Autorisations** et cliquez sur l’icône de la corbeille à côté de l’autorisation que vous souhaitez supprimer, puis confirmez.
 
-   <Frame>![Dashboard (Tableau de bord) - Add API Permissions (Ajouter des permissions API) - API Define Permissions Screen (Écran de définition des permissions API)](//images.ctfassets.net/cdy7uua7fh8z/32Pb185OFs2mC6z2fmunEw/efe280485cc016d4396588dad02bfad5/2025-02-27_10-14-21.png)</Frame>
+   <Frame>![Dashboard (Tableau de bord) - Add API Permissions (Ajouter des permissions API) - API Define Permissions Screen (Écran de définition des permissions API)](/images/fr-ca/cdy7uua7fh8z/32Pb185OFs2mC6z2fmunEw/efe280485cc016d4396588dad02bfad5/2025-02-27_10-14-21.png)</Frame>
 
 ## Utiliser Management API
 
 Faites un appel PATCH au [point de terminaison Mise à jour du serveur de ressources](https://auth0.com/docs/api/management/v2#!/Resource_Servers/patch_resource_servers_by_id) en incluant toutes les autorisations que vous souhaitez conserver et en excluant toutes celles que vous souhaitez supprimer. Remplacez les valeurs des placeholders `API_ID`, `MGMT_API_ACCESS_TOKEN`, `PERMISSION_NAME` et `PERMISSION_DESC` par l’identifiant de l’API, le jeton d’accès à Management API, le ou les nom de l’autorisation et la ou les descriptions de l’autorisation, respectivement.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/resource-servers/API_ID' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "scopes": [ { "value": "PERMISSION_NAME", "description": "PERMISSION_DESC" }, { "value": "PERMISSION_NAME", "description": "PERMISSION_DESC" } ] }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/resource-servers/API_ID");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -44,7 +44,7 @@ request.AddParameter("application/json", "{ \"scopes\": [ { \"value\": \"PERMISS
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -65,8 +65,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/resource-servers/API_ID")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -75,7 +75,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/resource-serv
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -97,8 +97,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
@@ -124,7 +124,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/resource-servers/API_ID",
@@ -149,8 +149,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"scopes\": [ { \"value\": \"PERMISSION_NAME\", \"description\": \"PERMISSION_DESC\" }, { \"value\": \"PERMISSION_NAME\", \"description\": \"PERMISSION_DESC\" } ] }"
@@ -165,7 +165,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -180,8 +180,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"scopes\": [ { \"value\": \"PERMISSION_NAME\", \"description\": \"PERMISSION_DESC\" }, { \"value\": \"PERMISSION_NAME\", \"description\": \"PERMISSION_DESC\" } ] }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -226,19 +226,19 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>API_ID</code></td>
+<td>`API_ID`</td>
 <td>ID de l’API pour laquelle vous souhaitez supprimer les autorisations.</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><a href="https://auth0.com/docs/api/management/v2/tokens">Jeton d’accès pour Management API </a> avec la permission <code>update:resource_servers</code>.</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td><a href="https://auth0.com/docs/api/management/v2/tokens">Jeton d’accès pour Management API </a> avec la permission `update:resource_servers`.</td>
 </tr>
 <tr>
-<td><code>PERMISSION_NAME</code></td>
+<td>`PERMISSION_NAME`</td>
 <td>Nom(s) de la ou des autorisations que vous souhaitez conserver pour l’API spécifiée.</td>
 </tr>
 <tr>
-<td><code>PERMISSION_DESC</code></td>
+<td>`PERMISSION_DESC`</td>
 <td>Description(s) conviviales de la ou des autorisations que vous souhaitez conserver pour l’API spécifiée.</td>
 </tr>
 </tbody>

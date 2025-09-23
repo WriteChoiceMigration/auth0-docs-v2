@@ -1,13 +1,13 @@
 ---
 title: "Migrer vers les points de terminaison de Management API avec des jetons d’accès"
 permalink: "migrate-to-calling-api-with-access-tokens"
+'description': "Décrit l’abandon de l’utilisation des jetons d’ID comme informations d’identification pour Management API et comment migrer votre configuration pour utiliser les jetons d’accès."
 'og:title': "Migrer vers les points de terminaison de Management API avec des jetons d’accès"
 'og:description': "Décrit l’abandon de l’utilisation des jetons d’ID comme informations d’identification pour Management API et comment migrer votre configuration pour utiliser les jetons d’accès."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Migrer vers les points de terminaison de Management API avec des jetons d’accès"
 'twitter:description': "Décrit l’abandon de l’utilisation des jetons d’ID comme informations d’identification pour Management API et comment migrer votre configuration pour utiliser les jetons d’accès."
 ---
-# Migrer vers les points de terminaison de Management API avec des jetons d’accès
 
 L’utilisation des jetons d’ID pour appeler les points de terminaison de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip> est obsolète. Vous devez utiliser des jetons d’accès. La période de grâce pour cette migration a commencé le **31 mars 2018**.
 
@@ -85,7 +85,7 @@ Dans l’exemple ci-dessous, vous utilisez le point de terminaison `GET User by 
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 https://{yourDomain}/authorize?
       scope=openid
       &response_type=id_token
@@ -99,7 +99,7 @@ Dans l’exemple ci-dessous, vous pouvez voir la nouvelle approche qui obtient u
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 https://{yourDomain}/authorize?
       audience=https://{yourDomain}/api/v2/
       &scope=read:current_user
@@ -118,7 +118,7 @@ Pour obtenir un jeton d’accès permettant d’accéder à Management API :
 
 Si vous décodez le jeton d’accès reçu et examinez son contenu, vous verrez ce qui suit :
 
-```json
+```javascript lines
 {
       "iss": "https://{yourDomain}/",
       "sub": "auth0|5a620d29a840170a9ef43672",
@@ -142,7 +142,7 @@ Dans l’exemple ci-dessous, vous souhaitez utiliser le point de terminaison `GE
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 POST https://{yourDomain}/oauth/token
     Content-Type: application/x-www-form-urlencoded
     {
@@ -159,7 +159,7 @@ Dans l’exemple ci-dessous, vous pouvez voir la nouvelle approche qui obtient �
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 POST https://{yourDomain}/oauth/token
     Content-Type: application/x-www-form-urlencoded
     {
@@ -190,7 +190,7 @@ Dans l’exemple ci-dessous, vous pouvez voir l’ancienne approche.
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 // get an ID Token
     var webAuth = new auth0.WebAuth({
       clientID: '{yourClientId}',
@@ -210,7 +210,7 @@ Dans cet exemple, vous pouvez voir la nouvelle approche.
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 // get an Access Token
     var webAuth = new auth0.WebAuth({
       clientID: '{yourClientId}',

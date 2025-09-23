@@ -1,13 +1,13 @@
 ---
 title: "Enregistrement Auth0.Android et renouvellement des jetons"
 permalink: "auth0-android-save-and-renew-tokens"
+'description': "Garder votre utilisateur connecté avec Auth0.Android"
 'og:title': "Enregistrement Auth0.Android et renouvellement des jetons"
 'og:description': "Garder votre utilisateur connecté avec Auth0.Android"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Enregistrement Auth0.Android et renouvellement des jetons"
 'twitter:description': "Garder votre utilisateur connecté avec Auth0.Android"
 ---
-# Enregistrement Auth0.Android et renouvellement des jetons
 
 Lorsqu’une authentification est effectuée avec la permission `offline_access` incluse, elle renvoie un jeton d’actualisation qui peut être utilisé pour demander un nouveau jeton d’utilisateur, sans obliger l’utilisateur à s’authentifier à nouveau.
 
@@ -28,7 +28,7 @@ Il existe deux classes que vous pouvez utiliser pour gérer les identifiants :
 
 Créer une nouvelle instance en fournissant une `AuthenticationAPIClient` et une implémentation `Storage`.
 
-```
+```kotlin lines
 val auth0 = Auth0(this)
 val apiClient = AuthenticationAPIClient(auth0)
 val manager = CredentialsManager(apiClient, SharedPreferencesStorage(this))
@@ -38,13 +38,13 @@ val manager = CredentialsManager(apiClient, SharedPreferencesStorage(this))
 
 Les identifiants stockés sont considérés comme valides s’ils n’ont pas expiré ou s’ils peuvent être actualisés. Vérifier si un utilisateur s’est déjà connecté.
 
-```
+``` lines
 val loggedIn = manager.hasValidCredentials()
 ```
 
 Pour déconnecter l’utilisateur de votre application, supprimez les identifiants stockés et renvoyez-le à l’écran de connexion.
 
-```
+``` lines
 manager.clearCredentials()
 ```
 
@@ -52,7 +52,7 @@ manager.clearCredentials()
 
 Étant donné que les identifiants peuvent devoir être actualisés par rapport aux serveurs Auth0, cette méthode est asynchrone. Fournissez une implémentation de rappel à l’endroit où vous voulez recevoir les identifiants. Les identifiants renvoyés par cette méthode en cas de succès sont toujours valides.
 
-```
+```kotlin lines
 manager.getCredentials(object: Callback<Credentials, CredentialsManagerException>() {
     override fun onSuccess(credentials: Credentials) {
         // Use credentials
@@ -70,7 +70,7 @@ Si l’`accessToken` a expiré, le gestionnaire utilise automatiquement le `refr
 
 Vous pouvez enregistrer les identifiants obtenus lors de l’authentification dans le gestionnaire.
 
-```
+``` lines
 manager.saveCredentials(credentials)
 ```
 
@@ -80,7 +80,7 @@ manager.saveCredentials(credentials)
 
 Créer une nouvelle instance en fournissant un `Context` Android valide, une `AuthenticationAPIClient` et une implémentation de `Storage`.
 
-```
+```kotlin lines
 val auth0 = Auth0(this)
 val apiClient = AuthenticationAPIClient(auth0)
 val manager = SecureCredentialsManager(this, apiClient, SharedPreferencesStorage(this))
@@ -102,7 +102,7 @@ Appelez la méthode ci-dessous pour activer l’authentification. Fournit un con
 
 Définissez également une constante de code de demande afin que le code de demande provenant du résultat de l’activité puisse être mis en correspondance.
 
-```
+```kotlin lines
 companion object {
   const val RC_UNLOCK_AUTHENTICATION = 123
 }
@@ -115,7 +115,7 @@ Si la fonctionnalité est activée, le gestionnaire invitera l’utilisateur à 
 
 Après avoir vérifié que le code de demande reçu correspond à celui utilisé dans l’étape de configuration, rediriger les paramètres reçus vers le gestionnaire pour terminer l’authentification. Les identifiants seront envoyés à la fonction de rappel d’origine.
 
-```
+```kotlin lines
 override fun onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == RC_UNLOCK_AUTHENTICATION && manager.checkAuthenticationResult(requestCode, resultCode)) {
         return

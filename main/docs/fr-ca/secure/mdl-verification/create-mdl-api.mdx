@@ -1,13 +1,13 @@
 ---
 title: "Create the Mobile Driver’s License Verification API"
 permalink: "create-mdl-api"
+'description': "Create an instance of Auth0's Mobile Driver’s License Verification API for the mDL Verification Service."
 'og:title': "Create the Mobile Driver’s License Verification API"
 'og:description': "Create an instance of Auth0's Mobile Driver’s License Verification API for the mDL Verification Service."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Create the Mobile Driver’s License Verification API"
 'twitter:description': "Create an instance of Auth0's Mobile Driver’s License Verification API for the mDL Verification Service."
 ---
-# Create the Mobile Driver’s License Verification API
 
 <Warning>
 
@@ -42,7 +42,7 @@ Once you've been approved to join the EA, you can create the mDL Verification AP
 5. Enable Verification API.
 
    <Frame>![Auth0 Dashboard > Applications > APIs
-   Auth0 Dashboard > Applications > Applications](//images.ctfassets.net/cdy7uua7fh8z/4mzN6voEXDUXkJjGXXe50Y/e84c8be48ce78289f950c62eaa4601cc/2025-03-11_14-42-35.png)</Frame>
+   Auth0 Dashboard > Applications > Applications](/images/fr-ca/cdy7uua7fh8z/4mzN6voEXDUXkJjGXXe50Y/e84c8be48ce78289f950c62eaa4601cc/2025-03-11_14-42-35.png)</Frame>
 
 6. In the drop-down menu, choose the associated permissions:
 
@@ -55,13 +55,13 @@ Once you've been approved to join the EA, you can create the mDL Verification AP
 1. Make a `POST` call to the [Create a Resource Server](https://auth0.com/docs/api/management/v2/resource-servers/post-resource-servers) endpoint.
 
    <CodeGroup>
-```bash curl.sh
+```bash cURL lines
    curl --request POST \
    --url 'https://{yourDomain}/api/v2/resource-servers/post-resource-servers' \
    --header 'content-type: application/json' \
    --data '{"name"}'
-   ```
-   ```csharp c_.cs
+   ``` lines
+   ```csharp C# lines
    var client = new RestClient("https://{yourDomain}/api/v2/resource-servers/post-resource-servers");
    var request = new RestRequest(Method.POST);
    request.AddHeader("content-type", "application/json");
@@ -69,7 +69,7 @@ Once you've been approved to join the EA, you can create the mDL Verification AP
    IRestResponse response = client.Execute(request);
    ```
 
-   ```go go.go
+   ```go Go lines
    package main
    import (
    "fmt"
@@ -88,15 +88,15 @@ Once you've been approved to join the EA, you can create the mDL Verification AP
    fmt.Println(res)
    fmt.Println(string(body))
    }
-   ```
-   ```java java.java
+   ``` lines
+   ```java Java lines
    HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/resource-servers/post-resource-servers")
    .header("content-type", "application/json")
    .body("{\"name\"}")
    .asString();
    ```
 
-   ```javascript node_js.js
+   ```javascript Node.JS lines
    var axios = require("axios").default;
    var options = {
    method: 'POST',
@@ -109,8 +109,8 @@ Once you've been approved to join the EA, you can create the mDL Verification AP
    }).catch(function (error) {
    console.error(error);
    });
-   ```
-   ```obj-c obj-c.obj-c
+   ``` lines
+   ```obj-c Obj-C lines
    #import 
    NSDictionary \*headers = @{ @"content-type": @"application/json" };
    NSData \*postData = [[NSData alloc] initWithData:[@"{"name"}" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -133,7 +133,7 @@ Once you've been approved to join the EA, you can create the mDL Verification AP
    [dataTask resume];
    ```
 
-   ```php php.php
+   ```php PHP lines
    $curl = curl_init();
    curl_setopt_array($curl, [
    CURLOPT_URL => "https://{yourDomain}/api/v2/resource-servers/post-resource-servers",
@@ -156,8 +156,8 @@ Once you've been approved to join the EA, you can create the mDL Verification AP
    } else {
    echo $response;
    }
-   ```
-   ```python python.py
+   ``` lines
+   ```python Python lines
    import http.client
    conn = http.client.HTTPSConnection("")
    payload = "{\"name\"}"
@@ -168,7 +168,7 @@ Once you've been approved to join the EA, you can create the mDL Verification AP
    print(data.decode("utf-8"))
    ```
 
-   ```ruby ruby.rb
+   ```ruby Ruby lines
    require 'uri'
    require 'net/http'
    require 'openssl'
@@ -181,8 +181,8 @@ Once you've been approved to join the EA, you can create the mDL Verification AP
    request.body = "{\"name\"}"
    response = http.request(request)
    puts response.read_body
-   ```
-   ```swift swift.swift
+   ``` lines
+   ```swift Swift lines
    import Foundation
    let headers = ["content-type": "application/json"]
    let postData = NSData(data: "{"name"}".data(using: String.Encoding.utf8)!)

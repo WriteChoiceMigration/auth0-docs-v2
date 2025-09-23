@@ -1,13 +1,13 @@
 ---
 title: "Configurer des fonctionnalités pour utiliser des Domaines personnalisés"
 permalink: "configure-features-to-use-custom-domains"
+'description': "Découvrez comment configurer un domaine personnalisé pour les fonctions d’authentification Auth0."
 'og:title': "Configurer des fonctionnalités pour utiliser des Domaines personnalisés"
 'og:description': "Découvrez comment configurer un domaine personnalisé pour les fonctions d’authentification Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer des fonctionnalités pour utiliser des Domaines personnalisés"
 'twitter:description': "Découvrez comment configurer un domaine personnalisé pour les fonctions d’authentification Auth0."
 ---
-# Configurer des fonctionnalités pour utiliser des Domaines personnalisés
 
 Pour configurer les fonctionnalités Auth0 afin qu’elles utilisent votre domaine personnalisé, vous devrez peut-être suivre des étapes supplémentaires en fonction des fonctions que vous utilisez. Par exemple, vous devrez peut-être apporter des modifications avant de pouvoir utiliser votre domaine personnalisé sur votre page de connexion ou pour appeler vos API.
 
@@ -87,7 +87,7 @@ Si vous utilisez [Connexion universelle Auth0.](/docs/fr-ca/authenticate/login/a
 
 Si vous utilisez[Lock pour le Web](/docs/fr-ca/libraries/lock) vous devez définir les options `configurationBaseUrl` et `overrides` comme indiqué dans l’exemple de script suivant :
 
-```javascript
+```javascript lines
 var lock = new Auth0Lock(config.clientID, config.auth0Domain, {
   //code omitted for brevity
   configurationBaseUrl: config.clientConfigurationBaseUrl,
@@ -101,7 +101,7 @@ var lock = new Auth0Lock(config.clientID, config.auth0Domain, {
 
 Si vous utilisez [Auth0.js](/docs/fr-ca/libraries/auth0js) sur la page de Connexion universelle, vous devez définir l’option `overrides`.
 
-```javascript
+```javascript lines
 var webAuth = new auth0.WebAuth({
   clientID: config.clientID,
   domain: config.auth0Domain,
@@ -122,7 +122,7 @@ Si vous utilisez [Lock pour le Web](/docs/fr-ca/libraries/lock) intégré dans v
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 var lock = new Auth0Lock('{yourClientId}', '{yourCustomDomain}', {
   //code omitted for brevity
   configurationBaseUrl: 'https://cdn.us.auth0.com'
@@ -140,11 +140,11 @@ L’URL CDN varie selon la région. Les locataires créés avant le 11 juin 20
 
 ## Trousse SDK Auth0 pour les applications à page unique (SPA), Auth0.js et autres trousses SDK
 
-Si vous utilisez la [Trousse SDK Auth0 pour les applications à page unique (SPA)](/docs/libraries/auth0-spa-js), [Auth0.js](/docs/libraries/auth0js) ou [d’autres trousses SDK](/docs/support/matrix#auth0-sdks), vous devrez initialiser la trousse SDK en utilisant votre domaine personnalisé. Par exemple, si vous utilisez la trousse SDK Auth0.js, vous devez définir ce qui suit :
+Si vous utilisez la [Trousse SDK Auth0 pour les applications à page unique (SPA)](/docs/fr-ca/libraries/auth0-spa-js), [Auth0.js](/docs/fr-ca/libraries/auth0js) ou [d’autres trousses SDK](/docs/fr-ca/support/matrix#auth0-sdks), vous devrez initialiser la trousse SDK en utilisant votre domaine personnalisé. Par exemple, si vous utilisez la trousse SDK Auth0.js, vous devez définir ce qui suit :
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 webAuth = new auth0.WebAuth({
   domain: '{yourCustomDomain}',
   clientID: '{yourClientId}'
@@ -155,14 +155,14 @@ Et pour la trousse SDK Auth0 pour les applications à page unique (SPA) :
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 const auth0 = await createAuth0Client({
   domain: '{yourCustomDomain}',
   client_id: '{yourClientId}'
 });
 ```
 
-Consultez la section API ci-dessous si vous utilisez un domaine personnalisé et avez également l’intention d’effectuer [des actions avec Management API via Auth0.js](/docs/libraries/auth0js/v9#user-management).
+Consultez la section API ci-dessous si vous utilisez un domaine personnalisé et avez également l’intention d’effectuer [des actions avec Management API via Auth0.js](/docs/fr-ca/libraries/auth0js/v9#user-management).
 
 ## Utiliser des domaines personnalisés dans les courriels
 
@@ -195,7 +195,7 @@ Toutes les demandes (c’est-à-dire l’obtention du jeton et l’appel effecti
 
 Si vous utilisez un flux d’authentification avec votre domaine personnalisé pour demander des jetons d’accès afin d’accéder à <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Management API</Tooltip>, vous devez également appeler le point de terminaison de Management API avec votre domaine personnalisé.
 
-```
+``` lines
 POST https://mycustomdomain.com/oauth/token
 ... // other parameters 
 ...
@@ -204,7 +204,7 @@ audience:https://defaulttenant.eu.auth0.com/api/v2/
 
 Votre demande de jeton d’accès devrait ressembler à ce qui suit
 
-```
+``` lines
 GET https://mycustomdomain.com/api/v2/clients
 
 Headers:
@@ -215,7 +215,7 @@ Authorization: Bearer <access_token>
 
 Si vous utilisez Auth0 avec un domaine personnalisé pour émettre des jetons d’accès pour vos API, vous devez valider le ou les émetteurs de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">JWT</Tooltip> par rapport à votre domaine personnalisé. Par exemple, si vous utilisez le logiciel médiateur/intergiciel [express-jwt](https://github.com/auth0/express-jwt), vous devez effectuer le changement suivant :
 
-```
+```javascript lines
 app.use(jwt({
   issuer: 'https://<YOUR-CUSTOM-DOMAIN>/',
   //code omitted for brevity
@@ -264,7 +264,7 @@ Si vous souhaitez utiliser votre domaine personnalisé avec les connexions ADFS,
 
 Si vous n’avez pas besoin de la prise en charge de Kerberos, les connexions AD/LDAP ne nécessitent pas de configuration supplémentaire.
 
-Pour utiliser les connexions AD/LDAP avec la prise en charge de Kerberos, vous devrez mettre à jour le point de terminaison Ticket pour qu’il fonctionne avec le domaine personnalisé. Comme indiqué dans la documentation du [connecteur AD/LDAP d’Auth0](/docs/connector/modify#point-an-ad-ldap-connector-to-a-new-connection), le fichier `config.json` doit être modifié, avec la valeur `PROVISIONING_TICKET` changée pour utiliser votre domaine personnalisé au format `https://<YOUR-CUSTOM-DOMAIN>/p/ad/jUG0dN0R`.
+Pour utiliser les connexions AD/LDAP avec la prise en charge de Kerberos, vous devrez mettre à jour le point de terminaison Ticket pour qu’il fonctionne avec le domaine personnalisé. Comme indiqué dans la documentation du [connecteur AD/LDAP d’Auth0](/docs/fr-ca/connector/modify#point-an-ad-ldap-connector-to-a-new-connection), le fichier `config.json` doit être modifié, avec la valeur `PROVISIONING_TICKET` changée pour utiliser votre domaine personnalisé au format `https://<YOUR-CUSTOM-DOMAIN>/p/ad/jUG0dN0R`.
 
 Une fois cette modification enregistrée, vous devez redémarrer le service AD/LDAP Connector pour qu’elle prenne effet.
 

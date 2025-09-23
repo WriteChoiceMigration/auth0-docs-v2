@@ -1,13 +1,13 @@
 ---
 title: "Configuration de l’API et de la SPA (SPA + API)"
 permalink: "part-3"
+'description': "Configuration de l’API et de la SPA pour le scénario d’architecture SPA + API"
 'og:title': "Configuration de l’API et de la SPA (SPA + API)"
 'og:description': "Configuration de l’API et de la SPA pour le scénario d’architecture SPA + API"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configuration de l’API et de la SPA (SPA + API)"
 'twitter:description': "Configuration de l’API et de la SPA pour le scénario d’architecture SPA + API"
 ---
-# Configuration de l’API et de la SPA (SPA + API)
 
 Dans cette section, nous verrons comment nous pouvons mettre en œuvre une API pour notre scénario.
 
@@ -85,7 +85,7 @@ Dans cette section, nous verrons comment mettre en œuvre une SPA pour notre sc�
 
 Pour autoriser l’utilisateur, nous utiliserons la [bibliothèque auth0.js](https://auth0.com/docs/libraries/auth0js). Vous pouvez initialiser une nouvelle instance de l’application Auth0 comme suit :
 
-```javascript
+```javascript lines
 var auth0 = new auth0.WebAuth({
   clientID: '{yourClientId}',
   domain: '{yourDomain}',
@@ -107,7 +107,7 @@ Vous devez transmettre les valeurs de configuration suivantes :
 
 Pour lancer le flux d’authentification, vous pouvez appeler la méthode `authorise()` :
 
-```
+```javascript lines
 auth0.authorize();
 ```
 
@@ -137,7 +137,7 @@ Cette section démontre comment récupérer les informations de l’utilisateur 
 
 La méthode `client.userInfo` peut être appelée en transmettant le jeton `authResult.accessToken` retourné afin de récupérer les informations du profil de l’utilisateur. Elle fera une requête au point de terminaison [/userinfo](https://auth0.com/docs/api/authentication#get-user-info) et retournera l’objet `user`, qui contient les informations de l’utilisateur, comme dans l’exemple ci-dessous :
 
-```json
+```json lines
 {
     "email_verified": "false",
     "email": "test@example.com",
@@ -154,7 +154,7 @@ La méthode `client.userInfo` peut être appelée en transmettant le jeton `aut
 
 Vous pouvez accéder à l’une de ces propriétés dans la fonction de rappel passée lors de l’appel de la fonction `userInfo` :
 
-```javascript
+```javascript lines
 const accessToken = authResult.accessToken;
 
 auth0.client.userInfo(accessToken, (err, profile) => {

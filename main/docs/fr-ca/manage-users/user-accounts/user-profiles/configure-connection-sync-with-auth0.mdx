@@ -1,13 +1,13 @@
 ---
 title: "Configurer la connexion du fournisseur d’identité pour les mises à jour du profil utilisateur"
 permalink: "configure-connection-sync-with-auth0"
+'description': "Découvrez comment mettre à jour les préférences de connexion pour un fournisseur d’identité en amont afin de pouvoir contrôler le moment où les attributs racine du profil utilisateur sont mis à jour."
 'og:title': "Configurer la connexion du fournisseur d’identité pour les mises à jour du profil utilisateur"
 'og:description': "Découvrez comment mettre à jour les préférences de connexion pour un fournisseur d’identité en amont afin de pouvoir contrôler le moment où les attributs racine du profil utilisateur sont mis à jour."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer la connexion du fournisseur d’identité pour les mises à jour du profil utilisateur"
 'twitter:description': "Découvrez comment mettre à jour les préférences de connexion pour un fournisseur d’identité en amont afin de pouvoir contrôler le moment où les attributs racine du profil utilisateur sont mis à jour."
 ---
-# Configurer la connexion du fournisseur d’identité pour les mises à jour du profil utilisateur
 
 Vous pouvez mettre à jour les préférences de connexion pour un fournisseur d’identité en amont afin de contrôler quand les mises à jour des attributs racine du profil utilisateur sont autorisées à l’aide de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip> ou de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>.
 
@@ -36,15 +36,15 @@ Avant de terminer cette étape, vous devez d’abord [récupérer les valeurs ex
 Effectuez une requête `PATCH` au point de terminaison [Mettre à jour un connexion](https://auth0.com/docs/api/management/v2#!/Connections/patch_connections_by_id). Veillez à inclure les valeurs originales des options dans la requête afin d’éviter d’écraser les valeurs actuelles. De plus, assurez-vous de remplacer les paramètres fictifs `CONNECTION_ID`, `MGMT_API_ACCESS_TOKEN`, et `ATTRIBUTE_UPDATE_VALUE` par votre ID de connexion, le jeton d’accès de Management API et la valeur de mise à jour de l’attribut, respectivement.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/connections/CONNECTION_ID' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{"options":{"set_user_root_attributes": "ATTRIBUTE_UPDATE_VALUE"}}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/CONNECTION_ID");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -54,7 +54,7 @@ request.AddParameter("application/json", "{\"options\":{\"set_user_root_attribut
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -75,8 +75,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/connections/CONNECTION_ID")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -85,7 +85,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/connections/C
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -102,8 +102,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
@@ -129,7 +129,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections/CONNECTION_ID",
@@ -154,8 +154,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"options\":{\"set_user_root_attributes\": \"ATTRIBUTE_UPDATE_VALUE\"}}"
@@ -170,7 +170,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -185,8 +185,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{\"options\":{\"set_user_root_attributes\": \"ATTRIBUTE_UPDATE_VALUE\"}}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -222,16 +222,16 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>CONNECTION_ID</code></td>
+<td>`CONNECTION_ID`</td>
 <td>ID de la connexion pour laquelle vous souhaitez autoriser les mises à jour des attributs racine.</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><a href="https://auth0.com/docs/api/management/v2/tokens">Jeton d’accès pour Management API</a> avec la permission <code>update:connections</code>.</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td><a href="https://auth0.com/docs/api/management/v2/tokens">Jeton d’accès pour Management API</a> avec la permission `update:connections`.</td>
 </tr>
 <tr>
-<td><code>ATTRIBUTE_UPDATE_VALUE</code></td>
-<td>Indique quand vous souhaitez autoriser les mises à jour des attributs racine du profil utilisateur. Les valeurs valides sont <code>on_first_login</code> et <code>on_each_login</code>. Par défaut, <code>on_each_login</code> pour les nouvelles connexions.</td>
+<td>`ATTRIBUTE_UPDATE_VALUE`</td>
+<td>Indique quand vous souhaitez autoriser les mises à jour des attributs racine du profil utilisateur. Les valeurs valides sont `on_first_login` et `on_each_login`. Par défaut, `on_each_login` pour les nouvelles connexions.</td>
 </tr>
 </tbody>
 </table>

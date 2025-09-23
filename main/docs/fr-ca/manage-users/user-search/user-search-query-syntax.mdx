@@ -1,13 +1,13 @@
 ---
 title: "Syntaxe de la requête de recherche de l’utilisateur"
 permalink: "user-search-query-syntax"
+'description': "Décrit la syntaxe de la chaîne de requête de recherche d’utilisateurs d’Auth0."
 'og:title': "Syntaxe de la requête de recherche de l’utilisateur"
 'og:description': "Décrit la syntaxe de la chaîne de requête de recherche d’utilisateurs d’Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Syntaxe de la requête de recherche de l’utilisateur"
 'twitter:description': "Décrit la syntaxe de la chaîne de requête de recherche d’utilisateurs d’Auth0."
 ---
-# Syntaxe de la requête de recherche de l’utilisateur
 
 <Note>
 
@@ -40,52 +40,52 @@ Vous pouvez rechercher des utilisateurs à l’aide de tous les [champs de profi
 </thead>
 <tbody>
 <tr>
-<td><code>phone_number</code></td>
+<td>`phone_number`</td>
 <td>texte</td>
 <td>Le numéro de téléphone de l’utilisateur. Valide uniquement pour les utilisateurs disposant d’un appareil compatible SMS.</td>
 </tr>
 <tr>
-<td><code>phone_verified</code></td>
+<td>`phone_verified`</td>
 <td>booléen</td>
-<td>La valeur <code>true/false</code> (« vrai/faux ») indique si le numéro de téléphone de l’utilisateur a été vérifié. Valide uniquement pour les utilisateurs disposant d’un appareil compatible SMS.</td>
+<td>La valeur `true/false` (« vrai/faux ») indique si le numéro de téléphone de l’utilisateur a été vérifié. Valide uniquement pour les utilisateurs disposant d’un appareil compatible SMS.</td>
 </tr>
 <tr>
-<td><code>logins_count</code></td>
+<td>`logins_count`</td>
 <td>entier</td>
-<td>Le nombre de fois où l’utilisateur s’est connecté. Si un utilisateur est bloqué et se connecte, la session bloquée est comptabilisée dans <code>logins_count</code> et met à jour la valeur <code>last_login</code>.</td>
+<td>Le nombre de fois où l’utilisateur s’est connecté. Si un utilisateur est bloqué et se connecte, la session bloquée est comptabilisée dans `logins_count` et met à jour la valeur `last_login`.</td>
 </tr>
 <tr>
-<td><code>created_at</code></td>
+<td>`created_at`</td>
 <td>date time</td>
 <td>Horodatage de la création du profil utilisateur.</td>
 </tr>
 <tr>
-<td><code>updated_at</code></td>
+<td>`updated_at`</td>
 <td>date time</td>
 <td>Horodatage de la dernière mise à jour/modification du profil de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>last_login</code></td>
+<td>`last_login`</td>
 <td>date time</td>
-<td>L’horodatage de la dernière connexion de l’utilisateur. Dans le cas où cette propriété est exécutée à l’intérieur d’une <a href="/docs/rules">Rule (Règle</a> avec l’objet <code>user</code>, la valeur sera employée pour la connexion qui a déclenché la règle (puisque les Règles s’exécutent après la connexion réelle).</td>
+<td>L’horodatage de la dernière connexion de l’utilisateur. Dans le cas où cette propriété est exécutée à l’intérieur d’une <a href="/docs/fr-ca/rules">Rule (Règle</a> avec l’objet `user`, la valeur sera employée pour la connexion qui a déclenché la règle (puisque les Règles s’exécutent après la connexion réelle).</td>
 </tr>
 <tr>
-<td><code>last_ip</code></td>
+<td>`last_ip`</td>
 <td>texte (adresse IP valide)</td>
 <td>L’adresse IP employée lors de la dernière connexion de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>blocked</code></td>
+<td>`blocked`</td>
 <td>booléen</td>
-<td>La valeur <code>true</code> (vrai) ou <code>false</code> (faux) indique si l’utilisateur a été bloqué. Remarque : <code>true</code>   rapporte <em>seulement</em> les utilisateurs bloqués via le tableau de bord de l’administrateur et Management API; il ne rapporte pas les utilisateurs bloqués par la détection d’anomalie par force brute.</td>
+<td>La valeur `true` (vrai) ou `false` (faux) indique si l’utilisateur a été bloqué. Remarque : `true`   rapporte <em>seulement</em> les utilisateurs bloqués via le tableau de bord de l’administrateur et Management API; il ne rapporte pas les utilisateurs bloqués par la détection d’anomalie par force brute.</td>
 </tr>
 <tr>
-<td><code>email.domain</code></td>
+<td>`email.domain`</td>
 <td>texte</td>
 <td>La partie domaine du courriel de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>organization_id</code></td>
+<td>`organization_id`</td>
 <td>text (identifiant d’organization valide)</td>
 <td>L’organization dont l’utilisateur est membre.</td>
 </tr>
@@ -111,19 +111,19 @@ Pour trouver des correspondances exactes, utilisez des guillemets doubles : `na
 Par exemple, pour trouver les utilisateurs portant le nom `jane smith`, utilisez `q=name:"jane smith"` :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/users?q=name%3A%22jane%20smith%22&search_engine=v3' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users?q=name%3A%22jane%20smith%22&search_engine=v3");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -140,14 +140,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/users?q=name%3A%22jane%20smith%22&search_engine=v3")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -160,8 +160,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users?q=name%3A%22jane%20smith%22&search_engine=v3"]
@@ -182,7 +182,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users?q=name%3A%22jane%20smith%22&search_engine=v3",
@@ -204,8 +204,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -215,7 +215,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -227,8 +227,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users?q=name%3A%22jane%20smith%22&search_engine=v3")! as URL,
@@ -261,19 +261,19 @@ Les recherches par caractères de remplacement peuvent être effectuées sur les
 * Pour la correspondance des suffixes, les éléments littéraux doivent comporter trois caractères ou plus. Par exemple, `name:*usa` est autorisé, mais `name:*sa` ne l’est pas.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/users?q=name%3Ajohn\*&search_engine=v3' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users?q=name%3Ajohn\*&search_engine=v3");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -290,14 +290,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/users?q=name%3Ajohn\*&search_engine=v3")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -310,8 +310,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users?q=name%3Ajohn\*&search_engine=v3"]
@@ -332,7 +332,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users?q=name%3Ajohn\*&search_engine=v3",
@@ -354,8 +354,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -365,7 +365,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -377,8 +377,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users?q=name%3Ajohn\*&search_engine=v3")! as URL,
@@ -409,19 +409,19 @@ Vous pouvez utiliser des plages dans vos requêtes de recherche d’utilisateurs
 * Utilisez les plages en combinaison avec des caractères de remplacement. Par exemple, pour trouver tous les utilisateurs ayant plus de 100 connexions, utilisez `q=logins_count:{100 TO *]`.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/users?q=logins_count%3A%7B100%20TO%20\*%5D&search_engine=v3' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users?q=logins_count%3A%7B100%20TO%20\*%5D&search_engine=v3");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -438,14 +438,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/users?q=logins_count%3A%7B100%20TO%20\*%5D&search_engine=v3")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -458,8 +458,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users?q=logins_count%3A%7B100%20TO%20\*%5D&search_engine=v3"]
@@ -480,7 +480,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users?q=logins_count%3A%7B100%20TO%20\*%5D&search_engine=v3",
@@ -502,8 +502,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -513,7 +513,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -525,8 +525,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users?q=logins_count%3A%7B100%20TO%20\*%5D&search_engine=v3")! as URL,
@@ -555,7 +555,7 @@ La liste de Management API Auth0 [ou le point de terminaison de recherche des u
 
 Vous trouverez ci-dessous un exemple de profil utilisateur `user_metadata` :
 
-```json
+```json lines
 {
   "favorite_color": "blue",
   "approved": false,

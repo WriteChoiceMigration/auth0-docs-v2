@@ -1,13 +1,13 @@
 ---
 title: "Authentification avec mTLS"
 permalink: "authenticate-with-mtls"
+'description': "Découvrez comment authentifier un client en utilisant mTLS."
 'og:title': "Authentification avec mTLS"
 'og:description': "Découvrez comment authentifier un client en utilisant mTLS."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Authentification avec mTLS"
 'twitter:description': "Découvrez comment authentifier un client en utilisant mTLS."
 ---
-# Authentification avec mTLS
 
 ## mTLS dans OAuth/OIDC
 
@@ -20,11 +20,11 @@ En 2020, Internet Engineering Task Force (IETF) a publié [RFC 8705](https://
 
 Pour sécuriser un flux OAuth avec mTLS, les clients transmettent un certificat mTLS au point de terminaison TLS sur le réseau périphérique lors de l’établissement de la connexion TLS. Avant que le serveur d’autorisation ne puisse traiter la requête, il doit d’abord valider le certificat mTLS du client.
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/4SlprP2uTYMCoLIPLsOl4v/414ad59c922ae2d23a3b4e6808d2ce20/HRI_diagrams_-_mtls_diagram_1__2_.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/4SlprP2uTYMCoLIPLsOl4v/414ad59c922ae2d23a3b4e6808d2ce20/HRI_diagrams_-_mtls_diagram_1__2_.png)</Frame>
 
 En outre, mTLS peut également être utilisé pour garantir qu’un jeton d’accès ne soit exploité que par la partie désignée, un mécanisme appelé contrainte d’expéditeur ou liaison de jeton. Lorsque le client appelle le point de terminaison `/oauth/token` sur le serveur d’autorisation au moyen d’une connexion mTLS, le jeton d’accès généré contient des informations permettant au serveur de ressources de vérifier que le certificat TLS du client correspond à celui associé au jeton d’accès.
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/7qocbfqySAnu85ph6WVSGU/343f49bd85195745a655ebc4adff448e/HRI_diagrams_-_mtls_diagram_2__1_.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/7qocbfqySAnu85ph6WVSGU/343f49bd85195745a655ebc4adff448e/HRI_diagrams_-_mtls_diagram_2__1_.png)</Frame>
 
 **Remarque** : l’authentification client mTLS et la liaison de jeton mTLS peuvent être utilisées de manière indépendante. L’authentification client mTLS peut être mise en œuvre sans liaison de jeton mTLS, et la liaison de jeton mTLS peut être combinée avec d’autres méthodes d’authentification client, telles que le secret client ou la clé privée <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">JWT</Tooltip>. Même lorsque d’autres méthodes d’authentification client sont employées, le client envoie toujours son certificat au serveur d’autorisation pour assurer la liaison de jeton mTLS.
 
@@ -34,7 +34,7 @@ mTLS pour Auth0 s'appuie sur des [domaines personnalisés](/docs/fr-ca/customize
 
 Les appels client authentifiés à Auth0, qui nécessitent habituellement un secret client, sont d’abord redirigés vers le périphérique client. Cela est déjà en place pour les domaines personnalisés utilisant des certificats gérés par le client. Le client Edge effectue la négociation mTLS avec le client et valide son certificat. Une fois le certificat client validé, la requête est ensuite transmise au domaine périphérique du locataire sur Auth0, en incluant le certificat client validé dans un en-tête HTTP avec la clé correcte `cname-api-key`, conformément à la fonctionnalité des domaines personnalisés.
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/7p3tqUtBeMAp4fBbbemhOh/bf2257f19da57f9f00a0506ed89c9659/HRI_diagrams_-_mtls_diagram_3__1_.png)</Frame>
+<Frame>![null](/images/fr-ca/cdy7uua7fh8z/7p3tqUtBeMAp4fBbbemhOh/bf2257f19da57f9f00a0506ed89c9659/HRI_diagrams_-_mtls_diagram_3__1_.png)</Frame>
 
 ## Fait un appel au serveur d’autorisation
 
@@ -46,7 +46,7 @@ Une réponse réussie retourne le document de découverte OIDC ou un objet JSON
 
 Si l’authentification client mTLS est activée, le document de découverte OIDC inclut le `token_endpoint_auth_methods_supported` property, which contains either `tls_client_auth` ou `self_signed_tls_client_auth` :
 
-```json
+```json lines
 {
   ...
   "token_endpoint_auth_methods_supported": ["tls_client_auth"]
@@ -56,7 +56,7 @@ Si l’authentification client mTLS est activée, le document de découverte O
 
 Si la liaison de jeton mTLS est activée, le document de découverte OIDC définit la propriété `tls_client_certificate_bound_access_tokens` sur `true` :
 
-```json
+```json lines
 {
   ...
   "tls_client_certificate_bound_access_tokens": true
@@ -68,7 +68,7 @@ Les environnements prenant en charge les alias de point de terminaison mTLS exp
 
 Dans l’exemple de code suivant, la propriété du `token_endpoint` est exposée deux fois. Le point de terminaison à utiliser pour les appels mTLS est répertorié sous `mtls_endpoint_aliases`, ou `https://mtls.auth.bank.com/oauth/token` :
 
-```json
+```json lines
 {
   ...
   "mtls_endpoint_aliases": {

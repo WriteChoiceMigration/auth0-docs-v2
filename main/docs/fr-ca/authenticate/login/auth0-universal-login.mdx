@@ -1,13 +1,13 @@
 ---
 title: "Connexion universelle Auth0"
 permalink: "auth0-universal-login"
+'description': "Décrit comment la connexion universelle Auth0 vous fournit les moyens de prouver l’identité de vos utilisateurs avec notre serveur d’autorisation."
 'og:title': "Connexion universelle Auth0"
 'og:description': "Décrit comment la connexion universelle Auth0 vous fournit les moyens de prouver l’identité de vos utilisateurs avec notre serveur d’autorisation."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Connexion universelle Auth0"
 'twitter:description': "Décrit comment la connexion universelle Auth0 vous fournit les moyens de prouver l’identité de vos utilisateurs avec notre serveur d’autorisation."
 ---
-# Connexion universelle Auth0
 
 La connexion universelle Auth0 procure la fonctionnalité essentielle d’un serveur d’autorisation : le flux de connexion. Lorsqu’un utilisateur doit prouver son identité pour accéder à votre application, vous pouvez le rediriger vers la connexion universelle et laisser Auth0 gérer le processus d’authentification.
 
@@ -41,11 +41,11 @@ Auth0 utilise les normes suivantes pour améliorer l’accès aux flux de Connex
 
 Vous avez la possibilité d’activer ces normes à l’aide du bouton bascule situé dans votre Auth0 Dashboard en accédant à [**Image de marque > Connexion universelle > Options avancées**](https://manage.auth0.com/#/universal-login/customizations-new).
 
-<Frame>![In Early Access, this toggle enables WCAG elements in your sign-in flow. ](//images.ctfassets.net/cdy7uua7fh8z/5O4DDy1h0rgbYNzKwm1lKY/e3c5ec0d81c8814b802f2ca64b4a2619/WCAG_-_FR.png)</Frame>
+<Frame>![In Early Access, this toggle enables WCAG elements in your sign-in flow. ](/images/fr-ca/cdy7uua7fh8z/5O4DDy1h0rgbYNzKwm1lKY/e3c5ec0d81c8814b802f2ca64b4a2619/WCAG_-_FR.png)</Frame>
 
-Vous pouvez également activer cette fonctionnalité dans Management API en mettant à jour l’indicateur `enable_ulp_wcag_compliance` dans le [point de terminaison Mise à jour des paramètres de l’invite](/docs/api/management/v2/prompts/patch-prompts) :
+Vous pouvez également activer cette fonctionnalité dans Management API en mettant à jour l’indicateur `enable_ulp_wcag_compliance` dans le [point de terminaison Mise à jour des paramètres de l’invite](/docs/fr-ca/api/management/v2/prompts/patch-prompts) :
 
-```bash
+```javascript lines
 curl -L -X PATCH 'https://<tenant_name>.auth0.com/api/v2/prompts' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
@@ -84,14 +84,14 @@ Si vous décidez de mettre en œuvre la Connexion classique, vous pouvez personn
 Après avoir activé la Connexion universelle ou la Connexion classique dans votre locataire, suivez les étapes ci-dessous pour mettre en œuvre l’expérience.
 
 1. [Enregistrez votre application](https://auth0.com/docs/get-started/auth0-overview/create-applications) avec Auth0.
-2. Configurez votre application pour qu’elle appelle le [point de terminaison de connexion](/docs/api/authentication#login) de l’Authentication API afin de déclencher le flux de connexion et de gérer la réponse. Vous pouvez configurer cela directement ou utiliser l’une des trousses [SDK](https://auth0.com/docs/libraries) d’Auth0.
+2. Configurez votre application pour qu’elle appelle le [point de terminaison de connexion](/docs/fr-ca/api/authentication#login) de l’Authentication API afin de déclencher le flux de connexion et de gérer la réponse. Vous pouvez configurer cela directement ou utiliser l’une des trousses [SDK](https://auth0.com/docs/libraries) d’Auth0.
 3. Créez une connexion par [base de données](/docs/fr-ca/get-started/applications/set-up-database-connections), d’[entreprise](/docs/fr-ca/authenticate/enterprise-connections) ou via [réseau social](/docs/fr-ca/authenticate/identity-providers/social-identity-providers) et activez-la pour votre application.
 
 ### Rendez-vous à la page de connexion
 
-Vous pouvez appeler directement le [point de terminaison de la connexion](/docs/api/authentication#login) à partir de n’importe quel navigateur.
+Vous pouvez appeler directement le [point de terminaison de la connexion](/docs/fr-ca/api/authentication#login) à partir de n’importe quel navigateur.
 
-```
+``` lines
 https://{yourDomain}/authorize?
   response_type=code|token&
   client_id={yourClientId}&
@@ -113,7 +113,7 @@ En option, vous pouvez inclure le paramètre de `connexion` pour inviter les uti
 
 ### Utiliser les guides Quickstart (Démarrage rapide)
 
-Pour plus d’informations sur la façon de configurer la Connexion universelle pour votre application, consultez les [Guides de démarrage rapide](/docs/quickstarts). Choisissez l’approche qui correspond le mieux à vos technologies et suivez le guide de démarrage rapide pour un aperçu de la mise en œuvre.
+Pour plus d’informations sur la façon de configurer la Connexion universelle pour votre application, consultez les [Guides de démarrage rapide](/docs/fr-ca/quickstarts). Choisissez l’approche qui correspond le mieux à vos technologies et suivez le guide de démarrage rapide pour un aperçu de la mise en œuvre.
 
 ## En savoir plus
 

@@ -1,12 +1,14 @@
 ---
 title: "Auth0"
 permalink: "ionic-vue"
+'description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:title': "Auth0"
 'og:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0"
 'twitter:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 ---
+
 # Ionic & Capacitor (Vue)
 
 <Frame>![Gravatar for steve.hobbs@auth0.com](//www.gravatar.com/avatar/f771aa7b7fa0220130cb6a9f243d7327?d=mm&r=g&s=50)</Frame>
@@ -46,7 +48,7 @@ You should also be familiar with the [Capacitor development workflow](https://ca
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Native Applications](/docs/architecture-scenarios/application/mobile-api) and which [protocol](/docs/api-auth/grant/authorization-code-pkce) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/fr-ca/overview), how it [integrates with Native Applications](/docs/fr-ca/architecture-scenarios/application/mobile-api) and which [protocol](/docs/fr-ca/api-auth/grant/authorization-code-pkce) it uses.
 
 </Note>
 
@@ -89,7 +91,7 @@ Go to the [Application Settings](https://manage.auth0.com/#/applications/{yourCl
 
 You should set the **Allowed Callback URL** to:
 
-```
+```bash lines
 YOUR_PACKAGE_ID://{yourDomain}/capacitor/YOUR_PACKAGE_ID/callback
 ```
 
@@ -99,7 +101,7 @@ A logout URL is a URL in your application that Auth0 can return to after the use
 
 You should set the **Allowed Logout URLs** to
 
-```
+```bash lines
 YOUR_PACKAGE_ID://{yourDomain}/capacitor/YOUR_PACKAGE_ID/callback
 ```
 
@@ -107,7 +109,7 @@ YOUR_PACKAGE_ID://{yourDomain}/capacitor/YOUR_PACKAGE_ID/callback
 
 To be able to make requests from your application to Auth0, set the following **Allowed Origins** in your [Application Settings](https://manage.auth0.com/#/applications/{yourClientId}/settings).
 
-```
+```bash lines
 capacitor://localhost, http://localhost
 ```
 
@@ -119,7 +121,7 @@ Lastly, be sure that the **Application Type** for your application is set to **N
 
 Run the following command within your project directory to install the Auth0 Vue SDK:
 
-```
+```bash lines
 npm install @auth0/auth0-vue
 ```
 
@@ -129,7 +131,7 @@ The SDK exposes several types that help you integrate Auth0 with your Vue applic
 
 This quickstart and sample make use of some of Capacitor's official plugins. Install these into your app using the following command:
 
-```
+```bash lines
 npm install @capacitor/browser @capacitor/app
 ```
 
@@ -148,7 +150,7 @@ The SDK exports `createAuth0`, a composable that contains all the services requi
 
 Open `src/main.ts` and install the plugin using `app.use`
 
-```
+```javascript lines
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
@@ -216,7 +218,7 @@ By default, the SDK's `loginWithRedirect` method uses `window.location.href` to 
 
 Add a new file `LoginButton.vue` with the following code:
 
-```
+```html lines
 <template>
   <ion-button @click="login">Log in</ion-button>
 </template>
@@ -268,7 +270,7 @@ The `Browser.close()` method should close the browser when this event is raised.
 
 Add the following capacitor application listener to your main `App` component:
 
-```
+```html lines
 <template>
   <ion-app>
     <ion-router-outlet />
@@ -334,7 +336,7 @@ Similar to the login step, if you do not set `openUrl` when calling `logout`, th
 
 Create a new file `LogoutButton.vue` and add the following code to the file. Then, add the `LogoutButton` component to your app.
 
-```
+```html lines
 <template>
   <ion-button @click="onLogout">Log out</ion-button>
 </template>
@@ -382,7 +384,7 @@ Add the `LogoutButton` component to your application. When you click it, verify 
 
 The Auth0 Vue SDK helps you retrieve the [profile information](https://auth0.com/docs/users/concepts/overview-user-profile) associated with logged-in users quickly in whatever component you need, such as their name or profile picture, to personalize the user interface. The profile information is available through the `user` property exposed by the `useAuth0()` composable. Take this `UserProfile` component as an example of how to use it:
 
-```
+```html lines
 <template>
   <div v-if="isLoading">Loading ...</div>
   <div v-else-if="!user"></div>
@@ -422,7 +424,7 @@ Add the `UserProfile` component to your application, and verify that you can dis
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

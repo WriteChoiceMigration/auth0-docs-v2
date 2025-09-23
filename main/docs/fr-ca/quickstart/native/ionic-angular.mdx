@@ -1,12 +1,14 @@
 ---
 title: "Auth0"
 permalink: "ionic-angular"
+'description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:title': "Auth0"
 'og:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0"
 'twitter:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 ---
+
 # Ionic & Capacitor (Angular)
 
 <Frame>![Gravatar for steve.hobbs@auth0.com](//www.gravatar.com/avatar/f771aa7b7fa0220130cb6a9f243d7327?d=mm&r=g&s=50)</Frame>
@@ -46,7 +48,7 @@ You should also be familiar with the [Capacitor development workflow](https://ca
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Native Applications](/docs/architecture-scenarios/application/mobile-api) and which [protocol](/docs/api-auth/grant/authorization-code-pkce) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/fr-ca/overview), how it [integrates with Native Applications](/docs/fr-ca/architecture-scenarios/application/mobile-api) and which [protocol](/docs/fr-ca/api-auth/grant/authorization-code-pkce) it uses.
 
 </Note>
 
@@ -89,7 +91,7 @@ Go to the [Application Settings](https://manage.auth0.com/#/applications/{yourCl
 
 You should set the **Allowed Callback URL** to:
 
-```
+```bash lines
 YOUR_PACKAGE_ID://{yourDomain}/capacitor/YOUR_PACKAGE_ID/callback
 ```
 
@@ -99,7 +101,7 @@ A logout URL is a URL in your application that Auth0 can return to after the use
 
 You should set the **Allowed Logout URLs** to
 
-```
+```bash lines
 YOUR_PACKAGE_ID://{yourDomain}/capacitor/YOUR_PACKAGE_ID/callback
 ```
 
@@ -107,7 +109,7 @@ YOUR_PACKAGE_ID://{yourDomain}/capacitor/YOUR_PACKAGE_ID/callback
 
 To be able to make requests from your application to Auth0, set the following **Allowed Origins** in your [Application Settings](https://manage.auth0.com/#/applications/{yourClientId}/settings).
 
-```
+```bash lines
 capacitor://localhost, http://localhost
 ```
 
@@ -119,7 +121,7 @@ Lastly, be sure that the **Application Type** for your application is set to **N
 
 Run the following command within your project directory to install the Auth0 Angular SDK:
 
-```
+```bash lines
 npm install @auth0/auth0-angular
 ```
 
@@ -129,7 +131,7 @@ The SDK exposes several types that help you integrate Auth0 with your Angular ap
 
 This quickstart and sample make use of some of Capacitor's official plugins. Install these into your app using the following command:
 
-```
+```bash lines
 npm install @capacitor/browser @capacitor/app
 ```
 
@@ -151,7 +153,7 @@ The SDK exports `AuthModule`, a module that contains all the services required f
 * Add `AuthModule` to the application by calling `AuthModule.forRoot` and adding to your application module's `imports` array
 * Specify the configuration for the Auth0 Angular SDK
 
-```javascript
+```javascript lines
 // Import the types from the SDK
 import { AuthModule } from '@auth0/auth0-angular';
 import config from '../../capacitor.config';
@@ -218,7 +220,7 @@ By default, the SDK's `loginWithRedirect` method uses `window.location.href` to 
 
 Add a new `LoginButton` component to your application with the following code:
 
-```
+```javascript lines
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Browser } from '@capacitor/browser';
@@ -259,7 +261,7 @@ The `Browser.close()` method should close the browser when this event is raised.
 
 Modify your `App` component and use the `ngOnInit` method to handle the callback from Auth0.
 
-```
+```javascript lines
 import { Component, OnInit, NgZone } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { mergeMap } from 'rxjs/operators';
@@ -336,7 +338,7 @@ Similar to the login step, if you do not set `openUrl` when calling `logout`, th
 
 Create a new `LogoutButton` component and add the following code to the file. Then, add the `LogoutButton` component to your app.
 
-```
+```javascript lines
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Browser } from '@capacitor/browser';
@@ -378,7 +380,7 @@ The Auth0 SDK helps you retrieve the [profile information](https://auth0.com/doc
 
 Create a new component `Profile`, and use the following code to display user profile information in your app.
 
-```
+```javascript lines
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
@@ -405,7 +407,7 @@ Add `ProfileComponent` to your application, and verify that you can display the 
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

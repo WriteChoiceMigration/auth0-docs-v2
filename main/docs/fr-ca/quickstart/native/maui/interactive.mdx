@@ -1,17 +1,19 @@
 ---
 title: "Ajouter une connexion à votre application MAUI"
 permalink: "interactive"
+'description': "Ce tutoriel explique comment ajouter une connexion utilisateur avec Auth0 à une application .NET MAUI."
 'og:title': "Ajouter une connexion à votre application MAUI"
 'og:description': "Ce tutoriel explique comment ajouter une connexion utilisateur avec Auth0 à une application .NET MAUI."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/xamarin.png"
 'twitter:title': "Ajouter une connexion à votre application MAUI"
 'twitter:description': "Ce tutoriel explique comment ajouter une connexion utilisateur avec Auth0 à une application .NET MAUI."
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -87,11 +89,11 @@ Utilisez le gestionnaire de paquet NuGet (Outils -> Gestionnaire de paquets de l
 
 Vous pouvez aussi utiliser la Console du gestionnaire de paquets NuGet (`Install-Package`) ou le `dotnet` interface de ligne de commande (CLI) (`dotnet add`).
 
-```
+``` lines
 Install-Package Auth0.OidcClient.MAUI
 ```
 
-```
+``` lines
 dotnet add package Auth0.OidcClient.MAUI
 ```
 
@@ -105,7 +107,7 @@ Une configuration propre à la plateforme est nécessaire pour utiliser la trous
 
 Créez une nouvelle activité qui étend `WebAuthenticatorCallbackActivity` :
 
-```json
+```csharp lines
 [Activity(NoHistory = true, LaunchMode = LaunchMode.SingleTop, Exported = true)]
 [IntentFilter(new[] { Intent.ActionView },
 Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
@@ -124,7 +126,7 @@ Pour garantir la réactivation correcte de votre application après la redirecti
 
 * Ajouter le protocole correspondant au `Package.appxmanifest`. Dans ce cas, il est défini sur `myapp`, mais vous pouvez le changer à votre guise (veillez également à mettre à jour toutes les URL Auth0 correspondantes).
 
-```
+```xml lines
 <Applications>
 <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
 <Extensions>
@@ -138,7 +140,7 @@ Pour garantir la réactivation correcte de votre application après la redirecti
 
 * Appelez `Activator.Default.CheckRedirectionActivation()` dans le fichier propre à `App.xaml.cs`.
 
-```
+```csharp lines
 public App()
 {
 if (Auth0.OidcClient.Platforms.Windows.Activator.Default.CheckRedirectionActivation())
@@ -153,7 +155,7 @@ this.InitializeComponent();
 
 Pour intégrer Auth0 dans votre application, instanciez une instance de la classe `Auth0Client` en passant une instance de `Auth0ClientOptions` qui contient votre domaine Auth0, votre identifiant client et les permissions requises. De plus, vous devez également configurer `RedirectUri` et `PostLogoutRedirectUri` pour garantir qu’Auth0 peut rediriger vers l’application en utilisant les URL configurées.
 
-```
+```csharp lines
 using Auth0.OidcClient;
 var client = new Auth0Client(new Auth0ClientOptions {
 Domain = "{yourDomain}",
@@ -181,7 +183,7 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 À présent que vous avez configuré votre application Auth0 et la trousse SDK Auth0, vous devez configurer la connexion pour votre projet. Pour ce faire, vous utiliserez la méthode `LoginAsync()` de la trousse SDK pour créer un bouton de connexion qui redirige les utilisateurs vers la page de connexion universelle Auth0.
 
-```javascript
+```csharp lines
 var loginResult = await client.LoginAsync();
 ```
 
@@ -205,7 +207,7 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 Les utilisateurs qui se connectent à votre projet auront également besoin d’un moyen de se déconnecter. Créez un bouton de déconnexion en utilisant la méthode `LogoutAsync()` de la trousse SDK. Lorsque les utilisateurs se déconnectent, ils seront redirigés vers votre point de terminaison de déconnexion Auth0, qui par la suite les redirigera immédiatement vers l’URL de déconnexion que vous avez configurée précédemment dans ce démarrage rapide.
 
-```
+```csharp lines
 await client.LogoutAsync();
 ```
 
@@ -244,7 +246,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/native/maui/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

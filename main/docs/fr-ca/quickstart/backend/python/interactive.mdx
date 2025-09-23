@@ -1,17 +1,19 @@
 ---
 title: "Ajouter une autorisation à votre application API Flask"
 permalink: "interactive"
+'description': "Ce guide explique comment intégrer Auth0 à n’importe quelle API Python, nouvelle ou ancienne, développée avec Flask."
 'og:title': "Ajouter une autorisation à votre application API Flask"
 'og:description': "Ce guide explique comment intégrer Auth0 à n’importe quelle API Python, nouvelle ou ancienne, développée avec Flask."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/python.png"
 'twitter:title': "Ajouter une autorisation à votre application API Flask"
 'twitter:description': "Ce guide explique comment intégrer Auth0 à n’importe quelle API Python, nouvelle ou ancienne, développée avec Flask."
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -27,7 +29,7 @@ permalink: "interactive"
 
 [View on Github](https://github.com/auth0-samples/auth0-python-api-samples/tree/master/00-Starter-Seed) Log In & Download Sample
 
-1. [Docs](/docs/fr-ca)
+1. [Docs](/docs/fr-ca/fr-ca)
 3. [Quickstarts](/docs/fr-ca/quickstarts)
 5. [Backend/API](/docs/fr-ca/quickstart/backend)
 7. [Python API](/docs/fr-ca/quickstart/backend/python/interactive)
@@ -58,7 +60,7 @@ Les autorisations vous permettent de définir comment les ressources peuvent êt
 
 Vous pouvez définir les autorisations autorisées dans la vue **Permissions (Autorisations)** de la section [APIs (API)](https://manage.auth0.com/#/apis) d'Auth0 Dashboard.
 
-![Auth0 Dashboard> Applications > APIs (API) > [Specific API (API précise)] > Onglet Permissions (Autorisations)](//images.ctfassets.net/cdy7uua7fh8z/1s3Yp5zqJiKiSWqbPSezNO/677a3405b2853f5fdf9e42f6e83ceba7/Quickstarts_API_-_French.png)
+![Auth0 Dashboard> Applications > APIs (API) > [Specific API (API précise)] > Onglet Permissions (Autorisations)](/images/fr-ca/cdy7uua7fh8z/1s3Yp5zqJiKiSWqbPSezNO/677a3405b2853f5fdf9e42f6e83ceba7/Quickstarts_API_-_French.png)
 
 <Note>
 
@@ -72,7 +74,7 @@ Cet exemple utilise la permission `read:messages`.
 
 Ajoutez les dépendances suivantes à votre fichier `requirements.txt` :
 
-```
+```powershell lines
 # /requirements.txt
 flask
 
@@ -113,24 +115,24 @@ Le decorator `require_auth` sur la route `private_scoped` prend en charge un arg
 
 Pour appeler votre API, vous avez besoin d’un jeton d’accès. Vous pouvez obtenir un jeton d’accès à des fins de test dans la vue **Test** dans vos [API settings (Paramètres API)](https://manage.auth0.com/#/apis).
 
-![Auth0 Dashboard> Applications > API > [API specifique] > Onglet Test](//images.ctfassets.net/cdy7uua7fh8z/6jeVBuypOGX5qMRXeJn5ow/8aa621c6d95e3f21115493a19ab05f7a/Quickstart_Example_App_-_API.png)
+![Auth0 Dashboard> Applications > API > [API specifique] > Onglet Test](/images/fr-ca/cdy7uua7fh8z/6jeVBuypOGX5qMRXeJn5ow/8aa621c6d95e3f21115493a19ab05f7a/Quickstart_Example_App_-_API.png)
 
 Fournir le jeton d’accès comme un en-tête `Authorization` dans vos demandes.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request get \
 --url 'http:///{yourDomain}/api_path' \
 --header 'authorization: Bearer YOUR_ACCESS_TOKEN_HERE'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("http:///{yourDomain}/api_path");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer YOUR_ACCESS_TOKEN_HERE");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -147,14 +149,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("http:///{yourDomain}/api_path")
 .header("authorization", "Bearer YOUR_ACCESS_TOKEN_HERE")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'get',
@@ -166,8 +168,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer YOUR_ACCESS_TOKEN_HERE" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http:///{yourDomain}/api_path"]
@@ -188,7 +190,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "http:///{yourDomain}/api_path",
@@ -210,8 +212,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPConnection("")
 headers = { 'authorization': "Bearer YOUR_ACCESS_TOKEN_HERE" }
@@ -221,7 +223,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 url = URI("http:///{yourDomain}/api_path")
@@ -230,8 +232,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer YOUR_ACCESS_TOKEN_HERE'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer YOUR_ACCESS_TOKEN_HERE"]
 let request = NSMutableURLRequest(url: NSURL(string: "http:///{yourDomain}/api_path")! as URL,
@@ -270,7 +272,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/backend/python/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

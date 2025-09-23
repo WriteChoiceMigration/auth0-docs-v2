@@ -1,13 +1,13 @@
 ---
 title: "Authentification avec clé privée JWT"
 permalink: "authenticate-with-private-key-jwt"
+'description': "Décrit comment construire une assertion pour utiliser l’authentification par clé privée JWT."
 'og:title': "Authentification avec clé privée JWT"
 'og:description': "Décrit comment construire une assertion pour utiliser l’authentification par clé privée JWT."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Authentification avec clé privée JWT"
 'twitter:description': "Décrit comment construire une assertion pour utiliser l’authentification par clé privée JWT."
 ---
-# Authentification avec clé privée JWT
 
 <Card title="Before you start">
 
@@ -65,7 +65,7 @@ Nous vous recommandons de construire le jeton à l’aide d’outils standard ou
 
 Dans l’exemple ci-dessous, le script Node.js utilise un [jose package](https://github.com/panva/jose) pour générer l’assertion :
 
-```javascript
+```javascript lines
 const { SignJWT } = require('jose')
 const crypto = require("crypto");
 const uuid = require("uuid");
@@ -96,11 +96,11 @@ main();
 
 Exemple d’assertion client signée avec une clé privée :
 
-<Frame>![private key example](//images.ctfassets.net/cdy7uua7fh8z/4O8zb1gZnEmUQ6FrRkfmlc/a30b73e09d51ca0b4bf929b91571a80a/2023-03-13_16-53-54.png)</Frame>
+<Frame>![private key example](/images/fr-ca/cdy7uua7fh8z/4O8zb1gZnEmUQ6FrRkfmlc/a30b73e09d51ca0b4bf929b91571a80a/2023-03-13_16-53-54.png)</Frame>
 
 Correspond à :
 
-```json
+```json lines
 {
   "alg": "RS256",
   "kid": "my kid"
@@ -130,7 +130,7 @@ Pour échanger l’assertion JWT contre un jeton d’accès, appelez le [point d
 * `$client_assertion`: Affirmation JWT
 * `$resource_server_identifier` : identifiant du serveur de ressources. Pour en savoir plus, lisez [Enregistrer des API](/docs/fr-ca/get-started/auth0-overview/set-up-apis).
 
-```bash
+```bash lines
 curl --location --request POST 'https://$tenant/oauth/token' \
   --header 'Content-Type: application/x-www-form-urlencoded' \
   --data-urlencode 'grant_type=client_credentials' \

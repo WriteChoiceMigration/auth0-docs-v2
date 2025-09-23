@@ -1,13 +1,13 @@
 ---
 title: "Configuration des notifications poussées pour MFA"
 permalink: "configure-push-notifications-for-mfa"
+'description': "Décrit comment configurer les notifications poussées pour MFA (authentification multifactorielle)."
 'og:title': "Configuration des notifications poussées pour MFA"
 'og:description': "Décrit comment configurer les notifications poussées pour MFA (authentification multifactorielle)."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configuration des notifications poussées pour MFA"
 'twitter:description': "Décrit comment configurer les notifications poussées pour MFA (authentification multifactorielle)."
 ---
-# Configuration des notifications poussées pour MFA
 
 Les trousses SDK [Guardian](/docs/fr-ca/secure/multi-factor-authentication/auth0-guardian) pour [iOS](/docs/fr-ca/secure/multi-factor-authentication/auth0-guardian/guardian-for-ios-sdk) et [Android](/docs/fr-ca/secure/multi-factor-authentication/auth0-guardian/guardian-for-android-sdk) vous permettent d’utiliser une application personnalisée pour les services de notification poussées spécifiques à un fournisseur. Vous pouvez configurer les notifications poussées pour la plateforme AWS Simple Notification Service (SNS) ou utiliser les services Direct to Vendor pour ajouter les identifiants Firebase Cloud Messaging (FCM) et Notification poussée Apple (APN) directement dans Auth0.
 
@@ -26,7 +26,7 @@ Pour recevoir des notifications poussées de Guardian, vous devez d’abord remp
 2. Sélectionnez **Personnaliser** pour accéder à d’autres paramètres.
 3. Dans la section Service de notification push, choisissez **Amazon SNS.**
 
-<Frame>![Auth0 Dashboard > Security > Multi-factor Auth > Guardian > Custom > Amazon SNS](//images.ctfassets.net/cdy7uua7fh8z/6PKSyH99GJ2CalJoG38sfZ/fbe7229dcc6f7d303a582520001b3dc1/Amazon_SNS.png)</Frame>
+<Frame>![Auth0 Dashboard > Security > Multi-factor Auth > Guardian > Custom > Amazon SNS](/images/fr-ca/cdy7uua7fh8z/6PKSyH99GJ2CalJoG38sfZ/fbe7229dcc6f7d303a582520001b3dc1/Amazon_SNS.png)</Frame>
 
 1. Dans la section Configuration SNS d’Amazon, remplissez les champs suivants :
 
@@ -110,7 +110,7 @@ Pour configurer les notifications poussées iOS dans votre Auth0 Dashboard, réc
 4. Exportez le certificat et la clé privée associée dans un fichier P12 sans mot de passe (nom par défaut : `Certificates.p12`).
 5. Pour générer un fichier P12 en utilisant Triple DES au lieu de RC2, exécutez
 
-   ```
+   ``` lines
    openssl pkcs12 -in Certificates.p12 -legacy -nocerts -nodes -out pk.pem -passin pass:"" &&
    openssl pkcs12 -in Certificates.p12 -legacy -nokeys -out cert.crt -passin pass:"" &&
    openssl pkcs12 -export -inkey pk.pem -in cert.crt -descert -out Certificate_3des.p12 -passout pass:"" &&

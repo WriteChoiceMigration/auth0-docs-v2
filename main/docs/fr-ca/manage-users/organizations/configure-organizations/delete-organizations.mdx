@@ -1,13 +1,13 @@
 ---
 title: "Suppression des organisations"
 permalink: "delete-organizations"
+'description': "Découvrez comment supprimer des Organizations à l’aide d’Auth0 Dashboard ou de Management API."
 'og:title': "Suppression des organisations"
 'og:description': "Découvrez comment supprimer des Organizations à l’aide d’Auth0 Dashboard ou de Management API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Suppression des organisations"
 'twitter:description': "Découvrez comment supprimer des Organizations à l’aide d’Auth0 Dashboard ou de Management API."
 ---
-# Suppression des organisations
 
 Lors de la suppression d’une [organisation](/docs/fr-ca/manage-users/organizations/organizations-overview), le lien entre les utilisateurs et l’organisation concernée est supprimé, mais les utilisateurs eux-mêmes ne sont pas supprimés de votre locataire.
 
@@ -31,19 +31,19 @@ Pour supprimer une organisation à partir d’Auth0 Dashboard :
 Effectuez un appel `GET` au point de terminaison`Delete Organization`. Veillez à remplacer les valeurs de remplacement `ORG_ID` et `MGMT_API_ACCESS_TOKEN` par l’identifiant de votre organisation et le jeton d’accès à Management API, respectivement.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request DELETE \
 --url 'https://{yourDomain}/api/v2/organizations/ORG_ID' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/organizations/ORG_ID");
 var request = new RestRequest(Method.DELETE);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -60,14 +60,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.delete("https://{yourDomain}/api/v2/organizations/ORG_ID")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'DELETE',
@@ -79,8 +79,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/organizations/ORG_ID"]
@@ -101,7 +101,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/organizations/ORG_ID",
@@ -123,8 +123,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MGMT_API_ACCESS_TOKEN" }
@@ -134,7 +134,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -146,8 +146,8 @@ request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/organizations/ORG_ID")! as URL,
@@ -186,12 +186,12 @@ Si vous utilisez des domaines personnalisés, votre domaine est le nom de votre 
 </thead>
 <tbody>
 <tr>
-<td><code>ORG_ID</code></td>
+<td>`ORG_ID`</td>
 <td>ID de l’organisation que vous souhaitez supprimer.</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><a href="/docs/tokens/management-api-access-tokens">Jeton d’accès à Management API</a> avec la permission <code>delete:organizations</code>.</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td><a href="/docs/fr-ca/tokens/management-api-access-tokens">Jeton d’accès à Management API</a> avec la permission `delete:organizations`.</td>
 </tr>
 </tbody>
 </table>

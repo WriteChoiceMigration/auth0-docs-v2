@@ -1,13 +1,13 @@
 ---
 title: "Exemples de cas d’utilisation : permissions et demandes"
 permalink: "sample-use-cases-scopes-and-claims"
+'description': "Découvrez comment utiliser les permissions et les demandes avec les applications et les API."
 'og:title': "Exemples de cas d’utilisation : permissions et demandes"
 'og:description': "Découvrez comment utiliser les permissions et les demandes avec les applications et les API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Exemples de cas d’utilisation : permissions et demandes"
 'twitter:description': "Découvrez comment utiliser les permissions et les demandes avec les applications et les API."
 ---
-# Exemples de cas d’utilisation : permissions et demandes
 
 Dans ces exemples, nous utilisons le [flux de code d’autorisation](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow) pour authentifier un utilisateur et demander les permissions et les jetons nécessaires. Pour plus de détails sur les paramètres des requêtes ou pour savoir comment implémenter entièrement ce flux, lisez notre tutoriel : [Ajouter une connexion aux applications Web standard](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow/add-login-auth-code-flow).
 
@@ -17,7 +17,7 @@ Dans cet exemple, nous souhaitons authentifier un utilisateur et obtenir des dé
 
 1. Lancer le flux d’authentification en envoyant l’utilisateur à l’URL d’autorisation :
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
      response_type=code&
      client_id={yourClientId}&
@@ -42,7 +42,7 @@ Dans cet exemple, nous souhaitons authentifier un utilisateur et obtenir des dé
 2. Une fois que l’utilisateur a consenti (si nécessaire) et qu’Auth0 a redirigé vers votre application, [demandez des jetons](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow/add-login-auth-code-flow).
 3. Extrayez le jeton d’ID de la réponse et [décodez-le](/docs/fr-ca/secure/tokens/id-tokens). Vous devriez voir les demandes suivantes :
 
-   ```json
+   ```json lines
    {
      "name": "John Doe",
      "nickname": "john.doe",
@@ -74,7 +74,7 @@ Avant d’utiliser une API personnalisée, vous devez savoir quelles permissions
 
 1. Lancer le flux d’autorisation en envoyant l’utilisateur à l’URL d’autorisation :
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
      response_type=code&
      client_id={yourClientId}&
@@ -117,7 +117,7 @@ Avant d’utiliser une API personnalisée, vous devez savoir quelles permissions
 
 1. Lancer le flux d’authentification en envoyant l’utilisateur à l’URL d’autorisation :
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
      response_type=code&
      client_id={yourClientId}&
@@ -161,11 +161,11 @@ Auth0 accepte les demandes avec ou sans espace de noms, mais avec certaines rest
 Supposez que :
 
 * À un moment donné, l’utilisateur a sélectionné une méthode `preferred_contact` d’`email` et une `favorite_color``red` et que nous l’avons enregistrée dans le cadre des `user_metadata` de l’utilisateur.
-* Nous avons utilisé la [Management API](/docs/api/management/v2#!/Users/patch_users_by_id) ou le Dashboard pour définir des informations spécifiques à l’application pour cet utilisateur.
+* Nous avons utilisé la [Management API](/docs/fr-ca/api/management/v2#!/Users/patch_users_by_id) ou le Dashboard pour définir des informations spécifiques à l’application pour cet utilisateur.
 
 Dans ce cas le [profil utilisateur normalisé](/docs/fr-ca/manage-users/user-accounts/user-profiles/normalized-user-profiles) stocké par Auth0 est :
 
-```json
+```json lines
 {
   "email": "jane@example.com",
   "email_verified": true,
@@ -179,7 +179,7 @@ Dans ce cas le [profil utilisateur normalisé](/docs/fr-ca/manage-users/user-acc
 
 Pour ce profil, Auth0 renverrait normalement les demandes de jeton d’ID suivantes à votre application :
 
-```json
+```json lines
 {
   "email": "jane@example.com",
   "email_verified": true,
@@ -202,7 +202,7 @@ Pour recevoir les données personnalisées, nous devons [créer une nouvelle act
 2. Saisissez un **Nom** descriptif pour votre Action (par exemple, `Ajouter des métadonnées utilisateur aux jetons`), sélectionnez le déclencheur `Login / Post Login`, car vous allez ajouter l’action au flux de connexion, puis sélectionnez **Créer**.
 3. Localisez l'Éditeur de code d’Actions, copiez-y le code JavaScript suivant et sélectionnez **Enregistrer le brouillon** pour enregistrer vos modifications :
 
-   ```
+   ``` lines
    exports.onExecutePostLogin = async (event, api) => {
      const namespace = 'https://myapp.example.com';
      const { favorite_color, preferred_contact } = event.user.user_metadata;
@@ -225,7 +225,7 @@ Enfin, ajoutez l’Action que vous avez créée dans le [Flux de connexion](http
 
 Avec cette Action activée, Auth0 inclura les demandes personnalisées `favorite_color` et `preferred_contact` dans le jeton d’ID :
 
-```json
+```json lines
 {
   "email": "jane@example.com",
   "email_verified": true,

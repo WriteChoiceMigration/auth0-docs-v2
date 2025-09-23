@@ -1,13 +1,13 @@
 ---
 title: "Migrer des Hooks vers les Actions"
 permalink: "migrate-from-hooks-to-actions"
+'description': "Apprenez à migrer votre code Hooks Auth0 existant vers le code Auth0 Actions."
 'og:title': "Migrer des Hooks vers les Actions"
 'og:description': "Apprenez à migrer votre code Hooks Auth0 existant vers le code Auth0 Actions."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Migrer des Hooks vers les Actions"
 'twitter:description': "Apprenez à migrer votre code Hooks Auth0 existant vers le code Auth0 Actions."
 ---
-# Migrer des Hooks vers les Actions
 
 Lorsque vous convertissez des Hooks existants en Actions, vous devez associer la nouvelle Action au Déclencheur correspondant au type du hook. Si vous suivez les étapes ci-dessous et que vous utilisez les mappages que nous avons identifiés, la fonctionnalité devrait être identique.
 
@@ -111,36 +111,36 @@ Les fonctions du hook sont exportées à l’aide de l’export par défaut, tan
 <tbody>
 <tr>
 <td>Échange d’identifiant du client</td>
-<td><code>onExecuteCredentialsExchange</code></td>
+<td>`onExecuteCredentialsExchange`</td>
 </tr>
 <tr>
 <td>Enregistrement pré-utilisateur</td>
-<td><code>onExecutePreUserRegistration</code></td>
+<td>`onExecutePreUserRegistration`</td>
 </tr>
 <tr>
 <td>Enregistrement post-utilisateur</td>
-<td><code>onExecutePostUserRegistration</code></td>
+<td>`onExecutePostUserRegistration`</td>
 </tr>
 <tr>
 <td>Mot de passe après changement</td>
-<td><code>onExecutePostChangePassword</code></td>
+<td>`onExecutePostChangePassword`</td>
 </tr>
 <tr>
 <td>Envoyer un message par téléphonee</td>
-<td><code>onExecuteSendPhoneMessage</code></td>
+<td>`onExecuteSendPhoneMessage`</td>
 </tr>
 </tbody>
 </table>
 
 **Avant**
 
-```
+```javascript lines
 module.exports = async function myHooksFunction(){}
 ```
 
 **Après**
 
-```javascript
+```javascript lines
 // Client Credentials Exchange
 exports.onExecuteCredentialsExchange = async (event, api) => {}
 
@@ -184,7 +184,7 @@ Pour convertir les secrets des Hooks en Actions :
 
 **Avant**
 
-```
+```javascript lines
 async function (user, context, cb) {
     const { SECRET_NAME } = context.webtask.secrets;
 
@@ -194,7 +194,7 @@ async function (user, context, cb) {
 
 **Après**
 
-```
+```javascript lines
 async (event, api) => {
     const { SECRET_NAME } = event.secrets;
 
@@ -218,7 +218,7 @@ Selon le type du Hook que vous convertissez, l’objet `event` changera :
 
 **Avant**
 
-```
+```javascript lines
 async function (user, context, cb) {
 	const clientId = context.clientID;
 	const tenant = context.connection.tenant
@@ -229,7 +229,7 @@ async function (user, context, cb) {
 
 **Après**
 
-```
+```javascript lines
 async (event, api) => {
 	const clientId = event.client.client_id;
 	const tenant = event.tenant.id;
@@ -254,7 +254,7 @@ Si vous utilisiez auparavant la fonction `Callback()` dans un échange d’infor
 
 Si vous avez ajouté des demandes supplémentaires au jeton d’accès lors d’un hook d’échange d’identifiants clients :
 
-```javascript
+```javascript lines
 // Client Credentials Exchange Hook
 module.exports = function(client, scope, audience, context, cb) {
   var access_token = {};
@@ -267,7 +267,7 @@ module.exports = function(client, scope, audience, context, cb) {
 
 Vous pouvez désormais utiliser les actions [Objet API Échange d’identifiants clients](/docs/fr-ca/customize/actions/explore-triggers/machine-to-machine-trigger/credentials-exchange-api-object) :
 
-```javascript
+```javascript lines
 // Client Credentials Exchange Action
 exports.onExecuteCredentialsExchange = async (event, api) => {
   api.accessToken.setCustomClaim("https://example.com/claim", 'bar');  
@@ -278,7 +278,7 @@ exports.onExecuteCredentialsExchange = async (event, api) => {
 
 Si vous avez ajouté des revendications supplémentaires au jeton d’accès lors d’un Hook de pré-enregistrement d’utilisateur :
 
-```javascript
+```javascript lines
 // Pre User Registration Hook
 module.exports = function (user, context, cb) {
 	if (user.app_metadata.condition === "success") {
@@ -299,7 +299,7 @@ module.exports = function (user, context, cb) {
 
 Vous pouvez désormais utiliser le [Objet API Pré-enregistrement de l’utilisateur](/docs/fr-ca/customize/actions/explore-triggers/signup-and-login-triggers/pre-user-registration-trigger/pre-user-registration-api-object) :
 
-```javascript
+```javascript lines
 // Pre User Registration Action
 exports.onExecutePreUserRegistration = async (event, api) => {
 	if (event.user.app_metadata.condition === "success") {

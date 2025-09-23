@@ -1,13 +1,13 @@
 ---
 title: "PHP : Utiliser l’Authentication API avec Auth0-PHP"
 permalink: "using-the-authentication-api-with-auth0-php"
+'description': "En utilisant l’Authentication API d’Auth0 dans vos applications PHP."
 'og:title': "PHP : Utiliser l’Authentication API avec Auth0-PHP"
 'og:description': "En utilisant l’Authentication API d’Auth0 dans vos applications PHP."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "PHP : Utiliser l’Authentication API avec Auth0-PHP"
 'twitter:description': "En utilisant l’Authentication API d’Auth0 dans vos applications PHP."
 ---
-# PHP : Utiliser l’Authentication API avec Auth0-PHP
 
 La trousse SDK Auth0 pour PHP fournit une classe `Auth0\SDK\API\Authentication`, qui contient les méthodes que vous pouvez utiliser pour accéder directement à l’[Authentication API](https://auth0.com/docs/api/authentication). Veuillez noter que cette interface est destinée à des applications plus avancées et fournit en général une façon de suivre les sessions des utilisateurs. Pour la plupart des cas d’utilisation, vous souhaiterez travailler avec la [classe de base Auth0](/docs/fr-ca/libraries/auth0-php/auth0-php-basic-use).
 
@@ -23,7 +23,7 @@ Un [Flux de code d’autorisation](/docs/fr-ca/get-started/authentication-and-au
 
 Les utilisateurs doivent s’authentifier avec Auth0 pour générer le code d’autorisation. Ceci se fait en étant redirigé vers le point de terminaison `/authorize` pour votre domaine locataire. Le code suivant s’affichera sur une page nécessitant une authentification :
 
-```javascript
+```php lines
 // 👆 We're continuing from the "getting started" guide linked in "Prerequisites" above. Append this to the index.php file you created there.
 
 // Setup a PHP session, which we'll use as a custom session store for the authenticated user.
@@ -56,7 +56,7 @@ Le processus ci-dessus réalise le suivant :
 
 Après authentification, l’utilisateur est redirigé vers notre application à l’URL de rappel, qui est gérée comme suit :
 
-```javascript
+```php lines
 // 👆 We're continuing from the "getting started" guide linked in "Prerequisites" above. Append this to the index.php file you created there.
 
 // Ensure we have our PHP session open so we can retrieve our stored state for comparison.
@@ -138,7 +138,7 @@ Ensuite, autorisez l’application pour l’API a utiliser sous l’onglet **App
 
 Demandez un jeton d’accès pour l’API en utilisant l’exemple ci-dessous :
 
-```javascript
+```php lines
 // 👆 We're continuing from the "getting started" guide linked in "Prerequisites" above.
 
 // Begin a client credentials exchange:
@@ -160,7 +160,7 @@ print_r($response, true);
 
 Si la méthode a réussi, vous devriez voir ce qui suit :
 
-```
+``` lines
 Array
 (
     [access_token] => eyJ0eXAi...eyJpc3Mi...QoB2c24w
@@ -178,7 +178,7 @@ Bien que détruire la session locale avec `session_destroy()` suffirait à désa
 Tout d’abord, déterminez où l’utilisateur doit se retrouver une fois la déconnexion terminée. Enregistrez-le dans les paramètres de l’application Auth0 dans le champ « URL de déconnexion autorisées ». Aussi, ajoutez une clé `AUTH0_LOGOUT_RETURN_URL` avec cette URL comme valeur dans votre fichier `.env`
 Ajoutez ce qui suit au code de déconnexion de votre application :
 
-```javascript
+```php lines
 // 👆 We're continuing from the "getting started" guide linked in "Prerequisites" above.
 
 // Deauthenticate the user's local session in your application.

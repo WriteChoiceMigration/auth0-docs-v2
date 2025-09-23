@@ -1,15 +1,15 @@
 ---
 title: "Configurer les écrans ACUL"
 permalink: "configure-acul-screens"
+'description': "Comment configurer et modifier les écrans dans les personnalisations avancées pour la connexion universelle"
 'og:title': "Configurer les écrans ACUL"
 'og:description': "Comment configurer et modifier les écrans dans les personnalisations avancées pour la connexion universelle"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer les écrans ACUL"
 'twitter:description': "Comment configurer et modifier les écrans dans les personnalisations avancées pour la connexion universelle"
 ---
-# Configurer les écrans ACUL
 
-Le mode de rendu avancé est configuré sur une base d’écran par écran via [Management API](/docs/api/management/v2) d’appels et est aussi supporté dans [l’outil Deploy CLI](/docs/fr-ca/deploy-monitor/deploy-cli-tool) et le [fournisseur Auth0 Terraform](/docs/fr-ca/deploy-monitor/auth0-terraform-provider).
+Le mode de rendu avancé est configuré sur une base d’écran par écran via [Management API](/docs/fr-ca/api/management/v2) d’appels et est aussi supporté dans [l’outil Deploy CLI](/docs/fr-ca/deploy-monitor/deploy-cli-tool) et le [fournisseur Auth0 Terraform](/docs/fr-ca/deploy-monitor/auth0-terraform-provider).
 
 ## Options de configuration
 
@@ -24,7 +24,7 @@ Les écrans qui utilisent le mode de rendu avancé disposent des options de conf
 
 Les balises HTML suivantes sont ajoutées par défaut au modèle de page en mode de rendu avancé et peuvent être désactivées en définissant la valeur de `default_head_tags_disabled` sur true.
 
-```
+```html lines
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,7 +43,7 @@ Le référencement de `entity.metadata` ou de `authorization_parameters` sans cl
 
 Vous trouverez ci-dessous les données contextuelles facultatives disponibles :
 
-```
+```csharp lines
 "context-configuration": [
     "branding.settings",
     "branding.themes.default",
@@ -69,7 +69,7 @@ Vous trouverez ci-dessous les données contextuelles facultatives disponibles :
 
 Le mode de rendu avancé vous permet d’ajouter des méta-informations, de remplacer les titres de page et les icônes par défaut et de référencer vos ressources groupées en définissant des balises HTML incluses dans le `<head>` du modèle de page. Vous pouvez définir jusqu’à 25 balises par écran, toutes définies sous la forme d’un tableau d’objets JSON.
 
-```
+```javascript lines
 "head_tags": [
   {
     "tag": "",
@@ -89,13 +89,13 @@ Le contenu entre les balises d’ouverture et de fermeture.Le contenu est limit�
 
 Lorsque vous utilisez une balise `<title>` personnalisée :
 
-```
+```html lines
 My Company Login | {{client.name}}
 ```
 
 Lorsque vous utilisez une police personnalisée :
 
-```
+```javascript lines
 '@font-face {  font-family: "custom-font";  src: url("https://cdn.sass.app/{{client.metadata.custom_font}}");}body {  font-family: custom-font;}'
 ```
 
@@ -163,7 +163,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Appeler Management API">
 
-```
+```csharp lines
 # PATCH to /api/v2/prompts/login-id/screen/login-id/rendering
 {
   "rendering_mode": "advanced",
@@ -210,7 +210,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Appeler un fournisseur Terraform">
 
-```
+```csharp lines
 resource "auth0_prompt_screen_renderer" "apsr" {
   prompt_type     = "login-id"
   screen_name = "login-id"

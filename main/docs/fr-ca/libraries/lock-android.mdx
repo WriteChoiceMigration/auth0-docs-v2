@@ -1,13 +1,13 @@
 ---
 title: "Lock.Android : Débuter"
 permalink: "lock-android"
+'description': "Découvrez Lock pour Android, un gadget logiciel qui offre une expérience de connexion et d’inscription sans friction pour vos applications Android natives."
 'og:title': "Lock.Android : Débuter"
 'og:description': "Découvrez Lock pour Android, un gadget logiciel qui offre une expérience de connexion et d’inscription sans friction pour vos applications Android natives."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Lock.Android : Débuter"
 'twitter:description': "Découvrez Lock pour Android, un gadget logiciel qui offre une expérience de connexion et d’inscription sans friction pour vos applications Android natives."
 ---
-# Lock.Android : Débuter
 
 Lock pour Android peut s’intégrer à vos applications Android natives pour offrir une manière élégante de connecter vos utilisateurs et de les inscrire dans votre application. Il prend en charge les fournisseurs d’identité sociale tels que Facebook, Google ou X, ainsi que les fournisseurs d’entreprise tels qu’Active Directory.
 
@@ -19,7 +19,7 @@ Pour utiliser l’interface utilisateur de Lock ou votre propre interface utilis
 
 Voici le nécessaire dans `build.gradle` pour cibler le code à 8 octets pour les plugiciels Android et Kotlin respectivement.
 
-```
+``` lines
 android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -68,7 +68,7 @@ Les instructions suivantes décrivent la mise en œuvre de Classic Lock pour And
 
 Dans votre fichier `app/build.gradle` ajoutez les paramètres fictifs [Manifest Placeholders](https://developer.android.com/studio/build/manifest-build-variables.html) pour les propriétés Auth0 Domain et Auth0 Scheme, qui vont être utilisés en interne par la bibliothèque pour enregistrer un « filtre d’intention » qui capture le résultat de l’authentification.
 
-```
+``` lines
 plugins {
     id "com.android.application"
     id "kotlin-android"
@@ -91,7 +91,7 @@ android {
 
 Il est recommandé d’ajouter ces valeurs au fichier `strings.xml` en tant que ressources de chaîne qui peuvent être référencées ultérieurement à partir du code. Ce guide suivra cette pratique.
 
-```
+```xml lines
 <resources>
     <string name="com_auth0_client_id">{yourClientId}</string>
     <string name="com_auth0_domain">{yourDomain}</string>
@@ -102,13 +102,13 @@ Il est recommandé d’ajouter ces valeurs au fichier `strings.xml` en tant que 
 
 Dans l’activité où vous prévoyez d’invoquer Lock, créez une instance de `Auth0` avec les informations de votre application. Le moyen le plus simple de le créer est de transmettre un contexte Android. Cela prendra en compte les valeurs définies précédemment dans le fichier `strings.xml`. Pour que cela fonctionne, les ressources de chaîne doivent être définies à l’aide des mêmes clés que celles répertoriées ci-dessus.
 
-```
+```kotlin lines
 val account = Auth0(context)
 ```
 
 Déclarer une implémentation `AuthenticationCallback (Rappel d’authentification)` qui gérera les événements d’authentification des utilisateurs. L’objet `Credentials (Informations d’identification)` renvoyé dans les scénarios d’authentification réussis contiendra les jetons que votre application ou API finira par consommer. Veillez consulter [Tokens (Jetons)](/docs/fr-ca/secure/tokens) pour plus de détails.
 
-```
+```kotlin lines
 private val callback = object : AuthenticationCallback() {
     override fun onAuthentication(credentials: Credentials) {
         // Authenticated
@@ -124,7 +124,7 @@ Préparez une nouvelle instance de Lock en utilisant la classe Builder pour la c
 
 Une fois terminé, créez l’instance Lock. Cette instance est destinée à être réutilisée et doit être supprimée lorsqu’elle n’est plus nécessaire. Un bon endroit pour procéder ainsi est dans le dossier de votre méthode d’activité `onDestroy`.
 
-```javascript
+```kotlin lines
 // This activity will show Lock
 class MyActivity : AppCompatActivity() {
 
@@ -160,7 +160,7 @@ class MyActivity : AppCompatActivity() {
 
 Enfin, lancez le widget `Lock` à l’intérieur de votre activité.
 
-```
+```kotlin lines
 startActivity(lock.newIntent(this))
 ```
 

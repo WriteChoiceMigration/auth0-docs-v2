@@ -1,13 +1,13 @@
 ---
 title: "Connectez votre application à ADFS"
 permalink: "adfs"
+'description': "Apprenez à connecter votre application aux Services de fédération Active Directory (ADFS) en utilisant des connexions d’entreprise."
 'og:title': "Connectez votre application à ADFS"
 'og:description': "Apprenez à connecter votre application aux Services de fédération Active Directory (ADFS) en utilisant des connexions d’entreprise."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Connectez votre application à ADFS"
 'twitter:description': "Apprenez à connecter votre application aux Services de fédération Active Directory (ADFS) en utilisant des connexions d’entreprise."
 ---
-# Connectez votre application à ADFS
 
 Pour connecter votre application aux Services de fédération Active Directory (ADFS) de Microsoft, vous devez fournir les informations suivantes à votre administrateur ADFS :
 
@@ -32,11 +32,11 @@ Vous devez exécuter ce script en tant qu’administrateur de votre système.
 
 </Note>
 
-```
+```powershell lines
 (new-object Net.WebClient -property @{Encoding = [Text.Encoding]::UTF8}).DownloadString("https://raw.github.com/auth0/adfs-auth0/master/adfs.ps1") | iex
 ```
 
-```
+```powershell lines
 AddRelyingParty "urn:auth0:{yourTenant}" "https://{yourDomain}/login/callback"
 ```
 
@@ -50,7 +50,7 @@ Si vous utilisez la fonctionnalité [domaines personnalisés](/docs/fr-ca/custom
 
 Le script crée l’approbation de la partie de confiance, comme suit :
 
-```
+```powershell lines
 $realm = "urn:auth0:{yourTenant}";
 $webAppEndpoint = "https://{yourDomain}/login/callback";
 Add-PSSnapin Microsoft.Adfs.Powershell
@@ -60,7 +60,7 @@ $rp = Get-ADFSRelyingPartyTrust -Name $realm
 
 Le script crée aussi des règles pour émettre les attributs les plus courants, tels que le courriel, l’UPN, le prénom ou le nom de famille :
 
-```
+```powershell lines
 $rules = @'
 @RuleName = "Store: ActiveDirectory -> Mail (ldap attribute: mail), Name (ldap attribute: displayName), Name ID (ldap attribute: userPrincipalName), GivenName (ldap attribute: givenName), Surname (ldap attribute: sn)"
 c:[Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname", Issuer == "AD AUTHORITY"]
@@ -163,7 +163,7 @@ Les mappages des étapes précédentes sont les plus couramment utilisés, mais 
 
 Maintenant que vous avez une connexion fonctionnelle, l’étape suivante consiste à configurer votre application afin de l’utiliser. Vous pouvez suivre nos guides rapides étape par étape ou utiliser nos bibliothèques et notre API.
 
-* [Commencez avec nos guides de démarrage rapide](/docs/quickstarts)
+* [Commencez avec nos guides de démarrage rapide](/docs/fr-ca/quickstarts)
 * [Configurez votre application en utilisant notre formulaire de connexion Lock.](/docs/fr-ca/libraries/lock)
 * [Configurez votre application en utilisant notre bibliothèque Auth0.js et votre propre interface utilisateur](/docs/fr-ca/libraries/auth0js)
-* [Utilisez notre Authentication API pour vous authentifier.](/docs/api/authentication)
+* [Utilisez notre Authentication API pour vous authentifier.](/docs/fr-ca/api/authentication)

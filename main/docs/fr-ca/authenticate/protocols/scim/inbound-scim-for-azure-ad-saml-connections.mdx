@@ -1,13 +1,13 @@
 ---
 title: "SCIM entrant pour les connexions SAML Entra ID"
 permalink: "inbound-scim-for-azure-ad-saml-connections"
+'description': "Marche à suivre pour l’établissement d’une connexion Entra via SAML SCIM"
 'og:title': "SCIM entrant pour les connexions SAML Entra ID"
 'og:description': "Marche à suivre pour l’établissement d’une connexion Entra via SAML SCIM"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "SCIM entrant pour les connexions SAML Entra ID"
 'twitter:description': "Marche à suivre pour l’établissement d’une connexion Entra via SAML SCIM"
 ---
-# SCIM entrant pour les connexions SAML Entra ID
 
 <Card title="Before you start">
 
@@ -27,7 +27,7 @@ Cette section décrit comment configurer une application d’entreprise autre qu
 4. Dans l’onglet **Mappage**, assurez-vous que l’**attribut SCIM contenant l’identifiant utilisateur** est réglé sur **userName**.
 5. Passez à la zone **Mappages supplémentaires** et remplacez ceci :
 
-```json
+```javascript lines
 {
 		"scim": "emails[primary eq true].value",
 		"auth0": "email"
@@ -36,20 +36,20 @@ Cette section décrit comment configurer une application d’entreprise autre qu
 
 Par celà :
 
-```json
+```javascript lines
 {
 		"scim": "emails[type eq \"work\"].value",
 		"auth0": "email"
 	   },
 ```
 
-6. Consultez les autres **Mappages supplémentaires** pour vous assurer que les attributs SCIM étendus sont mappés avec vos attributs Auth0 préférés. Consultez [mappage des attributs](/docs/authenticate/protocols/scim/configure-inbound-scim#attribute-mapping) pour plus de détails.
+6. Consultez les autres **Mappages supplémentaires** pour vous assurer que les attributs SCIM étendus sont mappés avec vos attributs Auth0 préférés. Consultez [mappage des attributs](/docs/fr-ca/authenticate/protocols/scim/configure-inbound-scim#attribute-mapping) pour plus de détails.
 
 7. Cliquez sur **Enregistrer les modifications**.
 
 ### Récupérer l’URL du point de terminaison SCIM et le jeton
 
-La configuration du SCIM dans un locataire Entra ID nécessite un URL de point de terminaison SCIM et un jeton de Auth0. Ces valeurs peuvent être récupérées manuellement via l’<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip> ou programmatiquement via <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>. Consultez la section [Instructions pour le déploiement](/docs/authenticate/protocols/scim/configure-inbound-scim#deployment-guidelines) pour les meilleures pratiques. En utilisant le tableau de bord :
+La configuration du SCIM dans un locataire Entra ID nécessite un URL de point de terminaison SCIM et un jeton de Auth0. Ces valeurs peuvent être récupérées manuellement via l’<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip> ou programmatiquement via <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>. Consultez la section [Instructions pour le déploiement](/docs/fr-ca/authenticate/protocols/scim/configure-inbound-scim#deployment-guidelines) pour les meilleures pratiques. En utilisant le tableau de bord :
 
 1. Dans Auth0 Dashboard, naviguez jusqu’à l’onglet **Configuration** SCIM, puis copiez l’ **URL du point de terminaison SCIM** et collez-le dans un endroit sûr.
 2. Générez un jeton SCIM en choisissant **Générer un nouveau jeton,** puis définissez une date d’expiration pour le jeton si vous le souhaitez.
@@ -66,7 +66,7 @@ La configuration du SCIM dans un locataire Entra ID nécessite un URL de point d
 7. Accédez à **Mappages** et sélectionnez **Fourniture des utilisateurs Microsoft Entra ID**, puis Accédez à **Mappages d’attributs** et sélectionnez la ligne contenant `emails[type eq "work"].value` et `mail`
 8. Dans l’écran **Modifier l’attribut**  définissez **Match objects using this attribute (Associer les objets utilisant cet attribut)** à **Yes (Oui)**, puisdéfinissez **Matching precedence (Précédent de correspondance)** sur **2** et choisissez **OK.**
 
-<Frame>![SAML Azure Attribute Mapping](//images.ctfassets.net/cdy7uua7fh8z/6JnGm4IeBglKiHNoVPX5vs/ddc17baeca48f02a6309b57ab87f845e/attributemap2.jpg)</Frame>
+<Frame>![SAML Azure Attribute Mapping](/images/fr-ca/cdy7uua7fh8z/6JnGm4IeBglKiHNoVPX5vs/ddc17baeca48f02a6309b57ab87f845e/attributemap2.jpg)</Frame>
 
 Choisissez **Enregistrer** pour enregistrer les mappages d’attributs, puis sélectionnez **X** dans le coin supérieur droit pour revenir à l’écran **Fourniture**.
 

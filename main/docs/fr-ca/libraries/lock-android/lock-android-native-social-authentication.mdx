@@ -1,13 +1,13 @@
 ---
 title: "Lock.Android : Authentification native via réseau social"
 permalink: "lock-android-native-social-authentication"
+'description': "Lock.Android – Authentification native via réseau social"
 'og:title': "Lock.Android : Authentification native via réseau social"
 'og:description': "Lock.Android – Authentification native via réseau social"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Lock.Android : Authentification native via réseau social"
 'twitter:description': "Lock.Android – Authentification native via réseau social"
 ---
-# Lock.Android : Authentification native via réseau social
 
 ## Fournisseur natif – Google
 
@@ -51,7 +51,7 @@ Vous pouvez vérifier la version la plus récente dans [Readme](https://github.c
 1. Dans votre application Android, créez une nouvelle ressource de type chaîne dans le fichier `res/strings.xml`. Nommez-le `google_server_client_id` et donnez-lui comme valeur le `CLIENT_ID` obtenu à l’étape 5 de la configuration de la section de configuration de **Google Developers Console** ci-dessus.
 2. Ajoutez les métadonnées de la version de Google Play Services au fichier `AndroidManifest.xml`, à l’intérieur de la balise Application.
 
-   ```
+   ``` lines
    <meta-data
        android:name="com.google.android.gms.version"
        android:value="@integer/google_play_services_version" />
@@ -62,7 +62,7 @@ Vous pouvez vérifier la version la plus récente dans [Readme](https://github.c
    
 3. Ajoutez l’autorisation Internet Android à votre fichier `AndroidManifest.xml`.
 
-   ```
+   ```xml lines
    <uses-permission android:name="android.permission.INTERNET" />
    ```
 
@@ -71,7 +71,7 @@ Vous pouvez vérifier la version la plus récente dans [Readme](https://github.c
    
 4. En créant une nouvelle instance de `GoogleAuthProvider`, transmettez la valeur `google_server_client_id` obtenue précédemment comme premier paramètre :
 
-   ```
+   ``` lines
    public class MainActivity extends AppCompatActivity {
      private GoogleAuthProvider provider;
      // ...
@@ -98,7 +98,7 @@ Si vous avez besoin d’aide supplémentaire pour l’installation de la trousse
 
 Si vous prévoyez d’utiliser ce fournisseur sans **Lock**, assurez-vous de passer outre la méthode `onActivityResult()` et de rediriger l’appel vers l’instance du fournisseur. Pour finir, appelez « start » pour lancer le processus d’authentification.
 
-```javascript
+```java lines
 // Define your own request codes
 private static final int RC_PERMISSIONS = 101;
 private static final int RC_AUTHENTICATION = 102;
@@ -124,7 +124,7 @@ Voilà, vous êtes prêt à exécuter l’application et à vous connecter à l�
 
 Pour utiliser un nom de connexion via réseau social personnalisé afin d’autoriser Auth0, créez l’instance de GoogleAuthProvider à l’aide du deuxième constructeur :
 
-```
+```java lines
 GoogleAuthProvider provider = new GoogleAuthProvider("my-connection", "google-server-client-id", client);
 ```
 
@@ -132,7 +132,7 @@ GoogleAuthProvider provider = new GoogleAuthProvider("my-connection", "google-se
 
 Pour envoyer des paramètres supplémentaires lors de l’authentification, appelez `setParameters`.
 
-```
+```java lines
 Map<String, Object> parameters = new HashMap<>();
 //Add entries
 provider.setParameters(parameters);
@@ -142,7 +142,7 @@ provider.setParameters(parameters);
 
 Par défaut, la permission `Scopes.PLUS_LOGIN` est demandée. Vous pouvez personnaliser les permissions en appelant `setScopes` avec la liste des permissions. Chaque API de Google (Auth, Drive, Plus,  etc.) précise sa propre liste de permissions Google.
 
-```
+```java lines
 provider.setScopes(Arrays.asList(new Scope(Scopes.PLUS_ME), new Scope(Scopes.PLUS_LOGIN)));
 ```
 
@@ -150,7 +150,7 @@ provider.setScopes(Arrays.asList(new Scope(Scopes.PLUS_ME), new Scope(Scopes.PLU
 
 Ce fournisseur n’a pas besoin d’autorisations spéciales dans le manifeste d’Android pour authentifier l’utilisateur. Cependant, si votre cas d’utilisation l’exige, vous pouvez laisser l’AuthProvider s’en charger pour vous. Utilisez la méthode `setRequiredPermissions`.
 
-```
+```java lines
 provider.setRequiredPermissions(new String[]{"android.permission.GET_ACCOUNTS"});
 ```
 
@@ -224,7 +224,7 @@ Vous pouvez vérifier la version la plus récente dans [Readme](https://github.c
 1. Dans votre application Android, créez une nouvelle ressource de type chaîne dans le fichier `res/strings.xml`. Nommez-le `facebook_app_id` et donnez-lui comme valeur le `APP ID` obtenu à l’étape 5 de la section de configuration de la **Facebook Developers Console** ci-dessus.
 2. Ajoutez les métadonnées `FacebookActivity` et `facebook_app_id` au fichier `AndroidManifest.xml`, à l’intérieur de la balise Application.
 
-   ```
+   ``` lines
    <activity
        android:name="com.facebook.FacebookActivity"
        android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -239,7 +239,7 @@ Vous pouvez vérifier la version la plus récente dans [Readme](https://github.c
    
 3. Ajoutez l’autorisation Internet Android à votre fichier `AndroidManifest.xml`.
 
-   ```
+   ```xml lines
    <uses-permission android:name="android.permission.INTERNET" />
    ```
 
@@ -248,7 +248,7 @@ Vous pouvez vérifier la version la plus récente dans [Readme](https://github.c
    
 4. Créez une nouvelle instance de `FacebookAuthProvider`.
 
-   ```
+   ``` lines
    public class MainActivity extends AppCompatActivity {
      private FacebookAuthProvider provider;
      // ...
@@ -276,7 +276,7 @@ Si vous avez besoin d’aide supplémentaire pour l’installation de la trousse
 
 Si vous prévoyez d’utiliser ce fournisseur sans **Lock**, assurez-vous de passer outre la méthode `onActivityResult()` de votre activité et de rediriger l’appel vers l’instance du fournisseur. Pour finir, appelez ,,« start » pour lancer le processus d’authentification.
 
-```javascript
+```java lines
 // Define your own request codes
 private static final int RC_PERMISSIONS = 101;
 private static final int RC_AUTHENTICATION = 102;
@@ -302,7 +302,7 @@ Voilà, vous êtes prêt à exécuter l’application et à vous connecter à l�
 
 Pour utiliser un nom de connexion via réseau social personnalisé afin d’autoriser Auth0, appelez `setConnection` avec votre nouveau nom de connexion.
 
-```
+```java lines
 FacebookAuthProvider provider = new FacebookAuthProvider("my_connection_name", client);
 ```
 
@@ -310,7 +310,7 @@ FacebookAuthProvider provider = new FacebookAuthProvider("my_connection_name", c
 
 Pour envoyer des paramètres supplémentaires lors de l’authentification, appelez `setParameters`.
 
-```
+```java lines
 Map<String, Object> parameters = new HashMap<>();
 //Add entries
 provider.setParameters(parameters);
@@ -320,7 +320,7 @@ provider.setParameters(parameters);
 
 Par défaut, la permission `public_profile` est demandée. Vous pouvez les personnaliser en appelant `setPermissions` avec la liste des autorisations Facebook.
 
-```
+```java lines
 provider.setPermissions(Arrays.asList("public_profile", "user_photos"));
 ```
 
@@ -328,7 +328,7 @@ provider.setPermissions(Arrays.asList("public_profile", "user_photos"));
 
 Ce fournisseur n’a pas besoin d’autorisations spéciales dans le manifeste d’Android pour authentifier l’utilisateur. Cependant, si votre cas d’utilisation l’exige, vous pouvez laisser l’AuthProvider s’en charger pour vous. Utilisez la méthode `setRequiredPermissions` pour les préciser.
 
-```
+```java lines
 provider.setRequiredPermissions(new String[]{"android.permission.GET_ACCOUNTS"});
 ```
 

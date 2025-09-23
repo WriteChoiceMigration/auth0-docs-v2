@@ -1,21 +1,21 @@
 ---
 title: "Gérer les métadonnées avec des règles"
 permalink: "manage-metadata-rules"
+'description': "Apprenez à gérer les métadonnées des applications, des utilisateurs et des clients à l’aide de règles."
 'og:title': "Gérer les métadonnées avec des règles"
 'og:description': "Apprenez à gérer les métadonnées des applications, des utilisateurs et des clients à l’aide de règles."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Gérer les métadonnées avec des règles"
 'twitter:description': "Apprenez à gérer les métadonnées des applications, des utilisateurs et des clients à l’aide de règles."
 ---
-# Gérer les métadonnées avec des règles
 
 <Warning>
 
 La date de fin de vie (EOL) des Règles et des Appels sera le **18 novembre 2026**. Ils ne sont plus disponibles pour les nouveaux locataires créés à partir du **16 octobre 2023**. Les locataires actuels ayant des hooks actifs conserveront l’accès aux produit Hooks jusqu’à la fin de leur durée de vie.
 
-Nous vous conseillons vivement d’utiliser les Actions pour étendre Auth0. Avec les Actions, vous avez accès à des informations de type enrichies, à une documentation intégrée et à des packages `npm` publics, et vous pouvez connecter des intégrations externes qui optimisent votre expérience d’extensibilité globale. Pour en savoir plus sur ce que les Actions proposent, consultez [Comprendre comment fonctionnent Auth0 Actions](/docs/customize/actions/actions-overview).
+Nous vous conseillons vivement d’utiliser les Actions pour étendre Auth0. Avec les Actions, vous avez accès à des informations de type enrichies, à une documentation intégrée et à des packages `npm` publics, et vous pouvez connecter des intégrations externes qui optimisent votre expérience d’extensibilité globale. Pour en savoir plus sur ce que les Actions proposent, consultez [Comprendre comment fonctionnent Auth0 Actions](/docs/fr-ca/customize/actions/actions-overview).
 
-Pour vous aider dans votre migration, nous proposons des guides qui vous aideront à [migrer des Règles vers les Actions](/docs/customize/actions/migrate/migrate-from-rules-to-actions) et à [migrer des Hooks vers les Actions](/docs/customize/actions/migrate/migrate-from-hooks-to-actions). Nous avons également une page dédiée à la [Migration vers les Actions](https://auth0.com/extensibility/movetoactions) qui met en évidence les comparaisons de fonctionnalités, [une démo des Actions](https://www.youtube.com/watch?v=UesFSY1klrI)  et d’autres ressources pour vous aider dans votre parcours de migration.
+Pour vous aider dans votre migration, nous proposons des guides qui vous aideront à [migrer des Règles vers les Actions](/docs/fr-ca/customize/actions/migrate/migrate-from-rules-to-actions) et à [migrer des Hooks vers les Actions](/docs/fr-ca/customize/actions/migrate/migrate-from-hooks-to-actions). Nous avons également une page dédiée à la [Migration vers les Actions](https://auth0.com/extensibility/movetoactions) qui met en évidence les comparaisons de fonctionnalités, [une démo des Actions](https://www.youtube.com/watch?v=UesFSY1klrI)  et d’autres ressources pour vous aider dans votre parcours de migration.
 
 Pour en savoir plus sur l’obsolescence des Règles et des Appels, consultez notre article de blog : [Preparing for Rules and Hooks End of Life (Préparation à la fin de vie des règles et des crochets)](https://auth0.com/blog/preparing-for-rules-and-hooks-end-of-life/).
 
@@ -23,7 +23,7 @@ Pour en savoir plus sur l’obsolescence des Règles et des Appels, consultez no
 
 Vous pouvez lire, mettre à jour et supprimer les métadonnées à l’aide des [Règles d'Auth0](/docs/fr-ca/customize/rules). Dans les sections suivantes, nous nous référerons à cet exemple où l’utilisateur et ses informations sont représentés par l’extrait de code JSON suivant :
 
-```json
+```json lines
 {
   "user_id": "jdoe",
   "email": "john.doe@example.com",
@@ -49,11 +49,11 @@ Vous pouvez lire les métadonnées à l’aide de règles avec <Tooltip data-too
 
 Par défaut, les attributs du profil utilisateur fournis par des fournisseurs d’identité autres qu’Auth0 (tels que Google, Facebook ou X) ne sont pas directement modifiables, car ils sont mis à jour par le fournisseur d’identité à chaque fois que l’utilisateur se connecte.
 
-Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_name` ou les attributs racine de `l’image` sur le profil utilisateur normalisé, vous devez [configurer votre synchronisation de connexion avec Auth0](/docs/manage-users/user-accounts/user-profiles/configure-connection-sync-with-auth0) de manière à ce que les attributs de l’utilisateur soient mis à jour à partir du fournisseur d’identité uniquement lors de la création du profil utilisateur. Ces attributs racine seront alors disponibles à l’édition individuelle ou par importation en grande quantité.
+Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_name` ou les attributs racine de `l’image` sur le profil utilisateur normalisé, vous devez [configurer votre synchronisation de connexion avec Auth0](/docs/fr-ca/manage-users/user-accounts/user-profiles/configure-connection-sync-with-auth0) de manière à ce que les attributs de l’utilisateur soient mis à jour à partir du fournisseur d’identité uniquement lors de la création du profil utilisateur. Ces attributs racine seront alors disponibles à l’édition individuelle ou par importation en grande quantité.
 
 À titre d’exemple, supposons que les métadonnées suivantes soient stockées pour un utilisateur dont l’adresse courriel est `jane.doe@example.com` :
 
-```json
+```json lines
 {
     "email": "jane.doe@example.com",
     "user_metadata": {
@@ -65,9 +65,9 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 }
 ```
 
-En utilisant l’exemple de métadonnées ci-dessus, vous pouvez vous référer à des éléments précis de l’ensemble de données dans des [règles d'Auth0](/docs/fr-ca/customize/rules) ou via un appel à [Management API](/docs/users/guides/manage-user-metadata) comme suit :
+En utilisant l’exemple de métadonnées ci-dessus, vous pouvez vous référer à des éléments précis de l’ensemble de données dans des [règles d'Auth0](/docs/fr-ca/customize/rules) ou via un appel à [Management API](/docs/fr-ca/users/guides/manage-user-metadata) comme suit :
 
-```
+```javascript lines
 console.log(user.email); // "jane.doe@example.com"
 console.log(user.user_metadata.hobby); // "surfing"
 console.log(user.app_metadata.plan); // "full"
@@ -81,7 +81,7 @@ Pour lire les métadonnées disponibles, vous devez accéder à la propriété u
 
 Vous pouvez prendre une décision en fonction des rôles utilisateur.
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.app_metadata = user.app_metadata || {};
   if (user.app_metadata.roles.indexOf('writer')){
@@ -95,7 +95,7 @@ function(user, context, callback){
 
 Vous pouvez baser vos décisions sur des préférences précises, par exemple une préférence de couleur :
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.user_metadata = user.user_metadata || {};
   if (user.user_metadata.preferences.color === 'black'){
@@ -109,7 +109,7 @@ function(user, context, callback){
 
 Les métadonnées de l’application (`clientMetadata`) constituent une propriété facultative de premier niveau de l’objet `context`. Les applications existantes n’ont pas de valeur pour cette propriété.
 
-```javascript
+```javascript lines
 function(user, context, callback){
   context.clientMetadata = context.clientMetadata || {};
   if (context.clientMetadata.usersuppliedkey1 === 'black'){
@@ -131,7 +131,7 @@ Utilisez des règles pour mapper les attributs SAML qu’Auth0 reçoit de l’I
 
 Pour ajouter un rôle administratif à l’utilisateur :
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.app_metadata = user.app_metadata || {};
   // update the app_metadata that will be part of the response
@@ -151,7 +151,7 @@ function(user, context, callback){
 
 Il en résulte la représentation JSON suivante des informations du profil utilisateur :
 
-```json
+```json lines
 {
   "user_id": "jdoe",
   "email": "john.doe@example.com",
@@ -170,7 +170,7 @@ Il en résulte la représentation JSON suivante des informations du profil utili
 
 Pour ajouter la préférence `fontSize` de l’utilisateur au profil utilisateur :
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.user_metadata = user.user_metadata || {};
   // update the user_metadata that will be part of the response
@@ -190,7 +190,7 @@ function(user, context, callback){
 
 Il en résulte la représentation JSON suivante des informations du profil utilisateur :
 
-```json
+```json lines
 {
   "user_id": "jdoe",
   "email": "john.doe@example.com",
@@ -210,7 +210,7 @@ Il en résulte la représentation JSON suivante des informations du profil utili
 
 Pour réduire le temps de traitement de la règle, vous pouvez mettre à jour les `app_metadata` et les `user_metadata` dans la même règle :
 
-```javascript
+```javascript lines
 function(user, context, callback){
 
   var q = require('q');
@@ -244,7 +244,7 @@ function(user, context, callback){
 
 Il en résulte la représentation JSON suivante des informations du profil utilisateur :
 
-```json
+```json lines
 {
   "user_id": "jdoe",
   "email": "john.doe@example.com",
@@ -270,7 +270,7 @@ Pour supprimer une propriété, il suffit de définir sa valeur sur `null`.
 
 Pour supprimer les rôles de l’utilisateur, utilisez l’exemple de règle suivant :
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.app_metadata = user.app_metadata || {};
   // update the app_metadata that will be part of the response
@@ -289,7 +289,7 @@ function(user, context, callback){
 
 Il en résulte la représentation JSON suivante du profil utilisateur :
 
-```json
+```json lines
 {
   "user_id": "jdoe",
   "email": "john.doe@example.com",
@@ -306,7 +306,7 @@ Il en résulte la représentation JSON suivante du profil utilisateur :
 
 Pour supprimer une seule valeur d’une propriété, supprimez cette valeur spécifique. Par exemple, pour supprimer le rôle `writer` du profil utilisateur :
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.app_metadata = user.app_metadata || {};
   user.app_metadata.roles = user.app_metadata.roles || [];
@@ -331,7 +331,7 @@ function(user, context, callback){
 
 Il en résulte la représentation JSON suivante du profil utilisateur :
 
-```json
+```json lines
 {
   "user_id": "google-oauth2|1234",
   "email": "john.doe@gmail.com",
@@ -352,7 +352,7 @@ Notez que la propriété `roles` existe toujours, mais qu’elle ne contient auc
 
 Pour supprimer la préférence de couleur de l’utilisateur :
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.user_metadata = user.user_metadata || {};
   // update the user_metadata that will be part of the response
@@ -372,7 +372,7 @@ function(user, context, callback){
 
 Il en résulte la représentation JSON suivante des informations du profil utilisateur :
 
-```json
+```json lines
 {
   "user_id": "jdoe",
   "email": "john.doe@example.com",

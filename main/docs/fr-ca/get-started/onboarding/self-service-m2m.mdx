@@ -1,13 +1,13 @@
 ---
 title: "Libre-service machine-machine (M2M)"
 permalink: "self-service-m2m"
+'description': "Décrit comment s’intégrer avec une étude de cas M2M."
 'og:title': "Libre-service machine-machine (M2M)"
 'og:description': "Décrit comment s’intégrer avec une étude de cas M2M."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Libre-service machine-machine (M2M)"
 'twitter:description': "Décrit comment s’intégrer avec une étude de cas M2M."
 ---
-# Libre-service machine-machine (M2M)
 
 Si votre cas d’utilisation s’adresse à une <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">audience</Tooltip> non interactive comme des API ou des serveurs dorsaux, vous serez intégré avec une configuration machine-machine (M2M).
 
@@ -72,8 +72,8 @@ Vous pouvez planifier certains détails de configuration avant de créer un comp
 
 * Le nom de votre locataire joue un rôle dans votre domaine Auth0. Avant d’en définir un, vous devriez passez en revue les [caractéristiques du locataire](https://auth0.com/docs/get-started/auth0-overview/create-tenants#create-a-tenant-and-domain).
 * Les fonctionnalités d’Auth0 dont vous avez besoin selon l’utilisation que vous en faites. Certaines fonctionnalités ne sont disponibles qu’avec les abonnements Professionnel et Entreprise.
-* Déterminez si vous devez prendre en charge plusieurs environnements, notamment pour le développement, la simulation et la production. Pour en savoir plus, consultez [Configurer plusieurs environnements](/docs/get-started/auth0-overview/create-tenants/set-up-multiple-environments).
-* Si votre cas d’utilisation implique des applications tierces que vous souhaitez enregistrer dans un locataire, vous pouvez utiliser l’[Enregistrement dynamique d'applications](/docs/get-started/applications/dynamic-client-registration) basé sur le [protocole OIDC pour l’enregistrement des clients](https://openid.net/specs/openid-connect-registration-1_0.html).
+* Déterminez si vous devez prendre en charge plusieurs environnements, notamment pour le développement, la simulation et la production. Pour en savoir plus, consultez [Configurer plusieurs environnements](/docs/fr-ca/get-started/auth0-overview/create-tenants/set-up-multiple-environments).
+* Si votre cas d’utilisation implique des applications tierces que vous souhaitez enregistrer dans un locataire, vous pouvez utiliser l’[Enregistrement dynamique d'applications](/docs/fr-ca/get-started/applications/dynamic-client-registration) basé sur le [protocole OIDC pour l’enregistrement des clients](https://openid.net/specs/openid-connect-registration-1_0.html).
 * Passez en revue nos [services dorsaux et nos librairies d’API](https://auth0.com/docs/libraries#backend) pour essayer l’un de nos démarrages rapides.
 
 </Card>
@@ -123,22 +123,22 @@ Utilisez l’exemple fourni dans Management API Explorer pour appeler le point d
 <tr>
 <td><strong>Nom</strong></td>
 <td>Nom informel de l’API. N’affecte aucune fonctionnalité.</td>
-<td><code>yourDomain</code></td>
+<td>`yourDomain`</td>
 </tr>
 <tr>
 <td><strong>Identificateur</strong></td>
-<td>Identifiant unique de l’API. Auth0 recommande d’utiliser une URL. Auth0 fait la différence entre les URL qui incluent la dernière barre oblique. Par exemple, <code>https://example.com</code> et <code>https://example.com/</code> sont deux identificateurs différents. L’URL ne doit pas nécessairement être une URL accessible au public. Auth0 n’appellera pas votre API. Cette valeur ne peut pas être modifiée par la suite.</td>
-<td><code>https://{yourDomain}</code></td>
+<td>Identifiant unique de l’API. Auth0 recommande d’utiliser une URL. Auth0 fait la différence entre les URL qui incluent la dernière barre oblique. Par exemple, `https://example.com` et `https://example.com/` sont deux identificateurs différents. L’URL ne doit pas nécessairement être une URL accessible au public. Auth0 n’appellera pas votre API. Cette valeur ne peut pas être modifiée par la suite.</td>
+<td>`https://{yourDomain}`</td>
 </tr>
 <tr>
 <td><strong>Profil du jeton Web JSON (JWT)</strong></td>
-<td>Le profil détermine le format des jetons d’accès émis pour l’API. Les valeurs possibles sont <code>Auth0</code> et <code>RFC 9068</code>. Pour en savoir plus, lisez la section <a href="/docs/secure/tokens/access-tokens/access-token-profiles">Profils de jeton d’accès</a>.</td>
-<td><code>access_token</code></td>
+<td>Le profil détermine le format des jetons d’accès émis pour l’API. Les valeurs possibles sont `Auth0` et `RFC 9068`. Pour en savoir plus, lisez la section <a href="/docs/fr-ca/secure/tokens/access-tokens/access-token-profiles">Profils de jeton d’accès</a>.</td>
+<td>`access_token`</td>
 </tr>
 <tr>
 <td><strong>JSON Web Token (JWT) Signing Algorithm (Algorithme de signature de jetons Web JSON)</strong></td>
-<td>Algorithme avec lequel signer les jetons d’accès. Les valeurs disponibles sont <code>HS256</code>, <code>PS256</code>, <code>RS256</code>. Si vous sélectionnez <code>RS256</code> (recommandé), le jeton sera signé avec la clé privée de votre locataire.</td>
-<td><code>HS256</code></td>
+<td>Algorithme avec lequel signer les jetons d’accès. Les valeurs disponibles sont `HS256`, `PS256`, `RS256`. Si vous sélectionnez `RS256` (recommandé), le jeton sera signé avec la clé privée de votre locataire.</td>
+<td>`HS256`</td>
 </tr>
 </tbody>
 </table>
@@ -151,7 +151,7 @@ Il est nécessaire d’établir une association entre votre application et votre
 
 <Note>
 
-L’API d’Auth0 a plusieurs paramètres que vous devriez passer en revue avant la configuration. Pour en savoir plus, consultez[Paramètres de l’API](/docs/get-started/apis/api-settings).
+L’API d’Auth0 a plusieurs paramètres que vous devriez passer en revue avant la configuration. Pour en savoir plus, consultez[Paramètres de l’API](/docs/fr-ca/get-started/apis/api-settings).
 
 </Note>
 
@@ -164,7 +164,7 @@ Si vous créez votre API dans Dashboard, Auth0 génère automatiquement une appl
 
    <Note>
 
-   Vous pouvez créer une autre application pour le développement ou la production ultérieurement en suivant les instructions pour [Enregistrer les applications de communication entre machines](/docs/get-started/auth0-overview/create-applications/machine-to-machine-apps).
+   Vous pouvez créer une autre application pour le développement ou la production ultérieurement en suivant les instructions pour [Enregistrer les applications de communication entre machines](/docs/fr-ca/get-started/auth0-overview/create-applications/machine-to-machine-apps).
 
    </Note>
 
@@ -173,7 +173,7 @@ Si vous créez votre API dans Dashboard, Auth0 génère automatiquement une appl
 4. Activez la bascule **Authorize (Autoriser)**, puis sélectionnez le bouton fléché à droite pour développer la carte.
 5. Sélectionnez **Update (Mise à jour)**.
 
-   <Frame>![Dashboard > Applications > APIs](//images.ctfassets.net/cdy7uua7fh8z/6L2R46XVdYw1kifRfMifRz/edee29a7ba67ba10f2ced2543f6ef581/Timesheet_API_Config.png)</Frame>
+   <Frame>![Dashboard > Applications > APIs](/images/fr-ca/cdy7uua7fh8z/6L2R46XVdYw1kifRfMifRz/edee29a7ba67ba10f2ced2543f6ef581/Timesheet_API_Config.png)</Frame>
 
    <Note>
 
@@ -207,7 +207,7 @@ Dans Auth0 Dasboard ou Management API, vous pourrez :
 
 Avant de configurer votre méthode d’authentification :
 
-* Examinez le [Flux des identifiants client](/docs/get-started/authentication-and-authorization-flow/client-credentials-flow) pour l’authentification machine à machine. Voici le flux de travail pour l’authentification et l’autorisation non interactive.
+* Examinez le [Flux des identifiants client](/docs/fr-ca/get-started/authentication-and-authorization-flow/client-credentials-flow) pour l’authentification machine à machine. Voici le flux de travail pour l’authentification et l’autorisation non interactive.
 * Déterminez le niveau d’accès pour vos API. Cela permet de déterminer quelles [permissions](/docs/fr-ca/get-started/apis/scopes/api-scopes) vous configurerez lors de la création de votre API.
 
 </Card>
@@ -226,7 +226,7 @@ Le profil ou format par défaut est le profil de jeton Auth0 associé à deux pr
 
 <Note>
 
-Auth0 prend en charge d’autres méthodes d’authentification client en plus de fournir l’ID client et le secret client en tant qu’identifiants. Ces méthodes, y compris notre recommandation de [Clé privée JWT](/docs/get-started/authentication-and-authorization-flow/authenticate-with-private-key-jwt) pour les configurations M2M, sont disponibles avec un plan Entreprise. Pour en savoir plus, consultez [Identifiants d’application](/docs/secure/application-credentials).
+Auth0 prend en charge d’autres méthodes d’authentification client en plus de fournir l’ID client et le secret client en tant qu’identifiants. Ces méthodes, y compris notre recommandation de [Clé privée JWT](/docs/fr-ca/get-started/authentication-and-authorization-flow/authenticate-with-private-key-jwt) pour les configurations M2M, sont disponibles avec un plan Entreprise. Pour en savoir plus, consultez [Identifiants d’application](/docs/fr-ca/secure/application-credentials).
 
 </Note>
 
@@ -235,7 +235,7 @@ Auth0 prend en charge d’autres méthodes d’authentification client en plus d
 Une demande au point de terminaison `/oauth/token` doit être similaire à l’exemple ci-dessous :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -243,8 +243,8 @@ curl --request POST \
 --data client_id=YOUR_CLIENT_ID \
 --data client_secret=YOUR_CLIENT_SECRET \
 --data audience=YOUR_API_IDENTIFIER
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -252,7 +252,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=client_cre
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -271,15 +271,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=client_credentials&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&audience=YOUR_API_IDENTIFIER")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -297,8 +297,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=client_credentials" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -324,7 +324,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -347,8 +347,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=client_credentials&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&audience=YOUR_API_IDENTIFIER"
@@ -359,7 +359,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -372,8 +372,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=client_credentials&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&audience=YOUR_API_IDENTIFIER"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=client_credentials".data(using: String.Encoding.utf8)!)
@@ -401,7 +401,7 @@ dataTask.resume()
 
 La réponse devrait être similaire à l’exemple ci-dessous :
 
-```
+``` lines
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -441,7 +441,7 @@ Dans Auth0 Dashboard, vous devez :
 
 * Enregistrer et vérifier votre domaine avant de pouvoir l’utiliser avec vos services Auth0.
 * Déterminer si vous souhaitez gérer votre propre certificat ou utiliser un certificat géré par Auth0. Pour en savoir plus sur les certificats, lisez [Options de gestion des certificats](https://auth0.com/docs/customize/custom-domains#certificate-management-options).
-* Vérifiez que la version TLS (SSL) et le chiffre que vous souhaitez utiliser pour les certificats autogérés sont pris en charge par Auth0. Pour en savoir plus, lisez [Versions et chiffres TLS (SSL)](/docs/customize/custom-domains/self-managed-certificates/tls-ssl).
+* Vérifiez que la version TLS (SSL) et le chiffre que vous souhaitez utiliser pour les certificats autogérés sont pris en charge par Auth0. Pour en savoir plus, lisez [Versions et chiffres TLS (SSL)](/docs/fr-ca/customize/custom-domains/self-managed-certificates/tls-ssl).
 
 </Card>
 
@@ -502,7 +502,7 @@ Notre section [Déployer et surveiller](/docs/fr-ca/deploy-monitor) fournit des 
 
 Pour consulter la Vérification de préparation, sélectionnez le menu déroulant sous le nom de votre locataire et l’étiquette environnementale dans [Auth0 Dashboard > Run Readiness Checks (Exécuter les vérifications de préparation)](https://manage.auth0.com/#/production-checks).
 
-<Frame>![Auth0 Dashboard > Readiness Checklist](//images.ctfassets.net/cdy7uua7fh8z/7iu1CzH0NgaXJbLBNWXZli/259f149b1c3ecb06f17f0b875c330652/Readiness_Checks_-_French.png)</Frame>
+<Frame>![Auth0 Dashboard > Readiness Checklist](/images/fr-ca/cdy7uua7fh8z/7iu1CzH0NgaXJbLBNWXZli/259f149b1c3ecb06f17f0b875c330652/Readiness_Checks_-_French.png)</Frame>
 
 Vous pouvez utiliser le filtre pour appliquer les vérifications de préparation aux applications sélectionnées. **Ces vérifications ne s’appliquent pas à vos API configurées**.
 

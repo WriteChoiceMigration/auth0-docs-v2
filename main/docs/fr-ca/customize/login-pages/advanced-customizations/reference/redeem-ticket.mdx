@@ -1,23 +1,23 @@
 ---
 title: "Redeem Ticket screen class"
 permalink: "redeem-ticket"
+'description': "Learn about the ACUL Redeem Ticket screen class"
 'og:title': "Redeem Ticket screen class"
 'og:description': "Learn about the ACUL Redeem Ticket screen class"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Redeem Ticket screen class"
 'twitter:description': "Learn about the ACUL Redeem Ticket screen class"
 ---
-# Redeem Ticket screen class
 
 ## Redeem Ticket screen class
 
 The Redeem Ticket screen class provides methods associated with the redeem-ticket screen.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/5BiASkwQRQfJe61xCMq2Sx/f24832f81cf056562cec20b09394d0f9/Screenshot_2025-04-24_at_09.30.28.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/5BiASkwQRQfJe61xCMq2Sx/f24832f81cf056562cec20b09394d0f9/Screenshot_2025-04-24_at_09.30.28.png)</Frame>
 
 Import and instantiate the Redeem Ticket screen class:
 
-```
+```javascript lines
 import RedeemTicket from '@auth0/auth0-acul-js/redeem-ticket';
 
 const redeemTicketManager = new RedeemTicket();
@@ -29,7 +29,7 @@ The Redeem Ticket screen class properties are:
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -64,7 +64,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -76,7 +76,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -95,7 +95,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -103,7 +103,7 @@ interface prompt{
 
 </Tab><Tab title="écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -150,7 +150,7 @@ interface PasskeyCreate {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -161,7 +161,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -194,7 +194,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -214,7 +214,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -250,7 +250,7 @@ The Redeem Ticket screen class method is:
 
 This method continues the flow.
 
-```
+```javascript lines
 import RedeemTicket from '@auth0/auth0-acul-js/redeem-ticket';
 const redeemTicket = new RedeemTicket();
 
@@ -268,7 +268,7 @@ await redeemTicket.continue();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>string | number | boolean | undefined</td>
 <td>No</td>
 <td>Optional data collected to user.</td>

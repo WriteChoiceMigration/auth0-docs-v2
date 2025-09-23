@@ -1,13 +1,13 @@
 ---
 title: "Adopter l’authentification conforme à OIDC"
 permalink: "oidc-conformant-authentication"
+'description': "Apprenez en plus sur l’effet du paramètre d’application conforme à OIDC sur le pipeline d’authentification."
 'og:title': "Adopter l’authentification conforme à OIDC"
 'og:description': "Apprenez en plus sur l’effet du paramètre d’application conforme à OIDC sur le pipeline d’authentification."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Adopter l’authentification conforme à OIDC"
 'twitter:description': "Apprenez en plus sur l’effet du paramètre d’application conforme à OIDC sur le pipeline d’authentification."
 ---
-# Adopter l’authentification conforme à OIDC
 
 Auth0 est un [fournisseur OpenID Connect (OIDC) certifié](http://openid.net/certification/). Dans le cadre des efforts d’Auth0 pour améliorer la sécurité et l’interopérabilité basée sur des normes, nous déployons de nouvelles fonctionnalités exclusivement sur les flux d’authentification strictement conformes aux [spécifications d’OIDC](http://openid.net/specs/openid-connect-core-1_0.html).
 
@@ -37,11 +37,11 @@ Si vous souhaitez forcer toutes les modifications décrites dans ce guide en mê
 2. Défilez jusqu’à **Advanced Settings (Réglages avancés)**  et ensuite jusqu’à l’onglet **OAuth**.
 3. Activez le commutateur **OIDC Conformant (Conforme à OIDC)** et cliquez sur **Save Changes (Enregistrer les modifications)**.
 
-Si vous souhaitez utiliser le pipeline conforme à OIDC sur la base d’une demande d’authentification par demande et que votre application doit appeler une API avec un jeton d’accès <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">JWT</Tooltip>, lancez la demande au point de terminaison [`/social`](/docs/api/authentication#social) avec un paramètre `audience`.
+Si vous souhaitez utiliser le pipeline conforme à OIDC sur la base d’une demande d’authentification par demande et que votre application doit appeler une API avec un jeton d’accès <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">JWT</Tooltip>, lancez la demande au point de terminaison [`/social`](/docs/fr-ca/api/authentication#social) avec un paramètre `audience`.
 
 Si vous souhaitez utiliser le pipeline conforme à OIDC pour chaque requête d’authentification et que votre application n’a pas besoin d’appeler une API, utilisez le paramètre `audience` suivant :
 
-```
+``` lines
 https://{yourDomain}/userinfo
 ```
 
@@ -75,12 +75,12 @@ Pour en savoir plus, lisez [Adoptions conformes à OIDC : Jetons d’accès](/d
   + Les jetons d’actualisation ne seront plus renvoyés lors de l’utilisation du Flux implicite pour l’authentification.
 * [Flux de mot de passe du propriétaire de ressource](/docs/fr-ca/authenticate/login/oidc-conformant-authentication/oidc-adoption-rop-flow) : des différences structurelles existent dans la demande d’authentification, la réponse d’authentification, la structure du jeton d’ID et la structure du jeton d’accès. Plus précisément :
 
-  + le [point de terminaison du propriétaire de la ressource](/docs/api/authentication#database-ad-ldap-active-) héritée est désactivé, ce qui désactive également l’authentification sans mot de passe pour la connexion intégrée à partir de ce point de terminaison. Pour [mettre en oeuvre l’option sans mot de passe avec une connexion intégrée](/docs/connections/passwordless/guides/embedded-login), vous devez utiliser l’API intégrée sans mot de passe ou nos trousses SDK, selon le type de votre application.
+  + le [point de terminaison du propriétaire de la ressource](/docs/fr-ca/api/authentication#database-ad-ldap-active-) héritée est désactivé, ce qui désactive également l’authentification sans mot de passe pour la connexion intégrée à partir de ce point de terminaison. Pour [mettre en oeuvre l’option sans mot de passe avec une connexion intégrée](/docs/fr-ca/connections/passwordless/guides/embedded-login), vous devez utiliser l’API intégrée sans mot de passe ou nos trousses SDK, selon le type de votre application.
   + le paramètre `device` est maintenant considéré comme étant invalide si vous demandez un jeton d’actualisation à l’aide de la permission `offline_access`.
 
 ### Délégation
 
-* **Déconseillé** : point de terminaison [`/delegation`](/docs/api/authentication#delegation), sauf lorsqu’il est utilisé pour obtenir des jetons API tiers.
+* **Déconseillé** : point de terminaison [`/delegation`](/docs/fr-ca/api/authentication#delegation), sauf lorsqu’il est utilisé pour obtenir des jetons API tiers.
 * Les applications conformes à l’OIDC ne peuvent pas être la source ou la cible de demandes de délégation.
 
 Pour en savoir plus, lisez [Adoption conforme à OIDC : Délégation](/docs/fr-ca/authenticate/login/oidc-conformant-authentication/oidc-adoption-delegation).
@@ -88,9 +88,9 @@ Pour en savoir plus, lisez [Adoption conforme à OIDC : Délégation](/docs/fr-
 ### Points de terminaison
 
 * **Déconseillé** : point de terminaison `/tokeninfo`
-* **Désactivé**: le point de terminaison [`/oauth/access_token`](/docs/api/authentication#post-oauth-access_token) (utilisé pour l’authentification sociale à partir d’applications mobiles natives).
+* **Désactivé**: le point de terminaison [`/oauth/access_token`](/docs/fr-ca/api/authentication#post-oauth-access_token) (utilisé pour l’authentification sociale à partir d’applications mobiles natives).
 * **Déconseillé** : Point de terminaison `/ssodata`
-* **Déconseillé** : Point de terminaison [`/delegation`](/docs/api/authentication#delegation) sauf lorsqu’il est utilisé pour obtenir des jetons API tiers.
+* **Déconseillé** : Point de terminaison [`/delegation`](/docs/fr-ca/api/authentication#delegation) sauf lorsqu’il est utilisé pour obtenir des jetons API tiers.
 
 ### Jetons d’actualisation
 

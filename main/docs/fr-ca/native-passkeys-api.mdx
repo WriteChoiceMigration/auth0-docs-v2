@@ -1,17 +1,17 @@
 ---
 title: "API Clés d’identification natives"
 permalink: "native-passkeys-api"
+'description': "Spécifications d’Auth0 Authentication API pour les clés d’identification natives"
 'og:title': "API Clés d’identification natives"
 'og:description': "Spécifications d’Auth0 Authentication API pour les clés d’identification natives"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "API Clés d’identification natives"
 'twitter:description': "Spécifications d’Auth0 Authentication API pour les clés d’identification natives"
 ---
-# API Clés d’identification natives
 
 <Note>
 
-Clés d’identification natives est actuellement proposé en accès anticipé limité. Pour en savoir plus sur les étapes de diffusion d’Auth0, consultez [Étapes de la diffusion du produit](/docs/troubleshoot/product-lifecycle/product-release-stages).
+Clés d’identification natives est actuellement proposé en accès anticipé limité. Pour en savoir plus sur les étapes de diffusion d’Auth0, consultez [Étapes de la diffusion du produit](/docs/fr-ca/troubleshoot/product-lifecycle/product-release-stages).
 
 </Note>
 
@@ -37,16 +37,16 @@ Lance le flux d’inscription de la clé d’identification pour un nouvel utili
 </thead>
 <tbody>
 <tr>
-<td><code>client_id</code></td>
-<td><strong>Obligatoire</strong>. <code>client_id</code> de votre application.</td>
+<td>`client_id`</td>
+<td><strong>Obligatoire</strong>. `client_id` de votre application.</td>
 </tr>
 <tr>
-<td><code>realm</code></td>
+<td>`realm`</td>
 <td><strong>Facultatif</strong>. Le nom de la connexion à associer avec cet utilisateur.<br/><br/>Le répertoire par défaut de votre locataire est utilisé si aucune connexion n’est précisée.</td>
 </tr>
 <tr>
-<td><code>user_profile</code></td>
-<td>_<em>Obligatoire</em>. Un objet contenant des informations d’identification pour l’utilisateur. Par défaut, cela inclut un <code>email</code> valide et un <code>name</code> d’affichage facultatif.<br/><br/>Si vous avez activé les <a href="/docs/authenticate/database-connections/activate-and-configure-attributes-for-flexible-identifiers">identifiants flexibles</a> pour votre connexion par base de données, vous pouvez utiliser une combinaison de <code>email</code>, <code>phone_number</code>, ou <code>username</code> comme identificateurs. Ces options peuvent être obligatoires ou facultatives et doivent correspondre à votre configuration d’identificateur flexible.<br/><br/>Si l’identifiant transmis (tel que <code>email</code>) existe déjà dans le directory, l’utilisateur doit être invité à effectuer le flux de connexion.</td>
+<td>`user_profile`</td>
+<td>_<em>Obligatoire</em>. Un objet contenant des informations d’identification pour l’utilisateur. Par défaut, cela inclut un `email` valide et un `name` d’affichage facultatif.<br/><br/>Si vous avez activé les <a href="/docs/fr-ca/authenticate/database-connections/activate-and-configure-attributes-for-flexible-identifiers">identifiants flexibles</a> pour votre connexion par base de données, vous pouvez utiliser une combinaison de `email`, `phone_number`, ou `username` comme identificateurs. Ces options peuvent être obligatoires ou facultatives et doivent correspondre à votre configuration d’identificateur flexible.<br/><br/>Si l’identifiant transmis (tel que `email`) existe déjà dans le directory, l’utilisateur doit être invité à effectuer le flux de connexion.</td>
 </tr>
 </tbody>
 </table>
@@ -55,7 +55,7 @@ Lance le flux d’inscription de la clé d’identification pour un nouvel utili
 
 ##### Demande
 
-```
+```json lines
 POST /passkey/register
 Content-Type: application/json
 
@@ -71,7 +71,7 @@ Content-Type: application/json
 
 ##### Réponse
 
-```
+```json lines
 HTTP/1.1 200 OK
 Content-Type: application/json
 
@@ -134,44 +134,44 @@ Le paramètre `authn_response` est basé sur la [Spécification de Web Authentic
 </thead>
 <tbody>
 <tr>
-<td><code>grant_type</code></td>
-<td><strong>Obligatoire</strong>. Inclure la valeur : <code>urn:okta:params:oauth:grant-type:webauthn</code></td>
+<td>`grant_type`</td>
+<td><strong>Obligatoire</strong>. Inclure la valeur : `urn:okta:params:oauth:grant-type:webauthn`</td>
 </tr>
 <tr>
-<td><code>scope</code></td>
-<td><strong>Facultatif</strong>. Utiliser <code>openid</code> pour obtenir un jeton d’ID ou <code>openid profile email</code> pour inclure des informations de profil utilisateur dans le jeton d’ID.</td>
+<td>`scope`</td>
+<td><strong>Facultatif</strong>. Utiliser `openid` pour obtenir un jeton d’ID ou `openid profile email` pour inclure des informations de profil utilisateur dans le jeton d’ID.</td>
 </tr>
 <tr>
-<td><code>audience</code></td>
+<td>`audience`</td>
 <td><strong>Facultatif</strong>. Identifiant API de l’API pour laquelle vous souhaitez obtenir un jeton d’accès.</td>
 </tr>
 <tr>
-<td><code>auth_session</code></td>
+<td>`auth_session`</td>
 <td><strong>Obligatoire</strong>. Identifiant de session retourné lors de la demande initiale de défi de clé d’identification.</td>
 </tr>
 <tr>
-<td><code>authn_response</code></td>
-<td><strong>Obligatoire</strong>. Un objet contenant les éléments suivants :<ul><li><code>id</code></li><li><code>rawId</code></li><li><code>type</code></li><li><code>authenticatorAttachment</code></li><li><code>response</code></li></ul></td>
+<td>`authn_response`</td>
+<td><strong>Obligatoire</strong>. Un objet contenant les éléments suivants :<ul><li>`id`</li><li>`rawId`</li><li>`type`</li><li>`authenticatorAttachment`</li><li>`response`</li></ul></td>
 </tr>
 <tr>
-<td><code>authn_response.id</code></td>
+<td>`authn_response.id`</td>
 <td><strong>Obligatoire</strong>. ID d’identification Base64URL.</td>
 </tr>
 <tr>
-<td><code>authn_response.rawId</code></td>
+<td>`authn_response.rawId`</td>
 <td><strong>Obligatoire</strong>. ID d’identification Base64URL.</td>
 </tr>
 <tr>
-<td><code>authn_response.type</code></td>
-<td><strong>Obligatoire</strong>. Inclure la valeur : <code>public-key</code></td>
+<td>`authn_response.type`</td>
+<td><strong>Obligatoire</strong>. Inclure la valeur : `public-key`</td>
 </tr>
 <tr>
-<td><code>authn_response.authenticatorAttachment</code></td>
-<td><strong>Obligatoire</strong>. Inclure les valeurs :<ul><li><code>platform</code></li><li><code>cross-platform</code></li></ul></td>
+<td>`authn_response.authenticatorAttachment`</td>
+<td><strong>Obligatoire</strong>. Inclure les valeurs :<ul><li>`platform`</li><li>`cross-platform`</li></ul></td>
 </tr>
 <tr>
-<td><code>authn_response.response</code></td>
-<td><strong>Obligatoire</strong>. Un objet contenant les éléments suivants : <ul><li><code>clientDataJSON</code>: Contient la sérialisation compatible JSON des données client; héritée de <a href="https://www.w3.org/TR/webauthn-3/#authenticatorresponse">AuthenticatorResponse</a>.</li><li><code>attestationObject</code>: Contient des données d’authentification et une déclaration d’attestation; héritée de <a href="https://www.w3.org/TR/webauthn-3/#authenticatorresponse">AuthenticatorResponse</a>.</li></ul></td>
+<td>`authn_response.response`</td>
+<td><strong>Obligatoire</strong>. Un objet contenant les éléments suivants : <ul><li>`clientDataJSON`: Contient la sérialisation compatible JSON des données client; héritée de <a href="https://www.w3.org/TR/webauthn-3/#authenticatorresponse">AuthenticatorResponse</a>.</li><li>`attestationObject`: Contient des données d’authentification et une déclaration d’attestation; héritée de <a href="https://www.w3.org/TR/webauthn-3/#authenticatorresponse">AuthenticatorResponse</a>.</li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -180,7 +180,7 @@ Le paramètre `authn_response` est basé sur la [Spécification de Web Authentic
 
 ##### Demande
 
-```
+```json lines
 POST /oauth/token
 Content-Type: application/json
 
@@ -206,7 +206,7 @@ Content-Type: application/json
 
 ##### Réponse
 
-```
+```json lines
 HTTP/1.1 200 OK
 Content-Type: application/json
 
@@ -239,11 +239,11 @@ En réponse, Auth0 renvoie [PublicKeyCredentialRequestOptions](https://www.w3.or
 </thead>
 <tbody>
 <tr>
-<td><code>client_id</code></td>
-<td><strong>Obligatoire</strong>. <code>client_id</code> de votre application.</td>
+<td>`client_id`</td>
+<td><strong>Obligatoire</strong>. `client_id` de votre application.</td>
 </tr>
 <tr>
-<td><code>realm</code></td>
+<td>`realm`</td>
 <td><strong>Facultatif</strong>. Le nom de la connexion à associer avec l’utilisateur.<br/><br/>Le répertoire par défaut de votre locataire est utilisé si aucune connexion n’est précisée.</td>
 </tr>
 </tbody>
@@ -253,7 +253,7 @@ En réponse, Auth0 renvoie [PublicKeyCredentialRequestOptions](https://www.w3.or
 
 ##### Demande
 
-```
+```json lines
 POST /passkey/challenge
 Content-Type: application/json
 
@@ -265,7 +265,7 @@ Content-Type: application/json
 
 ##### Réponse
 
-```
+```json lines
 HTTP/1.1 200 OK
 Content-Type: application/json
 
@@ -306,47 +306,47 @@ Le paramètre `authn_response` est basé sur la [Spécification de Web Authentic
 </thead>
 <tbody>
 <tr>
-<td><code>grant_type</code></td>
-<td><strong>Obligatoire</strong>. Inclure la valeur : <code>urn:okta:params:oauth:grant-type:webauthn</code></td>
+<td>`grant_type`</td>
+<td><strong>Obligatoire</strong>. Inclure la valeur : `urn:okta:params:oauth:grant-type:webauthn`</td>
 </tr>
 <tr>
-<td><code>scope</code></td>
-<td><strong>Facultatif</strong>. Utiliser <code>openid</code> pour obtenir un jeton d’ID ou <code>openid profile email</code> pour inclure des informations de profil utilisateur dans le jeton d’ID.</td>
+<td>`scope`</td>
+<td><strong>Facultatif</strong>. Utiliser `openid` pour obtenir un jeton d’ID ou `openid profile email` pour inclure des informations de profil utilisateur dans le jeton d’ID.</td>
 </tr>
 <tr>
-<td><code>audience</code></td>
+<td>`audience`</td>
 <td><strong>Facultatif</strong>. Identifiant API de l’API pour laquelle vous souhaitez obtenir un jeton d’accès.</td>
 </tr>
 <tr>
-<td><code>auth_session</code></td>
+<td>`auth_session`</td>
 <td><strong>Obligatoire</strong>. Identifiant de session retourné lors de la demande initiale de défi de clé d’identification.</td>
 </tr>
 <tr>
-<td><code>authn_response</code></td>
-<td><strong>Obligatoire</strong>. Un objet contenant les éléments suivants :<ul><li><code>id</code></li><li><code>rawId</code></li><li><code>type</code></li><li><code>authenticatorAttachment</code></li><li><code>response</code></li><li><code>clientExtensionResults</code></li></ul></td>
+<td>`authn_response`</td>
+<td><strong>Obligatoire</strong>. Un objet contenant les éléments suivants :<ul><li>`id`</li><li>`rawId`</li><li>`type`</li><li>`authenticatorAttachment`</li><li>`response`</li><li>`clientExtensionResults`</li></ul></td>
 </tr>
 <tr>
-<td><code>authn_response.id</code></td>
+<td>`authn_response.id`</td>
 <td><strong>Obligatoire</strong>. ID d’identification Base64URL.</td>
 </tr>
 <tr>
-<td><code>authn_response.rawId</code></td>
+<td>`authn_response.rawId`</td>
 <td><strong>Obligatoire</strong>. ID d’identification Base64URL.</td>
 </tr>
 <tr>
-<td><code>authn_response.type</code></td>
-<td><strong>Obligatoire</strong>. Inclure la valeur : <code>public-key</code></td>
+<td>`authn_response.type`</td>
+<td><strong>Obligatoire</strong>. Inclure la valeur : `public-key`</td>
 </tr>
 <tr>
-<td><code>authn_response.authenticatorAttachment</code></td>
-<td><strong>Obligatoire</strong>. Inclure les valeurs :<ul><li><code>platform</code></li><li><code>cross-platform</code></li></ul></td>
+<td>`authn_response.authenticatorAttachment`</td>
+<td><strong>Obligatoire</strong>. Inclure les valeurs :<ul><li>`platform`</li><li>`cross-platform`</li></ul></td>
 </tr>
 <tr>
-<td><code>authn_response.response</code></td>
-<td><strong>Obligatoire</strong>. Un objet contenant les éléments suivants : <ul><li><code>authenticatorData</code>: Contient les <a href="https://www.w3.org/TR/webauthn-3/#authenticator-data">données d’authentification</a> renvoyées par l’authentificateur.</li><li><code>clientDataJSON</code>: Contient la sérialisation compatible JSON des données client; héritée de <a href="https://www.w3.org/TR/webauthn-3/#authenticatorresponse">AuthenticatorResponse</a>.</li><li><code>signature</code>: Signature Base64URL renvoyée par l’authentificateur.</li><li><code>userHandle</code>: Identifiant Base64URL du compte utilisateur.</li></ul></td>
+<td>`authn_response.response`</td>
+<td><strong>Obligatoire</strong>. Un objet contenant les éléments suivants : <ul><li>`authenticatorData`: Contient les <a href="https://www.w3.org/TR/webauthn-3/#authenticator-data">données d’authentification</a> renvoyées par l’authentificateur.</li><li>`clientDataJSON`: Contient la sérialisation compatible JSON des données client; héritée de <a href="https://www.w3.org/TR/webauthn-3/#authenticatorresponse">AuthenticatorResponse</a>.</li><li>`signature`: Signature Base64URL renvoyée par l’authentificateur.</li><li>`userHandle`: Identifiant Base64URL du compte utilisateur.</li></ul></td>
 </tr>
 <tr>
-<td><code>authn_response.clientExtensionResults</code></td>
+<td>`authn_response.clientExtensionResults`</td>
 <td><strong>Facultatif</strong>. Contient les résultats du traitement des extensions client demandées par la partie utilisatrice.</td>
 </tr>
 </tbody>
@@ -356,7 +356,7 @@ Le paramètre `authn_response` est basé sur la [Spécification de Web Authentic
 
 ##### Demande
 
-```
+```json lines
 POST /oauth/token
 Content-Type: application/json
 
@@ -384,7 +384,7 @@ Content-Type: application/json
 
 ##### Réponse
 
-```
+```json lines
 HTTP/1.1 200 OK
 Content-Type: application/json
 

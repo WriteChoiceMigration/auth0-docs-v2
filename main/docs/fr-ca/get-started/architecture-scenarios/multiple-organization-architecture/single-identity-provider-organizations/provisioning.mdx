@@ -1,13 +1,13 @@
 ---
 title: "Fournisseur  d’identités  unique : provisionnement"
 permalink: "provisioning"
+'description': "Apprenez à provisionner les organisations pour les architectures multi-locataires."
 'og:title': "Fournisseur  d’identités  unique : provisionnement"
 'og:description': "Apprenez à provisionner les organisations pour les architectures multi-locataires."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Fournisseur  d’identités  unique : provisionnement"
 'twitter:description': "Apprenez à provisionner les organisations pour les architectures multi-locataires."
 ---
-# Fournisseur d’identités unique : provisionnement
 
 En utilisant la fonctionnalité Auth0 Organizations, un seul locataire Auth0 peut être provisionné pour le déploiement dans un environnement de production. Pour tous les scénarios d’architecture, sauf les plus complexes, il est recommandé de fournir un seul locataire Auth0 à utiliser dans un environnement de production, pour faciliter l’intégration/l’utilisation de [Authentification unique (SSO)](/docs/fr-ca/authenticate/single-sign-on), la [gestion du profil](/docs/fr-ca/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/profile-management) de l’utilisateur, et ainsi de suite. En fonction de l’implémentation, vous devrez traiter certains points supplémentaires concernant la configuration de votre locataire Auth0 et votre intégration correspondante.
 
@@ -35,13 +35,13 @@ Il est également possible d’utiliser une seule définition d’application da
 
 ## Connexions
 
-Ensuite, définissez les [Connexions](/docs/connections) qui seront utilisées pour authentifier les utilisateurs. Dans ce cas, nous définirons une [connexions de base de données](/docs/connections/database) pour les utilisateurs associés à Hoekstra & Associates et une [connexion d’entreprise](/docs/connections/identity-providers-enterprise) pour les utilisateurs associées à la banque MetaHexa.
+Ensuite, définissez les [Connexions](/docs/fr-ca/connections) qui seront utilisées pour authentifier les utilisateurs. Dans ce cas, nous définirons une [connexions de base de données](/docs/fr-ca/connections/database) pour les utilisateurs associés à Hoekstra & Associates et une [connexion d’entreprise](/docs/fr-ca/connections/identity-providers-enterprise) pour les utilisateurs associées à la banque MetaHexa.
 
 <Note>
 
 **Meilleure pratique**
 
-Pour les organisations à fournisseur d’identités unique (IdP), créez une connexion pour chaque organisation définie afin d’offrir une certaine flexibilité pour un certain nombre de scénarios d’utilisation. Par exemple, une seule [connexion à une base de données ou base de données personnalisée](/docs/connections/database) par organisation vous permet de supprimer facilement les utilisateurs associés aux organisations qui sont déclassées et offre une flexibilité maximale aux organisations qui ont des exigences différentes en matière de complexité des mots de passe.
+Pour les organisations à fournisseur d’identités unique (IdP), créez une connexion pour chaque organisation définie afin d’offrir une certaine flexibilité pour un certain nombre de scénarios d’utilisation. Par exemple, une seule [connexion à une base de données ou base de données personnalisée](/docs/fr-ca/connections/database) par organisation vous permet de supprimer facilement les utilisateurs associés aux organisations qui sont déclassées et offre une flexibilité maximale aux organisations qui ont des exigences différentes en matière de complexité des mots de passe.
 
 </Note>
 
@@ -61,7 +61,7 @@ Les utilisateurs sont ensuite associés à une organisation Auth0 en leur attrib
 
 <Note>
 
-Pour qu’un utilisateur puisse se voir attribuer manuellement le statut de membre d’une organisation, il doit déjà avoir un [profil utilisateur](/docs/manage-users/user-accounts/user-profiles) défini dans Auth0. Vous pouvez [affecter manuellement l’adhésion](/docs/fr-ca/manage-users/organizations/configure-organizations/assign-members) à l’aide du Tenant Dashboard Auth0 ou de Management API.
+Pour qu’un utilisateur puisse se voir attribuer manuellement le statut de membre d’une organisation, il doit déjà avoir un [profil utilisateur](/docs/fr-ca/manage-users/user-accounts/user-profiles) défini dans Auth0. Vous pouvez [affecter manuellement l’adhésion](/docs/fr-ca/manage-users/organizations/configure-organizations/assign-members) à l’aide du Tenant Dashboard Auth0 ou de Management API.
 
 </Note>
 
@@ -73,7 +73,7 @@ La fonctionnalité Auth0 Organization (Organisation) permet également d’utili
 
 Reprenons l’exemple de Hoekstra & Associates et voyons comment cette implémentation peut se dérouler lorsqu’une connexion à la base de données est utilisée dans le cadre de l’invitation utilisateur; la majeure partie du flux de travail décrit sera généralement gérée en utilisant la trousse SDK Auth0 ou la bibliothèque associée à votre infrastructure technologique :
 
-<Frame>![Architecture Scenarios - MOA - Isolated Users, Shared Apps, Invitation Flow (Database Connection)](//images.ctfassets.net/cdy7uua7fh8z/2QMwMeBQ6U9TjLtbjPgNwe/1b436cd226b95355e73a93d5f9bc0be3/Isolated_Users__Shared_Apps__Invitation_Flow__Database_Connection_.png)</Frame>
+<Frame>![Architecture Scenarios - MOA - Isolated Users, Shared Apps, Invitation Flow (Database Connection)](/images/fr-ca/cdy7uua7fh8z/2QMwMeBQ6U9TjLtbjPgNwe/1b436cd226b95355e73a93d5f9bc0be3/Isolated_Users__Shared_Apps__Invitation_Flow__Database_Connection_.png)</Frame>
 
 1. Jennifer de Hoekstra & Associates reçoit un courriel envoyé par le locataire Auth0 de Travel0 au nom de l’instance de Travel0 Corporate Booking de Hoekstra & Associates.
 
@@ -114,7 +114,7 @@ Reprenons l’exemple de Hoekstra & Associates et voyons comment cette implémen
 
 Reprenons l’exemple de la banque MetaHexa et voyons comment cette implémentation peut se dérouler lorsqu’une connexion d’entreprise est utilisée dans le cadre de l’invitation d’un utilisateur; là aussi, la plupart du flux de travail décrit sera généralement géré à l’aide da la trousse SDK Auth0 pertinente ou de la bibliothèque associée à votre pile technologique :
 
-<Frame>![Architecture Scenarios - MOA - Isolated Users, Shared Apps, Invitation Flow (Enterprise Connection)](//images.ctfassets.net/cdy7uua7fh8z/1IsdaHpprvIp17R5zYIg7q/c2c73360fb21657ab2ae98c0981b1cc6/Isolated_Users__Shared_Apps__Invitation_Flow__Enterprise_Connection_.png)</Frame>
+<Frame>![Architecture Scenarios - MOA - Isolated Users, Shared Apps, Invitation Flow (Enterprise Connection)](/images/fr-ca/cdy7uua7fh8z/1IsdaHpprvIp17R5zYIg7q/c2c73360fb21657ab2ae98c0981b1cc6/Isolated_Users__Shared_Apps__Invitation_Flow__Enterprise_Connection_.png)</Frame>
 
 1. Amintha de MetaHexa Bank reçoit un courriel envoyé par le locataire Auth0 de Travel0 au nom de l’instance de Travel0 Corporate Booking de MetaHexa Bank.
 

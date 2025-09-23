@@ -1,13 +1,13 @@
 ---
 title: "Administration déléguée : Hooks d’extension"
 permalink: "delegated-administration-hooks"
+'description': "Apprenez à personnaliser le comportement de l’extension Delegated Administration en utilisant des hooks d’extension."
 'og:title': "Administration déléguée : Hooks d’extension"
 'og:description': "Apprenez à personnaliser le comportement de l’extension Delegated Administration en utilisant des hooks d’extension."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Administration déléguée : Hooks d’extension"
 'twitter:description': "Apprenez à personnaliser le comportement de l’extension Delegated Administration en utilisant des hooks d’extension."
 ---
-# Administration déléguée : Hooks d’extension
 
 Si vous êtes un utilisateur assigné au rôle **Administrateur délégué - Administrateur** vous pouvez gérer les différents hooks d’extension et requêtes qui vous permettent de personnaliser le comportement de l’extension Delegated Administration.
 
@@ -32,7 +32,7 @@ L’objet de contexte (**ctx**) exposera quelques auxiliaires et des information
 
 Pour ajouter un message aux journaux Webtask (que vous pouvez consulter en utilisant l’extension Realtime Webtask Logs), faites appel à la méthode **log** :
 
-```javascript
+```javascript lines
 function(ctx, callback) {
   ctx.log('Logging action:', ctx.payload.action);
   return callback();
@@ -45,7 +45,7 @@ Pour en savoir plus sur l’extension Realtime Webtask Log, lisez [Journaux Real
 
 Pour mettre en cache quelque chose (comme une longue liste de départements), vous pouvez la stocker dans l’objet **global** du contexte Cet objet sera disponible jusqu’à ce que le conteneur Webtask soit recyclé.
 
-```javascript
+```javascript lines
 function(ctx, callback) {
   ctx.global.departments = [ 'IT', 'HR', 'Finance' ];
   return callback();
@@ -56,7 +56,7 @@ function(ctx, callback) {
 
 Vous pouvez stocker des données personnalisées dans l’extension. Ce champ est limité à 400 Ko de données.
 
-```javascript
+```javascript lines
 var data = {
 departments: [ 'IT', 'HR', 'Finance' ]
 };
@@ -72,7 +72,7 @@ ctx.write(data)
 
 Pour lire les données :
 
-```
+```javascript lines
 ctx.read()
 .then(function(data) {
     // ...
@@ -86,7 +86,7 @@ ctx.read()
 
 Chaque hook d’extension expose la charge utile ou la demande en cours avec des informations spécifiques. La demande contiendra toujours des informations sur l’utilisateur connecté au Dashboard des utilisateurs :
 
-```javascript
+```javascript lines
 function(ctx, callback) {
   ctx.log('Current User:', ctx.request.user);
   return callback();
@@ -97,7 +97,7 @@ function(ctx, callback) {
 
 Si vous souhaitez appeler un service externe (tel qu’une API) pour valider des données ou charger des adhésions, vous pouvez le faire en utilisant le module `request`
 
-```javascript
+```javascript lines
 function(ctx, callback) {
 var request = require('request');
     request('http://api.mycompany.com/departments', function (error, response, body) {
@@ -124,7 +124,7 @@ var request = require('request');
 
 Kelly gère le département des Finances, et elle ne devrait pouvoir accéder qu’aux utilisateurs de son département.
 
-```javascript
+```javascript lines
 function(ctx, callback) {
   if (ctx.payload.action === 'delete:user') {
     return callback(new Error('You are not allowed to delete users.'));

@@ -1,17 +1,19 @@
 ---
 title: "Ajouter une autorisation à votre application API ASP.NET Core Web"
 permalink: "interactive"
+'description': "Ce tutoriel explique comment ajouter une autorisation à une application API ASP.NET Core Web en utilisant le logiciel médiateur JWT standard."
 'og:title': "Ajouter une autorisation à votre application API ASP.NET Core Web"
 'og:description': "Ce tutoriel explique comment ajouter une autorisation à une application API ASP.NET Core Web en utilisant le logiciel médiateur JWT standard."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/asp.png"
 'twitter:title': "Ajouter une autorisation à votre application API ASP.NET Core Web"
 'twitter:description': "Ce tutoriel explique comment ajouter une autorisation à une application API ASP.NET Core Web en utilisant le logiciel médiateur JWT standard."
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -27,7 +29,7 @@ permalink: "interactive"
 
 [View on Github](https://github.com/auth0-samples/auth0-aspnetcore-webapi-samples/tree/master/Quickstart/01-Authorization) Log In & Download Sample
 
-1. [Docs](/docs/fr-ca)
+1. [Docs](/docs/fr-ca/fr-ca)
 3. [Quickstarts](/docs/fr-ca/quickstarts)
 5. [Backend/API](/docs/fr-ca/quickstart/backend)
 7. [ASP.NET Core Web API](/docs/fr-ca/quickstart/backend/aspnet-core-webapi/interactive)
@@ -58,7 +60,7 @@ Les autorisations vous permettent de définir comment les ressources peuvent êt
 
 Vous pouvez définir les autorisations autorisées dans la vue **Permissions (Autorisations)** de la section [API](https://manage.auth0.com/#/apis) d’Auth0 Dashboard. L’exemple suivant utilise la permission `read:messages`.
 
-![Auth0 Dashboard> Applications > APIs (API) > [Specific API (API précise)] > Onglet Permissions (Autorisations)](//images.ctfassets.net/cdy7uua7fh8z/1s3Yp5zqJiKiSWqbPSezNO/677a3405b2853f5fdf9e42f6e83ceba7/Quickstarts_API_-_French.png)
+![Auth0 Dashboard> Applications > APIs (API) > [Specific API (API précise)] > Onglet Permissions (Autorisations)](/images/fr-ca/cdy7uua7fh8z/1s3Yp5zqJiKiSWqbPSezNO/677a3405b2853f5fdf9e42f6e83ceba7/Quickstarts_API_-_French.png)
 
 [2
 
@@ -66,7 +68,7 @@ Vous pouvez définir les autorisations autorisées dans la vue **Permissions (Au
 
 Pour permettre à votre application de valider les jetons d’accès, ajoutez une référence au package NuGet `Microsoft.AspNetCore.Authentication.JwtBearer` :
 
-```
+```powershell lines
 Install-Package Microsoft.AspNetCore.Authentication.JwtBearer
 ```
 
@@ -115,8 +117,8 @@ Lors de la sécurisation des points de terminaison qui nécessitent des permissi
 
 La façon dont vous appelez votre API dépend du type d’application que vous développez et du cadre que vous utilisez. Pour en savoir plus, lire le Guide rapide de l’application concernée :
 
-* [Applications à page unique](/docs/quickstart/spa)
-* [Application mobile/native](/docs/quickstart/native)
+* [Applications à page unique](/docs/fr-ca/quickstart/spa)
+* [Application mobile/native](/docs/fr-ca/quickstart/native)
 
 ### Obtenir un jeton d’accès
 
@@ -139,19 +141,19 @@ Pour en savoir plus sur l’obtention de l’identificateur client et du secret 
 **Exemple de demande**
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request post \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -168,14 +170,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'post',
@@ -187,8 +189,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
@@ -209,7 +211,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -231,8 +233,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'content-type': "application/x-www-form-urlencoded" }
@@ -242,7 +244,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -254,8 +256,8 @@ request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/x-www-form-urlencoded'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/token")! as URL,
@@ -281,19 +283,19 @@ dataTask.resume()
 Maintenant que vous avez un jeton d’accès, vous pouvez l’utiliser pour appeler des points de terminaison API sécurisés. Lorsque vous appelez un point de terminaison sécurisé, vous devez inclure le jeton d’accès en tant que jeton de porteur dans l’en-tête **Authorization** de la requête. Par exemple, vous pouvez faire une requête au point de terminaison `/api/private` :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request get \
 --url http://localhost:3010/api/private \
 --header 'authorization: Bearer YOUR_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("http://localhost:3010/api/private");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer YOUR_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -310,14 +312,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("http://localhost:3010/api/private")
 .header("authorization", "Bearer YOUR_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'get',
@@ -329,8 +331,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer YOUR_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:3010/api/private"]
@@ -351,7 +353,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_PORT => "3010",
@@ -374,8 +376,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPConnection("localhost:3010")
 headers = { 'authorization': "Bearer YOUR_ACCESS_TOKEN" }
@@ -385,7 +387,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 url = URI("http://localhost:3010/api/private")
@@ -394,8 +396,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer YOUR_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer YOUR_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "http://localhost:3010/api/private")! as URL,
@@ -446,7 +448,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/backend/aspnet-core-webapi/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

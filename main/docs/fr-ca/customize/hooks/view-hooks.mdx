@@ -1,21 +1,21 @@
 ---
 title: "Visualiser les hooks"
 permalink: "view-hooks"
+'description': "Apprenez comment afficher les hooks à l’aide du Tableau de bord et de Management API. Les hooks peuvent également être importés et exportés à l’aide de l’outil Auth0 Deploy CLI."
 'og:title': "Visualiser les hooks"
 'og:description': "Apprenez comment afficher les hooks à l’aide du Tableau de bord et de Management API. Les hooks peuvent également être importés et exportés à l’aide de l’outil Auth0 Deploy CLI."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Visualiser les hooks"
 'twitter:description': "Apprenez comment afficher les hooks à l’aide du Tableau de bord et de Management API. Les hooks peuvent également être importés et exportés à l’aide de l’outil Auth0 Deploy CLI."
 ---
-# Visualiser les hooks
 
 <Warning>
 
 La date de fin de vie (EOL) des Règles et des Appels sera le **18 novembre 2026**. Ils ne sont plus disponibles pour les nouveaux locataires créés à partir du **16 octobre 2023**. Les locataires actuels ayant des hooks actifs conserveront l’accès aux produit Hooks jusqu’à la fin de leur durée de vie.
 
-Nous vous conseillons vivement d’utiliser les Actions pour étendre Auth0. Avec les Actions, vous avez accès à des informations de type enrichies, à une documentation intégrée et à des packages `npm` publics, et vous pouvez connecter des intégrations externes qui optimisent votre expérience d’extensibilité globale. Pour en savoir plus sur ce que les Actions proposent, consultez [Comprendre comment fonctionnent Auth0 Actions](/docs/customize/actions/actions-overview).
+Nous vous conseillons vivement d’utiliser les Actions pour étendre Auth0. Avec les Actions, vous avez accès à des informations de type enrichies, à une documentation intégrée et à des packages `npm` publics, et vous pouvez connecter des intégrations externes qui optimisent votre expérience d’extensibilité globale. Pour en savoir plus sur ce que les Actions proposent, consultez [Comprendre comment fonctionnent Auth0 Actions](/docs/fr-ca/customize/actions/actions-overview).
 
-Pour vous aider dans votre migration, nous proposons des guides qui vous aideront à [migrer des Règles vers les Actions](/docs/customize/actions/migrate/migrate-from-rules-to-actions) et à [migrer des Hooks vers les Actions](/docs/fr-ca/customize/actions/migrate/migrate-from-hooks-to-actions). Nous avons également une page dédiée à la [Migration vers les Actions](https://auth0.com/extensibility/movetoactions) qui met en évidence les comparaisons de fonctionnalités, [une démo des Actions](https://www.youtube.com/watch?v=UesFSY1klrI)  et d’autres ressources pour vous aider dans votre parcours de migration.
+Pour vous aider dans votre migration, nous proposons des guides qui vous aideront à [migrer des Règles vers les Actions](/docs/fr-ca/customize/actions/migrate/migrate-from-rules-to-actions) et à [migrer des Hooks vers les Actions](/docs/fr-ca/customize/actions/migrate/migrate-from-hooks-to-actions). Nous avons également une page dédiée à la [Migration vers les Actions](https://auth0.com/extensibility/movetoactions) qui met en évidence les comparaisons de fonctionnalités, [une démo des Actions](https://www.youtube.com/watch?v=UesFSY1klrI)  et d’autres ressources pour vous aider dans votre parcours de migration.
 
 Pour en savoir plus sur l’obsolescence des Règles et des Appels, consultez notre article de blog : [Preparing for Rules and Hooks End of Life (Préparation à la fin de vie des règles et des crochets)](https://auth0.com/blog/preparing-for-rules-and-hooks-end-of-life/).
 
@@ -25,7 +25,7 @@ Pour en savoir plus sur l’obsolescence des Règles et des Appels, consultez no
 
 Comme nous prévoyons de supprimer les fonctions Règles et Hooks en 2026, vous devez créer de nouvelles Règles ou de nouveaux Hooks uniquement dans votre environnement de développement et uniquement pour tester la migration vers les Actions.
 
-Pour apprendre à migrer vos Règles vers des Actions, consultez [Migrer des règles vers les actions](/docs/customize/actions/migrate/migrate-from-rules-to-actions). Pour apprendre à migrer vos Hooks vers des Actions, consultez la section [Migrer des Hooks vers les actions](/docs/fr-ca/customize/actions/migrate/migrate-from-hooks-to-actions).
+Pour apprendre à migrer vos Règles vers des Actions, consultez [Migrer des règles vers les actions](/docs/fr-ca/customize/actions/migrate/migrate-from-rules-to-actions). Pour apprendre à migrer vos Hooks vers des Actions, consultez la section [Migrer des Hooks vers les actions](/docs/fr-ca/customize/actions/migrate/migrate-from-hooks-to-actions).
 
 </Warning>
 
@@ -39,22 +39,22 @@ Tous les hooks configurés sont répertoriés en fonction du point d’extensibi
 
 ## Utiliser Management API
 
-Effectuez un appel `GET` au point de terminaison [Obtenir les hooks](/docs/api/management/v2/#!/Hooks/get_hooks). Veillez à remplacer le paramètre fictif `MGMT_API_ACCESS_TOKEN` par votre jeton d’accès à Management API.
+Effectuez un appel `GET` au point de terminaison [Obtenir les hooks](/docs/fr-ca/api/management/v2/#!/Hooks/get_hooks). Veillez à remplacer le paramètre fictif `MGMT_API_ACCESS_TOKEN` par votre jeton d’accès à Management API.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/hooks' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/hooks");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -71,14 +71,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/hooks")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -90,8 +90,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/hooks"]
@@ -112,7 +112,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/hooks",
@@ -134,8 +134,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MGMT_API_ACCESS_TOKEN" }
@@ -145,7 +145,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -157,8 +157,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/hooks")! as URL,
@@ -187,8 +187,8 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td>Jeton d’accès à Management API avec la <dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">permission</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn> <code>create:hooks</code>. Pour en savoir plus, consultez <a href="/docs/api/management/v2/tokens">Jetons d’accès à Management API</a>.</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>Jeton d’accès à Management API avec la <dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">permission</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn> `create:hooks`. Pour en savoir plus, consultez <a href="/docs/fr-ca/api/management/v2/tokens">Jetons d’accès à Management API</a>.</td>
 </tr>
 </tbody>
 </table>

@@ -1,17 +1,17 @@
 ---
 title: "Rendre des formulaires à l’aide d’Actions"
 permalink: "render"
+'description': "Découvrez comment vous pouvez rendre des formulaires à l’aide d’Actions."
 'og:title': "Rendre des formulaires à l’aide d’Actions"
 'og:description': "Découvrez comment vous pouvez rendre des formulaires à l’aide d’Actions."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Rendre des formulaires à l’aide d’Actions"
 'twitter:description': "Découvrez comment vous pouvez rendre des formulaires à l’aide d’Actions."
 ---
-# Rendre des formulaires à l’aide d’Actions
 
 Une fois que vous avez créé un formulaire, vous pouvez le rendre avec [Actions](/docs/fr-ca/customize/actions) en utilisant la méthode `api.prompt.render()` :
 
-```javascript
+```javascript lines
 // Example using the post-login trigger
 
 exports.onExecutePostLogin = async (event, api) => {
@@ -24,9 +24,9 @@ exports.onContinuePostLogin = async (event, api) => {
 ```
 
 Remplacez form_id par l’ID du formulaire. Vous pouvez localiser l’ID dans l’URL du formulaire, par exemple :  `ap_pUMG...` ou sélectionnez-le dans l’onglet de l’éditeur de formulaires **Embed**.
-Dans les [Éditeur de code d’Actions](/docs/customize/actions/write-your-first-action#create-an-action), vous pouvez définir la logique métier pour décider quand et comment rendre le formulaire.
+Dans les [Éditeur de code d’Actions](/docs/fr-ca/customize/actions/write-your-first-action#create-an-action), vous pouvez définir la logique métier pour décider quand et comment rendre le formulaire.
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 
   // Only render the form if user is missing company_name metadata
@@ -51,7 +51,7 @@ Vous pouvez renseigner des valeurs pour les champs existants et les champs masqu
 
 Dans l’exemple ci-dessous, la valeur `Jane` remplit le champ `first_name`.
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   api.prompt.render(':form_id', {
     fields: {
@@ -83,7 +83,7 @@ Vous pouvez injecter des variables côté serveur en utilisant la propriété `v
 
 Dans l’exemple ci-dessous, la valeur `123456789` remplit la variable `external_user_id`.
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   api.prompt.render(':form_id', {
     vars: {
@@ -121,7 +121,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Exemple d’objet event.prompt">
 
-```json
+```json lines
 {
   "id": "ap_fuVuFiiQWN3mTEujWTy966",
   "fields": {
@@ -139,7 +139,7 @@ accordion.expand_all/accordion.collapse_all
 
 Dans l’exemple ci-dessous, `api.user.setUserMetadata` remplit l’attribut `user_metadata``company_name` avec la propriété `event.prompt.fields.company_name` qui a été recueillie à partir de votre formulaire.
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   api.prompt.render(':form_id');
 }

@@ -1,13 +1,13 @@
 ---
 title: "Mise en œuvre des applications (Applications Web + SSO)"
 permalink: "part-3"
+'description': "Mise en œuvre des applications – Scénario des applications Web classiques"
 'og:title': "Mise en œuvre des applications (Applications Web + SSO)"
 'og:description': "Mise en œuvre des applications – Scénario des applications Web classiques"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Mise en œuvre des applications (Applications Web + SSO)"
 'twitter:description': "Mise en œuvre des applications – Scénario des applications Web classiques"
 ---
-# Mise en œuvre des applications (Applications Web + SSO)
 
 Passons en revue la mise en œuvre de notre application Web classique. Nous avons utilisé ASP .NET Core pour la mise en œuvre, le code figure dans ce [référentiel GitHub](https://github.com/auth0-samples/auth0-pnp-webapp-oidc).
 
@@ -56,7 +56,7 @@ La raison pour laquelle vous utilisez l’expiration du jeton pour déterminer l
 
 Le flux de connexion est le suivant :
 
-<Frame>![undefined](//images.ctfassets.net/cdy7uua7fh8z/4bqozVk6fF4JrWRP1BJK7Y/1403eb1c0efb12552307358a26c6e7f7/login-flow.png)</Frame>
+<Frame>![undefined](/images/fr-ca/cdy7uua7fh8z/4bqozVk6fF4JrWRP1BJK7Y/1403eb1c0efb12552307358a26c6e7f7/login-flow.png)</Frame>
 
 1. **Initiate OIDC Authentication Flow (Initier le flux d’authentification OIDC)** : Le navigateur de l’utilisateur enverra une demande à Auth0 pour initier le flux OIDC.
 2. **Set SSO Cookie (Définir le témoin SSO)** : Auth0 crée un témoin pour stocker les informations de l’utilisateur.
@@ -70,7 +70,7 @@ Auth0 gère sa propre session de signature unique. Les applications peuvent choi
 
  Si c’est le cas, il est connecté sans avoir à saisir à nouveau ses identifiants auprès du fournisseur d’identité (IDP) réel. Même si l’utilisateur ne s’est pas authentifié, l’application effectue tout de même un flux d’authentification avec Auth0 et obtient un nouveau jeton d’ID, qui peut être utilisé pour gérer la nouvelle session de l’application locale. :::
 
-**Voir la mise en œuvre dans**[**ASP.NET Core**](/docs/architecture-scenarios/application/web-app-sso/implementation-aspnetcore#configure-the-cookie-and-oidc-middleware).
+**Voir la mise en œuvre dans**[**ASP.NET Core**](/docs/fr-ca/architecture-scenarios/application/web-app-sso/implementation-aspnetcore#configure-the-cookie-and-oidc-middleware).
 
 ## Déconnexion de l’utilisateur
 
@@ -84,7 +84,7 @@ Pour rediriger un utilisateur après la déconnexion, ajoutez un paramètre de c
 
 Le flux de déconnexion (excluant la déconnexion fédérée) se déroule comme suit :
 
-<Frame>![undefined](//images.ctfassets.net/cdy7uua7fh8z/5t5iXTeGMUzyKHhqOAGRmp/d51797c6513686ea758f0613d01b55d4/logout-flow.png)</Frame>
+<Frame>![undefined](/images/fr-ca/cdy7uua7fh8z/5t5iXTeGMUzyKHhqOAGRmp/d51797c6513686ea758f0613d01b55d4/logout-flow.png)</Frame>
 
 1. **Initiate Logout Flow (Initier le flux de déconnexion)** : Le flux de déconnexion est initié à partir du navigateur, par exemple lorsque l’utilisateur clique sur un lien de **Logout (Déconnexion)**. Une demande sera adressée au serveur Web.
 2. **Clear user’s local session (Effacer la session locale de l’utilisateur)** : Le cache du témoin de session de l’application de l’utilisateur sera vidé.
@@ -92,7 +92,7 @@ Le flux de déconnexion (excluant la déconnexion fédérée) se déroule comme 
 4. **Clear SSO Cookie (Effacer le témoin SSO)** : Auth0 videra le cache du témoin SSO.
 5. **Rediriger vers l’URL après la déconnexion** : Auth0 renvoie une réponse de redirection et redirige le navigateur de l’utilisateur vers le paramètre de chaîne de requête `returnTo`.
 
-**Voir la mise en œuvre dans**[**ASP.NET Core**](/docs/architecture-scenarios/application/web-app-sso/implementation-aspnetcore#implement-the-logout).
+**Voir la mise en œuvre dans**[**ASP.NET Core**](/docs/fr-ca/architecture-scenarios/application/web-app-sso/implementation-aspnetcore#implement-the-logout).
 
 ## Contrôle d’accès
 
@@ -136,15 +136,15 @@ Lorsque vous cliquez sur le lien pour ouvrir l’extension pour la première foi
 
 Dans le tableau de bord d’autorisation, naviguez vers Groupes dans le menu de navigation, et créez un nouveau groupe appelé Admin.
 
-<Frame>![undefined](//images.ctfassets.net/cdy7uua7fh8z/6zOF0mCrLV2rwdpxn9JD1e/5d6e227c4a96260856afd8f94c4212d9/create-admin-group.png)</Frame>
+<Frame>![undefined](/images/fr-ca/cdy7uua7fh8z/6zOF0mCrLV2rwdpxn9JD1e/5d6e227c4a96260856afd8f94c4212d9/create-admin-group.png)</Frame>
 
 Une fois le groupe ajouté, vous pouvez cliquer sur le nouveau groupe pour accéder à la section de gestion des groupes. Allez dans l’onglet Mappages de groupe et ajoutez un nouveau mappage de groupe qui mappera tous les utilisateurs d’Active Directory dans les groupes `Timesheet Admins` au groupe `Admin` que vous venez de créer.
 
-<Frame>![undefined](//images.ctfassets.net/cdy7uua7fh8z/RaMHHJ1G9LoO5xoz3BJnN/b01c93948b1a54b599f1eb106bd8ef26/add-group-mapping.png)</Frame>
+<Frame>![undefined](/images/fr-ca/cdy7uua7fh8z/RaMHHJ1G9LoO5xoz3BJnN/b01c93948b1a54b599f1eb106bd8ef26/add-group-mapping.png)</Frame>
 
 Cliquez sur **Save (Enregistrer)** : le nouveau mappage est listé.
 
-<Frame>![undefined](//images.ctfassets.net/cdy7uua7fh8z/1whRHGlsRhGhA6vcrsElsv/093716ca939c843729c3022c810ee6a7/view-group-mapping.png)</Frame>
+<Frame>![undefined](/images/fr-ca/cdy7uua7fh8z/1whRHGlsRhGhA6vcrsElsv/093716ca939c843729c3022c810ee6a7/view-group-mapping.png)</Frame>
 
 Une fois le mappage configuré, il vous suffit de maintenir l’appartenance au groupe `Timesheet Admins` dans Active Directory, et ces utilisateurs seront automatiquement mappés vers le groupe `Admin` au sein de notre application.
 
@@ -154,7 +154,7 @@ Pour en savoir plus, consultez la [documentation relative à Authorization Exten
 
 Lorsque vous avez installé Authorization Extension, une règle Auth0 a été créée, qui ajoutera une demande d’`authorization` avec tous les paramètres liés à l’autorisation pour un utilisateur particulier. Les groupes d’un utilisateur seront ajoutés en tant que sous-demande de la demande `authorization` appelée `groups` et tous les groupes auxquels un utilisateur appartient seront ajoutés en tant que tableau à cette demande. Voici un exemple de ce à quoi peut ressembler la charge utile JSON d’un jeton d’ID avec les groupes énumérés :
 
-```json
+```json lines
 {
   "sub": "1234567890",
   "name": "John Doe",

@@ -1,12 +1,14 @@
 ---
 title: "Auth0"
 permalink: "maui"
+'description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:title': "Auth0"
 'og:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0"
 'twitter:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 ---
+
 # MAUI
 
 <Frame>![Gravatar for frederik.prijck@okta.com](//www.gravatar.com/avatar/47494236ef92645941b44cb5b50c307d?d=mm&r=g&s=50)</Frame>
@@ -47,7 +49,7 @@ The MAUI SDK supports Android, iOS, macOS, and Windows. Continue reading for pla
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Native Applications](/docs/architecture-scenarios/application/mobile-api) and which [protocol](/docs/api-auth/grant/authorization-code-pkce) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/fr-ca/overview), how it [integrates with Native Applications](/docs/fr-ca/architecture-scenarios/application/mobile-api) and which [protocol](/docs/fr-ca/api-auth/grant/authorization-code-pkce) it uses.
 
 </Note>
 
@@ -108,11 +110,11 @@ Use the NuGet Package Manager (Tools -> Library Package Manager -> Package Manag
 
 Alternatively, you can use the Nuget Package Manager Console (`Install-Package`) or the `dotnet` CLI (`dotnet add`).
 
-```
+``` lines
 Install-Package Auth0.OidcClient.MAUI
 ```
 
-```
+``` lines
 dotnet add package Auth0.OidcClient.MAUI
 ```
 
@@ -124,7 +126,7 @@ You need some platform-specific configuration to use the SDK with Android and Wi
 
 Create a new Activity that extends `WebAuthenticatorCallbackActivity`:
 
-```json
+```csharp lines
 [Activity(NoHistory = true, LaunchMode = LaunchMode.SingleTop, Exported = true)]
 [IntentFilter(new[] { Intent.ActionView },
               Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
@@ -143,7 +145,7 @@ To make sure it can properly reactivate your application after being redirected 
 
 * Add the corresponding protocol to the `Package.appxmanifest`. In this case, this is set to `myapp`, but you can change this to whatever you like (ensure to update all relevant Auth0 URLs as well).
 
-  ```
+  ``` lines
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
       <Extensions>
@@ -160,7 +162,7 @@ To make sure it can properly reactivate your application after being redirected 
   
 * Call `Activator.Default.CheckRedirectionActivation()` in the Windows-specific `App.xaml.cs` file.
 
-  ```
+  ``` lines
   public App()
   {
     if (Auth0.OidcClient.Platforms.Windows.Activator.Default.CheckRedirectionActivation())
@@ -179,7 +181,7 @@ To make sure it can properly reactivate your application after being redirected 
 To integrate Auth0 into your application, instantiate an instance of the `Auth0Client` class, passing an instance of `Auth0ClientOptions` that contains your Auth0 Domain, Client ID and the required Scopes.
 Additionally, you also need to configure the `RedirectUri` and `PostLogoutRedirectUri` to ensure Auth0 can redirect back to the application using the URL(s) configured.
 
-```
+```csharp lines
 using Auth0.OidcClient;
 
 var client = new Auth0Client(new Auth0ClientOptions
@@ -198,7 +200,7 @@ By default, the SDK will leverage Chrome Custom Tabs for Android, ASWebAuthentic
 
 Now that you have configured your Auth0 Application and the Auth0 SDK, you need to set up login for your project. To do this, you will use the SDK’s `LoginAsync()` method to create a login button that redirects users to the Auth0 Universal Login page.
 
-```javascript
+```csharp lines
 var loginResult = await client.LoginAsync();
 ```
 
@@ -208,7 +210,7 @@ If there isn't any error, you can access the `User`, `IdentityToken`, `AccessTok
 
 Users who log in to your project will also need a way to log out. Create a logout button using the SDK’s `LogoutAsync()` method. When users log out, they will be redirected to your Auth0 logout endpoint, which will then immediately redirect them back to the logout URL you set up earlier in this quickstart.
 
-```
+```csharp lines
 await client.LogoutAsync();
 ```
 
@@ -218,7 +220,7 @@ Now that your users can log in and log out, you will likely want to be able to r
 
 The Auth0 SDK for MAUI provides user information through the `LoginResult.User` property.
 
-```
+```csharp lines
 if (loginResult.IsError == false)
 {
     var user = loginResult.User;
@@ -230,7 +232,7 @@ if (loginResult.IsError == false)
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

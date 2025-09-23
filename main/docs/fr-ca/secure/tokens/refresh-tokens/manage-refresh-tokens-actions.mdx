@@ -1,13 +1,13 @@
 ---
 title: "Jetons d’actualisation avec des Actions"
 permalink: "manage-refresh-tokens-actions"
+'description': "En savoir plus sur la gestion des jetons d’actualisation avec des Actions"
 'og:title': "Jetons d’actualisation avec des Actions"
 'og:description': "En savoir plus sur la gestion des jetons d’actualisation avec des Actions"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Jetons d’actualisation avec des Actions"
 'twitter:description': "En savoir plus sur la gestion des jetons d’actualisation avec des Actions"
 ---
-# Jetons d’actualisation avec des Actions
 
 L’utilisation des jetons d’actualisation avec des [Actions](/docs/fr-ca/customize/actions) vous permet de configurer des capacités de détection et de réponse aux risques post-authentification afin de protéger vos applications et vos utilisateurs contre les jetons d’actualisation compromis. Vous pouvez également personnaliser dynamiquement [les expirations des jetons d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens/configure-refresh-token-expiration).
 
@@ -60,7 +60,7 @@ Vous pouvez utiliser ces méthodes pour personnaliser dynamiquement les stratég
 
 <Note>
 
-`api.refreshToken.setExpiresAt(absolute)` et `api.refreshToken.setIdleExpiresAt(idle)` permettent de définir l’expiration d’un jeton d’actualisation, avant son émission, ou de modifier l’expiration d’un jeton d’actualisation existant au cours d’un flux [échange de jetons d’actualisation](/docs/secure/tokens/refresh-tokens/use-refresh-tokens).
+`api.refreshToken.setExpiresAt(absolute)` et `api.refreshToken.setIdleExpiresAt(idle)` permettent de définir l’expiration d’un jeton d’actualisation, avant son émission, ou de modifier l’expiration d’un jeton d’actualisation existant au cours d’un flux [échange de jetons d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens/use-refresh-tokens).
 
 `api.refreshToken.setExpiresAt(absolute)` et `api.refreshToken.setIdleExpiresAt(idle)` convertissent les jetons d’actualisation qui n’expirent pas en jetons d’actualisation expirant en utilisant les paramètres par défaut [Refresh Token Expirations (Expirations du jeton d’actualisation)](/docs/fr-ca/secure/tokens/refresh-tokens/configure-refresh-token-expiration) comme valeurs maximales.
 
@@ -86,7 +86,7 @@ Vous pouvez utiliser les [Actions](/docs/fr-ca/customize/actions) pour configure
 
 Vous pouvez utiliser l’objet [évaluations](https://auth0.com/docs/secure/multi-factor-authentication/adaptive-mfa/customize-adaptive-mfa#assessments-object) de l’authentification multifacteur (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>) adaptative pour déterminer si un utilisateur se connecte à partir d’un lieu qui indique ImpossibleTravel et révoquer le jeton d’actualisation associé à la transaction.
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication ?? {};
   const ImpossibleTravel = riskAssessment?.assessments.ImpossibleTravel;
@@ -111,7 +111,7 @@ Dans cet exemple, une vérification se produit au début de l’Action pour vér
 
 Si vous utilisez les propriétés des objets post-connexion `event.refresh_token.device.initial_ip` et `event.request.ip`, vous pouvez vous assurer qu’une transaction de jeton d’actualisation conserve la même adresse IP pendant toute sa durée. Dans ce scénario, tout changement d’IP est considéré comme un risque et un nouveau jeton d’actualisation est nécessaire.
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const refreshTokenInitialIp = event.refresh_token?.device?.initial_ip;
   const requestCurrentIp = event.request.ip;
@@ -144,7 +144,7 @@ Vous pouvez utiliser des [Actions](/docs/fr-ca/customize/actions) pour personnal
 
 Vous pouvez utiliser l’Action post-connexion pour définir une durée de vie du jeton d’actualisation par organisation. L’exemple ci-dessous utilise les métadonnées `refresh_token_timeout` de l’Organization pour définir l’heure d’expiration du jeton d’actualisation.
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   // Refresh token timeout (in miliseconds) metadata configured in the Organizations
   const organization_refresh_token_lifetime =
@@ -179,7 +179,7 @@ Dans cet exemple, s’il existe un délai d’expiration absolu spécifique déf
 
 Vous pouvez utiliser l’action post-connexion pour définir un délai d’inactivité du jeton d’actualisation à l’aide des [métadonnées de l’application](/docs/fr-ca/get-started/applications/configure-application-metadata) et de [l’utilisateur](/docs/fr-ca/manage-users/user-accounts/metadata). L’exemple ci-dessous utilise les rôles de métadonnées de l’utilisateur pour définir le rôle d’adhésion de l’utilisateur et les métadonnées de l’application pour définir le délai d’inactivité du jeton d’actualisation attendu.
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   // admins are configured with a shorter idle timeout for refresh tokens, in an application metadata
   const max_idle_lifetime =

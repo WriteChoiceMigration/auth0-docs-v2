@@ -1,13 +1,13 @@
 ---
 title: "Démarrage rapide de la trousse SDK Auth0 ACUL JS"
 permalink: "sdk-quickstart"
+'description': "Apprenez à mettre en œuvre le démarrage rapide de la trousse SDK Auth0 ACUL JS"
 'og:title': "Démarrage rapide de la trousse SDK Auth0 ACUL JS"
 'og:description': "Apprenez à mettre en œuvre le démarrage rapide de la trousse SDK Auth0 ACUL JS"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Démarrage rapide de la trousse SDK Auth0 ACUL JS"
 'twitter:description': "Apprenez à mettre en œuvre le démarrage rapide de la trousse SDK Auth0 ACUL JS"
 ---
-# Démarrage rapide de la trousse SDK Auth0 ACUL JS
 
 <Card title="Before you start">
 
@@ -16,14 +16,14 @@ Vous avez besoin de ce qui suit :
 * Un locataire de développement Auth0 avec la connexion universelle configurée.
 * Une application configurée de domaine personnalisé.
 * Une app de développement ou d’exemple (comme [React sample](https://auth0.com/docs/quickstart/spa/react)) s’exécutant sur votre localhost.
-* [Authentification Identifier First](/docs/authenticate/login/auth0-universal-login/identifier-first) activée
+* [Authentification Identifier First](/docs/fr-ca/authenticate/login/auth0-universal-login/identifier-first) activée
 * Une connexion de base de données qui utilise les mots de passe.
 
 </Card>
 
 <Warning>
 
-La personnalisation avancée pour la connexion universelle est actuellement en accès anticipé. Vous pouvez demander l’accès auprès de votre Gestionnaire de compte technique. Pour en savoir plus sur les étapes de publication d’Auth0, lisez [Étapes de la publication d’un produit](/docs/troubleshoot/product-lifecycle/product-release-stages).
+La personnalisation avancée pour la connexion universelle est actuellement en accès anticipé. Vous pouvez demander l’accès auprès de votre Gestionnaire de compte technique. Pour en savoir plus sur les étapes de publication d’Auth0, lisez [Étapes de la publication d’un produit](/docs/fr-ca/troubleshoot/product-lifecycle/product-release-stages).
 
 </Warning>
 
@@ -36,7 +36,7 @@ Pour en savoir plus, consultez le [référentiel GitHub de la trousse SDK Auth0 
 
 Après avoir cloné les paragraphes passe-partout react, changez de répertoire vers le `dossier auth0-acul-react-boilerplate` et installez la trousse SDK.
 
-```javascript
+```javascript lines
 //Clone the ACUL sample application into the root folder of your project
 
 git clone https://github.com/auth0-samples/auth0-acul-samples.git
@@ -50,7 +50,7 @@ cd auth0-acul-samples && npm i
 
 Dans le dossier `auth0-acul-react-boilerplate/src`, modifiez le début du dossier `App.tsx` à importer et instanciez la trousse SDK.
 
-```
+```javascript lines
 import { LoginId as ScreenProvider } from "@auth0/auth0-acul-js";
 
 export default function LoginId() {
@@ -64,7 +64,7 @@ export default function LoginId() {
 
 Localisez la fonction `button click` dans le dossier `App.tsx` pour mettre en œuvre l’action de connexion.
 
-```javascript
+```javascript lines
 const formSubmitHandler = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -82,7 +82,7 @@ const formSubmitHandler = (event: ChangeEvent<HTMLFormElement>) => {
 
 ACUL exige que les éléments soient hébergés sur une URL publique. Pour les besoins de ce démarrage rapide, les éléments seront servis à partir de localhost.
 
-```javascript
+```javascript lines
 // Creates the local assets 
 
 npm run build 
@@ -97,7 +97,7 @@ npx serve -p 8080 --cors
 
 Activez le mode avancé pour l’écran de l’identifiant de la connexion en utilisant un [jeton d’exploration Management API Auth0 de test](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-testing) et l’adresse du [domaine personnalisé](/docs/fr-ca/customize/custom-domains) configuré pour l’application d’exemple.
 
-```bash
+```javascript lines
 curl --location --request PATCH 'https://{<CUSTOM-DOMAIN>/api/v2/prompts/login-id/screen/login-id/rendering' \
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer <API-TOKEN>' \

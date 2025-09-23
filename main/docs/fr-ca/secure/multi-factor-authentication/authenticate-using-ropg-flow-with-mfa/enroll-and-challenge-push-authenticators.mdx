@@ -1,13 +1,13 @@
 ---
 title: "Inscrire et lancer un défi-réponse pour les authentifiants Push"
 permalink: "enroll-and-challenge-push-authenticators"
+'description': "Décrit comment créer vos propres flux MFA à l’aide de Push comme facteur d’authentification."
 'og:title': "Inscrire et lancer un défi-réponse pour les authentifiants Push"
 'og:description': "Décrit comment créer vos propres flux MFA à l’aide de Push comme facteur d’authentification."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Inscrire et lancer un défi-réponse pour les authentifiants Push"
 'twitter:description': "Décrit comment créer vos propres flux MFA à l’aide de Push comme facteur d’authentification."
 ---
-# Inscrire et lancer un défi-réponse pour les authentifiants Push
 
 Auth0 offre un flux intégré d’enregistrement et d’authentification <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip> en utilisant la [connexion universelle](/docs/fr-ca/authenticate/login/auth0-universal-login). Cependant, si vous souhaitez créer votre propre interface utilisateur, vous pouvez utiliser [l’API MFA](/docs/fr-ca/secure/multi-factor-authentication/multi-factor-authentication-developer-resources/mfa-api) pour ce faire.
 
@@ -35,14 +35,14 @@ Faites une demande `POST (PUBLIER)` au point de terminaison d’association MFA 
 Pour inscrire avec Push, définissez le paramètre `authenticator_types` sur `[oob]` et le paramètre `oob_channels` sur `[auth0]`.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/mfa/associate' \
 --header 'authorization: Bearer MFA_TOKEN' \
 --header 'content-type: application/json' \
 --data '{ "authenticator_types": ["oob"], "oob_channels": ["auth0"] }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/mfa/associate");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer MFA_TOKEN");
@@ -51,7 +51,7 @@ request.AddParameter("application/json", "{ \"authenticator_types\": [\"oob\"], 
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -71,8 +71,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/mfa/associate")
 .header("authorization", "Bearer MFA_TOKEN")
 .header("content-type", "application/json")
@@ -80,7 +80,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/mfa/associate")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -93,8 +93,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MFA_TOKEN",
 @"content-type": @"application/json" };
@@ -120,7 +120,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/mfa/associate",
@@ -144,8 +144,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"authenticator_types\": [\"oob\"], \"oob_channels\": [\"auth0\"] }"
@@ -159,7 +159,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -173,8 +173,8 @@ request["content-type"] = 'application/json'
 request.body = "{ \"authenticator_types\": [\"oob\"], \"oob_channels\": [\"auth0\"] }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer MFA_TOKEN",
@@ -206,7 +206,7 @@ dataTask.resume()
 
 Si l’étape réussie, vous recevez une réponse comme celle-ci :
 
-```json
+```json lines
 {
     "authenticator_type": "oob",
     "barcode_uri": "otpauth://totp/tenant:user?enrollment_tx_id=qfjn2eiNYSjU3xID7dBYeCBSrdREWJPY&base_url=tenan",
@@ -229,7 +229,7 @@ Pour confirmer l’inscription, l’utilisateur final devra balayer un code QR a
 Ensuite, l’application Guardian application informera Auth0 que l’utilisateur a bien été inscrit. Pour savoir si cela s'est produit, interrogez le point de terminaison des jetons Auth0 avec le code `oob_code` renvoyé par l’appel au point de terminaison MFA Associate.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'authorization: Bearer {mfaToken}' \
@@ -239,8 +239,8 @@ curl --request POST \
 --data 'client_secret={yourClientSecret}' \
 --data 'mfa_token={mfaToken}' \
 --data 'oob_code={oobCode}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer {mfaToken}");
@@ -249,7 +249,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=http%3A%2F
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -269,8 +269,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("authorization", "Bearer {mfaToken}")
 .header("content-type", "application/x-www-form-urlencoded")
@@ -278,7 +278,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -300,8 +300,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {mfaToken}",
 @"content-type": @"application/x-www-form-urlencoded" };
@@ -329,7 +329,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -353,8 +353,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-oob&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&oob_code=%7BoobCode%7D"
@@ -368,7 +368,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -382,8 +382,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-oob&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&oob_code=%7BoobCode%7D"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {mfaToken}",
@@ -415,7 +415,7 @@ dataTask.resume()
 
 Si l’utilisateur n’a pas balayé le code, une réponse `authorization_pending` sera renvoyée, indiquant que vous devez appeler de nouveau `oauth_token` dans quelques secondes :
 
-```json
+```json lines
 {
     "error": "authorization_pending",
     "error_description": "Authorization pending: please repeat the request in a few seconds."
@@ -424,7 +424,7 @@ Si l’utilisateur n’a pas balayé le code, une réponse `authorization_pendin
 
 Si l’appel ne réussi pas, vous recevrez une réponse dans le format suivant, contenant le jeton d’accès :
 
-```json
+```json lines
 {
   "id_token": "eyJ...i",
   "access_token": "eyJ...i",
@@ -449,13 +449,13 @@ Obtenez un jeton MFA en suivant les étapes décrites dans [Authentification ave
 Pour effectuer le défi-réponse avec l’utilisateur, vous aurez besoin de l’`authenticator_id` pour le facteur que vous désirez utiliser. Vous pouvez énumérer toutes les authentifications à l’aide du point de terminaison des facteurs d’authentification multifacteur :
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/mfa/authenticators' \
 --header 'authorization: Bearer MFA_TOKEN' \
 --header 'content-type: application/json'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/mfa/authenticators");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer MFA_TOKEN");
@@ -463,7 +463,7 @@ request.AddHeader("content-type", "application/json");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -481,15 +481,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/mfa/authenticators")
 .header("authorization", "Bearer MFA_TOKEN")
 .header("content-type", "application/json")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -501,8 +501,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MFA_TOKEN",
 @"content-type": @"application/json" };
@@ -524,7 +524,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/mfa/authenticators",
@@ -547,8 +547,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = {
@@ -561,7 +561,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -574,8 +574,8 @@ request["authorization"] = 'Bearer MFA_TOKEN'
 request["content-type"] = 'application/json'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer MFA_TOKEN",
@@ -601,7 +601,7 @@ dataTask.resume()
 
 Vous obtiendrez une liste de facteurs d’authentification avec le format suivant :
 
-```json
+```json lines
 [
     {
         "id": "recovery-code|dev_Ahb2Tb0ujX3w7ilC",
@@ -630,19 +630,19 @@ Lorsque les utilisateurs s’inscrivent avec Push, ils sont également inscrits 
 Pour déclencher un défi-réponse avec courriel, `POST` au point de terminaison du défi-réponse d’AMF à l’aide de l’ `authenticator_id` correspondante et du `mfa_token`.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/mfa/challenge' \
 --data '{ "client_id": "{yourClientId}", "client_secret": "{yourClientSecret", "challenge_type": "oob", "authenticator_id": "push|dev_ZUla9SQ6tAIHSz6y", "mfa_token": "{mfaToken}" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/mfa/challenge");
 var request = new RestRequest(Method.POST);
 request.AddParameter("undefined", "{ \"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret\", \"challenge_type\": \"oob\", \"authenticator_id\": \"push|dev_ZUla9SQ6tAIHSz6y\", \"mfa_token\": \"{mfaToken}\" }", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -660,14 +660,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/mfa/challenge")
 .body("{ \"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret\", \"challenge_type\": \"oob\", \"authenticator_id\": \"push|dev_ZUla9SQ6tAIHSz6y\", \"mfa_token\": \"{mfaToken}\" }")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -685,8 +685,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*parameters = @{ @"client_id": @"{yourClientId}",
 @"client_secret": @"{yourClientSecret",
@@ -712,7 +712,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/mfa/challenge",
@@ -732,8 +732,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret\", \"challenge_type\": \"oob\", \"authenticator_id\": \"push|dev_ZUla9SQ6tAIHSz6y\", \"mfa_token\": \"{mfaToken}\" }"
@@ -743,7 +743,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -755,8 +755,8 @@ request = Net::HTTP::Post.new(url)
 request.body = "{ \"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret\", \"challenge_type\": \"oob\", \"authenticator_id\": \"push|dev_ZUla9SQ6tAIHSz6y\", \"mfa_token\": \"{mfaToken}\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let parameters = [
 "client_id": "{yourClientId}",
@@ -788,7 +788,7 @@ dataTask.resume()
 
 Si l’opération réussit, vous recevrez la réponse suivante :
 
-```json
+```json lines
 {
     "challenge_type": "oob",
     "oob_code": "Fe26...jGco"
@@ -798,7 +798,7 @@ Si l’opération réussit, vous recevrez la réponse suivante :
 Votre application doit commencer à interroger le point de terminaison OAuth0 Token jusqu’à ce que l’utilisateur accepte la notification poussée.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -807,8 +807,8 @@ curl --request POST \
 --data 'client_secret={yourClientSecret}' \
 --data 'mfa_token={mfaToken}' \
 --data 'oob_code={oobCode}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -816,7 +816,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=http%3A%2F
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -835,15 +835,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-oob&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&oob_code=%7BoobCode%7D")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -862,8 +862,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=http://auth0.com/oauth/grant-type/mfa-oob" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -890,7 +890,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -913,8 +913,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-oob&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&oob_code=%7BoobCode%7D"
@@ -925,7 +925,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -938,8 +938,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-oob&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&oob_code=%7BoobCode%7D"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=http://auth0.com/oauth/grant-type/mfa-oob".data(using: String.Encoding.utf8)!)
@@ -976,19 +976,19 @@ L’appel peut renvoyer un des résultats suivants :
 </thead>
 <tbody>
 <tr>
-<td><code>authorization_pending</code></td>
+<td>`authorization_pending`</td>
 <td>Erreur : Si le défi-réponse n’a pas été accepté ou rejeté.</td>
 </tr>
 <tr>
-<td><code>slow_down</code></td>
+<td>`slow_down`</td>
 <td>Erreur : Si l’interrogation est trop fréquente.</td>
 </tr>
 <tr>
-<td><code>access_token</code> et <code>refresh_token</code></td>
+<td>`access_token` et `refresh_token`</td>
 <td>Si le défi-réponse a été accepté, l’interrogation devrait être arrêtée à ce stade.</td>
 </tr>
 <tr>
-<td><code>invalid_grant</code></td>
+<td>`invalid_grant`</td>
 <td>Erreur : Si le défi-réponse a été rejeté, l’interrogation devrait être arrêtée à ce stade.</td>
 </tr>
 </tbody>

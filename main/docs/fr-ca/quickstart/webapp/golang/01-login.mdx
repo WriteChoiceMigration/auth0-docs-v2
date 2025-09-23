@@ -1,12 +1,14 @@
 ---
 title: "Login"
 permalink: "01-login"
+'description': "This tutorial demonstrates how to add user login to a Go web application using Auth0."
 'og:title': "Login"
 'og:description': "This tutorial demonstrates how to add user login to a Go web application using Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/golang.png"
 'twitter:title': "Login"
 'twitter:description': "This tutorial demonstrates how to add user login to a Go web application using Auth0."
 ---
+
 # Go
 
 <Frame>![Gravatar for sergiu.ghitea@auth0.com](//www.gravatar.com/avatar/a233774feb593b913cbfba5c9faf1689?d=mm&r=g&s=50)</Frame>
@@ -41,7 +43,7 @@ System requirements: Go 1.21+
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Regular Web Applications](/docs/architecture-scenarios/web-app-sso) and which [protocol](/docs/flows) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/fr-ca/overview), how it [integrates with Regular Web Applications](/docs/fr-ca/architecture-scenarios/web-app-sso) and which [protocol](/docs/fr-ca/flows) it uses.
 
 </Note>
 
@@ -91,7 +93,7 @@ If you are following along with the sample project you downloaded from the top o
 
 Start by adding a `go.mod` file to list all the dependencies to be used.
 
-```javascript
+```javascript lines
 // go.mod
 
 module 01-Login
@@ -109,7 +111,7 @@ require (
 
 We can now make the dependencies available for us by running the following shell command:
 
-```
+```bash lines
 go mod download
 ```
 
@@ -124,7 +126,7 @@ This example uses `gin` for routing, but you can use whichever router you want.
 Create a `.env` file within the root of your project directory to store the app configuration, and fill in the
 environment variables:
 
-```
+```bash lines
 # The URL of our Auth0 Tenant Domain.
 # If you're using a Custom Domain, be sure to set this to that value instead.
 AUTH0_DOMAIN='{yourDomain}'
@@ -145,7 +147,7 @@ Create a file called `auth.go` in the `platform/authenticator` folder. In this p
 configure and return [OAuth2](https://godoc.org/golang.org/x/oauth2) and
 [oidc](https://godoc.org/github.com/coreos/go-oidc) clients, and another one to verify an ID Token.
 
-```javascript
+```go lines
 // platform/authenticator/auth.go
 
 package authenticator
@@ -210,7 +212,7 @@ Create a file called `router.go` in the `platform/router` folder. In this packag
 and return our routes using [github.com/gin-gonic/gin](https://github.com/gin-gonic/gin). You will be passing an
 instance of `Authenticator` to the method, so it can be used within the `login` and `callback` handlers.
 
-```javascript
+```go lines
 // platform/router/router.go
 
 package router
@@ -268,7 +270,7 @@ our cookie based sessions.
 
 Next, let's create our application's entry point `main.go` and wire everything up together:
 
-```javascript
+```go lines
 // main.go
 
 package main
@@ -307,7 +309,7 @@ func main() {
 Create a file called `login.go` in the `web/app/login` folder, and add a `Handler` function to handle the `/login`
 route.
 
-```javascript
+```go lines
 // web/app/login/login.go
 
 package login
@@ -359,7 +361,7 @@ func generateRandomState() (string, error) {
 
 Add a link to `/login` route in the `home.html` template.
 
-```
+```html lines
 <!-- web/template/home.html -->
 
 <div>
@@ -374,7 +376,7 @@ Add a link to `/login` route in the `home.html` template.
 Once users have authenticated using Auth0's Universal Login Page, they'll return to the app at the `/callback`
 route that will be handled in the following `Handler` function:
 
-```javascript
+```go lines
 // web/app/callback/callback.go
 
 package callback
@@ -433,7 +435,7 @@ func Handler(auth *authenticator.Authenticator) gin.HandlerFunc {
 
 You can access the user information via the `profile` you stored in the session previously.
 
-```javascript
+```go lines
 // web/app/user/user.go
 
 package user
@@ -454,7 +456,7 @@ func Handler(ctx *gin.Context) {
 }
 ```
 
-```
+```html lines
 <!-- web/template/user.html -->
 
 <div>
@@ -464,17 +466,17 @@ func Handler(ctx *gin.Context) {
 </div>
 ```
 
-For information about the userinfo hash, see [User Profile](/docs/users/concepts/overview-user-profile).
+For information about the userinfo hash, see [User Profile](/docs/fr-ca/users/concepts/overview-user-profile).
 
 ## Logging Out
 
 To log the user out, clear the data from the session and redirect the user to the Auth0 logout endpoint. You can find
-more information about this in the [logout documentation](/docs/logout).
+more information about this in the [logout documentation](/docs/fr-ca/logout).
 
 Create a file called `logout.go` in the folder `web/app/logout/logout.go`, and add the function `Handler` to redirect
 the user to Auth0's logout endpoint.
 
-```javascript
+```go lines
 // web/app/logout/logout.go
 
 package logout
@@ -517,14 +519,14 @@ func Handler(ctx *gin.Context) {
 
 <Note>
 
-The redirect URL needs to be in the list of Allowed Logout URLs in the settings section of the application, For more information, see [Redirect Users After Logout](/docs/logout/guides/redirect-users-after-logout).
+The redirect URL needs to be in the list of Allowed Logout URLs in the settings section of the application, For more information, see [Redirect Users After Logout](/docs/fr-ca/logout/guides/redirect-users-after-logout).
 
 </Note>
 
 Create a file called `user.js` in the folder `web/static/js`, and add the code to remove the cookie from a logged-in
 user.
 
-```
+```javascript lines
 $(document).ready(function () {
     $('.btn-logout').click(function (e) {
         Cookies.remove('auth-session');
@@ -545,7 +547,7 @@ You need to add the `js.cookie.js` file to the `web/static/js` folder to use it.
 
 Create a middleware that will check if the user is authenticated or not based on the `profile` session key:
 
-```javascript
+```go lines
 // platform/middleware/isAuthenticated.go
 
 package middleware
@@ -570,7 +572,7 @@ func IsAuthenticated(ctx *gin.Context) {
 
 Finally, set up this middleware for any route that needs authentication by adding it to the router.
 
-```javascript
+```go lines
 // platform/router/router.go
 
 router.GET("/user", middleware.IsAuthenticated, user.Handler)
@@ -578,7 +580,7 @@ router.GET("/user", middleware.IsAuthenticated, user.Handler)
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

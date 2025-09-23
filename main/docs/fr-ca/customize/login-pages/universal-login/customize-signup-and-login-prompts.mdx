@@ -1,19 +1,19 @@
 ---
 title: "Personnaliser les invites d’inscription et de connexion"
 permalink: "customize-signup-and-login-prompts"
+'description': "Apprenez à personnaliser les invites d’inscription et de connexion pour la connexion universelle."
 'og:title': "Personnaliser les invites d’inscription et de connexion"
 'og:description': "Apprenez à personnaliser les invites d’inscription et de connexion pour la connexion universelle."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Personnaliser les invites d’inscription et de connexion"
 'twitter:description': "Apprenez à personnaliser les invites d’inscription et de connexion pour la connexion universelle."
 ---
-# Personnaliser les invites d’inscription et de connexion
 
 <Card title="Before you start">
 
 1. Assurez-vous qu’un [**domaine personnalisé**](/docs/fr-ca/customize/custom-domains) est configuré pour votre locataire.
-2. Confirmez que vous utilisez la [**connexion universelle**](/docs/authenticate/login/auth0-universal-login/universal-login-vs-classic-login/universal-experience) pour toutes les invites d’inscription et de connexion et assurez-vous que **Personnaliser la page de connexion** est désactivé pour les invites de connexion.
-3. Vérifiez que vous avez configuré un [Modèle de page personnalisé](/docs/customize/universal-login-pages/universal-login-page-templates#custom-sign-up-prompts).
+2. Confirmez que vous utilisez la [**connexion universelle**](/docs/fr-ca/authenticate/login/auth0-universal-login/universal-login-vs-classic-login/universal-experience) pour toutes les invites d’inscription et de connexion et assurez-vous que **Personnaliser la page de connexion** est désactivé pour les invites de connexion.
+3. Vérifiez que vous avez configuré un [Modèle de page personnalisé](/docs/fr-ca/customize/universal-login-pages/universal-login-page-templates#custom-sign-up-prompts).
 
 </Card>
 
@@ -74,7 +74,7 @@ Les points d’entrée suivants sont disponibles lorsqu’au moins une connexion
 
 Les partiels peuvent contenir un maximum de 10 000 caractères et sont gérés par la [Management API Auth0](https://auth0.com/docs/api/management/v2/prompts/put-partials) à l’adresse `/v2/prompts/{prompts_name}/partials`. Chaque invite doit spécifier le `Screen (Écran)` lors de l’ajout, de la mise à jour ou de la suppression d’un partiel. Vous trouverez ci-dessous un exemple d’appel permettant d’afficher tous les partiels existants pour une invite, en notant que le préfixe `ulp-container` n’est pas nécessaire pour référencer les points d’entrée dans les appels de l’API.
 
-```
+```javascript lines
 GET /api/v2/prompts/signup-id/partials
 # response
 # success code: 200
@@ -89,7 +89,7 @@ body: {
 
 Les partiels peuvent également être gérés à l’aide de l’interface de connexion universelle personnalisée de l’interface de ligne de commande (CLI) Auth0 en exécutant `auth0 ul customize` dans votre terminal.
 
-<Frame>![An image showing the command-line interface for Partials. ](//images.ctfassets.net/cdy7uua7fh8z/KxWfVAMkumyI2jrUqkEp8/b9315709899864a2f8758ad7f5a4f5b2/Partials_CLI_Image.jpg)</Frame>
+<Frame>![An image showing the command-line interface for Partials. ](/images/fr-ca/cdy7uua7fh8z/KxWfVAMkumyI2jrUqkEp8/b9315709899864a2f8758ad7f5a4f5b2/Partials_CLI_Image.jpg)</Frame>
 
 #### Style et validation des entrées de formulaire
 
@@ -120,7 +120,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Éléments du champ de saisie Style préconçu pour les champs de saisie">
 
-```
+```javascript lines
 <div class="ulp-field">
   <label for="first-name">First Name</label>
   <input type="text" name="ulp-first-name" id="first-name">
@@ -134,7 +134,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Éléments de sélection Style préconçu pour les champs de sélection">
 
-```
+```javascript lines
 <div class="ulp-field">
   <label for="preferred-language">Preferred Language</label>
   <select name="ulp-preferred-language" id="preferred-language">
@@ -153,7 +153,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Éléments de texte Style préconçu pour les champs de texte">
 
-```
+```javascript lines
 <div class="ulp-field">
   <label for="comments">Comments</label>
   <textarea type="text" name="ulp-comments" id="comments"></textarea>
@@ -167,7 +167,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Éléments de cases à cocher Style préconçu pour les champs des cases à cocher">
 
-```
+```javascript lines
 <div class="ulp-field">
   <input type="checkbox" name="ulp-terms-of-service" id="terms-of-service">
   <label for="terms-of-service">
@@ -183,7 +183,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Validation numéro de téléphone Validation du numéro de téléphone côté client">
 
-```javascript
+```javascript lines
 // Validation Function
 <script>
   function validatePhoneFunction(element, formSubmitted) {
@@ -211,7 +211,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Screen Reader Validation Validation for accessible error messages">
 
-```
+```javascript lines
 <script>
   function requiredTextFunction(element, formSubmitted) {
     if (!formSubmitted) return true;
@@ -253,15 +253,15 @@ Auth0 conseille, dans la mesure du possible, de valider les données fournies pa
 
 #### Localiser le contenu
 
-Un contenu partiel peut être localisé en définissant de nouvelles variables de texte personnalisées à l’aide de la [Custom Text API](/docs/api/management/v2/prompts/put-custom-text-by-language). Il est possible de définir jusqu’à trente variables de texte personnalisées par combinaison d’écran/langue.
+Un contenu partiel peut être localisé en définissant de nouvelles variables de texte personnalisées à l’aide de la [Custom Text API](/docs/fr-ca/api/management/v2/prompts/put-custom-text-by-language). Il est possible de définir jusqu’à trente variables de texte personnalisées par combinaison d’écran/langue.
 
 ##### Créer ou mettre à jour une variable de texte personnalisée
 
-La Custom Text API est disponible [ici](/docs/api/management/v2/prompts/get-custom-text-by-language) et chaque variable suit une convention de dénomination `var-<name>`. Les appels à l’API doivent spécifier un Screen lors de l’ajout, de la mise à jour ou de la suppression d’une variable de texte personnalisée. Les liens Markdown sont pris en charge et sont convertis en éléments HTML `<a>` avant d’être affichés aux utilisateurs.
+La Custom Text API est disponible [ici](/docs/fr-ca/api/management/v2/prompts/get-custom-text-by-language) et chaque variable suit une convention de dénomination `var-<name>`. Les appels à l’API doivent spécifier un Screen lors de l’ajout, de la mise à jour ou de la suppression d’une variable de texte personnalisée. Les liens Markdown sont pris en charge et sont convertis en éléments HTML `<a>` avant d’être affichés aux utilisateurs.
 
 Vous trouverez ci-dessous un exemple d’appel permettant d’ajouter une variable pour le texte d’une étiquette de case à cocher relative aux conditions d’utilisation en anglais et en espagnol. Pour en savoir plus, consultez la documentation de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>.
 
-```
+```javascript lines
 # PUT /api/v2/prompts/signup-id/custom-text/en
 {
   "signup": {
@@ -281,7 +281,7 @@ Vous trouverez ci-dessous un exemple d’appel permettant d’ajouter une variab
 
 Les variables de texte personnalisées sont référencées dans les partiels à l’aide de l’objet `prompts.screen.text`; la référence pour l’exemple `var-tos` de la section précédente est `prompts.screen.texts.varTos`. Voir ci-dessous un exemple d’utilisation d’une variable précédemment créée dans un partiel sur l’invite ID d’inscription, en notant que la variable `var-tos` de Management API est référencée en tant que `varTos` dans le partiel.
 
-```
+```javascript lines
 # PUT api/v2/prompts/signup/partials
 {
   "signup": {
@@ -329,7 +329,7 @@ Pour en savoir plus sur l’atténuation des risques et les meilleures pratiques
 
 À partir de l’action, les données capturées peuvent être envoyées à une API externe pour validation et stockage ou sauvegardées dans `user_metadata` sur l’utilisateur via `api.user.setUserMetadata</code.`
 
-```
+```javascript lines
 # Given this code in the signup form
 # <div class="ulp-field">
 #   <label for="full-name">Full Name</label>

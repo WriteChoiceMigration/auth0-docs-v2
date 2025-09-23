@@ -1,17 +1,17 @@
 ---
 title: "Clés d’identification natives pour applications mobiles"
 permalink: "native-passkeys-for-mobile-applications"
+'description': "Découvrez comment implémenter des flux de clés d’identification natives pour les applications Android et iOS"
 'og:title': "Clés d’identification natives pour applications mobiles"
 'og:description': "Découvrez comment implémenter des flux de clés d’identification natives pour les applications Android et iOS"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Clés d’identification natives pour applications mobiles"
 'twitter:description': "Découvrez comment implémenter des flux de clés d’identification natives pour les applications Android et iOS"
 ---
-# Clés d’identification natives pour applications mobiles
 
 <Note>
 
-Clés d’identification natives est actuellement proposé en accès anticipé limité. Pour en savoir plus sur les étapes de diffusion d’Auth0, consultez [Étapes de la diffusion du produit](/docs/troubleshoot/product-lifecycle/product-release-stages).
+Clés d’identification natives est actuellement proposé en accès anticipé limité. Pour en savoir plus sur les étapes de diffusion d’Auth0, consultez [Étapes de la diffusion du produit](/docs/fr-ca/troubleshoot/product-lifecycle/product-release-stages).
 
 </Note>
 
@@ -63,7 +63,7 @@ Pour préparer votre application aux clés d’identification natives, vous deve
 
 #### Management API
 
-Appelez le point de terminaison [Update a Client (Mettre à jour un client)](/docs/api/management/v2/clients/patch-clients-by-id) et :
+Appelez le point de terminaison [Update a Client (Mettre à jour un client)](/docs/fr-ca/api/management/v2/clients/patch-clients-by-id) et :
 
 * Mettez à jour `grant_types` pour inclure `urn:okta:params:oauth:grant-type:webauthn`.
 * Utilisez l’objet `mobile` pour spécifier les paramètres de l’appareil iOS et Android selon vos besoins.
@@ -84,13 +84,13 @@ Si l’utilisateur fournit un identifiant qui existe déjà, il est recommandé 
 #### Étapes du flux
 
 1. Un utilisateur visite votre application et choisit d’enregistrer un nouveau compte. L’utilisateur fournit un identifiant demandé par votre application, tel que son adresse courriel.
-2. Votre application lance ensuite le défi-réponse d’inscription en appelant le point de terminaison [Demander un défi-réponse d’inscription](/docs/native-passkeys-api#request-signup-challenge) d’Auth0 Authentication API :
+2. Votre application lance ensuite le défi-réponse d’inscription en appelant le point de terminaison [Demander un défi-réponse d’inscription](/docs/fr-ca/native-passkeys-api#request-signup-challenge) d’Auth0 Authentication API :
 
    <Note>
    * Si vous ne spécifiez pas de `realm`, le répertoire par défaut de votre locataire est utilisé.
-   * Par défaut, le courriel est l’identifiant requis. Si vous avez activé [Identifiants flexibles](/docs/authenticate/database-connections/activate-and-configure-attributes-for-flexible-identifiers) pour votre connexion de base de données, vous pouvez utiliser une combinaison de `email`, `phone_number`, ou `username` à la place. Ces options peuvent être obligatoires ou facultatives et doivent correspondre à votre configuration d’identificateur flexible.</Note>
+   * Par défaut, le courriel est l’identifiant requis. Si vous avez activé [Identifiants flexibles](/docs/fr-ca/authenticate/database-connections/activate-and-configure-attributes-for-flexible-identifiers) pour votre connexion de base de données, vous pouvez utiliser une combinaison de `email`, `phone_number`, ou `username` à la place. Ces options peuvent être obligatoires ou facultatives et doivent correspondre à votre configuration d’identificateur flexible.</Note>
 
-   ```
+   ``` lines
    POST /passkey/register
    Content-Type: application/json
 
@@ -109,7 +109,7 @@ Si l’utilisateur fournit un identifiant qui existe déjà, il est recommandé 
    
 3. En réponse, Auth0 renvoie [PublicKeyCredentialCreationOptions](https://www.w3.org/TR/webauthn-3/#dictdef-publickeycredentialcreationoptions) avec un identifiant `auth_session` :
 
-   ```
+   ``` lines
    HTTP/1.1 200 OK
    Content-Type: application/json
 
@@ -147,9 +147,9 @@ Si l’utilisateur fournit un identifiant qui existe déjà, il est recommandé 
 
    * Consultez la [documentation d’enregistrement Android](https://developer.android.com/identity/sign-in/credential-manager#create-passkey).
    * Consultez la [documentation d’enregistrement iOS](https://developer.apple.com/documentation/authenticationservices/supporting-passkeys#Register-a-new-account-on-a-service).
-5. Votre application utilise ensuite les identifiants obtenus lors du processus d’enregistrement, y compris les détails `authn_response`, pour appeler le point de terminaison [Jeton](/docs/native-passkeys-api#authenticate-new-user) :
+5. Votre application utilise ensuite les identifiants obtenus lors du processus d’enregistrement, y compris les détails `authn_response`, pour appeler le point de terminaison [Jeton](/docs/fr-ca/native-passkeys-api#authenticate-new-user) :
 
-   ```
+   ``` lines
    POST /oauth/token
    Content-Type: application/json
 
@@ -178,7 +178,7 @@ Si l’utilisateur fournit un identifiant qui existe déjà, il est recommandé 
    
 6. Auth0 crée un nouveau compte utilisateur et renvoie les jetons demandés pour compléter le flux :
 
-   ```
+   ``` lines
    HTTP/1.1 200 OK
    Content-Type: application/json
 
@@ -201,7 +201,7 @@ Un utilisateur existant lance le flux de connexion par clé d’identification l
 
 #### Étapes du flux
 
-1. Un utilisateur lance votre application et commence le processus de connexion. Votre application lance ensuite le défi-réponse de connexion en appelant le point de terminaison[Demander un défi-réponse de connexion](/docs/native-passkeys-api#request-login-challenge) d’Authentication API :
+1. Un utilisateur lance votre application et commence le processus de connexion. Votre application lance ensuite le défi-réponse de connexion en appelant le point de terminaison[Demander un défi-réponse de connexion](/docs/fr-ca/native-passkeys-api#request-login-challenge) d’Authentication API :
 
    <Note>
 
@@ -209,7 +209,7 @@ Un utilisateur existant lance le flux de connexion par clé d’identification l
 
    </Note>
 
-   ```
+   ``` lines
    POST /passkey/challenge
    Content-Type: application/json
 
@@ -224,7 +224,7 @@ Un utilisateur existant lance le flux de connexion par clé d’identification l
    
 2. En réponse, Auth0 renvoie [PublicKeyCredentialRequestOptions](https://www.w3.org/TR/webauthn-3/#dictdef-publickeycredentialrequestoptions) avec l’objet `auth_session` pour continuer le flux dans votre application :
 
-   ```
+   ``` lines
    HTTP/1.1 200 OK
    Content-Type: application/json
 
@@ -246,9 +246,9 @@ Un utilisateur existant lance le flux de connexion par clé d’identification l
 
    * Consultez la [documentation de connexion Android](https://developer.android.com/identity/sign-in/credential-manager#sign-in).
    * Consultez la [documentation de connexion iOS](https://developer.apple.com/documentation/authenticationservices/supporting-passkeys#Connect-to-a-service-with-an-existing-account).
-4. Votre application utilise ensuite les identifiants obtenus lors du processus de connexion, y compris les détails `authn_response`, pour appeler le point de terminaison[Jeton](/docs/native-passkeys-api#authenticate-existing-user) :
+4. Votre application utilise ensuite les identifiants obtenus lors du processus de connexion, y compris les détails `authn_response`, pour appeler le point de terminaison[Jeton](/docs/fr-ca/native-passkeys-api#authenticate-existing-user) :
 
-   ```
+   ``` lines
    POST /oauth/token
    Content-Type: application/json
 
@@ -279,7 +279,7 @@ Un utilisateur existant lance le flux de connexion par clé d’identification l
    
 5. Auth0 authentifie les identifiants de connexion et renvoie les jetons demandés pour compléter le flux :
 
-   ```
+   ``` lines
    HTTP/1.1 200 OK
    Content-Type: application/json
 
@@ -302,10 +302,10 @@ Les ressources suivantes peuvent être référencées lors de l’implémentatio
 
 * Auth0 Authentication API (API d’authentification Auth0)
 
-  + [Demander un défi-réponse d’inscription](/docs/native-passkeys-api#request-signup-challenge)
-  + [Authentifier un nouvel utilisateur](/docs/native-passkeys-api#authenticate-new-user)
-  + [Demander un défi-réponse de connexion](/docs/native-passkeys-api#request-login-challenge)
-  + [Authentifier un utilisateur existant](/docs/native-passkeys-api#authenticate-existing-user)
+  + [Demander un défi-réponse d’inscription](/docs/fr-ca/native-passkeys-api#request-signup-challenge)
+  + [Authentifier un nouvel utilisateur](/docs/fr-ca/native-passkeys-api#authenticate-new-user)
+  + [Demander un défi-réponse de connexion](/docs/fr-ca/native-passkeys-api#request-login-challenge)
+  + [Authentifier un utilisateur existant](/docs/fr-ca/native-passkeys-api#authenticate-existing-user)
 * Ressources Android
 
   + [Documentation d’enregistrement](https://developer.android.com/identity/sign-in/credential-manager#create-passkey)

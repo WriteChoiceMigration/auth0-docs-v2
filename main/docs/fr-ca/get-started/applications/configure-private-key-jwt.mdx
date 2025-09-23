@@ -1,13 +1,13 @@
 ---
 title: "Configurer l’authentification par clé privée JWT"
 permalink: "configure-private-key-jwt"
+'description': "Décrit comment configurer les applications nouvelles et existantes pour utiliser l’authentification par clé privée JWT."
 'og:title': "Configurer l’authentification par clé privée JWT"
 'og:description': "Décrit comment configurer les applications nouvelles et existantes pour utiliser l’authentification par clé privée JWT."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configurer l’authentification par clé privée JWT"
 'twitter:description': "Décrit comment configurer les applications nouvelles et existantes pour utiliser l’authentification par clé privée JWT."
 ---
-# Configurer l’authentification par clé privée JWT
 
 <Note>
 
@@ -37,7 +37,7 @@ Nous vous recommandons de stocker en toute sécurité le paramètre `client_secr
 4. Dans les paramètres de l’application, sélectionnez l’onglet **Identifiants**.
 5. Sous **Méthodes d’authentification**, sélectionnez **Clé privée JWT**.
 
-   <Frame>![Configuration de l’authentification JWT Private Key (Clé privée JWT) - Instructions pour le Auth0 Dashboard (Tableau de bord Auth0)](//images.ctfassets.net/cdy7uua7fh8z/33kfi48tkbMIOQJ8PBxj76/3a37d4906b80c31d5427b852f56cdb00/Default_App_-_Creds_-_French.png)</Frame>
+   <Frame>![Configuration de l’authentification JWT Private Key (Clé privée JWT) - Instructions pour le Auth0 Dashboard (Tableau de bord Auth0)](/images/fr-ca/cdy7uua7fh8z/33kfi48tkbMIOQJ8PBxj76/3a37d4906b80c31d5427b852f56cdb00/Default_App_-_Creds_-_French.png)</Frame>
 
 6. Configurer les détails de l’identifiant :
 
@@ -83,7 +83,7 @@ Vous pouvez mettre à jour un identifiant existant en y ajoutant une date d’ex
 2. Sélectionnez l’onglet **Credentials (Identifiants)**.
 3. Choisissez l’identifiant que vous voulez mettre à jour et sélectionnez **Edit Credential (Modifier l’identifiant)**.
 
-   <Frame>![Dashboard - Applications - Application Settings - Credentials - update expiry date](//images.ctfassets.net/cdy7uua7fh8z/6858PTDkNCRZiIqtBVmciZ/98cad98076e61ac1a3a9d0620dbc99dc/Demo_Key2_-_French.png)</Frame>
+   <Frame>![Dashboard - Applications - Application Settings - Credentials - update expiry date](/images/fr-ca/cdy7uua7fh8z/6858PTDkNCRZiIqtBVmciZ/98cad98076e61ac1a3a9d0620dbc99dc/Demo_Key2_-_French.png)</Frame>
 
 4. Sélectionnez **Set an explicit expiry date for this Credential (Définir une date d’expiration explicite pour cet identifiant)** et définissez une date ultérieure.
 5. Sélectionnez **Update Credential (Mettre à jour l’identifiant)**.
@@ -94,7 +94,7 @@ Vous pouvez mettre à jour un identifiant existant en y ajoutant une date d’ex
 
 Vous pouvez créer une nouvelle application avec `private_key_jwt` comme méthode d’authentification à l’aide de Management API. Effectuez un appel `POST` au point de terminaison [`Create a Client`](https://auth0.com/docs/api/management/v2#!/Clients/get_clients) avec la charge utile suivante :
 
-```bash
+```bash lines
 curl --location --request POST 'https://{domain}/api/v2/clients' \
   --header 'Authorization: Bearer {managementApiAccessToken} \
   --header 'Content-Type: application/json' \
@@ -128,32 +128,32 @@ curl --location --request POST 'https://{domain}/api/v2/clients' \
 </thead>
 <tbody>
 <tr>
-<td><code>algorithm</code></td>
+<td>`algorithm`</td>
 <td>Algorithme utilisé pour signer les assertions. Les valeurs prises en charge sont RS256, RS384 et PS256. S’il n’est pas précisé, l’algorithme sera par défaut RS256.</td>
 </tr>
 <tr>
-<td><code>clientName</code></td>
+<td>`clientName`</td>
 <td>Nom pour votre nouveau client.</td>
 </tr>
 <tr>
-<td><code>credentialName</code></td>
+<td>`credentialName`</td>
 <td>Nom pour la clé publique.</td>
 </tr>
 <tr>
-<td><code>expires_at</code></td>
+<td>`expires_at`</td>
 <td>Facultatif.  Date d’expiration de l’authentifiant au format ISO 8601. Par exemple, « 2020-08-20T19:10:06.299Z ». Une fois la date d’expiration passée, l’authentifiant n’est plus valide.</td>
 </tr>
 <tr>
-<td><code>managementApiAccessToken</code></td>
-<td><a href="/docs/secure/tokens/access-tokens/management-api-access-tokens">Jeton d’accès pour Management API</a> avec la permission <code>create:credentials</code>.</td>
+<td>`managementApiAccessToken`</td>
+<td><a href="/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens">Jeton d’accès pour Management API</a> avec la permission `create:credentials`.</td>
 </tr>
 <tr>
-<td><code>pem</code></td>
+<td>`pem`</td>
 <td>Clé publique, ou certificat x.509, encodé au format PEM.</td>
 </tr>
 <tr>
-<td><code>parse_expiry_from_cert</code></td>
-<td>Facultatif. Un booléen qui indique à Auth0 d’analyser la date d’expiration lorsqu’un certificat lui est fourni. Si aucun certificat n’est fourni , Auth0 renverra une erreur. <code>parse_expiry_from_cert</code> et <code>expires_at</code> sont aussi mutuellement exclusifs. Dans ce cas, Auth0 renverra une erreur.</td>
+<td>`parse_expiry_from_cert`</td>
+<td>Facultatif. Un booléen qui indique à Auth0 d’analyser la date d’expiration lorsqu’un certificat lui est fourni. Si aucun certificat n’est fourni , Auth0 renverra une erreur. `parse_expiry_from_cert` et `expires_at` sont aussi mutuellement exclusifs. Dans ce cas, Auth0 renverra une erreur.</td>
 </tr>
 </tbody>
 </table>
@@ -200,7 +200,7 @@ Après avoir configuré private_key_jwt, vous ne pourrez plus accéder à la val
 
 Une fois que vous avez généré une paire de clés, créez la ressource d’identification. Effectuez la demande POST suivante au point de terminaison [`/clients`](https://auth0.com/docs/api/management/v2#!/Clients/post_clients) de Management API.
 
-```bash
+```bash lines
 curl --location --request POST 'https://{domain}/api/v2/clients/{clientId}/credentials' \
   --header 'Authorization: Bearer {managementApiAccessToken} \
   --header 'Content-Type: application/json' \
@@ -221,32 +221,32 @@ curl --location --request POST 'https://{domain}/api/v2/clients/{clientId}/crede
 </thead>
 <tbody>
 <tr>
-<td><code>algorithm</code></td>
+<td>`algorithm`</td>
 <td>Algorithme utilisé pour signer les assertions. Les valeurs prises en charge sont RS256, RS384 et PS256. S’il n’est pas spécifié, l’algorithme par défaut est RS256.</td>
 </tr>
 <tr>
-<td><code>clientId</code></td>
+<td>`clientId`</td>
 <td>Identifiant de l’application à mettre à jour.</td>
 </tr>
 <tr>
-<td><code>credentialName</code></td>
+<td>`credentialName`</td>
 <td>Nom de la clé publique.</td>
 </tr>
 <tr>
-<td><code>managementApiAccessToken</code></td>
-<td><a href="/docs/secure/tokens/access-tokens/management-api-access-tokens">Jeton d’accès à Management API</a> avec la permission <code>create:credentials</code>.</td>
+<td>`managementApiAccessToken`</td>
+<td><a href="/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens">Jeton d’accès à Management API</a> avec la permission `create:credentials`.</td>
 </tr>
 <tr>
-<td><code>pem</code></td>
+<td>`pem`</td>
 <td>Clé publique, ou certificat x.509, encodée au format PEM.</td>
 </tr>
 <tr>
-<td><code>expires_at</code></td>
-<td>Facultatif.  Date d’expiration de l’identifiant au format ISO 860. Par exemple, <code>2020-08-20T19:10:06.299Z</code>. Une fois la date d’expiration passée, l’identifiant n’est plus valide.</td>
+<td>`expires_at`</td>
+<td>Facultatif.  Date d’expiration de l’identifiant au format ISO 860. Par exemple, `2020-08-20T19:10:06.299Z`. Une fois la date d’expiration passée, l’identifiant n’est plus valide.</td>
 </tr>
 <tr>
-<td><code>parse_expiry_from_cert</code></td>
-<td>Facultatif. Un booléen qui indique qu’Auth0 doit analyser l’expiration lorsqu’un certificat est fourni. Si aucun certificat n’est fourni, Auth0 renvoie une erreur. <code>parse_expiry_from_cert</code> et <code>expires_at</code> sont mutuellement exclusifs. Dans ce cas, Auth0 va retourner une erreur.</td>
+<td>`parse_expiry_from_cert`</td>
+<td>Facultatif. Un booléen qui indique qu’Auth0 doit analyser l’expiration lorsqu’un certificat est fourni. Si aucun certificat n’est fourni, Auth0 renvoie une erreur. `parse_expiry_from_cert` et `expires_at` sont mutuellement exclusifs. Dans ce cas, Auth0 va retourner une erreur.</td>
 </tr>
 </tbody>
 </table>
@@ -255,7 +255,7 @@ curl --location --request POST 'https://{domain}/api/v2/clients/{clientId}/crede
 
 La clé publique PEM doit être décodée en JSON avant d’être transmise à Auth0. Dans cet exemple, le contenu à inclure est le suivant :
 
-```
+``` lines
 ----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA53VzmIVVZZWyNm266l82
 mnoDc9g/snXklax5kChEhqK/WnTUvuXP4Gd4THj8rchxgUGKXd4PF3SUcKyn/qPm
@@ -277,7 +277,7 @@ Une fois que vous avez créé l’identifiant, associez-le à votre application.
 
 Effectuez une requête PATCH au point de terminaison [`Update a Client`](https://auth0.com/docs/api/management/v2#!/Clients/patch_clients_by_id) de Management API :
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId} \
   --header 'Authorization: Bearer {managementApiAccessToken} \
   --header 'Content-Type: application/json' \
@@ -299,19 +299,19 @@ curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId} \
 </thead>
 <tbody>
 <tr>
-<td><code>clientId</code></td>
+<td>`clientId`</td>
 <td>ID de l’application à mettre à jour.</td>
 </tr>
 <tr>
-<td><code>managementApiAccessToken</code></td>
-<td><a href="/docs/secure/tokens/access-tokens/management-api-access-tokens">Jeton d’accès à Management API</a> avec les permissions <code>update:client</code> et <code>update:credentials</code>.</td>
+<td>`managementApiAccessToken`</td>
+<td><a href="/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens">Jeton d’accès à Management API</a> avec les permissions `update:client` et `update:credentials`.</td>
 </tr>
 <tr>
-<td><code>credentialId</code></td>
+<td>`credentialId`</td>
 <td>ID de l’identifiant que vous avez créé.</td>
 </tr>
 <tr>
-<td><code>pem</code></td>
+<td>`pem`</td>
 <td>La clé publique en format PEM.</td>
 </tr>
 </tbody>
@@ -319,7 +319,7 @@ curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId} \
 
 <Warning>
 
-Auth0 ne prend pas en charge l’utilisation de HS256 comme algorithme de signature JWT de l’application. Vous devez avoir le champ `jwt_configuration.alg` défini sur l’algorithme RS256. Pour savoir comment modifier l’algorithme de signature, lisez [Modifier les algorithmes de signature de l’application](/docs/get-started/applications/change-application-signing-algorithms).
+Auth0 ne prend pas en charge l’utilisation de HS256 comme algorithme de signature JWT de l’application. Vous devez avoir le champ `jwt_configuration.alg` défini sur l’algorithme RS256. Pour savoir comment modifier l’algorithme de signature, lisez [Modifier les algorithmes de signature de l’application](/docs/fr-ca/get-started/applications/change-application-signing-algorithms).
 
 </Warning>
 
@@ -335,7 +335,7 @@ Une fois que vous avez configuré votre méthode d’authentification en tant qu
 
 **Exemple**
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId} \
   --header 'Authorization: Bearer {managementApiAccessToken} \
   --header 'Content-Type: application/json' \
@@ -353,16 +353,16 @@ curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId} \
 </thead>
 <tbody>
 <tr>
-<td><code>clientId</code></td>
+<td>`clientId`</td>
 <td>ID de l’application à mettre à jour.</td>
 </tr>
 <tr>
-<td><code>managementApiAccessToken</code></td>
-<td><a href="/docs/secure/tokens/access-tokens/management-api-access-tokens">Jeton d’accès pour Management API</a> avec les permissions <code>update:client</code></td>
+<td>`managementApiAccessToken`</td>
+<td><a href="/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens">Jeton d’accès pour Management API</a> avec les permissions `update:client`</td>
 </tr>
 <tr>
-<td><code>tokenEndpointAuthMethod</code></td>
-<td>Méthode d’authentification finale. Par exemple : <code>client_secret_basic</code> ou <code>client_secret_post</code>.</td>
+<td>`tokenEndpointAuthMethod`</td>
+<td>Méthode d’authentification finale. Par exemple : `client_secret_basic` ou `client_secret_post`.</td>
 </tr>
 </tbody>
 </table>
@@ -371,7 +371,7 @@ curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId} \
 
 Vous pouvez mettre à jour un identifiant existant avec une date d’expiration à l’aide du point de terminaison [Mettre à jour un identifiant](https://auth0.com/docs/api/management/v2#!/Clients/patch_credentials_by_credential_id) de Management API.
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId}/credentials/{credentialId} ' \
   --header 'Authorization: Bearer {managementApiAccessToken} \
   --header 'Content-Type: application/json' \

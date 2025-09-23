@@ -1,13 +1,13 @@
 ---
 title: "Versions publiées"
 permalink: "releases"
+'description': "En savoir plus sur les versions publiées des déclencheurs dans les actions du flux de connexion, y compris les modifications et les nouvelles fonctionnalités."
 'og:title': "Versions publiées"
 'og:description': "En savoir plus sur les versions publiées des déclencheurs dans les actions du flux de connexion, y compris les modifications et les nouvelles fonctionnalités."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Versions publiées"
 'twitter:description': "En savoir plus sur les versions publiées des déclencheurs dans les actions du flux de connexion, y compris les modifications et les nouvelles fonctionnalités."
 ---
-# Versions publiées
 
 Les fonctionnalités et les modifications majeures apportées aux versions des déclencheurs du flux de connexion sont énumérées ci-dessous.
 
@@ -50,7 +50,7 @@ Dans la version du déclencheur post-connexion précédant la mise à dispositio
 
 Déclencheur avant la mise à disposition générale :
 
-```
+```javascript lines
 async function myFunction(event, context) {
   return {
     user: {
@@ -64,7 +64,7 @@ async function myFunction(event, context) {
 
 Déclencheur après la mise à disposition générale :
 
-```
+```javascript lines
 async function onExecutePostLogin(event, api) {
   api.user.setUserMetadata('myParam', 'foo');
 }
@@ -80,7 +80,7 @@ Vous ne devez pas utiliser cette méthode dans les rappels car l’invocation de
 
 Déclencheur avant la mise à disposition générale :
 
-```
+```javascript lines
 async function myFunction(event, context) {
   return {
     user: {
@@ -94,7 +94,7 @@ async function myFunction(event, context) {
 
 Déclencheur après la mise à disposition générale :
 
-```
+```javascript lines
 async function onExecutePostLogin(event, api) {
   api.user.setAppMetadata('myParam', 'foo');
 }
@@ -110,7 +110,7 @@ Vous ne devez pas utiliser cette méthode dans les rappels car l’invocation de
 
 Déclencheur avant la mise à disposition générale :
 
-```
+```javascript lines
 async function myFunction(event, context) {
   throw new Error("Access denied.");
 }
@@ -118,7 +118,7 @@ async function myFunction(event, context) {
 
 Déclencheur après la mise à disposition générale :
 
-```
+```javascript lines
 async function onExecutePostLogin(event, api) {
   api.access.deny("Access denied.");
 }
@@ -134,7 +134,7 @@ Lancer une erreur permet également de refuser une connexion, mais l’appel de 
 
 Déclencheur avant la mise à disposition générale :
 
-```
+```javascript lines
 async function myFunc(event, context) {
   return {
     accessToken: {
@@ -148,7 +148,7 @@ async function myFunc(event, context) {
 
 Déclencheur après la mise à disposition générale :
 
-```
+```javascript lines
 async function myFunc(event, api) {
   api.accessToken.setCustomClaim('https://example.com/custom/claim', 'Custom claim value');
 }
@@ -158,7 +158,7 @@ async function myFunc(event, api) {
 
 Déclencheur avant la mise à disposition générale :
 
-```
+```javascript lines
 async function myFunc(event, context) {
   return {
     idToken: {
@@ -172,7 +172,7 @@ async function myFunc(event, context) {
 
 Déclencheur après la mise à disposition générale :
 
-```
+```javascript lines
 async function myFunc(event, api) {
   api.idToken.setCustomClaim('https://example.com/custom/claim', 'Custom claim value');
 }
@@ -182,7 +182,7 @@ async function myFunc(event, api) {
 
 Déclencheur avant la mise à disposition générale :
 
-```
+```javascript lines
 async function myFunction(event, context) {
   return {
     command: {
@@ -195,7 +195,7 @@ async function myFunction(event, context) {
 
 Déclencheur après la mise à disposition générale :
 
-```
+```javascript lines
 async function onExecutePostLogin(event, api) {
   api.multifactor.enable("duo");
 }
@@ -205,7 +205,7 @@ async function onExecutePostLogin(event, api) {
 
 Déclencheur avant la mise à disposition générale :
 
-```
+```javascript lines
 async function myFunction(event, context) {
   return {
     command: {
@@ -218,7 +218,7 @@ async function myFunction(event, context) {
 
 Déclencheur après la mise à disposition générale :
 
-```
+```javascript lines
 async function onExecutePostLogin(event, api) {
   api.redirect.sendUserTo("https://my-app.example.com");
 }

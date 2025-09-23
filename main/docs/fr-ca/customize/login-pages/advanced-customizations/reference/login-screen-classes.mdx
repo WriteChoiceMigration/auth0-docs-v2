@@ -1,13 +1,13 @@
 ---
 title: "Classes d’écran de connexion"
 permalink: "login-screen-classes"
+'description': "En savoir plus sur les classes d’écran de connexion ACUL"
 'og:title': "Classes d’écran de connexion"
 'og:description': "En savoir plus sur les classes d’écran de connexion ACUL"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Classes d’écran de connexion"
 'twitter:description': "En savoir plus sur les classes d’écran de connexion ACUL"
 ---
-# Classes d’écran de connexion
 
 ## Classe d’écran de connexion
 
@@ -19,7 +19,7 @@ La classe d’écran de connexion fait partie du flux d’[authentification Iden
 
 Importer et instancier la classe d’écran de connexion :
 
-```
+```javascript lines
 import Login from "@auth0/auth0-acul-js/login";
 const loginManager = new Login();
 
@@ -38,7 +38,7 @@ Les propriétés de la classe d’écran de connexion sont :
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -73,7 +73,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -85,7 +85,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -104,7 +104,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -112,7 +112,7 @@ interface prompt{
 
 </Tab><Tab title="Écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -136,7 +136,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -147,7 +147,7 @@ interface tenant {
 
 </Tab><Tab title="Transaction">
 
-```
+```javascript lines
 interface transaction {
   allowedIdentifiers: null | IdentifierType[];
   alternateConnections: null | (Connection | EnterpriseConnection)[];
@@ -196,7 +196,7 @@ IdentifierType: "phone" | "email" | "username"
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -216,7 +216,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -252,7 +252,7 @@ Les méthodes de la classe d’écran de connexion sont :
 
 Cette méthode authentifie l’utilisateur en se basant sur l’identifiant et le mot de passe fournis. Selon la configuration du serveur, il pourrait s’agir d’un courriel, d’un nom d’utilisateur ou d’un numéro de téléphone. Examinez les [identifiants flexibles](https://auth0.com/docs/authenticate/database-connections/flexible-identifiers-and-attributes) pour plus de détails.
 
-```
+```javascript lines
 loginManager.login({
   username: "testUser",
   password: "testPassword"
@@ -269,28 +269,28 @@ loginManager.login({
 </thead>
 <tbody>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>Chaîne</td>
 <td>Oui</td>
 <td>Identifiant de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>password</code></td>
+<td>`password`</td>
 <td>Chaîne</td>
 <td>Oui</td>
 <td>Mot de passe de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>Chaîne</td>
 <td>Conditionnellement</td>
 <td>Le code Captcha ou la réponse du fournisseur de Captcha. Cette propriété est requise si votre locataire Auth0 a activé la détection de robots.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>Chaîne | Numéro | Booléen | Non défini</td>
 <td>Non</td>
-<td>Données supplémentaires collectées auprès de l’utilisateur. Ces données sont accessibles dans le déclencheur d’action <code>post-login</code>.</td>
+<td>Données supplémentaires collectées auprès de l’utilisateur. Ces données sont accessibles dans le déclencheur d’action `post-login`.</td>
 </tr>
 </tbody>
 </table>
@@ -299,7 +299,7 @@ loginManager.login({
 
 Cette méthode redirige l’utilisateur au fournisseur d’identité du réseau social ou de l’entreprise pour authentification. Examinez les [fournisseurs d’identité sociaux](https://auth0.com/docs/authenticate/identity-providers/social-identity-providers) et les [fournisseurs d’identité de l’entreprise](https://auth0.com/docs/authenticate/identity-providers/enterprise-identity-providers) pour les détails.
 
-```
+```javascript lines
 import Login from "@auth0/auth0-acul-js/login";
 const loginManager = new Login();
 loginManager.federatedLogin({
@@ -317,16 +317,16 @@ loginManager.federatedLogin({
 </thead>
 <tbody>
 <tr>
-<td><code>connection</code></td>
+<td>`connection`</td>
 <td>string</td>
 <td>Oui</td>
 <td>L’identifiant de la connexion.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>string | number | boolean | undefined</td>
 <td>Non</td>
-<td>Données supplémentaires collectées auprès de l’utilisateur. Ces données sont accessibles dans le déclencheur d’Action <code>post-login</code>.</td>
+<td>Données supplémentaires collectées auprès de l’utilisateur. Ces données sont accessibles dans le déclencheur d’Action `post-login`.</td>
 </tr>
 </tbody>
 </table>
@@ -341,7 +341,7 @@ La classe d’écran de l’identifiant de la connexion fait partie du flux d’
 
 Importer et instancier la classe d’écran de l’identifiant de la connexion :
 
-```
+```javascript lines
 import LoginId from '@auth0/auth0-acul-js/login-id';
 const loginIdManager = new LoginId();
 
@@ -360,7 +360,7 @@ Les propriétés de la classe d’écran de l’identifiant de la connexion sont
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -395,7 +395,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -407,7 +407,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -426,7 +426,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -434,7 +434,7 @@ interface prompt{
 
 </Tab><Tab title="Écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -488,7 +488,7 @@ interface PhonePrefix {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -499,7 +499,7 @@ interface tenant {
 
 </Tab><Tab title="Transaction">
 
-```
+```javascript lines
 interface transaction {
   allowedIdentifiers: null | IdentifierType[];
   alternateConnections: null | (Connection | EnterpriseConnection)[];
@@ -549,7 +549,7 @@ IdentifierType: "phone" | "email" | "username"
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -569,7 +569,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -605,7 +605,7 @@ Les méthodes de la classe d’écran de l’identifiant de la connexion sont :
 
 Cette méthode dirige l’utilisateur à l’étape suivante où il peut saisir son mot de passe ou son code de mot de passe unique Selon la configuration du serveur, il pourrait s’agir d’un courriel, d’un nom d’utilisateur ou d’un numéro de téléphone. Examinez les [identifiants flexibles](https://auth0.com/docs/authenticate/database-connections/flexible-identifiers-and-attributes) pour plus de détails.
 
-```
+```javascript lines
 loginIdManager.login({
   username: <identifierFieldValue>
 });
@@ -621,22 +621,22 @@ loginIdManager.login({
 </thead>
 <tbody>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>chaîne</td>
 <td>Oui</td>
 <td>L’identifiant de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Le code captcha ou la réponse du fournisseur captcha. Cette propriété est obligatoire si votre locataire Auth0 a activé la détection de robots.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
-<td>Données supplémentaires recueillies auprès de l’utilisateur. Les données sont accessibles dans le déclencheur d’action <code>post-login</code>.</td>
+<td>Données supplémentaires recueillies auprès de l’utilisateur. Les données sont accessibles dans le déclencheur d’action `post-login`.</td>
 </tr>
 </tbody>
 </table>
@@ -645,7 +645,7 @@ loginIdManager.login({
 
 Cette méthode permet d’authentifier l’utilisateur à l’aide de la clé d’identification fournie et, en cas de succès, de le rediriger vers la `redirect_url`.
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 loginIdManager.passkeyLogin();
 ```
@@ -654,7 +654,7 @@ loginIdManager.passkeyLogin();
 
 Cette méthode redirige l’utilisateur au fournisseur d’identité du réseau social ou de l’entreprise pour authentification. Examinez les [fournisseurs d’identité sociaux](https://auth0.com/docs/authenticate/identity-providers/social-identity-providers) et les [fournisseurs d’identité de l’entreprise](https://auth0.com/docs/authenticate/identity-providers/enterprise-identity-providers) pour les détails.
 
-```
+```javascript lines
 import LoginId from "@auth0/auth0-acul-js/login-id";
 const loginIdManager = new LoginId();
 
@@ -685,16 +685,16 @@ loginIdManager.federatedLogin({
 </thead>
 <tbody>
 <tr>
-<td><code>connection</code></td>
+<td>`connection`</td>
 <td>string</td>
 <td>Oui</td>
 <td>L’identifiant de la connexion.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>string | number | boolean | undefined</td>
 <td>Non</td>
-<td>Données supplémentaires collectées auprès de l’utilisateur. Ces données sont accessibles dans le déclencheur d’Action <code>post-login</code>.</td>
+<td>Données supplémentaires collectées auprès de l’utilisateur. Ces données sont accessibles dans le déclencheur d’Action `post-login`.</td>
 </tr>
 </tbody>
 </table>
@@ -703,7 +703,7 @@ loginIdManager.federatedLogin({
 
 Cette méthode le redirige vers la liste des indicatifs de pays, où il peut mettre à jour le préfixe de l’indicatif de pays pour son numéro de téléphone.
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 loginIdManager.pickCountryCode();
 ```
@@ -718,7 +718,7 @@ La classe d’écran de connexion par mot de passe fait partie du flux d’[auth
 
 Importer et instancier la classe d’écran de connexion par mot de passe
 
-```
+```javascript lines
 import LoginPassword from "@auth0/auth0-acul-js/login-password";
 const loginPasswordManager = new LoginPassword();
 
@@ -737,7 +737,7 @@ Les propriétés de la classe d’écran de connexion par mot de passe sont :
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -772,7 +772,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -784,7 +784,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -803,7 +803,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -811,7 +811,7 @@ interface prompt{
 
 </Tab><Tab title="Écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -836,7 +836,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -847,7 +847,7 @@ interface tenant {
 
 </Tab><Tab title="Transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -904,7 +904,7 @@ interface UsernamePolicy {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -924,7 +924,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -960,7 +960,7 @@ La méthode de la classe d’écran de connexion par mot de passe est :
 
 Cette méthode authentifie l’utilisateur en se basant sur l’identifiant de l’étape précédente et le mot de passe fourni. Une fois authentifié, l’utilisateur est dirigé à la prochaine étape.
 
-```
+```javascript lines
 loginPasswordManager.login({
   username: <usernameFieldValue>,
   password: ********
@@ -977,28 +977,28 @@ loginPasswordManager.login({
 </thead>
 <tbody>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Le code captcha ou la réponse du fournisseur captcha. Cette propriété est obligatoire si votre locataire Auth0 a activé la détection de robots.</td>
 </tr>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>chaîne</td>
 <td>Oui</td>
 <td>L’identifiant de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>password</code></td>
+<td>`password`</td>
 <td>chaîne</td>
 <td>Oui</td>
 <td>Le mot de passe de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
-<td>Données supplémentaires recueillies auprès de l’utilisateur. Les données sont accessibles dans le déclencheur d’action <code>post-login</code>.</td>
+<td>Données supplémentaires recueillies auprès de l’utilisateur. Les données sont accessibles dans le déclencheur d’action `post-login`.</td>
 </tr>
 </tbody>
 </table>
@@ -1013,7 +1013,7 @@ La classe d’écran de connexion sans mot de passe par code envoyé par courrie
 
 Importer et instancier la classe d’écran de connexion sans mot de passe par code envoyé par courriel
 
-```
+```javascript lines
 import LoginPasswordlessEmailCode from '@auth0/auth0-acul-js/login-passwordless-email-code';
 const loginPasswordlessEmailCodeManager = new LoginPasswordlessEmailCode();
 
@@ -1032,7 +1032,7 @@ Les propriétés de classe d’écran de connexion sans mot de passe par code en
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -1067,7 +1067,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -1079,7 +1079,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -1098,7 +1098,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -1106,7 +1106,7 @@ interface prompt{
 
 </Tab><Tab title="Écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -1134,7 +1134,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -1145,7 +1145,7 @@ interface tenant {
 
 </Tab><Tab title="Transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -1179,7 +1179,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -1199,7 +1199,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -1235,7 +1235,7 @@ La méthode de classe d’écran de connexion sans mot de passe par code envoyé
 
 Cette méthode envoie un nouveau code de mot de passe à usage unique à l’adresse courriel fournie à l’étape précédente.
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 loginPasswordlessEmailCode.resendCode();
 ```
@@ -1250,7 +1250,7 @@ loginPasswordlessEmailCode.resendCode();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>string | number | boolean | undefined</td>
 <td>No</td>
 <td>Optional data collected to user.</td>
@@ -1262,7 +1262,7 @@ loginPasswordlessEmailCode.resendCode();
 
 Cette méthode authentifie l’utilisateur en se basant sur l’adresse courriel et le code unique fournis.
 
-```
+```javascript lines
 loginPasswordlessEmailCode.submitCode({
  email: <EmailFieldValue>;
  code: <OtpCodeFieldValue>;
@@ -1279,22 +1279,22 @@ loginPasswordlessEmailCode.submitCode({
 </thead>
 <tbody>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>string</td>
 <td>Sous conditions</td>
 <td>Le code Captcha ou la réponse du fournisseur Captcha. Cette propriété est requise si votre locataire Auth0 a activé la détection de robots.</td>
 </tr>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>N° de chaîne</td>
 <td>Oui</td>
 <td>Code OTP envoyé au courriel.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>Chaîne | Numéro | Booléen | Non défini</td>
 <td>Non</td>
-<td>Données supplémentaires collectées auprès de l’utilisateur. Ces données sont accessibles dans le déclencheur d’action <code>post-login</code>.</td>
+<td>Données supplémentaires collectées auprès de l’utilisateur. Ces données sont accessibles dans le déclencheur d’action `post-login`.</td>
 </tr>
 </tbody>
 </table>
@@ -1309,7 +1309,7 @@ La classe d’écran de connexion sans mot de passe avec code unique envoyé par
 
 Importer et instancier la classe d’écran de connexion sans mot de passe par code envoyé par courriel
 
-```
+```javascript lines
 import LoginPasswordlessSmsOtp from '@auth0/auth0-acul-js/login-passwordless-sms-otp';
 const loginPasswordlessSmsOtpManager = new LoginPasswordlessSmsOtp();
 
@@ -1328,7 +1328,7 @@ Les propriétés de classe d’écran de connexion sans mot de passe avec code u
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -1363,7 +1363,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -1375,7 +1375,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -1394,7 +1394,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -1402,7 +1402,7 @@ interface prompt{
 
 </Tab><Tab title="Écran">
 
-```
+```javascript lines
 interface screen {
   backLink: null | string;
   captcha: null | CaptchaContext;
@@ -1427,7 +1427,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -1438,7 +1438,7 @@ interface tenant {
 
 </Tab><Tab title="Transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -1472,7 +1472,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -1492,7 +1492,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -1528,7 +1528,7 @@ La méthode de classe d’écran de connexion sans mot de passe avec code unique
 
 Cette méthode envoie un nouveau code de mot de passe à usage unique à l’adresse courriel fournie à l’étape précédente.
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 loginPasswordlessSmsOtpManager.resendOTP()
 ```
@@ -1543,7 +1543,7 @@ loginPasswordlessSmsOtpManager.resendOTP()
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>string | number | boolean | undefined</td>
 <td>No</td>
 <td>Optional data collected to user.</td>
@@ -1555,7 +1555,7 @@ loginPasswordlessSmsOtpManager.resendOTP()
 
 Cette méthode authentifie l’utilisateur en se basant sur le numéro de téléphone et le code unique fournis.
 
-```
+```javascript lines
 loginPasswordlessSmsOtpManager.submitOTP({
  username: <PhoneFieldValue>;
  otp: <OtpCodeFieldValue>;
@@ -1572,25 +1572,25 @@ loginPasswordlessSmsOtpManager.submitOTP({
 </thead>
 <tbody>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Le code captcha ou la réponse du fournisseur captcha. Cette propriété est obligatoire si votre locataire Auth0 a activé la détection de robots.</td>
 </tr>
 <tr>
-<td><code>otp</code></td>
+<td>`otp`</td>
 <td>chaîne</td>
 <td>Oui</td>
 <td>Le code OTP envoyé au numéro de téléphone.</td>
 </tr>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>chaîne</td>
 <td>Oui</td>
 <td>Le numéro de téléphone de l’étape précédente.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données facultatives recueillies auprès de l’utilisateur.</td>

@@ -1,13 +1,13 @@
 ---
 title: "Utiliser des noms d’organisation dans les API Authentication"
 permalink: "use-org-name-authentication-api"
+'description': "Configuration, considérations de sécurité et meilleures pratiques pour l’utilisation des noms d’organisations dans l’Authentication API."
 'og:title': "Utiliser des noms d’organisation dans les API Authentication"
 'og:description': "Configuration, considérations de sécurité et meilleures pratiques pour l’utilisation des noms d’organisations dans l’Authentication API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Utiliser des noms d’organisation dans les API Authentication"
 'twitter:description': "Configuration, considérations de sécurité et meilleures pratiques pour l’utilisation des noms d’organisations dans l’Authentication API."
 ---
-# Utiliser des noms d’organisation dans les API Authentication
 
 Par défaut, [Authentication API](https://auth0.com/docs/api/authentication) utilise les identifiants d’organisation pour identifier des organisations spécifiques. Si nécessaire, vous pouvez configurer votre locataire pour qu’il utilise également les noms des organisations comme identifiant. Toutefois, avant d’activer cette fonction, il convient de prendre en compte les implications en termes d’utilisation et de sécurité. Pour mieux comprendre l’impact potentiel, consultez la section [Considérations et recommandations](#considerations-and-recommendations).
 
@@ -20,7 +20,7 @@ La configuration de votre locataire pour prendre en charge les noms d’organisa
 
 <Note>
 
-* Les [organisations](/docs/manage-users/organizations/configure-organizations/create-organizations) peuvent être configurées avec deux noms : une valeur de Nom requise traitée par le serveur comme un identifiant unique, et un Nom d’affichage facile pour l’utilisateur, facultatif. Le paramètre `org_name` n’accepte que la valeur de Nom requise et ne prend pas en charge pas les valeurs de Nom d’affichage.
+* Les [organisations](/docs/fr-ca/manage-users/organizations/configure-organizations/create-organizations) peuvent être configurées avec deux noms : une valeur de Nom requise traitée par le serveur comme un identifiant unique, et un Nom d’affichage facile pour l’utilisateur, facultatif. Le paramètre `org_name` n’accepte que la valeur de Nom requise et ne prend pas en charge pas les valeurs de Nom d’affichage.
 * Cette fonctionnalité est gérée au niveau du locataire. Elle ne peut être activé individuellement pour des organisations spécifiques.
 
 </Note>
@@ -38,7 +38,7 @@ L’exemple suivant illustre un flux Codes d’autorisation qui utilise des noms
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+``` lines
 https://{yourDomain}/authorize?
     response_type=code&
     client_id={yourClientId}&
@@ -52,7 +52,7 @@ https://{yourDomain}/authorize?
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```bash
+```bash lines
 curl --request POST \
   --url 'https://{yourDomain}/oauth/token' \
   --header 'content-type: application/x-www-form-urlencoded' \
@@ -65,7 +65,7 @@ curl --request POST \
 
 3. Les jetons décodés renvoyés contiennent à la fois les revendications `org_id` et `org_name` :
 
-```json
+```json lines
 {
     "sub": "google-oauth2|10...17",
     "aud": [

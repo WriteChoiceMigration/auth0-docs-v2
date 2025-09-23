@@ -1,12 +1,14 @@
 ---
 title: "Login"
 permalink: "01-login"
+'description': "The Okta Spring Boot Starter makes it easy to add login to your Spring Boot application."
 'og:title': "Login"
 'og:description': "The Okta Spring Boot Starter makes it easy to add login to your Spring Boot application."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/spring.png"
 'twitter:title': "Login"
 'twitter:description': "The Okta Spring Boot Starter makes it easy to add login to your Spring Boot application."
 ---
+
 # Java Spring Boot
 
 <Frame>![Gravatar for jim.anderson@auth0.com](//www.gravatar.com/avatar/4fc3c0e33c1da40d889d1628519048ab?d=mm&r=g&s=50)</Frame>
@@ -43,7 +45,7 @@ This tutorial uses [Spring MVC](https://docs.spring.io/spring/docs/current/sprin
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Regular Web Applications](/docs/architecture-scenarios/web-app-sso) and which [protocol](/docs/flows) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/fr-ca/overview), how it [integrates with Regular Web Applications](/docs/fr-ca/architecture-scenarios/web-app-sso) and which [protocol](/docs/fr-ca/flows) it uses.
 
 </Note>
 
@@ -101,7 +103,7 @@ This guide uses [Thymeleaf](https://www.thymeleaf.org/) and the [Spring Security
 
 If you're using Gradle, you can include these dependencies as shown below.
 
-```
+``` lines
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.4'
@@ -117,7 +119,7 @@ implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 
 If you are using Maven:
 
-```
+```xml lines
 <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -158,7 +160,7 @@ If you are using Maven:
 
 The Okta Spring Boot Starter makes it easy to configure your application with Auth0. The sample below uses an `application.yml` file, though you can also use properties files or any of the other [supported externalization mechanisms](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config).
 
-```
+```yaml lines
 # src/main/resources/application.yml
 okta:
   oauth2:
@@ -177,7 +179,7 @@ server:
 
 To enable user login with Auth0, create a class that will register a [SecurityFilterChain](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/web/SecurityFilterChain.html), and add the `@Configuration` annotation.
 
-```
+```java lines
 package com.auth0.example;
 
 import org.springframework.context.annotation.Bean;
@@ -208,7 +210,7 @@ public class SecurityConfig {
 
 You can further configure the [HttpSecurity](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/config/annotation/web/builders/HttpSecurity.html) instance to require authentication on all or certain paths. For example, to require authentication on all paths except the home page:
 
-```
+```java lines
 http
     .authorizeHttpRequests(authorize -> authorize
         .requestMatchers("/").permitAll()
@@ -220,7 +222,7 @@ http
 
 The Okta Spring Boot Starter will use the client configuration you defined earlier to handle login when a user visits the `/oauth2/authorization/okta` path of your application. You can use this to create a login link in your application.
 
-```
+```html lines
 <!-- src/main/resources/templates/index.html -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <body>
@@ -236,7 +238,7 @@ The Okta Spring Boot Starter will use the client configuration you defined earli
 
 Be sure to create or update a controller to render your view.
 
-```
+```java lines
 package com.auth0.example;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -278,7 +280,7 @@ Now that users can log into your application, they need [a way to log out](https
 
 In the `SecurityConfig` class, provide a `LogoutHandler` that redirects to the Auth0 logout endpoint, and configure the `HttpSecurity` to add the logout handler:
 
-```
+```java lines
 package com.auth0.example;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -333,7 +335,7 @@ public class SecurityConfig {
 
 You can then update your view to POST to the `/logout` endpoint (Spring Security provides this by default) to enable users to log out.
 
-```
+```html lines
 <div sec:authorize="isAuthenticated()">
     <p>You are logged in!</p>
     <form name="logoutForm" th:action="@{/logout}" method="post">
@@ -352,7 +354,7 @@ You can retrieve the [profile information](https://auth0.com/docs/users/concepts
 
 In your controller, add the user's profile information to the model:
 
-```
+```java lines
 @Controller
 public class HomeController {
 
@@ -368,7 +370,7 @@ public class HomeController {
 
 You can then use this profile information in your view, as shown below.
 
-```
+```html lines
 <div sec:authorize="isAuthenticated()">
     <Frame><img th:src="${profile.get('picture')}" th:attr="alt=${profile.get('name')}"/></Frame>
 
@@ -384,7 +386,7 @@ Verify that you can display the user name or [any other `user` property](https:/
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

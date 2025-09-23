@@ -1,13 +1,13 @@
 ---
 title: "Signer et chiffrer les requêtes SAML"
 permalink: "sign-and-encrypt-saml-requests"
+'description': "Décrit le scénario de configuration spécial pour signer et chiffrer les demandes SAML."
 'og:title': "Signer et chiffrer les requêtes SAML"
 'og:description': "Décrit le scénario de configuration spécial pour signer et chiffrer les demandes SAML."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Signer et chiffrer les requêtes SAML"
 'twitter:description': "Décrit le scénario de configuration spécial pour signer et chiffrer les demandes SAML."
 ---
-# Signer et chiffrer les requêtes SAML
 
 Pour augmenter la sécurité de vos transactions, vous pouvez signer ou chiffrer à la fois vos demandes et vos réponses dans le protocole <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip>. Dans cet article, vous trouverez des configurations pour des scénarios spécifiques, séparés en deux cas d’utilisation :
 
@@ -39,7 +39,7 @@ Point de terminaison : `https://{yourDomain}/api/v2/connections/{yourConnection
 
 Charge utile :
 
-```json
+```json lines
 {
 	{ 
 		"options" : {
@@ -55,7 +55,7 @@ Par défaut, Auth0 utilise la clé privée du locataire pour signer les requête
 
 Vous pouvez générer votre propre certificat et votre clé privée à l’aide de cette commande :
 
-```
+```bash lines
 openssl req -x509 -nodes -sha256 -days 3650 -newkey rsa:2048 -keyout private_key.key -out certificate.crt
 ```
 
@@ -67,7 +67,7 @@ Point de terminaison : `https://{yourDomain}/api/v2/connections/{yourConnection
 
 Charge utile :
 
-```json
+```json lines
 {
 	{ 
 		"options" : {
@@ -122,7 +122,7 @@ Point de terminaison : `https://{yourDomain}/api/v2/connections/{yourConnection
 
 Charge utile :
 
-```json
+```json lines
 {
 	{ 
 		"options" : {
@@ -159,7 +159,7 @@ Par défaut, Auth0 signe **l’assertion** SAML dans la réponse. Pour signer la
 3. Sélectionnez **Application Web SAML2** pour afficher ses paramètres, et localisez le bloc de code **Paramètres** .
 4. Localisez la clé **"****`signResponse"`**. Décommentez-la (ou ajoutez-la, si nécessaire), puis donnez-lui la valeur `true` (la valeur par défaut est `false`). La configuration devrait ressembler à ceci :
 
-   ```json
+   ```json lines
    {
      [...], // other settings
      "signResponse": true
@@ -174,7 +174,7 @@ Par défaut, Auth0 signe **l’assertion** SAML dans la réponse. Pour signer la
 
 Par défaut, Auth0 utilise la paire de clés privée/publique attribuée à votre locataire pour signer les réponses ou assertions SAML. Pour des scénarios très spécifiques, vous pouvez souhaiter fournir votre propre paire de clés. Vous pouvez le faire avec une règle comme celle-ci :
 
-```javascript
+```javascript lines
 /**
 * Handler that will be called during the execution of a PostLogin flow.
 *
@@ -219,7 +219,7 @@ Pour configurer la validation de la signature :
 4. Sélectionnez **Application Web SAML2** pour afficher ses paramètres, et localisez le bloc de code **Paramètres** .
 5. Localisez la clé **"****`signingCert"`**. Décommentez-la (ou ajoutez-la, si nécessaire), puis définissez sa valeur en fonction du certificat que vous avez téléchargé depuis le fournisseur de services. La configuration devrait ressembler à ceci :
 
-   ```json
+   ```json lines
    {
      [...], // other settings
      "signingCert": "-----BEGIN CERTIFICATE-----\nMIIC8jCCAdqgAwIBAgIJObB6jmhG0QIEMA0GCSqGSIb3DQEBBQUAMCAxHjAcBgNV\n[..all the other lines..]-----END CERTIFICATE-----\n"
@@ -240,7 +240,7 @@ Vous devez obtenir le certificat et la clé publique auprès du fournisseur de s
 
 Une fois que vous avez obtenu les fichiers de certificat et de clé publique, vous devez les [transformer en chaînes de caractères](/docs/fr-ca/authenticate/protocols/saml/saml-sso-integrations/work-with-certificates-and-keys-as-strings) pour les utiliser dans une Action. L’Action se présentera comme suit :
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 
 // this Action sets a specific public key to encrypt the SAML assertion generated from Auth0

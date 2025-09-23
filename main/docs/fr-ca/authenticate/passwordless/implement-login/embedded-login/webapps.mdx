@@ -1,13 +1,13 @@
 ---
 title: "Connexion sans mot de passe intégrée dans les applications Web classiques"
 permalink: "webapps"
+'description': "Décrit la mise en œuvre de l’authentification sans mot de passe avec connexion intégrée dans les applications classiques."
 'og:title': "Connexion sans mot de passe intégrée dans les applications Web classiques"
 'og:description': "Décrit la mise en œuvre de l’authentification sans mot de passe avec connexion intégrée dans les applications classiques."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Connexion sans mot de passe intégrée dans les applications Web classiques"
 'twitter:description': "Décrit la mise en œuvre de l’authentification sans mot de passe avec connexion intégrée dans les applications classiques."
 ---
-# Connexion sans mot de passe intégrée dans les applications Web classiques
 
 Pour utiliser les API sans mot de passe intégrées dans les applications Web classiques, assurez-vous d’activer l’option **OTP sans mot de passe** octroyer à [Auth0 Dashboard (Tableau de bord Auth0) > Applications > Applications](https://manage.auth0.com/#/applications) dans les paramètres de votre application sous **Advanced Settings (Paramètres avancés)** > **Types d’autorisation**.
 
@@ -23,13 +23,13 @@ Voici quelques extraits de code qui peuvent être utilisés pour appeler ces poi
 **Envoyer un code à usage unique par courriel**
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/passwordless/start' \
 --header 'content-type: application/json' \
 --data '{"client_id": "{yourClientId}", "client_secret": "{yourClientSecret}", "connection": "email", "email": "{userEmail}","send": "code"}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/passwordless/start");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -37,7 +37,7 @@ request.AddParameter("application/json", "{\"client_id\": \"{yourClientId}\", \"
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -56,15 +56,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/passwordless/start")
 .header("content-type", "application/json")
 .body("{\"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"connection\": \"email\", \"email\": \"{userEmail}\",\"send\": \"code\"}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -83,8 +83,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"client_id": @"{yourClientId}",
@@ -112,7 +112,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/passwordless/start",
@@ -135,8 +135,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"connection\": \"email\", \"email\": \"{userEmail}\",\"send\": \"code\"}"
@@ -147,7 +147,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -160,8 +160,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"connection\": \"email\", \"email\": \"{userEmail}\",\"send\": \"code\"}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = [
@@ -196,13 +196,13 @@ dataTask.resume()
 Vous devez préciser `send: link`.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/passwordless/start' \
 --header 'content-type: application/json' \
 --data '{"client_id": "{yourClientId}", "client_secret": "{yourClientSecret}", "connection": "email", "email": "{userEmail}","send": "link"}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/passwordless/start");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -210,7 +210,7 @@ request.AddParameter("application/json", "{\"client_id\": \"{yourClientId}\", \"
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -229,15 +229,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/passwordless/start")
 .header("content-type", "application/json")
 .body("{\"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"connection\": \"email\", \"email\": \"{userEmail}\",\"send\": \"link\"}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -256,8 +256,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"client_id": @"{yourClientId}",
@@ -285,7 +285,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/passwordless/start",
@@ -308,8 +308,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"connection\": \"email\", \"email\": \"{userEmail}\",\"send\": \"link\"}"
@@ -320,7 +320,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -333,8 +333,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"connection\": \"email\", \"email\": \"{userEmail}\",\"send\": \"link\"}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = [
@@ -367,13 +367,13 @@ dataTask.resume()
 **Envoyer un mot de passe à usage unique par SMS**
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/passwordless/start' \
 --header 'content-type: application/json' \
 --data '{"client_id": "{yourClientId}", "client_secret": "{yourClientSecret}", "connection": "sms", "phone_number": "{userPhoneNumber}","send": "code"}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/passwordless/start");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -381,7 +381,7 @@ request.AddParameter("application/json", "{\"client_id\": \"{yourClientId}\", \"
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -400,15 +400,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/passwordless/start")
 .header("content-type", "application/json")
 .body("{\"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"connection\": \"sms\", \"phone_number\": \"{userPhoneNumber}\",\"send\": \"code\"}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -427,8 +427,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"client_id": @"{yourClientId}",
@@ -456,7 +456,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/passwordless/start",
@@ -479,8 +479,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"connection\": \"sms\", \"phone_number\": \"{userPhoneNumber}\",\"send\": \"code\"}"
@@ -491,7 +491,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -504,8 +504,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"connection\": \"sms\", \"phone_number\": \"{userPhoneNumber}\",\"send\": \"code\"}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = [
@@ -538,13 +538,13 @@ dataTask.resume()
 **Authentifier un utilisateur SMS**
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/json' \
 --data '{"grant_type": "http://auth0.com/oauth/grant-type/passwordless/otp", "client_id": "{yourClientId}", "client_secret": "YOUR_CLIENT_SECRET", "username": "USER_PHONE_NUMBER", "otp": "code", "realm": "sms", "audience": "your-api-audience","scope": "openid profile email"}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -552,7 +552,7 @@ request.AddParameter("application/json", "{\"grant_type\": \"http://auth0.com/oa
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -571,15 +571,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/json")
 .body("{\"grant_type\": \"http://auth0.com/oauth/grant-type/passwordless/otp\", \"client_id\": \"{yourClientId}\", \"client_secret\": \"YOUR_CLIENT_SECRET\", \"username\": \"USER_PHONE_NUMBER\", \"otp\": \"code\", \"realm\": \"sms\", \"audience\": \"your-api-audience\",\"scope\": \"openid profile email\"}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -601,8 +601,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"grant_type": @"http://auth0.com/oauth/grant-type/passwordless/otp",
@@ -633,7 +633,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -656,8 +656,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"grant_type\": \"http://auth0.com/oauth/grant-type/passwordless/otp\", \"client_id\": \"{yourClientId}\", \"client_secret\": \"YOUR_CLIENT_SECRET\", \"username\": \"USER_PHONE_NUMBER\", \"otp\": \"code\", \"realm\": \"sms\", \"audience\": \"your-api-audience\",\"scope\": \"openid profile email\"}"
@@ -668,7 +668,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -681,8 +681,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"grant_type\": \"http://auth0.com/oauth/grant-type/passwordless/otp\", \"client_id\": \"{yourClientId}\", \"client_secret\": \"YOUR_CLIENT_SECRET\", \"username\": \"USER_PHONE_NUMBER\", \"otp\": \"code\", \"realm\": \"sms\", \"audience\": \"your-api-audience\",\"scope\": \"openid profile email\"}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = [
@@ -718,13 +718,13 @@ dataTask.resume()
 **Authentifier un utilisateur de messagerie**
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/json' \
 --data '{"grant_type": "http://auth0.com/oauth/grant-type/passwordless/otp", "client_id": "{yourClientId}", "client_secret": "{yourClientSecret}", "username": "{userPhoneNumber}", "otp": "code", "realm": "email", "audience": "your-api-audience", "scope": "openid profile email"}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -732,7 +732,7 @@ request.AddParameter("application/json", "{\"grant_type\": \"http://auth0.com/oa
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -751,15 +751,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/json")
 .body("{\"grant_type\": \"http://auth0.com/oauth/grant-type/passwordless/otp\", \"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"username\": \"{userPhoneNumber}\", \"otp\": \"code\", \"realm\": \"email\", \"audience\": \"your-api-audience\", \"scope\": \"openid profile email\"}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -781,8 +781,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"grant_type": @"http://auth0.com/oauth/grant-type/passwordless/otp",
@@ -813,7 +813,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -836,8 +836,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"grant_type\": \"http://auth0.com/oauth/grant-type/passwordless/otp\", \"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"username\": \"{userPhoneNumber}\", \"otp\": \"code\", \"realm\": \"email\", \"audience\": \"your-api-audience\", \"scope\": \"openid profile email\"}"
@@ -848,7 +848,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -861,8 +861,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"grant_type\": \"http://auth0.com/oauth/grant-type/passwordless/otp\", \"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"username\": \"{userPhoneNumber}\", \"otp\": \"code\", \"realm\": \"email\", \"audience\": \"your-api-audience\", \"scope\": \"openid profile email\"}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = [

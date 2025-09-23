@@ -1,13 +1,13 @@
 ---
 title: "Refuser l’accès d’un utilisateur à une API à l’aide de règles"
 permalink: "deny-api-access"
+'description': "Apprenez à utiliser Authorization Extension d’Auth0 pour refuser aux utilisateurs l’accès à une API à l’aide de règles."
 'og:title': "Refuser l’accès d’un utilisateur à une API à l’aide de règles"
 'og:description': "Apprenez à utiliser Authorization Extension d’Auth0 pour refuser aux utilisateurs l’accès à une API à l’aide de règles."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Refuser l’accès d’un utilisateur à une API à l’aide de règles"
 'twitter:description': "Apprenez à utiliser Authorization Extension d’Auth0 pour refuser aux utilisateurs l’accès à une API à l’aide de règles."
 ---
-# Refuser l’accès d’un utilisateur à une API à l’aide de règles
 
 <Note>
 
@@ -17,7 +17,7 @@ permalink: "deny-api-access"
 
 Allez dans [Dashboard (Tableau de bord) > Auth0 Pipeline (Pipeline Auth0) > Rules (Règles)](https://manage.auth0.com/#/rules). Vous pouvez définir des [Règles](/docs/fr-ca/customize/rules) pour un certain nombre d’objectifs différents, de la gestion des utilisateurs à l’enrichissement de leurs profils. Si vous devez refuser à un utilisateur l’accès à votre API, vous pouvez créer des Rôles avec des permissions assignées, puis créer une règle pour supprimer les permissions du Jeton d’accès :
 
-```json
+```javascript lines
 {
 function (user, context, callback) {
   var permissions = user.permissions || [];

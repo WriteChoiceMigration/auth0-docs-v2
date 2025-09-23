@@ -1,13 +1,13 @@
 ---
 title: "Trousse SDK Guardian.swift pour iOS"
 permalink: "guardian-for-ios-sdk"
+'description': "Cette section explique comment installer et configurer les options de la trousse SDK Guardian.swift pour iOS."
 'og:title': "Trousse SDK Guardian.swift pour iOS"
 'og:description': "Cette section explique comment installer et configurer les options de la trousse SDK Guardian.swift pour iOS."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Trousse SDK Guardian.swift pour iOS"
 'twitter:description': "Cette section explique comment installer et configurer les options de la trousse SDK Guardian.swift pour iOS."
 ---
-# Trousse SDK Guardian.swift pour iOS
 
 [Guardian.swift](https://github.com/auth0/Guardian.swift) vous permet d’intégrer le service multifacteur Guardian d‘Auth0 dans votre propre application iOS, en le transformant en deuxième facteur. Vos utilisateurs bénéficieront de tous les avantages de notre authentification multifacteur (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>) en toute simplicité à partir de votre application. Pour en savoir plus, consultez [Premiers pas avec le service de notification poussée d’Apple](https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-push-notifications-for-mfa#configure-push-notifications-for-apple-using-apn-).
 
@@ -22,7 +22,7 @@ permalink: "guardian-for-ios-sdk"
 
 Guardian.swift est disponible sur [CocoaPods](http://cocoapods.org). Pour l’installer, ajoutez la ligne suivante à votre podfile :
 
-```
+``` lines
 pod 'Guardian', '~> 1.1.0'
 ```
 
@@ -30,7 +30,7 @@ pod 'Guardian', '~> 1.1.0'
 
 Ajoutez cette ligne à votre cartfile :
 
-```
+``` lines
 github "auth0/Guardian.swift" ~> 1.1.0
 ```
 
@@ -44,13 +44,13 @@ github "auth0/Guardian.swift" ~> 1.1.0
 
 `Guardian` est au cœur de la trousse SDK. Pour utiliser la trousse SDK, importez la bibliothèque :
 
-```
+```swift lines
 import Guardian
 ```
 
 Définissez le domaine pour votre locataire. Vous pouvez aussi utiliser le domaine personnalisé si vous en avez configuré un pour votre locataire.
 
-```
+```swift lines
 let domain = "<tenant>.<region>.auth0.com"
 ```
 
@@ -84,7 +84,7 @@ Vous avez besoin des informations suivantes en plus de votre domaine de locatair
 
 Vous pourrez ensuite inscrire votre appareil :
 
-```
+```swift lines
 Guardian
         .enroll(forDomain: "{yourTenantDomain}",
                 usingUri: "{enrollmentUri}",
@@ -108,13 +108,13 @@ Vous obtiendrez ensuite les informations d’inscription, qui devraient être st
 
 Guardian.swift fournit une classe de commodité pour générer une clé de connexion :
 
-```
+```swift lines
 let signingKey = try DataRSAPrivateKey.new()
 ```
 
 Cette clé n’existe qu’en mémoire, mais vous pouvez obtenir sa représentation `Data` et la stocker en toute sécurité, par exemple dans une SQLiteDB chiffrée.
 
-```javascript
+```swift lines
 // Store data
 let data = signingKey.data
 // perform the storage
@@ -125,19 +125,19 @@ let loadedKey = try DataRSAPrivateKey(data: data)
 
 Si vous voulez simplement la stocker dans le trousseau d’iOS :
 
-```
+```swift lines
 let signingKey = try KeychainRSAPrivateKey.new(with: "com.myapp.mytag")
 ```
 
 Dans l’exemple ci-dessus, une clé est créée et stockée automatiquement sous la balise fournie. Si vous souhaitez la récupérer, vous pouvez utiliser la balise :
 
-```
+```swift lines
 let signingKey = try KeychainRSAPrivateKey(tag: "com.myapp.mytag")
 ```
 
 Quant à la clé de vérification, vous pouvez l’obtenir à partir de n’importe quelle `SigningKey`. Par exemple :
 
-```
+```swift lines
 let verificationKey = try signingKey.verificationKey()
 ```
 
@@ -145,7 +145,7 @@ let verificationKey = try signingKey.verificationKey()
 
 Une fois l’inscription configurée, vous recevrez une notification poussée chaque fois que l’utilisateur devra valider son identité avec l’authentification multifacteur. Guardian fournit une méthode pour analyser les données reçues des noms de point d’accès et renvoyer une instance de `notification` prête à l’emploi.
 
-```
+```swift lines
 if let notification = Guardian.notification(from: notificationPayload) {
     // we have received a Guardian push notification
 }
@@ -155,7 +155,7 @@ Une fois que vous avez l’instance de notification, vous pouvez facilement auto
 
 Lorsque vous disposez de ces informations, le paramètre `device` met en œuvre le protocole `AuthenticatedDevice` :
 
-```
+```swift lines
 struct Authenticator: Guardian.AuthenticationDevice {
     let signingKey: SigningKey
     let localIdentifier: String
@@ -164,7 +164,7 @@ struct Authenticator: Guardian.AuthenticationDevice {
 
 L’identifiant local est celui de l’appareil, se trouvant par défaut dans l’inscription `UIDevice.current.identifierForVendor`. Il ne vous reste plus qu’à faire l’appel suivant :
 
-```
+```swift lines
 Guardian
         .authentication(forDomain: "{yourTenantDomain}", device: device)
         .allow(notification: notification)
@@ -182,7 +182,7 @@ Guardian
 
 Pour refuser une demande d’authentification, appelez `reject`. Vous pouvez également envoyer un motif de rejet (facultatif). Celui-ci apparaîtra dans les journaux de Guardian.
 
-```
+```swift lines
 Guardian
         .authentication(forDomain: "{yourTenantDomain}", device: device)
         .reject(notification: notification)
@@ -201,7 +201,7 @@ Guardian
 
 Si vous souhaitez supprimer une inscription, par exemple si vous voulez désactiver l’authentification multifacteur, vous pouvez effectuer la demande suivante :
 
-```
+```swift lines
 Guardian
         .api(forDomain: "{yourTenantDomain}")
         .device(forEnrollmentId: "{userEnrollmentId}", token: "{enrollmentDeviceToken}")
@@ -230,7 +230,7 @@ Vous pouvez connecter une ressource à partir du Auth0 Dashboard ou de la trouss
 
 1. Accédez à l’invite de connexion Auth0 et copiez le code fourni ou une clé base32 similaire provenant d’une autre source. À l’étape suivante, vous saisirez ce code dans une application d’authentification.
 
-   <Frame>![An example login prompt displaying a one-time code](//images.ctfassets.net/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/6fabccc27455fbc5251928812e12475c/OTP_Challenge_2_-_French.png)</Frame>
+   <Frame>![An example login prompt displaying a one-time code](/images/fr-ca/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/6fabccc27455fbc5251928812e12475c/OTP_Challenge_2_-_French.png)</Frame>
 
 2. Ajoutez le code que vous avez copié à une application d’authentification, telle que Guardian.
 
@@ -238,7 +238,7 @@ Vous pouvez connecter une ressource à partir du Auth0 Dashboard ou de la trouss
 
 1. Importez la bibliothèque de Guardian.
 
-   ```
+   ```swift lines
    import Guardian
    ```
 
@@ -247,7 +247,7 @@ Vous pouvez connecter une ressource à partir du Auth0 Dashboard ou de la trouss
    
 2. Créez un générateur de code.
 
-   ```
+   ``` lines
    let codeGenerator = try Guardian.totp(
 
       base32Secret: enrollmentCode,  // Enrollment code entered by user
@@ -262,7 +262,7 @@ Vous pouvez connecter une ressource à partir du Auth0 Dashboard ou de la trouss
    
 3. Récupérez le code généré.
 
-   ```
+   ``` lines
    codeGenerator.code()
    ```
 
@@ -274,7 +274,7 @@ Vous pouvez connecter une ressource à partir du Auth0 Dashboard ou de la trouss
 
 Dans l’invite de connexion Auth0, saisissez le code que vous avez généré à l’étape précédente.
 
-<Frame>![An example login prompt displaying a one-time code](//images.ctfassets.net/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/6fabccc27455fbc5251928812e12475c/OTP_Challenge_2_-_French.png)</Frame>
+<Frame>![An example login prompt displaying a one-time code](/images/fr-ca/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/6fabccc27455fbc5251928812e12475c/OTP_Challenge_2_-_French.png)</Frame>
 
 En sélectionnant Continue (Continuer), un message s’affiche indiquant que votre application a été ajoutée en tant que facteur d’authentification pour votre utilisateur.
 
@@ -282,9 +282,9 @@ En sélectionnant Continue (Continuer), un message s’affiche indiquant que vot
 
 Une fois le facteur inscrit, votre utilisateur peut se connecter à l’aide de votre application. Tout d’abord, choisissez l’application Guardian comme méthode d’authentification.
 
-<Frame>![The authentication method selection screen](//images.ctfassets.net/cdy7uua7fh8z/1k7IsU9kfP5mrXU2jfGHuT/452742661982cf772868f02040dd682b/MFA_-_Begin_Enrollment.png)</Frame>
+<Frame>![The authentication method selection screen](/images/fr-ca/cdy7uua7fh8z/1k7IsU9kfP5mrXU2jfGHuT/452742661982cf772868f02040dd682b/MFA_-_Begin_Enrollment.png)</Frame>
 
 Saisissez ensuite le code à usage unique dans l’invite de connexion pour vérifier votre identité.
 
-<Frame>![The Verify Your Identity screen prompting the user for a one-time code](//images.ctfassets.net/cdy7uua7fh8z/S6uTieLjtuNUrQRMh8uch/143543634427803da8af2f0b7fb4c88d/OTP_Challenge_-_French.png)</Frame>
+<Frame>![The Verify Your Identity screen prompting the user for a one-time code](/images/fr-ca/cdy7uua7fh8z/S6uTieLjtuNUrQRMh8uch/143543634427803da8af2f0b7fb4c88d/OTP_Challenge_-_French.png)</Frame>
 

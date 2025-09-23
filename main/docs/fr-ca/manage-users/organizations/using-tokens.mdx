@@ -1,13 +1,13 @@
 ---
 title: "Travailler avec des jetons et Organizations"
 permalink: "using-tokens"
+'description': "Découvrez comment les jetons fonctionnent avec la fonctionnalité Organizations d’Auth0 et comment authentifier les utilisateurs appartenant à une organization."
 'og:title': "Travailler avec des jetons et Organizations"
 'og:description': "Découvrez comment les jetons fonctionnent avec la fonctionnalité Organizations d’Auth0 et comment authentifier les utilisateurs appartenant à une organization."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Travailler avec des jetons et Organizations"
 'twitter:description': "Découvrez comment les jetons fonctionnent avec la fonctionnalité Organizations d’Auth0 et comment authentifier les utilisateurs appartenant à une organization."
 ---
-# Travailler avec des jetons et Organizations
 
 <Card title="La disponibilité varie selon le plan Auth0">
 
@@ -30,7 +30,7 @@ Pour authentifier un utilisateur par l’intermédiaire d’une organization, un
 
 <Note>
 
-Par défaut, les jetons d’accessibilité et d’ID n’incluent que des ID d’organisation. Cependant, vous pouvez configurer votre locataire pour permettre l’utilisation de noms d’organisation dans la Authentication API. Lorsqu’ils sont configurés, les jetons d’accès et d’ID contiennent tous deux les demandes `org_id` et `org_name`. Pour en savoir plus, consultez [Utiliser des noms d’organisation dans la Authentication API](/docs/manage-users/organizations/configure-organizations/use-org-name-authentication-api).
+Par défaut, les jetons d’accessibilité et d’ID n’incluent que des ID d’organisation. Cependant, vous pouvez configurer votre locataire pour permettre l’utilisation de noms d’organisation dans la Authentication API. Lorsqu’ils sont configurés, les jetons d’accès et d’ID contiennent tous deux les demandes `org_id` et `org_name`. Pour en savoir plus, consultez [Utiliser des noms d’organisation dans la Authentication API](/docs/fr-ca/manage-users/organizations/configure-organizations/use-org-name-authentication-api).
 
 </Note>
 
@@ -38,7 +38,7 @@ Par défaut, les jetons d’accessibilité et d’ID n’incluent que des ID d�
 
 Dans l’exemple suivant, notez que `https://marketplace/roles` et `https://namespace.exampleco.com/` sont des demandes personnalisées qui ont été ajoutées au jeton, tandis que les autres demandes incluses sont standard.
 
-```json
+```json lines
 {
   "https://marketplace/roles": [
     "marketplace-administrator"
@@ -57,7 +57,7 @@ Dans l’exemple suivant, notez que `https://marketplace/roles` et `https://name
 
 ### Jeton d’accès
 
-```json
+```json lines
 {
   "iss": "https://exampleco.auth0.com/",
   "sub": "auth0|602c0dcab993d10073daf680",
@@ -84,13 +84,13 @@ Dans les cas de communication entre machines, un paramètre `organization` est a
 
 <Note>
 
-Par défaut, les jetons d’accessibilité et d’ID n’incluent que des ID d’organisation. Cependant, vous pouvez configurer votre locataire pour permettre l’utilisation de noms d’organisation dans la Authentication API. Lorsqu’ils sont configurés, les jetons d’accès et d’ID contiennent tous deux les demandes `org_id` et `org_name`. Pour en savoir plus, consultez [Utiliser les noms d’Organisation dans Authentication API](/docs/manage-users/organizations/configure-organizations/use-org-name-authentication-api).
+Par défaut, les jetons d’accessibilité et d’ID n’incluent que des ID d’organisation. Cependant, vous pouvez configurer votre locataire pour permettre l’utilisation de noms d’organisation dans la Authentication API. Lorsqu’ils sont configurés, les jetons d’accès et d’ID contiennent tous deux les demandes `org_id` et `org_name`. Pour en savoir plus, consultez [Utiliser les noms d’Organisation dans Authentication API](/docs/fr-ca/manage-users/organizations/configure-organizations/use-org-name-authentication-api).
 
 </Note>
 
 L’exemple de code suivant est un exemple de jeton d’accès renvoyé dans les cas d’une communication entre machines.
 
-```json
+```json lines
 {
   "iss": "https://exampleco.auth0.com/",
   "sub": "CS2MNgcX1VZFCJaEzfKw2VPAAS0gzhqP@clients",
@@ -113,7 +113,7 @@ Lorsque le paramètre `organization` est ajouté à un appel au point de termina
 
 Si vous avez configuré votre locataire pour permettre l’utilisation de noms d’organisation dans la Authentication API, les jetons d’accès et d’ID contiennent tous les deux les demandes `org_id` et `org_name`. S’il existe, validez la demande `org_name` et `org_id` pour vous assurer que les valeurs reçues correspondent à une entité de confiance.
 
-En général, utiliser des ID d’organisation est une méthode préférable pour la validation des jetons. Cependant, les noms d’organisation peuvent être utilisés s’ils sont plus appropriés pour le cas d’utilisation. Pour comprendre les implications potentielles d’utiliser des noms d’organisation pour valider des jetons, consultez [Utiliser des noms d’organisation dans la Authentication API](/docs/manage-users/organizations/configure-organizations/use-org-name-authentication-api).
+En général, utiliser des ID d’organisation est une méthode préférable pour la validation des jetons. Cependant, les noms d’organisation peuvent être utilisés s’ils sont plus appropriés pour le cas d’utilisation. Pour comprendre les implications potentielles d’utiliser des noms d’organisation pour valider des jetons, consultez [Utiliser des noms d’organisation dans la Authentication API](/docs/fr-ca/manage-users/organizations/configure-organizations/use-org-name-authentication-api).
 
 </Note>
 

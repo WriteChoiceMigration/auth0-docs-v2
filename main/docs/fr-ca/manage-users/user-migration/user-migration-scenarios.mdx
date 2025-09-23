@@ -1,13 +1,13 @@
 ---
 title: "Scénarios de migration des utilisateurs"
 permalink: "user-migration-scenarios"
+'description': "Les scénarios de migration d’utilisateurs à partir de diverses plateformes utilisent plusieurs méthodes."
 'og:title': "Scénarios de migration des utilisateurs"
 'og:description': "Les scénarios de migration d’utilisateurs à partir de diverses plateformes utilisent plusieurs méthodes."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Scénarios de migration des utilisateurs"
 'twitter:description': "Les scénarios de migration d’utilisateurs à partir de diverses plateformes utilisent plusieurs méthodes."
 ---
-# Scénarios de migration des utilisateurs
 
 Voici quelques exemples de scénarios de migration d’utilisateurs de Gigya, Okta et Stormpath vers Auth0. Chacun de ces scénarios suppose que vous avez des comptes sur ces plateformes.
 
@@ -23,12 +23,12 @@ Configurez la [connexion à la base de données personnalisée](/docs/fr-ca/auth
 1. Exportez les utilisateurs de Gigya : Utilisez [Gigya’s IdentitySync](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/2b717202e42a4165aa7f75f7eecab64f.html) pour transformer et exporter les données des utilisateurs afin qu’elles correspondent à un schéma cible. Pour en savoir plus sur ce processus, voir [Gigya IdentitySync : Utiliser IdentitySync](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/2b717202e42a4165aa7f75f7eecab64f.html?locale=en-US).
 
    Suivez les instructions pour transformer les données utilisateur de votre base de données Gigya dans le [schéma](/docs/fr-ca/manage-users/user-migration/bulk-user-import-database-schema-and-examples) correct et exporter les données transformées au format JSON.
-2. Importez vos utilisateurs Gigya dans Auth0 : Vous pouvez importer des utilisateurs avec [l’extension Importation/Exportation des utilisateurs](/docs/fr-ca/manage-users/user-migration/user-import-export-extension) ou [Management API](/docs/api/management/v2).
+2. Importez vos utilisateurs Gigya dans Auth0 : Vous pouvez importer des utilisateurs avec [l’extension Importation/Exportation des utilisateurs](/docs/fr-ca/manage-users/user-migration/user-import-export-extension) ou [Management API](/docs/fr-ca/api/management/v2).
 
    * **L’extension Importation/Exportation des utilisateurs** : Allez sur [Auth0 Dashboard > Extensions](https://manage.auth0.com/#/extensions), sélectionnez l’extension **Importation/Exportation des utilisateurs** et installez-la. Une fois l’extension installée, vous pouvez cliquer dessus pour ouvrir une interface d’importation/exportation.
 
      Glissez votre fichier JSON d’utilisateurs Gigya exportés dans la zone de téléchargement désignée, et sélectionnez la base de données que vous avez créée précédemment. Sélectionnez **Commencer à importer des utilisateurs** pour commencer votre importation. Pour en savoir plus, voir [l’extension Importation/Exportation des utilisateurs](/docs/fr-ca/manage-users/user-migration/user-import-export-extension).
-   * **Management API** : Pour importer vos utilisateurs dans Auth0, [créez une tâche](/docs/api/management/v2#!/Jobs/post_users_imports). Pour des instructions détaillées, lisez [Importations d’utilisateurs en lot](/docs/fr-ca/manage-users/user-migration/bulk-user-imports).
+   * **Management API** : Pour importer vos utilisateurs dans Auth0, [créez une tâche](/docs/fr-ca/api/management/v2#!/Jobs/post_users_imports). Pour des instructions détaillées, lisez [Importations d’utilisateurs en lot](/docs/fr-ca/manage-users/user-migration/bulk-user-imports).
 
 ## Scénario 2 : Migrer les utilisateurs d’Okta vers Auth0
 
@@ -38,7 +38,7 @@ Configurez la [connexion à la base de données personnalisée](/docs/fr-ca/auth
 
    Dans la vue **Base de données personnalisée** de votre connexion à la base de données, localisez **Scripts d’action de base de données** et sélectionnez **Connexion**.
 
-   ```javascript
+   ```javascript lines
    function login (email, password, callback) {
      // Replace {yourOktaDomain} with your own Okta domain
      var url = 'https:/{yourOktaDomain}/api/v1/authn';
@@ -94,7 +94,7 @@ Configurez la [connexion à la base de données personnalisée](/docs/fr-ca/auth
 
    Dans la vue **Base de données personnalisée** de votre connexion à la base de données, localisez **Scripts d’action de base de données** et sélectionnez **Obtenir l’utilisateur**.
 
-   ```javascript
+   ```javascript lines
    function getByEmail(email, callback) {
      // Replace {yourOktaDomain} with your own Okta domain
      var url = 'https://{yourOktaDomain}/api/v1/users/' + encodeURIComponent(email);
@@ -143,7 +143,7 @@ Configurez la [connexion à la base de données personnalisée](/docs/fr-ca/auth
 
    Si l’authentification est réussie, la réponse de Stormpath inclura l’URL du compte de l’utilisateur. Effectuez une seconde requête à l’URL du compte pour récupérer les informations de l’utilisateur. Vous pouvez alors extraire les informations de l’utilisateur et les transmettre à Auth0 dans la fonction de rappel.
 
-   ```javascript
+   ```javascript lines
    function login(username, password, callback) {
      // Replace the {yourStormpathClientId} attribute with your Stormpath ID
      var url = 'https://api.stormpath.com/v1/applications/{yourStormpathClientId}/loginAttempts';
@@ -219,7 +219,7 @@ Configurez la [connexion à la base de données personnalisée](/docs/fr-ca/auth
 4. Créez le script [Obtenir l’utilisateur](/docs/fr-ca/authenticate/database-connections/custom-db/templates/get-user) : Le script **Obtenir l’utilisateur** est exécuté lorsque l’utilisateur tente de réinitialiser son mot de passe mais que son compte n’est pas trouvé dans la base de données Auth0. Vous devrez créer un script qui appellera le point de terminaison `/accounts` de l’API de Stormpath, en utilisant le courriel de l’utilisateur comme paramètre `email`.
    En cas de succès, Stormpath renverra les informations associées à l’utilisateur. Vous pouvez extraire les informations de l’utilisateur et les transmettre à Auth0 dans la fonction de rappel.
 
-   ```javascript
+   ```javascript lines
    function getByEmail(email, callback) {
      // Replace the {yourStormpathClientId} attribute with your Stormpath ID
      var url = 'https://api.stormpath.com/v1/applications/{yourStormpathClientId}/accounts';

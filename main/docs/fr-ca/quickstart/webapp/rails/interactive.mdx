@@ -1,17 +1,19 @@
 ---
 title: "Ajouter une connexion à votre application Ruby on Rails"
 permalink: "interactive"
+'description': "Ce tutoriel explique comment ajouter la connexion utilisateur à une application Ruby on Rails."
 'og:title': "Ajouter une connexion à votre application Ruby on Rails"
 'og:description': "Ce tutoriel explique comment ajouter la connexion utilisateur à une application Ruby on Rails."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/rails.png"
 'twitter:title': "Ajouter une connexion à votre application Ruby on Rails"
 'twitter:description': "Ce tutoriel explique comment ajouter la connexion utilisateur à une application Ruby on Rails."
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -27,7 +29,7 @@ permalink: "interactive"
 
 [View on Github](https://github.com/auth0-samples/auth0-rubyonrails-sample/tree/master/sample) Log In & Download Sample
 
-1. [Docs](/docs/fr-ca)
+1. [Docs](/docs/fr-ca/fr-ca)
 3. [Quickstarts](/docs/fr-ca/quickstarts)
 5. [Regular Web App](/docs/fr-ca/quickstart/webapp)
 7. [Ruby On Rails](/docs/fr-ca/quickstart/webapp/rails/interactive)
@@ -88,7 +90,7 @@ Utilisez `omniauth-auth0`, une [stratégie OmniAuth](https://github.com/intridea
 
 Ajoutez les dépendances suivantes à votre `Gemfile` :
 
-```
+```ruby lines
 gem 'omniauth-auth0', '~> 3.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0' # prevents forged authentication requests
 ```
@@ -147,7 +149,7 @@ Pour [prévenir les requêtes d’authentification falsifiées](https://github.c
 
 </Warning>
 
-```
+```ruby lines
 <!-- Place a login button anywhere on your application -->
 <%= button_to 'Login', '/auth/auth0', method: :post %>
 ```
@@ -170,7 +172,7 @@ Pour tester cela après l’étape précédente, vous devez peut-être effacer v
 
 </Note>
 
-```
+```ruby lines
 <!-- Place a logout button anywhere on your application -->
 <%= button_to 'Logout', 'auth/logout', method: :get %>
 ```
@@ -189,7 +191,7 @@ Pour afficher le profil utilisateur, votre application doit fournir une route pr
 
 Une fois que vous avez une préoccupation, incluez-la dans tout contrôleur qui nécessite un utilisateur connecté. Vous pouvez ensuite accéder à l’utilisateur à partir de la session `session[:userinfo]` comme dans l’exemple suivant :
 
-```
+```ruby lines
 class DashboardController < ApplicationController
 include Secured
 def show
@@ -201,7 +203,7 @@ end
 
 Une fois que l’utilisateur a chargé la session, utilisez-la pour afficher des informations dans votre système frontal :
 
-```
+```xml lines
 <div>
 <p>Normalized User Profile:<%= JSON.pretty_generate(@user[:info])%></p>
 <p>Full User Profile:<%= JSON.pretty_generate(@user[:extra][:raw_info])%></p>
@@ -232,7 +234,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/webapp/rails/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

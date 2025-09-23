@@ -1,17 +1,19 @@
 ---
 title: "Android – Connexion Facebook"
 permalink: "interactive"
+'description': "Ce tutoriel explique comment ajouter la connexion utilisateur à une application Android à l’aide de la méthode native Connexion Facebook."
 'og:title': "Android – Connexion Facebook"
 'og:description': "Ce tutoriel explique comment ajouter la connexion utilisateur à une application Android à l’aide de la méthode native Connexion Facebook."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/android.png"
 'twitter:title': "Android – Connexion Facebook"
 'twitter:description': "Ce tutoriel explique comment ajouter la connexion utilisateur à une application Android à l’aide de la méthode native Connexion Facebook."
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -126,7 +128,7 @@ Maintenant que les artefacts requis ont été obtenus, vous êtes prêt à les �
 2. Copiez les valeurs **Domaine** et **Identifiant client** de la page des paramètres de l’application. Ces valeurs sont requises par la trousse SDK.
 3. Créez deux nouvelles ressources dans le fichier strings.xml de votre application Android pour les stocker. Les noms des clés doivent correspondre à ceux utilisés ci-dessous :
 
-   ```
+   ``` lines
    <resources>
 
        <string name="com_auth0_domain">{yourDomain}</string>
@@ -144,7 +146,7 @@ Maintenant que les artefacts requis ont été obtenus, vous êtes prêt à les �
 
 Dans votre application Android, ajoutez cette ligne au fichier app/build.gradle :
 
-```
+``` lines
 dependencies {
 implementation 'com.auth0.android:auth0:1.+'
 }
@@ -156,7 +158,7 @@ Il est maintenant temps d’exécuter la tâche Gradle Sync pour actualiser le p
 
 Si votre application ne prévoit pas d’utiliser le module d’authentification Web fourni par la trousse SDK, vous devrez supprimer l’activité inutilisée du fichier AndroidManifest.xml pour éviter les problèmes liés au placeholder du manifeste. Pour ce faire, il suffit d’ajouter une déclaration d’activité et de l’annoter avec tools:node="remove".
 
-```
+``` lines
 <application>
 <!-- Add the activity declaration line below -->
 <activity
@@ -173,7 +175,7 @@ Toutefois, si vous envisagez de prendre en charge l’authentification Web, rend
 
 Vous devez instancier la trousse SDK avant de l’utiliser. Définissez un champ au niveau de la classe et initialisez-le dans la méthode `onCreate`. Remarque : Les identifiants définis à l’étape précédente sont transmis au développeur `Auth0` et une nouvelle instance de `AuthenticationAPIClient` est créée avec lui.
 
-```
+``` lines
 private AuthenticationAPIClient auth0Client;
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -229,7 +231,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/native/android-facebook-login/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

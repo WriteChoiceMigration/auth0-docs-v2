@@ -1,13 +1,13 @@
 ---
 title: "Règles d’utilisation avec Authorization Extension"
 permalink: "use-rules-with-the-authorization-extension"
+'description': "Décrit comment utiliser les informations de Authorization Extension dans les règles."
 'og:title': "Règles d’utilisation avec Authorization Extension"
 'og:description': "Décrit comment utiliser les informations de Authorization Extension dans les règles."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Règles d’utilisation avec Authorization Extension"
 'twitter:description': "Décrit comment utiliser les informations de Authorization Extension dans les règles."
 ---
-# Règles d’utilisation avec Authorization Extension
 
 <Note>
 
@@ -41,7 +41,7 @@ Pour en savoir plus, lisez [Créer des demandes personnalisées](/docs/fr-ca/sec
 
 Vous devez limiter le nombre de demandes que vous ajoutez au jeton.
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   var namespace = 'http://yourdomain/claims/'; // You can set your own namespace, but do not use an Auth0 domain
 
@@ -81,7 +81,7 @@ Maintenant que chaque application a un rôle qui lui est associé, vous pouvez c
 2. Ajoutez cette règle et assurez-vous qu’elle figure après la règle « auth0-authorization-extension » générée.
 3. Après avoir défini `required_roles`, créez une nouvelle [règle](https://manage.auth0.com/#/rules) avec le corps suivant :
 
-   ```javascript
+   ```javascript lines
    function (user, context, callback) {
      context.clientMetadata = context.clientMetadata || {};
      if (context.clientMetadata.required_roles && context.clientMetadata.required_roles.length){

@@ -1,13 +1,13 @@
 ---
 title: "Tutoriel AWS API Gateway - Étape 4"
 permalink: "aws-api-gateway-delegation-4"
+'description': "Étape 4 du tutoriel Amazon API Gateway"
 'og:title': "Tutoriel AWS API Gateway - Étape 4"
 'og:description': "Étape 4 du tutoriel Amazon API Gateway"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Tutoriel AWS API Gateway - Étape 4"
 'twitter:description': "Étape 4 du tutoriel Amazon API Gateway"
 ---
-# Tutoriel AWS API Gateway - Étape 4
 
 <Warning>
 
@@ -39,11 +39,11 @@ En utilisant la [Console de passerelle Amazon API](https://console.aws.amazon.co
 
 Cliquez sur **Actions** et **Créer une ressource**. Nommez la nouvelle ressource enfant `Purchase`. Cliquez sur **Créer une ressource**.
 
-Ajoutez une méthode OPTIONS pour la ressource `purchase`, comme indiqué précédemment pour les `pets` dans la [Section Configurer CORS et déployer l’API de l’étape 2 - Sécuriser et déployer la passerelle API Amazon](/docs/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-2#set-up-cors-and-deploy-the-api).
+Ajoutez une méthode OPTIONS pour la ressource `purchase`, comme indiqué précédemment pour les `pets` dans la [Section Configurer CORS et déployer l’API de l’étape 2 - Sécuriser et déployer la passerelle API Amazon](/docs/fr-ca/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-2#set-up-cors-and-deploy-the-api).
 
 Créez une nouvelle fonction AWS Lambda pour l’achat d’un animal de compagnie appelé `PetPurchase`, ce qui ajoute les attributs `isSold` et `soldTo` à un animal de compagnie comme suit :
 
-```javascript
+```javascript lines
 var AWS = require('aws-sdk');
 var DOC = require('dynamodb-doc');
 var dynamo = new DOC.DynamoDB();
@@ -99,11 +99,11 @@ exports.handler = function(event, context) {
 };
 ```
 
-Une fois que vous avez défini la fonction Lambda, [ajouter une méthode POST à la ressource `purchase`](/docs/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-1#method-post-pet-information) qui appelle le `PetPurchase` Lambda Assurez-vous d’ajouter également l’en-tête `Access-Control-Allow-Origin` avec une valeur de `*` à la méthode POST en utilisant la configuration de réponse de la méthode/réponse d’intégration que l’on trouve dans la [Section Configurer CORS et déployer l’API de l’étape 2 - Sécuriser et déployer la passerelle API Amazon](/docs/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-2#set-up-cors-and-deploy-the-api).
+Une fois que vous avez défini la fonction Lambda, [ajouter une méthode POST à la ressource `purchase`](/docs/fr-ca/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-1#method-post-pet-information) qui appelle le `PetPurchase` Lambda Assurez-vous d’ajouter également l’en-tête `Access-Control-Allow-Origin` avec une valeur de `*` à la méthode POST en utilisant la configuration de réponse de la méthode/réponse d’intégration que l’on trouve dans la [Section Configurer CORS et déployer l’API de l’étape 2 - Sécuriser et déployer la passerelle API Amazon](/docs/fr-ca/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-2#set-up-cors-and-deploy-the-api).
 
 Testez la méthode de passerelle API en fournissant les éléments suivants comme message d’entrée :
 
-```json
+```javascript lines
 {
     "petId": 1,
     "userName": "fred flintstone"
@@ -112,7 +112,7 @@ Testez la méthode de passerelle API en fournissant les éléments suivants comm
 
 Dans la réponse du test, vous devriez voir que l’animal de compagnie avec l’ID 1 est maintenant vendu à Fred Flintstone :
 
-```json
+```javascript lines
 [
   {
     "id": 1,
@@ -133,7 +133,7 @@ Pour sécuriser votre API, suivez le même processus que pour ajouter un nouveau
 
 L’ARN de la méthode que vous sécuriserez dans la politique IAM devrait ressembler à ceci :
 
-```
+``` lines
 arn:aws:execute-api:us-east-1:your-accountid:your-api-id/*/pets/purchase
 ```
 
@@ -167,7 +167,7 @@ Accédez à [Auth0 Dashboard > Applications > Applications](https://manage.auth0
 
 ##### Déployer l’API
 
-En utilisant la [Console de passerelle Amazon API](https://console.aws.amazon.com/apigateway), vous allez à nouveau [déployer l’API et générer une nouvelle trousse SDK JavaScript](/docs/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-2#set-up-cors-and-deploy-the-api).
+En utilisant la [Console de passerelle Amazon API](https://console.aws.amazon.com/apigateway), vous allez à nouveau [déployer l’API et générer une nouvelle trousse SDK JavaScript](/docs/fr-ca/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-2#set-up-cors-and-deploy-the-api).
 
 À ce stade, vous avez effectué les modifications de configuration nécessaires pour permettre les achats d’animaux de compagnie. Pour activer cette mise à jour, copiez votre trousse SDK nouvellement téléchargée sur le précédent dans votre dossier `pets`, ainsi que votre bucket Amazon S3.
 
@@ -181,7 +181,7 @@ Dans le fichier `pets/login/login.js`, modifier les valeurs de `role` et de `pri
 
 Pour tester cette fonctionnalité, vous pouvez masquer temporairement la touche Supprimer dans l’interface utilisateur en supprimant `ng-show="isAdmin"` dans `/pets/home/home.html` :
 
-```
+```html lines
 <button ng-show="isAdmin" class="btn delete-btn" ng-click="removePet(pet.id)">remove</button>
 ```
 
@@ -191,7 +191,7 @@ Après avoir transféré les modifications dans votre bucket S3, tentez de suppr
 
 Dans `home.js`, modifiez la fonction `buyPet` pour activer les achats d’animaux de compagnie :
 
-```javascript
+```javascript lines
 function buyPet(user, id) {
     var apigClient = getSecureApiClient();
 
@@ -229,7 +229,7 @@ Vous ajouterez une règle qui vérifiera si le rôle demandé par l’utilisateu
 2. Choisissez le modèle **Règle vide**
 3. Nommez la règle **AWS Pets** (ou quelque chose de similaire), puis remplissez le corps de la règle avec ce qui suit JavaScript code :
 
-   ```javascript
+   ```javascript lines
    function (user, context, callback) {
      if(context.clientID === '{yourClientId}') {
        var socialRoleInfo = {

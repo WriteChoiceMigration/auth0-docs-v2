@@ -1,13 +1,13 @@
 ---
 title: "Déconnexion par canal d’appui OIDC"
 permalink: "back-channel-logout"
+'description': "Décrit la fonction de déconnexion par canal d’appui OIDC d’Auth0."
 'og:title': "Déconnexion par canal d’appui OIDC"
 'og:description': "Décrit la fonction de déconnexion par canal d’appui OIDC d’Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Déconnexion par canal d’appui OIDC"
 'twitter:description': "Décrit la fonction de déconnexion par canal d’appui OIDC d’Auth0."
 ---
-# Déconnexion par canal d’appui OIDC
 
 Auth0 prend en charge la [Spécification 1.0 du canal d’appui OpenID Connect](https://openid.net/specs/openid-connect-backchannel-1_0.html#Backchannel) dans tous les locataires ayant souscrit à un plan Entreprise.
 
@@ -29,7 +29,7 @@ Les applications ne peuvent pas s’appuyer sur les témoins de session pour dé
 
 Lorsque les utilisateurs finaux s’authentifient avec succès auprès d’Auth0 lors de la connexion, le serveur d’autorisation émet des jetons d’accès et d’ID. Des jetons de déconnexion sont générés lorsqu’une session est détruite, par exemple par une action de déconnexion ou par la révocation d’une session. Les jetons d’ID et de déconnexion contiennent les demandes dont votre application a besoin pour faciliter le flux de production de déconnexion du canal d’appui. Pour en savoir plus sur les demandes, consultez [Demandes de jetons Web JSON](/docs/fr-ca/secure/tokens/json-web-tokens/json-web-token-claims).
 
-<Frame>![Workflow for back-channel logout](//images.ctfassets.net/cdy7uua7fh8z/5jQ5HogFNeD9tqUGEJuJHE/663f1f52b285f7019fd1157f5a26caf0/2023-09-29_09-32-00.png)</Frame>
+<Frame>![Workflow for back-channel logout](/images/fr-ca/cdy7uua7fh8z/5jQ5HogFNeD9tqUGEJuJHE/663f1f52b285f7019fd1157f5a26caf0/2023-09-29_09-32-00.png)</Frame>
 
 1. Connexion – Lors de l’authentification de l’utilisateur, le locataire Auth0 ajoute le `sid` au jeton d’ID.
 2. Connexion – L’application conserve l’identifiant de session reçu dans son propre magasin de sessions et l’associe à la session propre à l’application.
@@ -46,7 +46,7 @@ La réponse attendue est `HTTP 200` pour une déconnexion réussie. Si vous rece
 
 L’exemple de cas d’utilisation montre comment la déconnexion par canal d’appui fonctionne avec plusieurs applications :
 
-<Frame>![Back-channel logout multiple app use case](//images.ctfassets.net/cdy7uua7fh8z/54mbNobsvLec0A2tz0DXUG/99ce79c9e93ffe526472d6250373778c/2023-06-20_09-39-12.png)</Frame>
+<Frame>![Back-channel logout multiple app use case](/images/fr-ca/cdy7uua7fh8z/54mbNobsvLec0A2tz0DXUG/99ce79c9e93ffe526472d6250373778c/2023-06-20_09-39-12.png)</Frame>
 
 1. Lors de la configuration de l’application, l’application A enregistre un URI de déconnexion du canal d’appui auprès d’Auth0.
 2. Lors de la configuration de l’application, l’application B enregistre un URI de déconnexion du canal d’appui auprès d’Auth0.
@@ -76,7 +76,7 @@ Votre application doit être en mesure d’analyser et de valider les <Tooltip 
 
 Une fois que votre application valide et décode votre jeton, le contenu est similaire à l’exemple ci-dessous :
 
-```json
+```bash lines
 {
   "iss": "https://artex-dev.eu.auth0.com/",
   "sub": "auth0|602e93db83fa6f00749a23e6",
@@ -112,7 +112,7 @@ Cet exemple utilise une note de session stockée pour les besoins de la démonst
 
 **routes/index.js**
 
-```javascript
+```javascript lines
 const express = require('express');
 const router = express.Router();
 const { requiresAuth } = require('express-openid-connect');
@@ -169,7 +169,7 @@ module.exports = router;
 
 **middlewares/validateLogoutToken.js**
 
-```javascript
+```javascript lines
 // This middleware validates the logout token as defined here:
 // https://openid.net/specs/openid-connect-backchannel-1_0.html#Validation
 
@@ -245,7 +245,7 @@ Une approche courante pour le stockage des jetons consiste à définir un magasi
 
 Chaque fois que l’application a besoin de vérifier son statut d’authentification, elle interroge le magasin de jetons de déconnexion pour savoir si sa session est toujours active. Le magasin de déconnexion efface régulièrement les informations obsolètes pour ne conserver que les informations nécessaires.
 
-<Frame>![Logout Token Store](//images.ctfassets.net/cdy7uua7fh8z/2zTtcie1d0fjiSuxZ4huyV/dbcf45fb68a045bd1b1918315f8025f7/image__21_.png)</Frame>
+<Frame>![Logout Token Store](/images/fr-ca/cdy7uua7fh8z/2zTtcie1d0fjiSuxZ4huyV/dbcf45fb68a045bd1b1918315f8025f7/image__21_.png)</Frame>
 
 ## Considérations relatives à la sécurité
 

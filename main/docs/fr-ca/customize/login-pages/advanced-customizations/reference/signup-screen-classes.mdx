@@ -1,13 +1,13 @@
 ---
 title: "Classes de l’écran d’inscription"
 permalink: "signup-screen-classes"
+'description': "En savoir plus sur les classes de l’écran d’inscription ACUL."
 'og:title': "Classes de l’écran d’inscription"
 'og:description': "En savoir plus sur les classes de l’écran d’inscription ACUL."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Classes de l’écran d’inscription"
 'twitter:description': "En savoir plus sur les classes de l’écran d’inscription ACUL."
 ---
-# Classes de l’écran d’inscription
 
 ## Classe de l’écran d’inscription
 
@@ -19,7 +19,7 @@ La classe de l’écran d’inscription fait partie du flux [Identifier First A
 
 Importer et instancier la classe de l’écran d’inscription
 
-```
+```javascript lines
 import Signup from '@auth0/auth0-acul-js/signup';
 const signupManager = new Signup();
 
@@ -38,7 +38,7 @@ Les propriétés de la classe de l’écran d’inscription sont :
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -73,7 +73,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -85,7 +85,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -104,7 +104,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -112,7 +112,7 @@ interface prompt{
 
 </Tab><Tab title="Écran">
 
-```
+```javascript lines
 interface screen {
  captcha: null | CaptchaContext;
  captchaImage: null | string;
@@ -137,7 +137,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -148,7 +148,7 @@ interface tenant {
 
 </Tab><Tab title="Transaction">
 
-```
+```javascript lines
 interface TransactionMembersOnSignup {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -194,7 +194,7 @@ interface UsernamePolicy {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -214,7 +214,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -250,7 +250,7 @@ Les méthodes de la classe de l’écran d’inscription sont :
 
 Cette méthode redirige l’utilisateur vers la liste de sélection du code pays, où il peut mettre à jour le préfixe du code pays pour son numéro de téléphone.
 
-```
+```javascript lines
 import Signup from "@auth0/auth0-acul-js/signup";
 const signupManager = new Signup();
 
@@ -261,7 +261,7 @@ signupManager.pickCountryCode();
 
 Cette méthode redirige l’utilisateur vers l’étape suivante du flux d’authentification. Selon la configuration du serveur, cet écran peut inclure des entrées pour un ou plusieurs des éléments suivants : courriel, nom d’utilisateur ou numéro de téléphone. Pour plus de détails, veuillez consulter [Identifiants flexibles](https://auth0.com/docs/authenticate/database-connections/flexible-identifiers-and-attributes).
 
-```
+```javascript lines
 import Signup from '@auth0/auth0-acul-js/signup';
 
 const signupManager = new Signup();
@@ -282,40 +282,40 @@ signupManager.signup({
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Adresse courriel de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>phone</code></td>
+<td>`phone`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Numéro de téléphone de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Nom d’utilisateur de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>password</code></td>
+<td>`password`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Mot de passe de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Code Captcha ou réponse du fournisseur de Captcha. Cette propriété est requise si votre locataire Auth0 a activé la détection des robots.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>Chaîne | Numéro | Booléen | Non défini</td>
 <td>Non</td>
-<td>Données supplémentaires collectées auprès de l’utilisateur. Ces données sont accessibles dans le déclencheur d’action <code>pre-user-registration</code>.</td>
+<td>Données supplémentaires collectées auprès de l’utilisateur. Ces données sont accessibles dans le déclencheur d’action `pre-user-registration`.</td>
 </tr>
 </tbody>
 </table>
@@ -324,7 +324,7 @@ signupManager.signup({
 
 Cette méthode redirige l’utilisateur vers le fournisseur d’identité sociale ou d’entreprise (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>) pour l’authentification. Pour plus de détails, veuillez consulter [Social Identity Providers (Fournisseurs d’identité sociale)](https://auth0.com/docs/authenticate/identity-providers/social-identity-providers) et [Enterprise Identity Providers (Fournisseurs d’identité de l’entreprise)](https://auth0.com/docs/authenticate/identity-providers/enterprise-identity-providers).
 
-```
+```javascript lines
 import Signup from '@auth0/auth0-acul-js/signup';
 
 const signupManager = new Signup();
@@ -344,13 +344,13 @@ signupManager.federatedSignup({
 </thead>
 <tbody>
 <tr>
-<td><code>connection</code></td>
+<td>`connection`</td>
 <td>chaîne</td>
 <td>Oui</td>
 <td>Identifiant de la connexion.</td>
 </tr>
 <tr>
-<td><code>[clé: chaîne]</code></td>
+<td>`[clé: chaîne]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données supplémentaires collectées auprès de l’utilisateur.</td>
@@ -368,7 +368,7 @@ La classe de l’identifiant de l’écran d’inscription fait partie du flux [
 
 Importer et instancier la classe de l’identifiant de l’écran d’inscription
 
-```
+```javascript lines
 import SignupId from '@auth0/auth0-acul-js/signup-id';
 const signupIdManager = new SignupId();
 
@@ -387,7 +387,7 @@ Les propriétés de la classe de l’identifiant de l’écran d’inscription s
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -422,7 +422,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -434,7 +434,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -453,7 +453,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -461,7 +461,7 @@ interface prompt{
 
 </Tab><Tab title="écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -484,7 +484,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -495,7 +495,7 @@ interface tenant {
 
 </Tab><Tab title="Transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -541,7 +541,7 @@ interface UsernamePolicy {
 
 </Tab><Tab title="unstrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -561,7 +561,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -597,7 +597,7 @@ Les méthodes de la classe de l’identifiant de l’écran d’inscription sont
 
 Cette méthode redirige l’utilisateur vers l’étape suivante du flux d’authentification. Selon la configuration du serveur, cet écran peut inclure des entrées pour un ou plusieurs des éléments suivants : courriel, nom d’utilisateur ou numéro de téléphone. Pour plus de détails, veuillez consulter [Identifiants flexibles](https://auth0.com/docs/authenticate/database-connections/flexible-identifiers-and-attributes).
 
-```
+```javascript lines
 import SignupId from "@auth0/auth0-acul-js/signup-id";
 
 const signupIdManager = new SignupId();
@@ -625,34 +625,34 @@ signupIdManager.signup(signupParams);
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Le courriel de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>phone</code></td>
+<td>`phone`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Le numéro de téléphone de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Le nom d’utilisateur de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Le code captcha ou la réponse du fournisseur captcha. Cette propriété est obligatoire si votre locataire Auth0 a activé la détection de robots.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
-<td>Données supplémentaires recueillies auprès de l’utilisateur. Les données sont accessibles dans le déclencheur d’action <code>pre-user-registration</code>.</td>
+<td>Données supplémentaires recueillies auprès de l’utilisateur. Les données sont accessibles dans le déclencheur d’action `pre-user-registration`.</td>
 </tr>
 </tbody>
 </table>
@@ -661,7 +661,7 @@ signupIdManager.signup(signupParams);
 
 Cette méthode redirige l’utilisateur vers le fournisseur d’identité sociale ou d’entreprise (IdP) pour l’authentification. Pour plus de détails, veuillez consulter [Social Identity Providers (Fournisseurs d’identité sociale)](https://auth0.com/docs/authenticate/identity-providers/social-identity-providers) et [Enterprise Identity Providers (Fournisseurs d’identité de l’entreprise)](https://auth0.com/docs/authenticate/identity-providers/enterprise-identity-providers).
 
-```
+```javascript lines
 import SignupId from "@auth0/auth0-acul-js/signup-id";
 
 const signupIdManager = new SignupId();
@@ -687,13 +687,13 @@ signupIdManager.federatedSignup(signupParams);
 </thead>
 <tbody>
 <tr>
-<td><code>connection</code></td>
+<td>`connection`</td>
 <td>chaîne</td>
 <td>Oui</td>
 <td>Identifiant de la connexion.</td>
 </tr>
 <tr>
-<td><code>[clé: chaîne]</code></td>
+<td>`[clé: chaîne]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données supplémentaires collectées auprès de l’utilisateur.</td>
@@ -711,7 +711,7 @@ L’écran d’inscription par mot de passe fait partie du flux [Identifier Fir
 
 Importer et instancier la classe de l’identifiant de l’écran d’inscription
 
-```
+```javascript lines
 import SignupPassword from '@auth0/auth0-acul-js/signup-password';
 const signupPasswordManager = new SignupPassword();
 
@@ -730,7 +730,7 @@ Les propriétés de la classe de l’écran inscription par mot de passe sont :
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -765,7 +765,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -777,7 +777,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -796,7 +796,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -804,7 +804,7 @@ interface prompt{
 
 </Tab><Tab title="écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -832,7 +832,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -843,7 +843,7 @@ interface tenant {
 
 </Tab><Tab title="Transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -889,7 +889,7 @@ interface PasswordPolicy {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -909,7 +909,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -945,7 +945,7 @@ La méthode de classe de l’écran inscription par mot de passe est :
 
 Cette méthode soumet l’identifiant de l’étape précédente et le mot de passe fourni pour créer le compte de l’utilisateur. Une fois créé, l’utilisateur est dirigé vers l’étape suivante.
 
-```
+```javascript lines
 signupPasswordManager.signup({
   email: <EmailFieldValue>
   phone: <PhoneFieldValue>
@@ -964,40 +964,40 @@ signupPasswordManager.signup({
 </thead>
 <tbody>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Le code captcha ou la réponse du fournisseur captcha. Cette propriété est obligatoire si votre locataire Auth0 a activé la détection de robots.</td>
 </tr>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Le courriel de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>password</code></td>
+<td>`password`</td>
 <td>chaîne</td>
 <td>Oui</td>
 <td>Le mot de passe de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>phone</code></td>
+<td>`phone`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Le numéro de téléphone de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Le nom d’utilisateur de l’utilisateur.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
-<td>Données supplémentaires recueillies auprès de l’utilisateur. Les données sont accessibles dans le déclencheur d’action <code>pre-user-registration</code>.</td>
+<td>Données supplémentaires recueillies auprès de l’utilisateur. Les données sont accessibles dans le déclencheur d’action `pre-user-registration`.</td>
 </tr>
 </tbody>
 </table>
@@ -1012,7 +1012,7 @@ La classe de l’écran d’inscription par clé d’identification fait partie 
 
 Importer et instancier la classe de l’écran d’inscription par clé d’identification
 
-```
+```javascript lines
 import PasskeyEnrollment from '@auth0/auth0-acul-js/passkey-enrollment';
 const passskeyEnrollmentManager = new PasskeyEnrollment();
 
@@ -1031,7 +1031,7 @@ Les propriétés de la classe de l’écran d’inscription par clé d’identif
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -1066,7 +1066,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -1078,7 +1078,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -1097,7 +1097,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -1105,7 +1105,7 @@ interface prompt{
 
 </Tab><Tab title="Écran">
 
-```
+```javascript lines
 interface screen {
   backLink: null | string;
   captcha: null | CaptchaContext;
@@ -1149,7 +1149,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -1160,7 +1160,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -1193,7 +1193,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -1213,7 +1213,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -1249,7 +1249,7 @@ Les méthodes de la classe de l’écran d’inscription par clé d’identifica
 
 Cette méthode envoie l’utilisateur vers l’écran d’inscription par mot de passe pour créer son mot de passe.
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 passkeyEnrollment.abortPasskeyEnrollment();
 ```
@@ -1264,7 +1264,7 @@ passkeyEnrollment.abortPasskeyEnrollment();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données facultatives collectées auprès de l’utilisateur.</td>
@@ -1276,7 +1276,7 @@ passkeyEnrollment.abortPasskeyEnrollment();
 
 Créez une clé d’identification et authentifiez l’utilisateur. Après avoir créé la clé d’identification, cette méthode envoie l’utilisateur à `redirect_url`.
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 passkeyEnrollment.continuePasskeyEnrollment();
 ```
@@ -1291,7 +1291,7 @@ passkeyEnrollment.continuePasskeyEnrollment();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données facultatives collectées auprès de l’utilisateur.</td>
@@ -1309,7 +1309,7 @@ La classe de l’écran local d’inscription par clé d’identification fait p
 
 Importer et instancier la classe de l’écran local d’inscription par clé d’identification
 
-```
+```javascript lines
 import PasskeyEnrollmentLocal from '@auth0/auth0-acul-js/passkey-enrollment-local';
 const passskeyEnrollmentLocalManager = new PasskeyEnrollmentLocal();
 
@@ -1328,7 +1328,7 @@ Les propriétés de la classe de l’écran local d’inscription par clé d’i
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -1363,7 +1363,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -1375,7 +1375,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -1394,7 +1394,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -1402,7 +1402,7 @@ interface prompt{
 
 </Tab><Tab title="Écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -1444,7 +1444,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -1455,7 +1455,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -1488,7 +1488,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -1508,7 +1508,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -1544,7 +1544,7 @@ Les méthodes de la classe de l’écran local d’inscription par clé d’iden
 
 Ignorez la création de la clé d’identification et fournissez plutôt un mot de passe. Cette méthode envoie l’utilisateur vers Signup Password Screen (Écran d’inscription par mot de passe) pour créer son mot de passe.
 
-```
+```javascript lines
 passkeyEnrollment.abortPasskeyEnrollment({
   doNotShowAgain: <BooleanFieldValue>
 });
@@ -1560,7 +1560,7 @@ passkeyEnrollment.abortPasskeyEnrollment({
 </thead>
 <tbody>
 <tr>
-<td><code>doNotShowAgain</code></td>
+<td>`doNotShowAgain`</td>
 <td>booléen</td>
 <td>Oui</td>
 <td>Indique si l’utilisateur souhaite ou non qu’on lui rappelle de créer à nouveau une clé d’identification après avoir ignoré la création initiale.</td>
@@ -1572,7 +1572,7 @@ passkeyEnrollment.abortPasskeyEnrollment({
 
 Créez une clé d’identification et authentifiez l’utilisateur. Après avoir créé la clé d’identification, cette opération envoie l’utilisateur à la `redirect_url`.
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 passkeyEnrollment.continuePasskeyEnrollment();
 ```
@@ -1587,7 +1587,7 @@ passkeyEnrollment.continuePasskeyEnrollment();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données facultatives collectées auprès de l’utilisateur.</td>
@@ -1605,7 +1605,7 @@ La classe de l’écran de vérification du numéro de téléphone fait partie d
 
 Importer et instancier la classe de l’écran de défi d'identifiant du téléphone
 
-```
+```javascript lines
 import PhoneIdentifierChallenge from '@auth0/auth0-acul-js/phone-identifier-challenge';
 const phoneIdentifierChallengeManager = new PhoneIdentifierChallenge();
 
@@ -1624,7 +1624,7 @@ Les propriétés de la classe de l’écran de défi d'identifiant du téléphon
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -1659,7 +1659,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -1671,7 +1671,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -1690,7 +1690,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -1698,7 +1698,7 @@ interface prompt{
 
 </Tab><Tab title="Écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -1723,7 +1723,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -1734,7 +1734,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -1767,7 +1767,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -1787,7 +1787,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -1823,7 +1823,7 @@ Les méthodes de la classe de l’écran de défi d'identifiant du téléphone s
 
 Cette méthode envoie un nouveau code OTP à l’adresse courriel fournie à l’étape précédente.
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 phoneIdentifierChallenge.resendCode();
 ```
@@ -1838,7 +1838,7 @@ phoneIdentifierChallenge.resendCode();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données facultatives collectées auprès de l’utilisateur.</td>
@@ -1850,7 +1850,7 @@ phoneIdentifierChallenge.resendCode();
 
 Cette méthode renvoie l’utilisateur à l’étape précédente.
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 phoneIdentifierChallenge.returnToPrevious();
 ```
@@ -1865,7 +1865,7 @@ phoneIdentifierChallenge.returnToPrevious();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données facultatives collectées auprès de l’utilisateur.</td>
@@ -1877,7 +1877,7 @@ phoneIdentifierChallenge.returnToPrevious();
 
 Cette méthode vérifie le numéro de téléphone fourni et permet à l’utilisateur de continuer à s’inscrire.
 
-```
+```javascript lines
 phoneIdentifierChallenge.submitPhoneChallenge({
     code: "<CodeFieldValue>"
 });
@@ -1893,19 +1893,19 @@ phoneIdentifierChallenge.submitPhoneChallenge({
 </thead>
 <tbody>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Le code CAPTCHA ou la réponse du fournisseur de CAPTCHA. Cette propriété est requise si la détection de robots est activée dans votre tenant Auth0.</td>
 </tr>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>chaîne</td>
 <td>Oui</td>
 <td>Le code OTP envoyé au numéro de téléphone.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | indéfini</td>
 <td>Non</td>
 <td>Données facultatives recueillies de l’utilisateur.</td>
@@ -1923,7 +1923,7 @@ La classe de l’écran d’inscription à la vérification du numéro de télé
 
 Importer et instancier de l’écran d’inscription à l'identifiant du téléphone
 
-```
+```javascript lines
 import PhoneIdentifierEnrollment from '@auth0/auth0-acul-js/phone-identifier-enrollment';
 const phoneIdentifierEnrollmentManager = new PhoneIdentifierEnrollment();
 
@@ -1942,7 +1942,7 @@ Les propriétés de la classe de l’écran d’inscription à l'identifiant du 
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -1977,7 +1977,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -1989,7 +1989,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -2008,7 +2008,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -2016,7 +2016,7 @@ interface prompt{
 
 </Tab><Tab title="Écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -2042,7 +2042,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -2053,7 +2053,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -2086,7 +2086,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -2106,7 +2106,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -2142,7 +2142,7 @@ Les méthodes de la classe de l’écran d’inscription à l'identifiant du té
 
 Envoyez un code de mot de passe à usage unique via la méthode choisie par l’utilisateur au numéro de téléphone fourni à l’étape précédente.
 
-```
+```javascript lines
 phoneIdentifierChallenge.continuePhoneEnrollment({
   type: "text" | "voice"
 });
@@ -2158,13 +2158,13 @@ phoneIdentifierChallenge.continuePhoneEnrollment({
 </thead>
 <tbody>
 <tr>
-<td><code>type</code></td>
+<td>`type`</td>
 <td>chaîne</td>
 <td>Oui</td>
-<td>Valeurs possibles : <code>text</code> or <code>voice</code></td>
+<td>Valeurs possibles : `text` or `voice`</td>
 </tr>
 <tr>
-<td><code>[clé: chaîne]</code></td>
+<td>`[clé: chaîne]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données optionnelles collectées auprès de l’utilisateur.</td>
@@ -2176,7 +2176,7 @@ phoneIdentifierChallenge.continuePhoneEnrollment({
 
 Cette méthode renvoie l’utilisateur à l’étape précédente.
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 phoneIdentifierChallenge.returnToPrevious();
 ```
@@ -2191,7 +2191,7 @@ phoneIdentifierChallenge.returnToPrevious();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données facultatives collectées auprès de l’utilisateur.</td>
@@ -2209,7 +2209,7 @@ La classe de l’écran de vérification de l’adresse courriel fait partie du 
 
 Importer et instancier la classe de l’écran de l'identifiant de l’adresse courriel :
 
-```
+```javascript lines
 import EmailIdentifierChallenge from '@auth0/auth0-acul-js/email-identifier-challenge';
 const emailIdentifierChallengeManager = new EmailIdentifierChallenge();
 
@@ -2228,7 +2228,7 @@ Les propriétés de la classe de l’écran de vérification de l'identifiant de
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -2263,7 +2263,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -2275,7 +2275,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -2294,7 +2294,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -2302,7 +2302,7 @@ interface prompt{
 
 </Tab><Tab title="Écran">
 
-```
+```javascript lines
 interface screen{
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -2327,7 +2327,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -2338,7 +2338,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -2371,7 +2371,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -2391,7 +2391,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -2427,7 +2427,7 @@ Les méthodes de la classe de l’écran de l'identifiant de l’adresse courrie
 
 Cette méthode envoie un nouveau code OTP à l’adresse courriel fournie à l’étape précédente.
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 emailIdentifierChallenge.resendCode();
 ```
@@ -2442,7 +2442,7 @@ emailIdentifierChallenge.resendCode();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données facultatives collectées auprès de l’utilisateur.</td>
@@ -2454,7 +2454,7 @@ emailIdentifierChallenge.resendCode();
 
 Cette méthode renvoie l’utilisateur à l’étape précédente.
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 emailIdentifierChallenge.returnToPrevious();
 ```
@@ -2469,7 +2469,7 @@ emailIdentifierChallenge.returnToPrevious();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | non défini</td>
 <td>Non</td>
 <td>Données facultatives collectées auprès de l’utilisateur.</td>
@@ -2481,7 +2481,7 @@ emailIdentifierChallenge.returnToPrevious();
 
 Cette méthode vérifie l’adresse courriel fournie et permet à l’utilisateur de continuer à s’inscrire.
 
-```
+```javascript lines
 emailIdentifierChallenge.submitEmailChallenge({
   code: <CodeFieldValue>
 });
@@ -2497,19 +2497,19 @@ emailIdentifierChallenge.submitEmailChallenge({
 </thead>
 <tbody>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>chaîne</td>
 <td>Conditionnellement</td>
 <td>Le code CAPTCHA ou la réponse du fournisseur de CAPTCHA. Cette propriété est requise si la détection de robots est activée dans votre tenant Auth0.</td>
 </tr>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>chaîne</td>
 <td>Oui</td>
 <td>Le code OTP envoyé à l'adresse courriel.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>chaîne | nombre | booléen | indéfini</td>
 <td>Non</td>
 <td>Données supplémentaires recueillies de l’utilisateur.</td>

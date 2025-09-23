@@ -1,13 +1,13 @@
 ---
 title: "Migration des Règles vers les Actions"
 permalink: "migrate-from-rules-to-actions"
+'description': "Apprenez à migrer votre code Règles d'Auth0 existant vers le code Auth0 Actions."
 'og:title': "Migration des Règles vers les Actions"
 'og:description': "Apprenez à migrer votre code Règles d'Auth0 existant vers le code Auth0 Actions."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Migration des Règles vers les Actions"
 'twitter:description': "Apprenez à migrer votre code Règles d'Auth0 existant vers le code Auth0 Actions."
 ---
-# Migration des Règles vers les Actions
 
 Lorsque vous convertissez des Règles existantes en Actions, vous devez associer la nouvelle action au déclencheur post-connexion (`post-login`) du flux de connexion Si vous suivez les étapes ci-dessous et que vous conservez vos Actions dans le même ordre que vos Règles d’origine, la fonctionnalité devrait être identique.
 
@@ -75,7 +75,7 @@ Les Règles utilisent une simple fonction déclarée avec des paramètres `user`
 
 **Avant**
 
-```
+```javascript lines
 async function myRulesFunction(user, context, callback) {
     // ... additional code
 }
@@ -83,7 +83,7 @@ async function myRulesFunction(user, context, callback) {
 
 **Après**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 	// ... additional code
 };
@@ -101,7 +101,7 @@ Les données stockées ou modifiées dans les propriétés de l’objet `event` 
 
 **Avant**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	const userEmail = user.email;
 	const userId = user.user_id;
@@ -115,7 +115,7 @@ function myRulesFunction(user, context, callback) {
 
 **Après**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 	const userEmail = event.user.email;
 	const userId = event.user.user_id;
@@ -139,7 +139,7 @@ Les données stockées ou modifiées dans les propriétés de l’objet `event` 
 
 **Avant**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	const clientId = context.clientID;
 	const clientMetadata = context.clientMetadata || {};
@@ -157,7 +157,7 @@ function myRulesFunction(user, context, callback) {
 
 **Après**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 	const clientId = event.client.client_id;
 	const clientMetadata = event.client.metadata;
@@ -192,7 +192,7 @@ Si la version de vos modules `npm` n’est pas la plus récente, c’est le bon 
 
 **Avant**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	const dependency = require("dependency@1.2.3");
 
@@ -202,7 +202,7 @@ function myRulesFunction(user, context, callback) {
 
 **Après**
 
-```javascript
+```javascript lines
 const dependency = require("dependency"); // v1.2.3
 exports.onExecutePostLogin = async (event, api) => {
 	// ... additional code
@@ -215,7 +215,7 @@ Une fois la Règle traitée, elle doit appeler la fonction `callback()` et trans
 
 **Avant**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	const userAppMetadata = user.app_metadata || {};
 	if (userAppMetadata.condition === "success") {
@@ -234,7 +234,7 @@ function myRulesFunction(user, context, callback) {
 
 **Après**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 	if (event.user.app_metadata.condition === "success") {
 		// This Action succeeded, proceed with next Action.
@@ -262,7 +262,7 @@ Pour convertir les secrets des Règles en Actions :
 
 **Avant**
 
-```javascript
+```javascript lines
 function myRulesFunction (user, context, callback) {
   const { CLIENT_ID, CLIENT_SECRET } = configuration;
 
@@ -272,7 +272,7 @@ function myRulesFunction (user, context, callback) {
 
 **Après**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const { CLIENT_ID, CLIENT_SECRET } = event.secrets;
 
@@ -288,7 +288,7 @@ Les Règles et les Actions permettent toutes deux d’ajouter des demandes perso
 
 **Avant**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	const userAppMetadata = user.app_metadata || {};
 	const namespace = "https://namespace/";
@@ -302,7 +302,7 @@ function myRulesFunction(user, context, callback) {
 
 **Après**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 	const namespace = "https://namespace/";
 
@@ -326,7 +326,7 @@ Pour les Règles, l’authentification multifacteur (<Tooltip data-tooltip-id="r
 
 **Avant**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	if (user.app_metadata.needs_mfa === true) {
 		context.multifactor = { 
@@ -341,7 +341,7 @@ function myRulesFunction(user, context, callback) {
 
 **Après**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 	if (event.user.app_metadata.needs_mfa === true) {
 		api.multifactor.enable("any", { allowRememberBrowser: false });
@@ -357,7 +357,7 @@ La mise à jour `user_metadata` et `app_metadata` dans les Règles requiert un a
 
 **Avant**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	user.app_metadata = user.app_metadata || {}; 
 	user.app_metadata.roles = user.app_metadata.roles || [];
@@ -376,7 +376,7 @@ Si les Règles suivantes doivent mettre à jour les métadonnées utilisateur, e
 
 **Après**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 	const userRolesUpdated = event.user.app_metadata.roles || [];
 	userRolesUpdated.push("administrator"); 
@@ -410,7 +410,7 @@ Cependant, si les appels sont nécessaires et sont configurés pour éviter les 
 
 **Avant**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	const ManagementClient = require("auth0@2.9.1").ManagementClient; 
 	const managementClientInstance = new ManagementClient({
@@ -435,7 +435,7 @@ function myRulesFunction(user, context, callback) {
 
 **Après**
 
-```javascript
+```javascript lines
 const auth0Sdk = require("auth0");
 exports.onExecutePostLogin = async (event, api) => {
 	const ManagementClient = auth0Sdk.ManagementClient;
@@ -471,13 +471,13 @@ Dans les Actions, le pipeline d’actions est interrompu lors de la redirection 
 
 <Note>
 
-Expliquer comment faire toutes les redirections correctement dans Actions dépasse la portée de ce guide. Pour plus de détails, consultez [Rediriger avec des Actions](/docs/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/redirect-with-actions).
+Expliquer comment faire toutes les redirections correctement dans Actions dépasse la portée de ce guide. Pour plus de détails, consultez [Rediriger avec des Actions](/docs/fr-ca/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/redirect-with-actions).
 
 </Note>
 
 **Avant**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
     if (context.protocol === "redirect-callback") {
         // User was redirected to the /continue endpoint
@@ -503,7 +503,7 @@ function myRulesFunction(user, context, callback) {
 
 **Après**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
     api.accessToken.setClaim("https://dev.TLD/wasRedirected", true)
 ```
@@ -514,7 +514,7 @@ L’objet de la Règle `context.sso` fournit des détails sur la session active 
 
 **Avant**
 
-```javascript
+```javascript lines
 function (user, context, callback) {
 
   const clients = context.sso?.current_clients ?? []; 
@@ -529,7 +529,7 @@ function (user, context, callback) {
 
 **Après**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const clients = event?.session?.clients ?? []; 
 

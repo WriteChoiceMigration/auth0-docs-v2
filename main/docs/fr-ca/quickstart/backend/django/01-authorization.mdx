@@ -1,12 +1,14 @@
 ---
 title: "Authorization"
 permalink: "01-authorization"
+'description': "This tutorial demonstrates how to add authorization to a Django REST Framework API."
 'og:title': "Authorization"
 'og:description': "This tutorial demonstrates how to add authorization to a Django REST Framework API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/django.png"
 'twitter:title': "Authorization"
 'twitter:description': "This tutorial demonstrates how to add authorization to a Django REST Framework API."
 ---
+
 # Django API: Authorization
 
 <Frame>![Gravatar for luciano.balmaceda@auth0.com](//www.gravatar.com/avatar/da735b48d8300a97640149156b650305?d=mm&r=g&s=50)</Frame>
@@ -38,7 +40,7 @@ System requirements: Python 3.5 and up | Django 2.2.\* | djangorestframework 3.1
 
 <Note>
 
-**New to Auth0?** Learn [how Auth0 works](/docs/overview) and read about [implementing API authentication and authorization](/docs/api-auth)  using the OAuth 2.0 framework.
+**New to Auth0?** Learn [how Auth0 works](/docs/fr-ca/overview) and read about [implementing API authentication and authorization](/docs/fr-ca/api-auth)  using the OAuth 2.0 framework.
 
 </Note>
 
@@ -50,7 +52,7 @@ In the [APIs](https://manage.auth0.com/#/apis) section of the Auth0 dashboard, c
 
 <Frame>![Create API](https://cdn2.auth0.com/docs/1.14567.0/media/articles/server-apis/create-api.png)</Frame>
 
-By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
+By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/fr-ca/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
 
 ### Define permissions
 
@@ -69,7 +71,7 @@ This example uses the `read:messages` scope.
 This example demonstrates:
 
 * How to check for a JSON Web Token (JWT) in the `Authorization` header of an incoming HTTP request.
-* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/tokens/guides/validate-access-tokens).
+* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/fr-ca/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/fr-ca/tokens/guides/validate-access-tokens).
 
 ## Setup the Django Application
 
@@ -77,7 +79,7 @@ This example demonstrates:
 
 Add the following dependencies to your `requirements.txt` and run `pip install -r requirements.txt`.
 
-```
+```python lines
 cryptography~=2.8
 django~=2.2.7
 djangorestframework~=3.10.31
@@ -93,7 +95,7 @@ This guide assumes you already have a Django application set up. If that is not 
 
 The sample project was created with the following commands:
 
-```
+```bash lines
 django-admin startproject apiexample
 cd apiexample
 python manage.py startapp auth0authorization
@@ -105,7 +107,7 @@ You need to define a way to map the username from the Access Token payload to th
 
 Add [`RemoteUserMiddleware`](https://docs.djangoproject.com/en/2.2/ref/middleware/#django.contrib.auth.middleware.RemoteUserMiddleware) middleware component after `AuthenticationMiddleware` to middleware list.
 
-```
+```python lines
 # apiexample/settings.py
 
 MIDDLEWARE = [
@@ -117,7 +119,7 @@ MIDDLEWARE = [
 
 Add `ModelBackend` and `RemoteUserBackend` to the Authentication Backends.
 
-```
+```python lines
 # apiexample/settings.py
 
 AUTHENTICATION_BACKENDS = [
@@ -128,7 +130,7 @@ AUTHENTICATION_BACKENDS = [
 
 Create `utils.py` file in your application's folder and define a function that maps the `sub` field from the `access_token` to the username. Then, the [authenticate](https://docs.djangoproject.com/en/2.2/ref/contrib/auth/#django.contrib.auth.backends.RemoteUserBackend.authenticate) method from [RemoteUserBackend](https://docs.djangoproject.com/en/2.2/ref/contrib/auth/#django.contrib.auth.backends.RemoteUserBackend) will create a remote user in the Django authentication system and return a User object for the username.
 
-```
+```python lines
 # auth0authorization/utils.py
 
 from django.contrib.auth import authenticate
@@ -145,7 +147,7 @@ The `settings.py` file contains the configuration of the Django project.
 
 Add `rest_framework` app to the `INSTALLED_APPS` entry.
 
-```
+```python lines
 # apiexample/settings.py
 
 INSTALLED_APPS = [
@@ -156,7 +158,7 @@ INSTALLED_APPS = [
 
 Add `JSONWebTokenAuthentication` to Django REST framework's `DEFAULT_AUTHENTICATION_CLASSES`.
 
-```
+```python lines
 # apiexample/settings.py
 
 REST_FRAMEWORK = {
@@ -175,7 +177,7 @@ Configure the [Django REST Framework JWK](https://github.com/Styria-Digital/djan
 
 Set the `JWT_AUDIENCE` to your API identifier and the `JWT_ISSUER` to your Auth0 domain. By default, those values will be retrieved from the `.env` file.
 
-```
+```python lines
 # apiexample/settings.py
 
 JWT_AUTH = {
@@ -192,7 +194,7 @@ JWT_AUTH = {
 
 Create the function to fetch the JWKS from your Auth0 account to verify and decode the incoming Access Token.
 
-```
+```python lines
 # auth0authorization/utils.py
 
 import json
@@ -219,7 +221,7 @@ def jwt_decode_token(token):
 
 Add the following methods to the `views.py` file to create a decorator that will check the granted scopes from the `access_token`.
 
-```
+```python lines
 # auth0authorization/views.py
 
 from functools import wraps
@@ -268,7 +270,7 @@ The routes shown below are available for the following requests:
 
 In the file `views.py` add `public` and `private` endpoints. Add the `@api_view` decorator to all the endpoints to indicate that the method requires authentication. Lastly, add the decorator `@permission_classes([AllowAny])` to the `public` endpoint to accept unauthenticated requests.
 
-```
+```python lines
 # auth0authorization/views.py
 
 from django.http import JsonResponse
@@ -287,7 +289,7 @@ def private(request):
 
 Use the `requires_scope` decorator in the methods that require specific scopes granted. The method below requires the `read:messages` scope granted.
 
-```
+```python lines
 # auth0authorization/views.py
 
 @api_view(['GET'])
@@ -304,7 +306,7 @@ Django has a [URL dispatcher](https://docs.djangoproject.com/en/2.2/topics/http/
 
 Create the file `urls.py` in your application folder. Add the URL patterns.
 
-```
+```python lines
 # auth0authorization/urls.py
 
 from django.urls import path
@@ -320,7 +322,7 @@ urlpatterns = [
 
 The Django project also has a `urls.py` file. Add a reference to your application's `urls.py` file.
 
-```
+```python lines
 # apiexample/urls.py
 
 from django.contrib import admin
@@ -334,7 +336,7 @@ urlpatterns = [
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/fr-ca/identityproviders)[* Enable multifactor authentication](/docs/fr-ca/multifactor-authentication)[* Learn about attack protection](/docs/fr-ca/attack-protection)[* Learn about rules](/docs/fr-ca/rules)
 
 ---
 

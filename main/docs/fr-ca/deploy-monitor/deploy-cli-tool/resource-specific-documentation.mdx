@@ -1,13 +1,13 @@
 ---
 title: "Documentation spécifique aux ressources"
 permalink: "resource-specific-documentation"
+'description': "Découvrez les spécificités de la documentation des ressources pour l’outil Auth0 Deploy CLI."
 'og:title': "Documentation spécifique aux ressources"
 'og:description': "Découvrez les spécificités de la documentation des ressources pour l’outil Auth0 Deploy CLI."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Documentation spécifique aux ressources"
 'twitter:description': "Découvrez les spécificités de la documentation des ressources pour l’outil Auth0 Deploy CLI."
 ---
-# Documentation spécifique aux ressources
 
 En règle générale, les fichiers de configuration des ressources de Deploy CLI correspondent étroitement aux schémas de charge utile de [Management API Auth0](https://auth0.com/docs/api/management/v2), mais il existe quelques nuances notables à prendre en compte.
 
@@ -21,7 +21,7 @@ Les invites textuelles multilingues personnalisées suivent une hiérarchie part
 
 ### Hiérarchie
 
-```
+```yaml lines
 prompts:
   customText:
     <LANGUAGE>: # two character language code
@@ -32,7 +32,7 @@ prompts:
 
 ### Exemple
 
-```
+```yaml lines
 prompts:
   identifier_first: true
   universal_login_experience: classic
@@ -60,7 +60,7 @@ Lors de la gestion des connexions de base de données, les valeurs de `options.c
 
 Structure du dossier en mode YAML :
 
-```
+``` lines
 ./databases/
     /Username-Password-Authentication
         /change_password.js   
@@ -74,7 +74,7 @@ Structure du dossier en mode YAML :
 
 Contenu de `tenant.yaml` :
 
-```
+```yaml lines
 databases:
   - name: Username-Password-Authentication
     # ...
@@ -93,7 +93,7 @@ databases:
 
 Structure du dossier en mode répertoire :
 
-```
+``` lines
 ./database-connections/
     ./Username-Password-Authentication/
         ./change_password.js
@@ -107,7 +107,7 @@ Structure du dossier en mode répertoire :
 
 Contenu de `database.json` :
 
-```json
+```json lines
 {
   "options": {
     "customScripts": {
@@ -132,7 +132,7 @@ Lorsque la connexion universelle est remplacée par un code HTML personnalisé, 
 
 Structure du dossier en mode YAML :
 
-```
+``` lines
 ./pages/
     /error_page.html
     /guardian_multifactor.html
@@ -143,7 +143,7 @@ Structure du dossier en mode YAML :
 
 Contenu de `tenant.yaml` :
 
-```
+```yaml lines
 pages:
   - name: error_page
     html: ./pages/error_page.html
@@ -164,7 +164,7 @@ pages:
 
 Structure du dossier en mode répertoire :
 
-```
+``` lines
 ./pages/
     ./error_page.html
     ./error_page.json
@@ -178,7 +178,7 @@ Structure du dossier en mode répertoire :
 
 Contenu de `login.json` :
 
-```json
+```json lines
 {
   "name": "login",
   "enabled": false,
@@ -188,7 +188,7 @@ Contenu de `login.json` :
 
 Contenu de `error_page.json` :
 
-```json
+```json lines
 {
   "html": "./error_page.html",
   "show_log_link": false,
@@ -199,7 +199,7 @@ Contenu de `error_page.json` :
 
 Contenu de `guardian_multifactor.json` :
 
-```json
+```json lines
 {
   "enabled": true,
   "html": "./guardian_multifactor.html",
@@ -209,7 +209,7 @@ Contenu de `guardian_multifactor.json` :
 
 Contenu de `password_reset.json` :
 
-```json
+```json lines
 {
   "enabled": true,
   "html": "./password_reset.html",

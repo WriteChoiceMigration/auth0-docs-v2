@@ -1,23 +1,23 @@
 ---
 title: "Organization screen classes"
 permalink: "organization"
+'description': "Learn about the ACUL Organization screen classes"
 'og:title': "Organization screen classes"
 'og:description': "Learn about the ACUL Organization screen classes"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Organization screen classes"
 'twitter:description': "Learn about the ACUL Organization screen classes"
 ---
-# Organization screen classes
 
 ## Organization Selection screen class
 
 The Organization Selection screen class provides methods associated with the organization-selection screen.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/3okogBPGS1KmSlhUSk9xhk/07bc19ad8b58772d3de872a49b8f6ca5/Screenshot_2025-03-25_at_20.27.41.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/3okogBPGS1KmSlhUSk9xhk/07bc19ad8b58772d3de872a49b8f6ca5/Screenshot_2025-03-25_at_20.27.41.png)</Frame>
 
 Import and instantiate the Organization Selection screen class:
 
-```
+```javascript lines
 import OrganizationSelection from '@auth0/auth0-acul-js/organization-selection';
 const organizationSelection = new OrganizationSelection();
 
@@ -37,7 +37,7 @@ The Organization Selection screen class properties are:
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -72,7 +72,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -84,7 +84,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -103,7 +103,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -111,7 +111,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -144,7 +144,7 @@ interface PhonePrefix {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -155,7 +155,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -188,7 +188,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -216,7 +216,7 @@ The Organization Selection screen class method is:
 
 This method continues with the selected organization name.
 
-```
+```javascript lines
 import OrganizationSelection from '@auth0/auth0-acul-js/organization-selection';
 const organizationSelection = new OrganizationSelection();
 
@@ -235,13 +235,13 @@ await organizationSelection.continueWithOrganizationName({
 </thead>
 <tbody>
 <tr>
-<td><code>organizationName</code></td>
+<td>`organizationName`</td>
 <td>string</td>
 <td>Yes</td>
 <td>The organization name.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>string | number | boolean | undefined</td>
 <td>No</td>
 <td>Optional data collected from user.</td>
@@ -253,11 +253,11 @@ await organizationSelection.continueWithOrganizationName({
 
 The Organization Picker screen class provides methods associated with the organization-picker screen. This screen allows users to select an organization from a list of available organizations.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/3aFR1VujjNlIauzRAuMapf/12e80cb2e3f131d2eb45aa0ca13f1d8c/Screenshot_2025-03-25_at_20.49.09.png)</Frame>
+<Frame>![](/images/fr-ca/cdy7uua7fh8z/3aFR1VujjNlIauzRAuMapf/12e80cb2e3f131d2eb45aa0ca13f1d8c/Screenshot_2025-03-25_at_20.49.09.png)</Frame>
 
 Import and instantiate the Organization Picker screen class:
 
-```
+```javascript lines
 import OrganizationPicker from '@auth0/auth0-acul-js/organization-picker';
 const organizationPicker = new OrganizationPicker();
 
@@ -277,7 +277,7 @@ The Organization Picker screen class properties are:
 
 <Tabs><Tab title="image de marque">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -312,7 +312,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -324,7 +324,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -343,7 +343,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -351,7 +351,7 @@ interface prompt{
 
 </Tab><Tab title="écran">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -398,7 +398,7 @@ interface PasskeyCreate {
 
 </Tab><Tab title="locataire">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -409,7 +409,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -442,7 +442,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -462,7 +462,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -498,7 +498,7 @@ The Organization Picker screen class method are:
 
 This method submits the selected organization ID.
 
-```
+```javascript lines
 import OrganizationPicker from '@auth0/auth0-acul-js/organization-picker';
 const organizationPicker = new OrganizationPicker();
 
@@ -517,13 +517,13 @@ organizationPicker.selectOrganization({
 </thead>
 <tbody>
 <tr>
-<td><code>organization</code></td>
+<td>`organization`</td>
 <td>string</td>
 <td>Yes</td>
 <td>The organization ID.</td>
 </tr>
 <tr>
-<td><code>state</code></td>
+<td>`state`</td>
 <td>string</td>
 <td>No</td>
 <td></td>
@@ -535,7 +535,7 @@ organizationPicker.selectOrganization({
 
 This method submits the action to skip the organization selection.
 
-```
+```javascript lines
 import OrganizationPicker from '@auth0/auth0-acul-js/organization-picker';
 const organizationPicker = new OrganizationPicker();
 
@@ -552,7 +552,7 @@ organizationPicker.skipOrganizationSelection();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>string | number | boolean | undefined</td>
 <td>No</td>
 <td>Optional data collected to user.</td>
