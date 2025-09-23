@@ -45,11 +45,11 @@ System requirements: Flutter 3+ | Android API 21+ and Android Studio 4+ (for And
 
 Auth0 allows you to quickly add authentication and access user profile information in your app. This guide demonstrates how to integrate Auth0 with a Flutter app using the [Auth0 Flutter SDK](https://github.com/auth0/auth0-flutter).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 The Flutter SDK currently only supports Flutter apps for Android, iOS, and macOS.
 
-</Note>
+</Callout>
 
 ## Getting started
 
@@ -67,14 +67,14 @@ If the callback and logout URLs are not set, users will be unable to log in and 
 
 Go to the [settings page](https://manage.auth0.com/#/applications/{yourClientId}/settings) of your Auth0 application and add the following URLs to **Allowed Callback URLs** and **Allowed Logout URLs**, depending on the platform of your app. If you have a [custom domain](/docs/ja-jp/customize/custom-domains), use this instead of the Auth0 domain from the settings page.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 On Android, the value of the `SCHEME` placeholder can be `https` or some other custom scheme. `https` schemes require enabling [Android App Links](https://auth0.com/docs/get-started/applications/enable-android-app-links-support).
 
 On iOS 17.4+ and macOS 14.4+ it is possible to use Universal Links (`https` scheme) as callback and logout URLs. When enabled, the SDK will fall back to using a custom URL scheme on older iOS / macOS versions –your app's [bundle identifier](https://developer.apple.com/documentation/appstoreconnectapi/bundle_ids).
 **This feature requires Xcode 15.3+ and a paid Apple Developer account**.
 
-</Note>
+</Callout>
 
 #### Android
 
@@ -139,11 +139,11 @@ android {
 * `auth0Domain`: The domain of your Auth0 tenant. Generally, you find this in the Auth0 Dashboard under your **Application Settings** in the Domain field. If you are using a custom domain, you should set this to the value of your custom domain instead.
 * `auth0Scheme`: The scheme to use. Can be a custom scheme, or `https` if you want to use [Android App Links](https://auth0.com/docs/applications/enable-android-app-links). You can read more about setting this value in the [Auth0.Android SDK README](https://github.com/auth0/Auth0.Android#a-note-about-app-deep-linking).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 You do not need to declare a specific `intent-filter` for your activity because you defined the manifest placeholders with your Auth0 **Domain** and **Scheme** values. The library handles the redirection for you.
 
-</Note>
+</Callout>
 
 Run **Sync Project with Gradle Files** inside Android Studio to apply your changes.
 
@@ -179,11 +179,11 @@ webcredentials:{yourDomain}
 
 If you have a [custom domain](/docs/ja-jp/customize/custom-domains), use this instead of the Auth0 domain from the settings page.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 For the associated domain to work, your app must be signed with your team certificate **even when building for the iOS simulator**. Make sure you are using the Apple Team whose Team ID is configured in the settings page of your Auth0 application.
 
-</Note>
+</Callout>
 
 ## Add login to your app
 

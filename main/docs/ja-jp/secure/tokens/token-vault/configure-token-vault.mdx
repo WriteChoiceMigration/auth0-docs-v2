@@ -27,13 +27,13 @@ To configure Token Vault, you need to:
    * [Access token exchange](/docs/ja-jp/secure/tokens/token-vault/access-token-exchange-with-token-vault)
 4. Manage tokensets within the Token Vault for your connection.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 If you have previously set your MFA policy to **Always** in the Auth0 Dashboard, you need to set it to **Never** to retrieve an access token from Token Vault. Otherwise, you will receive an error. To learn more about the different MFA policies, read [Enable MFA in the Auth0 Dashboard](/docs/ja-jp/secure/multi-factor-authentication/enable-mfa#enable-mfa-in-the-auth0-dashboard).
 
 If you need to trigger MFA challenges for interactive flows, enable **Customize MFA Factors using Actions** when [setting up MFA for your tenant](/docs/ja-jp/secure/multi-factor-authentication/customize-mfa/customize-mfa-selection-universal-login#prepare-your-tenant). You can then use an Action to trigger an MFA challenge based on the `event.transaction.protocol` property. To learn more, read [Customize MFA selection for Universal Login](/docs/ja-jp/secure/multi-factor-authentication/customize-mfa/customize-mfa-selection-universal-login).
 
-</Note>
+</Callout>
 
 ## Configure connection
 
@@ -57,11 +57,11 @@ To enable Token Vault for a supported social and enterprise/custom connection:
 
 To enable Token Vault for a supported social and enterprise connection, run the following bash script to set `federated_connections_access_tokens` to `true` in the `options` object:
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 When you use the `options` parameter when making a `PATCH` call to the [Update a connection](https://auth0.com/docs/api/management/v2/connections/patch-connections-by-id) endpoint, you override the existing `options` object with the `options` object in your request body. As a result, make sure you include your entire `options` object in your request body.
 
-</Note>
+</Callout>
 
 ```bash lines
 # set your variables

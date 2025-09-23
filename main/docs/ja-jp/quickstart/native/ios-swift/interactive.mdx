@@ -62,13 +62,13 @@ Auth0のサービスを利用するには、Auth0 Dashboadに設定済みのア�
 
 Auth0はリダイレクトでユーザーをアプリに戻すため、Callback URLとログアウトURLを呼び出します。Auth0は、ユーザーを認証した後にCallback URLを呼び出し、セッションのクッキーを削除した後にログアウトURLを呼び出します。Callback URLとログインURLを設定しないと、ユーザーはアプリにログインやログアウトが行えなくなり、アプリにエラーが発生します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 iOS 17.4以降とmacOS 14.4以降では、ユニバーサルリンクをCallback URLおよびログアウトURLとして使用できます。有効になっている場合、古いバージョンのiOS/macOSでは、Auth0.swiftはフォールバックとしてカスタムURLスキームを使用します。
 
 **この機能にはXcode 15.3以降と有料のApple Developerアカウントが必要です。**
 
-</Note>
+</Callout>
 
 アプリのプラットフォームに応じて、以下の**Callback URL**と**ログアウトURL**を追加してください。カスタムドメインがある場合は、Auth0テナントのドメインに代わってそちらを使用します。
 
@@ -123,11 +123,11 @@ webcredentials:labs-fundtraining.us.auth0.com
 
 カスタムドメインがある場合は、Auth0テナントのドメインではなくそちらを使用してください。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 関連ドメインが動作するためには、**iOSシミュレーター用に構築されている場合でも**、アプリが自分のチーム証明書で署名されている必要があります。Apple Teamには必ず、Auth0アプリケーションの設定ページで構成されたチームIDのものを使用してください。
 
-</Note>
+</Callout>
 
 [2
 
@@ -147,11 +147,11 @@ https://github.com/auth0/Auth0.swift
 
 それから依存ルールを選択して**［Add Package（パッケージを追加）］**を押します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 SPMの詳細については、[公式ドキュメント](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app)を確認してください。
 
-</Note>
+</Callout>
 
 ### CocoaPodsを使用する
 
@@ -163,11 +163,11 @@ pod 'Auth0', '~> 2.0'
 
 それから`pod install`を実行します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 CocoaPodsの詳細は、[公式ドキュメント](https://guides.cocoapods.org/using/getting-started.html)を確認してください。
 
-</Note>
+</Callout>
 
 ### Carthageを使用する
 
@@ -179,11 +179,11 @@ github "auth0/Auth0.swift" ~> 2.0
 
 それから`carthage bootstrap --use-xcframeworks`を実行します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Carthageの詳細については、[公式ドキュメント](https://github.com/Carthage/Carthage#getting-started)を確認してください。
 
-</Note>
+</Callout>
 
 [3
 
@@ -196,11 +196,11 @@ Auth0.swiftのSDKにはAuth0**domain**と**Client ID**が必要です。これ�
 
 Auth0ドメインとクライアントIDの値を含むアプリバンドルに`Auth0.plist`という名前の`plist`ファイルを作成します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 SDKはプログラムコードによって構成することも可能です。詳細は[README](https://github.com/auth0/Auth0.swift#configure-client-id-and-domain-programmatically)をご覧ください。
 
-</Note>
+</Callout>
 
 ##### checkpoint.header
 
@@ -214,11 +214,11 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 ログインページを提示したいファイルに`Auth0`モジュールをインポートします。それから**ログイン**ボタンのアクションでユニバーサルログインページを提示します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 コールバックに基づいたAPIの代わりにasync/awaitまたはCombineを使用できます。詳細は[README](https://github.com/auth0/Auth0.swift#web-auth-login-ios--macos)をご覧ください。
 
-</Note>
+</Callout>
 
 <Frame>![iOSアプリのユニバーサルログイン画面の例](/images/ja-jp/cdy7uua7fh8z/3ZRDXpjlUXEcQpXq6Q00L1/4b6b596983b5f7d257975a5efcc1cafa/login-ios_japanese.png)</Frame>
 
@@ -257,11 +257,11 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 Auth0.swiftのSDKには、IDトークンのような[JWT](https://jwt.io/)をデコードするための[ユーティリティ](https://github.com/auth0/JWTDecode.swift)が含まれています。ユーザープロファイル情報にアクセスしたいファイルへ`JWTDecode`モジュールをインポートすることで開始します。それから、`decode(jwt:)`メソッドを使ってIDトークンをデコードし、そこに含まれるクレームにアクセスします。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 最新のユーザー情報は`userInfo(withAccessToken:)`メソッドで取得できます。詳細は[EXAMPLES](https://github.com/auth0/Auth0.swift/blob/master/EXAMPLES.md#retrieve-user-information)をご覧ください。
 
-</Note>
+</Callout>
 
 ##### checkpoint.header
 

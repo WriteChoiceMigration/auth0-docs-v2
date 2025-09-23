@@ -39,11 +39,11 @@ event.refresh_tokenとapi.refreshTokenオブジェクトは両方とも、[リ�
 
 ポストログインの**api.refreshToken.revoke(reason)**メソッドを使用すると、トランザクションに関したリスクに対処することができます。このメソッドでは以下を行うことができます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 `api.refresh_token(reason)`メソッドを使用したい場合は、event.refresh_tokenのプロパティを必ず定義してください。
 
-</Note>
+</Callout>
 
 取り消し操作を行うと、[テナントログ](/docs/ja-jp/deploy-monitor/logs)に以下のログイベントが追加されます。
 
@@ -68,7 +68,7 @@ event.refresh_tokenとapi.refreshTokenオブジェクトは両方とも、[リ�
 
 これらのメソッドを使用すると、以下を基に、リフレッシュトークンのライフタイムと非アクティブポリシーを動的にカスタマイズすることができます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 `api.refreshToken.setExpiresAt(absolute)`メソッドと`api.refreshToken.setIdleExpiresAt(idle)`メソッドを使用すると、発行前にリフレッシュトークンの有効期限を定義したり、[リフレッシュトークン交換](/docs/ja-jp/secure/tokens/refresh-tokens/use-refresh-tokens)フロー中にリフレッシュトークンに既存の有効期限を変更したりできます。
 
@@ -76,7 +76,7 @@ event.refresh_tokenとapi.refreshTokenオブジェクトは両方とも、[リ�
 
 `api.refreshToken.setIdleExpiresAt(idle)`は、リフレッシュトークンの非アクティブタイムアウトを設定します。正常な交換でこのメソッドが呼び出されない場合には、アプリケーション設定にあるリフレッシュトークンのライフタイムを使って、非アクティブタイムアウトが上書きされます。
 
-</Note>
+</Callout>
 
 2023年9月21日以降に発行されたリフレッシュトークン（US-3リ－ジョンのテナントの場合は2024年2月22日）には、適切な値を持つセッションID（`session_id`）プロパティが含まれます。この日付よりも前に発行されたリフレッシュトークンには、`null`値を持つこのプロパティが含まれます。
 

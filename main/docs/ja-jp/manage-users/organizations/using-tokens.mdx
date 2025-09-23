@@ -28,11 +28,11 @@ JWTクレームには以下の2種類があります。
 
 組織を通じてユーザーを認証するには、`/authorize`エンドポイントへの呼び出しに`organization`パラメーターが追加されます。以下は、ユーザーが組織を通してログインした際に返されるトークンの例です。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 IDトークンとアクセストークンには、デフォルトでOrganization IDのみが含まれます。ただし、テナントは、Authentication APIでOrganization名を使用できるように構成することも可能です。そのように構成すると、IDトークンとアクセストークンに`org_id`クレームと`org_name`クレームの両方が含まれるようになります。詳細については、「[Authentication APIでOrganization名を使用する](/docs/ja-jp/manage-users/organizations/configure-organizations/use-org-name-authentication-api) 」を参照してください。
 
-</Note>
+</Callout>
 
 ### IDトークン
 
@@ -82,11 +82,11 @@ IDトークンとアクセストークンには、デフォルトでOrganization
 
 マシンツーマシンのユースケースでは、`/oauth/token`エンドポイントへのクライアント資格情報要求に`organization`パラメーターが追加され、アプリケーションはユーザーではなく自分自身のアクセストークンを取得できます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 IDトークンとアクセストークンには、デフォルトでOrganization IDのみが含まれます。ただし、テナントは、Authentication APIでOrganization名を使用できるように構成することも可能です。そのように構成すると、IDトークンとアクセストークンに`org_id`クレームと`org_name`クレームの両方が含まれるようになります。詳細については、「[Authentication APIで組織名を使用する](/docs/ja-jp/manage-users/organizations/configure-organizations/use-org-name-authentication-api)」をお読みください。
 
-</Note>
+</Callout>
 
 次のコードサンプルは、マシンツーマシンのユースケースで返されるアクセストークンの例です。
 
@@ -109,13 +109,13 @@ IDトークンとアクセストークンには、デフォルトでOrganization
 
 `/authorize`エンドポイントまたは`/oauth/token`エンドポイントへの呼び出しに`organization`パラメーターが追加されると、Auth0 SDKは`org_id`クレームを自動的に検証し、生成されたトークンの一部として返します。ただし、セキュリティを保護するために、追加の検証はトークンを受け取ったときに行います。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 テナントの構成を通じてAuthentication APIにおけるOrganization名の使用を許可した場合は、IDトークンとアクセストークンに`org_id`クレームと`org_name`クレームの両方が含まれます。その場合は、`org_id`クレームに加えて`org_name`クレームも検証し、受け取った値が信頼できるエンティティと一致することを確認します。
 
 一般に、トークンの検証にはOrganization IDを使用することが推奨されます。ただし、Organization名の方が適している状況では、Organization名を使用してかまいません。トークンの検証にOrganization名を使用をした場合の影響については、「[Authentication APIでOrganization名を使用する](/docs/ja-jp/manage-users/organizations/configure-organizations/use-org-name-authentication-api)」をお読みください。
 
-</Note>
+</Callout>
 
 **Webアプリケーション**
 

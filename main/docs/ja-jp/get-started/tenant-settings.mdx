@@ -159,11 +159,11 @@ Auth0が発行したトークンのタイムアウトは、別の場所で構成
 * **Enable email verification flow during login for Azure AD and ADFS connections（Azure ADとADFS接続のログインにメール確認フローを有効にする）**：有効にすると、ユーザーがAzure ADまたはADFS接続を使って初めてログインする際に、メールの確認を促します。
 * **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-12" tip="">Refresh Token</Tooltip> Revocation Deletes Grant（リフレッシュトークンの取り消しで付与を削除する）**：有効にすると、Authentication APIの`/oauth/revoke`エンドポイントを使ってリフレッシュトークンを取り消す際に、基盤となる付与を削除します。
 
-  <Note>
+  <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
   この機能は、既存のテナントに対しては、これまでの動作を維持するためにデフォルトで有効になっています。新しいテナント（2021年1月13日現在）に対しては、リフレッシュトークンを取り消しても付与が取り消されないように、この機能がデフォルトで無効化されます。付与の取り消しが必要な場合は、付与取り消しエンドポイントを使用して個別に要求を送らなければなりません。
 
-  </Note>
+  </Callout>
 
 * **Allow Organization Names in Authentication API（Authentication APIで組織名を使用する）**：有効にすると、[/authorize](https://auth0.com/docs/api/authentication#authorize-application)と[SAML](https://auth0.com/docs/api/authentication#saml)エンドポイントが組織IDと組織名を受け付けるようになります。また、IDとアクセストークンに`org_id`クレームと`org_name`クレームの両方が含まれるようになります。この設定を有効化する前に、「[Authentication APIで組織名を使用する](/docs/ja-jp/manage-users/organizations/configure-organizations/use-org-name-authentication-api)」を参照し、考慮するべき重要な事柄や潜在的な影響を確認してください。
 * **Allow Pushed Authorization Requests (PAR)（Pushed Authorization Requests（PAR）を許可する）**：有効にすると、`/par`エンドポイントがクライアントアプリケーションからプッシュされた認可要求を受け付けるようになります。そうすることで、クライアントアプリケーションが安全ではない表のチャンネル（ブラウザー）を使って要求を送信することが防げます。
@@ -175,13 +175,13 @@ Auth0が発行したトークンのタイムアウトは、別の場所で構成
 * **Runtime（ランタイム）**：[カスタムデータベースのアクションスクリプト](/docs/ja-jp/authenticate/database-connections/custom-db/templates)や[カスタムソーシャル接続](/docs/ja-jp/authenticate/identity-providers/social-identity-providers/oauth2)などのAuth0拡張機能に使用するNode.jsランタイム環境のバージョンを選択します。
 * **Verify Custom DB Scripts（カスタムDBスクリプトを確認する）**：選択すると、有効化済みのカスタムデータベースにNode.jsランタイムのバージョン互換チェックが実行されます。
 
-  <Note>
+  <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
   データベース検証アクションスクリプトの機能：
 
   + テナントに1～10の[データベース接続](/docs/ja-jp/authenticate/database-connections/custom-db/create-db-connection)がある場合に利用できます。
   + [カスタムデータベーススクリプト](/docs/ja-jp/authenticate/database-connections/custom-db/templates)を有効にする必要があります。
-  + Node.jsランタイムの互換性のみを検証します。機能性は検証しません。</Note>
+  + Node.jsランタイムの互換性のみを検証します。機能性は検証しません。</Callout>
 
 ### 移行
 

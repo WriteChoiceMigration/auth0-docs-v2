@@ -39,11 +39,11 @@ permalink: "interactive"
 
 Auth0を使用すると、アプリケーションに手軽に認証を追加して、ユーザープロファイル情報にアクセスできます。このガイドでは、Flutterアプリに[Auth0 Flutter SDK](https://github.com/auth0/auth0-flutter)を使ってAuth0を統合する方法を説明します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Flutter SDKは現在、Android、iOS、macOS版のFlutterアプリのみに対応しています。
 
-</Note>
+</Callout>
 
 このクイックスタートでは、すでに[Flutter](https://flutter.dev/)アプリが問題なく作動しているものとします。そうでない場合は、[Flutter「入門」ガイド](https://docs.flutter.dev/get-started/install)をチェックして、シンプルなアプリの始め方をご確認ください。
 
@@ -69,13 +69,13 @@ Callback URLとログアウトURLは、ユーザーをアプリにリダイレ�
 
 プラットフォームに合わせて、Callback URLとログアウトURLに以下の値を設定します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Androidでは、`SCHEME`プレースホルダーの値は`https`や他のカスタムスキームでも構いません。`https`スキームでは、[Androidアプリリンク](https://auth0.com/docs/get-started/applications/enable-android-app-links-support)を有効にする必要があります。
 
 iOS 17.4以降とmacOS 14.4以降では、ユニバーサルリンク（`https`スキーム）をCallback URLとログアウトURLに使うことができます。有効にすると、SDKは、iOS/macOSの古いバージョンではカスタムURLスキームにフォールバックして、アプリの[バンドル識別子](https://developer.apple.com/documentation/appstoreconnectapi/bundle_ids)を使用します。**この機能にはXcode 15.3以降と有料のApple Developerアカウントが必要です**。
 
-</Note>
+</Callout>
 
 #### Android
 
@@ -120,11 +120,11 @@ SDKにはマニフェストのプレースホルダーが必要です。Auth0は
 * `auth0Domain`：Auth0テナントのドメインです。通常、Auth0 Dashboardにある**アプリケーションの設定**の**［Domain（ドメイン）］**フィールドで確認できます。カスタムドメインを使用している場合には、この値をカスタムドメインの値に設定してください。
 * `auth0Scheme`：使用するスキームです。カスタムスキーム、または、[Androidアプリリンク](https://auth0.com/docs/applications/enable-android-app-links)を利用したい場合はhttpsになります。この値の設定に関する詳細情報は、[Auth0.Android SDK README](https://github.com/auth0/Auth0.Android#a-note-about-app-deep-linking)をお読みください。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 アクティビティーに特別な`intent-filter`を宣言する必要はありません。これは、マニフェストのプレースホルダーをAuth0**ドメイン**と**スキーム**の値で定義したからです。リダイレクトはライブラリーによって処理されます。
 
-</Note>
+</Callout>
 
 Android Studio内で**Sync Project with Gradle Files**を実行し、変更内容を適用します。
 
@@ -160,11 +160,11 @@ Auth0アプリケーションの[設定ページ](https://manage.auth0.com/#/app
 
 カスタムドメインがある場合は、Auth0ドメインの代わりに、設定ページにあるカスタムドメインを使用してください。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 関連ドメインが動作するためには、**iOSシミュレーター用に構築されている場合でも**、アプリが自分のチーム証明書で署名されている必要があります。Apple Teamには必ず、Auth0アプリケーションの設定ページで構成されたチームIDのものを使用してください。
 
-</Note>
+</Callout>
 
 [5
 

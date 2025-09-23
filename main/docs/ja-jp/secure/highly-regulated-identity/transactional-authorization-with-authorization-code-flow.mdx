@@ -16,11 +16,11 @@ permalink: "transactional-authorization-with-authorization-code-flow"
 
 この記事では、銀行間振込を承認するエンドツーエンドの流れを通して説明します。同じトランザクション認可フローが、他のユースケースにも適用できます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 トランザクション認可はAPIごとに構成しなければなりません。有効化したトランザクション認可は、そのAPIのスコープと`authorization_details.types`に適用されます。
 
-</Note>
+</Callout>
 
 ## 前提条件
 
@@ -167,11 +167,11 @@ exports.onExecutePostLogin = async (event, api) => {
 };
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Actionsから`api.authentication.challengeWith`の前に`api.multifactor.enable('any', { allowRememberBrowser: false })`を呼び出すと、このデバイスを記憶するオプションが削除され、ユーザーに対し、全トランザクションでプッシュチャレンジの検証を強制することができます。
 
-</Note>
+</Callout>
 
 プッシュ通知は、[Auth0 Guardian SDK](/docs/ja-jp/secure/multi-factor-authentication/auth0-guardian)がモバイルアプリケーションに渡す、`event.transaction.linking_id`を含みます。通信時、プロパティ名は、`txlnkid`に短縮されます。`linking_id`を使用して、モバイルアプリケーションは、トランザクション詳細を取得し、ユーザーに表示できます。ユーザーがこの操作を承認または拒否すると、モバイルアプリケーションは、MFAチャレンジをそれぞれ許可または拒否します。トランザクションは、[操作の完了](#complete-the-operation)の段階へと進みます。
 
@@ -185,11 +185,11 @@ Actionsから`api.authentication.challengeWith`の前に`api.multifactor.enable(
 
 <Frame>![null](/images/ja-jp/cdy7uua7fh8z/kYn2A0p2jTY5CUn1FsjVf/3f40fea75ae090e6befeb36af56b1660/Phone_Challenge_-_Japanese.png)</Frame>
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Actionsから`api.authentication.challengeWith`の前に`api.multifactor.enable('any', { allowRememberBrowser: false })`を呼び出すと、このデバイスを記憶するオプションが削除され、ユーザーに対し、全トランザクションでプッシュチャレンジの検証を強制することができます。
 
-</Note>
+</Callout>
 
 ユーザーは、検証コードが記載されたSMSを受け取ります。
 

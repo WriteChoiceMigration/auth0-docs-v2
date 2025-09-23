@@ -47,13 +47,13 @@ permalink: "user-import-export-extension"
 
 ユーザーをインポートするには、有効なJSONファイル（[スキーマと例はこちら](/docs/ja-jp/manage-users/user-migration/bulk-user-import-database-schema-and-examples)）を**［Drop your file here, or click to select（ここにファイルをドロップまたはクリックして選択）］**のエリアにドラッグアンドドロップします。または、この領域の任意の場所をクリックし、適切なJSONファイルを探して選択することもできます。JSONファイルには、インポートしたいユーザーのリストが含まれている必要があります。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Auth0テナントからエクスポートしたファイルを使用する場合は、`ndjson`から[JSON](https://auth0.com/docs/manage-users/user-migration/bulk-user-exports#json-compatible-format)に変換する必要があります。同じユーザーIDを維持するために、インポートするユーザーIDから`auth0| prefix`を削除しなければなりません。
 
 インポート処理では、ユーザーIDに自動的に`auth0| prefix`が追加されます。インポートする前に`auth0| prefix`を削除しなかった場合、ユーザーIDは、`auth0|auth0|...`として返されます。
 
-</Note>
+</Callout>
 
 ユーザーのインポート先になるデータベース接続を選択します。選択する接続が、少なくとも1つのアプリケーションで有効になっていることを確認してください。
 
@@ -67,11 +67,11 @@ Auth0テナントからエクスポートしたファイルを使用する場合
 
 ### ユーザーをエクスポートする
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 エクスポートファイルのサイズが大きいため、Auth0はndjson形式を使用します。ユーザーをインポートする前に、**ndjson**を**json**に変換する必要があります。その際には、[jq](https://stedolan.github.io/jq/)など、ご希望のライブラリーを使用できます。後でインポートするためにユーザーをエクスポートする場合は、ユーザーフィールドの名前をデフォルトのままにしておきます。［Column Name（カラム名）］にマッピングしてはいけません。
 
-</Note>
+</Callout>
 
 データベース接続に関連付けられている既存のAuth0ユーザーをエクスポートするには、**［Export（エクスポート）］**を選択します。
 
@@ -98,11 +98,11 @@ Auth0テナントからエクスポートしたファイルを使用する場合
 
 Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>では、ユーザーインポート/エクスポート拡張機能を使用して、`user_metadata`および `app_metadata`へのユーザープロファイルの一括更新が可能です。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Auth0は、現在、パスワードレスの一括インポートをサポートしていません。[Auth0 Management API](https://auth0.com/docs/api/management/v2#!/Users/patch_users_by_id)を使って、ユーザーを個別に更新してください。
 
-</Note>
+</Callout>
 
 ### ユーザーをエクスポートする
 
@@ -158,11 +158,11 @@ Auth0は、現在、パスワードレスの一括インポートをサポート
 
 ユーザーのメールアドレスは、データベースでユーザーの検索キー（lookup key）となっているため、変更しないでください。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 IDには一意の`connection|id`がなければなりません。複数の接続に同じユーザーIDが存在すると、更新に失敗します。
 
-</Note>
+</Callout>
 
 属性を追加するには、各ユーザースキーマに新しいフィールドを作成し、値で更新します。以下の例では、「Family Name（姓）」属性に「Smith（スミス）」の値があり、新しい属性の後にカンマ（「,」）があります。
 
@@ -184,11 +184,11 @@ IDには一意の`connection|id`がなければなりません。複数の接続
 
 変更をユーザーファイルに保存します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 この処理では、複数のユーザーをブロックできません。Auth0 Dashboardまたは[Auth0 Management API](https://auth0.com/docs/api/management/v2#!/Users/patch_users_by_id)を使ってユーザーを個別にブロックしなければなりません。
 
-</Note>
+</Callout>
 
 ### 更新したユーザープロファイルのデータをインポートする
 

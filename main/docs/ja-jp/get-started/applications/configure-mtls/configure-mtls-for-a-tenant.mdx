@@ -11,7 +11,7 @@ permalink: "configure-mtls-for-a-tenant"
 
 テナントのmTLS認証を構成する方法を説明します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 以下の例では、**$management_access_token**または[Management APIのアクセストークン](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens)を指定します。これは、少なくとも以下のスコープを含むアクセストークンで置き換えなければなりません。
 
@@ -25,7 +25,7 @@ permalink: "configure-mtls-for-a-tenant"
 
 必要なスコープを含んだアクセストークンの取得については、「 [アクセストークンを取得する](/docs/ja-jp/secure/tokens/access-tokens/get-access-tokens)」をお読みください。
 
-</Note>
+</Callout>
 
 まず最初に、[カスタムドメイン](/docs/ja-jp/customize/custom-domains)を構成して検証する必要があります。
 
@@ -52,11 +52,11 @@ curl --location --request POST 'https://$tenant/api/v2/custom-domains' \
 
 [Management API](https://auth0.com/docs/api/management/v2)でmTLSヘッダーを受け入れるための既存のカスタムドメインを構成できます。しかし、すでに存在するカスタムドメインの`type`は変更できません。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 mTLSには、種類が`self_managed_certs`のカスタムドメインのみ使用できます。Auth0は、現在、mTLSに`auth0_managed_certs`の種類を使用することをサポートしていません。
 
-</Note>
+</Callout>
 
 以下のPOST要求でmTLSヘッダーを受け入れるための既存のカスタムドメインを構成します。
 

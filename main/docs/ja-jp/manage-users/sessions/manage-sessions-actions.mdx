@@ -41,13 +41,13 @@ permalink: "manage-sessions-actions"
 
   + これはカスタマイズ可能なオプションであり、取り消すのではなく、リフレッシュトークンの保持を選択することもできます。この操作は非同期的に実行され、最終的には整合します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 `api.session.revoke(reason,options)`メソッドを使用する場合には、event.session.idプロパティが存在することを確認してください。
 
 `api.access.deny()`とは異なり、`api.session.revoke()`は現在のトランザクションを拒否し、セッションも取り消すため、第一要素の認証を再実行する必要があります。
 
-</Note>
+</Callout>
 
 ### イベントログの取り消しを監視する
 
@@ -70,13 +70,13 @@ permalink: "manage-sessions-actions"
 * リスク評価
 * Actionsの実行中に使用できる他の動的基準
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 `api.session.setExpiresAt(absolute)`メソッドおよび`api.session.setIdleExpiresAt(idle)`メソッドを使用する場合は、`event.session.id`などのevent.sessionオブジェクトのプロパティが存在することを確認してください。
 
 `api.session.setIdleExpiresAt(idle)`メソッドは、現在のインタラクションのセッション非アクティブタイムアウトを設定します。メソッドが再適用されない場合、後続の成功したインタラクションは、セッション非アクティブタイムアウト設定を使用して非アクティブタイムアウトを上書きします。
 
-</Note>
+</Callout>
 
 ## 制限事項
 

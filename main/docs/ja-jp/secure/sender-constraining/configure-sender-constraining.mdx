@@ -9,11 +9,11 @@ permalink: "configure-sender-constraining"
 'twitter:description': "Auth0テナントの送信者制約を構成する方法の概要です。"
 ---
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 ハイリーレギュレーテッドアイデンティティ機能を使用するには、エンタープライズプランとハイリーレギュレーテッドアイデンティティアドオンが必要です。詳細については、「[Auth0の価格設定](https://auth0.com/pricing/)」を参照してください。
 
-</Note>
+</Callout>
 
 送信者制約（別名トークンバインディング）は、アクセストークンを秘密鍵などの暗号鍵にバインドできるようにします。これにより、アクセストークンを要求したアプリケーションのみが、これを使用して関連するリソースにアクセスできるようになり、トークンの盗難やリプレイ攻撃が軽減されます。
 
@@ -24,11 +24,11 @@ Highly Regulated Identityは、「mTLSトークンバインディング」とし
 
 ## アクセストークンが証明書にバインドされる仕組み
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 [機密クライアント](/docs/ja-jp/get-started/applications/confidential-and-public-applications#confidential-applications)のみがmTLSのトークンバインディングに対応しています。
 
-</Note>
+</Callout>
 
 [アプリケーションをmTLS用に設定](/docs/ja-jp/get-started/applications/configure-mtls/configure-mtls-for-a-client)した後、アプリケーションは相互TLSを使用してアクセストークンを要求できるようになります。認可サーバーは、アクセストークンのペイロードに確認クレーム（`cnf`）を含めることによって、クライアント証明書を発行されたアクセストークンにバインドします。この`cnf`には、クライアント証明書のサムプリントを表すハッシュが含まれています。
 

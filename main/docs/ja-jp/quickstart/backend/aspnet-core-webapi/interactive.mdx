@@ -46,11 +46,11 @@ Auth0 DashboardでAPIをまだ作成していない場合は、対話型のセ�
 
 Auth0にあるAPIはそれぞれAPI識別子を使って構成され、アプリケーションのコードはAPI識別子をオーディエンスとしてアクセストークンを検証します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **Auth0を初めてご利用ですか？**Auth0の仕組みと、OAuth 2.0フレームワークを用いたAPI認証と認可の実装について説明します。
 
-</Note>
+</Callout>
 
 [1
 
@@ -81,11 +81,11 @@ Install-Package Microsoft.AspNetCore.Authentication.JwtBearer
 1. `AddAuthentication`メソッドを呼び出して、認証サービスを登録します。`JwtBearerDefaults.AuthenticationScheme`をデフォルトのスキームとして構成します。
 2. `AddJwtBearer`メソッドを呼び出して、JWTベアラー認証スキームを登録します。Auth0ドメインをオーソリティ、Auth0 API識別子をオーディエンスとして構成し、Auth0ドメインとAPI識別子がアプリケーションの**appsettings.json**ファイル内で設定されていることを確認します。
 
-   <Note>
+   <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
    場合によっては、アクセストークンに`sub`クレームが含まれないことがあります。この場合には、`User.Identity.Name`が`null`になります。別のクレームを`User.Identity.Name`にマッピングしたい場合には、それを`AddJwtBearer()`への呼び出しの中で`options.TokenValidationParameters`に追加します。
 
-   </Note>
+   </Callout>
 
 3. `UseAuthentication`メソッドと`UseAuthorization`メソッドの呼び出しを`var app = builder.Build();`メソッドの下に追加して、ミドルウェアパイプラインに認証ミドルウェアと認可ミドルウェアを追加します。
 
@@ -131,11 +131,11 @@ APIの呼び出し方は、開発しているアプリケーションの種類�
 * **クライアントシークレット**を`client_secret`パラメーターとして渡す。
 * **API 識別子**（このクイックスタートで以前にミドルウェアの構成に使用したのと同じ値）を`audience`パラメーターとして渡す。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 マシンツーマシンアプリケーションにクライアントIDとクライアントシークレットを取得する詳細については、アプリケーションの設定をお読みください。
 
-</Note>
+</Callout>
 
 **要求例**
 

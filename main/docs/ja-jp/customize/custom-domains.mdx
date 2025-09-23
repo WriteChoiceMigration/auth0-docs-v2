@@ -38,19 +38,19 @@ permalink: "custom-domains"
 
 カスダムドメインを構成する場合は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>の[［Auth0 Dashboard］>［Branding（ブランディング）］>［Custom Domains（カスタムドメイン）］](https://manage.auth0.com/#/custom_domains)タブで行います。カスタムドメインを追加し、証明書の種類を選択して、指示に従います。ドメインの検証プロセスを完了します。検証プロセスは、Auth0管理証明書を使用するか自己管理証明書を使用するかによって異なります。CNAMEを作成するときは、Auth0がCNAMEを検証してカスタムドメインを使用できるように、CNAMEをAuth0に対して宣言する必要があります。カスタムドメインを構成し確認したら、新しいカスタムドメインを使用するために[Auth0の機能を構成する](/docs/ja-jp/customize/custom-domains/configure-features-to-use-custom-domains)必要があります。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 無料のカスタムドメインをセットアップするには、Auth0テナントは検証目的および詐欺防止のために有効なクレジットカードをファイルに保有していなければなりません。クレジットカードには請求されません。
 
-</Note>
+</Callout>
 
 Auth0では、CNAMEが正しく管理されていることを確認できるように、開発段階（運用環境に移行する前）でカスタムドメインを作成することを推奨しています。たとえば、`login.YOUR_DOMAIN.com`を`YOUR_DOMAIN.auth0.com`にマッピングするCNAMEを作成することができます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 IPアドレスは変更されやすいため、Auth0はIPアドレスの静的なリストを提供していません。代わりに、カスタムドメインを[Allow List（許可リスト）](/docs/ja-jp/secure/security-guidance/data-security/allowlist)に追加することをお勧めします。
 
-</Note>
+</Callout>
 
 カスタムドメインを使用するように既存のテナントを更新できます。`YOUR_DOMAIN.auth0.com`を使用した既存の統合はそのまま機能します。変更後は既存のセッションが無効になるため、ユーザーは再度ログインする必要があります。さらに、ログイン中にエラーが発生した場合、ユーザーはカスタムドメインに関連付けられたブラウザーCookieを削除しなければならない場合があります。埋め込み型のLockまたはSDKを使用する場合は、標準ドメイン設定とカスタムドメインのどちらを使用するかを選択できます。
 

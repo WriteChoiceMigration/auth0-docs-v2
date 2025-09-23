@@ -15,21 +15,21 @@ permalink: "part-1"
 
 ExampleCo は、Identity as a Service（IDaaS）プロバイダーとしてAuth0を使用することを決定しました。この決定の理由は、会社がIDおよびアクセス管理のトレーニング、実装、保守にリソースを投入したくなかったためです。さらに、同社は将来的にこのソリューションにモバイルネイティブアプリとAPIを追加し、承認されたタイムシートを社内システムにプッシュする計画もあります。Auth0は、最小限の労力でアーキテクチャにこのような変更を組み込む柔軟性を提供します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 IDaaS（Identity as a Service）は、IDおよびアクセス管理を行うクラウドベースのサービスです。提供するサービスには、シングルサインオン（SSO）、フェデレーションID、パスワード管理などがあります。
 
-</Note>
+</Callout>
 
 ## 使用するプロトコル
 
 次の決定は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OpenID</Tooltip> Connect（OIDC）を使用した<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OAuth 2.0</Tooltip> と<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SAML</Tooltip>のどちらのプロトコルを使用するかという点に関係します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Auth0では、消費者向けのWeb製品（OAuth 2.0、OAuth 1.0、OpenID）とエンタープライズデプロイメント（SAML、WS-Federation、LDAP）のどちらにも、実績があり広く普及しているIDプロトコルを実装しています。ビジネスニーズに合ったものを自由にお選びいただけます。
 
-</Note>
+</Callout>
 
 **OpenID Connect**は、OAuth 2.0ファミリーの仕様に基づいた認証プロトコルです。OAuth 2.0プロトコルを介して配信されるシンプルなJSON IDトークン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">JWT</Tooltip>）を使用します。
 
@@ -87,9 +87,9 @@ IDトークンの検証にはいくつかの手順が必要です：
 12. `acr`クレームが要求された場合、アプリケーションは主張されたクレーム値が適切であることを確認する必要があります。
 13. `auth_time`クレームが、このクレームに対する特定の要求を通して、または`max_age`パラメータを使用して要求された場合、アプリケーションは`auth_time`クレーム値を確認し、最後のエンドユーザー認証から経過した時間が長すぎると判断した場合は再認証を要求する必要があります。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 IDトークンをサーバー上に保管する場合は、セキュリティ保護が必要です。
 
-</Note>
+</Callout>
 

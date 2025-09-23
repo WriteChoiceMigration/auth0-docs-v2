@@ -39,21 +39,21 @@ The sections below outline how you can add:
 * To your native application, a Subscribe Now button that lets authenticated users sign up for a paid membership plan using a secure web checkout experience.
 * To your web application, a Subscription page that allows user to select membership subscriptions without the user logging-in again.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 This use case focuses on React-based web applications using the Auth0 React SDK.
 
 If you are using a different framework, such as Node or Express, the logic for managing `session_transfer_token` whether through a URL parameter or cookie can be adapted accordingly.
 
-</Note>
+</Callout>
 
 ## Configure Auth0 CLI
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Use the [Auth0 CLI](https://github.com/auth0/auth0-cli) to configure your Auth0 tenant. You can also use the [Auth0 Management API](https://auth0.com/docs/api/management/v2); to learn more read [Configure Native to Web SSO](https://auth0.com/docs/authenticate/single-sign-on/native-to-web/configure-implement-native-to-web#configure-native-applications).
 
-</Note>
+</Callout>
 
 Follow these steps to authenticate your Auth0 tenant using [Auth0 CLI](https://github.com/auth0/auth0-cli):
 
@@ -95,11 +95,11 @@ auth0 apps session-transfer update {yourClientId}  --allowed-auth-methods=cookie
 
 If the `session_transfer_token` is injected into the browser with a cookie no additional changes to your web application are required. The only requirement is that the browser navigates to your [application's Login URI](https://sus.auth0.com/docs/get-started/applications/application-settings#application-uris) to handle the redirect of the user to your Auth0 tenant’s `/authorize` endpoint.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 You can configure the Application Login URI in your application's settings within the Auth0 Dashboard. This is the route Auth0 will redirect users to when initiating login from external sources.
 
-</Note>
+</Callout>
 
 ## Create a subscription page in the web application
 
@@ -346,13 +346,13 @@ struct MainView: View {
 }
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 This sample uses the audience `https://sample.api.com` for demonstration purposes. You can create an API with this identifier in your Auth0 tenant or replace it with your own API identifier.
 
 To learn more, read [Set Up APIs](https://auth0.com/docs/get-started/auth0-overview/set-up-apis).
 
-</Note>
+</Callout>
 
 This allows the user to select the `Subscribe to Membership` in the native app and immediately start the web application subscription process without logging in again.
 
@@ -446,13 +446,13 @@ private fun loginWithBrowser() {
 }
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 This sample uses the audience `https://sample.api.com` for demonstration purposes. You can create an API with this identifier in your Auth0 tenant or replace it with your own API identifier.
 
 To learn more, read [Set Up APIs](https://auth0.com/docs/get-started/auth0-overview/set-up-apis).
 
-</Note>
+</Callout>
 
 4. Add the `launchSubscriptionFlow()` method to open the web application:
 

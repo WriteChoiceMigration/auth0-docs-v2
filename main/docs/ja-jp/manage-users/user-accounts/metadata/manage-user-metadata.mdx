@@ -28,11 +28,11 @@ exports.onExecutePostLogin = async (event, api) => {
 
 アクションの終わりに、`api.user.setAppMetadata`を呼び出して、ユーザーオブジェクトにある一部のメタデータを保存したいと示します。各トリガーの実行終了時に、アクションはユーザープロファイルを単一操作で更新します。`setUserMetadata`アクションが複数回呼び出された場合（同じフローの異なるアクションで呼び出された場合であっても）、ユーザープロファイルの更新はトリガーの実行が終わったときの1回だけになります。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 `setUserMetadata`または`setAppMetadata`の複数の呼び出しは、異なるアクションで行われたものであっても、トリガーの実行の最後に1つのユーザープロファイル更新にまとめてバッチ処理されます。
 
-</Note>
+</Callout>
 
 ## ベストプラクティス
 

@@ -74,11 +74,11 @@ Auth0テナントは認可サーバーとして機能し、ユーザー（リソ
 
 単一のAPIであっても、論理的に関連する[マイクロサービスAPI](/docs/ja-jp/get-started/apis/set-logical-api)一式であっても、Auth0が提供するアクセストークンを活用してサービスへのアクセスを保護できます。これを[Auth0 Dashboard](https://manage.auth0.com/)で、または[Auth0 Management API](/docs/ja-jp/api/management/v2#!/Resource_Servers/post_resource_servers)を通じてセットアップするのは比較的簡単ですが、さまざまなアプリケーションのシナリオとAPIのレイアウトを確認して、システムに最適なアーキテクチャを判断することが重要です。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 OAuth2のアクセストークンは、主に公開APIのセキュリティ保護で使うために設計されています。アクセストークンは、JWTで表記されると自己完結型エンティティになるため、サードパーティのAPIを呼び出すことなく検証できます。使用しているAPIがアプリケーションの一部（アプリケーションによってのみ呼び出される）である、またはファイアウォールの内側にあるなど、これに該当しない場合には、既存のクッキーベースなどのワークフローで十分に保護されており、トークンで保護することは過剰かもしれません。
 
-</Note>
+</Callout>
 
 OAuth2は、特にサードパーティのアクセスを念頭に置いて設計されています。たとえば、ユーザー（リソース所有者）が、ユーザーのデータを提供するサービス（リソースサーバー）と同じOrganizationに属していないアプリケーション（クライアント）を使用する場合などです。このようなケースで、アプリケーションがユーザーの所有するデータにアクセスする必要がある場合、ユーザーはそのデータが存在するOrganizationにリダイレクトされ、そのOrganizationがユーザーを認証してから、ユーザーに対して、アプリケーションにデータへのアクセス許可を与えるように求めます。アクセス許可を求めるこのプロンプトは[同意](/docs/ja-jp/get-started/applications/confidential-and-public-applications/user-consent-and-third-party-applications)の提供と呼ばれ、[サードパーティアプリケーション](/docs/ja-jp/scopes/api-scopes#example-an-api-called-by-a-third-party-application)のサポート提供の大きな部分を占めます。サードパーティアプリケーションを統合する予定がある場合は、Auth0がユーザーの同意を求めるプロンプトを処理するように、早い段階でサードパーティとしてマークすることが重要です。
 

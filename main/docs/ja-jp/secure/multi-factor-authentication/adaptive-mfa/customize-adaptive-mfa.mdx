@@ -13,11 +13,11 @@ permalink: "customize-adaptive-mfa"
 
 ## Adaptive MFAをカスタマイズするタイミング
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Adaptive MFAのカスタマイズは、ユーザーがMFAに登録されていて、IDとしてメールアドレスを使用することが求められている場合のみ検討するようにしてください。
 
-</Note>
+</Callout>
 
 ユーザーが<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">MFA</Tooltip>に登録されていない場合は、Adaptive MFAにデフォルトのポリシーを使用してください。ユーザーがMFAに登録されておらず、アクションが高リスクだと判断した場合、不正者を阻止する方法は限られてしまいます。
 
@@ -231,11 +231,11 @@ exports.onExecutePostLogin = async (event, api) => {
 
 各評価には[信頼スコア](#confidence-scores)、評価結果を説明するコード、およびその他のコンテキスト情報が含まれています。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 アセスメントバックエンドシステムで障害が発生するという極めて稀な状況では、Auth0がデフォルトで安全な動作をとるため、アセスメントコードが`assessment_not_available`、関連付けられた信頼度が`low`になります。Actionsを使用すると、この信頼度スコアをオーバライドできます。詳細については、「[Auth0がアセッサーを実行できない場合の安全な処理](#safely-handle-when-auth0-fails-execute-assessors)」をお読みください。
 
-</Note>
+</Callout>
 
 #### NewDevice評価
 
@@ -553,11 +553,11 @@ exports.onExecutePostLogin = async (event, api) => {
 
 ## アクションの結果
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 MFAをトリガーするアクションは、デフォルトのAdaptive MFAの動作に優先します。
 
-</Note>
+</Callout>
 
 いずれかのアクションが信頼スコアに基づいてMFAをトリガーする場合、デフォルトのAdaptive MFAポリシーは、信頼スコアが`low`（低）のときにMFAをトリガーします。
 

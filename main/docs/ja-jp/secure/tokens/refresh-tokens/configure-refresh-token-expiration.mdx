@@ -49,11 +49,11 @@ permalink: "configure-refresh-token-expiration"
 </tbody>
 </table>
 
-   <Note>
+   <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
    うるう年を考慮して、1年は365.25日と計算されます。
 
-   </Note>
+   </Callout>
 
 6. **［Inactivity Expiration（非アクティブ有効期限）］**を有効にします。有効にすると、リフレッシュトークンは指定された非アクティブ有効期限で期限切れとなり、それ以降はトークンが使用できなくなります。
 7. **［Maximum Refresh Token Lifetime（リフレッシュトークンの最大ライフライム）］**を秒単位で入力します。リフレッシュトークンが指定された期限内に交換されない場合には、リフレッシュトークンが期限切れとなり、新しいアクセストークンの取得に使用できなくなります。有効期限は、リフレッシュトークンが期限内に新しいアクセストークンと交換されるたびに更新されます。
@@ -111,11 +111,11 @@ PATCH /api/v2/clients/{id}
 * Auth0 SDKはすべて、リフレッシュトークンの有効期限に対応しています。
 * リフレッシュトークンの有効期限機能は、[OAuth 2.0 Security BCP recommendations](https://www.ietf.org/archive/id/draft-ietf-oauth-security-topics-16.html#section-4.13.2)に準拠しています。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 OAuth BCPでは、ブラウザーベースのアプリケーションに対して発行されたリフレッシュトークンに有効期限があること、送信者に対して制約を設けるか、各要求でトークンをローテーションさせることが求められます。そのため、SPAは、デフォルトでローテーションを行い、無期限のリフレッシュトークンを**サポートしていません**。
 
-</Note>
+</Callout>
 
 ## もっと詳しく
 

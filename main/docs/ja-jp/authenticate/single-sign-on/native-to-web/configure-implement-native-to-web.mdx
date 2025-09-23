@@ -23,7 +23,7 @@ You need an [access token](/docs/ja-jp/secure/tokens/access-tokens/management-ap
 
 To configure Native to Web SSO, you need to create and manage session_transfer_tokens and configure your native and web applications.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Native to Web SSO supports the following SDKs: [Auth0 Android SDK](https://github.com/auth0/auth0.android/blob/main/EXAMPLES.md#native-to-web-sso-login-ea) and [Auth0 Swift SDK](https://github.com/auth0/Auth0.swift/blob/master/EXAMPLES.md#sso-credentials-ea).
 
@@ -31,7 +31,7 @@ Native to Web SSO support is available in the following tools: [Auth0 Deploy CLI
 
 Native to Web SSO supports any authentication flow that returns a refresh token, such as [Resource Owner Password Flow](/docs/ja-jp/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa) and [Authorization Code Flow with Proof Key for Code Exchange](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce).
 
-</Note>
+</Callout>
 
 ### Create and manage Session Transfer Tokens
 
@@ -117,13 +117,13 @@ Native to Web Single SSO provides a seamless user experience transitioning authe
 
 To facilitate this, your native application needs to exchange a refresh token for a Session Transfer Token and send the Session Transfer Token, through a URL or cookie, to your web application to authorize the session.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 If `allow_refresh_token` is disabled in the client but the application requests `offline_access`, Auth0 will not issue a `refresh_token` but the authentication will still work.
 
 If refresh token rotation is enabled, Auth0 returns a new `refresh_token` in the token exchange call. The refresh token exchange should happen immediately before your code opens the web application.
 
-</Note>
+</Callout>
 
 ### In your native application
 
@@ -186,11 +186,11 @@ curl -X POST https://{yourDomain}/oauth/token \
     "audience":"urn:YOUR_AUTH0_TENANT_DOMAIN:session_transfer"}'
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 These samples use placeholder variables for dynamic variables. Replace the placeholders using your Auth0 domain, client_id and an existing refresh_token.
 
-</Note>
+</Callout>
 
 The Auth0 tenant returns a single-use and short-lived (1-minute lifetime) session_transfer_token.
 
@@ -203,13 +203,13 @@ The Auth0 tenant returns a single-use and short-lived (1-minute lifetime) sessio
 }
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 If refresh token rotation is enabled, the exchange will also return a refresh token.
 
 If you requested an ID Token during authentication, this call will also return an ID Token.
 
-</Note>
+</Callout>
 
 #### Step 2: Send the Session Transfer Token through a URL or cookie
 
@@ -363,11 +363,11 @@ dataTask.resume()
 
 ### In your web application
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 When the Session Transfer Token is sent as a cookie, no further configuration is needed as the browser sends the cookie in the `/authorize` endpoint request.
 
-</Note>
+</Callout>
 
 Implement Native to Web Web Single SSO in your web application using URL parameters by:
 

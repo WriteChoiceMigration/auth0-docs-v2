@@ -26,11 +26,11 @@ permalink: "adfs"
 
 Windows PowerShellを使って、以下の2つのコマンドを実行します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 このスクリプトは、システムの管理者として実行しなければなりません。
 
-</Note>
+</Callout>
 
 ```powershell lines
 (new-object Net.WebClient -property @{Encoding = [Text.Encoding]::UTF8}).DownloadString("https://raw.github.com/auth0/adfs-auth0/master/adfs.ps1") | iex
@@ -42,11 +42,11 @@ AddRelyingParty "urn:auth0:{yourTenant}" "https://{yourDomain}/login/callback"
 
 統合を自動化するために、スクリプトは[ADFS PowerShell SnapIn](http://technet.microsoft.com/en-us/library/adfs2-powershell-basics.aspx)を使って**<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Relying Party</Tooltip>**を作成し、構成します。Relyin Partyは認証されたユーザーについて、**email**、**upn**、**given name**、**surname**のクレームを発行します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 [カスタムドメイン](/docs/ja-jp/customize/custom-domains)機能を使用している場合は、`$webAppEndpoint`の値を「`https://<使用しているカスタムドメイン>/login/callback`」に置き換える必要があります。
 
-</Note>
+</Callout>
 
 スクリプトは以下のように、ADFSにRelying Party Trustを作成します。
 

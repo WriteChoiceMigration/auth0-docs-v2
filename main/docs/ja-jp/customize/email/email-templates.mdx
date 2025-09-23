@@ -9,11 +9,11 @@ permalink: "email-templates"
 'twitter:description': "テンプレート言語Liquidの構文を使ってメールをカスタマイズする方法について説明します。"
 ---
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 カスタマイズしたメールを送信するには、プロバイダーまたはテンプレートレベルで差出人のアドレスを構成する必要があります。詳細については、「[テンプレートのフィールドを構成する](#configure-template-fields)」の「**差出人のアドレスを構成する**」セクションをお読みください。
 
-</Note>
+</Callout>
 
 メールをカスタマイズできるようにするには、サードパーティサービス（Amazon SES、Mandrill、SendGrid、SparkPost、Mailgun、またはカスタムSMTPプロバイダーなど）を使って、自分のメールプロバイダーを構成する必要があります。詳細については、「[外部SMTPプロバイダーを構成する](/docs/ja-jp/customize/email/smtp-email-providers)」をお読みください。
 
@@ -23,13 +23,13 @@ Auth0では、DashboardでHTMLベースの[メール](https://manage.auth0.com/#
 
 メールテンプレートごとに**［From Address（差出人アドレス）］**、**［Subject（件名）］**、**［Message（メッセージ）］**本文をカスタマイズできます。Liquid構文を使ってコンテンツを動的に生成し、多数のコンテキスト変数にアクセスすることができます。メールメッセージの作成時に、これらの変数は関連する値に置き換えられます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **［Try（テスト）］**ボタンをクリックすると、Auth0から、テナントの（フレンドリー名ではない）生の名前を基にしたデフォルトのアプリ名がメールで届きます。異なるアプリに対してテンプレートをテストするには、フローの実行に使うサンプルユーザーを作成します。
 
 ただし、特定のアプリケーションやユーザーに対しては、Auth0 Management APIの[メールアドレスの確認メール送信](https://auth0.com/docs/api/management/v2#!/Jobs/post_verification_email)エンドポイントを使って手動で確認メールをトリガーできます。
 
-</Note>
+</Callout>
 
 ## 共通変数
 
@@ -59,7 +59,7 @@ Auth0では、DashboardでHTMLベースの[メール](https://manage.auth0.com/#
   + `support_email`
   + `support_url`
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 以下のユーザープロパティは信頼できないため、Liquidの`escape`関数をパイプでつなげなければなりません（`{{ user.name | escape }}`）：
 
@@ -71,7 +71,7 @@ Auth0では、DashboardでHTMLベースの[メール](https://manage.auth0.com/#
 
 また、ユーザーが提供した情報を含む`user.user_metadata`プロパティは、エスケープしなければなりません。
 
-</Note>
+</Callout>
 
 以下のメールテンプレートは、[組織](/docs/ja-jp/manage-users/organizations/organizations-overview)のためにさらにカスタマイズすることができます。
 

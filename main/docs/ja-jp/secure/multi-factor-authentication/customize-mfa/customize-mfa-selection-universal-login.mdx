@@ -11,12 +11,12 @@ permalink: "customize-mfa-selection-universal-login"
 
 Auth0は[多要素認証（MFA）](/docs/ja-jp/secure/multi-factor-authentication/multi-factor-authentication-factors)でユーザーアクセスを確保するための様々な要素をサポートしています。`ポストログイン`を使用することで、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>フローをカスタマイズし、指定要素または要素のシーケンスでユーザーにチャレンジできます。ユーザーやその所属する組織に関するコンテキスト情報を使用して、より個別化された体験を作成することも可能です。例えば、特定の組織への所属やユーザーに割り当てられた役割に基づいて、特定の要素でユーザーにチャレンジするようにフローをカスタマイズすることができます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 * この機能を使用すると、MFA選択フローをカスタマイズすることができます。MFA登録フローをカスタマイズしたい場合は、「[ユニバーサルログインでのMFA登録をカスタマイズする](/docs/ja-jp/secure/multi-factor-authentication/customize-mfa/customize-mfa-enrollments-universal-login)」を参照してください。
 * [ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login/universal-login-vs-classic-login/universal-experience)を使用している場合、MFAフローはActionsを使わないとカスタマイズできません。
 
-</Note>
+</Callout>
 
 ## 仕組み
 
@@ -119,13 +119,13 @@ MFAフローをカスタマイズする前に、まず、テナントでMFAを�
 
 <Frame>![［Auth0 Dashboard］>［Security（セキュリティ）］>［MFA（多要素認証）］>［Additional Settings（追加設定）］](/images/ja-jp/cdy7uua7fh8z/2hv0ELTkkka3t230SXfxw/3df4a2e61198f7c2cfbf6864df592b39/MFA_-_Actions_toggle_-_Japanese.png)</Frame>
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 * `challengeWith`コマンドと`challengeWithAny` コマンドを実行するアクションは、[api.multifactor.enable](/docs/ja-jp/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/post-login-api-object)を介して有効化されたチャレンジをオーバーライドします。また、**［Define Policies（ポリシーを定義）］**にあるMFA設定に優先します。
 * アプリケーションにアクセスしようとするユーザーに必ずMFAを完了させるためには、**［Require Multi-factor Auth（多要素認証を要求）］**を**［Use Adaptive MFA（Adaptive MFAを使用する）］**または**［Always（常に）］**に設定します。Actionsコードが実行されない場合にこの設定がバックアップとして機能し、ユーザーによるMFAの迂回を防ぎます。
 * コマンドでリスク評価を使用したい場合は、**［Adaptive MFA Risk Assessment（Adaptive MFAリスク評価）］**を有効にして、`post-login`のActionsコードで[event.authentication.riskAssessment](/docs/ja-jp/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/post-login-api-object)を使用します。
 
-</Note>
+</Callout>
 
 ### 要素にユーザーを登録する
 

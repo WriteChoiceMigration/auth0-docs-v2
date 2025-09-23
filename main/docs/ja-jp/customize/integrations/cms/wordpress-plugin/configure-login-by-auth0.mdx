@@ -11,11 +11,11 @@ permalink: "configure-login-by-auth0"
 
 Login by Auth0プラグインは、そのセットアップウィザードを使って構成することも、手動で構成しながら細かく制御することもできます。詳細については、「[Login by Auth0をインストールする](/docs/ja-jp/customize/integrations/cms/wordpress-plugin/install-login-by-auth0)」をお読みください。以下の手順は、セットアップウィザードが完了しなかった場合や、ログインの問題のトラブルシューティングの一環としても使用できます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 以下の手順を始める前に、Auth0アカウントにログインする必要があります。アカウントがない場合は、[アカウントを作成](https://auth0.com/signup)してください。
 
-</Note>
+</Callout>
 
 ## Auth0の構成
 
@@ -42,11 +42,11 @@ Auth0テナントはWordPressサイトからのログイン要求を受け入れ
 2. **［Allowed Logout URLs（許可されているログアウトURL）］**フィールドにWordPressサイトのログインURLを入力します。
 3. **［Allowed Origins (CORS)（許可されているオリジン（CORS））］**フィールドは空のままにします（これには先ほどの**［Allowed Callback URLs（許可されているコールバックURL）］**の値が使用されます）。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 サイトのプロトコル（httpまたはhttps）を確認して、ホームURLをベースとして使用します。上記のURLはすべて、**［wp-admin］>［Settings（設定）］>［General（一般）］>［WordPress Address (URL)］**で確認できます。
 
-</Note>
+</Callout>
 
 1. 下にスクロールして、**［Show Advanced Settings（詳細設定を表示）］**を選んでから、**［OAuth］**ビューを選択して、**［JsonWebToken Signature Algorithm（JsonWebToken署名アルゴリズム）］**が［RS256］に設定されていることを確認します。もしこれを後で変更する必要がある場合は、この画面とwp-adminの両方で変更する必要があります（下の［Settings（設定）］>［Basic（基本）］を参照）。
 2. **［OIDC Conformant（OIDC準拠）］**を有効にします。
@@ -143,11 +143,11 @@ WordPressマルチサイトネットワークにあるすべてのサイトが�
 * **Custom Lock JS URL（カスタムLock JS URL）：**Lockのバーションをポイントする有効なURLです。**［Use Custom Lock JS URL（カスタムのLock JS URLを使用）］**が無効になっている場合、このフィールドは自動的に非表示になります。オプション名は`cdn_url`です。
 * **Connections to Show（表示する接続）：**ユーザーにログインでの使用を許可する各IDプロバイダーをここにリストします。空にすると、すべての有効なプロバイダーをユーザーが使用できるようになります（詳細については、「[Lock UIのカスタマイズ](/docs/ja-jp/libraries/lock/lock-ui-customization)」をお読みください）。オプション名は`lock_connections`です。
 
-  <Note>
+  <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
   パスワードレスログインを有効にした場合は、ここに、許可されたソーシャルIDプロバイダーをリストしなければなりません。詳細については、「[GitHubリポジトリにある.social(options, callback)](https://github.com/auth0/lock-passwordless#socialoptions-callback)」を参照してください。
 
-  </Note>
+  </Callout>
 
 ### 高度
 
@@ -162,11 +162,11 @@ WordPressマルチサイトネットワークにあるすべてのサイトが�
 * **Force HTTPS Callback（HTTPSコールバックを強制）：**このオプションは、サイトがHTTPSを許可しながらも強制する場合に有効にします。これにより、ホームURLがHTTPSに設定されていない場合に、Auth0コールバックがHTTPSに強制されます。オプション名は`force_https_callback`です。
 * **Auto Provisioning（自動プロビジョニング）：**新規登録が許可されない場合、Auth0からの新規ユーザーをWordPressデータベースに保存する必要がありますか？このオプションは、Auth0経由でログインしたときに存在しないWordPressユーザーを作成します（たとえば、ユーザーがAuth0 Dashboardで作成される場合）。オプション名は`auto_provisioning`です。
 
-  <Note>
+  <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
   WordPressで登録が許可されている場合は、この設定にかかわらず、新しいユーザーが作成されます。
 
-  </Note>
+  </Callout>
 
 * **User Migration（ユーザーの移行）：**このオプションを有効にすると、Auth0移行Webサービスが公開されます。しかし、接続は[Auth0 Dashboard](https://manage.auth0.com/#)で手動で構成する必要があります。移行プロセスの詳細については、「[WordPressプラグインのLogin by Auth0でユーザーを移行する](/docs/ja-jp/customize/integrations/cms/wordpress-plugin/user-migration-in-login-by-auth0)」をお読みください。**［Generate New Migration Token（新しい移行トークンの生成）］**ボタンを使用すると、保存したトークンを新しいトークンに置き換えることができます。両方のスクリプトで既存のトークンを新しいトークンに置き換えられるように、データベース接続の構成ページで**［Custom Database（カスタムデータベース）］**タブが開いていることを確認してください。オプション名は`migration_ws`です。移行トークンのオプション名は`migration_token`です。
 * **Migration IPs AllowList（移行IPのAllowList）：**リストにあるIPからの要求のみが、移行Webサービスへのアクセスを許可されます。オプション名は`migration_ips_filter`です。

@@ -50,11 +50,11 @@ ActionsはHooksでできることの大部分を処理できますが、移行�
 
 ### フックコードを新しいアクションにコピーする
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 フックのコードを新しいアクションにコピーし、Auth0 DashboardのActionsコードエディターで使用することをお勧めします。コードにある未解決の問題が特定できます。
 
-</Note>
+</Callout>
 
 1. 運用テナントにログインし、変換元となるフックのコードをコピーします。
 2. 非運用テナントに切り替えて、[［Auth0 Dashboard］ > ［Actions（アクション）］ > ［Library（ライブラリ）］](https://manage.auth0.com/#/select-tenant?path=/actions/library)に移動します。
@@ -160,11 +160,11 @@ exports.onExecuteSendPhoneMessage = async (event) => {}
 
 HooksとActionsは依存関係を類似した方法で処理します。どちらも、依存関係は、UIまたはManagement APIを使って個別に追加され、コードに含められます。どちらの場合も、`npm`レジストリで利用可能なパッケージを要求することができます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 `npm`モジュールが最新バージョンでないなら、今こそアップデートする絶好の機会です！
 
-</Note>
+</Callout>
 
 1. フックコード内の`require`ステートメントを検索してください。
 2. バージョン番号を削除しますが、これらの番号はメモしておいてください。
@@ -237,11 +237,11 @@ async (event, api) => {
 };
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 フックの`context`オブジェクトとは異なり、`event`オブジェクトのプロパティで保管・変更されたデータは、他のアクションでは使用できません。フックが、これらのプロパティでデータを設定することでコア機能をトリガーしている場合は、アクション間でデータを保持するために、[Machine to Machine（M2M）](/docs/ja-jp/customize/actions/explore-triggers/machine-to-machine-trigger/credentials-exchange-api-object)や[Pre User Registration（ユーザー登録前）](/docs/ja-jp/customize/actions/explore-triggers/signup-and-login-triggers/pre-user-registration-trigger/pre-user-registration-api-object)のアクションフローにある`api`インターフェイスを使う必要があります。
 
-</Note>
+</Callout>
 
 ### コールバックを変換する
 

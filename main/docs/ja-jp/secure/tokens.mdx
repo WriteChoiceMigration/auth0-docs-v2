@@ -15,11 +15,11 @@ IDに関連したトークンには、IDトークンとアクセストークン�
 
 [IDトークン](/docs/ja-jp/secure/tokens/id-tokens)は、アプリケーションでのみ使用される[JSON Web Token（JWT）](/docs/ja-jp/secure/tokens/json-web-tokens)です。たとえば、ユーザーのログインにGoogleを使用して、カレンダーを同期させるアプリの場合、Googleはユーザーに関する情報を含むIDトークンをアプリに送信します。その後、このアプリは[トークンの内容](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)を解析し、その情報（名前やプロファイル画像などの詳細を含む）を使ってユーザーエクスペリエンスをカスタマイズします。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 IDトークンに含まれる情報を使用する前に、必ず[IDトークンを検証](/docs/ja-jp/secure/tokens/id-tokens/validate-id-tokens)してください。この作業には[ライブラリー](https://jwt.io/#libraries-io)が便利です。
 
-</Note>
+</Callout>
 
 IDトークンを使ってAPIにアクセス**してはいけません**。各トークンには、意図されたオーディエンス（通常は受信者）についての情報が含まれています。<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OpenID</Tooltip> Connectの仕様によると、IDトークンのオーディエンス（**aud**クレームで示される）は、認証を要求しているアプリケーションのクライアントIDでなければなりません。そうでない場合は、そのトークンを信頼してはいけません。
 

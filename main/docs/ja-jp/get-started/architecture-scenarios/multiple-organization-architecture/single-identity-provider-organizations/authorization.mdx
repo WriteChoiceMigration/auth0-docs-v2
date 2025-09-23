@@ -13,7 +13,7 @@ permalink: "authorization"
 
 * [IDトークン](/docs/ja-jp/secure/tokens/id-tokens)は一般的に、カスタムクレームを使って、ユーザーの認可情報をアプリケーションへ伝えるために使用されます。このカスタムクレームは[ルール](/docs/ja-jp/customize/rules)拡張を使って追加することができます。追加されたクレームは、ユーザーの許可されていない操作を阻止するユーザーインターフェイスを表示できるようにします。また、IDトークンの認可情報は、ユーザーが従来型のWebアプリでフロントエンドの制御を迂回できないようにする方法をアプリケーションのバックエンドに提供します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **ベストプラクティス**
 
@@ -21,18 +21,18 @@ permalink: "authorization"
 
 Auth0のRBAC機能から提供された情報をIDトークンに（手動で適用する場合はアクセストークンにも）カスタムクレームとして追加することもできます。Auth0 Organizationsは、メンバーシップを通じて割り当てられたロールを介してAuth0 RBAC機能を活用することができます。詳細については、「[Organazaionメンバーにロールを追加する](/docs/ja-jp/manage-users/organizations/configure-organizations/add-member-roles)」を参照してください。
 
-</Note>
+</Callout>
 
 * 共有リソースサービスへの公開アクセスを提供するAPIは通常、アクセス制御メカニズムによって保護されます。このため、Auth0には認可ベアラートークンまたは<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OAuth</Tooltip> 2[アクセストークン](/docs/ja-jp/secure/tokens/access-tokens)を作成する機能が備わっており、これでユーザー認可情報をAPIに伝えることができます。通常は、Auth0の[Role-Based Access Control (RBAC)](/docs/ja-jp/manage-users/access-control/configure-core-rbac)を使用して1つ以上の[メンバーシップが割り当てられたロール](/docs/ja-jp/manage-users/organizations/configure-organizations/add-member-roles)を適用するか、[ルール](/docs/ja-jp/customize/rules)拡張を介してカスタムクレームを追加することで実行されます。Auth0のRBAC機能を活用して、アクセストークンの`スコープ`クレームを自動的に調整することもできます。APIはこの情報を使って適切なレベルのアクセス制御を適用し、ユーザーについての情報を追加で検索することなく、ポリシールールを適用できるようにします。
 * Auth0テナントでアプリケーションレベルのポリシーを実装したい場合には、広範囲のアプリケーションやリソースサービス（API）にポリシーを適用できるようになります。個別に変更する必要はありません。これを実装するには通常、[ルール](/docs/ja-jp/customize/rules)拡張を使用します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **ベストプラクティス**
 
 Auth0 Organizationsは、ユーザーの認証時にAuth0ルールが組織中心の情報にアクセスできるようにします。この情報には、ルールの`context`オブジェクトに含まれている`organization`オブジェクトを介してアクセスします。`organization`オブジェクトは、Auth0のOrganization定義に照らし合わせてプロビジョニングされたメタデータへのアクセスも可能にします。詳細については、「[Organizationのカスタム開発](/docs/ja-jp/manage-users/organizations/custom-development)」を参照してください。
 
-</Note>
+</Callout>
 
 ## IDトークンのクレーム
 
@@ -107,11 +107,11 @@ context.accessToken['http://travel0.net/multifactor'] = context.multifactor;
 
 Auth0組織機能は、Auth0テナントに関連する[認可コア](/docs/ja-jp/manage-users/access-control/configure-core-rbac)機能を使用して、[Role-Based Access Control (RBAC)](/docs/ja-jp/manage-users/access-control/rbac)もサポートします。RBACは、[Auth0組織のメンバーシップレベルで適用](/docs/ja-jp/manage-users/organizations/configure-organizations/add-member-roles)されます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 [APIに対してAuth0 Authorization Core（認可コア）RBACを有効化](/docs/ja-jp/get-started/apis/enable-role-based-access-control-for-apis)すると、アクセストークンに含まれるデフォルトの`scope`クレームが自動的に変更され、`permission`クレームがデフォルトで追加されます（例については「[トークンとOrganizationでの作業](/docs/ja-jp/manage-users/organizations/using-tokens)」を参照してください）。また、ロール情報をカスタムクレームとしてIDトークンに追加することもできます。それには、ルールの `context`オブジェクトにある`authorization`オブジェクトにアクセスします。詳細については、「[認可でのルールのサンプルユースケース：ユーザーのロールをトークンに追加する](/docs/ja-jp/manage-users/access-control/sample-use-cases-rules-with-authorization)」を参照してください。
 
-</Note>
+</Callout>
 
 ## アクセス制御
 

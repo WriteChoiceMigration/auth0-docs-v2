@@ -9,11 +9,11 @@ permalink: "authorization-code-flow-with-rar"
 'twitter:description': "認可コードフローにRich Authorization Requests（RAR）を使用する方法について説明します。"
 ---
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 ハイリーレギュレーテッドアイデンティティ機能を使用するには、エンタープライズプランとハイリーレギュレーテッドアイデンティティアドオンが必要です。詳細については、「[Auth0の価格設定](https://auth0.com/pricing/)」を参照してください。
 
-</Note>
+</Callout>
 
 [Rich Authorization Requests (RAR)](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rar)（リッチ認可要求(RAR)）はOAuth2プロトコルを拡張し、クライアントが認可コードフロー中にエンドユーザーなどのリソース所有者にきめ細かな認可データを要求して取得する方法を提供します。
 
@@ -39,11 +39,11 @@ curl --location 'https://$tenant/oauth/par' \
 --data-urlencode 'authorization_details=[{"type": "money_transfer", "instructedAmount": {"amount": 2500, "currency": "USD"},   "sourceAccount": "xxxxxxxxxxx1234", "destinationAccount": "xxxxxxxxxxx9876", "beneficiary": "Hanna Herwitz", "subject": "A Lannister Always Pays His Debts"}]'
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 フロントチャネル（ブラウザー）で機密データを保護し、受信した種類を早期に検証するために、Auth0では、`authorization_details`を直接`/authorize`エンドポイントに追加することはできません。`/par`エンドポイントに渡してから、認可コードフローを使って処理する必要があります。詳細については、「 [Pushed Authorization Requests（PAR）を使った認可コードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow/authorization-code-flow-with-par) 」を参照してください。
 
-</Note>
+</Callout>
 
 各`authorization_details`要素は、`type`フィールドが含まれている限り、完全にカスタムにすることができます。
 
@@ -105,11 +105,11 @@ grant_type=authorization_code&client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET
 
 標準プロトコルのサポートに加えて、`event.transaction.requested_authorization_details`プロパティを使用して、ログイン後のアクション内のRARも公開します。このプロパティを使用して、多要素認証のステップアップなど、トランザクションに関する決定を行います。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Auth0では、現在、Actionsを使ったPARの更新は許可されていません。
 
-</Note>
+</Callout>
 
 ## Auth0がサポートしていないものは何ですか?
 

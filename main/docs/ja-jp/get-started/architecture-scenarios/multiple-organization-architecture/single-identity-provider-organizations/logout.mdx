@@ -23,24 +23,24 @@ permalink: "logout"
    1. `returnTo`：[`https://hoekstra.corp.travel0.net/logoutComplete`](https://hoekstra.corp.travel0.net/logoutComplete)
    2. `client_id`：Hoekstra & AssociatesのTravel0 Corporate Bookingインスタンスのために、Travel0 Auth0テナントで作成されたアプリケーションに関連付けられているクライアントID。
 
-      <Note>
+      <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
       **ベストプラクティス**
 
       Auth0では、アプリケーションを個別に定義した方が、`returnTo` URLの構成が簡単になります。この構成においては、入力されたURLを正しく検証するために、対応する`client_id`が使用されます。詳細については、「[プロビジョニング](/docs/ja-jp/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/provisioning)」を参照してください。
 
-      </Note>
+      </Callout>
 
 3. Travel0 Auth0テナントはユーザーのために構築したAuth0セッションを終了し、すべてのSSO情報を削除して、指定された`returnTo` URLにブラウザーをリダイレクトします。
 4. Hoekstra & AssociatesのTravel Corporate Bookingインスタンスは、Jenniferが正常にログアウトしたことを通知するページを表示し、必要であれば再ログインできるボタンもおそらく表示します。
 
    1. この段階で、Travel0 Corporate Bookingインスタンスは、通常、ユーザーに関連づけられたアプリケーションセッションのクリーンアップも行います。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Auth0でのユーザーのSSOセッションを削除したくない場合は、Auth0テナント上にある`/logout`エンドポイントへのリダイレクトを設定せずに、アプリケーションセッションを単に終了することができます。ユーザーはアプリケーションからログアウトされますが、Auth0でのSSOセッションは有効なままです。この場合、ユーザーに対して、Auth0テナントにログインしたままであること、もう一度［`Login`（ログイン）］をクリックしても第1認証の資格情報が要求されないことを知らせるとよいでしょう。
 
-</Note>
+</Callout>
 
 ## エンタープライズ接続
 
@@ -57,13 +57,13 @@ Auth0でのユーザーのSSOセッションを削除したくない場合は、
    2. `client_id`：MetaHexa BankのTravel0 Corporate Bookingインスタンスのために、Travel0のAuth0テナントで作成されたアプリケーションに関連付けられているクライアントID。
    3. `federated`：MetaHexa Bank IdPからユーザーをログアウトする際に使用された任意のパラメーター。指定された場合、ブラウザーはMetaHexa Bank IdPに関連付けられた`/logout`エンドポイントにリダイレクトされ、ブラウザーをTravel0 Auth0テナントにリダイレクトで戻す前にユーザーのセッションを終了します。
 
-      <Note>
+      <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
       **ベストプラクティス**
 
       Auth0では、アプリケーションを個別に定義した方が、`returnTo` URLの構成が簡単になります。この構成においては、入力されたURLを正しく検証するために、対応する`client_id`が使用されます。詳細については、「[プロビジョニング](/docs/ja-jp/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/provisioning)」を参照してください。
 
-      </Note>
+      </Callout>
 
 ステップ3と4は[データベース接続](#database-connection)のシナリオで説明された内容と同じです。Jenniferの代わりにAmintha、Hoekstra & Assciatesの代わりにMetaHexa Bank（`metahexa.corp.travel0.net`）を入れてください。
 

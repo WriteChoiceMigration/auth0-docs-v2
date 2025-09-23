@@ -11,12 +11,12 @@ permalink: "configure-a-custom-phone-provider-with-terraform"
 
 You can configure a [custom phone provider](https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers/configure-a-custom-phone-provider) with the Terraform Auth0 provider. The Terraform Auth0 provider is used to interact with the [Auth0 Management API](https://auth0.com/docs/api/management/v2) in order to configure an Auth0 Tenant. To learn more, review Terraform’s [Auth0 Provider](https://registry.terraform.io/providers/auth0/auth0/latest/docs) documentation.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 * If you are using Terraform to configure a custom phone provider, delete your existing Auth0 tenant custom [phone](https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers/configure-a-custom-phone-provider) provider.
 * Auth0 has a maximum limit of one Action for Actions associated with the following triggers: custom-phone-provider and custom-email-provider.
 
-</Note>
+</Callout>
 
 The following steps outline how to a custom phone provider using Terraform:
 
@@ -45,11 +45,11 @@ resource "auth0_action" "custom_phone_provider" {
 }
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 In order to bind a Terraform `auth0_action` to an `auth0_trigger_action`, set the auth0_action to `deploy = true`. To learn more, read Terraform's [auth0_action](https://registry.terraform.io/providers/auth0/auth0/latest/docs/resources/action) documentation.
 
-</Note>
+</Callout>
 
 2. Bind the `auth0_action` to the custom-phone-provider `auth0_trigger_action`:
 

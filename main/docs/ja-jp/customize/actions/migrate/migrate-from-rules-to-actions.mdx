@@ -52,11 +52,11 @@ Post-Loginアクションは既存のルールの後に実行されるため、D
 
 ### ルールコードを新しいアクションにコピーする
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 ルールのコードを新しいアクションにコピーし、Auth0 DashboardのActionsコードエディターで使用することをお勧めします。コードにある未解決の問題が特定できます。
 
-</Note>
+</Callout>
 
 1. 運用テナントにログインし、変換元となるルールのコードをコピーします。
 2. 非運用テナントに切り替えて、[［Auth0 Dashboard］ > ［Actions（アクション）］ > ［Library（ライブラリ）］](https://manage.auth0.com/#/select-tenant?path=/actions/library)に移動します。
@@ -93,11 +93,11 @@ exports.onExecutePostLogin = async (event, api) => {
 
 ルールでは、ログインするユーザーに関するデータは[`user`オブジェクト](/docs/ja-jp/customize/rules/user-object-in-rules)に保存されます。アクションでは、このデータは[`event`オブジェクト](/docs/ja-jp/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/post-login-event-object)の`user`プロパティにあります。既存のプロパティの大部分は、この新しい場所でアクセスできます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 `event`オブジェクトのプロパティで保管・変更されたデータは、他のアクションでは使用できません。
 
-</Note>
+</Callout>
 
 **変更前**
 
@@ -131,11 +131,11 @@ exports.onExecutePostLogin = async (event, api) => {
 
 ルールでは、現在のログインセッションに関するデータは[`context`オブジェクト](/docs/ja-jp/customize/rules/context-object)に保存されます。アクションの場合、このデータは再形成され、[`event`オブジェクト](/docs/ja-jp/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/post-login-event-object)に移動されました。プロパティの多くはそのまま移行されましたが、わかりやすくするために一部が結合されました。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 `event`オブジェクトのプロパティで保管・変更されたデータは、他のアクションでは使用できません。`context.idToken`や`context.multifactor`など、プロパティにデータを設定することでルールがコア機能をトリガーする場合は、そのようなユースケースについて説明している以下のセクションをお読みください。
 
-</Note>
+</Callout>
 
 **変更前**
 
@@ -179,11 +179,11 @@ exports.onExecutePostLogin = async (event, api) => {
 
 ルールでは、特定のパッケージの特定のバージョンのみが許可され、新しいパッケージとバージョンを追加するにはAuth0への要求が必要です。アクションでは、`npm`レジストリで利用可能な任意のパッケージを要求できます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 `npm`モジュールが最新バージョンでないなら、今こそアップデートする絶好の機会です！
 
-</Note>
+</Callout>
 
 1. ルールコード内で`require`ステートメントを検索します。
 2. バージョン番号を削除しますが、これらの番号はメモしておいてください。
@@ -469,11 +469,11 @@ exports.onExecutePostLogin = async (event, api) => {
 
 アクションでは、リダイレクトが発生するとアクションパイプラインが一時停止し、ユーザーが戻ると再開されます。また、エクスポートされたリダイレクトトリガー関数はリダイレクトコールバックとは別のものです。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 あらゆるリダイレクトをアクションで適切に行う方法について、このガイドで説明することはできません。詳細については、「[アクションを使ったリダイレクト](/docs/ja-jp/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/redirect-with-actions)」をお読みください。
 
-</Note>
+</Callout>
 
 **変更前**
 

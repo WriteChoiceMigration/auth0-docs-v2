@@ -295,11 +295,11 @@ $('#loginRedirectCallback').click(async () => {
 
 非表示のiframe と`prompt=none`を使用するか、またはリフレッシュトークンをローテーションさせることで、サイレントモードで新しいアクセストークンを取得します。リフレッシュトークンは、SDKの構成時に`useRefreshTokens`が`true`に設定されている場合に使用されます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 SafariやBraveなど、サードパーティクッキーをブロックするブラウザーでは、リフレッシュトークンを使用せずにサイレントでアクセストークンを取得することはできません。カスタムドメインでの回避策については、「[Safariを使ったトークン更新のトラブルシューティング](/docs/ja-jp/troubleshoot/authentication-issues/renew-tokens-when-using-safari)」をお読みください。
 
-</Note>
+</Callout>
 
 メモリー内ストレージ（デフォルト）の設定でリフレッシュトークンが使用されると、新しいトークンは対応しているブラウザーのウェブワーカー（Web Worker）を使って取得されます。
 
@@ -330,11 +330,11 @@ $('#getTokenPopup').click(async () => {
 
 オプションは、ユーザー認証時に要求された、異なるオーディエンスとそのスコープを持つアクセストークンを取得する`getTokenSilently`に渡すこともできます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 これは、リフレッシュトークンを使わない場合（`useRefreshTokens: false`）にのみ有効です。リフレッシュトークンは、ユーザーの認証時に要求された特定のオーディエンスとスコープにバインドされているためです。
 
-</Note>
+</Callout>
 
 ```javascript lines
 $('#getToken_audience').click(async () => {

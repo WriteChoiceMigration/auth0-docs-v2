@@ -29,11 +29,11 @@ BYOKを使用して独自の顧客提供ルートキーをインポートする�
 
 1. [新しい暗号化キーの作成](https://auth0.com/docs/api/management/v2/keys/post-encryption)エンドポイントを呼び出して、Bring Your Own Keyのプロセスを開始し、暗号化マテリアルなしで事前にアクティブ化された顧客提供ルートキーの`kid`（キー識別子）を取得します。
 
-   <Note>
+   <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
    このエンドポイントは、キーの一意の識別子であるkid値を返します。
 
-   </Note>
+   </Callout>
 
 2. [パブリックラッピングキーの作成](https://auth0.com/docs/api/management/v2/keys/post-encryption-wrapping-key)エンドポイントを呼び出して、パブリックラッピングキーを作成して返します。
 3. 自分の環境で独自の暗号化キーマテリアルを生成し、それをパブリックラッピングキーでラップ（暗号化）して、ラップ暗号化キー（顧客提供ルートキー）を作成します。
@@ -100,9 +100,9 @@ BYOKを使用して独自の顧客提供ルートキーをインポートする�
 * [暗号化キーのインポート](https://auth0.com/docs/api/management/v2/keys/post-encryption-key)エンドポイントを使用して、新しい顧客提供ルートキーのマテリアルをインポートします。
 * [キーIDによる暗号化キーの削除](https://auth0.com/docs/api/management/v2/keys/delete-encryption-key)エンドポイントを使用して、既存の顧客提供ルートキーを削除し、Bring Your Own Keyの使用をオプトアウトします。Auth0環境ルートキーは、キー階層を再暗号化するために使用されます。この操作が既存のデータや認証フローに悪影響を及ぼすことはありません。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 テナントでカスタマーマネージドキー（CMK）機能が有効化されていない場合にAPIエンドポイントを呼び出すと、`This feature is not enabled for this tenant`（この機能はこのテナントに有効化されていません）というエラーが返されます。
 
-</Note>
+</Callout>
 

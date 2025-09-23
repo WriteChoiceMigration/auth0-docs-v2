@@ -23,13 +23,13 @@ Auth0 Organizations （組織）機能を使用することによって、シン
 
 各顧客に個別の組織テナントをプロビジョニングする場合には、一般的にそれぞれについてAuth0で独立したアプリケーションの定義が必要になります。その場合は通常、どのAuth0 Organizationを使うのかを特定する`/authorize`エンドポイントの呼び出しの一部として、アプリケーション固有の`client_id`パラメーターと`organization`パラメーターの双方が含まれます。詳細については、[「認証」](/docs/ja-jp/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/authentication)を参照してください。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **ベストプラクティス**
 
 Auth0では、アプリケーションを個別に定義した方が、構成しやすいだけでなく、セキュリティのために最大限の分離を実現できます。個別に定義することで、許可されるCallback URLなどの項目を個別に設定することができ、最小権限の原則（PoLP）に従って、クライアントIDやクライアントシークレット情報が漏洩する危険を最小限に抑えることができます。
 
-</Note>
+</Callout>
 
 別の方法として、Auth0で1つのアプリケーションの定義を使用することもできます。この場合、第1要素の認証の一環として、ユーザーは必要な組織を指定するように要求されます。これには通常、共通のアプリケーション `client_id`が必要ですが、 `organization`パラメーターは`/authorize`エンドポイント宛ての呼び出しでは省略されます。
 
@@ -37,13 +37,13 @@ Auth0では、アプリケーションを個別に定義した方が、構成し
 
 次に、ユーザーの認証に使われる[［Connections（接続）］](/docs/ja-jp/connections)を定義します。この例では、Hoekstra & Associatesの関連ユーザーのために[［Database Connection（データベース接続）］](/docs/ja-jp/connections/database)、MetaHexa Bankの関連ユーザーのためには[［Enterprise Connection（エンタープライズ接続）］](/docs/ja-jp/connections/identity-providers-enterprise) を定義します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **ベストプラクティス**
 
 単一のIDプロバイダー（IdP）を使用している組織では、定義された組織ごとに接続を1つ作成して柔軟性を持たせ、多数のユースケースに対応します。たとえば、各組織につき1つの[データベース接続またはカスタムデータベース接続](/docs/ja-jp/connections/database)があれば、組織が閉鎖された場合に関連付けられているユーザーが簡単に削除できます。また、パスワードの複雑性に関して異なる要件を課している組織にとっても、柔軟性が高まります。
 
-</Note>
+</Callout>
 
 接続が定義されたら、Auth0 DashboardまたはAuth0 Management APIを使用して、適切なAuth0 Organizationにプロビジョニングされます。詳細は、[「組織の接続を有効にする」](/docs/ja-jp/manage-users/organizations/configure-organizations/enable-connections)をお読みください。
 
@@ -59,11 +59,11 @@ Management APIまたはDashboardを介してユーザーをプロビジョニン
 
 ユーザーは、メンバーシップを割り当てることによってAuth0 Organizationに関係付けられ、Auth0 Organizationを設定して、[ユーザーのメンバーシップを自動で](/docs/ja-jp/manage-users/organizations/configure-organizations/grant-just-in-time-membership)、または[手動で、割り当てることができます](/docs/ja-jp/manage-users/organizations/configure-organizations/assign-members)。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 ユーザーに手動で組織のメンバーシップを割り当てるためには、そのユーザーにAuth0で定義された[ユーザープロファイル](/docs/ja-jp/manage-users/user-accounts/user-profiles)がなければなりません。[メンバーシップを手動で割り当てる](/docs/ja-jp/manage-users/organizations/configure-organizations/assign-members)ときは、Auth0 Tenant DashboardまたはAuth0 Management APIを使用します。
 
-</Note>
+</Callout>
 
 ### Invitation（招待）
 

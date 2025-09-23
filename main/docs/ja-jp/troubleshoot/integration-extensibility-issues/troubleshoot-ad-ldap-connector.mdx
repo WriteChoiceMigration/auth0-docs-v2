@@ -93,11 +93,11 @@ CPUサイクルを消費している可能性のあるホストマシン上の�
 
 最初にAD/LDAPコネクタを展開してから、アクティブユーザーの数が増加しているかどうかを確認します。これは、独自の[監視ソリューション](/docs/ja-jp/customize/log-streams)を使用して評価することも、[Auth0アクティブユーザーレポート](/docs/ja-jp/troubleshoot/customer-support/manage-subscriptions/monitor-subscription-usage)から推定値を取得することもできます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Microsoft Windows Server環境では、Microsoft System Center Operations Manager（SCOM）の構成を通じてAD/LDAPコネクターのサービスステータスを監視・警告することができます。詳細については、「[System Center Operations Managerを使ってAD/LDAPコネクターを監視する](https://auth0.com/docs/authenticate/identity-providers/enterprise-identity-providers/active-directory-ldap/ad-ldap-connector/ad-ldap-connector-scom)」を参照してください。
 
-</Note>
+</Callout>
 
 アクティブユーザーの数が増加し、上記のすべての手順が既に実行されている場合は、ホストマシンのハードウェア仕様をアップグレードするか、[高可用性環境](/docs/ja-jp/authenticate/identity-providers/enterprise-identity-providers/active-directory-ldap/ad-ldap-connector/ad-ldap-high-availability)を構成する必要があります。
 
@@ -140,11 +140,11 @@ Active Directoryを使用してWindowsネットワークを構成する場合は
 
 コネクタをホストしているコンピューターがプロキシの背後にある場合は、`HTTP_PROXY`システム環境変数を設定するか、[AD/LDAPコネクタ構成ファイル](/docs/ja-jp/authenticate/identity-providers/enterprise-identity-providers/active-directory-ldap/ad-ldap-connector/ad-ldap-connector-config-file-schema)で`HTTP_PROXY`変数を設定できます。認証されたプロキシを使用する場合、URLは `http://USERNAME:PASSWORD@SERVER_URL:PORT`の形式にする必要があります。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 環境変数を設定した場合、または[AD/LDAPコネクターの構成ファイル](https://auth0.com/docs/authenticate/identity-providers/enterprise-identity-providers/active-directory-ldap/ad-ldap-connector/ad-ldap-connector-config-file-schema)を編集した場合は、AD/LDAPコネクターを再起動しないと変更内容が適用されません。
 
-</Note>
+</Callout>
 
 `HTTP_PROXY` URLはプロキシ自体のURLである必要があり、`.pac`（自動構成）ファイルを指すことはできません。プロキシが`.pac`ファイルを使用して構成されている場合は、`.pac`ファイルをダウンロードし、そこでプロキシ URL を見つけます。
 

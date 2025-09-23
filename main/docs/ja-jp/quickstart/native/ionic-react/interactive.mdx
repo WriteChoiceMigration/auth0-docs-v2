@@ -53,11 +53,11 @@ Auth0を使用すると、アプリケーションに手軽に認証を追加し
 
 Auth0のサービスを利用するには、Auth0 Dashboadに設定済みのアプリケーションがある必要があります。Auth0アプリケーションは、プロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 以下の説明では、「`YOUR_PACKAGE_ID`」を実際のアプリケーションのパッケージIDに置き換えてください。これは、`capacitor.config.ts`ファイルの`appId`フィールドで見つけて構成することができます。詳細については、[Capacitorの構成スキーマ](https://capacitorjs.com/docs/config#schema)を参照してください。
 
-</Note>
+</Callout>
 
 ### アプリケーションを構成する
 
@@ -71,35 +71,35 @@ Auth0のサービスを利用するには、Auth0 Dashboadに設定済みのア�
 
 Callback URLとは、Auth0がユーザーを認証後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはログイン後にアプリケーションに戻りません。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 サンプルプロジェクトに沿って進めている場合には、次の値に設定します：
 
 `YOUR_PACKAGE_ID://{yourTenant}.auth0.com/capacitor/YOUR_PACKAGE_ID/callback`
 
-</Note>
+</Callout>
 
 ### ログアウトURLを構成する
 
 ログアウトURLとは、Auth0がユーザーをログアウト後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーを受け取ります。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 サンプルプロジェクトに沿って進めている場合には、次の値に設定します：
 
 `YOUR_PACKAGE_ID://{yourTenant}.auth0.com/capacitor/YOUR_PACKAGE_ID/callback`
 
-</Note>
+</Callout>
 
 ### 許可されているオリジンを構成する
 
 ネイティブアプリケーションからAuth0へ要求を送信できるようにするには、[アプリケーションの設定](https://manage.auth0.com/dashboard/#/applications/%7ByourClientId%7D/settings)で次の**許可されているオリジン**を設定します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 サンプルプロジェクトに沿って進めている場合、capacitorにiOSとAndroidでそれぞれ`capacitor://localhost, http://localhost`を設定します。
 
-</Note>
+</Callout>
 
 最後に、アプリケーションの**［Application Type（アプリケーションタイプ）］**が**［Native（ネイティブ）］**になっていることを[アプリケーションの設定](https://manage.auth0.com/dashboard/#/applications/%7ByourClientId%7D/settings)で必ず確認してください。
 
@@ -122,11 +122,11 @@ SDKは、慣用的に[React Hooks](https://reactjs.org/docs/hooks-overview.html)
 * [`@capacitor/browser`](https://capacitorjs.com/docs/apis/browser)：デバイスのシステムブラウザーと対話できるようになり、Auth0の認可エンドポイントへのURLを開くために使用されます。
 * [`@capacitor/app`](https://capacitorjs.com/docs/apis/app)：高レベルのアプリイベントを受け取れるようになるため、Auth0からのコールバックを扱うのに便利です。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 iOSのCapacitorのBrowserプラグインは[`SFSafariViewController`](https://developer.apple.com/documentation/safariservices/sfsafariviewcontroller)を使用し、iOS 11以降ではデバイス上のSafariとクッキーを共有しません。つまり、これらのデバイスではSSOが機能しません。SSOが必要な場合には、[ASWebAuthenticationSession](https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession)を使用する互換のプラグインを使用してください。
 
-</Note>
+</Callout>
 
 [4
 
@@ -164,11 +164,11 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 Capacitorアプリケーションでは、[CapacitorのBrowserプラグイン](https://capacitorjs.com/docs/apis/browser)によって、Auth0の[ユニバーサルログインページ](https://auth0.com/universal-login)にリダイレクトされます。`loginWithRedirect`関数の`openUrl`パラメーターに`Browser.open`の使用を設定し、デバイスのシステムブラウザーコンポーネント（iOSでは[SFSafariViewController](https://developer.apple.com/documentation/safariservices/sfsafariviewcontroller)、Androidでは[Chrome Custom Tabs](https://developer.chrome.com/docs/android/custom-tabs)）でURLが開くようにします。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 SDKの`loginWithRedirect`メソッドは、デフォルトで`window.location.href`を使用して、ユーザーのデバイスにあるデフォルトのブラウザーアプリケーションでログインページを開きます。プラットフォームに適切なシステムブラウザーコンポーネントは使用しません。ユーザーが認証でアプリケーションを離れるため、ユーザーエクスペリエンスとしては最適ではありません。
 
-</Note>
+</Callout>
 
 ##### checkpoint.header
 
@@ -186,11 +186,11 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 このイベントが発生した際に、`Browser.close()`メソッドがブラウザーを閉じるようにします。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 以下の説明では、カスタムURLスキームを使用して、アプリケーション内でコールバックを処理することを前提にしています。このためには、`YOUR_PACKAGE_ID`を選択したプラットのURLスキームで置き換えて登録します。詳細については、iOSには「[カスタムURLスキームを定義する](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app)」、Androidには「[アプリコンテンツ用のディープリンクを作成する](https://developer.android.com/training/app-links/deep-linking)」をお読みください。
 
-</Note>
+</Callout>
 
 ##### checkpoint.header
 
@@ -210,11 +210,11 @@ Auth0 SDKを使用してIonicとCapacitorで実現するには、以下を行い
 * `logout`を呼び出し、`logoutParams.returnTo`パラメーターにリダイレクト先のURLを渡して、SDKからログアウトします。
 * CapacitorのBrowserプラグインを使用して`Browser.open`でURLを開くコールバックに、`openUrl`パラメーターを設定します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 ログインの手順と同様に、`logout`を呼び出す際に`openUrl`を設定しないと、SDKがユーザーをログアウトURLにリダイレクトするのに、デバイスのデフォルトのブラウザーアプリケーションが使用されるため、ユーザーエクスペリエンスとしては最適ではありません。
 
-</Note>
+</Callout>
 
 ##### checkpoint.header
 

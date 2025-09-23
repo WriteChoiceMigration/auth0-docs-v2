@@ -23,7 +23,7 @@ permalink: "max-age-reauthentication"
 
 [OIDCの仕様](https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest)では、再認証UI（通常はログインプロンプト）をトリガーするのに`prompt=login`パラメーターが使用できると定義されています。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **prompt**
 
@@ -33,7 +33,7 @@ permalink: "max-age-reauthentication"
 
 認可サーバーがエンドユーザーに対して再認証を要求します。エンドユーザーを再認証できなかった場合はエラー（通常は`login_required`）を返さなければなりません。
 
-</Note>
+</Callout>
 
 ただし、このパラメーターで再認証を確実にするには問題があります。**RPには、再認証の操作が行われたことを確認する方法がありません**。なぜそうなのかを理解するために、トラフィックを調べてみましょう。RPからの認証要求のフローは以下のようになります。
 
@@ -77,13 +77,13 @@ ASが返す信頼されたIDドキュメントには、**最終ログインの�
 
 `prompt=login`と違って、`max_age`認証要求パラメーターには、指定の間隔内に再認証が行われたことをRPが確実に確認できる方法があります。[OIDCの仕様](https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest)には以下が定義されています。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **max_age**
 
 任意：最大認証時間。OpenIDプロバイダーが最後に有効なエンドユーザー認証を行ってからの、許可される経過時間を秒単位で指定します。経過時間がこの値より大きい場合、OpenIDプロバイダーは、エンドユーザーを有効に再認証しようとしなければなりません（`max_age`要求パラメーターは、OpenID 2.0 PAPEの`max_auth_age`要求パラメーターに対応します）。 `max_age`が使用された場合、返されるIDトークンには`auth_time`クレーム値が含まれなければなりません。
 
-</Note>
+</Callout>
 
 定義にある最後の文章が最も重要な部分です。RPが`max_age`を要求した場合、RPに`auth_time`クレームを渡す必要があります。つまり、`max_age`の用途には以下の2つがあります。
 
@@ -114,11 +114,11 @@ OIDCの仕様により、再認証の実行を確実に確認する方法とし�
 
 ### auth_time確認の例
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 再認証が行われたことを確認する検証を必ず実装してください。適切な`auth_time`が返されたことを検証しなければなりません。
 
-</Note>
+</Callout>
 
 以下の例では、[passport-auth0-openidconnect](https://github.com/auth0/passport-auth0-openidconnect)モジュールを使用して、再認証の確認方法を説明します。最初の（最も簡単な）例としては、`max_age=0`オプションを`Auth0OidcStrategy`に追加して確認する方法です。
 

@@ -9,11 +9,11 @@ permalink: "custom-token-exchange"
 'twitter:description': "早期アクセス版のカスタムトークン交換機能について説明します。"
 ---
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 カスタムトークン交換は、現在早期アクセス版として提供されています。Auth0のリリースについては、「[製品のリリース段階](/docs/ja-jp/troubleshoot/product-lifecycle/product-release-stages)」を参照してください。
 
-</Note>
+</Callout>
 
 [RFC 8693](https://datatracker.ietf.org/doc/html/rfc8693)で定義されているように、カスタムトークン交換はアプリケーションが`/oauth/token`エンドポイントを呼び出したときに既存のトークンをAuth0トークンに交換できるようにします。これは以下のような高度な統合に役立ちます。
 
@@ -27,7 +27,7 @@ permalink: "custom-token-exchange"
 
 カスタムトークン交換はユーザーの認証に使用できます。たとえば、アクション内でユースケースの認可ロジックを適用して、トランザクションにユーザーを設定できます。そうすると、Auth0がアクセストークン、IDトークンとリフレッシュトークンをユーザーに発行します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 カスタムトークン交換は、トランザクションでユーザーを識別するサブジェクトトークンの安全な検証を追加で担うことにより、トランザクションのユーザー設定に優れた柔軟性を提供します。
 
@@ -35,7 +35,7 @@ permalink: "custom-token-exchange"
 
 サブジェクトトークンの安全な検証を実装する各種のオプションについては、「[ユースケースの例とサンプルコード](#example-use-cases-and-code-samples)」に記載の推奨を読んだ上で適用してください。また、[攻撃防御](#attack-protection)機能の適用も検討してください。
 
-</Note>
+</Callout>
 
 ## セットアップ
 
@@ -59,11 +59,11 @@ permalink: "custom-token-exchange"
 
 3. アプリケーションに[［First-Party（ファーストパーティー）］](/docs/ja-jp/get-started/applications/confidential-and-public-applications/first-party-and-third-party-applications)フラグがあり、[［Dashboard］>［Applications（アプリケーション）］>［Advanced Settings（詳細設定）］>［OAuth］で［OIDC Conformant（OIDC準拠）］](/docs/ja-jp/get-started/applications/application-settings#oauth)として構成されていることを確認します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 カスタムデータベースは`setUserById`操作にのみ対応しています。次回のカスタムトークン交換の EAリリースでは対応が`setUserByConnection`まで拡大される予定です。
 
-</Note>
+</Callout>
 
 アプリケーションを作成したら、`client_id`と`client_secret`を必ずメモして、後で`/oauth/token`エンドポイントを呼び出すときに使用できるようにします。
 
@@ -203,13 +203,13 @@ curl --location --request DELETE 'https://{{YOUR _TENANT}}/api/v2/token-exchange
 
 トークン交換の付与タイプを使用するトランザクションを識別するには、[ログイン後アクション](/docs/ja-jp/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger)の`oauth2-token-exchange`と同じ値を持つ`event.transaction.protocol`を探します。トークン交換の付与タイプはカスタムトークン交換とネイティブソーシャルログインの両方のトランザクションで使用され、`subject_token_type`はいずれかのカスタムトークン交換プロファイルに対応しているため、`subject_token_type`値を使用すれば、それらの2つを区別できます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 早期アクセス版のカスタムトークン交換は[多要素認証](/docs/ja-jp/secure/multi-factor-authentication)に対応していません。MFAをテナントポリシーとして有効化することや、`api.multifactor.enable()`、`api.authentication.challengeWith()`、`api.authentication.enrollWith()`の使用はカスタムトークン交換に未対応であるため、ログイン後アクショントリガー内においてトランザクションが回復不可能なエラーで失敗します。`subject_token_type`値に応じて`event.transaction.protocol==oauth2-token-exchange` の場合にはMFAの有効化を必ずスキップしてください。
 
 MFA対応は次回のカスタムトークン交換のEAに追加される予定です。
 
-</Note>
+</Callout>
 
 ### Actions APIを使用する
 
@@ -217,7 +217,7 @@ MFA対応は次回のカスタムトークン交換のEAに追加される予定
 
 カスタムトークン交換トランザクションはそれぞれ1つのテナントイベントログを生成します。トランザクションが成功すると種類が`secte`のイベントログが生成され、トランザクションが失敗すると種類が`fecte`のイベントログが生成されます。これらの種類は受け取るかもしれないエラーを理解するのに役立ちます。`/oauth/token`エンドポイントからのエラーには詳細があまり含まれません。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 カスタムトークン交換は、トランザクションでユーザーを識別するサブジェクトトークンの安全な検証を追加で担うことにより、トランザクションのユーザー設定に優れた柔軟性を提供します。
 
@@ -225,7 +225,7 @@ MFA対応は次回のカスタムトークン交換のEAに追加される予定
 
 サブジェクトトークンの安全な検証を実装する各種のオプションについては、「[ユースケースの例とサンプルコード](#example-use-cases-and-code-samples)」に記載の推奨を読んだ上で適用してください。また、[攻撃防御](#attack-protection)機能の適用も検討してください。
 
-</Note>
+</Callout>
 
 #### api.authentication.setUserById(user_id)
 
@@ -270,11 +270,11 @@ exports.onExecuteCustomTokenExchange = async (event, api) => {
 
 ユーザーが`setUserByConnection()`を通してログインするたびに、ログイン回数が加算されます。このメソッドはユーザーがブロックされていると失敗します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 カスタムトークン交換のEA版は現在、エンタープライズ接続とソーシャル接続に加えて、Auth0のデータベース接続に対応しています。今後のカスタムトークン交換のEA版には、インポートモードが`OFF`のカスタムデータベース対応が追加される予定です。
 
-</Note>
+</Callout>
 
 <table class="table"><thead>
 <tr>
@@ -391,13 +391,13 @@ exports.onExecuteCustomTokenExchange = async (event, api) => {
 
 Auth0のデータベース接続では、ユーザーのためにランダムなパスワードが動的に生成されます。ユーザーの作成後に必要に応じて[パスワードのリセットフロー](/docs/ja-jp/authenticate/database-connections/password-change)をトリガーするには、別のオプションがあります。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 ユーザーが接続に存在していない場合に、ユーザーを作成することなくログインさせるには、`creationBehavior`を`none`に設定します。
 
 今後のカスタムトークン交換では、接続の構成に応じてメール属性が任意になる予定です。
 
-</Note>
+</Callout>
 
 ##### 更新の動作
 
@@ -411,17 +411,17 @@ Auth0のデータベース接続では、ユーザーのためにランダムな
 * `email_verified`
 * `phone_verified`
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 `setUserByConnection()`を使用して、すでに`email`、`username`、または`phone_number`の属性を含むユーザープロファイルを更新にするには、それらの属性に既存の値を指定して渡す必要があります。そうしないと、メソッドがエラーを返します。
 
-</Note>
+</Callout>
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 ユーザーが接続にすでに存在する場合に、プロファイル属性を変更することなくログインさせるには、`updateBehavior`を`none`に設定します。
 
-</Note>
+</Callout>
 
 ##### メール検証
 
@@ -878,11 +878,11 @@ exports.onExecuteCustomTokenExchange = async (event, api) => {
 
 その他の拡張パラメーターは、対応するアクションの`event.request.body`に含まれていますが、無視されます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Organizationsはカスタムトークン交換の早期アクセスではまだ対応されていません。organizationパラメーターを使用すると、要求が拒否されます。Organizations対応は次のバージョンのカスタムトークン交換に追加する予定です。
 
-</Note>
+</Callout>
 
 ### 要求例
 
@@ -975,11 +975,11 @@ curl --location --request PATCH 'https://{{YOUR _TENANT}}/api/v2//attack-protect
 
 技術的な制約やユーザーエクスペリエンスの観点から、エンドユーザーのリダイレクトに基づく標準的なフェデレーションログインストラテジーが適用できない高度な統合シナリオには、カスタムトークン交換をソリューションとして使用できます。ユースケースに提供するコードは不完全なものであり、対処するコードを論理的に進められるように説明することのみを意図しています。より詳しいサンプルコードについては、「[サンプルコード](#code-samples)」を参照してください。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 できる限り、そのままで使用できる通常のフェデレーションログインの使用をお勧めします。カスタムトークン交換はトランザクションにユーザーを設定可能にすることで、トランザクションの安全な検証と処理を強化し、柔軟性を向上します。
 
-</Note>
+</Callout>
 
 このセクションでは、ユースケースの例と該当するシナリオの実装に推奨されるサンプルコードを紹介します。ユースケースを説明するために、GearUpという架空のレンタカー会社を想定します。
 
@@ -1207,11 +1207,11 @@ JWTを安全に検証する方法の詳しい例については、「[サンプ�
 
 Auth0とシークレットを共有する必要がない場合は、できる限り非対称のアルゴリズムと鍵を使用します。これは、適用できるk公開鍵を公表するためにJWKS URIエンドポイントを公開する場合などで、鍵のローテーションも簡素化します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 強力なアルゴリズムと十分な高エントロピーのキーやシークレットで確実にサブジェクトトークンを保護することは、お客様の責任であることに注意してください。
 
-</Note>
+</Callout>
 
 #### 非対称鍵で署名されたJWTを検証する
 

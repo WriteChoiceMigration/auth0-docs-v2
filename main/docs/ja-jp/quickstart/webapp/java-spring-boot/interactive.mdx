@@ -37,13 +37,13 @@ permalink: "interactive"
 
 # Spring Webアプリケーションにログインを追加する
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 ### Spring WebFluxを使用する？
 
 このチュートリアルでは[Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html)を使用します。[Spring WebFlux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#spring-web-reactive)を使用している場合、認証を追加する手順は似ていますが、実装の詳細は一部異なります。[Spring Boot WebFluxサンプルコード](https://github.com/auth0-samples/auth0-spring-boot-login-samples/tree/master/webflux-login)で、Auth0とSpring Boot WebFluxアプリケーションの統合方法を確認してください。
 
-</Note>
+</Callout>
 
 [1
 
@@ -63,25 +63,25 @@ Auth0のサービスを利用するには、Auth0 Dashboadでセットアップ�
 
 Callback URLとは、Auth0がユーザーを認証後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはログイン後にアプリケーションに戻りません。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 サンプルプロジェクトに沿って進めている場合には、次の値に設定します：
 
 `http://localhost:3000/login/oauth2/code/okta`
 
-</Note>
+</Callout>
 
 ### ログアウトURLを構成する
 
 ログアウトURLとは、Auth0がユーザーをログアウト後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーを受け取ります。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 サンプルプロジェクトに沿って進めている場合には、次の値に設定します：
 
 `http://localhost:3000`
 
-</Note>
+</Callout>
 
 [2
 
@@ -91,11 +91,11 @@ Callback URLとは、Auth0がユーザーを認証後にリダイレクトする
 
 Spring BootアプリケーションをAuth0と統合するには、[Okta Spring Boot Starter](https://github.com/okta/okta-spring-boot/)をアプリケーションの依存関係に含めます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 このガイドでは、ビューレイヤー用に[Thymeleaf](https://www.thymeleaf.org/)と[Spring Security統合モジュール](https://github.com/thymeleaf/thymeleaf-extras-springsecurity)を使用しています。別の表示技術を使用している場合、Spring Securityの構成とコンポーネントはそのまま同じです。
 
-</Note>
+</Callout>
 
 Gradleを使用している場合は、以下のようにこれらの依存関係を含めることができます。
 
@@ -179,11 +179,11 @@ port: 3000
 
 Auth0でユーザーログインを有効にするには、[SecurityFilterChain](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/web/SecurityFilterChain.html)を登録するクラスを作成し、`@Configuration`の注釈を追加します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 すべてまたは特定のパスで認証を必須にするために、[HttpSecurity](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/config/annotation/web/builders/HttpSecurity.html)インスタンスを構成することができます。たとえば、ホームページを除くすべてのパスで認証を必須にするには、以下のようにします：
 
-</Note>
+</Callout>
 
 ```java lines
 http.authorizeHttpRequests(authorize -> authorize
@@ -216,11 +216,11 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 <Frame>![null](/images/ja-jp/cdy7uua7fh8z/7L6lZ6xCi1L7sJBFZUPb9g/1012d2df62dd58a943f75092452f91d2/Login_Screen_-_Japanese.png)</Frame>
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Auth0は、Googleソーシャルプロバイダーを新しいテナントでデフォルトで有効にし、[ソーシャルIDプロバイダー](https://auth0.com/docs/connections/identity-providers-social)でログインテストを実施するための開発者キーを提供します。ただし、これらの開発者キーにはいくつかの制限が設けられており、これによってアプリケーションが異なる動作をする場合があります。この動作の様子と修正方法については、「[Auth0開発者キーを使ってソーシャル接続をテストする](https://auth0.com/docs/connections/social/devkeys#limitations-of-developer-keys)」ドキュメントを参照してください。
 
-</Note>
+</Callout>
 
 [7
 

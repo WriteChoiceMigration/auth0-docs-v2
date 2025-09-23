@@ -63,31 +63,31 @@ Auth0にサインアップしたときには、新しいアプリケーション
 * **Client ID（クライアントID）**
 * **Client Secret（クライアントシークレット）**
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 このページの上部からサンプルをダウンロードした場合は、これらの詳細が入力されます。
 
-</Note>
+</Callout>
 
 ### Callback URLを構成する
 
 Callback URLはアプリケーション内にあるURLで、Auth0は認証後にユーザーをここにリダイレクトします。アプリのCallback URLは[アプリケーションの設定](https://manage.auth0.com/#/applications)にある**［Allowed Callback URLs（許可されているコールバックURL）］**フィールドに追加する必要があります。このフィールドが設定されていない場合、ユーザーはアプリケーションにログインできず、エラーが返されます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 このページの上部からダウンロードしたサンプルプロジェクトに沿って進めている場合には、**［Allowed Callback URLs（許可されているコールバックURL）］**フィールドに`http://localhost:3000/callback`を追加する必要があります。
 
-</Note>
+</Callout>
 
 ### ログアウトURLを構成する
 
 ログアウトURLはアプリケーション内にあるURLで、Auth0は認可サーバーからのログアウト後にユーザーをここに戻すことができます。これは、`returnTo`クエリパラメーターで指定されます。アプリのログアウトURLは[アプリケーションの設定](https://manage.auth0.com/#/applications)にある**［Allowed Logout URLs（許可されているログアウトURL）］**フィールドに追加する必要があります。このフィールドが設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーが返されます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 このページの上部からダウンロードしたサンプルプロジェクトに沿って進めている場合には、**［Allowed Logout URLs（許可されているログアウトURL）］**フィールドに`http://localhost:3000/`を追加する必要があります。
 
-</Note>
+</Callout>
 
 [3
 
@@ -135,11 +135,11 @@ implementation 'com.auth0:mvc-auth-commons:1. '
 
 ### Java EEアプリケーションを構成する
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 このチュートリアルに付属のサンプルはJSPを使用して作成され、[WildFly](https://wildfly.org/)アプリケーションサーバーでテストが完了しています。他のアプリケーションコンテナーや技術を使用して作業する場合には、一部の手順を調整する必要があるかもしれません。
 
-</Note>
+</Callout>
 
 Java EEアプリケーションは、Auth0アプリケーションを使ってユーザーを認証するために、いくつかの情報を必要とします。この情報の保管にはデプロイメント記述子である`web.xml`ファイルを使用できますが、別の安全な場所に保管することもできます。
 
@@ -254,11 +254,11 @@ public CredentialValidationResult validate(final Credential credential) {
 * Auth0アプリケーションに**RS256署名アルゴリズム**（新しいAuth0アプリケーション作成時のデフォルト）の使用が構成されている場合には、`JwkProvider`を構成して、トークン署名の検証に使われる公開鍵を取得するようにします。その他の構成オプションについては、[jwks-rsa-javaレポジトリ](https://github.com/auth0/jwks-rsa-java)を参照してください。
 * Auth0アプリケーションに**HS256署名アルゴリズム**の使用が構成されている場合には、`JwkProvider`を構成する必要はありません。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 使用可能な署名アルゴリズムについては、[こちらのドキュメント](https://auth0.com/docs/tokens/concepts/signing-algorithms)を参照してください。
 
-</Note>
+</Callout>
 
 以下のサンプルは、**RS256署名アルゴリズム**の使用に`AuthenticationController`をどのように構成するのかを示しています。
 

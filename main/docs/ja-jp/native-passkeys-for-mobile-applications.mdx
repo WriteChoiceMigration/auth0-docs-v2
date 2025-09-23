@@ -9,11 +9,11 @@ permalink: "native-passkeys-for-mobile-applications"
 'twitter:description': "AndroidやiOSのアプリケーションにネイティブパスキーフローを実装する方法について説明します。"
 ---
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 ネイティブパスキーは、現在、限定早期アクセスでご利用いただけます。Auth0のリリースについては、「[製品のリリース段階](/docs/ja-jp/troubleshoot/product-lifecycle/product-release-stages)」を参照してください。
 
-</Note>
+</Callout>
 
 パスキーは、従来の認証形式（ユーザー名/パスワードなど）に代わるフィッシング耐性のある代替手段であり、より簡単かつ安全なユーザーエクスペリエンスを提供します。パスキーは、FIDO® W3C Web Authentication（WebAuthn）とClient to Authenticator Protocol（CTAP）の[仕様](https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html#intro))をモデルにしています。
 
@@ -86,10 +86,10 @@ AndroidまたはiOSのアプリケーションにネイティブのパスキー�
 1. ユーザーがアプリケーションを開いて、新しいアカウントの登録を選択します。アプリケーションが要求するメールアドレスなどの識別子をユーザーが入力します。
 2. アプリケーションがAuth0 Authentication APIの[サインアップチャレンジ要求](/docs/ja-jp/native-passkeys-api#request-signup-challenge)エンドポイントを呼び出して、サインアップチャレンジを始めます。
 
-   <Note>
+   <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
    * `realm`を指定しない場合には、テナントにデフォルトのディレクトリが使用されます。
    * デフォルトでは、メールが必須の識別子です。データベース接続で[Flexible Identifier](/docs/ja-jp/authenticate/database-connections/activate-and-configure-attributes-for-flexible-identifiers)を有効にした場合は、`email`、`phone_number`と`username`の組み合わせを識別子として使用することができます。これらのオプションは必須または任意にできますが、Flexible Identifierの構成に一致する必要があります。
-   </Note>
+   </Callout>
 
    ```http lines
    POST /passkey/register
@@ -204,11 +204,11 @@ AndroidまたはiOSのアプリケーションにネイティブのパスキー�
 
 1. ユーザーがアプリケーションを起動して、ログイン画面を開きます。アプリケーションがAuthentication APIの[ログインチャレンジ要求](/docs/ja-jp/native-passkeys-api#request-login-challenge)エンドポイントを呼び出して、ログインチャレンジを始めます。
 
-   <Note>
+   <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
    `realm`を指定しない場合には、テナントにデフォルトのディレクトリが使用されます。
 
-   </Note>
+   </Callout>
 
    ``` lines
    POST /passkey/challenge

@@ -29,14 +29,14 @@ Organizationメンバーのロールは、Auth0の[ロールベースのアク�
 2. [ユーザー招待フローをカスタマイズする](#customize-the-user-invitation-flow)
 3. [メンバーシップ招待を送信する](#send-membership-invitations)
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **制限事項**
 
 * Auth0では、ユーザー招待をメールでしか送信できません。別の方法で招待を送信したい場合は、招待URLの生成を選択することができます。
 * 招待されたユーザーは、ログインするか、招待を受け取ったメールアドレスでアカウントを作成しなければなりません。
 
-</Note>
+</Callout>
 
 ## メンバーシップ招待フローをアプリケーションに統合する
 
@@ -50,21 +50,21 @@ Organizationメンバーのロールは、Auth0の[ロールベースのアク�
 
 アプリケーションの経路はクエリ文字列で`invitation`と`organization`のパラメーターを受け付け、その両方のパラメーター使ってAuth0 Authentication APIの[認可](https://auth0.com/docs/api/authentication#authorize-application)エンドポイントを呼び出す必要があります。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 複数テナントのシナリオで、Organization名がサブドメインまたはパス変数として使用されている場合（たとえば、`acme.myapp.com`）は、ユーザーに送信される招待リンクに`organization_name`パラメーターも含まれます。Authentication APIの[認可](https://auth0.com/docs/api/authentication#authorize-application)エンドポイントにこのパラメーターを送る必要はありません。
 
-</Note>
+</Callout>
 
 たとえば、組織対応のアプリケーションで**［Application Login URI（アプリケーションのログインURI）］**が`https://myapp.com/login`に設定されている場合、エンドユーザーに送信される招待メールには次のリンクが含まれます：`https://myapp.com/login?invitation={invitation_ticket_id}&organization={organization_id}&organization_name={organization_name}`.
 
 ## ユーザー招待フローをカスタマイズする
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 ユーザー招待フローをカスタマイズするには、カスタムドメインを使用しなければなりません。無料プランではカスタムドメインを無料で1つ使用できます。追加のカスタムドメインは、すべての有料プランでご利用いただけます。
 
-</Note>
+</Callout>
 
 ユーザー招待プロンプトとユーザーが受信するメールをカスタマイズするには、ユニバーサルログインプロンプトとメールテンプレートを変更します。詳細については、以下のページを参照してください。
 
@@ -82,7 +82,7 @@ Organizationメンバーのロールは、Auth0の[ロールベースのアク�
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>またはManagement APIを使用して[組織メンバーシップの招待状を送る](/docs/ja-jp/manage-users/organizations/configure-organizations/send-membership-invitations)ことができます。独自のメールサービスを使用して招待を送信する場合は、招待URLの生成のみを選択できます。それ以外の場合、ユーザーは、構成された接続を使用して組織にログインできるリンクを含むメールを受け取ります。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 ユーザーが招待を受け入れると、そのメールアドレスに検証済みのマークが付きます。
 
@@ -90,5 +90,5 @@ Organizationメンバーのロールは、Auth0の[ロールベースのアク�
 
 期限までにユーザーが招待を受け入れなかった場合は、招待に期限切れのマークが付き、いずれ[Auth0 Dashboard](/docs/ja-jp/get-started/auth0-overview/dashboard)から削除されます。
 
-</Note>
+</Callout>
 

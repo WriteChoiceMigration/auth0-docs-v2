@@ -9,11 +9,11 @@ permalink: "configure-private-key-jwt"
 'twitter:description': "秘密鍵JWT認証を使用するための新規および既存のアプリケーションの構成方法について説明します。"
 ---
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 秘密鍵JWTは、エンタープライズプランでのみ使用できます。アップグレードするには、「[Auth0の価格設定](https://auth0.com/pricing/)」からご連絡ください。
 
-</Note>
+</Callout>
 
 秘密鍵<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JWT</Tooltip>認証は、非対称鍵ペアで署名されたJWTアサーションを使用して、[OIDC Connect Core Client Authentication 1.0](https://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication)によるクライアント認証をサポートします。新しいアプリケーションを作成して`private_key_jwt`を使用するか、既存のアプリケーションで認証に秘密鍵ペアを使用するように設定することができます。
 
@@ -158,7 +158,7 @@ curl --location --request POST 'https://{domain}/api/v2/clients' \
 </tbody>
 </table>
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 公開鍵のPEMは、Auth0に渡す前にJSONでエスケープ処理する必要があります。この例では、以下を渡す必要があります：
 
@@ -172,17 +172,17 @@ IF+t0HbO1E387fvLcuSyai1yWbSr1PXyiB2aXyDpbD4u7d3ux4ahU2opH11lBqvx
 +wIDAQAB
 -----END PUBLIC KEY-----`
 
-</Note>
+</Callout>
 
 応答には、`client_id`プロパティを含み、アプリケーションをリソースサーバーに紐づけます。また、応答には、資格情報のために作成した生成`kid`を含みます。これはのちほど、`client_assertion`を生成するために使用します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Auth0は、[JSON Web Key Thumbprint](https://datatracker.ietf.org/doc/html/rfc7638)規格に基づいて資格情報のkidを生成します。
 
 kidは、JWK表記された公開鍵のSHA256ダイジェストをbase64URLエンコードしたもので構成されます。
 
-</Note>
+</Callout>
 
 #### 既存のアプリケーションの構成
 

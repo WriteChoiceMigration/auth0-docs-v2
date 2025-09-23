@@ -13,11 +13,11 @@ permalink: "configure-silent-authentication"
 
 SPAで[暗黙フロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/implicit-flow-with-form-post)を使用すると、明示的な緩和策を必要とするセキュリティ上の課題につながります。[PKCEを使った認可コードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce)をサイレント認証と組み合わせて使用することで、SPAのセッションを更新できます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 近年、ブラウザーのユーザープライバシー制御機能が発達し、サードパーティクッキーがブロックされることでユーザーエクスペリエンスに悪影響を与えています。そのため、ブラウザーベースのフローは、[リフレッシュトークンのローテーション](/docs/ja-jp/secure/tokens/refresh-tokens/refresh-token-rotation)を使用しなければなりません。これにより、SPAで安全にリフレッシュトークンが使用できる一方で、ブラウザーにあるITPなどのプライバシー保護技術にUXを阻害されることなく、エンドユーザーがリソースにシームレスにアクセスできます。
 
-</Note>
+</Callout>
 
 ## サイレント認証要求を開始する
 
@@ -40,11 +40,11 @@ GET https://{yourDomain}/authorize
 
 `prompt=none`パラメーターにより、Auth0は指定された`redirect_uri`（コールバックURL）に、指定された`response_mode`を使用して、成功またはエラーの2つのうちいずれかの応答を即座に送信します。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 適用可能な[ルール](/docs/ja-jp/customize/rules)はすべて、サイレント認証処理の一部として実行されます。
 
-</Note>
+</Callout>
 
 ### 認証成功の応答
 
@@ -103,11 +103,11 @@ GET https://your_callback_url/
 
 ユーザーがAuth0で有効なセッションを保持している限り、新しいトークンを取得するためにサイレント認証要求を行うことができます。[auth0.jsのメソッド`checkSession`](/docs/ja-jp/libraries/auth0js)は、SPA用に`response_mode=web_message`と組み合わせてサイレントトークン要求を使用して、要求が非表示のiframe内で実行されるようにします。SPAでは、Auth0.jsが結果処理（トークンまたはエラーコード）を処理し、アプリケーションが提供するコールバック関数を通じて情報を渡します。これにより、UXが中断されること（ページの再読み込みや状態の喪失）はありません。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Safariブラウザーに関する他の重要な制限事項や回避方法については、「[Safariを使ってトークンを更新する](/docs/ja-jp/troubleshoot/authentication-issues/renew-tokens-when-using-safari)」を参照してください。
 
-</Note>
+</Callout>
 
 ### アクセストークンの有効期限
 

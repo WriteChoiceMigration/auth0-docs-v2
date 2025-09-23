@@ -57,21 +57,21 @@ Auth0のサービスを利用するには、Auth0 Dashboadに設定済みのア�
 
 Callback URLとは、Auth0がユーザーを認証後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはログイン後にアプリケーションに戻りません。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000``/callback`に設定してください。
 
-</Note>
+</Callout>
 
 ### ログアウトURLを構成する
 
 ログアウトURLとは、Auth0がユーザーをログアウト後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーを受け取ります。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000/logout`に設定してください。
 
-</Note>
+</Callout>
 
 [2
 
@@ -166,11 +166,11 @@ build.gradle
 
 ユーザー認証を可能にするために、`domain`、`clientId`、`clientSecret`を使って`auth0-java-mvc-commons` SDKから提供された`AuthenticationController`のインスタンスを作成します。サンプルでは、RS256非対称署名アルゴリズムを使って署名したトークンで使用するためのコンポーネントの構成方法が紹介されています。トークンの署名を検証するために使用された公開鍵を取得する`JwkProvider`が指定されています。その他の構成オプションについての詳細は、[jwks-rsa-javaレポジトリ](https://github.com/auth0/jwks-rsa-java)をご覧ください。HS256を使用している場合は、`JwkProvider`を構成する必要はありません。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 `AuthenticationController`はコンテキストを一切保存せず、再使用を意図しています。不必要な作成はリソースの追加作成を招き、パフォーマンスに影響が出る可能性があります。
 
-</Note>
+</Callout>
 
 [5
 
@@ -186,11 +186,11 @@ build.gradle
 
 認可URLを`AuthenticationController`で生成することにより、要求はライブラリーで以前設定した呼び出しコンテキストを保持します。コントローラーに渡されると、有効な`Tokens`インスタンスまたは不具合を特定するExceptionが返ってきます。呼び出しに成功した場合、後でアクセスするために資格情報をどこかに保存しておく必要があります。ライブラリーに含まれる`SessionsUtils`クラスを使って、要求の`HttpSession`を使用できます。
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 トークンを要求した時刻と受け取った`expiresIn`値は保存することを推奨します。そうすることで、次回トークンを使用する時に、すでに有効期限が切れているか、または引き続き有効かを確認できます。このサンプルでは検証をスキップします。
 
-</Note>
+</Callout>
 
 [7
 
