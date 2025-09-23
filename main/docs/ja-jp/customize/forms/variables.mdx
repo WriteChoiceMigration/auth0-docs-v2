@@ -13,7 +13,7 @@ permalink: "variables"
 
 変数を使用する際の基本的な考慮事項は次のとおりです。
 
-* 変数は中括弧{`{ variable }}`で囲みます。
+* 変数は中括弧`{{ variable }}`で囲みます。
 * 変数が存在しないか解決できない場合は、`未定義`の変数と同じ効果があります。
 * `null`または`未定義`の変数を処理するには、nullish演算子を使用できます。例:`{{fields.foo ?? fields.bar}}`。
 
@@ -195,122 +195,122 @@ accordion.expand_all/accordion.collapse_all
 <tr>
 <td>toArray(value)</td>
 <td>値を配列に変換します</td>
-<td>{{ functions.toArray('abc') }} // ['abc']</td>
+<td>`{{ functions.toArray('abc') }} // ['abc']`</td>
 </tr>
 <tr>
 <td>toBoolean(value)</td>
 <td>値をブール値に変換します</td>
-<td>{{ functions.toBoolean(1) }} // true <br/><br/>{{ functions.toBoolean(0) }} // false</td>
+<td>`{{ functions.toBoolean(1) }} // true `<br/><br/>`{{ functions.toBoolean(0) }} // false`</td>
 </tr>
 <tr>
 <td>length(value)</td>
 <td>パラメーター値の長さを返します</td>
-<td>{{ functions.length('auth0') }} // 5</td>
+<td>`{{ functions.length('auth0') }} // 5`</td>
 </tr>
 <tr>
 <td>mask(value)</td>
 <td>実行時に公開されないように値をマスクします</td>
-<td>{{ functions.mask('my_awesome_secret') }} // ███</td>
+<td>`{{ functions.mask('my_awesome_secret') }} // ███`</td>
 </tr>
 <tr>
 <td>toNumber(value)</td>
 <td>値を数値に変換します</td>
-<td>{{ functions.toNumber('123') }} // 123</td>
+<td>`{{ functions.toNumber('123') }} // 123`</td>
 </tr>
 <tr>
 <td>random(min, max, [boolean])</td>
 <td>最小値と最大値の間の乱数を返します</td>
-<td>{{ functions.random(0, 6) }} // 4 <br/><br/>{{ functions.random(0, 6, true) }} // 3.8523497...</td>
+<td>`{{ functions.random(0, 6) }} // 4 `<br/><br/>`{{ functions.random(0, 6, true) }} // 3.8523497...`</td>
 </tr>
 <tr>
 <td>slice(value, start, end)</td>
 <td>開始インデックスと終了インデックスの間の値配列または文字列のセクションを返します</td>
-<td>{{ functions.slice( 'example', 3, 5) }} // 'mp'</td>
+<td>`{{ functions.slice( 'example', 3, 5) }} // 'mp'`</td>
 </tr>
 <tr>
 <td>toString(value)</td>
 <td>値を文字列に変換します</td>
-<td>{{ functions.toString(123) }} // '123'</td>
+<td>`{{ functions.toString(123) }} // '123'`</td>
 </tr>
 <tr>
 <td>substring(value, start, end)</td>
 <td>開始インデックスと終了インデックスの間の値のセクションを返します。<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring#differences_between_substring_and_slice">sliceとsubstring関数の違い</a>についてお読みください</td>
-<td>{{ functions.substring( 'example’', 3, 5) }} // 'mp'</td>
+<td>`{{ functions.substring( 'example’', 3, 5) }} // 'mp'`</td>
 </tr>
 <tr>
 <td>toTimestamp()</td>
 <td>現在のUNIXタイムスタンプを返します</td>
-<td>{{ functions.toTimestamp() }} // 1628761483</td>
+<td>`{{ functions.toTimestamp() }} // 1628761483`</td>
 </tr>
 <tr>
 <td>toTimestamp(date)</td>
 <td>指定された日付をUNIX時間で返します</td>
-<td>{{ functions.toTimestamp('2021-04-30T10:02:50.876Z') }} // 1619776970</td>
+<td>`{{ functions.toTimestamp('2021-04-30T10:02:50.876Z') }} // 1619776970`</td>
 </tr>
 <tr>
 <td>toTimestamp(date)</td>
 <td>指定された日付をUNIX時間で返します</td>
-<td>{{ functions.toTimestamp('2021-04-30T10:02:50.876Z') }} // 1619776970</td>
+<td>`{{ functions.toTimestamp('2021-04-30T10:02:50.876Z') }} // 1619776970`</td>
 </tr>
 <tr>
 <td>replaceAll(value, string, replacement)</td>
 <td>パターンに一致するすべての部分を置換文字列に置き換えた新しい文字列を返します。</td>
-<td>{{ functions.replaceall('2021-04-30', '-', '/') }} // 2021/04/30</td>
+<td>`{{ functions.replaceall('2021-04-30', '-', '/') }} // 2021/04/30`</td>
 </tr>
 <tr>
 <td>replace(value, string, replacement)</td>
 <td>パターンに一致するすべての部分を置換文字列に置き換えた新しい文字列を返します。パターンが文字列の場合、最初の出現のみが置換されます。</td>
-<td>{{ functions.replace('2021-04-30', '-', '/') }} // 2021/04-30</td>
+<td>`{{ functions.replace('2021-04-30', '-', '/') }} // 2021/04-30`</td>
 </tr>
 <tr>
 <td>split(value, Separator, limit?)</td>
 <td>セパレーターで区切られた部分文字列の順序付きリストを返します。</td>
-<td>{{ functions.split('2021-04-30', '-') }} // ['2021', '04', '30']</td>
+<td>`{{ functions.split('2021-04-30', '-') }} // ['2021', '04', '30']`</td>
 </tr>
 <tr>
 <td>now()</td>
 <td>現在の日付をISO8601形式で返します。</td>
-<td>{{ functions.now() }} // 2021-04-30T10:31:28.576Z</td>
+<td>`{{ functions.now() }} // 2021-04-30T10:31:28.576Z`</td>
 </tr>
 <tr>
 <td>includes(collection, item, fromIndex?)</td>
 <td>配列のエントリに特定の値が含まれているかどうかを返します。</td>
-<td>{{ functions.includes(['auth0', 'identity', 'authentication'], 'identity') }} // true</td>
+<td>`{{ functions.includes(['auth0', 'identity', 'authentication'], 'identity') }} // true`</td>
 </tr>
 <tr>
 <td>indexOf(collection, item, fromIndex?)</td>
 <td>配列内で特定の要素が見つかる最初のインデックスを返します。存在しない場合は-1を返します。</td>
-<td>{{ functions.indexOf(['auth0', 'identity', 'authentication'], 'identity') }} // 1</td>
+<td>`{{ functions.indexOf(['auth0', 'identity', 'authentication'], 'identity') }} // 1`</td>
 </tr>
 <tr>
 <td>merge(base, value)</td>
 <td>基本データ型に応じて、結合された配列、オブジェクト、または連結された文字列を返します。</td>
-<td>{{ functions.merge(['auth0', 'identity'], ['authentication']) }} // ['auth0', 'identity', 'authentication']</td>
+<td>`{{ functions.merge(['auth0', 'identity'], ['authentication']) }} // ['auth0', 'identity', 'authentication']`</td>
 </tr>
 <tr>
 <td>md5(value)</td>
 <td>MD5 ハッシュ値を返します。</td>
-<td>{{ functions.md5('auth0') }} // 7bbb597...</td>
+<td>`{{ functions.md5('auth0') }} // 7bbb597...`</td>
 </tr>
 <tr>
 <td>sha1(value)</td>
 <td>SHA1 ハッシュ値を返します。</td>
-<td>{{ functions.sha1('auth0') }} // b4ec5339...</td>
+<td>`{{ functions.sha1('auth0') }} // b4ec5339...`</td>
 </tr>
 <tr>
 <td>sha256(value)</td>
 <td>SHA256ハッシュ値を返します。</td>
-<td>{{ functions.sha256('auth0') }} // d9082bdc...</td>
+<td>`{{ functions.sha256('auth0') }} // d9082bdc...`</td>
 </tr>
 <tr>
 <td>sha512(value)</td>
 <td>SHA512ハッシュ値を返します。</td>
-<td>{{ functions.sha512('auth0') }} // c0d588069d...</td>
+<td>`{{ functions.sha512('auth0') }} // c0d588069d...`</td>
 </tr>
 <tr>
 <td>uuid()</td>
 <td>ランダムなv4 UUIDを返します</td>
-<td>{{ functions.uuid() }} // 36b8f84d-df4e-4d49-b662-bcde71a8764</td>
+<td>`{{ functions.uuid() }} // 36b8f84d-df4e-4d49-b662-bcde71a8764`</td>
 </tr>
 </tbody>
 </table>

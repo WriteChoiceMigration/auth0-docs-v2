@@ -35,16 +35,18 @@ permalink: "email-template-descriptions"
 </Callout>
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>でメールテンプレートを更新すると、リダイレクトリンクでメールアドレスを送信するのを防ぐことができます。例：
-
-`PATCH /api/v2/email-templates/reset_email
+```
+PATCH /api/v2/email-templates/reset_email
 {
 "includeEmailInRedirect": false
 }`または
-
-`PATCH /api/v2/email-templates/verify_email
+```
+```
+PATCH /api/v2/email-templates/verify_email
 {
 "includeEmailInRedirect": false
-}`
+}
+```
 
 他に考えられるメッセージを適切に処理するために、ターゲットURLハンドラーも準備しておく必要があります。
 

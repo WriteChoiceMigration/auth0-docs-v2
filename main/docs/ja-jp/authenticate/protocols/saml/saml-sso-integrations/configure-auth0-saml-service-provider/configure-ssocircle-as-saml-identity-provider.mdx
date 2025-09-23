@@ -35,30 +35,30 @@ permalink: "configure-ssocircle-as-saml-identity-provider"
 2. この接続に適切な構成を設定します。入力必須のフィールドは以下のみです：
 
    <table class="table"><thead>
-<tr>
-<th><strong>設定</strong></th>
-<th><strong>説明</strong></th>
-<th><strong>例</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>接続名</td>
-<td>Auth0の接続名。</td>
-<td>`myoktaconnection`</td>
-</tr>
-<tr>
-<td>サインインURL</td>
-<td>ユーザーログイン要求が送信されるOkta URL。<br/><br/>これは、前に記録した__IDプロバイダーのシングルサインオンURL__です。</td>
-<td>`https://my_okta_tenant_name.okta.com/app/` `my_okta_tenant_namemy_okta_saml_app_integration_name/` `dakflkbzevu5i5zBi939/sso/saml`</td>
-</tr>
-<tr>
-<td>X509署名証明書</td>
-<td>Oktaテナントの公開鍵の署名証明書。<br/><br/>前にダウンロードした__X509証明書__をアップロードします。</td>
-<td>`myOktaTenantSigningCertificate.pem`</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th><strong>設定</strong></th>
+   <th><strong>説明</strong></th>
+   <th><strong>例</strong></th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td>接続名</td>
+   <td>Auth0の接続名。</td>
+   <td>`myoktaconnection`</td>
+   </tr>
+   <tr>
+   <td>サインインURL</td>
+   <td>ユーザーログイン要求が送信されるOkta URL。<br/><br/>これは、前に記録した__IDプロバイダーのシングルサインオンURL__です。</td>
+   <td>`https://my_okta_tenant_name.okta.com/app/` `my_okta_tenant_namemy_okta_saml_app_integration_name/` `dakflkbzevu5i5zBi939/sso/saml`</td>
+   </tr>
+   <tr>
+   <td>X509署名証明書</td>
+   <td>Oktaテナントの公開鍵の署名証明書。<br/><br/>前にダウンロードした__X509証明書__をアップロードします。</td>
+   <td>`myOktaTenantSigningCertificate.pem`</td>
+   </tr>
+   </tbody>
+   </table>
 3. マッピングを設定時、以下のJSONを使ってSSOCircleからSAML属性を正しくマッピングします。
 
    ```json lines
@@ -89,26 +89,26 @@ Auth0 SAML接続のメタデータへは、以下のフォーマットでURLを�
 3. **［Add New Service Provider（新規サービスプロバイダの追加）］**を選択して、以下の情報を入力し、新規サービスプロバイダー（この場合はAuth0 )を設定します。
 
    <table class="table"><thead>
-<tr>
-<th>設定</th>
-<th>説明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>FQDN of the ServiceProvider（サービスプロバイダーのFQDN）</strong></td>
-<td>`auth0.com`</td>
-</tr>
-<tr>
-<td><strong>Attributes to send in assertion（アサーションに送信する属性）</strong></td>
-<td>`EmailAddress`ボックスにチェックを入れます。</td>
-</tr>
-<tr>
-<td><strong>Insert your metadata information:（メタデータ情報を挿入：）</strong></td>
-<td>Auth0接続を構成した後にダウンロードしたXMLメタデータを貼り付けます。</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th>設定</th>
+   <th>説明</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td><strong>FQDN of the ServiceProvider（サービスプロバイダーのFQDN）</strong></td>
+   <td>`auth0.com`</td>
+   </tr>
+   <tr>
+   <td><strong>Attributes to send in assertion（アサーションに送信する属性）</strong></td>
+   <td>`EmailAddress`ボックスにチェックを入れます。</td>
+   </tr>
+   <tr>
+   <td><strong>Insert your metadata information:（メタデータ情報を挿入：）</strong></td>
+   <td>Auth0接続を構成した後にダウンロードしたXMLメタデータを貼り付けます。</td>
+   </tr>
+   </tbody>
+   </table>
 4. **［Submit（送信）］**をクリックします。
 
 ## 接続をテストする

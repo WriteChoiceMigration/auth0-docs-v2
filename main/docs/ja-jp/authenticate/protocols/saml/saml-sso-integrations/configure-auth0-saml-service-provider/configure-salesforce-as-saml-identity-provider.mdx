@@ -41,30 +41,30 @@ permalink: "configure-salesforce-as-saml-identity-provider"
 3. 設定ウィンドウで、以下の情報を入力します。
 
    <table class="table"><thead>
-<tr>
-<th>設定</th>
-<th>説明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Connection Name（接続名）</strong></td>
-<td>接続の名前。たとえば、<strong>SFIDP</strong>。</td>
-</tr>
-<tr>
-<td><strong>Email Domains（メールドメイン）</strong></td>
-<td>ユーザーがログインに使用するメールドメイン名を入力します。たとえば、ユーザーが`abc-example.com`のメールドメイン名を持っている場合は、それをこのフィールドに入力します。複数のドメインを入力できます。</td>
-</tr>
-<tr>
-<td><strong>Sign In URL（サインインURL）</strong></td>
-<td>Salesforceからダウンロードしたメタデータファイルを開き、`SingleSignOnService`バインディングを含む行を見つけます。この行の`location`属性の値は、サインインURLです。次のようになります：`https://{sf-account-name}.my.salesforce.com/idp/endpoint/HttpRedirect`で`{sf-account-name}`はSalesforceドメイン名です。</td>
-</tr>
-<tr>
-<td><strong>Sign Out URL（サインアウトURL）</strong></td>
-<td>サインインURLに入力したのと同じURLを入力します。</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th>設定</th>
+   <th>説明</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td><strong>Connection Name（接続名）</strong></td>
+   <td>接続の名前。たとえば、<strong>SFIDP</strong>。</td>
+   </tr>
+   <tr>
+   <td><strong>Email Domains（メールドメイン）</strong></td>
+   <td>ユーザーがログインに使用するメールドメイン名を入力します。たとえば、ユーザーが`abc-example.com`のメールドメイン名を持っている場合は、それをこのフィールドに入力します。複数のドメインを入力できます。</td>
+   </tr>
+   <tr>
+   <td><strong>Sign In URL（サインインURL）</strong></td>
+   <td>Salesforceからダウンロードしたメタデータファイルを開き、`SingleSignOnService`バインディングを含む行を見つけます。この行の`location`属性の値は、サインインURLです。次のようになります：`https://{sf-account-name}.my.salesforce.com/idp/endpoint/HttpRedirect`で`{sf-account-name}`はSalesforceドメイン名です。</td>
+   </tr>
+   <tr>
+   <td><strong>Sign Out URL（サインアウトURL）</strong></td>
+   <td>サインインURLに入力したのと同じURLを入力します。</td>
+   </tr>
+   </tbody>
+   </table>
 4. **［Certificate（証明書）］**では、Salesforceからダウンロードした証明書を次のコマンドで.pem形式に変換します。
    `openssl x509 -in original.crt -out sfcert.pem -outform PEM`ここで、`original.crt`はダウンロードした.crtファイルのファイル名です。
 
@@ -83,34 +83,34 @@ Auth0からSAMLベースの認証要求を受信し、応答できるように�
 3. 新しい接続アプリを作成し、以下のフィールドに入力します。
 
    <table class="table"><thead>
-<tr>
-<th>設定</th>
-<th>説明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Entity ID（エンティティID）</strong></td>
-<td>`urn:auth0:YOUR_TENANT:YOUR_CONNECTION_NAME`</td>
-</tr>
-<tr>
-<td><strong>ACS URL</strong></td>
-<td>`https://{yourDomain}/login/callback`</td>
-</tr>
-<tr>
-<td><strong>Subject Type（サブジェクトタイプ）</strong></td>
-<td>`Persistent ID`</td>
-</tr>
-<tr>
-<td><strong>Name ID Format（名前のID形式）</strong></td>
-<td>`emailAddress`があるものを選ぶ</td>
-</tr>
-<tr>
-<td><strong>Issuer（発行者）</strong></td>
-<td>`https://{your-saleforce-domain}.my.salesforce.com`</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th>設定</th>
+   <th>説明</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td><strong>Entity ID（エンティティID）</strong></td>
+   <td>`urn:auth0:YOUR_TENANT:YOUR_CONNECTION_NAME`</td>
+   </tr>
+   <tr>
+   <td><strong>ACS URL</strong></td>
+   <td>`https://{yourDomain}/login/callback`</td>
+   </tr>
+   <tr>
+   <td><strong>Subject Type（サブジェクトタイプ）</strong></td>
+   <td>`Persistent ID`</td>
+   </tr>
+   <tr>
+   <td><strong>Name ID Format（名前のID形式）</strong></td>
+   <td>`emailAddress`があるものを選ぶ</td>
+   </tr>
+   <tr>
+   <td><strong>Issuer（発行者）</strong></td>
+   <td>`https://{your-saleforce-domain}.my.salesforce.com`</td>
+   </tr>
+   </tbody>
+   </table>
 4. **［Save（保存）］**をクリックして設定を完了します。
 
 ## Salesforceのユーザーに権限を付与する

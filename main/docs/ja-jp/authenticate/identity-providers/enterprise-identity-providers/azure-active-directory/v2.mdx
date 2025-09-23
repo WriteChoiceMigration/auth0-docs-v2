@@ -132,107 +132,107 @@ Auth0でMicrosoft Entra IDエンタープライズ接続を作成して構成し
 2. 接続の詳細を入力し、**［Create（作成）］**を選択します。
 
    <table class="table"><thead>
-<tr>
-<th>フィールド</th>
-<th>説明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Connection name（接続名）</strong></td>
-<td>接続の論理識別子。テナントに対して一意である必要があります。一度設定すると、この名前は変更できません。</td>
-</tr>
-<tr>
-<td><strong>Microsoft Entra ID Domain（Microsoft Entra IDドメイン）</strong></td>
-<td>Microsoft Entra IDドメイン名。これは、Microsoft AzureポータルのMicrosoft Entra IDディレクトリの概要ページで確認できます。</td>
-</tr>
-<tr>
-<td><strong>Client ID（クライアントID）</strong></td>
-<td>登録済みのMicrosoft Entra IDアプリケーションの一意の識別子。Microsoft Entra IDに登録したアプリの**［Application（client）ID（アプリケーション（クライアント）ID）］**の保存値を入力します。</td>
-</tr>
-<tr>
-<td><strong>Client Secret（クライアントシークレット）</strong></td>
-<td>登録済みのMicrosoft Entra IDアプリケーションへのアクセスに使用する文字列。Microsoft Entra IDに登録したアプリの**［Client secret（クライアントシークレット）］**の保存値を入力します。</td>
-</tr>
-<tr>
-<td><strong>User ID Attribute Type（ユーザーID属性タイプ）</strong></td>
-<td>Auth0のuser_idプロパティにマッピングされるIDトークンの属性。このオプションは、Microsoftのドキュメント、「<a href="https://learn.microsoft.com/en-us/entra/identity-platform/id-token-claims-reference#use-claims-to-reliably-identify-a-user">IDトークンのクレームのリファレンス - Microsoft IDプラットフォーム</a>」に記載の2種類のサポートされたIDタイプに対応しています。</td>
-</tr>
-<tr>
-<td><strong>Use common endpoint（共通のエンドポイントの使用）</strong></td>
-<td>（任意）有効にすると、アプリケーションは新しいディレクトリからユーザーを動的に受け入れます。通常、Microsoft Entra IDに登録したアプリケーションでサポートされているアカウントタイプにマルチテナントオプションを選択した場合に有効になります。Auth0はユーザーをAzureの共通ログインエンドポイントにリダイレクトし、Azureはユーザーのメールアドレスのドメインに基づいてホーム領域検出を実行します。</td>
-</tr>
-<tr>
-<td><strong>Identity API（アイデンティティAPI）</strong></td>
-<td>Auth0がMicrosoft Entra IDエンドポイントと対話するために使用するAPI。動作の違いについては、Microsoftの<a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison">Microsoft IDプラットフォーム（v2.0）に更新する理由</a>ドキュメントをご覧ください。</td>
-</tr>
-<tr>
-<td><strong>Attributes（属性）</strong></td>
-<td>アプリがアクセスできるサインイン済みユーザーの基本属性。Auth0ユーザープロファイルにどの程度情報を保管したいかを示します。</td>
-</tr>
-<tr>
-<td><strong>Extended Attributes（拡張属性）</strong>（任意）</td>
-<td>アプリがアクセスできるサインイン済みユーザーの拡張属性。</td>
-</tr>
-<tr>
-<td><strong>Auth0 API</strong>（任意）</td>
-<td>選択すると、Microsoft Entra ID APIへの呼び出しを行う機能が必要であることを示します。これにより、Auth0にログインしたことがないユーザーでも、Microsoft Entra ID Graphでユーザーを検索できます。</td>
-</tr>
-<tr>
-<td><strong>Email Verification（メール確認）</strong></td>
-<td>Auth0がユーザープロファイルの`email_verified`フィールドを設定する方法を選択します。詳細については、「<a href="/docs/ja-jp/connections/azuread-adfs-email-verification">Azure ADとADFSのメール検証</a>」を参照してください。</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th>フィールド</th>
+   <th>説明</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td><strong>Connection name（接続名）</strong></td>
+   <td>接続の論理識別子。テナントに対して一意である必要があります。一度設定すると、この名前は変更できません。</td>
+   </tr>
+   <tr>
+   <td><strong>Microsoft Entra ID Domain（Microsoft Entra IDドメイン）</strong></td>
+   <td>Microsoft Entra IDドメイン名。これは、Microsoft AzureポータルのMicrosoft Entra IDディレクトリの概要ページで確認できます。</td>
+   </tr>
+   <tr>
+   <td><strong>Client ID（クライアントID）</strong></td>
+   <td>登録済みのMicrosoft Entra IDアプリケーションの一意の識別子。Microsoft Entra IDに登録したアプリの**［Application（client）ID（アプリケーション（クライアント）ID）］**の保存値を入力します。</td>
+   </tr>
+   <tr>
+   <td><strong>Client Secret（クライアントシークレット）</strong></td>
+   <td>登録済みのMicrosoft Entra IDアプリケーションへのアクセスに使用する文字列。Microsoft Entra IDに登録したアプリの**［Client secret（クライアントシークレット）］**の保存値を入力します。</td>
+   </tr>
+   <tr>
+   <td><strong>User ID Attribute Type（ユーザーID属性タイプ）</strong></td>
+   <td>Auth0のuser_idプロパティにマッピングされるIDトークンの属性。このオプションは、Microsoftのドキュメント、「<a href="https://learn.microsoft.com/en-us/entra/identity-platform/id-token-claims-reference#use-claims-to-reliably-identify-a-user">IDトークンのクレームのリファレンス - Microsoft IDプラットフォーム</a>」に記載の2種類のサポートされたIDタイプに対応しています。</td>
+   </tr>
+   <tr>
+   <td><strong>Use common endpoint（共通のエンドポイントの使用）</strong></td>
+   <td>（任意）有効にすると、アプリケーションは新しいディレクトリからユーザーを動的に受け入れます。通常、Microsoft Entra IDに登録したアプリケーションでサポートされているアカウントタイプにマルチテナントオプションを選択した場合に有効になります。Auth0はユーザーをAzureの共通ログインエンドポイントにリダイレクトし、Azureはユーザーのメールアドレスのドメインに基づいてホーム領域検出を実行します。</td>
+   </tr>
+   <tr>
+   <td><strong>Identity API（アイデンティティAPI）</strong></td>
+   <td>Auth0がMicrosoft Entra IDエンドポイントと対話するために使用するAPI。動作の違いについては、Microsoftの<a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison">Microsoft IDプラットフォーム（v2.0）に更新する理由</a>ドキュメントをご覧ください。</td>
+   </tr>
+   <tr>
+   <td><strong>Attributes（属性）</strong></td>
+   <td>アプリがアクセスできるサインイン済みユーザーの基本属性。Auth0ユーザープロファイルにどの程度情報を保管したいかを示します。</td>
+   </tr>
+   <tr>
+   <td><strong>Extended Attributes（拡張属性）</strong>（任意）</td>
+   <td>アプリがアクセスできるサインイン済みユーザーの拡張属性。</td>
+   </tr>
+   <tr>
+   <td><strong>Auth0 API</strong>（任意）</td>
+   <td>選択すると、Microsoft Entra ID APIへの呼び出しを行う機能が必要であることを示します。これにより、Auth0にログインしたことがないユーザーでも、Microsoft Entra ID Graphでユーザーを検索できます。</td>
+   </tr>
+   <tr>
+   <td><strong>Email Verification（メール確認）</strong></td>
+   <td>Auth0がユーザープロファイルの`email_verified`フィールドを設定する方法を選択します。詳細については、「<a href="/docs/ja-jp/connections/azuread-adfs-email-verification">Azure ADとADFSのメール検証</a>」を参照してください。</td>
+   </tr>
+   </tbody>
+   </table>
 
    <Frame>![Microsoft Entra ID接続を新規作成する](/images/ja-jp/cdy7uua7fh8z/1r6WTgLJUlbiV9jligIwER/f9862dd5ba92afa7d977134b5628ff09/Enterprise_Connection_-_MSFT_-_Japanese.png)</Frame>
 
 3. **［Provisioning（プロビジョニング）］**ビューでユーザープロファイルがAuth0で作成および更新される方法を構成することができます。
 
    <table class="table"><thead>
-<tr>
-<th>フィールド</th>
-<th>説明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Sync user profile attributes at each login（ログインごとにユーザープロファイル属性を同期する）</strong></td>
-<td>有効な場合、ユーザーがログインするたびにユーザープロファイルデータを自動的に同期するため、接続ソースで加えられた変更はAuth0で自動的に更新されます。</td>
-</tr>
-<tr>
-<td><strong>Sync user profiles using SCIM（SCIMを使ってユーザープロファイルを同期する）</strong></td>
-<td>有効な場合、SCIMを使ってユーザープロファイルデータを同期することができます。詳細については、「<a href="https://auth0.com/docs/ja-jp/authenticate/protocols/scim/configure-inbound-scim">インバウンドSCIMを構成する</a>」を参照してください。</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th>フィールド</th>
+   <th>説明</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td><strong>Sync user profile attributes at each login（ログインごとにユーザープロファイル属性を同期する）</strong></td>
+   <td>有効な場合、ユーザーがログインするたびにユーザープロファイルデータを自動的に同期するため、接続ソースで加えられた変更はAuth0で自動的に更新されます。</td>
+   </tr>
+   <tr>
+   <td><strong>Sync user profiles using SCIM（SCIMを使ってユーザープロファイルを同期する）</strong></td>
+   <td>有効な場合、SCIMを使ってユーザープロファイルデータを同期することができます。詳細については、「<a href="https://auth0.com/docs/ja-jp/authenticate/protocols/scim/configure-inbound-scim">インバウンドSCIMを構成する</a>」を参照してください。</td>
+   </tr>
+   </tbody>
+   </table>
 4. **［Login Experience（ログインエクスペリエンス）］**ビューでこの接続でのユーザーログインの方法を構成することができます。
 
    <table class="table"><thead>
-<tr>
-<th><strong>フィールド</strong></th>
-<th><strong>説明</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>ホームレルムディスカバリー</strong></td>
-<td>ユーザーのメールドメインを、指定されたIDプロバイダードメインと比較します。詳細については、[識別子優先認証の構成]を参照してください。（https://auth0.com/docs/ja-jp/authenticate/login/auth0-universal-login/identifier-first）</td>
-</tr>
-<tr>
-<td><strong>接続ボタンを表示</strong></td>
-<td>このオプションでは、アプリケーションの接続ボタンをカスタマイズするため次の選択肢が表示されます。</td>
-</tr>
-<tr>
-<td><strong>Button display name（ボタン表示名）</strong> （オプション）</td>
-<td>ユニバーサルログインのログインボタンをカスタマイズするために使用されるテキスト。設定されるとボタンは以下を読み取ります："Continue with {Button display name}"</td>
-</tr>
-<tr>
-<td><strong>Button logo（ボタンロゴ）URL</strong> （任意）</td>
-<td>ユニバーサルログインのログインボタンをカスタマイズするために使用される画像のURL。設定されると、ユニバーサルログインのログインボタンは、20px×20pxの四角で画像を表示します。</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th><strong>フィールド</strong></th>
+   <th><strong>説明</strong></th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td><strong>ホームレルムディスカバリー</strong></td>
+   <td>ユーザーのメールドメインを、指定されたIDプロバイダードメインと比較します。詳細については、[識別子優先認証の構成]を参照してください。（https://auth0.com/docs/ja-jp/authenticate/login/auth0-universal-login/identifier-first）</td>
+   </tr>
+   <tr>
+   <td><strong>接続ボタンを表示</strong></td>
+   <td>このオプションでは、アプリケーションの接続ボタンをカスタマイズするため次の選択肢が表示されます。</td>
+   </tr>
+   <tr>
+   <td><strong>Button display name（ボタン表示名）</strong> （オプション）</td>
+   <td>ユニバーサルログインのログインボタンをカスタマイズするために使用されるテキスト。設定されるとボタンは以下を読み取ります："Continue with `{Button display name}`"</td>
+   </tr>
+   <tr>
+   <td><strong>Button logo（ボタンロゴ）URL</strong> （任意）</td>
+   <td>ユニバーサルログインのログインボタンをカスタマイズするために使用される画像のURL。設定されると、ユニバーサルログインのログインボタンは、20px×20pxの四角で画像を表示します。</td>
+   </tr>
+   </tbody>
+   </table>
 
    <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 

@@ -49,45 +49,45 @@ Cloudflareをリバースプロキシとして構成するには、Cloudflareで
 2. 目的のゾーンのCloudflareダッシュボードで、以下の設定の[CNAMEレコードを作成](https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-dns-records/#create-dns-records)します。
 
    <table class="table"><thead>
-<tr>
-<th><strong>設定</strong></th>
-<th><strong>値</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Name（名前）</td>
-<td>カスタムドメイン名。</td>
-</tr>
-<tr>
-<td>Target（ターゲット）</td>
-<td>以前記録した__Origin Domain Name__の値。</td>
-</tr>
-<tr>
-<td>Proxy Status（プロキシのステータス）</td>
-<td>`Proxied`</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th><strong>設定</strong></th>
+   <th><strong>値</strong></th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Name（名前）</td>
+   <td>カスタムドメイン名。</td>
+   </tr>
+   <tr>
+   <td>Target（ターゲット）</td>
+   <td>以前記録した__Origin Domain Name__の値。</td>
+   </tr>
+   <tr>
+   <td>Proxy Status（プロキシのステータス）</td>
+   <td>`Proxied`</td>
+   </tr>
+   </tbody>
+   </table>
 3. 以下の設定で、選択したカスタムドメインすべてのURLを対象とする[ページルールを作成](https://support.cloudflare.com/hc/en-us/articles/200172336-Creating-Page-Rules)します。
 
    <table class="table"><thead>
-<tr>
-<th><strong>設定</strong></th>
-<th><strong>値</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Host Header Override（ホストヘッダーのオーバーライド）</td>
-<td>以前記録した__Origin Domain Name__の値。</td>
-</tr>
-<tr>
-<td>True-Client-IP</td>
-<td>`Enable`</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th><strong>設定</strong></th>
+   <th><strong>値</strong></th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Host Header Override（ホストヘッダーのオーバーライド）</td>
+   <td>以前記録した__Origin Domain Name__の値。</td>
+   </tr>
+   <tr>
+   <td>True-Client-IP</td>
+   <td>`Enable`</td>
+   </tr>
+   </tbody>
+   </table>
 4. [変換ルールを作成](https://developers.cloudflare.com/rules/transform/request-header-modification/create-dashboard/)します。
 
    1. **［要求ヘッダーを修正する］**ビューに切り替えます。
@@ -96,22 +96,22 @@ Cloudflareをリバースプロキシとして構成するには、Cloudflareで
    4. ［要求ヘッダーを修正する］で、**［スタティック設定］**を選択し、以下のフィールドを設定します。
 
       <table class="table"><thead>
-<tr>
-<th><strong>フィールド</strong></th>
-<th><strong>値</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Header name（ヘッダー名）</td>
-<td>`cname-api-key`</td>
-</tr>
-<tr>
-<td>Value（値）</td>
-<td>以前記録した__cname-api-key__の値。</td>
-</tr>
-</tbody>
-</table>
+      <tr>
+      <th><strong>フィールド</strong></th>
+      <th><strong>値</strong></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Header name（ヘッダー名）</td>
+      <td>`cname-api-key`</td>
+      </tr>
+      <tr>
+      <td>Value（値）</td>
+      <td>以前記録した__cname-api-key__の値。</td>
+      </tr>
+      </tbody>
+      </table>
 5. [［常にHTTPSを使用］](https://developers.cloudflare.com/ssl/edge-certificates/additional-options/always-use-https/)が有効で、選択したカスタムドメインの[［暗号化モード］](https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/)が少なくとも**［フル］**に設定されていることを確認します。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
