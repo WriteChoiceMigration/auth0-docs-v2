@@ -1,13 +1,13 @@
 ---
 title: "ユーザープロファイルでのメタデータの使い方"
 permalink: "define-maintain-custom-user-data"
+'description': "Auth0が使用するユーザー、アプリケーション、およびクライアントのメタデータについて説明します。IDプロバイダー以外からの情報を保管するために、メタデータをどのようにして使うのかについて説明します。"
 'og:title': "ユーザープロファイルでのメタデータの使い方"
 'og:description': "Auth0が使用するユーザー、アプリケーション、およびクライアントのメタデータについて説明します。IDプロバイダー以外からの情報を保管するために、メタデータをどのようにして使うのかについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユーザープロファイルでのメタデータの使い方"
 'twitter:description': "Auth0が使用するユーザー、アプリケーション、およびクライアントのメタデータについて説明します。IDプロバイダー以外からの情報を保管するために、メタデータをどのようにして使うのかについて説明します。"
 ---
-# ユーザープロファイルでのメタデータの使い方
 
 Auth0は包括的システムを提供して、Auth0ユーザープロファイルにメタデータを保管できるようにしています。メタデータは以下に使用できます。
 
@@ -34,17 +34,17 @@ Auth0は3種類のメタデータを使って、特定の情報を保管しま�
 <tbody>
 <tr>
 <td><strong>User Information（ユーザー情報）</strong></td>
-<td><code>user_metadata</code></td>
+<td>`user_metadata`</td>
 <td>ユーザーの主要な機能性に影響しない設定などのユーザー属性を保管します。このデータは、Management APIを使ってフォームを作成すると、ログイン済みのユーザーが編集<strong>できる</strong>ため、安全なデータ保管場所としては使用<strong>できません</strong>。</td>
 </tr>
 <tr>
 <td><strong>Access Information（アクセス情報）</strong></td>
-<td><code>app_metadata</code></td>
+<td>`app_metadata`</td>
 <td>権限、Auth0プラン、外部IDなど、ユーザーの機能へのアクセスに影響する情報を保管します。このデータはユーザーが編集<strong>できない</strong>ため、このフィールドに保管できる情報には制約があります。</td>
 </tr>
 <tr>
 <td><strong>Application Information（アプリケーション情報）</strong></td>
-<td><code>Client</code>オブジェクトの<code>client_metadata</code>、ルールの<code>context.clientMetadata</code>、ログイン後アクションの<code>event.client.metadata</code>。</td>
+<td>`Client`オブジェクトの`client_metadata`、ルールの`context.clientMetadata`、ログイン後アクションの`event.client.metadata`。</td>
 <td>アプリケーション（OIDC OAuth2の用語では<em>クライアント</em>）に関する情報を保管します。たとえば、アプリケーションのホームページのURL（Auth0がアプリケーション設定で指定しない任意の値）です。</td>
 </tr>
 </tbody>
@@ -58,7 +58,7 @@ Auth0は3種類のメタデータを使って、特定の情報を保管しま�
 
 ### アクションを使用する
 
-[アクション](/docs/ja-jp/customize/actions)は安全でテナント固有のバージョン管理された関数で、Node.jsで記述され、Auth0プラットフォームにある特定の拠点で実行されます。アクションは、カスタムロジックでAuth0の機能をカスタマイズおよび拡張するために使用されます。[ユーザープロファイルを強化](/docs/customize/actions/flows-and-triggers/login-flow#enrich-the-user-profile)するために使うこともできます。
+[アクション](/docs/ja-jp/customize/actions)は安全でテナント固有のバージョン管理された関数で、Node.jsで記述され、Auth0プラットフォームにある特定の拠点で実行されます。アクションは、カスタムロジックでAuth0の機能をカスタマイズおよび拡張するために使用されます。[ユーザープロファイルを強化](/docs/ja-jp/customize/actions/flows-and-triggers/login-flow#enrich-the-user-profile)するために使うこともできます。
 
 たとえば、カスタムクレームを使用する`post-login`アクションを作成して、`user_metadata`プロパティーをIDトークンにコピーするのに使うことができます。その際に、ユーザーの`user_metadata`はAuthentication APIの[ユーザー情報取得](https://auth0.com/docs/api/authentication#get-user-info)エンドポイントを介して取得されます。
 
@@ -66,7 +66,7 @@ Auth0は3種類のメタデータを使って、特定の情報を保管しま�
 
 ### Management APIを使用する
 
-ユーザーは、適切なスコープを指定してアクセストークンを要求し、以下の[Management API](/docs/api/management/v2)エンドポイントを使って`user_metadata`の表示や作成、更新を行ったり、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">MFA</Tooltip>の構成を削除したりできます。
+ユーザーは、適切なスコープを指定してアクセストークンを要求し、以下の[Management API](/docs/ja-jp/api/management/v2)エンドポイントを使って`user_metadata`の表示や作成、更新を行ったり、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">MFA</Tooltip>の構成を削除したりできます。
 
 <table class="table"><thead>
 <tr>
@@ -78,28 +78,28 @@ Auth0は3種類のメタデータを使って、特定の情報を保管しま�
 <tbody>
 <tr>
 <td>表示</td>
-<td><a href="https://auth0.com/docs/ja-jp/api/management/v2#!/Users/get_users_by_id"><code>GET /api/v2/users/{id}</code></a></td>
-<td><code>read:current_user</code></td>
+<td><a href="https://auth0.com/docs/ja-jp/api/management/v2#!/Users/get_users_by_id">`GET /api/v2/users/{id}`</a></td>
+<td>`read:current_user`</td>
 </tr>
 <tr>
 <td>作成</td>
-<td><a href="https://auth0.com/docs/ja-jp/api/management/v2#!/Users/post_users"><code>PATCH /api/v2/users/{id}</code></a></td>
-<td><code>create:current_user_metadata</code></td>
+<td><a href="https://auth0.com/docs/ja-jp/api/management/v2#!/Users/post_users">`PATCH /api/v2/users/{id}`</a></td>
+<td>`create:current_user_metadata`</td>
 </tr>
 <tr>
 <td>更新</td>
-<td><a href="https://auth0.com/docs/ja-jp/api/management/v2#!/Users/patch_users_by_id"><code>PATCH /api/v2/users/{id}</code></a></td>
-<td><code>update:current_user_metadata</code></td>
+<td><a href="https://auth0.com/docs/ja-jp/api/management/v2#!/Users/patch_users_by_id">`PATCH /api/v2/users/{id}`</a></td>
+<td>`update:current_user_metadata`</td>
 </tr>
 <tr>
 <td>削除</td>
-<td><a href="https://auth0.com/docs/ja-jp/api/management/v2#!/Users/delete_multifactor_by_provider"><code>DELETE /api/v2/users/{id}/multifactor/{provider}</code></a></td>
-<td><code>update:users</code></td>
+<td><a href="https://auth0.com/docs/ja-jp/api/management/v2#!/Users/delete_multifactor_by_provider">`DELETE /api/v2/users/{id}/multifactor/{provider}`</a></td>
+<td>`update:users`</td>
 </tr>
 </tbody>
 </table>
 
-Auth0 Management APIを呼び出すのに、アクセストークンは必須です。詳細については、「[Management APIのアクセストークン](/docs/api/management/v2/tokens)」と「[SPAにManagement APIのトークンを取得する](/docs/api/management/v2/get-access-tokens-for-spas)」をお読みください。
+Auth0 Management APIを呼び出すのに、アクセストークンは必須です。詳細については、「[Management APIのアクセストークン](/docs/ja-jp/api/management/v2/tokens)」と「[SPAにManagement APIのトークンを取得する](/docs/ja-jp/api/management/v2/get-access-tokens-for-spas)」をお読みください。
 
 ### Dashboardを使用する
 
@@ -107,9 +107,9 @@ Auth0 Dashboardを使用すると、キーと値のペアを含むアプリケ�
 
 ### ロックライブラリーを使用する
 
-[ロック](/docs/libraries/lock)ライブラリーは、`user_metadata`の定義、追加、読み取り、更新に使うことができます。`user_metadata`プロパティは、他のユーザープロファイルのプロパティと同じ方法で読み取ります。たとえば、以下のコードのスニペットでは、`user_metadata.hobby`に関連付けられた値が取得され、ページにある要素に割り当てられます。
+[ロック](/docs/ja-jp/libraries/lock)ライブラリーは、`user_metadata`の定義、追加、読み取り、更新に使うことができます。`user_metadata`プロパティは、他のユーザープロファイルのプロパティと同じ方法で読み取ります。たとえば、以下のコードのスニペットでは、`user_metadata.hobby`に関連付けられた値が取得され、ページにある要素に割り当てられます。
 
-```javascript
+```javascript lines
 // Use the accessToken acquired upon authentication to call getUserInfo
 lock.getUserInfo(accessToken, function(error, profile) {
   if (!error) {
@@ -118,11 +118,11 @@ lock.getUserInfo(accessToken, function(error, profile) {
 });
 ```
 
-ユーザーのサインアップフォームにカスタムフィールドを追加するには、`additionalSignUpFields`を使用します。ユーザーがカスタムフィールドにデータを追加すると、Auth0は入力された値をユーザーの`user_metadata`に保管します。サインアップ時の`user_metadata`の追加については、「[追加のサインアップフィールド](/docs/libraries/lock/v10/customization#additionalsignupfields-array-)」を参照してください。
+ユーザーのサインアップフォームにカスタムフィールドを追加するには、`additionalSignUpFields`を使用します。ユーザーがカスタムフィールドにデータを追加すると、Auth0は入力された値をユーザーの`user_metadata`に保管します。サインアップ時の`user_metadata`の追加については、「[追加のサインアップフィールド](/docs/ja-jp/libraries/lock/v10/customization#additionalsignupfields-array-)」を参照してください。
 
 ## カスタムデータベース接続とメタデータ
 
-[カスタムデータベース接続](/docs/connections/database#using-your-own-user-store)がある場合には、Authentication APIの[`/dbconnections/signup`](/docs/api/authentication?shell#signup)エンドポイントを使って、ユーザーに`user_metadata`を設定することができます。カスタムサインアッププロセスでのメタデータの扱いについては、「[カスタムサインアップ](/docs/ja-jp/libraries/custom-signup)」をお読みください。
+[カスタムデータベース接続](/docs/ja-jp/connections/database#using-your-own-user-store)がある場合には、Authentication APIの[`/dbconnections/signup`](/docs/ja-jp/api/authentication?shell#signup)エンドポイントを使って、ユーザーに`user_metadata`を設定することができます。カスタムサインアッププロセスでのメタデータの扱いについては、「[カスタムサインアップ](/docs/ja-jp/libraries/custom-signup)」をお読みください。
 
 `user_metadata`フィールドをAuthentication APIの`/dbconnections/signup`エンドポイントを使って設定する際には、最大10の文字列フィールド、最大500文字までに制限されます。
 

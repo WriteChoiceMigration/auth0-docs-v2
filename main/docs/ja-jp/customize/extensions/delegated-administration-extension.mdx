@@ -1,17 +1,17 @@
 ---
 title: "委任管理拡張機能v3"
 permalink: "delegated-administration-extension"
+'description': "委任管理拡張機能（DAE）を使って、他のDashboard機能へのアクセスを許可することなく、選択したグループのユーザーにAuth0 Dashboardの「ユーザー」セクションを公開する方法について説明します。"
 'og:title': "委任管理拡張機能v3"
 'og:description': "委任管理拡張機能（DAE）を使って、他のDashboard機能へのアクセスを許可することなく、選択したグループのユーザーにAuth0 Dashboardの「ユーザー」セクションを公開する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "委任管理拡張機能v3"
 'twitter:description': "委任管理拡張機能（DAE）を使って、他のDashboard機能へのアクセスを許可することなく、選択したグループのユーザーにAuth0 Dashboardの「ユーザー」セクションを公開する方法について説明します。"
 ---
-# 委任管理拡張機能v3
 
 <Note>
 
-組織内の他のユーザーや管理者にテナント使用機能を委任する場合は、［Tenant Members（テナントメンバー）］設定の使用をお勧めします。詳細については、「[ダッシュボードへのアクセス](/docs/get-started/manage-dashboard-access)」をお読みください。
+組織内の他のユーザーや管理者にテナント使用機能を委任する場合は、［Tenant Members（テナントメンバー）］設定の使用をお勧めします。詳細については、「[ダッシュボードへのアクセス](/docs/ja-jp/get-started/manage-dashboard-access)」をお読みください。
 
 </Note>
 
@@ -58,13 +58,13 @@ DAEを構成するには、必ず以下を行います。
 
 <Note>
 
-[Delegated Administration Extension（DAE：委任管理拡張機能）](/docs/ja-jp/customize/extensions/delegated-administration-extension)と[Authorization Core（認可コア）](/docs/ja-jp/manage-users/access-control/rbac)は全く別の機能ですが、Authorization Core（認可コア）機能セットを使用すると、ActionsでDAEのロールを作成し、管理することができます。方法については、「[サンプルユースケース：認可のあるアクション](/docs/manage-users/access-control/sample-use-cases-actions-with-authorization)」を参照してください。
+[Delegated Administration Extension（DAE：委任管理拡張機能）](/docs/ja-jp/customize/extensions/delegated-administration-extension)と[Authorization Core（認可コア）](/docs/ja-jp/manage-users/access-control/rbac)は全く別の機能ですが、Authorization Core（認可コア）機能セットを使用すると、ActionsでDAEのロールを作成し、管理することができます。方法については、「[サンプルユースケース：認可のあるアクション](/docs/ja-jp/manage-users/access-control/sample-use-cases-actions-with-authorization)」を参照してください。
 
 </Note>
 
 <Note>
 
-委任管理拡張機能（DAE）のある組織を使ってユーザーとしてログインする場合は、ユーザーロールを利用できません。`event.authorization.roles`には組織メンバーのロールのみ使用できます。組織メンバーにロールを追加するには、「[組織メンバーにロールを追加する](/docs/manage-users/organizations/configure-organizations/add-member-roles)」をお読みください。
+委任管理拡張機能（DAE）のある組織を使ってユーザーとしてログインする場合は、ユーザーロールを利用できません。`event.authorization.roles`には組織メンバーのロールのみ使用できます。組織メンバーにロールを追加するには、「[組織メンバーにロールを追加する](/docs/ja-jp/manage-users/organizations/configure-organizations/add-member-roles)」をお読みください。
 
 </Note>
 
@@ -78,19 +78,19 @@ Auth0は、接続に関連付けられたユーザーに対して、そのロー
 </thead>
 <tbody>
 <tr>
-<td><code>Delegated Admin - User</code></td>
+<td>`Delegated Admin - User`</td>
 <td>ユーザーを検索、ユーザーを作成、ユーザーを開く、ユーザーに削除やブロックなどのアクションを実行します。</td>
 </tr>
 <tr>
-<td><code>Delegated Admin - Administrator</code></td>
+<td>`Delegated Admin - Administrator`</td>
 <td>Delegated Admin - User（委任管理 - ユーザー）ができるすべてのことを実行できるほか、テナント内のすべてのログを表示し、フックを構成します。</td>
 </tr>
 <tr>
-<td><code>Delegated Admin - Auditor</code></td>
+<td>`Delegated Admin - Auditor`</td>
 <td>ユーザーを検索してユーザー情報を表示します（変更は行いません）。アクションベースのボタンはこのロールには表示されません。</td>
 </tr>
 <tr>
-<td><code>Delegated Admin - Operator</code></td>
+<td>`Delegated Admin - Operator`</td>
 <td>ユーザー管理とログにはアクセスしますが、拡張機能の設定セクションにはアクセスしません。</td>
 </tr>
 </tbody>
@@ -102,7 +102,7 @@ Auth0は、接続に関連付けられたユーザーに対して、そのロー
 2. [DAEロールをユーザーに手動で割り当て](/docs/ja-jp/manage-users/access-control/configure-core-rbac/rbac-users/assign-roles-to-users)ます。
 3. [Actions](/docs/ja-jp/customize/actions)を使用して、ユーザーロールをIDトークンにあるDAEの名前空間に追加します。
 
-   ```
+   ``` lines
    exports.onExecutePostLogin = async (event, api) => {
      const namespace = `https://{yourTenant}/auth0-delegated-admin`;
      if (event.client.client_id === 'CLIENT_ID' && event.authorization) {
@@ -121,7 +121,7 @@ Auth0は、接続に関連付けられたユーザーに対して、そのロー
 
 <Warning>
 
-Auth0は、プロファイル情報を[OpenID Connect（OIDC）仕様](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)で定義されている構造化クレーム形式で返します。つまり、IDトークンまたはアクセストークンに追加するカスタムクレームは、衝突を避けるために[ガイドラインと制限に従わなければなりません](/docs/secure/tokens/json-web-tokens/create-custom-claims)。
+Auth0は、プロファイル情報を[OpenID Connect（OIDC）仕様](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)で定義されている構造化クレーム形式で返します。つまり、IDトークンまたはアクセストークンに追加するカスタムクレームは、衝突を避けるために[ガイドラインと制限に従わなければなりません](/docs/ja-jp/secure/tokens/json-web-tokens/create-custom-claims)。
 
 </Warning>
 
@@ -157,37 +157,37 @@ Authorization Core（認証コア）を使用しない場合は、ユーザー�
 <tr>
 <td>オーストラリア</td>
 <td>AU</td>
-<td><code>https://{yourTenant}.au.webtask.io/auth0-delegated-admin</code></td>
+<td>`https://{yourTenant}.au.webtask.io/auth0-delegated-admin`</td>
 </tr>
 <tr>
 <td>欧州</td>
 <td>EU</td>
-<td><code>https://{yourTenant}.eu.webtask.io/auth0-delegated-admin</code></td>
+<td>`https://{yourTenant}.eu.webtask.io/auth0-delegated-admin`</td>
 </tr>
 <tr>
 <td>欧州</td>
 <td>EU-2</td>
-<td><code>https://{yourTenant}.eu.webtask.run/auth0-delegated-admin</code></td>
+<td>`https://{yourTenant}.eu.webtask.run/auth0-delegated-admin`</td>
 </tr>
 <tr>
 <td>日本</td>
 <td>JP-1</td>
-<td><code>https://{yourTenant}.jp.webtask.run/auth0-delegated-admin</code></td>
+<td>`https://{yourTenant}.jp.webtask.run/auth0-delegated-admin`</td>
 </tr>
 <tr>
 <td>英国</td>
 <td>UK</td>
-<td><code>https://{yourTenant}.uk.webtask.run/auth0-delegated-admin</code></td>
+<td>`https://{yourTenant}.uk.webtask.run/auth0-delegated-admin`</td>
 </tr>
 <tr>
 <td>米国</td>
 <td>US-1</td>
-<td><code>https://{yourTenant}.us.webtask.io/auth0-delegated-admin</code></td>
+<td>`https://{yourTenant}.us.webtask.io/auth0-delegated-admin`</td>
 </tr>
 <tr>
 <td>米国</td>
 <td>US-3</td>
-<td><code>https://{yourTenant}.us.webtask.run/auth0-delegated-admin</code></td>
+<td>`https://{yourTenant}.us.webtask.run/auth0-delegated-admin`</td>
 </tr>
 </tbody>
 </table>

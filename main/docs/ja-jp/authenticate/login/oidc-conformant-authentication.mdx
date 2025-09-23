@@ -1,13 +1,13 @@
 ---
 title: "OIDC準拠認証の採用"
 permalink: "oidc-conformant-authentication"
+'description': "OIDC準拠のアプリケーション設定が認証パイプラインに与える影響について説明します。"
 'og:title': "OIDC準拠認証の採用"
 'og:description': "OIDC準拠のアプリケーション設定が認証パイプラインに与える影響について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "OIDC準拠認証の採用"
 'twitter:description': "OIDC準拠のアプリケーション設定が認証パイプラインに与える影響について説明します。"
 ---
-# OIDC準拠認証の採用
 
 Auth0は[認定OpenID Connect (OIDC)プロバイダー](http://openid.net/certification/)です。Auth0 では、セキュリティと標準ベースの相互運用性を向上させる取り組みの一環として、[OIDC仕様](http://openid.net/specs/openid-connect-core-1_0.html)に厳密に準拠した認証フローにのみ新しい機能を展開しています。
 
@@ -37,11 +37,11 @@ OIDC Conformant（OIDC準拠）設定を手動で無効にすることはでき�
 2. **［Advanced Settings（詳細設定）］**にスクロールし、**OAuth**タブに進みます。
 3. **［OIDC Conformant（OIDC準拠）］**トグルスイッチを有効にし、**［Save Changes（変更を保存）］**をクリックします。
 
-認証要求ごとにOIDC準拠のパイプラインを使用する必要があり、アプリケーションが<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">JWT</Tooltip>アクセストークンを使用してAPIを呼び出す必要がある場合は、`audience`パラメーターを使用して[`/social`](/docs/api/authentication#social)エンドポイントへの要求を開始します。
+認証要求ごとにOIDC準拠のパイプラインを使用する必要があり、アプリケーションが<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">JWT</Tooltip>アクセストークンを使用してAPIを呼び出す必要がある場合は、`audience`パラメーターを使用して[`/social`](/docs/ja-jp/api/authentication#social)エンドポイントへの要求を開始します。
 
 認証要求ごとにOIDC準拠のパイプラインを使用する必要があり、アプリケーションがAPIを呼び出す必要がない場合は、次の`audience`パラメーターを使用します。
 
-```
+``` lines
 https://{yourDomain}/userinfo
 ```
 
@@ -75,12 +75,12 @@ OIDC準拠パイプラインを有効にすると、従来のパイプライン�
   + 認証に暗黙フローを使用すると、リフレッシュトークンは返されなくなります。
 * [リソース所有者のパスワードフロー](/docs/ja-jp/authenticate/login/oidc-conformant-authentication/oidc-adoption-rop-flow)：認証要求、認証応答、IDトークン構造、アクセストークン構造には構造上の違いがあります。具体的には次のような違いがあります。
 
-  + 従来の[リソース所有者エンドポイント](/docs/api/authentication#database-ad-ldap-active-)が無効になり、そのエンドポイントからの埋め込みログインのパスワードレス認証も無効になります。[埋め込みログインでパスワードレスを実装する](/docs/connections/passwordless/guides/embedded-login)には、アプリケーションの種類に応じて、埋め込みパスワードレスAPIまたはSDKを使用してください。
+  + 従来の[リソース所有者エンドポイント](/docs/ja-jp/api/authentication#database-ad-ldap-active-)が無効になり、そのエンドポイントからの埋め込みログインのパスワードレス認証も無効になります。[埋め込みログインでパスワードレスを実装する](/docs/ja-jp/connections/passwordless/guides/embedded-login)には、アプリケーションの種類に応じて、埋め込みパスワードレスAPIまたはSDKを使用してください。
   + `offline_access`スコープを使用してリフレッシュトークンを要求する場合、`device`パラメーターは無効と見なされるようになりました。
 
 ### 委任
 
-* **廃止**：[`/delegation`](/docs/api/authentication#delegation)エンドポイント、サードパーティのAPIトークンを取得するために使用される場合を除く。
+* **廃止**：[`/delegation`](/docs/ja-jp/api/authentication#delegation)エンドポイント、サードパーティのAPIトークンを取得するために使用される場合を除く。
 * OIDC準拠のアプリケーションは、委任要求のソースまたはターゲットになることはできません。
 
 詳細は「[OIDC準拠の採用：委任](/docs/ja-jp/authenticate/login/oidc-conformant-authentication/oidc-adoption-delegation)」をお読みください。
@@ -88,9 +88,9 @@ OIDC準拠パイプラインを有効にすると、従来のパイプライン�
 ### エンドポイント
 
 * **廃止**：`/tokeninfo`エンドポイント
-* **無効**：[`/oauth/access_token`](/docs/api/authentication#post-oauth-access_token)エンドポイント（ネイティブモバイルアプリケーションからのソーシャル認証に使用）。
+* **無効**：[`/oauth/access_token`](/docs/ja-jp/api/authentication#post-oauth-access_token)エンドポイント（ネイティブモバイルアプリケーションからのソーシャル認証に使用）。
 * **廃止**：`/ssodata`エンドポイント
-* **廃止**：[`/delegation`](/docs/api/authentication#delegation)エンドポイント、サードパーティーAPIトークンを取得するために使用される場合を除く。
+* **廃止**：[`/delegation`](/docs/ja-jp/api/authentication#delegation)エンドポイント、サードパーティーAPIトークンを取得するために使用される場合を除く。
 
 ### リフレッシュトークン
 

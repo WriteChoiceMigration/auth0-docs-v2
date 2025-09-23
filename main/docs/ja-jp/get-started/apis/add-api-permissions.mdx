@@ -1,13 +1,13 @@
 ---
 title: "API許可の追加"
 permalink: "add-api-permissions"
+'description': "Auth DashboardまたはManagement APIを使用してAPIにアクセス許可を追加する方法について説明します。"
 'og:title': "API許可の追加"
 'og:description': "Auth DashboardまたはManagement APIを使用してAPIにアクセス許可を追加する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "API許可の追加"
 'twitter:description': "Auth DashboardまたはManagement APIを使用してAPIにアクセス許可を追加する方法について説明します。"
 ---
-# API許可の追加
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を使用してAPIにアクセス許可を追加できます。
 
@@ -21,11 +21,11 @@ permalink: "add-api-permissions"
 
 1. [［Dashboard］>［Applications （アプリケーション）］>［API］](https://manage.auth0.com/#/apis)に移動し、表示するAPI名をクリックします。
 
-   <Frame>![Dashboard - アプリケーション - APIリスト](//images.ctfassets.net/cdy7uua7fh8z/3rhmhghYZDSi6YWHRA5yMQ/2bafc57d32df6eb415b9e59b62f41531/API_List.png)</Frame>
+   <Frame>![Dashboard - アプリケーション - APIリスト](/images/ja-jp/cdy7uua7fh8z/3rhmhghYZDSi6YWHRA5yMQ/2bafc57d32df6eb415b9e59b62f41531/API_List.png)</Frame>
 
 2. **［Permissions（アクセス許可）］**タブに移動し、追加するアクセス許可のアクセス許可名と説明を入力します。予約されたアクセス許可名は使用しないでください（予約名セクションを参照）。
 
-   <Frame>![Dashboard - APIの権限を追加する - APIの権限の定義画面](//images.ctfassets.net/cdy7uua7fh8z/32Pb185OFs2mC6z2fmunEw/6b337d23304ea568dfcf8d9156b859b8/2025-02-27_10-17-20.png)</Frame>
+   <Frame>![Dashboard - APIの権限を追加する - APIの権限の定義画面](/images/ja-jp/cdy7uua7fh8z/32Pb185OFs2mC6z2fmunEw/6b337d23304ea568dfcf8d9156b859b8/2025-02-27_10-17-20.png)</Frame>
 
 3. **［Add（追加）］**をクリックします。個々のアプリケーションでは、APIと適切に対話するためにアクセス許可やスコープの更新が必要になる場合があることに注意してください。
 
@@ -40,15 +40,15 @@ permalink: "add-api-permissions"
 [Update Resource Server（リソースサーバー更新）エンドポイント](https://auth0.com/docs/api/management/v2/resource-servers/patch-resource-servers-by-id)に対して`PATCH`呼び出しを行います。`API_ID`、`MGMT_API_ACCESS_TOKEN`、`PERMISSION_NAME`、`PERMISSION_DESC`のプレースホルダー値をそれぞれAPI ID、Management APIのアクセストークン、アクセス許可名、アクセス許可の説明に置き換えます。予約されたアクセス許可名は使用しないでください（予約名セクションを参照）。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/resource-servers/API_ID' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "scopes": [ { "value": "PERMISSION_NAME", "description": "PERMISSION_DESC" }, { "value": "PERMISSION_NAME", "description": "PERMISSION_DESC" } ] }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/resource-servers/API_ID");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -58,7 +58,7 @@ request.AddParameter("application/json", "{ \"scopes\": [ { \"value\": \"PERMISS
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -79,8 +79,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/resource-servers/API_ID")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -89,7 +89,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/resource-serv
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -111,8 +111,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
@@ -138,7 +138,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/resource-servers/API_ID",
@@ -163,8 +163,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"scopes\": [ { \"value\": \"PERMISSION_NAME\", \"description\": \"PERMISSION_DESC\" }, { \"value\": \"PERMISSION_NAME\", \"description\": \"PERMISSION_DESC\" } ] }"
@@ -179,7 +179,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -194,8 +194,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"scopes\": [ { \"value\": \"PERMISSION_NAME\", \"description\": \"PERMISSION_DESC\" }, { \"value\": \"PERMISSION_NAME\", \"description\": \"PERMISSION_DESC\" } ] }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -246,19 +246,19 @@ Management APIでは、スコープの追加・変更時に、含めたいスコ
 </thead>
 <tbody>
 <tr>
-<td><code>API_ID</code></td>
+<td>`API_ID`</td>
 <td>アクセス許可を削除したいAPIのID。</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><code>update:resource_servers</code>のスコープを持つ<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>`update:resource_servers`のスコープを持つ<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 <tr>
-<td><code>PERMISSION_NAME</code></td>
+<td>`PERMISSION_NAME`</td>
 <td>指定したAPIで保持したいアクセス許可の名前。</td>
 </tr>
 <tr>
-<td><code>PERMISSION_DESC</code></td>
+<td>`PERMISSION_DESC`</td>
 <td>指定したAPIで保持したいアクセス許可のわかりやすい説明。</td>
 </tr>
 </tbody>

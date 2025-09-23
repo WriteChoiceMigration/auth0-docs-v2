@@ -1,28 +1,28 @@
 ---
 title: "アプリケーションの所有権を更新する"
 permalink: "update-application-ownership"
+'description': "Auth0 Management APIを使用してアプリケーションの所有権を更新する方法を説明します。これにより、アプリケーションをAuth0にファーストパーティーアプリケーションとして登録するのか、サードパーティーアプリケーションとして登録するのかを指定できます。"
 'og:title': "アプリケーションの所有権を更新する"
 'og:description': "Auth0 Management APIを使用してアプリケーションの所有権を更新する方法を説明します。これにより、アプリケーションをAuth0にファーストパーティーアプリケーションとして登録するのか、サードパーティーアプリケーションとして登録するのかを指定できます。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "アプリケーションの所有権を更新する"
 'twitter:description': "Auth0 Management APIを使用してアプリケーションの所有権を更新する方法を説明します。これにより、アプリケーションをAuth0にファーストパーティーアプリケーションとして登録するのか、サードパーティーアプリケーションとして登録するのかを指定できます。"
 ---
-# アプリケーションの所有権を更新する
 
 Auth0の<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>を使用して、アプリケーションの所有権を更新することができます。これにより、アプリケーションをAuth0にファーストパーティーアプリケーションとして登録するのか、サードパーティーアプリケーションとして登録するのかを指定できます。
 
-[クライアント更新エンドポイント](/docs/api/management/v2#!/Clients/patch_clients_by_id)に`PATCH`呼び出しを行います。必ず、`{yourClientId}`、`{yourMgmtApiAccessToken}`、および`{ownershipBoolean}`のプレースホルダーの値を、それぞれご自身のクライアントID、Management APIのアクセストークン、アプリケーションの所有権を表すブール値に置き換えてください。
+[クライアント更新エンドポイント](/docs/ja-jp/api/management/v2#!/Clients/patch_clients_by_id)に`PATCH`呼び出しを行います。必ず、`{yourClientId}`、`{yourMgmtApiAccessToken}`、および`{ownershipBoolean}`のプレースホルダーの値を、それぞれご自身のクライアントID、Management APIのアクセストークン、アプリケーションの所有権を表すブール値に置き換えてください。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/clients/%7ByourClientId%7D' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "is_first_party": "{ownershipBoolean}" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/clients/%7ByourClientId%7D");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -32,7 +32,7 @@ request.AddParameter("application/json", "{ \"is_first_party\": \"{ownershipBool
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -53,8 +53,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/clients/%7ByourClientId%7D")
 .header("content-type", "application/json")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
@@ -63,7 +63,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/clients/%7Byo
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -80,8 +80,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer {yourMgmtApiAccessToken}",
@@ -107,7 +107,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/clients/%7ByourClientId%7D",
@@ -132,8 +132,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"is_first_party\": \"{ownershipBoolean}\" }"
@@ -148,7 +148,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -163,8 +163,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"is_first_party\": \"{ownershipBoolean}\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -200,16 +200,16 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>YOUR_CLIENT_ID</code></td>
+<td>`YOUR_CLIENT_ID`</td>
 <td>更新されるアプリケーションのID。</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><code>update:clients</code>の<dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">スコープ</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>を持つ<a href="/docs/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>`update:clients`の<dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">スコープ</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>を持つ<a href="/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 <tr>
-<td><code>OWNERSHIP_BOOLEAN</code></td>
-<td>アプリケーションに対して指定したい所有権。アプリケーションがファーストパーティの場合は、<code>is_first_party</code>の値が<code>true</code>になります。アプリケーションがサードパーティの場合は、<code>is_first_party</code>の値が<code>false</code>になります。</td>
+<td>`OWNERSHIP_BOOLEAN`</td>
+<td>アプリケーションに対して指定したい所有権。アプリケーションがファーストパーティの場合は、`is_first_party`の値が`true`になります。アプリケーションがサードパーティの場合は、`is_first_party`の値が`false`になります。</td>
 </tr>
 </tbody>
 </table>

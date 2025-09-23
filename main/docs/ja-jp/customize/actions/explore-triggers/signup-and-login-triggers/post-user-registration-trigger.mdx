@@ -1,17 +1,17 @@
 ---
 title: "ユーザー登録後トリガー"
 permalink: "post-user-registration-trigger"
+'description': "データベースまたはパスワードレス接続に対してユーザーが作成された後に実行される、ユーザー登録後フローとpost-user-registrationアクショントリガーについて説明します。"
 'og:title': "ユーザー登録後トリガー"
 'og:description': "データベースまたはパスワードレス接続に対してユーザーが作成された後に実行される、ユーザー登録後フローとpost-user-registrationアクショントリガーについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユーザー登録後トリガー"
 'twitter:description': "データベースまたはパスワードレス接続に対してユーザーが作成された後に実行される、ユーザー登録後フローとpost-user-registrationアクショントリガーについて説明します。"
 ---
-# ユーザー登録後トリガー
 
 ユーザー登録後トリガーは、ユーザーがデータベースまたはパスワードレス接続に追加された後に実行されます。
 
-<Frame>![Diagram of the Actions Post User Registration Flow.](//images.ctfassets.net/cdy7uua7fh8z/4bqF9YEPYQshnJGCx39pws/e3a057cac6b621855f1e481a4e1e68d1/post-user-registration-flow.png)</Frame>
+<Frame>![Diagram of the Actions Post User Registration Flow.](/images/ja-jp/cdy7uua7fh8z/4bqF9YEPYQshnJGCx39pws/e3a057cac6b621855f1e481a4e1e68d1/post-user-registration-flow.png)</Frame>
 
 このフローのアクションは非ブロック（非同期）であるため、Authパイプラインの実行はアクションの完了を待たずに継続されます。そのため、アクションの結果は、Auth0のトランザクションに影響しません。
 
@@ -30,7 +30,7 @@ permalink: "post-user-registration-trigger"
 
 ### 新しいユーザーが登録されたらSlackに通知する
 
-```javascript
+```javascript lines
 /**
 * Handler that will be called during the execution of a PostUserRegistration flow.
 * 
@@ -59,7 +59,7 @@ exports.onExecutePostUserRegistration = async (event, api) => {
 
 post-user-registrationアクションを使用して、Auth0ユーザーIDをリモートシステムに保存できます。
 
-```javascript
+```javascript lines
 /**
 * Handler that will be called during the execution of a PostUserRegistration flow.
 * 

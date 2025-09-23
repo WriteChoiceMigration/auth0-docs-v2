@@ -1,13 +1,13 @@
 ---
 title: "Auth0の構成（モバイルアプリ + API）"
 permalink: "part-2"
+'description': "モバイルアプリ + APIアーキテクチャのシナリオでのAuth0の構成"
 'og:title': "Auth0の構成（モバイルアプリ + API）"
 'og:description': "モバイルアプリ + APIアーキテクチャのシナリオでのAuth0の構成"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0の構成（モバイルアプリ + API）"
 'twitter:description': "モバイルアプリ + APIアーキテクチャのシナリオでのAuth0の構成"
 ---
-# Auth0の構成（モバイルアプリ + API）
 
 このセクションでは、[Auth0 Dashboard](https://manage.auth0.com/#)での適用が必要なすべての設定を確認します。
 
@@ -21,7 +21,7 @@ APIについて、以下の詳細を入力する必要があります。
 * **［Identifier（識別子）］**：APIに一意の識別子。URLの使用を推奨していますが、公開されたURLである必要はありません。Auth0がこのAPIを呼び出すことはありません。この値は後から変更することはできません。
 * **［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Signing Algorithm</Tooltip>（署名アルゴリズム）］**： トークンの署名に使用するアルゴリズム。使用可能な値は`HS256`と`RS256`です。RS256を選択すると、トークンはテナントの秘密鍵で署名されます。署名アルゴリズムの詳細については、「[署名アルゴリズム](/docs/ja-jp/get-started/applications/signing-algorithms)」を参照してください。
 
-<Frame>![Dashboard -アプリケーション API - APIの作成 - ポップアップ](//images.ctfassets.net/cdy7uua7fh8z/4kIH4BQc4vDel2zhJ6lwCE/5fc39d821df752269175fa5e47440419/Create_API_form.png)</Frame>
+<Frame>![Dashboard -アプリケーション API - APIの作成 - ポップアップ](/images/ja-jp/cdy7uua7fh8z/4kIH4BQc4vDel2zhJ6lwCE/5fc39d821df752269175fa5e47440419/Create_API_form.png)</Frame>
 
 必要な情報を入力し、**［Create（作成）］**ボタンをクリックします。
 
@@ -31,7 +31,7 @@ APIを作成する際には、トークンの署名に使用するアルゴリ�
 
 <Note>
 
-署名はJWTの一部です。JWTの構造に慣れていない場合は、「[JSON Web Tokenの構造](/docs/secure/tokens/json-web-tokens/json-web-token-structure)」を参照してください。
+署名はJWTの一部です。JWTの構造に慣れていない場合は、「[JSON Web Tokenの構造](/docs/ja-jp/secure/tokens/json-web-tokens/json-web-token-structure)」を参照してください。
 
 </Note>
 
@@ -58,7 +58,7 @@ JWTの署名アルゴリズムについて詳しくは、「[JSON Web Token（JW
 
 APIの設定で、**［Permissions（アクセス許可）］**タブに移動します。このセクションでは、以前に説明した4つのスコープ（`read:timesheets`、`create:timesheets`、`delete:timesheets`、`approve:timesheets`）すべてを追加することができます。
 
-<Frame>![Dashboard - アプリケーション - API - アクセス許可](//images.ctfassets.net/cdy7uua7fh8z/xxMOKezob6gNHJ0CcKhcg/637cc070d9e00e22b070d0cffed7bba0/Gift_Shop_Module_-_Permissions.png)</Frame>
+<Frame>![Dashboard - アプリケーション - API - アクセス許可](/images/ja-jp/cdy7uua7fh8z/xxMOKezob6gNHJ0CcKhcg/637cc070d9e00e22b070d0cffed7bba0/Gift_Shop_Module_-_Permissions.png)</Frame>
 
 ## アプリケーションを作成する
 
@@ -86,7 +86,7 @@ Autho0には、**ネイティブアプリ**（モバイルアプリまたはデ�
 
 次に、同じ手順で「**Manager（マネージャー）**」ロールを作成し、すべてのアクセス許可が選択されていることを確認します。
 
-<Frame>![Dashboard - Extensions - Authorization Extension - Create Manager Role](//images.ctfassets.net/cdy7uua7fh8z/3ver0yyJpTLypmcIDzwSNt/d880e8ae74e6e973c7ce1c8b0f7e7c87/create-manager-role.png)</Frame>
+<Frame>![Dashboard - Extensions - Authorization Extension - Create Manager Role](/images/ja-jp/cdy7uua7fh8z/3ver0yyJpTLypmcIDzwSNt/d880e8ae74e6e973c7ce1c8b0f7e7c87/create-manager-role.png)</Frame>
 
 ### ユーザーをロールに割り当てる
 
@@ -106,7 +106,7 @@ Autho0には、**ネイティブアプリ**（モバイルアプリまたはデ�
 
 **［Create Role（ルールの作成）］**ボタンをクリックし、**［Empty Rule（空のルール）］**テンプレートを選択します。このルールに「**<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Access Token</Tooltip> Scopes（アクセストークンスのコープ）**」のような名前を付けて、そのルールに次のコードを指定することができます。
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   if (context.clientName !== 'Timesheets SPA') {
     return callback(null, user, context);

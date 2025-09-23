@@ -1,13 +1,13 @@
 ---
 title: "メールでのパスワードレス認証"
 permalink: "email-otp"
+'description': "メール認証要素を使用してパスワードレス接続を使用する方法を説明します。"
 'og:title': "メールでのパスワードレス認証"
 'og:description': "メール認証要素を使用してパスワードレス接続を使用する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "メールでのパスワードレス認証"
 'twitter:description': "メール認証要素を使用してパスワードレス接続を使用する方法を説明します。"
 ---
-# メールでのパスワードレス認証
 
 パスワードレス接続を構成して、ワンタイムパスワード（OTP）をメールでユーザーに送信し、認証を完了することができます。
 
@@ -21,11 +21,11 @@ OTPが送信されたメールアドレスが既存のユーザーと一致す�
 
 ### 埋め込みログイン
 
-<Frame>![埋め込みログインでパスワードレスにメールを使用したワークフローの図](//images.ctfassets.net/cdy7uua7fh8z/3HMLxPTq9eCsq1eR21s0bL/fa25c9582c85c6302b79d21b369c79cf/SMS_Email_Flow.png)</Frame>
+<Frame>![埋め込みログインでパスワードレスにメールを使用したワークフローの図](/images/ja-jp/cdy7uua7fh8z/3HMLxPTq9eCsq1eR21s0bL/fa25c9582c85c6302b79d21b369c79cf/SMS_Email_Flow.png)</Frame>
 
 ### ユニバーサルログイン
 
-<Frame>![ユニバーサルログインでパスワードレスにメールを使用したワークフローの図](//images.ctfassets.net/cdy7uua7fh8z/5p3cKrJwmc7MxpQ7pbXsjC/b3b6062b6c92f51889843cbc4edf515f/Screenshot_2024-10-29_at_11.54.03.png)</Frame>
+<Frame>![ユニバーサルログインでパスワードレスにメールを使用したワークフローの図](/images/ja-jp/cdy7uua7fh8z/5p3cKrJwmc7MxpQ7pbXsjC/b3b6062b6c92f51889843cbc4edf515f/Screenshot_2024-10-29_at_11.54.03.png)</Frame>
 
 ## 接続を構成する
 
@@ -59,7 +59,7 @@ OTPが送信されたメールアドレスが既存のユーザーと一致す�
 
 たとえば、`request_language`パラメータを参照してメッセージの言語を変更できます：
 
-```json
+```json lines
 {% if request_language contains 'dutch' %}
    Hier is uw verificatie code: {{ code }}
 {% endif %}
@@ -78,24 +78,24 @@ OTPが送信されたメールアドレスが既存のユーザーと一致す�
 </thead>
 <tbody>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>使用するパスワード。</td>
 </tr>
 <tr>
-<td><code>link</code></td>
+<td>`link`</td>
 <td>生成されるサインインリンク。</td>
 </tr>
 <tr>
-<td><code>application.name</code></td>
+<td>`application.name`</td>
 <td>ユーザーがサインアップしているアプリケーションの名前。</td>
 </tr>
 <tr>
-<td><code>request_language</code></td>
+<td>`request_language`</td>
 <td>メッセージコンテンツに対して要求された言語。</td>
 </tr>
 <tr>
-<td><code>operation</code></td>
-<td>APIを介してユーザーのメール更新によってテンプレートがトリガーされたかを示します。トリガーされると値は<code>change_email</code>になります。トリガーされていない場合は<code>null</code>です。</td>
+<td>`operation`</td>
+<td>APIを介してユーザーのメール更新によってテンプレートがトリガーされたかを示します。トリガーされると値は`change_email`になります。トリガーされていない場合は`null`です。</td>
 </tr>
 </tbody>
 </table>

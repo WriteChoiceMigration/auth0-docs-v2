@@ -1,13 +1,13 @@
 ---
 title: "Guardian for Android SDK"
 permalink: "guardian-for-android-sdk"
+'description': "Auth0 Guardian for Android SDKのインストール方法、設定方法、オプションの使用方法について説明します。"
 'og:title': "Guardian for Android SDK"
 'og:description': "Auth0 Guardian for Android SDKのインストール方法、設定方法、オプションの使用方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Guardian for Android SDK"
 'twitter:description': "Auth0 Guardian for Android SDKのインストール方法、設定方法、オプションの使用方法について説明します。"
 ---
-# Guardian for Android SDK
 
 [Guardian for Android SDK](https://github.com/auth0/Guardian.Android)は、Guardian機能があるAndroidアプリの作成を支援し、プッシュ通知による多要素認証（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>）へのセキュアなアクセスを提供します。このツールキットによって、組織のルックアンドフィールに合ったGuardianアプリケーションの独自にカスタマイズしたバージョンを構築できます。詳細については、「[MFAにプッシュ通知を構成する](https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-push-notifications-for-mfa#configure-push-notifications-for-apple-using-apn-)」を参照してください。
 
@@ -27,7 +27,7 @@ Guardianは[Maven Central](http://search.maven.org/)と[JCenter](https://bintray
 1. [［Dashboard］ > ［Security（セキュリティ）］ > ［Multifactor Auth（多要素認証）］ > ［Push via Auth0 Guardian（Auth0 Guardianを介してプッシュ）］](https://manage.auth0.com/#/security/mfa/guardian)に進みます。
 2. 上部のスイッチを切り替えて有効にします。
 
-<Frame>![［Auth0 Dashboard］ > ［Security（セキュリティ）］ > ［Multi-factor Auth（多要素認証）］ > ［Guardian］ > ［Custom（カスタム）］ > ［Amazon SNS］](//images.ctfassets.net/cdy7uua7fh8z/6PKSyH99GJ2CalJoG38sfZ/43644347942a224b271008b358afde0c/2025-01-27_11-22-59.png)</Frame>
+<Frame>![［Auth0 Dashboard］ > ［Security（セキュリティ）］ > ［Multi-factor Auth（多要素認証）］ > ［Guardian］ > ［Custom（カスタム）］ > ［Amazon SNS］](/images/ja-jp/cdy7uua7fh8z/6PKSyH99GJ2CalJoG38sfZ/43644347942a224b271008b358afde0c/2025-01-27_11-22-59.png)</Frame>
 
 3.[プッシュ通知を構成します](https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-push-notifications-for-mfa#configure-push-notifications-for-android-using-fcm)。
 
@@ -35,7 +35,7 @@ Guardianは[Maven Central](http://search.maven.org/)と[JCenter](https://bintray
 
 GuardianはSDKの中核です。特定のテナントURL向けにこのクラスのインスタンスを作成する必要があります。
 
-```
+```javascript lines
 Uri url = Uri.parse("https://<tenant>.<region>.auth0.com");
 
 Guardian guardian = new Guardian.Builder()
@@ -45,7 +45,7 @@ Guardian guardian = new Guardian.Builder()
 
 または
 
-```
+```javascript lines
 String domain = "<tenant>.<region>.auth0.com";
 
 Guardian guardian = new Guardian.Builder()
@@ -59,7 +59,7 @@ Guardian guardian = new Guardian.Builder()
 
 `Guardian.enroll`関数を使用して登録を作成できますが、まず、そのための新しいRSA鍵ペアを作成する必要があります。秘密鍵は、ログインを許可または拒否する要求に署名するために使用されます。公開鍵は、サーバーが要求の署名を後で検証できるように登録プロセス中に送信されます。
 
-```
+```javascript lines
 KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
 keyPairGenerator.initialize(2048); // you MUST use at least 2048 bit keys
 KeyPair keyPair = keyPairGenerator.generateKeyPair();
@@ -67,7 +67,7 @@ KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
 次に、Guardian QRコードをスキャンして登録情報を取得し、それを使用してアカウントを登録します。
 
-```
+```javascript lines
 Uri enrollmentUriFromQr = ...; // the URI obtained from a Guardian QR code
 
 CurrentDevice device = new CurrentDevice(context, "fcmToken", "deviceName");
@@ -79,7 +79,7 @@ Enrollment enrollment = guardian
 
 また、バックグラウンドスレッドで要求を実行することもできます。
 
-```
+```javascript lines
 guardian
     .enroll(enrollmentUriFromQr, device, keyPair)
     .start(new Callback<Enrollment> {
@@ -105,11 +105,11 @@ guardian
 </thead>
 <tbody>
 <tr>
-<td><code>deviceName</code></td>
+<td>`deviceName`</td>
 <td>2番目の要素が必要とされるときにユーザーに表示される登録用の名前。</td>
 </tr>
 <tr>
-<td><code>fcmToken</code></td>
+<td>`fcmToken`</td>
 <td>Firebase Cloud Messaging（FCM）プッシュ通知サービスのトークン。詳細については、「<a href="https://firebase.google.com/docs/cloud-messaging/android/client#sample-register" title="sample register">サンプル登録</a>」を参照してください。</td>
 </tr>
 </tbody>
@@ -119,7 +119,7 @@ guardian
 
 MFAを無効にするには、登録を削除できます。
 
-```
+```javascript lines
 guardian
     .delete(enrollment)
     .execute(); // or start(new Callback<> ...)
@@ -131,7 +131,7 @@ guardian
 
 Guardianは、FCMから受信した[RemoteMessage](https://firebase.google.com/docs/reference/android/com/google/firebase/messaging/RemoteMessage)内の`Map<String, String>`データを解析し、使用可能な`Notification`インスタンスを返すメソッドを提供します。
 
-```javascript
+```javascript lines
 // at the FCM listener you receive a RemoteMessage
 @Override
 public void onMessageReceived(RemoteMessage message) {
@@ -148,7 +148,7 @@ public void onMessageReceived(RemoteMessage message) {
 
 通知インスタンスを取得したら、`allow`メソッドを使用して認証要求を承認できます。以前に取得した登録も必要です。複数の登録がある場合、必ず通知と同じ`ID`（`enrollmentId`プロパティ）のものを使用してください。
 
-```
+```javascript lines
 guardian
     .allow(notification, enrollment)
     .execute(); // or start(new Callback<> ...)
@@ -158,7 +158,7 @@ guardian
 
 認証要求を拒否するには、代わりに`reject`を使用します。また、任意で、Guardianログで確認できる拒否の理由を追加することもできます。
 
-```
+```javascript lines
 guardian
     .reject(notification, enrollment) // or reject(notification, enrollment, reason)
     .execute(); // or start(new Callback<> ...)
@@ -178,7 +178,7 @@ guardian
 
 1. Auth0ログインプロンプトにアクセスし、提供されたコード、または別のソースから取得した同様のbase32エンコードキーをコピーします。
 
-   <Frame>![An example login prompt displaying a one-time code](//images.ctfassets.net/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/24838237a74ae47d42a23a059edad27a/OTP_Challenge_2_-_Japanese.png)</Frame>
+   <Frame>![An example login prompt displaying a one-time code](/images/ja-jp/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/24838237a74ae47d42a23a059edad27a/OTP_Challenge_2_-_Japanese.png)</Frame>
 
 2. コードを取得し、Guardian SDKに追加します。
 
@@ -196,7 +196,7 @@ guardian
 
 **Java**
 
-```
+```java lines
 public class LoginCodeGenerator {
 
    private static final int TOTP_LENGTH = 6;
@@ -230,7 +230,7 @@ public class LoginCodeGenerator {
 
 **Kotlin**
 
-```
+```kotlin lines
 class LoginCodeGenerator {
 
    fun getCode(copiedCode: String): String {
@@ -270,7 +270,7 @@ class LoginCodeGenerator {
 
 `getCode()`から生成されたワンタイムパスワードをAuth0ログインプロンプトに入力します。
 
-<Frame>![An example login prompt displaying a one-time code](//images.ctfassets.net/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/24838237a74ae47d42a23a059edad27a/OTP_Challenge_2_-_Japanese.png)</Frame>
+<Frame>![An example login prompt displaying a one-time code](/images/ja-jp/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/24838237a74ae47d42a23a059edad27a/OTP_Challenge_2_-_Japanese.png)</Frame>
 
 ［Continue（続ける）］を選択すると、アプリケーションがユーザーの認証要素として追加されたことを示すメッセージが表示されます。
 
@@ -278,13 +278,13 @@ class LoginCodeGenerator {
 
 要素が登録されると、ユーザーはアプリを使用してログインできるようになります。まず、認証方法としてGuardianアプリを選択します。
 
-<Frame>![The authentication method selection screen](//images.ctfassets.net/cdy7uua7fh8z/1k7IsU9kfP5mrXU2jfGHuT/2ab98043294c662bd8b165eb04df9aa1/2025-01-27_14-46-27.png)</Frame>
+<Frame>![The authentication method selection screen](/images/ja-jp/cdy7uua7fh8z/1k7IsU9kfP5mrXU2jfGHuT/2ab98043294c662bd8b165eb04df9aa1/2025-01-27_14-46-27.png)</Frame>
 
 ワンタイムコードを生成するには、Auth0ログインプロンプトからコピーしたコードを使用して`getCode(copedCode:String)`を呼び出します。
 
 次に、ワンタイムコードをログインプロンプトに入力し、本人確認を行います。
 
-<Frame>![The Verify Your Identity screen prompting the user for a one-time code](//images.ctfassets.net/cdy7uua7fh8z/S6uTieLjtuNUrQRMh8uch/21156d1cdf4b839d73ba97b1c149c77b/OTP_Challenge_-_Japanese.png)</Frame>
+<Frame>![The Verify Your Identity screen prompting the user for a one-time code](/images/ja-jp/cdy7uua7fh8z/S6uTieLjtuNUrQRMh8uch/21156d1cdf4b839d73ba97b1c149c77b/OTP_Challenge_-_Japanese.png)</Frame>
 
 ## もっと詳しく
 

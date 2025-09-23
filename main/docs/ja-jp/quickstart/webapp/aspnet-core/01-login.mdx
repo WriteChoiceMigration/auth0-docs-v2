@@ -1,12 +1,14 @@
 ---
 title: "Login"
 permalink: "01-login"
+'description': "This tutorial demonstrates how to add user login to an ASP.NET Core application."
 'og:title': "Login"
 'og:description': "This tutorial demonstrates how to add user login to an ASP.NET Core application."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/asp.png"
 'twitter:title': "Login"
 'twitter:description': "This tutorial demonstrates how to add user login to an ASP.NET Core application."
 ---
+
 # ASP.NET Core MVC
 
 <Frame>![Gravatar for frederik.prijck@auth0.com](//www.gravatar.com/avatar/b74fc62fbaf2a93d1db3c549f62d4d9a?d=mm&r=g&s=50)</Frame>
@@ -75,13 +77,13 @@ If you are following along with the sample project you downloaded from the top o
 
 ## Integrate Auth0
 
-[Universal Login](/docs/hosted-pages/login) is the easiest way to set up authentication in your application. We recommend using it for the best experience, best security and the fullest array of features. This guide will use it to provide a way for your users to log in to your ASP.NET Core application.
+[Universal Login](/docs/ja-jp/hosted-pages/login) is the easiest way to set up authentication in your application. We recommend using it for the best experience, best security and the fullest array of features. This guide will use it to provide a way for your users to log in to your ASP.NET Core application.
 
 ### Install dependencies
 
 To integrate Auth0 with ASP.NET Core you can use our SDK by installing the `Auth0.AspNetCore.Authentication` Nuget package to your application.
 
-```
+```bash lines
 Install-Package Auth0.AspNetCore.Authentication
 ```
 
@@ -91,7 +93,7 @@ To enable authentication in your ASP.NET Core application, use the middleware pr
 
 Ensure to configure the `Domain` and `ClientId`, these are required fields to ensure the SDK knows which Auth0 tenant and application it should use.
 
-```javascript
+```csharp lines
 var builder = WebApplication.CreateBuilder(args);
 // Cookie configuration for HTTP to support cookies with SameSite=None
 builder.Services.ConfigureSameSiteNoneCookies();
@@ -118,7 +120,7 @@ The `ConfigureSameSiteNoneCookies` method used above was added as part of the [s
 
 Make sure you have enabled authentication and authorization in your Program.cs file:
 
-```
+```csharp lines
 app.UseAuthentication();
 app.UseAuthorization();
 ```
@@ -129,7 +131,7 @@ To add the `Login`, call `ChallengeAsync` and pass "Auth0" (`Auth0Constants.Auth
 
 After the OIDC middleware signs the user in, the user is also automatically signed in to the cookie middleware. This allows the user to be authenticated on subsequent requests.
 
-```
+```csharp lines
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Auth0.AspNetCore.Authentication;
@@ -156,7 +158,7 @@ The SDK extracts the user's information from the ID Token and makes them availab
 
 You can create a custom user profile page for displaying a user's name, email address, and profile image, by passing the corresponding information to the view from inside your controller.
 
-```
+```csharp lines
 public class AccountController : Controller
 {
     [Authorize]
@@ -176,7 +178,7 @@ public class AccountController : Controller
 
 To add `Logout`, you need to sign the user out of both the Auth0 middleware as well as the cookie middleware.
 
-```
+```csharp lines
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Auth0.AspNetCore.Authentication;

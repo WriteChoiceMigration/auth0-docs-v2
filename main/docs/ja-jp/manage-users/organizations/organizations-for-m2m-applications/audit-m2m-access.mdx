@@ -1,15 +1,15 @@
 ---
 title: "M2Mアクセスを監査する"
 permalink: "audit-m2m-access"
+'description': "アプリケーションのM2Mアクセスを監査する方法を説明します。"
 'og:title': "M2Mアクセスを監査する"
 'og:description': "アプリケーションのM2Mアクセスを監査する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "M2Mアクセスを監査する"
 'twitter:description': "アプリケーションのM2Mアクセスを監査する方法を説明します。"
 ---
-# M2Mアクセスを監査する
 
-組織へのマシンツーマシンアクセスは、クライアント権限付与を組織に直接関連付けるか、クライアント権限付与設定で任意の組織へのアクセスを許可することで付与できます。どちらのシナリオも、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>から監査でき、アプリケーションに対して組織に関連付けられたクライアント権限付与のリストを表示または取得できます。組織へのM2Mアクセス権限の仕組みの詳細については、「[M2Mアクセスのアプリケーションを構成する](/docs/manage-users/organizations/organizations-for-m2m-applications/configure-your-application-for-m2m-access)」および「[M2Mアクセスを認可する](/docs/manage-users/organizations/organizations-for-m2m-applications/authorize-m2m-access)」をお読みください。
+組織へのマシンツーマシンアクセスは、クライアント権限付与を組織に直接関連付けるか、クライアント権限付与設定で任意の組織へのアクセスを許可することで付与できます。どちらのシナリオも、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>から監査でき、アプリケーションに対して組織に関連付けられたクライアント権限付与のリストを表示または取得できます。組織へのM2Mアクセス権限の仕組みの詳細については、「[M2Mアクセスのアプリケーションを構成する](/docs/ja-jp/manage-users/organizations/organizations-for-m2m-applications/configure-your-application-for-m2m-access)」および「[M2Mアクセスを認可する](/docs/ja-jp/manage-users/organizations/organizations-for-m2m-applications/authorize-m2m-access)」をお読みください。
 
 ## 直接関連付けによって付与されるアクセス
 
@@ -23,20 +23,20 @@ permalink: "audit-m2m-access"
 2. **［Machine-to-Machine Access（マシンツーマシンアクセス）］**タブを選択します。このOrganizationで直接の関連付けを介してAPIにアクセスできる、すべてのアプリケーションのページネーションされたリストを取得できます。
 3. アプリケーションを選択して、そのアプリケーションに認可されたAPIリストを確認します。
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/5FVJzuu5yq8IHwpQKdYYU6/c511123ce66ec2c84e7163c350b1fb0f/Specific_Org_-_M2M_-_Japanese.png)</Frame>
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/5FVJzuu5yq8IHwpQKdYYU6/c511123ce66ec2c84e7163c350b1fb0f/Specific_Org_-_M2M_-_Japanese.png)</Frame>
 
 </Tab><Tab title="Mangement API">
 
-Organizationに関連付けられたクライアントの許可は、[Organization Client Grants（Organizationのクライアントの許可）](/docs/api/management/v2/organizations/get-organization-client-grants)APIエンドポイントを介して取得できます：
+Organizationに関連付けられたクライアントの許可は、[Organization Client Grants（Organizationのクライアントの許可）](/docs/ja-jp/api/management/v2/organizations/get-organization-client-grants)APIエンドポイントを介して取得できます：
 
-```bash
+```bash lines
 curl -X GET --location "https://{YOUR_DOMAIN}/api/v2/organizations/{ORG_id}/client-grants/" \
   --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
 ```
 
-または、Organizationの少なくとも1つのAPIにアクセスできるアプリケーションについての情報を取得したい場合は、[Get Client Grants（クライアントの取得）APIエンドポイント](/docs/api/management/v2/clients/get-clients)で検索語句に`client_grant.organization_id:{organization_id}`を使用し、`q`クエリパラメーターを使用できます。Lucene構文を使用します。この構文は、[ユーザー検索のクエリ構文](/docs/manage-users/user-search/user-search-query-syntax)に類似しています。
+または、Organizationの少なくとも1つのAPIにアクセスできるアプリケーションについての情報を取得したい場合は、[Get Client Grants（クライアントの取得）APIエンドポイント](/docs/ja-jp/api/management/v2/clients/get-clients)で検索語句に`client_grant.organization_id:{organization_id}`を使用し、`q`クエリパラメーターを使用できます。Lucene構文を使用します。この構文は、[ユーザー検索のクエリ構文](/docs/ja-jp/manage-users/user-search/user-search-query-syntax)に類似しています。
 
-```bash
+```bash lines
 curl -X GET --location "https://{YOUR_DOMAIN}/api/v2/clients?q=client_grant.organization_id%3Aorganization_id" \
   --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
 ```
@@ -53,20 +53,20 @@ curl -X GET --location "https://{YOUR_DOMAIN}/api/v2/clients?q=client_grant.orga
 2. **［Machine to Machine Access（マシン間アクセス）］**タブを選択します。組織のAPIの少なくとも1つにアクセスできる、すべてのアプリケーションのページ番号付きリストが表示されます。
 3. アプリケーションを選択すると、そのアプリケーションに許可されているAPIの一覧が表示されます。
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/4H3VjVTz0ZGDvV5za9y33m/00fa8644567bb220abe48a603c74825f/Orgs_-_M2M_Access_-_Japanese.png)</Frame>
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/4H3VjVTz0ZGDvV5za9y33m/00fa8644567bb220abe48a603c74825f/Orgs_-_M2M_Access_-_Japanese.png)</Frame>
 
 </Tab><Tab title="Mangement API">
 
 `allow_any_organization`パラメーターのあるクライアントの許可は、[Get Client Grants（クライアントの許可の取得）](https://auth0.com/docs/api/management/v2/client-grants/get-client-grants)APIエンドポイントを介して取得できます：
 
-```bash
+```bash lines
 curl -X GET --location "https://{YOUR_DOMAIN}/api/v2/client-grants?allow_any_organization=true" \
   --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
 ```
 
 または、任意のOrganizationの少なくとも1つのAPIにアクセスできるアプリケーションについての情報を取得したい場合は、[Get Client Grants（クライアントの許可の取得）](https://auth0.com/docs/api/management/v2/client-grants/get-client-grants)APIエンドポイントで検索語句に`client_grant.allow_any_organization:true`を使用し、`q`クエリパラメーターを使用できます。Lucene構文を使用します。この構文は、[ユーザー検索のクエリ構文](https://auth0.com/docs/manage-users/user-search/user-search-query-syntax)に類似しています。
 
-```bash
+```bash lines
 curl -X GET --location "https://{YOUR_DOMAIN}/api/v2/clients?q=client_grant.allow_any_organization%3Atrue" \
   --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
 ```
@@ -91,11 +91,11 @@ curl -X GET --location "https://{YOUR_DOMAIN}/api/v2/clients?q=client_grant.allo
 </thead>
 <tbody>
 <tr>
-<td><code>client_grant.organization_id:{organization_id}</code></td>
+<td>`client_grant.organization_id:{organization_id}`</td>
 <td>1つの組織のAPIの1つ以上にアクセスできるアプリケーションの検索に使用します。</td>
 </tr>
 <tr>
-<td><code>client_grant.allow_any_organization:true</code></td>
+<td>`client_grant.allow_any_organization:true`</td>
 <td>任意の組織のAPIの1つ以上にアクセスできるアプリケーションの検索に使用します。</td>
 </tr>
 </tbody>
@@ -107,7 +107,7 @@ Organizationsのマシンツーマシンアクセスもテナントログに反�
 
 次のコードサンプルは、組織情報を含む`seccft`テナントログの例です。
 
-```json
+```json lines
 {
   "date": "2024-10-24T19:06:17.460Z",
   "type": "seccft",

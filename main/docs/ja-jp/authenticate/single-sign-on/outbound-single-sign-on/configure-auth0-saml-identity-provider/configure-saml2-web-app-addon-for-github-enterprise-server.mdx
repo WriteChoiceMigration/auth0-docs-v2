@@ -1,13 +1,13 @@
 ---
 title: "GitHub Enterprise ServerをSAMLサービスプロバイダーとして構成する"
 permalink: "configure-saml2-web-app-addon-for-github-enterprise-server"
+'description': "GitHub Enterprise Serverのプライベートインスタンス用のSAML2 Webアプリアドオンを使用して、Auth0をIDプロバイダーとして構成する方法を説明します。"
 'og:title': "GitHub Enterprise ServerをSAMLサービスプロバイダーとして構成する"
 'og:description': "GitHub Enterprise Serverのプライベートインスタンス用のSAML2 Webアプリアドオンを使用して、Auth0をIDプロバイダーとして構成する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "GitHub Enterprise ServerをSAMLサービスプロバイダーとして構成する"
 'twitter:description': "GitHub Enterprise Serverのプライベートインスタンス用のSAML2 Webアプリアドオンを使用して、Auth0をIDプロバイダーとして構成する方法を説明します。"
 ---
-# GitHub Enterprise ServerをSAMLサービスプロバイダーとして構成する
 
 [GitHub Enterprise Server](https://help.github.com/en/enterprise/2.16/admin/user-management/using-saml)（使用しているプライベートのGitHubアプライアンス）にSAML2 Webアプリアドオンを使用すると、Auth0をIDプロバイダーとして構成することができます。Auth0をGitHub Enterprise Cloud（github.com）のIDプロバイダーとして構成したい場合には、「[Auth0をGitHub Enterprise CloudのIDプロバイダーとして構成する](/docs/ja-jp/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-github-enterprise-cloud)」をお読みください。
 
@@ -17,11 +17,11 @@ permalink: "configure-saml2-web-app-addon-for-github-enterprise-server"
 2. [［Addons（アドオン）］](https://manage.auth0.com/#/applications/{yourClientId}/addons)タブに移動し、**［SAML2 Web App（SAML2 Webアプリ）］**トグルを有効にします。
 3. **［Settings（設定）］**タブで、**［Application Callback URL（アプリケーションのCallback URL）］**を次に設定します：`https://github.com/orgs/{yourGitHubOrgName}/saml/consume`
 
-   <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 設定タブ](//images.ctfassets.net/cdy7uua7fh8z/6dJgYkcOgMZ73HVTkAWt1x/0126f55506d82cfd73d0bcb7ebd6fa9f/2025-02-27_14-00-16.png)</Frame>
+   <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 設定タブ](/images/ja-jp/cdy7uua7fh8z/6dJgYkcOgMZ73HVTkAWt1x/0126f55506d82cfd73d0bcb7ebd6fa9f/2025-02-27_14-00-16.png)</Frame>
 
 4. 以下のコードを**［Settings（設定）］**テキストボックスに貼り付け、**［Debug（デバッグ）］**をクリックします。
 
-   ```json
+   ```json lines
    {
          "audience": "{yourGitHubServerUrl}",
          "mappings": {
@@ -49,7 +49,7 @@ permalink: "configure-saml2-web-app-addon-for-github-enterprise-server"
 5. タブの最後までスクロールし、**［Enable（有効）］**をクリックします。
 6. **［Usage（使用状況）］**タブで**［Identity Provider Metadata（IDプロバイダーのメタデータ）］**を見つけ、**［Download（ダウンロード）］**をクリックしてメタデータファイルをダウンロードします。これは、Auth0をIDプロバイダーとして構成する際に必要になります。
 
-   <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 使用状況タブ](//images.ctfassets.net/cdy7uua7fh8z/3T90BDpyTXFUWDp1JkncBU/20060887bf494416b5831075fd4fce13/2025-01-28_10-16-30.png)</Frame>
+   <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 使用状況タブ](/images/ja-jp/cdy7uua7fh8z/3T90BDpyTXFUWDp1JkncBU/20060887bf494416b5831075fd4fce13/2025-01-28_10-16-30.png)</Frame>
 
 ## GitHubでSAML SSOを構成する
 
@@ -64,15 +64,15 @@ permalink: "configure-saml2-web-app-addon-for-github-enterprise-server"
 <tbody>
 <tr>
 <td><strong>Sign On URL（サインオンURL）</strong></td>
-<td>Auth0で作成した直後のGitHubアプリケーションの<code>client_id</code>は<code>https://{yourDomain}/samlp/{CLIENT_ID}</code> <br/> <code>{CLIENT_ID}</code>になります。</td>
+<td>Auth0で作成した直後のGitHubアプリケーションの`client_id`は`https://{yourDomain}/samlp/{CLIENT_ID}` <br/> `{CLIENT_ID}`になります。</td>
 </tr>
 <tr>
 <td><strong>Issuer（発行者）</strong></td>
-<td><code>urn:auth0:{yourTenant}</code></td>
+<td>`urn:auth0:{yourTenant}`</td>
 </tr>
 <tr>
 <td><strong>Verification Certificate（検証証明書）</strong></td>
-<td><code>https://{yourDomain}/pem</code>からダウンロードします。ダウンロードしたファイルをテキストエディターで開き、中身をコピーしてからGitHubのテキスト領域に貼り付けます。</td>
+<td>`https://{yourDomain}/pem`からダウンロードします。ダウンロードしたファイルをテキストエディターで開き、中身をコピーしてからGitHubのテキスト領域に貼り付けます。</td>
 </tr>
 <tr>
 <td><strong>User Attributes（ユーザー属性）</strong></td>
@@ -80,11 +80,11 @@ permalink: "configure-saml2-web-app-addon-for-github-enterprise-server"
 </tr>
 <tr>
 <td><strong>Signature method（署名メソッド）</strong></td>
-<td><code>RSA256-SHA256</code></td>
+<td>`RSA256-SHA256`</td>
 </tr>
 <tr>
 <td><strong>Digest method（ダイジェストメソッド）</strong></td>
-<td><code>SHA256</code></td>
+<td>`SHA256`</td>
 </tr>
 </tbody>
 </table>

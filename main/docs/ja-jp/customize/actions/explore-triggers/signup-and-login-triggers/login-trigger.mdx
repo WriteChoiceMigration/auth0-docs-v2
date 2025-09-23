@@ -1,17 +1,17 @@
 ---
 title: "ログイントリガー"
 permalink: "login-trigger"
+'description': "アクションログインフローと、ユーザーがログインした後、リフレッシュトークンが要求されたときに実行されるログイン後のアクショントリガーについて説明します。"
 'og:title': "ログイントリガー"
 'og:description': "アクションログインフローと、ユーザーがログインした後、リフレッシュトークンが要求されたときに実行されるログイン後のアクショントリガーについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ログイントリガー"
 'twitter:description': "アクションログインフローと、ユーザーがログインした後、リフレッシュトークンが要求されたときに実行されるログイン後のアクショントリガーについて説明します。"
 ---
-# ログイントリガー
 
 ログイントリガーは、ユーザーがAuth0テナント上のアプリケーションに対して正常に認証された場合に実行されます。これにはサインアップ後の認証も含まれます。
 
-<Frame>![Diagram showing the Actions Login Flow.](//images.ctfassets.net/cdy7uua7fh8z/2SkfIOm4fFOJ8N0GNJwam8/619e5c54b7c8cff98f0d31a72088e3f1/2024-09-30_10-01-42.png)</Frame>
+<Frame>![Diagram showing the Actions Login Flow.](/images/ja-jp/cdy7uua7fh8z/2SkfIOm4fFOJ8N0GNJwam8/619e5c54b7c8cff98f0d31a72088e3f1/2024-09-30_10-01-42.png)</Frame>
 
 このトリガー内のアクションはブロッキング（同期的）であり、トリガーのプロセスの一部として実行されます。そのため、アクションが完了するまでAuth0パイプラインの他の部分の実行が停止されます。
 
@@ -32,7 +32,7 @@ permalink: "login-trigger"
 
 ログイン後のアクションを使用すると、アプリケーションにアクセスしようとしているユーザーへのアクセスを拒否するためのカスタムロジックを提供できます。
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -48,7 +48,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 アクセスを平日のみに限定したいアプリケーションがある場合は、次のアクションを作成できます。
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -68,7 +68,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 たとえば、APIを呼び出すユーザーのすべてに対して、アクセスを拒否したいとします。この場合は、[［Dashboard］>［Applications（アプリケーション）］>［APIs］](https://manage.auth0.com/#/apis)の**［API <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Audience</Tooltip>（APIオーディエンス）］**フィールドにあるAPIのオーディエンスの値に基づいてアクセスを拒否する必要があります。これを行うには、以下のアクションを作成します。
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -85,7 +85,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 Auth0が発行したトークンにユーザーロールを追加するには、`event.authorization`オブジェクトと`api.idToken.setCustomClaim`および`api.accessToken.setCustomClaim`メソッドを使用します。
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -106,7 +106,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 Auth0には[ユーザープロファイル](/docs/ja-jp/manage-users/user-accounts/user-profiles/normalized-user-profiles)にメタデータを保存するためのシステムがあります。ログイン中にユーザープロファイルの`user_metadata`または`app_metadata`を設定するには、`api.user.setUserMetadata`または`api.user.setAppMetadata`関数を使用します。
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -122,7 +122,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 ログイン後のアクションを使用すると、アプリケーションのニーズに応じて、ユーザーの<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">MFA</Tooltip>を動的に要求できます。
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -141,7 +141,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 ログイン後のアクションを使用すると、パスキーで認証したユーザーのMFAを動的にスキップすることで、煩わしさを軽減できます。
 
-```javascript
+```javascript lines
 /**
 * Handler that will be called during the execution of a PostLogin flow.
 *
@@ -167,7 +167,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 [リダイレクトルール](/docs/ja-jp/customize/rules/redirect-users)と同様に、ログイン後のアクションを使用してユーザーを外部サイトに送信できます。完了すると、ユーザーをAuth0にリダイレクトで戻し、ログインフローを続行できます。以下の例では、リダイレクトのアクションを使ってユーザーに好きな色の指定を求めています。
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -219,7 +219,7 @@ exports.onContinuePostLogin = async (event, api) => {
 * スコープを追加する前に、必ず予期されているオーディエンスを確認してください。
 * スコープを追加するときには、信頼できない入力を使用してはけません。
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about the user and the context in which they are logging in.
  * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.

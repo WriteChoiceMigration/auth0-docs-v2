@@ -1,13 +1,13 @@
 ---
 title: "Lock.Android:サインアップ時のカスタムフィールド"
 permalink: "lock-android-custom-fields-at-signup"
+'description': "Lock.Androidを使用してサインアップに追加のフィールドを追加する"
 'og:title': "Lock.Android:サインアップ時のカスタムフィールド"
 'og:description': "Lock.Androidを使用してサインアップに追加のフィールドを追加する"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Lock.Android:サインアップ時のカスタムフィールド"
 'twitter:description': "Lock.Androidを使用してサインアップに追加のフィールドを追加する"
 ---
-# Lock.Android:サインアップ時のカスタムフィールド
 
 **Lock.Android**を使用すると、新しいアカウントを作成する前にユーザーが入力する必要がある追加のフィールドを指定できます。ユーザーが基本フィールド（メール、ユーザー名、パスワード）を入力した後、追加のフィールドが2番目の画面に表示されます。
 
@@ -24,7 +24,7 @@ permalink: "lock-android-custom-fields-at-signup"
 
 ユーザーには表示されないが、サインアップ後に動的に追加のメタデータを含めるために使用できるフィールドを作成することもできます。
 
-```javascript
+```kotlin lines
 // Regular field
 val nameField = CustomField(R.drawable.ic_name, FieldType.TYPE_NAME, "first_name", R.string.hint_first_name, CustomField.Storage.PROFILE_ROOT)
 
@@ -40,7 +40,7 @@ val customFields = listOf(nameField, androidField)
 
 `withSignUpFields()`メソッドを使用して、構築中にカスタムフィールドのリストをLockインスタンスに渡します。
 
-```
+```kotlin lines
 val lock = Lock.newBuilder(auth0, callback)
               .withSignUpFields(customFields)
               //...
@@ -69,4 +69,4 @@ val lock = Lock.newBuilder(auth0, callback)
 * PROFILE_ROOT
 * USER_METADATA（デフォルト）
 
-フィールドをユーザープロファイルのルートレベルに保存するには、そのキーが[エンドポイントのドキュメント](/docs/api/authentication#signup)にリストされているキーと一致する必要があります。
+フィールドをユーザープロファイルのルートレベルに保存するには、そのキーが[エンドポイントのドキュメント](/docs/ja-jp/api/authentication#signup)にリストされているキーと一致する必要があります。

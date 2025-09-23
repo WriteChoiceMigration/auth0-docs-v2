@@ -1,13 +1,13 @@
 ---
 title: "Auth0構成（SPA + API）"
 permalink: "part-2"
+'description': "SPA + APIアーキテクチャのシナリオでのAuth0の構成"
 'og:title': "Auth0構成（SPA + API）"
 'og:description': "SPA + APIアーキテクチャのシナリオでのAuth0の構成"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0構成（SPA + API）"
 'twitter:description': "SPA + APIアーキテクチャのシナリオでのAuth0の構成"
 ---
-# Auth0構成（SPA + API）
 
 このセクションでは、[Auth0 Dashboard](https://manage.auth0.com/#)での適用が必要なすべての設定を確認します。
 
@@ -21,7 +21,7 @@ APIについて、以下の詳細を入力するよう求められます。
 * **［Identifier（識別子）］**：APIに一意の識別子。URLの使用を推奨していますが、公開されたURLである必要はありません。Auth0がこのAPIを呼び出すことはありません。この値は後から変更することはできません。
 * **［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Signing Algorithm</Tooltip>（署名アルゴリズム）］**：トークンの署名に使用するアルゴリズム。使用可能な値は`HS256`と`RS256`です。RS256を選択すると、トークンはテナントの秘密鍵で署名されます。署名アルゴリズムの詳細については、「[署名アルゴリズム](/docs/ja-jp/get-started/applications/signing-algorithms)」を参照してください。
 
-<Frame>![Dashboard -アプリケーション API - APIの作成 - ポップアップ](//images.ctfassets.net/cdy7uua7fh8z/4kIH4BQc4vDel2zhJ6lwCE/5fc39d821df752269175fa5e47440419/Create_API_form.png)</Frame>
+<Frame>![Dashboard -アプリケーション API - APIの作成 - ポップアップ](/images/ja-jp/cdy7uua7fh8z/4kIH4BQc4vDel2zhJ6lwCE/5fc39d821df752269175fa5e47440419/Create_API_form.png)</Frame>
 
 必要な情報を入力し、**［Create（作成）］**ボタンをクリックします。
 
@@ -31,7 +31,7 @@ APIについて、以下の詳細を入力するよう求められます。
 
 APIの設定で、［Permissions（アクセス許可）］タブに移動します。このセクションでは、ビジネスケースのスコープ（`read:timesheets`、`create:timesheets`、`delete:timesheets`、`approve:timesheets`）を追加することができます。
 
-<Frame>![Dashboard - アプリケーション - API - アクセス許可](//images.ctfassets.net/cdy7uua7fh8z/xxMOKezob6gNHJ0CcKhcg/637cc070d9e00e22b070d0cffed7bba0/Gift_Shop_Module_-_Permissions.png)</Frame>
+<Frame>![Dashboard - アプリケーション - API - アクセス許可](/images/ja-jp/cdy7uua7fh8z/xxMOKezob6gNHJ0CcKhcg/637cc070d9e00e22b070d0cffed7bba0/Gift_Shop_Module_-_Permissions.png)</Frame>
 
 ## アプリケーションを作成する
 
@@ -66,7 +66,7 @@ Autho0には、アプリケーションの種類が4つあります。
 
 アクセス許可の名前が、対応するスコープと完全に同一であることを確認します。
 
-<Frame>![Dashboard - Extensions - Authorization Extension - Create Permission](//images.ctfassets.net/cdy7uua7fh8z/6G4X14X3A73IDRwOrkmttq/e0c20c44a32e0b39a6d8fb72731ffbaf/create-permission.png)</Frame>
+<Frame>![Dashboard - Extensions - Authorization Extension - Create Permission](/images/ja-jp/cdy7uua7fh8z/6G4X14X3A73IDRwOrkmttq/e0c20c44a32e0b39a6d8fb72731ffbaf/create-permission.png)</Frame>
 
 引き続き、残りのすべてのスコープにアクセス許可を作成します。
 
@@ -102,7 +102,7 @@ Autho0には、アプリケーションの種類が4つあります。
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>で、**［Rules（ルール）］**タブに移動します。認可拡張機能によって作成されたルールが表示されているはずです。**［Create Role（ルールの作成）］**ボタンをクリックし、**［Empty Rule（空のルール）］**テンプレートを選択します。このルールに「**<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Access Token</Tooltip> Scopes（アクセストークンスのコープ）**」のような名前を付けて、そのルールに次のコードを指定することができます。
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   var permissions = user.permissions || [];
   var requestedScopes = context.request.body.scope || context.request.query.scope;

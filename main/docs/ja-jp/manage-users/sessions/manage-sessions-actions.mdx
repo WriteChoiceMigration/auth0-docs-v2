@@ -1,13 +1,13 @@
 ---
 title: "Actionsを使用したセッション"
 permalink: "manage-sessions-actions"
+'description': "Actionsを使ったセッションの管理について説明します。"
 'og:title': "Actionsを使用したセッション"
 'og:description': "Actionsを使ったセッションの管理について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Actionsを使用したセッション"
 'twitter:description': "Actionsを使ったセッションの管理について説明します。"
 ---
-# Actionsを使用したセッション
 
 [Actions](/docs/ja-jp/customize/actions)でセッションを使用すると、認証後のリスク検出と応答機能を構成して、アプリケーションとユーザーをセッションハイジャックから保護することができます。また、2[セッションライフタイム制限](/docs/ja-jp/manage-users/sessions/configure-session-lifetime-settings)を動的にカスタマイズすることもできます。
 
@@ -98,7 +98,7 @@ permalink: "manage-sessions-actions"
 
 ログイン後オブジェクトプロパティの`event.session.device.initial_asn`および`event.request.asn`を使用して、その期間中セッショントランザクションと特定の[autonomous system number (ASN)](https://www.arin.net/resources/guide/asn/)ネットワークをバインドして、ASNネットワークが変更した場合は再認証を要求できます。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const sessionInitialAsn = event.session?.device?.initial_asn;
   const sessionCurrentAsn = event.request.asn;
@@ -125,7 +125,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 ログイン後オブジェクトプロパティの`event.session.device.initial_ip`と`event.request.ip`を使って、その期間、セッションのトランザクションに同じIPアドレスが維持されるようにします。このシナリオでは、IPの変更はすべて危険だとみなされ、ユーザーは再認証を促されます。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const sessionInitialIp = event.session?.device?.initial_ip;
   const sessionCurrentIp = event.request.ip;
@@ -161,7 +161,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 また、Auth0 [Management API](https://auth0.com/docs/api/management/v2/connections/patch-connections-by-id)を使用して接続メタデータの`event.connection.metadata.session_timeout`を作成し、特定の接続タイムアウトを定義します。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const created = Date.parse(event.session?.created_at ?? "");
 
@@ -181,7 +181,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 `current_time`変数を定義し、`idle_session_timeout`という新しいOrganizationメタデータを使用して、組織に希望するアイドルタイムアウトを設定できます。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   // The Organization metadata is configured with a shorter idle timeout for sessions (in milliseconds)
   const idle_organization_lifetime =

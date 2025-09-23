@@ -1,13 +1,13 @@
 ---
 title: "一括ユーザーインポートのデータベーススキーマと例"
 permalink: "bulk-user-import-database-schema-and-examples"
+'description': "Management APIを使用して一括ユーザーインポートを行う方法について説明します。"
 'og:title': "一括ユーザーインポートのデータベーススキーマと例"
 'og:description': "Management APIを使用して一括ユーザーインポートを行う方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "一括ユーザーインポートのデータベーススキーマと例"
 'twitter:description': "Management APIを使用して一括ユーザーインポートを行う方法について説明します。"
 ---
-# 一括ユーザーインポートのデータベーススキーマと例
 
 ユーザーファイルには、ユーザーの情報をJSON形式の配列として含める必要があります。
 
@@ -21,7 +21,7 @@ permalink: "bulk-user-import-database-schema-and-examples"
 
 以下のJSONスキーマは有効なユーザーを記述しています。
 
-```json
+```json lines
 {
   "type": "object",
 	"properties": {
@@ -309,91 +309,91 @@ JSONスキーマの詳細については、[jsonschema.org](http://json-schema.o
 </thead>
 <tbody>
 <tr>
-<td><code>app_metadata</code></td>
+<td>`app_metadata`</td>
 <td>オブジェクト</td>
-<td>アプリケーションの主要な機能またはユーザーがアクセスできるものに影響を与えるデータ。<code>app_metadata</code>に保管されているデータをユーザーは編集できません。これには、サポートプラン、ロール、アクセスグループなどが含まれます。</td>
+<td>アプリケーションの主要な機能またはユーザーがアクセスできるものに影響を与えるデータ。`app_metadata`に保管されているデータをユーザーは編集できません。これには、サポートプラン、ロール、アクセスグループなどが含まれます。</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>blocked</code></td>
+<td>`blocked`</td>
 <td>ブール値</td>
 <td>ユーザーがブロックされているかどうかを示します。</td>
 <td>No</td>
 </tr>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>文字列</td>
 <td>ユーザーのメールアドレス。</td>
 <td>No</td>
 </tr>
 <tr>
-<td><code>email_verified</code></td>
+<td>`email_verified`</td>
 <td>ブール値</td>
-<td>ユーザーがメールアドレスを検証したかどうかを示します。デフォルトで<code>email</code>がアップサートにより更新され、<code>email_verified</code>でない場合は<code>false</code>に設定されます。</td>
+<td>ユーザーがメールアドレスを検証したかどうかを示します。デフォルトで`email`がアップサートにより更新され、`email_verified`でない場合は`false`に設定されます。</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>family_name</code></td>
+<td>`family_name`</td>
 <td>文字列</td>
 <td>ユーザーの姓。</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>given_name</code></td>
+<td>`given_name`</td>
 <td>文字列</td>
 <td>ユーザーの名。</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>name</code></td>
+<td>`name`</td>
 <td>文字列</td>
 <td>ユーザーのフルネーム。</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>nickname</code></td>
+<td>`nickname`</td>
 <td>文字列</td>
 <td>ユーザーのニックネーム。</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>picture</code></td>
+<td>`picture`</td>
 <td>文字列</td>
 <td>ユーザーのプロファイル画像を指すURL</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>user_id</code></td>
+<td>`user_id`</td>
 <td>文字列</td>
 <td>ユーザーの一意の識別子。これは、接続戦略によりプリペンドされます。</td>
 <td>No</td>
 </tr>
 <tr>
-<td><code>user_metadata</code></td>
+<td>`user_metadata`</td>
 <td>オブジェクト</td>
 <td>勤務先住所、自宅住所、ユーザーのお気に入りなど、ユーザーのアクセスに影響を与えないデータ。</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>文字列</td>
 <td>ユーザーのユーザー名。</td>
 <td>No</td>
 </tr>
 <tr>
-<td><code>password_hash</code></td>
+<td>`password_hash`</td>
 <td>文字列</td>
 <td>ユーザーの接続のためにハッシュ化されたパスワード。ユーザーが作成されると、Auth0は[bcrypt]（https://auth0.com/blog/hashing-in-action-understanding-bcrypt/）を使用してパスワードを保護します。ハッシュ化されたパスワードをインポートすることで、ユーザーはパスワードを保持できるようになるため、スムーズなエクスペリエンスを提供できます。互換性のあるパスワードは、bcrypt $2a$または$2b$を使ってハッシュ化し、saltRoundsを10回繰り返したものでなければなりません。このプロパティはユーザーが最初にインポートされたときのみ提供され、後で更新できません。</td>
 <td>No</td>
 </tr>
 <tr>
-<td><code>custom_password_hash</code></td>
+<td>`custom_password_hash`</td>
 <td>オブジェクト</td>
-<td>ユーザーのパスワードハッシュを提供するより一般的な方法。これは、ユーザーのパスワードハッシュが他のアルゴリズムで作成された場合に、<code>password_hash</code>フィールドの代わりに使用できます。ユーザーが最初にインポートされた<code>custom_password_hash</code>を使ってログインしなかった場合、一括インポートの処理中に<code>custom_password_hash</code>を更新できます。</td>
+<td>ユーザーのパスワードハッシュを提供するより一般的な方法。これは、ユーザーのパスワードハッシュが他のアルゴリズムで作成された場合に、`password_hash`フィールドの代わりに使用できます。ユーザーが最初にインポートされた`custom_password_hash`を使ってログインしなかった場合、一括インポートの処理中に`custom_password_hash`を更新できます。</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>mfa_factors</code></td>
+<td>`mfa_factors`</td>
 <td>配列</td>
 <td>このユーザーを認証するために使用できるMFA要素</td>
 <td>No</td>
@@ -441,89 +441,89 @@ JSONスキーマの詳細については、[jsonschema.org](http://json-schema.o
 </thead>
 <tbody>
 <tr>
-<td><code>algorithm</code></td>
+<td>`algorithm`</td>
 <td>string</td>
-<td>パスワードをハッシュするために使用されるアルゴリズム。以下のうちの１つである必要があります： <ul><li><code>argon2</code></li><li><code>bcrypt</code></li><li><code>hmac</code></li><li><code>ldap</code></li><li><code>md4</code></li><li><code>md5</code></li><li><code>sha1</code></li><li><code>sha256</code></li><li><code>sha512</code></li><li><code>pbkdf2</code></li><li><code>scrypt</code></li></ul></td>
+<td>パスワードをハッシュするために使用されるアルゴリズム。以下のうちの１つである必要があります： <ul><li>`argon2`</li><li>`bcrypt`</li><li>`hmac`</li><li>`ldap`</li><li>`md4`</li><li>`md5`</li><li>`sha1`</li><li>`sha256`</li><li>`sha512`</li><li>`pbkdf2`</li><li>`scrypt`</li></ul></td>
 </tr>
 <tr>
-<td><code>hash</code></td>
+<td>`hash`</td>
 <td>オブジェクト</td>
 <td></td>
 </tr>
 <tr>
-<td><code>hash.value</code></td>
+<td>`hash.value`</td>
 <td>文字列</td>
 <td>パスワードハッシュ。</td>
 </tr>
 <tr>
-<td><code>hash.encoding</code></td>
+<td>`hash.encoding`</td>
 <td>文字列</td>
-<td>提供されたハッシュのエンコーディング。以下のうちの１つである必要があります：<ul><li><code>base64</code></li><li><code>hex</code></li><li><code>utf8</code></li></ul>16進数の大文字と小文字のバリエーションと、URLエンコードされたbase64がサポートされています。</td>
+<td>提供されたハッシュのエンコーディング。以下のうちの１つである必要があります：<ul><li>`base64`</li><li>`hex`</li><li>`utf8`</li></ul>16進数の大文字と小文字のバリエーションと、URLエンコードされたbase64がサポートされています。</td>
 </tr>
 <tr>
-<td><code>hash.digest</code></td>
+<td>`hash.digest`</td>
 <td>文字列</td>
-<td>HMACハッシュを生成するために使用されるアルゴリズム。以下のうちの１つである必要があります：<ul><li><code>md4</code></li><li><code>md5</code></li><li><code>ripemd160</code></li><li><code>sha1</code></li><li><code>sha224</code></li><li><code>sha256</code></li><li><code>sha384</code></li><li><code>sha512</code></li><li><code>whirlpool</code></li></ul></td>
+<td>HMACハッシュを生成するために使用されるアルゴリズム。以下のうちの１つである必要があります：<ul><li>`md4`</li><li>`md5`</li><li>`ripemd160`</li><li>`sha1`</li><li>`sha224`</li><li>`sha256`</li><li>`sha384`</li><li>`sha512`</li><li>`whirlpool`</li></ul></td>
 </tr>
 <tr>
-<td><code>hash.key</code></td>
+<td>`hash.key`</td>
 <td>オブジェクト</td>
 <td>HMACハッシュを生成するために使用される鍵。</td>
 </tr>
 <tr>
-<td><code>hash.key.value</code></td>
+<td>`hash.key.value`</td>
 <td>文字列</td>
 <td>鍵値。</td>
 </tr>
 <tr>
-<td><code>hash.key.encoding</code></td>
+<td>`hash.key.encoding`</td>
 <td>文字列</td>
-<td>鍵エンコーディング。以下のうちの１つである必要があります：<ul><li><code>base64</code></li><li><code>hex</code></li><li><code>utf8</code></li></ul>デフォルトで、<code>hash.key.encoding</code>は<code>utf8</code>です。</td>
+<td>鍵エンコーディング。以下のうちの１つである必要があります：<ul><li>`base64`</li><li>`hex`</li><li>`utf8`</li></ul>デフォルトで、`hash.key.encoding`は`utf8`です。</td>
 </tr>
 <tr>
-<td><code>salt</code></td>
+<td>`salt`</td>
 <td>object</td>
 <td></td>
 </tr>
 <tr>
-<td><code>salt.value</code></td>
+<td>`salt.value`</td>
 <td>文字列</td>
 <td>ハッシュを生成するために使用されるソルト値。</td>
 </tr>
 <tr>
-<td><code>salt.encoding</code></td>
+<td>`salt.encoding`</td>
 <td>文字列</td>
-<td>提供されたソルトのエンコーディング。以下のうちの１つである必要があります：<ul><li><code>base64</code></li><li><code>hex</code></li><li><code>utf8</code></li></ul>16進数の大文字と小文字のバリエーションと、URLエンコードされたbase64がサポートされています。デフォルトで、<code>salt.encoding</code>は<code>utf8</code>です。</td>
+<td>提供されたソルトのエンコーディング。以下のうちの１つである必要があります：<ul><li>`base64`</li><li>`hex`</li><li>`utf8`</li></ul>16進数の大文字と小文字のバリエーションと、URLエンコードされたbase64がサポートされています。デフォルトで、`salt.encoding`は`utf8`です。</td>
 </tr>
 <tr>
-<td><code>salt.position</code></td>
+<td>`salt.position`</td>
 <td>文字列</td>
-<td>ハッシュが計算されたときのソルトの位置。デフォルトで、<code>salt.position</code>は<code>prefix</code>です。</td>
+<td>ハッシュが計算されたときのソルトの位置。デフォルトで、`salt.position`は`prefix`です。</td>
 </tr>
 <tr>
-<td><code>password.encoding</code></td>
+<td>`password.encoding`</td>
 <td>文字列</td>
-<td>ハッシュを生成するために使用されるパスワードのエンコーディング。以下のうちの１つである必要があります：<ul><li><code>ascii</code></li><li><code>utf8</code></li><li><code>utf16le</code></li><li><code>ucs2</code></li><li><code>latin1</code></li><li><code>binary</code></li></ul>ログイン時、ユーザーが提供したパスワードは、提供されたハッシュと照合される前に、<code>password.encoding</code>からトランスコードされます。たとえば、ハッシュが<code>ucs2</code>エンコードされた文字列から生成された場合は、次のように設定します： <code> "encoding":  "ucs2"</code></td>
+<td>ハッシュを生成するために使用されるパスワードのエンコーディング。以下のうちの１つである必要があります：<ul><li>`ascii`</li><li>`utf8`</li><li>`utf16le`</li><li>`ucs2`</li><li>`latin1`</li><li>`binary`</li></ul>ログイン時、ユーザーが提供したパスワードは、提供されたハッシュと照合される前に、`password.encoding`からトランスコードされます。たとえば、ハッシュが`ucs2`エンコードされた文字列から生成された場合は、次のように設定します： ` "encoding":  "ucs2"`</td>
 </tr>
 <tr>
-<td><code>keylen</code></td>
+<td>`keylen`</td>
 <td>整数</td>
-<td>スクリプトハッシュのバイト単位での望ましい鍵長。ゼロよりも大きい整数でなければなりません。<br/><code>algorithm</code>が<code>scrypt</code>に設定されている場合、このアルゴリズムが必要です。</td>
+<td>スクリプトハッシュのバイト単位での望ましい鍵長。ゼロよりも大きい整数でなければなりません。<br/>`algorithm`が`scrypt`に設定されている場合、このアルゴリズムが必要です。</td>
 </tr>
 <tr>
-<td><code>cost</code></td>
+<td>`cost`</td>
 <td>整数</td>
-<td>スクリプトハッシュに使用されるCPU/メモリーコストパラメーター。1より大きい2の冪でなければなりません。デフォルトで、<code>cost</code>は16384です。<br/><code>algorithm</code>が<code>scrypt</code>に設定されている場合のみ、このアルゴリズムが使用されます。</td>
+<td>スクリプトハッシュに使用されるCPU/メモリーコストパラメーター。1より大きい2の冪でなければなりません。デフォルトで、`cost`は16384です。<br/>`algorithm`が`scrypt`に設定されている場合のみ、このアルゴリズムが使用されます。</td>
 </tr>
 <tr>
-<td><code>blockSize</code></td>
+<td>`blockSize`</td>
 <td>整数</td>
-<td>スクリプトハッシュに使用されるブロックサイズパラメーター。正の整数でなければなりません。デフォルトで、<code>blockSize</code>は8です。<br/><code>algorithm</code>が<code>scrypt</code>に設定されている場合のみ、このアルゴリズムが使用されます。</td>
+<td>スクリプトハッシュに使用されるブロックサイズパラメーター。正の整数でなければなりません。デフォルトで、`blockSize`は8です。<br/>`algorithm`が`scrypt`に設定されている場合のみ、このアルゴリズムが使用されます。</td>
 </tr>
 <tr>
-<td><code>parallelization</code></td>
+<td>`parallelization`</td>
 <td>整数</td>
-<td>スクリプトハッシュに使用される並列化パラメーター。正の整数でなければなりません。デフォルトで、<code>parallelization</code>は1です。<br/><code>algorithm</code>が<code>scrypt</code>に設定されている場合のみ、このアルゴリズムが使用されます。</td>
+<td>スクリプトハッシュに使用される並列化パラメーター。正の整数でなければなりません。デフォルトで、`parallelization`は1です。<br/>`algorithm`が`scrypt`に設定されている場合のみ、このアルゴリズムが使用されます。</td>
 </tr>
 </tbody>
 </table>
@@ -532,7 +532,7 @@ JSONスキーマの詳細については、[jsonschema.org](http://json-schema.o
 
 ユーザーが最初にインポートされた`custom_password_hash`を使ってログインしなかった場合、一括インポートの処理中に`custom_password_hash`を更新できます。たとえば、以下のJSONは、`custom_password_hash`に異なる値を指定して、[`/api/v2/jobs/users-imports`](https://auth0.com/docs/api/management/v2?_ga=2.169020323.346193905.1601302257-746691936.1587131255#!/Jobs/post_users_imports)エンドポイントに2回送信することができます。2回目の送信では、`upsert`フラグを`true`に設定します。
 
-```json
+```javascript lines
 [
     {
     	"user_id": "2000",
@@ -690,34 +690,34 @@ Auth0は現在、以下のユーザーパスワードハッシュのインポー
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>オブジェクト</td>
 <td></td>
 </tr>
 <tr>
-<td><code>email.value</code></td>
+<td>`email.value`</td>
 <td>文字列</td>
 <td>MFAのメールアドレス。</td>
 </tr>
 <tr>
-<td><code>phone</code></td>
+<td>`phone`</td>
 <td>オブジェクト</td>
 <td></td>
 </tr>
 <tr>
-<td><code>phone.value</code></td>
+<td>`phone.value`</td>
 <td>文字列</td>
-<td>SMS MFAの電話番号。国コードがあり、先頭が<code>+</code>でなければなりません。例：<code>"+12125550001"</code></td>
+<td>SMS MFAの電話番号。国コードがあり、先頭が`+`でなければなりません。例：`"+12125550001"`</td>
 </tr>
 <tr>
-<td><code>totp</code></td>
+<td>`totp`</td>
 <td>オブジェクト</td>
 <td></td>
 </tr>
 <tr>
-<td><code>totp.secret</code></td>
+<td>`totp.secret`</td>
 <td>文字列</td>
-<td>Authenticatorアプリ（Google Authenticator、Microsoft Authenticator、Authy、1Password, LastPass）を使ったMFA認証のOTPシークレット。パッドなしのBase32エンコーディングで指定する必要があります。例： <code>"JBTWY3DPEHPK3PNP"</code></td>
+<td>Authenticatorアプリ（Google Authenticator、Microsoft Authenticator、Authy、1Password, LastPass）を使ったMFA認証のOTPシークレット。パッドなしのBase32エンコーディングで指定する必要があります。例： `"JBTWY3DPEHPK3PNP"`</td>
 </tr>
 </tbody>
 </table>
@@ -732,7 +732,7 @@ Auth0は現在、以下のユーザーパスワードハッシュのインポー
 
 以下の内容のあるファイルが有効です。
 
-```json
+```json lines
 [
   {
     "email": "john.doe@contoso.com",
@@ -754,7 +754,7 @@ Auth0は現在、以下のユーザーパスワードハッシュのインポー
 
 以下は、提供されたハッシュのあるユーザーの例です。
 
-```json
+```json lines
 [
     {
         "email": "antoinette@contoso.com",
@@ -878,7 +878,7 @@ Auth0は現在、以下のユーザーパスワードハッシュのインポー
 
 ### MFA要素の例
 
-```json
+```json lines
 [
     {
         "email": "antoinette@contoso.com",
@@ -939,7 +939,7 @@ Auth0は現在、以下のユーザーパスワードハッシュのインポー
 
 以下は、MFA要素のあるユーザーの例です。
 
-```json
+```json lines
 [
     {
         "email": "antoinette@contoso.com",

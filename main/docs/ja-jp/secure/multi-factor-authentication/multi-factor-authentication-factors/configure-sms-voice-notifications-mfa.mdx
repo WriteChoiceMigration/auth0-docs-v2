@@ -1,17 +1,17 @@
 ---
 title: "MFAにSMSと音声通知を設定する"
 permalink: "configure-sms-voice-notifications-mfa"
+'description': "MFAにSMSと音声通知を構成する方法について説明します。"
 'og:title': "MFAにSMSと音声通知を設定する"
 'og:description': "MFAにSMSと音声通知を構成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "MFAにSMSと音声通知を設定する"
 'twitter:description': "MFAにSMSと音声通知を構成する方法について説明します。"
 ---
-# MFAにSMSと音声通知を設定する
 
 <Warning>
 
-総合電話エクスペリエンスは、すべての電話プロバイダーの構成をテナントで一元管理します。このため、異なる電話認証要素のそれぞれに同じ電話プロバイダーを何度も構成する必要はありません。詳細については、「[多要素認証に総合電話エクスペリエンスを構成する](/docs/customize/phone-messages/unified-phone/use-auth0s-unified-phone-experience-for-multi-factor-authentication)」を参照してください。
+総合電話エクスペリエンスは、すべての電話プロバイダーの構成をテナントで一元管理します。このため、異なる電話認証要素のそれぞれに同じ電話プロバイダーを何度も構成する必要はありません。詳細については、「[多要素認証に総合電話エクスペリエンスを構成する](/docs/ja-jp/customize/phone-messages/unified-phone/use-auth0s-unified-phone-experience-for-multi-factor-authentication)」を参照してください。
 
 </Warning>
 
@@ -29,11 +29,11 @@ Dashboardまたは<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1
 
 SMSと音声が有効な場合、登録オプションとしてコードがSMSまたは音声を通じてユーザーに送られてきます。
 
-<Frame>![Configure SMS and Voice for MFA User Experience Voice](//images.ctfassets.net/cdy7uua7fh8z/2Q4BViGl71sdrytUDgNJ10/6254f8439eaf5f277b1287afb8874b5e/mfa-sms-voice.png)</Frame>
+<Frame>![Configure SMS and Voice for MFA User Experience Voice](/images/ja-jp/cdy7uua7fh8z/2Q4BViGl71sdrytUDgNJ10/6254f8439eaf5f277b1287afb8874b5e/mfa-sms-voice.png)</Frame>
 
 SMSのみを有効にする場合、フローはもっと単純です。
 
-<Frame>![Configure SMS and Voice for MFA User Experience SMS](//images.ctfassets.net/cdy7uua7fh8z/64PgR0CO1Wjfie2Hxy1Ptw/a67a401135a987a856be9f66bbadcb1c/mfa-sms.png)</Frame>
+<Frame>![Configure SMS and Voice for MFA User Experience SMS](/images/ja-jp/cdy7uua7fh8z/64PgR0CO1Wjfie2Hxy1Ptw/a67a401135a987a856be9f66bbadcb1c/mfa-sms.png)</Frame>
 
 ユーザーが登録後に認証を行う場合は、登録した電話に音声またはSMSメッセージが送られてきます。
 
@@ -81,14 +81,14 @@ SMSと音声メッセージテンプレートをカスタマイズすること�
 Management APIを使用して、どのメッセージ配信方法を有効にするかを構成できます。その際に使用されるのが、`/api/v2/guardian/factors/phone/message-types`エンドポイントです。`message_types`パラメーターは、`["sms"]`、`["voice"]`、または`["sms", "voice"]`を使用できる配列です。APIを呼び出すには、`update:guardian_factors`スコープをベアラーに持つ[Management APIアクセストークン](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens)が必要です。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PUT \
 --url 'https://{yourDomain}/api/v2/guardian/factors/phone/message-types' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: application/json' \
 --data '{ "message_types": ["sms", "voice"] }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/guardian/factors/phone/message-types");
 var request = new RestRequest(Method.PUT);
 request.AddHeader("content-type", "application/json");
@@ -97,7 +97,7 @@ request.AddParameter("application/json", "{ \"message_types\": [\"sms\", \"voice
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -117,8 +117,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/guardian/factors/phone/message-types")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -126,7 +126,7 @@ HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/guardian/factor
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PUT',
@@ -142,8 +142,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
@@ -168,7 +168,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/guardian/factors/phone/message-types",
@@ -192,8 +192,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"message_types\": [\"sms\", \"voice\"] }"
@@ -207,7 +207,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -221,8 +221,8 @@ request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 request.body = "{ \"message_types\": [\"sms\", \"voice\"] }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",

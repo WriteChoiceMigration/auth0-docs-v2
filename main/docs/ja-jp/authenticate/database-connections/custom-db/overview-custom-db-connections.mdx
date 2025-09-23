@@ -1,13 +1,13 @@
 ---
 title: "独自のユーザーストアを使用して認証する"
 permalink: "overview-custom-db-connections"
+'description': "IDプロバイダーに独自のデータベースを使用した認証について説明します。"
 'og:title': "独自のユーザーストアを使用して認証する"
 'og:description': "IDプロバイダーに独自のデータベースを使用した認証について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "独自のユーザーストアを使用して認証する"
 'twitter:description': "IDプロバイダーに独自のデータベースを使用した認証について説明します。"
 ---
-# 独自のユーザーストアを使用して認証する
 
 <Card title="利用可能性はAuth0プランによって異なる">
 
@@ -29,16 +29,16 @@ Webtask.ioとWebtask CLIには、2018年7月17日より前に作成されたテ�
 
 カスタムデータベース接続を作成して構成するには、以下のタスクを実行します。
 
-1. [接続作成](/docs/api/management/v2#!/Connections/post_connections)エンドポイントに`auth0`ストラテジーを使用します。
+1. [接続作成](/docs/ja-jp/api/management/v2#!/Connections/post_connections)エンドポイントに`auth0`ストラテジーを使用します。
 2. [［Auth0 Dashboard］>［Authentication（認証）］>［Database（データベース）］](https://manage.auth0.com/#/connections/database)に移動し、**［Use my own database（独自のデータベースを使用する）］**を有効にして、データベースのアクションスクリプトを編集できるようにします。
 
-   <Frame>![カスタムデータベースを有効にする 独自データベース使用オプション](//images.ctfassets.net/cdy7uua7fh8z/3kgHDpBFdVWNq9XOfhsTXI/2b7bba3e6105a0f2ded44afe78e19ac7/2025-02-25_10-23-29.png)</Frame>
+   <Frame>![カスタムデータベースを有効にする 独自データベース使用オプション](/images/ja-jp/cdy7uua7fh8z/3kgHDpBFdVWNq9XOfhsTXI/2b7bba3e6105a0f2ded44afe78e19ac7/2025-02-25_10-23-29.png)</Frame>
 
 ## 仕組み
 
 下の図が示すように、ユニバーサルログインワークフローにカスタムデータベース接続を使用して、ユーザーのID情報が独自のレガシーIDストアから取得できるようにします。
 
-<Frame>![カスタムデータベース接続の構造](//images.ctfassets.net/cdy7uua7fh8z/2lHqvZKFiEbAXURU2gmchc/4450e0d9ae3073545e112a3287b30f6e/custom-database-connections.png)</Frame>
+<Frame>![カスタムデータベース接続の構造](/images/ja-jp/cdy7uua7fh8z/2lHqvZKFiEbAXURU2gmchc/4450e0d9ae3073545e112a3287b30f6e/custom-database-connections.png)</Frame>
 
 すべての[データベース接続](/docs/ja-jp/authenticate/database-connections)タイプに共通なアーティファクトに加えて、カスタムデータベース接続を使用すると、アクションスクリプトを構成できるようになります。アクションスクリプトとは、レガシーIDストアとのやり取りに使用されるカスタムコードのことです。Auth0は、構成に[カスタムデータベースのアクションスクリプト用テンプレート](/docs/ja-jp/authenticate/database-connections/custom-db/templates)を各種提供しています。どれを使用するかは、作成するカスタムデータベース接続の用途がレガシー認証なのか、それとも自動移行なのかに依存します。
 

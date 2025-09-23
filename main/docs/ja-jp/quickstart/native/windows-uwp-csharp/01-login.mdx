@@ -1,12 +1,14 @@
 ---
 title: "Login"
 permalink: "01-login"
+'description': "This tutorial demonstrates how to add user login to a UWP C# application using Auth0."
 'og:title': "Login"
 'og:description': "This tutorial demonstrates how to add user login to a UWP C# application using Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/windows-8.png"
 'twitter:title': "Login"
 'twitter:description': "This tutorial demonstrates how to add user login to a UWP C# application using Auth0."
 ---
+
 # UWP
 
 <Frame>![Gravatar for damien.guard@auth0.com](//www.gravatar.com/avatar/3afad8f8d76c39d8b5b82578f030c53f?d=mm&r=g&s=50)</Frame>
@@ -39,7 +41,7 @@ System requirements: Microsoft Visual Studio 2017 | Windows 10 SDK (10.0.10586.0
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Native Applications](/docs/architecture-scenarios/application/mobile-api) and which [protocol](/docs/api-auth/grant/authorization-code-pkce) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/ja-jp/overview), how it [integrates with Native Applications](/docs/ja-jp/architecture-scenarios/application/mobile-api) and which [protocol](/docs/ja-jp/api-auth/grant/authorization-code-pkce) it uses.
 
 </Note>
 
@@ -94,7 +96,7 @@ If you are following along with the sample project you downloaded from the top o
 
 Use the NuGet Package Manager Console (Tools -> NuGet Package Manager -> Package Manager Console) to install the `Auth0.OidcClient.UWP` package, running the command:
 
-```
+```powershell lines
 Install-Package Auth0.OidcClient.UWP
 ```
 
@@ -102,7 +104,7 @@ Install-Package Auth0.OidcClient.UWP
 
 To integrate Auth0 login into your application, simply instantiate an instance of the `Auth0Client` class, configuring the Auth0 Domain and Client ID:
 
-```javascript
+```csharp lines
 // MainPage.xaml.cs
 
 using Auth0.OidcClient;
@@ -116,13 +118,13 @@ var client = new Auth0Client(new Auth0ClientOptions
 
 You can then call the `LoginAsync` method to log the user in:
 
-```javascript
+```csharp lines
 var loginResult = await client.LoginAsync();
 ```
 
 <Frame>![](https://cdn2.auth0.com/docs/1.14567.0/media/articles/native-platforms/windows-uwp-csharp/universal-login.png)</Frame>
 
-This will load the Auth0 login page into a web view. You can learn how to customize the login page in [this document](/docs/universal-login#simple-customization).
+This will load the Auth0 login page into a web view. You can learn how to customize the login page in [this document](/docs/ja-jp/universal-login#simple-customization).
 
 ## Handle Authentication Tokens
 
@@ -132,7 +134,7 @@ The returned login result will indicate whether authentication was successful, a
 
 You can check the `IsError` property of the result to see whether the login has failed. The `ErrorMessage` will contain more information regarding the error which occurred.
 
-```
+```csharp lines
 if (loginResult.IsError)
 {
     Debug.WriteLine($"An error occurred during login: {loginResult.Error}")
@@ -143,7 +145,7 @@ if (loginResult.IsError)
 
 On successful login, the login result will contain the ID Token and Access Token in the `IdentityToken` and `AccessToken` properties respectively.
 
-```
+```csharp lines
 if (!loginResult.IsError)
 {
     Debug.WriteLine($"id_token: {loginResult.IdentityToken}");
@@ -157,7 +159,7 @@ On successful login, the login result will contain the user information in the `
 
 To obtain information about the user, you can query the claims. You can for example obtain the user's name and email address from the `name` and `email` claims:
 
-```
+```csharp lines
 if (!loginResult.IsError)
 {
     Debug.WriteLine($"name: {loginResult.User.FindFirst(c => c.Type == "name")?.Value}");
@@ -173,7 +175,7 @@ The exact claims returned will depend on the scopes that were requested. For mor
 
 You can obtain a list of all the claims contained in the ID Token by iterating through the `Claims` collection:
 
-```
+```csharp lines
 if (!loginResult.IsError)
 {
     foreach (var claim in loginResult.User.Claims)
@@ -187,13 +189,13 @@ if (!loginResult.IsError)
 
 To log the user out call the `LogoutAsync` method.
 
-```
+```csharp lines
 await client.LogoutAsync();
 ```
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/ja-jp/identityproviders)[* Enable multifactor authentication](/docs/ja-jp/multifactor-authentication)[* Learn about attack protection](/docs/ja-jp/attack-protection)[* Learn about rules](/docs/ja-jp/rules)
 
 ---
 

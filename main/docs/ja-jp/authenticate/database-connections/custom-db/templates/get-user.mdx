@@ -1,13 +1,13 @@
 ---
 title: "ユーザー取得スクリプトのテンプレート"
 permalink: "get-user"
+'description': "ユーザーを検索するための、カスタムデータベースのアクションスクリプト用テンプレートについて説明します。"
 'og:title': "ユーザー取得スクリプトのテンプレート"
 'og:description': "ユーザーを検索するための、カスタムデータベースのアクションスクリプト用テンプレートについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユーザー取得スクリプトのテンプレート"
 'twitter:description': "ユーザーを検索するための、カスタムデータベースのアクションスクリプト用テンプレートについて説明します。"
 ---
-# ユーザー取得スクリプトのテンプレート
 
 ユーザー取得スクリプトは、ユーザーの現在の存在状態を特定するための関数を実装します。この関数の名前は`getUser`にすることをお勧めします。
 
@@ -38,7 +38,7 @@ permalink: "get-user"
 
 `getUser`関数は2つのパラメーターを受け取り、`callback`関数を返します。
 
-```
+```javascript lines
 getUser(email, callback): function
 ```
 
@@ -51,12 +51,12 @@ getUser(email, callback): function
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>文字列</td>
 <td>ユーザーのメールアドレス。</td>
 </tr>
 <tr>
-<td><code>callback</code></td>
+<td>`callback`</td>
 <td>関数</td>
 <td>パイプラインを介してエラーまたはプロファイルデータを渡すのに使用される</td>
 </tr>
@@ -67,7 +67,7 @@ getUser(email, callback): function
 
 これは疑似JavaScriptを使った例で、どのようにすれば`getUser`関数を実装できるかがわかります。言語固有の例については、「[言語固有のスクリプトの例](#language-specific-script-examples)」をお読みください。
 
-```javascript
+```javascript lines
 function getUser(email, callback) {
   // Send user identifier to external database API
   let options = {
@@ -106,7 +106,7 @@ function getUser(email, callback) {
 
 `callback`関数は2つまでのパラメーターを受け取り、1つの関数を返します。
 
-```
+```javascript lines
 callback(error[,profile]): function
 ```
 
@@ -120,13 +120,13 @@ callback(error[,profile]): function
 </thead>
 <tbody>
 <tr>
-<td><code>error</code></td>
+<td>`error`</td>
 <td>オブジェクト</td>
 <td>必須</td>
 <td>エラーデータを含む。</td>
 </tr>
 <tr>
-<td><code>profile</code></td>
+<td>`profile`</td>
 <td>オブジェクト</td>
 <td>任意</td>
 <td>ユーザーのプロファイルデータを含む。</td>
@@ -146,7 +146,7 @@ Get Userスクリプトがユーザーについて返すプロファイルデー
 
 #### 例
 
-```
+```javascript lines
 return callback(null, {
     username: "username",
     user_id: "my-custom-db|username@domain.com",
@@ -174,7 +174,7 @@ return callback(null, {
 
 #### 例
 
-```
+```javascript lines
 return callback(null);
 ```
 
@@ -184,7 +184,7 @@ return callback(null);
 
 #### 例
 
-```
+```javascript lines
 return callback(new Error("My custom error message."));
 ```
 
@@ -205,7 +205,7 @@ Auth0は、以下の言語や技術で使用できるサンプルスクリプト
 
 ### JavaScript
 
-```javascript
+```javascript lines
 function getByEmail(email, callback) {
   // This script should retrieve a user profile from your existing database,
   // without authenticating the user.
@@ -228,7 +228,7 @@ function getByEmail(email, callback) {
 
 ### ASP.NET Membership Provider（MVC3 - Universal Providers）
 
-```javascript
+```javascript lines
 function getByEmail(email, callback) {
   const sqlserver = require('tedious@1.11.0');
   const Connection = sqlserver.Connection;
@@ -278,7 +278,7 @@ function getByEmail(email, callback) {
 
 ### ASP.NET Membership Provider（MVC4 - Simple Membership）
 
-```javascript
+```javascript lines
 function getByEmail(email, callback) {
   const sqlserver = require('tedious@1.11.0');
   const Connection = sqlserver.Connection;
@@ -327,7 +327,7 @@ function getByEmail(email, callback) {
 
 ### MongoDB
 
-```javascript
+```javascript lines
 function getByEmail(email, callback) {
   const MongoClient = require('mongodb@5.1.0').MongoClient;
   const client = new MongoClient('mongodb://user:pass@mymongoserver.com');
@@ -351,7 +351,7 @@ function getByEmail(email, callback) {
 
 ### MySQL
 
-```javascript
+```javascript lines
 function getByEmail(email, callback) {
   const mysql = require('mysql');
   const connection = mysql({
@@ -376,7 +376,7 @@ function getByEmail(email, callback) {
 
 ### PostgreSQL
 
-```javascript
+```javascript lines
 function loginByEmail(email, callback) {
   //this example uses the "pg" library
   //more info here: https://github.com/brianc/node-postgres
@@ -403,7 +403,7 @@ function loginByEmail(email, callback) {
 
 ### SQL Server
 
-```javascript
+```javascript lines
 function getByEmail(email, callback) {
   //this example uses the "tedious" library
   //more info here: http://pekim.github.io/tedious/index.html
@@ -445,7 +445,7 @@ function getByEmail(email, callback) {
 
 ### Windows Azure SQL Database
 
-```javascript
+```javascript lines
 function getByEmail (name, callback) {
   var profile = {
     user_id:     "103547991597142817347",
@@ -461,7 +461,7 @@ function getByEmail (name, callback) {
 
 ### Axios
 
-```
+```javascript lines
 async function getUserAsync(email, callback) {
   //should be updated as new versions of axios are made available (https://auth0-extensions.github.io/canirequire/#axios)
   const axios = require("axios@0.22.0");
@@ -513,7 +513,7 @@ async function getUserAsync(email, callback) {
 
 ### Stormpath
 
-```javascript
+```javascript lines
 function getByEmail(email, callback) {
   // Replace the {yourStormpathClientId} with your Stormpath ID
   var url = 'https://api.stormpath.com/v1/applications/{yourStormpathClientId}/accounts';

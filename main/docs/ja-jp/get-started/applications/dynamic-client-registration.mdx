@@ -1,13 +1,13 @@
 ---
 title: "動的なアプリケーション登録"
 permalink: "dynamic-client-registration"
+'description': "Management APIを使用してAuth0でアプリケーションを動的に登録する方法について説明します。"
 'og:title': "動的なアプリケーション登録"
 'og:description': "Management APIを使用してAuth0でアプリケーションを動的に登録する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "動的なアプリケーション登録"
 'twitter:description': "Management APIを使用してAuth0でアプリケーションを動的に登録する方法について説明します。"
 ---
-# 動的なアプリケーション登録
 
 テナントに対して、サードパーティーのアプリケーションを動的に登録することができます。この機能は、[OpenID Connect Dynamic Client Registrationの仕様](https://openid.net/specs/openid-connect-registration-1_0.html)に基づいています。
 
@@ -23,18 +23,18 @@ Auth0は**オープンな動的登録**をサポートしています。つま�
 
 このためには、[［Dashboard］>［Settings（設定）］>［Advanced（詳細）］](https://manage.auth0.com/#/tenant/advanced)の順に移動し、**［OIDC Dynamic Application Registration（OIDCの動的なアプリケーション登録）］**を有効にします。
 
-または、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip> [`/Tenant/patch_settings`](/docs/api/management/v2#!/Tenants/patch_settings)エンドポイントを使用してこのフラグを更新することができます。
+または、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip> [`/Tenant/patch_settings`](/docs/ja-jp/api/management/v2#!/Tenants/patch_settings)エンドポイントを使用してこのフラグを更新することができます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/tenants/settings' \
 --header 'authorization: Bearer API2_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "flags": { "enable_dynamic_client_registration": true } }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/tenants/settings");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -44,7 +44,7 @@ request.AddParameter("application/json", "{ \"flags\": { \"enable_dynamic_client
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -65,8 +65,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/settings")
 .header("content-type", "application/json")
 .header("authorization", "Bearer API2_ACCESS_TOKEN")
@@ -75,7 +75,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/setti
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -92,8 +92,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer API2_ACCESS_TOKEN",
@@ -119,7 +119,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/tenants/settings",
@@ -144,8 +144,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"flags\": { \"enable_dynamic_client_registration\": true } }"
@@ -160,7 +160,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -175,8 +175,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"flags\": { \"enable_dynamic_client_registration\": true } }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -217,13 +217,13 @@ Auth0でアプリケーションを動的に登録するには、HTTP `POST`メ�
 「`My Dynamic application`」という名前で、コールバックURLが`https://application.example.com/callback`と`https://application.example.com/callback2`に指定されているアプリケーションを作成するには、以下のスニペットを使用します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oidc/register' \
 --header 'content-type: application/json' \
 --data '{"client_name":"My Dynamic Application","redirect_uris": ["https://application.example.com/callback", "https://application.example.com/callback2"]}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oidc/register");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -231,7 +231,7 @@ request.AddParameter("application/json", "{\"client_name\":\"My Dynamic Applicat
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -250,15 +250,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oidc/register")
 .header("content-type", "application/json")
 .body("{\"client_name\":\"My Dynamic Application\",\"redirect_uris\": [\"https://application.example.com/callback\", \"https://application.example.com/callback2\"]}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -277,8 +277,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"client_name": @"My Dynamic Application",
@@ -303,7 +303,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oidc/register",
@@ -326,8 +326,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"client_name\":\"My Dynamic Application\",\"redirect_uris\": [\"https://application.example.com/callback\", \"https://application.example.com/callback2\"]}"
@@ -338,7 +338,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -351,8 +351,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"client_name\":\"My Dynamic Application\",\"redirect_uris\": [\"https://application.example.com/callback\", \"https://application.example.com/callback2\"]}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = [
@@ -388,7 +388,7 @@ dataTask.resume()
 
 応答には基本的なアプリケーション情報が含まれます。
 
-```
+```json lines
 HTTP/1.1 201 Created
 Content-Type: application/json
 {
@@ -406,7 +406,7 @@ Content-Type: application/json
 ここでは、
 
 * **client_id**：一意のクライアント識別子。アプリケーションでAuth0を使用するよう構成するときに使用するIDです。これはシステムで生成され、変更することはできません。
-* **client_secret**：英数字の64ビットのクライアントシークレット。Authentication API [`/token`](/docs/api/authentication#get-token)への認証と、IDトークンの検証にアプリケーションで使用される値です。
+* **client_secret**：英数字の64ビットのクライアントシークレット。Authentication API [`/token`](/docs/ja-jp/api/authentication#get-token)への認証と、IDトークンの検証にアプリケーションで使用される値です。
 * **client_secret_expires_at**：`client_secret`が期限切れする時刻。Auth0では、この値は常にゼロ（`0`）で、アプリケーションが期限切れになることはありません。
 
 クライアントIDとクライアントシークレットは、認証および認証フローの実行に最も重要な要素であるため、メモしておいてください。詳細については、「[認証フローと認可フロー](/docs/ja-jp/get-started/authentication-and-authorization-flow)」をお読みください。
@@ -421,7 +421,7 @@ Content-Type: application/json
 
 まず、ユーザーを認可URLに送信するようにアプリケーションを構成する必要があります。
 
-```
+``` lines
 https://{yourDomain}/authorize?
   audience={API_AUDIENCE}&
   scope={SCOPE}&
@@ -444,7 +444,7 @@ https://{yourDomain}/authorize?
 
 例：
 
-```
+```html lines
 <a href="https://{yourDomain}/authorize?scope=appointments%20contacts&audience=appointments:api&response_type=id_token%20token&client_id={yourClientId}&redirect_uri={https://yourApp/callback}">
   Sign In
 </a>

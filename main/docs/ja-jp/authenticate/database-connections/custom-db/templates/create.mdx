@@ -1,13 +1,13 @@
 ---
 title: "作成スクリプトのテンプレート"
 permalink: "create"
+'description': "ユーザーを作成するための、カスタムデータベースのアクションスクリプト用テンプレートについて説明します。"
 'og:title': "作成スクリプトのテンプレート"
 'og:description': "ユーザーを作成するための、カスタムデータベースのアクションスクリプト用テンプレートについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "作成スクリプトのテンプレート"
 'twitter:description': "ユーザーを作成するための、カスタムデータベースのアクションスクリプト用テンプレートについて説明します。"
 ---
-# 作成スクリプトのテンプレート
 
 作成スクリプトは、ユーザーが作成されるときに定義された関数を実装します。この関数の名前は`create`にすることをお勧めします。
 
@@ -30,7 +30,7 @@ permalink: "create"
 
 `create`関数は2つのパラメーターを受け取り、`callback`関数を返します。
 
-```
+```javascript lines
 create(user, callback): function
 ```
 
@@ -43,12 +43,12 @@ create(user, callback): function
 </thead>
 <tbody>
 <tr>
-<td><code>user</code></td>
+<td>`user`</td>
 <td>オブジェクト</td>
 <td>ユーザー作成プロセスから取得した<a href="#user-object-parameter">ユーザープロファイルデータ</a>が含まれます。</td>
 </tr>
 <tr>
-<td><code>callback</code></td>
+<td>`callback`</td>
 <td>関数</td>
 <td>パイプラインを通してエラーデータを渡すために使用されます。</td>
 </tr>
@@ -59,7 +59,7 @@ create(user, callback): function
 
 これは疑似JavaScriptを使った例で、どのようにすれば`create`関数を実装できるかがわかります。言語固有の例については、「[言語固有のスクリプトの例](#language-specific-script-examples)」をお読みください。
 
-```javascript
+```javascript lines
 function create(user, callback) {
   // Send user profile data to external database API
   let hashedPassword = hash(user.password);
@@ -100,7 +100,7 @@ function create(user, callback) {
 
 #### 例
 
-```
+```javascript lines
 bcrypt.hash(password, 10, function (err, hash) {
     if (err) {
         return callback(err);
@@ -116,7 +116,7 @@ bcrypt.hash(password, 10, function (err, hash) {
 
 ### 定義
 
-```
+```javascript lines
 callback(error): function
 ```
 
@@ -130,7 +130,7 @@ callback(error): function
 </thead>
 <tbody>
 <tr>
-<td><code>error</code></td>
+<td>`error`</td>
 <td>オブジェクト</td>
 <td>必須</td>
 <td>エラーデータを含む。</td>
@@ -144,7 +144,7 @@ callback(error): function
 
 #### 例
 
-```
+```javascript lines
 return callback(null);
 ```
 
@@ -160,7 +160,7 @@ return callback(null);
 
 `ValidationError`コンストラクターは、最大2つのパラメーターを受け取ります。
 
-```
+```javascript lines
 new ValidationError(errorCode[, message]): ValidationError
 ```
 
@@ -172,11 +172,11 @@ new ValidationError(errorCode[, message]): ValidationError
 </thead>
 <tbody>
 <tr>
-<td><code>errorCode</code></td>
+<td>`errorCode`</td>
 <td>（必須）文字列。エラーのタイプを指定します。</td>
 </tr>
 <tr>
-<td><code>message</code></td>
+<td>`message`</td>
 <td>（任意）文字列。エラーに関する情報を含む。</td>
 </tr>
 </tbody>
@@ -188,7 +188,7 @@ new ValidationError(errorCode[, message]): ValidationError
 
 ##### 例
 
-```
+```javascript lines
 return callback(new ValidationError("user_exists", "My custom error message."));
 ```
 
@@ -201,7 +201,7 @@ return callback(new ValidationError("user_exists", "My custom error message."));
 <tbody>
 <tr>
 <td><strong>Code（コード）</strong></td>
-<td><code>fs</code></td>
+<td>`fs`</td>
 </tr>
 <tr>
 <td><strong>Event（イベント）</strong></td>
@@ -209,7 +209,7 @@ return callback(new ValidationError("user_exists", "My custom error message."));
 </tr>
 <tr>
 <td><strong>Description（説明）</strong></td>
-<td><code>My custom error message.</code></td>
+<td>`My custom error message.`</td>
 </tr>
 </tbody>
 </table>
@@ -226,36 +226,36 @@ return callback(new ValidationError("user_exists", "My custom error message."));
 </thead>
 <tbody>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>ユニバーサルログインを通してユーザーがサインアップした場合は、Auth0アプリケーションのクライアントIDです。Auth0 DashboardまたはManagement APIを通してユーザーが作成された場合は、APIキーです。</td>
 </tr>
 <tr>
-<td><code>tenant</code></td>
+<td>`tenant`</td>
 <td>Auth0テナント名です。</td>
 </tr>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>ユーザーのメールアドレスです。</td>
 </tr>
 <tr>
-<td><code>password</code></td>
+<td>`password`</td>
 <td>テキスト形式で表記したユーザーのパスワードです。</td>
 </tr>
 <tr>
-<td><code>username</code></td>
-<td>ユーザーのユーザー名です。カスタムデータベース接続の<a href="/docs/connections/database/require-username"><strong>［Requires Username（ユーザー名を要求する）］</strong></a>設定が有効の場合は、必須です。</td>
+<td>`username`</td>
+<td>ユーザーのユーザー名です。カスタムデータベース接続の<a href="/docs/ja-jp/connections/database/require-username"><strong>［Requires Username（ユーザー名を要求する）］</strong></a>設定が有効の場合は、必須です。</td>
 </tr>
 <tr>
-<td><code>connection</code></td>
+<td>`connection`</td>
 <td>Auth0接続名です。</td>
 </tr>
 <tr>
-<td><code>user_metadata</code></td>
-<td>オブジェクトが存在する場合は、ユーザーのAuth0プロファイルにある<code>user_metadata</code>オブジェクトのプロパティを含みます。</td>
+<td>`user_metadata`</td>
+<td>オブジェクトが存在する場合は、ユーザーのAuth0プロファイルにある`user_metadata`オブジェクトのプロパティを含みます。</td>
 </tr>
 <tr>
-<td><code>app_metadata</code></td>
-<td>オブジェクトが存在する場合は、ユーザーのAuth0プロファイルにある<code>app_metadata</code>オブジェクトのプロパティを含みます。</td>
+<td>`app_metadata`</td>
+<td>オブジェクトが存在する場合は、ユーザーのAuth0プロファイルにある`app_metadata`オブジェクトのプロパティを含みます。</td>
 </tr>
 </tbody>
 </table>
@@ -270,11 +270,11 @@ return callback(new ValidationError("user_exists", "My custom error message."));
 
 ### カスタムサインアップフィールド
 
-サインアップのプロセス中に[カスタムフィールドを作成して使用](/docs/libraries/custom-signup#using-the-api)する場合、これらは`user`オブジェクトに含まれます。
+サインアップのプロセス中に[カスタムフィールドを作成して使用](/docs/ja-jp/libraries/custom-signup#using-the-api)する場合、これらは`user`オブジェクトに含まれます。
 
 ### 例
 
-```json
+```javascript lines
 {
     client_id: "8tkMo6n1QkKOazqPcSQd8wU7LzXYibgK",
     tenant: "{yourAuth0Tenant}",
@@ -306,7 +306,7 @@ Auth0は、以下の言語や技術で使用できるサンプルスクリプト
 
 ### JavaScript
 
-```javascript
+```javascript lines
 function create(user, callback) {
   // This script should create a user entry in your existing database. It will
   // be executed when a user attempts to sign up, or when a user is created
@@ -338,7 +338,7 @@ function create(user, callback) {
 
 ### ASP.NET Membership Provider（MVC3 - Universal Providers）
 
-```javascript
+```javascript lines
 function create(user, callback) {
   const crypto = require('crypto');
   const sqlserver = require('tedious@1.11.0');
@@ -442,7 +442,7 @@ function create(user, callback) {
 
 ### ASP.NET Membership Provider（MVC4 - Simple Membership）
 
-```javascript
+```javascript lines
 function create(user, callback) {
   const crypto = require('crypto');
   const sqlserver = require('tedious@1.11.0');
@@ -521,7 +521,7 @@ function create(user, callback) {
 
 ### MongoDB
 
-```javascript
+```javascript lines
 function create(user, callback) {
   const bcrypt = require('bcrypt');
   const MongoClient = require('mongodb@3.1.4').MongoClient;
@@ -554,7 +554,7 @@ function create(user, callback) {
 
 ### MySQL
 
-```javascript
+```javascript lines
 function create(user, callback) {
   const mysql = require('mysql');
   const bcrypt = require('bcrypt');
@@ -583,7 +583,7 @@ function create(user, callback) {
 
 ### PostgreSQL
 
-```javascript
+```javascript lines
 function create(user, callback) {
   //this example uses the "pg" library
   //more info here: https://github.com/brianc/node-postgres
@@ -608,7 +608,7 @@ function create(user, callback) {
 
 ### SQL Server
 
-```javascript
+```javascript lines
 function create(user, callback) {
   //this example uses the "tedious" library
   //more info here: http://pekim.github.io/tedious/index.html
@@ -651,7 +651,7 @@ function create(user, callback) {
 
 ### Windows Azure SQL Database
 
-```javascript
+```javascript lines
 function create (user, callback) {
   //this example uses the "tedious" library
   //more info here: http://pekim.github.io/tedious/index.html
@@ -697,7 +697,7 @@ function create (user, callback) {
 
 ### Basic認証での要求
 
-```javascript
+```javascript lines
 function create(user, callback) {
   const request = require('request');
   request.post({
@@ -717,7 +717,7 @@ function create(user, callback) {
 レガシーデータベースかAuth0のいずれかでユーザーを作成できない場合は、以下を行います。
 
 1. Auth0の[Real-time Webtask Logs拡張機能](/docs/ja-jp/customize/extensions/real-time-webtask-logs)で`console.log()`のステートメントを確認します。
-2. レガシーデータベースでユーザーを探し、適宜削除します。ユーザーの状態の一部がAuth0にある場合は、Management APIの[ユーザー削除](https://auth0.com/docs/api/management/v2#!/Users/delete_users_by_id)エンドポイントまたは[接続ユーザー削除](/docs/api/management/v2#!/Connections/delete_users_by_email)エンドポイントを使用します。
+2. レガシーデータベースでユーザーを探し、適宜削除します。ユーザーの状態の一部がAuth0にある場合は、Management APIの[ユーザー削除](https://auth0.com/docs/api/management/v2#!/Users/delete_users_by_id)エンドポイントまたは[接続ユーザー削除](/docs/ja-jp/api/management/v2#!/Connections/delete_users_by_email)エンドポイントを使用します。
 3. **［Import Mode（インポートモード）］**が無効になっていることを確認してから、作成スクリプトを構成します。
 
 ## もっと詳しく

@@ -1,17 +1,19 @@
 ---
 title: "MAUIアプリケーションにログインを追加する"
 permalink: "interactive"
+'description': "このチュートリアルは、Auth0を使用して、.NET MAUIアプリケーションにユーザーログインを追加する方法について説明します。"
 'og:title': "MAUIアプリケーションにログインを追加する"
 'og:description': "このチュートリアルは、Auth0を使用して、.NET MAUIアプリケーションにユーザーログインを追加する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/xamarin.png"
 'twitter:title': "MAUIアプリケーションにログインを追加する"
 'twitter:description': "このチュートリアルは、Auth0を使用して、.NET MAUIアプリケーションにユーザーログインを追加する方法について説明します。"
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -87,11 +89,11 @@ NuGetパッケージ マネージャー（［Tools（ツール）］ -> ［Libra
 
 NuGetパッケージマネージャーコンソール（`Install-Package`）や`dotnet` CLI（`dotnet add`）を代わりに使用することもできます。
 
-```
+``` lines
 Install-Package Auth0.OidcClient.MAUI
 ```
 
-```
+``` lines
 dotnet add package Auth0.OidcClient.MAUI
 ```
 
@@ -105,7 +107,7 @@ SDKをAndroidとWindowsで使うためにはプラットフォーム特定の構
 
 `WebAuthenticatorCallbackActivity`を展開する新しいアクティビティを作成します：
 
-```json
+```csharp lines
 [Activity(NoHistory = true, LaunchMode = LaunchMode.SingleTop, Exported = true)]
 [IntentFilter(new[] { Intent.ActionView },
 Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
@@ -124,7 +126,7 @@ Auth0にリダイレクトで戻された後、アプリケーションが適切
 
 * 対応するプロトコルを`Package.appxmanifest`に加えます。この場合、設定は`myapp`になっていますが、お好きなものに変更できます（関連するすべてのAuth0 URLも確実に更新してください）。
 
-```
+```xml lines
 <Applications>
 <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
 <Extensions>
@@ -138,7 +140,7 @@ Auth0にリダイレクトで戻された後、アプリケーションが適切
 
 * Windows固有の`App.xaml.cs`ファイルで`Activator.Default.CheckRedirectionActivation()`を呼び出します。
 
-```
+```csharp lines
 public App()
 {
 if (Auth0.OidcClient.Platforms.Windows.Activator.Default.CheckRedirectionActivation())
@@ -153,7 +155,7 @@ this.InitializeComponent();
 
 Auth0をアプリケーションに統合するには、Auth0ドメイン、クライアントID、要求されたスコープを含む`Auth0ClientOptions`のインスタンスを渡して`Auth0Client`クラスをインスタンス化します。また、Auth0が構成したURLを使って確実にアプリケーションにリダイレクトするよう、`RedirectUri`と`PostLogoutRedirectUri`も構成する必要があります。
 
-```
+```csharp lines
 using Auth0.OidcClient;
 var client = new Auth0Client(new Auth0ClientOptions {
 Domain = "{yourDomain}",
@@ -181,7 +183,7 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 Auth0アプリケーションとAuth0 SDKの構成が完了したら、プロジェクトのためにログインをセットアップする必要があります。これを実現するには、SDKの`LoginAsync()`メソッドを使用して、ユーザーをAuth0のユニバーサルログインページにリダイレクトするログインボタンを作成します。
 
-```javascript
+```csharp lines
 var loginResult = await client.LoginAsync();
 ```
 
@@ -205,7 +207,7 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 プロジェクトにログインしたユーザーには、ログアウトする方法も必要です。SDKの`LogoutAsync()`メソッドを使用してログアウトボタンを作成します。ユーザーはログアウトすると、Auth0ログアウトエンドポイントにリダイレクトされてから、即座に、このクイックスタートで先ほどセットアップしたログアウトURLにリダイレクトで戻されます。
 
-```
+```csharp lines
 await client.LogoutAsync();
 ```
 
@@ -244,7 +246,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/native/maui/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

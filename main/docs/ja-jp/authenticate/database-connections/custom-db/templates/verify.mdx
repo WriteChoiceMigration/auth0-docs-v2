@@ -1,13 +1,13 @@
 ---
 title: "検証スクリプトのテンプレート"
 permalink: "verify"
+'description': "ユーザーのメール検証を行うための、カスタムデータベースのアクションスクリプト用テンプレートについて説明します。"
 'og:title': "検証スクリプトのテンプレート"
 'og:description': "ユーザーのメール検証を行うための、カスタムデータベースのアクションスクリプト用テンプレートについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "検証スクリプトのテンプレート"
 'twitter:description': "ユーザーのメール検証を行うための、カスタムデータベースのアクションスクリプト用テンプレートについて説明します。"
 ---
-# 検証スクリプトのテンプレート
 
 検証スクリプトは、ユーザーのメールアドレスが外部データベースにある場合に、検証ステータスを検証済みにする関数を実装します。この関数の名前は`verify`にすることをお勧めします。
 
@@ -27,7 +27,7 @@ permalink: "verify"
 
 `verify`関数は2つのパラメーターを受け取り、`callback`関数を返します。
 
-```
+```javascript lines
 verify(email, callback): function
 ```
 
@@ -40,12 +40,12 @@ verify(email, callback): function
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>文字列</td>
 <td>ユーザーのメールアドレス。</td>
 </tr>
 <tr>
-<td><code>callback</code></td>
+<td>`callback`</td>
 <td>関数</td>
 <td>パイプラインを通してエラーやプロファイルデータを渡すのに使用すされる。</td>
 </tr>
@@ -56,7 +56,7 @@ verify(email, callback): function
 
 これは疑似JavaScriptを使った例で、どのようにすれば`login`関数を実装できるかがわかります。言語固有の例については、「[言語固有のスクリプトの例](https://auth0.com/docs/authenticate/database-connections/custom-db/templates/verify#language-specific-script-examples)」をお読みください。
 
-```javascript
+```javascript lines
 function verify(email, callback) {
   // Send email to external database API
   let options = {
@@ -86,7 +86,7 @@ function verify(email, callback) {
 
 `callback`関数は2つまでのパラメーターを受け取り、1つの関数を返します。
 
-```
+```javascript lines
 callback(error, [verified]): function
 ```
 
@@ -100,16 +100,16 @@ callback(error, [verified]): function
 </thead>
 <tbody>
 <tr>
-<td><code>error</code></td>
+<td>`error`</td>
 <td>オブジェクト</td>
 <td>必須</td>
 <td>エラーデータが含まれます。</td>
 </tr>
 <tr>
-<td><code>verified</code></td>
+<td>`verified`</td>
 <td>ブール値</td>
 <td>任意</td>
-<td>外部データベースにおけるユーザーの確認状態を示す値（<code>true</code>または<code>false</code>）。値が<code>true</code>の場合にのみ必須。</td>
+<td>外部データベースにおけるユーザーの確認状態を示す値（`true`または`false`）。値が`true`の場合にのみ必須。</td>
 </tr>
 </tbody>
 </table>
@@ -128,7 +128,7 @@ callback(error, [verified]): function
 
 #### 例
 
-```
+```javascript lines
 callback(null, true);
 ```
 
@@ -138,7 +138,7 @@ callback(null, true);
 
 #### 例
 
-```
+```javascript lines
 return callback(new Error("My custom error message."));
 ```
 
@@ -157,7 +157,7 @@ Auth0は、以下の言語や技術で使用できるサンプルスクリプト
 
 ### JavaScript
 
-```javascript
+```javascript lines
 function verify(email, callback) {
   // This script should mark the current user's email address as verified in
   // your database.
@@ -186,7 +186,7 @@ function verify(email, callback) {
 
 ### ASP.NET Membership Provider（MVC3 - Universal Providers）
 
-```javascript
+```javascript lines
 function verify(email, callback) {
   const sqlserver = require('tedious@1.11.0');
   const Connection = sqlserver.Connection;
@@ -236,7 +236,7 @@ function verify(email, callback) {
 
 ### ASP.NET Membership Provider（MVC4 - Universal Providers）
 
-```javascript
+```javascript lines
 function verify (email, callback) {
   const sqlserver = require('tedious@1.11.0');
   const Connection = sqlserver.Connection;
@@ -300,7 +300,7 @@ function verify (email, callback) {
 
 ### MongoDB
 
-```javascript
+```javascript lines
 function verify (email, callback) {
   const MongoClient = require('mongodb@3.1.4').MongoClient;
   const client = new MongoClient('mongodb://user:pass@mymongoserver.com');
@@ -320,7 +320,7 @@ function verify (email, callback) {
 
 ### MySQL
 
-```javascript
+```javascript lines
 function verify(email, callback) {
   const mysql = require('mysql');
   const connection = mysql({
@@ -340,7 +340,7 @@ function verify(email, callback) {
 
 ### PostgreSQL
 
-```javascript
+```javascript lines
 function verify (email, callback) {
   //this example uses the "pg" library
   //more info here: https://github.com/brianc/node-postgres
@@ -361,7 +361,7 @@ function verify (email, callback) {
 
 ### SQL Server
 
-```javascript
+```javascript lines
 function verify (email, callback) {
   //this example uses the "tedious" library
   //more info here: http://pekim.github.io/tedious/index.html
@@ -399,7 +399,7 @@ function verify (email, callback) {
 
 ### Windows Azure SQL Database
 
-```javascript
+```javascript lines
 function verify (email, callback) {
   //this example uses the "tedious" library
   //more info here: http://pekim.github.io/tedious/index.html

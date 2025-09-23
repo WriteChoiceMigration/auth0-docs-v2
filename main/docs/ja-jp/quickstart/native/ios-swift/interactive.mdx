@@ -1,17 +1,19 @@
 ---
 title: "iOSまたはmacOSアプリケーションにログインを追加する"
 permalink: "interactive"
+'description': "このガイドは、iOSやmacOSアプリにAuth0.swift SDKを使ってAuth0を統合する方法を説明します。"
 'og:title': "iOSまたはmacOSアプリケーションにログインを追加する"
 'og:description': "このガイドは、iOSやmacOSアプリにAuth0.swift SDKを使ってAuth0を統合する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/ios.png"
 'twitter:title': "iOSまたはmacOSアプリケーションにログインを追加する"
 'twitter:description': "このガイドは、iOSやmacOSアプリにAuth0.swift SDKを使ってAuth0を統合する方法を説明します。"
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -72,21 +74,21 @@ iOS 17.4以降とmacOS 14.4以降では、ユニバーサルリンクをCallback
 
 #### iOS
 
-```
+``` lines
 https://{yourDomain}/ios/YOUR_BUNDLE_IDENTIFIER/callback,
 YOUR_BUNDLE_IDENTIFIER://{yourDomain}/ios/YOUR_BUNDLE_IDENTIFIER/callback
 ```
 
 #### macOS
 
-```
+``` lines
 https://{yourDomain}/macos/YOUR_BUNDLE_IDENTIFIER/callback,
 YOUR_BUNDLE_IDENTIFIER://{yourDomain}/macos/YOUR_BUNDLE_IDENTIFIER/callback
 ```
 
 たとえば、iOSのバンドル識別子が`com.example.MyApp`でAuth0ドメインが`example.us.auth0.com`の場合には、次の値になります：
 
-```
+``` lines
 https://example.us.auth0.com/ios/com.example.MyApp/callback,
 com.example.MyApp://example.us.auth0.com/ios/com.example.MyApp/callback
 ```
@@ -103,7 +105,7 @@ com.example.MyApp://example.us.auth0.com/ios/com.example.MyApp/callback
 
 Auth0アプリケーションの[設定ページ](https://manage.auth0.com/dashboard/us/#/applications/)に移動して最後までスクロールし、 **［Advanced Settings（詳細設定）］>［Device Settings（デバイス設定）］**を開きます。**［iOS］**セクションで**［Team ID（チームID）］**に[Apple Team ID](https://developer.apple.com/help/account/manage-your-team/locate-your-team-id/)を、**［App ID（アプリID）］**にアプリのバンドルIDを設定します。
 
-<Frame>![Auth0 Dashboard> ［Applications（アプリケーション）］ > ［Applications（アプリケーション）］ > ［Native App（ネイティブアプリ）］ > ［Settings（設定）］タブ > ［Advanced Settings（詳細設定）］ > ［Device Settings（デバイス設定）］タブ](//images.ctfassets.net/cdy7uua7fh8z/62v9bB3bUVMw9XLND5lcMI/1b20d248b400f75e1bf1174a7d0d0ba0/IOS_Settings_-_Japanese.png)</Frame>
+<Frame>![Auth0 Dashboard> ［Applications（アプリケーション）］ > ［Applications（アプリケーション）］ > ［Native App（ネイティブアプリ）］ > ［Settings（設定）］タブ > ［Advanced Settings（詳細設定）］ > ［Device Settings（デバイス設定）］タブ](/images/ja-jp/cdy7uua7fh8z/62v9bB3bUVMw9XLND5lcMI/1b20d248b400f75e1bf1174a7d0d0ba0/IOS_Settings_-_Japanese.png)</Frame>
 
 これで、アプリがAuth0テナントの`apple-app-site-association`ファイルに追加されます。
 
@@ -111,11 +113,11 @@ Auth0アプリケーションの[設定ページ](https://manage.auth0.com/dashb
 
 Xcodeで、アプリのターゲット設定の**［Signing & Capabilities（署名と機能）］**[タブ](https://developer.apple.com/documentation/xcode/adding-capabilities-to-your-app#Add-a-capability)に移動し、**［+ Capability（＋機能）］**ボタンを押します。それから**［Associated Domains（関連ドメイン）］**を選択します。
 
-<Frame>![［Xcode］> ［Signing & Capabilities（署名と機能）］タブ > ［Add New（新規追加）］ > ［Associated Domains（関連ドメイン）］](//images.ctfassets.net/cdy7uua7fh8z/72eVE104zKB5Q4NPnx6MCa/66c81ee64f104583bd00b9916778f989/ios-xcode-capabilities.png)</Frame>
+<Frame>![［Xcode］> ［Signing & Capabilities（署名と機能）］タブ > ［Add New（新規追加）］ > ［Associated Domains（関連ドメイン）］](/images/ja-jp/cdy7uua7fh8z/72eVE104zKB5Q4NPnx6MCa/66c81ee64f104583bd00b9916778f989/ios-xcode-capabilities.png)</Frame>
 
 次に、以下の [エントリー](https://developer.apple.com/documentation/xcode/configuring-an-associated-domain#Define-a-service-and-its-associated-domain)を**［Associated Domains（関連ドメイン）］**の下に追加します：
 
-```
+``` lines
 webcredentials:labs-fundtraining.us.auth0.com
 ```
 
@@ -139,7 +141,7 @@ Xcodeで以下のメニュー項目を開きます：
 
 **［Search or Enter Package URL（パッケージURLを検索または入力）］**検索ボックスに次のURLを入力します：
 
-```
+``` lines
 https://github.com/auth0/Auth0.swift
 ```
 
@@ -155,7 +157,7 @@ SPMの詳細については、[公式ドキュメント](https://developer.apple
 
 以下のラインを`Podfile`に追加します：
 
-```
+```ruby lines
 pod 'Auth0', '~> 2.0'
 ```
 
@@ -171,7 +173,7 @@ CocoaPodsの詳細は、[公式ドキュメント](https://guides.cocoapods.org/
 
 以下のラインを`Cartfile`に追加します：
 
-```
+```swift lines
 github "auth0/Auth0.swift" ~> 2.0
 ```
 
@@ -218,7 +220,7 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 </Note>
 
-<Frame>![iOSアプリのユニバーサルログイン画面の例](//images.ctfassets.net/cdy7uua7fh8z/3ZRDXpjlUXEcQpXq6Q00L1/4b6b596983b5f7d257975a5efcc1cafa/login-ios_japanese.png)</Frame>
+<Frame>![iOSアプリのユニバーサルログイン画面の例](/images/ja-jp/cdy7uua7fh8z/3ZRDXpjlUXEcQpXq6Q00L1/4b6b596983b5f7d257975a5efcc1cafa/login-ios_japanese.png)</Frame>
 
 ##### checkpoint.header
 
@@ -285,7 +287,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/native/ios-swift/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

@@ -1,17 +1,17 @@
 ---
 title: "Configure Token Vault"
 permalink: "configure-token-vault"
+'description': "Learn how to configure Token Vault. "
 'og:title': "Configure Token Vault"
 'og:description': "Learn how to configure Token Vault. "
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configure Token Vault"
 'twitter:description': "Learn how to configure Token Vault. "
 ---
-# Configure Token Vault
 
 <Warning>
 
-Token Vault is currently available in Early Access for public cloud tenants. By using this feature, you agree to the applicable Free Trial terms in Okta’s [Master Subscription Agreement](https://www.okta.com/legal). To learn more about Auth0's product release cycle, read [Product Release Stages](/docs/troubleshoot/product-lifecycle/product-release-stages). To participate in this program, contact [Auth0 Support](https://support.auth0.com/) or your Technical Account Manager.
+Token Vault is currently available in Early Access for public cloud tenants. By using this feature, you agree to the applicable Free Trial terms in Okta’s [Master Subscription Agreement](https://www.okta.com/legal). To learn more about Auth0's product release cycle, read [Product Release Stages](/docs/ja-jp/troubleshoot/product-lifecycle/product-release-stages). To participate in this program, contact [Auth0 Support](https://support.auth0.com/) or your Technical Account Manager.
 
 </Warning>
 
@@ -23,15 +23,15 @@ To configure Token Vault, you need to:
 2. Configure your application with the Token Vault grant type.
 3. Configure the token exchange for your application:
 
-   * [Refresh token exchange](/docs/secure/tokens/token-vault/refresh-token-exchange-with-token-vault)
-   * [Access token exchange](/docs/secure/tokens/token-vault/access-token-exchange-with-token-vault)
+   * [Refresh token exchange](/docs/ja-jp/secure/tokens/token-vault/refresh-token-exchange-with-token-vault)
+   * [Access token exchange](/docs/ja-jp/secure/tokens/token-vault/access-token-exchange-with-token-vault)
 4. Manage tokensets within the Token Vault for your connection.
 
 <Note>
 
-If you have previously set your MFA policy to **Always** in the Auth0 Dashboard, you need to set it to **Never** to retrieve an access token from Token Vault. Otherwise, you will receive an error. To learn more about the different MFA policies, read [Enable MFA in the Auth0 Dashboard](/docs/secure/multi-factor-authentication/enable-mfa#enable-mfa-in-the-auth0-dashboard).
+If you have previously set your MFA policy to **Always** in the Auth0 Dashboard, you need to set it to **Never** to retrieve an access token from Token Vault. Otherwise, you will receive an error. To learn more about the different MFA policies, read [Enable MFA in the Auth0 Dashboard](/docs/ja-jp/secure/multi-factor-authentication/enable-mfa#enable-mfa-in-the-auth0-dashboard).
 
-If you need to trigger MFA challenges for interactive flows, enable **Customize MFA Factors using Actions** when [setting up MFA for your tenant](/docs/secure/multi-factor-authentication/customize-mfa/customize-mfa-selection-universal-login#prepare-your-tenant). You can then use an Action to trigger an MFA challenge based on the `event.transaction.protocol` property. To learn more, read [Customize MFA selection for Universal Login](/docs/secure/multi-factor-authentication/customize-mfa/customize-mfa-selection-universal-login).
+If you need to trigger MFA challenges for interactive flows, enable **Customize MFA Factors using Actions** when [setting up MFA for your tenant](/docs/ja-jp/secure/multi-factor-authentication/customize-mfa/customize-mfa-selection-universal-login#prepare-your-tenant). You can then use an Action to trigger an MFA challenge based on the `event.transaction.protocol` property. To learn more, read [Customize MFA selection for Universal Login](/docs/ja-jp/secure/multi-factor-authentication/customize-mfa/customize-mfa-selection-universal-login).
 
 </Note>
 
@@ -51,7 +51,7 @@ To enable Token Vault for a supported social and enterprise/custom connection:
 4. In **Advanced**, toggle **Enable Token Vault**.
 5. Select **Save Changes**.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/69jDhgpWbFY1npKDNY9wOT/360db4a0140ff3a3a68f169f3b99c98c/Screenshot_2025-04-03_at_07.49.56.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/69jDhgpWbFY1npKDNY9wOT/360db4a0140ff3a3a68f169f3b99c98c/Screenshot_2025-04-03_at_07.49.56.png)</Frame>
 
 </Tab><Tab title="Management API">
 
@@ -63,7 +63,7 @@ When you use the `options` parameter when making a `PATCH` call to the [Update a
 
 </Note>
 
-```
+```bash lines
 # set your variables
 export access_token="YOUR_MANAGEMENT_API_ACCESS_TOKEN"
 export auth0_domain_url="https://{yourDomain}"
@@ -102,13 +102,13 @@ Only certain types of clients can use the Token Vault grant type:
 3. Under **Advanced Settings > Grant Types**, select the **Token Vault** grant type.
 4. Select **Save Changes**.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/4pDrKjLpUISfhhGAfc0EaU/a0c20a504c080ab32343e045bf99967d/Screenshot_2025-09-15_at_2.51.28â__PM.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/4pDrKjLpUISfhhGAfc0EaU/a0c20a504c080ab32343e045bf99967d/Screenshot_2025-09-15_at_2.51.28â__PM.png)</Frame>
 
 </Tab><Tab title="Management API">
 
 To enable Token Vault for an application, make a `PATCH` call to the [Update a Client](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) endpoint to add the `urn:auth0:params:oauth:grant-type:token-exchange:federated-connection-access-token` grant type to the client JSON object:
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://{yourDomain}/api/v2/clients/{clientId}' \
   --header 'Content-Type: application/json' \
   --header 'Authorization: Bearer <YOUR_MANAGEMENT_API_ACCESS_TOKEN>' \
@@ -134,11 +134,11 @@ To manage tokensets for a user, use the Management API:
 
 ### Get user’s tokensets
 
-To get a user's tokensets, you need a [Management API access token](/docs/secure/tokens/access-tokens/management-api-access-tokens) with the `read:federated_connections_tokensets` scope.
+To get a user's tokensets, you need a [Management API access token](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens) with the `read:federated_connections_tokensets` scope.
 
 Make a `GET` request to the `/federated-connections-tokensets` endpoint:
 
-```bash
+```bash lines
 curl --request GET \
   --url 'https://{yourDomain}/api/v2/users/{userId}/federated-connections-tokensets' \
   --header 'Authorization: Bearer <YOUR_MANAGEMENT_API_ACCESS_TOKEN>'
@@ -146,7 +146,7 @@ curl --request GET \
 
 If successful, you should receive a list of tokensets for the user:
 
-```
+```json lines
 Status Code: 200
 [{
   "connection": "google-oauth2",
@@ -176,11 +176,11 @@ Status Code: 200
 
 ### Delete a tokenset
 
-To delete a tokenset, you need a [Management API access token](/docs/secure/tokens/access-tokens/management-api-access-tokens) with the `update:federated_connections_tokensets` scope.
+To delete a tokenset, you need a [Management API access token](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens) with the `update:federated_connections_tokensets` scope.
 
 Make a `DELETE` request to the `/tokensets` endpoint:
 
-```bash
+```bash lines
 curl --request DELETE \
   --url 'https://{yourDomain}/api/v2/users/{userId}/federated-connections-tokensets/{tokensetId}' \
   --header 'Authorization: Bearer <YOUR_MANAGEMENT_API_ACCESS_TOKEN>'
@@ -188,7 +188,7 @@ curl --request DELETE \
 
 If successful, you should receive the following response:
 
-```
+```bash lines
 Response: 204 No-Content
 ```
 

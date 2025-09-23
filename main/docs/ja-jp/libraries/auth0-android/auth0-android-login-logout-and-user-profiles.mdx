@@ -1,19 +1,19 @@
 ---
 title: "Auth0.Androidのログイン、ログアウト、およびユーザープロファイル"
 permalink: "auth0-android-login-logout-and-user-profiles"
+'description': "Android SDKを使用してログイン、ログアウトを追加し、ユーザープロファイルを読み込む方法を説明します。"
 'og:title': "Auth0.Androidのログイン、ログアウト、およびユーザープロファイル"
 'og:description': "Android SDKを使用してログイン、ログアウトを追加し、ユーザープロファイルを読み込む方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0.Androidのログイン、ログアウト、およびユーザープロファイル"
 'twitter:description': "Android SDKを使用してログイン、ログアウトを追加し、ユーザープロファイルを読み込む方法を説明します。"
 ---
-# Auth0.Androidのログイン、ログアウト、およびユーザープロファイル
 
 ## Androidアプリケーションにログインを追加する
 
 `WebAuthProvider.login`メソッドを使用して、ユーザーをログインさせることができます。
 
-```
+```kotlin lines
 WebAuthProvider.login(account)
   .withScheme(getString(R.string.com_auth0_scheme))
   .withScope("openid profile email")
@@ -44,7 +44,7 @@ WebAuthProvider.login(account)
 
 </Note>
 
-```
+```kotlin lines
 WebAuthProvider.logout(account)
   .withScheme("demo")
   .start(this, object: Callback<Void?, AuthenticationException> {
@@ -68,7 +68,7 @@ WebAuthProvider.logout(account)
 
 このサンプルはユーザープロファイルを取得して画面に表示する機能のデモです。
 
-```javascript
+```kotlin lines
 var client = AuthenticationAPIClient(account)
 
 // Use the received access token to call `userInfo` and get the profile from Auth0.

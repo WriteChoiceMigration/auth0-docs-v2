@@ -1,13 +1,13 @@
 ---
 title: "APIとモバイルの構成（モバイルアプリ + API）"
 permalink: "part-3"
+'description': "モバイル + APIアーキテクチャーシナリオでのAPIとモバイルの構成"
 'og:title': "APIとモバイルの構成（モバイルアプリ + API）"
 'og:description': "モバイル + APIアーキテクチャーシナリオでのAPIとモバイルの構成"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "APIとモバイルの構成（モバイルアプリ + API）"
 'twitter:description': "モバイル + APIアーキテクチャーシナリオでのAPIとモバイルの構成"
 ---
-# APIとモバイルの構成（モバイルアプリ + API）
 
 このセクションでは、当社シナリオでAPIを実装する方法を説明します。
 
@@ -87,7 +87,7 @@ APIは以下の検証を実行すべきです。
 
 ユーザーを認可するには、[Proof Key for Code Exchange（PKCE）での認可コードフロー](https://auth0.com/docs/flows/guides/auth-code-pkce/call-api-auth-code-pkce)を実装します。モバイルアプリケーションは最初に、`code_challenge`および生成するために使用するメソッドと一緒に、ユーザーを[認可URL](https://auth0.com/docs/api/authentication#authorization-code-grant-pkce-)に送信する必要があります。
 
-```
+``` lines
 https://{yourDomain}/authorize?
     audience=API_AUDIENCE&
     scope=SCOPE&
@@ -117,19 +117,19 @@ https://{yourDomain}/authorize?
 </tr>
 <tr>
 <td><strong>scope</strong></td>
-<td>IDトークンとアクセストークンで返されるクレームを決定する<a href="/docs/scopes">スコープ</a> です。たとえば、<code>openid</code>スコープではIDトークンが返されます。提供しているモバイルアプリの例では、次のスコープを使用しています：<code>create:timesheets read:timesheets openid profile email offline_access</code>。これらのスコープによって、モバイルアプリはAPIを呼び出し、<dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">リフレッシュトークン</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>を取得して、IDトークンでユーザーの<code>name</code>、<code>picture</code>、<code>email</code>クレームを返すことができます。</td>
+<td>IDトークンとアクセストークンで返されるクレームを決定する<a href="/docs/ja-jp/scopes">スコープ</a> です。たとえば、`openid`スコープではIDトークンが返されます。提供しているモバイルアプリの例では、次のスコープを使用しています：`create:timesheets read:timesheets openid profile email offline_access`。これらのスコープによって、モバイルアプリはAPIを呼び出し、<dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">リフレッシュトークン</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>を取得して、IDトークンでユーザーの`name`、`picture`、`email`クレームを返すことができます。</td>
 </tr>
 <tr>
 <td><strong>response_type</strong></td>
-<td>使用する認証フローです。PKCEを使用するモバイルアプリケーションの場合は、これを<code>code</code>に設定します。</td>
+<td>使用する認証フローです。PKCEを使用するモバイルアプリケーションの場合は、これを`code`に設定します。</td>
 </tr>
 <tr>
 <td><strong>code_challenge</strong></td>
-<td>コード検証が生成したコードチャレンジです。コードチャレンジの生成方法については、<a href="/docs/flows/guides/auth-code-pkce/call-api-auth-code-pkce#authorize-the-user#create-a-code-verifier">こちら</a>を参照してください。</td>
+<td>コード検証が生成したコードチャレンジです。コードチャレンジの生成方法については、<a href="/docs/ja-jp/flows/guides/auth-code-pkce/call-api-auth-code-pkce#authorize-the-user#create-a-code-verifier">こちら</a>を参照してください。</td>
 </tr>
 <tr>
 <td><strong>code_challenge_method</strong></td>
-<td>チャレンジの生成方法です。Auth0は<code>S256</code>のみに対応しています。</td>
+<td>チャレンジの生成方法です。Auth0は`S256`のみに対応しています。</td>
 </tr>
 <tr>
 <td><strong>redirect_uri</strong></td>
@@ -144,15 +144,15 @@ https://{yourDomain}/authorize?
 
 認可URLへの要求が成功したら、以下の応答を受け取ります。
 
-```
+``` lines
 HTTP/1.1 302 Found
 Location: https://{yourDomain}/callback?code=AUTHORIZATION_CODE
 ```
 
-次に、応答の`認可コード`をAPIを呼び出すのに使用するアクセストークンと交換します。以下のデータを含めて、[トークン URL](/docs/api/authentication#authorization-code-pkce-)への`POST`要求を実行します。
+次に、応答の`認可コード`をAPIを呼び出すのに使用するアクセストークンと交換します。以下のデータを含めて、[トークン URL](/docs/ja-jp/api/authentication#authorization-code-pkce-)への`POST`要求を実行します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -161,8 +161,8 @@ curl --request POST \
 --data code_verified=YOUR_GENERATED_CODE_VERIFIER \
 --data code=YOUR_AUTHORIZATION_CODE \
 --data 'redirect_uri=https://{https://yourApp/callback}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -170,7 +170,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=authorizat
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -189,15 +189,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=authorization_code&client_id={yourClientId}&code_verified=YOUR_GENERATED_CODE_VERIFIER&code=YOUR_AUTHORIZATION_CODE&redirect_uri=https%3A%2F%2F{https://yourApp/callback}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -216,8 +216,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=authorization_code" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -244,7 +244,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -267,8 +267,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=authorization_code&client_id={yourClientId}&code_verified=YOUR_GENERATED_CODE_VERIFIER&code=YOUR_AUTHORIZATION_CODE&redirect_uri=https%3A%2F%2F{https://yourApp/callback}"
@@ -279,7 +279,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -292,8 +292,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=authorization_code&client_id={yourClientId}&code_verified=YOUR_GENERATED_CODE_VERIFIER&code=YOUR_AUTHORIZATION_CODE&redirect_uri=https%3A%2F%2F{https://yourApp/callback}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=authorization_code".data(using: String.Encoding.utf8)!)
@@ -329,7 +329,7 @@ dataTask.resume()
 <tbody>
 <tr>
 <td><strong>grant_type</strong></td>
-<td><code>authorization_code</code>に設定する必要があります。</td>
+<td>`authorization_code`に設定する必要があります。</td>
 </tr>
 <tr>
 <td><strong>client_id</strong></td>
@@ -337,22 +337,22 @@ dataTask.resume()
 </tr>
 <tr>
 <td><strong>code_verifier</strong></td>
-<td><a href="/docs/api/authentication#authorization-code-grant-pkce-">認可URL</a>（<code>/authorize</code>）に渡す<code>code_challenge</code>の生成に使用された暗号的にランダムなキーです。</td>
+<td><a href="/docs/ja-jp/api/authentication#authorization-code-grant-pkce-">認可URL</a>（`/authorize`）に渡す`code_challenge`の生成に使用された暗号的にランダムなキーです。</td>
 </tr>
 <tr>
 <td><strong>code</strong></td>
-<td>前回の認可呼び出しで受け取った<code>authorization_code</code>です。</td>
+<td>前回の認可呼び出しで受け取った`authorization_code`です。</td>
 </tr>
 <tr>
 <td><strong>redirect_uri</strong></td>
-<td>前のセクションで<code>/authorize</code>に渡された<code>redirect_uri</code>とURLが一致しなければなりません。</td>
+<td>前のセクションで`/authorize`に渡された`redirect_uri`とURLが一致しなければなりません。</td>
 </tr>
 </tbody>
 </table>
 
 トークンURLからの応答は、以下を含みます。
 
-```json
+```json lines
 {
   "access_token": "eyJz93a...k4laUWw",
   "refresh_token": "GEbRxBN...edjnXbL",
@@ -363,7 +363,7 @@ dataTask.resume()
 ```
 
 * **access_token**:`audience`で指定されたAPIのアクセストークン
-* **refresh_token**:[リフレッシュトークン](/docs/tokens/concepts/refresh-tokens)は、`offline_access`スコープを含め、DashboardでAPIの**［Allow Offline Access（オフラインアクセスの許可）］**を有効にした場合にのみ表示されます。
+* **refresh_token**:[リフレッシュトークン](/docs/ja-jp/tokens/concepts/refresh-tokens)は、`offline_access`スコープを含め、DashboardでAPIの**［Allow Offline Access（オフラインアクセスの許可）］**を有効にした場合にのみ表示されます。
 * **id_token**:ユーザープロファイル情報が入ったIDトークンJWT
 * **token_type**:トークンのタイプを含む文字列で、常にベアラートークンです。
 * **expires_in**:アクセストークンの有効期限が切れるまでの秒数。
@@ -376,7 +376,7 @@ APIの呼び出しとユーザープロファイルの取得に使用するた�
 
 [ユーザープロファイル](https://auth0.com/docs/api/authentication?http#user-profile)を取得するために、モバイルアプリケーションは[JWTライブラリー](https://jwt.io/#libraries-io)の１つを使用して、[IDトークン](https://auth0.com/docs/tokens/concepts/id-tokens)をデコードすることができます。これは、[署名を検証](https://auth0.com/docs/tokens/guides/validate-id-token#verify-the-signature)して、トークンの[クレームを検証](https://auth0.com/docs/tokens/guides/validate-id-token#verify-the-claims)することで行えます。IDトークンを検証したら、ユーザー情報を含んだペイロードにアクセスできます。
 
-```json
+```json lines
 {
   "email_verified": false,
   "email": "test.account@userinfo.com",
@@ -409,7 +409,7 @@ APIから安全なリソースにアクセスするには、認証されたユ�
 
 <Warning>
 
-リフレッシュトークンは、有効期限がなく、ユーザーに対し、実質的に永久に承認された状態でいることを可能にするため、アプリケーションで安全に保管されなければなりません。リフレッシュトークンが侵害された場合、または不要になった場合は、[Authentication API](/docs/api/authentication#revoke-refresh-token)を使用してリフレッシュトークンを取り消すことができます。
+リフレッシュトークンは、有効期限がなく、ユーザーに対し、実質的に永久に承認された状態でいることを可能にするため、アプリケーションで安全に保管されなければなりません。リフレッシュトークンが侵害された場合、または不要になった場合は、[Authentication API](/docs/ja-jp/api/authentication#revoke-refresh-token)を使用してリフレッシュトークンを取り消すことができます。
 
 </Warning>
 
@@ -420,19 +420,19 @@ APIから安全なリソースにアクセスするには、認証されたユ�
 要求には以下を含める必要があります。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -449,14 +449,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -468,8 +468,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSData \*postData = [[NSData alloc] initWithData:[@"undefined" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -492,7 +492,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -514,8 +514,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'content-type': "application/x-www-form-urlencoded" }
@@ -525,7 +525,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -537,8 +537,8 @@ request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/x-www-form-urlencoded'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSData(data: "undefined".data(using: String.Encoding.utf8)!)
@@ -570,7 +570,7 @@ dataTask.resume()
 <tbody>
 <tr>
 <td><strong>grant_type</strong></td>
-<td><code>refresh_token</code>に設定する必要があります。</td>
+<td>`refresh_token`に設定する必要があります。</td>
 </tr>
 <tr>
 <td><strong>client_id</strong></td>
@@ -585,7 +585,7 @@ dataTask.resume()
 
 応答には、新しいアクセストークンが含まれます。
 
-```json
+```json lines
 {
   "access_token": "eyJz93a...k4laUWw",
   "refresh_token": "GEbRxBN...edjnXbL",

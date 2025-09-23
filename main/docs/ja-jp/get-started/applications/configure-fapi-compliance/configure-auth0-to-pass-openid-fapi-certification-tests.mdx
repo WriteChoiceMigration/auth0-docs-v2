@@ -1,21 +1,21 @@
 ---
 title: "OpenID FAPI認定テストに合格するようにAuth0を構成する"
 permalink: "configure-auth0-to-pass-openid-fapi-certification-tests"
+'description': "OpenID FAPI認定テストに合格するようにAuth0を構成する方法を説明します。"
 'og:title': "OpenID FAPI認定テストに合格するようにAuth0を構成する"
 'og:description': "OpenID FAPI認定テストに合格するようにAuth0を構成する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "OpenID FAPI認定テストに合格するようにAuth0を構成する"
 'twitter:description': "OpenID FAPI認定テストに合格するようにAuth0を構成する方法を説明します。"
 ---
-# OpenID FAPI認定テストに合格するようにAuth0を構成する
 
 このセクションには、[OpenID FAPI適合性テスト](https://openid.net/certification/certification-fapi_op_testing/)を使用してソリューションをテストする場合にクライアントを構成する方法に関するアドバイスが含まれています。
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OpenID</Tooltip> FAPI適合性テストに合格するには、まず次の設定を行います。
 
 * `compliance_level`プロパティを、`fapi1_adv_pkj_par`または`fapi1_adv_mtls_par`のいずれかの目的のプロファイルに設定します
-* [mTLS（](/docs/ja-jp/get-started/applications/configure-mtls)[mTLS](/docs/get-started/applications/configure-mtls/configure-mtls-for-a-tenant#enable-mtls-aliases)[エイリアスを含む）を構成](/docs/ja-jp/get-started/applications/configure-mtls)するか、[秘密鍵JWTを構成](/docs/ja-jp/get-started/applications/configure-private-key-jwt)
-* [mTLSトークンバインディングを構成します](/docs/get-started/applications/configure-mtls/configure-mtls-for-a-client#enable-token-binding)
+* [mTLS（](/docs/ja-jp/get-started/applications/configure-mtls)[mTLS](/docs/ja-jp/get-started/applications/configure-mtls/configure-mtls-for-a-tenant#enable-mtls-aliases)[エイリアスを含む）を構成](/docs/ja-jp/get-started/applications/configure-mtls)するか、[秘密鍵JWTを構成](/docs/ja-jp/get-started/applications/configure-private-key-jwt)
+* [mTLSトークンバインディングを構成します](/docs/ja-jp/get-started/applications/configure-mtls/configure-mtls-for-a-client#enable-token-binding)
 
 次に、以下の手順に従ってOpenID FAPI適合テストの構成を完了します。
 
@@ -28,7 +28,7 @@ permalink: "configure-auth0-to-pass-openid-fapi-certification-tests"
 
 Auth0がユーザーに同意を求めることを確認する必要があります。クライアントがファーストパーティアプリとして構成されており、リソースサーバーまたはAPIがファーストパーティアプリの同意のスキップをサポートしている場合は、この手順をスキップできます。Auth0がユーザーに同意を求めるようにするには、クライアントの`is_first_party`プロパティを`false`に設定します。
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://$tenant/api/v2/clients/$client_id' \
   --header 'Authorization: Bearer $management_access_token' \
   --header 'Content-Type: application/json' \
@@ -39,7 +39,7 @@ curl --location --request PATCH 'https://$tenant/api/v2/clients/$client_id' \
 
 次に、以下のように接続をドメインレベルに昇格します。
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://$tenant/api/v2/connections/$connection_id' \
   --header 'Authorization: Bearer $management_access_token' \
   --header 'Content-Type: application/json' \
@@ -52,7 +52,7 @@ curl --location --request PATCH 'https://$tenant/api/v2/connections/$connection_
 
 FAPIテストは、`urn:mace:incommon:iap:silver`の必須ACR値を渡します。IDトークンに必要なACR値を含めるには、以下のようにテナントでサポートされているACR値のリストに`urn:mace:incommon:iap:silver`を追加します。
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://$tenant/api/v2/tenants/settings' \
   --header 'Authorization: Bearer $management_access_token' \
   --header 'Content-Type: application/json' \
@@ -65,7 +65,7 @@ curl --location --request PATCH 'https://$tenant/api/v2/tenants/settings' \
 
 キーをRS256だけでなく複数のアルゴリズムで使用できるようにするには、`/.well-known/jwks.json`エンドポイントの出力からテナントの`alg`プロパティを削除します。
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://$tenant/api/v2/tenants/settings' \
   --header 'Authorization: Bearer $management_access_token' \
   --header 'Content-Type: application/json' \
@@ -82,7 +82,7 @@ curl --location --request PATCH 'https://$tenant/api/v2/tenants/settings' \
 
 次のアクションを追加して、スコープと`redirect_uri` に必要な制限を適用します。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   if (!event.request.body || !event.request.body.refresh_token) {
     // Require a scope

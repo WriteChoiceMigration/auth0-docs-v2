@@ -1,13 +1,13 @@
 ---
 title: "カスタムデータベース接続を作成する"
 permalink: "create-db-connection"
+'description': "データベース接続の作成方法を説明します。"
 'og:title': "カスタムデータベース接続を作成する"
 'og:description': "データベース接続の作成方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "カスタムデータベース接続を作成する"
 'twitter:description': "データベース接続の作成方法を説明します。"
 ---
-# カスタムデータベース接続を作成する
 
 <Card title="利用可能性はAuth0プランによって異なる">
 
@@ -19,7 +19,7 @@ permalink: "create-db-connection"
 
 <Note>
 
-データベースに、ユーザープロファイル属性を保管する`id`、`nickname`、`email`、`password`などのフィールドがあることを確認してください。Auth0のユーザープロファイルスキーマについては、「[正規化ユーザープロファイル](/docs/manage-users/user-accounts/user-profiles/normalized-user-profiles)」をお読みください。ユーザープロファイルの更新については、「[データベースでユーザープロファイルを更新する](/docs/manage-users/user-accounts/user-profiles/update-user-profiles-using-your-database)」をお読みください。
+データベースに、ユーザープロファイル属性を保管する`id`、`nickname`、`email`、`password`などのフィールドがあることを確認してください。Auth0のユーザープロファイルスキーマについては、「[正規化ユーザープロファイル](/docs/ja-jp/manage-users/user-accounts/user-profiles/normalized-user-profiles)」をお読みください。ユーザープロファイルの更新については、「[データベースでユーザープロファイルを更新する](/docs/ja-jp/manage-users/user-accounts/user-profiles/update-user-profiles-using-your-database)」をお読みください。
 
 </Note>
 
@@ -79,7 +79,7 @@ Auth0では、以下に示した一般に使用されるほとんどのデータ
    * ［Try Connection（接続を試す）］
 3. **［Custom Database（カスタムデータベース）］**ビューを選択し、**［Use my own database（独自のデータベースを使用する）］**スイッチを有効にします。
 
-   <Frame>![カスタムデータベースを有効にする 独自データベース使用オプション](//images.ctfassets.net/cdy7uua7fh8z/3kgHDpBFdVWNq9XOfhsTXI/2b7bba3e6105a0f2ded44afe78e19ac7/2025-02-25_10-23-29.png)</Frame>
+   <Frame>![カスタムデータベースを有効にする 独自データベース使用オプション](/images/ja-jp/cdy7uua7fh8z/3kgHDpBFdVWNq9XOfhsTXI/2b7bba3e6105a0f2ded44afe78e19ac7/2025-02-25_10-23-29.png)</Frame>
 
 ## データベースアクションスクリプトを作成する
 
@@ -100,32 +100,32 @@ Auth0では、以下に示した一般に使用されるほとんどのデータ
 <tr>
 <td><strong>Login（ログイン）</strong> <br/><span class="label label-danger">必須</span></td>
 <td>ユーザーがログインを試みるたびに実行します。</td>
-<td><code>email</code>、<code>password</code></td>
+<td>`email`、`password`</td>
 </tr>
 <tr>
 <td><strong>Create（作成）</strong></td>
 <td>ユーザーがサインアップするときに実行します。</td>
-<td><code>user</code></td>
+<td>`user`</td>
 </tr>
 <tr>
 <td><strong>Verify（検証）</strong></td>
 <td>ユーザーが検証リンクに従った後に実行します。</td>
-<td><code>email</code></td>
+<td>`email`</td>
 </tr>
 <tr>
 <td><strong>Change Password（パスワード変更）</strong></td>
 <td>パスワードのリセット要求後にユーザーが確認リンクをクリックすると実行します。</td>
-<td><code>email</code>、<code>newPassword</code></td>
+<td>`email`、`newPassword`</td>
 </tr>
 <tr>
 <td><strong>Get User（ユーザー取得）</strong></td>
 <td>ユーザーを認証することなく、データベースからユーザープロファイルを取得します。</td>
-<td><code>email</code></td>
+<td>`email`</td>
 </tr>
 <tr>
 <td><strong>Delete（削除）</strong></td>
 <td>APIまたはAuth0 Dashboardを使用してユーザーが削除されると実行します。</td>
-<td><code>id</code></td>
+<td>`id`</td>
 </tr>
 </tbody>
 </table>
@@ -138,7 +138,7 @@ Auth0では、以下に示した一般に使用されるほとんどのデータ
 
 返されたユーザープロファイルにある`id`（または`user_id`）プロパティは、Auth0によってユーザーの識別に使用されます。
 
-複数のカスタムデータベース接続を使っている場合には、ユーザーIDの衝突を避けるために、`id`の値がすべてのカスタムデータベース接続で一意でなくてはなりません。`id`の値には、接続名をプレフィックス（スペースは削除）として追加することをお勧めします。ユーザーIDの詳細については、「[ユーザーを識別する](/docs/manage-users/user-accounts/identify-users)」をお読みください。
+複数のカスタムデータベース接続を使っている場合には、ユーザーIDの衝突を避けるために、`id`の値がすべてのカスタムデータベース接続で一意でなくてはなりません。`id`の値には、接続名をプレフィックス（スペースは削除）として追加することをお勧めします。ユーザーIDの詳細については、「[ユーザーを識別する](/docs/ja-jp/manage-users/user-accounts/identify-users)」をお読みください。
 
 </Card>
 
@@ -147,7 +147,7 @@ Auth0では、以下に示した一般に使用されるほとんどのデータ
 1. **［Use my own database（独自のデータベースを使用する）］**スイッチを切り替えた後、**［Database Action Scripts（データベースアクションスクリプト）］**領域が有効になります。**［Login（ログイン）］**タブが開いていることを確認します。
 2. **［Templates（テンプレート）］**ドロップダウンを使用して、MySQLデータベーススクリプト用テンプレートを選択します。
 
-   ```javascript
+   ```javascript lines
    function login(email, password, callback) {
      var bcrypt = require('bcrypt');
      var mysql = require('mysql');
@@ -192,7 +192,7 @@ Auth0では、以下に示した一般に使用されるほとんどのデータ
 3. **［Save and Try（保存して試す）］**をクリックします。
 4. **［Try（試す）］**をクリックしてスクリプトをテストします。（この手順によりスクリプトの保存も行われます。）
 
-   <Frame>![Modal to try the login script.](//images.ctfassets.net/cdy7uua7fh8z/8uBGZhHYZwOcO19ljJNNp/00adb32987a0558dbdff53d6c96f6743/Try_the_Login_Script_-_Japanese.png)</Frame>
+   <Frame>![Modal to try the login script.](/images/ja-jp/cdy7uua7fh8z/8uBGZhHYZwOcO19ljJNNp/00adb32987a0558dbdff53d6c96f6743/Try_the_Login_Script_-_Japanese.png)</Frame>
 
 **［Save（保存）］**または**［Try（試す）］**をクリックしないと、スクリプトのテンプレートはAuth0で使用されません。これは、スクリプトを1つだけ変更し、その他に変更を加えない場合にも当てはまります。すべてのスクリプトを設定するには、**［Save（保存）］**を少なくとも一度はクリックする必要があります。
 
@@ -218,7 +218,7 @@ Auth0では、以下に示した一般に使用されるほとんどのデータ
 
 <Tabs><Tab title="ログイン">
 
-```json
+```json lines
 {
     "organization": {
         "display_name": "My Organization",
@@ -233,7 +233,7 @@ Auth0では、以下に示した一般に使用されるほとんどのデータ
 
 </Tab><Tab title="作成">
 
-```json
+```json lines
 {
     "organization": {
         "display_name": "My Organization",
@@ -248,7 +248,7 @@ Auth0では、以下に示した一般に使用されるほとんどのデータ
 
 </Tab><Tab title="検証">
 
-```json
+```json lines
 {
     "organization": {
         "display_name": "My Organization",
@@ -263,7 +263,7 @@ Auth0では、以下に示した一般に使用されるほとんどのデータ
 
 </Tab><Tab title="パスワードの変更">
 
-```json
+```json lines
 {
     "organization": {
         "display_name": "My Organization",
@@ -278,7 +278,7 @@ Auth0では、以下に示した一般に使用されるほとんどのデータ
 
 </Tab><Tab title="ユーザーの取得">
 
-```json
+```json lines
 {
     "organization": {
         "display_name": "My Organization",
@@ -305,7 +305,7 @@ Auth0では、以下に示した一般に使用されるほとんどのデータ
 
 スクリプトに追加したパラメーターを使って接続を構成します。たとえば、以下をMySQL Loginスクリプトに追加することができます。
 
-```javascript
+```javascript lines
 function login (username, password, callback) {
   var mysql = require('mysql');
   var connection = mysql.createConnection({

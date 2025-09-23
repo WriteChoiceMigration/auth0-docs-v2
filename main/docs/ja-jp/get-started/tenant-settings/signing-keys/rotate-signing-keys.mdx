@@ -1,13 +1,13 @@
 ---
 title: "署名鍵をローテーションする"
 permalink: "rotate-signing-keys"
+'description': "Auth0 DashboardまたはManagement APIを使って、テナントのアプリケーションやAPIの署名鍵をローテーションする方法について説明します。"
 'og:title': "署名鍵をローテーションする"
 'og:description': "Auth0 DashboardまたはManagement APIを使って、テナントのアプリケーションやAPIの署名鍵をローテーションする方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "署名鍵をローテーションする"
 'twitter:description': "Auth0 DashboardまたはManagement APIを使って、テナントのアプリケーションやAPIの署名鍵をローテーションする方法について説明します。"
 ---
-# 署名鍵をローテーションする
 
 署名鍵を定期的に手動でローテーションして、アプリケーションやAPIがトークンの検証に使用するJSON Web Key（JWK）を変更することができます。アプリケーションまたはAPIがこのキー変更を許可**せず**、トークンの検証に期限の切れた署名鍵を使おうとした場合は、認証要求が失敗します。
 
@@ -31,32 +31,32 @@ Auth0は一度に1つの署名鍵しか署名しませんが、テナントの<T
 
 1. [［Dashboard］>［Settings（設定）］>［Signing Keys（署名鍵）］](https://manage.auth0.com/#/tenant/signing_keys)に移動します。
 
-   <Frame>![Dashboard テナントの設定 署名鍵タブ](//images.ctfassets.net/cdy7uua7fh8z/7r8t3EGctFmvkCgPrU0i2R/502f133ec9528c3bc8b73fa49a159d8a/Tenant_Settings_-_Signing_Keys.png)</Frame>
+   <Frame>![Dashboard テナントの設定 署名鍵タブ](/images/ja-jp/cdy7uua7fh8z/7r8t3EGctFmvkCgPrU0i2R/502f133ec9528c3bc8b73fa49a159d8a/Tenant_Settings_-_Signing_Keys.png)</Frame>
 
 2. **［Rotation Settings（ローテーション設定）］**の下から、**［Rotate Signing Key（署名鍵のローテーション）］**を見つけ、**［Rotate Key（キーのローテーション）］**を選択します。
 3. **［Rotate（ローテーション）］**をクリックして確定します。
 
-   <Frame>![Dashboard 設定 署名鍵タブ ローテーションの確認](//images.ctfassets.net/cdy7uua7fh8z/6Ofp24mgt8ZrvaxF2wLA5N/1780ed9391018204895487b952ea1a12/Rotate_Key_Warning.png)</Frame>
+   <Frame>![Dashboard 設定 署名鍵タブ ローテーションの確認](/images/ja-jp/cdy7uua7fh8z/6Ofp24mgt8ZrvaxF2wLA5N/1780ed9391018204895487b952ea1a12/Rotate_Key_Warning.png)</Frame>
 
 ## Management APIの使用
 
-1. 署名鍵のリストを取得するには、[全アプリケーション署名鍵の取得](/docs/api/management/v2#!/Keys/get_signing_keys)エンドポイントに`GET`呼び出しを行います。
-2. 署名鍵をローテーションするには、[アプリケーション署名鍵のローテーション](/docs/api/management/v2#!/Keys/post_signing_keys)エンドポイントに`POST`呼び出しを行います。`MGMT_API_ACCESS_TOKEN`プレースホルダーの値をManagement APIのアクセストークンで置き換えてください。
+1. 署名鍵のリストを取得するには、[全アプリケーション署名鍵の取得](/docs/ja-jp/api/management/v2#!/Keys/get_signing_keys)エンドポイントに`GET`呼び出しを行います。
+2. 署名鍵をローテーションするには、[アプリケーション署名鍵のローテーション](/docs/ja-jp/api/management/v2#!/Keys/post_signing_keys)エンドポイントに`POST`呼び出しを行います。`MGMT_API_ACCESS_TOKEN`プレースホルダーの値をManagement APIのアクセストークンで置き換えてください。
 
    <CodeGroup>
-```bash curl.sh
+```bash cURL lines
    curl --request POST \
    --url 'https://{yourDomain}/api/v2/keys/signing/rotate' \
    --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-   ```
-   ```csharp c_.cs
+   ``` lines
+   ```csharp C# lines
    var client = new RestClient("https://{yourDomain}/api/v2/keys/signing/rotate");
    var request = new RestRequest(Method.POST);
    request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
    IRestResponse response = client.Execute(request);
    ```
 
-   ```go go.go
+   ```go Go lines
    package main
    import (
    "fmt"
@@ -73,14 +73,14 @@ Auth0は一度に1つの署名鍵しか署名しませんが、テナントの<T
    fmt.Println(res)
    fmt.Println(string(body))
    }
-   ```
-   ```java java.java
+   ``` lines
+   ```java Java lines
    HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/keys/signing/rotate")
    .header("authorization", "Bearer {yourMgmtApiAccessToken}")
    .asString();
    ```
 
-   ```javascript node_js.js
+   ```javascript Node.JS lines
    var axios = require("axios").default;
    var options = {
    method: 'POST',
@@ -92,8 +92,8 @@ Auth0は一度に1つの署名鍵しか署名しませんが、テナントの<T
    }).catch(function (error) {
    console.error(error);
    });
-   ```
-   ```obj-c obj-c.obj-c
+   ``` lines
+   ```obj-c Obj-C lines
    #import 
    NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
    NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/keys/signing/rotate"]
@@ -114,7 +114,7 @@ Auth0は一度に1つの署名鍵しか署名しませんが、テナントの<T
    [dataTask resume];
    ```
 
-   ```php php.php
+   ```php PHP lines
    $curl = curl_init();
    curl_setopt_array($curl, [
    CURLOPT_URL => "https://{yourDomain}/api/v2/keys/signing/rotate",
@@ -136,8 +136,8 @@ Auth0は一度に1つの署名鍵しか署名しませんが、テナントの<T
    } else {
    echo $response;
    }
-   ```
-   ```python python.py
+   ``` lines
+   ```python Python lines
    import http.client
    conn = http.client.HTTPSConnection("")
    headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -147,7 +147,7 @@ Auth0は一度に1つの署名鍵しか署名しませんが、テナントの<T
    print(data.decode("utf-8"))
    ```
 
-   ```ruby ruby.rb
+   ```ruby Ruby lines
    require 'uri'
    require 'net/http'
    require 'openssl'
@@ -159,8 +159,8 @@ Auth0は一度に1つの署名鍵しか署名しませんが、テナントの<T
    request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
    response = http.request(request)
    puts response.read_body
-   ```
-   ```swift swift.swift
+   ``` lines
+   ```swift Swift lines
    import Foundation
    let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
    let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/keys/signing/rotate")! as URL,
@@ -189,8 +189,8 @@ Auth0は一度に1つの署名鍵しか署名しませんが、テナントの<T
 </thead>
 <tbody>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><code>create:signing_keys</code>と<code>update:signing_keys</code>のスコープを持つ<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>`create:signing_keys`と`update:signing_keys`のスコープを持つ<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 </tbody>
 </table>

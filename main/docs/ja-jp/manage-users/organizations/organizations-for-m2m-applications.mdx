@@ -1,13 +1,13 @@
 ---
 title: "組織に対するマシンツーマシン（M2M）アクセス"
 permalink: "organizations-for-m2m-applications"
+'description': "組織に対するマシンツーマシンアクセスについて説明します。"
 'og:title': "組織に対するマシンツーマシン（M2M）アクセス"
 'og:description': "組織に対するマシンツーマシンアクセスについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "組織に対するマシンツーマシン（M2M）アクセス"
 'twitter:description': "組織に対するマシンツーマシンアクセスについて説明します。"
 ---
-# 組織に対するマシンツーマシン（M2M）アクセス
 
 <Card title="利用可能性はAuth0プランによって異なる">
 
@@ -19,7 +19,7 @@ permalink: "organizations-for-m2m-applications"
 
 <Note>
 
-各要求のスコープを指定組織に定めるには、対応する`org_id`クレームをマシンツーマシントークンに含めます。APIサーバーは、APIリソースとデータへのアクセス認可時に、このクレームを検討して強制する必要があります。詳細については、「[トークンとOrganizationsで作業する](/docs/manage-users/organizations/using-tokens)」をお読みください。
+各要求のスコープを指定組織に定めるには、対応する`org_id`クレームをマシンツーマシントークンに含めます。APIサーバーは、APIリソースとデータへのアクセス認可時に、このクレームを検討して強制する必要があります。詳細については、「[トークンとOrganizationsで作業する](/docs/ja-jp/manage-users/organizations/using-tokens)」をお読みください。
 
 </Note>
 
@@ -51,7 +51,7 @@ permalink: "organizations-for-m2m-applications"
 </tbody>
 </table>
 
-架空の[Travel0という会社](/docs/manage-users/organizations/organizations-overview#sample-scenario)を例にして、2つの関連するユースケースを説明します。
+架空の[Travel0という会社](/docs/ja-jp/manage-users/organizations/organizations-overview#sample-scenario)を例にして、2つの関連するユースケースを説明します。
 
 ## サードパーティーのアプリケーションにAPIを公開する
 
@@ -59,12 +59,12 @@ Travel0はAuth0 Organizationsと<Tooltip data-tooltip-id="react-containers-Defin
 
 **組織に対するマシンツーマシンアクセスは、クライアント資格情報を特定の組織に関連付けることによって、それぞれのAPIにクライアント資格情報のアクセスを構成できるようにします**。下の図は例に使ったアプリケーションを説明したもので、Org XはOrg Xのスコープ内でのみTravel0 APIにアクセスできます。アグリゲーターが使用される場合には、1つのアプリケーションから複数組織へのアクセスを構成することもできます。組織に対するM2Mアクセスでは、M2MアクセスをAPIごとに使用して、特定の組織にどのアプリケーションがアクセスできるのかを制御します。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/6LksrBOcNzo2RXI3Tp6mCo/4d4a1411dec828db54d066ab7270159e/image4.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/6LksrBOcNzo2RXI3Tp6mCo/4d4a1411dec828db54d066ab7270159e/image4.png)</Frame>
 
 ## 内部アプリケーションのために組織を分離する
 
 Travel0には内部プロセスとCLIツールもあり、それらはクライアントの資格情報フローを使ってTravel0 APIにアクセスする必要があります。APIについてのアクセス制御を統一するために、Travel0は自社専有アプリケーションからの要求に特定組織へのスコープを含めて、各状況で正しいデータのみにアクセスされることを確実にしたいと考えます。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/5bMEPlmTLGgBn8fq5Fp59S/4ec170a4941766ddfd00a2dadd86f221/image7.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/5bMEPlmTLGgBn8fq5Fp59S/4ec170a4941766ddfd00a2dadd86f221/image7.png)</Frame>
 
 組織に対するM2Mアクセスは、アプリケーションがクライアントの資格情報フローでテナントにある各APIのあらゆる組織にアクセスするように、アプリケーションを構成することができます。

@@ -1,12 +1,14 @@
 ---
 title: "Authorization"
 permalink: "01-authorization"
+'description': "This tutorial demonstrates how to add authorization to a Go API."
 'og:title': "Authorization"
 'og:description': "This tutorial demonstrates how to add authorization to a Go API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/golang.png"
 'twitter:title': "Authorization"
 'twitter:description': "This tutorial demonstrates how to add authorization to a Go API."
 ---
+
 # Go API: Authorization
 
 <Frame>![Gravatar for sergiu.ghitea@auth0.com](//www.gravatar.com/avatar/a233774feb593b913cbfba5c9faf1689?d=mm&r=g&s=50)</Frame>
@@ -37,7 +39,7 @@ System requirements: Go 1.21+
 
 <Note>
 
-**New to Auth0?** Learn [how Auth0 works](/docs/overview) and read about [implementing API authentication and authorization](/docs/api-auth)  using the OAuth 2.0 framework.
+**New to Auth0?** Learn [how Auth0 works](/docs/ja-jp/overview) and read about [implementing API authentication and authorization](/docs/ja-jp/api-auth)  using the OAuth 2.0 framework.
 
 </Note>
 
@@ -49,7 +51,7 @@ In the [APIs](https://manage.auth0.com/#/apis) section of the Auth0 dashboard, c
 
 <Frame>![Create API](https://cdn2.auth0.com/docs/1.14567.0/media/articles/server-apis/create-api.png)</Frame>
 
-By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
+By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/ja-jp/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
 
 ### Define permissions
 
@@ -68,7 +70,7 @@ This example uses the `read:messages` scope.
 This example demonstrates:
 
 * How to check for a JSON Web Token (JWT) in the `Authorization` header of an incoming HTTP request.
-* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/tokens/guides/validate-access-tokens).
+* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/ja-jp/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/ja-jp/tokens/guides/validate-access-tokens).
 
 ## Validate Access Tokens
 
@@ -76,7 +78,7 @@ This example demonstrates:
 
 Add a `go.mod` file to list all the dependencies to be used.
 
-```javascript
+```javascript lines
 // go.mod
 
 module 01-Authorization-RS256
@@ -91,7 +93,7 @@ require (
 
 Download dependencies by running the following shell command:
 
-```
+```bash lines
 go mod download
 ```
 
@@ -100,7 +102,7 @@ go mod download
 Create a `.env` file within the root of your project directory to store the app configuration, and fill in the
 environment variables:
 
-```
+```bash lines
 # The URL of our Auth0 Tenant Domain.
 # If you're using a Custom Domain, be sure to set this to that value instead.
 AUTH0_DOMAIN='{yourDomain}'
@@ -117,7 +119,7 @@ otherwise a `401 Authorization` error will be returned.
 
 Setup **go-jwt-middleware** middleware to verify Access Tokens from incoming requests.
 
-```javascript
+```go lines
 // middleware/jwt.go
 
 package middleware
@@ -190,13 +192,13 @@ func EnsureValidToken() func(next http.Handler) http.Handler {
 }
 ```
 
-By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
+By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/ja-jp/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
 
 ## Protect API Endpoints
 
 To protect individual routes, pass `middleware` (defined above) to the http route.
 
-```javascript
+```go lines
 // main.go
 
 package main
@@ -252,7 +254,7 @@ any mechanism for checking that the token has the sufficient **scope** to access
 
 Create a function to check and ensure the Access Token has the correct scope before returning a successful response.
 
-```javascript
+```go lines
 // 👆 We're continuing from the steps above. Append this to your middleware/jwt.go file.
 
 // HasScope checks whether our claims have a specific scope.
@@ -270,7 +272,7 @@ func (c CustomClaims) HasScope(expectedScope string) bool {
 
 Use this function in the endpoint that requires the scope `read:messages`.
 
-```javascript
+```go lines
 // 👆 We're continuing from the steps above. Append this to your main.go file.
 
 func main() {
@@ -310,7 +312,7 @@ a standalone middleware that accepts multiple scopes to fit your use case.
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/ja-jp/identityproviders)[* Enable multifactor authentication](/docs/ja-jp/multifactor-authentication)[* Learn about attack protection](/docs/ja-jp/attack-protection)[* Learn about rules](/docs/ja-jp/rules)
 
 ---
 

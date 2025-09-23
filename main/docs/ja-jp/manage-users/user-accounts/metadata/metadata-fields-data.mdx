@@ -1,13 +1,13 @@
 ---
 title: "メタデータのフィールド名とデータ型"
 permalink: "metadata-fields-data"
+'description': "ユーザーメタデータ、アプリメタデータ、およびアプリケーション（クライアント）メタデータのフィールド名、データ型、ならびに制限と制約について説明します。"
 'og:title': "メタデータのフィールド名とデータ型"
 'og:description': "ユーザーメタデータ、アプリメタデータ、およびアプリケーション（クライアント）メタデータのフィールド名、データ型、ならびに制限と制約について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "メタデータのフィールド名とデータ型"
 'twitter:description': "ユーザーメタデータ、アプリメタデータ、およびアプリケーション（クライアント）メタデータのフィールド名、データ型、ならびに制限と制約について説明します。"
 ---
-# メタデータのフィールド名とデータ型
 
 Auth0は、特定の種類の情報を保管するために使用されるメタデータを3種類に区別しています。
 
@@ -27,17 +27,17 @@ Auth0のメタデータはセキュリティ保護されたデータストアで
 <tbody>
 <tr>
 <td><strong>User Information（ユーザー情報）</strong></td>
-<td><code>user_metadata</code></td>
+<td>`user_metadata`</td>
 <td>ユーザーの主要な機能性に影響しない設定などのユーザー属性を保管します。このデータは、Management APIを使ってフォームを作成すると、ログイン済みのユーザーが編集<strong>できる</strong>ため、安全なデータ保管場所としては使用<strong>できません</strong>。</td>
 </tr>
 <tr>
 <td><strong>Access Information（アクセス情報）</strong></td>
-<td><code>app_metadata</code></td>
+<td>`app_metadata`</td>
 <td>権限、Auth0プラン、外部IDなど、ユーザーの機能へのアクセスに影響する情報を保管します。このデータはユーザーが編集<strong>できない</strong>ため、このフィールドに保管できる情報には制約があります。</td>
 </tr>
 <tr>
 <td><strong>Application Information（アプリケーション情報）</strong></td>
-<td><code>Client</code>オブジェクトの<code>client_metadata</code>、ルールの<code>context.clientMetadata</code>、ログイン後アクションの<code>event.client.metadata</code>。</td>
+<td>`Client`オブジェクトの`client_metadata`、ルールの`context.clientMetadata`、ログイン後アクションの`event.client.metadata`。</td>
 <td>アプリケーション（OIDC OAuth2の用語では<em>クライアント</em>）に関する情報を保管します。たとえば、アプリケーションのホームページのURL（Auth0がアプリケーション設定で指定しない任意の値）です。</td>
 </tr>
 </tbody>
@@ -51,7 +51,7 @@ Auth0のメタデータはセキュリティ保護されたデータストアで
 
 たとえば、以下は許可されません。
 
-```json
+```json lines
 {
   "preference.color": "pink"
 }
@@ -59,7 +59,7 @@ Auth0のメタデータはセキュリティ保護されたデータストアで
 
 しかし、以下のように拡張することはできます。
 
-```json
+```json lines
 {
     "preference": { 
         "color": "pink" 
@@ -73,7 +73,7 @@ Auth0のメタデータはセキュリティ保護されたデータストアで
 
 以下のようにするのではなく、
 
-```json
+```json lines
 {
     "participants": [
         "Alice": {
@@ -88,7 +88,7 @@ Auth0のメタデータはセキュリティ保護されたデータストアで
 
 このようにします。
 
-```json
+```json lines
 {
     "participants": [
         {
@@ -109,7 +109,7 @@ Auth0のメタデータはセキュリティ保護されたデータストアで
 
 たとえば、ユーザーのルートプロファイルに（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip> IDプロバイダーから返される）`groups`フィールドがあり、`app_metadata`内にも`groups`フィールドがある場合、ユーザーのプロファイルは次のようになる可能性があります。
 
-```json
+```json lines
 {
     "user_id": "samlp|example-samlp-connection|username@domain.com",
     "groups": [
@@ -154,8 +154,8 @@ Auth0のメタデータはセキュリティ保護されたデータストアで
 
 ### サイズ制限とストレージ
 
-* [ユーザー検索エンドポイント](https://auth0.com/docs/api/management/v2/users/get-users)でインデックス作成、クエリ、返却できるユーザーデータには1ユーザーあたり1MBの制限があります。ユーザープロファイルが1MBより大きい場合、`app_metadata`および`user_metadata`内で256文字より多いすべての属性値は、検索できず、検索結果に返されません。ユーザープロファイルがこれらの大きな値を省いてもなお1MBを超える場合、そのユーザーの`app_metadata`および`user_metadata`属性は検索不可または返却不可となります。Auth0は、ユーザープロファイルが省略後もなお1MBを超える場合を`wum`[イベントコード](/docs/deploy-monitor/logs/log-event-type-codes)の下でキャプチャし、ログに記録します。オーバーサイズのユーザープロファイルについては、すべてのメタデータ属性を取得するために、[ユーザー取得エンドポイント](https://auth0.com/docs/api/management/v2/users/get-users-by-id)を使用する必要があります。
-* `user_metadata`フィールドをAuthentication APIの[サインアップエンドポイント](/docs/api/authentication?javascript#signup)を使って設定する際には、それぞれの値が500文字を超えない文字列フィールドを最大10個含めることができます。カスタムサインアッププロセスでのメタデータの扱いの例については、「[カスタムサインアップ](/docs/ja-jp/libraries/custom-signup)」をお読みください。
+* [ユーザー検索エンドポイント](https://auth0.com/docs/api/management/v2/users/get-users)でインデックス作成、クエリ、返却できるユーザーデータには1ユーザーあたり1MBの制限があります。ユーザープロファイルが1MBより大きい場合、`app_metadata`および`user_metadata`内で256文字より多いすべての属性値は、検索できず、検索結果に返されません。ユーザープロファイルがこれらの大きな値を省いてもなお1MBを超える場合、そのユーザーの`app_metadata`および`user_metadata`属性は検索不可または返却不可となります。Auth0は、ユーザープロファイルが省略後もなお1MBを超える場合を`wum`[イベントコード](/docs/ja-jp/deploy-monitor/logs/log-event-type-codes)の下でキャプチャし、ログに記録します。オーバーサイズのユーザープロファイルについては、すべてのメタデータ属性を取得するために、[ユーザー取得エンドポイント](https://auth0.com/docs/api/management/v2/users/get-users-by-id)を使用する必要があります。
+* `user_metadata`フィールドをAuthentication APIの[サインアップエンドポイント](/docs/ja-jp/api/authentication?javascript#signup)を使って設定する際には、それぞれの値が500文字を超えない文字列フィールドを最大10個含めることができます。カスタムサインアッププロセスでのメタデータの扱いの例については、「[カスタムサインアップ](/docs/ja-jp/libraries/custom-signup)」をお読みください。
 * `client_metadata`フィールドには最大10個のキーを含めることができます。そのキーと値のそれぞれの最大長は255文字で、UTF-8の特殊文字を含むことはできません。
 
 ### 制限

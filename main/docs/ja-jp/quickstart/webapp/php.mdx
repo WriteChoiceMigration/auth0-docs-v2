@@ -1,12 +1,14 @@
 ---
 title: "Auth0"
 permalink: "php"
+'description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:title': "Auth0"
 'og:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0"
 'twitter:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 ---
+
 # PHP
 
 <Frame>![Gravatar for evan.sims@auth0.com](//www.gravatar.com/avatar/f18513f6431d78d0891c146bfd59fbe6?d=mm&r=g&s=50)</Frame>
@@ -41,7 +43,7 @@ System requirements: PHP 7.4+ (8.0 recommended) | Auth0-PHP 8.0 | Composer
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Regular Web Applications](/docs/architecture-scenarios/web-app-sso) and which [protocol](/docs/flows) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/ja-jp/overview), how it [integrates with Regular Web Applications](/docs/ja-jp/architecture-scenarios/web-app-sso) and which [protocol](/docs/ja-jp/flows) it uses.
 
 </Note>
 
@@ -95,7 +97,7 @@ The Auth0 PHP SDK supports many [PHP-FIG](https://www.php-fig.org) standards off
 
 The most prolific networking library for PHP is [Guzzle](https://guzzlephp.org), although many are available to pick from within the PHP community. Let's use Guzzle for this sample application. Once again, from your project directory, run the following shell command:
 
-```
+```bash lines
 composer require guzzlehttp/guzzle guzzlehttp/psr7 http-interop/http-factory-guzzle
 ```
 
@@ -105,7 +107,7 @@ The Auth0 PHP SDK requires [Composer](https://getcomposer.org/doc/00-intro.md#in
 
 Run the following shell command within your project directory to install the Auth0 PHP SDK:
 
-```
+```bash lines
 composer require auth0/auth0-php
 ```
 
@@ -115,7 +117,7 @@ This will create a `vendor` folder within your project and download all the depe
 
 To begin, let's create a `.env` file within the root of your project directory to store our sample application's configuration and fill in the environment variables:
 
-```
+```bash lines
 # Your Auth0 application's Client ID
 AUTH0_CLIENT_ID={yourClientId}
 
@@ -135,13 +137,13 @@ AUTH0_BASE_URL=http://127.0.0.1:3000
 
 As PHP isn't able to read our `.env` file by itself, we'll want to install a library to help with that. Although we'll be using a particular library for our sample application's purposes, in a real world application any 'dotenv' loader of preference will work. From our project directory, let's run the following shell command to install the library:
 
-```
+```bash lines
 composer require vlucas/phpdotenv
 ```
 
 Next, let's create the PHP source file we'll be using for these code samples, `index.php`, and let's configure an instance of the Auth0 PHP SDK for our sample application:
 
-```
+```php lines
 <?php
 
 // Import the Composer Autoloader to make the SDK classes accessible:
@@ -165,13 +167,13 @@ Modern PHP applications use a routing pattern to pass incoming HTTP requests to 
 
 From our project directory, let's run the following shell command to install the routing library:
 
-```
+```bash lines
 composer require steampixel/simple-php-router
 ```
 
 Next, let's open our `index.php` back up and give our application life. Start by importing the routing library and defining our sample application's route's full URLs as named constants for convenience sake, as we'll need to reference them in a few places through our sample application:
 
-```javascript
+```php lines
 // 👆 We're continuing from the steps above. Append this to your index.php file.
 
 // Import our router library:
@@ -190,7 +192,7 @@ Now we can move on to adding our application's route handling logic, and the SDK
 
 The Auth0 PHP SDK has a convenient method for checking if our user has authenticated and returned their profile, `getCredentials()`. Let's install this on our index route to print the user profile if they're logged in or report that they need to login.
 
-```javascript
+```php lines
 // 👆 We're continuing from the steps above. Append this to your index.php file.
 
 Route::add('/', function() use ($auth0) {
@@ -215,7 +217,7 @@ We can access all the properties of our user's profile from the `user` property 
 
 It's important to note that the content of the user profile will vary depending on the social provider(s) you use, so you should never assume that a particular value will always be there within your application logic. Use PHP language constructs like `isset` or null coalescence to gracefully handle a value's presence, or lack thereof, for example:
 
-```javascript
+```php lines
 // ✋ We don't need to include this in our sample application, it's just an example.
 $name = $session->user['name'] ?? $session->user['nickname'] ?? $session->user['email'] ?? 'Unknown';
 ```
@@ -224,7 +226,7 @@ $name = $session->user['name'] ?? $session->user['nickname'] ?? $session->user['
 
 Now let's create our /login route, which will use the Auth0 PHP SDK's `login()` method to set up the user session and return a customized URL to Auth0's Universal Login Page for this user to login.
 
-```javascript
+```php lines
 // 👆 We're continuing from the steps above. Append this to your index.php file.
 
 Route::add('/login', function() use ($auth0) {
@@ -243,7 +245,7 @@ After our users return from authenticating with the Auth0's Universal Login Page
 
 When Auth0 passes our users back to us, it includes a few essential parameters in the query of the HTTP request. The Auth0 PHP SDK's `exchange()` method handles working with those, so finishing our authentication flow is straightforward:
 
-```javascript
+```php lines
 // 👆 We're continuing from the steps above. Append this to your index.php file.
 
 Route::add('/callback', function() use ($auth0) {
@@ -260,7 +262,7 @@ Route::add('/callback', function() use ($auth0) {
 
 Last but not least, let's properly handle logging our users out. The `logout()` method of the Auth0 PHP SDK handles clearing our sample application's session cookies, redirecting the user to Auth0's [/logout endpoint](https://auth0.com/docs/logout) (which logs out Auth0 session layer and any identify provider session layers), and then return the user to our / index route.
 
-```javascript
+```php lines
 // 👆 We're continuing from the steps above. Append this to your index.php file.
 
 Route::add('/logout', function() use ($auth0) {
@@ -274,7 +276,7 @@ Route::add('/logout', function() use ($auth0) {
 
 Last but not least, we need to tell our routing middleware to actually route requests:
 
-```javascript
+```php lines
 // 👆 We're continuing from the steps above. Append this to your index.php file.
 
 // This tells our router that we've finished configuring our routes, and we're ready to begin routing incoming HTTP requests:
@@ -283,7 +285,7 @@ Route::run('/');
 
 That's it! You're ready to run your new application; once again, from your project directory, run the following shell command:
 
-```
+```bash lines
 php -S 127.0.0.1:3000 index.php
 ```
 
@@ -291,7 +293,7 @@ Open your browser to [http://127.0.0.1:3000](https://127.0.0.1:3000) and try it 
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/ja-jp/identityproviders)[* Enable multifactor authentication](/docs/ja-jp/multifactor-authentication)[* Learn about attack protection](/docs/ja-jp/attack-protection)[* Learn about rules](/docs/ja-jp/rules)
 
 ---
 

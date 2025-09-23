@@ -1,13 +1,13 @@
 ---
 title: "OIDCバックチャネルログアウト"
 permalink: "back-channel-logout"
+'description': "Auth0のOIDCバックチャネルログアウト機能を説明します。"
 'og:title': "OIDCバックチャネルログアウト"
 'og:description': "Auth0のOIDCバックチャネルログアウト機能を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "OIDCバックチャネルログアウト"
 'twitter:description': "Auth0のOIDCバックチャネルログアウト機能を説明します。"
 ---
-# OIDCバックチャネルログアウト
 
 Auth0は、エンタープライズプランサブスクリプションのすべてのテナントにおいて、[OpenID Connectバックチャネルログアウト1.0仕様](https://openid.net/specs/openid-connect-backchannel-1_0.html#Backchannel)をサポートしています。
 
@@ -29,7 +29,7 @@ Auth0は、エンタープライズプランサブスクリプションのすべ
 
 エンドユーザーがログイン時にAuth0で正常に認証されると、認可サーバーはアクセストークンとIDトークンを発行します。ログアウトトークンは、ログアウトアクションやセッションの取り消しなどによってセッションが破棄されたときに生成されます。IDトークンとログアウトトークンの両方に、バックチャネルログアウトワークフローを容易にするためにアプリケーションが必要とするクレームが含まれています。クレームの詳細については、「[JSON Webトークンクレーム](/docs/ja-jp/secure/tokens/json-web-tokens/json-web-token-claims)」をお読みください。
 
-<Frame>![Workflow for back-channel logout](//images.ctfassets.net/cdy7uua7fh8z/5jQ5HogFNeD9tqUGEJuJHE/1ba97db33746ad428299018432e93147/2023-09-29_09-32-00__ja-JP_.png)</Frame>
+<Frame>![Workflow for back-channel logout](/images/ja-jp/cdy7uua7fh8z/5jQ5HogFNeD9tqUGEJuJHE/1ba97db33746ad428299018432e93147/2023-09-29_09-32-00__ja-JP_.png)</Frame>
 
 1. ログイン - ユーザー認証中に、Auth0テナントはIDトークンに`sid`を追加します。
 2. ログイン - アプリケーションは、受信したセッション識別子を独自のセッションストアに保存し、それをアプリケーション固有のセッションに関連付けます。
@@ -46,7 +46,7 @@ Auth0は、エンタープライズプランサブスクリプションのすべ
 
 サンプルユースケースでは、バックチャネルログアウトが複数のアプリケーションでどのように機能するかを示します。
 
-<Frame>![Back-channel logout multiple app use case](//images.ctfassets.net/cdy7uua7fh8z/54mbNobsvLec0A2tz0DXUG/e9fa0e64b839d7ab0485110b789ac068/2023-06-20_09-39-12.png)</Frame>
+<Frame>![Back-channel logout multiple app use case](/images/ja-jp/cdy7uua7fh8z/54mbNobsvLec0A2tz0DXUG/e9fa0e64b839d7ab0485110b789ac068/2023-06-20_09-39-12.png)</Frame>
 
 1. アプリケーションの構成中に、アプリケーションAはAuth0にバックチャネルログアウトURIを登録します。
 2. アプリケーションの構成中に、アプリケーションBはAuth0にバックチャネルログアウトURIを登録します。
@@ -76,7 +76,7 @@ Auth0でログアウトトークンとして使用するには、アプリケー
 
 アプリケーションがトークンを検証してデコードすると、コンテンツは以下の例のようになります。
 
-```json
+```bash lines
 {
   "iss": "https://artex-dev.eu.auth0.com/",
   "sub": "auth0|602e93db83fa6f00749a23e6",
@@ -112,7 +112,7 @@ Auth0でログアウトトークンとして使用するには、アプリケー
 
 **routes/index.js**
 
-```javascript
+```javascript lines
 const express = require('express');
 const router = express.Router();
 const { requiresAuth } = require('express-openid-connect');
@@ -169,7 +169,7 @@ module.exports = router;
 
 **middlewares/validateLogoutToken.js**
 
-```javascript
+```javascript lines
 // This middleware validates the logout token as defined here:
 // https://openid.net/specs/openid-connect-backchannel-1_0.html#Validation
 
@@ -245,7 +245,7 @@ module.exports = requiresValidLogoutToken;
 
 アプリケーションが認証ステータスを確認する必要があるときは、ログアウトトークンストアを照会して、セッションがまだアクティブかどうかを確認します。ログアウトストアは、必要な情報のみを保持するために、古い情報を定期的にフラッシュします。
 
-<Frame>![Logout Token Store](//images.ctfassets.net/cdy7uua7fh8z/2zTtcie1d0fjiSuxZ4huyV/3eedae4e01ef915bcd58ac4de1b861aa/image__21___ja-JP_.png)</Frame>
+<Frame>![Logout Token Store](/images/ja-jp/cdy7uua7fh8z/2zTtcie1d0fjiSuxZ4huyV/3eedae4e01ef915bcd58ac4de1b861aa/image__21___ja-JP_.png)</Frame>
 
 ## セキュリティに関する考慮事項
 

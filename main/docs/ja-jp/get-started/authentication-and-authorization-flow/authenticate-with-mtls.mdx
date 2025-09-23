@@ -1,13 +1,13 @@
 ---
 title: "mTLSで認証する"
 permalink: "authenticate-with-mtls"
+'description': "mTLSを使用してクライアントを認証する方法について説明します。"
 'og:title': "mTLSで認証する"
 'og:description': "mTLSを使用してクライアントを認証する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "mTLSで認証する"
 'twitter:description': "mTLSを使用してクライアントを認証する方法について説明します。"
 ---
-# mTLSで認証する
 
 ## OAuth/OIDCのmTLS
 
@@ -20,11 +20,11 @@ permalink: "authenticate-with-mtls"
 
 OAuthフローをmTLSで保護するために、クライアントはTLS接続の確立時に、mTLS証明書を顧客のエッジネットワーク上のTLS終端ポイントに送信します。認可サーバーは要求を処理する前に、クライアントのmTLS証明書をまず確認する必要があります。
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/4SlprP2uTYMCoLIPLsOl4v/dc34f47fa69654ed2b15c1bbde46a56a/HRI_diagrams_-_mtls_diagram_1__2_.png)</Frame>
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/4SlprP2uTYMCoLIPLsOl4v/dc34f47fa69654ed2b15c1bbde46a56a/HRI_diagrams_-_mtls_diagram_1__2_.png)</Frame>
 
 また、mTLSを使用すると、意図された当事者のみがアクセストークンを使用する（送信者制限またはトークンバインディングと呼ばれる）ことができます。クライアントがmTLS接続を使用して認可サーバーの`/oauth/token`エンドポイントを呼び出すと、クライアントのTLS証明書がアクセストークンの証明書に一致することを確認するためにリソースサーバーが使用する情報が、アクセストークンに含まれることになります。
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/7qocbfqySAnu85ph6WVSGU/558e40fe21a0284b9fcad7200da9f80e/HRI_diagrams_-_mtls_diagram_2__1_.png)</Frame>
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/7qocbfqySAnu85ph6WVSGU/558e40fe21a0284b9fcad7200da9f80e/HRI_diagrams_-_mtls_diagram_2__1_.png)</Frame>
 
 **注意**：mTLSクライアント認証とmTLSトークンバインディングは、それぞれ単独で使用することができます。mTLSクライアント認証はmTLSトークンバインディングなしで使用でき、mTLSトークンバインディングはクライアントシークレットや秘密鍵<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">JWT</Tooltip>など他の形式のクライアント認証と併用することができます。他の形式のクライアント認証を使用している場合でも、クライアントはクライアント証明書をmTLSトークンバインディングの認可サーバーに送信します。
 
@@ -34,7 +34,7 @@ Auth0のmTLSは[カスタムドメイン](/docs/ja-jp/customize/custom-domains)�
 
 クライアントシークレットを通常必要とするAuth0への認証済みクライアント呼び出しは、まず、カスタマーエッジに送信されます。このアクションは、顧客が管理する証明書を使用するカスタムドメインではすでに起こっています。カスタマーエッジはクライアントとmTLSハンドシェイクを実行し、クライアント証明書を検証します。クライアント証明書が検証されたら、カスタムドメインの機能に基づいて、要求がAuth0でテナントのエッジドメインに転送されます（HTTPヘッダー内の検証済みクライアント証明書と正しい`cname-api-key`を含む）。
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/7p3tqUtBeMAp4fBbbemhOh/f53eb8cab2a7c21ea3c5671f78168d44/HRI_diagrams_-_mtls_diagram_3__1_.png)</Frame>
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/7p3tqUtBeMAp4fBbbemhOh/f53eb8cab2a7c21ea3c5671f78168d44/HRI_diagrams_-_mtls_diagram_3__1_.png)</Frame>
 
 ## 認証サーバーを呼び出す
 
@@ -46,7 +46,7 @@ mTLSはクライアント認証とアクセストークンバインディング�
 
 mTLSクライアント認証が有効な場合、OIDCディスカバリードキュメントには`token_endpoint_auth_methods_supported`プロパティが含まれます。このプロパティには、`tls_client_auth`または`self_signed_tls_client_auth`が含まれています。
 
-```json
+```json lines
 {
   ...
   "token_endpoint_auth_methods_supported": ["tls_client_auth"]
@@ -56,7 +56,7 @@ mTLSクライアント認証が有効な場合、OIDCディスカバリードキ
 
 mTLSトークンバインディングが有効な場合、OIDCディスカバリードキュメントは`tls_client_certificate_bound_access_tokens`プロパティを`true:`に設定します。
 
-```json
+```json lines
 {
   ...
   "tls_client_certificate_bound_access_tokens": true
@@ -68,7 +68,7 @@ mTLSエンドポイントエイリアスをサポートする環境では、mTLS
 
 以下のコードサンプルでは、`token_endpoint`プロパティが2回公開されています。mTLSの呼び出しに使用するエンドポイントは、`mtls_endpoint_aliases`または`https://mtls.auth.bank.com/oauth/token`に一覧表示されています。
 
-```json
+```json lines
 {
   ...
   "mtls_endpoint_aliases": {

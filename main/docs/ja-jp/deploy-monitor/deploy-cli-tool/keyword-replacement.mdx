@@ -1,13 +1,13 @@
 ---
 title: "キーワードの置換"
 permalink: "keyword-replacement"
+'description': "キーワード置換を使用して、Auth0 Deploy CLIでマルチテナントワークフローを管理する方法を学びます。"
 'og:title': "キーワードの置換"
 'og:description': "キーワード置換を使用して、Auth0 Deploy CLIでマルチテナントワークフローを管理する方法を学びます。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "キーワードの置換"
 'twitter:description': "キーワード置換を使用して、Auth0 Deploy CLIでマルチテナントワークフローを管理する方法を学びます。"
 ---
-# キーワードの置換
 
 Deploy CLIは、環境固有の値を使用した動的なキーワード置換をサポートします。これにより、すべてのテナントが同じリソース構成ファイルを共有しながらも、微妙に異なる値を挿入するスケーラブルなマルチテナントワークフローが可能になります。
 
@@ -18,7 +18,7 @@ Deploy CLIは、環境固有の値を使用した動的なキーワード置換�
 
 ## config.jsonの例
 
-```json
+```javascript lines
 {
   "AUTH0_DOMAIN": "test-tenant.us.auth0.com",
   "AUTH0_CLIENT_ID": "FOO",
@@ -33,7 +33,7 @@ Deploy CLIは、環境固有の値を使用した動的なキーワード置換�
 
 ## tenant.yamlの例
 
-```
+```yaml lines
 tenant:
   friendly_name: "##ENVIRONMENT## tenant"
   allowed_logout_urls: @@ALLOWED_LOGOUT_URLS@@
@@ -47,7 +47,7 @@ clients:
 
 ## tenant.jsonの例
 
-```json
+```json lines
 {
   "friendly_name": "##ENVIRONMENT## tenant",
   "allowed_logout_urls": "@@ALLOWED_LOGOUT_URLS@@"
@@ -60,7 +60,7 @@ clients:
 
 ### config.jsonの例
 
-```json
+```json lines
 {
   "AUTH0_KEYWORD_REPLACE_MAPPINGS": {
     "GLOBAL_WEB_ORIGINS": "\"http://local.me:8080\", \"http://localhost\", \"http://localhost:3000\""
@@ -70,7 +70,7 @@ clients:
 
 ### tenant.yamlの例
 
-```
+```yaml lines
 clients:
   - name: Test App
     web_origins: [ "http://production-app.com", "https://production-app.com", ##GLOBAL_WEB_ORIGINS## ]

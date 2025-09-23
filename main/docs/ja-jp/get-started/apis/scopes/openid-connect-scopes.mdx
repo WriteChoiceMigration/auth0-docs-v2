@@ -1,17 +1,17 @@
 ---
 title: "OpenID Connectのスコープ"
 permalink: "openid-connect-scopes"
+'description': "OpenID Connect（OIDC）プロトコルで使用されるスコープとクレームを理解しましょう。"
 'og:title': "OpenID Connectのスコープ"
 'og:description': "OpenID Connect（OIDC）プロトコルで使用されるスコープとクレームを理解しましょう。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "OpenID Connectのスコープ"
 'twitter:description': "OpenID Connect（OIDC）プロトコルで使用されるスコープとクレームを理解しましょう。"
 ---
-# OpenID Connectのスコープ
 
 このドキュメントでは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OpenID</Tooltip> Connect（OIDC）認証プロトコルに含まれるスコープについてご説明します。OIDC自体の詳細情報については、[OpenID Connectプロトコル](/docs/ja-jp/authenticate/protocols/openid-connect-protocol)をご覧ください。
 
-OpenID Connect（OIDC）スコープは、アプリケーションが認証プロセスの際に名前や画像などのユーザー詳細へのアクセスを認可するために使用します。それぞれのスコープは、ユーザー属性のセットを返します。これをクレームといいます。アプリケーションが要求するスコープは、そのアプリケーションでどのユーザー属性が必要かによります。要求されたスコープをユーザーが認可すると、クレームがIDトークンに含める形で返されます。これは[`/userinfo` エンドポイント](/docs/api/authentication#get-user-info)経由でも使用できるようになります。
+OpenID Connect（OIDC）スコープは、アプリケーションが認証プロセスの際に名前や画像などのユーザー詳細へのアクセスを認可するために使用します。それぞれのスコープは、ユーザー属性のセットを返します。これをクレームといいます。アプリケーションが要求するスコープは、そのアプリケーションでどのユーザー属性が必要かによります。要求されたスコープをユーザーが認可すると、クレームがIDトークンに含める形で返されます。これは[`/userinfo` エンドポイント](/docs/ja-jp/api/authentication#get-user-info)経由でも使用できるようになります。
 
 たとえば、一般的なWebアプリケーションをビルドしてAuth0に登録し、ユーザー名とパスワードでログインできるように設定したとします。アプリにログインしたユーザーに、その人の名前を含んだ、パーソナライズされた歓迎メールが自動的に送信されるようにしたいと考えています。
 
@@ -28,7 +28,7 @@ OpenID Connect（OIDC）スコープは、アプリケーションが認証プ�
 
 ## 標準クレーム
 
-標準クレームは、アプリケーションにユーザー情報（名前・メール・画像など）を提供するためのもので、OIDCプロトコルに対してあらかじめ定義されています。クレームは、IDトークンに含める形で返され、また[`/userinfo`エンドポイント](/docs/api/authentication#get-user-info)経由でも使用できるようになります。
+標準クレームは、アプリケーションにユーザー情報（名前・メール・画像など）を提供するためのもので、OIDCプロトコルに対してあらかじめ定義されています。クレームは、IDトークンに含める形で返され、また[`/userinfo`エンドポイント](/docs/ja-jp/api/authentication#get-user-info)経由でも使用できるようになります。
 
 また、自分で定義、制御し、Auth0 Actionsを使用してトークンに追加する[カスタムクレーム](/docs/ja-jp/customize/actions/actions-overview)も作成できます。詳細については、[JSON Webトークンクレーム](/docs/ja-jp/secure/tokens/json-web-tokens/json-web-token-claims)をお読みください。
 
@@ -44,16 +44,16 @@ OIDCの基本（必須）スコープは`openid`で、アプリケーション�
 </thead>
 <tbody>
 <tr>
-<td><code>openid</code></td>
-<td>（必須）ユーザーを一意に識別する<code>sub</code>クレームを返します。IDトークンでは、<code>iss</code>、<code>aud</code>、<code>exp</code>、<code>iat</code>、<code>at_hash</code>の各クレームも表示されます。IDトークンクレームの詳細については、「<a href="/docs/tokens/id-tokens/id-token-structure">IDトークンの構造</a>」をお読みください。</td>
+<td>`openid`</td>
+<td>（必須）ユーザーを一意に識別する`sub`クレームを返します。IDトークンでは、`iss`、`aud`、`exp`、`iat`、`at_hash`の各クレームも表示されます。IDトークンクレームの詳細については、「<a href="/docs/ja-jp/tokens/id-tokens/id-token-structure">IDトークンの構造</a>」をお読みください。</td>
 </tr>
 <tr>
-<td><code>profile</code></td>
-<td>基本的なプロファイル情報（<code>name</code>、<code>family_name</code>、<code>given_name</code>、<code>middle_name</code>、<code>nickname</code>、<code>picture</code>、<code>updated_at</code>を含む）を表すクレームを返します。</td>
+<td>`profile`</td>
+<td>基本的なプロファイル情報（`name`、`family_name`、`given_name`、`middle_name`、`nickname`、`picture`、`updated_at`を含む）を表すクレームを返します。</td>
 </tr>
 <tr>
-<td><code>email</code></td>
-<td>ユーザーのメールアドレスを含む<code>email</code>クレームと、<code>email_verified</code>（メールアドレスがユーザーによって確認されたかどうかを示すブール値）を返します。</td>
+<td>`email`</td>
+<td>ユーザーのメールアドレスを含む`email`クレームと、`email_verified`（メールアドレスがユーザーによって確認されたかどうかを示すブール値）を返します。</td>
 </tr>
 </tbody>
 </table>

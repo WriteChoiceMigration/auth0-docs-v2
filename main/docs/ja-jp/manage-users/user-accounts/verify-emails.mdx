@@ -1,13 +1,13 @@
 ---
 title: "Auth0を使ってメールを検証する"
 permalink: "verify-emails"
+'description': "Auth0を使用してメールを検証するための各種手段についての概要"
 'og:title': "Auth0を使ってメールを検証する"
 'og:description': "Auth0を使用してメールを検証するための各種手段についての概要"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0を使ってメールを検証する"
 'twitter:description': "Auth0を使用してメールを検証するための各種手段についての概要"
 ---
-# Auth0を使ってメールを検証する
 
 ユーザーが提供したメールアドレスを使用する際には、ユーザーがそのメールを実際に使用できるかを確かめることが先決です。これは、ユーザーへのメール送信では常に必要で、検索のインデックスとしてメールを使う場合にも行います。Auth0では、ユーザーが本人であることを確認する方法としては、メールアドレスの使用を推奨していません。
 
@@ -51,8 +51,8 @@ Auth0が確認メールを送信するタイミングをカスタマイズする
 
 ユーザーが確認メールを受け取るタイミングを制御するには、2つの方法があります。
 
-* [メール検証ジョブ](/docs/api/management/v2#!/Jobs/post_verification_email)を使用します。これは、Auth0がメール検証テンプレートを使って確認メールを送信することをトリガーします。
-* [メール検証チケット](/docs/api/management/v2#!/Tickets/post_email_verification)を作成して、メールを自分で送信します。その際には、ユーザーがメールを確認するのにクリックするべきチケットを含めて送信します。
+* [メール検証ジョブ](/docs/ja-jp/api/management/v2#!/Jobs/post_verification_email)を使用します。これは、Auth0がメール検証テンプレートを使って確認メールを送信することをトリガーします。
+* [メール検証チケット](/docs/ja-jp/api/management/v2#!/Tickets/post_email_verification)を作成して、メールを自分で送信します。その際には、ユーザーがメールを確認するのにクリックするべきチケットを含めて送信します。
 
 ## ワンタイムパスワード
 
@@ -60,19 +60,19 @@ Auth0が確認メールを送信するタイミングをカスタマイズする
 
 別の方法でメールを検証したい状況があるかもしれません。たとえば、ユーザーのリストを使ってまとめて検証したり、独自に作成したカスタムワークフローを通してユーザーのメールを検証する方法があったりする場合です。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/5SO4gvkdOOZEnPInXrIN1m/10f9cbd55c8749294cfe8e71f864cb83/Email_Config_-_Japanese.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/5SO4gvkdOOZEnPInXrIN1m/10f9cbd55c8749294cfe8e71f864cb83/Email_Config_-_Japanese.png)</Frame>
 
 ## 特殊な検証の対応
 
-そのような場合には、[PATCH `/api/v2/users`エンドポイント](/docs/api/management/v2/#!/Users/patch_users_by_id)を使って`email_verified`を`true`に設定します。
+そのような場合には、[PATCH `/api/v2/users`エンドポイント](/docs/ja-jp/api/management/v2/#!/Users/patch_users_by_id)を使って`email_verified`を`true`に設定します。
 
-Microsoft Entra IDとADFSのエンタープライズ接続について、Auth0は一部のカスタムメール検証ワークフローに対応しています。これで、他のシステムからのユーザーが安全で正確な方法によってメール検証されていることを確認できます。詳細は、「[Microsoft Entra IDとADFSのメール検証](/docs/connections/azuread-adfs-email-verification)」をお読みください。
+Microsoft Entra IDとADFSのエンタープライズ接続について、Auth0は一部のカスタムメール検証ワークフローに対応しています。これで、他のシステムからのユーザーが安全で正確な方法によってメール検証されていることを確認できます。詳細は、「[Microsoft Entra IDとADFSのメール検証](/docs/ja-jp/connections/azuread-adfs-email-verification)」をお読みください。
 
-そのような場合には、[PATCH `/api/v2/users`エンドポイント](/docs/api/management/v2/#!/Users/patch_users_by_id)を使用して、`email_verified`を`true`に設定します。
+そのような場合には、[PATCH `/api/v2/users`エンドポイント](/docs/ja-jp/api/management/v2/#!/Users/patch_users_by_id)を使用して、`email_verified`を`true`に設定します。
 
 ## 特殊な検証の対応
 
-Microsoft Entra IDとADFSのエンタープライズ接続について、Auth0は一部のカスタムメール検証ワークフローに対応しています。これで、他のシステムからのユーザーが安全で正確な方法によってメール検証されていることを確認できます。詳細については、「[Microsoft Entra IDとADFSのメール検証](/docs/connections/azuread-adfs-email-verification)」をお読みください。
+Microsoft Entra IDとADFSのエンタープライズ接続について、Auth0は一部のカスタムメール検証ワークフローに対応しています。これで、他のシステムからのユーザーが安全で正確な方法によってメール検証されていることを確認できます。詳細については、「[Microsoft Entra IDとADFSのメール検証](/docs/ja-jp/connections/azuread-adfs-email-verification)」をお読みください。
 
 ## もっと詳しく
 

@@ -1,13 +1,13 @@
 ---
 title: "トークンとOrganizations（組織）を使用する"
 permalink: "using-tokens"
+'description': "トークンがAuth0のOrganizations（組織）で機能する仕組みと組織に属するユーザーを認証する方法について説明します。"
 'og:title': "トークンとOrganizations（組織）を使用する"
 'og:description': "トークンがAuth0のOrganizations（組織）で機能する仕組みと組織に属するユーザーを認証する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "トークンとOrganizations（組織）を使用する"
 'twitter:description': "トークンがAuth0のOrganizations（組織）で機能する仕組みと組織に属するユーザーを認証する方法について説明します。"
 ---
-# トークンとOrganizations（組織）を使用する
 
 <Card title="利用可能性はAuth0プランによって異なる">
 
@@ -30,7 +30,7 @@ JWTクレームには以下の2種類があります。
 
 <Note>
 
-IDトークンとアクセストークンには、デフォルトでOrganization IDのみが含まれます。ただし、テナントは、Authentication APIでOrganization名を使用できるように構成することも可能です。そのように構成すると、IDトークンとアクセストークンに`org_id`クレームと`org_name`クレームの両方が含まれるようになります。詳細については、「[Authentication APIでOrganization名を使用する](/docs/manage-users/organizations/configure-organizations/use-org-name-authentication-api) 」を参照してください。
+IDトークンとアクセストークンには、デフォルトでOrganization IDのみが含まれます。ただし、テナントは、Authentication APIでOrganization名を使用できるように構成することも可能です。そのように構成すると、IDトークンとアクセストークンに`org_id`クレームと`org_name`クレームの両方が含まれるようになります。詳細については、「[Authentication APIでOrganization名を使用する](/docs/ja-jp/manage-users/organizations/configure-organizations/use-org-name-authentication-api) 」を参照してください。
 
 </Note>
 
@@ -38,7 +38,7 @@ IDトークンとアクセストークンには、デフォルトでOrganization
 
 次の例では、`https://marketplace/roles`と`https://namespace.exampleco.com/`はトークンに追加されたカスタムクレームであり、含まれている他のクレームは標準クレームであることに注意してください。
 
-```json
+```json lines
 {
   "https://marketplace/roles": [
     "marketplace-administrator"
@@ -57,7 +57,7 @@ IDトークンとアクセストークンには、デフォルトでOrganization
 
 ### アクセストークン
 
-```json
+```json lines
 {
   "iss": "https://exampleco.auth0.com/",
   "sub": "auth0|602c0dcab993d10073daf680",
@@ -84,13 +84,13 @@ IDトークンとアクセストークンには、デフォルトでOrganization
 
 <Note>
 
-IDトークンとアクセストークンには、デフォルトでOrganization IDのみが含まれます。ただし、テナントは、Authentication APIでOrganization名を使用できるように構成することも可能です。そのように構成すると、IDトークンとアクセストークンに`org_id`クレームと`org_name`クレームの両方が含まれるようになります。詳細については、「[Authentication APIで組織名を使用する](/docs/manage-users/organizations/configure-organizations/use-org-name-authentication-api)」をお読みください。
+IDトークンとアクセストークンには、デフォルトでOrganization IDのみが含まれます。ただし、テナントは、Authentication APIでOrganization名を使用できるように構成することも可能です。そのように構成すると、IDトークンとアクセストークンに`org_id`クレームと`org_name`クレームの両方が含まれるようになります。詳細については、「[Authentication APIで組織名を使用する](/docs/ja-jp/manage-users/organizations/configure-organizations/use-org-name-authentication-api)」をお読みください。
 
 </Note>
 
 次のコードサンプルは、マシンツーマシンのユースケースで返されるアクセストークンの例です。
 
-```json
+```json lines
 {
   "iss": "https://exampleco.auth0.com/",
   "sub": "CS2MNgcX1VZFCJaEzfKw2VPAAS0gzhqP@clients",
@@ -113,7 +113,7 @@ IDトークンとアクセストークンには、デフォルトでOrganization
 
 テナントの構成を通じてAuthentication APIにおけるOrganization名の使用を許可した場合は、IDトークンとアクセストークンに`org_id`クレームと`org_name`クレームの両方が含まれます。その場合は、`org_id`クレームに加えて`org_name`クレームも検証し、受け取った値が信頼できるエンティティと一致することを確認します。
 
-一般に、トークンの検証にはOrganization IDを使用することが推奨されます。ただし、Organization名の方が適している状況では、Organization名を使用してかまいません。トークンの検証にOrganization名を使用をした場合の影響については、「[Authentication APIでOrganization名を使用する](/docs/manage-users/organizations/configure-organizations/use-org-name-authentication-api)」をお読みください。
+一般に、トークンの検証にはOrganization IDを使用することが推奨されます。ただし、Organization名の方が適している状況では、Organization名を使用してかまいません。トークンの検証にOrganization名を使用をした場合の影響については、「[Authentication APIでOrganization名を使用する](/docs/ja-jp/manage-users/organizations/configure-organizations/use-org-name-authentication-api)」をお読みください。
 
 </Note>
 

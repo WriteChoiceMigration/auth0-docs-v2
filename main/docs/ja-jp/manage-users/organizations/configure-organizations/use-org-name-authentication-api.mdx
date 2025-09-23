@@ -1,13 +1,13 @@
 ---
 title: "Authentication APIで組織名を使用する"
 permalink: "use-org-name-authentication-api"
+'description': "Authentication APIで組織名を使用する際のセットアップ、セキュリティへの配慮、およびベストプラクティスについて説明します。"
 'og:title': "Authentication APIで組織名を使用する"
 'og:description': "Authentication APIで組織名を使用する際のセットアップ、セキュリティへの配慮、およびベストプラクティスについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Authentication APIで組織名を使用する"
 'twitter:description': "Authentication APIで組織名を使用する際のセットアップ、セキュリティへの配慮、およびベストプラクティスについて説明します。"
 ---
-# Authentication APIで組織名を使用する
 
 デフォルトで、[Authentication API](https://auth0.com/docs/api/authentication)は組織IDを使用して特定の組織を識別します。必要であれば、テナントでも組織名が識別子として使われるように構成することができます。ただし、この機能を有効にする前に、使いやすさやセキュリティへの影響を考慮する必要があります。潜在的な影響を明確に理解するために、「[考慮と推薦事項](#considerations-and-recommendations)」セクションを確認してください。
 
@@ -20,7 +20,7 @@ Authentication APIで組織名に対応するようにテナントを構成す�
 
 <Note>
 
-* [Organizations](/docs/manage-users/organizations/configure-organizations/create-organizations)は、2つの名前で構成できます。1つは、一意の論理識別子の役割を果たす必須の名前値で、もう1つは、任意で設定できる、わかりやすい表示名です。`org_name` パラメーターは、必須の名前値のみを受け入れ、表示名値には対応していません。
+* [Organizations](/docs/ja-jp/manage-users/organizations/configure-organizations/create-organizations)は、2つの名前で構成できます。1つは、一意の論理識別子の役割を果たす必須の名前値で、もう1つは、任意で設定できる、わかりやすい表示名です。`org_name` パラメーターは、必須の名前値のみを受け入れ、表示名値には対応していません。
 * この機能はテナントレベルで管理されます。特定のOrganizationに対して個別に有効化することはできません。
 
 </Note>
@@ -38,7 +38,7 @@ Authentication APIで組織名に対応するようにテナントを構成す�
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+``` lines
 https://{yourDomain}/authorize?
     response_type=code&
     client_id={yourClientId}&
@@ -52,7 +52,7 @@ https://{yourDomain}/authorize?
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```bash
+```bash lines
 curl --request POST \
   --url 'https://{yourDomain}/oauth/token' \
   --header 'content-type: application/x-www-form-urlencoded' \
@@ -65,7 +65,7 @@ curl --request POST \
 
 3.デーコードされたトークンが返され、`org_id`と`org_name`クレームの両方が含まれています。
 
-```json
+```json lines
 {
     "sub": "google-oauth2|10...17",
     "aud": [

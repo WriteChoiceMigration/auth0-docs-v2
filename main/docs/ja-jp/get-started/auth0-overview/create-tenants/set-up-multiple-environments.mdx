@@ -1,13 +1,13 @@
 ---
 title: "複数環境をセットアップする"
 permalink: "set-up-multiple-environments"
+'description': "複数のAuth0テナントを使ってさまざまな環境を管理する方法を説明します。"
 'og:title': "複数環境をセットアップする"
 'og:description': "複数のAuth0テナントを使ってさまざまな環境を管理する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "複数環境をセットアップする"
 'twitter:description': "複数のAuth0テナントを使ってさまざまな環境を管理する方法を説明します。"
 ---
-# 複数環境をセットアップする
 
 Auth0では、開発・ステージング・運用環境を簡単にセットアップできます。環境ごとに新しいテナントを作成するだけで、一つひとつが確実に分離されます。Dashboardの左上のメニューにあるテナントチューザーを使うと、テナントを簡単に切り替えることができます。また、テナントごとに異なる管理者を設定することも可能です。
 
@@ -25,23 +25,23 @@ Auth0では、開発・ステージング・運用環境を簡単にセットア
 
 1. テナントにEnvironment （環境）タグを付けるには、[［Dashboard］>［Settings（設定）］>［General（一般設定）］](https://manage.auth0.com/#/tenant/general)に移動します。
 
-   <Frame>![Dashboard テナントの設定 一般設定タブ](//images.ctfassets.net/cdy7uua7fh8z/4okToiwlkNQBxwr8QGE3Rs/440d2aa39a898799edd43316486a130a/Basic_Settings_-_JP.png)</Frame>
+   <Frame>![Dashboard テナントの設定 一般設定タブ](/images/ja-jp/cdy7uua7fh8z/4okToiwlkNQBxwr8QGE3Rs/440d2aa39a898799edd43316486a130a/Basic_Settings_-_JP.png)</Frame>
 
 2. **［Assign Environment Tag（環境タグの割り当て）］**で、テナントの環境を**［Development（開発）］**、**［Staging（ステージング）］**または**［Production（運用）］**に指定します。
 
-   <Frame>![undefined](//images.ctfassets.net/cdy7uua7fh8z/27OH1jFXce97CSjk7TPeD7/1ee7cb22d4b19c9b10630c12ff4abcf5/Tenant_environment_tags.png)</Frame>
+   <Frame>![undefined](/images/ja-jp/cdy7uua7fh8z/27OH1jFXce97CSjk7TPeD7/1ee7cb22d4b19c9b10630c12ff4abcf5/Tenant_environment_tags.png)</Frame>
 
 3. 環境を選択したら、**［Save（保存）］**をクリックします。
 
 ## 移行
 
-[Management API v2](/docs/api/management/v2)を使用すると、テナント間でアセット（[ルール](/docs/ja-jp/customize/rules)やデータベース[接続](/docs/connections)など）の移行を自動化することができます。
+[Management API v2](/docs/ja-jp/api/management/v2)を使用すると、テナント間でアセット（[ルール](/docs/ja-jp/customize/rules)やデータベース[接続](/docs/ja-jp/connections)など）の移行を自動化することができます。
 
 構成を管理しやすくするために、構成値は[Dashboard](https://manage.auth0.com/#/rules)に保存して、**ルール**や**データベース接続**のスクリプトに埋め込むことは避けてください。
 
 たとえば、ログのURLを設定するとします。1つの方法は、ルールにハードコードすることです。
 
-```javascript
+```javascript lines
 function(user, context, callback){
       var log_url = 'https://someurl/log';
       ...
@@ -58,7 +58,7 @@ function(user, context, callback){
 4. [［Dashboard］>［Rules（ルール）］](https://manage.auth0.com/#/rules)に移動して、ページの終わりまでスクロールし、構成値を設定（この例ではキー名には`log_url`、値には`https://someurl/log`を使用）してから**［Create（作成）］**をクリックします。
 5. これでルールを書く準備ができました。作成したルールを編集し、コード領域に以下のコードを入力してから、**［Save（保存）］**をクリックします。
 
-   ```javascript
+   ```javascript lines
    function(user, context, callback){
          var log_url = configuration.log_url;
          ...

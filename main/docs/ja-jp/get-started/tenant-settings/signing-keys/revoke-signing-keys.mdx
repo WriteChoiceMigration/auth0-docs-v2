@@ -1,13 +1,13 @@
 ---
 title: "署名鍵を取り消す"
 permalink: "revoke-signing-keys"
+'description': "Auth0 DashboardまたはManagement APIを使って、テナントのアプリケーションの署名鍵を取り消す方法について説明します。"
 'og:title': "署名鍵を取り消す"
 'og:description': "Auth0 DashboardまたはManagement APIを使って、テナントのアプリケーションの署名鍵を取り消す方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "署名鍵を取り消す"
 'twitter:description': "Auth0 DashboardまたはManagement APIを使って、テナントのアプリケーションの署名鍵を取り消す方法について説明します。"
 ---
-# 署名鍵を取り消す
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>や<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を使って、テナントのアプリケーションの署名鍵を取り消すことができます。署名鍵は、アプリケーションやAPIに送信されたIDトークン、アクセストークン、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SAML</Tooltip>アサーション、および<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">WS-Fed</Tooltip>アサーションを署名するのに使用されます。詳細については、「[署名鍵](/docs/ja-jp/get-started/tenant-settings/signing-keys)」をお読みください。
 
@@ -44,23 +44,23 @@ permalink: "revoke-signing-keys"
 
 </Warning>
 
-1. 署名鍵のリストを取得するには、[全アプリケーション署名鍵の取得](/docs/api/management/v2#!/Keys/get_signing_keys)エンドポイントに`GET`呼び出しを行います。
-2. [鍵のIDでアプリケーションの署名鍵取り消し](/docs/api/management/v2#!/Keys/put_signing_keys)エンドポイントに`PUT`呼び出しを行います。`{yourKeyId}`と`{yourMgmtApiAccessToken}`のプレースホルダーの値を、それぞれ署名鍵IDとManagement APIのアクセストークンに置き換えてください。
+1. 署名鍵のリストを取得するには、[全アプリケーション署名鍵の取得](/docs/ja-jp/api/management/v2#!/Keys/get_signing_keys)エンドポイントに`GET`呼び出しを行います。
+2. [鍵のIDでアプリケーションの署名鍵取り消し](/docs/ja-jp/api/management/v2#!/Keys/put_signing_keys)エンドポイントに`PUT`呼び出しを行います。`{yourKeyId}`と`{yourMgmtApiAccessToken}`のプレースホルダーの値を、それぞれ署名鍵IDとManagement APIのアクセストークンに置き換えてください。
 
    <CodeGroup>
-```bash curl.sh
+```bash cURL lines
    curl --request PUT \
    --url 'https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke' \
    --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-   ```
-   ```csharp c_.cs
+   ``` lines
+   ```csharp C# lines
    var client = new RestClient("https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke");
    var request = new RestRequest(Method.PUT);
    request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
    IRestResponse response = client.Execute(request);
    ```
 
-   ```go go.go
+   ```go Go lines
    package main
    import (
    "fmt"
@@ -77,14 +77,14 @@ permalink: "revoke-signing-keys"
    fmt.Println(res)
    fmt.Println(string(body))
    }
-   ```
-   ```java java.java
+   ``` lines
+   ```java Java lines
    HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke")
    .header("authorization", "Bearer {yourMgmtApiAccessToken}")
    .asString();
    ```
 
-   ```javascript node_js.js
+   ```javascript Node.JS lines
    var axios = require("axios").default;
    var options = {
    method: 'PUT',
@@ -96,8 +96,8 @@ permalink: "revoke-signing-keys"
    }).catch(function (error) {
    console.error(error);
    });
-   ```
-   ```obj-c obj-c.obj-c
+   ``` lines
+   ```obj-c Obj-C lines
    #import 
    NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
    NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke"]
@@ -118,7 +118,7 @@ permalink: "revoke-signing-keys"
    [dataTask resume];
    ```
 
-   ```php php.php
+   ```php PHP lines
    $curl = curl_init();
    curl_setopt_array($curl, [
    CURLOPT_URL => "https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke",
@@ -140,8 +140,8 @@ permalink: "revoke-signing-keys"
    } else {
    echo $response;
    }
-   ```
-   ```python python.py
+   ``` lines
+   ```python Python lines
    import http.client
    conn = http.client.HTTPSConnection("")
    headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -151,7 +151,7 @@ permalink: "revoke-signing-keys"
    print(data.decode("utf-8"))
    ```
 
-   ```ruby ruby.rb
+   ```ruby Ruby lines
    require 'uri'
    require 'net/http'
    require 'openssl'
@@ -163,8 +163,8 @@ permalink: "revoke-signing-keys"
    request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
    response = http.request(request)
    puts response.read_body
-   ```
-   ```swift swift.swift
+   ``` lines
+   ```swift Swift lines
    import Foundation
    let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
    let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke")! as URL,
@@ -193,12 +193,12 @@ permalink: "revoke-signing-keys"
 </thead>
 <tbody>
 <tr>
-<td><code>YOUR_KEY_ID</code></td>
+<td>`YOUR_KEY_ID`</td>
 <td>取り消す署名鍵のID。署名鍵IDを見つける方法については、「<a href="https://auth0.com/docs/ja-jp/tokens/guides/locate-jwks">JSON Web鍵セットを見つける</a>」を参照してください。</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td>スコープ<code>update:signing_keys</code>を持つ<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>スコープ`update:signing_keys`を持つ<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 </tbody>
 </table>

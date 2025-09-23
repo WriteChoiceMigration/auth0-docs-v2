@@ -1,13 +1,13 @@
 ---
 title: "リリース"
 permalink: "releases"
+'description': "破壊的変更および新機能を含む、Actionsログインフローのトリガーのリリース済みバージョンについて説明します。"
 'og:title': "リリース"
 'og:description': "破壊的変更および新機能を含む、Actionsログインフローのトリガーのリリース済みバージョンについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "リリース"
 'twitter:description': "破壊的変更および新機能を含む、Actionsログインフローのトリガーのリリース済みバージョンについて説明します。"
 ---
-# リリース
 
 ログインフローのトリガーのバージョンでリリースされた機能と破壊的変更は以下の通りです。
 
@@ -50,7 +50,7 @@ permalink: "releases"
 
 GA前のトリガー：
 
-```
+```javascript lines
 async function myFunction(event, context) {
   return {
     user: {
@@ -64,7 +64,7 @@ async function myFunction(event, context) {
 
 GAトリガー：
 
-```
+```javascript lines
 async function onExecutePostLogin(event, api) {
   api.user.setUserMetadata('myParam', 'foo');
 }
@@ -80,7 +80,7 @@ async function onExecutePostLogin(event, api) {
 
 GA前のトリガー：
 
-```
+```javascript lines
 async function myFunction(event, context) {
   return {
     user: {
@@ -94,7 +94,7 @@ async function myFunction(event, context) {
 
 GAトリガー：
 
-```
+```javascript lines
 async function onExecutePostLogin(event, api) {
   api.user.setAppMetadata('myParam', 'foo');
 }
@@ -110,7 +110,7 @@ async function onExecutePostLogin(event, api) {
 
 GA前のトリガー：
 
-```
+```javascript lines
 async function myFunction(event, context) {
   throw new Error("Access denied.");
 }
@@ -118,7 +118,7 @@ async function myFunction(event, context) {
 
 GAトリガー：
 
-```
+```javascript lines
 async function onExecutePostLogin(event, api) {
   api.access.deny("Access denied.");
 }
@@ -134,7 +134,7 @@ async function onExecutePostLogin(event, api) {
 
 GA前のトリガー：
 
-```
+```javascript lines
 async function myFunc(event, context) {
   return {
     accessToken: {
@@ -148,7 +148,7 @@ async function myFunc(event, context) {
 
 GAトリガー：
 
-```
+```javascript lines
 async function myFunc(event, api) {
   api.accessToken.setCustomClaim('https://example.com/custom/claim', 'Custom claim value');
 }
@@ -158,7 +158,7 @@ async function myFunc(event, api) {
 
 GA前のトリガー：
 
-```
+```javascript lines
 async function myFunc(event, context) {
   return {
     idToken: {
@@ -172,7 +172,7 @@ async function myFunc(event, context) {
 
 GAトリガー：
 
-```
+```javascript lines
 async function myFunc(event, api) {
   api.idToken.setCustomClaim('https://example.com/custom/claim', 'Custom claim value');
 }
@@ -182,7 +182,7 @@ async function myFunc(event, api) {
 
 GA前のトリガー：
 
-```
+```javascript lines
 async function myFunction(event, context) {
   return {
     command: {
@@ -195,7 +195,7 @@ async function myFunction(event, context) {
 
 GAトリガー：
 
-```
+```javascript lines
 async function onExecutePostLogin(event, api) {
   api.multifactor.enable("duo");
 }
@@ -205,7 +205,7 @@ async function onExecutePostLogin(event, api) {
 
 GA前のトリガー：
 
-```
+```javascript lines
 async function myFunction(event, context) {
   return {
     command: {
@@ -218,7 +218,7 @@ async function myFunction(event, context) {
 
 GAトリガー：
 
-```
+```javascript lines
 async function onExecutePostLogin(event, api) {
   api.redirect.sendUserTo("https://my-app.example.com");
 }

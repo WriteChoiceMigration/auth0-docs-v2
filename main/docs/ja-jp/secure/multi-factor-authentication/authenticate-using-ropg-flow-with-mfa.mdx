@@ -1,15 +1,15 @@
 ---
 title: "MFAでリソース所有者のパスワードフロー使用して認証する"
 permalink: "authenticate-using-ropg-flow-with-mfa"
+'description': "MFAでリソース所有者のパスワードフローを使用して認証する方法を説明します。"
 'og:title': "MFAでリソース所有者のパスワードフロー使用して認証する"
 'og:description': "MFAでリソース所有者のパスワードフローを使用して認証する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "MFAでリソース所有者のパスワードフロー使用して認証する"
 'twitter:description': "MFAでリソース所有者のパスワードフローを使用して認証する方法を説明します。"
 ---
-# MFAでリソース所有者のパスワードフロー使用して認証する
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>が有効な場合、[Auth0のMFA API](/docs/api/authentication#multi-factor-authentication)は[リソース所有者のパスワードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/resource-owner-password-flow)（ROPG：リソース所有者パスワード付与とも呼ばれる）を用いた認証フローで利用することができます。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>が有効な場合、[Auth0のMFA API](/docs/ja-jp/api/authentication#multi-factor-authentication)は[リソース所有者のパスワードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/resource-owner-password-flow)（ROPG：リソース所有者パスワード付与とも呼ばれる）を用いた認証フローで利用することができます。
 
 ## 前提条件
 
@@ -20,7 +20,7 @@ MFA APIを使用するには、事前にアプリケーションに対してMFA�
 リソース所有者のパスワードフローを用いた認証では、ユーザー名とパスワードを使用して`/oauth/token`エンドポイントを呼び出します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -31,8 +31,8 @@ curl --request POST \
 --data 'client_secret={yourClientSecret}' \
 --data audience=https://someapi.com/api \
 --data 'scope=openid profile read:sample'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -40,7 +40,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=password&u
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -59,15 +59,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=password&username=user%40example.com&password=pwd&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&audience=https%3A%2F%2Fsomeapi.com%2Fapi&scope=openid%20profile%20read%3Asample")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -88,8 +88,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=password" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -118,7 +118,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -141,8 +141,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=password&username=user%40example.com&password=pwd&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&audience=https%3A%2F%2Fsomeapi.com%2Fapi&scope=openid%20profile%20read%3Asample"
@@ -153,7 +153,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -166,8 +166,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=password&username=user%40example.com&password=pwd&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&audience=https%3A%2F%2Fsomeapi.com%2Fapi&scope=openid%20profile%20read%3Asample"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=password".data(using: String.Encoding.utf8)!)
@@ -198,7 +198,7 @@ dataTask.resume()
 
 MFAが有効な場合には、`mfa_required`エラーと`mfa_token`が返されます。
 
-```json
+```json lines
 {
     "error": "mfa_required",
     "error_description": "Multifactor authentication required",
@@ -211,13 +211,13 @@ MFAが有効な場合には、`mfa_required`エラーと`mfa_token`が返され�
 ## 登録されているオーセンティケーターを取得する
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/mfa/authenticators' \
 --header 'authorization: Bearer MFA_TOKEN' \
 --header 'content-type: application/json'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/mfa/authenticators");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer MFA_TOKEN");
@@ -225,7 +225,7 @@ request.AddHeader("content-type", "application/json");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -243,15 +243,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/mfa/authenticators")
 .header("authorization", "Bearer MFA_TOKEN")
 .header("content-type", "application/json")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -263,8 +263,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MFA_TOKEN",
 @"content-type": @"application/json" };
@@ -286,7 +286,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/mfa/authenticators",
@@ -309,8 +309,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = {
@@ -323,7 +323,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -336,8 +336,8 @@ request["authorization"] = 'Bearer MFA_TOKEN'
 request["content-type"] = 'application/json'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer MFA_TOKEN",
@@ -363,7 +363,7 @@ dataTask.resume()
 
 使用可能なオーセンティケーターの配列が取得できます。ユーザーが要素を登録しなかった場合、配列は空になります。
 
-```json
+```json lines
 [
     {
         "id": "recovery-code|dev_O4KYL4FtcLAVRsCl",

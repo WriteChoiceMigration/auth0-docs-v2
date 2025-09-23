@@ -1,13 +1,13 @@
 ---
 title: "認可拡張でルールを使用する"
 permalink: "use-rules-with-the-authorization-extension"
+'description': "ルール内で認可拡張の情報を使用する方法について説明します。"
 'og:title': "認可拡張でルールを使用する"
 'og:description': "ルール内で認可拡張の情報を使用する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "認可拡張でルールを使用する"
 'twitter:description': "ルール内で認可拡張の情報を使用する方法について説明します。"
 ---
-# 認可拡張でルールを使用する
 
 <Note>
 
@@ -41,7 +41,7 @@ Auth0ルールを認可拡張と併用すると、次のようなことが可能
 
 トークンに追加するクレームの数を制限する必要があります。
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   var namespace = 'http://yourdomain/claims/'; // You can set your own namespace, but do not use an Auth0 domain
 
@@ -80,7 +80,7 @@ function (user, context, callback) {
 2. このルールを追加し、生成された「auth0-authorization-extension」ルールの後にリストされていることを確認します。
 3. `required_roles`を設定したら、次の本文を持つ新しい[ルール](https://manage.auth0.com/#/rules)を作成します：
 
-   ```javascript
+   ```javascript lines
    function (user, context, callback) {
      context.clientMetadata = context.clientMetadata || {};
      if (context.clientMetadata.required_roles && context.clientMetadata.required_roles.length){

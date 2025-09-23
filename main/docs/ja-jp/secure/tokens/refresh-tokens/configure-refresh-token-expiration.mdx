@@ -1,13 +1,13 @@
 ---
 title: "リフレッシュトークンの有効期限を構成する"
 permalink: "configure-refresh-token-expiration"
+'description': "リフレッシュトークンの有効期限を構成する方法について説明します。"
 'og:title': "リフレッシュトークンの有効期限を構成する"
 'og:description': "リフレッシュトークンの有効期限を構成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "リフレッシュトークンの有効期限を構成する"
 'twitter:description': "リフレッシュトークンの有効期限を構成する方法について説明します。"
 ---
-# リフレッシュトークンの有効期限を構成する
 
 リフレッシュトークンは、漏洩すると新しいアクセストークンの取得に使用される危険性があるため、攻撃者の恰好の標的となります。このリスクを軽減するために、Auth0では、 リフレッシュトークンのローテーションと自動再利用検知の使用をお勧めします。リフレッシュトークンのローテーションは、事前設定されたライフタイムを過ぎてから有効期限を迎えるリフレッシュトークンを発行します。期限が切れると、ユーザーは同じファミリーの新しいリフレッシュトークン、ファミリーIDを共有するリフレッシュトークン、または新しいアクセストークンとリフレッシュトークンのペアを取得します。詳細については、「[リフレッシュトークンのローテーション](/docs/ja-jp/secure/tokens/refresh-tokens/refresh-token-rotation)」をお読みください。
 
@@ -23,7 +23,7 @@ permalink: "configure-refresh-token-expiration"
 3. **［Settings（設定）］**タブに移動します。
 4. **［Refresh Token Expiration（リフレッシュトークンの有効期限）］**で、**［Set Idle Refresh Token Lifetime（リフレッシュトークンのアイドルライフタイムを設定する）］**を有効にします。有効にすると、リフレッシュトークンは指定されたリフレッシュトークンのアイドルライフタイムに​よって期限切れとなり、それ以降はトークンが使用できなくなります。ローテーションが有効な場合は、ライフタイム期限を設定する必要があります。
 
-   <Frame>![Dashboard アプリケーション アプリケーション設定タブ リフレッシュトークンの有効期限](//images.ctfassets.net/cdy7uua7fh8z/2EnpIEc4kBxjnS3T67xPzC/6e46d561cab7eebe0b214931295aa129/Refresh_Token_Expiration_-_Japanese.png)</Frame>
+   <Frame>![Dashboard アプリケーション アプリケーション設定タブ リフレッシュトークンの有効期限](/images/ja-jp/cdy7uua7fh8z/2EnpIEc4kBxjnS3T67xPzC/6e46d561cab7eebe0b214931295aa129/Refresh_Token_Expiration_-_Japanese.png)</Frame>
 
 5. **［Idle Refresh Token Lifetime（リフレッシュトークンのアイドルライフタイム）］**を秒単位で入力します。リフレッシュトークンは指定された期間が過ぎると期限切れとなり、新しいアクセストークンの取得に使用できなくなります。ローテーションが有効な場合には、リフレッシュトークンのアイドルライフタイムも新しいトークンの取得に適用されます。
 
@@ -81,7 +81,7 @@ permalink: "configure-refresh-token-expiration"
 
 絶対ライフタイムと非アクティブ有効期限の設定は、Management APIの[/api/v2/clients/{id}](https://auth0.com/docs/api/management/v2#!/Clients/patch_clients_by_id)エンドポイントのペイロードで構成することができます。下の例では、ローテーションされないリフレッシュトークンの有効期限を設定します。
 
-```
+```javascript lines
 PATCH /api/v2/clients/{id}
 {
   "refresh_token": {

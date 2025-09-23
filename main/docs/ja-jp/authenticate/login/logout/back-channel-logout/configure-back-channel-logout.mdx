@@ -1,20 +1,20 @@
 ---
 title: "OIDCバックチャネルログアウトを構成する"
 permalink: "configure-back-channel-logout"
+'description': "Auth0のサービスでOIDCバックチャネルログアウトを構成する方法について説明します。"
 'og:title': "OIDCバックチャネルログアウトを構成する"
 'og:description': "Auth0のサービスでOIDCバックチャネルログアウトを構成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "OIDCバックチャネルログアウトを構成する"
 'twitter:description': "Auth0のサービスでOIDCバックチャネルログアウトを構成する方法について説明します。"
 ---
-# OIDCバックチャネルログアウトを構成する
 
 <Card title="Before you start">
 
 バックチャネルログアウトを使用するには、アプリケーションが以下の要件を満たす必要があります。
 
 * Auth0テナントがアクセスできるように、OIDCバックチャネルログアウトのURIエンドポイントがインターネット上で公開されている必要があります。
-* 本番環境の準備が整ったアプリケーションはTLSを使用する必要があります。詳細については、「[TLS（SSL）のバージョンと暗号](/docs/customize/custom-domains/self-managed-certificates/tls-ssl)」をお読みください。
+* 本番環境の準備が整ったアプリケーションはTLSを使用する必要があります。詳細については、「[TLS（SSL）のバージョンと暗号](/docs/ja-jp/customize/custom-domains/self-managed-certificates/tls-ssl)」をお読みください。
 * アプリケーションは提供されたセッション識別子（`sid`）を保管し、作成するユーザーセッションとその識別子を関連付けられなくてはなりません。本番環境のアプリケーションにはセッションで持続性ストレージの使用を推奨します。
 * アプリケーションは、クライアント側のクッキーを使うことなく、ログアウトプロセス中に`sid`を使って既存のセッションを取得できなくてはなりません。クッキーはブラウザー内に存在しており、ログアウトコールバックのエンドポイントにはアクセスできません。
 
@@ -24,7 +24,7 @@ permalink: "configure-back-channel-logout"
 
 OIDCバックチャネルログアウトは、すべてのエンタープライズプランのお客様が利用するためのものです。アプリケーションが要件を満たしているかを確認するには、OIDC標準の`/.well-known/*`メタデータエンドポイントを確認する必要があります。
 
-```
+```javascript lines
 GET https://acme.eu.auth0.com/.well-known/openid-configuration
 
 HTTP 200
@@ -59,7 +59,7 @@ HTTP 200
 4. **［OpenID Connect Back-Channel Logout（Open ID Connectバックチャネルログアウト）］ > ［Back-Channel Logout URI（バックチャネルログアウトURl）］**の下に、logout_tokensを受け取るアプリケーションのログアウトURIを追加します。
 5. 完了したら、**［Save Changes（変更を保存）］**を選択します。
 
-   <Frame>![Auth0 Dashboard > Applications > Settings](//images.ctfassets.net/cdy7uua7fh8z/19uQRkVswdmaO8gHTVTXCc/02e3bc83d556166bbc340e11c14e382e/Backchannel_Logout_-_URI.png)</Frame>
+   <Frame>![Auth0 Dashboard > Applications > Settings](/images/ja-jp/cdy7uua7fh8z/19uQRkVswdmaO8gHTVTXCc/02e3bc83d556166bbc340e11c14e382e/Backchannel_Logout_-_URI.png)</Frame>
 
 #### アプリケーションの登録解除
 
@@ -74,7 +74,7 @@ HTTP 200
 5. バックチャネルURLを削除する
 6. 完了したら、**［Save Changes（変更を保存）］**を選択します。
 
-   <Frame>![Auth0 Dashboard > Applications > Settings](//images.ctfassets.net/cdy7uua7fh8z/5SlrBhwrNbJx0Wdw2kQ19t/5c11c2d03587393e542ef07677edbf42/Backchannel_Logout_-_URI.png)</Frame>
+   <Frame>![Auth0 Dashboard > Applications > Settings](/images/ja-jp/cdy7uua7fh8z/5SlrBhwrNbJx0Wdw2kQ19t/5c11c2d03587393e542ef07677edbf42/Backchannel_Logout_-_URI.png)</Frame>
 
 監査の目的で、Auth0のテナントログで、バックチャネルログアウトURLのサブスクライブや、その解除を`API Operation Event`として常にロギングしています。詳細については、「[ログ](/docs/ja-jp/deploy-monitor/logs)」をお読みください。
 
@@ -84,7 +84,7 @@ HTTP 200
 
 API Managementを通してクライアントを`PATCH`するために、`oidc_logout`プロパティを追加します。
 
-```
+```javascript lines
 PATCH /api/v2/clients/{id}
 "oidc_logout": {
   "backchannel_logout_urls": ["http://acme.eu.auth0.com/events"]
@@ -101,7 +101,7 @@ PATCH /api/v2/clients/{id}
 
 `oidc_logout`パラメーターを削除します：
 
-```
+```javascript lines
 PATCH https://acme.eu.auth0.com/api/v2/clients/{id}
 {
   "oidc_logout": {
@@ -137,7 +137,7 @@ Auth0 DashboardまたはManagement APIを使用してバックチャネルログ
 
 エンコードされたトークンのペイロード：
 
-```
+```javascript lines
 POST /backchannel-logout HTTP/1.1
 Host: rp.example.org
 Content-Type: application/x-www-form-urlencoded
@@ -153,7 +153,7 @@ logout_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImdwY3ZFT0FPREE2T3pXRmw
 
 デコードされたトークンのペイロード：
 
-```json
+```javascript lines
 {
   "iss": "https://artex-dev.eu.auth0.com/",
   "sub": "auth0|602e93db83fa6f00749a23e6",

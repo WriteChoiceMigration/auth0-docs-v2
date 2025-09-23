@@ -1,23 +1,23 @@
 ---
 title: "多要素認証SMS画面クラス"
 permalink: "mfa-sms"
+'description': "ACULの多要素認証SMS画面クラスについて説明します"
 'og:title': "多要素認証SMS画面クラス"
 'og:description': "ACULの多要素認証SMS画面クラスについて説明します"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "多要素認証SMS画面クラス"
 'twitter:description': "ACULの多要素認証SMS画面クラスについて説明します"
 ---
-# 多要素認証SMS画面クラス
 
 ## MFA SMSチャレンジ画面クラス
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip> SMSチャレンジ画面クラスは、mfa-sms-challenge画面と関連付けられているメソッドを提供します。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/20G20ssvZiz0Z3OHp9QKmT/374f18dcf23be977240e53a51ea82012/Screenshot_2025-02-21_at_10.43.36.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/20G20ssvZiz0Z3OHp9QKmT/374f18dcf23be977240e53a51ea82012/Screenshot_2025-02-21_at_10.43.36.png)</Frame>
 
 MFA SMSチャレンジ画面クラスのインポートとインスタンス化
 
-```
+```javascript lines
 import MfaSmsChallenge from '@auth0/auth0-acul-js/mfa-sms-challenge';
 const mfaSmsChallenge = new MfaSmsChallenge();
 
@@ -38,7 +38,7 @@ MFA SMSチャレンジ画面クラスには以下のプロパティがありま�
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -73,7 +73,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -85,7 +85,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -104,7 +104,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -112,7 +112,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -137,7 +137,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -148,7 +148,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -181,7 +181,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -201,7 +201,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -237,7 +237,7 @@ MFA SMSチャレンジ画面クラスには以下のメソッドがあります�
 
 このメソッドは入力された検証コードとrememberBrowserオプションを送信します。
 
-```
+```javascript lines
 import MfaSmsChallenge from '@auth0/auth0-acul-js/mfa-sms-challenge';
 
 const mfaSmsChallenge = new MfaSmsChallenge();
@@ -257,19 +257,19 @@ await mfaSmsChallenge.continueMfaSmsChallenge({
 </thead>
 <tbody>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>文字列</td>
 <td>必須</td>
 <td>ユーザーが入力したコードです。</td>
 </tr>
 <tr>
-<td><code>rememberBrowser</code></td>
+<td>`rememberBrowser`</td>
 <td>ブール値</td>
 <td>任意</td>
 <td>ユーザーのブラウザー構成を記憶します。</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数値 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意 のデータです。</td>
@@ -281,7 +281,7 @@ await mfaSmsChallenge.continueMfaSmsChallenge({
 
 このメソッドは検証コードを音声通話検証で送信できるようにします。
 
-```
+```javascript lines
 import MfaSmsChallenge from '@auth0/auth0-acul-js/mfa-sms-challenge';
 
 const mfaSmsChallenge = new MfaSmsChallenge();
@@ -298,7 +298,7 @@ await mfaSmsChallenge.getACall();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -310,7 +310,7 @@ await mfaSmsChallenge.getACall();
 
 このメソッドはユーザーが利用可能な別のSMS構成を選択できるようにします。
 
-```
+```javascript lines
 import MfaSmsChallenge from '@auth0/auth0-acul-js/mfa-sms-challenge';
 
 const mfaSmsChallenge = new MfaSmsChallenge();
@@ -327,7 +327,7 @@ await mfaSmsChallenge.pickSms();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -339,7 +339,7 @@ await mfaSmsChallenge.pickSms();
 
 このメソッドはSMSコードを再度送信します。
 
-```
+```javascript lines
 import MfaSmsChallenge from '@auth0/auth0-acul-js/mfa-sms-challenge';
 
 const mfaSmsChallenge = new MfaSmsChallenge();
@@ -356,7 +356,7 @@ await mfaSmsChallenge.resendCode();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -368,7 +368,7 @@ await mfaSmsChallenge.resendCode();
 
 このメソッドは別のMFA方法を試行するアクションを送信します。
 
-```
+```javascript lines
 import MfaSmsChallenge from '@auth0/auth0-acul-js/mfa-sms-challenge';
 
 const mfaSmsChallenge = new MfaSmsChallenge();
@@ -385,7 +385,7 @@ await mfaSmsChallenge.tryAnotherMethod();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -397,11 +397,11 @@ await mfaSmsChallenge.tryAnotherMethod();
 
 MFA SMS登録画面クラスは、mfa-sms-challenge画面と関連付けられているメソッドを提供します。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/5DG03Sm0FFKKt9JOxOl5WN/5df6ce785b080baa951b749b4c472793/Screenshot_2025-02-21_at_11.55.42.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/5DG03Sm0FFKKt9JOxOl5WN/5df6ce785b080baa951b749b4c472793/Screenshot_2025-02-21_at_11.55.42.png)</Frame>
 
 MFA SMS登録画面クラスのインポートとインスタンス化
 
-```
+```javascript lines
 import MfaSmsEnrollment from '@auth0/auth0-acul-js/mfa-sms-enrollment';
 const mfaSmsEnrollment = new MfaSmsEnrollment();
 
@@ -419,7 +419,7 @@ MFA SMS登録画面クラスには以下のプロパティがあります。
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -454,7 +454,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -466,7 +466,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -485,7 +485,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -493,7 +493,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -515,7 +515,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -526,7 +526,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -559,7 +559,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -579,7 +579,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -615,7 +615,7 @@ MFA SMS登録画面クラスには以下のメソッドがあります。
 
 このメソッドは提供された電話番号でSMS登録の処理を続行します。
 
-```
+```javascript lines
 import MfaSmsEnrollment from '@auth0/auth0-acul-js/mfa-sms-enrollment';
 
 const mfaSmsEnrollment = new MfaSmsEnrollment();
@@ -632,19 +632,19 @@ await mfaSmsEnrollment.continueEnrollment({ phone: '1234567890' });
 </thead>
 <tbody>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>CAPTCHAプロバイダーが返すCAPTCHAコードまたは応答です。</td>
 </tr>
 <tr>
-<td><code>phone</code></td>
+<td>`phone`</td>
 <td>文字列</td>
 <td>任意</td>
 <td>ユーザーが入力した電話番号です。</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数値 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -656,7 +656,7 @@ await mfaSmsEnrollment.continueEnrollment({ phone: '1234567890' });
 
 このメソッドはSMS登録に国コードを選択するアクションを処理します。
 
-```
+```javascript lines
 import MfaSmsEnrollment from '@auth0/auth0-acul-js/mfa-sms-enrollment';
 
 const mfaSmsEnrollment = new MfaSmsEnrollment();
@@ -673,7 +673,7 @@ await mfaSmsEnrollment.pickCountryCode();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -685,7 +685,7 @@ await mfaSmsEnrollment.pickCountryCode();
 
 このメソッドはMFAに別の方法を試行するアクションを処理します。
 
-```
+```javascript lines
 import MfaSmsEnrollment from '@auth0/auth0-acul-js/mfa-sms-enrollment';
 
 const mfaSmsEnrollment = new MfaSmsEnrollment();
@@ -702,7 +702,7 @@ await mfaSmsEnrollment.tryAnotherMethod();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -714,11 +714,11 @@ await mfaSmsEnrollment.tryAnotherMethod();
 
 MFA SMSリスト画面クラスは、mfa-sms-list画面と関連付けられているメソッドを提供します。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/5WKzkwCtJn5ZViHcl9xATn/6147dac2ff98da4ab190922ced35a1f2/Screenshot_2025-02-21_at_12.29.36.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/5WKzkwCtJn5ZViHcl9xATn/6147dac2ff98da4ab190922ced35a1f2/Screenshot_2025-02-21_at_12.29.36.png)</Frame>
 
 MFA SMSリスト画面クラスのインポートとインスタンス化
 
-```
+```javascript lines
 import MfaSmsList from '@auth0/auth0-acul-js/mfa-sms-list';
 const mfaSmsList = new MfaSmsList();
 
@@ -737,7 +737,7 @@ MFA SMSリスト画面クラスには以下のプロパティがあります。
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -772,7 +772,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -784,7 +784,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -803,7 +803,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -811,7 +811,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -858,7 +858,7 @@ interface PasskeyCreate {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -869,7 +869,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -902,7 +902,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -922,7 +922,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -958,7 +958,7 @@ MFA SMSリスト画面クラスには以下のメソッドがあります。
 
 このメソッドはユーザーが前の画面に戻れるようにします。
 
-```
+```javascript lines
 import MfaSmsList from '@auth0/auth0-acul-js/mfa-sms-list';
 
 const mfaSmsList = new MfaSmsList();
@@ -975,7 +975,7 @@ await mfaSmsList.backAction();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -987,7 +987,7 @@ await mfaSmsList.backAction();
 
 このメソッドは、ユーザーが登録済みの電話番号のリストから電話番号を選択できるようにします。
 
-```
+```javascript lines
 import MfaSmsList from '@auth0/auth0-acul-js/mfa-sms-list';
 
 const mfaSmsList = new MfaSmsList();
@@ -1006,13 +1006,13 @@ await mfaSmsList.selectPhoneNumber({
 </thead>
 <tbody>
 <tr>
-<td><code>index</code></td>
+<td>`index`</td>
 <td>数値</td>
 <td>必須</td>
 <td>選択する電話番号のインデックスです。</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数値 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -1024,11 +1024,11 @@ await mfaSmsList.selectPhoneNumber({
 
 MFA国コード画面クラスは、ユーザーがMFAの電話番号検証に国コードを選択できるようにします。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/7hp8LeL9cbS3nbxw8wTuqK/3c862b1c47ae18fb43f22f55ea4d695a/Screenshot_2025-02-19_at_13.23.44.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/7hp8LeL9cbS3nbxw8wTuqK/3c862b1c47ae18fb43f22f55ea4d695a/Screenshot_2025-02-19_at_13.23.44.png)</Frame>
 
 MFA国コード画面クラスのインポートとインスタンス化
 
-```
+```javascript lines
 import MfaCountryCodes from '@auth0/auth0-acul-js/mfa-country-codes';
 const mfaCountryCodesManager = new MfaCountryCodes();
 
@@ -1049,7 +1049,7 @@ MFA国コード画面クラスには以下のプロパティがあります。
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -1084,7 +1084,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -1096,7 +1096,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -1115,7 +1115,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -1123,7 +1123,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -1151,7 +1151,7 @@ interface PhonePrefix {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -1162,7 +1162,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -1195,7 +1195,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -1215,7 +1215,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -1251,7 +1251,7 @@ MFA国コード画面クラスには以下のメソッドがあります。
 
 このメソッドはユーザーを前の画面に戻します。
 
-```
+```javascript lines
 import MfaCountryCodes from '@auth0/auth0-acul-js/mfa-country-codes';
 
 const mfaCountryCodes = new MfaCountryCodes();
@@ -1268,7 +1268,7 @@ await mfaCountryCodes.goBack();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -1280,7 +1280,7 @@ await mfaCountryCodes.goBack();
 
 このメソッドはユーザーが国コードを選択できるようにします。
 
-```
+```javascript lines
 import MfaCountryCodes from '@auth0/auth0-acul-js/mfa-country-codes';
 
 const mfaCountryCodes = new MfaCountryCodes();
@@ -1306,19 +1306,19 @@ await mfaCountryCodes.selectCountryCode({
 </thead>
 <tbody>
 <tr>
-<td><code>country_code</code></td>
+<td>`country_code`</td>
 <td>文字列</td>
 <td>必須</td>
 <td>選択する国コードです。</td>
 </tr>
 <tr>
-<td><code>phone_prefix</code></td>
+<td>`phone_prefix`</td>
 <td>文字列</td>
 <td>必須</td>
 <td>選択する電話番号の国番号です。</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数値 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>

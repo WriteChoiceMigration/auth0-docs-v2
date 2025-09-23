@@ -1,13 +1,13 @@
 ---
 title: "Native to Web SSO Best Practices"
 permalink: "native-to-web-sso-best-practices"
+'description': "Learn about Native to Web SSO best practices"
 'og:title': "Native to Web SSO Best Practices"
 'og:description': "Learn about Native to Web SSO best practices"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Native to Web SSO Best Practices"
 'twitter:description': "Learn about Native to Web SSO best practices"
 ---
-# Native to Web SSO Best Practices
 
 <Warning>
 
@@ -22,7 +22,7 @@ For best results when implementing Native to Web <Tooltip data-tooltip-id="react
 Use [`post-login`](/docs/ja-jp/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger) Action triggers to ensure web sessions created through Native to Web SSO are time-boxed appropriately and expire quickly when inactive. 
 You can use `post-login` Actions to detect when a session is initiated through a `session_transfer_token` and apply shorter idle and absolute timeouts:
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   if (event.session_transfer_token) {
     const now = Date.now();

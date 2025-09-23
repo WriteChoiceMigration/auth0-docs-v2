@@ -1,13 +1,13 @@
 ---
 title: "Unbounceのランディングページでユーザー情報を取得する"
 permalink: "get-user-information-on-unbounce-landing-pages"
+'description': "Unbounceのランディングページでワンクリックのソーシャル認証を使用してユーザー情報を取得する方法について説明します。"
 'og:title': "Unbounceのランディングページでユーザー情報を取得する"
 'og:description': "Unbounceのランディングページでワンクリックのソーシャル認証を使用してユーザー情報を取得する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Unbounceのランディングページでユーザー情報を取得する"
 'twitter:description': "Unbounceのランディングページでワンクリックのソーシャル認証を使用してユーザー情報を取得する方法について説明します。"
 ---
-# Unbounceのランディングページでユーザー情報を取得する
 
 ## Auth0の構成
 
@@ -21,7 +21,7 @@ permalink: "get-user-information-on-unbounce-landing-pages"
 1. プロバイダーでのログインをトリガーするボタンなどのUI要素を作成します。**［Properties（プロパティ）］>［Element Metadata（要素のメタデータ）］**にあるUI要素のIDをメモします。
 2. 新しいJavaScriptをUnbounceのランディングページに追加して、［`Placement`（配置）］に［`Before Body End Tag`（ボディの終了タグの前）］を選択し、以下のコードを追加します。また、依存関係として［jQuery］を選択します。
 
-```
+```html lines
 <script src="https://cdn.auth0.com/js/auth0/9.11/auth0.min.js"></script>
 <script type="application/javascript">
   var webAuth = new auth0.WebAuth({
@@ -46,7 +46,7 @@ permalink: "get-user-information-on-unbounce-landing-pages"
    1. 前の手順でメモしたボタンIDと[接続名](/docs/ja-jp/authenticate/identity-providers/locate-the-connection-id)を置き換えます。たとえば、Googleであれば`google-oauth2`、LinkedInであれば`linkedin`を使用します。
    2. IDは必ず正しく置換してください。`#name`や`#email`ではなく、フォームにあるそのフィールドのIDを入力します（フォームの編集中に［`Field Name and ID`（フィールド名とID）］の下に表示されます）。
 
-```
+```javascript lines
 $('#{buttonId}').bind('click', function() { 
   webAuth.authorize({
     connection: '{yourConnectionName}'

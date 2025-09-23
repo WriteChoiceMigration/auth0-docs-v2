@@ -1,13 +1,13 @@
 ---
 title: "Office 365のカスタムプロビジョニング"
 permalink: "office-365-custom-provisioning"
+'description': "Microsoft Office 365のカスタムプロビジョニングをセットアップする方法を説明します。"
 'og:title': "Office 365のカスタムプロビジョニング"
 'og:description': "Microsoft Office 365のカスタムプロビジョニングをセットアップする方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Office 365のカスタムプロビジョニング"
 'twitter:description': "Microsoft Office 365のカスタムプロビジョニングをセットアップする方法を説明します。"
 ---
-# Office 365のカスタムプロビジョニング
 
 Office 365のデフォルトのセットアップには、Active DirectoryとDirSync/Microsoft Entra ID同期サービスが含まれており、Entra ID（旧称Azure AD）にいるEntra IDユーザーを<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SSO</Tooltip>用に同期してプロビジョニングします。この構成では、Auth0がIDプロバイダーで、これらのユーザーにシングルサインオン（SSO）を提供します。
 
@@ -59,7 +59,7 @@ Office 365のデフォルトのセットアップには、Active DirectoryとDir
 
 コードでは、ユーザーがプロビジョニングされた後にルールが約15秒待つこともわかります。これは、プロビジョニングされたユーザーがOffice 365で利用可能になるのに数秒かかるためです。
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   // Require the Node.js packages that we are going to use.
   // Check this website for a complete list of the packages available:
@@ -273,7 +273,7 @@ function (user, context, callback) {
 
 ユーザーを（たとえば`https://office.travel0.com`などの「スマートリンク」を使用して）以下のURLにリダイレクトする必要があります。
 
-```
+``` lines
 https://{yourDomain}/login?client=AUTH0_OFFICE365_CLIENT_ID&protocol=wsfed&state=&redirect_uri=&
 ```
 
@@ -285,7 +285,7 @@ https://{yourDomain}/login?client=AUTH0_OFFICE365_CLIENT_ID&protocol=wsfed&state
 
 実装に（たとえば、SharePoint Onlineへの）ディープリンキングが必要になることがあります。その場合は、Office 365のログインページで開始するスマートリンクを構築してください。
 
-```
+``` lines
 https://login.microsoftonline.com/login.srf?wa=wsignin1.0&whr={yourCustomDomain}&wreply={deepLink}
 ```
 
@@ -295,7 +295,7 @@ https://login.microsoftonline.com/login.srf?wa=wsignin1.0&whr={yourCustomDomain}
 
 URLの例：
 
-```
+``` lines
 https://login.microsoftonline.com/login.srf?wa=wsignin1.0&whr=travel0.com&wreply=https%3A%2F%2Ftravel0%2Esharepoint%2Ecom
 ```
 

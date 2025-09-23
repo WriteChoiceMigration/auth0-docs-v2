@@ -1,13 +1,13 @@
 ---
 title: "委任管理：アクセスフック"
 permalink: "delegated-administration-access-hook"
+'description': "委任管理拡張機能を持つアクセスフックを使用する方法について説明します。"
 'og:title': "委任管理：アクセスフック"
 'og:description': "委任管理拡張機能を持つアクセスフックを使用する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "委任管理：アクセスフック"
 'twitter:description': "委任管理拡張機能を持つアクセスフックを使用する方法について説明します。"
 ---
-# 委任管理：アクセスフック
 
 フィルターフックはフィルタリングロジックのみを適用するため、現在のユーザー（または管理者の役割を果たしている人物）が特定のユーザーへのアクセス権を持っているかどうかを判定するには、2番目のロジック層が必要になります。
 
@@ -29,7 +29,7 @@ permalink: "delegated-administration-access-hook"
 
 財務部の管理を担うケリーがアクセスできるのは、部署内のユーザーのみに限られるべきです。
 
-```javascript
+```javascript lines
 function(ctx, callback) {
   if (ctx.payload.action === 'delete:user') {
     return callback(new Error('You are not allowed to delete users.'));

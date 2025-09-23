@@ -1,13 +1,13 @@
 ---
 title: "デフォルトのログインルートを設定する"
 permalink: "configure-default-login-routes"
+'description': "テナントやアプリケーションにデフォルトのログインルートを構成する方法について説明します。"
 'og:title': "デフォルトのログインルートを設定する"
 'og:description': "テナントやアプリケーションにデフォルトのログインルートを構成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "デフォルトのログインルートを設定する"
 'twitter:description': "テナントやアプリケーションにデフォルトのログインルートを構成する方法について説明します。"
 ---
-# デフォルトのログインルートを設定する
 
 場合によっては（以下を参照）、Auth0がOIDCサードパーティ起点のログインを使って、アプリケーションのログイン開始エンドポイントにリダイレクトしなければならないことがあります。詳細については、[OpenID Foundation](https://openid.net/specs/openid-connect-core-1_0.html#ThirdPartyInitiatedLogin)の「[Initiating Login from a Third Party](https://openid.net)」をお読みください。
 
@@ -16,15 +16,15 @@ permalink: "configure-default-login-routes"
 <Tabs><Tab title="アプリケーションレベル">
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/clients/{yourClientId}' \
 --header 'authorization: Bearer API2_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{"initiate_login_uri": ""}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/clients/{yourClientId}");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -34,7 +34,7 @@ request.AddParameter("application/json", "{\"initiate_login_uri\": \"\"}", Param
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -55,8 +55,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/clients/{yourClientId}")
 .header("content-type", "application/json")
 .header("authorization", "Bearer API2_ACCESS_TOKEN")
@@ -65,7 +65,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/clients/{your
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -82,8 +82,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer API2_ACCESS_TOKEN",
@@ -109,7 +109,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/clients/{yourClientId}",
@@ -134,8 +134,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"initiate_login_uri\": \"\"}"
@@ -150,7 +150,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -165,8 +165,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{\"initiate_login_uri\": \"\"}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -197,15 +197,15 @@ dataTask.resume()
 </Tab><Tab title="テナントレベル">
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/tenants/settings' \
 --header 'authorization: Bearer API2_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{"default_redirection_uri": ""}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/tenants/settings");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -215,7 +215,7 @@ request.AddParameter("application/json", "{\"default_redirection_uri\": \"\"}", 
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -236,8 +236,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/settings")
 .header("content-type", "application/json")
 .header("authorization", "Bearer API2_ACCESS_TOKEN")
@@ -246,7 +246,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/setti
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -263,8 +263,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer API2_ACCESS_TOKEN",
@@ -290,7 +290,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/tenants/settings",
@@ -315,8 +315,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"default_redirection_uri\": \"\"}"
@@ -331,7 +331,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -346,8 +346,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{\"default_redirection_uri\": \"\"}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -387,7 +387,7 @@ OIDCサードパーティ起点のログイン仕様に基づいて、リダイ�
 
 ### ユーザーがログインページをブックマーク
 
-アプリケーションがログインプロセスが開始すると、[必要なパラメーター](/docs/api/authentication#login)セットを使って`https://{yourDomain}/authorize`に移動します。Auth0は、エンドユーザーを`https://{yourDomain}/login`ページにリダイレクトし、URLは次のようになります。
+アプリケーションがログインプロセスが開始すると、[必要なパラメーター](/docs/ja-jp/api/authentication#login)セットを使って`https://{yourDomain}/authorize`に移動します。Auth0は、エンドユーザーを`https://{yourDomain}/login`ページにリダイレクトし、URLは次のようになります。
 
 `https://{yourDomain}/login?state=g6Fo2SBjNTRyanlVa3ZqeHN4d1htTnh&...`
 
@@ -403,17 +403,17 @@ Organizationsを使用している場合、エンドユーザーが組織のロ�
 
 この動作は、ユニバーサルログインエクスペリエンスが有効な場合にのみ起こります。クラシックログインでは、Change Password（パスワード変更）テンプレートでリダイレクトURLを構成する必要があります。詳細については、「[メールテンプレートをカスタマイズする](/docs/ja-jp/customize/email/email-templates)」をお読みください。
 
-ユニバーサルログインを使うテナントの場合、[`/post-password-change`](/docs/api/management/v2/#!/Tickets/post_password_change)エンドポイントは、ユーザーを特定のアプリケーションにリダイレクトする動作に対応しています。`client_id`が指定され、アプリケーションのログインURIが設定されている場合は、パスワードのリセット完了後にユーザーをアプリケーションに送り返すボタンが表示されます。
+ユニバーサルログインを使うテナントの場合、[`/post-password-change`](/docs/ja-jp/api/management/v2/#!/Tickets/post_password_change)エンドポイントは、ユーザーを特定のアプリケーションにリダイレクトする動作に対応しています。`client_id`が指定され、アプリケーションのログインURIが設定されている場合は、パスワードのリセット完了後にユーザーをアプリケーションに送り返すボタンが表示されます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/tickets/password-change' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: application/json' \
 --data '{ "user_id": "A_USER_ID", "client_id": "A_CLIENT_ID" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/tickets/password-change");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -422,7 +422,7 @@ request.AddParameter("application/json", "{ \"user_id\": \"A_USER_ID\", \"client
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -442,8 +442,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/tickets/password-change")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -451,7 +451,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/tickets/passwo
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -467,8 +467,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
@@ -494,7 +494,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/tickets/password-change",
@@ -518,8 +518,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"user_id\": \"A_USER_ID\", \"client_id\": \"A_CLIENT_ID\" }"
@@ -533,7 +533,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -547,8 +547,8 @@ request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 request.body = "{ \"user_id\": \"A_USER_ID\", \"client_id\": \"A_CLIENT_ID\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",

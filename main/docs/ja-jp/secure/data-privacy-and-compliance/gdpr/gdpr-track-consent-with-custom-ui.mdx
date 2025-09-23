@@ -1,13 +1,13 @@
 ---
 title: "GDPR:カスタムUIで同意を追跡する"
 permalink: "gdpr-track-consent-with-custom-ui"
+'description': "ログインに独自のカスタムUIを使用する場合に、auth0.jsまたはAuth0 APIを使用して同意情報を取得する方法について説明します。"
 'og:title': "GDPR:カスタムUIで同意を追跡する"
 'og:description': "ログインに独自のカスタムUIを使用する場合に、auth0.jsまたはAuth0 APIを使用して同意情報を取得する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "GDPR:カスタムUIで同意を追跡する"
 'twitter:description': "ログインに独自のカスタムUIを使用する場合に、auth0.jsまたはAuth0 APIを使用して同意情報を取得する方法について説明します。"
 ---
-# GDPR:カスタムUIで同意を追跡する
 
 チュートリアルでは、auth0.jsまたはAuth0 APIを使用して同意情報を要求し、入力内容をユーザーのメタデータに保存する方法を説明します。詳細については、「[ユーザープロファイルでのメタデータの使い方](/docs/ja-jp/manage-users/user-accounts/metadata)」をお読みください。
 
@@ -32,7 +32,7 @@ Lockを使用して同意を追跡する場合は、[GDPR：Lockで同意を追�
 
 例：
 
-```json
+```json lines
 {
   "consentGiven": "true"
   "consentTimestamp": "1525101183"
@@ -48,7 +48,7 @@ Lockを使用して同意を追跡する場合は、[GDPR：Lockで同意を追�
 
 ## オプション1：auth0.jsを使用する
 
-このセクションでは、シンプルなシングルページアプリケーションを使用して、ログインウィジェットをカスタマイズし、ユーザーが同意情報を提供するために使用できるフラグを追加します。アプリを最初から構築するのではなく、[Auth0のJavaScriptクイックスタートサンプルを使用します](/docs/quickstart/spa/vanillajs)。また、Auth0のユニバーサルログインページを使用して、アプリにログインを埋め込む代わりにユニバーサルログインを実装できるようにします。ユニバーサルログインの詳細については、「[Auth0ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)」をお読みください。ユニバーサルログインと埋め込みログインの違いについて詳しくは、「[中央集中型のユニバーサルログインと埋め込みログイン](/docs/ja-jp/authenticate/login/universal-vs-embedded-login)」をご覧ください。
+このセクションでは、シンプルなシングルページアプリケーションを使用して、ログインウィジェットをカスタマイズし、ユーザーが同意情報を提供するために使用できるフラグを追加します。アプリを最初から構築するのではなく、[Auth0のJavaScriptクイックスタートサンプルを使用します](/docs/ja-jp/quickstart/spa/vanillajs)。また、Auth0のユニバーサルログインページを使用して、アプリにログインを埋め込む代わりにユニバーサルログインを実装できるようにします。ユニバーサルログインの詳細については、「[Auth0ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)」をお読みください。ユニバーサルログインと埋め込みログインの違いについて詳しくは、「[中央集中型のユニバーサルログインと埋め込みログイン](/docs/ja-jp/authenticate/login/universal-vs-embedded-login)」をご覧ください。
 
 これは、データベース接続に対して**のみ**機能します（独自のデータベースをセットアップするのではなく、Auth0のインフラストラクチャを使用します）。
 
@@ -57,13 +57,13 @@ Lockを使用して同意を追跡する場合は、[GDPR：Lockで同意を追�
    このフィールドには、Auth0が認証後にユーザーをリダイレクトできるURLのセットが格納されます。サンプルアプリは`http://localhost:3000`で実行されるため、この値を設定します。
 2. **クライアントID**と**ドメイン**値をコピーします。これらは後で必要になります。
 3. [［Auth0 Dashboard]>［Authentication（認証）］>［Database（データベース）］](https://manage.auth0.com/#/connections/database)に移動して、新しい接続を作成します。**［Create DB Connection（DB接続の作成）］**をクリックし、新しい接続の名前を設定して、**［Save（保存）］**をクリックします。接続の**［Applications（アプリケーション）］**タブに移動し、新しく作成したアプリケーションが有効になっていることを確認します。
-4. [JavaScript SPAサンプルをダウンロードします](/docs/quickstart/spa/vanillajs)。
+4. [JavaScript SPAサンプルをダウンロードします](/docs/ja-jp/quickstart/spa/vanillajs)。
 5. [クライアントIDとドメイン値を設定します](https://github.com/auth0-samples/auth0-javascript-samples/tree/master/01-Login#set-the-client-id-and-domain)。
 6. [［Auth0 Dashboard］>［Branding（ブランディング）］>［Universal Login（ユニバーサルログイン）］](https://manage.auth0.com/#/login_settings)に移動します。**［Login（ログイン）］**タブでトグルを有効にします。
 7. **［Default Templates（デフォルトテンプレート）］**ドロップダウンで、`［Custom Login Form（カスタムログインフォーム）］`が選択されていることを確認します。コードは事前に入力されています。
 8. `databaseConnection`変数の値を、アプリが使用しているデータベース接続の名前に設定します。
 
-   ```javascript
+   ```javascript lines
    //code reducted for simplicity
    	var databaseConnection = 'test-db';
    	//code reducted for simplicity
@@ -74,7 +74,7 @@ Lockを使用して同意を追跡する場合は、[GDPR：Lockで同意を追�
    
 9. `consentGiven`メタデータのフィールドを追加するには、フォームにチェックボックスを追加します。この例では、チェックボックスはデフォルトでチェックが入っており、ユーザーがチェックを外せないよう無効になっています。これはビジネスニーズに応じて調整できます。
 
-   ```javascript
+   ```javascript lines
    //code reducted for simplicity
        <div class="form-group">
          <label for="name">I consent with data processing</label>
@@ -89,7 +89,7 @@ Lockを使用して同意を追跡する場合は、[GDPR：Lockで同意を追�
    
 
    
-10. サインアップ関数を編集してメタデータを設定します。メタデータの値をブール値ではなく、値が`true`の文字列に設定し、`toString`を使用して数値を文字列に変換していることに注意してください。これは、値として文字列のみを受け入れるAuthentication API[**サインアップ**エンドポイント](/docs/api/authentication#signup)の制限によるものです。
+10. サインアップ関数を編集してメタデータを設定します。メタデータの値をブール値ではなく、値が`true`の文字列に設定し、`toString`を使用して数値を文字列に変換していることに注意してください。これは、値として文字列のみを受け入れるAuthentication API[**サインアップ**エンドポイント](/docs/ja-jp/api/authentication#signup)の制限によるものです。
 
     ```
     //code reducted for simplicity
@@ -109,24 +109,24 @@ Lockを使用して同意を追跡する場合は、[GDPR：Lockで同意を追�
     
 11. ログインウィジェットの外観を確認するには、**［Preview（プレビュー）］**タブをクリックします。
 
-<Frame>![Dashboard Branding Universal Login Classic Login Tab Custom Login Form](//images.ctfassets.net/cdy7uua7fh8z/4m3WA0sKMoR0C1KVnVmZ1G/89f3b3002f4d3344411af061574e89b7/2025-02-26_15-16-19.png)</Frame>
+<Frame>![Dashboard Branding Universal Login Classic Login Tab Custom Login Form](/images/ja-jp/cdy7uua7fh8z/4m3WA0sKMoR0C1KVnVmZ1G/89f3b3002f4d3344411af061574e89b7/2025-02-26_15-16-19.png)</Frame>
 
 1. この構成をテストするには、アプリケーションを実行して、`http://localhost:3000`に移動します。新しいユーザーでサインアップします。次に[［Auth0 Dashboard］>［User Management（ユーザー管理）］>［Users（ユーザー）］](https://manage.auth0.com/#/users)に移動し、新規ユーザーを検索します。**［User Details（ユーザーの詳細）］**に移動し、**［Metadata（メタデータ）］**セクションまでスクロールします。**user_metadata**テキスト領域で、`consentGiven`メタデータが`true`に設定されていることを確認します。
 
 ## オプション2：API（データベース）を使用する
 
-独自のサーバーからログインページを提供する場合は、ユーザーがサインアップすると、Authentication API[**サインアップ**エンドポイント](/docs/api/authentication#signup)を直接呼び出すことができます。
+独自のサーバーからログインページを提供する場合は、ユーザーがサインアップすると、Authentication API[**サインアップ**エンドポイント](/docs/ja-jp/api/authentication#signup)を直接呼び出すことができます。
 
 これまで説明してきたのと同じシナリオで、新しいユーザーをサインアップすると、次のスニペットを使用してAuth0でユーザーを作成し、メタデータを設定できます。必ず、`consentTimestamp`要求パラメータの値を、ユーザーが同意したときのタイムスタンプに置き換えてください。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/dbconnections/signup' \
 --header 'content-type: application/json' \
 --data '{"client_id": "{yourClientId}","email": "YOUR_USER_EMAIL","password": "YOUR_USER_PASSWORD","user_metadata": {"consentGiven": "true", "consentTimestamp": "1525101183" }}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/dbconnections/signup");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -134,7 +134,7 @@ request.AddParameter("application/json", "{\"client_id\": \"{yourClientId}\",\"e
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -153,15 +153,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/dbconnections/signup")
 .header("content-type", "application/json")
 .body("{\"client_id\": \"{yourClientId}\",\"email\": \"YOUR_USER_EMAIL\",\"password\": \"YOUR_USER_PASSWORD\",\"user_metadata\": {\"consentGiven\": \"true\", \"consentTimestamp\": \"1525101183\" }}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -179,8 +179,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"client_id": @"{yourClientId}",
@@ -207,7 +207,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/dbconnections/signup",
@@ -230,8 +230,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"client_id\": \"{yourClientId}\",\"email\": \"YOUR_USER_EMAIL\",\"password\": \"YOUR_USER_PASSWORD\",\"user_metadata\": {\"consentGiven\": \"true\", \"consentTimestamp\": \"1525101183\" }}"
@@ -242,7 +242,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -255,8 +255,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"client_id\": \"{yourClientId}\",\"email\": \"YOUR_USER_EMAIL\",\"password\": \"YOUR_USER_PASSWORD\",\"user_metadata\": {\"consentGiven\": \"true\", \"consentTimestamp\": \"1525101183\" }}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = [
@@ -290,7 +290,7 @@ dataTask.resume()
 
 メタデータの値は、ブール値ではなく文字列を値として受け入れるというAPI制限により、ブール値ではなく、値が`true`の文字列に設定されていることに注意してください。
 
-ブール値の設定が必要な場合は、代わりに<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>を使用できます。このシナリオでは、通常どおりユーザーをサインアップし、ユーザーが作成された後、Management API[**更新ユーザー**エンドポイント](/docs/api/management/v2#!/Users/patch_users_by_id)を呼び出して必要なメタデータを設定します。その方法の詳細については、後述します。次の段落ではそのエンドポイントを使用します。
+ブール値の設定が必要な場合は、代わりに<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>を使用できます。このシナリオでは、通常どおりユーザーをサインアップし、ユーザーが作成された後、Management API[**更新ユーザー**エンドポイント](/docs/ja-jp/api/management/v2#!/Users/patch_users_by_id)を呼び出して必要なメタデータを設定します。その方法の詳細については、後述します。次の段落ではそのエンドポイントを使用します。
 
 ## オプション3：API（ソーシャル）を使用する
 
@@ -302,19 +302,19 @@ Management APIを呼び出す前に、有効なトークンを取得する必要
 
 リンク先の記事では、クライアントの資格情報フローを使用してトークンを取得していますが、これはブラウザで実行されているアプリからは使用できません。使用できるのは暗黙フローです。クライアントの資格情報フローの詳細については、「[クライアントの資格情報フロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/client-credentials-flow)」を参照してください。暗黙フローの詳細については、「[暗黙フロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/implicit-flow-with-form-post)」をご覧ください。
 
-**オーディエンス**要求パラメータを`https://YOUR_DOMAIN/api/v2/`に設定し、**スコープ**パラメータをスコープ`create:current_user_metadata`に設定します。応答で取得したアクセストークンを使用して、Management API[**更新ユーザー**エンドポイント](/docs/api/management/v2#!/Users/patch_users_by_id)を呼び出すことができます。
+**オーディエンス**要求パラメータを`https://YOUR_DOMAIN/api/v2/`に設定し、**スコープ**パラメータをスコープ`create:current_user_metadata`に設定します。応答で取得したアクセストークンを使用して、Management API[**更新ユーザー**エンドポイント](/docs/ja-jp/api/management/v2#!/Users/patch_users_by_id)を呼び出すことができます。
 
 有効なトークンを取得したら、次のスニペットを使用してユーザーのメタデータを更新します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/users/%7BUSER_ID%7D' \
 --header 'authorization: Bearer YOUR_ACCESS_TOKEN' \
 --header 'content-type: application/json' \
 --data '{"user_metadata": {"consentGiven":true, "consentTimestamp": "1525101183"}}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/%7BUSER_ID%7D");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer YOUR_ACCESS_TOKEN");
@@ -323,7 +323,7 @@ request.AddParameter("application/json", "{\"user_metadata\": {\"consentGiven\":
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -343,8 +343,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/users/%7BUSER_ID%7D")
 .header("authorization", "Bearer YOUR_ACCESS_TOKEN")
 .header("content-type", "application/json")
@@ -352,7 +352,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/users/%7BUSER_
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -365,8 +365,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer YOUR_ACCESS_TOKEN",
 @"content-type": @"application/json" };
@@ -391,7 +391,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/%7BUSER_ID%7D",
@@ -415,8 +415,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"user_metadata\": {\"consentGiven\":true, \"consentTimestamp\": \"1525101183\"}}"
@@ -430,7 +430,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -444,8 +444,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"user_metadata\": {\"consentGiven\":true, \"consentTimestamp\": \"1525101183\"}}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer YOUR_ACCESS_TOKEN",
@@ -486,7 +486,7 @@ dataTask.resume()
 1. リダイレクトルールを追加します。[［Auth0 Dashboard］>［Auth Pipeline（Authパイプライン）］>［Rules（ルール）］](https://manage.auth0.com/#/rules)に移動して、**［Create Rule（ルールを作成）］**をクリックします。**ルールテンプレート**で、**［empty rule（空のルール）］**を選択します。デフォルトのルールの名前を、`［empty rule（空のルール）］`からわかりやすい名前（例：`同意フォームにリダイレクト`）に変更します。
 2. スクリプトエディターに次のJavaScriptコードを追加し、変更を**［Save（保存）］**します。
 
-   ```
+   ``` lines
    exports.onExecutePostLogin = async (event, api) => {
        const { consentGiven } = event.user.user_metadata || {};
 

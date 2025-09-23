@@ -1,13 +1,13 @@
 ---
 title: "PHP：Auth0-PHPでManagement APIを使用する"
 permalink: "using-the-management-api-with-auth0-php"
+'description': "Auth0のManagement APIエンドポイントをPHPアプリケーションに統合する"
 'og:title': "PHP：Auth0-PHPでManagement APIを使用する"
 'og:description': "Auth0のManagement APIエンドポイントをPHPアプリケーションに統合する"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "PHP：Auth0-PHPでManagement APIを使用する"
 'twitter:description': "Auth0のManagement APIエンドポイントをPHPアプリケーションに統合する"
 ---
-# PHP：Auth0-PHPでManagement APIを使用する
 
 Auth0 PHP SDKには`Auth0\SDK\API\Management`クラスが用意されています。このクラスには、[Management API](https://auth0.com/docs/api/management/v2)にアクセスし、Auth0テナントで操作を実行するのに使用できるメソッドが格納されています。このインターフェイスを使用すると、以下のことが簡単にできます。
 
@@ -23,7 +23,7 @@ Auth0 PHP SDKには`Auth0\SDK\API\Management`クラスが用意されていま�
 * 一時的にアクセスするかテストを実施する場合には、[APIトークンを手動で生成し](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens)、`.env`ファイルに保存します。
 * 拡張アクセスでは、アクセスが必要な場合にはクライアント資格情報付与を作成して実行する必要があります。このプロセスの詳細については、[Authentication APIページ](/docs/ja-jp/libraries/auth0-php/using-the-authentication-api-with-auth0-php)をご覧ください。
 
-いずれの方式でも、生成されたトークンにはアプリで実行する操作に必要なスコープが含まれている必要があります。アクセスしようとする特定のエンドポイントに必要なスコープについては、[APIドキュメント](/docs/api/management/v2)を参照してください。
+いずれの方式でも、生成されたトークンにはアプリで実行する操作に必要なスコープが含まれている必要があります。アクセスしようとする特定のエンドポイントに必要なスコープについては、[APIドキュメント](/docs/ja-jp/api/management/v2)を参照してください。
 
 必要なスコープを付与するには、以下のようにします。
 
@@ -33,7 +33,7 @@ Auth0 PHP SDKには`Auth0\SDK\API\Management`クラスが用意されていま�
 
 上記のいずれかの方法を認証し、そのトークンを使って操作を実行できるようになります。
 
-```javascript
+```php lines
 // 👆 We're continuing from the "getting started" guide linked in "Prerequisites" above. Append this to the index.php file you created there.
 
 if (isset($env['AUTH0_MANAGEMENT_API_TOKEN'])) {
@@ -49,9 +49,9 @@ $management = $auth0->management();
 
 ### 例 - Search Users by Email（メールでユーザーを検索する）
 
-このエンドポイントは[こちらに](/docs/api/management/v2#!/Users/get_users)記載されています。
+このエンドポイントは[こちらに](/docs/ja-jp/api/management/v2#!/Users/get_users)記載されています。
 
-```javascript
+```php lines
 // 👆 We're continuing from the code above. Append this to your source code file.
 
 $response = $management->users()->getAll(['q' => 'josh']);
@@ -80,9 +80,9 @@ if (! empty($response)) {
 
 ### 例 - Get All Clients（すべてのクライアントを取得する）
 
-このエンドポイントは[こちらに](/docs/api/management/v2#!/Clients/get_clients)記載されています。
+このエンドポイントは[こちらに](/docs/ja-jp/api/management/v2#!/Clients/get_clients)記載されています。
 
-```javascript
+```php lines
 // 👆 We're continuing from the code above. Append this to your source code file.
 
 $response = $management->clients()->getAll(['q' => 'josh']);

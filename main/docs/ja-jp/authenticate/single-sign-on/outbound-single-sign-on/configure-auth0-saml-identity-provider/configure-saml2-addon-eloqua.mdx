@@ -1,13 +1,13 @@
 ---
 title: "SAMLサービスプロバイダーとしてOracle Eloqua Marketing Cloudを構成する"
 permalink: "configure-saml2-addon-eloqua"
+'description': "Oracle Eloqua用のSAML2 Webアプリアドオンを使用して、Auth0をIDプロバイダーとして設定する方法を説明します。"
 'og:title': "SAMLサービスプロバイダーとしてOracle Eloqua Marketing Cloudを構成する"
 'og:description': "Oracle Eloqua用のSAML2 Webアプリアドオンを使用して、Auth0をIDプロバイダーとして設定する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "SAMLサービスプロバイダーとしてOracle Eloqua Marketing Cloudを構成する"
 'twitter:description': "Oracle Eloqua用のSAML2 Webアプリアドオンを使用して、Auth0をIDプロバイダーとして設定する方法を説明します。"
 ---
-# SAMLサービスプロバイダーとしてOracle Eloqua Marketing Cloudを構成する
 
 Oracle Eloqua Marketing Cloudには、以下の<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip>構成を使用します。
 
@@ -17,11 +17,11 @@ Oracle Eloqua Marketing Cloudには、以下の<Tooltip data-tooltip-id="react-c
 2. **［Addons（アドオン）］**タブに移動し、**［SAML2 Web App（SAML2 Webアプリ）］**トグルを有効にします。
 3. **［Settings（設定）］**タブで、**［Application CallbackURL（アプリケーションのコールバックURL）］**を`https://login.eloqua.com/auth/saml2/acs`に設定します。
 
-   <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 設定タブ](//images.ctfassets.net/cdy7uua7fh8z/6dJgYkcOgMZ73HVTkAWt1x/0126f55506d82cfd73d0bcb7ebd6fa9f/2025-02-27_14-00-16.png)</Frame>
+   <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 設定タブ](/images/ja-jp/cdy7uua7fh8z/6dJgYkcOgMZ73HVTkAWt1x/0126f55506d82cfd73d0bcb7ebd6fa9f/2025-02-27_14-00-16.png)</Frame>
 
 4. 以下のコードを**［Settings（設定）］**テキストボックスに貼り付け、**［Debug（デバッグ）］**をクリックします。
 
-   ```json
+   ```json lines
    {
        "audience": "<Service Provider Entity Url from within Eloqua>",
         "recipient": "https://login.eloqua.com/auth/saml2/acs",
@@ -46,7 +46,7 @@ Oracle Eloqua Marketing Cloudには、以下の<Tooltip data-tooltip-id="react-c
 5. タブの最後までスクロールし、**［Enable（有効）］**をクリックします。
 6. **［Usage（使用状況）］**タブで、**［Identity Provider Metadata（IDプロバイダーのメタデータ）］**を検索し、**［Download（ダウンロード）］**をクリックしてメタデータファイルをダウンロードします。これは、EloquaでAuth0をIDプロバイダーとして構成する場合に必要になります。
 
-   <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 使用状況タブ](//images.ctfassets.net/cdy7uua7fh8z/3T90BDpyTXFUWDp1JkncBU/20060887bf494416b5831075fd4fce13/2025-01-28_10-16-30.png)</Frame>
+   <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 使用状況タブ](/images/ja-jp/cdy7uua7fh8z/3T90BDpyTXFUWDp1JkncBU/20060887bf494416b5831075fd4fce13/2025-01-28_10-16-30.png)</Frame>
 
 ## Oracle EloquaでSAML SSOを構成する
 

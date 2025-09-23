@@ -1,13 +1,13 @@
 ---
 title: "OIDCを使った暗黙フロー"
 permalink: "oidc-adoption-implicit-flow"
+'description': "OIDC準拠のパイプラインが暗黙フローに与える影響について説明します。"
 'og:title': "OIDCを使った暗黙フロー"
 'og:description': "OIDC準拠のパイプラインが暗黙フローに与える影響について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "OIDCを使った暗黙フロー"
 'twitter:description': "OIDC準拠のパイプラインが暗黙フローに与える影響について説明します。"
 ---
-# OIDCを使った暗黙フロー
 
 [暗黙フロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/implicit-flow-with-form-post)は従来、シークレットを安全に保存できないアプリケーションで使用されていましたが、このフローの使用はアクセストークンを要求するためのベストプラクティスとはみなされなくなりました。新しい実装では、[PKCEを使った認可コードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce)を使用してください。ただし、アプリケーションがユーザー認証にIDトークンのみを必要とする場合、フォームPOST応答モードと併用することでワークフローが効率化します。この場合は、[ハイブリッドフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/hybrid-flow)の一部として使用します。
 
@@ -19,7 +19,7 @@ permalink: "oidc-adoption-implicit-flow"
 
 ### 旧
 
-```
+``` lines
 GET /authorize?
     response_type=token
     &scope=openid email favorite_color offline_access
@@ -33,7 +33,7 @@ GET /authorize?
 
 ### OIDC準拠
 
-```
+``` lines
 GET /authorize?
     response_type=token id_token
     &scope=openid email
@@ -54,7 +54,7 @@ GET /authorize?
 
 ### 旧
 
-```
+``` lines
 HTTP/1.1 302 Found
 Location: https://app.example.com/#
     access_token=SlAV32hkKG
@@ -65,12 +65,12 @@ Location: https://app.example.com/#
     &token_type=Bearer
 ```
 
-* 返されるアクセストークンは、[`/userinfo`](/docs/api/authentication#get-user-info)エンドポイントの呼び出しに対して有効です。
+* 返されるアクセストークンは、[`/userinfo`](/docs/ja-jp/api/authentication#get-user-info)エンドポイントの呼び出しに対して有効です。
 * リフレッシュトークンは、`device`パラメーターが渡され、`offline_access`スコープが要求された場合にのみ返されます。
 
 ### OIDC準拠
 
-```
+``` lines
 HTTP/1.1 302 Found
 Location: https://app.example.com/#
     access_token=eyJ...
@@ -80,14 +80,14 @@ Location: https://app.example.com/#
     &token_type=Bearer
 ```
 
-* 返されるアクセストークンは、[`/userinfo`](/docs/api/authentication#get-user-info)エンドポイント（`audience`パラメーターで指定したAPIが`RS256`を[署名アルゴリズム](/docs/ja-jp/get-started/applications/signing-algorithms)として使用していることを条件とする）と、`audience`パラメーターで指定したリソースサーバー（任意）の呼び出しに対してのみ有効です。
+* 返されるアクセストークンは、[`/userinfo`](/docs/ja-jp/api/authentication#get-user-info)エンドポイント（`audience`パラメーターで指定したAPIが`RS256`を[署名アルゴリズム](/docs/ja-jp/get-started/applications/signing-algorithms)として使用していることを条件とする）と、`audience`パラメーターで指定したリソースサーバー（任意）の呼び出しに対してのみ有効です。
 * `response_type=id_token`を使用する場合は、IDトークンのみが返されます。リフレッシュトークンは暗黙的付与では許可されていません。代わりに、`prompt=none`を使用してください。
 
 ## IDトークンの構造
 
 ### 旧
 
-```json
+```json lines
 {
     "sub": "auth0|alice",
     "iss": "https://{yourDomain}/",
@@ -102,7 +102,7 @@ Location: https://app.example.com/#
 
 ### OIDC準拠
 
-```json
+```json lines
 {
     "sub": "auth0|alice",
     "iss": "https://{yourDomain}/",
@@ -123,7 +123,7 @@ Location: https://app.example.com/#
 
 ### 旧
 
-```
+```json lines
 SlAV32hkKG
 ```
 
@@ -131,7 +131,7 @@ SlAV32hkKG
 
 ### OIDC準拠
 
-```json
+```json lines
 {
     "sub": "auth0|alice",
     "iss": "https://{yourDomain}/",

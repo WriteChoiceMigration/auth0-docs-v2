@@ -1,13 +1,13 @@
 ---
 title: "回復コードを使用したチャレンジ"
 permalink: "challenge-with-recovery-codes"
+'description': "デバイスまたはアカウントへのアクセスを失ったユーザーに回復コードを使用してチャレンジするために、MFA APIを使用する方法を説明します。"
 'og:title': "回復コードを使用したチャレンジ"
 'og:description': "デバイスまたはアカウントへのアクセスを失ったユーザーに回復コードを使用してチャレンジするために、MFA APIを使用する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "回復コードを使用したチャレンジ"
 'twitter:description': "デバイスまたはアカウントへのアクセスを失ったユーザーに回復コードを使用してチャレンジするために、MFA APIを使用する方法を説明します。"
 ---
-# 回復コードを使用したチャレンジ
 
 テナントに対する[回復コードが有効](/docs/ja-jp/secure/multi-factor-authentication/configure-recovery-codes-for-mfa)になると、Auth0は、ユーザーが多要素認証（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>）に登録したときに自動的に回復コードを生成します。ユーザーは回復コードを保存する必要があります。このコードは後で、ユーザーがMFAに使用されるデバイスまたはアカウントへのアクセスを失った場合に使用されます。
 
@@ -33,18 +33,18 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
 </thead>
 <tbody>
 <tr>
-<td><code>grant_type</code></td>
-<td><code>http://auth0.com/oauth/grant-type/mfa-recovery-code</code></td>
+<td>`grant_type`</td>
+<td>`http://auth0.com/oauth/grant-type/mfa-recovery-code`</td>
 </tr>
 <tr>
-<td><code>recovery_code</code></td>
+<td>`recovery_code`</td>
 <td>ユーザーによって提供された回復コード。</td>
 </tr>
 </tbody>
 </table>
 
    <CodeGroup>
-```bash curl.sh
+```bash cURL lines
    curl --request POST \
    --url 'https://{yourDomain}/oauth/token' \
    --header 'content-type: application/x-www-form-urlencoded' \
@@ -53,8 +53,8 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
    --data 'client_secret={yourClientSecret}' \
    --data 'mfa_token={mfaToken}' \
    --data 'recovery_code={recoveryCode}'
-   ```
-   ```csharp c_.cs
+   ``` lines
+   ```csharp C# lines
    var client = new RestClient("https://{yourDomain}/oauth/token");
    var request = new RestRequest(Method.POST);
    request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -62,7 +62,7 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
    IRestResponse response = client.Execute(request);
    ```
 
-   ```go go.go
+   ```go Go lines
    package main
    import (
    "fmt"
@@ -81,15 +81,15 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
    fmt.Println(res)
    fmt.Println(string(body))
    }
-   ```
-   ```java java.java
+   ``` lines
+   ```java Java lines
    HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
    .header("content-type", "application/x-www-form-urlencoded")
    .body("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-recovery-code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&recovery_code=%7BrecoveryCode%7D")
    .asString();
    ```
 
-   ```javascript node_js.js
+   ```javascript Node.JS lines
    var axios = require("axios").default;
    var options = {
    method: 'POST',
@@ -108,8 +108,8 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
    }).catch(function (error) {
    console.error(error);
    });
-   ```
-   ```obj-c obj-c.obj-c
+   ``` lines
+   ```obj-c Obj-C lines
    #import 
    NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
    NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=http://auth0.com/oauth/grant-type/mfa-recovery-code" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -136,7 +136,7 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
    [dataTask resume];
    ```
 
-   ```php php.php
+   ```php PHP lines
    $curl = curl_init();
    curl_setopt_array($curl, [
    CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -159,8 +159,8 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
    } else {
    echo $response;
    }
-   ```
-   ```python python.py
+   ``` lines
+   ```python Python lines
    import http.client
    conn = http.client.HTTPSConnection("")
    payload = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-recovery-code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&recovery_code=%7BrecoveryCode%7D"
@@ -171,7 +171,7 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
    print(data.decode("utf-8"))
    ```
 
-   ```ruby ruby.rb
+   ```ruby Ruby lines
    require 'uri'
    require 'net/http'
    require 'openssl'
@@ -184,8 +184,8 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
    request.body = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-recovery-code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&recovery_code=%7BrecoveryCode%7D"
    response = http.request(request)
    puts response.read_body
-   ```
-   ```swift swift.swift
+   ``` lines
+   ```swift Swift lines
    import Foundation
    let headers = ["content-type": "application/x-www-form-urlencoded"]
    let postData = NSMutableData(data: "grant_type=http://auth0.com/oauth/grant-type/mfa-recovery-code".data(using: String.Encoding.utf8)!)
@@ -214,7 +214,7 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
 
 3. 回復コードを保存するようにユーザーに求めます。呼び出しに成功した場合は、認証トークンと新しい回復コードを受け取ります。
 
-   ```json
+   ```json lines
    {
        "access_token": "O3...H4",
        "id_token": "eyJh...w",

@@ -1,13 +1,13 @@
 ---
 title: "Streamline API Authorization Flows with Auth0 Model Context Protocol (MCP) Server"
 permalink: "streamline-api-authorization-flows-with-auth0-model-context-protocol-mcp"
+'description': "Streamline your API authorization flows with Auth0 Model Context Protocol (MCP) Server."
 'og:title': "Streamline API Authorization Flows with Auth0 Model Context Protocol (MCP) Server"
 'og:description': "Streamline your API authorization flows with Auth0 Model Context Protocol (MCP) Server."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Streamline API Authorization Flows with Auth0 Model Context Protocol (MCP) Server"
 'twitter:description': "Streamline your API authorization flows with Auth0 Model Context Protocol (MCP) Server."
 ---
-# Streamline API Authorization Flows with Auth0 Model Context Protocol (MCP) Server
 
 <Card title="Overview">
 
@@ -36,7 +36,7 @@ Before creating new APIs, it's important to understand what's already configured
 
 Ask Claude:
 
-```
+``` lines
 Show me all the resource servers (APIs) currently configured in my Auth0 tenant.
 ```
 
@@ -48,7 +48,7 @@ Now that you understand your current configuration, you can create new APIs for 
 
 Ask Claude:
 
-```
+``` lines
 I need to create three new APIs for our microservices:
 1. An inventory API with read and write scopes
 2. An orders API with read and write scopes
@@ -65,7 +65,7 @@ After your APIs are defined, you'll need to implement custom authorization logic
 
 Ask Claude:
 
-```
+``` lines
 Create an Action that enforces the following authorization rules:
 1. Verify the requesting application has the appropriate scopes for the API being accessed.
 2. For the customers API, requests using the admin scope should only come from our internal IP ranges (10.0.0.0/8 and 172.16.0.0/12).
@@ -80,7 +80,7 @@ Once you're satisfied with the Action code, you can deploy it to your production
 
 Ask Claude:
 
-```
+``` lines
 Deploy this action to run during the token issuance process.
 ```
 
@@ -92,7 +92,7 @@ Next, you'll need to configure your client applications to access the appropriat
 
 Ask Claude:
 
-```
+``` lines
 Create an 'inventory-manager' application on my Auth0 tenant and update the app to access the inventory and orders APIs with read and write permissions, but not the customers API.
 ```
 
@@ -104,7 +104,7 @@ To ensure your authorization system is working correctly, you can check the logs
 
 Ask Claude:
 
-```
+``` lines
 Check the logs for any failed API access attempts in the last hour. Focus on authorization failures.
 ```
 
@@ -116,7 +116,7 @@ Based on the log analysis, you might need to refine your authorization rules. Fo
 
 Ask Claude:
 
-```
+```python lines
 Update the authorization action to also allow requests from our development VPN range 192.168.100.0/24.
 ```
 

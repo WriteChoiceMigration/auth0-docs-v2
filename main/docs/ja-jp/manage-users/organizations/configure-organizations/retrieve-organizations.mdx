@@ -1,19 +1,19 @@
 ---
 title: "組織を取得する"
 permalink: "retrieve-organizations"
+'description': "Auth0 DashboardやManagement APIを使用して組織を取得する方法を説明します。"
 'og:title': "組織を取得する"
 'og:description': "Auth0 DashboardやManagement APIを使用して組織を取得する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "組織を取得する"
 'twitter:description': "Auth0 DashboardやManagement APIを使用して組織を取得する方法を説明します。"
 ---
-# 組織を取得する
 
 プログラムで[組織](/docs/ja-jp/manage-users/organizations/organizations-overview)を操作する場合は、すべての組織のリストを取得するか、名前またはIDで組織を個別に取得する必要がある場合があります。
 
 <Warning>
 
-Management APIには、機密のクライアントを使ってアクセスすることしかできません。Management APIの使用には、[Auth0 Management APIレート制限](/docs/troubleshoot/customer-support/operational-policies/rate-limit-policy/management-api-endpoint-rate-limits)が適用されます。
+Management APIには、機密のクライアントを使ってアクセスすることしかできません。Management APIの使用には、[Auth0 Management APIレート制限](/docs/ja-jp/troubleshoot/customer-support/operational-policies/rate-limit-policy/management-api-endpoint-rate-limits)が適用されます。
 
 </Warning>
 
@@ -23,26 +23,26 @@ Management APIには、機密のクライアントを使ってアクセスする
 
 <Warning>
 
-1000件を超える結果を取得するには、チェックポイントページネーションメソッドを使用しなければなりません。詳細については、当社のAPI Explorerで「[Organizations取得エンドポイント](/docs/api/management/v2#!/Organizations/get_organizations)」を参照してください。
+1000件を超える結果を取得するには、チェックポイントページネーションメソッドを使用しなければなりません。詳細については、当社のAPI Explorerで「[Organizations取得エンドポイント](/docs/ja-jp/api/management/v2#!/Organizations/get_organizations)」を参照してください。
 
 </Warning>
 
 `Get Organizations`エンドポイントに対して`GET`呼び出しを行います。`MGMT_API_ACCESS_TOKEN`プレースホルダーの値をManagement APIのアクセストークンで置き換えてください。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/organizations' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/organizations");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -59,14 +59,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/organizations")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -78,8 +78,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/organizations"]
@@ -100,7 +100,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/organizations",
@@ -122,8 +122,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MGMT_API_ACCESS_TOKEN" }
@@ -133,7 +133,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -145,8 +145,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/organizations")! as URL,
@@ -185,8 +185,8 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><code>read:organizations</code>スコープのある<a href="/docs/tokens/management-api-access-tokens">Management APIのアクセストークン</a>。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>`read:organizations`スコープのある<a href="/docs/ja-jp/tokens/management-api-access-tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 </tbody>
 </table>
@@ -205,49 +205,49 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>200</code></td>
+<td>`200`</td>
 <td></td>
 <td>Organization successfully retrieved（メンバーを取得しました）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_paging</code></td>
+<td>`400`</td>
+<td>`invalid_paging`</td>
 <td>Requesting page exceeds the allowed maximum of 1000 records（要求しているページは許可される最大の1000件のレコードを超えました）</td>
 <td>APIは、最大1000件のレコードのみを返すように制限されています。</td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_query_string</code></td>
+<td>`400`</td>
+<td>`invalid_query_string`</td>
 <td>Invalid request query string（無効な要求クエリ文字列です）メッセージは、原因によって異なります。</td>
 <td>クエリ文字列が有効ではありません。</td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Invalid token（無効なトークンです）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Invalid signature received for JSON Web Token validation（JSON Webトークン検証に無効な署名を受け取りました）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Client is not global（クライアントがグローバルでありません）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>403</code></td>
-<td><code>insufficient_scope</code></td>
-<td>Insufficient scope; expected any of（スコープ不足。次のいずれかを想定します）： <code>read:organizations</code>.</td>
+<td>`403`</td>
+<td>`insufficient_scope`</td>
+<td>Insufficient scope; expected any of（スコープ不足。次のいずれかを想定します）： `read:organizations`.</td>
 <td>提供されたベアラートークンスコープで許可されていないフィールドのread/writeを試みました。</td>
 </tr>
 <tr>
-<td><code>429</code></td>
+<td>`429`</td>
 <td></td>
 <td>Too many requests（要求が多すぎます）X-RateLimit-Limit、X-RateLimit-Remaining、X-RateLimit-Resetヘッダーを確認してください。</td>
 <td></td>
@@ -262,19 +262,19 @@ Management APIを介してIDで組織を取得できます。
 `Get Organization`エンドポイントに対して`GET`呼び出しを行います。`ORG_ID`と`MGMT_API_ACCESS_TOKEN`のプレースホルダーの値を、それぞれ組織IDとManagement APIのアクセストークンに置き換えてください。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/organizations/ORG_ID' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/organizations/ORG_ID");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -291,14 +291,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/organizations/ORG_ID")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -310,8 +310,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/organizations/ORG_ID"]
@@ -332,7 +332,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/organizations/ORG_ID",
@@ -354,8 +354,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MGMT_API_ACCESS_TOKEN" }
@@ -365,7 +365,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -377,8 +377,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/organizations/ORG_ID")! as URL,
@@ -417,12 +417,12 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>ORG_ID</code></td>
+<td>`ORG_ID`</td>
 <td>取得する組織のID。</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><code>read:organizations</code>スコープのある<a href="/docs/tokens/management-api-access-tokens">Management APIのアクセストークン</a>。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>`read:organizations`スコープのある<a href="/docs/ja-jp/tokens/management-api-access-tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 </tbody>
 </table>
@@ -441,43 +441,43 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>200</code></td>
+<td>`200`</td>
 <td></td>
 <td>Organizationが正常に取得されました。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_query_string</code></td>
+<td>`400`</td>
+<td>`invalid_query_string`</td>
 <td>要求クエリ文字列が無効です。メッセージは原因に応じて異なります。</td>
 <td>クエリ文字列が有効ではありません。</td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>トークンが無効です。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>JSON Webトークンの検証に受け取った署名が無効です。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>クライアントがグローバルでありません。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>403</code></td>
-<td><code>insufficient_scope</code></td>
-<td>スコープが不十分です。予想された値：<code>read:organizations</code></td>
+<td>`403`</td>
+<td>`insufficient_scope`</td>
+<td>スコープが不十分です。予想された値：`read:organizations`</td>
 <td>指定されたベアラートークンのスコープで許可されていないフィールドの読み取り/書き込みを試行しました。</td>
 </tr>
 <tr>
-<td><code>429</code></td>
+<td>`429`</td>
 <td></td>
 <td>要求が多すぎます。X-RateLimit-Limit、X-RateLimit-Remaining、X-RateLimit-Resetヘッダーを確認してください。</td>
 <td></td>
@@ -492,19 +492,19 @@ Management APIを介して組織を名前で取得できます。
 `Get Organization by Name`エンドポイントへの`GET`呼び出しを行います。`ORG_NAME`と`MGMT_API_ACCESS_TOKEN`のプレースホルダーの値を、それぞれ組織IDとManagement APIのアクセストークンに置き換えてください。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/organizations/name/ORG_NAME' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/organizations/name/ORG_NAME");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -521,14 +521,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/organizations/name/ORG_NAME")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -540,8 +540,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/organizations/name/ORG_NAME"]
@@ -562,7 +562,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/organizations/name/ORG_NAME",
@@ -584,8 +584,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MGMT_API_ACCESS_TOKEN" }
@@ -595,7 +595,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -607,8 +607,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/organizations/name/ORG_NAME")! as URL,
@@ -647,12 +647,12 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>ORG_ NAME</code></td>
+<td>`ORG_ NAME`</td>
 <td>取得したい組織の名前。最大の長さは50文字。</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td>スコープ<code>read:organizations</code>を持つ<a href="/docs/tokens/management-api-access-tokens">Management APIのアクセストークン</a>。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>スコープ`read:organizations`を持つ<a href="/docs/ja-jp/tokens/management-api-access-tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 </tbody>
 </table>
@@ -671,43 +671,43 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>200</code></td>
+<td>`200`</td>
 <td></td>
 <td>Organizationが正常に取得されました。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_query_string</code></td>
+<td>`400`</td>
+<td>`invalid_query_string`</td>
 <td>要求クエリ文字列が無効です。メッセージは原因に応じて異なります。</td>
 <td>クエリ文字列が有効ではありません。</td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>トークンが無効です。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>JSON Webトークンの検証に受け取った署名が無効です。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>クライアントがグローバルでありません。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>403</code></td>
-<td><code>insufficient_scope</code></td>
-<td>スコープが不十分です。予想された値：<code>read:organizations</code></td>
+<td>`403`</td>
+<td>`insufficient_scope`</td>
+<td>スコープが不十分です。予想された値：`read:organizations`</td>
 <td>指定されたベアラートークンのスコープで許可されていないフィールドの読み取り/書き込みを試行しました。</td>
 </tr>
 <tr>
-<td><code>429</code></td>
+<td>`429`</td>
 <td></td>
 <td>要求が多すぎます。X-RateLimit-Limit、X-RateLimit-Remaining、X-RateLimit-Resetヘッダーを確認してください。</td>
 <td></td>

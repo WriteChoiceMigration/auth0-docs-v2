@@ -1,27 +1,27 @@
 ---
 title: "ユーザーのインポート中にルート属性を設定する"
 permalink: "set-root-attributes-during-user-import"
+'description': "Auth0 Management APIを使用して、ユーザーのインポート中にルート属性を設定する方法について説明します。"
 'og:title': "ユーザーのインポート中にルート属性を設定する"
 'og:description': "Auth0 Management APIを使用して、ユーザーのインポート中にルート属性を設定する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユーザーのインポート中にルート属性を設定する"
 'twitter:description': "Auth0 Management APIを使用して、ユーザーのインポート中にルート属性を設定する方法について説明します。"
 ---
-# ユーザーのインポート中にルート属性を設定する
 
 このガイドでは、Auth0の<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>を使用して、インポート中にユーザーのルート属性を設定する方法について説明します。これにより、ユーザーをインポートする際に、ルート属性の設定に必要なAPI呼び出しの数を最小限に抑えることができます。インポート可能な属性については、「[正規化ユーザープロファイルの構造](/docs/ja-jp/manage-users/user-accounts/user-profiles/user-profile-structure)」を参照してください。
 
-`POST`呼び出しを[ユーザーインポートのジョブ作成エンドポイント](/docs/api/management/v2#!/Jobs/post_users_imports)に対して行います。`MGMT_API_ACCESS_TOKEN`、`CONNECTION_ID`、`JSON_USER_FILE_PATH`のプレースホルダーをそれぞれManagement APIのアクセストークン、接続ID、ユーザーファイル名に置き換えます。
+`POST`呼び出しを[ユーザーインポートのジョブ作成エンドポイント](/docs/ja-jp/api/management/v2#!/Jobs/post_users_imports)に対して行います。`MGMT_API_ACCESS_TOKEN`、`CONNECTION_ID`、`JSON_USER_FILE_PATH`のプレースホルダーをそれぞれManagement APIのアクセストークン、接続ID、ユーザーファイル名に置き換えます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/jobs/usersimports' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: multipart/form-data ' \
 --data '{ "connection_id": "CONNECTION_ID", "users": "JSON_USER_FILE_PATH" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/jobs/usersimports");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "multipart/form-data ");
@@ -30,7 +30,7 @@ request.AddParameter("multipart/form-data ", "{ \"connection_id\": \"CONNECTION_
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -50,8 +50,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/jobs/usersimports")
 .header("content-type", "multipart/form-data ")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -59,7 +59,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/jobs/usersimpo
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -75,8 +75,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"multipart/form-data ",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
@@ -100,7 +100,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/jobs/usersimports",
@@ -124,8 +124,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"connection_id\": \"CONNECTION_ID\", \"users\": \"JSON_USER_FILE_PATH\" }"
@@ -139,7 +139,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -153,8 +153,8 @@ request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 request.body = "{ \"connection_id\": \"CONNECTION_ID\", \"users\": \"JSON_USER_FILE_PATH\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "multipart/form-data ",
@@ -188,16 +188,16 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><code>create:users</code>の<dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">スコープ</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>を持つ<a href="/docs/api/management/v2/tokens">Management APIアクセストークン</a>です。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>`create:users`の<dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">スコープ</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>を持つ<a href="/docs/ja-jp/api/management/v2/tokens">Management APIアクセストークン</a>です。</td>
 </tr>
 <tr>
-<td><code>CONNECTION_ID</code></td>
-<td>ユーザーが挿入される接続のIDです。この情報は<a href="/docs/api/management/v2#!/Connections/get_connections">全接続取得エンドポイント</a>を使用して取得できます。</td>
+<td>`CONNECTION_ID`</td>
+<td>ユーザーが挿入される接続のIDです。この情報は<a href="/docs/ja-jp/api/management/v2#!/Connections/get_connections">全接続取得エンドポイント</a>を使用して取得できます。</td>
 </tr>
 <tr>
-<td><code>JSON_USER_FILE_PATH</code></td>
-<td>インポートするユーザーを含むファイルのファイル名です。JSON形式のファイルにユーザーのルート属性を含める必要があります。利用可能な属性のリストについては、「<a href="/docs/users/references/user-profile-structure#attributes">ユーザープロファイル属性</a>」を参照してください。ファイル形式の例については、「<a href="/docs/users/references/bulk-import-database-schema-examples">ユーザーの一括インポートのデータベーススキーマと例</a>」を参照してください。</td>
+<td>`JSON_USER_FILE_PATH`</td>
+<td>インポートするユーザーを含むファイルのファイル名です。JSON形式のファイルにユーザーのルート属性を含める必要があります。利用可能な属性のリストについては、「<a href="/docs/ja-jp/users/references/user-profile-structure#attributes">ユーザープロファイル属性</a>」を参照してください。ファイル形式の例については、「<a href="/docs/ja-jp/users/references/bulk-import-database-schema-examples">ユーザーの一括インポートのデータベーススキーマと例</a>」を参照してください。</td>
 </tr>
 </tbody>
 </table>

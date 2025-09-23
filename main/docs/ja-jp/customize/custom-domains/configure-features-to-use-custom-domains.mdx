@@ -1,13 +1,13 @@
 ---
 title: "機能にカスタムドメインの使用を構成する"
 permalink: "configure-features-to-use-custom-domains"
+'description': "Auth0の認証機能にカスタムドメインを構成する方法について説明します。"
 'og:title': "機能にカスタムドメインの使用を構成する"
 'og:description': "Auth0の認証機能にカスタムドメインを構成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "機能にカスタムドメインの使用を構成する"
 'twitter:description': "Auth0の認証機能にカスタムドメインを構成する方法について説明します。"
 ---
-# 機能にカスタムドメインの使用を構成する
 
 Auth0の機能にカスタムドメインの使用を構成する場合、使用している機能によっては追加の手順を完了する必要があります。たとえば、ログインページでカスタムドメインを使用したり、APIを呼び出したりするには、変更が必要になるかもしれません。
 
@@ -87,7 +87,7 @@ Auth0をしばらく使用していて、カスタムドメインを有効化す
 
 [Web用のLock](/docs/ja-jp/libraries/lock)を使用している場合には、`configurationBaseUrl`と`overrides`のオプションを以下のスクリプト例のように設定しなければなりません。
 
-```javascript
+```javascript lines
 var lock = new Auth0Lock(config.clientID, config.auth0Domain, {
   //code omitted for brevity
   configurationBaseUrl: config.clientConfigurationBaseUrl,
@@ -101,7 +101,7 @@ var lock = new Auth0Lock(config.clientID, config.auth0Domain, {
 
 ユニバーサルログインページに[Auth0.js](/docs/ja-jp/libraries/auth0js)を使用している場合には、`overrides`オプションを設定する必要があります。
 
-```javascript
+```javascript lines
 var webAuth = new auth0.WebAuth({
   clientID: config.clientID,
   domain: config.auth0Domain,
@@ -122,7 +122,7 @@ var webAuth = new auth0.WebAuth({
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 var lock = new Auth0Lock('{yourClientId}', '{yourCustomDomain}', {
   //code omitted for brevity
   configurationBaseUrl: 'https://cdn.us.auth0.com'
@@ -140,11 +140,11 @@ CDNのURLは地域によって異なります。2020年6月11日より前に作�
 
 ## Auth0 SPA SDK、Auth0.js、その他のSDK
 
-[Auth0 SPA SDK](/docs/libraries/auth0-spa-js)、[Auth0.js](/docs/libraries/auth0js)または[その他のSDK](/docs/support/matrix#auth0-sdks)を使用している場合には、カスタムドメインの使用にSDKを初期化する必要があります。たとえば、Auth0.js SDKの使用では以下を設定します。
+[Auth0 SPA SDK](/docs/ja-jp/libraries/auth0-spa-js)、[Auth0.js](/docs/ja-jp/libraries/auth0js)または[その他のSDK](/docs/ja-jp/support/matrix#auth0-sdks)を使用している場合には、カスタムドメインの使用にSDKを初期化する必要があります。たとえば、Auth0.js SDKの使用では以下を設定します。
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 webAuth = new auth0.WebAuth({
   domain: '{yourCustomDomain}',
   clientID: '{yourClientId}'
@@ -155,14 +155,14 @@ Auth0 SPA SDKでは以下を設定します。
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 const auth0 = await createAuth0Client({
   domain: '{yourCustomDomain}',
   client_id: '{yourClientId}'
 });
 ```
 
-カスタムドメインを使用していて、[Auth0.jsを用いたManagement APIのアクション](/docs/libraries/auth0js/v9#user-management)を実行する予定の場合には、以下に記載のAPIセクションを参照してください。
+カスタムドメインを使用していて、[Auth0.jsを用いたManagement APIのアクション](/docs/ja-jp/libraries/auth0js/v9#user-management)を実行する予定の場合には、以下に記載のAPIセクションを参照してください。
 
 ## メールにカスタムドメインを使用する
 
@@ -195,7 +195,7 @@ Auth0はトークンを発行するのに、トークンの取得に使用した
 
 また、カスタムドメインを用いた認証フローを使って、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Management API</Tooltip>へのアクセスにアクセストークンを要求する場合には、そのカスタムドメインでManagement APIを呼び出す必要があります。
 
-```
+``` lines
 POST https://mycustomdomain.com/oauth/token
 ... // other parameters 
 ...
@@ -204,7 +204,7 @@ audience:https://defaulttenant.eu.auth0.com/api/v2/
 
 アクセストークン要求は以下のようになるはずです。
 
-```
+``` lines
 GET https://mycustomdomain.com/api/v2/clients
 
 Headers:
@@ -215,7 +215,7 @@ Authorization: Bearer <access_token>
 
 Auth0でカスタムドメインを使ってAPIにアクセストークンを発行する場合には、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">JWT</Tooltip>の発行者をカスタムドメインに照らし合わせて検証しなければなりません。たとえば、[express-jwt](https://github.com/auth0/express-jwt)ミドルウェアの使用では、以下の変更を行う必要があります。
 
-```
+```javascript lines
 app.use(jwt({
   issuer: 'https://<YOUR-CUSTOM-DOMAIN>/',
   //code omitted for brevity
@@ -264,7 +264,7 @@ ADFS接続でカスタムドメインを使用したい場合には、ADFSの設
 
 Kerberosへの対応が不必要な場合には、AD/LDAP接続をそれ以上構成する必要はありません。
 
-Kerberosに対応したAD/LDAP接続を使用するには、カスタムドメインと動作するようにチケットエンドポイントを更新しなければなりません。[Auth0 AD/LDAPコネクターのドキュメント](/docs/connector/modify#point-an-ad-ldap-connector-to-a-new-connection)でも説明したように、`config.json`ファイルを編集し、カスタムドメインを使用するように、`PROVISIONING_TICKET`値を`https://<YOUR-CUSTOM-DOMAIN>/p/ad/jUG0dN0R`形式の値に変更します。
+Kerberosに対応したAD/LDAP接続を使用するには、カスタムドメインと動作するようにチケットエンドポイントを更新しなければなりません。[Auth0 AD/LDAPコネクターのドキュメント](/docs/ja-jp/connector/modify#point-an-ad-ldap-connector-to-a-new-connection)でも説明したように、`config.json`ファイルを編集し、カスタムドメインを使用するように、`PROVISIONING_TICKET`値を`https://<YOUR-CUSTOM-DOMAIN>/p/ad/jUG0dN0R`形式の値に変更します。
 
 この変更を保存したら、AD/LDAPコネクターサービスを再起動して、変更内容を適用する必要があります。
 

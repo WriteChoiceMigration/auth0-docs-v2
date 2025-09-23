@@ -1,13 +1,13 @@
 ---
 title: "Configure Mobile Driver’s License Verification Presentation Request"
 permalink: "configure-mdl-verification-request"
+'description': "Learn how to use Auth0's Verification Service for with Verifiable Credentials such as Mobile Driver's Licenses."
 'og:title': "Configure Mobile Driver’s License Verification Presentation Request"
 'og:description': "Learn how to use Auth0's Verification Service for with Verifiable Credentials such as Mobile Driver's Licenses."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configure Mobile Driver’s License Verification Presentation Request"
 'twitter:description': "Learn how to use Auth0's Verification Service for with Verifiable Credentials such as Mobile Driver's Licenses."
 ---
-# Configure Mobile Driver’s License Verification Presentation Request
 
 <Warning>
 
@@ -91,7 +91,7 @@ You can request the following claims:
 
 1. Create a Verification Template similar to the example below. Outline the mDL claims you want to request from the user.
 
-   ```json
+   ```json lines
    {
       "name":"TEMPLATE_NAME",
       "dialect":"simplified/1.0",
@@ -155,7 +155,7 @@ A **Verification Presentation Request** keeps track of a verification request in
 3. Create a new file named **start.js** in the **api/verify** folder.
 4. Add the following code snippet to the **start.js** file:
 
-   ```
+   ```javascript lines
    import fetch from "node-fetch";
    ```
 
@@ -171,7 +171,7 @@ A **Verification Presentation Request** keeps track of a verification request in
 
 5. Map the environment variables from the **.env.local file**. If you are using Next.js, it will parse this file by default and map the variables to the `process.env` object:
 
-   ```javascript
+   ```javascript lines
    const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN;
    const TEMPLATE_ID = process.env.TEMPLATE_ID;
    const PROTOCOL = process.env.PROTOCOL;
@@ -241,7 +241,7 @@ Once you create a verification request, the application needs to know if the use
 1. Create a new file named **check.js** in the **/api/verify** folder you already created.
 2. Import the `node-fetch` library and load the required environment variables.
 
-   ```javascript
+   ```javascript lines
    const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN;
    const VERIFICATION_BEARER_TOKEN = process.env.AUTH0_CLIENT_ID;
 
@@ -254,7 +254,7 @@ Once you create a verification request, the application needs to know if the use
    
 3. The `HTTP` handler is similar to the previous one, but the Verification ID must be extracted from the Verification `POST` request body so your application can exchange the requested claims with Auth0:
 
-   ```
+   ```javascript lines
    export default async function handler(req, res) {
        try {
            const verificationId = req.body.verificationId;
@@ -271,7 +271,7 @@ Once you create a verification request, the application needs to know if the use
    
 4. Implement the `run()` function. This function uses the Verification ID to exchange the requested claims with Auth0 and returns the result.
 
-   ```
+   ```javascript lines
    async function run(verificationId) {
        if (!verificationId) throw new Error("verificationId not found");
 
@@ -308,7 +308,7 @@ The claims requested will be available in the result and can be used based on yo
 
 <Warning>
 
-Auth0 metadata is not a secure data store and should not be used to store sensitive information. This includes secrets and high-risk PII like social security numbers or credit card numbers, etc. Auth0 customers are strongly encouraged to evaluate the data stored in metadata and only store that which is necessary for identity and access management purposes. To learn more, read [Auth0 General Data Protection Regulation Compliance](/docs/secure/data-privacy-and-compliance/gdpr).
+Auth0 metadata is not a secure data store and should not be used to store sensitive information. This includes secrets and high-risk PII like social security numbers or credit card numbers, etc. Auth0 customers are strongly encouraged to evaluate the data stored in metadata and only store that which is necessary for identity and access management purposes. To learn more, read [Auth0 General Data Protection Regulation Compliance](/docs/ja-jp/secure/data-privacy-and-compliance/gdpr).
 
 </Warning>
 

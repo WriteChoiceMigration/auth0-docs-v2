@@ -1,13 +1,13 @@
 ---
 title: "ルールに関するAuth0セキュリティ情報"
 permalink: "2019-01-10-rules"
+'description': "不適切なカスタムルールコードによって認証フローに脆弱性が生じるケースについて。"
 'og:title': "ルールに関するAuth0セキュリティ情報"
 'og:description': "不適切なカスタムルールコードによって認証フローに脆弱性が生じるケースについて。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ルールに関するAuth0セキュリティ情報"
 'twitter:description': "不適切なカスタムルールコードによって認証フローに脆弱性が生じるケースについて。"
 ---
-# ルールに関するAuth0セキュリティ情報
 
 **公開日**：2019年1月10日
 
@@ -35,7 +35,7 @@ Auth0は特殊なパラメーターによってサイレント認証を提供し
 
 この対策として、MFAを迂回するためにサイレント認証に基づく条件ロジックを使用してはなりません。このようなルールはMFAの完全な迂回を許してしまうため、決して使用しないでください。
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   if (context.request.query && context.request.query.prompt === 'none') {
   // skip MFA for silent token requests
@@ -49,7 +49,7 @@ function (user, context, callback) {
 
 サイレント認証に基づくカスタム多要素認証へのリダイレクトを判断するルールは、一部の一般的でない状況でMFAの迂回を許してしまう可能性があります。たとえば、以下のようなルールは避けてください。
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   if (context.request.query && context.request.query.prompt === 'none') {
   //redirect to custom MFA
@@ -70,7 +70,7 @@ function (user, context, callback) {
 
 #### デバイスフィンガープリント
 
-```javascript
+```javascript lines
 function (user, context, callback) {
 
   var crypto = require('crypto');
@@ -97,7 +97,7 @@ function (user, context, callback) {
 
 #### Country Code（国番号）
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   user.app_metadata = user.app_metadata || {};
 
@@ -122,7 +122,7 @@ function (user, context, callback) {
 
 ユーザーに頻繁にMFAを求めないようにするには、`allowRememberBrowser`パラメーターをtrueに設定します。これにより、チェックボックスを選択したエンドユーザーは30日おきにしか多要素認証を求められなくなります。例：
 
-```
+```javascript lines
 context.multi-factor = {
     provider: 'guardian',
     allowRememberBrowser: true
@@ -168,7 +168,7 @@ context.multi-factor = {
 
 Auth0のコンテキストオブジェクトを外部サービスに送信するルールロジックがある場合、要求に紐づけられた`id_token`や`access_token`のようなアイテムを公開することになります。例：
 
-```
+```javascript lines
 request.post({
     url: 'http://requestbin.fullcontact.com/YourBinUrl',
     json: {
@@ -202,7 +202,7 @@ request.post({
 
 認証プロセスの一部に、Twillio経由のSMSメッセージ送信などの有料サービスを含むルールロジックがある場合、コストが高くなる危険性があります。有効なユーザー名とパスワードを入手した攻撃者がサービスへの呼び出しをトリガーし、ルールで指定されている認証プロセス全体を完了することなく費用を発生させられる可能性があるためです。例：
 
-```javascript
+```javascript lines
 //Sends user SMS via Twilio
   function notifyUser(done) {
     const request = require('request');
@@ -250,7 +250,7 @@ request.post({
 
 特定のメールまたはメールドメインに基づくアクセス制御を必要とするルールロジックを設定しながら、ユーザーがメールを確認したかどうかをチェックし損ねている場合、攻撃者は第二の接続タイプを使用することで追加の権限を取得できる可能性があります。例：
 
-```javascript
+```javascript lines
 var userHasAccess = allowList.some(function (email) {
     return email === user.email;
   });
@@ -266,7 +266,7 @@ var userHasAccess = allowList.some(function (email) {
 
 メールアドレスに基づいて認可を付与する場合には、常に、以下のロジックでルールを開始してください。
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   // Access should only be granted to verified users.
   if (!user.email || !user.email_verified) {

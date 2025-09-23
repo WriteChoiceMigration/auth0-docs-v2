@@ -1,13 +1,13 @@
 ---
 title: "暗黙フロー使用時にリプレイ攻撃を軽減する"
 permalink: "mitigate-replay-attacks-when-using-the-implicit-flow"
+'description': "フォームPOSTを使用した暗黙フローで使うために、暗号ノンスを安全に生成して検証する方法について説明します。"
 'og:title': "暗黙フロー使用時にリプレイ攻撃を軽減する"
 'og:description': "フォームPOSTを使用した暗黙フローで使うために、暗号ノンスを安全に生成して検証する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "暗黙フロー使用時にリプレイ攻撃を軽減する"
 'twitter:description': "フォームPOSTを使用した暗黙フローで使うために、暗号ノンスを安全に生成して検証する方法について説明します。"
 ---
-# 暗黙フロー使用時にリプレイ攻撃を軽減する
 
 [フォームPOSTを使用した暗黙フロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/implicit-flow-with-form-post)でリプレイ攻撃を軽減するために、認証要求では必ずノンスを送信しなければなりません。これは[OpenID Connect（OIDC）の仕様でも要求](https://openid.net/specs/openid-connect-core-1_0.html#ImplicitAuthRequest)されています。
 
@@ -17,7 +17,7 @@ permalink: "mitigate-replay-attacks-when-using-the-implicit-flow"
 
 <Note>
 
-[cross-origin認証](/docs/authenticate/login/cross-origin-authentication)を使用している場合は、[Auth0.js](/docs/ja-jp/libraries/auth0js)が`state`パラメーターと`nonce`パラメーターを管理します。
+[cross-origin認証](/docs/ja-jp/authenticate/login/cross-origin-authentication)を使用している場合は、[Auth0.js](/docs/ja-jp/libraries/auth0js)が`state`パラメーターと`nonce`パラメーターを管理します。
 
 </Note>
 
@@ -25,7 +25,7 @@ permalink: "mitigate-replay-attacks-when-using-the-implicit-flow"
 
 暗号的にランダムのノンスを生成するには、1つの方法として[Nano ID](https://github.com/ai/nanoid)などのツールを使用することができます。ただし、ツールとJavaScriptコードをバンドルする必要があります。それが不可能な場合には、[最新のブラウザー](http://caniuse.com/#feat=cryptography)が[Web Crypto API](https://www.w3.org/TR/WebCryptoAPI/)を使用して暗号的に安全なランダムの文字列をノンス用に生成できることを活用することができます。
 
-```javascript
+```javascript lines
 function randomString(length) {
     var charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz+/'
     result = ''
@@ -57,7 +57,7 @@ function randomString(length) {
 
 例：
 
-```
+```javascript lines
 window.localStorage.setItem('nonce', randomString(16));
 ```
 
@@ -65,7 +65,7 @@ window.localStorage.setItem('nonce', randomString(16));
 
 Auth0が[IDトークン](/docs/ja-jp/secure/tokens/id-tokens)で応答したら、このトークンを通常通りに[検証してデコード](/docs/ja-jp/secure/tokens/id-tokens/validate-id-tokens)する必要があります。`nonce`クレームには、要求で送信したのと完全に同じ値が含まれていなければなりません。そうでない場合には、アプリケーションが認証を拒否する必要があります。
 
-```javascript
+```javascript lines
 var jwt = '...'; // validated and decoded ID Token body
 if (jwt.nonce === window.localStorage.getItem('nonce')) {
     // Nonce is OK

@@ -1,19 +1,19 @@
 ---
 title: "Event Types"
 permalink: "event-types"
+'description': "Learn more about supported Event types."
 'og:title': "Event Types"
 'og:description': "Learn more about supported Event types."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Event Types"
 'twitter:description': "Learn more about supported Event types."
 ---
-# Event Types
 
 <Warning>
 
-**Events are currently available in** [Early Access](/docs/troubleshoot/product-lifecycle/product-release-stages). By using this feature, you agree to the applicable Free Trial terms in Okta’s [Master Subscription Agreement](https://www.okta.com/legal/?_gl=1*agihqh*_gcl_au*NjM2NjA1MDg4LjE3NTM5ODE4NjY.*_ga*MTgyNDA4MjM2Ny4xNzE1MTAyMjQy*_ga_QKMSDV5369*czE3NTQ0NzQ3NTAkbzM1MyRnMSR0MTc1NDQ3NjU5MCRqNiRsMCRoMA..).
+**Events are currently available in** [Early Access](/docs/ja-jp/troubleshoot/product-lifecycle/product-release-stages). By using this feature, you agree to the applicable Free Trial terms in Okta’s [Master Subscription Agreement](https://www.okta.com/legal/?_gl=1*agihqh*_gcl_au*NjM2NjA1MDg4LjE3NTM5ODE4NjY.*_ga*MTgyNDA4MjM2Ny4xNzE1MTAyMjQy*_ga_QKMSDV5369*czE3NTQ0NzQ3NTAkbzM1MyRnMSR0MTc1NDQ3NjU5MCRqNiRsMCRoMA..).
 
-To learn more about Auth0's product release cycle, review [Product Release Stages](/docs/troubleshoot/product-lifecycle/product-release-stages).
+To learn more about Auth0's product release cycle, review [Product Release Stages](/docs/ja-jp/troubleshoot/product-lifecycle/product-release-stages).
 
 </Warning>
 
@@ -77,7 +77,7 @@ Events are published using a schema that conforms to the [CloudEvent specificati
 </tbody>
 </table>
 
-```json
+```json lines
 {
   "id": "evt_<unique-id>",
   "source": "urn:auth0:<your-tenant>:users",
@@ -130,15 +130,15 @@ When creating an event stream, you can subscribe to the following user events:
 </thead>
 <tbody>
 <tr>
-<td><code>user.created</code></td>
+<td>`user.created`</td>
 <td>Published each time a user is created. This event captures users created through a variety of channels, such as a signup page, the Auth0 Management API, custom signup forms, bulk user imports, SCIM, or JIT (for Social, Enterprise, or Passwordless connections).</td>
 </tr>
 <tr>
-<td><code>user.updated</code></td>
+<td>`user.updated`</td>
 <td>Published each time a user is updated. This event captures user updates made through a variety of channels, such as the Auth0 Management API, bulk user imports, SCIM, or JIT (for Social, Enterprise, or Passwordless connections).</td>
 </tr>
 <tr>
-<td><code>user.deleted</code></td>
+<td>`user.deleted`</td>
 <td>Published each time a user is deleted. This event captures user deletions made through the Management API or as a result of deleting a connection.</td>
 </tr>
 </tbody>
@@ -148,7 +148,7 @@ When creating an event stream, you can subscribe to the following user events:
 
 `user.created` events are published each time a user is created. These events capture users created through a variety of channels, such as a signup page, the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>, bulk user imports, SCIM, or just-in-time provisioning (JIT), for Social, Enterprise, or <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Passwordless</Tooltip> connections.
 
-```json
+```json lines
 {
   "id": "evt_xxxxxxxx", 
   "source": "https://auth0.com/docs/v1beta1/user.created",
@@ -201,7 +201,7 @@ Review the following sections for examples based on different methods of user cr
 
 **Scenario**: A user signs up through a Universal Login prompt using a database connection.
 
-```json
+```json lines
 {
   "specversion": "1.0",
   "type": "user.created",
@@ -265,7 +265,7 @@ Review the following sections for examples based on different methods of user cr
 
 **Scenario**: A user associated with a database connection is created through the Management API.
 
-```json
+```json lines
 {
   "id": "evt_987654321",
   "source": "https://auth0.com/docs/v1beta1/user.created",
@@ -301,7 +301,7 @@ Review the following sections for examples based on different methods of user cr
 
 **Scenario**: A user signs up using a social connection such as Google.
 
-```json
+```json lines
 {
   "id": "evt_google123",
   "source": "https://auth0.com/docs/v1beta1/user.created",
@@ -337,7 +337,7 @@ Review the following sections for examples based on different methods of user cr
 
 **Scenario**: A user signs up through a SAML SCIM connection.
 
-```json
+```json lines
 {
   "id": "evt_saml_scim123",
   "source": "https://auth0.com/docs/v1beta1/user.created",
@@ -375,7 +375,7 @@ Review the following sections for examples based on different methods of user cr
 
 `user.updated` events are published each time a user is updated. These events capture user updates made through a variety of channels, such as the user themselves after logging in, the Management API, bulk user imports (upsert), SCIM, or just-in-time provisioning (JIT), for Social, Enterprise, or Passwordless connections.
 
-```json
+```json lines
 {
   "specversion": "1.0",
   "type": "user.updated",
@@ -439,7 +439,7 @@ Review the following sections for examples based on different methods of user cr
 
 `user.deleted` events publish each time a user is deleted. These events capture users deleted through the Management API or when a connection is deleted.
 
-```json
+```json lines
 {
   "specversion": "1.0",
   "type": "user.deleted",
@@ -469,43 +469,43 @@ When creating an event stream, you can subscribe to the following user events:
 </thead>
 <tbody>
 <tr>
-<td><code>organization.created</code></td>
+<td>`organization.created`</td>
 <td>Published each time an organization is created.</td>
 </tr>
 <tr>
-<td><code>organization.updated</code></td>
+<td>`organization.updated`</td>
 <td>Published each time an organization is updated.</td>
 </tr>
 <tr>
-<td><code>organization.deleted</code></td>
+<td>`organization.deleted`</td>
 <td>Published each time an organization is deleted.</td>
 </tr>
 <tr>
-<td><code>organization.member.added</code></td>
+<td>`organization.member.added`</td>
 <td>Published each time a member is added to an organization.</td>
 </tr>
 <tr>
-<td><code>organization.member.deleted</code></td>
+<td>`organization.member.deleted`</td>
 <td>Published each time a member is removed from an organization.</td>
 </tr>
 <tr>
-<td><code>organization.member.role.assigned</code></td>
+<td>`organization.member.role.assigned`</td>
 <td>Published each time a role is assigned to a member within an organization.</td>
 </tr>
 <tr>
-<td><code>organization.member.role.deleted</code></td>
+<td>`organization.member.role.deleted`</td>
 <td>Published each time a role is unassigned from a member within an organization.</td>
 </tr>
 <tr>
-<td><code>organization.connection.added</code></td>
+<td>`organization.connection.added`</td>
 <td>Published each time a connection is added to an organization.</td>
 </tr>
 <tr>
-<td><code>organization.connection.updated</code></td>
+<td>`organization.connection.updated`</td>
 <td>Published each time a connection belonging to an organization is updated.</td>
 </tr>
 <tr>
-<td><code>organization.connection.removed</code></td>
+<td>`organization.connection.removed`</td>
 <td>Published each time a connection is removed from an organization.</td>
 </tr>
 </tbody>
@@ -515,7 +515,7 @@ When creating an event stream, you can subscribe to the following user events:
 
 When a new organization is successfully created within your Auth0 tenant, an `organization.created` event is published, providing details about the newly established organization.
 
-```json
+```json lines
 {
   "specversion": "1.0",
   "type": "organization.created",
@@ -546,7 +546,7 @@ When a new organization is successfully created within your Auth0 tenant, an `or
 
 When the configuration of an existing organization is modified, an `organization.updated` event is published, containing details about the updated organization.
 
-```json
+```json lines
 {
   "specversion": "1.0",
   "type": "organization.updated",
@@ -577,7 +577,7 @@ When the configuration of an existing organization is modified, an `organization
 
 When an organization is removed from your Auth0 tenant, an `organization.deleted` event is published, signaling its successful deletion.
 
-```json
+```json lines
 {
   "specversion": "1.0",
   "type": "organization.deleted",
@@ -601,7 +601,7 @@ When an organization is removed from your Auth0 tenant, an `organization.deleted
 
 When a new member joins an organization, an `organization.member.added` event is published, containing information about the new membership.
 
-```json
+```json lines
 {
   "specversion": "1.0",
   "type": "organization.member.added",
@@ -628,7 +628,7 @@ When a new member joins an organization, an `organization.member.added` event is
 
 When a member is removed from an organization, an `organization.member.deleted` event is published, signaling their successful removal.
 
-```json
+```json lines
 {
   "specversion": "1.0",
   "type": "organization.member.deleted",
@@ -655,7 +655,7 @@ When a member is removed from an organization, an `organization.member.deleted` 
 
 When a role is assigned to an organization member, an `organization.member.role.assigned` event is published, containing information about the new role.
 
-```json
+```json lines
 {
   "specversion": "1.0",
   "type": "organization.member.role.assigned",
@@ -685,7 +685,7 @@ When a role is assigned to an organization member, an `organization.member.role.
 
 When a role is unassigned from an organization member, an `organization.member.role.deleted` event is published, signaling its removal.
 
-```json
+```json lines
 {
   "specversion": "1.0",
   "type": "organization.member.role.deleted",
@@ -715,7 +715,7 @@ When a role is unassigned from an organization member, an `organization.member.r
 
 When a new connection is successfully linked to an organization, an `organization.connection.added` event is published.
 
-```json
+```json lines
 {
   "specversion": "1.0",
   "type": "organization.connection.added",
@@ -745,7 +745,7 @@ When a new connection is successfully linked to an organization, an `organizatio
 
 When the configuration of an existing connection linked to an organization is modified, an `organization.connection.updated` event is published, containing information about the updated connection.
 
-```json
+```json lines
 {
   "specversion": "1.0",
   "type": "organization.connection.updated",
@@ -775,7 +775,7 @@ When the configuration of an existing connection linked to an organization is mo
 
 When a connection is unlinked from an organization, an `organization.connection.removed` event is published, signalling its removal.
 
-```json
+```json lines
 {
   "specversion": "1.0",
   "type": "organization.connection.removed",

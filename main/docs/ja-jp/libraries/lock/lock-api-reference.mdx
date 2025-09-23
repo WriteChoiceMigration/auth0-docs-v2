@@ -1,13 +1,13 @@
 ---
 title: "Lock APIのリファレンス"
 permalink: "lock-api-reference"
+'description': "Lock v11 APIの詳細。"
 'og:title': "Lock APIのリファレンス"
 'og:description': "Lock v11 APIの詳細。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Lock APIのリファレンス"
 'twitter:description': "Lock v11 APIの詳細。"
 ---
-# Lock APIのリファレンス
 
 Lockには、多くのメソッド、機能、構成可能なオプションがあります。このリファレンスでは、必要なものを紹介し、その使用方法について説明します。以下をクリックして、探しているメソッドに直接移動するか、単に参照してください。Lockによって生成されるイベントに関する情報を探している場合は、[on()](#on-)メソッドのセクションに記載されています。
 
@@ -31,7 +31,7 @@ Lockには、多くのメソッド、機能、構成可能なオプションが�
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 var Auth = (function() {
 
   var privateStore = {};
@@ -79,7 +79,7 @@ var Auth = (function() {
 * **accessToken{String}**：ユーザートークン。
 * **コールバック{Function}**:ユーザープロファイルが取得された後に呼び出されます。
 
-```
+```javascript lines
 lock.getUserInfo(accessToken, function(error, profile) {
   if (!error) {
     alert("hello " + profile.name);
@@ -107,7 +107,7 @@ lock.getUserInfo(accessToken, function(error, profile) {
 
 オプションのオーバーライド例:
 
-```javascript
+```javascript lines
 // Show the Lock widget, without overriding any options
 lock.show();
 
@@ -129,7 +129,7 @@ lock.show({
 * **タイプ** {String}:メッセージタイプ。`エラー`または`成功`のいずれかである必要があります。
 * **テキスト** {String}:表示するテキスト。
 
-```
+```javascript lines
 lock.show({
   flashMessage:{
     type: 'success',
@@ -140,7 +140,7 @@ lock.show({
 
 `flashMessage`オプションの実際の用途は、認可エラーを処理することです。`flashMessage`には、エラーの説明テキストを入力できます。
 
-```
+```javascript lines
 lock.on('authorization_error', function(error) {
   lock.show({
     flashMessage: {
@@ -161,7 +161,7 @@ lock.on('authorization_error', function(error) {
 
 ポップアップモードでLockウィジェットを非表示にする（閉じる）使用例:
 
-```javascript
+```javascript lines
 // Listen for authenticated event and hide Lock
 lock.on("authenticated", function() {
   lock.hide();
@@ -201,7 +201,7 @@ Lockは、そのライフサイクル中にイベントを生成します。`on`
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 var Auth = (function() {
 
   var privateStore = {};
@@ -243,7 +243,7 @@ var Auth = (function() {
 * **hash** {String}:リダイレクトから受信したハッシュフラグメント。
 * **コールバック**{Function}:解析が完了した後に呼び出されます。最初の引数としてエラー（存在する場合）があり、2番目の引数として認証結果があります。使用できるハッシュがない場合は、両方の引数が`null`になります。
 
-```
+```javascript lines
 lock.resumeAuth(hash, function(error, authResult) {
   if (error) {
     alert("Could not parse hash");
@@ -260,7 +260,7 @@ lock.resumeAuth(hash, function(error, authResult) {
 * **オプション** {Object}:オプション。通常は`/authorize`に送信される有効なOAuth2パラメーターを受け入れます。省略した場合は、Auth0の初期化時に指定されたパラメーターが使用されます。
 * **コールバック**{Function}:トークンの更新結果で呼び出されます。最初の引数としてエラー（存在する場合）があり、2番目の引数として認証結果があります。
 
-```
+```javascript lines
 lock.checkSession({}, function(err, authResult) {
   // handle error or new tokens
 });
@@ -272,7 +272,7 @@ lock.checkSession({}, function(err, authResult) {
 
 * **オプション** {Object}:これはオプションであり、auth0.js logout()と同じルールに従います。
 
-```
+```javascript lines
 lock.logout({
   returnTo: 'https://myapp.com/bye-bye'
 });

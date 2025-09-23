@@ -1,13 +1,13 @@
 ---
 title: "RulesからActionsに移行する"
 permalink: "migrate-from-rules-to-actions"
+'description': "既存のAuth0 HooksコードをAuth0 Actionsコードに移行する方法を学びます。"
 'og:title': "RulesからActionsに移行する"
 'og:description': "既存のAuth0 HooksコードをAuth0 Actionsコードに移行する方法を学びます。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "RulesからActionsに移行する"
 'twitter:description': "既存のAuth0 HooksコードをAuth0 Actionsコードに移行する方法を学びます。"
 ---
-# RulesからActionsに移行する
 
 既存のルールをアクションに変換する場合は、新しいアクションをログインフローのログイン後(`post-login`)トリガーに関連付ける必要があります。以下の手順に従い、アクションを元のルールと同じ順序にしておくと、機能は同じになります。
 
@@ -75,7 +75,7 @@ Post-Loginアクションは既存のルールの後に実行されるため、D
 
 **変更前**
 
-```
+```javascript lines
 async function myRulesFunction(user, context, callback) {
     // ... additional code
 }
@@ -83,7 +83,7 @@ async function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 	// ... additional code
 };
@@ -101,7 +101,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 **変更前**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	const userEmail = user.email;
 	const userId = user.user_id;
@@ -115,7 +115,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 	const userEmail = event.user.email;
 	const userId = event.user.user_id;
@@ -139,7 +139,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 **変更前**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	const clientId = context.clientID;
 	const clientMetadata = context.clientMetadata || {};
@@ -157,7 +157,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 	const clientId = event.client.client_id;
 	const clientMetadata = event.client.metadata;
@@ -192,7 +192,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 **変更前**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	const dependency = require("dependency@1.2.3");
 
@@ -202,7 +202,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```javascript
+```javascript lines
 const dependency = require("dependency"); // v1.2.3
 exports.onExecutePostLogin = async (event, api) => {
 	// ... additional code
@@ -215,7 +215,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 **変更前**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	const userAppMetadata = user.app_metadata || {};
 	if (userAppMetadata.condition === "success") {
@@ -234,7 +234,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 	if (event.user.app_metadata.condition === "success") {
 		// This Action succeeded, proceed with next Action.
@@ -262,7 +262,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 **変更前**
 
-```javascript
+```javascript lines
 function myRulesFunction (user, context, callback) {
   const { CLIENT_ID, CLIENT_SECRET } = configuration;
 
@@ -272,7 +272,7 @@ function myRulesFunction (user, context, callback) {
 
 **変換後**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const { CLIENT_ID, CLIENT_SECRET } = event.secrets;
 
@@ -288,7 +288,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 **変更前**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	const userAppMetadata = user.app_metadata || {};
 	const namespace = "https://namespace/";
@@ -302,7 +302,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 	const namespace = "https://namespace/";
 
@@ -326,7 +326,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 **変更前**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	if (user.app_metadata.needs_mfa === true) {
 		context.multifactor = { 
@@ -341,7 +341,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 	if (event.user.app_metadata.needs_mfa === true) {
 		api.multifactor.enable("any", { allowRememberBrowser: false });
@@ -357,7 +357,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 **変更前**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	user.app_metadata = user.app_metadata || {}; 
 	user.app_metadata.roles = user.app_metadata.roles || [];
@@ -376,7 +376,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 	const userRolesUpdated = event.user.app_metadata.roles || [];
 	userRolesUpdated.push("administrator"); 
@@ -410,7 +410,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 **変更前**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
 	const ManagementClient = require("auth0@2.9.1").ManagementClient; 
 	const managementClientInstance = new ManagementClient({
@@ -435,7 +435,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```javascript
+```javascript lines
 const auth0Sdk = require("auth0");
 exports.onExecutePostLogin = async (event, api) => {
 	const ManagementClient = auth0Sdk.ManagementClient;
@@ -471,13 +471,13 @@ exports.onExecutePostLogin = async (event, api) => {
 
 <Note>
 
-あらゆるリダイレクトをアクションで適切に行う方法について、このガイドで説明することはできません。詳細については、「[アクションを使ったリダイレクト](/docs/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/redirect-with-actions)」をお読みください。
+あらゆるリダイレクトをアクションで適切に行う方法について、このガイドで説明することはできません。詳細については、「[アクションを使ったリダイレクト](/docs/ja-jp/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/redirect-with-actions)」をお読みください。
 
 </Note>
 
 **変更前**
 
-```javascript
+```javascript lines
 function myRulesFunction(user, context, callback) {
     if (context.protocol === "redirect-callback") {
         // User was redirected to the /continue endpoint
@@ -503,7 +503,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
     api.accessToken.setClaim("https://dev.TLD/wasRedirected", true)
 ```
@@ -514,7 +514,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 **変更前**
 
-```javascript
+```javascript lines
 function (user, context, callback) {
 
   const clients = context.sso?.current_clients ?? []; 
@@ -529,7 +529,7 @@ function (user, context, callback) {
 
 **変換後**
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const clients = event?.session?.clients ?? []; 
 

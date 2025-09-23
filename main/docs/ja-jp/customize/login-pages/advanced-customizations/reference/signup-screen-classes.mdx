@@ -1,13 +1,13 @@
 ---
 title: "サインアップス画面クラス"
 permalink: "signup-screen-classes"
+'description': "ACULのサインアップス画面クラスについて説明します"
 'og:title': "サインアップス画面クラス"
 'og:description': "ACULのサインアップス画面クラスについて説明します"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "サインアップス画面クラス"
 'twitter:description': "ACULのサインアップス画面クラスについて説明します"
 ---
-# サインアップス画面クラス
 
 ## サインアップス画面クラス
 
@@ -19,7 +19,7 @@ permalink: "signup-screen-classes"
 
 サインアップ画面クラスのインポートとインスタンス化
 
-```
+```javascript lines
 import Signup from '@auth0/auth0-acul-js/signup';
 const signupManager = new Signup();
 
@@ -38,7 +38,7 @@ signupManager.screenLinks();
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -73,7 +73,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -85,7 +85,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -104,7 +104,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -112,7 +112,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
  captcha: null | CaptchaContext;
  captchaImage: null | string;
@@ -137,7 +137,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -148,7 +148,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface TransactionMembersOnSignup {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -194,7 +194,7 @@ interface UsernamePolicy {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -214,7 +214,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -250,7 +250,7 @@ ShortEntity<Key>: {
 
 このメソッドはユーザーを国番号選択リストにリダイレクトし、ユーザーが電話番号の国番号を更新できるようにします。
 
-```
+```javascript lines
 import Signup from "@auth0/auth0-acul-js/signup";
 const signupManager = new Signup();
 
@@ -261,7 +261,7 @@ signupManager.pickCountryCode();
 
 このメソッドはユーザーを認証フローの次のステップにリダイレクトします。サーバーの構成に応じて、この画面にはメールアドレス、ユーザー名、電話番号の中から1つ以上が含まれます。詳細については、「[柔軟な識別子](https://auth0.com/docs/authenticate/database-connections/flexible-identifiers-and-attributes)」を参照してください。
 
-```
+```javascript lines
 import Signup from '@auth0/auth0-acul-js/signup';
 
 const signupManager = new Signup();
@@ -282,40 +282,40 @@ signupManager.signup({
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>ユーザーのメールです。</td>
 </tr>
 <tr>
-<td><code>phone</code></td>
+<td>`phone`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>ユーザーの電話番号です。</td>
 </tr>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>ユーザーのユーザー名です。</td>
 </tr>
 <tr>
-<td><code>password</code></td>
+<td>`password`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>ユーザーのパスワードです。</td>
 </tr>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>CAPTCHAプロバイダーが返すCAPTCHAコードまたは応答です。このプロパティはAuth0テナントにボット検知が有効な場合には必須です。</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数値 | ブール値 | undefined</td>
 <td>任意</td>
-<td>ユーザーから収集した追加のデータです。このデータには<code>pre-user-registration</code>アクショントリガーでアクセスできます。</td>
+<td>ユーザーから収集した追加のデータです。このデータには`pre-user-registration`アクショントリガーでアクセスできます。</td>
 </tr>
 </tbody>
 </table>
@@ -324,7 +324,7 @@ signupManager.signup({
 
 このメソッドは認証のために、ユーザーをソーシャルまたはエンタープライズIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>）にリダイレクトします。詳細については、「[ソーシャルIDプロバイダー](https://auth0.com/docs/authenticate/identity-providers/social-identity-providers)」と「[エンタープライズIDプロバイダー](https://auth0.com/docs/authenticate/identity-providers/enterprise-identity-providers)」を参照してください。
 
-```
+```javascript lines
 import Signup from '@auth0/auth0-acul-js/signup';
 
 const signupManager = new Signup();
@@ -344,13 +344,13 @@ signupManager.federatedSignup({
 </thead>
 <tbody>
 <tr>
-<td><code>connection</code></td>
+<td>`connection`</td>
 <td>文字列</td>
 <td>必須</td>
 <td>接続の識別子。</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 番号 | ブール値 | 未定義</td>
 <td>任意</td>
 <td>ユーザーから収集した追加のデータ。</td>
@@ -368,7 +368,7 @@ signupManager.federatedSignup({
 
 サインアップID画面クラスのインポートとインスタンス化
 
-```
+```javascript lines
 import SignupId from '@auth0/auth0-acul-js/signup-id';
 const signupIdManager = new SignupId();
 
@@ -387,7 +387,7 @@ signupIdManager.screenLinks();
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -422,7 +422,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -434,7 +434,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -453,7 +453,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -461,7 +461,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -484,7 +484,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -495,7 +495,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -541,7 +541,7 @@ interface UsernamePolicy {
 
 </Tab><Tab title="unstrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -561,7 +561,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -597,7 +597,7 @@ ShortEntity<Key>: {
 
 このメソッドはユーザーを認証フローの次のステップに進めます。サーバーの構成に応じて、この画面にはメールアドレス、ユーザー名、電話番号の中から1つ以上が含まれます。詳細については、「[柔軟な識別子](https://auth0.com/docs/authenticate/database-connections/flexible-identifiers-and-attributes)」を参照してください。
 
-```
+```javascript lines
 import SignupId from "@auth0/auth0-acul-js/signup-id";
 
 const signupIdManager = new SignupId();
@@ -625,34 +625,34 @@ signupIdManager.signup(signupParams);
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>ユーザーのメールです。</td>
 </tr>
 <tr>
-<td><code>phone</code></td>
+<td>`phone`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>ユーザーの電話番号です。</td>
 </tr>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>ユーザーのユーザー名です。</td>
 </tr>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>CAPTCHAプロバイダーが返すCAPTCHAコードまたは応答です。このプロパティはAuth0テナントにボット検知が有効な場合には必須です。</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数値 | ブール値 | 未定義</td>
 <td>任意</td>
-<td>ユーザーから収集した追加のデータです。このデータには<code>pre-user-registration</code>アクショントリガーでアクセスできます。</td>
+<td>ユーザーから収集した追加のデータです。このデータには`pre-user-registration`アクショントリガーでアクセスできます。</td>
 </tr>
 </tbody>
 </table>
@@ -661,7 +661,7 @@ signupIdManager.signup(signupParams);
 
 このメソッドは認証のために、ユーザーをソーシャルまたはエンタープライズIDプロバイダー（IdP）にリダイレクトします。詳細については、「[ソーシャルIDプロバイダー](https://auth0.com/docs/authenticate/identity-providers/social-identity-providers)」と「[エンタープライズIDプロバイダー](https://auth0.com/docs/authenticate/identity-providers/enterprise-identity-providers)」を参照してください。
 
-```
+```javascript lines
 import SignupId from "@auth0/auth0-acul-js/signup-id";
 
 const signupIdManager = new SignupId();
@@ -687,13 +687,13 @@ signupIdManager.federatedSignup(signupParams);
 </thead>
 <tbody>
 <tr>
-<td><code>connection</code></td>
+<td>`connection`</td>
 <td>文字列</td>
 <td>必須</td>
 <td>接続の識別子。</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 番号 | ブール値 | 未定義</td>
 <td>任意</td>
 <td>ユーザーから収集した追加のデータ。</td>
@@ -711,7 +711,7 @@ signupIdManager.federatedSignup(signupParams);
 
 サインアップパスワード画面クラスのインポートとインスタンス化
 
-```
+```javascript lines
 import SignupPassword from '@auth0/auth0-acul-js/signup-password';
 const signupPasswordManager = new SignupPassword();
 
@@ -730,7 +730,7 @@ signupPasswordManager.screenLinks();
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -765,7 +765,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -777,7 +777,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -796,7 +796,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -804,7 +804,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -832,7 +832,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -843,7 +843,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -889,7 +889,7 @@ interface PasswordPolicy {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -909,7 +909,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -945,7 +945,7 @@ ShortEntity<Key>: {
 
 ユーザーのアカウントを作成するために、このメソッドは前のステップからの識別子と入力されたパスワードを送信します。作成されると、ユーザーは次のステップに誘導されます。
 
-```
+```javascript lines
 signupPasswordManager.signup({
   email: <EmailFieldValue>
   phone: <PhoneFieldValue>
@@ -964,40 +964,40 @@ signupPasswordManager.signup({
 </thead>
 <tbody>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>CAPTCHAプロバイダーが返すCAPTCHAコードまたは応答です。このプロパティはAuth0テナントにボット検知が有効な場合には必須です。</td>
 </tr>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>ユーザーのメールです。</td>
 </tr>
 <tr>
-<td><code>password</code></td>
+<td>`password`</td>
 <td>文字列</td>
 <td>必須</td>
 <td>ユーザーのパスワードです。</td>
 </tr>
 <tr>
-<td><code>phone</code></td>
+<td>`phone`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>ユーザーの電話番号です。</td>
 </tr>
 <tr>
-<td><code>username</code></td>
+<td>`username`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>ユーザーのユーザー名です。</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数値 | ブール値 | 未定義</td>
 <td>任意</td>
-<td>ユーザーから収集した追加のデータです。このデータには<code>pre-user-registration</code>アクショントリガーでアクセスできます。</td>
+<td>ユーザーから収集した追加のデータです。このデータには`pre-user-registration`アクショントリガーでアクセスできます。</td>
 </tr>
 </tbody>
 </table>
@@ -1012,7 +1012,7 @@ signupPasswordManager.signup({
 
 パスキー登録画面クラスのインポートとインスタンス化
 
-```
+```javascript lines
 import PasskeyEnrollment from '@auth0/auth0-acul-js/passkey-enrollment';
 const passskeyEnrollmentManager = new PasskeyEnrollment();
 
@@ -1031,7 +1031,7 @@ passskeyEnrollmentManager.screenLinks();
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -1066,7 +1066,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -1078,7 +1078,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -1097,7 +1097,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -1105,7 +1105,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   backLink: null | string;
   captcha: null | CaptchaContext;
@@ -1149,7 +1149,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -1160,7 +1160,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -1193,7 +1193,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -1213,7 +1213,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -1249,7 +1249,7 @@ ShortEntity<Key>: {
 
 このメソッドはパスワードを作成するために、ユーザーをサインアップパスワード画面に誘導します。
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 passkeyEnrollment.abortPasskeyEnrollment();
 ```
@@ -1264,7 +1264,7 @@ passkeyEnrollment.abortPasskeyEnrollment();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -1276,7 +1276,7 @@ passkeyEnrollment.abortPasskeyEnrollment();
 
 パスキーを作成して、ユーザーを認証します。パスキーを作成したら、このメソッドがユーザーを`redirect_url`にリダイレクトします。
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 passkeyEnrollment.continuePasskeyEnrollment();
 ```
@@ -1291,7 +1291,7 @@ passkeyEnrollment.continuePasskeyEnrollment();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -1309,7 +1309,7 @@ passkeyEnrollment.continuePasskeyEnrollment();
 
 パスキー登録ローカル画面クラスのインポートとインスタンス化
 
-```
+```javascript lines
 import PasskeyEnrollmentLocal from '@auth0/auth0-acul-js/passkey-enrollment-local';
 const passskeyEnrollmentLocalManager = new PasskeyEnrollmentLocal();
 
@@ -1328,7 +1328,7 @@ passskeyEnrollmentLocalManager.screenLinks();
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -1363,7 +1363,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -1375,7 +1375,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -1394,7 +1394,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -1402,7 +1402,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -1444,7 +1444,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -1455,7 +1455,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -1488,7 +1488,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -1508,7 +1508,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -1544,7 +1544,7 @@ ShortEntity<Key>: {
 
 パスキーの作成をスキップし、代わりにパスワードを提供します。このメソッドはパスワードを作成するために、ユーザーをサインアップパスワード画面に誘導します。
 
-```
+```javascript lines
 passkeyEnrollment.abortPasskeyEnrollment({
   doNotShowAgain: <BooleanFieldValue>
 });
@@ -1560,7 +1560,7 @@ passkeyEnrollment.abortPasskeyEnrollment({
 </thead>
 <tbody>
 <tr>
-<td><code>doNotShowAgain</code></td>
+<td>`doNotShowAgain`</td>
 <td>ブール値</td>
 <td>必須</td>
 <td>初期作成をスキップした後、パスキーを再度作成するよう促す通知をユーザーに表示するかどうかを指定します。</td>
@@ -1572,7 +1572,7 @@ passkeyEnrollment.abortPasskeyEnrollment({
 
 パスキーを作成して、ユーザーを認証します。パスキーを作成したら、この操作がユーザーを`redirect_url`にリダイレクトします。
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 passkeyEnrollment.continuePasskeyEnrollment();
 ```
@@ -1587,7 +1587,7 @@ passkeyEnrollment.continuePasskeyEnrollment();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -1605,7 +1605,7 @@ passkeyEnrollment.continuePasskeyEnrollment();
 
 電話識別子チャレンジ画面クラスのインポートとインスタンス化
 
-```
+```javascript lines
 import PhoneIdentifierChallenge from '@auth0/auth0-acul-js/phone-identifier-challenge';
 const phoneIdentifierChallengeManager = new PhoneIdentifierChallenge();
 
@@ -1624,7 +1624,7 @@ phoneIdentifierChallengeManager.screenData();
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -1659,7 +1659,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -1671,7 +1671,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -1690,7 +1690,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -1698,7 +1698,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -1723,7 +1723,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -1734,7 +1734,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -1767,7 +1767,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -1787,7 +1787,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -1823,7 +1823,7 @@ ShortEntity<Key>: {
 
 このメソッドは前のステップで入力されたメールアドレスに新しいOTPコードを送信します。
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 phoneIdentifierChallenge.resendCode();
 ```
@@ -1838,7 +1838,7 @@ phoneIdentifierChallenge.resendCode();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -1850,7 +1850,7 @@ phoneIdentifierChallenge.resendCode();
 
 このメソッドはユーザーを前のステップに戻します。
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 phoneIdentifierChallenge.returnToPrevious();
 ```
@@ -1865,7 +1865,7 @@ phoneIdentifierChallenge.returnToPrevious();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -1877,7 +1877,7 @@ phoneIdentifierChallenge.returnToPrevious();
 
 このメソッドは入力された電話番号を検証し、ユーザーがサインアップを続行できるようにします。
 
-```
+```javascript lines
 phoneIdentifierChallenge.submitPhoneChallenge({
     code: "<CodeFieldValue>"
 });
@@ -1893,19 +1893,19 @@ phoneIdentifierChallenge.submitPhoneChallenge({
 </thead>
 <tbody>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>captchaコードまたはcaptchaプロバイダーからの応答。このプロパティは、Auth0テナントでボット検知が有効になっている場合に必要です。</td>
 </tr>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>文字列</td>
 <td>必須</td>
 <td>電話番号に送信されるOTPコード。</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 番号 | ブール値 | 未定義</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータ。</td>
@@ -1923,7 +1923,7 @@ phoneIdentifierChallenge.submitPhoneChallenge({
 
 電話識別子登録画面クラスのインポートとインスタンス化
 
-```
+```javascript lines
 import PhoneIdentifierEnrollment from '@auth0/auth0-acul-js/phone-identifier-enrollment';
 const phoneIdentifierEnrollmentManager = new PhoneIdentifierEnrollment();
 
@@ -1942,7 +1942,7 @@ phoneIdentifierEnrollmentManager.screenData();
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -1977,7 +1977,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -1989,7 +1989,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -2008,7 +2008,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -2016,7 +2016,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -2042,7 +2042,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -2053,7 +2053,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -2086,7 +2086,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -2106,7 +2106,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -2142,7 +2142,7 @@ ShortEntity<Key>: {
 
 ユーザーが選択した手段を使って、前のステップで入力した電話番号にOTPコードを送信します。
 
-```
+```javascript lines
 phoneIdentifierChallenge.continuePhoneEnrollment({
   type: "text" | "voice"
 });
@@ -2158,13 +2158,13 @@ phoneIdentifierChallenge.continuePhoneEnrollment({
 </thead>
 <tbody>
 <tr>
-<td><code>type</code></td>
+<td>`type`</td>
 <td>文字列</td>
 <td>はい</td>
-<td>可能な値：<code>text</code>または<code>voice</code></td>
+<td>可能な値：`text`または`voice`</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数値 | ブール値 | undefined</td>
 <td>いいえ</td>
 <td>ユーザーから収集される任意のデータ。</td>
@@ -2176,7 +2176,7 @@ phoneIdentifierChallenge.continuePhoneEnrollment({
 
 このメソッドはユーザーを前のステップに戻します。
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 phoneIdentifierChallenge.returnToPrevious();
 ```
@@ -2191,7 +2191,7 @@ phoneIdentifierChallenge.returnToPrevious();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -2209,7 +2209,7 @@ phoneIdentifierChallenge.returnToPrevious();
 
 メール識別子チャレンジ画面クラスのインポートとインスタンス化
 
-```
+```javascript lines
 import EmailIdentifierChallenge from '@auth0/auth0-acul-js/email-identifier-challenge';
 const emailIdentifierChallengeManager = new EmailIdentifierChallenge();
 
@@ -2228,7 +2228,7 @@ emailIdentifierChallengeManager.screenData();
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -2263,7 +2263,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -2275,7 +2275,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -2294,7 +2294,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -2302,7 +2302,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen{
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -2327,7 +2327,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -2338,7 +2338,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -2371,7 +2371,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -2391,7 +2391,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -2427,7 +2427,7 @@ ShortEntity<Key>: {
 
 このメソッドは前のステップで入力されたメールアドレスに新しいOTPコードを送信します。
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 emailIdentifierChallenge.resendCode();
 ```
@@ -2442,7 +2442,7 @@ emailIdentifierChallenge.resendCode();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -2454,7 +2454,7 @@ emailIdentifierChallenge.resendCode();
 
 このメソッドはユーザーを前のステップに戻します。
 
-```javascript
+```javascript lines
 // This method does not support any parameters
 emailIdentifierChallenge.returnToPrevious();
 ```
@@ -2469,7 +2469,7 @@ emailIdentifierChallenge.returnToPrevious();
 </thead>
 <tbody>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 数字 | ブール値 | undefined</td>
 <td>任意</td>
 <td>ユーザーから収集した任意のデータです。</td>
@@ -2481,7 +2481,7 @@ emailIdentifierChallenge.returnToPrevious();
 
 このメソッドは入力されたメールアドレスを検証し、ユーザーがサインアップを続行できるようにします。
 
-```
+```javascript lines
 emailIdentifierChallenge.submitEmailChallenge({
   code: <CodeFieldValue>
 });
@@ -2497,19 +2497,19 @@ emailIdentifierChallenge.submitEmailChallenge({
 </thead>
 <tbody>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>文字列</td>
 <td>条件付き</td>
 <td>captchaコードまたはcaptchaプロバイダーからの応答。このプロパティは、Auth0テナントでボット検知が有効になっている場合に必要です。</td>
 </tr>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>文字列</td>
 <td>必須</td>
 <td>メールアドレスに送信されるOTPコード。</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 番号 | ブール値 | 未定義</td>
 <td>任意</td>
 <td>ユーザーから収集した追加のデータ。</td>

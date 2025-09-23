@@ -1,13 +1,13 @@
 ---
 title: "IDおよびアクセス管理（IAM）入門"
 permalink: "identity-and-access-management"
+'description': "IDおよびアクセス管理のコンピューターソフトウェア分野の基本的な概要で、経験が浅い方向けに書かれています"
 'og:title': "IDおよびアクセス管理（IAM）入門"
 'og:description': "IDおよびアクセス管理のコンピューターソフトウェア分野の基本的な概要で、経験が浅い方向けに書かれています"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "IDおよびアクセス管理（IAM）入門"
 'twitter:description': "IDおよびアクセス管理のコンピューターソフトウェア分野の基本的な概要で、経験が浅い方向けに書かれています"
 ---
-# IDおよびアクセス管理（IAM）入門
 
 ## IDおよびアクセス管理とは？
 
@@ -20,9 +20,9 @@ IAMを理解するには、いくつかの基本的な概念を理解してお�
 * **デジタルリソース**とは、コンピューターシステムにあるアプリケーションとデータのあらゆる組み合わせのことです。デジタルリソースの例として、Webアプリケーション、API、プラットフォーム、デバイス、データベースなどが挙げられます。
 * IAMの中心となるのは**ID（アイデンティティ）**です。誰かがリソースへのアクセスを要求しているとします。その人は顧客かもしれないし、従業員や会員、参加者、あるいはそれ以外の人かもしれません。IAMでは、**ユーザー**アカウントがデジタルIDとなります。ユーザーアカウントは、ソフトウェアやIoTデバイス、ロボティクスなどの人間以外のものを表すこともできます。
 
-<Frame>![ユーザーがリソースにアクセスしている簡単な図](//images.ctfassets.net/cdy7uua7fh8z/4jZPLvwFRGMSCBRv6ksLqb/6095abc4cf3ed1ac954784cb763cd063/intro-iam-user-wants-resource.png)</Frame>
+<Frame>![ユーザーがリソースにアクセスしている簡単な図](/images/ja-jp/cdy7uua7fh8z/4jZPLvwFRGMSCBRv6ksLqb/6095abc4cf3ed1ac954784cb763cd063/intro-iam-user-wants-resource.png)</Frame>
 
-<Frame>![IAMシステムがユーザーによるリソースへのアクセスを制御していることを示す簡単な図](//images.ctfassets.net/cdy7uua7fh8z/64NhRWH7dFSSTRGv040nIB/75360b47260ed5b5ab75382a3fffea79/IAM-verifies-access.png)</Frame>
+<Frame>![IAMシステムがユーザーによるリソースへのアクセスを制御していることを示す簡単な図](/images/ja-jp/cdy7uua7fh8z/64NhRWH7dFSSTRGv040nIB/75360b47260ed5b5ab75382a3fffea79/IAM-verifies-access.png)</Frame>
 
 * **認証**は、デジタルIDを検証することです。誰か（または何か）が認証を行い、自分がユーザー本人であることを証明します。
 * **認可**は、ユーザーがアクセスできるリソースを決定するプロセスです。
@@ -35,11 +35,11 @@ IAMを理解するには、いくつかの基本的な概念を理解してお�
 
 **認証：**建物に入ると、警備員に写真付きのIDカードを見せる必要があります。警備員はカードの写真とあなたの顔を照合します。一致すると、警備員は入館を許可し、建物内の別のエリアにアクセスすることができます。しかし、警備員はどの部屋に入れるかを教えてはくれません。ただ、あなたが主張する人物であることの証明を求めるだけです。これが認証で、ユーザーIDを確認することです。
 
-<Frame>![認証の仕組みが、建物の入り口で各人のバッジを確認する警備員に似ていることを示す図](//images.ctfassets.net/cdy7uua7fh8z/2kbfIgTRNIKNdqJBbgmWQ4/316bafce4a681dbce6b1b361448e2b33/authentication-building.png)</Frame>
+<Frame>![認証の仕組みが、建物の入り口で各人のバッジを確認する警備員に似ていることを示す図](/images/ja-jp/cdy7uua7fh8z/2kbfIgTRNIKNdqJBbgmWQ4/316bafce4a681dbce6b1b361448e2b33/authentication-building.png)</Frame>
 
 **認可：**次に、この建物内のエレベーターやドアには、移動したり開けたりするためのカードの読み取りセンサーがあります。あなたのIDカードにあるチップは、所属する企業が占有している1階へのアクセスのみを許可します。他の階に入ろうとIDカードをタッチしても、アクセスは拒否されます。また、自分の部屋に入ることはできますが、同僚の部屋に入ることはできません。備品室には入れますが、サーバールームには入れません。これが認可で、IDに基づいて異なるリソースへのアクセスを付与または拒否することです。
 
-<Frame>![認可の仕組みが、建物の一部の部屋にしかアクセスできないようにするバッジと同じようなものであることを示す図](//images.ctfassets.net/cdy7uua7fh8z/2OGIbazhGLOdDB0OVOTyX8/6aaca0fddc7a61df96b4f708eb6d9525/authorization-building.png)</Frame>
+<Frame>![認可の仕組みが、建物の一部の部屋にしかアクセスできないようにするバッジと同じようなものであることを示す図](/images/ja-jp/cdy7uua7fh8z/2OGIbazhGLOdDB0OVOTyX8/6aaca0fddc7a61df96b4f708eb6d9525/authorization-building.png)</Frame>
 
 認証と認可について詳細は、「[認証と認可](/docs/ja-jp/get-started/identity-fundamentals/authentication-and-authorization)」をお読みください。
 
@@ -80,7 +80,7 @@ IAMはアプリケーション、API、デバイス、データストア、そ�
 
 IDプロバイダーは、ID情報を作成、維持、管理し、他のアプリケーションに認証サービスを提供することができます。たとえば、GoogleアカウントはIDプロバイダーの1つです。ユーザー名、氏名、役職、メールアドレスなどのアカウント情報を保存します。Slateのオンラインマガジンでは、Google（または他のIDプロバイダー）を使ってログインできるため、情報を新たに入力して保存する手間を省けます。
 
-<Frame>![Screenshot of Slate magazine login](//images.ctfassets.net/cdy7uua7fh8z/2moycObnuKnYfoqFMSGCO0/12aa20de553bfce8afba3cf4f56cbd8d/Slate-login.png)</Frame>
+<Frame>![Screenshot of Slate magazine login](/images/ja-jp/cdy7uua7fh8z/2moycObnuKnYfoqFMSGCO0/12aa20de553bfce8afba3cf4f56cbd8d/Slate-login.png)</Frame>
 
 この認証情報がIDプロバイダーによって、それを利用しているアプリに共有されることはありません。たとえば、SlateはユーザーのGoogleパスワードを見ることはできません。Googleはただ、SlateにIDの証明ができたことを知らせるだけです。
 

@@ -1,13 +1,13 @@
 ---
 title: "Deploy CLIを構成する"
 permalink: "configure-the-deploy-cli"
+'description': "Auth0 Deploy CLIを構成して、ニーズに合わせてツールを変更する方法を説明します。"
 'og:title': "Deploy CLIを構成する"
 'og:description': "Auth0 Deploy CLIを構成して、ニーズに合わせてツールを変更する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Deploy CLIを構成する"
 'twitter:description': "Auth0 Deploy CLIを構成して、ニーズに合わせてツールを変更する方法を説明します。"
 ---
-# Deploy CLIを構成する
 
 DeployのCLIを構成することは、Auth0の資格情報を確立するためだけでなく、一般的にはツールの動作を特定のニーズに合わせて変更するためにも不可欠です。Deploy CLIの構成方法は2通りあります。
 
@@ -20,7 +20,7 @@ Deploy CLIの構成にはスタンドアロンJSONファイルを使用できま
 
 ### 例
 
-```json
+```javascript lines
 {
   "AUTH0_DOMAIN": "<YOUR_TENANT_DOMAIN>",
   "AUTH0_CLIENT_ID": "<YOUR_CLIENT_ID>",
@@ -46,7 +46,7 @@ Deploy CLIの構成にはスタンドアロンJSONファイルを使用できま
 
 #### config.jsonファイルを使用せずにYAML形式の構成を展開する
 
-```
+```php lines
 $ export AUTH0_DOMAIN=<YOUR_AUTH0_DOMAIN>
 $ export AUTH0_CLIENT_ID=<YOUR_CLIENT_ID>
 $ export AUTH0_CLIENT_SECRET=<YOUR_CLIENT_SECRET>
@@ -55,13 +55,13 @@ $ a0deploy import --input_file=local/tenant.yaml
 
 #### 環境変数の取り込みを無効にする
 
-```
+```php lines
 $ a0deploy export -c=config.json --format=yaml --output_folder=local --env=false
 ```
 
 #### 非プリミティブ構成値
 
-```
+```php lines
 $ export AUTH0_EXCLUDED='["actions","organizations"]'
 $ export AUTH0_KEYWORD_REPLACE_MAPPINGS='{"ENVIRONMENT":"dev"}'
 $ a0deploy export -c=config.json --format=yaml --output_folder=local
@@ -109,7 +109,7 @@ $ a0deploy export -c=config.json --format=yaml --output_folder=local
 
 #### 例
 
-```json
+```json lines
 {
   "AUTH0_EXCLUDED": ["organizations", "connections", "hooks"]
 }
@@ -125,7 +125,7 @@ $ a0deploy export -c=config.json --format=yaml --output_folder=local
 
 #### 例
 
-```json
+```json lines
 {
   "AUTH0_INCLUDED_ONLY": ["clients", "connections", "tenant", "branding"]
 }
@@ -137,7 +137,7 @@ $ a0deploy export -c=config.json --format=yaml --output_folder=local
 
 #### 例
 
-```json
+```javascript lines
 {
   "ENVIRONMENT": "DEV",
   "ALLOWED_ORIGINS": ["https://dev.test-site.com", "localhost"]
@@ -162,7 +162,7 @@ $ a0deploy export -c=config.json --format=yaml --output_folder=local
 
 #### 例
 
-```json
+```javascript lines
 {
   "connections": ["options.twilio_token"]
 }

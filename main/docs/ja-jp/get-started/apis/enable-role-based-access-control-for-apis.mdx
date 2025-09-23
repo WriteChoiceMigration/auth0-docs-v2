@@ -1,13 +1,13 @@
 ---
 title: "APIにロールベースのアクセス制御（RBAC）を有効にする"
 permalink: "enable-role-based-access-control-for-apis"
+'description': "Auth0 DashboardまたはManagement APIを使用して、APIにロールベースのアクセス制御（RBAC）を有効化する方法を学びます。"
 'og:title': "APIにロールベースのアクセス制御（RBAC）を有効にする"
 'og:description': "Auth0 DashboardまたはManagement APIを使用して、APIにロールベースのアクセス制御（RBAC）を有効化する方法を学びます。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "APIにロールベースのアクセス制御（RBAC）を有効にする"
 'twitter:description': "Auth0 DashboardまたはManagement APIを使用して、APIにロールベースのアクセス制御（RBAC）を有効化する方法を学びます。"
 ---
-# APIにロールベースのアクセス制御（RBAC）を有効にする
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>またはManagement使用して、APIに[ロールベースのアクセス制御（RBAC）](/docs/ja-jp/manage-users/access-control/rbac)を有効化することができます。これにより、APIの認可コア機能セットが有効になります。
 
@@ -15,7 +15,7 @@ RBACを有効にすると、アクセストークンに権限が含まれてい�
 
 <Note>
 
-アクセストークンのスコープを変更する[Actions](/docs/customize/actions)
+アクセストークンのスコープを変更する[Actions](/docs/ja-jp/customize/actions)
 
 </Note>
 
@@ -23,11 +23,11 @@ RBACを有効にすると、アクセストークンに権限が含まれてい�
 
 1. [［Dashboard］>［Applications （アプリケーション）］>［API］](https://manage.auth0.com/#/apis)に移動し、表示するAPI名をクリックします。
 
-   <Frame>![Dashboard - アプリケーション - APIリスト](//images.ctfassets.net/cdy7uua7fh8z/3rhmhghYZDSi6YWHRA5yMQ/2bafc57d32df6eb415b9e59b62f41531/API_List.png)</Frame>
+   <Frame>![Dashboard - アプリケーション - APIリスト](/images/ja-jp/cdy7uua7fh8z/3rhmhghYZDSi6YWHRA5yMQ/2bafc57d32df6eb415b9e59b62f41531/API_List.png)</Frame>
 
 2. **［RBAC Settings（RBACの設定）］**までスクロールして、**［Enable RBAC（RBACを有効にする）］**トグルを有効にします。
 
-   <Frame>![Auth0 Dashboard - APIの設定 - RBACトグル](//images.ctfassets.net/cdy7uua7fh8z/65tKb6aj0ktc2qXLUVlV3e/ee1e226b004fb56f88143ead67750fbf/API_-_RBAC_Settings.png)</Frame>
+   <Frame>![Auth0 Dashboard - APIの設定 - RBACトグル](/images/ja-jp/cdy7uua7fh8z/65tKb6aj0ktc2qXLUVlV3e/ee1e226b004fb56f88143ead67750fbf/API_-_RBAC_Settings.png)</Frame>
 
 3. ユーザーに割り当てられたすべての権限をアクセストークンの`permissions`クレームに含めるには、**［Add Permissions in the Access Token（アクセストークンに権限を追加する）］**トグルを有効にして、**［Save（保存）］**をクリックします。アクセストークンに権限を含めると、最小限の呼び出しで権限を取得できますが、トークンのサイズは大きくなります。**［Add Permissions in the Access Token（アクセストークンに権限を追加する）］**トグルを有効にすると、Auth0はAPIに設定された[アクセストークンプロファイル](/docs/ja-jp/secure/tokens/access-tokens/access-token-profiles)を基に、トークンのダイアレクトも更新します。
 
@@ -41,15 +41,15 @@ RBACを有効にすると、アクセストークンに権限が含まれてい�
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を使用してRBACを有効にするには、[リソースサーバー更新エンドポイント](https://auth0.com/docs/api/management/v2/resource-servers/patch-resource-servers-by-id)にPATCH要求を行います。PATCH要求で、`enforce_policies`を`true`に設定します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/resource-servers/API_ID' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "enforce_policies": "true", "token_dialect": "TOKEN_DIALECT" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/resource-servers/API_ID");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -59,7 +59,7 @@ request.AddParameter("application/json", "{ \"enforce_policies\": \"true\", \"to
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -80,8 +80,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/resource-servers/API_ID")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -90,7 +90,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/resource-serv
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -107,8 +107,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
@@ -135,7 +135,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/resource-servers/API_ID",
@@ -160,8 +160,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"enforce_policies\": \"true\", \"token_dialect\": \"TOKEN_DIALECT\" }"
@@ -176,7 +176,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -191,8 +191,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"enforce_policies\": \"true\", \"token_dialect\": \"TOKEN_DIALECT\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -233,15 +233,15 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>API_ID</code></td>
+<td>`API_ID`</td>
 <td>RBACを有効にしたいAPIのID。</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td>スコープ<code>update:resource_servers</code>を持つ<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>スコープ`update:resource_servers`を持つ<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 <tr>
-<td><code>TOKEN_DIALECT</code></td>
+<td>`TOKEN_DIALECT`</td>
 <td>指定されたAPIのアクセストークンのダイアレクト。詳しくは、「<a href="#token-dialect-options">トークンのダイアレクトオプション</a>」をご覧ください。</td>
 </tr>
 </tbody>
@@ -259,20 +259,20 @@ Auth0は以下のトークンダイアレクトに対応しています。
 </thead>
 <tbody>
 <tr>
-<td><code>access_token</code></td>
-<td>デフォルトのAuth0トークンプロファイルは<a href="/docs/ja-jp/secure/tokens/json-web-tokens">JSON Web Token（JWT）</a>形式のアクセストークンを生成します。アクセストークンの<code>scope</code>クレームには、要求された権限とユーザーに割り当てられた権限の共通部分が含まれます。<code>permissions</code>クレームは渡されません。詳細については、「<a href="/docs/ja-jp/secure/tokens/access-tokens/access-token-profiles">アクセストークンのプロファイル</a>」をお読みください。</td>
+<td>`access_token`</td>
+<td>デフォルトのAuth0トークンプロファイルは<a href="/docs/ja-jp/secure/tokens/json-web-tokens">JSON Web Token（JWT）</a>形式のアクセストークンを生成します。アクセストークンの`scope`クレームには、要求された権限とユーザーに割り当てられた権限の共通部分が含まれます。`permissions`クレームは渡されません。詳細については、「<a href="/docs/ja-jp/secure/tokens/access-tokens/access-token-profiles">アクセストークンのプロファイル</a>」をお読みください。</td>
 </tr>
 <tr>
-<td><code>access_token_authz</code></td>
-<td><code>permissions</code>クレームのあるデフォルトのAuth0トークンプロファイル（<code>access_token</code>）です。アクセストークンの<code>scope</code>クレームには、要求された権限とユーザーに割り当てられた権限の共通部分が含まれます。アクセストークンの<code>permissions</code>クレームには、ユーザーに割り当てられたすべての許可が含まれます。アクセストークンに許可を含めると、最小限の呼び出しで許可を取得できますが、トークンサイズは大きくなります。</td>
+<td>`access_token_authz`</td>
+<td>`permissions`クレームのあるデフォルトのAuth0トークンプロファイル（`access_token`）です。アクセストークンの`scope`クレームには、要求された権限とユーザーに割り当てられた権限の共通部分が含まれます。アクセストークンの`permissions`クレームには、ユーザーに割り当てられたすべての許可が含まれます。アクセストークンに許可を含めると、最小限の呼び出しで許可を取得できますが、トークンサイズは大きくなります。</td>
 </tr>
 <tr>
-<td><code>rfc9068_profile</code></td>
-<td><a href="https://datatracker.ietf.org/doc/html/rfc9068">IETF JWT Profile for OAuth 2.0 Access Tokens（RFC 9068）</a>に準拠したJWT形式のアクセストークンを生成します。アクセストークンの<code>scope</code>クレームには、要求された権限とユーザーに割り当てられた権限の共通部分が含まれます。<code>permissions</code>クレームは渡されません。詳細については、「<a href="/docs/ja-jp/secure/tokens/access-tokens/access-token-profiles">アクセストークンのプロファイル</a>」をお読みください。</td>
+<td>`rfc9068_profile`</td>
+<td><a href="https://datatracker.ietf.org/doc/html/rfc9068">IETF JWT Profile for OAuth 2.0 Access Tokens（RFC 9068）</a>に準拠したJWT形式のアクセストークンを生成します。アクセストークンの`scope`クレームには、要求された権限とユーザーに割り当てられた権限の共通部分が含まれます。`permissions`クレームは渡されません。詳細については、「<a href="/docs/ja-jp/secure/tokens/access-tokens/access-token-profiles">アクセストークンのプロファイル</a>」をお読みください。</td>
 </tr>
 <tr>
-<td><code>rfc9068_profile_authz</code></td>
-<td><code>permissions</code>のあるRFC 9068トークンプロファイル（<code>rfc9068_profile</code>）。アクセストークンの<code>scope</code>クレームには、要求された権限とユーザーに割り当てられた権限の共通部分が含まれます。アクセストークンの<code>permissions</code>クレームには、ユーザーに割り当てられたすべての許可が含まれます。アクセストークンに許可を含めると、最小限の呼び出しで許可を取得できますが、トークンサイズは大きくなります。</td>
+<td>`rfc9068_profile_authz`</td>
+<td>`permissions`のあるRFC 9068トークンプロファイル（`rfc9068_profile`）。アクセストークンの`scope`クレームには、要求された権限とユーザーに割り当てられた権限の共通部分が含まれます。アクセストークンの`permissions`クレームには、ユーザーに割り当てられたすべての許可が含まれます。アクセストークンに許可を含めると、最小限の呼び出しで許可を取得できますが、トークンサイズは大きくなります。</td>
 </tr>
 </tbody>
 </table>

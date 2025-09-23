@@ -1,13 +1,13 @@
 ---
 title: "シングルIDプロバイダー：認可"
 permalink: "authorization"
+'description': "複数テナントのアーキテクチャでユーザーを認可することについて説明します。"
 'og:title': "シングルIDプロバイダー：認可"
 'og:description': "複数テナントのアーキテクチャでユーザーを認可することについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "シングルIDプロバイダー：認可"
 'twitter:description': "複数テナントのアーキテクチャでユーザーを認可することについて説明します。"
 ---
-# シングルIDプロバイダー：認可
 
 認可では通常、誰に何が許可されるのかをどのようにして決定するのか、そして、この許可に関する情報をどのようにしてアプリケーションやAPIに伝えるのかを考える必要があります。使用しているアプリケーションによっては、それらの片方または両方の影響を受けることがあります。当社のアーキテクチャシナリオでは、[B2B認可](/docs/ja-jp/get-started/architecture-scenarios/business-to-business/authorization)に関する一般的なガイダンスを提供しています。こちらのガイダンスと併せて確認することをお勧めします。
 
@@ -17,7 +17,7 @@ permalink: "authorization"
 
 **ベストプラクティス**
 
-アクセス権限は、[Auth0 Authorization Core](/docs/ja-jp/manage-users/access-control/configure-core-rbac)機能経由で[Auth0 Role-Based Access Control](/docs/ja-jp/manage-users/access-control/rbac)（RBAC）を使用して定義し、アクセストークンに自動的に適用することができます。詳細については、「[APIのRole-Based Access Control（RBAC）を有効にする](/docs/get-started/apis/enable-role-based-access-control-for-apis)」を参照してください。
+アクセス権限は、[Auth0 Authorization Core](/docs/ja-jp/manage-users/access-control/configure-core-rbac)機能経由で[Auth0 Role-Based Access Control](/docs/ja-jp/manage-users/access-control/rbac)（RBAC）を使用して定義し、アクセストークンに自動的に適用することができます。詳細については、「[APIのRole-Based Access Control（RBAC）を有効にする](/docs/ja-jp/get-started/apis/enable-role-based-access-control-for-apis)」を参照してください。
 
 Auth0のRBAC機能から提供された情報をIDトークンに（手動で適用する場合はアクセストークンにも）カスタムクレームとして追加することもできます。Auth0 Organizationsは、メンバーシップを通じて割り当てられたロールを介してAuth0 RBAC機能を活用することができます。詳細については、「[Organazaionメンバーにロールを追加する](/docs/ja-jp/manage-users/organizations/configure-organizations/add-member-roles)」を参照してください。
 
@@ -30,7 +30,7 @@ Auth0のRBAC機能から提供された情報をIDトークンに（手動で適
 
 **ベストプラクティス**
 
-Auth0 Organizationsは、ユーザーの認証時にAuth0ルールが組織中心の情報にアクセスできるようにします。この情報には、ルールの`context`オブジェクトに含まれている`organization`オブジェクトを介してアクセスします。`organization`オブジェクトは、Auth0のOrganization定義に照らし合わせてプロビジョニングされたメタデータへのアクセスも可能にします。詳細については、「[Organizationのカスタム開発](/docs/manage-users/organizations/custom-development)」を参照してください。
+Auth0 Organizationsは、ユーザーの認証時にAuth0ルールが組織中心の情報にアクセスできるようにします。この情報には、ルールの`context`オブジェクトに含まれている`organization`オブジェクトを介してアクセスします。`organization`オブジェクトは、Auth0のOrganization定義に照らし合わせてプロビジョニングされたメタデータへのアクセスも可能にします。詳細については、「[Organizationのカスタム開発](/docs/ja-jp/manage-users/organizations/custom-development)」を参照してください。
 
 </Note>
 
@@ -38,7 +38,7 @@ Auth0 Organizationsは、ユーザーの認証時にAuth0ルールが組織中�
 
 通常、クレームは[IDトークンクレーム](/docs/ja-jp/get-started/architecture-scenarios/business-to-consumer/authorization)のベストプラクティスガイドに説明されるように、IDトークンに追加することができます。Auth0組織機能を使用する場合、`org_id`クレームは組織メンバーシップを持つユーザーに発行された任意のIDトークン（例については、「[トークンと組織を使用する](/docs/ja-jp/manage-users/organizations/using-tokens)」を参照）に自動的に追加されます。このパラメーターはAuth0 SDKが検証します。また、IDトークンにカスタムクレームを追加して、Auth0の組織に関連付けられた補足情報を追加することもできます。
 
-```
+```javascript lines
 context.idToken['http://travel0.net/multifactor'] = context.multifactor;
 ```
 
@@ -48,7 +48,7 @@ context.idToken['http://travel0.net/multifactor'] = context.multifactor;
 
 Auth0 Organizations（組織）機能は 、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>対応のアプリケーションには対応していませんが、アップストリームのIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">IdP</Tooltip>）が生成したSAMLアサーションを構成して、ダウンストリームで使用されるIDトークンに標準やカスタムのクレームを追加することはできます。たとえば、以下のように、SAMLエンタープライズ接続にあるマッピングセクションを定義することができます。
 
-```json
+```json lines
 { 
   "user_id": [
     "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
@@ -66,7 +66,7 @@ Auth0 Organizations（組織）機能は 、<Tooltip data-tooltip-id="react-cont
 }
 ```
 
-この例では、各フィールドにルールの`user`オブジェクト内の値が割り当てられ、IDトークンの標準クレームにマッピングするか、カスタムクレームを使ってマッピングされます。SAMLマッピングをカスタマイズする方法の詳細については、「[アプリをSAML IDプロバイダーに接続する：マッピングをセットアップする](/docs/connections/enterprise/saml#set-up-mappings)」を参照してください。
+この例では、各フィールドにルールの`user`オブジェクト内の値が割り当てられ、IDトークンの標準クレームにマッピングするか、カスタムクレームを使ってマッピングされます。SAMLマッピングをカスタマイズする方法の詳細については、「[アプリをSAML IDプロバイダーに接続する：マッピングをセットアップする](/docs/ja-jp/connections/enterprise/saml#set-up-mappings)」を参照してください。
 
 ## アクセストークンのクレーム
 
@@ -74,7 +74,7 @@ Auth0 Organizations（組織）機能は 、<Tooltip data-tooltip-id="react-cont
 
 IDトークンと同様に、Auth0組織機能を使用する場合、`org_id`クレームは組織メンバーシップを持つユーザーに発行された任意のアクセストークン（例については、「[トークンと組織を使用する](/docs/ja-jp/manage-users/organizations/using-tokens)」を参照）に自動的に追加されます。また、アクセストークンにカスタムクレームを追加して、Auth0の組織に関連付けられた補足情報を追加することもできます。
 
-```
+```javascript lines
 context.accessToken['http://travel0.net/multifactor'] = context.multifactor;
 ```
 
@@ -109,7 +109,7 @@ Auth0組織機能は、Auth0テナントに関連する[認可コア](/docs/ja-j
 
 <Note>
 
-[APIに対してAuth0 Authorization Core（認可コア）RBACを有効化](/docs/get-started/apis/enable-role-based-access-control-for-apis)すると、アクセストークンに含まれるデフォルトの`scope`クレームが自動的に変更され、`permission`クレームがデフォルトで追加されます（例については「[トークンとOrganizationでの作業](/docs/ja-jp/manage-users/organizations/using-tokens)」を参照してください）。また、ロール情報をカスタムクレームとしてIDトークンに追加することもできます。それには、ルールの `context`オブジェクトにある`authorization`オブジェクトにアクセスします。詳細については、「[認可でのルールのサンプルユースケース：ユーザーのロールをトークンに追加する](/docs/manage-users/access-control/sample-use-cases-rules-with-authorization)」を参照してください。
+[APIに対してAuth0 Authorization Core（認可コア）RBACを有効化](/docs/ja-jp/get-started/apis/enable-role-based-access-control-for-apis)すると、アクセストークンに含まれるデフォルトの`scope`クレームが自動的に変更され、`permission`クレームがデフォルトで追加されます（例については「[トークンとOrganizationでの作業](/docs/ja-jp/manage-users/organizations/using-tokens)」を参照してください）。また、ロール情報をカスタムクレームとしてIDトークンに追加することもできます。それには、ルールの `context`オブジェクトにある`authorization`オブジェクトにアクセスします。詳細については、「[認可でのルールのサンプルユースケース：ユーザーのロールをトークンに追加する](/docs/ja-jp/manage-users/access-control/sample-use-cases-rules-with-authorization)」を参照してください。
 
 </Note>
 

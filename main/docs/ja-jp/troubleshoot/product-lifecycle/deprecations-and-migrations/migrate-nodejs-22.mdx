@@ -1,13 +1,13 @@
 ---
 title: "Node 18からNode 22への移行"
 permalink: "migrate-nodejs-22"
+'description': "Node.js 18で影響受けるAuth0 Actionsアイテムについて説明します。"
 'og:title': "Node 18からNode 22への移行"
 'og:description': "Node.js 18で影響受けるAuth0 Actionsアイテムについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Node 18からNode 22への移行"
 'twitter:description': "Node.js 18で影響受けるAuth0 Actionsアイテムについて説明します。"
 ---
-# Node 18からNode 22への移行
 
 2025年1月15日以降、Node 22の拡張ランタイムは、弊社の一連の拡張オファリングにおいて、一般利用可能（GA）です。これにはアクション、ルール、フック、データベーススクリプト、カスタムソーシャル接続が含まれます。コードセキュリティのベストプラクティスに従うために、できるだけ早くNode 22にアップデートすることを強くお勧めします。
 
@@ -22,11 +22,11 @@ permalink: "migrate-nodejs-22"
 
 #### ソーシャル接続の統合
 
-Nodeランタイムバージョンの変更が影響を与える可能性があるソーシャル接続の全リストを確認するには、[Management API](/docs/api/management/v2)を使用します。特に、カスタムソーシャル接続として明示的に作成されたものか、Marketplaceを通して最初に追加されたものかを問わず、影響を受ける可能性があるソーシャル接続はすべて、`oauth1`か`oauth2`のいずれかの値の`strategy`属性を持ちます。
+Nodeランタイムバージョンの変更が影響を与える可能性があるソーシャル接続の全リストを確認するには、[Management API](/docs/ja-jp/api/management/v2)を使用します。特に、カスタムソーシャル接続として明示的に作成されたものか、Marketplaceを通して最初に追加されたものかを問わず、影響を受ける可能性があるソーシャル接続はすべて、`oauth1`か`oauth2`のいずれかの値の`strategy`属性を持ちます。
 
-テナントに含まれるすべてのカスタムソーシャル接続は、[全接続取得](/docs/api/management/v2#!/Connections/get_connections)エンドポイントを使用すると、ページ分割して取得できます。たとえば、以下のクエリオプションは先頭から100までのカスタムソーシャル接続の名前と識別子を返します。
+テナントに含まれるすべてのカスタムソーシャル接続は、[全接続取得](/docs/ja-jp/api/management/v2#!/Connections/get_connections)エンドポイントを使用すると、ページ分割して取得できます。たとえば、以下のクエリオプションは先頭から100までのカスタムソーシャル接続の名前と識別子を返します。
 
-```
+``` lines
 /api/v2/connections?strategy=oauth1&strategy=oauth2&include_totals=true&fields=name&per_page=100
 ```
 
@@ -45,7 +45,7 @@ Node 22で新たにカスタムアクションを作成するには、Auth0 Dash
 
 ### 既存のカスタムアクションをアップグレードする
 
-Node 12、16、18で作成した既存のカスタムアクションをそれぞれNode 22にアップグレードできる他にも、古いランタイムを使用して[前のバージョンに戻す](/docs/customize/actions/manage-versions#revert-actions)ことができます。アクションをNode 22にアップグレードするには、必要な変更を既存の実装に加えて新しいバージョンの作成とデプロイを行い、ランタイムとしてNode 22の使用を設定します。
+Node 12、16、18で作成した既存のカスタムアクションをそれぞれNode 22にアップグレードできる他にも、古いランタイムを使用して[前のバージョンに戻す](/docs/ja-jp/customize/actions/manage-versions#revert-actions)ことができます。アクションをNode 22にアップグレードするには、必要な変更を既存の実装に加えて新しいバージョンの作成とデプロイを行い、ランタイムとしてNode 22の使用を設定します。
 
 ### 他の拡張製品にNode 22を選択する
 

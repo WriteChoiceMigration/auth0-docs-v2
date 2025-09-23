@@ -1,13 +1,13 @@
 ---
 title: "カスタムデータベースのアクションスクリプトのベストプラクティス"
 permalink: "execution"
+'description': "カスタムデータベースアクションスクリプトの実行に関するベストプラクティスについて説明します。"
 'og:title': "カスタムデータベースのアクションスクリプトのベストプラクティス"
 'og:description': "カスタムデータベースアクションスクリプトの実行に関するベストプラクティスについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "カスタムデータベースのアクションスクリプトのベストプラクティス"
 'twitter:description': "カスタムデータベースアクションスクリプトの実行に関するベストプラクティスについて説明します。"
 ---
-# カスタムデータベースのアクションスクリプトのベストプラクティス
 
 カスタムのデータベース接続タイプにより、Auth0がレガシーのidentity storeとやり取りするために使用するカスタムコードが含まれるアクションスクリプトを構成できます。アクションスクリプトは、事前に定義されたパラメーターのセットを受け付ける、名前が付けられたJavaScript関数です。
 
@@ -33,7 +33,7 @@ Auth0は、アクションスクリプト内での[Promise](https://developer.mo
 
 この例では、[promiseチェーン](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)を使用して書かれた、ネットワークからリソースを取得しPromiseオブジェクトを返す、ビルトインのJavaScript `fetch`メソッドを使用しています。
 
-```javascript
+```javascript lines
 function login(userNameOrEmail, password, callback) {
 	const hashedPassword = hash(password);
 	const apiEndpoint = 'https://example.com/api/authenticate';
@@ -75,7 +75,7 @@ function login(userNameOrEmail, password, callback) {
 
 この例では、[async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)を使用して書かれた、ネットワークからリソースを取得しPromiseオブジェクトを返す、組み込みのJavaScript `fetch`メソッドを使用しています。
 
-```
+```javascript lines
 async function login(userNameOrEmail, password, callback) {
 	const hashedPassword = hash(password);
 	const apiEndpoint = 'https://example.com/api/authenticate';
@@ -142,7 +142,7 @@ async function login(userNameOrEmail, password, callback) {
 
 エラーを説明するメッセージで、`Error`オブジェクトを`callback`関数に渡します。
 
-```
+```javascript lines
 return callback(new Error('My custom error message'));
 ```
 
@@ -160,7 +160,7 @@ Auth0とレガシーのidentity store間の通信すべての安全を確保し�
 
 `user`オブジェクトが`access_token`および`refresh_token`プロパティを返した場合、Auth0は、別の種類のユーザー情報とは異なる方法でそれらを処理します。Auth0は、それらを`user`オブジェクトの`identities`プロパティに保存します。
 
-```json
+```json lines
 {
     "email": "you@example.com",
     "updated_at": "2019-03-15T15:56:44.577Z",

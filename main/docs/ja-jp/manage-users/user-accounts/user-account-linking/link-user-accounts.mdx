@@ -1,13 +1,13 @@
 ---
 title: "ユーザーアカウントをリンクする"
 permalink: "link-user-accounts"
+'description': "さまざまなIDプロバイダーのユーザーアカウントをリンクして、ユーザーが任意のアカウントから認証し、アプリで認識できるようにする方法を説明します。"
 'og:title': "ユーザーアカウントをリンクする"
 'og:description': "さまざまなIDプロバイダーのユーザーアカウントをリンクして、ユーザーが任意のアカウントから認証し、アプリで認識できるようにする方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユーザーアカウントをリンクする"
 'twitter:description': "さまざまなIDプロバイダーのユーザーアカウントをリンクして、ユーザーが任意のアカウントから認証し、アプリで認識できるようにする方法を説明します。"
 ---
-# ユーザーアカウントをリンクする
 
 ユーザーアカウントをリンクして、プライマリとセカンダリの関係を形成します。リンクが成功すると、エンドポイントはプライマリアカウントIDの新しい配列を返します。
 
@@ -35,11 +35,11 @@ Auth0 は、デフォルトですべてのIDを個別のものとして扱いま
 
 ## アカウントリンク拡張機能
 
-Dashboardの[アカウントリンク拡張機能](/docs/extensions/account-link)をインストールして構成すると、2つ目のアカウントを作成したユーザーの初回ログイン時に、古いアカウントと新しいアカウントをリンクするよう求めることができます。ユーザーは、2つのアカウントをリンクするか、別々にしておくかを選択できます。
+Dashboardの[アカウントリンク拡張機能](/docs/ja-jp/extensions/account-link)をインストールして構成すると、2つ目のアカウントを作成したユーザーの初回ログイン時に、古いアカウントと新しいアカウントをリンクするよう求めることができます。ユーザーは、2つのアカウントをリンクするか、別々にしておくかを選択できます。
 
 ## Management APIエンドポイント
 
-Auth0 Management APIが提供する[ユーザーアカウントのリンク](/docs/api/v2#!/Users/post_identities)エンドポイントは、次の2つの方法で呼び出すことができます：
+Auth0 Management APIが提供する[ユーザーアカウントのリンク](/docs/ja-jp/api/v2#!/Users/post_identities)エンドポイントは、次の2つの方法で呼び出すことができます：
 
 * ユーザーが開始するアカウントリンクで、`update:current_user_identities`スコープを含むアクセストークンを使用する
 * サーバー側のアカウントリンクで、`update:users`スコープを含むアクセストークンを使用する
@@ -52,7 +52,7 @@ Auth0 Management APIが提供する[ユーザーアカウントのリンク](/do
 * URLの一部としてプライマリアカウントの`user_id`
 * セカンダリアカウントのIDトークンが`RS256`で署名されていること、クライアントを識別する`aud`クレームが要求アクセストークンの`azp`クレームの値と一致していること。`update:current_user_identities`スコープを含むアクセストークンは、現在ログインしているユーザーの情報を更新する場合**のみ**使用できます。そのため、このメソッドは、ユーザーがリンクプロセスを開始する場合に適しています。
 
-```json
+```javascript lines
 {
   "method": "POST",
   "url": "https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities",
@@ -81,7 +81,7 @@ Auth0 Management APIが提供する[ユーザーアカウントのリンク](/do
 * セカンダリアカウントの`user_id`
 * セカンダリアカウントのIDトークンが`RS256`で署名されていること、クライアントを識別する`aud`クレームが要求アクセストークンの`azp`クレームの値と一致していること。`update:users`スコープを含むアクセストークンは、**任意の**ユーザーの情報更新に使用できます。そのため、このメソッドは、サーバー側コードでの使用のみを意図しています。
 
-```json
+```javascript lines
 {
   "method": "POST",
   "url": "https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities",
@@ -103,7 +103,7 @@ Auth0 Management APIが提供する[ユーザーアカウントのリンク](/do
 
 `SECONDARY_ACCOUNT_USER_ID`と`SECONDARY_ACCOUNT_PROVIDER`は、ユーザーの一意のIDによって推測できます。たとえば、ユーザーIDが`google-oauth2|108091299999329986433`の場合、要求で`google-oauth2`の部分を`provider`、`108091299999329986433`の部分を`user_id`として設定します。`provider`と`user_id`の代わりに、セカンダリアカウントのIDトークンをペイロードの一部として送信できます：
 
-```json
+```javascript lines
 {
   "method": "POST",
   "url": "https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities",
@@ -125,7 +125,7 @@ Auth0 Management APIが提供する[ユーザーアカウントのリンク](/do
 
 ## Auth0.jsライブラリー
 
-[Auth0.js](/docs/libraries/auth0js)ライブラリーを使用できます。まず、Management APIの呼び出しに使用できるアクセストークンを取得しなければなりません。それには、Auth0.jsを初期化する際に`https://{yourDomain}/api/v2/`オーディエンスを指定します。認証フローの一部としてアクセストークンを取得します。代わりに、`checkSession`メソッドを使用することもできます。アクセストークンを取得したら、そのアカウントのAuth0ドメインとアクセストークンを渡して新しい`auth0.Management`インスタンスを作成することができます。詳細については、[Auth0.js > ユーザー管理](/docs/libraries/auth0js/v9#user-management)をご覧ください。
+[Auth0.js](/docs/ja-jp/libraries/auth0js)ライブラリーを使用できます。まず、Management APIの呼び出しに使用できるアクセストークンを取得しなければなりません。それには、Auth0.jsを初期化する際に`https://{yourDomain}/api/v2/`オーディエンスを指定します。認証フローの一部としてアクセストークンを取得します。代わりに、`checkSession`メソッドを使用することもできます。アクセストークンを取得したら、そのアカウントのAuth0ドメインとアクセストークンを渡して新しい`auth0.Management`インスタンスを作成することができます。詳細については、[Auth0.js > ユーザー管理](/docs/ja-jp/libraries/auth0js/v9#user-management)をご覧ください。
 
 ## ルールを使用して不足している情報を追加する
 
@@ -133,7 +133,7 @@ Auth0 Management APIが提供する[ユーザーアカウントのリンク](/do
 
 セカンダリIDの情報を使用してプライマリIDに不足している情報を追加するには、次の例のようなルールを記述します。
 
-```javascript
+```javascript lines
 function(user, context, callback) {
   
   const propertiesToComplete = ["given_name", "family_name", "name"];
@@ -190,7 +190,7 @@ ActionsはAuth0機能を柔軟に拡張できますが、ユーザーアカウ�
 
 これらの手順を実行するために、ログイン後のアクションの例には次の内容が含まれます。
 
-```javascript
+```javascript lines
 // @ts-check
 const { ManagementClient } = require("auth0");
 

@@ -1,17 +1,19 @@
 ---
 title: "Ruby on Railsアプリケーションにログインを追加する"
 permalink: "interactive"
+'description': "このチュートリアルは、Ruby on Railsアプリケーションにユーザーログインを追加する方法について説明します。"
 'og:title': "Ruby on Railsアプリケーションにログインを追加する"
 'og:description': "このチュートリアルは、Ruby on Railsアプリケーションにユーザーログインを追加する方法について説明します。"
-'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/rails.png"
+'og:image': "/docs/media/platforms/rails.png"
 'twitter:title': "Ruby on Railsアプリケーションにログインを追加する"
 'twitter:description': "このチュートリアルは、Ruby on Railsアプリケーションにユーザーログインを追加する方法について説明します。"
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -27,7 +29,7 @@ permalink: "interactive"
 
 [View on Github](https://github.com/auth0-samples/auth0-rubyonrails-sample/tree/master/sample) Log In & Download Sample
 
-1. [Docs](/docs/ja-jp)
+1. [Docs](/docs/ja-jp/ja-jp)
 3. [Quickstarts](/docs/ja-jp/quickstarts)
 5. [Regular Web App](/docs/ja-jp/quickstart/webapp)
 7. [Ruby On Rails](/docs/ja-jp/quickstart/webapp/rails/interactive)
@@ -88,7 +90,7 @@ Allowed Web Origin（許可されているWebオリジン）とは、認証フ�
 
 `Gemfile`に次の依存関係を追加します：
 
-```
+```ruby lines
 gem 'omniauth-auth0', '~> 3.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0' # prevents forged authentication requests
 ```
@@ -147,7 +149,7 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 </Warning>
 
-```
+```ruby lines
 <!-- Place a login button anywhere on your application -->
 <%= button_to 'Login', '/auth/auth0', method: :post %>
 ```
@@ -170,7 +172,7 @@ Railsアプリケーションにログインできるようになったら、ロ
 
 </Note>
 
-```
+```ruby lines
 <!-- Place a logout button anywhere on your application -->
 <%= button_to 'Logout', 'auth/logout', method: :get %>
 ```
@@ -189,7 +191,7 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 Concernができたら、ログインユーザーを必要とするすべてのコントローラーに含めます。その後、次の例のように、`session[:userinfo]`セッションからユーザーにアクセスできます：
 
-```
+```ruby lines
 class DashboardController < ApplicationController
 include Secured
 def show
@@ -201,7 +203,7 @@ end
 
 ユーザーがセッションから読み込まれたら、フロントエンドで情報を表示するために使います：
 
-```
+```xml lines
 <div>
 <p>Normalized User Profile:<%= JSON.pretty_generate(@user[:info])%></p>
 <p>Full User Profile:<%= JSON.pretty_generate(@user[:extra][:raw_info])%></p>
@@ -232,7 +234,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/webapp/rails/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

@@ -1,13 +1,13 @@
 ---
 title: "Use Auth0's Unified Phone Experience for Multi-Factor Authentication"
 permalink: "use-auth0s-unified-phone-experience-for-multi-factor-authentication"
+'description': "Migrate your phone provider configuration to the Unified Phone Experience."
 'og:title': "Use Auth0's Unified Phone Experience for Multi-Factor Authentication"
 'og:description': "Migrate your phone provider configuration to the Unified Phone Experience."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Use Auth0's Unified Phone Experience for Multi-Factor Authentication"
 'twitter:description': "Migrate your phone provider configuration to the Unified Phone Experience."
 ---
-# Use Auth0's Unified Phone Experience for Multi-Factor Authentication
 
 <Card title="Before you start">
 
@@ -30,7 +30,7 @@ If you already have a phone provider configured for Multi-Factor Authentication 
 
 <Note>
 
-Auth0 does not provide feedback to the end user on whether a phone message has been sent successfully with the tenant-level provider. To troubleshoot issues, review the [tenant logs](/docs/deploy-monitor/logs).
+Auth0 does not provide feedback to the end user on whether a phone message has been sent successfully with the tenant-level provider. To troubleshoot issues, review the [tenant logs](/docs/ja-jp/deploy-monitor/logs).
 
 </Note>
 
@@ -53,7 +53,7 @@ To use the Unified Phone Experience, you need to:
 2. Select **Phone Message**.
 3. If you are able to use the Unified Phone Experience, a banner advises you to configure a tenant-level provider:
 
-   <Frame>![](//images.ctfassets.net/cdy7uua7fh8z/1mZryDWIpdkpGmhxn4Gr8K/4bdad7fbcd81dd0bf4855d94b7205e8b/2025-02-11_23-20-07.png)</Frame>
+   <Frame>![](/images/ja-jp/cdy7uua7fh8z/1mZryDWIpdkpGmhxn4Gr8K/4bdad7fbcd81dd0bf4855d94b7205e8b/2025-02-11_23-20-07.png)</Frame>
 
 <Note>
 
@@ -68,7 +68,7 @@ If you are using Twilio as your phone provider for Multi-Factor Authentication, 
 1. Navigate to [**Branding > Phone Provider**](https://manage.auth0.com/#/phone/templates/phone/provider).
 2. Select and configure your provider:
 
-   <Frame>![Branding > Phone Provider > Twilio](//images.ctfassets.net/cdy7uua7fh8z/6TESTIdmhUL0LEitACadIK/fcdc34e18a6b66b47370f6d754c085b5/2025-02-21_12-49-53.png)</Frame>
+   <Frame>![Branding > Phone Provider > Twilio](/images/ja-jp/cdy7uua7fh8z/6TESTIdmhUL0LEitACadIK/fcdc34e18a6b66b47370f6d754c085b5/2025-02-21_12-49-53.png)</Frame>
 
    1. Choose Twilio as your phone provider.
    2. Choose your delivery methods.
@@ -118,40 +118,40 @@ accordion.expand_all/accordion.collapse_all
 
 <table class="table"><thead>
 <tr>
-<th><b><code>send-phone-message</code> context object</b></th>
-<th><b><code>custom-phone-provider</code> context object</b></th>
+<th><b>`send-phone-message` context object</b></th>
+<th><b>`custom-phone-provider` context object</b></th>
 <th><b>Status</b></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>text</code></td>
-<td><code>notification.as_text</code> and <code>notification.as_voice</code></td>
+<td>`text`</td>
+<td>`notification.as_text` and `notification.as_voice`</td>
 <td>Updated</td>
 </tr>
 <tr>
-<td><code>message_type</code></td>
-<td><code>notification.message_type</code> <ul><li>Note the difference in values: <code>second-factor-authentication</code> vs <code>otp_enroll</code>, <code>verify</code> vs <code>otp_verify</code>)</li></ul></td>
+<td>`message_type`</td>
+<td>`notification.message_type` <ul><li>Note the difference in values: `second-factor-authentication` vs `otp_enroll`, `verify` vs `otp_verify`)</li></ul></td>
 <td>Updated</td>
 </tr>
 <tr>
-<td><code>action</code></td>
-<td><code>notification.delivery_method</code></td>
+<td>`action`</td>
+<td>`notification.delivery_method`</td>
 <td>Updated</td>
 </tr>
 <tr>
-<td><code>language</code></td>
-<td><code>notification.locale</code></td>
+<td>`language`</td>
+<td>`notification.locale`</td>
 <td>Updated</td>
 </tr>
 <tr>
-<td><code>code</code></td>
-<td><code>notification.code</code></td>
+<td>`code`</td>
+<td>`notification.code`</td>
 <td>Updated</td>
 </tr>
 <tr>
-<td><code>recipient</code></td>
-<td><code>notification.recipient</code></td>
+<td>`recipient`</td>
+<td>`notification.recipient`</td>
 <td>Updated</td>
 </tr>
 </tbody>
@@ -163,40 +163,40 @@ accordion.expand_all/accordion.collapse_all
 
 <table class="table"><thead>
 <tr>
-<th><b> <code>send-phone-message</code> context object </b></th>
+<th><b> `send-phone-message` context object </b></th>
 <th><b>Tenant-level provider context object</b></th>
 <th><b> Status </b></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>ip</code></td>
-<td><code>ip</code></td>
+<td>`ip`</td>
+<td>`ip`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user_agent</code></td>
-<td><code>user_agent</code></td>
+<td>`user_agent`</td>
+<td>`user_agent`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>language</code></td>
-<td><code>language</code></td>
+<td>`language`</td>
+<td>`language`</td>
 <td>Updated</td>
 </tr>
 <tr>
-<td><code>method</code></td>
-<td><code>method</code> optional</td>
+<td>`method`</td>
+<td>`method` optional</td>
 <td>Updated</td>
 </tr>
 <tr>
-<td><code>hostname</code></td>
-<td><code>hostname</code> optional</td>
+<td>`hostname`</td>
+<td>`hostname` optional</td>
 <td>Updated</td>
 </tr>
 <tr>
-<td><code>geoip</code></td>
-<td><code>geoip</code></td>
+<td>`geoip`</td>
+<td>`geoip`</td>
 <td>Updated</td>
 </tr>
 </tbody>
@@ -208,35 +208,35 @@ accordion.expand_all/accordion.collapse_all
 
 <table class="table"><thead>
 <tr>
-<th><b> <code>send-phone-message</code> context object </b></th>
+<th><b> `send-phone-message` context object </b></th>
 <th><b>Tenant-level provider context object</b></th>
 <th><b> Status </b></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>tenant.id</code></td>
-<td><code>tenant</code></td>
+<td>`tenant.id`</td>
+<td>`tenant`</td>
 <td>Updated</td>
 </tr>
 <tr>
 <td>N/A</td>
-<td><code>tenant.home_url</code></td>
+<td>`tenant.home_url`</td>
 <td>New</td>
 </tr>
 <tr>
 <td>N/A</td>
-<td><code>tenant.logo_url</code></td>
+<td>`tenant.logo_url`</td>
 <td>New</td>
 </tr>
 <tr>
 <td>N/A</td>
-<td><code>tenant.support_email</code></td>
+<td>`tenant.support_email`</td>
 <td>New</td>
 </tr>
 <tr>
 <td>N/A</td>
-<td><code>tenant.support_url</code></td>
+<td>`tenant.support_url`</td>
 <td>New</td>
 </tr>
 </tbody>
@@ -248,25 +248,25 @@ accordion.expand_all/accordion.collapse_all
 
 <table class="table"><thead>
 <tr>
-<th><b> <code>send-phone-message</code> context object </b></th>
+<th><b> `send-phone-message` context object </b></th>
 <th><b>Tenant-level provider context object</b></th>
 <th><b> Status </b></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>client.client_metadata</code></td>
-<td><code>client.metadata</code></td>
+<td>`client.client_metadata`</td>
+<td>`client.metadata`</td>
 <td>Updated</td>
 </tr>
 <tr>
-<td><code>client.client_id</code></td>
-<td><code>client.client_id</code></td>
+<td>`client.client_id`</td>
+<td>`client.client_id`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>client.name</code></td>
-<td><code>client.name</code></td>
+<td>`client.name`</td>
+<td>`client.name`</td>
 <td>Unchanged</td>
 </tr>
 </tbody>
@@ -278,100 +278,100 @@ accordion.expand_all/accordion.collapse_all
 
 <table class="table"><thead>
 <tr>
-<th><b> <code>send-phone-message</code> context object </b></th>
+<th><b> `send-phone-message` context object </b></th>
 <th><b>Tenant-level provider context object</b></th>
 <th><b> Status </b></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>user.user_id</code></td>
-<td><code>user.user_id</code></td>
+<td>`user.user_id`</td>
+<td>`user.user_id`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.name</code></td>
-<td><code>user.name</code></td>
+<td>`user.name`</td>
+<td>`user.name`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.email</code></td>
-<td><code>user.email</code></td>
+<td>`user.email`</td>
+<td>`user.email`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.app_metadata</code></td>
-<td><code>user.app_metadata</code></td>
+<td>`user.app_metadata`</td>
+<td>`user.app_metadata`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.user_metadata</code></td>
-<td><code>user.user_metadata</code></td>
+<td>`user.user_metadata`</td>
+<td>`user.user_metadata`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.email_verified</code></td>
-<td><code>user.email_verified</code></td>
+<td>`user.email_verified`</td>
+<td>`user.email_verified`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.phone_number</code></td>
-<td><code>user.phone_number</code></td>
+<td>`user.phone_number`</td>
+<td>`user.phone_number`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.phone_verified</code></td>
-<td><code>user.phone_verified</code></td>
+<td>`user.phone_verified`</td>
+<td>`user.phone_verified`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.picture</code></td>
-<td><code>user.picture</code></td>
+<td>`user.picture`</td>
+<td>`user.picture`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.created_at</code></td>
-<td><code>user.created_at</code></td>
+<td>`user.created_at`</td>
+<td>`user.created_at`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.updated_at</code></td>
-<td><code>user.updated_at</code></td>
+<td>`user.updated_at`</td>
+<td>`user.updated_at`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.multifactor</code></td>
-<td><code>user.multifactor</code></td>
+<td>`user.multifactor`</td>
+<td>`user.multifactor`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.identities</code></td>
+<td>`user.identities`</td>
 <td>N/A</td>
 <td>Removed</td>
 </tr>
 <tr>
-<td><code>user.family_name</code></td>
-<td><code>user.family_name</code></td>
+<td>`user.family_name`</td>
+<td>`user.family_name`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.given_name</code></td>
-<td><code>user.given_name</code></td>
+<td>`user.given_name`</td>
+<td>`user.given_name`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.nickname</code></td>
-<td><code>user.nickname</code></td>
+<td>`user.nickname`</td>
+<td>`user.nickname`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
-<td><code>user.username</code></td>
-<td><code>user.username</code></td>
+<td>`user.username`</td>
+<td>`user.username`</td>
 <td>Unchanged</td>
 </tr>
 <tr>
 <td>N/A</td>
-<td><code>user.login_count</code></td>
+<td>`user.login_count`</td>
 <td>New</td>
 </tr>
 </tbody>
@@ -383,7 +383,7 @@ For a complete list of the contextual variables, read [Customize Phone Templates
 
 Review the custom phone provider example:
 
-```javascript
+```javascript lines
 const { fetch } = require('undici');
 /**
 * Handler to be executed while sending a phone notification
@@ -439,7 +439,7 @@ To continue and configure your MFA `custom-phone-provider` trigger:
 
 If you have not enabled a tenant-level provider in the Auth0 Dashboard, you won’t be able to configure phone SMS and voice phone factors for MFA.
 
-<Frame>![Unified phone MFA no tenant provider configured warning](//images.ctfassets.net/cdy7uua7fh8z/6HE10zh6tL6ByihAh4Cj6K/c0faf43eb8e4d606ef1ac20ec538bcac/2025-02-12_09-14-41.png)</Frame>
+<Frame>![Unified phone MFA no tenant provider configured warning](/images/ja-jp/cdy7uua7fh8z/6HE10zh6tL6ByihAh4Cj6K/c0faf43eb8e4d606ef1ac20ec538bcac/2025-02-12_09-14-41.png)</Frame>
 
 </Warning>
 
@@ -606,27 +606,27 @@ The following Guardian endpoints will no longer work with the Unified Phone Expe
 <tbody>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/guardian/get-phone-twilio-factor-provider">Get Twilio configuration</a></li><li><a href="https://auth0.com/docs/api/management/v2/guardian/get-sms-twilio-factor-provider">Get Twilio SMS configuration</a></li></ul></td>
-<td><code>read:guardian_factors</code></td>
+<td>`read:guardian_factors`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/guardian/get-guardian-phone-providers">Get phone provider configuration</a></li><li><a href="https://auth0.com/docs/api/management/v2/guardian/get-sms-providers">Get phone provider SMS configuration</a></li></ul></td>
-<td><code>read:guardian_factors</code></td>
+<td>`read:guardian_factors`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/guardian/put-twilio">Update Twilio configuration</a></li><li><a href="https://auth0.com/docs/api/management/v2/guardian/put-sms-twilio-factor-provider">Update Twilio SMS configuration</a></li></ul></td>
-<td><code>update:guardian_factors</code></td>
+<td>`update:guardian_factors`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/guardian/put-phone-providers">Update phone provider configuration</a></li><li><a href="https://auth0.com/docs/api/management/v2/guardian/put-sms-providers">Update SMS configuration</a></li></ul></td>
-<td><code>update:guardian_factors</code></td>
+<td>`update:guardian_factors`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/guardian/get-factor-phone-templates">Get enrollment and verification phone templates</a></li><li><a href="https://auth0.com/docs/api/management/v2/guardian/get-factor-sms-templates">Get SMS enrollment and verification templates</a></li></ul></td>
-<td><code>read:guardian_factors</code></td>
+<td>`read:guardian_factors`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/guardian/put-factor-phone-templates">Update enrollment and verification phone templates</a></li><li><a href="https://auth0.com/docs/api/management/v2/guardian/put-factor-sms-templates">Update SMS enrollment and verification templates</a></li></ul></td>
-<td><code>update:guardian_factors</code></td>
+<td>`update:guardian_factors`</td>
 </tr>
 </tbody>
 </table>
@@ -642,35 +642,35 @@ Replace the Guardian endpoints with the new Phone Provider Branding endpoints an
 <tbody>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/branding/get-branding-phone-providers">Get the phone providers set for a tenant</a></li><li><a href="https://auth0.com/docs/api/management/v2/branding/get-phone-provider">Get the phone provider</a></li></ul></td>
-<td><code>read:phone_providers</code></td>
+<td>`read:phone_providers`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/branding/update-phone-provider">Update the phone provider</a></li></ul></td>
-<td><code>update:phone_providers</code></td>
+<td>`update:phone_providers`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/branding/create-phone-provider">Configure the phone provider</a></li></ul></td>
-<td><code>create:phone_providers</code></td>
+<td>`create:phone_providers`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/branding/get-phone-templates">Get list of phone notification templates</a></li><li><a href="https://auth0.com/docs/api/management/v2/branding/get-phone-template">Get a phone notification template</a></li></ul></td>
-<td><code>read:phone_templates</code></td>
+<td>`read:phone_templates`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/branding/update-phone-template">Update a phone notification template</a></li></ul></td>
-<td><code>update:phone_templates</code></td>
+<td>`update:phone_templates`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/branding/create-phone-template">Create a phone notification template</a></li></ul></td>
-<td><code>create:phone_templates</code></td>
+<td>`create:phone_templates`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/branding/delete-phone-provider">Delete a phone template</a></li></ul></td>
-<td><code>delete:phone_templates</code></td>
+<td>`delete:phone_templates`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/branding/delete-phone-provider">Delete a phone provider</a></li></ul></td>
-<td><code>delete:phone_providers</code></td>
+<td>`delete:phone_providers`</td>
 </tr>
 </tbody>
 </table>
@@ -686,19 +686,19 @@ The following Guardian endpoints work with the Unified Phone Experience and will
 <tbody>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/guardian/get-message-types">Get enabled phone factors</a></li></ul></td>
-<td><code>read:guardian_factors</code></td>
+<td>`read:guardian_factors`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/guardian/put-message-types">Update enabled phone factors</a></li></ul></td>
-<td><code>update:guardian_factors</code></td>
+<td>`update:guardian_factors`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/guardian/get-guardian-phone-providers">Get phone provider configuration</a></li></ul></td>
-<td><code>read:guardian_factors</code></td>
+<td>`read:guardian_factors`</td>
 </tr>
 <tr>
 <td><ul><li><a href="https://auth0.com/docs/api/management/v2/guardian/put-phone-providers">Update phone provider configuration</a></li></ul></td>
-<td><code>update:guardian_factors</code></td>
+<td>`update:guardian_factors`</td>
 </tr>
 </tbody>
 </table>
@@ -707,5 +707,5 @@ The following Guardian endpoints work with the Unified Phone Experience and will
 
 If you configure the Unified Phone Experience and then disable it, existing integrations with your phone provider, including MFA, could break.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/3qqa2QWXRNKZV96AQq6O0G/28cdff44a9532f5c005a5e1acb763ab8/2025-02-24_14-58-47.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/3qqa2QWXRNKZV96AQq6O0G/28cdff44a9532f5c005a5e1acb763ab8/2025-02-24_14-58-47.png)</Frame>
 

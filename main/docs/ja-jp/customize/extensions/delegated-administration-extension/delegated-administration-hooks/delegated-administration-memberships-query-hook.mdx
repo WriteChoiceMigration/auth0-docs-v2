@@ -1,13 +1,13 @@
 ---
 title: "委任管理：メンバーシップクエリフック"
 permalink: "delegated-administration-memberships-query-hook"
+'description': "委任管理拡張機能にメンバーシップクエリフックを使用する方法について説明します。"
 'og:title': "委任管理：メンバーシップクエリフック"
 'og:description': "委任管理拡張機能にメンバーシップクエリフックを使用する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "委任管理：メンバーシップクエリフック"
 'twitter:description': "委任管理拡張機能にメンバーシップクエリフックを使用する方法について説明します。"
 ---
-# 委任管理：メンバーシップクエリフック
 
 新しいユーザーの作成では、ユーザーインターフェイスにドロップダウンが表示され、ユーザーに割り当てるメンバーシップを選択することができます。これらのメンバーシップは**メンバーシップクエリフック**を使って定義されます。
 
@@ -20,7 +20,7 @@ permalink: "delegated-administration-memberships-query-hook"
 
 IT部のユーザーは他の部署にユーザーを作成できなくてはなりません。他の部署のユーザーは自身の部署にのみユーザーを作成できなくてはなりません。
 
-```javascript
+```javascript lines
 function(ctx, callback) {
   var currentDepartment = ctx.payload.user.app_metadata && ctx.payload.user.app_metadata.department;
   if (!currentDepartment || !currentDepartment.length) {
@@ -43,7 +43,7 @@ function(ctx, callback) {
 
 **createMemberships**をtrueに設定すると、エンドユーザーが**memberships**フィールドに任意の値を入力できるようになります。
 
-```javascript
+```javascript lines
 function(ctx, callback) {
   var currentDepartment = ctx.payload.user.app_metadata.department;
   if (!currentDepartment || !currentDepartment.length) {

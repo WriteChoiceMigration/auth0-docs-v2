@@ -1,15 +1,15 @@
 ---
 title: "カスタムフィールドコンポーネント"
 permalink: "custom-field-components"
+'description': "カスタムコンポーネントを使用して、特定のロジックやUIに必要なフィールドをJavaScriptやHTMLとCSSを用いて作成する方法について説明します。"
 'og:title': "カスタムフィールドコンポーネント"
 'og:description': "カスタムコンポーネントを使用して、特定のロジックやUIに必要なフィールドをJavaScriptやHTMLとCSSを用いて作成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "カスタムフィールドコンポーネント"
 'twitter:description': "カスタムコンポーネントを使用して、特定のロジックやUIに必要なフィールドをJavaScriptやHTMLとCSSを用いて作成する方法について説明します。"
 ---
-# カスタムフィールドコンポーネント
 
-<Frame>![Dashboard > Actions > Forms > Custom field](//images.ctfassets.net/cdy7uua7fh8z/3bZUItvx7VQG1AUuTah1V0/6ba3b7e9909d189f418cdc85a5ed53b9/custom-field.png)</Frame>
+<Frame>![Dashboard > Actions > Forms > Custom field](/images/ja-jp/cdy7uua7fh8z/3bZUItvx7VQG1AUuTah1V0/6ba3b7e9909d189f418cdc85a5ed53b9/custom-field.png)</Frame>
 
 カスタムコンポーネントを使用すると、フォームの外観や操作性を拡張したり、JavaScriptやHTML、CSSを用いて強力なロジックを追加したりできます。
 
@@ -40,7 +40,7 @@ permalink: "custom-field-components"
 
 カスタムフィールドのソースコードで参照するキーと値のペアを追加します。キーと値のペアはフィールド[変数](/docs/ja-jp/customize/forms/variables)から含めることができます。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/6VEtliKd20ZF4MJKhvB5Z0/e1b3b5df4860d013d1e3eb79d1174b35/params.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/6VEtliKd20ZF4MJKhvB5Z0/e1b3b5df4860d013d1e3eb79d1174b35/params.png)</Frame>
 
 <Note>
 
@@ -50,7 +50,7 @@ permalink: "custom-field-components"
 
 下の例では、キーと値のペアである`symbol={{fields.symbol}}`と`separator=,`を使用して、カスタムフィールドの設定が入力されています。
 
-```javascript
+```javascript lines
 function CustomComponent(context) {
   const input = document.createElement('input');
   let mask = null;
@@ -87,9 +87,9 @@ function CustomComponent(context) {
 
 カスタムフィールドにJavaScriptコードを追加します。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/TMuY21ILSxBiBWv792cTB/97e9855145d7b52fc33ed60249e86642/source-code.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/TMuY21ILSxBiBWv792cTB/97e9855145d7b52fc33ed60249e86642/source-code.png)</Frame>
 
-```javascript
+```javascript lines
 function customInput() {
   const input = document.createElement('input');
   input.type = 'text';
@@ -118,9 +118,9 @@ function customInput() {
 
 カスタムフィールドはデフォルトで任意の値形式を受け付けます。ただし、[JSONスキーマ](https://json-schema.org/)を使用すると、サーバー側で値を検証することができます。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/5iQfwWq8Scx11s1fcSONvK/d7af907f575095d66558ee2631c73113/json-schema.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/5iQfwWq8Scx11s1fcSONvK/d7af907f575095d66558ee2631c73113/json-schema.png)</Frame>
 
-```json
+```json lines
 {
   "type": "array",
   "items": {
@@ -136,7 +136,7 @@ function customInput() {
 
 カスタムフィールドにCSSコードを追加します。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/lC4w1THpVDD32Ke6IsXrl/e1371beeed09d5f12b6656d397c3b692/css.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/lC4w1THpVDD32Ke6IsXrl/e1371beeed09d5f12b6656d397c3b692/css.png)</Frame>
 
 ## カスタムフィールドハンドラー
 
@@ -157,7 +157,7 @@ HTML要素、文字列または空の値を返します。
 </thead>
 <tbody>
 <tr>
-<td><code>params</code></td>
+<td>`params`</td>
 <td>
 <p><em>任意のオブジェクト</em>です。カスタムフィールド設定からのパラメーターです。
             </p>
@@ -166,7 +166,7 @@ HTML要素、文字列または空の値を返します。
 </tbody>
 </table>
 
-```javascript
+```javascript lines
 const input = document.createElement('input');
 input.type = 'text';
 
@@ -190,7 +190,7 @@ init() {
 </thead>
 <tbody>
 <tr>
-<td><code>params</code></td>
+<td>`params`</td>
 <td>
 <p><em>任意のオブジェクト</em>です。カスタムフィールド設定からのパラメーターです。
             </p>
@@ -213,7 +213,7 @@ init() {
 
 **例：**
 
-```javascript
+```javascript lines
 function customTextInput() {
   const input = document.createElement('input');
   input.type = 'text';
@@ -246,7 +246,7 @@ function customTextInput() {
 
 `init()`メソッドが呼び出される前に読み込みが終了することをフォームが保証するURLのリストを返します。
 
-```
+```javascript lines
 getScripts() {
   return ['https://example.com/script_a.js', 'https://example.com/script_b.js'];
 }
@@ -266,7 +266,7 @@ getScripts() {
 
 現在のカスタムフィールドに値を設定します。
 
-```javascript
+```javascript lines
 function customInput(context) {
   const input = document.createElement('input');
   input.type = 'text';
@@ -287,7 +287,7 @@ function customInput(context) {
 
 現在のカスタムフィールドの一意の識別子を返します。
 
-```javascript
+```javascript lines
 function customInput(context) {
   const input = document.createElement('input');
   input.type = 'text';
@@ -315,7 +315,7 @@ function customInput(context) {
 
 </Note>
 
-```javascript
+```javascript lines
 function customInput(context) {
   // Accessing parameters on the root of the function does NOT work
   // const { defaultValue } = context.custom.getParams();
@@ -387,14 +387,14 @@ function customInput(context) {
 </thead>
 <tbody>
 <tr>
-<td><code>id</code></td>
+<td>`id`</td>
 <td>
 <p><em>文字列</em>。非表示フィールドのIDです。
             </p>
 </td>
 </tr>
 <tr>
-<td><code>value</code></td>
+<td>`value`</td>
 <td>
 <p><em>文字列</em>。非表示フィールドの値です。
             </p>
@@ -424,7 +424,7 @@ function customInput(context) {
 </thead>
 <tbody>
 <tr>
-<td><code>id</code></td>
+<td>`id`</td>
 <td>
 <p><em>文字列</em>。IDフィールド値です。
             </p>
@@ -433,7 +433,7 @@ function customInput(context) {
 </tbody>
 </table>
 
-```javascript
+```javascript lines
 const fullName = context.form.getField('full_name');
 const fullNameValue = fullName.getValue();
 console.log(fullNameValue); // John Doe
@@ -453,11 +453,11 @@ console.log(fullNameValue); // John Doe
 
 あらかじめ設定された範囲からの値を返すカスタムフィールドです。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/4afLZWM9MAXXti4F3Cuc3D/c6c6d33c650b7b9fde3de011feb82192/range-input-custom-field.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/4afLZWM9MAXXti4F3Cuc3D/c6c6d33c650b7b9fde3de011feb82192/range-input-custom-field.png)</Frame>
 
 **ソースコード**:：
 
-```javascript
+```javascript lines
 function rangeInput() {
   const input = document.createElement('input');
   input.type = 'range';
@@ -481,11 +481,11 @@ function rangeInput() {
 
 色の16進数値を返すカスタムフィールドです。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/5HAWLZJmCRlyl3dIrgzgWv/c602ccc1662d40d03898dcaa94d213dc/color-input-custom-field.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/5HAWLZJmCRlyl3dIrgzgWv/c602ccc1662d40d03898dcaa94d213dc/color-input-custom-field.png)</Frame>
 
 **ソースコード**:：
 
-```javascript
+```javascript lines
 function colorInput() {
   const input = document.createElement('input');
   input.type = 'color';
@@ -507,11 +507,11 @@ function colorInput() {
 
 サードパーティーのAPIを使用したオートコンプリート値を返すカスタムフィールドです。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/l0lvyJgPLrHrLT8rpR6IF/800868d966ef5b64effbb6a3b0cabf94/autocomplete-api.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/l0lvyJgPLrHrLT8rpR6IF/800868d966ef5b64effbb6a3b0cabf94/autocomplete-api.png)</Frame>
 
 **ソースコード**:：
 
-```javascript
+```javascript lines
 function textInputWithAutocomplete(context) {
   const input = document.createElement('input');
   input.type = 'text';
@@ -546,11 +546,11 @@ function textInputWithAutocomplete(context) {
 
 サードパーティーのAPIを使用した動的ドロップダウンリストからの値を返すカスタムフィールドです。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/6gwOMuZaYi3dh0bkrxnKy9/33172d00e3933c74954a8ac3befaff7f/dropdowncustomfield.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/6gwOMuZaYi3dh0bkrxnKy9/33172d00e3933c74954a8ac3befaff7f/dropdowncustomfield.png)</Frame>
 
 **ソースコード**:：
 
-```javascript
+```javascript lines
 function dynamicDropdown() {
   const select = document.createElement('select');
   select.classList.add('af-stringField-input');
@@ -598,11 +598,11 @@ function dynamicDropdown() {
 
 ユーザーがフィールドを追加できるカスタムフィールドです。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/7xM41qqb1zYjLAPG16wxGc/a33a3dd624222643e3f967ff35acbbac/Screenshot_2024-09-12_at_09.32.35.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/7xM41qqb1zYjLAPG16wxGc/a33a3dd624222643e3f967ff35acbbac/Screenshot_2024-09-12_at_09.32.35.png)</Frame>
 
 **ソースコード**:：
 
-```javascript
+```javascript lines
 function DynamicInputs(context) {
   const DEFAULT_INITIAL_INPUTS = 2;
   const DEFAULT_PLACEHOLDER = 'jane.doe@example.com';
@@ -742,7 +742,7 @@ function DynamicInputs(context) {
 
 **CSSコード**：
 
-```
+```csharp lines
 .af-button.af-dynamic-input-remove-button {
   width: 48px;
   color: var(--button-font-color);

@@ -1,13 +1,13 @@
 ---
 title: "OAuth 2.0の認可フレームワーク"
 permalink: "oauth"
+'description': "Auth0がOAuth 2.0の認可フレームワークとどのように動作するのかを説明します。"
 'og:title': "OAuth 2.0の認可フレームワーク"
 'og:description': "Auth0がOAuth 2.0の認可フレームワークとどのように動作するのかを説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "OAuth 2.0の認可フレームワーク"
 'twitter:description': "Auth0がOAuth 2.0の認可フレームワークとどのように動作するのかを説明します。"
 ---
-# OAuth 2.0の認可フレームワーク
 
 <Card title="Overview">
 
@@ -62,31 +62,31 @@ OAuth 2.0は、`/authorize`エンドポイントおよび`/oauth/token`エンド
 </thead>
 <tbody>
 <tr>
-<td><code>response_type</code></td>
+<td>`response_type`</td>
 <td>どの付与を実行するか認可サーバーに指示します。</td>
 </tr>
 <tr>
-<td><code>response_mode</code></td>
-<td>（任意）認可要求の結果の形式を指定します。値：<br/>- <code>query</code>：認可コード付与の場合です。<code>302 Found</code>はリダイレクトをトリガーします。<br/>- <code>fragment</code>：暗黙付与の場合です。<code>302 Found</code>はリダイレクトをトリガーします。<br/>- <code>form_post</code>：<code>200 OK</code>と、HTMLフォームに隠しパラメーターとして埋め込まれた応答パラメーターが入ります。<br/>- <code>web_message</code>：サイレント認証の場合です。HTML5 Webメッセージを使用します。</td>
+<td>`response_mode`</td>
+<td>（任意）認可要求の結果の形式を指定します。値：<br/>- `query`：認可コード付与の場合です。`302 Found`はリダイレクトをトリガーします。<br/>- `fragment`：暗黙付与の場合です。`302 Found`はリダイレクトをトリガーします。<br/>- `form_post`：`200 OK`と、HTMLフォームに隠しパラメーターとして埋め込まれた応答パラメーターが入ります。<br/>- `web_message`：サイレント認証の場合です。HTML5 Webメッセージを使用します。</td>
 </tr>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>認可を求めるアプリケーションのIDです。</td>
 </tr>
 <tr>
-<td><code>redirect_uri</code></td>
+<td>`redirect_uri`</td>
 <td>URLを含みます。このエンドポイントから正常な応答を受け取ると、このURLにリダイレクトされます。</td>
 </tr>
 <tr>
-<td><code>scope</code></td>
+<td>`scope`</td>
 <td>アプリケーションに必要な権限をスペース区切りで列挙します。</td>
 </tr>
 <tr>
-<td><code>state</code></td>
-<td>セキュリティ目的で使用される不透明な値です。この要求パラメーターが要求に設定されている場合は、<code>redirect_uri</code>の一部としてアプリケーションに返されます。</td>
+<td>`state`</td>
+<td>セキュリティ目的で使用される不透明な値です。この要求パラメーターが要求に設定されている場合は、`redirect_uri`の一部としてアプリケーションに返されます。</td>
 </tr>
 <tr>
-<td><code>connection</code></td>
+<td>`connection`</td>
 <td>パスワードレス接続の接続タイプを指定します。</td>
 </tr>
 </tbody>
@@ -120,19 +120,19 @@ IDトークンはJWTで、ログインしたユーザーについての情報が
 </thead>
 <tbody>
 <tr>
-<td><code>query</code></td>
-<td>認可コード付与のデフォルト値です。成功応答は<code>302 Found</code>で、<code>redirect_uri</code>へのリダイレクトをトリガーします。応答パラメーターは、<code>Location</code>ヘッダー内にある<code>redirect_uri</code>のクエリコンポーネント（<code>?</code>に後続の部分）に埋め込まれます。<br/>例：<br/><code>HTTP/1.1 302 Found</code> <br/><code>Location: https://my-redirect-uri.callback?code=js89p2x1</code>の場合、認可コードは<code>js89p21</code>です。</td>
+<td>`query`</td>
+<td>認可コード付与のデフォルト値です。成功応答は`302 Found`で、`redirect_uri`へのリダイレクトをトリガーします。応答パラメーターは、`Location`ヘッダー内にある`redirect_uri`のクエリコンポーネント（`?`に後続の部分）に埋め込まれます。<br/>例：<br/>`HTTP/1.1 302 Found` <br/>`Location: https://my-redirect-uri.callback?code=js89p2x1`の場合、認可コードは`js89p21`です。</td>
 </tr>
 <tr>
-<td><code>fragment</code></td>
-<td>暗黙付与のデフォルト値です。成功応答は<code>302 Found</code>で、<code>redirect_uri</code>（要求パラメーター）へのリダイレクトをトリガーします。応答パラメーターは、<code>Location</code>ヘッダー内にある<code>redirect_uri</code>のフラグメントコンポーネント（<code>#</code>に後続の部分）に埋め込まれます。<br/>例：<br/><code>HTTP/1.1 302 Found</code><br/><code>Location: https://my-redirect-uri/callback#access_token=eyB...78f&amp;token_type=Bearer&amp;expires_in=3600</code></td>
+<td>`fragment`</td>
+<td>暗黙付与のデフォルト値です。成功応答は`302 Found`で、`redirect_uri`（要求パラメーター）へのリダイレクトをトリガーします。応答パラメーターは、`Location`ヘッダー内にある`redirect_uri`のフラグメントコンポーネント（`#`に後続の部分）に埋め込まれます。<br/>例：<br/>`HTTP/1.1 302 Found`<br/>`Location: https://my-redirect-uri/callback#access_token=eyB...78f&amp;token_type=Bearer&amp;expires_in=3600`</td>
 </tr>
 <tr>
-<td><code>form_post</code></td>
-<td>応答モードは、<a href="https://openid.net/specs/oauth-v2-form-post-response-mode-1_0.html">OAuth 2.0 Form Post Response Mode specification</a>の仕様に定義されています。成功応答は<code>200 OK</code>で、パラメーターはHTMLフォームに隠されたパラメーターとして埋め込まれます。フォームの<code>action</code>は<code>redirect_uri</code>で、フォームを送信するために<code>onload</code>属性が構成されます。ブラウザーがHTMLを読み込むと、<code>redirect_uri</code>にリダイレクトされます。</td>
+<td>`form_post`</td>
+<td>応答モードは、<a href="https://openid.net/specs/oauth-v2-form-post-response-mode-1_0.html">OAuth 2.0 Form Post Response Mode specification</a>の仕様に定義されています。成功応答は`200 OK`で、パラメーターはHTMLフォームに隠されたパラメーターとして埋め込まれます。フォームの`action`は`redirect_uri`で、フォームを送信するために`onload`属性が構成されます。ブラウザーがHTMLを読み込むと、`redirect_uri`にリダイレクトされます。</td>
 </tr>
 <tr>
-<td><code>web_message</code></td>
+<td>`web_message`</td>
 <td>この応答モードは、<a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00">OAuth 2.0 Web Message Response Mode specification</a>の仕様に定義されています。/authorizationエンドポイントからの認可応答でリダイレクトするのではなく、HTML5 Webメッセージングが使用されます。これは、サイレント認証では特に便利です。この応答モードを使用するには、アプリのURLをAuth0の<a href="https://manage.auth0.com/#/applications/{yourClientId}/settings">アプリケーション設定</a>にある**［Allowed Web Origins（許可されているWebオリジン）］**フィールドで登録する必要があります。</td>
 </tr>
 </tbody>

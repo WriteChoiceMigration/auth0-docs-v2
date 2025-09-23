@@ -1,13 +1,13 @@
 ---
 title: "権限をロールに追加"
 permalink: "add-permissions-to-roles"
+'description': "Auth0 DashboardまたはManagement APIを使用してユーザーに権限を追加する方法を説明します。"
 'og:title': "権限をロールに追加"
 'og:description': "Auth0 DashboardまたはManagement APIを使用してユーザーに権限を追加する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "権限をロールに追加"
 'twitter:description': "Auth0 DashboardまたはManagement APIを使用してユーザーに権限を追加する方法を説明します。"
 ---
-# 権限をロールに追加
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を使用して、[roles](/docs/ja-jp/manage-users/access-control/rbac)に権限を割り当てることができます。ロールとその権限は、API Authorization Core機能セットで使用できます。
 
@@ -29,15 +29,15 @@ permalink: "add-permissions-to-roles"
 `［POST］`呼び出しを[［Add Role Permissions endpoint（ロール権限追加）］エンドポイント](https://auth0.com/docs/api/management/v2#!/Roles/post_role_permission_assignment)に対して行います。`ROLE_ID`、`MGMT_API_ACCESS_TOKEN`、`API_IDENTIFIER`、`PERMISSION_NAME`のプレースホルダーをそれぞれロールID、Management APIのアクセストークン、API識別子（オーディエンス）、権限名に置き換えます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/roles/ROLE_ID/permissions' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "permissions": [ { "resource_server_identifier": "API_IDENTIFIER", "permission_name": "PERMISSION_NAME" }, { "resource_server_identifier": "API_IDENTIFIER", "permission_name": "PERMISSION_NAME" } ] }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/roles/ROLE_ID/permissions");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -47,7 +47,7 @@ request.AddParameter("application/json", "{ \"permissions\": [ { \"resource_serv
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -68,8 +68,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/roles/ROLE_ID/permissions")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -78,7 +78,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/roles/ROLE_ID/
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -106,8 +106,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
@@ -133,7 +133,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/roles/ROLE_ID/permissions",
@@ -158,8 +158,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"permissions\": [ { \"resource_server_identifier\": \"API_IDENTIFIER\", \"permission_name\": \"PERMISSION_NAME\" }, { \"resource_server_identifier\": \"API_IDENTIFIER\", \"permission_name\": \"PERMISSION_NAME\" } ] }"
@@ -174,7 +174,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -189,8 +189,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"permissions\": [ { \"resource_server_identifier\": \"API_IDENTIFIER\", \"permission_name\": \"PERMISSION_NAME\" }, { \"resource_server_identifier\": \"API_IDENTIFIER\", \"permission_name\": \"PERMISSION_NAME\" } ] }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -235,19 +235,19 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>ROLE_ID</code></td>
+<td>`ROLE_ID`</td>
 <td>アクセス許可を追加したいロールのID。</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><code>update:roles</code>のスコープを持つ<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>`update:roles`のスコープを持つ<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 <tr>
-<td><code>API_IDENTIFIER</code></td>
+<td>`API_IDENTIFIER`</td>
 <td>これは、指定されたロールに追加したいアクセス許可に関連するAPIの識別子（別名オーディエンス）です。これは、API IDではありません。</td>
 </tr>
 <tr>
-<td><code>PERMISSION_NAME</code></td>
+<td>`PERMISSION_NAME`</td>
 <td>指定されたロールに追加したいアクセス許可の名前。</td>
 </tr>
 </tbody>

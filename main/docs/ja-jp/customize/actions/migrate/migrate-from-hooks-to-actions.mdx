@@ -1,13 +1,13 @@
 ---
 title: "HooksからActionsへの移行"
 permalink: "migrate-from-hooks-to-actions"
+'description': "既存のAuth0 HooksコードをAuth0 Actionsコードに移行する方法を学びます。"
 'og:title': "HooksからActionsへの移行"
 'og:description': "既存のAuth0 HooksコードをAuth0 Actionsコードに移行する方法を学びます。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "HooksからActionsへの移行"
 'twitter:description': "既存のAuth0 HooksコードをAuth0 Actionsコードに移行する方法を学びます。"
 ---
-# HooksからActionsへの移行
 
 既存のHooksをActionsに変換する際には、その種類のフックに対応するトリガーを新しいアクションと関連付ける必要があります。提供するマッピングの識別に沿って以下の手順に従えば、ほぼ同一の機能性に保てるはずです。
 
@@ -110,36 +110,36 @@ Hooksの関数はデフォルトのエクスポートを使ってエクスポー
 <tbody>
 <tr>
 <td>Client Credentials Exchange（クライアント資格情報交換）</td>
-<td><code>onExecuteCredentialsExchange</code></td>
+<td>`onExecuteCredentialsExchange`</td>
 </tr>
 <tr>
 <td>Pre-User Registration（ユーザー登録前）</td>
-<td><code>onExecutePreUserRegistration</code></td>
+<td>`onExecutePreUserRegistration`</td>
 </tr>
 <tr>
 <td>Post-User Registration（ユーザー登録後）</td>
-<td><code>onExecutePostUserRegistration</code></td>
+<td>`onExecutePostUserRegistration`</td>
 </tr>
 <tr>
 <td>Post-Change Password（パスワード変更後）</td>
-<td><code>onExecutePostChangePassword</code></td>
+<td>`onExecutePostChangePassword`</td>
 </tr>
 <tr>
 <td>Send Phone Message（電話メッセージ送信）</td>
-<td><code>onExecuteSendPhoneMessage</code></td>
+<td>`onExecuteSendPhoneMessage`</td>
 </tr>
 </tbody>
 </table>
 
 **変更前**
 
-```
+```javascript lines
 module.exports = async function myHooksFunction(){}
 ```
 
 **変更後**
 
-```javascript
+```javascript lines
 // Client Credentials Exchange
 exports.onExecuteCredentialsExchange = async (event, api) => {}
 
@@ -183,7 +183,7 @@ HooksとActionsはシークレットを類似した方法で処理します。�
 
 **変更前**
 
-```
+```javascript lines
 async function (user, context, cb) {
     const { SECRET_NAME } = context.webtask.secrets;
 
@@ -193,7 +193,7 @@ async function (user, context, cb) {
 
 **変更後**
 
-```
+```javascript lines
 async (event, api) => {
     const { SECRET_NAME } = event.secrets;
 
@@ -217,7 +217,7 @@ async (event, api) => {
 
 **変更前**
 
-```
+```javascript lines
 async function (user, context, cb) {
 	const clientId = context.clientID;
 	const tenant = context.connection.tenant
@@ -228,7 +228,7 @@ async function (user, context, cb) {
 
 **変更後**
 
-```
+```javascript lines
 async (event, api) => {
 	const clientId = event.client.client_id;
 	const tenant = event.tenant.id;
@@ -253,7 +253,7 @@ async (event, api) => {
 
 Client Credentials Exchange Hook（クライアント資格情報の交換フック）でアクセストークンにクレームを追加する場合には以下を使用していました。
 
-```javascript
+```javascript lines
 // Client Credentials Exchange Hook
 module.exports = function(client, scope, audience, context, cb) {
   var access_token = {};
@@ -266,7 +266,7 @@ module.exports = function(client, scope, audience, context, cb) {
 
 Actionsの[クライアント資格情報交換のAPIオブジェクト](/docs/ja-jp/customize/actions/explore-triggers/machine-to-machine-trigger/credentials-exchange-api-object)を使用できます：
 
-```javascript
+```javascript lines
 // Client Credentials Exchange Action
 exports.onExecuteCredentialsExchange = async (event, api) => {
   api.accessToken.setCustomClaim("https://example.com/claim", 'bar');  
@@ -277,7 +277,7 @@ exports.onExecuteCredentialsExchange = async (event, api) => {
 
 Pre User Registration Hook（ユーザー登録前のフック）でアクセストークンにクレームを追加する場合には以下を使用していました。
 
-```javascript
+```javascript lines
 // Pre User Registration Hook
 module.exports = function (user, context, cb) {
 	if (user.app_metadata.condition === "success") {
@@ -298,7 +298,7 @@ module.exports = function (user, context, cb) {
 
 [Pre User Registration（ユーザー登録前）のAPIオブジェクト](/docs/ja-jp/customize/actions/explore-triggers/signup-and-login-triggers/pre-user-registration-trigger/pre-user-registration-api-object)を使用できます：
 
-```javascript
+```javascript lines
 // Pre User Registration Action
 exports.onExecutePreUserRegistration = async (event, api) => {
 	if (event.user.app_metadata.condition === "success") {

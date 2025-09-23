@@ -1,19 +1,19 @@
 ---
 title: "シングルIDプロバイダー：プロファイル管理"
 permalink: "profile-management"
+'description': "マルチテナントのアーキテクチャで、組織のユーザープロファイルを管理することについて説明します。"
 'og:title': "シングルIDプロバイダー：プロファイル管理"
 'og:description': "マルチテナントのアーキテクチャで、組織のユーザープロファイルを管理することについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "シングルIDプロバイダー：プロファイル管理"
 'twitter:description': "マルチテナントのアーキテクチャで、組織のユーザープロファイルを管理することについて説明します。"
 ---
-# シングルIDプロバイダー：プロファイル管理
 
 プロファイル管理は、組織ベースのシナリオでも一般的に他のアーキテクチャのシナリオと同じです。アーキテクチャのシナリオでは、[B2Bプロファイル管理](/docs/ja-jp/get-started/architecture-scenarios/business-to-business/profile-management)に関する一般的なガイダンスを提供しています。ここに記載のガイダンスと共に参照することをお勧めします。
 
 <Warning>
 
-ユーザーに関連付けられたロールを管理するには、Auth0にユーザーアカウントが存在しなければなりません。[メンバーシップに関連付けられたAuth0 Organizationロール機能を使用している場合にも当てはまります](/docs/ja-jp/manage-users/organizations/configure-organizations/add-member-roles)。ただし、[ユーザー招待](/docs/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/provisioning)ワークフローでプロビジョニングされるユーザーアカウントには、招待プロセスの一部として自動的にロールが割り当てられることがあります。詳細については、「[組織メンバーを招待する](/docs/ja-jp/manage-users/organizations/configure-organizations/invite-members)」を参照してください。他のメカニズムを使用してユーザーを事前登録している場合は、初回認証時に、ロール情報をAuth0の外部に保存し、拡張性を使用して（たとえば、[ルール](/docs/ja-jp/customize/rules)の一環として）アクセス/コピーしなければなりません。
+ユーザーに関連付けられたロールを管理するには、Auth0にユーザーアカウントが存在しなければなりません。[メンバーシップに関連付けられたAuth0 Organizationロール機能を使用している場合にも当てはまります](/docs/ja-jp/manage-users/organizations/configure-organizations/add-member-roles)。ただし、[ユーザー招待](/docs/ja-jp/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/provisioning)ワークフローでプロビジョニングされるユーザーアカウントには、招待プロセスの一部として自動的にロールが割り当てられることがあります。詳細については、「[組織メンバーを招待する](/docs/ja-jp/manage-users/organizations/configure-organizations/invite-members)」を参照してください。他のメカニズムを使用してユーザーを事前登録している場合は、初回認証時に、ロール情報をAuth0の外部に保存し、拡張性を使用して（たとえば、[ルール](/docs/ja-jp/customize/rules)の一環として）アクセス/コピーしなければなりません。
 
 </Warning>
 
@@ -23,7 +23,7 @@ permalink: "profile-management"
 
 **ベストプラクティス**
 
-Organization関連のシナリオでは、必ずメールアドレスを検証する必要があります。そのため、セルフサービスのメールアドレス検証機能を提供することで、別の検証方法がない状況に対応する必要があります。詳細については、「[メールアドレス検証](/docs/manage-users/user-accounts/verify-emails)」を参照してください。
+Organization関連のシナリオでは、必ずメールアドレスを検証する必要があります。そのため、セルフサービスのメールアドレス検証機能を提供することで、別の検証方法がない状況に対応する必要があります。詳細については、「[メールアドレス検証](/docs/ja-jp/manage-users/user-accounts/verify-emails)」を参照してください。
 
 </Note>
 
@@ -37,7 +37,7 @@ Auth0では、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip
 * 関連の電話番号を変更する
 * ユーザー名を変更する
 * 規制順守（GDPRなど）の一環として、アカウントのプロビジョニングを解除する
-* パスワード変更処理を行う。一般的に[パスワードリセット](/docs/connections/database/password-change#trigger-an-interactive-password-reset-flow)の実装をお勧めします。これには組織特定のブランディングを活用でき、詳細は「[ブランディング：パスワードリセットページ</>」に記載されています。](/docs/ja-jp/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/branding)
+* パスワード変更処理を行う。一般的に[パスワードリセット](/docs/ja-jp/connections/database/password-change#trigger-an-interactive-password-reset-flow)の実装をお勧めします。これには組織特定のブランディングを活用でき、詳細は「[ブランディング：パスワードリセットページ</>」に記載されています。](/docs/ja-jp/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/branding)
 
 <Note>
 

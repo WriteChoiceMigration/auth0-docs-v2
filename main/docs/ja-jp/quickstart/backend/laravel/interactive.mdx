@@ -1,35 +1,37 @@
 ---
 title: "Laravelアプリケーションに認可を追加する"
 permalink: "interactive"
+'description': "このガイドでは、新規（または既存）のLaravel 9または10アプリケーションにAuth0を統合する方法を説明します。"
 'og:title': "Laravelアプリケーションに認可を追加する"
 'og:description': "このガイドでは、新規（または既存）のLaravel 9または10アプリケーションにAuth0を統合する方法を説明します。"
-'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/php.png"
+'og:image': "/docs/media/platforms/php.png"
 'twitter:title': "Laravelアプリケーションに認可を追加する"
 'twitter:description': "このガイドでは、新規（または既存）のLaravel 9または10アプリケーションにAuth0を統合する方法を説明します。"
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[ḥḛḛααḍḛḛṛ.ααͼţḭḭṓṓṇÀÀṛḛḛαα.ααṛţḭḭͼḽḛḛṡḺḭḭṇḳṪḛḛẋţ](/docs/ja-jp/articles)[ḥḛḛααḍḛḛṛ.ααͼţḭḭṓṓṇÀÀṛḛḛαα.ʠṵṵḭḭͼḳṡţααṛţṡḺḭḭṇḳṪḛḛẋţ](/docs/ja-jp/quickstarts)[ḥḛḛααḍḛḛṛ.ααͼţḭḭṓṓṇÀÀṛḛḛαα.ααṵṵţḥ0ÀÀṗḭḭṡḺḭḭṇḳṪḛḛẋţ](/docs/ja-jp/api)[ḥḛḛααḍḛḛṛ.ααͼţḭḭṓṓṇÀÀṛḛḛαα.ṡḍḳṡḺḭḭṇḳṪḛḛẋţ](/docs/ja-jp/libraries)
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+[Ḉṓṓṇţααͼţ ṡααḽḛḛṡ](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Ḻṓṓḡ ḭḭṇṢḭḭḡṇ ṵṵṗ
 
 ---
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+[Ḉṓṓṇţααͼţ ṡααḽḛḛṡ](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Ḻṓṓḡ ḭḭṇṢḭḭḡṇ ṵṵṗ
 
 [##### Laravelアプリケーションに認可を追加する](#Laravelアプリケーションに認可を追加する)
 
-[View on Github](https://github.com/auth0-samples/laravel/tree/7.x/sample) Log In & Download Sample
+[ṗααḡḛḛṡ.ţṵṵţṓṓṛḭḭααḽṔααḡḛḛ.ṇḛḛẁ.ḥḛḛααḍḛḛṛβṵṵţţṓṓṇṡ.ṽḭḭḛḛẁṎṎṇḠḭḭţḥṵṵḅ](https://github.com/auth0-samples/laravel/tree/7.x/sample) ṗααḡḛḛṡ.ţṵṵţṓṓṛḭḭααḽṔααḡḛḛ.ṇḛḛẁ.ḥḛḛααḍḛḛṛβṵṵţţṓṓṇṡ.ḽṓṓḡḬḬṇÀÀṇḍḌṓṓẁṇḽṓṓααḍṢααṃṗḽḛḛ
 
-1. [Quickstarts](/docs/ja-jp/quickstarts)
-3. [Backend/API](/docs/ja-jp/quickstart/backend)
-5. [Laravel API](/docs/ja-jp/quickstart/backend/laravel/interactive)
+1. [Ǫṵṵḭḭͼḳṡţααṛţṡ](/docs/ja-jp/quickstarts)
+3. [βααͼḳḛḛṇḍ/ÀÀṔḬḬ](/docs/ja-jp/quickstart/backend)
+5. [Ḻααṛααṽḛḛḽ ÀÀṔḬḬ](/docs/ja-jp/quickstart/backend/laravel/interactive)
 
 # 
 
@@ -53,13 +55,13 @@ permalink: "interactive"
 
 **Laravelアプリケーションをまだセットアップしていない場合**には、シェルを開いて、新規プロジェクトに適切なディレクトリに移動し、次のコマンドを実行します：
 
-```
+```bash lines
 composer create-project --prefer-dist laravel/laravel auth0-laravel-api ^9.0
 ```
 
 このガイドにあるすべてのコマンドは、Laravelプロジェクトディレクトリのルートから実行されていることを前提としています。必ず新規プロジェクトのディレクトリに移動（`cd`）してください：
 
-```bash
+```bash lines
 cd auth0-laravel-api
 ```
 
@@ -69,13 +71,13 @@ cd auth0-laravel-api
 
 プロジェクトディレクトリで次のコマンドを実行して、[Auth0 Laravel SDK](https://github.com/auth0/laravel-auth0)をインストールします：
 
-```
+```bash lines
 composer require auth0/login:^7.8 --update-with-all-dependencies
 ```
 
 そして、アプリケーションにSDK構成ファイルを生成します：
 
-```
+```bash lines
 php artisan vendor:publish --tag auth0
 ```
 
@@ -85,19 +87,19 @@ php artisan vendor:publish --tag auth0
 
 プロジェクトディレクトリから次のコマンドを実行して、[Auth0 CLI](https://github.com/auth0/auth0-cli)をダウンロードします：
 
-```bash
+```bash lines
 curl -sSfL https://raw.githubusercontent.com/auth0/auth0-cli/main/install.sh | sh -s -- -b .
 ```
 
 そして、Auth0アカウントを使ってCLIを認証し、プロンプトでユーザーとしてログインすることを選択します：
 
-```
+```bash lines
 ./auth0 login
 ```
 
 次に、Auth0で新しいアプリケーションを作成します：
 
-```
+```bash lines
 ./auth0 apps create \
 --name "My Laravel Backend" \
 --type "regular" \
@@ -111,7 +113,7 @@ curl -sSfL https://raw.githubusercontent.com/auth0/auth0-cli/main/install.sh | s
 
 また、新しいAPIも作成します：
 
-```
+```bash lines
 ./auth0 apis create \
 --name "My Laravel Backend API" \
 --identifier "https://github.com/auth0/laravel-auth0" \
@@ -124,7 +126,7 @@ curl -sSfL https://raw.githubusercontent.com/auth0/auth0-cli/main/install.sh | s
 
 これらのファイルには資格情報が保管されているため、機密として扱うことが重要です。必ず、バージョン管理では、これらのファイルをコミットしないようにしてください。Gitを使用している場合は、必ず`.gitignore`ファイルに追加します：
 
-```
+```bash lines
 echo ".auth0.*.json" >> .gitignore
 ```
 
@@ -144,7 +146,7 @@ SDKは、`api`ミドルウェアと併用するLaravelアプリケーション�
 
 `Authorization`ヘッダーで有効なアクセストークンを含まない要求を拒否するには、Laravelの`auth`ミドルウェアを使用することができます。
 
-```
+```php lines
 Route::get('/private', function () {
 return response()->json([
 'message' => 'Your token is valid; you are authorized.',
@@ -154,7 +156,7 @@ return response()->json([
 
 また、これをLaravelの`can`ミドルウェアと組み合わせると、提供されたトークンに特定の[権限](https://auth0.com/docs/manage-users/access-control/rbac)を要求することができます。
 
-```
+```php lines
 Route::get('/scope', function () {
 return response()->json([
 'message' => 'Your token is valid and has the read:messages permission; you are authorized.',
@@ -170,7 +172,7 @@ return response()->json([
 
 以下は、ユーザーの識別子とメールアドレスを取得する例です。
 
-```
+```php lines
 Route::get('/', function () {
 if (! auth()->check()) {
 return response()->json([
@@ -195,7 +197,7 @@ return response()->json([
 
 以下の例では、`read:users`スコープを付与する必要があります。APIエンドポイントのリストと必要なスコープについては、[Management APIのドキュメント](https://auth0.com/docs/api/management/v2)を参照してください。
 
-```
+```php lines
 use Auth0\Laravel\Facade\Auth0;
 Route::get('/me', function () {
 $user = auth()->id();
@@ -227,7 +229,7 @@ return response()->json([
 
 Laravelアプリケーションを起動する準備が整いました。要求を受け付けることができます：
 
-```
+```php lines
 php artisan serve
 ```
 
@@ -267,29 +269,29 @@ checkpoint.itWorked checkpoint.somethingNotRight
 * [イベントフック](https://github.com/auth0/laravel-auth0/blob/main/docs/Events.md)はAuth0 Laravel SDKで発生したイベントをリッスンする方法を処理して、統合の動作を完全にカスタマイズすることができます。
 * [Management API](https://github.com/auth0/laravel-auth0/blob/main/docs/Management.md)対応はAuth0 Laravel SDKに組み込まれているため、LaravelアプリケーションからManagement APIと対話することができます。
 
-## Next Steps
+## Ṅḛḛẋţ Ṣţḛḛṗṡ
 
-Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+ḚḚẋͼḛḛḽḽḛḛṇţ ẁṓṓṛḳ! ḬḬϝ ẏẏṓṓṵṵ ṃααḍḛḛ ḭḭţ ţḥḭḭṡ ϝααṛ, ẏẏṓṓṵṵ ṡḥṓṓṵṵḽḍ ṇṓṓẁ ḥααṽḛḛ ḽṓṓḡḭḭṇ, ḽṓṓḡṓṓṵṵţ, ααṇḍ ṵṵṡḛḛṛ ṗṛṓṓϝḭḭḽḛḛ ḭḭṇϝṓṓṛṃααţḭḭṓṓṇ ṛṵṵṇṇḭḭṇḡ ḭḭṇ ẏẏṓṓṵṵṛ ααṗṗḽḭḭͼααţḭḭṓṓṇ.
 
-This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+Ṫḥḭḭṡ ͼṓṓṇͼḽṵṵḍḛḛṡ ṓṓṵṵṛ ʠṵṵḭḭͼḳṡţααṛţ ţṵṵţṓṓṛḭḭααḽ, ḅṵṵţ ţḥḛḛṛḛḛ ḭḭṡ ṡṓṓ ṃṵṵͼḥ ṃṓṓṛḛḛ ţṓṓ ḛḛẋṗḽṓṓṛḛḛ. Ṫṓṓ ḽḛḛααṛṇ ṃṓṓṛḛḛ ααḅṓṓṵṵţ ẁḥααţ ẏẏṓṓṵṵ ͼααṇ ḍṓṓ ẁḭḭţḥ ÀÀṵṵţḥ0, ͼḥḛḛͼḳ ṓṓṵṵţ:
 
-* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
-* [laravel-auth0 SDK](https://github.com/auth0/laravel-auth0) - Explore the SDK used in this tutorial more fully
-* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+* [ÀÀṵṵţḥ0 Ḍααṡḥḅṓṓααṛḍ](https://manage.auth0.com/#) - Ḻḛḛααṛṇ ḥṓṓẁ ţṓṓ ͼṓṓṇϝḭḭḡṵṵṛḛḛ ααṇḍ ṃααṇααḡḛḛ ẏẏṓṓṵṵṛ ÀÀṵṵţḥ0 ţḛḛṇααṇţ ααṇḍ ααṗṗḽḭḭͼααţḭḭṓṓṇṡ
+* [ḽααṛααṽḛḛḽ-ααṵṵţḥ0 ṢḌḰ](https://github.com/auth0/laravel-auth0) - ḚḚẋṗḽṓṓṛḛḛ ţḥḛḛ ṢḌḰ ṵṵṡḛḛḍ ḭḭṇ ţḥḭḭṡ ţṵṵţṓṓṛḭḭααḽ ṃṓṓṛḛḛ ϝṵṵḽḽẏẏ
+* [ÀÀṵṵţḥ0 Ṁααṛḳḛḛţṗḽααͼḛḛ](https://marketplace.auth0.com/) - Ḍḭḭṡͼṓṓṽḛḛṛ ḭḭṇţḛḛḡṛααţḭḭṓṓṇṡ ẏẏṓṓṵṵ ͼααṇ ḛḛṇααḅḽḛḛ ţṓṓ ḛḛẋţḛḛṇḍ ÀÀṵṵţḥ0’ṡ ϝṵṵṇͼţḭḭṓṓṇααḽḭḭţẏẏ
 
-Did it work?
+Ḍḭḭḍ ḭḭţ ẁṓṓṛḳ?
 
 Yes No
 
-Any suggestion or typo?
+ÀÀṇẏẏ ṡṵṵḡḡḛḛṡţḭḭṓṓṇ ṓṓṛ ţẏẏṗṓṓ?
 
-[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/backend/laravel/interactive.md)
+[ḚḚḍḭḭţ ṓṓṇ ḠḭḭţḤṵṵḅ](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/backend/laravel/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![ṗααḡḛḛṡ.ţṵṵţṓṓṛḭḭααḽṔααḡḛḛ.ṇḛḛẁ.ααͼţḭḭṓṓṇḤḛḛṛṓṓ.ṡḭḭḡṇṲṲṗḤḛḛṛṓṓ.ḅṵṵţţṓṓṇṪḛḛẋţ](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
-Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+Ṣḭḭḡṇ ṵṵṗ ϝṓṓṛ ααṇ ÀÀṵṵţḥ0 ααͼͼṓṓṵṵṇţ ṓṓṛ ḽṓṓḡ ḭḭṇ ţṓṓ ẏẏṓṓṵṵṛ ḛḛẋḭḭṡţḭḭṇḡ ααͼͼṓṓṵṵṇţ ţṓṓ ḭḭṇţḛḛḡṛααţḛḛ ḍḭḭṛḛḛͼţḽẏẏ ẁḭḭţḥ ẏẏṓṓṵṵṛ ṓṓẁṇ ţḛḛṇααṇţ.
 
-Sign Up
+ṗααḡḛḛṡ.ţṵṵţṓṓṛḭḭααḽṔααḡḛḛ.ṇḛḛẁ.ααͼţḭḭṓṓṇḤḛḛṛṓṓ.ṡḭḭḡṇṲṲṗḤḛḛṛṓṓ.ḅṵṵţţṓṓṇṪḛḛẋţ
 
 Developers
 

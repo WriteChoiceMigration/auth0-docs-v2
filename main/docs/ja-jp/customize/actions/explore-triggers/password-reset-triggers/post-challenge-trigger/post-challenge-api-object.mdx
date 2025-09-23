@@ -1,13 +1,13 @@
 ---
 title: "アクションのトリガー：post-challenge - APIオブジェクト"
 permalink: "post-challenge-api-object"
+'description': "パスワードリセットのpost-challengeアクショントリガーのAPIオブジェクトについて説明します。"
 'og:title': "アクションのトリガー：post-challenge - APIオブジェクト"
 'og:description': "パスワードリセットのpost-challengeアクショントリガーのAPIオブジェクトについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "アクションのトリガー：post-challenge - APIオブジェクト"
 'twitter:description': "パスワードリセットのpost-challengeアクショントリガーのAPIオブジェクトについて説明します。"
 ---
-# アクションのトリガー：post-challenge - APIオブジェクト
 
 `post-challenge`アクショントリガーのAPIオブジェクトは以下を含みます。
 
@@ -30,7 +30,7 @@ permalink: "post-challenge-api-object"
 </thead>
 <tbody>
 <tr>
-<td><code>reason</code></td>
+<td>`reason`</td>
 <td>
 <p>
 <em>文字列</em>。人間に読める形式でログインの拒否を説明します。エンドユーザーのインターフェイスに直接表示することができます。
@@ -65,7 +65,7 @@ permalink: "post-challenge-api-object"
 </thead>
 <tbody>
 <tr>
-<td><code>factor</code></td>
+<td>`factor`</td>
 <td>
 <p>
 <em>FactorSelector</em>。最初のチャレンジに使用されるべき要素の種類（およびそのオプション）を記述したオブジェクトです。
@@ -73,10 +73,10 @@ permalink: "post-challenge-api-object"
 </td>
 </tr>
 <tr>
-<td><code>options</code></td>
+<td>`options`</td>
 <td>
 <p>
-            任意のオブジェクト。<code>additionalFactors</code>をプロパティとして指定することもできる追加のオプションです。
+            任意のオブジェクト。`additionalFactors`をプロパティとして指定することもできる追加のオプションです。
           </p>
 </td>
 </tr>
@@ -103,7 +103,7 @@ permalink: "post-challenge-api-object"
 </thead>
 <tbody>
 <tr>
-<td><code>factor</code></td>
+<td>`factor`</td>
 <td>
 <p>
 <em>FactorSelector[]</em>。要素の配列です。
@@ -134,7 +134,7 @@ permalink: "post-challenge-api-object"
 </thead>
 <tbody>
 <tr>
-<td><code>key</code></td>
+<td>`key`</td>
 <td>
 <p><em>文字列</em>。キャッシュに保管されているレコードのキーです。</p>
 </td>
@@ -163,7 +163,7 @@ permalink: "post-challenge-api-object"
 </thead>
 <tbody>
 <tr>
-<td><code>key</code></td>
+<td>`key`</td>
 <td>
 <p><em>文字列</em>。キャッシュに保管されているレコードのキーです。</p>
 </td>
@@ -175,9 +175,9 @@ permalink: "post-challenge-api-object"
 
 指定されたkeyのキャッシュに文字列値を保管または更新します。
 
-このキャッシュに保管された値は、それを設定するトリガーにスコープが限定されます。これは[アクションのキャッシュ制限](/docs/customize/actions/limitations)の対象になります。
+このキャッシュに保管された値は、それを設定するトリガーにスコープが限定されます。これは[アクションのキャッシュ制限](/docs/ja-jp/customize/actions/limitations)の対象になります。
 
-このように保管された値には、指定された`ttl`または`expires_at`値までのライフタイムがあります。ライフタイムが指定されない場合には、デフォルトのライフタイムである15分が使用されます。ライフタイムは[アクションのキャッシュ制限](/docs/customize/actions/limitations)が定める最大値を超過してはいけません。
+このように保管された値には、指定された`ttl`または`expires_at`値までのライフタイムがあります。ライフタイムが指定されない場合には、デフォルトのライフタイムである15分が使用されます。ライフタイムは[アクションのキャッシュ制限](/docs/ja-jp/customize/actions/limitations)が定める最大値を超過してはいけません。
 
 <table class="table">
 <thead>
@@ -188,42 +188,42 @@ permalink: "post-challenge-api-object"
 </thead>
 <tbody>
 <tr>
-<td><code>key</code></td>
+<td>`key`</td>
 <td>
 <p><em>文字列</em>。キャッシュに保管されているレコードのキーです。</p>
 </td>
 </tr>
 <tr>
-<td><code>value</code></td>
+<td>`value`</td>
 <td>
 <p><em>文字列</em>。保管するレコードの値です。</p>
 </td>
 </tr>
 <tr>
-<td><code>options</code></td>
+<td>`options`</td>
 <td>
 <p><em>任意のオブジェクト</em>。キャッシュの動作を調整するためのオプションです。</p>
 </td>
 </tr>
 <tr>
-<td><code>options.expires_at</code></td>
+<td>`options.expires_at`</td>
 <td>
 <p>
-<em>任意の数値</em>。UNIXエポックからのミリ秒単位で指定した絶対有効期限です。キャッシュ済みのレコードは早期に削除されることはあっても、<code>expires_at</code>で指定された時点を過ぎて存続することはありません。
+<em>任意の数値</em>。UNIXエポックからのミリ秒単位で指定した絶対有効期限です。キャッシュ済みのレコードは早期に削除されることはあっても、`expires_at`で指定された時点を過ぎて存続することはありません。
           </p>
 <p>
-<strong>注意：</strong>この値が<code>ttl</code>で指定されている場合は指定するべきではありません。両方で指定された場合、2つの中で早い方の有効期限が適用されます。
+<strong>注意：</strong>この値が`ttl`で指定されている場合は指定するべきではありません。両方で指定された場合、2つの中で早い方の有効期限が適用されます。
           </p>
 </td>
 </tr>
 <tr>
-<td><code>options.ttl</code></td>
+<td>`options.ttl`</td>
 <td>
 <p>
-<em>任意の数値</em>。このキャッシュエントリの存続時間をミリ秒単位で指定します。キャッシュ済みのレコードは早期に削除されることはあっても、<code>ttl</code>で指定された時点を過ぎて存続することはありません。
+<em>任意の数値</em>。このキャッシュエントリの存続時間をミリ秒単位で指定します。キャッシュ済みのレコードは早期に削除されることはあっても、`ttl`で指定された時点を過ぎて存続することはありません。
           </p>
 <p>
-<strong>注意：</strong>この値が<code>expires_at</code>で指定されている場合は指定するべきではありません。両方で指定された場合、2つの中で早い方の有効期限が適用されます。
+<strong>注意：</strong>この値が`expires_at`で指定されている場合は指定するべきではありません。両方で指定された場合、2つの中で早い方の有効期限が適用されます。
           </p>
 </td>
 </tr>
@@ -247,7 +247,7 @@ JWT文字列を返します。
 </thead>
 <tbody>
 <tr>
-<td><code>options</code></td>
+<td>`options`</td>
 <td>
 <p>
 <em>オプション</em>。結果のURLのクエリパラメーターに機密データをどのように暗号化するのかを構成します。
@@ -255,7 +255,7 @@ JWT文字列を返します。
 </td>
 </tr>
 <tr>
-<td><code>options.expiresInSeconds</code></td>
+<td>`options.expiresInSeconds`</td>
 <td>
 <p>
 <em>数値</em>。トークンが期限切れになるまでの秒数です。デフォルトは900秒です。
@@ -263,7 +263,7 @@ JWT文字列を返します。
 </td>
 </tr>
 <tr>
-<td><code>options.payload</code></td>
+<td>`options.payload`</td>
 <td>
 <p>
 <em>オプション</em>。リダイレクト先に渡され、信頼性と整合性が証明可能であるべきデータです。
@@ -271,10 +271,10 @@ JWT文字列を返します。
 </td>
 </tr>
 <tr>
-<td><code>options.secret</code></td>
+<td>`options.secret`</td>
 <td>
 <p>
-<em>文字列</em>。リダイレクト先と共有され、JWTの署名に使用されるシークレットです。この値はシークレットとして保管され、<code>event.secrets['SECRET_NAME']</code>を使用して取得されなければなりません。
+<em>文字列</em>。リダイレクト先と共有され、JWTの署名に使用されるシークレットです。この値はシークレットとして保管され、`event.secrets['SECRET_NAME']`を使用して取得されなければなりません。
             </p>
 </td>
 </tr>
@@ -296,13 +296,13 @@ JWT文字列を返します。
 </thead>
 <tbody>
 <tr>
-<td><code>url</code></td>
+<td>`url`</td>
 <td>
 <p><em>文字列</em>。リダイレクト先のURLです。</p>
 </td>
 </tr>
 <tr>
-<td><code>options</code></td>
+<td>`options`</td>
 <td>
 <p>
 <em>オプション</em>。リダイレクトURLに追加される任意のクエリ文字列パラメーターを表すオブジェクトです。
@@ -310,7 +310,7 @@ JWT文字列を返します。
 </td>
 </tr>
 <tr>
-<td><code>options.query</code></td>
+<td>`options.query`</td>
 <td>
 <p>
 <em>オプション</em>。リダイレクトURLに追加する追加のクエリ文字列パラメーターです。
@@ -335,24 +335,24 @@ JWTトークンのペイロードを返します。
 </thead>
 <tbody>
 <tr>
-<td><code>options</code></td>
+<td>`options`</td>
 <td>
 <p>
-<em>オプション</em>。リダイレクト後に、JWTトークンに含めて<code>/continue</code>エンドポイントに渡された暗号化済みのデータを取得するためのオプションです。
+<em>オプション</em>。リダイレクト後に、JWTトークンに含めて`/continue`エンドポイントに渡された暗号化済みのデータを取得するためのオプションです。
             </p>
 </td>
 </tr>
 <tr>
-<td><code>options.secret</code></td>
+<td>`options.secret`</td>
 <td>
 <p><em>文字列</em>。トークンの暗号化に使用されたシークレットです。</p>
 </td>
 </tr>
 <tr>
-<td><code>options.tokenParameterName</code></td>
+<td>`options.tokenParameterName`</td>
 <td>
 <p>
-<em>文字列</em>。<code>/continue</code>エンドポイントに送信されたクエリまたは本文のパラメーターの名前です。デフォルトは<code>session_token</code>です。
+<em>文字列</em>。`/continue`エンドポイントに送信されたクエリまたは本文のパラメーターの名前です。デフォルトは`session_token`です。
             </p>
 </td>
 </tr>
@@ -374,7 +374,7 @@ JWTトークンのペイロードを返します。
 </thead>
 <tbody>
 <tr>
-<td><code>url</code></td>
+<td>`url`</td>
 <td>
 <p>
 <em>文字列</em>。パスワードの更新後にユーザーのリダイレクト先となるURLです。URLが検証済みでユーザーに安全であることを確認してください。
@@ -382,7 +382,7 @@ JWTトークンのペイロードを返します。
 </td>
 </tr>
 <tr>
-<td><code>options</code></td>
+<td>`options`</td>
 <td>
 <p>
 <em>オプション</em>。リダイレクト先のURLに追加する任意の追加クエリ文字列パラメーターを表すオブジェクトです。
@@ -390,7 +390,7 @@ JWTトークンのペイロードを返します。
 </td>
 </tr>
 <tr>
-<td><code>options.query</code></td>
+<td>`options.query`</td>
 <td>
 <p>
 <em>オプション</em>。リダイレクト先のURLに追加する追加のクエリ文字列パラメーターです。

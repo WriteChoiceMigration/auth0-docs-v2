@@ -1,13 +1,13 @@
 ---
 title: "ユニバーサルログインに対するMFA登録をカスタイズする"
 permalink: "customize-mfa-enrollments-universal-login"
+'description': "ポストログインアクションを使用して、MFAフローをカスタマイズし、指定要素でユーザーに登録を促します。"
 'og:title': "ユニバーサルログインに対するMFA登録をカスタイズする"
 'og:description': "ポストログインアクションを使用して、MFAフローをカスタマイズし、指定要素でユーザーに登録を促します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユニバーサルログインに対するMFA登録をカスタイズする"
 'twitter:description': "ポストログインアクションを使用して、MFAフローをカスタマイズし、指定要素でユーザーに登録を促します。"
 ---
-# ユニバーサルログインに対するMFA登録をカスタイズする
 
 Auth0は[多要素認証（MFA）](/docs/ja-jp/secure/multi-factor-authentication/multi-factor-authentication-factors)でユーザーアクセスを確保するための様々な要素をサポートしています。`ポストログイン`アクションを使用することで、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>フローをカスタマイズし、指定要素でユーザーにに登録を促します。要素でユーザーが登録をした後、その要素を今後のログインの認証の2番目のメソッドとして使用できます。
 
@@ -66,7 +66,7 @@ MFA登録が発生すると、`methods` には`name:mfa`のオブジェクトが
 
 これらのフローを説明するために、次の例を考えてみましょう:
 
-```javascript
+```javascript lines
 // Action 1
 
 exports.onExecutePostLogin = async (event, api) => {
@@ -132,7 +132,7 @@ MFAフローをカスタマイズする前に、テナントでMFAをセット�
 
 フローのカスタマイズには、［追加設定］セクションのアクショントグルを使用して、［MFA要素のカスタマイズ］を有効にする必要があります。この設定が無効になっている場合、カスタマイズされたフローは、正常に作動しません。
 
-<Frame>![［Auth0 Dashboard］>［Security（セキュリティ）］>［MFA（多要素認証）］>［Additional Settings（追加設定）］](//images.ctfassets.net/cdy7uua7fh8z/2hv0ELTkkka3t230SXfxw/3df4a2e61198f7c2cfbf6864df592b39/MFA_-_Actions_toggle_-_Japanese.png)</Frame>
+<Frame>![［Auth0 Dashboard］>［Security（セキュリティ）］>［MFA（多要素認証）］>［Additional Settings（追加設定）］](/images/ja-jp/cdy7uua7fh8z/2hv0ELTkkka3t230SXfxw/3df4a2e61198f7c2cfbf6864df592b39/MFA_-_Actions_toggle_-_Japanese.png)</Frame>
 
 **注意**：`enrollWith`または`enrollWithAny`コマンドを使用したアクションは、テナントでMFAを有効または無効にする既存のポリシーまたはルールをオーバーライドします。
 
@@ -200,7 +200,7 @@ MFAフローをカスタマイズする前に、テナントでMFAをセット�
 
 [テナントログ](/docs/ja-jp/deploy-monitor/logs)を通じて、カスタマイズされたMFA登録を監視できます。
 
-テナントログは、Auth0 Dashboardの[［Monitoring（モニタリング）］>［Logs（ログ）］](https://manage.auth0.com/#/logs)から利用可能です。その他に、[Management API](/docs/api/management/v2/introduction)を使用して、ログを取得します。
+テナントログは、Auth0 Dashboardの[［Monitoring（モニタリング）］>［Logs（ログ）］](https://manage.auth0.com/#/logs)から利用可能です。その他に、[Management API](/docs/ja-jp/api/management/v2/introduction)を使用して、ログを取得します。
 
 予期しない動作が発生した場合は、次のイベントコードのテナントログを確認して、詳細情報を得てください。
 

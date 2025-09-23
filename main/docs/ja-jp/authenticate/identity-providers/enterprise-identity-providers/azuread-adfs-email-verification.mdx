@@ -1,13 +1,13 @@
 ---
 title: "Microsoft Entra IDとADFSのメール検証"
 permalink: "azuread-adfs-email-verification"
+'description': "Azure ADおよびADFSの「email_verified」フィールドの設定方法を制御する方法について説明します。"
 'og:title': "Microsoft Entra IDとADFSのメール検証"
 'og:description': "Azure ADおよびADFSの「email_verified」フィールドの設定方法を制御する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Microsoft Entra IDとADFSのメール検証"
 'twitter:description': "Azure ADおよびADFSの「email_verified」フィールドの設定方法を制御する方法について説明します。"
 ---
-# Microsoft Entra IDとADFSのメール検証
 
 Auth0ユーザーのプロファイルには`email_verified`フィールドがあり、接続タイプに応じてさまざまな方法で設定できます。データベース接続の場合、ユーザーはメールを検証するためにメール検証フローを実行する必要があります。フェデレーション接続の場合、IDプロバイダーは独自の基準に基づいて`email_verified`フィールドを返すことができます。
 
@@ -42,7 +42,7 @@ Azure AD接続には、**共通エンドポイントを使用する**プロパ�
 
 </Note>
 
-<Frame>![Dashboard - Advanced Tenant Settings - Migrations](//images.ctfassets.net/cdy7uua7fh8z/4K1rQIv6p96KPCYOrhjXz4/be0f7b104d743fd0d3d42d18df97e144/dashboard-tenant-edit_view-advanced_migrations_azure-adfs.png)</Frame>
+<Frame>![Dashboard - Advanced Tenant Settings - Migrations](/images/ja-jp/cdy7uua7fh8z/4K1rQIv6p96KPCYOrhjXz4/be0f7b104d743fd0d3d42d18df97e144/dashboard-tenant-edit_view-advanced_migrations_azure-adfs.png)</Frame>
 
 この設定が無効である場合、`email_verified`は常にAzure AD/ADFS接続に対して`true`になります。有効である場合、接続レベルで`メール検証`設定を使用します。
 
@@ -52,7 +52,7 @@ Azure AD接続には、**共通エンドポイントを使用する**プロパ�
 
 ユーザーが未検証のメールで初めて認証すると、Auth0はユーザーにメールアカウントに送信される1回限りのコードを入力してメールを検証するよう求めます。
 
-<Frame>![Auth0 - Email Verification Prompt - One-Time Code](//images.ctfassets.net/cdy7uua7fh8z/i92GJgntVuU5QK37adugH/1fbdd130aa8f147a558bb96bfe52a62f/Verify_Email_-_JP.png)</Frame>
+<Frame>![Auth0 - Email Verification Prompt - One-Time Code](/images/ja-jp/cdy7uua7fh8z/i92GJgntVuU5QK37adugH/1fbdd130aa8f147a558bb96bfe52a62f/Verify_Email_-_JP.png)</Frame>
 
 ユーザーがこの手順を完了すると、`email_verified`フィールドが`true`に設定され、Azure ADまたはADFSがユーザーに別のメールを返さない限り、ユーザーは再度メール検証を求められることはなくなります。
 

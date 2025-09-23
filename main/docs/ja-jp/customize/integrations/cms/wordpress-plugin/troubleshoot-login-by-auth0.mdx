@@ -1,13 +1,13 @@
 ---
 title: "WordpressプラグインのLogin by Auth0のトラブルシューティング"
 permalink: "troubleshoot-login-by-auth0"
+'description': "このページでは、WordpressプラグインのLogin by Auth0に関する一般的な問題を解決する方法について説明します。"
 'og:title': "WordpressプラグインのLogin by Auth0のトラブルシューティング"
 'og:description': "このページでは、WordpressプラグインのLogin by Auth0に関する一般的な問題を解決する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "WordpressプラグインのLogin by Auth0のトラブルシューティング"
 'twitter:description': "このページでは、WordpressプラグインのLogin by Auth0に関する一般的な問題を解決する方法について説明します。"
 ---
-# WordpressプラグインのLogin by Auth0のトラブルシューティング
 
 以下ではトラブルシューティングでよくある質問をいくつか説明します。これらで問題が解消されない場合には、次を検討してください。
 
@@ -28,7 +28,7 @@ permalink: "troubleshoot-login-by-auth0"
 
 これは通常、サーバーの時刻設定が間違っていることが原因になります。エラーメッセージが「早すぎる」と告知している場合には、サーバーの時刻が将来に設定されています。トークンの有効期限が切れていると告知される場合には、サーバーの時刻がかなり過去に設定されています。2つのサーバー間で時刻が異なることはよくあります。サーバー上のPHPで`echo date(DateTime::ISO8601)`を出力し、それを現在のUTC時間と秒まで比較します。サーバーの時刻がUCT時間よりも60秒（デフォルトの許容誤差）以上違っている場合には、サーバーのクロックスキューを調整するために許容誤差をより長く設定する必要があります。以下のコードをテーマの`functions.php`に貼り付けるか、そのコードの実行をプラグインが読み込まれた後、ログインのフックが実行される前に処理できる場所に貼り付けます。
 
-```
+```php lines
 add_filter( 'auth0_jwt_leeway', function( $default_leeway ) { return 120; } );
 ```
 
@@ -110,7 +110,7 @@ Chromiumベースのブラウザーを使用している場合には、サード
 
 これは、コールバックURLがAllowListに追加されていないために起きます。以下のコードを`my_forcelogin_whitelist`フィルターに追加してみてください。
 
-```javascript
+```php lines
 function wp_auth0_forcelogin_whitelist( $whitelist ) {
   if ( ! empty( $_GET['auth0'] ) ) {
     $whitelist[] = site_url($_SERVER['REQUEST_URI']);
@@ -142,9 +142,9 @@ add_filter('v_forcelogin_whitelist', 'wp_auth0_forcelogin_whitelist', 10, 1);
 
 現在のバージョンのプラグインには、ユーザーをAuth0に自動移行する方法はありませんが、以下を行うことができます。
 
-* プラグインは2つのエンドポイントを公開して、カスタムデータベース接続を**Auth0へのインポート**モードでマークできるようにしています。エンドポイントの詳細については、「[データベースからの自動移行を構成する](/docs/connections/database/migrating)」をお読みください。[これらのプラグインスクリプトを使用](https://github.com/auth0/wp-auth0/blob/master/lib/WP_Auth0_CustomDBLib.php)して、接続をセットアップすることができます。
-* ユーザーデータをJSONファイルにエクスポートして、Auth0への一括インポートを行うためにアップロードします。移行後に初めてユーザーがAuth0を使ってログインするときには、パスワードをリセットする必要があります。これは、Auth0が移行中にAuth0がWordPressのパスワードを復号化できないためです。JSONファイルを生成する方法については、「[ユーザーを一括してインポートする](/docs/ja-jp/manage-users/user-migration/bulk-user-imports)」をお読みください。それから、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>の[ユーザーインポートエンドポイント](/docs/api/v2#!/Jobs/post_users_imports)を使用して、ファイルをアップロードする必要があります。
-* [このスクリプト](https://gist.github.com/glena/b31716e3c8fe48927be2)とWordPress XML RPCエンドポイントを使用して、カスタムデータベース接続で移行フローをセットアップします。移行フローの設定については、「[データベースからの自動移行を構成する](/docs/connections/database/migrating)」をお読みください。WordPress XML RPCエンドポイントの詳細については、[wordpress.orgに記載のXML-RPC対応](https://codex.wordpress.org/XML-RPC_Support)に関するドキュメントをお読みください。
+* プラグインは2つのエンドポイントを公開して、カスタムデータベース接続を**Auth0へのインポート**モードでマークできるようにしています。エンドポイントの詳細については、「[データベースからの自動移行を構成する](/docs/ja-jp/connections/database/migrating)」をお読みください。[これらのプラグインスクリプトを使用](https://github.com/auth0/wp-auth0/blob/master/lib/WP_Auth0_CustomDBLib.php)して、接続をセットアップすることができます。
+* ユーザーデータをJSONファイルにエクスポートして、Auth0への一括インポートを行うためにアップロードします。移行後に初めてユーザーがAuth0を使ってログインするときには、パスワードをリセットする必要があります。これは、Auth0が移行中にAuth0がWordPressのパスワードを復号化できないためです。JSONファイルを生成する方法については、「[ユーザーを一括してインポートする](/docs/ja-jp/manage-users/user-migration/bulk-user-imports)」をお読みください。それから、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>の[ユーザーインポートエンドポイント](/docs/ja-jp/api/v2#!/Jobs/post_users_imports)を使用して、ファイルをアップロードする必要があります。
+* [このスクリプト](https://gist.github.com/glena/b31716e3c8fe48927be2)とWordPress XML RPCエンドポイントを使用して、カスタムデータベース接続で移行フローをセットアップします。移行フローの設定については、「[データベースからの自動移行を構成する](/docs/ja-jp/connections/database/migrating)」をお読みください。WordPress XML RPCエンドポイントの詳細については、[wordpress.orgに記載のXML-RPC対応](https://codex.wordpress.org/XML-RPC_Support)に関するドキュメントをお読みください。
 
 ## dictを設定するときにform_title設定が無視される
 
@@ -152,7 +152,7 @@ add_filter('v_forcelogin_whitelist', 'wp_auth0_forcelogin_whitelist', 10, 1);
 
 その場合にform_titleを変更するには、以下の属性をdictのJSONに追加する必要があります。
 
-```json
+```json lines
 {
     "signin": {
         "title": "The desired form title"

@@ -1,19 +1,19 @@
 ---
 title: "プロビジョニング（B2B）"
 permalink: "provisioning"
+'description': "B2B IAMの実装について、ユーザーのプロビジョニングの機能性と考慮するべき事項について説明します。"
 'og:title': "プロビジョニング（B2B）"
 'og:description': "B2B IAMの実装について、ユーザーのプロビジョニングの機能性と考慮するべき事項について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "プロビジョニング（B2B）"
 'twitter:description': "B2B IAMの実装について、ユーザーのプロビジョニングの機能性と考慮するべき事項について説明します。"
 ---
-# プロビジョニング（B2B）
 
 ユーザーがどのようにしてサインアップするかを決めることは、早期に検討するべき重要事項です。そこでの決定内容が、今後必要となる多くの決定事項に影響を与えます。ユーザーがシステムに追加される方法には一般的なパターンがあり、ワークフローの設計を考える際に注意するべき事柄があります。
 
 ### ベストプラクティス
 
-Auth0はさまざまなワークフローをサポートしていますが、サインアップにはAuth0[ユニバーサルログイン](/docs/login/universal-login)を使用したWebベースのワークフローが、最適な機能性と最高のセキュリティを提供するという点で、業界でもAuth0にとってもベストプラクティスとみなされています。
+Auth0はさまざまなワークフローをサポートしていますが、サインアップにはAuth0[ユニバーサルログイン](/docs/ja-jp/login/universal-login)を使用したWebベースのワークフローが、最適な機能性と最高のセキュリティを提供するという点で、業界でもAuth0にとってもベストプラクティスとみなされています。
 
 Auth0は、いくつかの異なる[IDプロバイダー](/docs/ja-jp/authenticate/identity-providers)を通したサインアップに対応しています。サインアップ中には、Auth0がユーザープロファイルをプロビジョニングするため、ユーザーのアカウント情報が含まれます。機能性とワークフローを検討する際には、以下のように、考慮するべき事柄がいくつかあります。
 
@@ -58,7 +58,7 @@ Auth0はそのままで便利に使えるIDストレージを提供している�
 
 組織のプロビジョニングでは、以下を考慮する必要があります。
 
-組織管理者ポータルでは、管理者が組織の作成、編集、削除を行えます。会社の従業員または顧客の管理者が、このような管理者になることができます。独自のシステムとAuth0テナントの両方で、複数の作業を実行する必要があります。このポータルは、システム内のデータストアと構成にアクセスできるよう、独自のシステム内に必要となる可能性があります。ただし、Auth0は[Auth0 Management API](/docs/api/management/v2)を提供しているため、独自のシステム内で変更を行うと同時に、変更内容をAuth0テナントに反映することができます。
+組織管理者ポータルでは、管理者が組織の作成、編集、削除を行えます。会社の従業員または顧客の管理者が、このような管理者になることができます。独自のシステムとAuth0テナントの両方で、複数の作業を実行する必要があります。このポータルは、システム内のデータストアと構成にアクセスできるよう、独自のシステム内に必要となる可能性があります。ただし、Auth0は[Auth0 Management API](/docs/ja-jp/api/management/v2)を提供しているため、独自のシステム内で変更を行うと同時に、変更内容をAuth0テナントに反映することができます。
 
 * **Auth0テナントにライブで更新**：新しい組織をリアルタイムに作成したい場合には、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>を使って、Auth0テナントを直接変更することをお勧めします。変更内容がリアルタイムで反映されるため、新しい組織の追加も即座に反映されます。特に、組織にセルフサインアップをプロビジョニングしている場合には、この方法をお勧めします。
 
@@ -78,9 +78,9 @@ Auth0はそのままで便利に使えるIDストレージを提供している�
 
 ### ベストプラクティス
 
-当社の多くの顧客の方は、2段階でのユーザー移行を選びます。まず自動移行を行ってできるだけ多くのアクティブユーザーを移行し、次に自動移行をオフにして一括移行で残りのユーザーを移行する、というアプローチです。詳細については、[「ユーザー移行シナリオ」](/docs/users/import-and-export-users/user-migration-scenarios)をご覧ください。
+当社の多くの顧客の方は、2段階でのユーザー移行を選びます。まず自動移行を行ってできるだけ多くのアクティブユーザーを移行し、次に自動移行をオフにして一括移行で残りのユーザーを移行する、というアプローチです。詳細については、[「ユーザー移行シナリオ」](/docs/ja-jp/users/import-and-export-users/user-migration-scenarios)をご覧ください。
 
-自動移行は、ユーザーを個別に移行したい場合にお勧めします。また、ほぼすべての状況で、ユーザーは既存のパスワードを維持することができます。一括移行では、[Management API](/docs/api/management/v2#!/Jobs/post_users_imports)の使用をお勧めします。[User Import/Export（ユーザーインポート/エクスポート）拡張機能](/docs/ja-jp/manage-users/user-migration/user-import-export-extension)に比べて、Management APIには高い柔軟性と制御が備わっているため、シンプルな状況のほとんどで有効です。
+自動移行は、ユーザーを個別に移行したい場合にお勧めします。また、ほぼすべての状況で、ユーザーは既存のパスワードを維持することができます。一括移行では、[Management API](/docs/ja-jp/api/management/v2#!/Jobs/post_users_imports)の使用をお勧めします。[User Import/Export（ユーザーインポート/エクスポート）拡張機能](/docs/ja-jp/manage-users/user-migration/user-import-export-extension)に比べて、Management APIには高い柔軟性と制御が備わっているため、シンプルな状況のほとんどで有効です。
 
 対応アルゴリズムの1つを使ってパスワードがハッシュ化され、レガシーIDストアに保管されていない限り、ユーザーの一括移行では通常、**移行の完了後にパスワードのリセット**が必要になります。その場合、使用しているアルゴリズムとソルトラウンド数によっては、一括移行で**ユーザーのパスワードを維持**することができます。詳細については、「[一括インポートのデータベーススキームの例](/docs/ja-jp/manage-users/user-migration/bulk-user-import-database-schema-and-examples)」を参照してください。
 
@@ -94,7 +94,7 @@ Auth0はそのままで便利に使えるIDストレージを提供している�
 
 ### ベストプラクティス
 
-Management APIへの呼び出しは、[「Auth0のレート制限ポリシー」](/docs/support/policies/rate-limit-policy)の対象となります。Auth0は通常、APIを直接呼び出す代わりに、開発環境に適した[Auth0 SDK](/docs/libraries)の使用を推奨していることにご注意ください。
+Management APIへの呼び出しは、[「Auth0のレート制限ポリシー」](/docs/ja-jp/support/policies/rate-limit-policy)の対象となります。Auth0は通常、APIを直接呼び出す代わりに、開発環境に適した[Auth0 SDK](/docs/ja-jp/libraries)の使用を推奨していることにご注意ください。
 
 ## 組織のユーザーをプロビジョニングする
 
@@ -121,7 +121,7 @@ Auth0のデータベース接続タイプは、既存の（レガシー）IDス�
 
 ### ベストプラクティス
 
-[「Organization機能」](/docs/organizations)を活用できれば、ログインシステムを大幅に簡易化でき、今後の維持と拡張がしやすくなります。詳細は、[「複数のOrganizationアーキテクチャ」](/docs/architecture-scenarios/multiple-organization-architecture)をご覧ください。
+[「Organization機能」](/docs/ja-jp/organizations)を活用できれば、ログインシステムを大幅に簡易化でき、今後の維持と拡張がしやすくなります。詳細は、[「複数のOrganizationアーキテクチャ」](/docs/ja-jp/architecture-scenarios/multiple-organization-architecture)をご覧ください。
 
 ### デプロビジョニングの制限
 

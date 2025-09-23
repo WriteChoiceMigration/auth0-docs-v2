@@ -1,13 +1,13 @@
 ---
 title: "WordPressプラグインのLogin by Auth0でユーザーを移行する"
 permalink: "user-migration-in-login-by-auth0"
+'description': "Login by Auth0 WordPressプラグインのユーザー移行機能について説明する"
 'og:title': "WordPressプラグインのLogin by Auth0でユーザーを移行する"
 'og:description': "Login by Auth0 WordPressプラグインのユーザー移行機能について説明する"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "WordPressプラグインのLogin by Auth0でユーザーを移行する"
 'twitter:description': "Login by Auth0 WordPressプラグインのユーザー移行機能について説明する"
 ---
-# WordPressプラグインのLogin by Auth0でユーザーを移行する
 
 ユーザー移行機能は、カスタムデータベースと呼ばれるAuth0コア機能をLogin by Auth0プラグインのURLエンドポイントと組み合わせて使用​​し、ユーザーが既存のWordPressユーザーアカウントで認証できるようにします。カスタムデータベースの詳細については、「[カスタムデータベース接続](/docs/ja-jp/authenticate/database-connections/custom-db)」をお読みください。
 
@@ -47,7 +47,7 @@ permalink: "user-migration-in-login-by-auth0"
     - `migrationToken`を上記の手順4で確認したセキュリティトークンの値に設定します。
     - `userNamespace`をAuth0のアプリケーション名に設定するか、文字、数字、ダッシュのみを含むその他の値に設定します。
 
-    <Frame>![WordPress Plugin custom database settings](//images.ctfassets.net/cdy7uua7fh8z/1icr0yX47nODUrzP7B6Xl2/b43621c3b6641f68bcb14ac38b237c11/auth0-custom-database-config.png)</Frame>
+    <Frame>![WordPress Plugin custom database settings](/images/ja-jp/cdy7uua7fh8z/1icr0yX47nODUrzP7B6Xl2/b43621c3b6641f68bcb14ac38b237c11/auth0-custom-database-config.png)</Frame>
 
 13. トップの**［Try（試す）］**ボタンをクリックし、表示されるフォームで有効なWordPressユーザーアカウントを使用します。「プロファイルは」に続いてユーザーのデータが表示されます。表示されない場合は、以下の**トラブルシューティング**セクションを参照してください。
 14. **［Get User（ユーザーの取得）］**ビューを選択し、既存のコードを消去し、[GitHubリポジトリからdb-login.jsコードをコピーして](https://raw.githubusercontent.com/auth0/wp-auth0/4.4.0/lib/scripts-js/db-get-user.js)、コードエディターに貼り付けます。
@@ -118,11 +118,11 @@ URLが正しいことがわかっていてもこの問題が解決しない場�
 
 これは、移行IP許可リストがオンになっているが、着信IPアドレスがリストにないことを意味します。ログインスクリプトのすぐ下に、IPアドレスのリストが表示されます。
 
-<Frame>![WordPress User Migration - Auth0 IP Addresses](//images.ctfassets.net/cdy7uua7fh8z/3RnxoRlvXm8FmNfu02fXVn/3672806c9cbf2bfe28503be8b8a63eda/auth0-incoming-ip-addresses.png)</Frame>
+<Frame>![WordPress User Migration - Auth0 IP Addresses](/images/ja-jp/cdy7uua7fh8z/3RnxoRlvXm8FmNfu02fXVn/3672806c9cbf2bfe28503be8b8a63eda/auth0-incoming-ip-addresses.png)</Frame>
 
 これらのIPアドレスがすべて、プラグインの**Auth0 > Settings（設定） > Advanced（詳細）**の下にあるWordPressに表示されていることを確認します。
 
-<Frame>![WordPress User Migration - IP Whitelist](//images.ctfassets.net/cdy7uua7fh8z/3w6C1IrsSC9hoivpSY122l/d117857524ef8d7872f364d3a7dbabda/migration-ip-whitelist-setting-field.png)</Frame>
+<Frame>![WordPress User Migration - IP Whitelist](/images/ja-jp/cdy7uua7fh8z/3w6C1IrsSC9hoivpSY122l/d117857524ef8d7872f364d3a7dbabda/migration-ip-whitelist-setting-field.png)</Frame>
 
 Auth0にリストされているIPアドレスの1つ以上がWordPressに表示されない場合は、不足しているアドレスをフィールドに追加して、設定ページを保存します。また、不足しているIPアドレスを含む[投稿をAuth0コミュニティに作成](https://community.auth0.com/tags/wordpress)し（「wordpress」というタグを付けてください）、問題に対処できるようにします。
 

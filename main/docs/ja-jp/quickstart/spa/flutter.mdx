@@ -1,12 +1,14 @@
 ---
 title: "Auth0"
 permalink: "flutter"
+'description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:title': "Auth0"
 'og:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0"
 'twitter:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 ---
+
 # Flutter (Web)
 
 <Frame>![Gravatar for steve.hobbs@auth0.com](//www.gravatar.com/avatar/f771aa7b7fa0220130cb6a9f243d7327?d=mm&r=g&s=50)</Frame>
@@ -56,7 +58,7 @@ You should also be familiar with the [Flutter command line tool](https://docs.fl
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Single-Page Applications](/docs/architecture-scenarios/application/spa-api) and which [protocol](/docs/flows/concepts/auth-code-pkce) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/ja-jp/overview), how it [integrates with Single-Page Applications](/docs/ja-jp/architecture-scenarios/application/spa-api) and which [protocol](/docs/ja-jp/flows/concepts/auth-code-pkce) it uses.
 
 </Note>
 
@@ -119,13 +121,13 @@ If you are following along with the sample project you downloaded from the top o
 
 Add the Auth0 Flutter SDK into the project:
 
-```
+```bash lines
 flutter pub add auth0_flutter
 ```
 
 Add the following script tag to your `index.html` page:
 
-```
+```html lines
 <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js" defer></script>
 ```
 
@@ -135,7 +137,7 @@ Add the following script tag to your `index.html` page:
 
 Integrate Auth0 Universal Login in your Flutter app by importing the SDK and instantiating the `Auth0` class using your Auth0 domain and Client ID values. See this example, which instantiates the class inside a widget state object:
 
-```
+```dart lines
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:auth0_flutter/auth0_flutter_web.dart';
 
@@ -172,7 +174,7 @@ You will normally need to specify the `redirectUrl` parameter to `loginWithRedir
 
 </Note>
 
-```
+```dart lines
 if (_credentials == null) {
   ElevatedButton(
     onPressed: () => auth0.loginWithRedirect(redirectUrl: 'http://localhost:3000'),
@@ -183,7 +185,7 @@ if (_credentials == null) {
 
 When a user logs in, they are redirected back to your application. You are then able to access the ID and access tokens for this user by calling `onLoad` during startup and handling the credentials that are given to you:
 
-```
+```dart lines
 auth0.onLoad().then((final credentials) => setState(() {
     // Handle or store credentials here
     _credentials = credentials;
@@ -204,7 +206,7 @@ To log users out, redirect them to the Auth0 logout endpoint to clear their logi
 
 See this example of an `ElevatedButton` widget that logs the user out of the app:
 
-```
+```dart lines
 ElevatedButton(
   onPressed: () async {
     await auth0.logout();
@@ -224,7 +226,7 @@ The user profile automatically retrieves user profile properties for you when th
 
 See this example of a `View` component that displays the user profile on the screen:
 
-```
+```dart lines
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:flutter/material.dart';
 

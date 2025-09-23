@@ -1,13 +1,13 @@
 ---
 title: "Auth0.Android"
 permalink: "auth0-android"
+'description': "Auth0.Androidをインストール・初期化・使用する方法について説明します。"
 'og:title': "Auth0.Android"
 'og:description': "Auth0.Androidをインストール・初期化・使用する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0.Android"
 'twitter:description': "Auth0.Androidをインストール・初期化・使用する方法について説明します。"
 ---
-# Auth0.Android
 
 Auth0.Androidは、Androidアプリでユーザーを認証し、[Auth0 API](/docs/ja-jp/api)にアクセスするために使用できる、クライアント側のライブラリーです。
 
@@ -25,7 +25,7 @@ SDKをプロジェクトに追加します。ライブラリーはAuth0のAuthen
 
 アプリの`build.gradle`依存関係セクションで、以下を追加します。
 
-```
+``` lines
 dependencies {
   // Add the Auth0 Android SDK
   implementation 'com.auth0.android:auth0:2.+'
@@ -42,7 +42,7 @@ Android Studioのプロンプトを使って同期させるか、コマンドラ
 
 `android`セクションで、AndroidとKotlinのプラグインのそれぞれに対して、Java 8バイトコードをターゲットにするようにします。
 
-```
+``` lines
 android {
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
@@ -58,7 +58,7 @@ android {
 
 アプリケーションの`AndroidManifest.xml`ファイルを開いて、以下の権限を追加します。
 
-```
+```xml lines
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
@@ -79,7 +79,7 @@ Web Authentication機能を使用する予定がなく、マニフェストの�
 
 </Note>
 
-```
+```kotlin lines
 apply plugin: 'com.android.application'
 
 android {
@@ -108,7 +108,7 @@ android {
 
 Auth0クライアントIDとドメインの値を使用して、`Auth0`オブジェクトを新規作成します。オブジェクトは、後でAuth0のエンドポイントとやり取りする際にこれを使用します。
 
-```
+```kotlin lines
 val auth0 = Auth0("YOUR_CLIENT_ID", "YOUR_DOMAIN")
 ```
 

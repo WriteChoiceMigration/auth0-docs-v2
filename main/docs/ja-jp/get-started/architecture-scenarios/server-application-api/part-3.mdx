@@ -1,13 +1,13 @@
 ---
 title: "アプリケーションの実装（サーバーアプリ + API）"
 permalink: "part-3"
+'description': "サーバーアプリ + APIアーキテクチャシナリオのアプリケーション実装"
 'og:title': "アプリケーションの実装（サーバーアプリ + API）"
 'og:description': "サーバーアプリ + APIアーキテクチャシナリオのアプリケーション実装"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "アプリケーションの実装（サーバーアプリ + API）"
 'twitter:description': "サーバーアプリ + APIアーキテクチャシナリオのアプリケーション実装"
 ---
-# アプリケーションの実装（サーバーアプリ + API）
 
 このシュートリアルのセクションでは、APIとそれに関連するマシンツーマシンアプリケーションについて掘り下げてみたいと思います。最初から始めたい方は、「[APIを使用したサーバーアプリケーション](/docs/ja-jp/get-started/architecture-scenarios/server-application-api)」をお読みください。
 
@@ -34,14 +34,14 @@ ExampleCoのTimesheets APIでは、エンドポイントを構成してタイム
 </thead>
 <tbody>
 <tr>
-<td><code>POST</code></td>
-<td><code>/timesheets/upload</code></td>
+<td>`POST`</td>
+<td>`/timesheets/upload`</td>
 <td>新しいタイムシートエントリを作成する</td>
 </tr>
 </tbody>
 </table>
 
-```json
+```json lines
 {
   'user_id': '007',
   'date': '2017-05-10T17:40:20.095Z',
@@ -52,7 +52,7 @@ ExampleCoのTimesheets APIでは、エンドポイントを構成してタイム
 
 APIは要求を正しく処理すると、`HTTP 201 Created`ステータスコードともに、JSONオブジェクトを含んだボディーを返します。このJSONオブジェクトには、新規作成されたタイムシートを記述するメッセージプロパティが含まれています。
 
-```json
+```json lines
 {
 "message": "Created timesheet 14 for employee 007."
 }
@@ -60,7 +60,7 @@ APIは要求を正しく処理すると、`HTTP 201 Created`ステータスコ�
 
 <Note>
 
-[Node.js](/docs/get-started/architecture-scenarios/server-application-api/api-implementation-nodejs#1-define-the-api-endpoint)での実装を参照してください。
+[Node.js](/docs/ja-jp/get-started/architecture-scenarios/server-application-api/api-implementation-nodejs#1-define-the-api-endpoint)での実装を参照してください。
 
 </Note>
 
@@ -70,7 +70,7 @@ APIエンドポイントを保護するには、APIアプリケーション内�
 
 すべての条件が満たされると、APIアプリケーションは前に述べたメッセージで応答します。提供されたアクセストークンに問題がある（またはまったく提供されていない）場合は、APIアプリケーションが`HTTP 401 Unauthorized`ステータスコードを送信します。
 
-[**Node.js**](/docs/get-started/architecture-scenarios/server-application-api/api-implementation-nodejs#2-secure-the-api-endpoint)**での実装を参照してください。**
+[**Node.js**](/docs/ja-jp/get-started/architecture-scenarios/server-application-api/api-implementation-nodejs#2-secure-the-api-endpoint)**での実装を参照してください。**
 
 #### アクセストークン取得する
 
@@ -78,7 +78,7 @@ APIエンドポイントを保護するには、APIアプリケーション内�
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```json
+```json lines
 {
   audience: "{yourApiIdentifier}",
   grant_type: "client_credentials",
@@ -91,11 +91,11 @@ codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
 アクセストークンでAPIのエンドポイントはセキュリティ保護されましたが、APIを呼び出すプロセスに新しいタイムシートのエントリをPOSTする権限があるかは未確認のままです。
 
-前述のように、それぞれのアクセストークンには、アプリケーションに付与されたアクセス権限のリストが含まれます。これらの権限は、`scope`要求パラメーターを使って定義されます。これを構成する方法については、「[スコープを構成する](/docs/get-started/architecture-scenarios/server-application-api/part-3#configure-the-scopes)」記述のある段落をお読みください。
+前述のように、それぞれのアクセストークンには、アプリケーションに付与されたアクセス権限のリストが含まれます。これらの権限は、`scope`要求パラメーターを使って定義されます。これを構成する方法については、「[スコープを構成する](/docs/ja-jp/get-started/architecture-scenarios/server-application-api/part-3#configure-the-scopes)」記述のある段落をお読みください。
 
 エンドポイントには、`batch:upload`スコープが必要です。
 
-[**Node.js**](/docs/get-started/architecture-scenarios/server-application-api/api-implementation-nodejs#3-check-the-client-permissions)**での実装を参照してください。**
+[**Node.js**](/docs/ja-jp/get-started/architecture-scenarios/server-application-api/api-implementation-nodejs#3-check-the-client-permissions)**での実装を参照してください。**
 
 ### マシンツーマシンアプリケーションを実装する
 
@@ -116,7 +116,7 @@ codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```json
+```json lines
 {
   "audience": "{yourApiIdentifier}",
   "grant_type": "client_credentials",
@@ -127,7 +127,7 @@ codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
 詳細については、「[クライアントの資格情報フローを使用してAPIを呼び出す](/docs/ja-jp/get-started/authentication-and-authorization-flow/client-credentials-flow/call-your-api-using-the-client-credentials-flow)」を参照してください。
 
-[**Python**](/docs/get-started/architecture-scenarios/server-application-api/cron-implementation-python#get-an-access-token)の実装を参照してください。
+[**Python**](/docs/ja-jp/get-started/architecture-scenarios/server-application-api/cron-implementation-python#get-an-access-token)の実装を参照してください。
 
 ## APIを呼び出す
 
@@ -140,4 +140,4 @@ codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 * HTTP `POST`要求を行う
 * 応答を解析し、ターミナルに出力する（任意）
 
-[**Python**](/docs/get-started/architecture-scenarios/server-application-api/cron-implementation-python#invoke-the-api)の実装を参照してください。
+[**Python**](/docs/ja-jp/get-started/architecture-scenarios/server-application-api/cron-implementation-python#invoke-the-api)の実装を参照してください。

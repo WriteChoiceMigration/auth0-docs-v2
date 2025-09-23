@@ -1,13 +1,13 @@
 ---
 title: "Angular 2でのSPA実装（SPA + API）"
 permalink: "spa-implementation-angular2"
+'description': "SPA + APIアーキテクチャシナリオ向けのAngular 2でのSPA実装"
 'og:title': "Angular 2でのSPA実装（SPA + API）"
 'og:description': "SPA + APIアーキテクチャシナリオ向けのAngular 2でのSPA実装"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Angular 2でのSPA実装（SPA + API）"
 'twitter:description': "SPA + APIアーキテクチャシナリオ向けのAngular 2でのSPA実装"
 ---
-# Angular 2でのSPA実装（SPA + API）
 
 本ドキュメントはSPA + APIアーキテクチャシナリオの一部で、Angular 2でSPAを実装する方法を説明します。実装したソリューションについての情報は、シナリオを参照してください。
 
@@ -17,7 +17,7 @@ Angular 2でのSPA実装で使用する全ソースコードは、[こちらのG
 
 アプリケーションには特定の構成情報が必要になります。残りの実装作業に進む前に、さまざまな構成値を入れる`AuthConfig`インターフェイスを作成してください。このインターフェイスは、`auth0-variables.ts`というファイルに入れます。
 
-```
+```javascript lines
 interface AuthConfig {
   clientID: string;
   domain: string;
@@ -39,7 +39,7 @@ export const AUTH_CONFIG: AuthConfig = {
 
 ユーザー認証に必要なタスクを管理・調整する最善の方法は、再利用可能なサービスを作成することです。これにより、アプリケーション全体でそのメソッドを呼び出せるようになります。[auth0.js](https://auth0.com/docs/libraries/auth0js)の`WebAuth`オブジェクトのインスタンスは、サービスで作成できます。
 
-```
+```javascript lines
 import { Injectable } from '@angular/core';
 import { AUTH_CONFIG } from './auth0-variables';
 import { Router } from '@angular/router';
@@ -135,7 +135,7 @@ export class AuthService {
 
 アプリのルートコンポーネントで`handleAuthentication`を呼び出すことで、ユーザーがアプリにリダイレクトで戻された後、アプリを最初に読み込む際、認証のハッシュフラグメントを処理できるようにします。
 
-```javascript
+```javascript lines
 // src/app/app.component.ts
 
 import { Component } from '@angular/core';
@@ -166,11 +166,11 @@ export class AppComponent {
 
 `CallbackComponent`というコンポーネントを作成して、読み込み中インジケーターを自動入力します。
 
-```
+```html lines
 <!-- app/callback/callback.html -->
 
 <div class="loading">
-  <Frame><img src="/docs/assets/loading.svg" alt="loading"></Frame>
+  <Frame><img src="/docs/ja-jp/assets/loading.svg" alt="loading"></Frame>
 
 </div>
 ```
@@ -189,7 +189,7 @@ export class AppComponent {
 
 ユーザーのプロファイルを取得するには、既存の`AuthService`クラスを更新します。ユーザーのアクセストークンをローカルストレージから抽出する`getProfile`関数を追加し、それを`userInfo`関数に渡してユーザー情報を取得します。
 
-```javascript
+```javascript lines
 // Existing code from the AuthService class is omitted in this code sample for brevity
 @Injectable()
 export class AuthService {
@@ -214,7 +214,7 @@ export class AuthService {
 
 たとえば、新しいコンポーネントを作成して、ユーザーのプロファイル情報を表示することができます。
 
-```
+```javascript lines
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../auth/auth.service';
 
@@ -243,13 +243,13 @@ export class ProfileComponent implements OnInit {
 
 このコンポーネントのテンプレートは以下のようなものになります。
 
-```
+```html lines
 <div class="panel panel-default profile-area">
   <div class="panel-heading">
     <h3>Profile</h3>
   </div>
   <div class="panel-body">
-    <Frame><img src="/docs/{{profile?.picture}}" class="avatar" alt="avatar"></Frame>
+    <Frame><img src="/docs/ja-jp/{{profile?.picture}}" class="avatar" alt="avatar"></Frame>
 
     <div>
       <label><i class="glyphicon glyphicon-user"></i> Nickname</label>
@@ -268,7 +268,7 @@ export class ProfileComponent implements OnInit {
 
 この確認を行うために先ほど書いた`setSession`関数のコードがこちらです。
 
-```
+```javascript lines
 private setSession(authResult): void {
   // Set the time that the Access Token will expire at
   const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
@@ -289,7 +289,7 @@ private setSession(authResult): void {
 
 次に、ユーザーが特定のスコープを付与されているかどうかを判断するために呼び出すことができる関数を`AuthService`クラスに追加する必要があります。
 
-```
+```javascript lines
 @Injectable()
 export class AuthService {
   // some code omitted for brevity
@@ -303,7 +303,7 @@ export class AuthService {
 
 このメソッドは、特定のUI要素を表示すべきかどうかを判断するために呼び出すことができます。例として、`approve:timesheets`スコープを持つユーザーにのみ**［Approve Timesheets（タイムシートの承認）］**リンクを表示したい場合を考えます。下のコードでは、リンクを表示すべきか否かを判断するために`userHasScopes`関数の呼び出しを追加します。
 
-```
+```html lines
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -317,8 +317,8 @@ export class AuthService {
         <li><a *ngIf="auth.isAuthenticated() && auth.userHasScopes(['approve:timesheets'])" routerLink="/approval">Approve Timesheets</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a *ngIf="!auth.isAuthenticated()" href="/docs/javascript:void(0)" (click)="auth.login()">Log In</a></li>
-        <li><a *ngIf="auth.isAuthenticated()" href="/docs/javascript:void(0)" (click)="auth.logout()">Log Out</a></li>
+        <li><a *ngIf="!auth.isAuthenticated()" href="/docs/ja-jp/javascript:void(0)" (click)="auth.login()">Log In</a></li>
+        <li><a *ngIf="auth.isAuthenticated()" href="/docs/ja-jp/javascript:void(0)" (click)="auth.logout()">Log Out</a></li>
       </ul>
     </div>
   </div>
@@ -333,7 +333,7 @@ export class AuthService {
 
 ユーザーに正しいスコープが付与されていない場合にユーザーがルートにナビゲートされないよう、ルートを保護する必要もあります。このために、新しい`ScopeGuardService`サービスクラスを追加することができます。
 
-```
+```javascript lines
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 import { AuthService } from './auth.service';
@@ -359,7 +359,7 @@ export class ScopeGuardService implements CanActivate {
 
 追加したら、ルートの構成時に使用して、ルートを有効にしてよいかどうかを判断します。以下の`approval`ルートの定義では、新しい`ScopeGuardService`が使用されています。
 
-```javascript
+```javascript lines
 // app.routes.ts
 
 import { Routes, CanActivate } from '@angular/router';
@@ -389,7 +389,7 @@ export const ROUTES: Routes = [
 
 `angular2-jwt`をインストールします。
 
-```
+``` lines
 # installation with npm
 npm install --save angular2-jwt
 
@@ -399,7 +399,7 @@ yarn add angular2-jwt
 
 `angular2-jwt`の構成値を含むファクトリ関数を作成して、アプリケーションの`@NgModule`で`providers`配列に追加します。ファクトリ関数には、ローカルストレージから`access_token`を取得する`tokenGetter`関数が必要です。
 
-```
+```javascript lines
 import { Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
@@ -426,7 +426,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
 `angular2-jwt`が構成されたら、`AuthHttp`クラスを使用してアプリケーションの任意の場所からAPIを安全に呼び出すことができます。そのためには、`AuthHttp`を必要な任意のコンポーネントまたはサービスに注入し、Angularの標準`Http`クラスと同様に使用します。
 
-```
+```javascript lines
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
@@ -453,7 +453,7 @@ export class TimesheetsService {
 
 ユーザーのアクセストークンの更新には、Angular SPAのアップデートが必要です。auth0.jsから`checkSession`メソッドを呼び出すメソッドを`AuthService`に追加します。更新できたら、既存の`setSession`メソッドを使用してローカルストレージに新しいトークンを設定します。
 
-```
+```javascript lines
 public renewToken() {
   this.auth0.checkSession({
     audience: AUTH_CONFIG.apiUrl
@@ -467,7 +467,7 @@ public renewToken() {
 
 `AuthService`クラスに`scheduleRenewal`というメソッドを追加して、認証をサイレント更新すべき時間をセットアップします。以下の例では、実際のトークンが期限切れになる30秒前に更新されるようにセットアップしています。また、Observableからサブスクリプションを解除する`unscheduleRenewal`というメソッドも追加します。
 
-```
+```javascript lines
 public scheduleRenewal() {
   if (!this.isAuthenticated()) return;
 
@@ -502,4 +502,4 @@ public unscheduleRenewal() {
 
 ### リフレッシュトークンローテーション
 
-ブラウザーにおけるユーザーのプライバシー管理についての最近の進歩は、サードパーティクッキーへのアクセスを防ぐことでユーザーエクスペリエンスに悪影響を与えています。Auth0では、[「リフレッシュトークンのローテーション」](/docs/tokens/concepts/refresh-token-rotation)の使用を推奨しています。リフレッシュトークンローテーションは、SPAでリフレッシュトークンを安全に使用するためのセキュリティ方式であり、リソースにアクセスするエンドユーザーに、ITPのようなブラウザーのプライバシー保護技術に煩わされないシームレスなユーザーエクスペリエンスを提供します。
+ブラウザーにおけるユーザーのプライバシー管理についての最近の進歩は、サードパーティクッキーへのアクセスを防ぐことでユーザーエクスペリエンスに悪影響を与えています。Auth0では、[「リフレッシュトークンのローテーション」](/docs/ja-jp/tokens/concepts/refresh-token-rotation)の使用を推奨しています。リフレッシュトークンローテーションは、SPAでリフレッシュトークンを安全に使用するためのセキュリティ方式であり、リソースにアクセスするエンドユーザーに、ITPのようなブラウザーのプライバシー保護技術に煩わされないシームレスなユーザーエクスペリエンスを提供します。

@@ -1,13 +1,13 @@
 ---
 title: "Auth0でのMQTTによるデバイスの認証と認可"
 permalink: "authenticate-devices-using-mqtt"
+'description': "Auth0でMQTTを使用してデバイスを認証および認可する方法を説明します。"
 'og:title': "Auth0でのMQTTによるデバイスの認証と認可"
 'og:description': "Auth0でMQTTを使用してデバイスを認証および認可する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0でのMQTTによるデバイスの認証と認可"
 'twitter:description': "Auth0でMQTTを使用してデバイスを認証および認可する方法を説明します。"
 ---
-# Auth0でのMQTTによるデバイスの認証と認可
 
 MQTTは、他のシステムと通信するためのデバイスによく使用される軽量なプロトコルで、**publish/subscribe（パブリッシュ/サブスクライブ）**型のメッセージングプラットフォーム向けに設計されています。詳細については、Wikipediaの[MQTT](https://en.wikipedia.org/wiki/MQ_Telemetry_Transport)をお読みください。
 
@@ -23,7 +23,7 @@ MQTTプロトコルは、`usernames`および`passwords`に基づいて基本的
 
 この記事では、nodejsベースのMQTTブローカー（[mosca](https://github.com/mcollina/mosca)および[Auth0](https://auth0.com)）間の統合について説明します。この例では、Auth0を使って`publishers`および`subscribers`のブローカーに対する**認証**を行い、メッセージのルーティングを**認可**します。
 
-<Frame>![MQTTのデータフロー図](//images.ctfassets.net/cdy7uua7fh8z/1BAQm0lXvF7A3VqIciOagV/baca014f758ed79d17a82e496a4e3783/2023-09-22_13-15-29.png)</Frame>
+<Frame>![MQTTのデータフロー図](/images/ja-jp/cdy7uua7fh8z/1BAQm0lXvF7A3VqIciOagV/baca014f758ed79d17a82e496a4e3783/2023-09-22_13-15-29.png)</Frame>
 
 ## ソリューションのコンポーネント
 
@@ -31,7 +31,7 @@ MQTTプロトコルは、`usernames`および`passwords`に基づいて基本的
 
 **mosca**はホストにとっては簡単で、他のサーバーに埋め込むことができます。このサンプルの目的上、**mosca**サーバーを自己ホストします。
 
-```javascript
+```javascript lines
 var mosca = require('mosca')
 var Auth0Mosca = require('auth0mosca');
 
@@ -70,7 +70,7 @@ server.on('clientConnected', function(client) {
 
 この小さな[モジュール](https://www.npmjs.org/package/auth0mosca)には、**mosca**で使用される4つの関数（`authenticateWithCredentials`、`authenticateWithJWT`、`authorizePublish`、`authorizeSubscribe`）があります。
 
-```javascript
+```javascript lines
 var request = require('request');
 var jwt = require('jsonwebtoken');
 
@@ -170,7 +170,7 @@ module.exports = Auth0Mosca;
 3. `mosca`がJWTを検証する
 4. メッセージが送信されサブスクライバーに再送信される
 
-<Frame>![MQTTのJSON Web Tokenデータフロー図 ](//images.ctfassets.net/cdy7uua7fh8z/38KV0HggAdQDkLxqZuAOph/6b90dfd9159b49779ce39e7f78db448c/2023-09-22_13-15-47.png)</Frame>
+<Frame>![MQTTのJSON Web Tokenデータフロー図 ](/images/ja-jp/cdy7uua7fh8z/38KV0HggAdQDkLxqZuAOph/6b90dfd9159b49779ce39e7f78db448c/2023-09-22_13-15-47.png)</Frame>
 
 パブリッシャーとサブスクライバーは何らかの方法でJWTを取得します。ブローカーはAuth0と通信する必要はなくなりました。JWTは自己完結型のアーティファクトであり、署名に使用するシークレットで検証することができます。
 
@@ -178,7 +178,7 @@ module.exports = Auth0Mosca;
 
 このサンプルの場合、パブリッシャーは`mqtt`モジュールを使用する単純なnodejsプログラムであり、正しい資格情報を追加します。
 
-```javascript
+```javascript lines
 var mqtt = require('mqtt')
   , host = 'localhost'
   , port = '9999';
@@ -213,7 +213,7 @@ function sendTemperature(client){
 
 サブスクライバーはパブリッシャーに非常に似ています。
 
-```javascript
+```javascript lines
 var mqtt = require('mqtt')
   , host = 'localhost'
   , port = '9999';
@@ -245,7 +245,7 @@ client.on('message', function(topic, message) {
 
 ご覧のように、Auth0はさまざまなシナリオで簡単に使用することができます。Auth0のユーザーストアを使ってデバイスを管理します。時間や場所、デバイスIDといった他の状況に基づいて、はるかに洗練された認証ルールを記述する​ことも当然可能です。これらはすべて、追加のプロファイル属性やルールを通じて非常に簡単に実装​することができます。柔軟なAuth0 Profileが、任意のアーティファクト（この例の`topics`など）をサポートするためにどのように拡張できるかについても説明しています。
 
-Rules（ルール）の詳細については、[「Auth0 Rules」](/docs/rules)を確認してください。
+Rules（ルール）の詳細については、[「Auth0 Rules」](/docs/ja-jp/rules)を確認してください。
 
 資格情報（`username`/`password`）を安全でないネットワークを介して送信することは絶対に避けてください。メッセージ内容が公開されることを防ぐTransport Level Securityを提供する他の実装もあります。1つの例として、**mosca**はTLSをサポートします。すべてのトラフィックが閉域網を通る場合を除き、運用環境への導入ではこれが優先されるでしょう。
 

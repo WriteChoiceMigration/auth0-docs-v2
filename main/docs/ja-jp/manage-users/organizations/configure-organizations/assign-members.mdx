@@ -1,13 +1,13 @@
 ---
 title: "メンバーを組織に割り当てる"
 permalink: "assign-members"
+'description': "Auth0 DashboardまたはManagement APIを使ってメンバーを組織に直接割り当てる方法について説明します。"
 'og:title': "メンバーを組織に割り当てる"
 'og:description': "Auth0 DashboardまたはManagement APIを使ってメンバーを組織に直接割り当てる方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "メンバーを組織に割り当てる"
 'twitter:description': "Auth0 DashboardまたはManagement APIを使ってメンバーを組織に直接割り当てる方法について説明します。"
 ---
-# メンバーを組織に割り当てる
 
 [組織](/docs/ja-jp/manage-users/organizations/organizations-overview)にメンバーを割り当てるには、先にテナント内に[ユーザーを作成](/docs/ja-jp/manage-users/user-accounts/create-users)しておく必要があります。ユーザーが見つからない場合には、代わりに[ユーザーを招待](/docs/ja-jp/manage-users/organizations/configure-organizations/invite-members)することもできます。
 
@@ -28,15 +28,15 @@ Management APIでメンバーを割り当てるには、以下を行います。
 `Create Organization Members`エンドポイントに`POST`呼び出しを行います。必ず、`ORG_ID`、`MGMT_API_ACCESS_TOKEN`、および`USER_ID`のプレースホルダーの値を、それぞれ組織ID、Management APIのアクセストークン、ユーザーIDに置き換えます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url https://your_auth0_domain/api/v2/organizations/ORG_ID/members \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "members": [ "USER_ID", "USER_ID", "USER_ID" ] }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://your_auth0_domain/api/v2/organizations/ORG_ID/members");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -46,7 +46,7 @@ request.AddParameter("application/json", "{ \"members\": [ \"USER_ID\", \"USER_I
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -67,8 +67,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://your_auth0_domain/api/v2/organizations/ORG_ID/members")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -77,7 +77,7 @@ HttpResponse response = Unirest.post("https://your_auth0_domain/api/v2/organizat
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -94,8 +94,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
@@ -121,7 +121,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://your_auth0_domain/api/v2/organizations/ORG_ID/members",
@@ -146,8 +146,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("your_auth0_domain")
 payload = "{ \"members\": [ \"USER_ID\", \"USER_ID\", \"USER_ID\" ] }"
@@ -162,7 +162,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -177,8 +177,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"members\": [ \"USER_ID\", \"USER_ID\", \"USER_ID\" ] }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -224,15 +224,15 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>ORG_ID</code></td>
+<td>`ORG_ID`</td>
 <td>メンバーシップを割り当てたい組織のID。</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><code>create:organization_members</code>のスコープを持つ<a href="/docs/tokens/management-api-access-tokens">Management APIのアクセストークン</a>。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>`create:organization_members`のスコープを持つ<a href="/docs/ja-jp/tokens/management-api-access-tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 <tr>
-<td><code>USER_ID</code></td>
+<td>`USER_ID`</td>
 <td>指定された組織に割り当てたいユーザーのID。送信できるメンバーの数は各要求で組織ごとに最大10までです。</td>
 </tr>
 </tbody>
@@ -252,49 +252,49 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>204</code></td>
+<td>`204`</td>
 <td></td>
 <td>Members successfully added to organization（メンバーが組織に追加されました）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_body</code></td>
+<td>`400`</td>
+<td>`invalid_body`</td>
 <td>Invalid request body（無効な要求本文です）メッセージは、原因によって異なります。</td>
 <td>要求ペイロードが有効ではありません。</td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_query_string</code></td>
+<td>`400`</td>
+<td>`invalid_query_string`</td>
 <td>Invalid request query string（無効な要求クエリ文字列です）メッセージは、原因によって異なります。</td>
 <td>クエリ文字列が有効ではありません。</td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Invalid token（無効なトークンです）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Invalid signature received for JSON Web Token validation（JSON Webトークン検証に無効な署名を受け取りました）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Client is not global（クライアントがグローバルでありません）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>403</code></td>
-<td><code>insufficient_scope</code></td>
-<td>Insufficient scope; expected any of（スコープ不足。次のいずれかを想定します）： <code>create:organization_members</code>.</td>
+<td>`403`</td>
+<td>`insufficient_scope`</td>
+<td>Insufficient scope; expected any of（スコープ不足。次のいずれかを想定します）： `create:organization_members`.</td>
 <td>提供されたベアラートークンスコープで許可されていないフィールドのread/writeを試みました。</td>
 </tr>
 <tr>
-<td><code>429</code></td>
+<td>`429`</td>
 <td></td>
 <td>Too many requests（要求が多すぎます）X-RateLimit-Limit、X-RateLimit-Remaining、X-RateLimit-Resetヘッダーを確認してください。</td>
 <td></td>

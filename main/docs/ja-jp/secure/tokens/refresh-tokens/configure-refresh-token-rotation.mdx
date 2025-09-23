@@ -1,13 +1,13 @@
 ---
 title: "リフレッシュトークンのローテーションを構成する"
 permalink: "configure-refresh-token-rotation"
+'description': "リフレッシュトークンのローテーションを構成する方法について説明します。"
 'og:title': "リフレッシュトークンのローテーションを構成する"
 'og:description': "リフレッシュトークンのローテーションを構成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "リフレッシュトークンのローテーションを構成する"
 'twitter:description': "リフレッシュトークンのローテーションを構成する方法について説明します。"
 ---
-# リフレッシュトークンのローテーションを構成する
 
 Dashboardまたは[Auth0 SPA SDK](/docs/ja-jp/libraries/auth0-single-page-app-sdk)を使用して、アプリケーションごとにリフレッシュトークンのローテーションを構成します。リフレッシュトークンのローテーションが有効な場合、ユーザーはシームレスな遷移が可能となります。アプリケーションは、前の、有効期限がなくローテーションしないリフレッシュトークンを使用し、ローテーションするリフレッシュトークンに切り替えます。
 
@@ -25,7 +25,7 @@ Dashboardまたは[Auth0 SPA SDK](/docs/ja-jp/libraries/auth0-single-page-app-sd
 3. **［Settings（設定）］**タブに移動します。
 4. **［Refresh Token Rotation（リフレッシュトークンのローテーション）］**で、**［Allow Refresh Token Rotation（リフレッシュトークンのローテーションを許可する）］**を有効にします。.
 
-   <Frame>![Dashboard アプリケーション アプリケーション設定タブ リフレッシュトークンのローテーション](//images.ctfassets.net/cdy7uua7fh8z/Rk6i8MUVWZG34P7K6aurb/2633d759038770c7cc6f82afff26d50f/2025-01-28_14-28-18.png)</Frame>
+   <Frame>![Dashboard アプリケーション アプリケーション設定タブ リフレッシュトークンのローテーション](/images/ja-jp/cdy7uua7fh8z/Rk6i8MUVWZG34P7K6aurb/2633d759038770c7cc6f82afff26d50f/2025-01-28_14-28-18.png)</Frame>
 
 5. 自動再利用検出をトリガーする前に、要求と応答の間に時間の余裕を持たせるために、リフレッシュトークンに対して、**［Rotation Overlap Period（ローテーションのオーバーラップ期間）］**を秒単位で入力します。このオーバーラップ期間は、指定された時間枠内でローテーションするリフレッシュトークンを複数回にわたって交換するときに、同時実行の問題を回避するのに役立ちます。この期間中、侵害検出機能は適用されず、ローテーションする新しいリフレッシュトークンが発行されます。再利用できるのは直前のトークンのみです。最後から2番目のトークンが交換されると、侵害検出がトリガーされます。
 6. **［Save Changes（変更の保存）］**を選択します。
@@ -48,7 +48,7 @@ Auth0 SPA SDKを使用して、リフレッシュトークンのローテーシ�
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```javascript
+   ```javascript lines
    const auth0 = await createAuth0Client({
          domain: '{yourDomain}',
          client_id: '{yourClientId}',
@@ -62,7 +62,7 @@ Auth0 SPA SDKを使用して、リフレッシュトークンのローテーシ�
    
 3. リフレッシュトークンのローテーション設定を構成します。例：
 
-   ```
+   ``` lines
    PATCH /api/v2/clients/{client_id}
        {
          "refresh_token": {
@@ -86,19 +86,19 @@ Auth0 SPA SDKを使用して、リフレッシュトークンのローテーシ�
 </thead>
 <tbody>
 <tr>
-<td><code>rotation_type</code></td>
+<td>`rotation_type`</td>
 <td>テキスト文字列：rotatingまたはnon-rotating</td>
 </tr>
 <tr>
-<td><code>expiration_type</code></td>
+<td>`expiration_type`</td>
 <td>テキスト文字列：expiringまたはnon-expiring</td>
 </tr>
 <tr>
-<td><code>token_lifetime</code></td>
+<td>`token_lifetime`</td>
 <td><strong>リフレッシュトークンのローテーション</strong>が有効化されている場合、リフレッシュトークンのデフォルトの有効期限は30日（2,592,000秒）です。1年（31,557,600秒）までを構成することができます。<strong>トークンがローテーションされても、ライフタイムは延長されません。</strong></td>
 </tr>
 <tr>
-<td><code>leeway</code></td>
+<td>`leeway`</td>
 <td>潜在的なネットワークの同時並行で、クライアントが同じリフレッシュトークンを使って再試行をした際にトークンが無効となり、動作不能になることを考慮して、指定の時間内に同じリフレッシュトークンが使用されることを許容します。デフォルトでは無効に設定されています。この余裕時間は秒単位で構成します。</td>
 </tr>
 </tbody>

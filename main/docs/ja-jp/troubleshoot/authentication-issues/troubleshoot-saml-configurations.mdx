@@ -1,13 +1,13 @@
 ---
 title: "SAML構成のトラブルシューティング"
 permalink: "troubleshoot-saml-configurations"
+'description': "SAML構成に関する問題のトラブルシューティングを説明します。"
 'og:title': "SAML構成のトラブルシューティング"
 'og:description': "SAML構成に関する問題のトラブルシューティングを説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "SAML構成のトラブルシューティング"
 'twitter:description': "SAML構成に関する問題のトラブルシューティングを説明します。"
 ---
-# SAML構成のトラブルシューティング
 
 トラブルシューティングでは、構成を理解することが大切です。
 
@@ -94,13 +94,13 @@ SP起点のフローでこのエラーが表示される場合、次のいずれ
 
 テナントがカスタムドメインを使用している場合、ログインフローがカスタムドメインで開始し、正規ドメインで完了すると不一致が発生します。たとえば、ユーザーが次のカスタムドメインで始めたとします：
 
-```
+``` lines
 https://auth.{yourDomain}.com/authorize?client_id=abc123&redirect_uri=https://jwt.io&response_type=code&scope=openid&audience=https://example.com&connection=mysamlconnection
 ```
 
 ところが、IDプロバイダーは次の正規ドメインを使って、ACS URLにSAML応答を返すように構成されています：
 
-```
+``` lines
 https://{yourTenant}.auth0.com/login/callback
 ```
 
@@ -181,7 +181,7 @@ SAMLログインのトラブルシューティングでは、主に4つの確認
 2. 接続の**［Try（試す）］**（正三角形の再生）アイコンをクリックして、Auth0とリモートIdPとのやり取りをテストします。接続が動作**しない**場合には、このセクションに記載の手順を行います。動作する場合には、スキップして、次のセクションに進んでください。
 3. SAML接続の横にある**［Settings（設定）］**（歯車）アイコンをクリックします。
 
-   <Frame>![Dashboard Authentication Enterprise SAML Connection Settings](//images.ctfassets.net/cdy7uua7fh8z/6s8p4aMck06YnPStr493sA/f04f5ce020a1e93e1456b203c933d002/2025-01-28_13-32-44.png)</Frame>
+   <Frame>![Dashboard Authentication Enterprise SAML Connection Settings](/images/ja-jp/cdy7uua7fh8z/6s8p4aMck06YnPStr493sA/f04f5ce020a1e93e1456b203c933d002/2025-01-28_13-32-44.png)</Frame>
 
 4. 以下をIdPの管理者に問い合わせて確認します。
 
@@ -234,7 +234,7 @@ SAMLログインのトラブルシューティングでは、主に4つの確認
 <tbody>
 <tr>
 <td>Destination（送信先）</td>
-<td>SAML応答の送信先が正しいAuth0テナントと接続（<code>https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}</code>）であることを確認します。Status Field（ステータスフィールド）</td>
+<td>SAML応答の送信先が正しいAuth0テナントと接続（`https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}`）であることを確認します。Status Field（ステータスフィールド）</td>
 </tr>
 </tbody>
 </table>
@@ -253,7 +253,7 @@ SAMLログインのトラブルシューティングでは、主に4つの確認
    1. 接続にデバッグを有効化するには、[［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)に移動します。
    2. **SAML**のIdP接続リストを開いて、**［Settings（設定）］**をクリックし、**［Debug Mode（デバッグモード）］**を有効にします。
 
-      <Frame>![Troubleshoot SAML Connections Enable Debug Mode screen](//images.ctfassets.net/cdy7uua7fh8z/1F6npTHy1P0c0ygXfbndBD/66cfae3984c6dfdf6a3843641125f582/2025-02-27_15-35-30.png)</Frame>
+      <Frame>![Troubleshoot SAML Connections Enable Debug Mode screen](/images/ja-jp/cdy7uua7fh8z/1F6npTHy1P0c0ygXfbndBD/66cfae3984c6dfdf6a3843641125f582/2025-02-27_15-35-30.png)</Frame>
 
    3. **［Debug Mode（デバッグモード）］**を有効にすると、[Dashboard内](https://manage.auth0.com/#/logs)の**［Warning During Login（ログイン時の警告）］**ログエントリに`original_profile`プロパティが表示され、IDプロバイダーがSAMLアサーションに含めたすべての属性がリストされます。このリストを使用すると、IdPが送信している情報を確認して、マッピングの作成に役立てることができます。欠けている属性がアサーションに全く存在していない場合には、IdPに問い合わせて、それを含めるようにしてもらってください。
 5. 属性がAuth0のユーザーのプロファイルには存在するのに、正しい属性にマッピングされていない場合には、接続のマッピング機能を使って修正することができます。
@@ -261,7 +261,7 @@ SAMLログインのトラブルシューティングでは、主に4つの確認
    1. これを行うには、[［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)に移動します。
    2. **SAML**のIdP接続リストを開いて、**［Mappings（マッピング）］**タブに移動します。
 
-      <Frame>![Troubleshoot SAML Connections Mappings Tab Screen](//images.ctfassets.net/cdy7uua7fh8z/BPMjuhqE17E5vWcHukcKf/05fd3441c90518a6b9ec22b142784dec/2025-01-29_15-48-25.png)</Frame>
+      <Frame>![Troubleshoot SAML Connections Mappings Tab Screen](/images/ja-jp/cdy7uua7fh8z/BPMjuhqE17E5vWcHukcKf/05fd3441c90518a6b9ec22b142784dec/2025-01-29_15-48-25.png)</Frame>
 
    3. 提供しているエディター内のJSONのスニペットは、編集してマッピングの構成に使用することができます。左側の名前はAuth0のユーザープロファイル属性で、これらにアサーションの値がマッピングされます。右側の値はSAMLアサーションに含まれる識別子で、これらから属性にマッピングされます。Auth0がマッピングされていないSAML属性をユーザープロファイルに取り入れるときには、属性識別子に含まれるドット（`.`）がセミコロン（`:`）に変更されます。マッピングを構成するときには、必ず、提供する識別子をSAMLアサーションに含まれるものと一致させてください。
 
@@ -310,7 +310,7 @@ SAMLログインのトラブルシューティングでは、主に4つの確認
 <tbody>
 <tr>
 <td>Destination（送信先）</td>
-<td>SAML応答の送信先が正しいAuth0テナントと接続（<code>https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}</code>）であることを確認します。Status Field（ステータスフィールド）</td>
+<td>SAML応答の送信先が正しいAuth0テナントと接続（`https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}`）であることを確認します。Status Field（ステータスフィールド）</td>
 </tr>
 </tbody>
 </table>
@@ -426,7 +426,7 @@ SAMLログインのトラブルシューティングでは、主に4つの確認
 <tbody>
 <tr>
 <td>Destination（送信先）</td>
-<td>SAML応答の送信先が正しいAuth0テナントと接続（<code>https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}</code>）であることを確認します。Status Field（ステータスフィールド）</td>
+<td>SAML応答の送信先が正しいAuth0テナントと接続（`https://{TENANT}.auth0.com/login/callback?connection={CONNECTION}`）であることを確認します。Status Field（ステータスフィールド）</td>
 </tr>
 </tbody>
 </table>

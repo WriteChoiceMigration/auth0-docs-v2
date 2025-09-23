@@ -1,17 +1,19 @@
 ---
 title: "Android - Facebookログイン"
 permalink: "interactive"
+'description': "このチュートリアルは、ネイティブFacebookログインを使用して、Androidアプリケーションにユーザーログインを追加する方法について説明します。"
 'og:title': "Android - Facebookログイン"
 'og:description': "このチュートリアルは、ネイティブFacebookログインを使用して、Androidアプリケーションにユーザーログインを追加する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/android.png"
 'twitter:title': "Android - Facebookログイン"
 'twitter:description': "このチュートリアルは、ネイティブFacebookログインを使用して、Androidアプリケーションにユーザーログインを追加する方法について説明します。"
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -126,7 +128,7 @@ Facebook APIの`/oauth/access_token`エンドポイントに対して新しいGE
 2. アプリケーションの設定ページから**［Domain（ドメイン）］**と**［Client ID（クライアントID）］**の値をコピーします。これらはSDKで必要です。
 3. Androidアプリケーションのstrings.xmlファイルで2つの新しいリソースを作成して保存します。キーの名前は以下で使用するキーと一致しなければなりません。
 
-   ```
+   ``` lines
    <resources>
    <string name="com_auth0_domain">{yourDomain}</string>
    <string name="com_auth0_client_id">{yourClientId}</string>
@@ -141,7 +143,7 @@ Facebook APIの`/oauth/access_token`エンドポイントに対して新しいGE
 
 Androidアプリケーションで、この行をapp/build.gradleファイルに追加します：
 
-```
+``` lines
 dependencies {
 implementation 'com.auth0.android:auth0:1.+'
 }
@@ -153,7 +155,7 @@ implementation 'com.auth0.android:auth0:1.+'
 
 アプリケーションがSDKによって提供されるWeb認証モジュールを利用する予定がない場合は、未使用のアクティビティをAndroidManifest.xmlファイルから削除し、マニフェストのプレースホルダー問題を防ぐ必要があります。これを実現するには、アクティビティの宣言を追加し、tools:node="remove"の注釈を加えます。
 
-```
+``` lines
 <application>
 <!-- Add the activity declaration line below -->
 <activity
@@ -170,7 +172,7 @@ tools:node="remove" />
 
 SDKは、使用する前にインスタンス化する必要があります。クラスレベルでフィールドを定義し、`onCreate`メソッドで初期化します。上の手順で定義した資格情報が`Auth0`コンストラクターに渡されたら、`AuthenticationAPIClient`の新しいインスタンスが作成されます。
 
-```
+``` lines
 private AuthenticationAPIClient auth0Client;
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -226,7 +228,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/native/android-facebook-login/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

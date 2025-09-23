@@ -1,13 +1,13 @@
 ---
 title: "SAML IDプロバイダー起点のシングルサインオンを構成する"
 permalink: "identity-provider-initiated-single-sign-on"
+'description': "SAML IDプロバイダー起点のシングルサインオン（SSO）を設定する方法について説明します。"
 'og:title': "SAML IDプロバイダー起点のシングルサインオンを構成する"
 'og:description': "SAML IDプロバイダー起点のシングルサインオン（SSO）を設定する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "SAML IDプロバイダー起点のシングルサインオンを構成する"
 'twitter:description': "SAML IDプロバイダー起点のシングルサインオン（SSO）を設定する方法について説明します。"
 ---
-# SAML IDプロバイダー起点のシングルサインオンを構成する
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip>フェデレーションをセットアップする手順の多くは、サービスプロバイダーによって開始されるシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>）から始まります。サービスプロバイダーは、認証の目的でユーザーをIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">IdP</Tooltip>）にリダイレクトします。このプロセスは、消費者向けのシナリオでよく使用されます。
 
@@ -33,13 +33,13 @@ OIDCアプリケーションを使用する場合、最良のオプションは�
 
 IdP起点SSOを使用する場合は、必ずポストバックURLに接続パラメーターを含めてください。
 
-```
+``` lines
 https://{yourDomain}/login/callback?connection={yourConnectionName}
 ```
 
 [Organizations](https://auth0.com/docs/manage-users/organizations)機能を使用している場合は、必要に応じて、目的の組織の組織IDを含む、次の組織パラメーターを含めることもできます。
 
-```
+``` lines
 https://{yourDomain}/login/callback?connection={yourConnectionName}&organization={yourCustomersOrganizationId}
 ```
 
@@ -55,7 +55,7 @@ https://{yourDomain}/login/callback?connection={yourConnectionName}&organization
 
 Auth0.jsを使用している場合は、ライブラリーの`webAuth.parseHash`を更新し、フラグ `__enableIdPInitiatedLogin`を`true`に設定する必要があります。
 
-```javascript
+```javascript lines
 var data = webAuth.parseHash(
       {
         ...
@@ -81,7 +81,7 @@ _enableIdPInitiatedLogin: true
 1. [［Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)の順に移動し、**［SAMLP Identity Provider（SAMLP IDプロバイダー）］**を選択します。
 2. **［Settings（設定）］**で、IdP起点SSOの構成を確認できます。
 
-   <Frame>![プロトコル - IdP起点SSOの構成画面](//images.ctfassets.net/cdy7uua7fh8z/1HORCAp4fZQg0BOoIopvoS/11f3b6071383ddc6967c40138d5d1794/2025-01-28_13-46-21.png)</Frame>
+   <Frame>![プロトコル - IdP起点SSOの構成画面](/images/ja-jp/cdy7uua7fh8z/1HORCAp4fZQg0BOoIopvoS/11f3b6071383ddc6967c40138d5d1794/2025-01-28_13-46-21.png)</Frame>
 
 * **IdP-initiated SSO Behavior（IdP起点SSOの動作）**：このオプションを使用すると、SAML接続に対してIdP起点のログインを有効にすることができます。**［Accept Requests（要求を受け入れる）］**を選択し、すべての必須フィールドに値を入力します。
 * **Default Application（デフォルトのアプリケーション）**：IdP起点のログインが成功すると、これがユーザーをルーティングするアプリケーションとなります。この設定には、この接続で有効になっている利用可能なアプリケーションが表示されます。IdP起点でユーザーにログインさせるアプリケーションをドロップダウンから選択します。1つのSAML接続につき、IdP起点のログインに対して選択できるアプリケーションは1つだけです。
@@ -96,15 +96,15 @@ _enableIdPInitiatedLogin: true
 </thead>
 <tbody>
 <tr>
-<td><code>redirect_uri</code></td>
-<td>IdP起点のログインが完了したら、要求がアプリケーションの__Allowed Callback URLs（許可されているCallback URL）__にリスト表示されている最初のURLにリダイレクトされます。ただし、<code>redirect_uri</code>を設定している場合、IdPはこのURLにリダイレクトします。これにより、ワイルドカードを使用する設定されたサブドメインスキームがあり、ある特定のサブドメインのみにリダイレクトしたい場合などのケースに柔軟性を追加します。</td>
+<td>`redirect_uri`</td>
+<td>IdP起点のログインが完了したら、要求がアプリケーションの__Allowed Callback URLs（許可されているCallback URL）__にリスト表示されている最初のURLにリダイレクトされます。ただし、`redirect_uri`を設定している場合、IdPはこのURLにリダイレクトします。これにより、ワイルドカードを使用する設定されたサブドメインスキームがあり、ある特定のサブドメインのみにリダイレクトしたい場合などのケースに柔軟性を追加します。</td>
 </tr>
 <tr>
-<td><code>scope</code></td>
+<td>`scope`</td>
 <td>送信されたIDトークンのスコープを定義します。複数のスコープを設定できます。</td>
 </tr>
 <tr>
-<td><code>response_type</code></td>
+<td>`response_type`</td>
 <td>SPAの暗黙付与フローのトークンを設定します。通常のWebアプリに対して認証コード付与フローのコードを設定できます。</td>
 </tr>
 </tbody>
@@ -123,7 +123,7 @@ _enableIdPInitiatedLogin: true
 
 IdP起点SSOでアプリケーションを**Default Application（デフォルトのアプリケーション）**として選択する場合で、かつそのアプリケーションがテナントのドロップダウンリストの最初の100個のアプリケーションに含まれていない場合は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Management API</Tooltip>を使用してそのアプリケーションを選択する必要があります。パッチを実行する必要があります。
 
-```json
+```javascript lines
 {
 "options": {
 "signInEndpoint": "yourIdpSignInUrl",

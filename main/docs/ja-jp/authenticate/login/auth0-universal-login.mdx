@@ -1,13 +1,13 @@
 ---
 title: "Auth0のユニバーサルログイン"
 permalink: "auth0-universal-login"
+'description': "認可サーバーでユーザーの身元を証明する手段である、Auth0のユニバーサルログインについて説明します。"
 'og:title': "Auth0のユニバーサルログイン"
 'og:description': "認可サーバーでユーザーの身元を証明する手段である、Auth0のユニバーサルログインについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0のユニバーサルログイン"
 'twitter:description': "認可サーバーでユーザーの身元を証明する手段である、Auth0のユニバーサルログインについて説明します。"
 ---
-# Auth0のユニバーサルログイン
 
 Auth0のユニバーサルログインには、認可サーバーの重要な機能であるログインフローが備わっています。ユーザーがアプリケーションにアクセスするために本人確認を行う必要がある場合は、ユニバーサルログインにリダイレクトし、Auth0に認証プロセスを処理してもらうことができます。
 
@@ -41,11 +41,11 @@ Auth0は、以下の標準に従って、アシスティブテクノロジーを
 
 任意で、Auth0 Dashboardの[**［Branding（ブランディング）］>［Universal Login（ユニバーサルログイン）］>［Advanced Options（高度なオプション）］**](https://manage.auth0.com/#/universal-login/customizations-new)に移動し、トグルを使用して、これらの規格を有効にすることができます。
 
-<Frame>![早期アクセスでは、このトグルでサインインフローのWCAG要素を有効にします。 ](//images.ctfassets.net/cdy7uua7fh8z/5O4DDy1h0rgbYNzKwm1lKY/2302115935d5096c679425402a78a1c2/WCAG_-_JP.png)</Frame>
+<Frame>![早期アクセスでは、このトグルでサインインフローのWCAG要素を有効にします。 ](/images/ja-jp/cdy7uua7fh8z/5O4DDy1h0rgbYNzKwm1lKY/2302115935d5096c679425402a78a1c2/WCAG_-_JP.png)</Frame>
 
-また、`enable_ulp_wcag_compliance`フラグを[プロンプト設定更新エンドポイント](/docs/api/management/v2/prompts/patch-prompts)で更新し、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Management API</Tooltip>でこの機能を有効にすることもできます。
+また、`enable_ulp_wcag_compliance`フラグを[プロンプト設定更新エンドポイント](/docs/ja-jp/api/management/v2/prompts/patch-prompts)で更新し、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Management API</Tooltip>でこの機能を有効にすることもできます。
 
-```bash
+```javascript lines
 curl -L -X PATCH 'https://<tenant_name>.auth0.com/api/v2/prompts' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
@@ -84,14 +84,14 @@ curl -L -X PATCH 'https://<tenant_name>.auth0.com/api/v2/prompts' \
 ユニバーサルログインまたはクラシックログインをテナント内で有効にしたら、以下の手順に従ってエクスペリエンスを実装します。
 
 1. Auth0に[アプリケーションを登録](https://auth0.com/docs/get-started/auth0-overview/create-applications)します。
-2. 認証APIの[ログインエンドポイント](/docs/api/authentication#login)を呼び出すようにアプリケーションを構成し、ログインフローをトリガーして応答を処理します。これを行うには、直接構成するか、Auth0のいずれかの[SDK](https://auth0.com/docs/libraries)を使用します。
+2. 認証APIの[ログインエンドポイント](/docs/ja-jp/api/authentication#login)を呼び出すようにアプリケーションを構成し、ログインフローをトリガーして応答を処理します。これを行うには、直接構成するか、Auth0のいずれかの[SDK](https://auth0.com/docs/libraries)を使用します。
 3. [データベース](/docs/ja-jp/get-started/applications/set-up-database-connections)、[エンタープライズ](/docs/ja-jp/authenticate/enterprise-connections)、または[ソーシャル](/docs/ja-jp/authenticate/identity-providers/social-identity-providers)接続を作成し、アプリケーション向けに有効にします。
 
 ### ログインページに移動する
 
-[ログインエンドポイント](/docs/api/authentication#login)は任意のブラウザーから直接呼び出すことができます。
+[ログインエンドポイント](/docs/ja-jp/api/authentication#login)は任意のブラウザーから直接呼び出すことができます。
 
-```
+``` lines
 https://{yourDomain}/authorize?
   response_type=code|token&
   client_id={yourClientId}&
@@ -113,7 +113,7 @@ https://{yourDomain}/authorize?
 
 ### Quickstartガイドを使用する
 
-アプリケーションにユニバーサルログインをセットアップする方法については、「[クイックスタートガイド](/docs/quickstarts)」を参照してください。使用している技術に合った方法を選択し、クイックスタートに従って段階的に説明を受けながら実装が進められます。
+アプリケーションにユニバーサルログインをセットアップする方法については、「[クイックスタートガイド](/docs/ja-jp/quickstarts)」を参照してください。使用している技術に合った方法を選択し、クイックスタートに従って段階的に説明を受けながら実装が進められます。
 
 ## もっと詳しく
 

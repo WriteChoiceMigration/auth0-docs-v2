@@ -1,13 +1,13 @@
 ---
 title: "Delegated Administration:拡張フック"
 permalink: "delegated-administration-hooks"
+'description': "拡張フックを使用してDelegated Administration Extensionの動作をカスタマイズする方法について説明します。"
 'og:title': "Delegated Administration:拡張フック"
 'og:description': "拡張フックを使用してDelegated Administration Extensionの動作をカスタマイズする方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Delegated Administration:拡張フック"
 'twitter:description': "拡張フックを使用してDelegated Administration Extensionの動作をカスタマイズする方法について説明します。"
 ---
-# Delegated Administration:拡張フック
 
 **Delegated Admin - Administrator**ロールが割り当てられているユーザーは、委任管理拡張機能の動作をカスタマイズできるさまざまな拡張フックとクエリを管理できます。
 
@@ -32,7 +32,7 @@ context (**ctx**)オブジェクトは、現在の要求に関するいくつか
 
 Webtaskログ(リアルタイムWebtaskログ拡張機能を使用して表示できます)にメッセージを追加するには、**log**メソッドを呼び出します。
 
-```javascript
+```javascript lines
 function(ctx, callback) {
   ctx.log('Logging action:', ctx.payload.action);
   return callback();
@@ -45,7 +45,7 @@ function(ctx, callback) {
 
 何か(部署の長いリストなど)をキャッシュするには、コンテキストの**グローバル**オブジェクトに保存します。このオブジェクトは、Webtaskコンテナがリサイクルされるまで使用できます。
 
-```javascript
+```javascript lines
 function(ctx, callback) {
   ctx.global.departments = [ 'IT', 'HR', 'Finance' ];
   return callback();
@@ -56,7 +56,7 @@ function(ctx, callback) {
 
 拡張機能内にカスタムデータを保存できます。このフィールドは、400kbのデータに制限されています。
 
-```javascript
+```javascript lines
 var data = {
 departments: [ 'IT', 'HR', 'Finance' ]
 };
@@ -72,7 +72,7 @@ ctx.write(data)
 
 データを読み取るには:
 
-```
+```javascript lines
 ctx.read()
 .then(function(data) {
     // ...
@@ -86,7 +86,7 @@ ctx.read()
 
 各拡張フックは、現在のペイロードまたは要求を特定の情報と共に公開します。要求には、ユーザーダッシュボードにログインしているユーザーに関する情報が常に含まれます。
 
-```javascript
+```javascript lines
 function(ctx, callback) {
   ctx.log('Current User:', ctx.request.user);
   return callback();
@@ -97,7 +97,7 @@ function(ctx, callback) {
 
 データを検証したり、メンバーシップを読み込んだりするために外部サービス (APIなど) を呼び出す場合は、`要求`モジュールを使用してこれを行うことができます。
 
-```javascript
+```javascript lines
 function(ctx, callback) {
 var request = require('request');
     request('http://api.mycompany.com/departments', function (error, response, body) {
@@ -124,7 +124,7 @@ var request = require('request');
 
 Kellyは財務部門を管理しており、部門内のユーザーにのみアクセスできる必要があります。
 
-```javascript
+```javascript lines
 function(ctx, callback) {
   if (ctx.payload.action === 'delete:user') {
     return callback(new Error('You are not allowed to delete users.'));

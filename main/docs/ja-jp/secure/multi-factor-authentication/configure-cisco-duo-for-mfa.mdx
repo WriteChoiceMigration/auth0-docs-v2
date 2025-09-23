@@ -1,13 +1,13 @@
 ---
 title: "MFAにCisco Duo Securityを構成する"
 permalink: "configure-cisco-duo-for-mfa"
+'description': "MFAにCisco Duo Securityを構成する方法について説明します。"
 'og:title': "MFAにCisco Duo Securityを構成する"
 'og:description': "MFAにCisco Duo Securityを構成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "MFAにCisco Duo Securityを構成する"
 'twitter:description': "MFAにCisco Duo Securityを構成する方法について説明します。"
 ---
-# MFAにCisco Duo Securityを構成する
 
 <Card title="Before you start">
 
@@ -36,7 +36,7 @@ Duo Securityを構成するには、<Tooltip data-tooltip-id="react-containers-D
 
 アクション内でDuoを有効化するには、多要素認証を有効化する際に`duo`を`provider`パラメーターとして渡します。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   api.multifactor.enable('duo', { allowRememberBrowser: false });
 };
@@ -60,7 +60,7 @@ Duo Securityでは、**Web SDK**と**Admin SDK**の2種類の統合を作成す�
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 
 	const CLIENTS_WITH_MFA = ['{yourClientId}'];

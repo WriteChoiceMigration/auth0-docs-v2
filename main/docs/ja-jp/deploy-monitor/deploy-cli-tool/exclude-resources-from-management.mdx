@@ -1,13 +1,13 @@
 ---
 title: "管理からリソースを除外する"
 permalink: "exclude-resources-from-management"
+'description': "Auth0 Deploy CLIを使用するときにリソースを管理対象から除外する方法を説明します。"
 'og:title': "管理からリソースを除外する"
 'og:description': "Auth0 Deploy CLIを使用するときにリソースを管理対象から除外する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "管理からリソースを除外する"
 'twitter:description': "Auth0 Deploy CLIを使用するときにリソースを管理対象から除外する方法を説明します。"
 ---
-# 管理からリソースを除外する
 
 場合によっては、リソースを管理対象から除外すると便利なことがあります。これは、テナントに特定のリソースが大量に存在し、それらの管理が運用上の負担になっているため、または開発ワークフローが特定のリソースのサブセットにのみ関係し、パフォーマンスのために他のすべてのリソースを省略したいためである可能性があります。いずれにしても、Deploy CLI を使用するときにリソースを除外するためのオプションはいくつかあります。
 
@@ -27,7 +27,7 @@ permalink: "exclude-resources-from-management"
 
 次の例は、`clients`、`connections`、`databases`、および`organizations`をDeploy CLIによる管理から除外する方法を示しています。
 
-```json
+```json lines
 {
   "AUTH0_DOMAIN": "example-site.us.auth0.com",
   "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>",
@@ -39,7 +39,7 @@ permalink: "exclude-resources-from-management"
 
 次の例は、Deploy CLIによって`actions`、`clients`、および`connections`のみを管理するように指定する方法を示しています。
 
-```json
+```json lines
 {
   "AUTH0_DOMAIN": "example-site.us.auth0.com",
   "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>",
@@ -55,7 +55,7 @@ permalink: "exclude-resources-from-management"
 
 ### 例
 
-```json
+```json lines
 {
   "AUTH0_DOMAIN": "example-site.us.auth0.com",
   "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>",
@@ -82,7 +82,7 @@ IDを使ったリソースの除外は、今後のメジャーバージョンで
 
 #### 例
 
-```
+```yaml lines
 roles: # roles configuration is not omitted
   - name: Admin
     description: Can read and write things
@@ -101,7 +101,7 @@ roles: # roles configuration is not omitted
 
 #### 空の例
 
-```
+```yaml lines
 hooks: [] # Empty hooks
 connections: [] # Empty connections
 tenant: {} # Effectively a no-op, emptiness does not apply to non-set resource config

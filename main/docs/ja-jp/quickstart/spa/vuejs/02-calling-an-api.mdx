@@ -1,12 +1,14 @@
 ---
 title: "Calling an API"
 permalink: "02-calling-an-api"
+'description': "This quickstart demonstrates how to make calls to an external API from a Vue.JS application using Auth0."
 'og:title': "Calling an API"
 'og:description': "This quickstart demonstrates how to make calls to an external API from a Vue.JS application using Auth0."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/vue.png"
 'twitter:title': "Calling an API"
 'twitter:description': "This quickstart demonstrates how to make calls to an external API from a Vue.JS application using Auth0."
 ---
+
 # Vue: Calling an API
 
 <Frame>![Gravatar for frederik.prijck@auth0.com](//www.gravatar.com/avatar/b74fc62fbaf2a93d1db3c549f62d4d9a?d=mm&r=g&s=50)</Frame>
@@ -54,7 +56,7 @@ For **Signing Algorithm**, select **RS256**.
 
 To call an API, configure the plugin by setting the `audience` to the **API Identifier** of the API you want to call:
 
-```
+```typescript lines
 import { createAuth0 } from '@auth0/auth0-vue';
 
 const app = createApp(App);
@@ -78,7 +80,7 @@ app.mount('#app');
 With the plugin configured using an `audience`, Auth0 will return an Access Token that can be sent to your API.
 You can retrieve an Access Token by using the `getAccessTokenSilently` function thats exposed by our SDK.
 
-```
+```html lines
 <script>
   import { useAuth0 } from '@auth0/auth0-vue';
 
@@ -100,7 +102,7 @@ You can retrieve an Access Token by using the `getAccessTokenSilently` function 
 
 If you are using the Options API, you can use the same `getAccessTokenSilently` method from the global `$auth0` property through the `this` accessor.
 
-```
+```html lines
 <script>
   export default {
     methods: {
@@ -117,7 +119,7 @@ If you are using the Options API, you can use the same `getAccessTokenSilently` 
 To call an API, include the token in the `Authorization` header of your request.
 There are many ways to make HTTP calls with Vue. Here is an example using the `fetch` API with Vue's Composition API:
 
-```
+```html lines
 <script>
   import { useAuth0 } from '@auth0/auth0-vue';
 

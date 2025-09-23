@@ -1,13 +1,13 @@
 ---
 title: "SAMLサービスプロバイダーとしてのAuth0の構成"
 permalink: "configure-auth0-saml-service-provider"
+'description': "Auth0をSAMLフェデレーションのサービスプロバイダーとして構成する方法を説明します。"
 'og:title': "SAMLサービスプロバイダーとしてのAuth0の構成"
 'og:description': "Auth0をSAMLフェデレーションのサービスプロバイダーとして構成する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "SAMLサービスプロバイダーとしてのAuth0の構成"
 'twitter:description': "Auth0をSAMLフェデレーションのサービスプロバイダーとして構成する方法を説明します。"
 ---
-# SAMLサービスプロバイダーとしてのAuth0の構成
 
 Auth0を<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip>フェデレーションのサービスプロバイダー(SP)として構成するために、Auth0でエンタープライズ接続を作成し、接続するメタデータでSAML IDプロバイダー(<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">IdP</Tooltip>)を更新する必要があります。
 
@@ -58,7 +58,7 @@ Auth0で接続を作成するには、IdPから複数の構成メタデータを
 <tbody>
 <tr>
 <td>Connection Name（接続名）</td>
-<td><code>SAML-SP</code>などの接続名を入力します。</td>
+<td>`SAML-SP`などの接続名を入力します。</td>
 </tr>
 <tr>
 <td>Sign In URL（サインインURL）</td>
@@ -66,7 +66,7 @@ Auth0で接続を作成するには、IdPから複数の構成メタデータを
 </tr>
 <tr>
 <td>X509 Signing Certificate（X509署名証明書）</td>
-<td>IdPから取得したX509署名証明書ファイル（<code>.pem</code>または<code>.cer</code>の形式）をアップロードします。</td>
+<td>IdPから取得したX509署名証明書ファイル（`.pem`または`.cer`の形式）をアップロードします。</td>
 </tr>
 <tr>
 <td>Enable Sign Out（サインアウトの有効化）</td>
@@ -78,7 +78,7 @@ Auth0で接続を作成するには、IdPから複数の構成メタデータを
 </tr>
 <tr>
 <td>User ID Attribute（ユーザーID属性）</td>
-<td>SAMLトークンに含まれる属性を入力します。この属性はAuth0の<code>user_id</code>プロパティにマッピングされます。設定しない場合は、<code>user_id</code>が（ここで記載する優先順に）以下から取得されます：<ul><li><code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier</code></li><li><code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn</code></li><li><code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name</code></li></ul></td>
+<td>SAMLトークンに含まれる属性を入力します。この属性はAuth0の`user_id`プロパティにマッピングされます。設定しない場合は、`user_id`が（ここで記載する優先順に）以下から取得されます：<ul><li>`http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier`</li><li>`http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn`</li><li>`http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name`</li></ul></td>
 </tr>
 <tr>
 <td>Debug Mode（デバッグモード）</td>
@@ -98,7 +98,7 @@ Auth0で接続を作成するには、IdPから複数の構成メタデータを
 </tr>
 <tr>
 <td>Protocol Binding（プロトコルバインディング）</td>
-<td>ドロップダウンメニューから以下のいずれかを選択します。<ul><li><code>HTTP-Redirect</code>：URLパラメーターにメッセージを含めて送信します。</li><li><code>HTTP-POST</code>：HTMLフォームにメッセージを含めて送信します。</li></ul></td>
+<td>ドロップダウンメニューから以下のいずれかを選択します。<ul><li>`HTTP-Redirect`：URLパラメーターにメッセージを含めて送信します。</li><li>`HTTP-POST`：HTMLフォームにメッセージを含めて送信します。</li></ul></td>
 </tr>
 <tr>
 <td>Sync user profile attributes at each login（毎回のログインでユーザープロファイル属性を同期する）</td>
@@ -122,89 +122,89 @@ Auth0 Management APIの[接続作成](https://auth0.com/docs/api/management/v2#!
 </thead>
 <tbody>
 <tr>
-<td><code>signInEndpoint</code></td>
+<td>`signInEndpoint`</td>
 <td>文字列</td>
 <td>必須</td>
 <td>IdPの__サインインURL__。</td>
 </tr>
 <tr>
-<td><code>signingCert</code></td>
+<td>`signingCert`</td>
 <td>文字列</td>
 <td>必須</td>
-<td>Base64でエンコードされたX509署名証明書（<code>.pem</code>または<code>.cer</code>形式）の内容。</td>
+<td>Base64でエンコードされたX509署名証明書（`.pem`または`.cer`形式）の内容。</td>
 </tr>
 <tr>
-<td><code>debug</code></td>
+<td>`debug`</td>
 <td>ブール値</td>
 <td>任意</td>
-<td>__デバッグモード__を切り替えます。このモードでは、認証プロセス中に詳細なログが記録されます。運用環境で使用される接続の場合は<code>false</code>に設定します。</td>
+<td>__デバッグモード__を切り替えます。このモードでは、認証プロセス中に詳細なログが記録されます。運用環境で使用される接続の場合は`false`に設定します。</td>
 </tr>
 <tr>
-<td><code>destinationUrl</code></td>
+<td>`destinationUrl`</td>
 <td>文字列</td>
 <td>任意</td>
 <td>Auth0がSAML認証要求を送信するURL。プロキシゲートウェイを使用する場合にのみ必要です。</td>
 </tr>
 <tr>
-<td><code>digestAlgorithm</code></td>
+<td>`digestAlgorithm`</td>
 <td>文字列</td>
 <td>任意</td>
-<td>認証要求のダイジェスト要素を暗号化するために使用されるアルゴリズム。<br/><br/>受け入れられる値は<code>sha256</code>と<code>sha1</code>です。</td>
+<td>認証要求のダイジェスト要素を暗号化するために使用されるアルゴリズム。<br/><br/>受け入れられる値は`sha256`と`sha1`です。</td>
 </tr>
 <tr>
-<td><code>disableSignout</code></td>
+<td>`disableSignout`</td>
 <td>ブール値</td>
 <td>任意</td>
-<td>__サインアウトURL__を切り替えます。<code>false</code>の場合、ログアウト要求を受け入れるために__サインアウトURL__を指定する必要があります。<code>true</code>の場合、ログアウト要求は__サインインURL__に送信されます。</td>
+<td>__サインアウトURL__を切り替えます。`false`の場合、ログアウト要求を受け入れるために__サインアウトURL__を指定する必要があります。`true`の場合、ログアウト要求は__サインインURL__に送信されます。</td>
 </tr>
 <tr>
-<td><code>fieldsMap</code></td>
+<td>`fieldsMap`</td>
 <td>オブジェクト</td>
 <td>任意</td>
-<td>IdPからの認証応答に適用される属性マッピングが含まれます。<br/><br/>例：<code>"email": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"</code>。</td>
+<td>IdPからの認証応答に適用される属性マッピングが含まれます。<br/><br/>例：`"email": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"`。</td>
 </tr>
 <tr>
-<td><code>idpinitiated</code></td>
+<td>`idpinitiated`</td>
 <td>オブジェクト</td>
 <td>任意</td>
-<td>IdP起点SSOのオプションが含まれます：<ul><li><code>enabled</code>：ブール値。IdP起点SSOを切り替えます。</li><li><code>client_id</code>：文字列。デフォルトアプリケーションのクライアントID。</li><li><code>client_protocol</code>：文字列。デフォルトアプリケーションとの通信に使用される応答プロトコル。受け入れられる値は、<code>oauth2</code>、<code>samlp</code>、および<code>wsfed</code>です。</li><li><code>client_authorizequery</code>：文字列。デフォルトアプリケーションに送信されるクエリ文字列。</li></ul></td>
+<td>IdP起点SSOのオプションが含まれます：<ul><li>`enabled`：ブール値。IdP起点SSOを切り替えます。</li><li>`client_id`：文字列。デフォルトアプリケーションのクライアントID。</li><li>`client_protocol`：文字列。デフォルトアプリケーションとの通信に使用される応答プロトコル。受け入れられる値は、`oauth2`、`samlp`、および`wsfed`です。</li><li>`client_authorizequery`：文字列。デフォルトアプリケーションに送信されるクエリ文字列。</li></ul></td>
 </tr>
 <tr>
-<td><code>protocolBinding</code></td>
+<td>`protocolBinding`</td>
 <td>文字列</td>
 <td>任意</td>
-<td>認証要求に使用されるプロトコルバインディング。<br/><br/>受け入れられる値は次のとおりです：<ul><li><code>urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect</code></li><li><code>urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST</code></li></ul></td>
+<td>認証要求に使用されるプロトコルバインディング。<br/><br/>受け入れられる値は次のとおりです：<ul><li>`urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect`</li><li>`urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`</li></ul></td>
 </tr>
 <tr>
-<td><code>recipientUrl</code></td>
+<td>`recipientUrl`</td>
 <td>文字列</td>
 <td>任意</td>
 <td>IdPがSAML認証応答を送信するURL。プロキシゲートウェイを使用する場合にのみ必要です。</td>
 </tr>
 <tr>
-<td><code>signatureAlgorithm</code></td>
+<td>`signatureAlgorithm`</td>
 <td>文字列</td>
 <td>任意</td>
-<td>認証要求に署名するために使用されるアルゴリズム。<br/><br/>受け入れられる値は<code>rsa-sha256</code>および<code>rsa-sha1</code>です。</td>
+<td>認証要求に署名するために使用されるアルゴリズム。<br/><br/>受け入れられる値は`rsa-sha256`および`rsa-sha1`です。</td>
 </tr>
 <tr>
-<td><code>signSAMLRequest</code></td>
+<td>`signSAMLRequest`</td>
 <td>ブール値</td>
 <td>任意</td>
 <td>Auth0によって送信された認証要求の署名を切り替えます。</td>
 </tr>
 <tr>
-<td><code>user_id_attribute</code></td>
+<td>`user_id_attribute`</td>
 <td>文字列</td>
 <td>任意</td>
-<td>ユーザーIDプロパティにマッピングする認証応答内の属性の名前。このフィールドは、<code>fieldsMap</code>オブジェクトの<code>user_id</code>プロパティのマッピングよりも優先されます。</td>
+<td>ユーザーIDプロパティにマッピングする認証応答内の属性の名前。このフィールドは、`fieldsMap`オブジェクトの`user_id`プロパティのマッピングよりも優先されます。</td>
 </tr>
 </tbody>
 </table>
 
 #### 要求例
 
-```json
+```json lines
 {
 	"strategy": "samlp",
 	"name": "example-samlp-connection",
@@ -259,12 +259,12 @@ Auth0 Management APIの[接続作成](https://auth0.com/docs/api/management/v2#!
 </thead>
 <tbody>
 <tr>
-<td><code>destinationUrl</code></td>
+<td>`destinationUrl`</td>
 <td>文字列</td>
 <td>プロキシゲートウェイのURL。</td>
 </tr>
 <tr>
-<td><code>recipientUrl</code></td>
+<td>`recipientUrl`</td>
 <td>文字列</td>
 <td>プロキシゲートウェイのURL。</td>
 </tr>
@@ -293,44 +293,44 @@ Auth0がIdPに認証要求を送信すると、要求本文に`AuthnRequest`オ�
 </thead>
 <tbody>
 <tr>
-<td><code>AssertionConsumerServiceURL</code></td>
-<td>ユーザーがサインインすると、IdPが応答を送信するURLです。使用する場合には、要求テンプレートに<code>ProtocolBinding</code>属性を含めます。</td>
+<td>`AssertionConsumerServiceURL`</td>
+<td>ユーザーがサインインすると、IdPが応答を送信するURLです。使用する場合には、要求テンプレートに`ProtocolBinding`属性を含めます。</td>
 </tr>
 <tr>
-<td><code>Connection.&lt;options-key&gt;</code></td>
-<td>Auth0 Management APIの<a href="https://auth0.com/docs/ja-jp/api/management/v2/#!/Connections/get_connections_by_id">接続取得</a>エンドポイントから返された接続の<code>options</code>の値にアクセスするには、<code>Connection</code>キーにドット表記を使用します。たとえば、接続が<code>options.some_property: "value"</code>を含む場合には、テンプレートで<code>@@Connection.some_property@@</code>を使用することができます。</td>
+<td>`Connection.&lt;options-key&gt;`</td>
+<td>Auth0 Management APIの<a href="https://auth0.com/docs/ja-jp/api/management/v2/#!/Connections/get_connections_by_id">接続取得</a>エンドポイントから返された接続の`options`の値にアクセスするには、`Connection`キーにドット表記を使用します。たとえば、接続が`options.some_property: "value"`を含む場合には、テンプレートで`@@Connection.some_property@@`を使用することができます。</td>
 </tr>
 <tr>
-<td><code>Destination</code></td>
+<td>`Destination`</td>
 <td>Auth0が要求を送信するURLです。これは接続に構成された__サインインURL__になります。</td>
 </tr>
 <tr>
-<td><code>ID</code></td>
+<td>`ID`</td>
 <td>トランザクションIDです。</td>
 </tr>
 <tr>
-<td><code>IssueInstant</code></td>
+<td>`IssueInstant`</td>
 <td>トランザクションのタイムスタンプです。</td>
 </tr>
 <tr>
-<td><code>Issuer</code></td>
-<td><code>urn</code>形式のSPエンティティIDです。<br/><br/>例：<code>urn:auth0:&lt;YOUR_AUTH0_TENANT_NAME&gt;:&lt;YOUR_AUTH0_CONNECTION_NAME&gt;</code></td>
+<td>`Issuer`</td>
+<td>`urn`形式のSPエンティティIDです。<br/><br/>例：`urn:auth0:&lt;YOUR_AUTH0_TENANT_NAME&gt;:&lt;YOUR_AUTH0_CONNECTION_NAME&gt;`</td>
 </tr>
 <tr>
-<td><code>LoginHint</code></td>
+<td>`LoginHint`</td>
 <td>ログインしようとしているユーザーのユーザー名またはメールアドレスです。<a href="https://auth0.com/docs/ja-jp/authenticate/login/auth0-universal-login/identifier-first">Identifier First認証</a>では、Auth0はこの値をIdPに送信して、IdPのログインフォームに前もって入力しておくことができます。</td>
 </tr>
 <tr>
-<td><code>ProtocolBinding</code></td>
+<td>`ProtocolBinding`</td>
 <td>プロトコルの<a href="https://www.ibm.com/support/knowledgecenter/en/SSPREK_9.0.4/com.ibm.isam.doc/config/concept/fed_SAML20_bindings.html">バインドタイプ</a>です。</td>
 </tr>
 <tr>
-<td><code>ProviderName</code></td>
+<td>`ProviderName`</td>
 <td>要求を始めたアプリケーションの名前です。これは常にAuth0のテナント名を返します。</td>
 </tr>
 <tr>
-<td><code>AssertServiceURLAndDestination</code></td>
-<td>廃止予定です。新しい構成では、この代わりに、<code>AssertionConsumerServiceURL</code>と<code>Destination</code>を使用してください。</td>
+<td>`AssertServiceURLAndDestination`</td>
+<td>廃止予定です。新しい構成では、この代わりに、`AssertionConsumerServiceURL`と`Destination`を使用してください。</td>
 </tr>
 </tbody>
 </table>

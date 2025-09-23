@@ -1,13 +1,13 @@
 ---
 title: "Node.js APIの実装 (SPA+API)"
 permalink: "api-implementation-nodejs"
+'description': "SPA + APIアーキテクチャーシナリオ向けのNode.jsでのAPI実装"
 'og:title': "Node.js APIの実装 (SPA+API)"
 'og:description': "SPA + APIアーキテクチャーシナリオ向けのNode.jsでのAPI実装"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Node.js APIの実装 (SPA+API)"
 'twitter:description': "SPA + APIアーキテクチャーシナリオ向けのNode.jsでのAPI実装"
 ---
-# Node.js APIの実装 (SPA+API)
 
 本ドキュメントはSPA + APIアーキテクチャーシナリオの一部で、APIをNode.jsで実装する方法を説明します。実装したソリューションについての情報は、シナリオを参照してください。
 
@@ -25,7 +25,7 @@ API用のフォルダーを作成しそこに移動して`npm init`を実行し�
 
 サンプルの`package.json`は次のようになります。
 
-```json
+```json lines
 {
   "name": "timesheets-api",
   "version": "1.0.0",
@@ -59,7 +59,7 @@ API用のフォルダーを作成しそこに移動して`npm init`を実行し�
 
 これらの依存関係をインストールするには、次を実行します。
 
-```
+```bash lines
 npm install express cors express-jwt jwks-rsa body-parser express-jwt-authz --save
 ```
 
@@ -73,7 +73,7 @@ APIディレクトリに移動し、`server.js`ファイルを作成します。
 
 実装例を以下に示します。
 
-```javascript
+```javascript lines
 const express = require('express');
 const app = express();
 const { expressjwt: jwt } = require('express-jwt');
@@ -118,7 +118,7 @@ app.listen(8080);
 
 また、実際にタイムシートをデータベースに保存するコードを書くこともできます。以下はサンプル実装を示します（簡潔にするために一部のコードは省略しています）。
 
-```javascript
+```javascript lines
 // set dependencies - code omitted
 
 // Enable CORS - code omitted
@@ -157,7 +157,7 @@ app.post('/timesheets', checkJwt, function(req, res){
 
 また、作業シナリオをテストするためには、次を実行する必要があります。
 
-* アクセストークンを取得します。詳しい取得方法については、「[アクセストークンを取得する](/docs/architecture-scenarios/application/server-api#get-an-access-token)」を参照してください。
+* アクセストークンを取得します。詳しい取得方法については、「[アクセストークンを取得する](/docs/ja-jp/architecture-scenarios/application/server-api#get-an-access-token)」を参照してください。
 * APIを呼び出し、`Bearer ACCESS_TOKEN`値を指定して`Authorization`ヘッダーを要求に追加します（`ACCESS_TOKEN`は最初のステップで取得したトークンの値）。
 
 ## 3.アプリケーションの権限を確認する
@@ -166,7 +166,7 @@ app.post('/timesheets', checkJwt, function(req, res){
 
 そのためには、`express-jwt-authz` Node.jsパッケージを利用するので、それをプロジェクトに追加します。
 
-```
+```bash lines
 npm install express-jwt-authz --save
 ```
 
@@ -176,7 +176,7 @@ npm install express-jwt-authz --save
 
 以下はサンプル実装を示します（簡潔にするために一部のコードは省略しています）。
 
-```javascript
+```javascript lines
 // set dependencies - some code omitted
 const jwtAuthz = require('express-jwt-authz');
 
@@ -211,7 +211,7 @@ JWTの検証に使われる`express-jwt`ミドルウェアは、JWTに含まれ�
 
 わかりやすい名前をルールに付けます。たとえば、`［Add email to Access Token（アクセストークンにメールアドレスを追加）］`など。次に、ルールのコードとして次のコードを使用します。
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   const namespace = 'https://api.exampleco.com/';
   context.accessToken[namespace + 'email'] = user.email;
@@ -223,7 +223,7 @@ function (user, context, callback) {
 
 次に、API内で、`Req.Auth`からクレームの値を取得し、タイムシートエントリに関連付けることができる一意のユーザーIDとしてそれを使用できます。
 
-```
+```javascript lines
 app.get('/timesheets', checkJwt, jwtAuthz(['read:timesheets'], { customUserKey: 'auth' }), function(req, res) {
   var timesheet = req.body;
 

@@ -1,13 +1,13 @@
 ---
 title: "アクセストークンを使用するManagement APIエンドポイントに移行する"
 permalink: "migrate-to-calling-api-with-access-tokens"
+'description': "Management APIの資格情報としてのIDトークン使用の非推奨化と、構成をアクセストークンに移行する方法について説明します。"
 'og:title': "アクセストークンを使用するManagement APIエンドポイントに移行する"
 'og:description': "Management APIの資格情報としてのIDトークン使用の非推奨化と、構成をアクセストークンに移行する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "アクセストークンを使用するManagement APIエンドポイントに移行する"
 'twitter:description': "Management APIの資格情報としてのIDトークン使用の非推奨化と、構成をアクセストークンに移行する方法について説明します。"
 ---
-# アクセストークンを使用するManagement APIエンドポイントに移行する
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>エンドポイントの呼び出しにIDトークンを使用することは非推奨となります。今後はアクセストークンを使用しなければなりません。この移行の猶予期間は、**2018年3月31日**に開始しました。
 
@@ -77,48 +77,48 @@ Management APIで実行できるアクションは、アクセストークンに
 <tbody>
 <tr>
 <td>GET /api/v2/users/{id}</td>
-<td><code>read:current_user</code></td>
-<td><code>read:users</code></td>
+<td>`read:current_user`</td>
+<td>`read:users`</td>
 </tr>
 <tr>
 <td>GET /api/v2/users/{id}/enrollments</td>
-<td><code>read:current_user</code></td>
-<td><code>read:users</code></td>
+<td>`read:current_user`</td>
+<td>`read:users`</td>
 </tr>
 <tr>
 <td>POST/api/v2/users/{id}/identities</td>
-<td><code>update:current_user_identities</code></td>
-<td><code>update:users</code></td>
+<td>`update:current_user_identities`</td>
+<td>`update:users`</td>
 </tr>
 <tr>
 <td>DELETE /api/v2/users/{id}/identities/{provider}/{user_id}</td>
-<td><code>update:current_user_identities</code></td>
-<td><code>update:users</code></td>
+<td>`update:current_user_identities`</td>
+<td>`update:users`</td>
 </tr>
 <tr>
 <td>PATCH /api/v2/users/{id}</td>
-<td><code>update:current_user_metadata</code></td>
-<td><code>update:users</code></td>
+<td>`update:current_user_metadata`</td>
+<td>`update:users`</td>
 </tr>
 <tr>
 <td>PATCH /api/v2/users/{id}</td>
-<td><code>create:current_user_metadata</code></td>
-<td><code>update:users</code></td>
+<td>`create:current_user_metadata`</td>
+<td>`update:users`</td>
 </tr>
 <tr>
 <td>DELETE /api/v2/users/{id}/multifactor/{provider}</td>
-<td><code>delete:current_user_metadata</code></td>
-<td><code>update:users</code></td>
+<td>`delete:current_user_metadata`</td>
+<td>`update:users`</td>
 </tr>
 <tr>
 <td>POST /api/v2/device-credentials</td>
-<td><code>create:current_user_device_credentials</code></td>
-<td><code>create:device_credentials</code></td>
+<td>`create:current_user_device_credentials`</td>
+<td>`create:device_credentials`</td>
 </tr>
 <tr>
 <td>DELETE /api/v2/device-credentials/{id}</td>
-<td><code>delete:current_user_device_credentials</code></td>
-<td><code>delete:device_credentials</code></td>
+<td>`delete:current_user_device_credentials`</td>
+<td>`delete:device_credentials`</td>
 </tr>
 </tbody>
 </table>
@@ -139,7 +139,7 @@ Auth0は、前述のエンドポイントについてトークンを取得する
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 https://{yourDomain}/authorize?
       scope=openid
       &response_type=id_token
@@ -153,7 +153,7 @@ https://{yourDomain}/authorize?
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 https://{yourDomain}/authorize?
       audience=https://{yourDomain}/api/v2/
       &scope=read:current_user
@@ -172,7 +172,7 @@ Management APIにアクセスできるアクセストークンを取得するに
 
 受け取ったアクセストークンをデコードして確認すると、次のような内容になります。
 
-```json
+```javascript lines
 {
       "iss": "https://{yourDomain}/",
       "sub": "auth0|5a620d29a840170a9ef43672",
@@ -196,7 +196,7 @@ Management APIにアクセスできるアクセストークンを取得するに
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 POST https://{yourDomain}/oauth/token
     Content-Type: application/x-www-form-urlencoded
     {
@@ -213,7 +213,7 @@ POST https://{yourDomain}/oauth/token
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 POST https://{yourDomain}/oauth/token
     Content-Type: application/x-www-form-urlencoded
     {
@@ -244,7 +244,7 @@ Management APIへのアクセスとユーザーの管理にauth0.jsを使用す�
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 // get an ID Token
     var webAuth = new auth0.WebAuth({
       clientID: '{yourClientId}',
@@ -264,7 +264,7 @@ codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 // get an Access Token
     var webAuth = new auth0.WebAuth({
       clientID: '{yourClientId}',

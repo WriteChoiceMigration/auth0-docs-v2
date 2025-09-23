@@ -1,13 +1,13 @@
 ---
 title: "OIDCバックチャネルログアウトイニシエータ"
 permalink: "oidc-back-channel-logout-initiators"
+'description': "OIDCバックチャネルログアウトイニシエータの機能と、使用しているアプリケーションについて設定する方法を説明します。"
 'og:title': "OIDCバックチャネルログアウトイニシエータ"
 'og:description': "OIDCバックチャネルログアウトイニシエータの機能と、使用しているアプリケーションについて設定する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "OIDCバックチャネルログアウトイニシエータ"
 'twitter:description': "OIDCバックチャネルログアウトイニシエータの機能と、使用しているアプリケーションについて設定する方法を説明します。"
 ---
-# OIDCバックチャネルログアウトイニシエータ
 
 OIDCバックチャネルログアウトイニシエータを使用すると、セッション終了イベントに基づいて、ユーザーをリモートでアプリケーションからログアウトさせることができます。OIDCバックチャネルログアウトイニシエータは、IDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>）起点の<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>ログアウト要求など、プロトコルを超えて動作し、サードパーティーのクッキー制限には影響されません。
 
@@ -27,7 +27,7 @@ OIDCバックチャネルログアウトイニシエータを使用すると、�
 
 下の図は、パスワード変更イベントについて、OIDCバックチャネルログアウトイニシエータの動作をまとめたものです。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/2GwtCTwecxYONxL1DbewxO/a096a417507a96be8b13acf0970567a3/OIDC_Back-Channel_Logout_Initiators_Diagram.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/2GwtCTwecxYONxL1DbewxO/a096a417507a96be8b13acf0970567a3/OIDC_Back-Channel_Logout_Initiators_Diagram.png)</Frame>
 
 ## OIDCバックチャネルログアウトイニシエータを構成する
 
@@ -42,7 +42,7 @@ Auth0 Management APIでOIDCバックチャネルログアウトイニシエー�
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```
+   ``` lines
    PATCH /api/v2/clients/{yourClientId}
    {
      ...
@@ -76,18 +76,18 @@ Auth0 Management APIでOIDCバックチャネルログアウトイニシエー�
 </thead>
 <tbody>
 <tr>
-<td><code>mode</code></td>
+<td>`mode`</td>
 <td>文字列</td>
 <td>必須</td>
 <td>イニシエーターを有効にするための構成方法。</td>
-<td><code>custom</code>、<code>all</code></td>
+<td>`custom`、`all`</td>
 </tr>
 <tr>
-<td><code>selected_initiators</code></td>
+<td>`selected_initiators`</td>
 <td>配列</td>
-<td><code>mode</code>が<code>custom</code>の場合は必須</td>
+<td>`mode`が`custom`の場合は必須</td>
 <td>有効にするイニシエーターのリスト。</td>
-<td><code>rp-logout</code>、<code>idp-logout</code>、<code>password-changed</code>、<code>session-expired</code>、<code>session-revoked</code>、<code>account-deleted</code>、<code>email-identifier-changed</code></td>
+<td>`rp-logout`、`idp-logout`、`password-changed`、`session-expired`、`session-revoked`、`account-deleted`、`email-identifier-changed`</td>
 </tr>
 </tbody>
 </table>
@@ -108,11 +108,11 @@ Auth0 Management APIでOIDCバックチャネルログアウトイニシエー�
 </thead>
 <tbody>
 <tr>
-<td><code>custom</code></td>
-<td><code>selected_initiators</code>配列にリストされたイニシエーターのみを有効にします。</td>
+<td>`custom`</td>
+<td>`selected_initiators`配列にリストされたイニシエーターのみを有効にします。</td>
 </tr>
 <tr>
-<td><code>all</code></td>
+<td>`all`</td>
 <td>現在および将来のすべてのイニシエーターを自動的に有効にします。</td>
 </tr>
 </tbody>
@@ -132,31 +132,31 @@ Auth0 Management APIでOIDCバックチャネルログアウトイニシエー�
 </thead>
 <tbody>
 <tr>
-<td><code>rp-logout</code></td>
+<td>`rp-logout`</td>
 <td>要求がリライングパーティー（RP）によって開始されました。</td>
 </tr>
 <tr>
-<td><code>idp-logout</code></td>
+<td>`idp-logout`</td>
 <td>要求が外部IDプロバイダー（IdP）によって開始されました。</td>
 </tr>
 <tr>
-<td><code>password-changed</code></td>
+<td>`password-changed`</td>
 <td>要求がパスワードの変更によって開始されました。</td>
 </tr>
 <tr>
-<td><code>session-expired</code></td>
+<td>`session-expired`</td>
 <td>要求がセッションの期限切れによって開始されました。</td>
 </tr>
 <tr>
-<td><code>session-revoked</code></td>
+<td>`session-revoked`</td>
 <td>要求がセッションの削除によって開始されました。</td>
 </tr>
 <tr>
-<td><code>account-deleted</code></td>
+<td>`account-deleted`</td>
 <td>要求がアカウントの削除によって開始されました。</td>
 </tr>
 <tr>
-<td><code>email-identifier-changed</code></td>
+<td>`email-identifier-changed`</td>
 <td>要求がメール識別子の変更によって開始されました。</td>
 </tr>
 </tbody>
@@ -168,7 +168,7 @@ Auth0 Management APIでOIDCバックチャネルログアウトイニシエー�
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```json lines
 PATCH /api/v2/clients/{yourClientId}
 
 {
@@ -187,7 +187,7 @@ PATCH /api/v2/clients/{yourClientId}
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```json lines
 PATCH /api/v2/clients/{yourClientId}
 
 {
@@ -207,7 +207,7 @@ PATCH /api/v2/clients/{yourClientId}
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```json lines
 PATCH /api/v2/clients/{yourClientId}
 
 {
@@ -223,7 +223,7 @@ PATCH /api/v2/clients/{yourClientId}
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OpenID</Tooltip> Connectバックチャネルログアウトは他のアプリケーション設定と並行して構成できます。この機能は、バックチャネルログアウトURIが提供されると、自動的にアクティブ化されます。
 
-<Frame>![Dashboard > Applications > Application Settings](//images.ctfassets.net/cdy7uua7fh8z/vgN0wudP38zgRZNL59Mhy/305351ceb61852621759023a3269e9cf/Backchannel_Logout_settings.png)</Frame>
+<Frame>![Dashboard > Applications > Application Settings](/images/ja-jp/cdy7uua7fh8z/vgN0wudP38zgRZNL59Mhy/305351ceb61852621759023a3269e9cf/Backchannel_Logout_settings.png)</Frame>
 
 #### Selected initiators only（選択されたイニシエータのみ）
 

@@ -1,13 +1,13 @@
 ---
 title: "パラメーターをIDプロバイダーに渡す"
 permalink: "pass-parameters-to-idps"
+'description': "IDプロバイダーAPIへのパラメーターの渡し方を説明します。"
 'og:title': "パラメーターをIDプロバイダーに渡す"
 'og:description': "IDプロバイダーAPIへのパラメーターの渡し方を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "パラメーターをIDプロバイダーに渡す"
 'twitter:description': "IDプロバイダーAPIへのパラメーターの渡し方を説明します。"
 ---
-# パラメーターをIDプロバイダーに渡す
 
 認証中、プロバイダー固有のパラメーターをIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>）に渡せます。値は、接続ごとに静的またはユーザーごとに動的のいずれにも設定できます。
 
@@ -33,16 +33,16 @@ WordPressでは、その<Tooltip data-tooltip-id="react-containers-DefinitionToo
 
 #### 接続を取得する
 
-Management APIの[接続の取得](/docs/api/management/v2#!/Connections/get_connections_by_id)エンドポイントを呼び出し、`options`オブジェクトの既存の値を取得します：
+Management APIの[接続の取得](/docs/ja-jp/api/management/v2#!/Connections/get_connections_by_id)エンドポイントを呼び出し、`options`オブジェクトの既存の値を取得します：
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --header 'content-type: application/json'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -50,7 +50,7 @@ request.AddHeader("content-type", "application/json");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -68,15 +68,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .header("content-type", "application/json")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -91,8 +91,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}",
 @"content-type": @"application/json" };
@@ -114,7 +114,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D",
@@ -137,8 +137,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = {
@@ -151,7 +151,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -164,8 +164,8 @@ request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request["content-type"] = 'application/json'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {yourMgmtApiAccessToken}",
@@ -191,7 +191,7 @@ dataTask.resume()
 
 `options`オブジェクトは、次のようになります：
 
-```json
+```json lines
 {
   "options": {
     "client_id": "", 
@@ -205,7 +205,7 @@ dataTask.resume()
 
 既存の`オプション`オブジェクトをコピーし、`blog`フィールドを次の属性として`upstream_params`オブジェクトを追加します：
 
-```json
+```json lines
 {
   "options": {
     "client_id": "", 
@@ -221,14 +221,14 @@ dataTask.resume()
 Management APIの[接続を更新](https://auth0.com/docs/api/management/v2/#!/Connections/patch_connections_by_id)エンドポイントを、本文の`options`オブジェクトを次の通りにして呼び出します：
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --header 'content-type: application/json' \
 --data '{"options":{"client_id":"","profile":true,"scope":["profile"],"upstream_params":{"blog":{"value":"myblog.wordpress.com"}}}}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -237,7 +237,7 @@ request.AddParameter("application/json", "{\"options\":{\"client_id\":\"\",\"pro
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -257,8 +257,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .header("content-type", "application/json")
@@ -266,7 +266,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/connections/%
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -289,8 +289,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}",
 @"content-type": @"application/json" };
@@ -315,7 +315,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections/%7ByourWordpressConnectionId%7D",
@@ -339,8 +339,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"options\":{\"client_id\":\"\",\"profile\":true,\"scope\":[\"profile\"],\"upstream_params\":{\"blog\":{\"value\":\"myblog.wordpress.com\"}}}}"
@@ -354,7 +354,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -368,8 +368,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"options\":{\"client_id\":\"\",\"profile\":true,\"scope\":[\"profile\"],\"upstream_params\":{\"blog\":{\"value\":\"myblog.wordpress.com\"}}}}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {yourMgmtApiAccessToken}",
@@ -411,7 +411,7 @@ dataTask.resume()
 
 後ほどXの例で再び説明しますが、`オプション`オブジェクトの一例を掲載します：
 
-```json
+```json lines
 {
   "options": {
     "upstream_params": {
@@ -448,16 +448,16 @@ Xにより、任意の`screen_name`のパラメーターをOAuth認証エンド�
 
 #### 接続を取得する
 
-Management APIの[接続の取得](/docs/api/management/v2#!/Connections/get_connections_by_id)エンドポイントを呼び出し、`options`オブジェクトの既存の値を取得します：
+Management APIの[接続の取得](/docs/ja-jp/api/management/v2#!/Connections/get_connections_by_id)エンドポイントを呼び出し、`options`オブジェクトの既存の値を取得します：
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --header 'content-type: application/json'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -465,7 +465,7 @@ request.AddHeader("content-type", "application/json");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -483,15 +483,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .header("content-type", "application/json")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -506,8 +506,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}",
 @"content-type": @"application/json" };
@@ -529,7 +529,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D",
@@ -552,8 +552,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = {
@@ -566,7 +566,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -579,8 +579,8 @@ request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request["content-type"] = 'application/json'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {yourMgmtApiAccessToken}",
@@ -606,7 +606,7 @@ dataTask.resume()
 
 `options`オブジェクトは、次のようになります：
 
-```
+```json lines
 "options": {
   "client_id": "thisismyid",
   "client_secret": "thisismysecret",
@@ -618,7 +618,7 @@ dataTask.resume()
 
 既存の`オプション`オブジェクトをコピーし、`screen_name`フィールドを次の属性として`upstream_params`オブジェクトを追加し、`alias`属性を`login_hint`に設定します：
 
-```json
+```json lines
 {
   "options": {
     "client_id": "", 
@@ -636,14 +636,14 @@ dataTask.resume()
 Management APIの[接続を更新](https://auth0.com/docs/api/management/v2/#!/Connections/patch_connections_by_id)エンドポイントを、本文の`options`オブジェクトを次の通りにして呼び出します：
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --header 'content-type: application/json' \
 --data '{"options": {"client_id": "{clientId}", "client_secret": "{clientSecret}", "profile": true, "upstream_params": {"screen_name": {"alias": "login_hint"}}}}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -652,7 +652,7 @@ request.AddParameter("application/json", "{\"options\": {\"client_id\": \"{clien
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -672,8 +672,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .header("content-type", "application/json")
@@ -681,7 +681,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/connections/%
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -704,8 +704,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}",
 @"content-type": @"application/json" };
@@ -730,7 +730,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections/%7ByourXConnectionId%7D",
@@ -754,8 +754,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"options\": {\"client_id\": \"{clientId}\", \"client_secret\": \"{clientSecret}\", \"profile\": true, \"upstream_params\": {\"screen_name\": {\"alias\": \"login_hint\"}}}}"
@@ -769,7 +769,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -783,8 +783,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"options\": {\"client_id\": \"{clientId}\", \"client_secret\": \"{clientSecret}\", \"profile\": true, \"upstream_params\": {\"screen_name\": {\"alias\": \"login_hint\"}}}}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {yourMgmtApiAccessToken}",
@@ -820,7 +820,7 @@ dataTask.resume()
 
 Authentication APIの[ログインエンドポイント](https://auth0.com/docs/api/authentication#login)をユーザーのために呼び出す際、`login_hint`パラメーターにメールアドレスを渡せます：
 
-```
+``` lines
 https://{yourDomain}/authorize
   ?client_id={yourClientId}
   &response_type=token
@@ -831,7 +831,7 @@ https://{yourDomain}/authorize
 
 この値は、続いてXの認証エンドポイントに`screen_name`パラメーターとして渡されます。
 
-```
+``` lines
 https://api.twitter.com/oauth/authorize
   ?oauth_token={yourXAuthToken}
   &screen_name=user@domain.com

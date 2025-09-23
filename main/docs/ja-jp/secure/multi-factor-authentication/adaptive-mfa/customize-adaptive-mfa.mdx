@@ -1,13 +1,13 @@
 ---
 title: "Adaptive MFAをカスタマイズする"
 permalink: "customize-adaptive-mfa"
+'description': "Adaptive MFA（多要素認証）をカスタマイズする方法を説明します。"
 'og:title': "Adaptive MFAをカスタマイズする"
 'og:description': "Adaptive MFA（多要素認証）をカスタマイズする方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Adaptive MFAをカスタマイズする"
 'twitter:description': "Adaptive MFA（多要素認証）をカスタマイズする方法を説明します。"
 ---
-# Adaptive MFAをカスタマイズする
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Adaptive MFA</Tooltip>は、[Auth0 Actions](/docs/ja-jp/customize/actions)を使用してさまざまなシナリオでカスタマイズできます。
 
@@ -45,22 +45,22 @@ Adaptive MFAは、3つの評価分析に基づいて全体的な信頼スコア�
 </thead>
 <tbody>
 <tr>
-<td><code>low</code></td>
+<td>`low`</td>
 <td>ログイントランザクションがユーザーによって前に表示されたパターンに一致しません。</td>
 <td>MFAが必要です。</td>
 </tr>
 <tr>
-<td><code>medium</code></td>
+<td>`medium`</td>
 <td>ログイントランザクションがユーザーによって前に表示されたパターンに多少一致します。</td>
 <td>MFAは必要でありません。</td>
 </tr>
 <tr>
-<td><code>high</code></td>
+<td>`high`</td>
 <td>ログイントランザクションがユーザーによって前に表示されたパターンにぴったり一致します。</td>
 <td>MFAは必要でありません。</td>
 </tr>
 <tr>
-<td><code>neutral</code></td>
+<td>`neutral`</td>
 <td>非該当。今後使用するために予約されています。</td>
 <td>非該当。今後使用するために予約されています。</td>
 </tr>
@@ -155,19 +155,19 @@ Adaptive MFAは、3つの評価分析に基づいて全体的な信頼スコア�
 </thead>
 <tbody>
 <tr>
-<td><code>confidence</code></td>
+<td>`confidence`</td>
 <td>Adaptive MFAによって計算された全体の信頼度スコア。</td>
 <td>文字列</td>
-<td><code>low</code>、<code>medium</code>、<code>high</code>、<code>neutral</code></td>
+<td>`low`、`medium`、`high`、`neutral`</td>
 </tr>
 <tr>
-<td><code>version</code></td>
+<td>`version`</td>
 <td>リスク評価APIのバージョン識別子。</td>
 <td>文字列</td>
-<td><code>1</code></td>
+<td>`1`</td>
 </tr>
 <tr>
-<td><code>assessments</code></td>
+<td>`assessments`</td>
 <td>個々の評価詳細が含まれるオブジェクト。</td>
 <td>オブジェクト</td>
 <td>「<a href="#assessments-object">評価オブジェクト</a>」を参照。</td>
@@ -175,7 +175,7 @@ Adaptive MFAは、3つの評価分析に基づいて全体的な信頼スコア�
 </tbody>
 </table>
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   if (event.authentication && event.authentication.riskAssessment) {
     event.authentication.riskAssessment = {
@@ -251,19 +251,19 @@ exports.onExecutePostLogin = async (event, api) => {
 </thead>
 <tbody>
 <tr>
-<td><code>confidence</code></td>
+<td>`confidence`</td>
 <td>Adaptive MFAが計算した信頼度スコア。</td>
 <td>文字列</td>
-<td><code>low</code>、<code>medium</code>、<code>high</code>、<code>neutral</code></td>
+<td>`low`、`medium`、`high`、`neutral`</td>
 </tr>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>アセスメントの評価結果。</td>
 <td>文字列</td>
-<td><code>match</code>、<code>partial_match</code>、<code>no_match</code>、<code>initial_login</code>、<code>unknown_device</code>、<code>no_device_history</code>、<code>assessment_not_available</code></td>
+<td>`match`、`partial_match`、`no_match`、`initial_login`、`unknown_device`、`no_device_history`、`assessment_not_available`</td>
 </tr>
 <tr>
-<td><code>details</code></td>
+<td>`details`</td>
 <td>追加のコンテキスト情報。</td>
 <td>オブジェクト</td>
 <td>以下の表を参照してください。</td>
@@ -283,31 +283,31 @@ exports.onExecutePostLogin = async (event, api) => {
 </thead>
 <tbody>
 <tr>
-<td><code>match</code></td>
-<td><code>details</code>オブジェクトのプロパティ値が同等です。</td>
+<td>`match`</td>
+<td>`details`オブジェクトのプロパティ値が同等です。</td>
 </tr>
 <tr>
-<td><code>partial_match</code></td>
-<td><code>details</code>オブジェクトのプロパティ値が類似しています。</td>
+<td>`partial_match`</td>
+<td>`details`オブジェクトのプロパティ値が類似しています。</td>
 </tr>
 <tr>
-<td><code>no_match</code></td>
-<td><code>details</code>オブジェクトのプロパティ値が異なります。</td>
+<td>`no_match`</td>
+<td>`details`オブジェクトのプロパティ値が異なります。</td>
 </tr>
 <tr>
-<td><code>initial_login</code></td>
+<td>`initial_login`</td>
 <td>ユーザーが初めてデバイスにログインしました。</td>
 </tr>
 <tr>
-<td><code>unknown_device</code></td>
+<td>`unknown_device`</td>
 <td>Auth0はデバイスのメタデータを見つけることができませんでした。</td>
 </tr>
 <tr>
-<td><code>no_device_history</code></td>
+<td>`no_device_history`</td>
 <td>デバイスに関連するログイン履歴がありません。</td>
 </tr>
 <tr>
-<td><code>assessment_not_available</code></td>
+<td>`assessment_not_available`</td>
 <td>Auth0はデバイスの評価を実行できませんでした。</td>
 </tr>
 </tbody>
@@ -327,16 +327,16 @@ exports.onExecutePostLogin = async (event, api) => {
 </thead>
 <tbody>
 <tr>
-<td><code>device</code></td>
+<td>`device`</td>
 <td>ユーザーのデバイス。</td>
 <td>文字列</td>
-<td><code>known</code>、<code>unknown</code></td>
+<td>`known`、`unknown`</td>
 </tr>
 <tr>
-<td><code>useragent</code></td>
+<td>`useragent`</td>
 <td>ユーザーのユーザーエージェント。</td>
 <td>文字列</td>
-<td><code>known</code>、<code>unknown</code></td>
+<td>`known`、`unknown`</td>
 </tr>
 </tbody>
 </table>
@@ -355,16 +355,16 @@ exports.onExecutePostLogin = async (event, api) => {
 </thead>
 <tbody>
 <tr>
-<td><code>confidence</code></td>
+<td>`confidence`</td>
 <td>Adaptive MFAが計算した信頼度スコア。</td>
 <td>文字列</td>
-<td><code>low</code>、<code>medium</code>、<code>high</code>、<code>neutral</code></td>
+<td>`low`、`medium`、`high`、`neutral`</td>
 </tr>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>アセスメントの評価結果。</td>
 <td>文字列</td>
-<td><code>minimal_travel_from_last_login</code>、<code>travel_from_last_login</code>、<code>substantial_travel_from_last_login</code>、<code>impossible_travel_from_last_login</code>、<code>invalid_travel</code>、<code>missing_geoip</code>、<code>anonymous_proxy</code>、<code>unknown_location</code>、<code>initial_login</code>、<code>location_history_not_found</code>、<code>assessment_not_available</code></td>
+<td>`minimal_travel_from_last_login`、`travel_from_last_login`、`substantial_travel_from_last_login`、`impossible_travel_from_last_login`、`invalid_travel`、`missing_geoip`、`anonymous_proxy`、`unknown_location`、`initial_login`、`location_history_not_found`、`assessment_not_available`</td>
 </tr>
 </tbody>
 </table>
@@ -383,19 +383,19 @@ exports.onExecutePostLogin = async (event, api) => {
 </thead>
 <tbody>
 <tr>
-<td><code>confidence</code></td>
+<td>`confidence`</td>
 <td>Adaptive MFAが計算した信頼度スコア。</td>
 <td>文字列</td>
-<td><code>low</code>、<code>medium</code>、<code>high</code>、<code>neutral</code></td>
+<td>`low`、`medium`、`high`、`neutral`</td>
 </tr>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>アセスメントの評価結果。</td>
 <td>文字列</td>
-<td><code>not_found_on_deny_list</code>、<code>found_on_deny_list</code>、<code>invalid_ip_address</code>、<code>assessment_not_available</code></td>
+<td>`not_found_on_deny_list`、`found_on_deny_list`、`invalid_ip_address`、`assessment_not_available`</td>
 </tr>
 <tr>
-<td><code>details</code></td>
+<td>`details`</td>
 <td>追加のコンテキスト情報。</td>
 <td>オブジェクト</td>
 <td>以下の表を参照してください。</td>
@@ -417,28 +417,28 @@ exports.onExecutePostLogin = async (event, api) => {
 </thead>
 <tbody>
 <tr>
-<td><code>ip</code></td>
+<td>`ip`</td>
 <td>デバイスのIPアドレス。</td>
 <td>string</td>
 <td>任意の有効なIPv4またはIPv6アドレス。</td>
 </tr>
 <tr>
-<td><code>matches</code></td>
+<td>`matches`</td>
 <td>IPアドレスが属するサブネットマスク。</td>
 <td>string</td>
 <td>任意の有効なIPv4またはIPv6サブネットマスク。</td>
 </tr>
 <tr>
-<td><code>source</code></td>
+<td>`source`</td>
 <td>拒否リストの脅威インテリジェンスソースの名前。</td>
 <td>string</td>
 <td>任意の有効なテキスト。</td>
 </tr>
 <tr>
-<td><code>category</code></td>
+<td>`category`</td>
 <td>IPアドレスが信頼されない理由を示したカテゴリ。</td>
 <td>string</td>
-<td><code>abuse</code>、<code>anonymizer</code>、<code>datacenter</code>、<code>reputation</code>、<code>unroutable</code></td>
+<td>`abuse`、`anonymizer`、`datacenter`、`reputation`、`unroutable`</td>
 </tr>
 </tbody>
 </table>
@@ -455,23 +455,23 @@ exports.onExecutePostLogin = async (event, api) => {
 </thead>
 <tbody>
 <tr>
-<td><code>abuse</code></td>
+<td>`abuse`</td>
 <td>IPアドレスの動作が不正か、ボットネットの一部だと判明しました。</td>
 </tr>
 <tr>
-<td><code>anonymizer</code></td>
+<td>`anonymizer`</td>
 <td>VPNプロバイダー、公開プロキシ、Tor Exitノードなど、匿名サービスのIPアドレスです。</td>
 </tr>
 <tr>
-<td><code>datacenter</code></td>
+<td>`datacenter`</td>
 <td>クラウドホスティングサービスやコロケーションデータセンターのIPアドレスです。</td>
 </tr>
 <tr>
-<td><code>reputation</code></td>
+<td>`reputation`</td>
 <td>IPアドレスのアクティビティを基にした評判スコアが低いこをと示しています。</td>
 </tr>
 <tr>
-<td><code>unroutable</code></td>
+<td>`unroutable`</td>
 <td>IPアドレスが、公認のインターネットレジストリーによって割り当てや委任された範囲内にないか、一般利用に許可されていません。</td>
 </tr>
 </tbody>
@@ -491,19 +491,19 @@ exports.onExecutePostLogin = async (event, api) => {
 </thead>
 <tbody>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>評価結果の説明。</td>
 <td>文字列</td>
-<td><code>ok</code>、<code>requires_verification</code>、<code>phone_number_not_provided</code>、<code>assessment_not_available</code></td>
+<td>`ok`、`requires_verification`、`phone_number_not_provided`、`assessment_not_available`</td>
 </tr>
 <tr>
-<td><code>confidence</code></td>
+<td>`confidence`</td>
 <td>Adaptive MFAによって計算された信頼度スコア。</td>
 <td>文字列</td>
-<td><code>low</code>、<code>medium</code>、<code>high</code>、<code>neutral</code></td>
+<td>`low`、`medium`、`high`、`neutral`</td>
 </tr>
 <tr>
-<td><code>details</code></td>
+<td>`details`</td>
 <td>追加のコンテキスト情報。</td>
 <td>オブジェクト</td>
 <td>下の表を参照。</td>
@@ -525,28 +525,28 @@ exports.onExecutePostLogin = async (event, api) => {
 </thead>
 <tbody>
 <tr>
-<td><code>lineType</code></td>
+<td>`lineType`</td>
 <td>電話回線のタイプ</td>
 <td>文字列</td>
-<td><code>FIXED_LINE</code>、<code>MOBILE</code>、<code>FIXED_LINE_OR_MOBILE</code>、<code>TOLL_FREE</code>、 <code>PREMIUM_RATE</code>、<code>SHARED_COST</code>、<code>VOIP</code>、<code>PERSONAL_NUMBER</code>、<code>PAGER</code>、<code>UAN</code>、<code>UNKNOWN</code></td>
+<td>`FIXED_LINE`、`MOBILE`、`FIXED_LINE_OR_MOBILE`、`TOLL_FREE`、 `PREMIUM_RATE`、`SHARED_COST`、`VOIP`、`PERSONAL_NUMBER`、`PAGER`、`UAN`、`UNKNOWN`</td>
 </tr>
 <tr>
-<td><code>isValid</code></td>
+<td>`isValid`</td>
 <td>番号の有効性を返します</td>
 <td>ブール値</td>
-<td><code>true</code>、<code>false</code></td>
+<td>`true`、`false`</td>
 </tr>
 <tr>
-<td><code>countryCode</code></td>
+<td>`countryCode`</td>
 <td>電話の発信元の国コード</td>
 <td>整数</td>
-<td><code>0-999</code></td>
+<td>`0-999`</td>
 </tr>
 <tr>
-<td><code>number</code></td>
+<td>`number`</td>
 <td>電話番号</td>
 <td>文字列</td>
-<td>有効な番号（<code>countryCode</code>を含む）</td>
+<td>有効な番号（`countryCode`を含む）</td>
 </tr>
 </tbody>
 </table>
@@ -612,7 +612,7 @@ Auth0には、Adaptive MFAに基づいて、[Adaptive MFA](#adaptive-mfa)と[Req
 
 このテンプレートは例として、個々のリスク評価を使ってカスタムビジネスフローを構築する方法の始点を提供します。
 
-```javascript
+```javascript lines
 /**
 * Handler that will be called during the execution of a PostLogin flow.
 *
@@ -659,7 +659,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 このテンプレートは、標準またはAdaptive MFAポリシーを使うときに、MFA登録をどのように強制できるかを示しています。ここでは、`event.user.multifactor`を使ってユーザーがMFAに登録しているかどうかを確認し、登録していない場合は、登録するよう促します。
 
-```javascript
+```javascript lines
 /**
 * Handler that will be called during the execution of a PostLogin flow.
 *
@@ -681,7 +681,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 `riskAssessment.confidence`プロパティを評価してから、`high`、`medium`、または`low`といった定数と比較します。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const riskIsMedium = riskAssessment && riskAssessment.confidence === 'medium';
@@ -698,7 +698,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 複数の状況を使って、処理したいすべての信頼スコアを論理的に組み合わせます。たとえば、信頼スコアが`low`より大きいかどうかを知りたい場合は、`medium`または`high`に等しいかどうかを確認します。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const riskIsMediumOrHigh = riskAssessment && 
@@ -717,7 +717,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 `riskAssessment`オブジェクトを表示し、結果を別の場所で報告します。たとえば、メールを送信したり、レコードを外部データベースに保存したりできます。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const riskIsLow = riskAssessment && riskAssessment.confidence === 'low';
@@ -732,7 +732,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 [assessments](#assessments-object)オブジェクト（`code`プロパティなど）を使って各評価の詳細にアクセスします。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const { ImpossibleTravel } = riskAssessment && riskAssessment.assessments;
@@ -755,7 +755,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 `UnauthorizedError`オブジェクトを[エラーパラメーター](/docs/ja-jp/troubleshoot/error-handling-best-practices)に使用してコールバック関数を返すことで、ログイントランザクションが完了するのをブロックします。`UnauthorizedError`オブジェクトは必ず`error`を`unauthorized`に設定しますが、`error_message`をカスタマイズすることはできます。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const { ImpossibleTravel } = riskAssessment && riskAssessment.assessments;

@@ -1,13 +1,13 @@
 ---
 title: "秘密鍵JWT認証の設定"
 permalink: "configure-private-key-jwt"
+'description': "秘密鍵JWT認証を使用するための新規および既存のアプリケーションの構成方法について説明します。"
 'og:title': "秘密鍵JWT認証の設定"
 'og:description': "秘密鍵JWT認証を使用するための新規および既存のアプリケーションの構成方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "秘密鍵JWT認証の設定"
 'twitter:description': "秘密鍵JWT認証を使用するための新規および既存のアプリケーションの構成方法について説明します。"
 ---
-# 秘密鍵JWT認証の設定
 
 <Note>
 
@@ -37,7 +37,7 @@ Auth0 Dashboardを使用して、新しいアプリケーションを作成す�
 4. アプリケーション設定の下にある、**［Credentials（資格情報）］**タブを選択します。
 5. **［Authentication Methods（認証方法）］**の下にある、**［Private Key JWT（秘密鍵JWT）］**を選択します。
 
-   <Frame>![秘密鍵JWT認証を構成する - Auth0 Dashboardの説明](//images.ctfassets.net/cdy7uua7fh8z/33kfi48tkbMIOQJ8PBxj76/8909d19639a9dae5dbc7252ba17ddd3a/Default_App_-_Creds_-_Japanese.png)</Frame>
+   <Frame>![秘密鍵JWT認証を構成する - Auth0 Dashboardの説明](/images/ja-jp/cdy7uua7fh8z/33kfi48tkbMIOQJ8PBxj76/8909d19639a9dae5dbc7252ba17ddd3a/Default_App_-_Creds_-_Japanese.png)</Frame>
 
 6. 資格情報の詳細を構成します。
 
@@ -83,7 +83,7 @@ Auth0 Dashboardで、既存の資格情報の有効期限を更新できます�
 2. **［Credentials（資格情報）］**タブを選択します。
 3. 更新したい資格情報を選択し、**［Edit Credential（資格情報の編集）］**を選択します。
 
-   <Frame>![Dashboard - Applications - Application Settings - Credentials - update expiry date](//images.ctfassets.net/cdy7uua7fh8z/6858PTDkNCRZiIqtBVmciZ/489fea406e2bf399089b894b095bbc18/Credentials_-_Edit_Menu.png)</Frame>
+   <Frame>![Dashboard - Applications - Application Settings - Credentials - update expiry date](/images/ja-jp/cdy7uua7fh8z/6858PTDkNCRZiIqtBVmciZ/489fea406e2bf399089b894b095bbc18/Credentials_-_Edit_Menu.png)</Frame>
 
 4. **［Set an explicit expiry date for this Credential（この資格情報への明確な有効期限の設定）］**を選択し、未来の日付を設定します。
 5. **［Update Credential（資格情報の更新）］**を選択します。
@@ -94,7 +94,7 @@ Auth0 Dashboardで、既存の資格情報の有効期限を更新できます�
 
 Management APIを使用して、認証方法を`private_key_jwt`に設定し、新しいアプリケーションを作成できます。次のペイロードで[`クライアントの作成`](https://auth0.com/docs/api/management/v2#!/Clients/get_clients)エンドポイントに`POST`を呼び出します。
 
-```bash
+```bash lines
 curl --location --request POST 'https://{domain}/api/v2/clients' \
   --header 'Authorization: Bearer {managementApiAccessToken} \
   --header 'Content-Type: application/json' \
@@ -128,32 +128,32 @@ curl --location --request POST 'https://{domain}/api/v2/clients' \
 </thead>
 <tbody>
 <tr>
-<td><code>algorithm</code></td>
+<td>`algorithm`</td>
 <td>アサーションに署名するために使用するアルゴリズム。サポート値はRS256、RS384、PS256です。指定しない場合、アルゴリズムはデフォルトのRS256になります。</td>
 </tr>
 <tr>
-<td><code>clientName</code></td>
+<td>`clientName`</td>
 <td>新規クライアントの名前。</td>
 </tr>
 <tr>
-<td><code>credentialName</code></td>
+<td>`credentialName`</td>
 <td>公開鍵の名前。</td>
 </tr>
 <tr>
-<td><code>expires_at</code></td>
-<td>任意。ISO 8601形式の資格情報の有効期限。例えば、<code>2020-08-20T19:10:06.299Z</code>です。有効期限を過ぎると、資格情報は無効になります。</td>
+<td>`expires_at`</td>
+<td>任意。ISO 8601形式の資格情報の有効期限。例えば、`2020-08-20T19:10:06.299Z`です。有効期限を過ぎると、資格情報は無効になります。</td>
 </tr>
 <tr>
-<td><code>managementApiAccessToken</code></td>
-<td><code>create:credentials</code> スコープを持つ <a href="/docs/auth0.com/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens">Management API のアクセストークン </a> 。</td>
+<td>`managementApiAccessToken`</td>
+<td>`create:credentials` スコープを持つ <a href="/docs/ja-jp/auth0.com/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens">Management API のアクセストークン </a> 。</td>
 </tr>
 <tr>
-<td><code>pem</code></td>
+<td>`pem`</td>
 <td>PEM形式でエンコードされた公開鍵、またはx.509。</td>
 </tr>
 <tr>
-<td><code>parse_expiry_from_cert</code></td>
-<td>任意。証明書を与えられたときにAuth0が有効期限の構造解析をするべきブール値を示します。証明書が与えられない場合、Auth0はエラーを返します。また、<code>parse_expiry_from_cert</code>と<code>expires_at</code>も相互排他的です。その場合、Auth0はエラーを返します。</td>
+<td>`parse_expiry_from_cert`</td>
+<td>任意。証明書を与えられたときにAuth0が有効期限の構造解析をするべきブール値を示します。証明書が与えられない場合、Auth0はエラーを返します。また、`parse_expiry_from_cert`と`expires_at`も相互排他的です。その場合、Auth0はエラーを返します。</td>
 </tr>
 </tbody>
 </table>
@@ -200,7 +200,7 @@ private_key_jwtを構成した後では、クライアントシークレット�
 
 キーペアを生成したら、資格情報リソースを作成します。Management APIの[`/clients`](https://auth0.com/docs/api/management/v2#!/Clients/post_clients)エンドポイントに次のPOST要求をします。
 
-```bash
+```bash lines
 curl --location --request POST 'https://{domain}/api/v2/clients/{clientId}/credentials' \
   --header 'Authorization: Bearer {managementApiAccessToken} \
   --header 'Content-Type: application/json' \
@@ -218,7 +218,7 @@ curl --location --request POST 'https://{domain}/api/v2/clients/{clientId}/crede
 ::: ::: 注意 公開鍵
 PEM公開鍵は、Auth0に渡す前にJSON-escapedである必要があります。この例では、渡す必要のあるコンテンツは次の通りです：
 
-```
+``` lines
 ----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA53VzmIVVZZWyNm266l82
 mnoDc9g/snXklax5kChEhqK/WnTUvuXP4Gd4THj8rchxgUGKXd4PF3SUcKyn/qPm
@@ -240,7 +240,7 @@ IF+t0HbO1E387fvLcuSyai1yWbSr1PXyiB2aXyDpbD4u7d3ux4ahU2opH11lBqvx
 
 Management APIの[`クライアントの更新`](https://auth0.com/docs/api/management/v2#!/Clients/patch_clients_by_id)エンドポイントにPATCH要求を行います。
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId} \
   --header 'Authorization: Bearer {managementApiAccessToken} \
   --header 'Content-Type: application/json' \
@@ -262,19 +262,19 @@ curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId} \
 </thead>
 <tbody>
 <tr>
-<td><code>clientId</code></td>
+<td>`clientId`</td>
 <td>更新されるアプリケーションのID。</td>
 </tr>
 <tr>
-<td><code>managementApiAccessToken</code></td>
-<td><code>update:client</code>と<code>update:credentials</code>のスコープを持つ<a href="/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens">Management APIのアクセストークン</a>。</td>
+<td>`managementApiAccessToken`</td>
+<td>`update:client`と`update:credentials`のスコープを持つ<a href="/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 <tr>
-<td><code>credentialId</code></td>
+<td>`credentialId`</td>
 <td>新しい資格情報のID。</td>
 </tr>
 <tr>
-<td><code>pem</code></td>
+<td>`pem`</td>
 <td>PEM形式の公開鍵。</td>
 </tr>
 </tbody>
@@ -282,7 +282,7 @@ curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId} \
 
 <Warning>
 
-Auth0はアプリケーションのJWT署名アルゴリズムとして、HS256の使用に対応していません。RS256アルゴリズムに`jwt_configuration.alg`フィールドを設定する必要があります。署名アルゴリズムを変更する方法については、「[アプリケーションの署名アルゴリズムを変更する](/docs/get-started/applications/change-application-signing-algorithms)」をご覧ください。
+Auth0はアプリケーションのJWT署名アルゴリズムとして、HS256の使用に対応していません。RS256アルゴリズムに`jwt_configuration.alg`フィールドを設定する必要があります。署名アルゴリズムを変更する方法については、「[アプリケーションの署名アルゴリズムを変更する](/docs/ja-jp/get-started/applications/change-application-signing-algorithms)」をご覧ください。
 
 </Warning>
 
@@ -298,7 +298,7 @@ Auth0はアプリケーションのJWT署名アルゴリズムとして、HS256�
 
 **例**
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId} \
   --header 'Authorization: Bearer {managementApiAccessToken} \
   --header 'Content-Type: application/json' \
@@ -316,16 +316,16 @@ curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId} \
 </thead>
 <tbody>
 <tr>
-<td><code>clientId</code></td>
+<td>`clientId`</td>
 <td>更新されたアプリケーションのID。</td>
 </tr>
 <tr>
-<td><code>managementApiAccessToken</code></td>
-<td>update:clients<code>とupdate:client</code>と<code>update:credentials</code>のスコープを持つ  <a href="/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens">Management APIのアクセストークン</a> 。</td>
+<td>`managementApiAccessToken`</td>
+<td>update:clients`とupdate:client`と`update:credentials`のスコープを持つ  <a href="/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens">Management APIのアクセストークン</a> 。</td>
 </tr>
 <tr>
-<td><code>tokenEndpointAuthMethod</code></td>
-<td>最終の認証方法。例：<code>client_secret_basic</code>または<code>client_secret_post</code>。</td>
+<td>`tokenEndpointAuthMethod`</td>
+<td>最終の認証方法。例：`client_secret_basic`または`client_secret_post`。</td>
 </tr>
 </tbody>
 </table>
@@ -334,7 +334,7 @@ curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId} \
 
 Management APIの [資格情報の更新](https://auth0.com/docs/api/management/v2#!/Clients/patch_credentials_by_credential_id)エンドポイントで有効期限付きの既存の資格情報を更新できます。
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId}/credentials/{credentialId} ' \
   --header 'Authorization: Bearer {managementApiAccessToken} \
   --header 'Content-Type: application/json' \

@@ -1,13 +1,13 @@
 ---
 title: "AWS API Gatewayチュートリアルの手順5"
 permalink: "aws-api-gateway-delegation-5"
+'description': "Amazon API Gatewayチュートリアルの手順5"
 'og:title': "AWS API Gatewayチュートリアルの手順5"
 'og:description': "Amazon API Gatewayチュートリアルの手順5"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "AWS API Gatewayチュートリアルの手順5"
 'twitter:description': "Amazon API Gatewayチュートリアルの手順5"
 ---
-# AWS API Gatewayチュートリアルの手順5
 
 <Warning>
 
@@ -40,11 +40,11 @@ JWTにユーザー情報を追加するには、いくつかの方法があり�
 
 #### ルールを使用する
 
-ユーザーのメールアドレスをJWTに追加する方法の1つが、[ルール](/docs/rules)です。この方法は、値がユーザー認証用のJWTで常に利用可能なことを確実にしたい場合には適切です。
+ユーザーのメールアドレスをJWTに追加する方法の1つが、[ルール](/docs/ja-jp/rules)です。この方法は、値がユーザー認証用のJWTで常に利用可能なことを確実にしたい場合には適切です。
 
 `login.js`では、`auth.signin`に渡されるパラメーターにこのスコープが指定されているのを確認できます。
 
-```
+```javascript lines
 $scope.login = function() {
     var params = {
         authParams: {
@@ -87,7 +87,7 @@ path: 'examples/api-gateway/lambda'
 
 秘密鍵で`auth0-variables.js`を更新します。秘密鍵は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Auth0 Dashboard</Tooltip>にある［Application（アプリケーション）］の［Settings（設定）］タブに表示されます。
 
-```javascript
+```javascript lines
 var env={};
 env.AUTH0_SECRET='{yourAuth0Secret}';
 module.exports = env;
@@ -97,7 +97,7 @@ module.exports = env;
 
 `index.js`でロジックを確認します。60行目辺りのロジックではトークンが検証して解読され、購入ロジックで使われるID情報が含まれた、デコードされた情報が抽出されています。
 
-```
+```javascript lines
 if(event.authToken) {
      jwt.verify(event.authToken, secret, function(err, decoded) {
          if(err) {
@@ -135,7 +135,7 @@ if(event.authToken) {
 
 検証プロセスを続けるために、AWS Lambda関数へのPOSTの本文でJWTを渡します。これを行うには、以下のように、本文から`userName`を削除して、`authToken`を追加することで、`home.js`で`buyPet`メソッドを更新します。
 
-```javascript
+```javascript lines
 function buyPet(user, id) {
     var apigClient = getSecureApiClient();
     var body = {

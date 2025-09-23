@@ -1,13 +1,13 @@
 ---
 title: "Node 12および16からNode 18への移行"
 permalink: "migrate-nodejs-16-to-nodejs-18"
+'description': "Node.js v12、16からNode.js v18への移行で影響を受けるAuth0 Actionsアイテムについて説明します。"
 'og:title': "Node 12および16からNode 18への移行"
 'og:description': "Node.js v12、16からNode.js v18への移行で影響を受けるAuth0 Actionsアイテムについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Node 12および16からNode 18への移行"
 'twitter:description': "Node.js v12、16からNode.js v18への移行で影響を受けるAuth0 Actionsアイテムについて説明します。"
 ---
-# Node 12および16からNode 18への移行
 
 Node.js 12および16の長期サポート（LTS）は、2023年に終了しました。つまり、Node.js開発チームが、重要なセキュリティ修正をこれらのバージョンにバックポートしないことを意味します。Node 12または16のランタイムで実行することは、拡張コードをセキュリティ脆弱性にさらす可能性があります。
 
@@ -23,11 +23,11 @@ Node 18の拡張ランタイムは、弊社の一連の拡張オファリング�
 
 #### ソーシャル接続の統合
 
-Nodeランタイムバージョンの変更が影響を与える可能性があるソーシャル接続の全リストを確認するには、[Management API](/docs/api/management/v2)を使用します。特に、カスタムソーシャル接続として明示的に作成されたものか、Marketplaceを通して最初に追加されたものかを問わず、影響を受ける可能性があるソーシャル接続はすべて、`oauth1`か`oauth2`のいずれかの値の`strategy`属性を持ちます。
+Nodeランタイムバージョンの変更が影響を与える可能性があるソーシャル接続の全リストを確認するには、[Management API](/docs/ja-jp/api/management/v2)を使用します。特に、カスタムソーシャル接続として明示的に作成されたものか、Marketplaceを通して最初に追加されたものかを問わず、影響を受ける可能性があるソーシャル接続はすべて、`oauth1`か`oauth2`のいずれかの値の`strategy`属性を持ちます。
 
 `GET`接続<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>エンドポイントを使用して、ある特定のテナント内での既存のカスタムソーシャル接続すべてをページネーションできます。たとえば、以下のクエリオプションは、最大100のカスタムソーシャル接続の名前と識別子を返します。
 
-```
+``` lines
 /api/v2/connections?strategy=oauth1&strategy=oauth2&include_totals=true&fields=name&per_page=100
 ```
 
@@ -46,7 +46,7 @@ Auth0 Dashboardを通してNode 18で新しいカスタムActionsを作成する
 
 ### 既存のカスタムActionsをアップグレード
 
-Node 12または16で構築された既存のカスタムActionsをNode 18に個々にアップグレードでき、また古いランタイムを使用して[前のバージョンに戻す](/docs/customize/actions/manage-versions#revert-actions)ことができます。ActionsをNode 18にアップグレードするには、必要な変更を加えて、ランタイムでNode 18が使用されるように設定して、既存の実装の新しいバージョンを作成してデプロイします。
+Node 12または16で構築された既存のカスタムActionsをNode 18に個々にアップグレードでき、また古いランタイムを使用して[前のバージョンに戻す](/docs/ja-jp/customize/actions/manage-versions#revert-actions)ことができます。ActionsをNode 18にアップグレードするには、必要な変更を加えて、ランタイムでNode 18が使用されるように設定して、既存の実装の新しいバージョンを作成してデプロイします。
 
 ### 他の拡張製品のためにNode 18を選択する
 
@@ -111,7 +111,7 @@ HooksおよびActionsにおいては、モジュールを要求する前に、�
 
 <Warning>
 
-次のカスタムソーシャル接続（[Indeed](https://marketplace.auth0.com/integrations/indeed-social-connection)、[monday.com](https://marketplace.auth0.com/integrations/monday-com-monday-com-social-connection)、[Snapchat](https://marketplace.auth0.com/integrations/snapchat-social-connection)、および[Tumblr](https://marketplace.auth0.com/integrations/tumblr-social-connection)）のユーザープロファイルの取得スクリプトは、Marketplaceで利用可能で、`0.22.0`バージョンの`axios`モジュールを使用していましたが、Node 18では利用できません。これらの接続のいずれかを使用する場合は、必要に応じて[Management API](/docs/api/management/v2)を通じてそのスクリプトを確認し、更新してください。
+次のカスタムソーシャル接続（[Indeed](https://marketplace.auth0.com/integrations/indeed-social-connection)、[monday.com](https://marketplace.auth0.com/integrations/monday-com-monday-com-social-connection)、[Snapchat](https://marketplace.auth0.com/integrations/snapchat-social-connection)、および[Tumblr](https://marketplace.auth0.com/integrations/tumblr-social-connection)）のユーザープロファイルの取得スクリプトは、Marketplaceで利用可能で、`0.22.0`バージョンの`axios`モジュールを使用していましたが、Node 18では利用できません。これらの接続のいずれかを使用する場合は、必要に応じて[Management API](/docs/ja-jp/api/management/v2)を通じてそのスクリプトを確認し、更新してください。
 
 </Warning>
 
@@ -1163,7 +1163,7 @@ HooksおよびActionsにおいては、モジュールを要求する前に、�
 
 拡張コードが外部ネットワーク呼び出しを行う場合、ターゲットサーバーは安全な再ネゴシエーションをサポートしていなければならず、そうでなければ要求は失敗し、以下のようなエラーを受け取ります。
 
-```
+``` lines
 Error: write EPROTO C0BAF076:error:0A000152:SSL routines:final_renegotiate:unsafe legacy renegotiation disabled:../deps/openssl/openssl/ssl/statem/extensions.c:922:
 ```
 
@@ -1171,7 +1171,7 @@ Error: write EPROTO C0BAF076:error:0A000152:SSL routines:final_renegotiate:unsaf
 
 たとえば、`axios`ライブラリーについては、以下のコードスニペットが、旧来の動作にオプトインする方法を示しています。
 
-```javascript
+```javascript lines
 const axios = require('axios');
 const https = require('https');
 const crypto = require('crypto');
@@ -1187,7 +1187,7 @@ axios.get(
   })
 ```
 
-```javascript
+```javascript lines
 const axios = require('axios');
 const https = require('https');
 const crypto = require('crypto');

@@ -1,13 +1,13 @@
 ---
 title: "操作方法（B2B）"
 permalink: "operations"
+'description': "Auth0テナント環境を利用できるようにする方法について説明します。"
 'og:title': "操作方法（B2B）"
 'og:description': "Auth0テナント環境を利用できるようにする方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "操作方法（B2B）"
 'twitter:description': "Auth0テナント環境を利用できるようにする方法について説明します。"
 ---
-# 操作方法（B2B）
 
 利用可能な状態にするには、インフラストラクチャーを構成またはセットアップして、ビジネスの継続性において求められるスケーラブルで、測定可能、そして定量化が可能な運用に対応する必要があります。Auth0には、サポートサービスの手配（メールプロバイダーなど）、デプロイメントの監視サービス、異常状態の検出に加え、本番環境において問題が発生した際に、迅速かつスムーズにリカバリーするための対処方法を準備することが含まれています。
 
@@ -73,7 +73,7 @@ Auth0で実行するカスタムコードでネットワーク内のサービス
 
 ### レート制限とその他のエラー
 
-Auth0には、[レート制限を超過する](/docs/ja-jp/troubleshoot/customer-support/operational-policies/rate-limit-policy)と報告されるエラーに独自のエラーコードを用意しています。ログの自動スキャンをセットアップしてレート制限エラーを確認する必要があります。こうすれば、ユーザーに影響が及ぶ前に、レート制限を超過しそうなアクティビティへ事前に対処することが可能です。また、Auth0では、他の種類のエラーに対するエラーコードも公開している、[認証エラー](/docs/ja-jp/libraries/common-auth0-library-authentication-errors)に関するログだけでなく、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Management API</Tooltip>コールからのエラーをスキャンするのにも役立ちます（Management APIエラーコードは、[Management API Explorer](/docs/api/management/v2)内の各コールの下に表示されます）。
+Auth0には、[レート制限を超過する](/docs/ja-jp/troubleshoot/customer-support/operational-policies/rate-limit-policy)と報告されるエラーに独自のエラーコードを用意しています。ログの自動スキャンをセットアップしてレート制限エラーを確認する必要があります。こうすれば、ユーザーに影響が及ぶ前に、レート制限を超過しそうなアクティビティへ事前に対処することが可能です。また、Auth0では、他の種類のエラーに対するエラーコードも公開している、[認証エラー](/docs/ja-jp/libraries/common-auth0-library-authentication-errors)に関するログだけでなく、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Management API</Tooltip>コールからのエラーをスキャンするのにも役立ちます（Management APIエラーコードは、[Management API Explorer](/docs/ja-jp/api/management/v2)内の各コールの下に表示されます）。
 
 ### ベストプラクティス
 
@@ -85,7 +85,7 @@ Auth0には、[レート制限を超過する](/docs/ja-jp/troubleshoot/customer
 
 ### ベストプラクティス
 
-代理ログイントランザクションを送信できる機能をセットアップすることで、認証のエンドツーエンドのモニタリングが容易になります。これは[リソース所有者パスワード付与](/docs/api-auth/tutorials/password-grant)と権限のないテストユーザーを組み合わせて使用する簡単なアプリケーションで行うことができます。[Auth0レート制限ポリシー](/docs/policies/rate-limits)についてもご確認ください。
+代理ログイントランザクションを送信できる機能をセットアップすることで、認証のエンドツーエンドのモニタリングが容易になります。これは[リソース所有者パスワード付与](/docs/ja-jp/api-auth/tutorials/password-grant)と権限のないテストユーザーを組み合わせて使用する簡単なアプリケーションで行うことができます。[Auth0レート制限ポリシー](/docs/ja-jp/policies/rate-limits)についてもご確認ください。
 
 ## 通知
 
@@ -107,7 +107,7 @@ Auth0では、複数のセキュリティ関連のテストを定期的に実行
 
 ### ベストプラクティス
 
-定期的にAuth0 [「セキュリティ情報」](/docs/security/bulletins)ページを確認し、セキュリティ情報の影響を受けている場合には、推奨される対策を講じることがベストプラクティスです。
+定期的にAuth0 [「セキュリティ情報」](/docs/ja-jp/security/bulletins)ページを確認し、セキュリティ情報の影響を受けている場合には、推奨される対策を講じることがベストプラクティスです。
 
 ### 変更ログ
 
@@ -134,7 +134,7 @@ Auth0では、Auth0[変更ログ](https://auth0.com/changelog)内でサービス
 
 ### 組織管理者ポータル
 
-組織管理者ポータルでは、管理者が組織の作成、編集、削除を行えます。独自のシステムとAuth0テナントの両方で、複数の作業を実行する必要があります。このポータルは、システム内のデータストアと構成にアクセスできるよう、独自のシステム内に必要となる可能性があります。ただし、Auth0は[Auth0 Management API](/docs/api/management/v2)を提供しているため、独自のシステム内で変更を行うと同時に、変更内容をAuth0テナントに反映することができます。
+組織管理者ポータルでは、管理者が組織の作成、編集、削除を行えます。独自のシステムとAuth0テナントの両方で、複数の作業を実行する必要があります。このポータルは、システム内のデータストアと構成にアクセスできるよう、独自のシステム内に必要となる可能性があります。ただし、Auth0は[Auth0 Management API](/docs/ja-jp/api/management/v2)を提供しているため、独自のシステム内で変更を行うと同時に、変更内容をAuth0テナントに反映することができます。
 
 新しい組織を作成するには、主に2つの方法があります。どちらを選択するかは、新しい組織がデプロイされるまでに、どれだけの時間的な余裕があるかに依存します。
 
@@ -154,7 +154,7 @@ Organizationが必要とするアイテムだけを含む別のリポジトリ�
 
 ## セルフサービスのIdPプロビジョニング
 
-Auth0[接続](/docs/identityproviders)を利用すると、IdPを簡単に構成することができる一方で、オンボードの顧客組織IdPには時間がかかる工程となる可能性があります。定期的に新規顧客組織やIdP要件を変更中の既存組織に販売する場合には、いっそう時間を要します。そのため、顧客の組織管理者用にセルフサービスのポータルを構築することは意義があると、多くのお客様が答えています。結果的に、顧客が自社専用のIdPを構成できるようになるからです。その結果、IT部署の作業負荷を削減することになります。[Auth0 Management API](/docs/api/management/v2)には、これを実現する上で必要となる[接続管理機能](/docs/api/management/v2#!/Connections/get_connections)がすべて用意されています。
+Auth0[接続](/docs/ja-jp/identityproviders)を利用すると、IdPを簡単に構成することができる一方で、オンボードの顧客組織IdPには時間がかかる工程となる可能性があります。定期的に新規顧客組織やIdP要件を変更中の既存組織に販売する場合には、いっそう時間を要します。そのため、顧客の組織管理者用にセルフサービスのポータルを構築することは意義があると、多くのお客様が答えています。結果的に、顧客が自社専用のIdPを構成できるようになるからです。その結果、IT部署の作業負荷を削減することになります。[Auth0 Management API](/docs/ja-jp/api/management/v2)には、これを実現する上で必要となる[接続管理機能](/docs/ja-jp/api/management/v2#!/Connections/get_connections)がすべて用意されています。
 
 ## プロジェクト計画ガイド
 

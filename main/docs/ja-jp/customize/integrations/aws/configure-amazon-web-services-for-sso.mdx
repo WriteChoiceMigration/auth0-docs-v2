@@ -1,13 +1,13 @@
 ---
 title: "シングルサインオンにAmazon Web Servicesを構成する"
 permalink: "configure-amazon-web-services-for-sso"
+'description': "Auth0のシングルサインオン（SSO）にAmazon Web Services（AWS）を構成する方法について説明します。"
 'og:title': "シングルサインオンにAmazon Web Servicesを構成する"
 'og:description': "Auth0のシングルサインオン（SSO）にAmazon Web Services（AWS）を構成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "シングルサインオンにAmazon Web Servicesを構成する"
 'twitter:description': "Auth0のシングルサインオン（SSO）にAmazon Web Services（AWS）を構成する方法について説明します。"
 ---
-# シングルサインオンにAmazon Web Servicesを構成する
 
 Auth0をAWSと統合すると、サポートされているIDプロバイダーを使って、ユーザーがAWSにログインできるようになります。
 
@@ -71,7 +71,7 @@ Auth0をAWSと統合すると、サポートされているIDプロバイダー�
 
 <Note>
 
-高度なユースケースでロールを割り当てるサーバー側ルールについては、[Amazon API Gatewayのチュートリアル](/docs/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-5)を参照してください。
+高度なユースケースでロールを割り当てるサーバー側ルールについては、[Amazon API Gatewayのチュートリアル](/docs/ja-jp/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-5)を参照してください。
 
 </Note>
 
@@ -79,7 +79,7 @@ Auth0をAWSと統合すると、サポートされているIDプロバイダー�
 
 1. AWSロールをユーザーにマッピングするには、[ルール](/docs/ja-jp/customize/rules)を作成します。
 
-   ```javascript
+   ```javascript lines
    function (user, context, callback) {
 
      user.awsRole = 'arn:aws:iam::951887872838:role/TestSAML,arn:aws:iam::951887872838:saml-provider/MyAuth0';
@@ -127,7 +127,7 @@ Auth0をAWSと統合すると、サポートされているIDプロバイダー�
 
 たとえば、以下の構造を持つActive Directoryグループがあるとします。
 
-```javascript
+```javascript lines
 var user = {
   app_metadata: {
     ad_groups: {
@@ -141,7 +141,7 @@ var user = {
 
 この場合、ルールは次のようになります。
 
-```javascript
+```javascript lines
 function (user, context, callback) {
 
   var userGroups = user.app_metadata.ad_groups;
@@ -173,7 +173,7 @@ AWSセッションが期限切れになるまでの猶予時間（3600秒）を�
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 function (user, context, callback) {
     if(context.clientID !== '{yourClientId}'){
       return callback(null, user, context);

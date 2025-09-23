@@ -1,13 +1,13 @@
 ---
 title: "Implement Advanced Security Monitoring with Auth0 Model Context Protocol (MCP) Server"
 permalink: "implement-advanced-security-monitoring-with-auth0-model-context-protocol-mcp"
+'description': "Leverage Auth0 Model Context Protocol (MCP) Server and Claude to implement a sophisticated security monitoring and automated response system."
 'og:title': "Implement Advanced Security Monitoring with Auth0 Model Context Protocol (MCP) Server"
 'og:description': "Leverage Auth0 Model Context Protocol (MCP) Server and Claude to implement a sophisticated security monitoring and automated response system."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Implement Advanced Security Monitoring with Auth0 Model Context Protocol (MCP) Server"
 'twitter:description': "Leverage Auth0 Model Context Protocol (MCP) Server and Claude to implement a sophisticated security monitoring and automated response system."
 ---
-# Implement Advanced Security Monitoring with Auth0 Model Context Protocol (MCP) Server
 
 <Card title="Overview">
 
@@ -36,7 +36,7 @@ The first step in building a security monitoring system is to understand what no
 
 Ask Claude:
 
-```
+```python lines
 Analyze my Auth0 logs from the past week to identify normal authentication patterns. Look for common IP ranges, devices, browsers, and time-of-day patterns.
 ```
 
@@ -48,7 +48,7 @@ Now that you understand normal patterns, you can create Actions that detect susp
 
 Ask Claude:
 
-```
+``` lines
 Create an action that detects the following suspicious activities:
 1. Multiple failed login attempts within a short time period
 2. Logins from unusual geographic locations for a user
@@ -64,7 +64,7 @@ After you have detection in place, next you'll need to create Actions that respo
 
 Ask Claude:
 
-```
+``` lines
 Create an action that responds to security threats based on risk score:
 1. For low risk (score < 30), allow the login but log the event
 2. For medium risk (score 30-60), require additional verification like MFA
@@ -79,7 +79,7 @@ With your security Actions created, you need to deploy them in the correct seque
 
 Ask Claude:
 
-```
+``` lines
 Deploy the security detection action first, followed by the response action. They should run in sequence during the login flow.
 ```
 
@@ -91,7 +91,7 @@ For medium-risk logins that require additional verification, you'll want to crea
 
 Ask Claude:
 
-```
+``` lines
 Create a custom form for additional security verification that explains to the user why additional verification is needed and provides clear instructions.
 ```
 
@@ -99,7 +99,7 @@ Claude will use the `auth0_create_form` tool to create a custom Form. After crea
 
 Ask Claude:
 
-```
+``` lines
 Publish the form to my tenant
 ```
 
@@ -109,7 +109,7 @@ To ensure your security system is working effectively, you need to monitor secur
 
 Ask Claude:
 
-```
+```python lines
 Show me all high-risk security events from the past 24 hours, and identify any patterns or trends, using score-based categorization.
 ```
 
@@ -121,7 +121,7 @@ Based on your monitoring, you may need to fine-tune your security system to redu
 
 Ask Claude:
 
-```
+```python lines
 Update the security detection action to be more sensitive to logins from Russia and China, and less sensitive to unusual login times for users in the IT department.
 ```
 
@@ -129,7 +129,7 @@ Claude will use `auth0_get_action` to retrieve the current Action code, then use
 
 Ask Claude:
 
-```
+``` lines
 Deploy the action to my tenant.
 ```
 

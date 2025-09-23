@@ -1,13 +1,13 @@
 ---
 title: "ボット検知をネイティブアプリケーションに追加する"
 permalink: "bot-detection-native-apps"
+'description': "ボット保護と検知を、Auth0.Swift、Auth0.Android、Lock.Swift、およびLock.Androidを使用するネイティブアプリケーションに追加する方法について説明します。"
 'og:title': "ボット検知をネイティブアプリケーションに追加する"
 'og:description': "ボット保護と検知を、Auth0.Swift、Auth0.Android、Lock.Swift、およびLock.Androidを使用するネイティブアプリケーションに追加する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ボット検知をネイティブアプリケーションに追加する"
 'twitter:description': "ボット保護と検知を、Auth0.Swift、Auth0.Android、Lock.Swift、およびLock.Androidを使用するネイティブアプリケーションに追加する方法について説明します。"
 ---
-# ボット検知をネイティブアプリケーションに追加する
 
 [ボット検知](/docs/ja-jp/secure/attack-protection/bot-detection)をネイティブアプリケーションに追加する場合、使用するSDKと認証フローによっては、構成をほとんどまたは全く必要としません。
 
@@ -25,15 +25,15 @@ permalink: "bot-detection-native-apps"
 
 ### Auth0.swiftの例
 
-アプリケーションが、[Authentication API](/docs/api/authentication)を通じてデータベースログイン/サインアップを実行する場合は、`isVerificationRequired`エラーを処理する必要があります。このエラーは、要求が疑わしいとフラグが立てられ、ユーザー認証に別の検証ステップが必要であることを示します。
+アプリケーションが、[Authentication API](/docs/ja-jp/api/authentication)を通じてデータベースログイン/サインアップを実行する場合は、`isVerificationRequired`エラーを処理する必要があります。このエラーは、要求が疑わしいとフラグが立てられ、ユーザー認証に別の検証ステップが必要であることを示します。
 
 <Note>
 
-この検証ステップはWebベースであるため、[ユニバーサルログイン](/docs/authenticate/login/auth0-universal-login)を使用しないと完了できません。
+この検証ステップはWebベースであるため、[ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)を使用しないと完了できません。
 
 </Note>
 
-```
+```swift lines
 Auth0
     .authentication()
     .login(usernameOrEmail: email, 
@@ -74,11 +74,11 @@ Auth0
 
 <Note>
 
-この検証ステップはWebベースであるため、[ユニバーサルログイン](/docs/authenticate/login/auth0-universal-login)を使用しないと完了できません。
+この検証ステップはWebベースであるため、[ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)を使用しないと完了できません。
 
 </Note>
 
-```
+```javascript lines
 final String email = "username@domain.com";
 final String password = "a secret password";
 final String realm = "my-database-connection";

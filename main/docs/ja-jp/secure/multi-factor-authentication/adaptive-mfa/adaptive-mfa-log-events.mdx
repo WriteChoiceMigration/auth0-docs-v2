@@ -1,17 +1,17 @@
 ---
 title: "Adaptive MFAログイベント"
 permalink: "adaptive-mfa-log-events"
+'description': "Auth0でアダプティブ多要素認証（MFA）アクティビティをキャプチャするテナントログイベントについて説明します。"
 'og:title': "Adaptive MFAログイベント"
 'og:description': "Auth0でアダプティブ多要素認証（MFA）アクティビティをキャプチャするテナントログイベントについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Adaptive MFAログイベント"
 'twitter:description': "Auth0でアダプティブ多要素認証（MFA）アクティビティをキャプチャするテナントログイベントについて説明します。"
 ---
-# Adaptive MFAログイベント
 
 テナントログには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Adaptive MFA</Tooltip>リスク評価スコアに関連する情報を含む、成功したログインイベントと失敗したログインイベントのエントリが含まれます。これらは、ルールコンテキストオブジェクトで使用できるエントリと同じです。Adaptive <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">MFA</Tooltip>エントリの構造は次のとおりです。
 
-```json
+```javascript lines
 {
   "date": "2020-06-26T15:12:43.654Z",
   "type": "s",
@@ -44,7 +44,7 @@ permalink: "adaptive-mfa-log-events"
 
 以下に例を示します。
 
-```json
+```javascript lines
 {
   "date": "2020-06-24T20:24:39.412Z",
   "type": "s",
@@ -125,7 +125,7 @@ permalink: "adaptive-mfa-log-events"
 
 Auth0は、ルール実行に関する情報を提供するだけでなく、Adaptive MFA攻撃保護情報をテナントログに含めます。ルールに表示されるのと同じデータ構造がテナントログに表示されます。
 
-```json
+```javascript lines
 {
   "date": "2020-06-26T15:12:43.654Z",
   "type": "s",
@@ -159,7 +159,7 @@ Auth0は、ルール実行に関する情報を提供するだけでなく、Ada
 
 Adaptive MFAが有効になっている場合、信頼度スコアが低い最初のログイン試行時に、ユーザーはMFA登録を求められます。ログインイベントの詳細に**MFA**プロンプトが表示される場合があります。例：
 
-```json
+```javascript lines
 {
   "_id": "5ef3bb0a72487a0047c32959",
   "date": "2020-06-24T20:43:54.159Z",
@@ -253,7 +253,7 @@ Adaptive MFAが有効になっている場合、信頼度スコアが低い最�
 
 特定のMFAプロバイダーのイベントが表示される場合があります。**OTP認証成功**イベントを含む例を以下に示します。
 
-```json
+```javascript lines
 {
   "_id": "5ef3bb0922b43d004844af00",
   "date": "2020-06-24T20:43:53.758Z",

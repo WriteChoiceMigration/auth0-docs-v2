@@ -1,13 +1,13 @@
 ---
 title: "Auth0 Guardian"
 permalink: "auth0-guardian"
+'description': "Guardianの仕組みと、Guardian SDKを使用して独自の認証システムやGuardianのようなアプリケーションを構築する方法について説明します。"
 'og:title': "Auth0 Guardian"
 'og:description': "Guardianの仕組みと、Guardian SDKを使用して独自の認証システムやGuardianのようなアプリケーションを構築する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0 Guardian"
 'twitter:description': "Guardianの仕組みと、Guardian SDKを使用して独自の認証システムやGuardianのようなアプリケーションを構築する方法について説明します。"
 ---
-# Auth0 Guardian
 
 Auth0 Guardianは、iOSおよびAndroidデバイス用のモバイルアプリケーションで、ユーザーはプッシュ通知または一時的なワンタイムパスワードを使用して[多要素認証（MFA）](/docs/ja-jp/secure/multi-factor-authentication)を完了できます。
 
@@ -24,7 +24,7 @@ Auth0プッシュ通知は、AWS Simple Notification Service （SNS）または�
 * Firebase Cloud Messaging（FCM）
 * Apple Push Notification（APN）
 
-<Frame>![Auth0 Guardian flow diagram](//images.ctfassets.net/cdy7uua7fh8z/TdN0nXfYs0mqHpi9U3JQ9/e1018ba751dc3dc147c09d1e511c0d0a/diagram.png)</Frame>
+<Frame>![Auth0 Guardian flow diagram](/images/ja-jp/cdy7uua7fh8z/TdN0nXfYs0mqHpi9U3JQ9/e1018ba751dc3dc147c09d1e511c0d0a/diagram.png)</Frame>
 
 ### プッシュ通知に登録する
 
@@ -32,7 +32,7 @@ Auth0 Guardianを使用してプッシュ通知を構成すると、ユーザー
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>の[［Security（セキュリティ）］>［Multi-factor Auth（多要素認証）］>［Push Notification using Auth0 Guardian（Auth0 Guardianを使ったプッシュ通知）］](https://manage.auth0.com/#/security/mfa/guardian)から、プッシュ通知を有効にすることができます。
 
-<Frame>![Auth0 Dashboard > Security > Multi-factor Auth > Push Notification using Auth0 Guardian](//images.ctfassets.net/cdy7uua7fh8z/fwjSKFNhsvObzdPDiA79N/bb3b226023807be99c2249ff4d8c0465/Auth0_Guardian_-_Dashboard_setting.png)</Frame>
+<Frame>![Auth0 Dashboard > Security > Multi-factor Auth > Push Notification using Auth0 Guardian](/images/ja-jp/cdy7uua7fh8z/fwjSKFNhsvObzdPDiA79N/bb3b226023807be99c2249ff4d8c0465/Auth0_Guardian_-_Dashboard_setting.png)</Frame>
 
 ユーザーが初めてアプリケーションにサインアップまたはログインすると、Auth0 GuardianアプリまたはカスタムのGuardian SDKアプリを第二認証要素として登録できるQRコードを[ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)が提供します。ユーザーは、指定されたアプリでこのコードをスキャンして登録を完了するまでの時間が短くなります。
 
@@ -66,7 +66,7 @@ Auth0 Guardianや他のカスタムアプリを介してプッシュ通知を受
 1. ユーザーがアプリケーションへのログインを試行する。ユニバーサルログインMFAプロンプトが表示されるが、プッシュ通知を受信しない。
 2. MFAプロンプトで、ユーザーが**［Manuallay Enter Code（手動でコードを入力する）］**ボタンを選択する。OTPを使用して認証するには、このオプションを選択する必要がある。
 
-   <Frame>![［Manuallay Enter Code（手動でコードを入力する）］ボタンを表示するMFAプロンプトの例](//images.ctfassets.net/cdy7uua7fh8z/7reEOLI5CWxbpRzgZY7gxg/5cea15c9d8586a68df32c42d292c7478/MFA_-_Push_-_Japanese.png)</Frame>
+   <Frame>![［Manuallay Enter Code（手動でコードを入力する）］ボタンを表示するMFAプロンプトの例](/images/ja-jp/cdy7uua7fh8z/7reEOLI5CWxbpRzgZY7gxg/5cea15c9d8586a68df32c42d292c7478/MFA_-_Push_-_Japanese.png)</Frame>
 
 3. ユーザーがAuth0 GuardianまたはカスタムGuardian SDKアプリを開き、アクセスしようとしているアプリケーションを選択する。
 4. ユーザーが、［Account Detail（アカウント詳細）］ページの下部に表示されるOTPをコピーする。
@@ -82,11 +82,11 @@ Auth0 Guardianや他のカスタムアプリを介してプッシュ通知を受
 
 * **携帯電話以外のデバイス**：ユニバーサルログインはQRコードを表示し、ユーザーがスキャンして登録を続けられるようにします。
 
-<Frame>![Trouble Scanning?（スキャンできませんか？）リンクを表示するOTP登録プロンプトの例](//images.ctfassets.net/cdy7uua7fh8z/3kbyOBiLOpJiY8vI0kUqwg/8dba996a91cf3a66a9c7e4bd6ffd0b90/OTP_Challenge_3_-_Japanese.png)</Frame>
+<Frame>![Trouble Scanning?（スキャンできませんか？）リンクを表示するOTP登録プロンプトの例](/images/ja-jp/cdy7uua7fh8z/3kbyOBiLOpJiY8vI0kUqwg/8dba996a91cf3a66a9c7e4bd6ffd0b90/OTP_Challenge_3_-_Japanese.png)</Frame>
 
 * **携帯電話**：ユニバーサルログインはQRコードではなく、登録コードを直接表示します。
 
-<Frame>![The temporary one-time password enrollment screen as displayed on a mobile device. ](//images.ctfassets.net/cdy7uua7fh8z/5QvQ9FLYnVZXINFAeLkIr9/e244b935a012172d8ce64f26d85f07b3/OTP_prompt_-_Japanese.png)</Frame>
+<Frame>![The temporary one-time password enrollment screen as displayed on a mobile device. ](/images/ja-jp/cdy7uua7fh8z/5QvQ9FLYnVZXINFAeLkIr9/e244b935a012172d8ce64f26d85f07b3/OTP_prompt_-_Japanese.png)</Frame>
 
 どちらの方法でも、ユーザーは画面に表示された手順に従って、Auth0 GuardianアプリまたはカスタムのGuardian SDKアプリを認証の第2要素として登録できます。一般的に、このプロセスではユーザーがアプリケーションを適切なアプリに追加して、そのアプリケーション用のOTPを取得します。そして、ユーザーはOTPをユニバーサルログインのプロンプトに入力し、登録プロセスを完了させます。
 
@@ -157,291 +157,291 @@ Auth0 Guardianアプリは、次の言語と方言をサポートしています
 <tbody>
 <tr>
 <td>アルバニア語</td>
-<td><code>sq</code></td>
+<td>`sq`</td>
 </tr>
 <tr>
 <td>アムハラ語</td>
-<td><code>am</code></td>
+<td>`am`</td>
 </tr>
 <tr>
 <td>アルメニア語</td>
-<td><code>hy</code></td>
+<td>`hy`</td>
 </tr>
 <tr>
 <td>アゼルバイジャン語</td>
-<td><code>az</code></td>
+<td>`az`</td>
 </tr>
 <tr>
 <td>バスク語</td>
-<td><code>eu-ES</code></td>
+<td>`eu-ES`</td>
 </tr>
 <tr>
 <td>ベンガル語</td>
-<td><code>bn</code></td>
+<td>`bn`</td>
 </tr>
 <tr>
 <td>ボスニア語</td>
-<td><code>bs</code></td>
+<td>`bs`</td>
 </tr>
 <tr>
 <td>ブルガリア語</td>
-<td><code>bg</code></td>
+<td>`bg`</td>
 </tr>
 <tr>
 <td>カタルニア語</td>
-<td><code>ca-ES</code></td>
+<td>`ca-ES`</td>
 </tr>
 <tr>
 <td>中国語 - 香港特別行政区</td>
-<td><code>zh-HK</code></td>
+<td>`zh-HK`</td>
 </tr>
 <tr>
 <td>中国語 - 簡体</td>
-<td><code>zh-CN</code></td>
+<td>`zh-CN`</td>
 </tr>
 <tr>
 <td>中国語 - 繁体</td>
-<td><code>zh-TW</code></td>
+<td>`zh-TW`</td>
 </tr>
 <tr>
 <td>クロアチア語</td>
-<td><code>hr</code></td>
+<td>`hr`</td>
 </tr>
 <tr>
 <td>チェコ語</td>
-<td><code>cs</code></td>
+<td>`cs`</td>
 </tr>
 <tr>
 <td>デンマーク語</td>
-<td><code>da</code></td>
+<td>`da`</td>
 </tr>
 <tr>
 <td>オランダ語</td>
-<td><code>nl</code></td>
+<td>`nl`</td>
 </tr>
 <tr>
 <td>英語</td>
-<td><code>en</code></td>
+<td>`en`</td>
 </tr>
 <tr>
 <td>英語 - カナダ</td>
-<td><code>en-CA</code></td>
+<td>`en-CA`</td>
 </tr>
 <tr>
 <td>エストニア語</td>
-<td><code>et</code></td>
+<td>`et`</td>
 </tr>
 <tr>
 <td>フィンランド語</td>
-<td><code>fi</code></td>
+<td>`fi`</td>
 </tr>
 <tr>
 <td>フランス語</td>
-<td><code>fr-FR</code></td>
+<td>`fr-FR`</td>
 </tr>
 <tr>
 <td>フランス語 - カナダ</td>
-<td><code>fr-CA</code></td>
+<td>`fr-CA`</td>
 </tr>
 <tr>
 <td>ガリシア語</td>
-<td><code>gl-ES</code></td>
+<td>`gl-ES`</td>
 </tr>
 <tr>
 <td>ジョージア語</td>
-<td><code>ka</code></td>
+<td>`ka`</td>
 </tr>
 <tr>
 <td>ドイツ語</td>
-<td><code>de</code></td>
+<td>`de`</td>
 </tr>
 <tr>
 <td>ギリシャ語</td>
-<td><code>el</code></td>
+<td>`el`</td>
 </tr>
 <tr>
 <td>グジャラート語</td>
-<td><code>gu</code></td>
+<td>`gu`</td>
 </tr>
 <tr>
 <td>ヒンディー語</td>
-<td><code>hi</code></td>
+<td>`hi`</td>
 </tr>
 <tr>
 <td>ハンガリー語</td>
-<td><code>hu</code></td>
+<td>`hu`</td>
 </tr>
 <tr>
 <td>アイスランド語</td>
-<td><code>is</code></td>
+<td>`is`</td>
 </tr>
 <tr>
 <td>インドネシア語</td>
-<td><code>id</code></td>
+<td>`id`</td>
 </tr>
 <tr>
 <td>イタリア語</td>
-<td><code>it</code></td>
+<td>`it`</td>
 </tr>
 <tr>
 <td>日本語</td>
-<td><code>ja</code></td>
+<td>`ja`</td>
 </tr>
 <tr>
 <td>カンナダ語</td>
-<td><code>kn</code></td>
+<td>`kn`</td>
 </tr>
 <tr>
 <td>韓国語</td>
-<td><code>ko</code></td>
+<td>`ko`</td>
 </tr>
 <tr>
 <td>ラトビア語</td>
-<td><code>lv</code></td>
+<td>`lv`</td>
 </tr>
 <tr>
 <td>リトアニア語</td>
-<td><code>lt</code></td>
+<td>`lt`</td>
 </tr>
 <tr>
 <td>マケドニア語</td>
-<td><code>mk</code></td>
+<td>`mk`</td>
 </tr>
 <tr>
 <td>マレー語</td>
-<td><code>ms</code></td>
+<td>`ms`</td>
 </tr>
 <tr>
 <td>マラヤーラム語</td>
-<td><code>ml</code></td>
+<td>`ml`</td>
 </tr>
 <tr>
 <td>マラーティー語</td>
-<td><code>mr</code></td>
+<td>`mr`</td>
 </tr>
 <tr>
 <td>モンゴル語</td>
-<td><code>mn</code></td>
+<td>`mn`</td>
 </tr>
 <tr>
 <td>モンテネグロ語</td>
-<td><code>cnr</code></td>
+<td>`cnr`</td>
 </tr>
 <tr>
 <td>ミャンマー語</td>
-<td><code>my</code></td>
+<td>`my`</td>
 </tr>
 <tr>
 <td>ノルウェー語</td>
-<td><code>no</code></td>
+<td>`no`</td>
 </tr>
 <tr>
 <td>ノルウェー語 - ブークモール</td>
-<td><code>nb</code></td>
+<td>`nb`</td>
 </tr>
 <tr>
 <td>ノルウェー語 - ニーノシュク</td>
-<td><code>nn</code></td>
+<td>`nn`</td>
 </tr>
 <tr>
 <td>ポーランド語</td>
-<td><code>pl</code></td>
+<td>`pl`</td>
 </tr>
 <tr>
 <td>ポルトガル語 - ブラジル</td>
-<td><code>pt-BR</code></td>
+<td>`pt-BR`</td>
 </tr>
 <tr>
 <td>ポルトガル語 - ポルトガル</td>
-<td><code>pt-PT</code></td>
+<td>`pt-PT`</td>
 </tr>
 <tr>
 <td>パンジャブ語</td>
-<td><code>pa</code></td>
+<td>`pa`</td>
 </tr>
 <tr>
 <td>ルーマニア語</td>
-<td><code>ro</code></td>
+<td>`ro`</td>
 </tr>
 <tr>
 <td>ロシア語</td>
-<td><code>ru</code></td>
+<td>`ru`</td>
 </tr>
 <tr>
 <td>セルビア語</td>
-<td><code>sr</code></td>
+<td>`sr`</td>
 </tr>
 <tr>
 <td>スロバキア語</td>
-<td><code>sk</code></td>
+<td>`sk`</td>
 </tr>
 <tr>
 <td>スロベニア語</td>
-<td><code>sl</code></td>
+<td>`sl`</td>
 </tr>
 <tr>
 <td>ソマリ語</td>
-<td><code>so</code></td>
+<td>`so`</td>
 </tr>
 <tr>
 <td>スペイン語</td>
-<td><code>es</code></td>
+<td>`es`</td>
 </tr>
 <tr>
 <td>スペイン語 - アルゼンチン</td>
-<td><code>es-AR</code></td>
+<td>`es-AR`</td>
 </tr>
 <tr>
 <td>スペイン語 - ラテン アメリカ</td>
-<td><code>es-419</code></td>
+<td>`es-419`</td>
 </tr>
 <tr>
 <td>スペイン語 - メキシコ</td>
-<td><code>es-MX</code></td>
+<td>`es-MX`</td>
 </tr>
 <tr>
 <td>スワヒリ語</td>
-<td><code>sw</code></td>
+<td>`sw`</td>
 </tr>
 <tr>
 <td>スウェーデン語</td>
-<td><code>sv</code></td>
+<td>`sv`</td>
 </tr>
 <tr>
 <td>タガログ語</td>
-<td><code>tl</code></td>
+<td>`tl`</td>
 </tr>
 <tr>
 <td>タマジット語</td>
-<td><code>zgh</code></td>
+<td>`zgh`</td>
 </tr>
 <tr>
 <td>タミール語</td>
-<td><code>ta</code></td>
+<td>`ta`</td>
 </tr>
 <tr>
 <td>テルグ語</td>
-<td><code>te</code></td>
+<td>`te`</td>
 </tr>
 <tr>
 <td>タイ語</td>
-<td><code>th</code></td>
+<td>`th`</td>
 </tr>
 <tr>
 <td>トルコ語</td>
-<td><code>tr</code></td>
+<td>`tr`</td>
 </tr>
 <tr>
 <td>ウクライナ語</td>
-<td><code>uk</code></td>
+<td>`uk`</td>
 </tr>
 <tr>
 <td>ベトナム語</td>
-<td><code>vi</code></td>
+<td>`vi`</td>
 </tr>
 <tr>
 <td>ウェールズ語</td>
-<td><code>cy</code></td>
+<td>`cy`</td>
 </tr>
 </tbody>
 </table>
@@ -462,7 +462,7 @@ iOSとAndroidの両方のAuth0 Guardianアプリは、ライトモードとダ�
 
 <Note>
 
-Auth0 Guardianアプリでアプリケーションに割り当てられるデフォルトの名前は、使用している[テナント名](/docs/get-started/tenant-settings/find-your-tenant-name-or-tenant-id)または[テナント設定](/docs/get-started/tenant-settings)で指定されているフレンドリー名によって決まります。同様に、デフォルトのロゴには、テナント設定で指定されているロゴのURLが使用されます。
+Auth0 Guardianアプリでアプリケーションに割り当てられるデフォルトの名前は、使用している[テナント名](/docs/ja-jp/get-started/tenant-settings/find-your-tenant-name-or-tenant-id)または[テナント設定](/docs/ja-jp/get-started/tenant-settings)で指定されているフレンドリー名によって決まります。同様に、デフォルトのロゴには、テナント設定で指定されているロゴのURLが使用されます。
 
 テナント設定を変更するには、[［Auth0 Dashboard］>［Settings（設定）］>［General（一般）］](https://manage.auth0.com/dashboard/#/tenant/general)に移動します。
 
@@ -485,7 +485,7 @@ Auth0 Guardianアプリでアプリケーションに割り当てられるデフ
 
 アクション内でAuth0 Guardianを有効化するには、多要素認証を有効にする際に`provider`パラメーターとして`guardian`を渡します。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   api.multifactor.enable('guardian', { allowRememberBrowser: false });
 };
@@ -499,7 +499,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 初めてログインした後、ユーザーはデバイスを登録することができます。Mの詳細については、「多要素認証を有効にする」を参照してください。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 const groups = event.user.app_metadata.authorization.groups;
 const GROUPS_WITH_MFA = {

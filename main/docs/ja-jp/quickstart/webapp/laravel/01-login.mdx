@@ -1,12 +1,14 @@
 ---
 title: "Add Login to a Laravel Application"
 permalink: "01-login"
+'description': "Auth0's Laravel SDK allows you to quickly add authentication, user profile management, and routing access control to your Laravel application. This guide demonstrates how to integrate Auth0 with a new or existing Laravel 9 or 10 application."
 'og:title': "Add Login to a Laravel Application"
 'og:description': "Auth0's Laravel SDK allows you to quickly add authentication, user profile management, and routing access control to your Laravel application. This guide demonstrates how to integrate Auth0 with a new or existing Laravel 9 or 10 application."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/php.png"
 'twitter:title': "Add Login to a Laravel Application"
 'twitter:description': "Auth0's Laravel SDK allows you to quickly add authentication, user profile management, and routing access control to your Laravel application. This guide demonstrates how to integrate Auth0 with a new or existing Laravel 9 or 10 application."
 ---
+
 # Laravel
 
 <Frame>![Gravatar for evan.sims@auth0.com](//www.gravatar.com/avatar/f18513f6431d78d0891c146bfd59fbe6?d=mm&r=g&s=50)</Frame>
@@ -44,13 +46,13 @@ System requirements: Laravel 9 / 10 | PHP 8.0+ | Composer
 
 **If you do not already have a Laravel application set up**, open a shell to a suitable directory for a new project and run the following command:
 
-```
+```bash lines
 composer create-project --prefer-dist laravel/laravel auth0-laravel-app ^9.0
 ```
 
 All the commands in this guide assume you are running them from the root of your Laravel project, directory so you should `cd` into the new project directory:
 
-```bash
+```bash lines
 cd auth0-laravel-app
 ```
 
@@ -58,13 +60,13 @@ cd auth0-laravel-app
 
 Run the following command within your project directory to install the [Auth0 Laravel SDK](https://github.com/auth0/laravel-auth0):
 
-```
+```bash lines
 composer require auth0/login:^7.8 --update-with-all-dependencies
 ```
 
 Then generate an SDK configuration file for your application:
 
-```
+```bash lines
 php artisan vendor:publish --tag auth0
 ```
 
@@ -72,19 +74,19 @@ php artisan vendor:publish --tag auth0
 
 Run the following command from your project directory to download the [Auth0 CLI](https://github.com/auth0/auth0-cli):
 
-```bash
+```bash lines
 curl -sSfL https://raw.githubusercontent.com/auth0/auth0-cli/main/install.sh | sh -s -- -b .
 ```
 
 Then authenticate the CLI with your Auth0 account, choosing "as a user" when prompted:
 
-```
+```bash lines
 ./auth0 login
 ```
 
 Next, create a new application with Auth0:
 
-```
+```bash lines
 ./auth0 apps create \
   --name "My Laravel Application" \
   --type "regular" \
@@ -98,7 +100,7 @@ Next, create a new application with Auth0:
 
 You should also create a new API:
 
-```
+```bash lines
 ./auth0 apis create \
   --name "My Laravel Application's API" \
   --identifier "https://github.com/auth0/laravel-auth0" \
@@ -111,7 +113,7 @@ This produces two files in your project directory that configure the SDK.
 
 As these files contain credentials it's important to treat these as sensitive. You should ensure you do not commit these to version control. If you're using Git, you should add them to your `.gitignore` file:
 
-```
+```bash lines
 echo ".auth0.*.json" >> .gitignore
 ```
 
@@ -127,15 +129,15 @@ The SDK automatically registers all the necessary routes for your application's 
 </thead>
 <tbody>
 <tr>
-<td><code>/login</code></td>
+<td>`/login`</td>
 <td>Initiates the authentication flow.</td>
 </tr>
 <tr>
-<td><code>/logout</code></td>
+<td>`/logout`</td>
 <td>Logs the user out.</td>
 </tr>
 <tr>
-<td><code>/callback</code></td>
+<td>`/callback`</td>
 <td>Handles the callback from Auth0.</td>
 </tr>
 </tbody>
@@ -149,7 +151,7 @@ Laravel's authentication facilities use "guards" to define how users are authent
 
 To require users to authenticate before accessing a route, you can use Laravel's `auth` middleware:
 
-```
+```php lines
 Route::get('/private', function () {
   return response('Welcome! You are logged in.');
 })->middleware('auth');
@@ -157,7 +159,7 @@ Route::get('/private', function () {
 
 You can also require authenticated users to have specific [permissions](https://auth0.com/docs/manage-users/access-control/rbac) by combining this with Laravel's `can` middleware:
 
-```
+```php lines
 Route::get('/scope', function () {
     return response('You have the `read:messages` permissions, and can therefore access this resource.');
 })->middleware('auth')->can('read:messages');
@@ -169,7 +171,7 @@ Information about the authenticated user is available through Laravel's `Auth` F
 
 For example, to retrieve the user's identifier and email address:
 
-```
+```php lines
 Route::get('/', function () {
   if (! auth()->check()) {
     return response('You are not logged in.');
@@ -191,7 +193,7 @@ You can update user information using the [Auth0 Management API](https://github.
 
 For the following example, in which we will update a user's metadata and assign a random favorite color, you should grant the `read:users` and `update:users` scopes. A list of API endpoints and the required scopes can be found in [the Management API documentation](https://auth0.com/docs/api/management/v2).
 
-```
+```php lines
 use Auth0\Laravel\Facade\Auth0;
 
 Route::get('/colors', function () {
@@ -224,7 +226,7 @@ A quick reference guide of all the SDK's Management API methods is [available he
 
 You are now ready to start your Laravel application, so it can accept requests:
 
-```
+```bash lines
 php artisan serve
 ```
 

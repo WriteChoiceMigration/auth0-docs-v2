@@ -1,13 +1,13 @@
 ---
 title: "AWS API Gatewayチュートリアルの手順2"
 permalink: "aws-api-gateway-delegation-2"
+'description': "Amazon API Gatewayチュートリアルの手順2"
 'og:title': "AWS API Gatewayチュートリアルの手順2"
 'og:description': "Amazon API Gatewayチュートリアルの手順2"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "AWS API Gatewayチュートリアルの手順2"
 'twitter:description': "Amazon API Gatewayチュートリアルの手順2"
 ---
-# AWS API Gatewayチュートリアルの手順2
 
 <Warning>
 
@@ -38,14 +38,14 @@ AWS API Gatewayには、APIをセキュリティ保護するためのいくつ�
 
 1. APIキー
 2. IAM
-3. [Amazon Cognito](/docs/integrations/aws-api-gateway/secure-api-with-cognito)
+3. [Amazon Cognito](/docs/ja-jp/integrations/aws-api-gateway/secure-api-with-cognito)
 
 APIキーの使用は、通常、以下に示されているようなサービス間でのやり取りに適しています。ただし、このアプローチには、いくつかの欠点があります。
 
 * アプリケーションにライフタイムの長いシークレットを置くことはリスクが高い（アプリケーションが侵害されやすくなる）
 * APIキーを発行および管理するためのフレームワークを作成するには、セキュリティ保護された実装が必要だが、この開発が難しい場合がある
 
-このチュートリアルのセクションでは、API GatewayでAPIをセキュリティ保護するためにIAMロールとポリシーを使用しますが、Amazon Cognitoのユーザープールを使用してセキュリティ保護することも可能です。AWS APIをセキュリティ保護するための詳細な手順については、「[Cognitoを使用してAWS API Gatewayをセキュリティ保護する](/docs/integrations/aws-api-gateway/secure-api-with-cognito)」をお読みください。IAMロールとポリシーの使用に関する詳細については、Amazonの記事「[IAMアクセス許可を使用してAPIへのアクセスを制御する](http://docs.aws.amazon.com/apigateway/latest/developerguide/permissions.html)」をお読みください。Cognitoのユーザープールについての詳細は、「[Amazon Cognitユーザープール](http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html)」をご覧ください。
+このチュートリアルのセクションでは、API GatewayでAPIをセキュリティ保護するためにIAMロールとポリシーを使用しますが、Amazon Cognitoのユーザープールを使用してセキュリティ保護することも可能です。AWS APIをセキュリティ保護するための詳細な手順については、「[Cognitoを使用してAWS API Gatewayをセキュリティ保護する](/docs/ja-jp/integrations/aws-api-gateway/secure-api-with-cognito)」をお読みください。IAMロールとポリシーの使用に関する詳細については、Amazonの記事「[IAMアクセス許可を使用してAPIへのアクセスを制御する](http://docs.aws.amazon.com/apigateway/latest/developerguide/permissions.html)」をお読みください。Cognitoのユーザープールについての詳細は、「[Amazon Cognitユーザープール](http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html)」をご覧ください。
 
 ### 1.API GatewayとのSAML統合のためにIAMとAuth0を構成する
 
@@ -63,7 +63,7 @@ Auth0アカウントにログインします。Management Dashboardが表示さ�
 
 #### AWSを構成する
 
-SAMLを使用する委任アクセス用にAWSを構成するには、「[AWSの委任認証をセットアップする方法](/docs/aws-api-setup)」チュートリアルに従ってください。いくつか注意点があります。
+SAMLを使用する委任アクセス用にAWSを構成するには、「[AWSの委任認証をセットアップする方法](/docs/ja-jp/aws-api-setup)」チュートリアルに従ってください。いくつか注意点があります。
 
 * リンク先のチュートリアルの権限ポリシーではなく、ロールに権限ポリシーを割り当てるには、[以下の指示](#setting-the-permissions-policy-on-your-iws-iam-role)に従ってください。
 * 作成するSAMLプロバイダーに`auth0`と名前を付けます。
@@ -98,7 +98,7 @@ AWS IAMロールを構成したら、API Gatewayのメソッドを実行でき�
 
 ポリシードキュメントを編集します。**［Policy Name（ポリシー名）］**は任意の名前に設定できますが、`api-gateway-policy`のような名前をお勧めします。このロールに対してAPIメソッドへのアクセスを有効にするために、API用にARNを更新した後、以下のポリシーを適用します。
 
-```json
+```javascript lines
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -121,7 +121,7 @@ API Gatewayがユーザーに代わってこのロールを引き受けるため
 
 最終的な信頼関係は以下のようになるはずです。
 
-```json
+```javascript lines
 {
   "Version": "2012-10-17",
   "Statement": [

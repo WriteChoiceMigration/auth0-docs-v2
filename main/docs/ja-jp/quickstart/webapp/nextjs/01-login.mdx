@@ -1,12 +1,14 @@
 ---
 title: "Login"
 permalink: "01-login"
+'description': "This guide demonstrates how to integrate Auth0 with any new or existing Next.js application using the Auth0 Next.js SDK."
 'og:title': "Login"
 'og:description': "This guide demonstrates how to integrate Auth0 with any new or existing Next.js application using the Auth0 Next.js SDK."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/nginx-plus.png"
 'twitter:title': "Login"
 'twitter:description': "This guide demonstrates how to integrate Auth0 with any new or existing Next.js application using the Auth0 Next.js SDK."
 ---
+
 # Next.js
 
 <Frame>![Gravatar for rita.zerrizuela@auth0.com](//www.gravatar.com/avatar/362be3e655e039e025e63f87148a37fc?d=mm&r=g&s=50)</Frame>
@@ -40,7 +42,7 @@ System requirements: Next.js 13.4+
 
 <Note>
 
-**New to Auth?** Learn [How Auth0 works](/docs/overview), how it [integrates with Regular Web Applications](/docs/architecture-scenarios/web-app-sso) and which [protocol](/docs/flows) it uses.
+**New to Auth?** Learn [How Auth0 works](/docs/ja-jp/overview), how it [integrates with Regular Web Applications](/docs/ja-jp/architecture-scenarios/web-app-sso) and which [protocol](/docs/ja-jp/flows) it uses.
 
 </Note>
 
@@ -88,7 +90,7 @@ If you are following along with the sample project you downloaded from the top o
 
 Run the following command within your project directory to install the Auth0 Next.js SDK:
 
-```
+```bash lines
 npm install @auth0/nextjs-auth0
 ```
 
@@ -98,7 +100,7 @@ The SDK exposes methods and variables that help you integrate Auth0 with your Ne
 
 In the root directory of your project, add the file `.env.local` with the following [environment variables](https://nextjs.org/docs/basic-features/environment-variables):
 
-```
+```bash lines
 AUTH0_SECRET='use [openssl rand -hex 32] to generate a 32 bytes value'
 AUTH0_BASE_URL='http://localhost:3000'
 AUTH0_ISSUER_BASE_URL='https://{yourDomain}'
@@ -120,7 +122,7 @@ Create a file at `app/api/auth/[auth0]/route.js`. This is your Route Handler fil
 
 Then, import the `handleAuth` method from the SDK and call it from the `GET` export.
 
-```javascript
+```javascript lines
 // app/api/auth/[auth0]/route.js
 import { handleAuth } from '@auth0/nextjs-auth0';
 
@@ -146,7 +148,7 @@ On the frontend side, the SDK uses React Context to manage the authentication st
 
 Create the file `app/layout.jsx` as follows:
 
-```javascript
+```javascript lines
 // app/layout.jsx
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
@@ -177,7 +179,7 @@ Next linting rules might suggest using the `Link` component instead of an anchor
 
 </Note>
 
-```
+```html lines
 <a href="/api/auth/login">Login</a>
 ```
 
@@ -191,7 +193,7 @@ Once that's complete, verify that Auth0 redirects back to your application.
 
 <Note>
 
-Auth0 enables the Google social provider by default on new tenants and offers you developer keys to test logging in with [social identity providers](/docs/connections/identity-providers-social). However, these developer keys have some limitations that may cause your application to behave differently. For more details on what this behavior may look like and how to fix it, consult the [Test Social Connections with Auth0 Developer Keys](/docs/connections/social/devkeys#limitations-of-developer-keys) document.
+Auth0 enables the Google social provider by default on new tenants and offers you developer keys to test logging in with [social identity providers](/docs/ja-jp/connections/identity-providers-social). However, these developer keys have some limitations that may cause your application to behave differently. For more details on what this behavior may look like and how to fix it, consult the [Test Social Connections with Auth0 Developer Keys](/docs/ja-jp/connections/social/devkeys#limitations-of-developer-keys) document.
 
 </Note>
 
@@ -199,7 +201,7 @@ Auth0 enables the Google social provider by default on new tenants and offers yo
 
 Now that you can log in to your Next.js application, you need [a way to log out](https://auth0.com/docs/logout/log-users-out-of-auth0). Add a link that points to the `/api/auth/logout` API route. Clicking it redirects your users to your [Auth0 logout endpoint](https://auth0.com/docs/api/authentication?javascript#logout) (`https://YOUR_DOMAIN/v2/logout`) and then immediately redirects them back to your application.
 
-```
+```html lines
 <a href="/api/auth/logout">Logout</a>
 ```
 
@@ -215,7 +217,7 @@ The Auth0 Next.js SDK helps you retrieve the [profile information](https://auth0
 
 The profile information is available through the `user` property exposed by the `useUser()` hook. Take this [Client Component](https://nextjs.org/docs/getting-started/react-essentials#client-components) as an example of how to use it:
 
-```
+``` lines
 'use client';
 
 import { useUser } from '@auth0/nextjs-auth0/client';
@@ -249,7 +251,7 @@ The `user` property contains sensitive information and artifacts related to the 
 
 The profile information is available through the `user` property exposed by the `getSession` function. Take this [Server Component](https://nextjs.org/docs/getting-started/react-essentials#server-components) as an example of how to use it:
 
-```
+```python lines
 import { getSession } from '@auth0/nextjs-auth0';
 
 export default async function ProfileServer() {

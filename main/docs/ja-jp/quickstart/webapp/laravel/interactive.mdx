@@ -1,17 +1,19 @@
 ---
 title: "Laravelアプリケーションにログインを追加する"
 permalink: "interactive"
+'description': "このガイドでは、新規（または既存）のLaravel 9または10アプリケーションにAuth0を統合する方法を説明します。"
 'og:title': "Laravelアプリケーションにログインを追加する"
 'og:description': "このガイドでは、新規（または既存）のLaravel 9または10アプリケーションにAuth0を統合する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/php.png"
 'twitter:title': "Laravelアプリケーションにログインを追加する"
 'twitter:description': "このガイドでは、新規（または既存）のLaravel 9または10アプリケーションにAuth0を統合する方法を説明します。"
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -43,13 +45,13 @@ permalink: "interactive"
 
 **Laravelアプリケーションをまだセットアップしていない場合**には、シェルを開いて、新規プロジェクトに適切なディレクトリに移動し、次のコマンドを実行します：
 
-```
+```bash lines
 composer create-project --prefer-dist laravel/laravel auth0-laravel-app ^9.0
 ```
 
 このガイドにあるすべてのコマンドは、Laravelプロジェクトディレクトリのルートから実行されていることを前提としています。必ず新規プロジェクトのディレクトリに移動（`cd`）してください：
 
-```bash
+```bash lines
 cd auth0-laravel-app
 ```
 
@@ -59,13 +61,13 @@ cd auth0-laravel-app
 
 プロジェクトディレクトリで次のコマンドを実行して、[Auth0 Laravel SDK](https://github.com/auth0/laravel-auth0)をインストールします：
 
-```
+```bash lines
 composer require auth0/login:^7.8 --update-with-all-dependencies
 ```
 
 そして、アプリケーションにSDK構成ファイルを生成します：
 
-```
+```bash lines
 php artisan vendor:publish --tag auth0
 ```
 
@@ -75,19 +77,19 @@ php artisan vendor:publish --tag auth0
 
 プロジェクトディレクトリから次のコマンドを実行して、Auth0 CLIをダウンロードします：
 
-```bash
+```bash lines
 curl -sSfL https://raw.githubusercontent.com/auth0/auth0-cli/main/install.sh | sh -s -- -b .
 ```
 
 そして、Auth0アカウントを使ってCLIを認証し、プロンプトでユーザーとしてログインすることを選択します：
 
-```
+```bash lines
 ./auth0 login
 ```
 
 次に、Auth0で新しいアプリケーションを作成します：
 
-```
+```bash lines
 ./auth0 apps create \
 --name "My Laravel Application" \
 --type "regular" \
@@ -101,7 +103,7 @@ curl -sSfL https://raw.githubusercontent.com/auth0/auth0-cli/main/install.sh | s
 
 また、新しいAPIも作成します：
 
-```
+```bash lines
 ./auth0 apis create \
 --name "My Laravel Application's API" \
 --identifier "https://github.com/auth0/laravel-auth0" \
@@ -114,7 +116,7 @@ curl -sSfL https://raw.githubusercontent.com/auth0/auth0-cli/main/install.sh | s
 
 これらのファイルには資格情報が保管されているため、機密として扱うことが重要です。必ず、バージョン管理では、これらのファイルをコミットしないようにしてください。Gitを使用している場合は、必ず`.gitignore`ファイルに追加します：
 
-```
+```bash lines
 echo ".auth0.*.json" >> .gitignore
 ```
 
@@ -132,15 +134,15 @@ SDKは、アプリケーションのユーザーを認証するために必要�
 </thead>
 <tbody>
 <tr>
-<td><code>/login</code></td>
+<td>`/login`</td>
 <td>認証フローを開始します。</td>
 </tr>
 <tr>
-<td><code>/logout</code></td>
+<td>`/logout`</td>
 <td>ユーザーをログアウトさせます。</td>
 </tr>
 <tr>
-<td><code>/callback</code></td>
+<td>`/callback`</td>
 <td>Auth0からのコールバックを処理します。</td>
 </tr>
 </tbody>
@@ -156,7 +158,7 @@ Laravelの認証機能は「guards」を使用して、それぞれの要求で�
 
 経路へのアクセスに先だって、ユーザーの認証を要求するには、Laravelの`auth`ミドルウェアを使用することができます。
 
-```
+```php lines
 Route::get('/private', function () {
 return response('Welcome! You are logged in.');
 })->middleware('auth');
@@ -164,7 +166,7 @@ return response('Welcome! You are logged in.');
 
 また、これをLaravelの`can`ミドルウェアと組み合わせると、認証済みのユーザーに特定の[権限](https://auth0.com/docs/manage-users/access-control/rbac)を要求することができます。
 
-```
+```php lines
 Route::get('/scope', function () {
 return response('You have `read:messages` permission, and can therefore access this resource.');
 
@@ -179,7 +181,7 @@ return response('You have `read:messages` permission, and can therefore access t
 
 以下は、ユーザーの識別子とメールアドレスを取得する例です。
 
-```
+```php lines
 Route::get('/', function () {
 if (! auth()->check()) {
 return response('You are not logged in.');
@@ -198,11 +200,11 @@ return response("Hello {$name}! Your email address is {$email}.");
 
 ユーザー情報は、[Auth0 Management API](https://github.com/auth0/laravel-auth0/blob/main/docs/Management.md)を使用して更新することができます。管理エンドポイントはすべて、SDKの`management()`メソッドでアクセスすることができます。
 
-**Management APIを呼び出す前に、アプリケーションがManagement APIと通信できるようにしなければなりません。**これを実行するには、[Auth0 DashboardのAPIページ](/docs/%24%7Bmanage_url%7D#/apis)で`［Auth0 Management API］`を選択してから［Machine to Machine Applications（M2Mアプリケーション）］タブを選択します。Laravelアプリケーションを認可してから、下矢印をクリックして、付与したいスコープを選択します。
+**Management APIを呼び出す前に、アプリケーションがManagement APIと通信できるようにしなければなりません。**これを実行するには、[Auth0 DashboardのAPIページ](/docs/ja-jp/%24%7Bmanage_url%7D#/apis)で`［Auth0 Management API］`を選択してから［Machine to Machine Applications（M2Mアプリケーション）］タブを選択します。Laravelアプリケーションを認可してから、下矢印をクリックして、付与したいスコープを選択します。
 
 以下の例では、ユーザーのメタデータを更新し、好きな色をランダムに割り当てますが、必ず`read:users`と`update:users`のスコープを付与するようにします。APIエンドポイントのリストと必要なスコープについては、[Management APIのドキュメント](https://auth0.com/docs/api/management/v2)を参照してください。
 
-```
+```php lines
 use Auth0\Laravel\Facade\Auth0;
 Route::get('/colors', function () {
 $endpoint = Auth0::management()->users();
@@ -276,7 +278,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/webapp/laravel/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

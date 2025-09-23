@@ -1,21 +1,21 @@
 ---
 title: "ルールのテストに関するベストプラクティス"
 permalink: "rules-testing-best-practices"
+'description': "Auth0環境のテストとデバッグに関するベストプラクティスについて説明します。"
 'og:title': "ルールのテストに関するベストプラクティス"
 'og:description': "Auth0環境のテストとデバッグに関するベストプラクティスについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ルールのテストに関するベストプラクティス"
 'twitter:description': "Auth0環境のテストとデバッグに関するベストプラクティスについて説明します。"
 ---
-# ルールのテストに関するベストプラクティス
 
 <Warning>
 
 RulesとHooksのサポート終了（EOL）日は**2026年11月18日**であり、**2023年10月16**日の時点で作成された新しいテナントは使用できなくなります。Hooksが有効な既存のテナントは、サポート終了までHooksを利用できます。
 
-今後はActionsに移行して、Auth0の機能を拡張することを強くお勧めします。Actionsを使用すると、豊富な情報やインラインドキュメント、パブリック`npm`パッケージにアクセスして、外部統合を使って全体的な拡張エクスペリエンスを強化することができます。Actionsの詳細については、「[Auth0 Actionsの仕組みを理解する](/docs/customize/actions/actions-overview)」をお読みください。
+今後はActionsに移行して、Auth0の機能を拡張することを強くお勧めします。Actionsを使用すると、豊富な情報やインラインドキュメント、パブリック`npm`パッケージにアクセスして、外部統合を使って全体的な拡張エクスペリエンスを強化することができます。Actionsの詳細については、「[Auth0 Actionsの仕組みを理解する](/docs/ja-jp/customize/actions/actions-overview)」をお読みください。
 
-当社では、移行の参考資料として、[RulesからActionsへの移行](/docs/customize/actions/migrate/migrate-from-rules-to-actions)と[HooksからActionsへの移行](/docs/customize/actions/migrate/migrate-from-hooks-to-actions)に関するガイドを提供しています。また、専用の「[Actionsへの移行](https://auth0.com/extensibility/movetoactions)」ページでは、機能の比較や[Actionsのデモ](https://www.youtube.com/watch?v=UesFSY1klrI)、その他のリソースを掲載して、円滑な移行をサポートしています。
+当社では、移行の参考資料として、[RulesからActionsへの移行](/docs/ja-jp/customize/actions/migrate/migrate-from-rules-to-actions)と[HooksからActionsへの移行](/docs/ja-jp/customize/actions/migrate/migrate-from-hooks-to-actions)に関するガイドを提供しています。また、専用の「[Actionsへの移行](https://auth0.com/extensibility/movetoactions)」ページでは、機能の比較や[Actionsのデモ](https://www.youtube.com/watch?v=UesFSY1klrI)、その他のリソースを掲載して、円滑な移行をサポートしています。
 
 RulesとHooksの廃止の詳細については、当社のブログ記事「[RulesとHooksの提供終了について](https://auth0.com/blog/preparing-for-rules-and-hooks-end-of-life/)」をお読みください。
 
@@ -29,7 +29,7 @@ RulesとHooksの廃止の詳細については、当社のブログ記事「[Rul
 
 多少のボイラープレートを使用すれば、ルールがAuth0テナントに導入・実行され、変更することなく、CI/CD（継続的インテグレーションと継続的デプロイ）の自動化（単体）テスト環境で使用されるように実装できます。
 
-```javascript
+```javascript lines
 const vm = require('vm');
   const fs = require('fs');
   var user = {

@@ -1,13 +1,13 @@
 ---
 title: "OIDC Discoveryを使ってアプリケーションを構成する"
 permalink: "configure-applications-with-oidc-discovery"
+'description': "OpenID Connect（OIDC）Discoveryを使用して、Auth0でSDKを用いてアプリケーションを構成する方法について説明します。"
 'og:title': "OIDC Discoveryを使ってアプリケーションを構成する"
 'og:description': "OpenID Connect（OIDC）Discoveryを使用して、Auth0でSDKを用いてアプリケーションを構成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "OIDC Discoveryを使ってアプリケーションを構成する"
 'twitter:description': "OpenID Connect（OIDC）Discoveryを使用して、Auth0でSDKを用いてアプリケーションを構成する方法について説明します。"
 ---
-# OIDC Discoveryを使ってアプリケーションを構成する
 
 [OpenID Connect（OIDC）Discovery](https://openid.net/specs/openid-connect-discovery-1_0-final.html#RFC5785)ドキュメントは、IDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>）についてのメタデータを含みます。SDKにディスカバリーを追加して、アプリケーションを`./wellknown`エンドポイントにポイントし、IdPに関する情報を取得することで、IdPとの統合構成に役立てることができます。
 
@@ -21,7 +21,7 @@ OIDC DiscoveryをSDKに統合すると以下が得られます。
 
 ### 応答例
 
-```json
+```json lines
 {
   "issuer": "https://{yourDomain}.us.auth0.com/",
   "authorization_endpoint": "https://{yourDomain}.us.auth0.com/authorize",
@@ -116,7 +116,7 @@ OIDC DiscoveryをSDKに統合すると以下が得られます。
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```
+   ``` lines
    app.UseCookieAuthentication(new CookieAuthenticationOptions
    {
        AuthenticationType = CookieAuthenticationDefaults.AuthenticationType

@@ -1,13 +1,13 @@
 ---
 title: "リフレッシュトークンの使用"
 permalink: "use-refresh-tokens"
+'description': "認可中に受け取ったリフレッシュトークンを使用する方法について説明します。"
 'og:title': "リフレッシュトークンの使用"
 'og:description': "認可中に受け取ったリフレッシュトークンを使用する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "リフレッシュトークンの使用"
 'twitter:description': "認可中に受け取ったリフレッシュトークンを使用する方法について説明します。"
 ---
-# リフレッシュトークンの使用
 
 リフレッシュトークンは、ユーザーに再認証を求めることなく、ユーザーの新しいアクセストークンおよび/またはIDトークンを要求するために使用します。
 
@@ -17,14 +17,14 @@ permalink: "use-refresh-tokens"
 
 ## APIの呼び出し
 
-認証中に受け取ったリフレッシュトークンを新しいアクセストークンと交換するには、Auth0 Authentication APIでその[トークン取得API](/docs/api/authentication#refresh-token)を呼び出します。
+認証中に受け取ったリフレッシュトークンを新しいアクセストークンと交換するには、Auth0 Authentication APIでその[トークン取得API](/docs/ja-jp/api/authentication#refresh-token)を呼び出します。
 
 Authentication APIで使える認証方法の詳細は、「[認証方法](https://auth0.com/docs/api/authentication#authentication-methods)」をお読みください。
 
 ### 基本認証の使用
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'authorization: Basic {yourApplicationCredentials}' \
@@ -32,8 +32,8 @@ curl --request POST \
 --data grant_type=refresh_token \
 --data 'client_id={yourClientId}' \
 --data 'refresh_token={yourRefreshToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -42,7 +42,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=refresh_to
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -62,8 +62,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .header("authorization", "Basic {yourApplicationCredentials}")
@@ -71,7 +71,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -91,8 +91,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded",
 @"authorization": @"Basic {yourApplicationCredentials}" };
@@ -118,7 +118,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -142,8 +142,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=refresh_token&client_id={yourClientId}&refresh_token=%7ByourRefreshToken%7D"
@@ -157,7 +157,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -171,8 +171,8 @@ request["authorization"] = 'Basic {yourApplicationCredentials}'
 request.body = "grant_type=refresh_token&client_id={yourClientId}&refresh_token=%7ByourRefreshToken%7D"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/x-www-form-urlencoded",
@@ -203,7 +203,7 @@ dataTask.resume()
 ### POST認証の使用
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -211,8 +211,8 @@ curl --request POST \
 --data 'client_id={yourClientId}' \
 --data 'client_secret={yourClientSecret}' \
 --data 'refresh_token={yourRefreshToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -220,7 +220,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=refresh_to
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -239,15 +239,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=refresh_token&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&refresh_token=%7ByourRefreshToken%7D")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -265,8 +265,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=refresh_token" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -292,7 +292,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -315,8 +315,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=refresh_token&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&refresh_token=%7ByourRefreshToken%7D"
@@ -327,7 +327,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -340,8 +340,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=refresh_token&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&refresh_token=%7ByourRefreshToken%7D"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=refresh_token".data(using: String.Encoding.utf8)!)
@@ -377,19 +377,19 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>grant_type</code></td>
+<td>`grant_type`</td>
 <td>実行する付与タイプ。</td>
 </tr>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>アプリケーションのクライアントID。</td>
 </tr>
 <tr>
-<td><code>client_secret</code></td>
+<td>`client_secret`</td>
 <td>（任意）アプリケーションのクライアントシークレット。POSTトークン認証方式を使用する機密アプリケーションにのみ必要です。</td>
 </tr>
 <tr>
-<td><code>refresh_token</code></td>
+<td>`refresh_token`</td>
 <td>交換するリフレッシュトークン。</td>
 </tr>
 </tbody>
@@ -397,7 +397,7 @@ dataTask.resume()
 
 応答には新しいアクセストークン、そのタイプ、そのライフタイム（秒）、および付与されたスコープが含まれます。最初のトークンのスコープに`openid`が含まれている場合には、新しいIDトークンも応答に含まれます。
 
-```json
+```json lines
 {
       "access_token": "eyJ...MoQ",
       "expires_in": 86400,
@@ -411,7 +411,7 @@ dataTask.resume()
 
 [多要素認証（MFA）](/docs/ja-jp/secure/multi-factor-authentication)が有効で、リフレッシュトークンに失敗した場合は、以下の回避策があります。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   // This action will allow you to bypass the MFA logic for the refresh token exchange flow.
 

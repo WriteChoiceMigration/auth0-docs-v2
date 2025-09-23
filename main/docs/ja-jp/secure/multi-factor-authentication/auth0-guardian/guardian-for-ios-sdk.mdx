@@ -1,13 +1,13 @@
 ---
 title: "Guardian.swift iOS SDK"
 permalink: "guardian-for-ios-sdk"
+'description': "Guardian.swift iOS SDKのインストール方法、使用方法、オプションの構成方法について説明します。"
 'og:title': "Guardian.swift iOS SDK"
 'og:description': "Guardian.swift iOS SDKのインストール方法、使用方法、オプションの構成方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Guardian.swift iOS SDK"
 'twitter:description': "Guardian.swift iOS SDKのインストール方法、使用方法、オプションの構成方法について説明します。"
 ---
-# Guardian.swift iOS SDK
 
 <Note>
 
@@ -26,7 +26,7 @@ permalink: "guardian-for-ios-sdk"
 
 Guardian.swiftは[CocoaPods](http://cocoapods.org)から入手可能です。インストールするには、以下の行をPodfileに追加します。
 
-```
+``` lines
 pod 'Guardian', '~> 1.1.0'
 ```
 
@@ -34,7 +34,7 @@ pod 'Guardian', '~> 1.1.0'
 
 以下の行をCartfileに追加します。
 
-```
+``` lines
 github "auth0/Guardian.swift" ~> 1.1.0
 ```
 
@@ -48,13 +48,13 @@ github "auth0/Guardian.swift" ~> 1.1.0
 
 `Guardian`はSDKの中核です。SDKを使用するには、ライブラリをインポートします。
 
-```
+```swift lines
 import Guardian
 ```
 
 テナントのドメインを設定します。または、テナントにカスタムドメインを構成している場合、それを使用します。
 
-```
+```swift lines
 let domain = "<tenant>.<region>.auth0.com"
 ```
 
@@ -88,7 +88,7 @@ let domain = "<tenant>.<region>.auth0.com"
 
 情報を入手した後、デバイスを登録できます。
 
-```
+```swift lines
 Guardian
         .enroll(forDomain: "{yourTenantDomain}",
                 usingUri: "{enrollmentUri}",
@@ -112,13 +112,13 @@ Guardian
 
 Guardian.swiftは、署名鍵を生成するための便利なクラスを提供しています。
 
-```
+```swift lines
 let signingKey = try DataRSAPrivateKey.new()
 ```
 
 このキーはメモリ内にしか存在しません、`データ`表現を取得し、暗号化されたSQLiteDBなどにセキュアに保存できます。
 
-```javascript
+```swift lines
 // Store data
 let data = signingKey.data
 // perform the storage
@@ -129,19 +129,19 @@ let loadedKey = try DataRSAPrivateKey(data: data)
 
 しかし、iOSキーチェーンに保存したいだけなら、以下の手順で可能です。
 
-```
+```swift lines
 let signingKey = try KeychainRSAPrivateKey.new(with: "com.myapp.mytag")
 ```
 
 上記の例では、キーを作成し、与えられたタグの下に自動的に保存します。それを取得したい場合、タグを使用できます。
 
-```
+```swift lines
 let signingKey = try KeychainRSAPrivateKey(tag: "com.myapp.mytag")
 ```
 
 検証キーは、`SigningKey`から取得できます。以下の例を挙げます。
 
-```
+```swift lines
 let verificationKey = try signingKey.verificationKey()
 ```
 
@@ -149,7 +149,7 @@ let verificationKey = try signingKey.verificationKey()
 
 登録を行うと、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>で本人確認が必要になるたびにプッシュ通知が届きます。Guardianは、APNから受信したデータを解析し、使用可能な`Notification`インスタンスを返すメソッドを提供します。
 
-```
+```swift lines
 if let notification = Guardian.notification(from: notificationPayload) {
     // we have received a Guardian push notification
 }
@@ -159,7 +159,7 @@ if let notification = Guardian.notification(from: notificationPayload) {
 
 情報があれば、`device`パラメーターはプロトコル`AuthenticatedDevice`を実装しているものとなります。
 
-```
+```swift lines
 struct Authenticator: Guardian.AuthenticationDevice {
     let signingKey: SigningKey
     let localIdentifier: String
@@ -168,7 +168,7 @@ struct Authenticator: Guardian.AuthenticationDevice {
 
 ローカル識別子はデバイスのローカルIDであり、デフォルトでは登録`UIDevice.current.identifierForVendor`にあります。次に、以下を呼び出します。
 
-```
+```swift lines
 Guardian
         .authentication(forDomain: "{yourTenantDomain}", device: device)
         .allow(notification: notification)
@@ -186,7 +186,7 @@ Guardian
 
 認証要求を拒否するには、代わりに`reject`を呼び出します。オプションで拒否の理由を送ることもできます。拒否の理由はGuardianログに表示されます。
 
-```
+```swift lines
 Guardian
         .authentication(forDomain: "{yourTenantDomain}", device: device)
         .reject(notification: notification)
@@ -205,7 +205,7 @@ Guardian
 
 登録を削除したい場合、たとえばMFAを無効にしたい場合は、以下の要求を行います。
 
-```
+```swift lines
 Guardian
         .api(forDomain: "{yourTenantDomain}")
         .device(forEnrollmentId: "{userEnrollmentId}", token: "{enrollmentDeviceToken}")
@@ -234,7 +234,7 @@ Guardian
 
 1. Auth0ログインプロンプトにアクセスし、提供されたコード、または別のソースから取得した同様のbase32エンコードキーをコピーします。次のステップでは、このコードを認証アプリケーションに入力します。
 
-   <Frame>![An example login prompt displaying a one-time code](//images.ctfassets.net/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/24838237a74ae47d42a23a059edad27a/OTP_Challenge_2_-_Japanese.png)</Frame>
+   <Frame>![An example login prompt displaying a one-time code](/images/ja-jp/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/24838237a74ae47d42a23a059edad27a/OTP_Challenge_2_-_Japanese.png)</Frame>
 
 2. コピーしたコードをGuardianなどの認証アプリケーションに追加します。
 
@@ -242,7 +242,7 @@ Guardian
 
 1. Guardianライブラリをインポートします。
 
-   ```
+   ```swift lines
    import Guardian
    ```
 
@@ -251,7 +251,7 @@ Guardian
    
 2. コードジェネレーターを作成します。
 
-   ```
+   ``` lines
    let codeGenerator = try Guardian.totp(
 
       base32Secret: enrollmentCode,  // Enrollment code entered by user
@@ -266,7 +266,7 @@ Guardian
    
 3. 生成されたコードを取得します。
 
-   ```
+   ``` lines
    codeGenerator.code()
    ```
 
@@ -278,7 +278,7 @@ Guardian
 
 Auth0ログインプロンプトで、前のステップで生成したコードを入力します。
 
-<Frame>![An example login prompt displaying a one-time code](//images.ctfassets.net/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/24838237a74ae47d42a23a059edad27a/OTP_Challenge_2_-_Japanese.png)</Frame>
+<Frame>![An example login prompt displaying a one-time code](/images/ja-jp/cdy7uua7fh8z/1yoqiIuERVTwCU8yfx6IM8/24838237a74ae47d42a23a059edad27a/OTP_Challenge_2_-_Japanese.png)</Frame>
 
 ［Continue（続ける）］を選択すると、アプリケーションがユーザーの認証要素として追加されたことを示すメッセージが表示されます。
 
@@ -286,9 +286,9 @@ Auth0ログインプロンプトで、前のステップで生成したコード
 
 要素が登録されると、ユーザーはアプリを使用してログインできるようになります。まず、認証方法としてGuardianアプリを選択します。
 
-<Frame>![The authentication method selection screen](//images.ctfassets.net/cdy7uua7fh8z/1k7IsU9kfP5mrXU2jfGHuT/2ab98043294c662bd8b165eb04df9aa1/2025-01-27_14-46-27.png)</Frame>
+<Frame>![The authentication method selection screen](/images/ja-jp/cdy7uua7fh8z/1k7IsU9kfP5mrXU2jfGHuT/2ab98043294c662bd8b165eb04df9aa1/2025-01-27_14-46-27.png)</Frame>
 
 次に、ワンタイムコードをログインプロンプトに入力し、本人確認を行います。
 
-<Frame>![The Verify Your Identity screen prompting the user for a one-time code](//images.ctfassets.net/cdy7uua7fh8z/S6uTieLjtuNUrQRMh8uch/21156d1cdf4b839d73ba97b1c149c77b/OTP_Challenge_-_Japanese.png)</Frame>
+<Frame>![The Verify Your Identity screen prompting the user for a one-time code](/images/ja-jp/cdy7uua7fh8z/S6uTieLjtuNUrQRMh8uch/21156d1cdf4b839d73ba97b1c149c77b/OTP_Challenge_-_Japanese.png)</Frame>
 

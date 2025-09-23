@@ -1,13 +1,13 @@
 ---
 title: "セルフサービスシングルサインオン (1)"
 permalink: "manage-self-service-sso"
+'description': "SSOのセットアップをB2Bの顧客に委任するために、セルフサービスシングルサインオンを使用する方法を説明します。 "
 'og:title': "セルフサービスシングルサインオン (1)"
 'og:description': "SSOのセットアップをB2Bの顧客に委任するために、セルフサービスシングルサインオンを使用する方法を説明します。 "
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "セルフサービスシングルサインオン (1)"
 'twitter:description': "SSOのセットアップをB2Bの顧客に委任するために、セルフサービスシングルサインオンを使用する方法を説明します。 "
 ---
-# セルフサービスシングルサインオン (1)
 
 セルフサービスシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SSO</Tooltip>）は、ツールを提供して、B2Bの顧客が独自のエンタープライズ顧客にSSOのセットアップを委任できるようにします。このタスクを委任することで、オンボーディングプロセスを円滑化し、顧客がより自主的に自らのサインオンエクスペリエンスを管理できるようになります。また、カスタマーベース全体でのSSO管理に関連する時間と費用を削減できます。
 
@@ -42,7 +42,7 @@ permalink: "manage-self-service-sso"
 4. 顧客の管理者はSSOセットアップアシスタントを起動して、表示される手順に従い、自身のIDプロバイダーを使ってアプリケーションを作成します。
 5. 顧客のアプリケーションをポイントする新たなエンタープライズ接続がお客様のAuth0テナントに追加されます。
 
-<Frame>![セルフサービスSSO機能のワークフロー図。](//images.ctfassets.net/cdy7uua7fh8z/3uW0vtLnF2O362NCxJSbqc/9b0f325e7a4c43735f78d0b1c04bd47e/SS-SSO_Diagram_-_Border__1_.png)</Frame>
+<Frame>![セルフサービスSSO機能のワークフロー図。](/images/ja-jp/cdy7uua7fh8z/3uW0vtLnF2O362NCxJSbqc/9b0f325e7a4c43735f78d0b1c04bd47e/SS-SSO_Diagram_-_Border__1_.png)</Frame>
 
 図を選択すると表示が拡大されます。
 
@@ -81,7 +81,7 @@ Auth0 Dashboardでセルフサービスプロファイルを作成するには�
 
 #### セルフサービスプロファイルを作成する：
 
-1. [セルフサービスプロファイル](/docs/api/management/v2/self-service-profiles/post-self-service-profiles)エンドポイントにPOST呼び出しを行います。
+1. [セルフサービスプロファイル](/docs/ja-jp/api/management/v2/self-service-profiles/post-self-service-profiles)エンドポイントにPOST呼び出しを行います。
 2. 必要に応じて、要求本文で以下のパラメーターを指定します：
 
 <table class="table"><thead>
@@ -92,55 +92,55 @@ Auth0 Dashboardでセルフサービスプロファイルを作成するには�
 </thead>
 <tbody>
 <tr>
-<td><code>name</code></td>
+<td>`name`</td>
 <td>文字列。最大長は100文字です。<br/><br/>セルフサービスプロファイル用のユーザーが使いやすい名前。<br/><br/>このパラメーターは必須です。</td>
 </tr>
 <tr>
-<td><code>description</code></td>
+<td>`description`</td>
 <td>文字列。最大長は140文字です。<br/><br/>サービスプロファイルの説明。<br/><br/>このパラメーターは任意です。</td>
 </tr>
 <tr>
-<td><code>allowed_strategies</code></td>
-<td>配列。<br/><br/>お客様の管理者がSSOの実装に使用できる1つ以上のIDプロバイダー。オプションは次のとおりです。<br/><br/><ul><li><code>okta</code> Okta Workforce Identity Cloudの場合</li><li><code>waad</code> Entra IDの場合</li><li><code>google-apps</code> Google Workspaceの場合</li><li><code>keycloak-samlp</code> Keycloakの場合</li><li><code>adfs</code> Microsoft Active Directoryフェデレーションサービスの場合</li><li><code>pingfederate</code> PingFederateの場合</li><li><code>oidc</code> 汎用OIDCの場合</li><li><code>samlp</code> 汎用SAMLの場合</li></ul></td>
+<td>`allowed_strategies`</td>
+<td>配列。<br/><br/>お客様の管理者がSSOの実装に使用できる1つ以上のIDプロバイダー。オプションは次のとおりです。<br/><br/><ul><li>`okta` Okta Workforce Identity Cloudの場合</li><li>`waad` Entra IDの場合</li><li>`google-apps` Google Workspaceの場合</li><li>`keycloak-samlp` Keycloakの場合</li><li>`adfs` Microsoft Active Directoryフェデレーションサービスの場合</li><li>`pingfederate` PingFederateの場合</li><li>`oidc` 汎用OIDCの場合</li><li>`samlp` 汎用SAMLの場合</li></ul></td>
 </tr>
 <tr>
-<td><code>user_attributes</code></td>
+<td>`user_attributes`</td>
 <td>オブジェクト。最大長は20文字です。<br/><br/>設定アシスタントフロー中にお客様の管理者に表示されるストアマッピング情報。特定の属性がAuth0に確実に渡されるように、お客様の管理者はこれらの属性をIDプロバイダーにマッピングするように求められます。<br/><br/>このパラメーターは任意です。</td>
 </tr>
 <tr>
-<td><code>user_attributes[].name</code></td>
-<td>文字列。最大長は255文字です。<br/><br/>Auth0でのユーザー属性名。<br/><br/><code>user_attributes</code>を定義する場合、このパラメーターは必須です。</td>
+<td>`user_attributes[].name`</td>
+<td>文字列。最大長は255文字です。<br/><br/>Auth0でのユーザー属性名。<br/><br/>`user_attributes`を定義する場合、このパラメーターは必須です。</td>
 </tr>
 <tr>
-<td><code>user_attributes[].description</code></td>
-<td>文字列。最大長は255文字です。<br/><br/>ユーザー属性の人間が理解できる説明。<br/><br/><code>user_attributes</code>を定義する場合、このパラメーターは必須です。</td>
+<td>`user_attributes[].description`</td>
+<td>文字列。最大長は255文字です。<br/><br/>ユーザー属性の人間が理解できる説明。<br/><br/>`user_attributes`を定義する場合、このパラメーターは必須です。</td>
 </tr>
 <tr>
-<td><code>user_attributes[].is_optional</code></td>
-<td>ブール値。<br/><br/>アプリケーションが機能するために、属性が任意かお客様に必須かを示します。<br/><br/><ul><li>属性を必須に設定するには、<code>true</code>を使用します。</li><li>任意の属性には、<code>false</code>を使用します。</li></ul><br/><code>user_attributes</code>を定義する場合、このパラメーターは必須です。</td>
+<td>`user_attributes[].is_optional`</td>
+<td>ブール値。<br/><br/>アプリケーションが機能するために、属性が任意かお客様に必須かを示します。<br/><br/><ul><li>属性を必須に設定するには、`true`を使用します。</li><li>任意の属性には、`false`を使用します。</li></ul><br/>`user_attributes`を定義する場合、このパラメーターは必須です。</td>
 </tr>
 <tr>
-<td><code>branding</code></td>
+<td>`branding`</td>
 <td>オブジェクト。<br/><br/>お客様の管理者に表示されるSSO設定アシスタントのスタイリングをカスタマイズするために使用されます。<br/><br/>このパラメーターは任意です。</td>
 </tr>
 <tr>
-<td><code>branding.logo_url</code></td>
+<td>`branding.logo_url`</td>
 <td>文字列。最大長は1024文字です。<br/><br/>ロゴをポイントするHTTPS URL。提供されている場合、このロゴはSSO設定アシスタントの右上に表示されます。<br/><br/>このパラメーターは任意です。</td>
 </tr>
 <tr>
-<td><code>branding.colors</code></td>
+<td>`branding.colors`</td>
 <td>オブジェクト。<br/><br/>インタラクティブボタンなど、SSO設定アシスタントの一部の要素にプライマリカラーを設定できるようにします。<br/><br/>このパラメーターは任意です。</td>
 </tr>
 <tr>
-<td><code>branding.colors.primary</code></td>
-<td>文字列。<br/><br/>SSO設定アシスタントに使用されるプライマリカラーのhex値を指定します。<br/><br/><code>branding.colors</code>を定義する場合、このパラメーターは必須です。</td>
+<td>`branding.colors.primary`</td>
+<td>文字列。<br/><br/>SSO設定アシスタントに使用されるプライマリカラーのhex値を指定します。<br/><br/>`branding.colors`を定義する場合、このパラメーターは必須です。</td>
 </tr>
 </tbody>
 </table>
 
 **要求本文の例**
 
-```json
+```json lines
 {
   "name": "Example Profile",
   "description": "An example profile for all customers",
@@ -167,7 +167,7 @@ Auth0 Dashboardでセルフサービスプロファイルを作成するには�
 
 「あといくつかの簡単なステップで、SSOの設定が完了します。この設定プロセスでは、ご利用のIDプロバイダーにも一部変更を加えます。操作を始める前に、別のブラウザータブかウィンドウで、ご利用のIDプロバイダーを開いてください。」
 
-このテキストは、 [セルフサービスプロファイルのカスタムテキスト](/docs/api/management/v2/self-service-profiles/put-self-service-profile-custom-text)エンドポイントにPUT呼び出しを行うことで、変更できます。
+このテキストは、 [セルフサービスプロファイルのカスタムテキスト](/docs/ja-jp/api/management/v2/self-service-profiles/put-self-service-profile-custom-text)エンドポイントにPUT呼び出しを行うことで、変更できます。
 
 <Warning>
 
@@ -190,8 +190,8 @@ Auth0 Dashboardでセルフサービスプロファイルを作成するには�
 </thead>
 <tbody>
 <tr>
-<td><code>introduction</code></td>
-<td>文字列。最大長は2000文字です。<br/><br/>SSO設定アシスタントのランディングページで表示する、導入テキストを完成させます。テキストには、太字やハイパーリンクなどの基本的な書式オプションを含めることができます。<br/><br/>このパラメーターで提供されるカスタムテキストは、以前のあらゆるメッセージを完全に上書きします。最善の結果が得られるように、お客様の管理者に表示したいメッセージ全文を提供してください。<br/><br/>空の本文<code>{}</code>を送信すると、カスタマイズされたメッセージがデフォルトのテキストにリセットされます。</td>
+<td>`introduction`</td>
+<td>文字列。最大長は2000文字です。<br/><br/>SSO設定アシスタントのランディングページで表示する、導入テキストを完成させます。テキストには、太字やハイパーリンクなどの基本的な書式オプションを含めることができます。<br/><br/>このパラメーターで提供されるカスタムテキストは、以前のあらゆるメッセージを完全に上書きします。最善の結果が得られるように、お客様の管理者に表示したいメッセージ全文を提供してください。<br/><br/>空の本文`{}`を送信すると、カスタマイズされたメッセージがデフォルトのテキストにリセットされます。</td>
 </tr>
 </tbody>
 </table>
@@ -199,7 +199,7 @@ Auth0 Dashboardでセルフサービスプロファイルを作成するには�
 
 **呼び出しの例**
 
-```
+```json lines
 PUT /api/v2/self-service-profiles/ssp_1234567890/custom-text/en/get-started
 
 {
@@ -209,7 +209,7 @@ PUT /api/v2/self-service-profiles/ssp_1234567890/custom-text/en/get-started
 
 **応答の例**
 
-```json
+```json lines
 {
   introduction: "Welcome! With <b>only a few steps</b>, you'll be able to setup your new connection. For assistance, contact <a href="https://www.examplesupportsite.com"> our support team </a>." 
 }
@@ -228,8 +228,8 @@ PUT /api/v2/self-service-profiles/ssp_1234567890/custom-text/en/get-started
 
 セルフサービスアクセスチケットを生成するには以下を行います。
 
-1. [セルフサービスプロファイル取得](/docs/api/management/v2/self-service-profiles/get-self-service-profiles)エンドポイントを通して、アクセスチケットに関連付けるセルフサービスプロファイルのIDを取得します。
-2. 適切なセルフサービスプロファイルのIDを使用して、[SSOアクセスチケット](/docs/api/management/v2/self-service-profiles/post-sso-ticket)エンドポイントを呼び出します：
+1. [セルフサービスプロファイル取得](/docs/ja-jp/api/management/v2/self-service-profiles/get-self-service-profiles)エンドポイントを通して、アクセスチケットに関連付けるセルフサービスプロファイルのIDを取得します。
+2. 適切なセルフサービスプロファイルのIDを使用して、[SSOアクセスチケット](/docs/ja-jp/api/management/v2/self-service-profiles/post-sso-ticket)エンドポイントを呼び出します：
 
 `POST  /api/v2/self-service-profiles/{id}/sso-ticket`
 
@@ -242,7 +242,7 @@ PUT /api/v2/self-service-profiles/ssp_1234567890/custom-text/en/get-started
 * 新規接続用にアクセスチケットを生成する場合は、`connection_config`パラメーターを使用して、確立されるSSO接続の主要な詳細を定義することができます。
 * アクセスチケットを既存の接続用に作成する場合は、`connection_id`パラメーターを代わりに使用する必要があります。
 
-既存の接続について`connection_config`の詳細を更新する場合、[SSOアクセスチケット](/docs/api/management/v2/self-service-profiles/post-sso-ticket)エンドポイントは使用できません。既存の接続にこの情報を変更しなければならない場合は、[接続更新](/docs/api/management/v2/connections/patch-connections-by-id)エンドポイントを使用します。
+既存の接続について`connection_config`の詳細を更新する場合、[SSOアクセスチケット](/docs/ja-jp/api/management/v2/self-service-profiles/post-sso-ticket)エンドポイントは使用できません。既存の接続にこの情報を変更しなければならない場合は、[接続更新](/docs/ja-jp/api/management/v2/connections/patch-connections-by-id)エンドポイントを使用します。
 
 </Note>
 
@@ -254,67 +254,67 @@ PUT /api/v2/self-service-profiles/ssp_1234567890/custom-text/en/get-started
 </thead>
 <tbody>
 <tr>
-<td><code>connection_id</code></td>
-<td>文字列。<br/><br/><strong>既存のSSO接続を更新する</strong>ためのアクセスチケットを生成するときに、このオプションを提供します。<br/><br/>顧客の管理者がSSOセットアップアシスタントを介して更新する接続のIDです。顧客の管理者はSAML証明書、または、関連する接続のOIDC IDやシークレットを変更することができます。<br/><br/>接続IDは、<a href="https://manage.auth0.com/#/connections/enterprise">Auth0 Dashboard</a>の［Authentication（認証）］セクション、または<a href="/docs/api/management/v2/connections/get-connections">すべての接続取得</a>エンドポイントから取得することができます。<br/><br/><code>connection_id</code>は<code>connection_config</code>と同時に使用できません。</td>
+<td>`connection_id`</td>
+<td>文字列。<br/><br/><strong>既存のSSO接続を更新する</strong>ためのアクセスチケットを生成するときに、このオプションを提供します。<br/><br/>顧客の管理者がSSOセットアップアシスタントを介して更新する接続のIDです。顧客の管理者はSAML証明書、または、関連する接続のOIDC IDやシークレットを変更することができます。<br/><br/>接続IDは、<a href="https://manage.auth0.com/#/connections/enterprise">Auth0 Dashboard</a>の［Authentication（認証）］セクション、または<a href="/docs/ja-jp/api/management/v2/connections/get-connections">すべての接続取得</a>エンドポイントから取得することができます。<br/><br/>`connection_id`は`connection_config`と同時に使用できません。</td>
 </tr>
 <tr>
-<td><code>connection_config</code></td>
-<td>オブジェクト。<br/><br/>SSO接続を<strong>新規作成する</strong>ためのアクセスチケットを生成するときに、このオプションを提供します。顧客の管理者は、SAML証明書、OIDC IDやシークレットなど、接続の重要な要素を変更することができます。<br/><br/><code>connection_config</code>と<code>connection_id</code>は同時に使用できません。</td>
+<td>`connection_config`</td>
+<td>オブジェクト。<br/><br/>SSO接続を<strong>新規作成する</strong>ためのアクセスチケットを生成するときに、このオプションを提供します。顧客の管理者は、SAML証明書、OIDC IDやシークレットなど、接続の重要な要素を変更することができます。<br/><br/>`connection_config`と`connection_id`は同時に使用できません。</td>
 </tr>
 <tr>
-<td><code>connection_config.name</code></td>
-<td>文字列。最大長は128文字です。<br/><br/>SSOセットアップアシスタントを介して作成された接続の名前です。<br/><br/><code>connection_config</code>を使用する場合、このパラメーターは必須です。</td>
+<td>`connection_config.name`</td>
+<td>文字列。最大長は128文字です。<br/><br/>SSOセットアップアシスタントを介して作成された接続の名前です。<br/><br/>`connection_config`を使用する場合、このパラメーターは必須です。</td>
 </tr>
 <tr>
-<td><code>connection_config.display_name</code></td>
-<td>文字列。最大長は128文字です。<br/><br/>SSOセットアップアシスタントを介して作成された接続の分かりやすい名前です。この名前はユニバーサルログインプロンプトに表示されます。<br/><br/><code>connection_config</code>を使用する場合、このパラメーターは任意です。</td>
+<td>`connection_config.display_name`</td>
+<td>文字列。最大長は128文字です。<br/><br/>SSOセットアップアシスタントを介して作成された接続の分かりやすい名前です。この名前はユニバーサルログインプロンプトに表示されます。<br/><br/>`connection_config`を使用する場合、このパラメーターは任意です。</td>
 </tr>
 <tr>
-<td><code>connection_config.is_domain_connection</code></td>
-<td>ブール値。<br/><br/>接続がドメインレベルにある場合は、<code>true</code>に設定します。<br/><br/><code>connection_config</code>を使用する場合、このパラメーターは任意です。</td>
+<td>`connection_config.is_domain_connection`</td>
+<td>ブール値。<br/><br/>接続がドメインレベルにある場合は、`true`に設定します。<br/><br/>`connection_config`を使用する場合、このパラメーターは任意です。</td>
 </tr>
 <tr>
-<td><code>connection_config.show_as_button</code></td>
-<td>ブール値。<br/><br/><code>true</code>の場合、接続はアプリケーションのログイン画面に認証オプションとして表示されます。<br/><br/><code>connection_config</code>を使用する場合、このパラメーターは任意です。</td>
+<td>`connection_config.show_as_button`</td>
+<td>ブール値。<br/><br/>`true`の場合、接続はアプリケーションのログイン画面に認証オプションとして表示されます。<br/><br/>`connection_config`を使用する場合、このパラメーターは任意です。</td>
 </tr>
 <tr>
-<td><code>connection_config.metadata</code></td>
-<td>オブジェクト[]。<br/><br/>確立される接続に関連付けられたメタデータです。オブジェクトは最大10個のキーと値のペアを持つことができます。文字列の値は最大255文字まで使用できます。<br/><br/><code>connection_config</code>を使用する場合、このパラメーターは任意です。</td>
+<td>`connection_config.metadata`</td>
+<td>オブジェクト[]。<br/><br/>確立される接続に関連付けられたメタデータです。オブジェクトは最大10個のキーと値のペアを持つことができます。文字列の値は最大255文字まで使用できます。<br/><br/>`connection_config`を使用する場合、このパラメーターは任意です。</td>
 </tr>
 <tr>
-<td><code>connection_config.options</code></td>
-<td>オブジェクト[]。<br/><br/>確立される接続のオプションで、<code>icon_url</code>と<code>domain_aliases[]</code>を含みます。<br/><br/><code>connection_config</code>を使用する場合、このパラメーターは任意です。</td>
+<td>`connection_config.options`</td>
+<td>オブジェクト[]。<br/><br/>確立される接続のオプションで、`icon_url`と`domain_aliases[]`を含みます。<br/><br/>`connection_config`を使用する場合、このパラメーターは任意です。</td>
 </tr>
 <tr>
-<td><code>enabled_clients</code></td>
+<td>`enabled_clients`</td>
 <td>文字列[]。<br/><br/>SSO接続に関連付けるアプリケーションクライアントIDのリストです。</td>
 </tr>
 <tr>
-<td><code>enabled_organizations</code></td>
+<td>`enabled_organizations`</td>
 <td>オブジェクト[]。<br/><br/>SSO接続に関連付ける組織のリストです。</td>
 </tr>
 <tr>
-<td><code>enabled_organizations[].organization_id</code></td>
-<td>SSO接続に関連付ける特定の組織のIDです。<br/><br/>IDは、<a href="https://manage.auth0.com/#/organizations">Auth0 Dashboard</a>の［Organizations（組織）］セクション、<a href="/docs/api/management/v2/organizations/get-organizations">Organizations取得</a>エンドポイント、または<a href="/docs/api/management/v2/organizations/get-name-by-name">名前でのOrganization取得</a>エンドポイントから取得することができます。<br/><br/><code>enabled_organizations</code>を使用する場合、このパラメーターは必須です。</td>
+<td>`enabled_organizations[].organization_id`</td>
+<td>SSO接続に関連付ける特定の組織のIDです。<br/><br/>IDは、<a href="https://manage.auth0.com/#/organizations">Auth0 Dashboard</a>の［Organizations（組織）］セクション、<a href="/docs/ja-jp/api/management/v2/organizations/get-organizations">Organizations取得</a>エンドポイント、または<a href="/docs/ja-jp/api/management/v2/organizations/get-name-by-name">名前でのOrganization取得</a>エンドポイントから取得することができます。<br/><br/>`enabled_organizations`を使用する場合、このパラメーターは必須です。</td>
 </tr>
 <tr>
-<td><code>enabled_organizations[].assign_membership_on_login</code></td>
-<td>ブール値。<br/><br/><code>true</code>の場合、関連付けられた接続を使ってログインするユーザーには、特定の組織へのメンバーシップが自動的に付与されます。<br/><br/><code>enabled_organizations</code>を使用する場合、このパラメーターは任意です。</td>
+<td>`enabled_organizations[].assign_membership_on_login`</td>
+<td>ブール値。<br/><br/>`true`の場合、関連付けられた接続を使ってログインするユーザーには、特定の組織へのメンバーシップが自動的に付与されます。<br/><br/>`enabled_organizations`を使用する場合、このパラメーターは任意です。</td>
 </tr>
 <tr>
-<td><code>enabled_organizations[].show_as_button</code></td>
-<td>ブール値。<br/><br/><code>true</code>の場合、関連付けられた接続はアプリケーションのOrganizationログイン画面に認証オプションとして表示されます。これは、エンタープライズ接続でのみ有効にすることができます。<br/><br/><code>enabled_organizations</code>を使用する場合、このパラメーターは任意です。</td>
+<td>`enabled_organizations[].show_as_button`</td>
+<td>ブール値。<br/><br/>`true`の場合、関連付けられた接続はアプリケーションのOrganizationログイン画面に認証オプションとして表示されます。これは、エンタープライズ接続でのみ有効にすることができます。<br/><br/>`enabled_organizations`を使用する場合、このパラメーターは任意です。</td>
 </tr>
 <tr>
-<td><code>ttl_sec</code></td>
-<td>数字。<br/><br/>アクセスチケットが期限切れになるまでの秒数です。この数値が指定されていない、または<code>0</code>に設定されている場合、値はデフォルトで<code>432000</code>（5日に相当）に設定されます。</td>
+<td>`ttl_sec`</td>
+<td>数字。<br/><br/>アクセスチケットが期限切れになるまでの秒数です。この数値が指定されていない、または`0`に設定されている場合、値はデフォルトで`432000`（5日に相当）に設定されます。</td>
 </tr>
 </tbody>
 </table>
 
 **要求本文の例**
 
-```json
+```json lines
 {
    "connection_config":{
       "name":"string",
@@ -358,7 +358,7 @@ PUT /api/v2/self-service-profiles/ssp_1234567890/custom-text/en/get-started
 
 応答で、セルフサービスアクセスチケットへのURLを受け取ります。
 
-```json
+```json lines
 {
   "ticket": "https://{domain}/self-service/connections-flow?ticket={id}"
 }
@@ -384,7 +384,7 @@ PUT /api/v2/self-service-profiles/ssp_1234567890/custom-text/en/get-started
 
 アクセスチケットを取り消すには以下を行います。
 
-1. [セルフサービスプロファイル取得](/docs/api/management/v2/self-service-profiles/get-self-service-profiles)エンドポイントを使用して、アクセスチケットに関連付けられているセルフサービスプロファイルのIDを取得します。
+1. [セルフサービスプロファイル取得](/docs/ja-jp/api/management/v2/self-service-profiles/get-self-service-profiles)エンドポイントを使用して、アクセスチケットに関連付けられているセルフサービスプロファイルのIDを取得します。
 2. 取り消すアクセスチケットのIDを見つけます。IDは、アクセスチケットURLの末尾にあります。
 3. 適切なIDを使用してアクセスチケット取り消しエンドポイントを呼び出します：
 
@@ -396,16 +396,16 @@ PUT /api/v2/self-service-profiles/ssp_1234567890/custom-text/en/get-started
 
 ### API
 
-セルフサービスSSOの管理には、以下の[Management API](/docs/api/management/v2/introduction)エンドポイントが使用できます。
+セルフサービスSSOの管理には、以下の[Management API](/docs/ja-jp/api/management/v2/introduction)エンドポイントが使用できます。
 
-* [セルフサービスプロファイル取得](/docs/api/management/v2/self-service-profiles/get-self-service-profiles)
-* [セルフサービスプロファイル作成](/docs/api/management/v2/self-service-profiles/post-self-service-profiles)
-* [IDでのセルフサービスプロファイル取得](/docs/api/management/v2/self-service-profiles/get-self-service-profiles-by-id)
-* [IDでのセルフサービスプロファイル削除](/docs/api/management/v2/self-service-profiles/delete-self-service-profiles-by-id)
-* [セルフサービスプロファイル更新](/docs/api/management/v2/self-service-profiles/patch-self-service-profiles-by-id)
-* [セルフサービスプロファイルのカスタムテキスト取得](/docs/api/management/v2/self-service-profiles/get-self-service-profile-custom-text)
-* [セルフサービスプロファイルのカスタムテキスト設定](/docs/api/management/v2/self-service-profiles/put-self-service-profile-custom-text)
-* [セルフサービスSSOフロー開始のアクセスチケット作成](/docs/api/management/v2/self-service-profiles/post-sso-ticket)
+* [セルフサービスプロファイル取得](/docs/ja-jp/api/management/v2/self-service-profiles/get-self-service-profiles)
+* [セルフサービスプロファイル作成](/docs/ja-jp/api/management/v2/self-service-profiles/post-self-service-profiles)
+* [IDでのセルフサービスプロファイル取得](/docs/ja-jp/api/management/v2/self-service-profiles/get-self-service-profiles-by-id)
+* [IDでのセルフサービスプロファイル削除](/docs/ja-jp/api/management/v2/self-service-profiles/delete-self-service-profiles-by-id)
+* [セルフサービスプロファイル更新](/docs/ja-jp/api/management/v2/self-service-profiles/patch-self-service-profiles-by-id)
+* [セルフサービスプロファイルのカスタムテキスト取得](/docs/ja-jp/api/management/v2/self-service-profiles/get-self-service-profile-custom-text)
+* [セルフサービスプロファイルのカスタムテキスト設定](/docs/ja-jp/api/management/v2/self-service-profiles/put-self-service-profile-custom-text)
+* [セルフサービスSSOフロー開始のアクセスチケット作成](/docs/ja-jp/api/management/v2/self-service-profiles/post-sso-ticket)
 
 ### レート制限
 
@@ -421,22 +421,22 @@ PUT /api/v2/self-service-profiles/ssp_1234567890/custom-text/en/get-started
 <tbody>
 <tr>
 <td>SSOプロファイルを管理する</td>
-<td><code>/api/v2/self-service-profiles</code></td>
+<td>`/api/v2/self-service-profiles`</td>
 <td>「<a href="/docs/ja-jp/troubleshoot/customer-support/operational-policies/rate-limit-policy/rate-limit-configurations">Management APIのレート制限</a>」でサブスクリプションの種類を確認してください。</td>
 </tr>
 <tr>
 <td>アクセスチケットを作成する</td>
-<td><code>/api/v2/self-service-profiles/{id}/sso-ticket</code></td>
+<td>`/api/v2/self-service-profiles/{id}/sso-ticket`</td>
 <td>「<a href="/docs/ja-jp/troubleshoot/customer-support/operational-policies/rate-limit-policy/rate-limit-configurations">Management APIのレート制限</a>」でサブスクリプションの種類を確認してください。</td>
 </tr>
 <tr>
 <td>アクセスチケットを使用する</td>
-<td><code>/self-service/connection-flows?ticket={id}</code></td>
+<td>`/self-service/connection-flows?ticket={id}`</td>
 <td>6 / 分 / IP</td>
 </tr>
 <tr>
 <td>webapp（セットアップアシスタントを含む）とwebappエンドポイントを読み込む</td>
-<td><code>/self-service/*</code></td>
+<td>`/self-service/*`</td>
 <td>50 / 分 / IP<br/>90 / 分 / テナント</td>
 </tr>
 </tbody>

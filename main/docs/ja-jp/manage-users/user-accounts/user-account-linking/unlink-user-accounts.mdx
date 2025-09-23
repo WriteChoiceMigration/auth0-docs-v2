@@ -1,15 +1,15 @@
 ---
 title: "ユーザーアカウントのリンクを解除する"
 permalink: "unlink-user-accounts"
+'description': "Management APIのUnlink a User Account（ユーザーアカウントのリンクを解除する）エンドポイントを使用して、ターゲットのユーザーアカウントからIDのリンクを解除して、分離したユーザーアカウントに戻す方法を説明します。"
 'og:title': "ユーザーアカウントのリンクを解除する"
 'og:description': "Management APIのUnlink a User Account（ユーザーアカウントのリンクを解除する）エンドポイントを使用して、ターゲットのユーザーアカウントからIDのリンクを解除して、分離したユーザーアカウントに戻す方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユーザーアカウントのリンクを解除する"
 'twitter:description': "Management APIのUnlink a User Account（ユーザーアカウントのリンクを解除する）エンドポイントを使用して、ターゲットのユーザーアカウントからIDのリンクを解除して、分離したユーザーアカウントに戻す方法を説明します。"
 ---
-# ユーザーアカウントのリンクを解除する
 
-Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>の[Unlink a User Account](/docs/api/management/v2#!/Users/delete_user_identity_by_user_id)（ユーザーアカウントのリンクを解除する）エンドポイント、またはAuth0.jsライブラリーを使用して、ターゲットのユーザーアカウントからIDのリンクを解除して、分離したユーザーアカウントに戻します。
+Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>の[Unlink a User Account](/docs/ja-jp/api/management/v2#!/Users/delete_user_identity_by_user_id)（ユーザーアカウントのリンクを解除する）エンドポイント、またはAuth0.jsライブラリーを使用して、ターゲットのユーザーアカウントからIDのリンクを解除して、分離したユーザーアカウントに戻します。
 
 このリンク解除プロセスの結果は次のようになります。
 
@@ -35,19 +35,19 @@ Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Man
 </thead>
 <tbody>
 <tr>
-<td><code>id</code></td>
-<td><code>string</code></td>
+<td>`id`</td>
+<td>`string`</td>
 <td>プライマリユーザーアカウントのID（必須）</td>
 </tr>
 <tr>
-<td><code>provider</code></td>
-<td><code>string</code></td>
-<td>リンクされたセカンダリアカウントのIDプロバイダー名（<code>google-oauth2</code>など）</td>
+<td>`provider`</td>
+<td>`string`</td>
+<td>リンクされたセカンダリアカウントのIDプロバイダー名（`google-oauth2`など）</td>
 </tr>
 <tr>
-<td><code>user_id</code></td>
-<td><code>string</code></td>
-<td>リンクされたセカンダリアカウントのID（<code>google-oauth2|123456789081523216417</code>の<code>|</code>の後に表示された<code>123456789081523216417</code>部分など）</td>
+<td>`user_id`</td>
+<td>`string`</td>
+<td>リンクされたセカンダリアカウントのID（`google-oauth2|123456789081523216417`の`|`の後に表示された`123456789081523216417`部分など）</td>
 </tr>
 </tbody>
 </table>
@@ -56,7 +56,7 @@ Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Man
 
 ## 応答例
 
-```json
+```javascript lines
 [
   {
     "connection": "Initial-Connection",
@@ -80,9 +80,9 @@ Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Man
 
 ## プライマリアカウントからJWTを使用する
 
-アカウントのリンクを解除するには、認可用のプライマリアカウントから<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">JWT</Tooltip>を使用してManagement APIの[Unlink a User Accountエンドポイント](/docs/api/v2#!/Users/delete_user_identity_by_user_id)を呼び出します。
+アカウントのリンクを解除するには、認可用のプライマリアカウントから<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">JWT</Tooltip>を使用してManagement APIの[Unlink a User Accountエンドポイント](/docs/ja-jp/api/v2#!/Users/delete_user_identity_by_user_id)を呼び出します。
 
-```javascript
+```javascript lines
 function unlinkAccount(secondaryProvider, secondaryUserId){
   var primaryUserId = localStorage.getItem('user_id');
   var primaryJWT = localStorage.getItem('id_token');
@@ -104,9 +104,9 @@ function unlinkAccount(secondaryProvider, secondaryUserId){
 
 ## update:usersスコープを持つアクセストークンを使用する
 
-2つ以上のユーザーアカウントのリンクを解除する必要がある場合は、`update:users`スコープを持つ[Management APIのアクセストークン](/docs/api/v2/tokens)を使用して、Management APIの[Unlink a User Accountエンドポイント](/docs/api/v2#!/Users/delete_user_identity_by_user_id)を呼び出します。
+2つ以上のユーザーアカウントのリンクを解除する必要がある場合は、`update:users`スコープを持つ[Management APIのアクセストークン](/docs/ja-jp/api/v2/tokens)を使用して、Management APIの[Unlink a User Accountエンドポイント](/docs/ja-jp/api/v2#!/Users/delete_user_identity_by_user_id)を呼び出します。
 
-```javascript
+```javascript lines
 function unlinkAccount(secondaryProvider, secondaryUserId) {
   var primaryUserId = localStorage.getItem('user_id');
   var primaryAccessToken = localStorage.getItem('access_token');
@@ -135,7 +135,7 @@ function unlinkAccount(secondaryProvider, secondaryUserId) {
 
 1. セッション内のユーザーを（それぞれが独立したユーザーアカウントを表す）新しいID配列で更新します。
 
-```javascript
+```javascript lines
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 const Auth0Client = require('../Auth0Client');
 const express = require('express');
@@ -154,9 +154,9 @@ router.post('/unlink-accounts/:targetUserProvider/:targetUserId',ensureLoggedIn,
 });
 ```
 
-1. `update:users`スコープを持つ[Management APIのアクセストークン](/docs/api/v2/tokens)を使用して、Management API v2の[Unlink a User Accountエンドポイント](/docs/api/v2#!/Users/delete_user_identity_by_user_id)を呼び出します。
+1. `update:users`スコープを持つ[Management APIのアクセストークン](/docs/ja-jp/api/v2/tokens)を使用して、Management API v2の[Unlink a User Accountエンドポイント](/docs/ja-jp/api/v2#!/Users/delete_user_identity_by_user_id)を呼び出します。
 
-```javascript
+```javascript lines
 const request = require('request');
 
 class Auth0Client {

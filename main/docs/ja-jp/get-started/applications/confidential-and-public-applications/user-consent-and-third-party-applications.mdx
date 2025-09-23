@@ -1,13 +1,13 @@
 ---
 title: "ユーザーの同意とサードパーティアプリケーション"
 permalink: "user-consent-and-third-party-applications"
+'description': "APIを、それを使用するアプリケーションから切り離す方法と、自分で制御していない、信頼できないサードパーティアプリの定義について説明します。"
 'og:title': "ユーザーの同意とサードパーティアプリケーション"
 'og:description': "APIを、それを使用するアプリケーションから切り離す方法と、自分で制御していない、信頼できないサードパーティアプリの定義について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユーザーの同意とサードパーティアプリケーション"
 'twitter:description': "APIを、それを使用するアプリケーションから切り離す方法と、自分で制御していない、信頼できないサードパーティアプリの定義について説明します。"
 ---
-# ユーザーの同意とサードパーティアプリケーション
 
 [OIDC](/docs/ja-jp/authenticate/protocols/openid-connect-protocol)準拠の認証パイプラインでは、リソースサーバー（APIなど）をアプリケーションとは別のエンティティとして定義することができます。そうすることで、APIを使用するアプリケーションからAPIを切り離すだけでなく、[サードパーティアプリケーション](/docs/ja-jp/get-started/applications/confidential-and-public-applications/first-party-and-third-party-applications)を定義して、外部パーティに対し、APIの内部で保護されているリソースへの安全なアクセスを許可することができます。
 
@@ -17,7 +17,7 @@ permalink: "user-consent-and-third-party-applications"
 
 たとえば、このような要求：
 
-```
+``` lines
 GET /authorize?
 client_id=some_third_party_client
 &redirect_uri=https://fabrikam.com/contoso_social
@@ -30,7 +30,7 @@ client_id=some_third_party_client
 
 は、次のようなユーザー同意ダイアログになります。
 
-<Frame>![認可 - ユーザーの同意とアプリケーション - 同意ダイアログ](//images.ctfassets.net/cdy7uua7fh8z/5Cz3aZKw8RRVlMkc5Zl6x7/3cbb542cc383a812a1116cd5ee04a7de/Consent_prompt.png)</Frame>
+<Frame>![認可 - ユーザーの同意とアプリケーション - 同意ダイアログ](/images/ja-jp/cdy7uua7fh8z/5Cz3aZKw8RRVlMkc5Zl6x7/3cbb542cc383a812a1116cd5ee04a7de/Consent_prompt.png)</Frame>
 
 ユーザーがアプリケーションの要求を承認すると、ユーザー権限付与が作成されます。付与は、このアプリケーション、このリソースサーバー、このスコープの組み合わせに対するユーザーの同意を表します。アプリケーションは、その後、通常どおりにAuth0から認証成功の応答を受け取ります。
 
@@ -40,7 +40,7 @@ client_id=some_third_party_client
 
 デフォルトでは、同意ページは、スコープの名前を使ってユーザーの同意を求めます。下の図のように、スコープ名を**action:resource_name**形式で定義します。
 
-<Frame>![認可 - ユーザーの同意とアプリケーション - 同意スコープ](//images.ctfassets.net/cdy7uua7fh8z/3Z4Ofbj5yF7eg5cLfcauh9/304828f6a825bb01c5aeb3a7c8d1915f/Blog_API_Permissions.png)</Frame>
+<Frame>![認可 - ユーザーの同意とアプリケーション - 同意スコープ](/images/ja-jp/cdy7uua7fh8z/3Z4Ofbj5yF7eg5cLfcauh9/304828f6a825bb01c5aeb3a7c8d1915f/Blog_API_Permissions.png)</Frame>
 
 同意ページは、同じリソースに対するスコープをグループにまとめ、そのリソースに対するアクションを1行に表示します。たとえば上記の構成では、**Posts: read and write your posts（投稿：あなたの投稿の読み取りと書き出し）**と表示されます。
 
@@ -49,15 +49,15 @@ client_id=some_third_party_client
 **use_scope_descriptions_for_consent**フラグを設定するには、APIに適切な呼び出しをする必要があります。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/tenants/settings' \
 --header 'authorization: Bearer API2_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "flags": { "use_scope_descriptions_for_consent": true } }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/tenants/settings");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -67,7 +67,7 @@ request.AddParameter("application/json", "{ \"flags\": { \"use_scope_description
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -88,8 +88,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/settings")
 .header("content-type", "application/json")
 .header("authorization", "Bearer API2_ACCESS_TOKEN")
@@ -98,7 +98,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/setti
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -115,8 +115,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer API2_ACCESS_TOKEN",
@@ -142,7 +142,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/tenants/settings",
@@ -167,8 +167,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"flags\": { \"use_scope_descriptions_for_consent\": true } }"
@@ -183,7 +183,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -198,8 +198,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"flags\": { \"use_scope_descriptions_for_consent\": true } }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -231,7 +231,7 @@ dataTask.resume()
 
 ユーザーがアプリケーションへの同意を拒否した場合は、要求の中で指定された`redirect_uri`に、`access_denied`エラーと共にリダイレクトされます。
 
-```
+``` lines
 HTTP/1.1 302 Found
 Location: https://fabrikam.com/contoso_social#
     error=access_denied

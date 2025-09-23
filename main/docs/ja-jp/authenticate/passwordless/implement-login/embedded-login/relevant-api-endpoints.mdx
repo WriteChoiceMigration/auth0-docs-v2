@@ -1,13 +1,13 @@
 ---
 title: "パスワードレスAPIを使用する"
 permalink: "relevant-api-endpoints"
+'description': "Auth0 APIを使用してパスワードレス認証の実装方法を説明します。"
 'og:title': "パスワードレスAPIを使用する"
 'og:description': "Auth0 APIを使用してパスワードレス認証の実装方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "パスワードレスAPIを使用する"
 'twitter:description': "Auth0 APIを使用してパスワードレス認証の実装方法を説明します。"
 ---
-# パスワードレスAPIを使用する
 
 パスワードレスAPIは次の2つのシナリオで使用できます。
 
@@ -28,7 +28,7 @@ permalink: "relevant-api-endpoints"
 
 </Note>
 
-[POST /passwordless/start](/docs/api/authentication#get-code-or-link)エンドポイントを呼び出すと、クラシックログインと埋め込みログインの両方でパスワードレス認証プロセスを開始できます。
+[POST /passwordless/start](/docs/ja-jp/api/authentication#get-code-or-link)エンドポイントを呼び出すと、クラシックログインと埋め込みログインの両方でパスワードレス認証プロセスを開始できます。
 
 エンドポイントに提供されたパラメーターに応じて、Auth0は次のいずれかを送信してユーザー検証プロセスを開始します。
 
@@ -37,7 +37,7 @@ permalink: "relevant-api-endpoints"
 
 API 呼び出しは次の構造を持つ必要があります。
 
-```
+```json lines
 POST https://{yourDomain}/passwordless/start
 Content-Type: application/json
 {
@@ -66,7 +66,7 @@ Content-Type: application/json
 
 ユーザーはOTPコードを受け取り、ネイティブアプリケーションまたはWebアプリケーションがユーザーにOTPコードの入力を求めます。ユーザーがコードを入力すると、次のパラメーターを使用して`/oauth/token`エンドポイントを呼び出すことで認証フローを完了できます。
 
-```
+```json lines
 POST https://{yourAuth0Domain}/oauth/token
 Content-Type: application/json
 {
@@ -83,7 +83,7 @@ Content-Type: application/json
 
 すべてがうまくいけば、Auth0は次のような応答を返します。
 
-```
+```json lines
 HTTP/1.1 200 OK
 Content-Type: application/json
 {

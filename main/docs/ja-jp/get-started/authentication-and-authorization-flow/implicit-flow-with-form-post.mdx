@@ -1,13 +1,13 @@
 ---
 title: "フォームPOSTを使った暗黙フロー"
 permalink: "implicit-flow-with-form-post"
+'description': "フォームPOSTを使った暗黙フローの動作と、ユーザーの認証にIDトークンのみを必要とする従来型のWebアプリでこのフローを使用するべき理由について理解します。"
 'og:title': "フォームPOSTを使った暗黙フロー"
 'og:description': "フォームPOSTを使った暗黙フローの動作と、ユーザーの認証にIDトークンのみを必要とする従来型のWebアプリでこのフローを使用するべき理由について理解します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "フォームPOSTを使った暗黙フロー"
 'twitter:description': "フォームPOSTを使った暗黙フローの動作と、ユーザーの認証にIDトークンのみを必要とする従来型のWebアプリでこのフローを使用するべき理由について理解します。"
 ---
-# フォームPOSTを使った暗黙フロー
 
 <Warning>
 
@@ -23,11 +23,11 @@ permalink: "implicit-flow-with-form-post"
 
 <Warning>
 
-このフローは、ログインのみのユースケースに使用します。ユーザーのログイン時にAPIを呼び出せるようにアクセストークンを要求する場合は、[PKCEを使った認可コードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce)または[ハイブリッドフロー](/docs/get-started/authentication-and-authorization-flow/hybrid-flow)を使用してください。
+このフローは、ログインのみのユースケースに使用します。ユーザーのログイン時にAPIを呼び出せるようにアクセストークンを要求する場合は、[PKCEを使った認可コードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce)または[ハイブリッドフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/hybrid-flow)を使用してください。
 
 </Warning>
 
-<Frame>![フロー - フォームPOSTフローで暗黙的モード - 認可シーケンスの図](//images.ctfassets.net/cdy7uua7fh8z/6m0uE4E7Hpzbdhyh9dEuYK/c7659f6fda881d2ac61af6724adeb54f/auth-sequence-implicit-form-post.png)</Frame>
+<Frame>![フロー - フォームPOSTフローで暗黙的モード - 認可シーケンスの図](/images/ja-jp/cdy7uua7fh8z/6m0uE4E7Hpzbdhyh9dEuYK/c7659f6fda881d2ac61af6724adeb54f/auth-sequence-implicit-form-post.png)</Frame>
 
 1. ユーザーはアプリで **［Login（ログイン）］** をクリックします。
 2. Auth0の SDKは、ユーザーをAuth0認可サーバー (`/authorize` endpoint)にリダイレクトし、要求された資格情報の種類を示す`id_token`の`response_type`パラメータを渡します。また、セキュリティを確保するために `form_post`の`response_mode`パラメータも渡します。
@@ -41,7 +41,7 @@ permalink: "implicit-flow-with-form-post"
 
 <Note>
 
-[Auth0 Single-Page App SDK](/docs/ja-jp/libraries/auth0-single-page-app-sdk)と[Single-Page Quickstarts](/docs/quickstart/spa)は、新しい推奨に従い、[PKCEを使った認可コードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce)を使用します。
+[Auth0 Single-Page App SDK](/docs/ja-jp/libraries/auth0-single-page-app-sdk)と[Single-Page Quickstarts](/docs/ja-jp/quickstart/spa)は、新しい推奨に従い、[PKCEを使った認可コードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce)を使用します。
 
 </Note>
 

@@ -1,13 +1,13 @@
 ---
 title: "アプリケーションを削除する"
 permalink: "remove-applications"
+'description': "Auth0 DashboardまたはManagement APIを使用して、Auth0に登録されているアプリケーションを削除する方法を説明します。"
 'og:title': "アプリケーションを削除する"
 'og:description': "Auth0 DashboardまたはManagement APIを使用して、Auth0に登録されているアプリケーションを削除する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "アプリケーションを削除する"
 'twitter:description': "Auth0 DashboardまたはManagement APIを使用して、Auth0に登録されているアプリケーションを削除する方法を説明します。"
 ---
-# アプリケーションを削除する
 
 アプリケーションは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>または管理APIを使って削除できます。この操作は、一度確定すると元に戻せません。
 
@@ -15,28 +15,28 @@ permalink: "remove-applications"
 
 1. [［Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)に移動し、アプリケーションの名前を選択して表示します。
 
-   <Frame>![Dashboardのアプリケーションリスト](//images.ctfassets.net/cdy7uua7fh8z/1ecNwGgFQZxdP57p0tp3jT/6a547af05f8729ea00700a851e13c62b/App_List_-_JP.png)</Frame>
+   <Frame>![Dashboardのアプリケーションリスト](/images/ja-jp/cdy7uua7fh8z/1ecNwGgFQZxdP57p0tp3jT/6a547af05f8729ea00700a851e13c62b/App_List_-_JP.png)</Frame>
 
 2. **［Settings（設定）］**ページを下にスクロールして**［Danger Zone（危険ゾーン）］**を見つけ、**［Delete（削除）］**を選んでから確定します。
 
 ## Management APIの使用
 
-[`/Clients/delete_clients_by_id`](/docs/api/management/v2#!/Clients/delete_clients_by_id)エンドポイントに`DELETE`呼び出しを行います。必ず、`YOUR_CLIENT_ID`と`MGMT_API_ACCESS_TOKEN`のプレースホルダーの値を、それぞれご自身のクライアントIDと<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>のアクセストークンに置き換えてください。
+[`/Clients/delete_clients_by_id`](/docs/ja-jp/api/management/v2#!/Clients/delete_clients_by_id)エンドポイントに`DELETE`呼び出しを行います。必ず、`YOUR_CLIENT_ID`と`MGMT_API_ACCESS_TOKEN`のプレースホルダーの値を、それぞれご自身のクライアントIDと<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>のアクセストークンに置き換えてください。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request DELETE \
 --url 'https://{yourDomain}/api/v2/clients/%7ByourClientId%7D' \
 --header 'authorization: Bearer {yourMgmtApiToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/clients/%7ByourClientId%7D");
 var request = new RestRequest(Method.DELETE);
 request.AddHeader("authorization", "Bearer {yourMgmtApiToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -53,14 +53,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.delete("https://{yourDomain}/api/v2/clients/%7ByourClientId%7D")
 .header("authorization", "Bearer {yourMgmtApiToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'DELETE',
@@ -72,8 +72,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/clients/%7ByourClientId%7D"]
@@ -94,7 +94,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/clients/%7ByourClientId%7D",
@@ -116,8 +116,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtApiToken}" }
@@ -127,7 +127,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -139,8 +139,8 @@ request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/clients/%7ByourClientId%7D")! as URL,
@@ -169,12 +169,12 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>YOUR_CLIENT_ID</code></td>
+<td>`YOUR_CLIENT_ID`</td>
 <td>削除されるアプリケーションのID。</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><code>delete:clients</code>スコープのある[Management APIの<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">アクセストークン</a>。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>`delete:clients`スコープのある[Management APIの<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">アクセストークン</a>。</td>
 </tr>
 </tbody>
 </table>

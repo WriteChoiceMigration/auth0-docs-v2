@@ -1,13 +1,13 @@
 ---
 title: "KerberosでAD/LDAPコネクターの認証を構成する"
 permalink: "configure-ad-ldap-connector-with-kerberos"
+'description': "Kerberos認証とフェデレーションを行うためにAD/LDAPコネクターを構成する方法について説明します。"
 'og:title': "KerberosでAD/LDAPコネクターの認証を構成する"
 'og:description': "Kerberos認証とフェデレーションを行うためにAD/LDAPコネクターを構成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "KerberosでAD/LDAPコネクターの認証を構成する"
 'twitter:description': "Kerberos認証とフェデレーションを行うためにAD/LDAPコネクターを構成する方法について説明します。"
 ---
-# KerberosでAD/LDAPコネクターの認証を構成する
 
 AD/LDAPコネクターを介してActive Directoryとフェデレーションを行うことができます。AD/LDAPコネクターを使用すると、ユーザーは企業ネットワーク内のドメイン参加マシンで認証を行うことができます。
 
@@ -29,13 +29,13 @@ Kerberos認証が有効な場合、ADコネクターが稼働しているサー�
 
 これが機能するには、ネットワークでユーザーが`config.json`コネクターの高可用性デプロイメントでは、ユーザーの接続先アドレスはすべてのコネクターインスタンスの前にあるネットワークロードバランサーです。
 
-<Frame>![KerberosでAD/LDAPコネクターの認証を構成する フロー図](//images.ctfassets.net/cdy7uua7fh8z/1EUZhFx2w5FjDeIoMySERC/8379c4c9dbb26041d396d031030f779f/2023-09-22_14-28-30.png)</Frame>
+<Frame>![KerberosでAD/LDAPコネクターの認証を構成する フロー図](/images/ja-jp/cdy7uua7fh8z/1EUZhFx2w5FjDeIoMySERC/8379c4c9dbb26041d396d031030f779f/2023-09-22_14-28-30.png)</Frame>
 
 詳細については、「[高可用性環境のAD/LDAPコネクターをデプロイする](/docs/ja-jp/authenticate/identity-providers/enterprise-identity-providers/active-directory-ldap/ad-ldap-connector/ad-ldap-high-availability)
 
 一方、ユーザーが企業ネットワークを使用していない（顧客先にいる、VPNを使わないリモートワークなど）場合は、AD/LDAPコネクターに直接アクセスすることはできません。ユーザーはユーザー名/パスワードを入力する必要があり、Auth0はAD/LDAPコネクターを使ってこれらの資格情報を検証します（今度は、Active Directoryを使用してこれらの資格情報を検証します）。
 
-<Frame>![Kerberos資格認証でAD/LDAPコネクターの認証を構成する フロー図](//images.ctfassets.net/cdy7uua7fh8z/7xo1cIdF6GmSowlVB8kjQn/0a3fc29c64db9c58b9e43db6d79fc574/2023-09-22_14-29-00.png)</Frame>
+<Frame>![Kerberos資格認証でAD/LDAPコネクターの認証を構成する フロー図](/images/ja-jp/cdy7uua7fh8z/7xo1cIdF6GmSowlVB8kjQn/0a3fc29c64db9c58b9e43db6d79fc574/2023-09-22_14-29-00.png)</Frame>
 
 ## Lockによる自動ログイン
 
@@ -49,7 +49,7 @@ AD/LDAP接続でIP範囲を検出し、ロックでそれらの範囲を使用�
 
 （エンドユーザーのIPアドレスに基づいて）Kerberosを使用できる場合は、ユーザーの自動サインインが必要になることもあります。Kerberosを使用できる場合にユーザーを自動的にサインインするために、以下の変更をAuth0のログインページに追加することができます。
 
-```
+```html lines
 <script src="https://cdn.auth0.com/js/lock/11.x.x/lock.min.js"></script>
 <script src="https://cdn.auth0.com/js/auth0/9.x/auth0.min.js"></script>
 <script src="https://cdn.auth0.com/js/polyfills/1.0/object-assign.min.js"></script>
@@ -109,7 +109,7 @@ AD/LDAP接続でIP範囲を検出し、ロックでそれらの範囲を使用�
 
 ユーザーが接続の設定で構成された範囲内のIPアドレスからログインしていても、`rememberLastLogin: false`を`lock.show()`に渡すことで、Kerberosを使用しないようにすることができます。
 
-```javascript
+```javascript lines
 function useKerberos() {
       // return true to use Kerberos, false to bypass
     };

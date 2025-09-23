@@ -1,26 +1,26 @@
 ---
 title: "リソース所有者フローを使ってMicrosoft Entra IDにネイティブアプリを接続する"
 permalink: "azure-active-directory-native"
+'description': "リソース所有者フローでエンタープライズ接続を使ってMicrosoft Entra IDにアプリを接続する方法について説明します。"
 'og:title': "リソース所有者フローを使ってMicrosoft Entra IDにネイティブアプリを接続する"
 'og:description': "リソース所有者フローでエンタープライズ接続を使ってMicrosoft Entra IDにアプリを接続する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "リソース所有者フローを使ってMicrosoft Entra IDにネイティブアプリを接続する"
 'twitter:description': "リソース所有者フローでエンタープライズ接続を使ってMicrosoft Entra IDにアプリを接続する方法について説明します。"
 ---
-# リソース所有者フローを使ってMicrosoft Entra IDにネイティブアプリを接続する
 
 WSフェデレーションと<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OpenID</Tooltip> Connectフローに加えて、Microsoft Entra IDで[リソース所有者](/docs/ja-jp/get-started/authentication-and-authorization-flow/resource-owner-password-flow)フローを使用することもできます。このフローでは、Microsoft Entra IDのログインページを表示するのでなく、ユーザーの資格情報（メールとパスワード）をキャプチャして検証することができます。セキュリティ上およびシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>）上の理由から、このアプローチは推奨されません。ただし、リソース所有者フローは、ネイティブモバイルシナリオ、またはMicrosoft Entra IDとの一括処理認証に役立つことがあります。
 
 この構成には、WebアプリケーションとWeb API、ネイティブアプリケーションという2つのアプリケーションが必要です。Microsoft Entra IDの観点からすれば、ユーザーはネイティブアプリケーションによる認証を通じて、WebアプリケーションとWeb APIにアクセスします。
 
-<Frame>![リソース所有者フローを使用するAzure ADアプリの概要図](//images.ctfassets.net/cdy7uua7fh8z/6Uy9Q35rn0d9rankvlJuBT/62393c99f1c85fa16b83319a66b1d173/azure-ad-native-app.png)</Frame>
+<Frame>![リソース所有者フローを使用するAzure ADアプリの概要図](/images/ja-jp/cdy7uua7fh8z/6Uy9Q35rn0d9rankvlJuBT/62393c99f1c85fa16b83319a66b1d173/azure-ad-native-app.png)</Frame>
 
 ## 前提条件
 
 [Auth0にアプリケーションを登録する](/docs/ja-jp/get-started/auth0-overview/create-applications)：
 
 1. **アプリケーションタイプ**として**［Native（ネイティブ）］**を選択します。
-2. **［Allowed Callback URL（許可されているコールバックURL）］**を追加します。コールバックURLの形式は、使用しているプラットフォームによって異なります。使用しているプラットフォームの形式の詳細については、「[ネイティブクイックスタート](/docs/quickstart/native)」を参照してください。
+2. **［Allowed Callback URL（許可されているコールバックURL）］**を追加します。コールバックURLの形式は、使用しているプラットフォームによって異なります。使用しているプラットフォームの形式の詳細については、「[ネイティブクイックスタート](/docs/ja-jp/quickstart/native)」を参照してください。
 3. アプリケーションの[［Grant Types（付与タイプ）］](/docs/ja-jp/get-started/applications/update-grant-types)に適切なフローが必ず含まれていることを確認してください。
 
 ## ステップ
@@ -105,7 +105,7 @@ Entra IDディレクトリが2つ以上ある場合は、アプリを登録す�
 アプリのセットアップ中は、以下の設定を必ず使用してください。
 
 * 外部組織（他のEntra IDディレクトリなど）からユーザーを許可したい場合は、**［Supported account types（サポートされているアカウントの種類）］**の設定時に、**［Accounts in any organizational directory (Any Azure AD directory - Multitenant)（任意の組織ディレクトリ内のアカウント（任意のMicrosoft Entra ID - マルチテナント））］**を選択します。
-* **［Redirect URI（リダイレクトURI）］**を設定するよう求められたら、`［Public client/native (mobile & desktop)（パブリッククライアント/ネイティブ（モバイルとデスクトップ））］`を選択し、コールバックURLを入力します。コールバックURLの形式は、使用しているプラットフォームによって異なります。使用しているプラットフォームの形式の詳細については、「[ネイティブクイックスタート](/docs/quickstart/native)」をお読みください。
+* **［Redirect URI（リダイレクトURI）］**を設定するよう求められたら、`［Public client/native (mobile & desktop)（パブリッククライアント/ネイティブ（モバイルとデスクトップ））］`を選択し、コールバックURLを入力します。コールバックURLの形式は、使用しているプラットフォームによって異なります。使用しているプラットフォームの形式の詳細については、「[ネイティブクイックスタート](/docs/ja-jp/quickstart/native)」をお読みください。
 
 このプロセス中に、後のチュートリアルで必要になるため、アプリケーション用に生成される**［Application (client) ID（アプリケーション（クライアント）ID）］**を記録しておきます（このIDは、アプリケーションの**［Overview（概要）］**画面に表示されます）。
 
@@ -146,7 +146,7 @@ Microsoft Entra IDで両方のアプリケーションを作成したら、Auth0
 
 1. [［Auth0 Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)に移動し、**［Microsoft Entra ID］**を見つけ、追加（**+**）ボタンを選択します。
 
-   <Frame>![Dashboard - 接続 -エンタープライズ](//images.ctfassets.net/cdy7uua7fh8z/1fSTcrZpkgkPR64NnI1lr8/101fc19f62d82b5c7b13d88f3a0a8e96/Enterprise_Connections_-_JP.png)</Frame>
+   <Frame>![Dashboard - 接続 -エンタープライズ](/images/ja-jp/cdy7uua7fh8z/1fSTcrZpkgkPR64NnI1lr8/101fc19f62d82b5c7b13d88f3a0a8e96/Enterprise_Connections_-_JP.png)</Frame>
 
 2. 接続の詳細を入力し、 **［Create（作成）］**をクリックします。
 
@@ -179,7 +179,7 @@ Microsoft Entra IDで両方のアプリケーションを作成したら、Auth0
 </tr>
 <tr>
 <td><strong>Identity API（アイデンティティAPI）</strong></td>
-<td>Microsoft Entra IDエンドポイントとやり取りするためのAuth0が使用するAPI。動作の違いについては、Microsoftの[Microsoft IDプラットフォーム（v2.0）に更新する理由]（https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison）ドキュメントをご覧ください。<code>Azure Active Directory (v1)</code>を選択し、<strong>App ID URI</strong>については、APIに公開するためにWebアプリケーションを構成した時に作成された<strong>Application ID URI</strong>の保存された値を入力します。</td>
+<td>Microsoft Entra IDエンドポイントとやり取りするためのAuth0が使用するAPI。動作の違いについては、Microsoftの[Microsoft IDプラットフォーム（v2.0）に更新する理由]（https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison）ドキュメントをご覧ください。`Azure Active Directory (v1)`を選択し、<strong>App ID URI</strong>については、APIに公開するためにWebアプリケーションを構成した時に作成された<strong>Application ID URI</strong>の保存された値を入力します。</td>
 </tr>
 <tr>
 <td><strong>Attributes（属性）</strong></td>
@@ -199,12 +199,12 @@ Microsoft Entra IDで両方のアプリケーションを作成したら、Auth0
 </tr>
 <tr>
 <td><strong>Email Verification（メール検証）</strong></td>
-<td>Auth0がユーザープロファイルで<code>email_verified</code>フィールドを設定する方法を選択します。詳細については、<a href="/docs/connections/azuread-adfs-email-verification">Microsoft Entra IDとADFSのメール検証</a>をご覧ください。</td>
+<td>Auth0がユーザープロファイルで`email_verified`フィールドを設定する方法を選択します。詳細については、<a href="/docs/ja-jp/connections/azuread-adfs-email-verification">Microsoft Entra IDとADFSのメール検証</a>をご覧ください。</td>
 </tr>
 </tbody>
 </table>
 
-   <Frame>![Microsoft Entra ID接続を新規作成する](//images.ctfassets.net/cdy7uua7fh8z/1r6WTgLJUlbiV9jligIwER/f9862dd5ba92afa7d977134b5628ff09/Enterprise_Connection_-_MSFT_-_Japanese.png)</Frame>
+   <Frame>![Microsoft Entra ID接続を新規作成する](/images/ja-jp/cdy7uua7fh8z/1r6WTgLJUlbiV9jligIwER/f9862dd5ba92afa7d977134b5628ff09/Enterprise_Connection_-_MSFT_-_Japanese.png)</Frame>
 
 ## Auth0アプリケーションでエンタープライズ接続を有効化する
 
@@ -239,8 +239,8 @@ Microsoft Entra IDで両方のアプリケーションを作成したら、Auth0
 
 ## 次の手順
 
-* [Auth0のライブラリーを使ってAuth0を統合する](/docs/libraries)
-* [Authentication APIを使ってAuth0を統合する](/docs/api/authentication)
+* [Auth0のライブラリーを使ってAuth0を統合する](/docs/ja-jp/libraries)
+* [Authentication APIを使ってAuth0を統合する](/docs/ja-jp/api/authentication)
 * [認証フローについての詳細を読む](/docs/ja-jp/get-started/authentication-and-authorization-flow)
 * [追加のパラメーターをIDプロバイダーに渡す](/docs/ja-jp/authenticate/identity-providers/pass-parameters-to-idps)
 * [アクセス許可のためにユーザーを再度プロンプトする](/docs/ja-jp/authenticate/identity-providers/social-identity-providers/reprompt-permissions)

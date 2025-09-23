@@ -1,13 +1,13 @@
 ---
 title: "組織の動作を定義する"
 permalink: "define-organization-behavior"
+'description': "Auth0 Organizations機能のアプリケーション内での組織の動作を定義する方法について説明します。"
 'og:title': "組織の動作を定義する"
 'og:description': "Auth0 Organizations機能のアプリケーション内での組織の動作を定義する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "組織の動作を定義する"
 'twitter:description': "Auth0 Organizations機能のアプリケーション内での組織の動作を定義する方法について説明します。"
 ---
-# 組織の動作を定義する
 
 Auth0でアプリケーションを表す場合には、アプリケーションが対応するべきユーザーの種類を指定することができます。個人による個人アカウントへのログインに対応するアプリケーションもあれば、[組織](/docs/ja-jp/manage-users/organizations/organizations-overview)のメンバーによる使用が目的のものもあります。それらの両方に対応するものもあります。これは組織の動作と呼ばれ、Auth0に接続するアプリケーションのそれぞれに設定することができます。
 
@@ -37,13 +37,13 @@ Auth0 Dashboardを使用して組織の動作を定義するには、以下を�
 <tbody>
 <tr>
 <td><strong>ユーザーのタイプ</strong></td>
-<td>どのカテゴリーのユーザーがアプリケーションにログインできるかを決定します。<br/><br/> オプションには以下が含まれます：<ul><li><strong>個人</strong>：ユーザーは、個人のアカウントでサインアップでき、アプリケーションに直接ログインできます。個人のユーザーはOrganizationを使用してログインできません。</li><li><strong>ビジネスユーザー</strong>：ログインするためには、ユーザーはOrganizationのメンバーでなければなりません。選択した場合、Organizationを提供してユーザーを<code>/authorize</code>エンドポイントにリダイレクトするか、またはOrganizationのプロンプトのためにログインフローを設定する必要があります。</li><li><strong>両方</strong>：ユーザーは、Organizationメンバーとしてログインするか、または個人のアカウントでサインアップできます。</li></ul></td>
-<td>__ユーザーのタイプ__のマッピング先<code>organization_usage</code><br/><br/>オプション：<ul><li>__個人__のマッピング先<code>deny</code></li><li> __ビジネスユーザー__のマッピング先<code>require</code></li><li>__両方__のマッピング先<code>allow</code></li></ul></td>
+<td>どのカテゴリーのユーザーがアプリケーションにログインできるかを決定します。<br/><br/> オプションには以下が含まれます：<ul><li><strong>個人</strong>：ユーザーは、個人のアカウントでサインアップでき、アプリケーションに直接ログインできます。個人のユーザーはOrganizationを使用してログインできません。</li><li><strong>ビジネスユーザー</strong>：ログインするためには、ユーザーはOrganizationのメンバーでなければなりません。選択した場合、Organizationを提供してユーザーを`/authorize`エンドポイントにリダイレクトするか、またはOrganizationのプロンプトのためにログインフローを設定する必要があります。</li><li><strong>両方</strong>：ユーザーは、Organizationメンバーとしてログインするか、または個人のアカウントでサインアップできます。</li></ul></td>
+<td>__ユーザーのタイプ__のマッピング先`organization_usage`<br/><br/>オプション：<ul><li>__個人__のマッピング先`deny`</li><li> __ビジネスユーザー__のマッピング先`require`</li><li>__両方__のマッピング先`allow`</li></ul></td>
 </tr>
 <tr>
 <td><strong>ログインフロー</strong></td>
 <td>アプリケーションにアクセスしたときにユーザーに表示する最初のログインプロンプトを決定します。ユーザーのタイプがビジネスユーザーまたは両方に設定されている場合のみ、このフィールドを構成できます。<br/><br/>オプションは次のとおりです：  <ul><li><strong>資格情報のプロンプト</strong>：ユーザーは最初にログインの資格情報を提供するように求められます。ログイン後、ユーザーはOrganizationを選択できます。</li><li><strong>Organizationのプロンプト</strong>：ユーザーは最初にOrganizationを選択するように求められます。その後、ログインするための資格情報を提供できます。ユーザーのタイプがビジネスユーザーに設定されている場合のみ、このオプションを使用できます。</li><li><strong>プロンプトなし</strong>：Auth0は、ユーザーに提供するログインプロンプトを規定していません。代わりに、あなたのアプリケーションが、適切なプロンプトを表示するために、Auth0に必要なパラメーターを送信する責任を負います。</li></ul></td>
-<td><strong>ログインフロー</strong> のマッピング先<code>organization_require_behavior</code><br/><br/>オプション:<ul><li>__資格情報のプロンプト__のマッピング先<code>post_login_prompt</code></li><li> __Organizationのプロンプト__のマッピング先<code>pre_login_prompt</code></li><li>__プロンプトなし__のマッピング先<code>no_prompt</code></li></ul></td>
+<td><strong>ログインフロー</strong> のマッピング先`organization_require_behavior`<br/><br/>オプション:<ul><li>__資格情報のプロンプト__のマッピング先`post_login_prompt`</li><li> __Organizationのプロンプト__のマッピング先`pre_login_prompt`</li><li>__プロンプトなし__のマッピング先`no_prompt`</li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -51,18 +51,18 @@ Auth0 Dashboardを使用して組織の動作を定義するには、以下を�
 
 ## Mangement API
 
-[クライアント更新エンドポイント](/docs/api/management/v2#!/Clients/patch_clients_by_id)に`PATCH`呼び出しを行います。`client_id`、`mgmt_api_access_token`、`organization_usage`、および`organization_require_behavior`のプレースホルダーをそれぞれクライアントID、Management APIのアクセストークン、組織の使用オプション、組織の動作オプションに置き換えます。
+[クライアント更新エンドポイント](/docs/ja-jp/api/management/v2#!/Clients/patch_clients_by_id)に`PATCH`呼び出しを行います。`client_id`、`mgmt_api_access_token`、`organization_usage`、および`organization_require_behavior`のプレースホルダーをそれぞれクライアントID、Management APIのアクセストークン、組織の使用オプション、組織の動作オプションに置き換えます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/clients/CLIENT_ID' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "organization_usage": "ORG_USAGE", "organization_require_behavior": "ORG_REQUIRE_BEHAVIOR" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/clients/CLIENT_ID");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -72,7 +72,7 @@ request.AddParameter("application/json", "{ \"organization_usage\": \"ORG_USAGE\
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -93,8 +93,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/clients/CLIENT_ID")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -103,7 +103,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/clients/CLIEN
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -123,8 +123,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
@@ -151,7 +151,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/clients/CLIENT_ID",
@@ -176,8 +176,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"organization_usage\": \"ORG_USAGE\", \"organization_require_behavior\": \"ORG_REQUIRE_BEHAVIOR\" }"
@@ -192,7 +192,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -207,8 +207,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"organization_usage\": \"ORG_USAGE\", \"organization_require_behavior\": \"ORG_REQUIRE_BEHAVIOR\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -247,20 +247,20 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>CLIENT_ID</code></td>
+<td>`CLIENT_ID`</td>
 <td>Organizationの動作を追加したいアプリケーションのIDです。</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><code>update:clients</code>スコープのある<a href="/docs/tokens/management-api-access-tokens">Management APIのアクセストークン</a>です。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>`update:clients`スコープのある<a href="/docs/ja-jp/tokens/management-api-access-tokens">Management APIのアクセストークン</a>です。</td>
 </tr>
 <tr>
-<td><code>ORGANIZATION_USAGE</code></td>
-<td>ユーザーがOrganizationにログインすることに、アプリケーションが対応するか決定します。オプションには以下が含まれます。<ul><li><code>deny</code>：（デフォルト）ユーザーはOrganizationを使用してログインできません。</li><li><code>allow</code>：ユーザーはOrganizationを使用して、または使用せずにログインできます。選択した場合、<code>/authorize</code>エンドポイントへのリダイレクトでユーザーにOrganizationを提供する必要があります。</li><li><code>require</code>：ユーザーはOrganizationを使用してログインしなければなりません。選択した場合、<code>/authorize</code>エンドポイントへのリダイレクトでユーザーにOrganizationを提供するか、<code>organization_require_behavior</code>を<code>pre_login_prompt</code>に設定し、ユーザーがOrganizationを選択してログインできるようにします。</li></ul></td>
+<td>`ORGANIZATION_USAGE`</td>
+<td>ユーザーがOrganizationにログインすることに、アプリケーションが対応するか決定します。オプションには以下が含まれます。<ul><li>`deny`：（デフォルト）ユーザーはOrganizationを使用してログインできません。</li><li>`allow`：ユーザーはOrganizationを使用して、または使用せずにログインできます。選択した場合、`/authorize`エンドポイントへのリダイレクトでユーザーにOrganizationを提供する必要があります。</li><li>`require`：ユーザーはOrganizationを使用してログインしなければなりません。選択した場合、`/authorize`エンドポイントへのリダイレクトでユーザーにOrganizationを提供するか、`organization_require_behavior`を`pre_login_prompt`に設定し、ユーザーがOrganizationを選択してログインできるようにします。</li></ul></td>
 </tr>
 <tr>
-<td><code>ORGANIZATION_REQUIRE_BEHAVIOR</code></td>
-<td>アプリケーションへのアクセスでユーザーに提供するログインフローを決定します。<code>organization_usage</code>が<code>require</code>または<code>allow</code>に設定されている場合にのみ適用されます。<br/><br/>オプションには以下が含まれます。<ul><li><code>no_prompt</code>：（デフォルト）プロンプトを表示しません。有効なOrganizationパラメーターのない要求は拒否されます。</li><li><code>pre_login_prompt</code>：ログインする前に、Organizationの選択をユーザに求めます。このオプションは、<code>organization_usage</code>が<code>require</code>に設定されている場合にのみ有効です。</li><li><code>post_login_prompt</code>：ユーザーに資格情報でログインするように促します。ログインした後で、Organizationの選択をユーザーに求めます。</li></ul></td>
+<td>`ORGANIZATION_REQUIRE_BEHAVIOR`</td>
+<td>アプリケーションへのアクセスでユーザーに提供するログインフローを決定します。`organization_usage`が`require`または`allow`に設定されている場合にのみ適用されます。<br/><br/>オプションには以下が含まれます。<ul><li>`no_prompt`：（デフォルト）プロンプトを表示しません。有効なOrganizationパラメーターのない要求は拒否されます。</li><li>`pre_login_prompt`：ログインする前に、Organizationの選択をユーザに求めます。このオプションは、`organization_usage`が`require`に設定されている場合にのみ有効です。</li><li>`post_login_prompt`：ユーザーに資格情報でログインするように促します。ログインした後で、Organizationの選択をユーザーに求めます。</li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -279,67 +279,67 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>200</code></td>
+<td>`200`</td>
 <td></td>
 <td>Client successfully updated.（クライアントが正常に更新されました。）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_uri</code></td>
+<td>`400`</td>
+<td>`invalid_uri`</td>
 <td>Invalid request URI.（要求URIが無効です。）メッセージは原因によって異なります。</td>
 <td>パスが有効ではありません。</td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_body</code></td>
+<td>`400`</td>
+<td>`invalid_body`</td>
 <td>Invalid request body.（要求ボディーが無効です。）メッセージは原因によって異なります。</td>
 <td>要求ペイロードが有効ではありません。</td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Invalid token.（無効なトークンです。）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Client is not global.（クライアントがグローバルではありません。）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Invalid signature received for JSON Web Token validation.（JSON Web Tokenの検証に無効な署名を受け取りました。）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>403</code></td>
-<td><code>insufficient_scope</code></td>
-<td>Insufficient scope; expected any of: <code>update:clients</code>.（スコープが不足しています。<code>update:clients</code>が必要です。）</td>
+<td>`403`</td>
+<td>`insufficient_scope`</td>
+<td>Insufficient scope; expected any of: `update:clients`.（スコープが不足しています。`update:clients`が必要です。）</td>
 <td>渡されたベアラートークンのスコープでは許可されないフィールドの読み込みや書き出しが試行されました。</td>
 </tr>
 <tr>
-<td><code>403</code></td>
-<td><code>insufficient_scope</code></td>
+<td>`403`</td>
+<td>`insufficient_scope`</td>
 <td>Some fields cannot be updated with the permissions granted by the bearer token scopes.（一部のフィールドは、ベアラートークンのスコープで付加された権限では更新できません。）メッセージはフィールドやスコープによって異なります。</td>
 <td>渡されたベアラートークンのスコープでは許可されないフィールドの読み込みや書き出しが試行されました。</td>
 </tr>
 <tr>
-<td><code>403</code></td>
-<td><code>operation_not_supported</code></td>
+<td>`403`</td>
+<td>`operation_not_supported`</td>
 <td>The account is not allowed to perform this operation.（アカウントには、この操作の実行が許可されていません。）</td>
 <td>アカウントにこの操作の実行が許可されていません。</td>
 </tr>
 <tr>
-<td><code>404</code></td>
-<td><code>inexistent_client</code></td>
+<td>`404`</td>
+<td>`inexistent_client`</td>
 <td>Client not found.（クライアントが見つかりません。）</td>
 <td>存在しないリソースです。指定されたアプリケーションは存在しません。</td>
 </tr>
 <tr>
-<td><code>429</code></td>
+<td>`429`</td>
 <td></td>
 <td>Too many requests.Check the X-RateLimit-Limit, X-RateLimit-Remaining and X-RateLimit-Reset headers.（要求が多すぎます。X-RateLimit-Limit、X-RateLimit-Remaining、X-RateLimit-Resetヘッダーを確認してください。）</td>
 <td></td>

@@ -1,13 +1,13 @@
 ---
 title: "Management APIを使って認証方法を管理する"
 permalink: "manage-authentication-methods-with-management-api"
+'description': "Auth0 Management APIを使ってユーザーのMFA認証方法を管理する方法について説明します。"
 'og:title': "Management APIを使って認証方法を管理する"
 'og:description': "Auth0 Management APIを使ってユーザーのMFA認証方法を管理する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Management APIを使って認証方法を管理する"
 'twitter:description': "Auth0 Management APIを使ってユーザーのMFA認証方法を管理する方法について説明します。"
 ---
-# Management APIを使って認証方法を管理する
 
 <Card title="Before you start">
 
@@ -35,19 +35,19 @@ permalink: "manage-authentication-methods-with-management-api"
 以下の要求は特定のユーザーについて、すべての認証方法のリストを返します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -64,14 +64,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -83,8 +83,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
@@ -105,7 +105,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
@@ -127,8 +127,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -138,7 +138,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -150,8 +150,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")! as URL,
@@ -176,7 +176,7 @@ dataTask.resume()
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>は、有効な各要求に対して、JSON形式の応答を返します。
 
-```json
+```json lines
 [
   {
     "id": "totp|dev_XXXXXXXXXXXXXXXX",
@@ -199,19 +199,19 @@ dataTask.resume()
 以下の要求は、指定された認証方法のIDに基づいて、ユーザーの1つの認証方法を返します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -228,14 +228,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -247,8 +247,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D"]
@@ -269,7 +269,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D",
@@ -291,8 +291,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -302,7 +302,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -314,8 +314,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")! as URL,
@@ -340,7 +340,7 @@ dataTask.resume()
 
 Management APIは、有効な各要求に対して、JSON形式の応答を返します。
 
-```json
+```json lines
 {
     "id": "totp|dev_XXXXXXXXXXXXXXXX",
     "type": "totp",
@@ -371,13 +371,13 @@ SMSでユーザーにワンタイムパスワード（OTP）を送信します�
 以下の要求はユーザーのSMS認証方法を作成します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --data '{ "type": "phone", "name": "SMS", "phone_number": "+00000000000" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -385,7 +385,7 @@ request.AddParameter("undefined", "{ \"type\": \"phone\", \"name\": \"SMS\", \"p
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -404,15 +404,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .body("{ \"type\": \"phone\", \"name\": \"SMS\", \"phone_number\": \"+00000000000\" }")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -425,8 +425,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSDictionary \*parameters = @{ @"type": @"phone",
@@ -452,7 +452,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
@@ -475,8 +475,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"type\": \"phone\", \"name\": \"SMS\", \"phone_number\": \"+00000000000\" }"
@@ -487,7 +487,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -500,8 +500,8 @@ request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request.body = "{ \"type\": \"phone\", \"name\": \"SMS\", \"phone_number\": \"+00000000000\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let parameters = [
@@ -533,7 +533,7 @@ dataTask.resume()
 
 Management APIは、有効な各要求に対して、JSON形式の応答を返します。
 
-```json
+```json lines
 {
     "type": "phone",
     "name": "SMS",
@@ -552,13 +552,13 @@ Management APIは、有効な各要求に対して、JSON形式の応答を返�
 以下の要求はユーザーのメール認証方法を作成します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --data '{ "type": "email", "name": "Email Factor", "email": "user@example.com" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -566,7 +566,7 @@ request.AddParameter("undefined", "{ \"type\": \"email\", \"name\": \"Email Fact
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -585,15 +585,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .body("{ \"type\": \"email\", \"name\": \"Email Factor\", \"email\": \"user@example.com\" }")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -606,8 +606,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSDictionary \*parameters = @{ @"type": @"email",
@@ -633,7 +633,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
@@ -656,8 +656,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"type\": \"email\", \"name\": \"Email Factor\", \"email\": \"user@example.com\" }"
@@ -668,7 +668,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -681,8 +681,8 @@ request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request.body = "{ \"type\": \"email\", \"name\": \"Email Factor\", \"email\": \"user@example.com\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let parameters = [
@@ -714,7 +714,7 @@ dataTask.resume()
 
 Management APIは、有効な各要求に対して、JSON形式の応答を返します。
 
-```json
+```json lines
 {
     "type": "email",
     "name": "Email Factor",
@@ -733,13 +733,13 @@ Management APIは、有効な各要求に対して、JSON形式の応答を返�
 以下の要求はユーザーのOTP認証方法を作成します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --data '{ "type": "totp", "name": "OTP Application", "totp_secret": "{yourSecret}" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -747,7 +747,7 @@ request.AddParameter("undefined", "{ \"type\": \"totp\", \"name\": \"OTP Applica
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -766,15 +766,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .body("{ \"type\": \"totp\", \"name\": \"OTP Application\", \"totp_secret\": \"{yourSecret}\" }")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -787,8 +787,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSDictionary \*parameters = @{ @"type": @"totp",
@@ -814,7 +814,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
@@ -837,8 +837,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"type\": \"totp\", \"name\": \"OTP Application\", \"totp_secret\": \"{yourSecret}\" }"
@@ -849,7 +849,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -862,8 +862,8 @@ request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request.body = "{ \"type\": \"totp\", \"name\": \"OTP Application\", \"totp_secret\": \"{yourSecret}\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let parameters = [
@@ -895,7 +895,7 @@ dataTask.resume()
 
 Management APIは、有効な各要求に対して、JSON形式の応答を返します。
 
-```json
+```json lines
 {
     "type": "totp",
     "name": "OTP Application",
@@ -914,13 +914,13 @@ Management APIは、有効な各要求に対して、JSON形式の応答を返�
 以下の要求はユーザーについて、セキュリティキーを使ったWebAuthn認証方法を作成します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --data '{ "type": "webauthn_roaming", "name": "WebAuthn with security keys", "public_key": "{yourPublicKey}", "key_id": "{yourKeyId}", "relying_party_identifier": "{yourDomain}" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -928,7 +928,7 @@ request.AddParameter("undefined", "{ \"type\": \"webauthn_roaming\", \"name\": \
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -947,15 +947,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .body("{ \"type\": \"webauthn_roaming\", \"name\": \"WebAuthn with security keys\", \"public_key\": \"{yourPublicKey}\", \"key_id\": \"{yourKeyId}\", \"relying_party_identifier\": \"{yourDomain}\" }")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -974,8 +974,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSDictionary \*parameters = @{ @"type": @"webauthn_roaming",
@@ -1003,7 +1003,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
@@ -1026,8 +1026,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"type\": \"webauthn_roaming\", \"name\": \"WebAuthn with security keys\", \"public_key\": \"{yourPublicKey}\", \"key_id\": \"{yourKeyId}\", \"relying_party_identifier\": \"{yourDomain}\" }"
@@ -1038,7 +1038,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -1051,8 +1051,8 @@ request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request.body = "{ \"type\": \"webauthn_roaming\", \"name\": \"WebAuthn with security keys\", \"public_key\": \"{yourPublicKey}\", \"key_id\": \"{yourKeyId}\", \"relying_party_identifier\": \"{yourDomain}\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let parameters = [
@@ -1086,7 +1086,7 @@ dataTask.resume()
 
 Management APIは、有効な各要求に対して、JSON形式の応答を返します。
 
-```json
+```json lines
 {
     "type": "webauthn-roaming",
     "name": "WebAuthn with security keys",
@@ -1109,13 +1109,13 @@ Management APIは、有効な各要求に対して、JSON形式の応答を返�
 以下の要求はユーザーについて、既存のすべての認証方法を置き換えます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PUT \
 --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --data '[{ "type": "phone", "preferred_authentication_method": "sms", "phone_number": "+00000000000", "name": "SMS" }]'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods");
 var request = new RestRequest(Method.PUT);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -1123,7 +1123,7 @@ request.AddParameter("undefined", "[{ \"type\": \"phone\", \"preferred_authentic
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -1142,15 +1142,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.put("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .body("[{ \"type\": \"phone\", \"preferred_authentication_method\": \"sms\", \"phone_number\": \"+00000000000\", \"name\": \"SMS\" }]")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PUT',
@@ -1170,8 +1170,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSDictionary \*parameters = @[ @{ @"type": @"phone", @"preferred_authentication_method": @"sms", @"phone_number": @"+00000000000", @"name": @"SMS" } ];
@@ -1195,7 +1195,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
@@ -1218,8 +1218,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "[{ \"type\": \"phone\", \"preferred_authentication_method\": \"sms\", \"phone_number\": \"+00000000000\", \"name\": \"SMS\" }]"
@@ -1230,7 +1230,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -1243,8 +1243,8 @@ request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request.body = "[{ \"type\": \"phone\", \"preferred_authentication_method\": \"sms\", \"phone_number\": \"+00000000000\", \"name\": \"SMS\" }]"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let parameters = [
@@ -1279,7 +1279,7 @@ dataTask.resume()
 
 Management APIは、有効な各要求に対して、JSON形式の応答を返します。
 
-```json
+```json lines
 [
   {
     "id": "phone|dev_XXXXXXXXXXXXXXXX",
@@ -1309,13 +1309,13 @@ Management APIは、有効な各要求に対して、JSON形式の応答を返�
 以下の要求は、特定の認証方法のIDに基づいて、ユーザーの1つの認証方法を更新します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --data '{ "name": "Mobile SMS" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -1323,7 +1323,7 @@ request.AddParameter("undefined", "{ \"name\": \"Mobile SMS\" }", ParameterType.
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -1342,15 +1342,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .body("{ \"name\": \"Mobile SMS\" }")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -1363,8 +1363,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSDictionary \*parameters = @{ @"name": @"Mobile SMS" };
@@ -1388,7 +1388,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D",
@@ -1411,8 +1411,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"name\": \"Mobile SMS\" }"
@@ -1423,7 +1423,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -1436,8 +1436,8 @@ request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request.body = "{ \"name\": \"Mobile SMS\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let parameters = ["name": "Mobile SMS"] as [String : Any]
@@ -1465,7 +1465,7 @@ dataTask.resume()
 
 Management APIは、有効な各要求に対して、JSON形式の応答を返します。
 
-```json
+```json lines
 {
     "type": "phone",
     "name": "Mobile SMS",
@@ -1494,19 +1494,19 @@ Management APIは、有効な各要求に対して、JSON形式の応答を返�
 以下の要求はユーザーのすべての認証方法を削除します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request DELETE \
 --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods");
 var request = new RestRequest(Method.DELETE);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -1523,14 +1523,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.delete("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'DELETE',
@@ -1542,8 +1542,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
@@ -1564,7 +1564,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
@@ -1586,8 +1586,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -1597,7 +1597,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -1609,8 +1609,8 @@ request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")! as URL,
@@ -1644,19 +1644,19 @@ Management APIは、有効な各要求に対して、ステータスコード`20
 以下の要求は、指定された認証方法のIDに基づいて、ユーザーの1つの認証方法を削除します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request DELETE \
 --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D");
 var request = new RestRequest(Method.DELETE);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -1673,14 +1673,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.delete("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'DELETE',
@@ -1692,8 +1692,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D"]
@@ -1714,7 +1714,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D",
@@ -1736,8 +1736,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -1747,7 +1747,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -1759,8 +1759,8 @@ request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")! as URL,

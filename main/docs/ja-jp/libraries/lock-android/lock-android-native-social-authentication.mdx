@@ -1,13 +1,13 @@
 ---
 title: "Lock.Android:ネイティブのソーシャル認証"
 permalink: "lock-android-native-social-authentication"
+'description': "Lock.Android - ネイティブのソーシャル認証"
 'og:title': "Lock.Android:ネイティブのソーシャル認証"
 'og:description': "Lock.Android - ネイティブのソーシャル認証"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Lock.Android:ネイティブのソーシャル認証"
 'twitter:description': "Lock.Android - ネイティブのソーシャル認証"
 ---
-# Lock.Android:ネイティブのソーシャル認証
 
 ## ネイティブプロバイダー - Google
 
@@ -51,7 +51,7 @@ Lock-Google[Maven Central](http://search.maven.org)と[JCenter](https://bintray.
 1. Androidアプリケーションの中で、`res/strings.xml`ファイル内に新しい文字列リソースを作成します。「`google_server_client_id`」という名前を付けて、上記の**Google開発者コンソール**手順5で取得した`CLIENT_ID`を値に設定します。
 2. アプリケーションタグ内の`AndroidManifest.xml`ファイルにGoogle Play開発者サービスのバージョンメタデータを追加します。
 
-   ```
+   ``` lines
    <meta-data
        android:name="com.google.android.gms.version"
        android:value="@integer/google_play_services_version" />
@@ -62,7 +62,7 @@ Lock-Google[Maven Central](http://search.maven.org)と[JCenter](https://bintray.
    
 3. `AndroidManifest.xml`ファイルにAndroidのInternet権限を追加します。
 
-   ```
+   ```xml lines
    <uses-permission android:name="android.permission.INTERNET" />
    ```
 
@@ -71,7 +71,7 @@ Lock-Google[Maven Central](http://search.maven.org)と[JCenter](https://bintray.
    
 4. `GoogleAuthProvider`の新たなインスタンスを作成する際は、以前に最初のパラメーターとして取得した`google_server_client_id`値を渡します。
 
-   ```
+   ``` lines
    public class MainActivity extends AppCompatActivity {
      private GoogleAuthProvider provider;
      // ...
@@ -98,7 +98,7 @@ Google SDK設定についてヘルプが必要な場合は、Googleの「[Sign-I
 
 このプロバイダーを**Lock**なしで使用するつもりであれば、必ず`onActivityResult()`メソッドを上書きして、呼び出しをプロバイダーインスタンスにリダイレクトするようにしてください。最後に、「start」を呼び出して認証プロセスを開始します。
 
-```javascript
+```java lines
 // Define your own request codes
 private static final int RC_PERMISSIONS = 101;
 private static final int RC_AUTHENTICATION = 102;
@@ -124,7 +124,7 @@ private void beginAuthentication(){
 
 Auth0に対してカスタムソーシャル接続名を使って認可するには、2番目のコンストラクターを使ってGoogleAuthProviderインスタンスを作成します。
 
-```
+```java lines
 GoogleAuthProvider provider = new GoogleAuthProvider("my-connection", "google-server-client-id", client);
 ```
 
@@ -132,7 +132,7 @@ GoogleAuthProvider provider = new GoogleAuthProvider("my-connection", "google-se
 
 認証で追加のパラメーターを送信するには、`setParameters`を呼び出します。
 
-```
+```java lines
 Map<String, Object> parameters = new HashMap<>();
 //Add entries
 provider.setParameters(parameters);
@@ -142,7 +142,7 @@ provider.setParameters(parameters);
 
 デフォルトでは、`Scopes.PLUS_LOGIN`スコープが要求されます。スコープをカスタマイズするには、`setScopes`とスコープのリストを呼び出します。各Google API（Auth、Drive、Plus..）がそれぞれのGoogleスコープのリストを指定します。
 
-```
+```java lines
 provider.setScopes(Arrays.asList(new Scope(Scopes.PLUS_ME), new Scope(Scopes.PLUS_LOGIN)));
 ```
 
@@ -150,7 +150,7 @@ provider.setScopes(Arrays.asList(new Scope(Scopes.PLUS_ME), new Scope(Scopes.PLU
 
 このプロバイダーは、ユーザーの認証に特別なAndroid Manifest権限を必要としません。しかし、ユースケースによってそれが必要な場合は、 AuthProviderにこれを処理させることができます。`setRequiredPermissions`メソッドを使います。
 
-```
+```java lines
 provider.setRequiredPermissions(new String[]{"android.permission.GET_ACCOUNTS"});
 ```
 
@@ -224,7 +224,7 @@ Lock-Facebookは、[Maven Central](http://search.maven.org)および[JCenter](ht
 1. Androidアプリケーションの中で、`res/strings.xml`ファイル内に新しい文字列リソースを作成します。`facebook_app_id`という名前を付け、**Facebook開発者コンソール**セクションの手順5で取得した`APP ID`値をセットします。
 2. アプリケーションタグ内の`FacebookActivity`と`facebook_app_id`メタデータを`AndroidManifest.xml`ファイルに追加します。
 
-   ```
+   ``` lines
    <activity
        android:name="com.facebook.FacebookActivity"
        android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -239,7 +239,7 @@ Lock-Facebookは、[Maven Central](http://search.maven.org)および[JCenter](ht
    
 3. `AndroidManifest.xml`ファイルにAndroidのInternet権限を追加します。
 
-   ```
+   ```xml lines
    <uses-permission android:name="android.permission.INTERNET" />
    ```
 
@@ -248,7 +248,7 @@ Lock-Facebookは、[Maven Central](http://search.maven.org)および[JCenter](ht
    
 4. `FacebookAuthProvider`の新しいインスタンスを作成します。
 
-   ```
+   ``` lines
    public class MainActivity extends AppCompatActivity {
      private FacebookAuthProvider provider;
      // ...
@@ -276,7 +276,7 @@ Facebook SDKセットアップに関してヘルプが必要な場合は、Faceb
 
 このプロバイダーを**Lock**なしで使用するつもりであれば、必ず`onActivityResult()`メソッドを上書きして、呼び出しをプロバイダーインスタンスにリダイレクトするようにしてください。最後に、「start」を呼び出して認証プロセスを開始します。
 
-```javascript
+```java lines
 // Define your own request codes
 private static final int RC_PERMISSIONS = 101;
 private static final int RC_AUTHENTICATION = 102;
@@ -302,7 +302,7 @@ private void beginAuthentication(){
 
 Auth0に対してカスタムソーシャル接続名を使って認可するには、新たな接続名を使って`setConnection`を呼び出します。
 
-```
+```java lines
 FacebookAuthProvider provider = new FacebookAuthProvider("my_connection_name", client);
 ```
 
@@ -310,7 +310,7 @@ FacebookAuthProvider provider = new FacebookAuthProvider("my_connection_name", c
 
 認証で追加のパラメーターを送信するには、`setParameters`を呼び出します。
 
-```
+```java lines
 Map<String, Object> parameters = new HashMap<>();
 //Add entries
 provider.setParameters(parameters);
@@ -320,7 +320,7 @@ provider.setParameters(parameters);
 
 デフォルトでは、`public_profile`権限が要求されます。カスタマイズするには、 `setPermissions`とFacebook権限のリストを呼び出します。
 
-```
+```java lines
 provider.setPermissions(Arrays.asList("public_profile", "user_photos"));
 ```
 
@@ -328,7 +328,7 @@ provider.setPermissions(Arrays.asList("public_profile", "user_photos"));
 
 このプロバイダーは、ユーザーの認証に特別なAndroid Manifest権限を必要としません。しかし、ユースケースによってそれが必要な場合は、 AuthProviderが処理できます。`setRequiredPermissions`メソッドを使ってそれらを指定します。
 
-```
+```java lines
 provider.setRequiredPermissions(new String[]{"android.permission.GET_ACCOUNTS"});
 ```
 

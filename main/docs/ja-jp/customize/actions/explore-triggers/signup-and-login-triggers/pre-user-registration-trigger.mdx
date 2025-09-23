@@ -1,17 +1,17 @@
 ---
 title: "ユーザー登録前フロー"
 permalink: "pre-user-registration-trigger"
+'description': "ユーザーがデータベースまたはパスワードレス接続を通じて登録を試みる際に作動するユーザー登録前フローについて説明します。メタデータが作成される、または登録を拒否する前にユーザープロファイルに追加するために使用されます。"
 'og:title': "ユーザー登録前フロー"
 'og:description': "ユーザーがデータベースまたはパスワードレス接続を通じて登録を試みる際に作動するユーザー登録前フローについて説明します。メタデータが作成される、または登録を拒否する前にユーザープロファイルに追加するために使用されます。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユーザー登録前フロー"
 'twitter:description': "ユーザーがデータベースまたはパスワードレス接続を通じて登録を試みる際に作動するユーザー登録前フローについて説明します。メタデータが作成される、または登録を拒否する前にユーザープロファイルに追加するために使用されます。"
 ---
-# ユーザー登録前フロー
 
 ユーザー登録前フローは、ユーザーがデータベース、またはパスワードレス接続に追加される前に実行されます。
 
-<Frame>![アクションのユーザー登録前フローを示す図。](//images.ctfassets.net/cdy7uua7fh8z/2KtUcZhaBcT12GxjhBJZFG/a29883931efed0618078db632cc77017/pre-user-registration-flow.png)</Frame>
+<Frame>![アクションのユーザー登録前フローを示す図。](/images/ja-jp/cdy7uua7fh8z/2KtUcZhaBcT12GxjhBJZFG/a29883931efed0618078db632cc77017/pre-user-registration-flow.png)</Frame>
 
 このフロー内のアクションはブロッキング（同期的）であり、トリガーのプロセスの一部として実行されます。そのため、アクションが完了するまでAuth0パイプラインの他の部分の実行が停止されます。
 
@@ -38,7 +38,7 @@ permalink: "pre-user-registration-trigger"
 
 pre-user-registrationのアクションは、ユーザーのサインアップを防ぐために使用されます。
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about registration event.
  * @param {PreUserRegistrationAPI} api
@@ -68,7 +68,7 @@ pre-user-registrationのアクションは、作成される前にメタデー�
 
 </Warning>
 
-```javascript
+```javascript lines
 /**
  * @param {Event} event - Details about registration event.
  * @param {PreUserRegistrationAPI} api
@@ -82,7 +82,7 @@ exports.onExecutePreUserRegistration = async (event, api) => {
 
 pre-user-registrationのアクションはユーザープロファイルに、別のシステムからのユーザーIDを保存するために使用することができます。
 
-```javascript
+```javascript lines
 const axios = require('axios');
 
 const REQUEST_TIMEOUT = 2000; // Example timeout

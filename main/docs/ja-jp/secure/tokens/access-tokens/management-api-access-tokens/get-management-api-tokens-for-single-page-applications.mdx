@@ -1,15 +1,15 @@
 ---
 title: "シングルページアプリケーションのManagement APIアクセストークンを取得する"
 permalink: "get-management-api-tokens-for-single-page-applications"
+'description': "シングルページアプリケーション（SPA）のManagement APIトークンに使用できるスコープとエンドポイントについて説明します。"
 'og:title': "シングルページアプリケーションのManagement APIアクセストークンを取得する"
 'og:description': "シングルページアプリケーション（SPA）のManagement APIトークンに使用できるスコープとエンドポイントについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "シングルページアプリケーションのManagement APIアクセストークンを取得する"
 'twitter:description': "シングルページアプリケーション（SPA）のManagement APIトークンに使用できるスコープとエンドポイントについて説明します。"
 ---
-# シングルページアプリケーションのManagement APIアクセストークンを取得する
 
-Auth0のManagement Dashboardでなく、Auth0の[Management API](/docs/api/management/v2#!)を使用して、アプリケーションとAPIを管理したい場合もあるでしょう。
+Auth0のManagement Dashboardでなく、Auth0の[Management API](/docs/ja-jp/api/management/v2#!)を使用して、アプリケーションとAPIを管理したい場合もあるでしょう。
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>エンドポイントを呼び出すには、Management APIトークンと呼ばれる特殊な[アクセストークン](/docs/ja-jp/secure/tokens/access-tokens)を使って認証を行う必要があります。Management APIトークンとは、呼び出したいManagement APIトークンに固有の付与された権限（スコープとも呼ばれる）を含む[JSON Web Tokens（JWT）](/docs/ja-jp/secure/tokens/json-web-tokens)を指します。
 
@@ -29,7 +29,7 @@ Management APIトークンがSPA用に発行されると、以下のスコープ
 
 <Note>
 
-[PATCH /api/v2/users/{id}](/docs/api/management/v2#!/Users/patch_users_by_id)エンドポイントを通じたパスワードの変更は、SPAに対して発行されたManagement APIトークンでは**実行できません**。
+[PATCH /api/v2/users/{id}](/docs/ja-jp/api/management/v2#!/Users/patch_users_by_id)エンドポイントを通じたパスワードの変更は、SPAに対して発行されたManagement APIトークンでは**実行できません**。
 
 </Note>
 
@@ -41,28 +41,28 @@ Management APIトークンがSPA用に発行されると、以下のスコープ
 </thead>
 <tbody>
 <tr>
-<td><code>read:current_user</code></td>
-<td><a href="/docs/api/management/v2#!/Users/get_users_by_id">GET /api/v2/users/{id}</a> <br/> <a href="/docs/api/management/v2#!/Users/get_enrollments">GET /api/v2/users/{id}/enrollments</a></td>
+<td>`read:current_user`</td>
+<td><a href="/docs/ja-jp/api/management/v2#!/Users/get_users_by_id">GET /api/v2/users/{id}</a> <br/> <a href="/docs/ja-jp/api/management/v2#!/Users/get_enrollments">GET /api/v2/users/{id}/enrollments</a></td>
 </tr>
 <tr>
-<td><code>update:current_user_identities</code></td>
-<td><a href="/docs/api/management/v2#!/Users/post_identities">POST/api/v2/users/{id}/identities</a> <br/> <a href="/docs/api/management/v2#!/Users/delete_user_identity_by_user_id">DELETE /api/v2/users/{id}/identities/{provider}/{user_id}</a></td>
+<td>`update:current_user_identities`</td>
+<td><a href="/docs/ja-jp/api/management/v2#!/Users/post_identities">POST/api/v2/users/{id}/identities</a> <br/> <a href="/docs/ja-jp/api/management/v2#!/Users/delete_user_identity_by_user_id">DELETE /api/v2/users/{id}/identities/{provider}/{user_id}</a></td>
 </tr>
 <tr>
-<td><code>update:current_user_metadata</code></td>
-<td><a href="/docs/api/management/v2#!/Users/patch_users_by_id">PATCH /api/v2/users/{id}</a></td>
+<td>`update:current_user_metadata`</td>
+<td><a href="/docs/ja-jp/api/management/v2#!/Users/patch_users_by_id">PATCH /api/v2/users/{id}</a></td>
 </tr>
 <tr>
-<td><code>create:current_user_metadata</code></td>
-<td><a href="/docs/api/management/v2#!/Users/patch_users_by_id">PATCH /api/v2/users/{id}</a></td>
+<td>`create:current_user_metadata`</td>
+<td><a href="/docs/ja-jp/api/management/v2#!/Users/patch_users_by_id">PATCH /api/v2/users/{id}</a></td>
 </tr>
 <tr>
-<td><code>create:current_user_device_credentials</code></td>
-<td><a href="/docs/api/management/v2#!/Device_Credentials/post_device_credentials">POST /api/v2/device-credentials</a></td>
+<td>`create:current_user_device_credentials`</td>
+<td><a href="/docs/ja-jp/api/management/v2#!/Device_Credentials/post_device_credentials">POST /api/v2/device-credentials</a></td>
 </tr>
 <tr>
-<td><code>delete:current_user_device_credentials</code></td>
-<td><a href="/docs/api/management/v2#!/Device_Credentials/delete_device_credentials_by_id">DELETE /api/v2/device-credentials/{id}</a></td>
+<td>`delete:current_user_device_credentials`</td>
+<td><a href="/docs/ja-jp/api/management/v2#!/Device_Credentials/delete_device_credentials_by_id">DELETE /api/v2/device-credentials/{id}</a></td>
 </tr>
 </tbody>
 </table>
@@ -82,7 +82,7 @@ SPAからManagement APIトークン（Management APIのオーディエンスを�
    1. ユーザー認証を行うには、ユーザーのログインまたはサインアップ時の移動先である認可エンドポイントにユーザーをリダイレクトします。
    2. 受け取ったManagement APIトークンは、[JSON Webトークン形式](/docs/ja-jp/secure/tokens/json-web-tokens/json-web-token-structure)になります。
    3. トークンをデコードし、その内容を確認します。
-2. Management APIを呼び出し、[Get User by ID](/docs/api/management/v2#!/Users/get_users_by_id)エンドポイントからログインしているユーザーのユーザープロファイルを取得します。
+2. Management APIを呼び出し、[Get User by ID](/docs/ja-jp/api/management/v2#!/Users/get_users_by_id)エンドポイントからログインしているユーザーのユーザープロファイルを取得します。
 
    1. エンドポイントを呼び出すには、要求の`Authorization`ヘッダーで取得した、エンコードされたManagement APIトークンを含めます。
    2. `USER_ID`と`MGMT_API_ACCESS_TOKEN`プレースホルダーの値を、ログインしたユーザーのユーザーID（エンコードされたManagement APIトークンの`sub`値）とManagement APIアクセストークンにそれぞれ、必ず置き換えてください。

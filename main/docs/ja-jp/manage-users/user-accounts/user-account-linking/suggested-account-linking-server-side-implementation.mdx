@@ -1,13 +1,13 @@
 ---
 title: "ユーザーアカウントのリンク：サーバー側実装"
 permalink: "suggested-account-linking-server-side-implementation"
+'description': "サンプルのシナリオを使って、サーバー側コードを使用してユーザーアカウントと通常のWebアプリをリンクする方法を説明します。"
 'og:title': "ユーザーアカウントのリンク：サーバー側実装"
 'og:description': "サンプルのシナリオを使って、サーバー側コードを使用してユーザーアカウントと通常のWebアプリをリンクする方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユーザーアカウントのリンク：サーバー側実装"
 'twitter:description': "サンプルのシナリオを使って、サーバー側コードを使用してユーザーアカウントと通常のWebアプリをリンクする方法を説明します。"
 ---
-# ユーザーアカウントのリンク：サーバー側実装
 
 Auth0は、様々なIDプロバイダーのユーザーアカウントのリンクをサポートします。サーバー側コードを使用して、通常のWebアプリケーションのアカウントをリンクし、続行する前にユーザーに許可を求めることができます。コードは、ユーザーを認証し、メールアドレスを使用してユーザーを検索・特定します。その後、アプリケーションは、ターゲットアカウントの資格情報で認証することで、アカウントをリンクすることをユーザーに促し、アカウントとリンクします。
 
@@ -15,12 +15,12 @@ Auth0は、様々なIDプロバイダーのユーザーアカウントのリン�
 
 1. ユーザーをアプリケーションにログインさせる。
 
-   ユーザーは [ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)を使用して、アプリケーションに対して認証を受けます。詳細については、Auth0 Management APIオーディエンスのトークンを要求する（オーディエンス=`https://{yourDomain}/api/v2/`）、[Regular Web App Quickstart（通常のWebアプリクイックスタート）](/docs/quickstart/webapp)をお読みください。
+   ユーザーは [ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)を使用して、アプリケーションに対して認証を受けます。詳細については、Auth0 Management APIオーディエンスのトークンを要求する（オーディエンス=`https://{yourDomain}/api/v2/`）、[Regular Web App Quickstart（通常のWebアプリクイックスタート）](/docs/ja-jp/quickstart/webapp)をお読みください。
 2. 同じメールアドレスを持つユーザーを検索する。
 
    同じ検証済みメール持っているユーザーのユーザープロファイルおよびリストを取得できます。
 
-   ```
+   ``` lines
    router.get("/", async (req, res) => {
      const { sub, email_verified } = req.openid.user;
      //fetch user profile containing the user_metadata and app_metadata properties
@@ -55,9 +55,9 @@ Auth0は、様々なIDプロバイダーのユーザーアカウントのリン�
 
    
 
-   同じ検証済みメール持っているユーザーレコードの全リストを取得するには、アプリケーションは、`read:users`スコープを持つ[Management APIアクセストークン](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens)を使用してAuth0 Management APIの[Get Users By Emailエンドポイント](/docs/api/v2#!/users-by-email/get_users_by_email)を呼び出します。
+   同じ検証済みメール持っているユーザーレコードの全リストを取得するには、アプリケーションは、`read:users`スコープを持つ[Management APIアクセストークン](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens)を使用してAuth0 Management APIの[Get Users By Emailエンドポイント](/docs/ja-jp/api/v2#!/users-by-email/get_users_by_email)を呼び出します。
 
-   ```javascript
+   ```javascript lines
    const request = require('request');
    class Auth0Client {
    ...
@@ -76,7 +76,7 @@ Auth0は、様々なIDプロバイダーのユーザーアカウントのリン�
    1. Auth0が、一致するメールアドレスを持つ1件以上のレコードを返すと、ユーザーには、アカウントのリンクを促す以下のメッセージと共に、リストが表示されます。
    2. ユーザーがアカウントをリンクしたい場合は、アカウントの隣にある**［Link（リンク）］**をクリックします。
 
-      <Frame>![Example application with server-side account linking page](//images.ctfassets.net/cdy7uua7fh8z/7unQjUtxTZUc4tRFOxhaP3/050fb853d2b3be37795ce88b8a60ffed/account-linking-webapp-small__1_.png)</Frame>
+      <Frame>![Example application with server-side account linking page](/images/ja-jp/cdy7uua7fh8z/7unQjUtxTZUc4tRFOxhaP3/050fb853d2b3be37795ce88b8a60ffed/account-linking-webapp-small__1_.png)</Frame>
 
 4. ユーザーが**［Link（リンク）］**をクリックすると、アプリケーションは、ターゲットアカウントで認証を受けることをユーザーに求め、その後アカウントのリンクを実行します。
 
@@ -90,7 +90,7 @@ Auth0は、様々なIDプロバイダーのユーザーアカウントのリン�
 
    以下のコードスニペットは、メタデータの検証およびマージの方法を示しています。
 
-   ```
+   ```javascript lines
    async function accountLink(req, res, next) {
    const {
      linking: { targetUserId },
@@ -129,13 +129,13 @@ Auth0は、様々なIDプロバイダーのユーザーアカウントのリン�
    
 
    
-5. アプリケーションは、`update:users`スコープを持つ[Management APIアクセストークン](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens)を使用してAuth0 Management APIの[Link a User Accountエンドポイント](/docs/api/v2#!/Users/post_identities)を呼び出します。
+5. アプリケーションは、`update:users`スコープを持つ[Management APIアクセストークン](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens)を使用してAuth0 Management APIの[Link a User Accountエンドポイント](/docs/ja-jp/api/v2#!/Users/post_identities)を呼び出します。
 
 ## メタデータマージの例
 
 以下の例は、[Node.js Auth0 SDK for API V2](https://github.com/auth0/node-auth0)を使用して、セカンダリアカウントの `user_metadata`および`app_metadata`をプライマリアカウントにマージする方法を明確に示しています。
 
-```javascript
+```javascript lines
 /*
  * Recursively merges user_metadata and app_metadata from secondary into primary user.
  * Data of primary user takes preponderance.

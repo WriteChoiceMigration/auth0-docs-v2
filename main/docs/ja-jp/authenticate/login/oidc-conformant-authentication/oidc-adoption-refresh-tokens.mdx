@@ -1,26 +1,26 @@
 ---
 title: "OIDCにおけるリフレッシュトークン"
 permalink: "oidc-adoption-refresh-tokens"
+'description': "OIDC準拠のパイプラインがリフレッシュトークンの使用にどのような影響を与えるのかについて説明します。"
 'og:title': "OIDCにおけるリフレッシュトークン"
 'og:description': "OIDC準拠のパイプラインがリフレッシュトークンの使用にどのような影響を与えるのかについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "OIDCにおけるリフレッシュトークン"
 'twitter:description': "OIDC準拠のパイプラインがリフレッシュトークンの使用にどのような影響を与えるのかについて説明します。"
 ---
-# OIDCにおけるリフレッシュトークン
 
 OIDC準拠のパイプラインでは、リフレッシュトークンは以下のようになります。
 
 * [暗黙付与](/docs/ja-jp/get-started/authentication-and-authorization-flow/implicit-flow-with-form-post)タイプの認証では返されなくなります。
 * [機密アプリケーション](/docs/ja-jp/get-started/applications/confidential-and-public-applications)で使用できます。
 * PKCEを使用した認可コードフローでは、公開アプリケーションによる[リフレッシュトークンのローテーション](/docs/ja-jp/secure/tokens/refresh-tokens/refresh-token-rotation)に使用できます。
-* 新しいトークンの取得には、[`/oauth/token`](/docs/api/authentication#refresh-token)エンドポイントを使用しなければなりません。これは、[`/delegation`](/docs/api/authentication#delegation)エンドポイントが廃止されたためです。
+* 新しいトークンの取得には、[`/oauth/token`](/docs/ja-jp/api/authentication#refresh-token)エンドポイントを使用しなければなりません。これは、[`/delegation`](/docs/ja-jp/api/authentication#delegation)エンドポイントが廃止されたためです。
 
 また、リフレッシュトークンの構造にも違いがあります。詳細については、「[リフレッシュトークン](/docs/ja-jp/secure/tokens/refresh-tokens)」をお読みください。
 
 ## レガシー（委任）
 
-```
+``` lines
 POST /delegation
 Content-Type: 'application/json'
 {
@@ -33,7 +33,7 @@ Content-Type: 'application/json'
 
 ## OIDC準拠（トークンエンドポイント）
 
-```
+``` lines
 POST /oauth/token
 Content-Type: application/x-www-form-urlencoded
 grant_type=refresh_token&refresh_token=123&client_id=123&client_secret=123&scope=openid+profile&audience=https%3A%2F%2Fapi.example.com

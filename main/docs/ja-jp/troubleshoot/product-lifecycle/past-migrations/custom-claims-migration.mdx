@@ -1,13 +1,13 @@
 ---
 title: "カスタムクレームの移行"
 permalink: "custom-claims-migration"
+'description': "レガシーの名前空間のあるクレームからカスタムクレームへの移行について説明します。"
 'og:title': "カスタムクレームの移行"
 'og:description': "レガシーの名前空間のあるクレームからカスタムクレームへの移行について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "カスタムクレームの移行"
 'twitter:description': "レガシーの名前空間のあるクレームからカスタムクレームへの移行について説明します。"
 ---
-# カスタムクレームの移行
 
 Auth0では、2022年7月28日より、名前空間のないプライベートのカスタムクレームをアクセストークンとIDトークンに追加できるようになりました。これらのクレームは、[`/userinfo`エンドポイント](https://auth0.com/docs/api/authentication#get-user-info)の応答にも追加されます。<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JWT</Tooltip>クレームのタイプについては、「[JSON Web Tokenクレーム](/docs/ja-jp/secure/tokens/json-web-tokens/json-web-token-claims)」をお読みください。
 
@@ -21,7 +21,7 @@ Auth0では、2022年7月28日より、名前空間のないプライベート�
 
 これまでAuth0では、名前空間のあるクレームしかアクセストークンとIDトークンに許可されていませんでした。カスタムクレームへの本移行により、今後は名前空間のないクレームをAuth0のAuthentication APIのアクセストークン、IDトークン、および`/userinfo`エンドポイントで使用できます。
 
-```javascript
+```javascript lines
 // an Auth0 action 
 exports.onExecutePostLogin = async (event, api) => {
 
@@ -67,7 +67,7 @@ Auth0がサポートするすべての<Tooltip data-tooltip-id="react-containers
 
 #### 例
 
-```javascript
+```javascript lines
 // an Auth0 action 
 exports.onExecutePostLogin = async (event, api) => {
 
@@ -80,7 +80,7 @@ exports.onExecutePostLogin = async (event, api) => {
 };
 ```
 
-```javascript
+```javascript lines
 // an Auth0 action 
 exports.onExecutePostLogin = async (event, api) => {
 
@@ -97,7 +97,7 @@ exports.onExecutePostLogin = async (event, api) => {
 };
 ```
 
-```javascript
+```javascript lines
 // an Auth0 action 
 exports.onExecutePostLogin = async (event, api) => {
 
@@ -181,7 +181,7 @@ Auth0は、OIDC標準やOAuth2標準で使用されるクレーム、または�
 
 #### 例
 
-```javascript
+```javascript lines
 // an Auth0 action 
 exports.onExecutePostLogin = async (event, api) => {
 
@@ -218,7 +218,7 @@ Auth0では、オーディエンスがAuth0 APIであるアクセストークン
 
 #### 例
 
-```javascript
+```javascript lines
 // an Auth0 action 
 exports.onExecutePostLogin = async (event, api) => {
 
@@ -235,7 +235,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 以下の例は、オーディエンスがAuth0 APIでない場合に返されるカスタムクレーム付きの応答を示しています。
 
-```
+``` lines
 -- A resource owner password flow 
 POST https://{yourTenant}.auth0.com/oauth/token
 
@@ -248,7 +248,7 @@ audience:https://{yourApi}.com -- Note the audience, that is a custom API
 scope:openid profile
 ```
 
-```javascript
+```json lines
 // The Access token returned by Auth0
 {
   "iss": "https://{yourTenant}.auth0.com/",
@@ -271,7 +271,7 @@ scope:openid profile
 
 以下の例は、Auth0 APIオーディエンスで返される、カスタムクレームが追加されていない応答を示しています。
 
-```
+``` lines
 -- A resource owner password flow 
 POST https://{yourTenant}.auth0.com/oauth/token
 
@@ -284,7 +284,7 @@ audience:https://{yourTenant}.auth0.com/api/v2/ -- This is an Auth0 audience
 scope:openid profile
 ```
 
-```javascript
+```json lines
 // The Access token returned by Auth0
 {
   "iss": "https://{yourTenant}.auth0.com/",
@@ -321,7 +321,7 @@ Auth0では、Auth0ドメインを名前空間識別子として使用した、�
 
 </Note>
 
-```javascript
+```javascript lines
 // an Auth0 action 
 exports.onExecutePostLogin = async (event, api) => {
 
@@ -369,7 +369,7 @@ Auth0では、OIDCユーザープロファイルクレームをアクセスト�
 
 #### 例
 
-```javascript
+```javascript lines
 // an Auth0 action 
 exports.onExecutePostLogin = async (event, api) => {
 
@@ -394,7 +394,7 @@ Auth0 Rulesを使用してユーザーオブジェクトに変更を加える場
 
 例1：Auth0は、`context.idToken.app_metadata`が空のオブジェクトで設定されている場合に属性マッピングを無視します。
 
-```javascript
+```javascript lines
 // an Auth0 Rule
 function (user, context, callback) {
 
@@ -416,7 +416,7 @@ function (user, context, callback) {
 
 この移行前のSAML応答：
 
-```
+``` lines
 <samlp:Response>
     (...)
     <saml:Assertion>
@@ -439,7 +439,7 @@ function (user, context, callback) {
 
 アップグレード後の動作のSAML応答：
 
-```
+``` lines
 <samlp:Response>
     (...)
     <saml:Assertion>
@@ -451,7 +451,7 @@ function (user, context, callback) {
 
 例2：`context.id_token`内の`app_metadata`のバージョンが優先されます。
 
-```javascript
+```javascript lines
 // an Auth0 Rule
 function (user, context, callback) {
 
@@ -476,7 +476,7 @@ function (user, context, callback) {
 
 この移行前のSAML応答：
 
-```
+``` lines
 <samlp:Response>
     (...)
     <saml:Assertion>
@@ -504,7 +504,7 @@ function (user, context, callback) {
 
 アップグレード後の動作のSAML応答：
 
-```
+``` lines
 <samlp:Response>
     (...)
     <saml:Assertion>
@@ -532,7 +532,7 @@ function (user, context, callback) {
 
 #### 例
 
-```javascript
+```javascript lines
 // an Auth0 action 
 exports.onExecutePostLogin = async (event, api) => {
 
@@ -553,7 +553,7 @@ Auth0では、IDトークンに設定されている場合、/userinfo応答で�
 
 #### 例
 
-```javascript
+```javascript lines
 // an Auth0 action 
 exports.onExecutePostLogin = async (event, api) => {
 
@@ -564,13 +564,13 @@ exports.onExecutePostLogin = async (event, api) => {
 };
 ```
 
-```
+``` lines
 -- a call to /userinfo 
 GET https://{yourTenant}.auth0.com/userinfo
 Authorization: Bearer {yourAccessToken}
 ```
 
-```javascript
+```json lines
 // the response from /userinfo
 {
     "sub": ***,
@@ -592,7 +592,7 @@ Authorization: Bearer {yourAccessToken}
 
 以下は、拡張コードがトリガーされるたびに生成される廃止ログの例です。
 
-```json
+```json lines
 {
   "date": "2022-06-28T08:12:52.084Z",
   "type": "depnote",
@@ -633,7 +633,7 @@ Auth0 Rulesと属性マッピングを使用したSAML2アドオンおよびWeb�
 
 * Auth0ルールのコードが常に`context.id_token`に設定されたオブジェクトのコンテンツを優先するようにします。
 
-  ```javascript
+  ```javascript lines
   // my_claim will be ignored, this line of code is not relevant anymore,
   // prefer setting my_claim on `context.idToken`
   user.app_metadata.my_claim = 'a value'; 
@@ -651,7 +651,7 @@ Auth0 Rulesと属性マッピングを使用したSAML2アドオンおよびWeb�
   
 * SAML2アドオンまたはWebサービスフェデレーション（WS-Fed）プロトコルの属性マッピングを使用する場合は、`app_metadata`または`user_metadata`クレームを`context.idToken`オブジェクトに設定しないようにします。可能な場合は、これらのクレームを名前空間のあるクレームに置き換えます。
 
-  ```
+  ``` lines
   context.idToken['https://mydomain.com/app_metadata'] = {
     my_claim: 'my claim'
   };
@@ -662,7 +662,7 @@ Auth0 Rulesと属性マッピングを使用したSAML2アドオンおよびWeb�
   
 * プロトコルが`samlp`または`wsfed`の場合、現在のプロトコルまたは現在のクライアントで条件を使用して、`app_metadata`または`user_metadata`を設定するステートメントを除外します。
 
-  ```
+  ``` lines
   if (!['samlp', 'wsfed'].includes(context.protocol)) {
       context.idToken.app_metadata = {
         claim_set_via_id_token: "This is a claim which was set via context.idToken"

@@ -1,13 +1,13 @@
 ---
 title: "Configure Rules"
 permalink: "configure-rules"
+'description': "Learn how to configure Tenant Access Control List (ACL) rules with the Auth0 Management API."
 'og:title': "Configure Rules"
 'og:description': "Learn how to configure Tenant Access Control List (ACL) rules with the Auth0 Management API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configure Rules"
 'twitter:description': "Learn how to configure Tenant Access Control List (ACL) rules with the Auth0 Management API."
 ---
-# Configure Rules
 
 You can configure Tenant Access Control List (ACL) rules with the Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>.
 
@@ -25,33 +25,33 @@ You can view, create, update, overwrite, and delete Tenant ACL rules with the Ma
 <tbody>
 <tr>
 <td>View a rule</td>
-<td><a href="/docs/api/management/v2/network-acls/get-network-acls-by-id">Get a specific access control list entry for a tenant</a></td>
-<td><code>read:network_acls</code></td>
+<td><a href="/docs/ja-jp/api/management/v2/network-acls/get-network-acls-by-id">Get a specific access control list entry for a tenant</a></td>
+<td>`read:network_acls`</td>
 </tr>
 <tr>
 <td>View all rules</td>
-<td><a href="/docs/api/management/v2/network-acls/get-network-acls">Get all access control list entries for a tenant</a></td>
-<td><code>read:network_acls</code></td>
+<td><a href="/docs/ja-jp/api/management/v2/network-acls/get-network-acls">Get all access control list entries for a tenant</a></td>
+<td>`read:network_acls`</td>
 </tr>
 <tr>
 <td>Create a rule</td>
-<td><a href="/docs/api/management/v2/network-acls/post-network-acls">Create access control list</a></td>
-<td><code>create:network_acls</code></td>
+<td><a href="/docs/ja-jp/api/management/v2/network-acls/post-network-acls">Create access control list</a></td>
+<td>`create:network_acls`</td>
 </tr>
 <tr>
 <td>Update a rule</td>
-<td><a href="/docs/api/management/v2/network-acls/patch-network-acls-by-id">Partial update for an access control list</a></td>
-<td><code>update:network_acls</code></td>
+<td><a href="/docs/ja-jp/api/management/v2/network-acls/patch-network-acls-by-id">Partial update for an access control list</a></td>
+<td>`update:network_acls`</td>
 </tr>
 <tr>
 <td>Overwrite a rule</td>
-<td><a href="/docs/api/management/v2/network-acls/put-network-acls-by-id">Update access control list</a></td>
-<td><code>update:network_acls</code></td>
+<td><a href="/docs/ja-jp/api/management/v2/network-acls/put-network-acls-by-id">Update access control list</a></td>
+<td>`update:network_acls`</td>
 </tr>
 <tr>
 <td>Delete a rule</td>
-<td><a href="/docs/api/management/v2/network-acls/delete-network-acls-by-id">Delete access control list</a></td>
-<td><code>delete:network_acls</code></td>
+<td><a href="/docs/ja-jp/api/management/v2/network-acls/delete-network-acls-by-id">Delete access control list</a></td>
+<td>`delete:network_acls`</td>
 </tr>
 </tbody>
 </table>
@@ -69,24 +69,24 @@ For detailed information about Tenant ACL parameters and how to use them, read [
 </thead>
 <tbody>
 <tr>
-<td><code>description</code></td>
+<td>`description`</td>
 <td>string</td>
 <td>Describes the purpose or functionality of the rule.</td>
 </tr>
 <tr>
-<td><code>active</code></td>
+<td>`active`</td>
 <td>boolean</td>
 <td>Enables or disables the rule.</td>
 </tr>
 <tr>
-<td><code>priority</code></td>
+<td>`priority`</td>
 <td>number</td>
 <td>Numerical value that determines the order in which the rule is evaluated. Lower values indicate higher priority.</td>
 </tr>
 <tr>
-<td><code>rule</code></td>
+<td>`rule`</td>
 <td>object</td>
-<td>Contains the following properties:<ul><li style="font-size: 1em;"><code>action</code>: object. Contains the action the rule performs.</li><li style="font-size: 1em;"><code>match</code>: object. Defines the conditions that the incoming request must fulfill.</li><li style="font-size: 1em;"><code>not_match</code>: object. Defines the conditions that the incoming request must not fulfill.</li><li style="font-size: 1em;"><code>scope</code>: string. Service or context in which the rule is enforced.</li></ul></td>
+<td>Contains the following properties:<ul><li style="font-size: 1em;">`action`: object. Contains the action the rule performs.</li><li style="font-size: 1em;">`match`: object. Defines the conditions that the incoming request must fulfill.</li><li style="font-size: 1em;">`not_match`: object. Defines the conditions that the incoming request must not fulfill.</li><li style="font-size: 1em;">`scope`: string. Service or context in which the rule is enforced.</li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -100,9 +100,9 @@ Here’s an example of a Tenant ACL rule that blocks all incoming traffic from C
 To create a Tenant ACL rule with the Management API:
 
 1. [Get a Management API access token](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-production) with the `create:network_acls` scope.
-2. Call the Management API [Create access control list](/docs/api/management/v2/network-acls/post-network-acls) endpoint with the following body:
+2. Call the Management API [Create access control list](/docs/ja-jp/api/management/v2/network-acls/post-network-acls) endpoint with the following body:
 
-   ```json
+   ```json lines
    {
      "description": "Block all traffic from China",
      "active": true,
@@ -125,7 +125,7 @@ To create a Tenant ACL rule with the Management API:
 
 </Tab><Tab title="Go SDK">
 
-```
+```go lines
 package main
 
 import (
@@ -167,7 +167,7 @@ func main() {
 
 </Tab><Tab title="Node SDK">
 
-```javascript
+```javascript lines
 const createNetworkAclPayload: Management.CreateNetworkAclRequestContent = {
   description: "Block all traffic from China",
   active: true,
@@ -188,7 +188,7 @@ const createNetworkAcl = await client.networkAcls.create(createNetworkAclPayload
 
 </Tab><Tab title="Terraform">
 
-```
+``` lines
 resource "auth0_network_acl" "block_traffic_acl" {
     description = "Block all traffic from China"
     active = true
@@ -207,7 +207,7 @@ resource "auth0_network_acl" "block_traffic_acl" {
 
 </Tab><Tab title="Deploy CLI">
 
-```
+``` lines
 networkACLs:
   - description: Block all traffic from China
     active: true
@@ -223,7 +223,7 @@ networkACLs:
 
 </Tab><Tab title="Auth0 CLI">
 
-```
+``` lines
 auth0 network-acl create \
 --description "Block all traffic from China" \
 --priority 1 \
@@ -244,9 +244,9 @@ You can enable or disable [monitoring mode](/docs/ja-jp/secure/tenant-access-con
 To enable monitoring mode for a Tenant ACL rule with the Management API:
 
 1. [Get a Management API access token](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-production) with the `update:network_acls` scope.
-2. Call the Management API [Partial update for an access control list](/docs/api/management/v2/network-acls/patch-network-acls-by-id) endpoint with the following body:
+2. Call the Management API [Partial update for an access control list](/docs/ja-jp/api/management/v2/network-acls/patch-network-acls-by-id) endpoint with the following body:
 
-   ```json
+   ```json lines
    {
      "rule": {
        "action": {
@@ -263,7 +263,7 @@ To enable monitoring mode for a Tenant ACL rule with the Management API:
 
 </Tab><Tab title="Go SDK">
 
-```
+```go lines
 package main
 
 import (
@@ -299,7 +299,7 @@ func main() {
 
 </Tab><Tab title="Node SDK">
 
-```javascript
+```javascript lines
 const updateNetworkAclPayload: Management.UpdateNetworkAclRequestContent = {
   rule: {
     action: {
@@ -314,7 +314,7 @@ const updateNetworkAcl = await client.networkAcls.update("YOUR_TENANT_ACL_ID", u
 
 </Tab><Tab title="Terraform">
 
-```
+``` lines
 resource "auth0_network_acl" "block_traffic_acl" {
     description = "Block all traffic from China"
     active = true
@@ -334,7 +334,7 @@ resource "auth0_network_acl" "block_traffic_acl" {
 
 </Tab><Tab title="Deploy CLI">
 
-```
+``` lines
 networkACLs:
   - description: Block all traffic from China
     active: true
@@ -351,7 +351,7 @@ networkACLs:
 
 </Tab><Tab title="Auth0 CLI">
 
-```
+``` lines
 auth0 network-acl update YOUR_TENANT_ACL_ID --action log
 ```
 

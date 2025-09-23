@@ -1,13 +1,13 @@
 ---
 title: "Use Case: Configure mobile-to-web payment flows using Native to Web SSO"
 permalink: "configure-mobile-to-web-payment-flows"
+'description': "Seamlessly transition users from your iOS or Android app into a secure, authenticated subscription flow in your web app using Native to Web Single Sign-On (SSO) and session transfer tokens."
 'og:title': "Use Case: Configure mobile-to-web payment flows using Native to Web SSO"
 'og:description': "Seamlessly transition users from your iOS or Android app into a secure, authenticated subscription flow in your web app using Native to Web Single Sign-On (SSO) and session transfer tokens."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Use Case: Configure mobile-to-web payment flows using Native to Web SSO"
 'twitter:description': "Seamlessly transition users from your iOS or Android app into a secure, authenticated subscription flow in your web app using Native to Web Single Sign-On (SSO) and session transfer tokens."
 ---
-# Use Case: Configure mobile-to-web payment flows using Native to Web SSO
 
 <Card title="Before you start">
 
@@ -59,13 +59,13 @@ Follow these steps to authenticate your Auth0 tenant using [Auth0 CLI](https://g
 
 1. Initialize the Auth0 CLI
 
-```
+```bash lines
 auth0 login
 ```
 
 2. Select **As a user** and follow the login flow.
 
-```
+``` lines
 How would you like to authenticate?
 > As a user
   As a machine
@@ -81,7 +81,7 @@ Native to Web SSO uses a `session_transfer_token` to establish SSO from a native
 
 Enable Native to Web SSO using Auth0 CLI:
 
-```
+```bash lines
 auth0 apps session-transfer update {yourClientId} --can-create-token=true --enforce-device-binding=asn
 ```
 
@@ -89,7 +89,7 @@ auth0 apps session-transfer update {yourClientId} --can-create-token=true --enfo
 
 Enable the web application to accept the `session_transfer_token` for authentication through a cookie or URL parameter using Auth0 CLI:
 
-```
+```bash lines
 auth0 apps session-transfer update {yourClientId}  --allowed-auth-methods=cookie,query
 ```
 
@@ -109,7 +109,7 @@ Add a new `/src/views/` file to create a subscription page:
 
 Create a file at `src/views/JoinMembership.js`. This file will prompt the users to complete a paid subscription.
 
-```
+```python lines
 import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useLocation } from "react-router-dom";
@@ -169,7 +169,7 @@ export default JoinMembership;
 
 Edit the file `src/App.js` and add a `/join-membership` route to the new subscription page:
 
-```
+```python lines
 import JoinMembership from "./views/JoinMembership";
 
  {/* Redirect to the join membership page */}
@@ -210,7 +210,7 @@ To launch the web-based subscription flow from your iOS native app, add a `Subsc
 
 Edit the body of the `ProfileView.swift` file to include a button below the user information:
 
-```
+```swift lines
 import SwiftUI
 
 struct ProfileView: View {
@@ -241,7 +241,7 @@ The `ProfileView.swift` file adds a `Subscribe to Membership` button and uses an
 
 Edit the `MainView.swift` file to define the behavior of the `Subscribe to Membership` button:
 
-```
+```swift lines
 import SwiftUI
 import Auth0
 import WebKit
@@ -366,13 +366,13 @@ To launch the web-based subscription flow from your Android native application, 
 
 Edit the `MainActivity.kt` file and add the following code to the `onCreate()` method:
 
-```
+```kotlin lines
 binding.buttonSubscribe.setOnClickListener { launchSubscriptionFlow() }
 ```
 
 Edit the `activity_main.xml` file to include the code below after `@+id/button_patch_metadata` button:
 
-```
+```xml lines
 <Button
     android:id="@+id/buttonSubscribe"
     android:layout_width="wrap_content"
@@ -386,7 +386,7 @@ Edit the `MainActivity.kt` file to define the behavior of the `Subscribe to Memb
 
 1. Extend the login flow and handle the subscription action:
 
-```javascript
+```kotlin lines
 // Required imports
 import com.auth0.android.authentication.storage.CredentialsManager
 import com.auth0.android.authentication.storage.SharedPreferencesStorage
@@ -395,7 +395,7 @@ import com.auth0.android.result.SSOCredentials
 
 2. Update the `onCreate()`method to include the `credentialsManager:`
 
-```
+```kotlin lines
 override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -424,7 +424,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 3. Update the `loginwithBrowser()` method to store credentials using the `credentialsManager:`
 
-```
+```kotlin lines
 private fun loginWithBrowser() {
     WebAuthProvider.login(account)
         .withScheme(getString(R.string.com_auth0_scheme))
@@ -456,7 +456,7 @@ To learn more, read [Set Up APIs](https://auth0.com/docs/get-started/auth0-overv
 
 4. Add the `launchSubscriptionFlow()` method to open the web application:
 
-```
+```kotlin lines
 private fun launchSubscriptionFlow() {
     credentialsManager.getCredentials(object : Callback<Credentials, CredentialsManagerException> {
         override fun onSuccess(credentials: Credentials) {

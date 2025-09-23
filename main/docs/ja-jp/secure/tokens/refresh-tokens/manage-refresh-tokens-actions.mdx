@@ -1,17 +1,17 @@
 ---
 title: "アクションを使用したリフレッシュトークン"
 permalink: "manage-refresh-tokens-actions"
+'description': "アクションを使ったリフレッシュトークンの管理について説明します。"
 'og:title': "アクションを使用したリフレッシュトークン"
 'og:description': "アクションを使ったリフレッシュトークンの管理について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "アクションを使用したリフレッシュトークン"
 'twitter:description': "アクションを使ったリフレッシュトークンの管理について説明します。"
 ---
-# アクションを使用したリフレッシュトークン
 
 <Warning>
 
-現在、アクションを使ったリフレッシュトークンはプライベート早期アクセスの段階であり、エンタープライズプランのお客様が利用できます。この機能へのアクセスは、担当の技術アカウント管理者（TAM）を通じてリクエストできます。Auth0のリリース段階については、「[製品のリリース段階](/docs/troubleshoot/product-lifecycle/product-release-stages)」をお読みください。
+現在、アクションを使ったリフレッシュトークンはプライベート早期アクセスの段階であり、エンタープライズプランのお客様が利用できます。この機能へのアクセスは、担当の技術アカウント管理者（TAM）を通じてリクエストできます。Auth0のリリース段階については、「[製品のリリース段階](/docs/ja-jp/troubleshoot/product-lifecycle/product-release-stages)」をお読みください。
 
 </Warning>
 
@@ -70,7 +70,7 @@ event.refresh_tokenとapi.refreshTokenオブジェクトは両方とも、[リ�
 
 <Note>
 
-`api.refreshToken.setExpiresAt(absolute)`メソッドと`api.refreshToken.setIdleExpiresAt(idle)`メソッドを使用すると、発行前にリフレッシュトークンの有効期限を定義したり、[リフレッシュトークン交換](/docs/secure/tokens/refresh-tokens/use-refresh-tokens)フロー中にリフレッシュトークンに既存の有効期限を変更したりできます。
+`api.refreshToken.setExpiresAt(absolute)`メソッドと`api.refreshToken.setIdleExpiresAt(idle)`メソッドを使用すると、発行前にリフレッシュトークンの有効期限を定義したり、[リフレッシュトークン交換](/docs/ja-jp/secure/tokens/refresh-tokens/use-refresh-tokens)フロー中にリフレッシュトークンに既存の有効期限を変更したりできます。
 
 `api.refreshToken.setExpiresAt(absolute)`メソッドと`api.refreshToken.setIdleExpiresAt(idle)`メソッドは、[リフレッシュトークン有効期限](/docs/ja-jp/secure/tokens/refresh-tokens/configure-refresh-token-expiration)のデフォルト設定を最大値として使用し、有効期限のないリフレッシュトークンを有効期限のあるリフレッシュトークンに変換します。
 
@@ -101,7 +101,7 @@ event.refresh_tokenとapi.refreshTokenオブジェクトは両方とも、[リ�
 
 ### IPバインディングによるリフレッシュトークンの取り消し
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication ?? {};
   const ImpossibleTravel = riskAssessment?.assessments.ImpossibleTravel;
@@ -124,7 +124,7 @@ exports.onExecutePostLogin = async (event, api) => {
 * 「403 access_denied」のエラー応答を返す
 * 「<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Refresh token</Tooltip> revoked due to impossible travel（impossible travelによりトークンが取り消されました）」というエラーを発行する
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const refreshTokenInitialIp = event.refresh_token?.device?.initial_ip;
   const requestCurrentIp = event.request.ip;
@@ -157,7 +157,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 ### メンバーシップロールを基にリフレッシュトークンの非アクティブタイムアウトをカスタマイズする
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   // Refresh token timeout (in miliseconds) metadata configured in the Organizations
   const organization_refresh_token_lifetime =

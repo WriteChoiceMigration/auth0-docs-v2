@@ -1,13 +1,13 @@
 ---
 title: "シングルページアプリ用Auth0 Angular SDK"
 permalink: "auth0-angular-spa"
+'description': "シングルページアプリ用Auth0 Angular SDKについて説明します。"
 'og:title': "シングルページアプリ用Auth0 Angular SDK"
 'og:description': "シングルページアプリ用Auth0 Angular SDKについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "シングルページアプリ用Auth0 Angular SDK"
 'twitter:description': "シングルページアプリ用Auth0 Angular SDKについて説明します。"
 ---
-# シングルページアプリ用Auth0 Angular SDK
 
 Auth0 Angular SDKは、Auth0を使用してAngularアプリケーションで認証と認可を実装するためのJavaScriptライブラリです。サービス、認証ガードとHTTPインターセプターを提供して、Angularアプリ内で一般的な認証タスクを処理できるようにします。
 
@@ -31,7 +31,7 @@ Angular SDKは、Angular SPAのバージョン14以降と互換性がありま�
 
 SDKの統合を始めるには、プロジェクトに`AuthModule`をインポートし、Auth0クライアントアプリに構成します。
 
-```
+```javascript lines
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -65,7 +65,7 @@ SDKはAngularの依存性注入システムに完全に対応しています。�
 
 そして、ユーザーログインを始めるために、サービスで`loginWithRedirect`または`loginWithPopup`メソッドを呼び出します。
 
-```
+```javascript lines
 import { Component } from '@angular/core';
 
 // Import the AuthService type from the SDK
@@ -91,7 +91,7 @@ export class LoginComponent {
 
 `logout`を使用して、ユーザーをログアウトさせます。<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>の**［Allowed Logout URLs（許可されているログアウトURL）］**に`returnTo`が指定されていることを確認してください。
 
-```
+```javascript lines
 import { Component } from '@angular/core';
 
 // Import the AuthService type from the SDK
@@ -121,7 +121,7 @@ export class LogoutComponent {
 
 認証状態は`isAuthenticated$`オブザーバブルを通して公開されます。
 
-```
+```html lines
 <div *ngIf="auth.isAuthenticated$ | async">
   <app-login></app-login>
 </div>
@@ -131,7 +131,7 @@ export class LogoutComponent {
 
 認証されたユーザーのユーザープロファイルは`user$`オブザーバブルを通して公開されます。
 
-```
+```html lines
 <ul *ngIf="auth.user$ | async as user">
   <li>{{ user.name }}</li>
   <li>{{ user.email }}</li>
@@ -146,7 +146,7 @@ export class LogoutComponent {
 
 認証ガードは、`canActivate`フック（子経路を使用している場合には`canActivateChild`）を使って経路に追加する必要があります。
 
-```
+```javascript lines
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './unprotected/unprotected.component';
@@ -189,7 +189,7 @@ SDKを構成して、どのAPIへの経路に自動でこのヘッダーを追�
 
 まず、Auth0 HTTPインターセプターをアプリに統合するために必要なタイプをインポートします。
 
-```javascript
+```javascript lines
 // Import the interceptor module and the Angular types you'll need
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
@@ -220,7 +220,7 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 
 下の例は、どの経路に`Authorization`ヘッダーを含めるべきかをSDKに指示する一般的な方法です。
 
-```javascript
+```javascript lines
 // Modify your existing SDK configuration to include the httpInterceptor config
 AuthModule.forRoot({
   domain: 'YOUR_AUTH0_DOMAIN',
@@ -283,7 +283,7 @@ AuthModule.forRoot({
 
 Angularの`HttpClient`サービスを使用して、APIを呼び出します。構成と一致する経路については、アクセストークンが`Authorization`ヘッダーに自動的に含められます。
 
-```
+```javascript lines
 export class MyComponent {
   constructor(private http: HttpClient) {}
 

@@ -1,23 +1,23 @@
 ---
 title: "Multi-Factor Authentication Voice screen classes"
 permalink: "mfa-voice"
+'description': "Learn about the ACUL Multi-Factor Authentication Voice screen classes"
 'og:title': "Multi-Factor Authentication Voice screen classes"
 'og:description': "Learn about the ACUL Multi-Factor Authentication Voice screen classes"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Multi-Factor Authentication Voice screen classes"
 'twitter:description': "Learn about the ACUL Multi-Factor Authentication Voice screen classes"
 ---
-# Multi-Factor Authentication Voice screen classes
 
 ## MFA Voice Challenge screen class
 
 The <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip> Voice Challenge screen class provides methods associated with the mfa-voice-challenge screen. This screen is displayed when the user needs to enter a recovery code to verify their identity.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/5L3KKdJ5negUbZJueVaMi8/ee711dc884da655088a63bb116f277f9/Screenshot_2025-04-23_at_18.17.24.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/5L3KKdJ5negUbZJueVaMi8/ee711dc884da655088a63bb116f277f9/Screenshot_2025-04-23_at_18.17.24.png)</Frame>
 
 Import and instantiate the MFA Voice Challenge screen class:
 
-```
+```javascript lines
 import MfaVoiceChallenge from '@auth0/auth0-acul-js/mfa-voice-challenge';
 const mfaVoiceChallenge = new MfaVoiceChallenge();
 ```
@@ -28,7 +28,7 @@ The MFA Voice Challenge screen class properties are:
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -63,7 +63,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -75,7 +75,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -94,7 +94,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -102,7 +102,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -127,7 +127,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -138,7 +138,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -171,7 +171,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -191,7 +191,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -227,7 +227,7 @@ The MFA Voice Challenge screen class methods are:
 
 This method continues the voice challenge flow.
 
-```
+```javascript lines
 import MfaVoiceChallenge from '@auth0/auth0-acul-js/mfa-voice-challenge';
 const mfaVoiceChallenge = new MfaVoiceChallenge();
 
@@ -248,13 +248,13 @@ mfaVoiceChallenge.continue({
 </thead>
 <tbody>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>string</td>
 <td>Yes</td>
 <td>The code entered by the user.</td>
 </tr>
 <tr>
-<td><code>rememberBrowser</code></td>
+<td>`rememberBrowser`</td>
 <td>boolean</td>
 <td>No</td>
 <td>Remember the user's browser configuration.</td>
@@ -266,7 +266,7 @@ mfaVoiceChallenge.continue({
 
 This method redirects the user to a phone selection screen.
 
-```javascript
+```javascript lines
 const mfaVoiceChallenge = new MfaVoiceChallenge();
 
 // Navigate to the screen for selecting a different phone number
@@ -277,7 +277,7 @@ mfaVoiceChallenge.pickPhone();
 
 This method requests a new voice call with a verification code.
 
-```javascript
+```javascript lines
 const mfaVoiceChallenge = new MfaVoiceChallenge();
 
 // Request a new voice call with verification code
@@ -288,7 +288,7 @@ mfaVoiceChallenge.resendCode();
 
 This method switches the user from voice confirmation to SMS confirmation.
 
-```javascript
+```javascript lines
 const mfaVoiceChallenge = new MfaVoiceChallenge();
 
 // Switch to SMS verification instead of voice call
@@ -299,7 +299,7 @@ mfaVoiceChallenge.switchToSms();
 
 This method allows the user to request an alternative MFA method.
 
-```javascript
+```javascript lines
 const mfaVoiceChallenge = new MfaVoiceChallenge();
 
 // Navigate to the screen for selecting an alternative MFA method
@@ -310,11 +310,11 @@ mfaVoiceChallenge.tryAnotherMethod();
 
 The MFA Voice Enrollment screen class provides methods associated with the mfa-voice-enrollment screen. This screen is displayed for a user needs to enter a phone number to receive a voice call with a code to continue enrollment.
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/10B062fqHG48WmJSPSHMmY/177fd3fb4fef03dccb75f8c6bab626bc/Screenshot_2025-04-23_at_18.39.35.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/10B062fqHG48WmJSPSHMmY/177fd3fb4fef03dccb75f8c6bab626bc/Screenshot_2025-04-23_at_18.39.35.png)</Frame>
 
 Import and instantiate the MFA Voice Enrollment screen class:
 
-```
+```javascript lines
 import MfaVoiceEnrollment from '@auth0/auth0-acul-js/mfa-voice-enrollment';
 const mfaVoiceEnrollment = new MfaVoiceEnrollment();
 ```
@@ -325,7 +325,7 @@ The MFA Voice Enrollment screen class properties are:
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -360,7 +360,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -372,7 +372,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -391,7 +391,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -399,7 +399,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -446,7 +446,7 @@ interface PasskeyCreate {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -457,7 +457,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -490,7 +490,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -510,7 +510,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -546,7 +546,7 @@ The MFA Voice Enrollment screen class methods are:
 
 This method continues the enrollment process.
 
-```
+```javascript lines
 import MfaVoiceEnrollment from '@auth0/auth0-acul-js/mfa-voice-enrollment';
 const mfaVoiceEnrollment = new MfaVoiceEnrollment();
 
@@ -566,13 +566,13 @@ mfaVoiceEnrollment.continue({
 </thead>
 <tbody>
 <tr>
-<td><code>phone</code></td>
+<td>`phone`</td>
 <td>string</td>
 <td>No</td>
 <td>The phone number entered by the user.</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>string | number | boolean | undefined</td>
 <td>No</td>
 <td>Optional data collected from user.</td>
@@ -584,7 +584,7 @@ mfaVoiceEnrollment.continue({
 
 This method allows users to pick their country code.
 
-```
+```javascript lines
 import MfaVoiceEnrollment from '@auth0/auth0-acul-js/mfa-voice-enrollment';
 const mfaVoiceEnrollment = new MfaVoiceEnrollment();
 
@@ -596,7 +596,7 @@ mfaVoiceEnrollment.selectPhoneCountryCode();
 
 This method asks users to try SMS if they already tried voice, or vice versa.
 
-```
+```javascript lines
 import MfaVoiceEnrollment from '@auth0/auth0-acul-js/mfa-voice-enrollment';
 const mfaVoiceEnrollment = new MfaVoiceEnrollment();
 

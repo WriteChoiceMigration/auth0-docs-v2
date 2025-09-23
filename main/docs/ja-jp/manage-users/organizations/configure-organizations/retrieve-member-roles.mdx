@@ -1,13 +1,13 @@
 ---
 title: "組織のメンバーロールを取得する"
 permalink: "retrieve-member-roles"
+'description': "Auth0 DashboardやManagement APIを使用して組織のメンバーロールを取得する方法について説明します。"
 'og:title': "組織のメンバーロールを取得する"
 'og:description': "Auth0 DashboardやManagement APIを使用して組織のメンバーロールを取得する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "組織のメンバーロールを取得する"
 'twitter:description': "Auth0 DashboardやManagement APIを使用して組織のメンバーロールを取得する方法について説明します。"
 ---
-# 組織のメンバーロールを取得する
 
 プログラムで[組織](/docs/ja-jp/manage-users/organizations/organizations-overview)を操作するには、組織のメンバーに割り当てられたロールのリストを取得する必要がある場合があります。
 
@@ -23,19 +23,19 @@ permalink: "retrieve-member-roles"
 `Get Organization Member Roles`エンドポイントに対して`GET`呼び出しを行います。必ず、`ORG_ID`、`USER_ID`、および`MGMT_API_ACCESS_TOKEN`のプレースホルダーの値を、それぞれご自身の組織ID、メンバーのユーザーID、Management APIのアクセストークンに置き換えてください。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/organizations/ORG_ID/members/USER_ID/roles' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/organizations/ORG_ID/members/USER_ID/roles");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -52,14 +52,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/organizations/ORG_ID/members/USER_ID/roles")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -71,8 +71,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/organizations/ORG_ID/members/USER_ID/roles"]
@@ -93,7 +93,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/organizations/ORG_ID/members/USER_ID/roles",
@@ -115,8 +115,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MGMT_API_ACCESS_TOKEN" }
@@ -126,7 +126,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -138,8 +138,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/organizations/ORG_ID/members/USER_ID/roles")! as URL,
@@ -178,16 +178,16 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>ORG_ID</code></td>
+<td>`ORG_ID`</td>
 <td>メンバーのロールを取得したい組織のID。</td>
 </tr>
 <tr>
-<td><code>USER_ID</code></td>
+<td>`USER_ID`</td>
 <td>ロールを取得したいメンバーのユーザーID。</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><code>read:organization_member_roles</code>のスコープを持つ<a href="/docs/tokens/management-api-access-tokens">Management APIのアクセストークン</a>。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>`read:organization_member_roles`のスコープを持つ<a href="/docs/ja-jp/tokens/management-api-access-tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 </tbody>
 </table>
@@ -206,43 +206,43 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>200</code></td>
+<td>`200`</td>
 <td></td>
 <td>Roles successfully retrieved.（ロールを正常に取得しました。）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>400</code></td>
-<td><code>invalid_query_string</code></td>
+<td>`400`</td>
+<td>`invalid_query_string`</td>
 <td>Invalid request query string.（無効な要求クエリ文字列です。）メッセージは原因によって異なります。</td>
 <td>クエリ文字列が有効ではありません。</td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Invalid token.（無効なトークンです。）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Invalid signature received for JSON Web Token validation.（JSON Web Tokenの検証に無効な署名を受け取りました。）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>Client is not global.（クライアントがグローバルではありません。）</td>
 <td></td>
 </tr>
 <tr>
-<td><code>403</code></td>
-<td><code>insufficient_scope</code></td>
-<td>Insufficient scope; expected any of: <code>read:organization_member_roles</code>.（スコープが不足しています。<code>read:organization_member_roles</code>が必要です。）</td>
+<td>`403`</td>
+<td>`insufficient_scope`</td>
+<td>Insufficient scope; expected any of: `read:organization_member_roles`.（スコープが不足しています。`read:organization_member_roles`が必要です。）</td>
 <td>渡されたベアラートークンのスコープでは許可されないフィールドの読み出しや書き込みが試行されました。</td>
 </tr>
 <tr>
-<td><code>429</code></td>
+<td>`429`</td>
 <td></td>
 <td>Too many requests.Check the X-RateLimit-Limit, X-RateLimit-Remaining and X-RateLimit-Reset headers.（要求が多すぎます。X-RateLimit-Limit、X-RateLimit-Remaining、X-RateLimit-Resetヘッダーを確認してください。）</td>
 <td></td>

@@ -1,19 +1,19 @@
 ---
 title: "Configure Flexible Language Selection"
 permalink: "language-selection"
+'description': "Learn how you can add a preferred language menu to Universal Login prompts. "
 'og:title': "Configure Flexible Language Selection"
 'og:description': "Learn how you can add a preferred language menu to Universal Login prompts. "
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configure Flexible Language Selection"
 'twitter:description': "Learn how you can add a preferred language menu to Universal Login prompts. "
 ---
-# Configure Flexible Language Selection
 
 Flexible language selection is an optional feature that allows users to select their preferred language on <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Universal Login</Tooltip> prompts associated with your application, such as the login screen. You can configure this feature individually for different Universal Login prompts.
 
 After implementing this feature for a specific prompt, a language selection menu is added to the associated screen. Users can choose a preferred language from this menu to automatically render the prompt in that language.
 
-<Frame>![Two Universal Login prompts showing the language selection menu. ](//images.ctfassets.net/cdy7uua7fh8z/4Z5pt3aH3vpRRYV0RDDnba/dc7a5abc8ee2cb462b2be4b43490393c/Language_Selector_Prompts.png)</Frame>
+<Frame>![Two Universal Login prompts showing the language selection menu. ](/images/ja-jp/cdy7uua7fh8z/4Z5pt3aH3vpRRYV0RDDnba/dc7a5abc8ee2cb462b2be4b43490393c/Language_Selector_Prompts.png)</Frame>
 
 ## Before you begin
 
@@ -40,7 +40,7 @@ Setting up flexible language selection includes two primary steps:
 
 To get started, add the following script to your [Universal Login page template](/docs/ja-jp/customize/login-pages/universal-login/customize-templates) to facilitate language selection.
 
-```
+```html lines
 <script>
   function updateSelectedLanguage() {
     const selectElement = document.getElementById('\''language'\'');
@@ -69,7 +69,7 @@ Be aware that this call will **overwrite any existing configurations** you have 
 </Warning>
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PUT \
 --url 'https://{yourDomain}/api/v2/branding/templates/universal-login' \
 --header 'authorization: Bearer MANAGEMENT_API_TOKEN' \
@@ -79,8 +79,8 @@ curl --request PUT \
 {%- auth0:head -%}
 {%- auth0:widget -%}
 '
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/branding/templates/universal-login");
 var request = new RestRequest(Method.PUT);
 request.AddHeader("content-type", "text/html");
@@ -90,7 +90,7 @@ request.AddParameter("text/html", "
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -111,8 +111,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/branding/templates/universal-login")
 .header("content-type", "text/html")
 .header("authorization", "Bearer MANAGEMENT_API_TOKEN")
@@ -121,7 +121,7 @@ HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/branding/templa
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PUT',
@@ -135,8 +135,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"text/html",
 @"authorization": @"Bearer MANAGEMENT_API_TOKEN" };
@@ -164,7 +164,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/branding/templates/universal-login",
@@ -189,8 +189,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "
@@ -205,7 +205,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -220,8 +220,8 @@ request.body = "
 \n\n{%- auth0:head -%}\n{%- auth0:widget -%}\n"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "text/html",
@@ -266,19 +266,19 @@ To add language selection to a specific prompt, use the Auth0 <Tooltip data-tool
 </thead>
 <tbody>
 <tr>
-<td><code>language</code></td>
+<td>`language`</td>
 <td>Required.<br/><br/>One or more languages to include in the language selection menu displayed to users.</td>
-<td><code>es</code>,<code>fr</code>,<code>en</code></td>
+<td>`es`,`fr`,`en`</td>
 </tr>
 <tr>
-<td><code>persist</code></td>
+<td>`persist`</td>
 <td>Required.<br/><br/>Determines whether the language should persist across the session.</td>
-<td><code>session</code></td>
+<td>`session`</td>
 </tr>
 <tr>
-<td><code>action</code></td>
+<td>`action`</td>
 <td>Optional.<br/><br/>Use this parameter in situations where you want users to be able to update their language without advancing the prompt.<br/><br/>If the value is provided, the form is <strong>not</strong> automatically submitted when a user changes their language. Otherwise, the prompt automatically advances when a different language is selected.</td>
-<td><code>change-language</code></td>
+<td>`change-language`</td>
 </tr>
 </tbody>
 </table>
@@ -298,10 +298,10 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Signup Prompt: Identifier + Password">
 
-To add language selection to the `signup` prompt, use the [Set partials for a prompt](/docs/api/management/v2/prompts/put-partials) endpoint:
+To add language selection to the `signup` prompt, use the [Set partials for a prompt](/docs/ja-jp/api/management/v2/prompts/put-partials) endpoint:
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PUT \
 --url 'https://{yourDomain}/api/v2/prompts/signup/partials' \
 --header 'authorization: Bearer {mgmtApiToken}' \
@@ -315,8 +315,8 @@ Preferred LanguageEnglishFrenchSpanish
 "
 }
 }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/prompts/signup/partials");
 var request = new RestRequest(Method.PUT);
 request.AddHeader("content-type", "application/json");
@@ -329,7 +329,7 @@ Preferred LanguageEnglishFrenchSpanish
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -353,8 +353,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/prompts/signup/partials")
 .header("content-type", "application/json")
 .header("authorization", "Bearer {mgmtApiToken}")
@@ -366,7 +366,7 @@ Preferred LanguageEnglishFrenchSpanish
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PUT',
@@ -387,8 +387,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer {mgmtApiToken}" };
@@ -417,7 +417,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/prompts/signup/partials",
@@ -445,8 +445,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\n \"signup\": {\n \"form-content-start\": \"
@@ -464,7 +464,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -482,8 +482,8 @@ Preferred LanguageEnglishFrenchSpanish
 \"\n }\n}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -518,10 +518,10 @@ dataTask.resume()
 
 <Accordion title="Login Prompt: Identifier First">
 
-To add language selection to the `login-id` prompt, use the [Set partials for a prompt](/docs/api/management/v2/prompts/put-partials) endpoint:
+To add language selection to the `login-id` prompt, use the [Set partials for a prompt](/docs/ja-jp/api/management/v2/prompts/put-partials) endpoint:
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PUT \
 --url 'https://{yourDomain}/api/v2/prompts/login-id/partials' \
 --header 'authorization: Bearer {mgmtApiToken}' \
@@ -535,8 +535,8 @@ Preferred LanguageEnglishFrenchSpanish
 "
 }
 }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/prompts/login-id/partials");
 var request = new RestRequest(Method.PUT);
 request.AddHeader("content-type", "application/json");
@@ -549,7 +549,7 @@ Preferred LanguageEnglishFrenchSpanish
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -573,8 +573,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/prompts/login-id/partials")
 .header("content-type", "application/json")
 .header("authorization", "Bearer {mgmtApiToken}")
@@ -586,7 +586,7 @@ Preferred LanguageEnglishFrenchSpanish
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PUT',
@@ -607,8 +607,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer {mgmtApiToken}" };
@@ -637,7 +637,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/prompts/login-id/partials",
@@ -665,8 +665,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\n \"login-id\": {\n \"form-content-start\": \"
@@ -684,7 +684,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -702,8 +702,8 @@ Preferred LanguageEnglishFrenchSpanish
 \"\n }\n}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -738,10 +738,10 @@ dataTask.resume()
 
 <Accordion title="Login Prompt: Passwordless (Email)">
 
-To add language selection to the `login-passwordless-email-code` prompt, use the [Set partials for a prompt](/docs/api/management/v2/prompts/put-partials) endpoint:
+To add language selection to the `login-passwordless-email-code` prompt, use the [Set partials for a prompt](/docs/ja-jp/api/management/v2/prompts/put-partials) endpoint:
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PUT \
 --url 'https://{yourDomain}/api/v2/prompts/login-passwordless/partials' \
 --header 'authorization: Bearer {mgmtApiToken}' \
@@ -755,8 +755,8 @@ Preferred LanguageEnglishFrenchSpanish
 "
 }
 }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/prompts/login-passwordless/partials");
 var request = new RestRequest(Method.PUT);
 request.AddHeader("content-type", "application/json");
@@ -769,7 +769,7 @@ Preferred LanguageEnglishFrenchSpanish
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -793,8 +793,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/prompts/login-passwordless/partials")
 .header("content-type", "application/json")
 .header("authorization", "Bearer {mgmtApiToken}")
@@ -806,7 +806,7 @@ Preferred LanguageEnglishFrenchSpanish
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PUT',
@@ -827,8 +827,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer {mgmtApiToken}" };
@@ -857,7 +857,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/prompts/login-passwordless/partials",
@@ -885,8 +885,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\n \"login-passwordless-email-code\": {\n \"form-content-start\": \"
@@ -904,7 +904,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -922,8 +922,8 @@ Preferred LanguageEnglishFrenchSpanish
 \"\n }\n}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",

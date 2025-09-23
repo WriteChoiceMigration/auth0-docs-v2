@@ -1,13 +1,13 @@
 ---
 title: "Auth0 Android v2の移行ガイド"
 permalink: "auth0-android-v2-migration-guide"
+'description': "Aut0 Android v1アプリをSDKのバージョン2に移行する方法について説明します。"
 'og:title': "Auth0 Android v2の移行ガイド"
 'og:description': "Aut0 Android v1アプリをSDKのバージョン2に移行する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0 Android v2の移行ガイド"
 'twitter:description': "Aut0 Android v1アプリをSDKのバージョン2に移行する方法について説明します。"
 ---
-# Auth0 Android v2の移行ガイド
 
 Auth0 Android SDKバージョン2には、Auth0をAndroidアプリに統合するための改善が数多く含まれています。**このアップグレードには互換性のない変更が含まれています。**v2に移行する際には、このガイドを読んで、変更内容を理解してください。
 
@@ -17,7 +17,7 @@ v2にはAndroid APIバージョン21以降とJava 8以降が必要です。
 
 AndroidとKotlinの各プラグインでJava 8のバイトコードをターゲットにするために、`build.gradle`には以下が必要です。
 
-```
+``` lines
 android {
   compileOptions {
       sourceCompatibility JavaVersion.VERSION_1_8
@@ -83,7 +83,7 @@ v2では、このライブラリーのHTTP要求を行う方法がさらにカ�
 
 ### タイムアウト構成
 
-```javascript
+```kotlin lines
 // Before
 val account = Auth0("{YOUR_CLIENT_ID}", "{YOUR_DOMAIN}")
 
@@ -104,7 +104,7 @@ account.networkingClient = netClient
 
 ### ロギング構成
 
-```javascript
+```kotlin lines
 // Before
 val account = Auth0("{YOUR_CLIENT_ID}", "{YOUR_DOMAIN}")
 account.isLoggingEnabled = true

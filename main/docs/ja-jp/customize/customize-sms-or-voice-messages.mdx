@@ -1,13 +1,13 @@
 ---
 title: "多要素認証のSMSと音声メッセージのカスタマイズする"
 permalink: "customize-sms-or-voice-messages"
+'description': "登録と検証中にAuth0から送られたSMSと音声メッセ―ジのカスタマイズ方法について説明します。"
 'og:title': "多要素認証のSMSと音声メッセージのカスタマイズする"
 'og:description': "登録と検証中にAuth0から送られたSMSと音声メッセ―ジのカスタマイズ方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "多要素認証のSMSと音声メッセージのカスタマイズする"
 'twitter:description': "登録と検証中にAuth0から送られたSMSと音声メッセ―ジのカスタマイズ方法について説明します。"
 ---
-# 多要素認証のSMSと音声メッセージのカスタマイズする
 
 登録（Guardianにデバイスを関連付ける場合）や検証（デバイスに認証メッセージが送られた場合）中にAuth0から送られたSMSや音声メッセージをカスタマイズすることができます。
 
@@ -31,23 +31,23 @@ permalink: "customize-sms-or-voice-messages"
 </thead>
 <tbody>
 <tr>
-<td><code>message_type</code></td>
-<td>どの種類のメッセージが送信されるかを示します（<code>sms</code>または<code>voice</code>）。</td>
+<td>`message_type`</td>
+<td>どの種類のメッセージが送信されるかを示します（`sms`または`voice`）。</td>
 </tr>
 <tr>
-<td><code>code</code></td>
-<td>登録/検証コード。音声メッセージを送信する場合。変数の値は数字の間にドットを入れて区切ります（<code>1.2.3.4.5</code>）。これで、音声メッセージングプロバイダーによって正確に発音されます。</td>
+<td>`code`</td>
+<td>登録/検証コード。音声メッセージを送信する場合。変数の値は数字の間にドットを入れて区切ります（`1.2.3.4.5`）。これで、音声メッセージングプロバイダーによって正確に発音されます。</td>
 </tr>
 <tr>
-<td><code>locale</code></td>
+<td>`locale`</td>
 <td>ユニバーサルログインまたはMFA API用。言語を指定します。</td>
 </tr>
 <tr>
-<td><code>requestInfo.lang</code></td>
-<td>クラシックログインのローカリゼーション用。ブラウザーからのAccept-Languageヘッダー。例：<code>es-AR,es;q=8.0</code>、<code>en-US,en</code></td>
+<td>`requestInfo.lang`</td>
+<td>クラシックログインのローカリゼーション用。ブラウザーからのAccept-Languageヘッダー。例：`es-AR,es;q=8.0`、`en-US,en`</td>
 </tr>
 <tr>
-<td><code>tenant.friendlyName</code></td>
+<td>`tenant.friendlyName`</td>
 <td><strong>［Dashboard］&gt;［Tenant Settings（テナント設定）］<strong>で設定された</strong>フレンドリー名前</strong>。</td>
 </tr>
 </tbody>
@@ -55,7 +55,7 @@ permalink: "customize-sms-or-voice-messages"
 
 ## 例
 
-```json
+```json lines
 {% if message_type == "voice" %}
   {% if locale contains "fr" %}
   Bonjour, vous avez demandé à recevoir un code de vérification pour vous enregister avec {{tenant.friendly_name}}. Votre code est: {{pause}} {{code}}. Je répète, votre code est: {{pause}}{{code}}.
@@ -77,7 +77,7 @@ permalink: "customize-sms-or-voice-messages"
 
 ## ローカリゼーション
 
-エンドポイントは、`x-request-language`ヘッダーをサポートし、それをロケールに送ることができます。詳細については、「[多言語サポート](/docs/connections/passwordless/guides/sms-otp#multi-language-support)」を参照してください。
+エンドポイントは、`x-request-language`ヘッダーをサポートし、それをロケールに送ることができます。詳細については、「[多言語サポート](/docs/ja-jp/connections/passwordless/guides/sms-otp#multi-language-support)」を参照してください。
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip> API（`POST /mfa/associate`と`POST /mfa/challenge`エンドポイント）でもサポートされています。送られたら、そのロケールはMFA SMS/音声テンプレートの`locale`変数で利用可能です。
 

@@ -1,13 +1,13 @@
 ---
 title: "インバウンドSCIMを構成する"
 permalink: "configure-inbound-scim"
+'description': "エンタープライズ接続のためにインバウンドSCIMを構成する方法についての概要"
 'og:title': "インバウンドSCIMを構成する"
 'og:description': "エンタープライズ接続のためにインバウンドSCIMを構成する方法についての概要"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "インバウンドSCIMを構成する"
 'twitter:description': "エンタープライズ接続のためにインバウンドSCIMを構成する方法についての概要"
 ---
-# インバウンドSCIMを構成する
 
 <Card title="Before you start">
 
@@ -57,35 +57,35 @@ Auth0は、ユーザー管理のために以下のSCIM 2.0操作をサポート�
 </thead>
 <tbody>
 <tr>
-<td><code>POST</code></td>
+<td>`POST`</td>
 <td><a href="https://tools.ietf.org/html/rfc7644#section-3.3">RFC7644のセクション3.3</a>に記載されているSCIM 2.0のコアスキーマとエンタープライズスキーマ拡張機能に含まれる属性を使って、Auth0内にユーザーを作成します。</td>
 </tr>
 <tr>
-<td><code>GET</code></td>
+<td>`GET`</td>
 <td>すでにAuth0に作成されているユーザーを、Auth0のuser_idの値と<a href="https://tools.ietf.org/html/rfc7644#section-3.4.1">RFC7644のセクション3.4.1</a>に記載の仕様を使って取得します。</td>
 </tr>
 <tr>
-<td><code>PUT</code></td>
+<td>`PUT`</td>
 <td><a href="https://tools.ietf.org/html/rfc7644#section-3.5.1">RFC7644のセクション3.5.1</a>に記載されているSCIM 2.0のコアスキーマとエンタープライズスキーマ拡張機能に含まれる属性を使って、Auth0内のユーザーを置き換えます。</td>
 </tr>
 <tr>
-<td><code>PATCH</code></td>
+<td>`PATCH`</td>
 <td><a href="https://tools.ietf.org/html/rfc7644#section-3.5.2">RFC7644のセクション3.5.2</a>に記載されているSCIM 2.0のコアスキーマとエンタープライズスキーマ拡張機能に含まれる属性を使って、Auth0のユーザーを更新します。</td>
 </tr>
 <tr>
-<td><code>DELETE</code></td>
+<td>`DELETE`</td>
 <td>Auth0のuser_idの値と<a href="https://tools.ietf.org/html/rfc7644#section-3.6">RFC7644のセクション3.6</a>に記載の仕様を使って、Auth0のユーザーを削除します。</td>
 </tr>
 <tr>
-<td><code>SEARCH</code></td>
+<td>`SEARCH`</td>
 <td><a href="https://tools.ietf.org/html/rfc7644#section-3.4.2">RFC7644のセクション3.4.2</a>に記載されているSCIMフィルターを使って、Auth0のユーザーを検索します。等価（EQ）、AND、ORの演算子に対応しています。</td>
 </tr>
 <tr>
-<td><code>PUT</code>（無効化）</td>
+<td>`PUT`（無効化）</td>
 <td>Auth0に保管されたユーザーを置き換え、SCIMのアクティブ属性をfalseに設定することで、Auth0内でユーザーがブロックされます。</td>
 </tr>
 <tr>
-<td><code>PATCH</code>（無効化）</td>
+<td>`PATCH`（無効化）</td>
 <td>Auth0に保管されたユーザーを更新し、SCIMのアクティブ属性をfalseに設定することで、Auth0内でユーザーがブロックされます。</td>
 </tr>
 </tbody>
@@ -99,13 +99,13 @@ Auth0は、[ユーザーリソースのためにSCIM 2.0 コアスキーマ](htt
 
 エンドポイントおよびトークンは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>の**［Authentication（認証）］ > ［Enterprise（エンタープライズ）］ > [connecton-type（接続タイプ）] > [your-connection（あなたの接続）] > ［Provisioning（プロビジョニング）］ >  ［Sync user profiles using SCIM（SCIMを使用してユーザープロファイルを同期する）］ > セットアップ**に表示され、構成可能です。
 
-<Frame>![DashboardのSCIMセットアップのスクリーンショット](//images.ctfassets.net/cdy7uua7fh8z/4jsLx8sZiy9WRhqaV5uCqt/01cd94030b8e8edb0df31265caeef3f0/SCIM_setup_w__tokens.png)</Frame>
+<Frame>![DashboardのSCIMセットアップのスクリーンショット](/images/ja-jp/cdy7uua7fh8z/4jsLx8sZiy9WRhqaV5uCqt/01cd94030b8e8edb0df31265caeef3f0/SCIM_setup_w__tokens.png)</Frame>
 
 **SCIMエンドポイントURL**により、SCIMクライアントは、特定のIDプロバイダーに対してAuth0に保存されているユーザーアカウントを管理できます。
 
 **［Generate New Token（新しいトークンを生成）］**オプションは、このSCIMエンドポイントに対して最大2つのアクティブトークンを生成し、SCIMクライアントが使用するトークンをダウンタイムなしで更新できます。またトークンは、**［Delete（削除）］**を選択することで、この画面上で取り消すことができます。
 
-<Frame>![DashboardのSCIMトークン設定のスクリーンショット](//images.ctfassets.net/cdy7uua7fh8z/5TUDyHPvAKFffK76gxUHY4/7178896cd8c69bc6b689b5962509a292/SCIM_setup.png)</Frame>
+<Frame>![DashboardのSCIMトークン設定のスクリーンショット](/images/ja-jp/cdy7uua7fh8z/5TUDyHPvAKFffK76gxUHY4/7178896cd8c69bc6b689b5962509a292/SCIM_setup.png)</Frame>
 
 以下のトークン生成の設定を使用できます。
 

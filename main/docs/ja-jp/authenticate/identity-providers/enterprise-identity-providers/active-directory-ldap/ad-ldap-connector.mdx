@@ -1,13 +1,13 @@
 ---
 title: "AD/LDAPコネクター"
 permalink: "ad-ldap-connector"
+'description': "Active Directory LDAPコネクターとその仕組みについて説明します。"
 'og:title': "AD/LDAPコネクター"
 'og:description': "Active Directory LDAPコネクターとその仕組みについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "AD/LDAPコネクター"
 'twitter:description': "Active Directory LDAPコネクターとその仕組みについて説明します。"
 ---
-# AD/LDAPコネクター
 
 Auth0は、ネットワークにインストールするActive Directory/LDAPコネクターを介して、Lightweight Directory Access Protocol（LDAP）を使ってActive Directory（AD）と統合します。
 
@@ -23,7 +23,7 @@ AD/LDAPコネクターを顧客のサーバーにインストールし、それ�
 
 AD/LDAPコネクター（1）は、Active Directory/LDAP（2）とAuth0 Service（3）間の橋渡し役です。AD/LDAPが通常内部ネットワークに制限されている一方、Auth0はまったく異なるコンテキストで実行されるクラウドサービスであるため、橋渡しを必要とします。
 
-<Frame>![AD/LDAPコネクター - AD/LDAPをAuth0に統合する - 図](//images.ctfassets.net/cdy7uua7fh8z/1xMpdHrtor0TR7F1gZ96zL/d5b69baf2b7d9df1ac853f4661c4b379/ldap-connect.png)</Frame>
+<Frame>![AD/LDAPコネクター - AD/LDAPをAuth0に統合する - 図](/images/ja-jp/cdy7uua7fh8z/1xMpdHrtor0TR7F1gZ96zL/d5b69baf2b7d9df1ac853f4661c4b379/ldap-connect.png)</Frame>
 
 ユーザーがAuth0で認証を行う場合は、AD/LDAPコネクターにリダイレクトされます。A​D/LDAPコネクターはユーザーをADサービスに照らし合わせて検証した後、検証結果をAuth​0に返します。AD/LDAPコネクターは、LDAP、Kerberos、およびクライアント証明書に基づ​いた認証をサポートします。
 
@@ -43,7 +43,7 @@ AD/LDAPコネクターはユーザープロファイルと資格情報をキャ�
 
 コネクターはデフォルトで、Active Directory用に高度に最適化されています。他のLDAPディレクトリ（OpenLDAPなど）で構成する場合は、`config.json`ファイルでこれらの設定をカスタマイズする必要があります。
 
-```
+```javascript lines
 "LDAP_USER_BY_NAME": "(cn={0})",
       "LDAP_SEARCH_QUERY": "(&(objectClass=person)(cn={0}))",
       "LDAP_SEARCH_ALL_QUERY": "(objectClass=person)",
@@ -55,7 +55,7 @@ AD/LDAPコネクターはユーザープロファイルと資格情報をキャ�
 
 **［OpenDJ Control Panel（OpenDJコントロールパネル）］**では、ユーザーごとに属性リストを取得することができます。このリストは、Auth0で認証を行う場合に、ユーザー名として使用する属性を決めるのに役立ちます。
 
-<Frame>![AD/LDAP Connector OpenDJ Example diagram](//images.ctfassets.net/cdy7uua7fh8z/14fTMlPqtzUicW2VTZPLPG/3ffa90a44eb864455ad3b77406f8ad32/opendj-attributes.png)</Frame>
+<Frame>![AD/LDAP Connector OpenDJ Example diagram](/images/ja-jp/cdy7uua7fh8z/14fTMlPqtzUicW2VTZPLPG/3ffa90a44eb864455ad3b77406f8ad32/opendj-attributes.png)</Frame>
 
 この例では、Johnの`cn`は**johndoe**で、`mail`フィールドは**johndoe@contoso.com**に設定されています。組織が、ユーザーにユーザー名（`cn`）を使って認証してもらいたい場合は、`LDAP_USER_BY_NAME`設定を`(cn={0})`に設定できますが、メールアドレスを使って認証を行う必要がある場合は、`(mail={0})`に設定する必要があります。
 

@@ -1,13 +1,13 @@
 ---
 title: "リフレッシュトークンの取り消し"
 permalink: "revoke-refresh-tokens"
+'description': "Authentication API、Management API、またはAuth0 Dashboardを使用してリフレッシュ トークンが侵害された場合に、リフレッシュトークンを取り消す方法を学びます。"
 'og:title': "リフレッシュトークンの取り消し"
 'og:description': "Authentication API、Management API、またはAuth0 Dashboardを使用してリフレッシュ トークンが侵害された場合に、リフレッシュトークンを取り消す方法を学びます。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "リフレッシュトークンの取り消し"
 'twitter:description': "Authentication API、Management API、またはAuth0 Dashboardを使用してリフレッシュ トークンが侵害された場合に、リフレッシュトークンを取り消す方法を学びます。"
 ---
-# リフレッシュトークンの取り消し
 
 リフレッシュトークンが侵害された場合に備えて、リフレッシュトークンを取り消すことができます。Auth0は、トークンが悪意のある攻撃者にさらされている可能性があるかのように、トークンの失効を処理します。
 
@@ -52,13 +52,13 @@ Dashboardを使用して、トークンを発行したアプリケーション�
 `/oauth/revoke`エンドポイントは、特定のトークンだけでなく、許可全体を取り消します。リフレッシュトークンを取り消すには、`/api/v2/device-credentials`エンドポイントを使用します。APIは最初にアプリケーションの資格情報を検証し、次にトークンが取り消し要求を行ったアプリケーションに発行されたかどうかを確認します。この検証が失敗すると、要求は拒否され、アプリケーションにエラーが通知されます。次に、APIはトークンを無効にします。無効化は直ちに行われ、取り消し後はトークンを再び使用することはできません。取り消し要求ごとに、同じ承認許可に対して発行されたすべてのトークンが無効になります。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/revoke' \
 --header 'content-type: application/json' \
 --data '{ "client_id": "{yourClientId}", "client_secret": "{yourClientSecret}", "token": "{yourRefreshToken}" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/revoke");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -66,7 +66,7 @@ request.AddParameter("application/json", "{ \"client_id\": \"{yourClientId}\", \
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -85,15 +85,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/revoke")
 .header("content-type", "application/json")
 .body("{ \"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"token\": \"{yourRefreshToken}\" }")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -110,8 +110,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"client_id": @"{yourClientId}",
@@ -137,7 +137,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/revoke",
@@ -160,8 +160,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"token\": \"{yourRefreshToken}\" }"
@@ -172,7 +172,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -185,8 +185,8 @@ request["content-type"] = 'application/json'
 request.body = "{ \"client_id\": \"{yourClientId}\", \"client_secret\": \"{yourClientSecret}\", \"token\": \"{yourRefreshToken}\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = [
@@ -224,15 +224,15 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><code>client_id</code> <br/><span class="label label-danger">必須</span></td>
+<td style="text-align:left">`client_id` <br/><span class="label label-danger">必須</span></td>
 <td style="text-align:left">アプリケーションのクライアントID。アプリケーションは、リフレッシュトークンが発行されたものと一致する必要があります。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>client_secret</code></td>
-<td style="text-align:left">アプリケーションのクライアントシークレット。<a href="/docs/applications/concepts/app-types-confidential-public#confidential-applications">機密アプリケーション</a>に必要です。</td>
+<td style="text-align:left">`client_secret`</td>
+<td style="text-align:left">アプリケーションのクライアントシークレット。<a href="/docs/ja-jp/applications/concepts/app-types-confidential-public#confidential-applications">機密アプリケーション</a>に必要です。</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>token</code> <br/><span class="label label-danger">必須</span></td>
+<td style="text-align:left">`token` <br/><span class="label label-danger">必須</span></td>
 <td style="text-align:left">取り消したいリフレッシュトークン。</td>
 </tr>
 </tbody>
@@ -246,7 +246,7 @@ dataTask.resume()
 
 要求が有効な場合、リフレッシュトークンは取り消され、応答は`HTTP 200`で、応答本文は空です。それ以外の場合、応答本文にはエラーコードと説明が含まれます。
 
-```json
+```json lines
 {
       "error": "invalid_request|invalid_client",
       "error_description": "Description of the error"
@@ -268,20 +268,20 @@ dataTask.resume()
 </tr>
 <tr>
 <td>400</td>
-<td>必要なパラメーターが要求で送信されませんでした（<code>"error":"invalid_request"</code>）。</td>
+<td>必要なパラメーターが要求で送信されませんでした（`"error":"invalid_request"`）。</td>
 </tr>
 <tr>
 <td>401</td>
-<td>要求は承認されていません（<code>"error": "invalid_client"</code>）。アプリケーションの資格情報（<code>client_id</code>と<code>client_secret</code>）が要求に存在し、有効な値が指定されていることを確認します。</td>
+<td>要求は承認されていません（`"error": "invalid_client"`）。アプリケーションの資格情報（`client_id`と`client_secret`）が要求に存在し、有効な値が指定されていることを確認します。</td>
 </tr>
 </tbody>
 </table>
 
 ## Management APIの使用
 
-Auth0 Management APIを使用してリフレッシュトークンを取り消すには、取り消すリフレッシュトークンの`id`が必要です。既存のリフレッシュトークンのリストを取得するには、`/api/v2/device-credentials`[エンドポイント](/docs/api/management/v2#!/Device_Credentials/get_device_credentials)を呼び出し、`type=refresh_token`と`user_id`を指定して、`read:device_credentials`スコープを含むアクセス トークンを使用します。結果を絞り込むには、トークンに関連付けられた`client_id`（わかっている場合）を指定することもできます。
+Auth0 Management APIを使用してリフレッシュトークンを取り消すには、取り消すリフレッシュトークンの`id`が必要です。既存のリフレッシュトークンのリストを取得するには、`/api/v2/device-credentials`[エンドポイント](/docs/ja-jp/api/management/v2#!/Device_Credentials/get_device_credentials)を呼び出し、`type=refresh_token`と`user_id`を指定して、`read:device_credentials`スコープを含むアクセス トークンを使用します。結果を絞り込むには、トークンに関連付けられた`client_id`（わかっている場合）を指定することもできます。
 
-```
+```json lines
 GET https://{yourDomain}/api/v2/device-credentials?
       type=refresh_token
       &client_id=
@@ -294,7 +294,7 @@ GET https://{yourDomain}/api/v2/device-credentials?
 
 応答本文：
 
-```json
+```json lines
 [
       {
     "id": "dcr_dFJiaAxbEroQ5xxx",
@@ -305,7 +305,7 @@ GET https://{yourDomain}/api/v2/device-credentials?
 
 リフレッシュトークンを取り消すには、`delete:device_credentials`スコープを含むアクセス トークンと上記で取得した ID の値を使用して、`/api/v2/device-credentials`エンドポイントを呼び出します。
 
-```
+```javascript lines
 DELETE https://{yourDomain}/api/v2/device-credentials/{id}
     
     {
@@ -321,8 +321,8 @@ DELETE https://{yourDomain}/api/v2/device-credentials/{id}
 
 [リフレッシュトークンのローテーション](/docs/ja-jp/secure/tokens/refresh-tokens/refresh-token-rotation)使用中に以前無効になったトークンが使用されている場合は、その無効になったトークンが発行された以降に発行されたリフレッシュトークンの全セットが付与と同様に直ちに失効され、ユーザーの再認証が必要になります。
 
-* リフレッシュトークンを取り消すには、Authentication APIの`/oauth/revoke`[エンドポイント](/docs/api/authentication#revoke-refresh-token)を使用します。このエンドポイントは、基礎となる許可を削除しません。この動作を変更して、Dashboardで基礎となる許可も削除できます。[［Dashboard］ > ［Tenant Settings（テナント設定）］ > ［Advanced（詳細）］](https://manage.auth0.com/#/tenant/advanced)。**Settings（設定）**までスクロールし、**リフレッシュトークンの取り消しによる許可の削除**のトグルを有効にします。
-* ローテーション用に構成されたリフレッシュトークンを取り消すには、Management API`/api/v2/device-credentials`[エンドポイント](/docs/api/management/v2#!/Device_Credentials/get_device_credentials)を使用します。
+* リフレッシュトークンを取り消すには、Authentication APIの`/oauth/revoke`[エンドポイント](/docs/ja-jp/api/authentication#revoke-refresh-token)を使用します。このエンドポイントは、基礎となる許可を削除しません。この動作を変更して、Dashboardで基礎となる許可も削除できます。[［Dashboard］ > ［Tenant Settings（テナント設定）］ > ［Advanced（詳細）］](https://manage.auth0.com/#/tenant/advanced)。**Settings（設定）**までスクロールし、**リフレッシュトークンの取り消しによる許可の削除**のトグルを有効にします。
+* ローテーション用に構成されたリフレッシュトークンを取り消すには、Management API`/api/v2/device-credentials`[エンドポイント](/docs/ja-jp/api/management/v2#!/Device_Credentials/get_device_credentials)を使用します。
 
 ## もっと詳しく
 

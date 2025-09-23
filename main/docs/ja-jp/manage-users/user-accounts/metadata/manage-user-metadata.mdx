@@ -1,19 +1,19 @@
 ---
 title: "ログイン後のアクショントリガーでユーザーメタデータを管理する"
 permalink: "manage-user-metadata"
+'description': "ログイン後のアクショントリガーで、user_metadataとapp_metadataをユーザーのログインフローの一部として変更する方法について説明します。"
 'og:title': "ログイン後のアクショントリガーでユーザーメタデータを管理する"
 'og:description': "ログイン後のアクショントリガーで、user_metadataとapp_metadataをユーザーのログインフローの一部として変更する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ログイン後のアクショントリガーでユーザーメタデータを管理する"
 'twitter:description': "ログイン後のアクショントリガーで、user_metadataとapp_metadataをユーザーのログインフローの一部として変更する方法について説明します。"
 ---
-# ログイン後のアクショントリガーでユーザーメタデータを管理する
 
 Auth0は豊富なシステムを提供して、Auth0ユーザープロファイルに[メタデータ](/docs/ja-jp/manage-users/user-accounts/metadata)を保管できるようにしています。`post-login`トリガーを構成すると、`user_metadata`と`app_metadata`をユーザーのログインフローの一部として変更できるようになります。ログイン後のトリガーは、ユーザープロファイルにアプリケーション固有のデータを保存したり、ユーザー操作ログをキャプチャしたり、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip>属性をメタデータフィールドにマッピングしたり、ユーザープロファイルにあるコストのかかる操作値をキャッシュして今後のログインに再利用したりなどの作業に役立ちます。
 
 `post-login``api`オブジェクトには、このトリガーで実行できる一般的な操作があります。ユーザーメタデータを管理するには、`api.user.setAppMetadata`メソッドと`api.user.setUserMetadata`メソッドを使用します。たとえば、特定のユーザーに何らかの動作が複数回にわたって実行されるのを防ぐには、以下のようなアクションを検討します。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   if (event.user.app_metadata.didAnExpensiveTask) {
     console.log(`Skipping the expensive task because it already occurred for ${event.user.email}.`);

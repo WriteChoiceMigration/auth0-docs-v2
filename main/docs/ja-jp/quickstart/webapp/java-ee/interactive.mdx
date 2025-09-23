@@ -1,17 +1,19 @@
 ---
 title: "Java EEアプリケーションにログインを追加する"
 permalink: "interactive"
+'description': "このチュートリアルは、Java EE Webアプリケーションにユーザーログインを追加する方法について説明します。"
 'og:title': "Java EEアプリケーションにログインを追加する"
 'og:description': "このチュートリアルは、Java EE Webアプリケーションにユーザーログインを追加する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/java.png"
 'twitter:title': "Java EEアプリケーションにログインを追加する"
 'twitter:description': "このチュートリアルは、Java EE Webアプリケーションにユーザーログインを追加する方法について説明します。"
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -53,7 +55,7 @@ permalink: "interactive"
 
 Auth0にサインアップしたときには、新しいアプリケーションが作成されたか、すでに作成済みであった可能性があります。Auth0と通信するには、アプリケーションについての詳細が必要になります。これらの詳細は、Auth0 Dashboardの[アプリケーションの設定](https://manage.auth0.com/#/applications)セクションで入手できます。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/1NtemqhRTHLFgWkGyAVSC6/ae66506a56ffab891e8a36e1344e6376/uwp.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/1NtemqhRTHLFgWkGyAVSC6/ae66506a56ffab891e8a36e1344e6376/uwp.png)</Frame>
 
 以下の情報が必要です。
 
@@ -101,7 +103,7 @@ Java EEアプリケーションをAuth0と統合するには、以下の依存�
 
 Mavenを使用している場合は、次の依存関係を`pom.xml`に追加します：
 
-```
+```xml lines
 <!-- pom.xml -->
 <dependency>
 <groupId>com.auth0</groupId>
@@ -124,7 +126,7 @@ Mavenを使用している場合は、次の依存関係を`pom.xml`に追加し
 
 Gradleを使用している場合は、次を`build.gradle`に追加します：
 
-```javascript
+```powershell lines
 // build.gradle
 providedCompile 'javax:javaee-api:8.0.1'
 providedCompile 'javax.security.enterprise:javax.security.enterprise-api:1.0'
@@ -150,7 +152,7 @@ Java EEアプリケーションは、Auth0アプリケーションを使って�
 </thead>
 <tbody>
 <tr>
-<td>このサンプルを__［Download Sample（サンプルをダウンロード）］__ボタンでダウンロードした場合は、<code>domain</code>、<code>clientId</code>、<code>clientSecret</code>の属性が自動的に入力されます。アカウントに複数のAuth0アプリケーションがある場合は特に、値が正しいことを確認してください。</td>
+<td>このサンプルを__［Download Sample（サンプルをダウンロード）］__ボタンでダウンロードした場合は、`domain`、`clientId`、`clientSecret`の属性が自動的に入力されます。アカウントに複数のAuth0アプリケーションがある場合は特に、値が正しいことを確認してください。</td>
 </tr>
 </tbody>
 </table>
@@ -172,7 +174,7 @@ Auth0を使用して認証するには、以下のインターフェイスをカ
 
 次に、現在の要求の呼び出し元を表すカスタムの`CallerPrincipal`を作成します：
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/security/Auth0JwtPrincipal.java
 public class Auth0JwtPrincipal extends CallerPrincipal {
 private final DecodedJWT idToken;
@@ -196,7 +198,7 @@ public DecodedJWT getIdToken() {
 
 これで、ユーザーの資格情報を表すために使用されるカスタムの`Credential`が実装できるようになりました。これには、プリンシパルについての情報が保管されます：
 
-```javascript
+```javascript lines
 // src/main/java/com/auth0/example/security/Auth0JwtCredential.java
 class Auth0JwtCredential implements Credential {
 private Auth0JwtPrincipal auth0JwtPrincipal;
@@ -220,7 +222,7 @@ Auth0JwtPrincipal getAuth0JwtPrincipal() {
 
 これで、呼び出し元プリンシパルと資格情報を表すクラスが定義できました。次に、`IdentityStore`のカスタム実装を作成します。このクラスはユーザー資格情報の検証に使用されます。
 
-```javascript
+```java lines
 // src/main/java/com/auth0/example/security/Auth0JwtIdentityStore.java
 @ApplicationScoped
 public class Auth0JwtIdentityStore implements IdentityStore {
@@ -260,7 +262,7 @@ public CredentialValidationResult validate(final Credential credential) {
 
 以下のサンプルは、**RS256署名アルゴリズム**の使用に`AuthenticationController`をどのように構成するのかを示しています。
 
-```javascript
+```javascript lines
 // src/main/java/com/auth0/example/security/Auth0AuthenticationProvider.java
 @ApplicationScoped
 public class Auth0AuthenticationProvider {
@@ -283,7 +285,7 @@ public AuthenticationController authenticationController(Auth0AuthenticationConf
 
 最後に、カスタムの`HttpAuthenticationMechanism`を実装します。
 
-```javascript
+```javascript lines
 // src/main/java/com/auth0/example/security/Auth0AuthenticationMechanism.java
 @ApplicationScoped
 @AutoApplySession
@@ -368,7 +370,7 @@ private boolean isCallbackRequest(HttpServletRequest request) {
 
 ユーザーが資格情報を入力し、要求されたアクセス権を認可すると、Auth0は`callbackUrl`に対して要求を発行し、IDトークンおよびアクセストークンと交換できる`code`クエリパラメーターを含めます。先ほど説明したように、上記で作成した`Auth0HttpAuthenticationMechanism`がこの交換を処理し、アプリケーションコンテナーに認証ステータスを通知できるようにします。そうすることで、`/callback`パスへの要求を処理するサーブレットは、ログイン前に要求された元のリソースに要求を転送するか、ホームページにリダイレクトするだけで済みます。
 
-```javascript
+```javascript lines
 // src/main/com/auth0/example/web/CallbackServlet.java
 @WebServlet(urlPatterns = {"/callback"})
 public class CallbackServlet extends HttpServlet {
@@ -395,7 +397,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
 
 そのプロファイル情報は、ユーザーについての情報を表示するビューで使用できます。
 
-```
+```html lines
 <!-- src/main/webapp/WEB-INF/jsp/fragments/navbar.jspf -->
 <c:choose>
 <c:when test="{empty profile}">
@@ -439,19 +441,19 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
 
 LinuxまたはMacOSを使用している場合は、次を行います：
 
-```
+```powershell lines
 ./mvnw clean wildfly:run
 ```
 
 Windows：
 
-```
+```powershell lines
 mvnw.cmd clean wildfly:run
 ```
 
 使用しているブラウザーで`http:``//localhost:3000`をポイントします。**ログイン**リンクを使用して、Auth0テナントにログインまたはサインアップします。
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/5Lp4Zahxd2v6wSJmy9JaM4/717068d1dafc0637c4dad2cdcf5a29a5/Login_Screen_-_Japanese.png)</Frame>
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/5Lp4Zahxd2v6wSJmy9JaM4/717068d1dafc0637c4dad2cdcf5a29a5/Login_Screen_-_Japanese.png)</Frame>
 
 ログインに成功すると、ユーザーのプロフィール画像とログインリンクのあるドロップダウンメニューが表示されます。**プロファイル**リンクをクリックすると、ユーザーのプロファイルページを表示することができます。ドロップダウンメニューにある**ログアウト**リンクをクリックすると、ログアウトできます。
 
@@ -473,7 +475,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/webapp/java-ee/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

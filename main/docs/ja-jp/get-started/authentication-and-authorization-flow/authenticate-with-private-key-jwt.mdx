@@ -1,13 +1,13 @@
 ---
 title: "秘密鍵JWTで認証する"
 permalink: "authenticate-with-private-key-jwt"
+'description': "秘密鍵JWT認証を使用するためのアサーションの構築方法について説明します。"
 'og:title': "秘密鍵JWTで認証する"
 'og:description': "秘密鍵JWT認証を使用するためのアサーションの構築方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "秘密鍵JWTで認証する"
 'twitter:description': "秘密鍵JWT認証を使用するためのアサーションの構築方法について説明します。"
 ---
-# 秘密鍵JWTで認証する
 
 <Card title="Before you start">
 
@@ -65,7 +65,7 @@ Auth0のSDKのいずれかを使用して、アサーションを自動的に構
 
 以下の例では、Node.jsスクリプトが[joseパッケージ](https://github.com/panva/jose)を使用してアサーションを生成しています。
 
-```javascript
+```javascript lines
 const { SignJWT } = require('jose')
 const crypto = require("crypto");
 const uuid = require("uuid");
@@ -96,11 +96,11 @@ main();
 
 秘密鍵で署名したクライアントアサーションの例
 
-<Frame>![private key example](//images.ctfassets.net/cdy7uua7fh8z/4O8zb1gZnEmUQ6FrRkfmlc/a30b73e09d51ca0b4bf929b91571a80a/2023-03-13_16-53-54.png)</Frame>
+<Frame>![private key example](/images/ja-jp/cdy7uua7fh8z/4O8zb1gZnEmUQ6FrRkfmlc/a30b73e09d51ca0b4bf929b91571a80a/2023-03-13_16-53-54.png)</Frame>
 
 以下に対応しています。
 
-```json
+```json lines
 {
   "alg": "RS256",
   "kid": "my kid"
@@ -130,7 +130,7 @@ JWTアサーションをアクセストークンと交換するには、以下�
 * `$client_assertion`：JWTアサーション
 * `$resource_server_identifier`：リソースサーバーの識別子。詳細については、「[APIを登録する](/docs/ja-jp/get-started/auth0-overview/set-up-apis)」お読みください。
 
-```bash
+```bash lines
 curl --location --request POST 'https://$tenant/oauth/token' \
   --header 'Content-Type: application/x-www-form-urlencoded' \
   --data-urlencode 'grant_type=client_credentials' \

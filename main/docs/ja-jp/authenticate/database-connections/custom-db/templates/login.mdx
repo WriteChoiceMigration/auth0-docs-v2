@@ -1,13 +1,13 @@
 ---
 title: "ログインスクリプトのテンプレート"
 permalink: "login"
+'description': "ユーザーのログインのための、カスタムデータベースのアクションスクリプト用テンプレートについて説明します。"
 'og:title': "ログインスクリプトのテンプレート"
 'og:description': "ユーザーのログインのための、カスタムデータベースのアクションスクリプト用テンプレートについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ログインスクリプトのテンプレート"
 'twitter:description': "ユーザーのログインのための、カスタムデータベースのアクションスクリプト用テンプレートについて説明します。"
 ---
-# ログインスクリプトのテンプレート
 
 ログインスクリプトは、ユーザーの認証が必要になるたびに実行される関数を実装します。この関数の名前は`login`にすることをお勧めします。
 
@@ -25,7 +25,7 @@ permalink: "login"
 
 `login`関数は3つのパラメーターを受け取り、`callback`関数を返します。
 
-```
+```javascript lines
 login(userNameOrEmail, password, callback): function
 ```
 
@@ -38,17 +38,17 @@ login(userNameOrEmail, password, callback): function
 </thead>
 <tbody>
 <tr>
-<td><code>userNameOrEmail</code></td>
+<td>`userNameOrEmail`</td>
 <td>文字列</td>
 <td>ユーザーのユーザー名またはメール。</td>
 </tr>
 <tr>
-<td><code>password</code></td>
+<td>`password`</td>
 <td>文字列</td>
 <td>ユーザーのパスワード（プレーンテキスト形式）。</td>
 </tr>
 <tr>
-<td><code>callback</code></td>
+<td>`callback`</td>
 <td>関数</td>
 <td>エラーやプロファイルデータをパイプラインを介して渡すために使用されます。</td>
 </tr>
@@ -59,7 +59,7 @@ login(userNameOrEmail, password, callback): function
 
 これは疑似JavaScriptを使った例で、どのようにすれば`login`関数を実装できるかがわかります。言語固有の例については、「[言語固有のスクリプトの例](#language-specific-script-examples)」をお読みください。
 
-```javascript
+```javascript lines
 function login(userNameOrEmail, password, callback) {
   // Send credentials to external database API
   let hashedPassword = hash(password);
@@ -102,7 +102,7 @@ function login(userNameOrEmail, password, callback) {
 
 #### 例
 
-```
+```javascript lines
 bcrypt.hash(password, 10, function (err, hash) {
     if (err) {
         return callback(err);
@@ -120,7 +120,7 @@ bcrypt.hash(password, 10, function (err, hash) {
 
 `callback`関数は2つまでのパラメーターを受け取り、1つの関数を返します。
 
-```
+```javascript lines
 callback(error[, profile]): function
 ```
 
@@ -134,13 +134,13 @@ callback(error[, profile]): function
 </thead>
 <tbody>
 <tr>
-<td><code>error</code></td>
+<td>`error`</td>
 <td>オブジェクト</td>
 <td>必須</td>
 <td>エラーデータを含む。</td>
 </tr>
 <tr>
-<td><code>profile</code></td>
+<td>`profile`</td>
 <td>オブジェクト</td>
 <td>任意</td>
 <td>ユーザーのプロファイルデータを含む。</td>
@@ -160,7 +160,7 @@ Loginスクリプトによって返されるユーザーのプロファイルデ
 
 #### 例
 
-```
+```javascript lines
 return callback(null, {
     username: "username",
     user_id: "my-custom-db|username@domain.com",
@@ -194,7 +194,7 @@ return callback(null, {
 
 `WrongUsernameOrPasswordError`コンストラクターは、最大2つのパラメーターを受け取ります。
 
-```
+```javascript lines
 new WrongUsernameOrPasswordError(userNameOrEmail[, message]): WrongUsernameOrPasswordError
 ```
 
@@ -208,13 +208,13 @@ new WrongUsernameOrPasswordError(userNameOrEmail[, message]): WrongUsernameOrPas
 </thead>
 <tbody>
 <tr>
-<td><code>userNameOrEmail</code></td>
+<td>`userNameOrEmail`</td>
 <td>文字列</td>
 <td>必須</td>
-<td>ユーザーのユーザー名またはメール、もしくは<code>null</code>値が含まれます。</td>
+<td>ユーザーのユーザー名またはメール、もしくは`null`値が含まれます。</td>
 </tr>
 <tr>
-<td><code>message</code></td>
+<td>`message`</td>
 <td>文字列</td>
 <td>任意</td>
 <td>エラーに関する情報が含まれます。</td>
@@ -228,7 +228,7 @@ new WrongUsernameOrPasswordError(userNameOrEmail[, message]): WrongUsernameOrPas
 
 ##### 例
 
-```
+```javascript lines
 return callback(new WrongUsernameOrPasswordError(userNameOrEmail, "My custom error message"));
 ```
 
@@ -241,7 +241,7 @@ return callback(new WrongUsernameOrPasswordError(userNameOrEmail, "My custom err
 <tbody>
 <tr>
 <td><strong>Code（コード）</strong></td>
-<td><code>fp</code></td>
+<td>`fp`</td>
 </tr>
 <tr>
 <td><strong>Event（イベント）</strong></td>
@@ -249,7 +249,7 @@ return callback(new WrongUsernameOrPasswordError(userNameOrEmail, "My custom err
 </tr>
 <tr>
 <td><strong>Description（説明）</strong></td>
-<td><code>My custom error message</code></td>
+<td>`My custom error message`</td>
 </tr>
 </tbody>
 </table>
@@ -260,7 +260,7 @@ return callback(new WrongUsernameOrPasswordError(userNameOrEmail, "My custom err
 
 ##### 例
 
-```
+```javascript lines
 return callback(new WrongUsernameOrPasswordError(null, "My custom error message"));
 ```
 
@@ -273,7 +273,7 @@ return callback(new WrongUsernameOrPasswordError(null, "My custom error message"
 <tbody>
 <tr>
 <td><strong>Code（コード）</strong></td>
-<td><code>fu</code></td>
+<td>`fu`</td>
 </tr>
 <tr>
 <td><strong>Event（イベント）</strong></td>
@@ -281,7 +281,7 @@ return callback(new WrongUsernameOrPasswordError(null, "My custom error message"
 </tr>
 <tr>
 <td><strong>Description（説明）</strong></td>
-<td><code>My custom error message</code></td>
+<td>`My custom error message`</td>
 </tr>
 </tbody>
 </table>
@@ -309,7 +309,7 @@ Auth0は、以下の言語や技術で使用できるサンプルスクリプト
 
 ### JavaScript
 
-```javascript
+```javascript lines
 function login(email, password, callback) {
   // This script should authenticate a user against the credentials stored in
   // your database.
@@ -351,7 +351,7 @@ function login(email, password, callback) {
 
 ### ASP.NET Membership Provider（MVC3 - Universal Providers）
 
-```javascript
+```javascript lines
 function login(email, password, callback) {
   const crypto = require('crypto');
   const sqlserver = require('tedious@11.0.3');
@@ -447,7 +447,7 @@ function login(email, password, callback) {
 
 ### ASP.NET Membership Provider (MVC4 - Simple Membership)
 
-```javascript
+```javascript lines
 function login(email, password, callback) {
   const crypto = require('crypto');
   const sqlserver = require('tedious@11.0.3');
@@ -557,7 +557,7 @@ function login(email, password, callback) {
 
 ### MongoDB
 
-```javascript
+```javascript lines
 function login(email, password, callback) {
   const bcrypt = require('bcrypt');
   const MongoClient = require('mongodb@3.1.4').MongoClient;
@@ -587,7 +587,7 @@ function login(email, password, callback) {
 
 ### MySQL
 
-```javascript
+```javascript lines
 function login(email, password, callback) {
   const mysql = require('mysql');
   const bcrypt = require('bcrypt');
@@ -617,7 +617,7 @@ function login(email, password, callback) {
 
 ### PostgreSQL
 
-```javascript
+```javascript lines
 function login(email, password, callback) {
   //this example uses the "pg" library
   //more info here: https://github.com/brianc/node-postgres
@@ -648,7 +648,7 @@ function login(email, password, callback) {
 
 ### SQL Server
 
-```javascript
+```javascript lines
 function login(email, password, callback) {
   //this example uses the "tedious" library
   //more info here: http://pekim.github.io/tedious/index.html
@@ -695,7 +695,7 @@ function login(email, password, callback) {
 
 ### Windows Azure SQL Database
 
-```javascript
+```javascript lines
 function login(email, password, callback) {
   //this example uses the "tedious" library
   //more info here: http://pekim.github.io/tedious/index.html
@@ -753,7 +753,7 @@ function login(email, password, callback) {
 
 ### Axios
 
-```
+```javascript lines
 async function loginAsync(email, password, callback) {
   //should be updated as new versions of axios are made available (https://auth0-extensions.github.io/canirequire/#axios)
   const axios = require("axios@0.22.0");
@@ -808,7 +808,7 @@ async function loginAsync(email, password, callback) {
 
 ### Stormpath
 
-```javascript
+```javascript lines
 function login(username, password, callback) {
   // Replace the {yourStormpathClientId} with your Stormpath ID
   var url = 'https://api.stormpath.com/v1/applications/{yourStormpathClientId}/loginAttempts';

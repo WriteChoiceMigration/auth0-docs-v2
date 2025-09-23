@@ -1,13 +1,13 @@
 ---
 title: "Lock.Android：使用を開始する"
 permalink: "lock-android"
+'description': "Lock for Androidを始めましょう。ネイティブAndroidアプリに対して、フリクションレスなログインおよびサインアップ体験を提供するウィジェットです。"
 'og:title': "Lock.Android：使用を開始する"
 'og:description': "Lock for Androidを始めましょう。ネイティブAndroidアプリに対して、フリクションレスなログインおよびサインアップ体験を提供するウィジェットです。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Lock.Android：使用を開始する"
 'twitter:description': "Lock for Androidを始めましょう。ネイティブAndroidアプリに対して、フリクションレスなログインおよびサインアップ体験を提供するウィジェットです。"
 ---
-# Lock.Android：使用を開始する
 
 Lock for Androidは、ネイティブAndroidアプリに組み込むことができ、ユーザーがアプリに便利な方法でログインしてサインアップできるようにします。Facebook、Google、またはXのようなソーシャルIDプロバイダーや、Active Directoryなどのエンタープライズプロバイダーをサポートします。
 
@@ -19,7 +19,7 @@ GitHubの[Lock.Androidレポジトリ](https://github.com/auth0/Lock.Android)を
 
 以下に、Java 8バイトコードをAndroidとKotlinプラグインのそれぞれのターゲットにするために何が`build.gradle`に必要なのかを示します。
 
-```
+``` lines
 android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -68,7 +68,7 @@ Web Authentication機能（つまり、ソーシャル接続）を使用する�
 
 `app/build.gradle`ファイルで、Auth0ドメインおよびAuth0スキームプロパティに[マニフェストファイル](https://developer.android.com/studio/build/manifest-build-variables.html)を追加すると、それがライブラリによって内部で使用され、認証結果を取り込むインテントフィルタを登録します。
 
-```
+``` lines
 plugins {
     id "com.android.application"
     id "kotlin-android"
@@ -91,7 +91,7 @@ android {
 
 これらの値を、後でコードから参照可能な文字列リソースとして`strings.xml`ファイルに追加することをお勧めします。このガイドではそのプラクティスに従います。
 
-```
+```xml lines
 <resources>
     <string name="com_auth0_client_id">{yourClientId}</string>
     <string name="com_auth0_domain">{yourDomain}</string>
@@ -102,13 +102,13 @@ android {
 
 Lockを起動する予定のアクティビティで、アプリケーションの情報を用いて`Auth0`のインスタンスを作成します。最も簡単な作成方法は、AndroidのContextを渡す方法です。これは、`strings.xml`ファイルで以前定義した値を使用します。これを行うには、文字列リソースが上記のものと同じキーを使用して定義されなければなりません。
 
-```
+```kotlin lines
 val account = Auth0(context)
 ```
 
 ユーザー認証イベントを処理する`AuthenticationCallback`実装を宣言します。正常な認証シナリオで返される`Credentials`オブジェクトには、アプリケーションまたはAPIが最終的に利用するトークンが含まれます。詳細については、「[トークン](/docs/ja-jp/secure/tokens)」をご覧ください。
 
-```
+```kotlin lines
 private val callback = object : AuthenticationCallback() {
     override fun onAuthentication(credentials: Credentials) {
         // Authenticated
@@ -124,7 +124,7 @@ Builderクラスを使用して構成し、新しいLockインスタンスを準
 
 完了したら、Lockインスタンスをビルドします。このインスタンスは、再使用されるように意図されており、必要なくなった時に廃棄されなければなりません。これを行うのに最適な場所は、アクティビティの`onDestroy`メソッド内です。
 
-```javascript
+```kotlin lines
 // This activity will show Lock
 class MyActivity : AppCompatActivity() {
 
@@ -160,7 +160,7 @@ class MyActivity : AppCompatActivity() {
 
 最後に、アクティビティの中から`Lock`ウィジェットを起動します。
 
-```
+```kotlin lines
 startActivity(lock.newIntent(this))
 ```
 

@@ -1,13 +1,13 @@
 ---
 title: "本番環境のManagement APIアクセストークンの取得"
 permalink: "get-management-api-access-tokens-for-production"
+'description': "Management APIを定期的かつ頻繁に呼び出すアクセストークンの取得方法をご覧ください。"
 'og:title': "本番環境のManagement APIアクセストークンの取得"
 'og:description': "Management APIを定期的かつ頻繁に呼び出すアクセストークンの取得方法をご覧ください。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "本番環境のManagement APIアクセストークンの取得"
 'twitter:description': "Management APIを定期的かつ頻繁に呼び出すアクセストークンの取得方法をご覧ください。"
 ---
-# 本番環境のManagement APIアクセストークンの取得
 
 本番環境に定期的かつ頻繁な呼び出しを行うには、バックエンドでトークンを自動的に提供するプロセスを構築（して、擬似的に無期限のトークンに）します。
 
@@ -22,7 +22,7 @@ Auth0に<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">M
 ペイロードは次の形式でなければなりません。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -30,8 +30,8 @@ curl --request POST \
 --data 'client_id={yourClientId}' \
 --data 'client_secret={yourClientSecret}' \
 --data 'audience=https://{yourDomain}/api/v2/'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -39,7 +39,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=client_cre
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -58,15 +58,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=client_credentials&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&audience=https%3A%2F%2F{yourDomain}%2Fapi%2Fv2%2F")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -84,8 +84,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=client_credentials" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -111,7 +111,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -134,8 +134,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=client_credentials&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&audience=https%3A%2F%2F{yourDomain}%2Fapi%2Fv2%2F"
@@ -146,7 +146,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -159,8 +159,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=client_credentials&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&audience=https%3A%2F%2F{yourDomain}%2Fapi%2Fv2%2F"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=client_credentials".data(using: String.Encoding.utf8)!)
@@ -186,7 +186,7 @@ dataTask.resume()
 ```
 </CodeGroup>
 
-[アプリケーションの設定タブ](https://manage.auth0.com/#/applications/{yourClientId}/settings)で必ず`` `{yourClientSecret}` ``をクライアントシークレットに更新します。
+[アプリケーションの設定タブ](https://manage.auth0.com/#/applications/{yourClientId}/settings)で必ず``{yourClientSecret}``をクライアントシークレットに更新します。
 
 要求パラメーター：
 
@@ -199,7 +199,7 @@ dataTask.resume()
 <tbody>
 <tr>
 <td><strong>grant_type</strong></td>
-<td>実行したい<a href="/docs/protocols/oauth2#grant-types">OAuth 2.0フロー</a>を示します。マシンツーマシン通信については、<code>client_credentials</code>の値を使用します。</td>
+<td>実行したい<a href="/docs/ja-jp/protocols/oauth2#grant-types">OAuth 2.0フロー</a>を示します。マシンツーマシン通信については、`client_credentials`の値を使用します。</td>
 </tr>
 <tr>
 <td><strong>client_id</strong></td>
@@ -211,7 +211,7 @@ dataTask.resume()
 </tr>
 <tr>
 <td><strong>audience</strong></td>
-<td>これは<code>Auth0 Management API</code>の <strong>識別子</strong> フィールドの値です。<a href="https://manage.auth0.com/#/apis">APIの設定タブ</a>で見つけることができます。</td>
+<td>これは`Auth0 Management API`の <strong>識別子</strong> フィールドの値です。<a href="https://manage.auth0.com/#/apis">APIの設定タブ</a>で見つけることができます。</td>
 </tr>
 </tbody>
 </table>
@@ -224,7 +224,7 @@ dataTask.resume()
 
 応答には[署名済みJWT](/docs/ja-jp/secure/tokens/json-web-tokens)、有効期限、付与されたスコープ、およびトークンタイプが含まれます。
 
-```json
+```json lines
 {
   "access_token": "eyJ...Ggg",
   "expires_in": 86400,
@@ -244,13 +244,13 @@ HTTP呼び出しの代わりに、[node-auth0](https://www.npmjs.com/package/aut
 このトークンを使用するには、要求の`Authorization`ヘッダーに含めます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url http:///%7BmgmtApiEndpoint%7D \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --header 'content-type: application/json'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("http:///%7BmgmtApiEndpoint%7D");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -258,7 +258,7 @@ request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -276,15 +276,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("http:///%7BmgmtApiEndpoint%7D")
 .header("content-type", "application/json")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -299,8 +299,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
@@ -322,7 +322,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "http:///%7BmgmtApiEndpoint%7D",
@@ -345,8 +345,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPConnection("")
 headers = {
@@ -359,7 +359,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 url = URI("http:///%7BmgmtApiEndpoint%7D")
@@ -369,8 +369,8 @@ request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -394,16 +394,16 @@ dataTask.resume()
 ```
 </CodeGroup>
 
-たとえば、[すべてのアプリケーションを取得](/docs/api/management/v2#!/Clients/get_clients)するには、以下を使用します。
+たとえば、[すべてのアプリケーションを取得](/docs/ja-jp/api/management/v2#!/Clients/get_clients)するには、以下を使用します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/clients' \
 --header 'authorization: Bearer {yourAccessToken}' \
 --header 'content-type: application/json'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/clients");
 var request = new RestRequest(Method.GET);
 request.AddHeader("content-type", "application/json");
@@ -411,7 +411,7 @@ request.AddHeader("authorization", "Bearer {yourAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -429,15 +429,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/clients")
 .header("content-type", "application/json")
 .header("authorization", "Bearer {yourAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -449,8 +449,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer {yourAccessToken}" };
@@ -472,7 +472,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/clients",
@@ -495,8 +495,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = {
@@ -509,7 +509,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -522,8 +522,8 @@ request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer {yourAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -555,7 +555,7 @@ Management API v2 Explorerから、各エンドポイント用のcurlコマン�
 
 ## 例：Pythonの実装
 
-このPythonスクリプトはManagement API v2のアクセストークンを取得し、[すべてのアプリケーション取得](/docs/api/management/v2#!/Clients/get_clients)エンドポイントの呼び出しに使用して、コンソールに応答を出力します。
+このPythonスクリプトはManagement API v2のアクセストークンを取得し、[すべてのアプリケーション取得](/docs/ja-jp/api/management/v2#!/Clients/get_clients)エンドポイントの呼び出しに使用して、コンソールに応答を出力します。
 
 実行する前に、以下の変数が有効な値であることを確認してください。
 
@@ -564,7 +564,7 @@ Management API v2 Explorerから、各エンドポイント用のcurlコマン�
 * `CLIENT_ID`：作成したM2Mアプリケーションの**<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Client ID</Tooltip>（クライアントID）**。
 * `CLIENT_SECRET`：作成したM2Mアプリケーションの**<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Client Secret</Tooltip>（クライアントシークレット）**。
 
-```
+```python lines
 def main():
   import json, requests
   from requests.exceptions import RequestException, HTTPError, URLRequired

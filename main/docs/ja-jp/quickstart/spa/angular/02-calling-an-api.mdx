@@ -1,12 +1,14 @@
 ---
 title: "Call an API"
 permalink: "02-calling-an-api"
+'description': "This tutorial demonstrates how to make API calls to the Auth0 Management API."
 'og:title': "Call an API"
 'og:description': "This tutorial demonstrates how to make API calls to the Auth0 Management API."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/angular.png"
 'twitter:title': "Call an API"
 'twitter:description': "This tutorial demonstrates how to make API calls to the Auth0 Management API."
 ---
+
 # Angular: Call an API
 
 <Frame>![Gravatar for steve.hobbs@auth0.com](//www.gravatar.com/avatar/f771aa7b7fa0220130cb6a9f243d7327?d=mm&r=g&s=50)</Frame>
@@ -42,11 +44,11 @@ Visit the [Integrate Angular with an API Server](https://developer.auth0.com/res
 
 The focus of this guide is to show you how to configure the SDK to call APIs protected by OAuth 2. Instead of creating a demo API to test the client-server connection, you'll use the [Auth0 Management API](https://auth0.com/docs/api#management-api), which comes bundled with your Auth0 tenant. However, you can adapt this guide to work with any API that you are securing with Auth0.
 
-This article builds upon [the previous chapter](/docs/quickstart/spa/angular-next), adding the capability to automatically attach an access token to outgoing requests made using Angular's built-in `HttpClient` service.
+This article builds upon [the previous chapter](/docs/ja-jp/quickstart/spa/angular-next), adding the capability to automatically attach an access token to outgoing requests made using Angular's built-in `HttpClient` service.
 
 <Note>
 
-If you followed the [previous section where you added user log in to Angular](/docs/quickstart/spa/angular-next#add-login-to-your-application), make sure that you log out of your application as you'll need a new access token to call APIs.
+If you followed the [previous section where you added user log in to Angular](/docs/ja-jp/quickstart/spa/angular-next#add-login-to-your-application), make sure that you log out of your application as you'll need a new access token to call APIs.
 
 </Note>
 
@@ -63,7 +65,7 @@ The following is an example of an Angular module (based upon the default impleme
 
 To begin, open your `app.module.ts` file and add the necessary imports at the top:
 
-```javascript
+```javascript lines
 // Import the injector module and the HTTP client module from Angular
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
@@ -73,7 +75,7 @@ import { authHttpInterceptorFn } from '@auth0/auth0-angular';
 
 Next, add `provideHttpClient` to the `providers` of the `bootstrapApplication` function, and add `authHttpInterceptorFn` using `withInterceptors`:
 
-```
+```javascript lines
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(withInterceptors([authHttpInterceptorFn])),
@@ -85,7 +87,7 @@ Finally, modify the configuration given to `provideAuth0()` to specify the `audi
 
 In this case, the audience and scope for the Auth0 Management API are given, which allows your app to retrieve information about the current user.
 
-```
+```javascript lines
 provideAuth0({
   // The domain and clientId were configured in the previous chapter
   domain: '{yourDomain}',
@@ -136,7 +138,7 @@ With your app module configured with the HTTP interceptor from the Angular SDK, 
 
 The following component demonstrates how to display the `user_metadata` field from the authenticated user's profile, by making a call to the `/api/v2/users` endpoint using `HttpClient`:
 
-```
+```javascript lines
 import { Component, OnInit } from '@angular/core';
 import { concatMap, tap, map } from 'rxjs/operators';
 

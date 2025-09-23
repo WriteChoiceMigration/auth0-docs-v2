@@ -1,13 +1,13 @@
 ---
 title: "付与タイプの更新"
 permalink: "update-grant-types"
+'description': "アプリケーションの付与タイプをAuth0 Dashboardまたは管理APIを使って更新する方法を確認してください。"
 'og:title': "付与タイプの更新"
 'og:description': "アプリケーションの付与タイプをAuth0 Dashboardまたは管理APIを使って更新する方法を確認してください。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "付与タイプの更新"
 'twitter:description': "アプリケーションの付与タイプをAuth0 Dashboardまたは管理APIを使って更新する方法を確認してください。"
 ---
-# 付与タイプの更新
 
 アプリケーションの付与タイプは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>または管理APIを使って変更できます。
 
@@ -15,27 +15,27 @@ permalink: "update-grant-types"
 
 1. [［Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)に移動し、アプリケーションの名前を選択して表示します。
 
-   <Frame>![Dashboardのアプリケーションリスト](//images.ctfassets.net/cdy7uua7fh8z/1ecNwGgFQZxdP57p0tp3jT/6a547af05f8729ea00700a851e13c62b/App_List_-_JP.png)</Frame>
+   <Frame>![Dashboardのアプリケーションリスト](/images/ja-jp/cdy7uua7fh8z/1ecNwGgFQZxdP57p0tp3jT/6a547af05f8729ea00700a851e13c62b/App_List_-_JP.png)</Frame>
 
 2. ページの下までスクロールし、**［Show Advanced Settings（詳細設定を表示）］**を選択します。
 3. **［Grant Types（付与タイプ）］**を選択し、アプリケーションに合わせて付与を有効化または無効化します。終わったら、**［Save Changes（変更を保存）］**を選択します。デバイスコードの付与タイプは、ネイティブアプリにのみ利用できます。
 
-   <Frame>![Dashboard アプリケーション アプリケーションの設定タブ 高度な設定 付与タイプタブ](//images.ctfassets.net/cdy7uua7fh8z/4ZMq4VfeGsKsKfZVFwSqe8/edefa1d22e1681cf2995b16dad00e08b/Grant_Types_-_Japanese.png)</Frame>
+   <Frame>![Dashboard アプリケーション アプリケーションの設定タブ 高度な設定 付与タイプタブ](/images/ja-jp/cdy7uua7fh8z/4ZMq4VfeGsKsKfZVFwSqe8/edefa1d22e1681cf2995b16dad00e08b/Grant_Types_-_Japanese.png)</Frame>
 
 ## Management APIの使用
 
-[`/Clients/patch_clients_by_id`](/docs/api/management/v2#!/Clients/patch_clients_by_id)エンドポイントに`PATCH`呼び出しを行います。必ず、`{yourClientId}`、`{yourManagementApiAccessToken}`、および`{grantType}`のプレースホルダーの値をそれぞれ、ご自身のクライアントID、管理APIのアクセストークン、希望する付与タイプに置き換えてください。
+[`/Clients/patch_clients_by_id`](/docs/ja-jp/api/management/v2#!/Clients/patch_clients_by_id)エンドポイントに`PATCH`呼び出しを行います。必ず、`{yourClientId}`、`{yourManagementApiAccessToken}`、および`{grantType}`のプレースホルダーの値をそれぞれ、ご自身のクライアントID、管理APIのアクセストークン、希望する付与タイプに置き換えてください。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/clients/%7ByourClientId%7D' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "grant_types": "{grantTypes}" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/clients/%7ByourClientId%7D");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -45,7 +45,7 @@ request.AddParameter("application/json", "{ \"grant_types\": \"{grantTypes}\" }"
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -66,8 +66,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/clients/%7ByourClientId%7D")
 .header("content-type", "application/json")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
@@ -76,7 +76,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/clients/%7Byo
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -93,8 +93,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer {yourMgmtApiAccessToken}",
@@ -120,7 +120,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/clients/%7ByourClientId%7D",
@@ -145,8 +145,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"grant_types\": \"{grantTypes}\" }"
@@ -161,7 +161,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -176,8 +176,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"grant_types\": \"{grantTypes}\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -213,15 +213,15 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>{yourClientId}</code></td>
+<td>`{yourClientId}`</td>
 <td>更新するアプリケーションのID。</td>
 </tr>
 <tr>
-<td><code>{yourManagementApiAccessToken}</code></td>
-<td>スコープ<code>update:clients</code>を持つ<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
+<td>`{yourManagementApiAccessToken}`</td>
+<td>スコープ`update:clients`を持つ<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 <tr>
-<td><code>{grantTypes}</code></td>
+<td>`{grantTypes}`</td>
 <td>指定されたアプリケーションで有効にしたい付与タイプ。</td>
 </tr>
 </tbody>
@@ -230,7 +230,7 @@ dataTask.resume()
 ## トラブルシューティング
 
 フローに適した`grant_types`のないアプリケーションでフローを使おうとすると、次のエラーが発生します：
-`` Grant type `grant_type` not allowed for the client. ``
+`Grant type `grant_type` not allowed for the client.`
 
 ## もっと詳しく
 

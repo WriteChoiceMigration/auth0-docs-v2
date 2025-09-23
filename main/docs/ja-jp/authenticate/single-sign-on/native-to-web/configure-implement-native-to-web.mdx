@@ -1,13 +1,13 @@
 ---
 title: "Configure and Implement Native to Web SSO"
 permalink: "configure-implement-native-to-web"
+'description': "Learn how to configure your applications to use Native to Web Single Sign-On."
 'og:title': "Configure and Implement Native to Web SSO"
 'og:description': "Learn how to configure your applications to use Native to Web Single Sign-On."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configure and Implement Native to Web SSO"
 'twitter:description': "Learn how to configure your applications to use Native to Web Single Sign-On."
 ---
-# Configure and Implement Native to Web SSO
 
 <Warning>
 
@@ -29,7 +29,7 @@ Native to Web SSO supports the following SDKs: [Auth0 Android SDK](https://githu
 
 Native to Web SSO support is available in the following tools: [Auth0 Deploy CLI](https://auth0.com/docs/deploy-monitor/deploy-cli-tool). [Auth0 Terraform Provider](https://auth0.com/docs/deploy-monitor/auth0-terraform-provider) and [Auth0 CLI](https://auth0.github.io/auth0-cli/).
 
-Native to Web SSO supports any authentication flow that returns a refresh token, such as [Resource Owner Password Flow](/docs/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa) and [Authorization Code Flow with Proof Key for Code Exchange](/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce).
+Native to Web SSO supports any authentication flow that returns a refresh token, such as [Resource Owner Password Flow](/docs/ja-jp/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa) and [Authorization Code Flow with Proof Key for Code Exchange](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce).
 
 </Note>
 
@@ -43,7 +43,7 @@ The first Management API call allows your native and web Applications to:
 
 For existing applications, make a `PATCH` call to the [Update a Client](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) endpoint. To create a new application, make a `POST` call to the [Create a Client](https://auth0.com/docs/api/management/v2/clients/post-clients) endpoint:
 
-```json
+```json lines
 {
   "session_transfer": {
     "can_create_session_transfer_token": false,
@@ -66,7 +66,7 @@ You can configure your native application to exchange a <Tooltip data-tooltip-id
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```bash
+```bash lines
 curl --request PATCH \
   --url 'https://{yourDomain}/api/v2/clients/{yourClientId}' \
   --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
@@ -81,7 +81,7 @@ curl --request PATCH \
 
 * Update your native application using [Auth0 CLI](https://auth0.github.io/auth0-cli/auth0_apps_session-transfer_update.html):
 
-```
+```bash lines
 auth0 apps session-transfer update {yourClientId} --can-create-token=true --enforce-device-binding=asn
 ```
 
@@ -93,7 +93,7 @@ Before you enable Session Transfer Token, make sure you have configured your web
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```bash
+```bash lines
 curl --request PATCH \
   --url '{yourDomain}/api/v2/clients//{yourClientId}' \
   --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
@@ -107,7 +107,7 @@ curl --request PATCH \
 
 * Update your web application using [Auth0 CLI](https://auth0.github.io/auth0-cli/auth0_apps_session-transfer_update.html):
 
-```
+```bash lines
 auth0 apps session-transfer update {yourClientId}  --allowed-auth-methods=cookie,query
 ```
 
@@ -135,7 +135,7 @@ Use the [/token](https://auth0.com/docs/api/authentication/authorization-code-fl
 
 <Tabs><Tab title="Swift SDK">
 
-```
+```swift lines
 credentialsManager.ssoCredentials { result in
     switch result {
     case .success(let ssoCredentials):
@@ -157,7 +157,7 @@ do {
 
 </Tab><Tab title="Android SDK">
 
-```
+```javascript lines
 authentication
 .ssoExchange("refresh_token")
 .start(object : Callback<SSOCredentials, AuthenticationException> {
@@ -177,7 +177,7 @@ authentication
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```bash
+```html lines
 curl -X POST https://{yourDomain}/oauth/token \
   -H 'Content-type: application/json' \
   -d '{"grant_type":"refresh_token", 
@@ -194,7 +194,7 @@ These samples use placeholder variables for dynamic variables. Replace the place
 
 The Auth0 tenant returns a single-use and short-lived (1-minute lifetime) session_transfer_token.
 
-```json
+```json lines
 {
     "access_token": "{session_transfer_token}",
     "issued_token_type": "urn:auth0:params:oauth:token-type:session_transfer_token",
@@ -223,7 +223,7 @@ If your web application using WebView or browser supports cookie injection, you 
 * Open the web application using WebView or browser.
 * Log the web application to your Auth0 tenant or <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Custom Domain</Tooltip>. As the `session_transfer_token` is included in the cookie, the user is not prompted for first-factor authentication.
 
-```bash
+```html lines
 curl --cookie auth0_session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN
       https://{yourDomain}/authorize?{authorize_params}
 ```
@@ -237,17 +237,17 @@ If your web application does not support cookie injection, you can configure you
 * Log the web application appending the `session_transfer_token` as a URL parameter to the [/authorize](https://auth0.com/docs/api/authentication/authorization-code-flow/authorize-application) endpoint. The Auth0 tenant authenticates the user without requiring first-factor authentication, as the session_transfer_token is valid and trusted
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN");
 var request = new RestRequest(Method.GET);
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -263,13 +263,13 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -281,8 +281,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN"]
 cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -301,7 +301,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN",
@@ -320,8 +320,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("your_web_app_login_url")
 conn.request("GET", "/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")
@@ -330,7 +330,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -341,8 +341,8 @@ http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 request = Net::HTTP::Get.new(url)
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let request = NSMutableURLRequest(url: NSURL(string: "https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")! as URL,
 cachePolicy: .useProtocolCachePolicy,
@@ -376,17 +376,17 @@ Implement Native to Web Web Single SSO in your web application using URL paramet
 From the application login URL, redirect to the `/authorize` endpoint when the `session_transfer_token` is sent as a URL parameter.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code");
 var request = new RestRequest(Method.GET);
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -402,13 +402,13 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -425,8 +425,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code"]
 cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -445,7 +445,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code",
@@ -464,8 +464,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 conn.request("GET", "/{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code")
@@ -474,7 +474,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -485,8 +485,8 @@ http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 request = Net::HTTP::Get.new(url)
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code")! as URL,
 cachePolicy: .useProtocolCachePolicy,
@@ -515,7 +515,7 @@ Below are examples of web applications using Auth0 SDKs to redirect the `session
 
 If your web application uses [Express.js](https://expressjs.com/) or the [Auth0 Express SDK](https://github.com/auth0/express-openid-connect), you can use the code below to add middleware support for `session_transfer_token`.
 
-```javascript
+```javascript lines
 const config = {
   authRequired: false,
   auth0Logout: true
@@ -543,20 +543,20 @@ app.use((req, res, next) => {
 If your web application uses <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">SAML</Tooltip> or <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-6" tip="">WS-Fed</Tooltip> service provider and Auth0 as the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-7" tip="">IdP</Tooltip>, you can send the `session_transfer_token` as an URL parameter to the Auth0 `/authorize` endpoint and the `redirect_uri` is the SAML or WS-Fed sign-in URL.
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN' \
 --header 'cookie: session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN' \
 --cookie session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN");
 var request = new RestRequest(Method.GET);
 request.AddHeader("cookie", "session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -573,14 +573,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")
 .header("cookie", "session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -593,8 +593,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"cookie": @"session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN"]
@@ -615,7 +615,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN",
@@ -637,8 +637,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'cookie': "session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN" }
@@ -648,7 +648,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -660,8 +660,8 @@ request = Net::HTTP::Get.new(url)
 request["cookie"] = 'session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["cookie": "session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")! as URL,
@@ -690,7 +690,7 @@ To facilitate this, the post-login Action object **event.session_transfer_token*
 
 The Action code below allows you to dynamically reject a transaction based on geolocation information:
 
-```javascript
+```javascript lines
 /**
 * Handler that will be called during the execution of a PostLogin flow.
 *

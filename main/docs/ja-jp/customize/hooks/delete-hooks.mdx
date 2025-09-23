@@ -1,21 +1,21 @@
 ---
 title: "フックの削除"
 permalink: "delete-hooks"
+'description': "DashboardやManagement APIを使ってフックを削除する方法を説明します。"
 'og:title': "フックの削除"
 'og:description': "DashboardやManagement APIを使ってフックを削除する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "フックの削除"
 'twitter:description': "DashboardやManagement APIを使ってフックを削除する方法を説明します。"
 ---
-# フックの削除
 
 <Warning>
 
 RulesとHooksのサポート終了（EOL）日は**2026年11月18日**であり、**2023年10月16**日の時点で作成された新しいテナントは使用できなくなります。Hooksが有効な既存のテナントは、サポート終了までHooksを利用できます。
 
-今後はActionsに移行して、Auth0の機能を拡張することを強くお勧めします。Actionsを使用すると、豊富な情報やインラインドキュメント、パブリック`npm`パッケージにアクセスして、外部統合を使って全体的な拡張エクスペリエンスを強化することができます。Actionsの詳細については、「[Auth0 Actionsの仕組みを理解する](/docs/customize/actions/actions-overview)」をお読みください。
+今後はActionsに移行して、Auth0の機能を拡張することを強くお勧めします。Actionsを使用すると、豊富な情報やインラインドキュメント、パブリック`npm`パッケージにアクセスして、外部統合を使って全体的な拡張エクスペリエンスを強化することができます。Actionsの詳細については、「[Auth0 Actionsの仕組みを理解する](/docs/ja-jp/customize/actions/actions-overview)」をお読みください。
 
-当社では、移行の参考資料として、[RulesからActionsへの移行](/docs/customize/actions/migrate/migrate-from-rules-to-actions)と[HooksからActionsへの移行](/docs/ja-jp/customize/actions/migrate/migrate-from-hooks-to-actions)に関するガイドを提供しています。また、専用の「[Actionsへの移行](https://auth0.com/extensibility/movetoactions)」ページでは、機能の比較や[Actionsのデモ](https://www.youtube.com/watch?v=UesFSY1klrI)、その他のリソースを掲載して、円滑な移行をサポートしています。
+当社では、移行の参考資料として、[RulesからActionsへの移行](/docs/ja-jp/customize/actions/migrate/migrate-from-rules-to-actions)と[HooksからActionsへの移行](/docs/ja-jp/customize/actions/migrate/migrate-from-hooks-to-actions)に関するガイドを提供しています。また、専用の「[Actionsへの移行](https://auth0.com/extensibility/movetoactions)」ページでは、機能の比較や[Actionsのデモ](https://www.youtube.com/watch?v=UesFSY1klrI)、その他のリソースを掲載して、円滑な移行をサポートしています。
 
 RulesとHooksの廃止の詳細については、当社のブログ記事「[RulesとHooksの提供終了について](https://auth0.com/blog/preparing-for-rules-and-hooks-end-of-life/)」をお読みください。
 
@@ -25,7 +25,7 @@ RulesとHooksの廃止の詳細については、当社のブログ記事「[Rul
 
 RulesとHooksの機能は2026年にサポートの終了を予定しているため、新しいルールやフックは、アクションへの移行をテストするためだけに、開発環境内で作成してください。
 
-RulesからActionsへの移行方法については、「[RulesからActionsに移行する](/docs/customize/actions/migrate/migrate-from-rules-to-actions)」をお読みください。HooksからActionsへの移行方法については、「[HooksからActionsに移行する](/docs/ja-jp/customize/actions/migrate/migrate-from-hooks-to-actions)」をお読みください。
+RulesからActionsへの移行方法については、「[RulesからActionsに移行する](/docs/ja-jp/customize/actions/migrate/migrate-from-rules-to-actions)」をお読みください。HooksからActionsへの移行方法については、「[HooksからActionsに移行する](/docs/ja-jp/customize/actions/migrate/migrate-from-hooks-to-actions)」をお読みください。
 
 </Warning>
 
@@ -38,22 +38,22 @@ RulesからActionsへの移行方法については、「[RulesからActionsに�
 
 ## Management APIの使用
 
-[［Delete a Hook endpoint（フックエンドポイントの削除）］](/docs/api/management/v2/#!/Hooks/delete_hooks_by_id)に対して、`［DELETE（削除）］`呼び出しを行います。`HOOK_ID`と`MGMT_API_ACCESS_TOKEN`のプレースホルダーの値を、それぞれフックIDとManagement APIのアクセストークンに置き換えてください。
+[［Delete a Hook endpoint（フックエンドポイントの削除）］](/docs/ja-jp/api/management/v2/#!/Hooks/delete_hooks_by_id)に対して、`［DELETE（削除）］`呼び出しを行います。`HOOK_ID`と`MGMT_API_ACCESS_TOKEN`のプレースホルダーの値を、それぞれフックIDとManagement APIのアクセストークンに置き換えてください。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request DELETE \
 --url 'https://{yourDomain}/api/v2/hooks/HOOK_ID' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/hooks/HOOK_ID");
 var request = new RestRequest(Method.DELETE);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -70,14 +70,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.delete("https://{yourDomain}/api/v2/hooks/HOOK_ID")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'DELETE',
@@ -89,8 +89,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/hooks/HOOK_ID"]
@@ -111,7 +111,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/hooks/HOOK_ID",
@@ -133,8 +133,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MGMT_API_ACCESS_TOKEN" }
@@ -144,7 +144,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -156,8 +156,8 @@ request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/hooks/HOOK_ID")! as URL,
@@ -186,12 +186,12 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>HOOK_ID</code></td>
+<td>`HOOK_ID`</td>
 <td>削除するフックのID。</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">スコープ</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn><code>update:hooks</code>を持つManagement APIのアクセストークン。詳細については、「<a href="/docs/api/management/v2/tokens">Management APIのアクセストークン</a>」をお読みください。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td><dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-mui-internal-clone-element="true" data-react-universal-portal="">スコープ</span><style data-emotion="css 1piulxx-MuiTooltip-popper" data-react-universal-portal="">.css-1piulxx-MuiTooltip-popper{z-index:1500;pointer-events:none;}.css-1piulxx-MuiTooltip-popper[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1piulxx-MuiTooltip-popper[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1piulxx-MuiTooltip-popper[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1piulxx-MuiTooltip-popper[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1piulxx-MuiTooltip-popper[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1piulxx-MuiTooltip-popper[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1piulxx-MuiTooltip-popper[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1piulxx-MuiTooltip-popper[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css 1yddtj5-MuiPopper-root-MuiTooltip-popper" data-react-universal-portal="">.css-1yddtj5-MuiPopper-root-MuiTooltip-popper{z-index:1500;pointer-events:none;}.css-1yddtj5-MuiPopper-root-MuiTooltip-popper[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1yddtj5-MuiPopper-root-MuiTooltip-popper[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1yddtj5-MuiPopper-root-MuiTooltip-popper[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1yddtj5-MuiPopper-root-MuiTooltip-popper[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1yddtj5-MuiPopper-root-MuiTooltip-popper[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1yddtj5-MuiPopper-root-MuiTooltip-popper[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1yddtj5-MuiPopper-root-MuiTooltip-popper[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1yddtj5-MuiPopper-root-MuiTooltip-popper[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>`update:hooks`を持つManagement APIのアクセストークン。詳細については、「<a href="/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>」をお読みください。</td>
 </tr>
 </tbody>
 </table>

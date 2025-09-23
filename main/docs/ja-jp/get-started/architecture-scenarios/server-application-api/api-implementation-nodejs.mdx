@@ -1,13 +1,13 @@
 ---
 title: "サーバーアプリ＋API：APIのためのNode.jsの実装"
 permalink: "api-implementation-nodejs"
+'description': "サーバークライアント＋APIアーキテクチャーシナリオ向けのAPIのNode.js実装"
 'og:title': "サーバーアプリ＋API：APIのためのNode.jsの実装"
 'og:description': "サーバークライアント＋APIアーキテクチャーシナリオ向けのAPIのNode.js実装"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "サーバーアプリ＋API：APIのためのNode.jsの実装"
 'twitter:description': "サーバークライアント＋APIアーキテクチャーシナリオ向けのAPIのNode.js実装"
 ---
-# サーバーアプリ＋API：APIのためのNode.jsの実装
 
 [サーバー＋APIアーキテクチャーシナリオ](https://auth0.com/docs/architecture-scenarios/application/server-api)の一環として、Node.jsでタイムシートAPIを実装する方法について説明します。実装したソリューションについての情報は、シナリオを参照してください。
 
@@ -25,7 +25,7 @@ API用のフォルダーを作成しそこに移動して`npm init`を実行し�
 
 サンプルの`package.json`は次のようになります。
 
-```json
+```json lines
 {
   "name": "timesheets-api",
   "version": "1.0.0",
@@ -58,7 +58,7 @@ API用のフォルダーを作成しそこに移動して`npm init`を実行し�
 
 これらの依存関係をインストールするには、次を実行します。
 
-```
+```bash lines
 npm install express express-jwt jwks-rsa body-parser --save
 ```
 
@@ -73,7 +73,7 @@ APIディレクトリに移動し、`server.js`ファイルを作成します。
 
 実装例を以下に示します。
 
-```javascript
+```javascript lines
 // set dependencies
 const express = require('express');
 const app = express();
@@ -115,7 +115,7 @@ app.listen(8080);
 
 これはまた、タイムシートエントリーをローカルデータベースまたは、希望する他のストレージメカニズムに保存するロジックを実装する良い機会でもあります。以下はサンプル実装を示します（簡潔にするために一部のコードは省略しています)。
 
-```javascript
+```javascript lines
 // set dependencies - code omitted
 
 // enable the use of request body parsing middleware - code omitted
@@ -162,13 +162,13 @@ app.post('/timesheets/upload', checkJwt, function(req, res){
 
 そのためには、`express-jwt-authz` Node.jsパッケージを利用するので、それをプロジェクトに追加します。
 
-```
+```bash lines
 npm install express-jwt-authz --save
 ```
 
 ここで`jwtAuthz (...)`への呼び出しをミドルウェアに追加して、特定のエンドポイントを実行するために、特定のスコープがJWTに含まれていることを確認します。以下はサンプル実装を示します（簡潔にするために一部のコードは省略しています)。
 
-```javascript
+```javascript lines
 // set dependencies - some code omitted
 const jwtAuthz = require('express-jwt-authz');
 

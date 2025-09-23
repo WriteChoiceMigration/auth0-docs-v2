@@ -1,13 +1,13 @@
 ---
 title: "AD/LDAPコネクターのテスト環境をセットアップする"
 permalink: "ad-ldap-connector-test-environment"
+'description': "Active Directory Domain Controllerを作成してテストする方法について説明します。"
 'og:title': "AD/LDAPコネクターのテスト環境をセットアップする"
 'og:description': "Active Directory Domain Controllerを作成してテストする方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "AD/LDAPコネクターのテスト環境をセットアップする"
 'twitter:description': "Active Directory Domain Controllerを作成してテストする方法について説明します。"
 ---
-# AD/LDAPコネクターのテスト環境をセットアップする
 
 クラウドにデプロイしたVM上にAD Domain Controllerを最小限にインストールして、テスト環境をセットアップすることができます。VMは任意のクラウドプラットフォーム上で実行することができます。この例では、Microsoft Azure上にセットアップする方法を説明します。
 
@@ -20,7 +20,7 @@ permalink: "ad-ldap-connector-test-environment"
 7. **SafeModeAdministratorPassword**が求められたら、VMの作成時に使用した管理者パスワードを入力します。Enterキーを押して続行します。昇格スクリプトが実行されて、VMが自動的に再起動します。
 8. テストのグループとユーザーを追加します。Remote Desktopクライアントを使ってVMにログインし、PowerShellコマンドプロンプトを開きます。以下のスクリプトを実行します。
 
-   ```
+   ``` lines
    > New-ADGroup -Name "Accounting" -GroupScope "DomainLocal"
        > New-ADGroup -Name "IT" -GroupScope "DomainLocal"
        
@@ -61,7 +61,7 @@ Auth0アカウントを使用してすべてが動作していることを確実
 5. **［Enterprise（エンタープライズ）］**で、「`auth0-test-ad`」という名前の**Active Directory / LDAP**接続を有効にします。
 6. ブラウザーで以下のリンクを開いて、認証フローをテストします。
 
-   ```
+   ```html lines
    https://{yourDomain}/authorize?response_type=token&scope=openid%20profile&client_id={yourClientId}&redirect_uri=http://jwt.io&connection=auth0-test-ad
    ```
 

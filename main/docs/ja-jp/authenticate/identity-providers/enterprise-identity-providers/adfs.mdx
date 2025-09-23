@@ -1,13 +1,13 @@
 ---
 title: "アプリをADFSに接続する"
 permalink: "adfs"
+'description': "エンタープライズ接続を使って、アプリケーションをADFS（Active Directory Federation Services）に接続する方法について説明します。"
 'og:title': "アプリをADFSに接続する"
 'og:description': "エンタープライズ接続を使って、アプリケーションをADFS（Active Directory Federation Services）に接続する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "アプリをADFSに接続する"
 'twitter:description': "エンタープライズ接続を使って、アプリケーションをADFS（Active Directory Federation Services）に接続する方法について説明します。"
 ---
-# アプリをADFSに接続する
 
 アプリケーションをMicrosoft ADFS（Active Directory Federation Services）に接続するには、ADFS管理者に以下の情報を提供する必要があります。
 
@@ -32,11 +32,11 @@ Windows PowerShellを使って、以下の2つのコマンドを実行します�
 
 </Note>
 
-```
+```powershell lines
 (new-object Net.WebClient -property @{Encoding = [Text.Encoding]::UTF8}).DownloadString("https://raw.github.com/auth0/adfs-auth0/master/adfs.ps1") | iex
 ```
 
-```
+```powershell lines
 AddRelyingParty "urn:auth0:{yourTenant}" "https://{yourDomain}/login/callback"
 ```
 
@@ -50,7 +50,7 @@ AddRelyingParty "urn:auth0:{yourTenant}" "https://{yourDomain}/login/callback"
 
 スクリプトは以下のように、ADFSにRelying Party Trustを作成します。
 
-```
+```powershell lines
 $realm = "urn:auth0:{yourTenant}";
 $webAppEndpoint = "https://{yourDomain}/login/callback";
 Add-PSSnapin Microsoft.Adfs.Powershell
@@ -60,7 +60,7 @@ $rp = Get-ADFSRelyingPartyTrust -Name $realm
 
 また、スクリプトは、email、UPN、given name、surnameなど、最も汎用される属性を出力するルールを作成します。
 
-```
+```powershell lines
 $rules = @'
 @RuleName = "Store: ActiveDirectory -> Mail (ldap attribute: mail), Name (ldap attribute: displayName), Name ID (ldap attribute: userPrincipalName), GivenName (ldap attribute: givenName), Surname (ldap attribute: sn)"
 c:[Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname", Issuer == "AD AUTHORITY"]
@@ -162,7 +162,7 @@ Set-ADFSRelyingPartyTrust –TargetName $realm –IssuanceAuthorizationRules $rS
 
 これで、実際に動作する接続が仕上がりました。次に、それを使用するアプリケーションを構成します。以下の段階的なクイックスタートを実行するか、提供されいているライブラリーやAPIを使用することができます。
 
-* [Quickstartで使用を開始する](/docs/quickstarts)
+* [Quickstartで使用を開始する](/docs/ja-jp/quickstarts)
 * [ロックログインフォームを使用してアプリケーションを構成する](/docs/ja-jp/libraries/lock)
 * [Auth0.jsライブラリーと独自のUIを使用してアプリケーションを構成する](/docs/ja-jp/libraries/auth0js)
-* [認証にAuth0 Authentication APIを使用する](/docs/api/authentication)
+* [認証にAuth0 Authentication APIを使用する](/docs/ja-jp/api/authentication)

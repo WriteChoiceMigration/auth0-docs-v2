@@ -1,13 +1,13 @@
 ---
 title: "メール変更スクリプトのテンプレート"
 permalink: "change-email"
+'description': "ユーザーのメールアドレスを変更するカスタムデータベースアクションスクリプトについて説明します。"
 'og:title': "メール変更スクリプトのテンプレート"
 'og:description': "ユーザーのメールアドレスを変更するカスタムデータベースアクションスクリプトについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "メール変更スクリプトのテンプレート"
 'twitter:description': "ユーザーのメールアドレスを変更するカスタムデータベースアクションスクリプトについて説明します。"
 ---
-# メール変更スクリプトのテンプレート
 
 メール変更スクリプトは、ユーザーのメールアドレスやその検証ステータスが変わった際に、定義済みの関数を実行します。この関数の名前を`changeEmail`にすることをお勧めします。
 
@@ -36,7 +36,7 @@ changeEmail関数は以下を行います。
 
 `changeEmail`関数は、4つのパラメーターを受け取り、`コールバック`関数を返します。
 
-```
+```javascript lines
 changeEmail(email, newEmail, verified, callback): function
 ```
 
@@ -49,22 +49,22 @@ changeEmail(email, newEmail, verified, callback): function
 </thead>
 <tbody>
 <tr>
-<td><code>email</code></td>
+<td>`email`</td>
 <td>文字列</td>
 <td>ユーザーの現在のメールアドレス。</td>
 </tr>
 <tr>
-<td><code>newEmail</code></td>
+<td>`newEmail`</td>
 <td>文字列</td>
 <td>外部データベースに設定するユーザーの新しいメールアドレスの値。</td>
 </tr>
 <tr>
-<td><code>verified</code></td>
+<td>`verified`</td>
 <td>ブール値</td>
 <td>新しいメールアドレスの確認状況。</td>
 </tr>
 <tr>
-<td><code>callback</code></td>
+<td>`callback`</td>
 <td>関数</td>
 <td>エラーデータをパイプライン経由で渡すために使用。</td>
 </tr>
@@ -75,7 +75,7 @@ changeEmail(email, newEmail, verified, callback): function
 
 これは疑似JavaScriptを使った例で、どのようにすれば`changeEmail`関数を実装できるかがわかります。
 
-```javascript
+```javascript lines
 function (email, newEmail, verified, callback) {
   // Prepare the API call
   let options = {
@@ -109,7 +109,7 @@ function (email, newEmail, verified, callback) {
 
 ### 定義
 
-```
+```javascript lines
 callback(error, operationResult): function
 ```
 
@@ -123,13 +123,13 @@ callback(error, operationResult): function
 </thead>
 <tbody>
 <tr>
-<td><code>error</code></td>
+<td>`error`</td>
 <td>オブジェクト</td>
 <td>必須</td>
 <td>エラーデータを含む。</td>
 </tr>
 <tr>
-<td><code>operationResult</code></td>
+<td>`operationResult`</td>
 <td>ブール値</td>
 <td>任意</td>
 <td>メール変更操作の結果を示す。</td>
@@ -141,7 +141,7 @@ callback(error, operationResult): function
 
 メールアドレス変更操作が成功した場合、`callback`関数を返し、`error`パラメーターには`null`を、`operationResult`パラメーターには`true`を渡します。
 
-```
+```javascript lines
 return callback(null, true);
 ```
 
@@ -149,7 +149,7 @@ return callback(null, true);
 
 メールアドレス変更操作が失敗した場合、`callback`関数を返し、`error`パラメーターには`null`を、`operationResult`パラメーターには`false`を渡します。
 
-```
+```javascript lines
 return callback(null, false);
 ```
 
@@ -157,7 +157,7 @@ return callback(null, false);
 
 エラーが発生した場合は、`callback`関数を返し、`error`パラメーターに関連するエラー情報を渡します。
 
-```
+```javascript lines
 return callback(new Error("My custom error message."));
 ```
 

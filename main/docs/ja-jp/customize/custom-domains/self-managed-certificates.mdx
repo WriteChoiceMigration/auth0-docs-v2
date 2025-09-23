@@ -1,17 +1,17 @@
 ---
 title: "自己管理証明書を使ってカスタムドメインを構成する"
 permalink: "self-managed-certificates"
+'description': "カスタムドメインの構成方法を説明します。ここでは、TLS（SSL）証明書、SSLターミネーションを処理するためのリバースプロキシ、およびAuth0への転送要求がユーザーの責任範囲となります。"
 'og:title': "自己管理証明書を使ってカスタムドメインを構成する"
 'og:description': "カスタムドメインの構成方法を説明します。ここでは、TLS（SSL）証明書、SSLターミネーションを処理するためのリバースプロキシ、およびAuth0への転送要求がユーザーの責任範囲となります。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "自己管理証明書を使ってカスタムドメインを構成する"
 'twitter:description': "カスタムドメインの構成方法を説明します。ここでは、TLS（SSL）証明書、SSLターミネーションを処理するためのリバースプロキシ、およびAuth0への転送要求がユーザーの責任範囲となります。"
 ---
-# 自己管理証明書を使ってカスタムドメインを構成する
 
 <Note>
 
-カスタムドメインで証明書を管理するには、エンタープライズサブスクリプションが必要です。詳細については、「[Auth0の価格設定](https://auth0.com/pricing/)」と「[ログイン](/docs/authenticate/login)」をお読みください。
+カスタムドメインで証明書を管理するには、エンタープライズサブスクリプションが必要です。詳細については、「[Auth0の価格設定](https://auth0.com/pricing/)」と「[ログイン](/docs/ja-jp/authenticate/login)」をお読みください。
 
 </Note>
 
@@ -41,7 +41,7 @@ Auth0でドメインを使用するには、先にドメインを所有してい
 
 1. [［Dashboard］>［Branding（ブランディング）］>［Custom Domains（カスタムドメイン）］](https://manage.auth0.com/#/branding/custom_domains)の順に移動します。
 
-   <Frame>![Auth0 - ブランディング - カスタムドメイン - 自己管理証明書 - ドメインを検証する](//images.ctfassets.net/cdy7uua7fh8z/4XhEmQwKfoqydOldfHnnud/7e7dfc2780545fc457592c7c3728da31/Custom_Domains_-_Self_-_Japanese.png)</Frame>
+   <Frame>![Auth0 - ブランディング - カスタムドメイン - 自己管理証明書 - ドメインを検証する](/images/ja-jp/cdy7uua7fh8z/4XhEmQwKfoqydOldfHnnud/7e7dfc2780545fc457592c7c3728da31/Custom_Domains_-_Self_-_Japanese.png)</Frame>
 
 2. TXT検証情報をドメインのDNSレコードに追加します。これらの手順は、お使いのドメインホストプロバイダーに応じて異なる場合があります。
 
@@ -123,7 +123,7 @@ Auth0でドメインを使用するには、先にドメインを所有してい
 </tr>
 <tr>
 <td>オリジンプロトコルポリシー</td>
-<td><code>HTTPS Only</code>に設定します。</td>
+<td>`HTTPS Only`に設定します。</td>
 </tr>
 <tr>
 <td>代替ドメイン名（CNAMEs）</td>
@@ -143,7 +143,7 @@ Auth0でドメインを使用するには、先にドメインを所有してい
 <tbody>
 <tr>
 <td>Header Name（ヘッダー名）</td>
-<td><code>cname-api-key</code>に設定します。</td>
+<td>`cname-api-key`に設定します。</td>
 </tr>
 <tr>
 <td>Value（値）</td>
@@ -163,7 +163,7 @@ Auth0でドメインを使用するには、先にドメインを所有してい
 <tbody>
 <tr>
 <td>Origin hostname（オリジンホスト名）</td>
-<td><code>{yourTenant}-&lt;CUSTOM_DOMAIN_ID&gt;.edge.tenants.us.auth0.com</code>を入力します。<code>&lt;CUSTOM_DOMAIN_ID&gt;</code>を、新しいカスタムドメインをセットアップしたときにAuth0から受け取ったオリジンドメイン名（カスタムドメインID）の値に置き換えます。テナントがUS地域内でない場合は、以下の１つを使用します。<ul><li>EU： <code>{yourTenant}-&lt;CUSTOM_DOMAIN_ID&gt;.edge.tenants.eu.auth0.com</code></li><li>AU: <code>{yourTenant}-&lt;CUSTOM_DOMAIN_ID&gt;.edge.tenants.au.auth0.com</code></li><li>JP：<code>{yourTenant}-&lt;CUSTOM_DOMAIN_ID&gt;.edge.tenants.jp.auth0.com</code></li></ul>たとえば、CUSTOM_DOMAIN_IDが以下の場合：<br/><br/> <code>cd_TXIdNgQ07HrAFVmz</code> <br/><br/>USのテナントについては、オリジンホスト名は以下にすべきです：<br/><br/><code>US: {yourTenant}-cd-txIdngq07hrafvmz.edge.tenants.us.auth0.com</code></td>
+<td>`{yourTenant}-&lt;CUSTOM_DOMAIN_ID&gt;.edge.tenants.us.auth0.com`を入力します。`&lt;CUSTOM_DOMAIN_ID&gt;`を、新しいカスタムドメインをセットアップしたときにAuth0から受け取ったオリジンドメイン名（カスタムドメインID）の値に置き換えます。テナントがUS地域内でない場合は、以下の１つを使用します。<ul><li>EU： `{yourTenant}-&lt;CUSTOM_DOMAIN_ID&gt;.edge.tenants.eu.auth0.com`</li><li>AU: `{yourTenant}-&lt;CUSTOM_DOMAIN_ID&gt;.edge.tenants.au.auth0.com`</li><li>JP：`{yourTenant}-&lt;CUSTOM_DOMAIN_ID&gt;.edge.tenants.jp.auth0.com`</li></ul>たとえば、CUSTOM_DOMAIN_IDが以下の場合：<br/><br/> `cd_TXIdNgQ07HrAFVmz` <br/><br/>USのテナントについては、オリジンホスト名は以下にすべきです：<br/><br/>`US: {yourTenant}-cd-txIdngq07hrafvmz.edge.tenants.us.auth0.com`</td>
 </tr>
 <tr>
 <td>Host header（ホストヘッダー）</td>
@@ -197,7 +197,7 @@ Auth0でドメインを使用するには、先にドメインを所有してい
 </tr>
 <tr>
 <td>［Allow List Headers（許可リストヘッダー）］</td>
-<td>次のヘッダーを使用できます：<code>User-Agent</code>、<code>Origin</code>、<code>Referer</code>、<code>Authorization</code>、<code>Accept</code>、<code>Accept-Language</code></td>
+<td>次のヘッダーを使用できます：`User-Agent`、`Origin`、`Referer`、`Authorization`、`Accept`、`Accept-Language`</td>
 </tr>
 <tr>
 <td>［Forward Cookies（クッキーの転送）］</td>

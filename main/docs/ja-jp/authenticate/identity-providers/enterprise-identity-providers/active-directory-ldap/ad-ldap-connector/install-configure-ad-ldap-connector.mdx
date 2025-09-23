@@ -1,13 +1,13 @@
 ---
 title: "AD/LDAPコネクターのインストールと構成"
 permalink: "install-configure-ad-ldap-connector"
+'description': "AD/LDAPコネクターのインストール方法と構成方法について説明します。"
 'og:title': "AD/LDAPコネクターのインストールと構成"
 'og:description': "AD/LDAPコネクターのインストール方法と構成方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "AD/LDAPコネクターのインストールと構成"
 'twitter:description': "AD/LDAPコネクターのインストール方法と構成方法について説明します。"
 ---
-# AD/LDAPコネクターのインストールと構成
 
 ## 前提条件
 
@@ -31,13 +31,13 @@ permalink: "install-configure-ad-ldap-connector"
 
 **AD/LDAPコネクター**がWindowsサービスとしてインストールされます。
 
-<Frame>![AD/LDAP Connector Services](//images.ctfassets.net/cdy7uua7fh8z/MPMfLmJsXoPAzpPQhGAv5/25fb39ac7cef7a125110b8fa9f2dff01/adldap-connector-services.png)</Frame>
+<Frame>![AD/LDAP Connector Services](/images/ja-jp/cdy7uua7fh8z/MPMfLmJsXoPAzpPQhGAv5/25fb39ac7cef7a125110b8fa9f2dff01/adldap-connector-services.png)</Frame>
 
 ### Auth0へのリンク
 
 インストールが完了すると、ブラウザーにlocalhostを指す画面が表示されます。
 
-<Frame>![AD/LDAP Connector Admin Ticket](//images.ctfassets.net/cdy7uua7fh8z/3biSuxJYQ4swMGJkOZtC3R/cab77cb763ad3b9ff47710bc406c527b/adldap-connector-admin-ticket.png)</Frame>
+<Frame>![AD/LDAP Connector Admin Ticket](/images/ja-jp/cdy7uua7fh8z/3biSuxJYQ4swMGJkOZtC3R/cab77cb763ad3b9ff47710bc406c527b/adldap-connector-admin-ticket.png)</Frame>
 
 接続のプロビジョニングを行った際に提供された**チケットのURL**を入力します。**チケットのURL**は、Auth0でこのコネクターを一意に識別します。コネクターはこれを使用してAuth0サーバーと通信し、自動的に構成を完了します。
 
@@ -45,7 +45,7 @@ permalink: "install-configure-ad-ldap-connector"
 
 LDAPの設定を入力します。
 
-<Frame>![adldap-connector-admin-settings](//images.ctfassets.net/cdy7uua7fh8z/2mHaknek0qyBxGmsanb30L/600b0259ed6db3fe9c526aa9f57a76bd/adldap-connector-admin-settings.png)</Frame>
+<Frame>![adldap-connector-admin-settings](/images/ja-jp/cdy7uua7fh8z/2mHaknek0qyBxGmsanb30L/600b0259ed6db3fe9c526aa9f57a76bd/adldap-connector-admin-settings.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -56,15 +56,15 @@ LDAPの設定を入力します。
 <tbody>
 <tr>
 <td><strong>LDAP Connection String（LDAP接続文字列）</strong></td>
-<td>たとえば、 <code>ldap://ldap.internal.contoso.com</code>です。これは、プロトコル + LDAPサーバーのドメイン名またはIPアドレスです。LDAPサーバーは、Active Directoryがインストールされたローカルのドメインコントローラーです。プロトコルは、<code>ldap</code>または<code>ldaps</code>です。<code>ldaps</code>を使用する必要がある場合は、現在のサーバーで証明書が有効なことを確認してください。</td>
+<td>たとえば、 `ldap://ldap.internal.contoso.com`です。これは、プロトコル + LDAPサーバーのドメイン名またはIPアドレスです。LDAPサーバーは、Active Directoryがインストールされたローカルのドメインコントローラーです。プロトコルは、`ldap`または`ldaps`です。`ldaps`を使用する必要がある場合は、現在のサーバーで証明書が有効なことを確認してください。</td>
 </tr>
 <tr>
 <td><strong>Base DN（ベースDN）</strong></td>
-<td>たとえば、<code>dc=contoso,dc=com</code>です。これは、コネクターが実行するクエリすべてに対するベースコンテナーです。</td>
+<td>たとえば、`dc=contoso,dc=com`です。これは、コネクターが実行するクエリすべてに対するベースコンテナーです。</td>
 </tr>
 <tr>
 <td><strong>Username（ユーザー名）</strong></td>
-<td>たとえば、<code>cn=svcauth0,dc=services,dc=contoso,dc=com</code>です。クエリを実行するためのユーザーの完全な識別名です。</td>
+<td>たとえば、`cn=svcauth0,dc=services,dc=contoso,dc=com`です。クエリを実行するためのユーザーの完全な識別名です。</td>
 </tr>
 <tr>
 <td><strong>Password（パスワード）</strong></td>
@@ -75,7 +75,7 @@ LDAPの設定を入力します。
 
 上記の情報を送信すると、コネクターは入力された情報を検証するために、一連のテストを実行します。結果はコンソール画面の**［Configuration Log（構成ログ）］**に表示されます。
 
-<Frame>![adldap-connector-admin-settings-ok](//images.ctfassets.net/cdy7uua7fh8z/7kezId8mhvyYDbuovvi9FM/c2f3b2188fdfebc460458daf7247c124/adldap-connector-admin-settings-ok.png)</Frame>
+<Frame>![adldap-connector-admin-settings-ok](/images/ja-jp/cdy7uua7fh8z/7kezId8mhvyYDbuovvi9FM/c2f3b2188fdfebc460458daf7247c124/adldap-connector-admin-settings-ok.png)</Frame>
 
 すべてのテストが緑（合格）であることを確認してください。
 
@@ -117,7 +117,7 @@ LDAPの設定を入力します。
    **Curlの例：**
 2. パッケージを展開し、依存関係ファイルをインストールします。
 
-   ```
+   ``` lines
    mkdir /opt/auth0-adldap
    tar -xzf /tmp/adldap.tar.gz -C /opt/auth0-adldap --strip-components=1
    cd /opt/auth0-adldap
@@ -131,7 +131,7 @@ LDAPの設定を入力します。
    `node server.js`チケット番号の入力を求めるメッセージが表示されたら、Auth0 Management Dashboardの**［Setup AD/LDAP connector（AD/LDAPコネクターの設定）］**画面の**［Settings（設定）］**タブからのチケットの完全なURLを入力します。
 4. LDAP接続および認証の詳細を使用して、`config.json`構成ファイルを編集するよう求められます。
 
-   ```
+   ``` lines
    "LDAP_URL": "ldap://{yourLdapServerFqdn}",
        "LDAP_BASE": "dc={yourDomain},dc=com",
        "LDAP_BIND_USER":"{yourLdapUser}",
@@ -144,7 +144,7 @@ LDAPの設定を入力します。
 5. `node server.js`をもう一度実行して、コネクターを起動します。この時点で、`config.json`の`LDAP_BIND_PASSWORD`の行が`LDAP_BIND_CREDENTIALS`に変わります。
 6. コネクターが実行されると、コネクターをデーモン化する必要があります（まだツールを選んでいない場合は、[upstart](http://upstart.ubuntu.com/)や[systemd](https://www.freedesktop.org/wiki/Software/systemd/)を検討することもできます）。たとえば、Ubuntu Xenialでsystemdを使用する場合、`/lib/systemd/system/auth0-adldap.service`ファイルには以下の内容が含まれる可能性があります。
 
-   ```json
+   ```json lines
    [Unit]
    Description=Auth0 AD LDAP Agent
    After=network.target

@@ -1,13 +1,13 @@
 ---
 title: "Rich Authorization Requests（RAR）を使った認可コードフロー"
 permalink: "authorization-code-flow-with-rar"
+'description': "認可コードフローにRich Authorization Requests（RAR）を使用する方法について説明します。"
 'og:title': "Rich Authorization Requests（RAR）を使った認可コードフロー"
 'og:description': "認可コードフローにRich Authorization Requests（RAR）を使用する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Rich Authorization Requests（RAR）を使った認可コードフロー"
 'twitter:description': "認可コードフローにRich Authorization Requests（RAR）を使用する方法について説明します。"
 ---
-# Rich Authorization Requests（RAR）を使った認可コードフロー
 
 <Note>
 
@@ -27,7 +27,7 @@ RARを使用すると、クライアントは`authorization_details`パラメー
 
 API用に[configure RAR](/docs/ja-jp/get-started/apis/configure-rich-authorization-requests)（RARを構成）した後、`/par`エンドポイントに渡される要求に`authorization_details`パラメーターを追加できます。パラメーターはオブジェクトの配列です。各オブジェクトにはtypeフィールドが必要ですが、型は配列内で一意である必要はありません。認可コードフローを使用した例を次に示します。
 
-```bash
+```bash lines
 curl --location 'https://$tenant/oauth/par' \
 --request POST \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -49,7 +49,7 @@ curl --location 'https://$tenant/oauth/par' \
 
 次のコードサンプルに示すように、`/oauth/token`エンドポイントで認可コードを交換すると、次のようになります。
 
-```
+```bash lines
 POST https://$tenant/oauth/token
 Content-Type: application/x-www-form-urlencoded
 
@@ -58,7 +58,7 @@ grant_type=authorization_code&client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET
 
 アクセストークンと`authorization_details`配列を含む応答を受け取ります。
 
-```json
+```json lines
 {
   "access_token": "ey...ZQ",
   "expires_in": 86400,
@@ -80,7 +80,7 @@ grant_type=authorization_code&client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET
 
 要求されたオーディエンスが[［JWE access tokens（JWEアクセストークン）］](/docs/ja-jp/secure/tokens/json-web-tokens)を使用するように構成されたAPIである場合、`type`以外のすべてのフィールドは、`/oauth/token`エンドポイントからの応答の`authorization_details`要素から削除されます。アクセストークンの要求は影響を受けません。
 
-```json
+```json lines
 {
   "iss": "https://my_tenant.auth0.com/",
   "sub": "auth0|me",

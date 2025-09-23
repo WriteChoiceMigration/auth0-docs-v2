@@ -1,13 +1,13 @@
 ---
 title: "SAML IDプロバイダーの構成設定"
 permalink: "saml-identity-provider-configuration-settings"
+'description': "SAML IDプロバイダーの構成設定について説明します。"
 'og:title': "SAML IDプロバイダーの構成設定"
 'og:description': "SAML IDプロバイダーの構成設定について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "SAML IDプロバイダーの構成設定"
 'twitter:description': "SAML IDプロバイダーの構成設定について説明します。"
 ---
-# SAML IDプロバイダーの構成設定
 
 ## 共通設定
 
@@ -15,7 +15,7 @@ permalink: "saml-identity-provider-configuration-settings"
 
 <Note>
 
-[カスタムドメイン](/docs/customize/custom-domains)を構成した場合は、Auth0ドメインではなく、カスタムドメインのCNAMEを使用しなければなりません。詳細については、「[機能にカスタムドメインの使用を構成する](https://auth0.com/docs/customize/custom-domains/configure-features-to-use-custom-domains#configure-saml-identity-providers)」をお読みください。
+[カスタムドメイン](/docs/ja-jp/customize/custom-domains)を構成した場合は、Auth0ドメインではなく、カスタムドメインのCNAMEを使用しなければなりません。詳細については、「[機能にカスタムドメインの使用を構成する](https://auth0.com/docs/customize/custom-domains/configure-features-to-use-custom-domains#configure-saml-identity-providers)」をお読みください。
 
 </Note>
 
@@ -23,13 +23,13 @@ permalink: "saml-identity-provider-configuration-settings"
 
 IdP起点<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SSO</Tooltip>を使用する場合は、必ずポストバックURLに接続パラメーターを含めてください。
 
-```
+``` lines
 https://{yourDomain}/login/callback?connection={yourConnectionName}
 ```
 
 [Organizations](https://auth0.com/docs/manage-users/organizations)機能を使用している場合は、必要に応じて、目的の組織の組織IDを含む、次の組織パラメーターを含めることもできます。
 
-```
+``` lines
 https://{yourDomain}/login/callback?connection={yourConnectionName}&organization={yourCustomersOrganizationId}
 ```
 
@@ -43,28 +43,28 @@ https://{yourDomain}/login/callback?connection={yourConnectionName}&organization
 
 サービスプロバイダーのID：
 
-```
+``` lines
 urn:auth0:{yourTenant}:{yourConnectionName}
 ```
 
-`connection.options.entityId`プロパティを使ってカスタムエンティティIDを作成できます。.詳細については、「[カスタムエンティティIDを指定する](/docs/connections/enterprise/saml#specify-a-custom-entity-id)」をお読みください。
+`connection.options.entityId`プロパティを使ってカスタムエンティティIDを作成できます。.詳細については、「[カスタムエンティティIDを指定する](/docs/ja-jp/connections/enterprise/saml#specify-a-custom-entity-id)」をお読みください。
 
 カスタムエンティティIDは接続取得エンドポイントを用いて取得することができます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D' \
 --header 'authorization: Bearer {yourAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -81,14 +81,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D")
 .header("authorization", "Bearer {yourAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -100,8 +100,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D"]
@@ -122,7 +122,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D",
@@ -144,8 +144,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourAccessToken}" }
@@ -155,7 +155,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -167,8 +167,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D")! as URL,
@@ -197,22 +197,22 @@ dataTask.resume()
 
 <table class="table"><thead>
 <tr>
-<th><code>connection.options.protocolBinding</code>の値</th>
+<th>`connection.options.protocolBinding`の値</th>
 <th>SAML要求のバインディング値</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>空の値（""）または存在しない</td>
-<td><code>HTTP-Redirect</code></td>
+<td>`HTTP-Redirect`</td>
 </tr>
 <tr>
-<td><code>urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect</code></td>
-<td><code>HTTP-Redirect</code></td>
+<td>`urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect`</td>
+<td>`HTTP-Redirect`</td>
 </tr>
 <tr>
-<td><code>urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST</code></td>
-<td><code>HTTP-POST</code></td>
+<td>`urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`</td>
+<td>`HTTP-POST`</td>
 </tr>
 </tbody>
 </table>
@@ -235,7 +235,7 @@ SAMLアサーションとSAML応答は、個別または同時に署名するこ
 
 これは、SAML IDプロバイダーがログアウトの要求と応答を送信する場所です。
 
-```
+``` lines
 https://{yourDomain}/logout
 ```
 
@@ -261,7 +261,7 @@ IdP起点のシングルサインオンについての詳細は、「[IdP起点�
 
 SAML IDプロバイダーによっては、すべての必要な情報を含めたメタデータを直接インポートできるものもあります。Auth0では、接続のメタデータは以下からアクセスできます。
 
-```
+``` lines
 https://{yourDomain}/samlp/metadata?connection={yourConnectionName}
 ```
 
@@ -269,7 +269,7 @@ https://{yourDomain}/samlp/metadata?connection={yourConnectionName}
 
 フェデレーションIdPにある組織のACS URLを使用して、組織ログインフローを開始します。
 
-```
+``` lines
 https://{yourDomain}/samlp?connection={yourConnectionName}&organization=${yourOrgID}
 ```
 

@@ -1,13 +1,13 @@
 ---
 title: "インタースティシャルCAPTCHA画面クラス"
 permalink: "interstitial-captcha-screen-class"
+'description': "ACULのインタースティシャルCAPTCHA画面クラスについて説明します"
 'og:title': "インタースティシャルCAPTCHA画面クラス"
 'og:description': "ACULのインタースティシャルCAPTCHA画面クラスについて説明します"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "インタースティシャルCAPTCHA画面クラス"
 'twitter:description': "ACULのインタースティシャルCAPTCHA画面クラスについて説明します"
 ---
-# インタースティシャルCAPTCHA画面クラス
 
 インタースティシャルCAPTCHA画面クラスは[Identifier First認証](/docs/ja-jp/authenticate/login/auth0-universal-login/identifier-first)フローの一部で、テナント設定を基に表示されます。詳細については、「[ボット検知](/docs/ja-jp/secure/attack-protection/bot-detection)」を参照してください。
 
@@ -17,7 +17,7 @@ permalink: "interstitial-captcha-screen-class"
 
 インタースティシャルCAPTCHA画面クラスのインポートとインスタンス化
 
-```
+```javascript lines
 import InterstitialCaptcha from "@auth0/auth0-acul-js/interstitial-captcha";
 const interstitialCaptcha = new InterstitialCaptcha();
 
@@ -36,7 +36,7 @@ interstitialCaptcha.screenData();
 
 <Tabs><Tab title="branding">
 
-```
+```javascript lines
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -71,7 +71,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```
+```javascript lines
 interface client {
   description: null | string;
   id: string;
@@ -83,7 +83,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```
+```javascript lines
 interface organization {
   branding: null | {
     colors?: {
@@ -102,7 +102,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```
+```javascript lines
 interface prompt{
   name: string;
 }
@@ -110,7 +110,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```
+```javascript lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -142,7 +142,7 @@ interface PhonePrefix {
 
 </Tab><Tab title="tenant">
 
-```
+```javascript lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -153,7 +153,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```
+```javascript lines
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -186,7 +186,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```
+```javascript lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -206,7 +206,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```
+```javascript lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -242,7 +242,7 @@ ShortEntity<Key>: {
 
 このメソッドはCAPTCHA返答を検証し、ユーザーを次のステップに誘導します。
 
-```
+```javascript lines
 interstitialCaptchaManager.submitCaptcha({
   captcha: <CaptchaCodeResponse>
 });
@@ -258,13 +258,13 @@ interstitialCaptchaManager.submitCaptcha({
 </thead>
 <tbody>
 <tr>
-<td><code>captcha</code></td>
+<td>`captcha`</td>
 <td>文字列</td>
 <td>必須</td>
 <td>captchaコードまたはcaptchaプロバイダーからの応答。</td>
 </tr>
 <tr>
-<td><code>[key: string]</code></td>
+<td>`[key: string]`</td>
 <td>文字列 | 番号 | ブール値 | 未定義</td>
 <td>任意</td>
 <td>ユーザーから収集した追加のデータ。</td>

@@ -1,21 +1,21 @@
 ---
 title: "ルールを使用してメタデータを管理"
 permalink: "manage-metadata-rules"
+'description': "ルールを使用して、アプリメタデータ、ユーザーメタデータ、クライアントメタデータを管理する方法について説明します。"
 'og:title': "ルールを使用してメタデータを管理"
 'og:description': "ルールを使用して、アプリメタデータ、ユーザーメタデータ、クライアントメタデータを管理する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ルールを使用してメタデータを管理"
 'twitter:description': "ルールを使用して、アプリメタデータ、ユーザーメタデータ、クライアントメタデータを管理する方法について説明します。"
 ---
-# ルールを使用してメタデータを管理
 
 <Warning>
 
 RulesとHooksのサポート終了（EOL）日は**2026年11月18日**であり、**2023年10月16**日の時点で作成された新しいテナントは使用できなくなります。Hooksが有効な既存のテナントは、サポート終了までHooksを利用できます。
 
-今後はActionsに移行して、Auth0の機能を拡張することを強くお勧めします。Actionsを使用すると、豊富な情報やインラインドキュメント、パブリック`npm`パッケージにアクセスして、外部統合を使って全体的な拡張エクスペリエンスを強化することができます。Actionsの詳細については、「[Auth0 Actionsの仕組みを理解する](/docs/customize/actions/actions-overview)」をお読みください。
+今後はActionsに移行して、Auth0の機能を拡張することを強くお勧めします。Actionsを使用すると、豊富な情報やインラインドキュメント、パブリック`npm`パッケージにアクセスして、外部統合を使って全体的な拡張エクスペリエンスを強化することができます。Actionsの詳細については、「[Auth0 Actionsの仕組みを理解する](/docs/ja-jp/customize/actions/actions-overview)」をお読みください。
 
-当社では、移行の参考資料として、[RulesからActionsへの移行](/docs/customize/actions/migrate/migrate-from-rules-to-actions)と[HooksからActionsへの移行](/docs/customize/actions/migrate/migrate-from-hooks-to-actions)に関するガイドを提供しています。また、専用の「[Actionsへの移行](https://auth0.com/extensibility/movetoactions)」ページでは、機能の比較や[Actionsのデモ](https://www.youtube.com/watch?v=UesFSY1klrI)、その他のリソースを掲載して、円滑な移行をサポートしています。
+当社では、移行の参考資料として、[RulesからActionsへの移行](/docs/ja-jp/customize/actions/migrate/migrate-from-rules-to-actions)と[HooksからActionsへの移行](/docs/ja-jp/customize/actions/migrate/migrate-from-hooks-to-actions)に関するガイドを提供しています。また、専用の「[Actionsへの移行](https://auth0.com/extensibility/movetoactions)」ページでは、機能の比較や[Actionsのデモ](https://www.youtube.com/watch?v=UesFSY1klrI)、その他のリソースを掲載して、円滑な移行をサポートしています。
 
 RulesとHooksの廃止の詳細については、当社のブログ記事「[RulesとHooksの提供終了について](https://auth0.com/blog/preparing-for-rules-and-hooks-end-of-life/)」をお読みください。
 
@@ -23,7 +23,7 @@ RulesとHooksの廃止の詳細については、当社のブログ記事「[Rul
 
 [Auth0ルール](/docs/ja-jp/customize/rules)を使用して、メタデータの読み取り、更新、削除を行うことができます。以降のセクションでは、ユーザーとその情報が次のJSONスニペットで表されるこの例について説明します。
 
-```json
+```json lines
 {
   "user_id": "jdoe",
   "email": "john.doe@example.com",
@@ -49,11 +49,11 @@ RulesとHooksの廃止の詳細については、当社のブログ記事「[Rul
 
 特に設定を変更しない限り、Auth0以外のIDプロバイダー（Google、Facebook、Xなど）によって提供されるユーザープロファイル属性は、ユーザーがログインするたびにIDプロバイダーから更新されるため、直接編集することはできません。
 
-正規化ユーザープロファイルのルート属性である`name`、`nickname`、`given_name`、`family_name`、`picture`を編集可能にするには、[接続がAuth0と同期されるように構成](/docs/manage-users/user-accounts/user-profiles/configure-connection-sync-with-auth0)して、ユーザー属性がユーザープロファイルの作成時のみIDプロバイダーに更新されるようにしなければなりません。そうすれば、これらのルート属性を個別に、または一括インポートを通じて編集できるようになります。
+正規化ユーザープロファイルのルート属性である`name`、`nickname`、`given_name`、`family_name`、`picture`を編集可能にするには、[接続がAuth0と同期されるように構成](/docs/ja-jp/manage-users/user-accounts/user-profiles/configure-connection-sync-with-auth0)して、ユーザー属性がユーザープロファイルの作成時のみIDプロバイダーに更新されるようにしなければなりません。そうすれば、これらのルート属性を個別に、または一括インポートを通じて編集できるようになります。
 
 例として、電子メールアドレスが`jane.doe@example.com`のユーザーに対して次のメタデータが保存されているとします。
 
-```json
+```json lines
 {
     "email": "jane.doe@example.com",
     "user_metadata": {
@@ -65,9 +65,9 @@ RulesとHooksの廃止の詳細については、当社のブログ記事「[Rul
 }
 ```
 
-上記のメタデータの例を使用すると、次のように[Auth0ルール](/docs/ja-jp/customize/rules)または[Management API](/docs/users/guides/manage-user-metadata)の呼び出しでデータセットから特定の項目を参照できます。
+上記のメタデータの例を使用すると、次のように[Auth0ルール](/docs/ja-jp/customize/rules)または[Management API](/docs/ja-jp/users/guides/manage-user-metadata)の呼び出しでデータセットから特定の項目を参照できます。
 
-```
+```javascript lines
 console.log(user.email); // "jane.doe@example.com"
 console.log(user.user_metadata.hobby); // "surfing"
 console.log(user.app_metadata.plan); // "full"
@@ -81,7 +81,7 @@ console.log(user.app_metadata.plan); // "full"
 
 ユーザーのロールに基づいて決定を行うことができます。
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.app_metadata = user.app_metadata || {};
   if (user.app_metadata.roles.indexOf('writer')){
@@ -95,7 +95,7 @@ function(user, context, callback){
 
 色の好みなど、特定の設定に基づいて決定を下すことができます。
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.user_metadata = user.user_metadata || {};
   if (user.user_metadata.preferences.color === 'black'){
@@ -109,7 +109,7 @@ function(user, context, callback){
 
 アプリケーションメタデータ（`clientMetadata`）は、`コンテキスト`オブジェクトのオプションの最上位プロパティです。既存のアプリケーションには、このプロパティの値はありません。
 
-```javascript
+```javascript lines
 function(user, context, callback){
   context.clientMetadata = context.clientMetadata || {};
   if (context.clientMetadata.usersuppliedkey1 === 'black'){
@@ -131,7 +131,7 @@ function(user, context, callback){
 
 管理者ロールをユーザーに追加するには:
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.app_metadata = user.app_metadata || {};
   // update the app_metadata that will be part of the response
@@ -151,7 +151,7 @@ function(user, context, callback){
 
 これにより、ユーザープロファイルの詳細が次のJSON表記になります。
 
-```json
+```json lines
 {
   "user_id": "jdoe",
   "email": "john.doe@example.com",
@@ -170,7 +170,7 @@ function(user, context, callback){
 
 ユーザーの`fontSize`設定をユーザープロファイルに追加するには:
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.user_metadata = user.user_metadata || {};
   // update the user_metadata that will be part of the response
@@ -190,7 +190,7 @@ function(user, context, callback){
 
 これにより、ユーザープロファイルの詳細が次のJSON表記になります。
 
-```json
+```json lines
 {
   "user_id": "jdoe",
   "email": "john.doe@example.com",
@@ -210,7 +210,7 @@ function(user, context, callback){
 
 ルールの処理時間を短縮するには、同じルールで`app_metadata`と`user_metadata`の両方を更新します。
 
-```javascript
+```javascript lines
 function(user, context, callback){
 
   var q = require('q');
@@ -244,7 +244,7 @@ function(user, context, callback){
 
 これにより、ユーザープロファイルの詳細が次のJSON表記になります。
 
-```json
+```json lines
 {
   "user_id": "jdoe",
   "email": "john.doe@example.com",
@@ -270,7 +270,7 @@ function(user, context, callback){
 
 ユーザーのロールを削除するには、次のサンプルルールを使用します。
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.app_metadata = user.app_metadata || {};
   // update the app_metadata that will be part of the response
@@ -289,7 +289,7 @@ function(user, context, callback){
 
 これにより、ユーザープロファイルが次のJSON表記になります。
 
-```json
+```json lines
 {
   "user_id": "jdoe",
   "email": "john.doe@example.com",
@@ -306,7 +306,7 @@ function(user, context, callback){
 
 プロパティの単一の値を削除するには、その特定の値を削除します。たとえば、ユーザープロファイルから`ライター`ロールを削除するには:
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.app_metadata = user.app_metadata || {};
   user.app_metadata.roles = user.app_metadata.roles || [];
@@ -331,7 +331,7 @@ function(user, context, callback){
 
 これにより、ユーザープロファイルが次のJSON表記になります。
 
-```json
+```json lines
 {
   "user_id": "google-oauth2|1234",
   "email": "john.doe@gmail.com",
@@ -352,7 +352,7 @@ function(user, context, callback){
 
 ユーザーの色の設定を削除するには:
 
-```javascript
+```javascript lines
 function(user, context, callback){
   user.user_metadata = user.user_metadata || {};
   // update the user_metadata that will be part of the response
@@ -372,7 +372,7 @@ function(user, context, callback){
 
 これにより、ユーザープロファイルの詳細が次のJSON表記になります。
 
-```json
+```json lines
 {
   "user_id": "jdoe",
   "email": "john.doe@example.com",

@@ -1,13 +1,13 @@
 ---
 title: "メールテンプレートの説明"
 permalink: "email-template-descriptions"
+'description': "Auth0で使用されるメールテンプレートについて説明します。"
 'og:title': "メールテンプレートの説明"
 'og:description': "Auth0で使用されるメールテンプレートについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "メールテンプレートの説明"
 'twitter:description': "Auth0で使用されるメールテンプレートについて説明します。"
 ---
-# メールテンプレートの説明
 
 ## 確認メール
 
@@ -30,7 +30,7 @@ permalink: "email-template-descriptions"
 
 <Note>
 
-一部のエラーは、ユーザーをURLへリダイレクトする代わりに、[一般的なエラーページ](/docs/authenticate/login/auth0-universal-login/error-pages)へ送ります。
+一部のエラーは、ユーザーをURLへリダイレクトする代わりに、[一般的なエラーページ](/docs/ja-jp/authenticate/login/auth0-universal-login/error-pages)へ送ります。
 
 </Note>
 
@@ -71,7 +71,7 @@ permalink: "email-template-descriptions"
 すべてのメールテンプレートで利用できる共通変数のほかに、**User Invitation（ユーザー招待）**テンプレートでは以下の変数も利用することができます。
 
 * `url`：URLパスワードを変更するためにユーザーが選択します。これを**［Message（メッセージ）］**フィールドで使用し、次の例に示すように、ユーザーが従うことができるリンクを作成することができます。
-  `<a href="/docs/{{ url }}">Click here to change your password</a>`
+  `<a href="/docs/ja-jp/{{ url }}">Click here to change your password</a>`
 * ユーザーが[Organization（組織）](/docs/ja-jp/manage-users/organizations/organizations-overview)からログインした場合：
 
   + `organization.id`
@@ -98,7 +98,7 @@ permalink: "email-template-descriptions"
 
 <Note>
 
-一部のエラーは、ユーザーをURLへリダイレクトする代わりに、[一般的なエラーページ](/docs/authenticate/login/auth0-universal-login/error-pages)へ送ります。
+一部のエラーは、ユーザーをURLへリダイレクトする代わりに、[一般的なエラーページ](/docs/ja-jp/authenticate/login/auth0-universal-login/error-pages)へ送ります。
 
 </Note>
 
@@ -125,7 +125,7 @@ permalink: "email-template-descriptions"
 
 このテンプレートには、ユーザーが従う必要があるリンクを作成するのに使用する`url`変数もあります。例：
 
-`<a href="/docs/{{ url }}">Click here to unblock your account</a>`
+`<a href="/docs/ja-jp/{{ url }}">Click here to unblock your account</a>`
 
 ### ブロックされたアカウントメールテンプレートのリダイレクト先の結果
 
@@ -163,7 +163,7 @@ permalink: "email-template-descriptions"
 
 すべてのメールテンプレートで利用できる共通変数のほかに、`link`変数はこのメールタイプで利用することができ、以下の例に示すように、この操作のためのリンク構築に使用するURLが含まれています。
 
-`<a href="/docs/{{ link }}">Enroll your MFA device</a>`
+`<a href="/docs/ja-jp/{{ link }}">Enroll your MFA device</a>`
 
 他のメールテンプレートとは異なり、正しい変数名は`link`であり、`url`ではありません。また、このメールテンプレートタイプでは、`connection.name`変数を使用することはできません。
 
@@ -183,7 +183,7 @@ permalink: "email-template-descriptions"
 
 ユーザーがフェデレーションログインを通して招待を受け入れた場合、IDプロバイダーが返すメールアドレスは、招待の送信先メールアドレスと一致しなければなりません。メール検証は、後続のログイン時にIDプロバイダーが返した値でオーバライドされません。
 
-期限までにユーザーが招待を受け入れなかった場合は、招待に期限切れのマークが付き、いずれ[Auth0 Dashboard](/docs/get-started/auth0-overview/dashboard)から削除されます。
+期限までにユーザーが招待を受け入れなかった場合は、招待に期限切れのマークが付き、いずれ[Auth0 Dashboard](/docs/ja-jp/get-started/auth0-overview/dashboard)から削除されます。
 
 </Note>
 
@@ -236,7 +236,7 @@ permalink: "email-template-descriptions"
 
 デフォルトのテンプレートでは、上記の変数を使って、以下のような操作を行います。
 
-```
+```html lines
 <!-- Email change content -->
 {% if operation == 'change_email' %}
   <p>Your email address has been updated.</p>
@@ -244,7 +244,7 @@ permalink: "email-template-descriptions"
   <!-- Signup email content -->
   {% if send == 'link' or send == 'link_ios' or send == 'link_android' %}
     <p>Click and confirm that you want to sign in to {{ application.name }}. This link will expire in five minutes.</p>
-    <a href="/docs/{{ link }}">Sign in to {{ application.name }}</a>
+    <a href="/docs/ja-jp/{{ link }}">Sign in to {{ application.name }}</a>
     {% elsif send == 'code' %}
     <p>Your verification code is: <b>{{ code }}</b></p>
   {% endif %}

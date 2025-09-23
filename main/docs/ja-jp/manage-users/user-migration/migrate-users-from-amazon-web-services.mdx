@@ -1,13 +1,13 @@
 ---
 title: "Amazon Web Servicesからユーザーを移行する"
 permalink: "migrate-users-from-amazon-web-services"
+'description': "Amazon Web Servicesからユーザーを移行する方法について説明します。"
 'og:title': "Amazon Web Servicesからユーザーを移行する"
 'og:description': "Amazon Web Servicesからユーザーを移行する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Amazon Web Servicesからユーザーを移行する"
 'twitter:description': "Amazon Web Servicesからユーザーを移行する方法について説明します。"
 ---
-# Amazon Web Servicesからユーザーを移行する
 
 2023年4月の時点で、ユーザーはAmazon Web Services（AWS）からAuth0に一括して移行できません。Auth0では、**自動移行**（別称「**レイジーローディング**」）の使用をお勧めします。これを行うには、以下の手順に従います。
 
@@ -20,7 +20,7 @@ permalink: "migrate-users-from-amazon-web-services"
 
 ##### get-user.js
 
-```javascript
+```javascript lines
 /*
     Requires Auth0 Global Variables to be set - https://auth0.com/docs/rules/configure-global-variables-for-rules
     If testing locally (or not wanting to use Auth0 Global Variables):
@@ -68,7 +68,7 @@ cognito.adminGetUser({
 
 ##### login.js
 
-```javascript
+```javascript lines
 /*
     Read StackOverflow article about potential window issue: https://stackoverflow.com/questions/40219518/aws-cognito-unauthenticated-login-error-window-is-not-defined-js
 

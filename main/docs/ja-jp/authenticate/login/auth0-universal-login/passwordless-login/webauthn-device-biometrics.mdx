@@ -1,13 +1,13 @@
 ---
 title: "パスワードレス認証のための生体認証デバイスによるWebAuthnの構成"
 permalink: "webauthn-device-biometrics"
+'description': "パスワードレス認証のための生体認証デバイスによるWebAuthnの構成方法について説明します。"
 'og:title': "パスワードレス認証のための生体認証デバイスによるWebAuthnの構成"
 'og:description': "パスワードレス認証のための生体認証デバイスによるWebAuthnの構成方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "パスワードレス認証のための生体認証デバイスによるWebAuthnの構成"
 'twitter:description': "パスワードレス認証のための生体認証デバイスによるWebAuthnの構成方法について説明します。"
 ---
-# パスワードレス認証のための生体認証デバイスによるWebAuthnの構成
 
 ユーザーがパスワードの代わりに生体認証デバイスによる[WebAuthn](/docs/ja-jp/secure/multi-factor-authentication/fido-authentication-with-webauthn)を使用して認証できるように、ユニバーサルログインを構成できます。
 
@@ -15,7 +15,7 @@ permalink: "webauthn-device-biometrics"
 
 <Warning>
 
-この機能はAuth0データベース接続で使用しなければなりません。[［Auth0 Dashboard］ > ［Authentication（認証）］ > ［Database（データベース）］](https://manage.auth0.com/#/connections/database)に移動して、データベース接続を選択します。詳細については、「[データベース接続](/docs/authenticate/database-connections)」をお読みください。
+この機能はAuth0データベース接続で使用しなければなりません。[［Auth0 Dashboard］ > ［Authentication（認証）］ > ［Database（データベース）］](https://manage.auth0.com/#/connections/database)に移動して、データベース接続を選択します。詳細については、「[データベース接続](/docs/ja-jp/authenticate/database-connections)」をお読みください。
 
 </Warning>
 
@@ -31,7 +31,7 @@ WebAuthn生体認証デバイスでパスワードレスを有効にするには
 
 ユーザー名/メールとパスワードで認証し、[生体認証デバイスによるWebAuthnを使用できる](https://webauthn.me/browser-support)デバイスを持っているユーザーには、デバイスを登録するオプションが与えられます。
 
-<Frame>![Example of setting up a Face ID login for specific domain using WebAuthn](//images.ctfassets.net/cdy7uua7fh8z/1JfsIYEo3O7xmTAxLRwNSs/2f2ba478ff32b0aa86f4f01cd6c0cf3b/2023-01-31_16-34-09.png)</Frame>
+<Frame>![Example of setting up a Face ID login for specific domain using WebAuthn](/images/ja-jp/cdy7uua7fh8z/1JfsIYEo3O7xmTAxLRwNSs/2f2ba478ff32b0aa86f4f01cd6c0cf3b/2023-01-31_16-34-09.png)</Frame>
 
 この機能を有効にすると、［このデバイスで手早くログイン（Login Faster on This Device）］ダイアログボックスでユーザーにいくつかのオプションを提供します。ユーザーは、デバイスを登録するか、エンロールメントをスキップして、プロンプトが表示される回数を減らすことができます。
 
@@ -43,25 +43,25 @@ WebAuthn生体認証デバイスでパスワードレスを有効にするには
 </thead>
 <tbody>
 <tr>
-<td><code>Continue</code></td>
+<td>`Continue`</td>
 <td>ユーザーに生体認証の要素を登録するよう要求する</td>
 </tr>
 <tr>
-<td><code>Remind me later</code></td>
+<td>`Remind me later`</td>
 <td>登録をスキップし、2週間後に再登録するよう要求する</td>
 </tr>
 <tr>
-<td><code>Not on this device</code></td>
+<td>`Not on this device`</td>
 <td>1年間またはAuth0のクッキーがユーザーのブラウザーに保存されている間は登録するよう要求しない</td>
 </tr>
 </tbody>
 </table>
 
-<Frame>![Login - webauthn biometrics - log in faster on this device](//images.ctfassets.net/cdy7uua7fh8z/1w3jwsf0ihbTD0BNudRXN9/de2288b561a3f34397a92f1ad4072289/2025-01-27_12-28-44.png)</Frame>
+<Frame>![Login - webauthn biometrics - log in faster on this device](/images/ja-jp/cdy7uua7fh8z/1w3jwsf0ihbTD0BNudRXN9/de2288b561a3f34397a92f1ad4072289/2025-01-27_12-28-44.png)</Frame>
 
 顧客が自分のデバイスを登録することを決定した場合、次にそのデバイスから認証する際、デバイス生体認証またはパスワードのどちらを使うか選択できます。
 
-<Frame>![Example of using Fingerprint or Face Recognition to login to a domain](//images.ctfassets.net/cdy7uua7fh8z/4DkewyodXBQ3gncybz7KPI/873d6a3eafb644ee605daa209006d1b3/Docs_Login.png)</Frame>
+<Frame>![Example of using Fingerprint or Face Recognition to login to a domain](/images/ja-jp/cdy7uua7fh8z/4DkewyodXBQ3gncybz7KPI/873d6a3eafb644ee605daa209006d1b3/Docs_Login.png)</Frame>
 
 この機能は「プログレッシブ登録」と呼ばれ、開発者とユーザーの両方にとってWebAuthnベース認証への移行ができるだけ簡単になるように設計されています。
 
@@ -83,7 +83,7 @@ WebAuthn生体認証デバイスでパスワードレスを有効にするには
 * ユーザーがWebAuthn生体認証を唯一の認証方法として使用して認証する場合、IDトークンの`amr`値は`mfa`に設定されます。
 * 拡張性プラットフォームからMFAを有効にしたい場合、ユーザーの認証方法を考慮し、MFAのプロンプトを表示するかどうかを決定できます。以下のルールは、ユーザーが`webauthn-platform`認証方法で認証しなかった場合にのみMFAを実行します。
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   let authMethods = context.authentication.methods;
 
@@ -101,7 +101,7 @@ function (user, context, callback) {
 
 このログイン後のアクションでも効果は同じです。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   let authMethods = event.authentication.methods;
 
@@ -115,7 +115,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 ## デバイス認識
 
-Auth0はルールを使用して、デバイスが登録済みかどうかを判断し、ユーザーにエンロールメントを指示します。詳細については、「[MFAのためにデバイス生体認証を使ってWebAuthnを構成する](/docs/ja-jp/secure/multi-factor-authentication/fido-authentication-with-webauthn/configure-webauthn-device-biometrics-for-mfa)」の「[デバイス認識](/docs/secure/multi-factor-authentication/fido-authentication-with-webauthn/configure-webauthn-device-biometrics-for-mfa#device-recognition)」をご覧ください。
+Auth0はルールを使用して、デバイスが登録済みかどうかを判断し、ユーザーにエンロールメントを指示します。詳細については、「[MFAのためにデバイス生体認証を使ってWebAuthnを構成する](/docs/ja-jp/secure/multi-factor-authentication/fido-authentication-with-webauthn/configure-webauthn-device-biometrics-for-mfa)」の「[デバイス認識](/docs/ja-jp/secure/multi-factor-authentication/fido-authentication-with-webauthn/configure-webauthn-device-biometrics-for-mfa#device-recognition)」をご覧ください。
 
 ユーザー列挙攻撃を避けるため、Auth0は、ユーザーが既知のデバイスからログインする場合にのみ、ユーザーに第一要素として生体認証を指示します。それ以外の場合、パスワードを使用してログインする必要がある。
 

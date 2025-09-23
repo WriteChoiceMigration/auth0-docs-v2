@@ -1,13 +1,13 @@
 ---
 title: "Lock.swift：スタイルカスタマイズのオプション"
 permalink: "lock-swift-customization"
+'description': "Lock.Swiftのスタイルのスタイリングとカスタマイズのオプション"
 'og:title': "Lock.swift：スタイルカスタマイズのオプション"
 'og:description': "Lock.Swiftのスタイルのスタイリングとカスタマイズのオプション"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Lock.swift：スタイルカスタマイズのオプション"
 'twitter:description': "Lock.Swiftのスタイルのスタイリングとカスタマイズのオプション"
 ---
-# Lock.swift：スタイルカスタマイズのオプション
 
 以下に記載されているように、Lockのスタイルと外観を設定するオプションは数多くあります。また、[動作設定オプション](/docs/ja-jp/libraries/lock-swift/lock-swift-configuration-options)ページには、Lockの動作や機能を変更するオプションも多数用意されています。
 
@@ -15,7 +15,7 @@ permalink: "lock-swift-customization"
 
 `withStyle`を使用して、Lockの初期設定にスタイルカスタマイズのオプションを追加できます。
 
-```
+```swift lines
 Lock
   .classic()
   .withStyle {
@@ -32,7 +32,7 @@ Lock
 
 ぼかし効果スタイルが使用されます。`UIBlurEffectStyle`で定義されている任意の値を使用できます。
 
-```
+```swift lines
 .withStyle {
   $0.headerBlur = .extraLight
 }
@@ -42,7 +42,7 @@ Lock
 
 ヘッダーの背景に使用される色。デフォルトでは色はなく、ただのぼかしです。
 
-```
+```swift lines
 .withStyle {
   $0.headerColor = UIColor? = nil
 }
@@ -52,7 +52,7 @@ Lock
 
 ヘッダーのロゴ画像。推奨される最小解像度は200ピクセル（幅） x 200ピクセル（高さ）です。
 
-```
+```swift lines
 .withStyle {
   $0.logo = LazyImage(name: "company_logo")
 }
@@ -62,7 +62,7 @@ Lock
 
 ヘッダーの「閉じる」アイコンを変更できます。
 
-```
+```swift lines
 .withStyle {
   $0.headerCloseIcon = LazyImage(name: "ic_close")
 }
@@ -72,7 +72,7 @@ Lock
 
 ヘッダーの「戻る」アイコンを変更できます。
 
-```
+```swift lines
 .withStyle {
   $0.headerBackIcon = LazyImage(name: "ic_close")
 }
@@ -84,7 +84,7 @@ Lock
 
 ヘッダータイトルを非表示にして、ロゴのみを表示します。デフォルトでは、このオプションはfalseです。
 
-```
+```swift lines
 .withStyle {
   $0.hideTitle = false
 }
@@ -94,7 +94,7 @@ Lock
 
 ヘッダーに使用されるタイトルテキスト。
 
-```
+```swift lines
 .withStyle {
   $0.title = "Company LLC"
 }
@@ -104,7 +104,7 @@ Lock
 
 ヘッダータイトルに使用される色。
 
-```
+```swift lines
 .withStyle {
   $0.titleColor = UIColor.black
 }
@@ -116,7 +116,7 @@ Lock
 
 プライマリボタンの色合いとして使用される色。
 
-```
+```swift lines
 .withStyle {
   $0.buttonTintColor = UIColor.white
 }
@@ -126,7 +126,7 @@ Lock
 
 Lockが無効のコンポーネントの色として使用される色。
 
-```
+```swift lines
 .withStyle {
   $0.disabledColor = UIColor(red: 0.8902, green: 0.898, blue: 0.9059, alpha: 1.0)
 }
@@ -136,7 +136,7 @@ Lockが無効のコンポーネントの色として使用される色。
 
 Lockが無効のコンポーネントテキストの色として使用される色。
 
-```
+```swift lines
 .withStyle {
   $0.disabledTextColor = UIColor(red: 0.5725, green: 0.5804, blue: 0.5843, alpha: 1.0)
 }
@@ -146,7 +146,7 @@ Lockが無効のコンポーネントテキストの色として使用される�
 
 プライマリボタンのタイトルを非表示にし、アイコンのみを表示します。デフォルトでは、このオプションはfalseです。
 
-```
+```swift lines
 .withStyle {
   $0.hideButtonTitle = false
 }
@@ -156,7 +156,7 @@ Lockが無効のコンポーネントテキストの色として使用される�
 
 Lockの原色として使用される色。
 
-```
+```swift lines
 .withStyle {
   $0.primaryColor = UIColor.orange
 }
@@ -168,7 +168,7 @@ Lockの原色として使用される色。
 
 入力フィールドのテキストの色。
 
-```
+```swift lines
 .withStyle {
   $0.inputTextColor = UIColor.black
 }
@@ -178,7 +178,7 @@ Lockの原色として使用される色。
 
 入力フィールドのプレースホルダーテキストの色。
 
-```
+```swift lines
 .withStyle {
   $0.inputPlaceholderTextColor = UIColor(red: 0.780, green: 0.780, blue: 0.804, alpha: 1.00)
 }
@@ -188,7 +188,7 @@ Lockの原色として使用される色。
 
 入力フィールドの境界線の色。
 
-```
+```swift lines
 .withStyle {
   $0.inputBorderColor = UIColor(red: 0.780, green: 0.780, blue: 0.804, alpha: 1.00)
 }
@@ -198,7 +198,7 @@ Lockの原色として使用される色。
 
 無効な値が入力された入力フィールドの境界線の色。
 
-```
+```swift lines
 .withStyle {
   $0.inputBorderColorError = UIColor.red
 }
@@ -208,7 +208,7 @@ Lockの原色として使用される色。
 
 入力フィールドの背景の色。
 
-```
+```swift lines
 .withStyle {
   $0.inputBackgroundColor = UIColor.white
 }
@@ -218,7 +218,7 @@ Lockの原色として使用される色。
 
 入力フィールドアイコンの背景の色。
 
-```
+```swift lines
 .withStyle {
   $0.inputIconBackgroundColor = UIColor(red: 0.9333, green: 0.9333, blue: 0.9333, alpha: 1.0)
 }
@@ -228,7 +228,7 @@ Lockの原色として使用される色。
 
 入力フィールドアイコンの色。
 
-```
+```swift lines
 .withStyle {
   $0.inputIconColor = UIColor(red: 0.5725, green: 0.5804, blue: 0.5843, alpha: 1.0)
 }
@@ -240,7 +240,7 @@ Lockの原色として使用される色。
 
 Lock Controllerのステータスバーの更新アニメーション。
 
-```
+```swift lines
 .withStyle {
   $0.UIStatusBarAnimation = .none
 }
@@ -250,7 +250,7 @@ Lock Controllerのステータスバーの更新アニメーション。
 
 Lockコントローラーのステータスバーの表示/非表示。
 
-```
+```swift lines
 .withStyle {
   $0.statusBarHidden = false
 }
@@ -260,7 +260,7 @@ Lockコントローラーのステータスバーの表示/非表示。
 
 Lockコントローラーのステータスバーのスタイル。
 
-```
+```swift lines
 .withStyle {
   $0.UIStatusBarStyle = .default
 }
@@ -270,7 +270,7 @@ Lockコントローラーのステータスバーのスタイル。
 
 Lockパスワードレス検索バーのスタイル。
 
-```
+```swift lines
 .withStyle {
   $0.UISearchBarStyle = .default
 }
@@ -282,7 +282,7 @@ Lockパスワードレス検索バーのスタイル。
 
 本文のテキストの色。
 
-```
+```swift lines
 .withStyle {
   $0.textColor = UIColor.black
 }
@@ -292,7 +292,7 @@ Lockパスワードレス検索バーのスタイル。
 
 Lockの背景色として使用される色。
 
-```
+```swift lines
 .withStyle {
   $0.backgroundColor = UIColor.white
 }
@@ -302,7 +302,7 @@ Lockの背景色として使用される色。
 
 Lockの背景として使用される画像。
 
-```
+```swift lines
 .withStyle {
   $0.backgroundImage = LazyImage(name: "company_logo")
 }
@@ -312,7 +312,7 @@ Lockの背景として使用される画像。
 
 非dbのOAuth2接続は、`AuthStyle`で接続名をマッピングすることでスタイルをカスタマイズできます。
 
-```
+```swift lines
 .withStyle {
   $0.oauth2["slack"] = AuthStyle(
     name: "Slack",
@@ -326,7 +326,7 @@ Lockの背景として使用される画像。
 
 ソーシャルセパレーターのラベルの色。
 
-```
+```swift lines
 .withStyle {
   $0.seperatorTextColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.54)
 }
@@ -336,7 +336,7 @@ Lockの背景として使用される画像。
 
 セカンダリボタンの色。
 
-```
+```swift lines
 .withStyle {
   $0.secondaryButtonColor = UIColor.black
 }
@@ -346,7 +346,7 @@ Lockの背景として使用される画像。
 
 データベースのログインタブ上のテキストの色。
 
-```
+```swift lines
 .withStyle {
   $0.tabTextColor = UIColor(red: 0.3608, green: 0.4, blue: 0.4353, alpha: 0.6)
 }
@@ -356,7 +356,7 @@ Lockの背景として使用される画像。
 
 データベースのログインタブ上の着色。
 
-```
+```swift lines
 .withStyle {
   $0.tabTintColor = UIColor(red: 0.3608, green: 0.4, blue: 0.4353, alpha: 0.6)
 }

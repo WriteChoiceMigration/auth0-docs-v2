@@ -1,13 +1,13 @@
 ---
 title: "電子メールテンプレートでLiquid構文を使用"
 permalink: "use-liquid-syntax-in-email-templates"
+'description': "電子メールテンプレートでLiquid構文を使用する方法について説明します。"
 'og:title': "電子メールテンプレートでLiquid構文を使用"
 'og:description': "電子メールテンプレートでLiquid構文を使用する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "電子メールテンプレートでLiquid構文を使用"
 'twitter:description': "電子メールテンプレートでLiquid構文を使用する方法について説明します。"
 ---
-# 電子メールテンプレートでLiquid構文を使用
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 dashboard</Tooltip>で利用可能な[電子メールテンプレート](https://manage.auth0.com/#/branding/email_templates)を使用する場合、Liquidテンプレート言語を使用して適切なデータを選択し、電子メールを書式設定するオプションがあります。Liquidは、さまざまな情報を含む電子メールを動的に生成するために使用できるHTMLの機能を拡張するオープンソースのテンプレート言語です。詳細については、Githubの[［Liquid for Designers（デザイナー向けLiquid）］](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)に関するページをお読みください。
 
@@ -42,159 +42,159 @@ Liquidには、出力とタグの2種類のマークアップがあります。
 </thead>
 <tbody>
 <tr>
-<td><code>append</code></td>
+<td>`append`</td>
 <td>文字列を追加します</td>
-<td><code>{{ 'foo' | append:'bar' }} #=&gt; 'foobar'</code></td>
+<td>`{{ 'foo' | append:'bar' }} #=&gt; 'foobar'`</td>
 </tr>
 <tr>
-<td><code>capitalize</code></td>
+<td>`capitalize`</td>
 <td>入力文の文字を大文字にします</td>
-<td><code>{{ "my great title" | capitalize }} #=&gt; My great title</code></td>
+<td>`{{ "my great title" | capitalize }} #=&gt; My great title`</td>
 </tr>
 <tr>
-<td><code>date</code></td>
+<td>`date`</td>
 <td>日付を再フォーマットします (<a href="http://docs.shopify.com/themes/liquid-documentation/filters/additional-filters#date">syntax reference</a>)</td>
 <td></td>
 </tr>
 <tr>
-<td><code>default</code></td>
+<td>`default`</td>
 <td>提供された値を返すnullまたは空の文字列でない限り、提供された変数を返します</td>
-<td><code>{{ undefined_variable | default: "Default value" }} #=&gt; "Default value"</code></td>
+<td>`{{ undefined_variable | default: "Default value" }} #=&gt; "Default value"`</td>
 </tr>
 <tr>
-<td><code>divided_by</code></td>
+<td>`divided_by`</td>
 <td>整数除算</td>
-<td><code>{{ 10 | divided_by:3 }} #=&gt; 3</code></td>
+<td>`{{ 10 | divided_by:3 }} #=&gt; 3`</td>
 </tr>
 <tr>
-<td><code>downcase</code></td>
+<td>`downcase`</td>
 <td>入力文字列を小文字に変換します</td>
-<td><code>{{ "Parker Moore" | downcase }} #=&gt; parker moore</code></td>
+<td>`{{ "Parker Moore" | downcase }} #=&gt; parker moore`</td>
 </tr>
 <tr>
-<td><code>escape</code></td>
+<td>`escape`</td>
 <td>文字列のHTMLエスケープ</td>
-<td><code>{{ "Have you read 'James &amp; the Giant Peach'?"| escape }} #=&gt; Have you read 'James &amp; the Giant Peach'?</code></td>
+<td>`{{ "Have you read 'James &amp; the Giant Peach'?"| escape }} #=&gt; Have you read 'James &amp; the Giant Peach'?`</td>
 </tr>
 <tr>
-<td><code>escape_once</code></td>
+<td>`escape_once`</td>
 <td>既存のエスケープされたエンティティに影響を与えることなくHTMLのエスケープされたバージョンを返します</td>
-<td><code>{{ "1 &lt; 2 &amp; 3" | escape_once }} #=&gt; 1 &lt; 2 &amp; 3</code></td>
+<td>`{{ "1 &lt; 2 &amp; 3" | escape_once }} #=&gt; 1 &lt; 2 &amp; 3`</td>
 </tr>
 <tr>
-<td><code>first</code></td>
+<td>`first`</td>
 <td>渡された配列の最初の要素を取得します</td>
 <td></td>
 </tr>
 <tr>
-<td><code>join</code></td>
+<td>`join`</td>
 <td>配列の要素を、特定の文字を間に使用して結合します</td>
 <td></td>
 </tr>
 <tr>
-<td><code>last</code></td>
+<td>`last`</td>
 <td>渡された配列の最初の要素を取得します</td>
 <td></td>
 </tr>
 <tr>
-<td><code>map</code></td>
+<td>`map`</td>
 <td>提供されたプロパティの配列をマップ/収集します</td>
 <td></td>
 </tr>
 <tr>
-<td><code>minus</code></td>
+<td>`minus`</td>
 <td>減算</td>
-<td><code>{{ 4 | minus:2 }} #=&gt; 2</code></td>
+<td>`{{ 4 | minus:2 }} #=&gt; 2`</td>
 </tr>
 <tr>
-<td><code>modulo</code></td>
+<td>`modulo`</td>
 <td>剰余</td>
-<td><code>{{ 3 | modulo:2 }} #=&gt; 1</code></td>
+<td>`{{ 3 | modulo:2 }} #=&gt; 1`</td>
 </tr>
 <tr>
-<td><code>newline_to_br</code></td>
+<td>`newline_to_br`</td>
 <td>各改行(\n)をHTML改行に置き換えます</td>
 <td></td>
 </tr>
 <tr>
-<td><code>plus</code></td>
+<td>`plus`</td>
 <td>加算</td>
-<td><code>{{ '1' | plus:'1' }} #=&gt; 2</code>, <code>{{ 1 | plus:1 }} #=&gt; 2</code></td>
+<td>`{{ '1' | plus:'1' }} #=&gt; 2`, `{{ 1 | plus:1 }} #=&gt; 2`</td>
 </tr>
 <tr>
-<td><code>prepend</code></td>
+<td>`prepend`</td>
 <td>文字列をプリペンドします</td>
-<td><code>{{ 'bar' | prepend:'foo' }} #=&gt; 'foobar'</code></td>
+<td>`{{ 'bar' | prepend:'foo' }} #=&gt; 'foobar'`</td>
 </tr>
 <tr>
-<td><code>remove</code></td>
+<td>`remove`</td>
 <td>各出現を削除します</td>
-<td><code>{{ 'foobarfoobar' | remove:'foo' }} #=&gt; 'barbar'</code></td>
+<td>`{{ 'foobarfoobar' | remove:'foo' }} #=&gt; 'barbar'`</td>
 </tr>
 <tr>
-<td><code>remove_first</code></td>
+<td>`remove_first`</td>
 <td>最初の出現を削除します</td>
-<td><code>{{ 'barbar' | remove_first:'bar' }} #=&gt; 'bar'</code></td>
+<td>`{{ 'barbar' | remove_first:'bar' }} #=&gt; 'bar'`</td>
 </tr>
 <tr>
-<td><code>replace</code></td>
+<td>`replace`</td>
 <td>各出現を置き換えます</td>
-<td><code>{{ 'foofoo' | replace:'foo','bar' }} #=&gt; 'barbar'</code></td>
+<td>`{{ 'foofoo' | replace:'foo','bar' }} #=&gt; 'barbar'`</td>
 </tr>
 <tr>
-<td><code>replace_first</code></td>
+<td>`replace_first`</td>
 <td>最初の出現を置き換えます</td>
-<td><code>{{ 'barbar' | replace_first:'bar','foo' }} #=&gt; 'foobar'</code></td>
+<td>`{{ 'barbar' | replace_first:'bar','foo' }} #=&gt; 'foobar'`</td>
 </tr>
 <tr>
-<td><code>round</code></td>
+<td>`round`</td>
 <td>出力を最も近い整数か、指定された小数点以下の桁数に丸めます</td>
-<td><code>{{ 4.5612 | round: 2 }} #=&gt; 4.56</code></td>
+<td>`{{ 4.5612 | round: 2 }} #=&gt; 4.56`</td>
 </tr>
 <tr>
-<td><code>size</code></td>
+<td>`size`</td>
 <td>配列または文字列のサイズを返します</td>
-<td><code>{{ "Ground control to Major Tom."| size }} #=&gt; 28</code></td>
+<td>`{{ "Ground control to Major Tom."| size }} #=&gt; 28`</td>
 </tr>
 <tr>
-<td><code>sort</code></td>
+<td>`sort`</td>
 <td>配列の要素をソートします</td>
 <td></td>
 </tr>
 <tr>
-<td><code>split</code></td>
+<td>`split`</td>
 <td>一致するパターンで文字列を分割します</td>
-<td><code>{{ "a~b" | split:"~" }} #=&gt; ['a','b']</code></td>
+<td>`{{ "a~b" | split:"~" }} #=&gt; ['a','b']`</td>
 </tr>
 <tr>
-<td><code>strip_html</code></td>
+<td>`strip_html`</td>
 <td>文字列からHTMLを削除します</td>
-<td><code>{{ "How &lt;em&gt;are&lt;/em&gt; you?"| strip_html }} #=&gt; How are you?</code></td>
+<td>`{{ "How &lt;em&gt;are&lt;/em&gt; you?"| strip_html }} #=&gt; How are you?`</td>
 </tr>
 <tr>
-<td><code>strip_newlines</code></td>
+<td>`strip_newlines`</td>
 <td>文字列からすべての改行(\n)を削除します</td>
 <td></td>
 </tr>
 <tr>
-<td><code>times</code></td>
+<td>`times`</td>
 <td>乗算</td>
-<td><code>{{ 5 | times:4 }} #=&gt; 20</code></td>
+<td>`{{ 5 | times:4 }} #=&gt; 20`</td>
 </tr>
 <tr>
-<td><code>truncate</code></td>
+<td>`truncate`</td>
 <td>文字列をx文字まで切り詰めますまた文字列に追加する2番目のパラメーターを受け入れます</td>
-<td><code>{{ 'foobarfoobar' | truncate: 5, '.' }} #=&gt; 'foob.'</code></td>
+<td>`{{ 'foobarfoobar' | truncate: 5, '.' }} #=&gt; 'foob.'`</td>
 </tr>
 <tr>
-<td><code>truncatewords</code></td>
+<td>`truncatewords`</td>
 <td>文字列をx文字まで切り詰めます</td>
 <td></td>
 </tr>
 <tr>
-<td><code>upcase</code></td>
+<td>`upcase`</td>
 <td>入力文字列を大文字に変換します</td>
-<td><code>{{ "Parker Moore" | upcase }} #=&gt; PARKER MOORE</code></td>
+<td>`{{ "Parker Moore" | upcase }} #=&gt; PARKER MOORE`</td>
 </tr>
 </tbody>
 </table>

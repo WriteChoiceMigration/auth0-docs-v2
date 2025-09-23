@@ -1,13 +1,13 @@
 ---
 title: "Configure and Implement Multi-Resource Refresh Token"
 permalink: "configure-and-implement-multi-resource-refresh-token"
+'description': "Learn how to configure and implement multi-resource refresh token"
 'og:title': "Configure and Implement Multi-Resource Refresh Token"
 'og:description': "Learn how to configure and implement multi-resource refresh token"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Configure and Implement Multi-Resource Refresh Token"
 'twitter:description': "Learn how to configure and implement multi-resource refresh token"
 ---
-# Configure and Implement Multi-Resource Refresh Token
 
 <Warning>
 
@@ -17,7 +17,7 @@ Multi-Resource Refresh Token is currently in Early Access. By using this feature
 
 ## Configure applications for MRRT
 
-To use Multi-Resource <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Refresh Tokens</Tooltip> (MRRT), configure your application’s refresh token policies using the Auth0 [Management API](/docs/api/management/v2/clients/patch-clients-by-id). These policies will specify which API and scopes the application is allowed to request during a refresh token exchange.
+To use Multi-Resource <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Refresh Tokens</Tooltip> (MRRT), configure your application’s refresh token policies using the Auth0 [Management API](/docs/ja-jp/api/management/v2/clients/patch-clients-by-id). These policies will specify which API and scopes the application is allowed to request during a refresh token exchange.
 
 You can define MRRT policies in the `refresh_token.policies` property of the application.
 
@@ -30,12 +30,12 @@ You can define MRRT policies in the `refresh_token.policies` property of the app
 </thead>
 <tbody>
 <tr>
-<td><code>audience</code></td>
+<td>`audience`</td>
 <td>string</td>
 <td>The Auth0 API <a href="https://auth0.com/docs/get-started/apis/api-settings#general-settings">identifier</a> of the application that will have access to using the refresh token.</td>
 </tr>
 <tr>
-<td><code>scope</code></td>
+<td>`scope`</td>
 <td>Array of strings</td>
 <td>The list of scopes allowed when requesting an access token for the specified audience. The scope must be equal to or narrower than the scopes defined on the API.</td>
 </tr>
@@ -48,10 +48,10 @@ The audience and scope properties must correspond to an existing application in 
 
 </Note>
 
-For existing applications, make a PATCH call to the [Update a Client](/docs/api/management/v2/clients/patch-clients-by-id) endpoint. To create a new application, make a POST call to the [Create a Client](/docs/api/management/v2/clients/post-clients) endpoint:
+For existing applications, make a PATCH call to the [Update a Client](/docs/ja-jp/api/management/v2/clients/patch-clients-by-id) endpoint. To create a new application, make a POST call to the [Create a Client](/docs/ja-jp/api/management/v2/clients/post-clients) endpoint:
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/clients//{yourClientId}' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
@@ -77,8 +77,8 @@ curl --request PATCH \
 ]
 }
 }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/clients//{yourClientId}");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -87,7 +87,7 @@ request.AddParameter("application/json", "{\n \"refresh_token\": {\n \"expiratio
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -107,8 +107,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/clients//{yourClientId}")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .header("content-type", "application/json")
@@ -116,7 +116,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/clients//{you
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -146,8 +146,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}",
 @"content-type": @"application/json" };
@@ -172,7 +172,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/clients//{yourClientId}",
@@ -196,8 +196,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\n \"refresh_token\": {\n \"expiration_type\": \"expiring\",\n \"rotation_type\": \"rotating\",\n \"token_lifetime\": 31557600,\n \"idle_token_lifetime\": 2592000,\n \"leeway\": 0,\n \"infinite_token_lifetime\": false,\n \"infinite_idle_token_lifetime\": false,\n \"policies\": [\n {\n \"audience\": \"https://api.example.com\",\n \"scope\": [\"read:data\"]\n },\n {\n \"audience\": \"https://billing.example.com\",\n \"scope\": [\"read:billing\"]\n }\n ]\n }\n}"
@@ -211,7 +211,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -225,8 +225,8 @@ request["content-type"] = 'application/json'
 request.body = "{\n \"refresh_token\": {\n \"expiration_type\": \"expiring\",\n \"rotation_type\": \"rotating\",\n \"token_lifetime\": 31557600,\n \"idle_token_lifetime\": 2592000,\n \"leeway\": 0,\n \"infinite_token_lifetime\": false,\n \"infinite_idle_token_lifetime\": false,\n \"policies\": [\n {\n \"audience\": \"https://api.example.com\",\n \"scope\": [\"read:data\"]\n },\n {\n \"audience\": \"https://billing.example.com\",\n \"scope\": [\"read:billing\"]\n }\n ]\n }\n}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {yourMgmtApiAccessToken}",
@@ -273,7 +273,7 @@ dataTask.resume()
 
 Sample response:
 
-```json
+```json lines
 {
   "client_id": "abc123xyz",
   "name": "My Native App",
@@ -296,7 +296,7 @@ Sample response:
 ## Implement multi-resource refresh token
 
 Once you configure your application’s refresh token with MRRT policies, you can start to  exchange a single refresh token for <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">access tokens</Tooltip> across multiple APIs.
-To facilitate this, your application needs to initiate a login flow using either the [Authorization Code Flow](/docs/get-started/authentication-and-authorization-flow/authorization-code-flow) or the [Resource Owner Password Grant](/docs/authenticate/login/oidc-conformant-authentication/oidc-adoption-rop-flow).
+To facilitate this, your application needs to initiate a login flow using either the [Authorization Code Flow](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow) or the [Resource Owner Password Grant](/docs/ja-jp/authenticate/login/oidc-conformant-authentication/oidc-adoption-rop-flow).
 
 ### Step 1: Authenticate and request a refresh token
 
@@ -306,7 +306,7 @@ To receive a refresh token, include the `offline_access` scope when initiating t
 
 If you do not receive a refresh token, confirm that:
 
-* The API has [Allow Offline Access](/docs/get-started/apis/api-settings#access-settings) enabled in its settings.
+* The API has [Allow Offline Access](/docs/ja-jp/get-started/apis/api-settings#access-settings) enabled in its settings.
 * `offline_access` is included in the scope.
 * The `audience` used in the request matches a configured API in your tenant.
 
@@ -317,7 +317,7 @@ If you do not receive a refresh token, confirm that:
 Once the refresh token is issued, you can request access tokens for any API and scopes defined in both the initial authentication and the MRRT policy. For example:
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/json' \
@@ -328,8 +328,8 @@ curl --request POST \
 "audience": "https://billing.example.com",
 "scope": "read:billing write:billing"
 }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -337,7 +337,7 @@ request.AddParameter("application/json", "{\n \"grant_type\": \"refresh_token\",
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -356,15 +356,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/json")
 .body("{\n \"grant_type\": \"refresh_token\",\n \"client_id\": \"{yourClientId}\",\n \"refresh_token\": \"${refreshToken}\",\n \"audience\": \"https://billing.example.com\",\n \"scope\": \"read:billing write:billing\"\n}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -383,8 +383,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"grant_type": @"refresh_token",
@@ -412,7 +412,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -435,8 +435,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\n \"grant_type\": \"refresh_token\",\n \"client_id\": \"{yourClientId}\",\n \"refresh_token\": \"${refreshToken}\",\n \"audience\": \"https://billing.example.com\",\n \"scope\": \"read:billing write:billing\"\n}"
@@ -447,7 +447,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -460,8 +460,8 @@ request["content-type"] = 'application/json'
 request.body = "{\n \"grant_type\": \"refresh_token\",\n \"client_id\": \"{yourClientId}\",\n \"refresh_token\": \"${refreshToken}\",\n \"audience\": \"https://billing.example.com\",\n \"scope\": \"read:billing write:billing\"\n}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = [
@@ -495,7 +495,7 @@ dataTask.resume()
 
 If you are using the Auth0 Swift SDK, you can exchange the refresh token using the following code:
 
-```
+```swift lines
 credentialsManager.apiCredentials(forAudience: "https://example.com/me",
                                   scope: "create:me:authentication_methods") { result in
     switch result {
@@ -511,7 +511,7 @@ To learn more, read [Auth0 Swift SDK](https://github.com/auth0/Auth0.swift/blob/
 
 If you are using the Auth0 Android SDK, you can exchange the refresh token using the following code:
 
-```
+```javascript lines
 credentialsManager.getApiCredentials(
     audience = "https://example.com/me", scope = " create:me:authentication_methods",
     callback = object : Callback<APICredentials, CredentialsManagerException> {
@@ -545,7 +545,7 @@ Using MRRT with [Actions](/docs/ja-jp/customize/actions) allows you to configure
 
 You can use the `event.client.refresh_token.policies` object to evaluate the application's audience and scope, when issuing or exchanging a refresh token, and to ensure precise control over API access and scopes.
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   // return the list of allowed APIs in the client
   const allowedAPIsInTheClient = event.client.refresh_token?.policies;
@@ -572,7 +572,7 @@ MRRT allows you to extend user access to new APIs without issuing new refresh to
 
 A user logs in requesting the following audience and scope:
 
-```json
+```json lines
 {
 "audience": "https://api.example.com",  
 "scope": "openid profile read:messages"
@@ -581,7 +581,7 @@ A user logs in requesting the following audience and scope:
 
 The application’s MRRT policy is configured to add an additional scope:
 
-```json
+```json lines
 {
   "audience": "https://api.example.com",
   "scope": ["write:messages"]
@@ -590,7 +590,7 @@ The application’s MRRT policy is configured to add an additional scope:
 
 A refresh token exchange using the same audience and no scopes would result in an access token containing all configured scopes:
 
-```json
+```json lines
 {
 "aud": "https://api.example.com"  
 "scope": "openid profile read:messages write:messages"

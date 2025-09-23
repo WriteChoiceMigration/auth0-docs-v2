@@ -1,13 +1,13 @@
 ---
 title: "組織の接続を無効にする"
 permalink: "disable-connections"
+'description': "Auth0 DashboardやManagement APIを使用して、組織の接続を無効にする方法を説明します。"
 'og:title': "組織の接続を無効にする"
 'og:description': "Auth0 DashboardやManagement APIを使用して、組織の接続を無効にする方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "組織の接続を無効にする"
 'twitter:description': "Auth0 DashboardやManagement APIを使用して、組織の接続を無効にする方法を説明します。"
 ---
-# 組織の接続を無効にする
 
 [組織](/docs/ja-jp/manage-users/organizations/organizations-overview)の接続は<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を使って無効にすることができます。
 
@@ -24,19 +24,19 @@ Auth0 Dashboardを使って接続を無効にするには、以下を行いま�
 `Delete Organization Connections`エンドポイントに`DELETE`呼び出しを行います。必ず、`ORG_ID`、`MGMT_API_ACCESS_TOKEN`、および`CONNECTION_ID`のプレースホルダーの値をそれぞれ組織ID、Management APIのアクセストークン、接続IDに置き換えます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request DELETE \
 --url 'https://{yourDomain}/api/v2/organizations/ORG_ID/enabled_connections/CONNECTION_ID' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/organizations/ORG_ID/enabled_connections/CONNECTION_ID");
 var request = new RestRequest(Method.DELETE);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -53,14 +53,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.delete("https://{yourDomain}/api/v2/organizations/ORG_ID/enabled_connections/CONNECTION_ID")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'DELETE',
@@ -72,8 +72,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/organizations/ORG_ID/enabled_connections/CONNECTION_ID"]
@@ -94,7 +94,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/organizations/ORG_ID/enabled_connections/CONNECTION_ID",
@@ -116,8 +116,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MGMT_API_ACCESS_TOKEN" }
@@ -127,7 +127,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -139,8 +139,8 @@ request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/organizations/ORG_ID/enabled_connections/CONNECTION_ID")! as URL,
@@ -179,15 +179,15 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>ORG_ID</code></td>
+<td>`ORG_ID`</td>
 <td>接続を無効にしたい組織のID。</td>
 </tr>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td>スコープ<code>delete:organization_connections</code>を持つ<a href="/docs/tokens/management-api-access-tokens">Management APIのアクセストークン</a>。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>スコープ`delete:organization_connections`を持つ<a href="/docs/ja-jp/tokens/management-api-access-tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 <tr>
-<td><code>CONNECTION_ID</code></td>
+<td>`CONNECTION_ID`</td>
 <td>組織のために無効にしたい接続のID。</td>
 </tr>
 </tbody>
@@ -207,37 +207,37 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>204</code></td>
+<td>`204`</td>
 <td></td>
 <td>接続が組織から正常に削除されました。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>トークンが無効です。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>JSON Web Tokenの検証に対して無効な署名を受け取りました。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>クライアントがグローバルでありません。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>403</code></td>
-<td><code>insufficient_scope</code></td>
-<td>スコープが不十分です。<code>delete:organization_connections</code>のいずれかが予期されています。</td>
+<td>`403`</td>
+<td>`insufficient_scope`</td>
+<td>スコープが不十分です。`delete:organization_connections`のいずれかが予期されています。</td>
 <td>指定されたベアラートークンのスコープで許可されていないフィールドの読み取り/書き込みを試行しました。</td>
 </tr>
 <tr>
-<td><code>429</code></td>
+<td>`429`</td>
 <td></td>
 <td>要求が多すぎます。X-RateLimit-Limit、X-RateLimit-Remaining、およびX-RateLimit-Resetのヘッダーを確認してください。</td>
 <td></td>

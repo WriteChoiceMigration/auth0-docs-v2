@@ -1,17 +1,19 @@
 ---
 title: "Express.js APIアプリケーションに認可を追加する"
 permalink: "interactive"
+'description': "このガイドは、新規または既存のExpress.js APIアプリケーションにexpress-oauth2-jwt-bearerパッケージを使ってAuth0を統合する方法を説明します。"
 'og:title': "Express.js APIアプリケーションに認可を追加する"
 'og:description': "このガイドは、新規または既存のExpress.js APIアプリケーションにexpress-oauth2-jwt-bearerパッケージを使ってAuth0を統合する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/node.png"
 'twitter:title': "Express.js APIアプリケーションに認可を追加する"
 'twitter:description': "このガイドは、新規または既存のExpress.js APIアプリケーションにexpress-oauth2-jwt-bearerパッケージを使ってAuth0を統合する方法を説明します。"
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -27,7 +29,7 @@ permalink: "interactive"
 
 [View on Github](https://github.com/auth0-samples/auth0-express-api-samples/tree/master/01-Authorization-RS256) Log In & Download Sample
 
-1. [Docs](/docs/ja-jp)
+1. [Docs](/docs/ja-jp/ja-jp)
 3. [Quickstarts](/docs/ja-jp/quickstarts)
 5. [Backend/API](/docs/ja-jp/quickstart/backend)
 7. [Node (Express) API](/docs/ja-jp/quickstart/backend/nodejs/interactive)
@@ -56,7 +58,7 @@ Auth0 Dashboardを使って初めてAPIをセットアップする場合には�
 
 Auth0 Dashboardの[［APIs］](https://manage.auth0.com/#/apis)セクションにある**［Permissions（権限）］**ビューで使用可能なアクセス許可を定義することができます。
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/5EnGfdqLVZ8fuIxbUn7gm1/ee4278d6ae1910497771f3b9762c86f8/Quickstarts_API.png)</Frame>
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/5EnGfdqLVZ8fuIxbUn7gm1/ee4278d6ae1910497771f3b9762c86f8/Quickstarts_API.png)</Frame>
 
 <Note>
 
@@ -70,7 +72,7 @@ Auth0 Dashboardの[［APIs］](https://manage.auth0.com/#/apis)セクション�
 
 まず、`npm`でSDKをインストールします。
 
-```
+```powershell lines
 npm install --save express-oauth2-jwt-bearer
 ```
 
@@ -100,24 +102,24 @@ npm install --save express-oauth2-jwt-bearer
 
 APIを呼び出すにはアクセストークンが必要です。テスト用のアクセストークンは、[API設定](https://manage.auth0.com/#/apis)の**［Test（テスト）］**ビューから取得することができます。
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/5HUMcKGXoNOvdJNXFI73oi/f50dd78093814054a81903d1e478f3aa/API_access_tokens.png)</Frame>
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/5HUMcKGXoNOvdJNXFI73oi/f50dd78093814054a81903d1e478f3aa/API_access_tokens.png)</Frame>
 
 要求の`Authorization`ヘッダーにアクセストークンを指定します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request get \
 --url http:///%7ByourDomain%7D/api_path \
 --header 'authorization: Bearer YOUR_ACCESS_TOKEN_HERE'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("http:///%7ByourDomain%7D/api_path");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer YOUR_ACCESS_TOKEN_HERE");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -134,14 +136,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("http:///%7ByourDomain%7D/api_path")
 .header("authorization", "Bearer YOUR_ACCESS_TOKEN_HERE")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'get',
@@ -153,8 +155,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer YOUR_ACCESS_TOKEN_HERE" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http:///%7ByourDomain%7D/api_path"]
@@ -175,7 +177,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "http:///%7ByourDomain%7D/api_path",
@@ -197,8 +199,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPConnection("")
 headers = { 'authorization': "Bearer YOUR_ACCESS_TOKEN_HERE" }
@@ -208,7 +210,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 url = URI("http:///%7ByourDomain%7D/api_path")
@@ -217,8 +219,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer YOUR_ACCESS_TOKEN_HERE'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer YOUR_ACCESS_TOKEN_HERE"]
 let request = NSMutableURLRequest(url: NSURL(string: "http:///%7ByourDomain%7D/api_path")! as URL,
@@ -267,7 +269,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/backend/nodejs/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

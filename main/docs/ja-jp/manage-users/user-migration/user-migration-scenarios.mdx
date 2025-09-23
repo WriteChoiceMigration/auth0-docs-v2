@@ -1,13 +1,13 @@
 ---
 title: "ユーザー移行のシナリオ"
 permalink: "user-migration-scenarios"
+'description': "複数の方法を使用したさまざまなプラットフォームからのユーザー移行シナリオ。"
 'og:title': "ユーザー移行のシナリオ"
 'og:description': "複数の方法を使用したさまざまなプラットフォームからのユーザー移行シナリオ。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユーザー移行のシナリオ"
 'twitter:description': "複数の方法を使用したさまざまなプラットフォームからのユーザー移行シナリオ。"
 ---
-# ユーザー移行のシナリオ
 
 Gigya、Okta、StormpathからAuth0にユーザーを移行するためのサンプルシナリオをいくつか示します。これらの各シナリオでは、それらのプラットフォームにアカウントがあることを前提としています。
 
@@ -23,12 +23,12 @@ Gigya、Okta、StormpathからAuth0にユーザーを移行するためのサン
 1. Gigyaユーザーをエクスポート：[GigyaのIdentitySync](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/2b717202e42a4165aa7f75f7eecab64f.html)を使用して、ユーザーデータを変換し、ターゲットスキーマに合わせてエクスポートします。このプロセスの詳細については、[Gigya IdentitySync：Using IdentitySync](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/2b717202e42a4165aa7f75f7eecab64f.html?locale=en-US)を参照してください。
 
    指示に従って、Gigyaデータベースのユーザーデータを正しい[［schema（スキーマ）］](/docs/ja-jp/manage-users/user-migration/bulk-user-import-database-schema-and-examples)に変換し、変換されたデータをJSON形式でエクスポートします。
-2. GigyaユーザーをAuth0にインポートします。[ユーザーインポート/エクスポート拡張](/docs/ja-jp/manage-users/user-migration/user-import-export-extension)または[［Management API］](/docs/api/management/v2)を使用してユーザーをインポートできます。
+2. GigyaユーザーをAuth0にインポートします。[ユーザーインポート/エクスポート拡張](/docs/ja-jp/manage-users/user-migration/user-import-export-extension)または[［Management API］](/docs/ja-jp/api/management/v2)を使用してユーザーをインポートできます。
 
    * **［User Import/Export Extension（ユーザーインポート/エクスポート拡張）］**：[Auth0 Dashboard>Extensions](https://manage.auth0.com/#/extensions)へ移動し、**［User Import / Export（ユーザーインポート/エクスポート）］**拡張を選択し、インストールします。拡張がインストールされたら、それをクリックしてインポート/エクスポートインターフェイスを開くことができます。
 
      エクスポートしたGigyaユーザーのJSONファイルを指定されたアップロード領域にドラッグし、先ほど作成したデータベースを選択します。インポートを開始するには、**ユーザーのインポートの開始**を選択します。詳細については、[ユーザーのインポート/エクスポート拡張](/docs/ja-jp/manage-users/user-migration/user-import-export-extension)を参照してください。
-   * **Management API**：ユーザーをAuth0にインポートする[ジョブを作成](/docs/api/management/v2#!/Jobs/post_users_imports)します。詳細な手順については、[［一括ユーザーインポート］](/docs/ja-jp/manage-users/user-migration/bulk-user-imports)を参照してください。
+   * **Management API**：ユーザーをAuth0にインポートする[ジョブを作成](/docs/ja-jp/api/management/v2#!/Jobs/post_users_imports)します。詳細な手順については、[［一括ユーザーインポート］](/docs/ja-jp/manage-users/user-migration/bulk-user-imports)を参照してください。
 
 ## シナリオ2：OktaからAuth0へのユーザー移行
 
@@ -37,7 +37,7 @@ Gigya、Okta、StormpathからAuth0にユーザーを移行するためのサン
 
    データベース接続の**［Custom Database（カスタムデータベース）］**ビューで、 **［Database Action Scripts（データベースアクションスクリプト）］**を見つけて、**Login（ログイン）］**を選択します。
 
-   ```javascript
+   ```javascript lines
    function login (email, password, callback) {
      // Replace {yourOktaDomain} with your own Okta domain
      var url = 'https:/{yourOktaDomain}/api/v1/authn';
@@ -91,7 +91,7 @@ Gigya、Okta、StormpathからAuth0にユーザーを移行するためのサン
 
    データベース接続の**［Custom Database（カスタムデータベース）］**ビューで、**［Database Action Scripts（データベースアクションスクリプト）］**を見つけて、**［Get User（ユーザーの取得）］**を選択します。
 
-   ```javascript
+   ```javascript lines
    function getByEmail(email, callback) {
      // Replace {yourOktaDomain} with your own Okta domain
      var url = 'https://{yourOktaDomain}/api/v1/users/' + encodeURIComponent(email);
@@ -140,7 +140,7 @@ Gigya、Okta、StormpathからAuth0にユーザーを移行するためのサン
 
    認証が成功すると、Stormpathからの応答にユーザーアカウントURLが含まれます。ユーザーの情報を取得するには、アカウントURLに対して2回目の要求を実行します。その後、ユーザーの情報を抽出し、コールバック関数でAuth0に渡すことができます。
 
-   ```javascript
+   ```javascript lines
    function login(username, password, callback) {
      // Replace the {yourStormpathClientId} attribute with your Stormpath ID
      var url = 'https://api.stormpath.com/v1/applications/{yourStormpathClientId}/loginAttempts';
@@ -215,7 +215,7 @@ Gigya、Okta、StormpathからAuth0にユーザーを移行するためのサン
    スクリプトの上にある**［Try（試す）］**ボタンをクリックして、スクリプトが機能するかどうかをテストして確認します。
 4. [ユーザー取得](/docs/ja-jp/authenticate/database-connections/custom-db/templates/get-user)スクリプトを作成します：**［Get User（ユーザー取得）］**スクリプトは、ユーザーがパスワードのリセットを試みたものの、Auth0データベース内にそのアカウントが見つからない場合に実行されます。Stormpath APIの`/accounts`エンドポイントを呼び出し、ユーザーのメールアドレスを`email`パラメータとして渡すスクリプトを作成する必要があります。成功した場合、Stormpathはユーザーの情報を返します。ユーザーの情報を抽出し、コールバック関数でAuth0に渡すことができます。
 
-   ```javascript
+   ```javascript lines
    function getByEmail(email, callback) {
      // Replace the {yourStormpathClientId} attribute with your Stormpath ID
      var url = 'https://api.stormpath.com/v1/applications/{yourStormpathClientId}/accounts';

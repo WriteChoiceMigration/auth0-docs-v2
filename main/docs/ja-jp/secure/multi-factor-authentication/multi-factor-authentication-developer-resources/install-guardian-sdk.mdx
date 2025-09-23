@@ -1,13 +1,13 @@
 ---
 title: "Guardian SDKをインストールする"
 permalink: "install-guardian-sdk"
+'description': "Guardian SDKをインストールして、オプションを構成し、使用する方法について説明します。"
 'og:title': "Guardian SDKをインストールする"
 'og:description': "Guardian SDKをインストールして、オプションを構成し、使用する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Guardian SDKをインストールする"
 'twitter:description': "Guardian SDKをインストールして、オプションを構成し、使用する方法について説明します。"
 ---
-# Guardian SDKをインストールする
 
 Guardian SDKはGuardianのUIのないクライアントを提供します。
 
@@ -21,7 +21,7 @@ Guardian SDKはGuardianのUIのないクライアントを提供します。
 
 ## Guardianを構成する
 
-```javascript
+```javascript lines
 var auth0GuardianJS = require('auth0-guardian-js')({
 	// For US tenants: https://{name}.guardian.auth0.com
  	// For AU tenants: https://{name}.guardian.au.auth0.com
@@ -52,7 +52,7 @@ var auth0GuardianJS = require('auth0-guardian-js')({
 
 Auth0テナントに構成されたカスタムドメインがある場合は、Guardianエンドポイントをポイントするように`serviceUrl`を適切に更新する必要があります。
 
-```javascript
+```javascript lines
 var auth0GuardianJS = require('auth0-guardian-js')({
     // For custom domains
     serviceUrl: "https://{yourCustomDomain}/guardian/",
@@ -72,7 +72,7 @@ var auth0GuardianJS = require('auth0-guardian-js')({
 
 方法によっては一部の手順を省くことができます。すべての方法で同じインターフェイスを使用するため、統一されたコードを記述できます。方法によって、認証が完了する場合と、さらに追加の認証手順が必要な場合があります。`enrollment-complete`イベントをリッスンすることで判断してください。
 
-```javascript
+```javascript lines
 function enroll(transaction, method) {
 	if (transaction.isEnrolled()) {
 		console.log('You are already enrolled');
@@ -165,7 +165,7 @@ auth0GuardianJS.start(function(err, transaction) {
 
 プッシュ通知が受信されたら、`auth-rejected`を受信することもあります。
 
-```javascript
+```javascript lines
 function authenticate(method) {
 	auth0GuardianJS.start(function (err, transaction) {
 		if (err) {

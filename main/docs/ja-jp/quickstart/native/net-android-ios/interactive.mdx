@@ -1,17 +1,19 @@
 ---
 title: ".NET AndroidまたはiOSアプリケーションにログインを追加する"
 permalink: "interactive"
+'description': "このチュートリアルは、Auth0を使用して、.NET AndroidまたはiOSアプリケーションにユーザーログインを追加する方法について説明します。"
 'og:title': ".NET AndroidまたはiOSアプリケーションにログインを追加する"
 'og:description': "このチュートリアルは、Auth0を使用して、.NET AndroidまたはiOSアプリケーションにユーザーログインを追加する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/xamarin.png"
 'twitter:title': ".NET AndroidまたはiOSアプリケーションにログインを追加する"
 'twitter:description': "このチュートリアルは、Auth0を使用して、.NET AndroidまたはiOSアプリケーションにユーザーログインを追加する方法について説明します。"
 ---
+
 [Skip to main content](#maincontent)
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -19,7 +21,7 @@ permalink: "interactive"
 
 ​
 
-[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
 
 [Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
 
@@ -100,12 +102,12 @@ NuGetパッケージマネージャ（［Tools（ツール）］ -> ［Library P
 
 NuGetパッケージマネージャーコンソール（`Install-Package`）や`dotnet` CLI（`dotnet add`）を代わりに使用することもできます。
 
-```
+``` lines
 Install-Package Auth0.OidcClient.AndroidX
 Install-Package Auth0.OidcClient.iOS
 ```
 
-```
+``` lines
 dotnet add Auth0.OidcClient.AndroidX
 dotnet add Auth0.OidcClient.iOS
 ```
@@ -116,7 +118,7 @@ dotnet add Auth0.OidcClient.iOS
 
 Auth0をアプリケーションに統合するには、Auth0のドメインとクライアントIDを含む`Auth0ClientOptions`のインスタンスを渡して、`Auth0Client`クラスをインスタンス化します。
 
-```
+```csharp lines
 using Auth0.OidcClient;
 var client = new Auth0Client(new Auth0ClientOptions {
 Domain = "{yourDomain}",
@@ -147,7 +149,7 @@ Androidデバイスでコールバックを扱うには、Callback URLを扱う�
 
 また、`Activity`クラスにある`OnNewIntent`イベントでインテントを扱う必要があります。`ActivityMediator`シングルトンの`Send`メソッドを呼び出して受け取ったURLを渡し、Auth0のOIDCクライアントに認証フローを終わらせるよう通知する必要があります。
 
-```
+```csharp lines
 protected override void OnNewIntent(Intent intent)
 {
 
@@ -172,7 +174,7 @@ iOSデバイスでコールバックを扱うには、以下を行います：
 
 これは、URLタイプを追加した後でXML表記された`info.plist`ファイルの例です：
 
-```
+```xml lines
 <key>CFBundleURLTypes</key>
 <array>
 <dict>
@@ -196,7 +198,7 @@ iOSデバイスでコールバックを扱うには、以下を行います：
 
 Auth0アプリケーションとAuth0 SDKの構成が完了したら、プロジェクトのためにログインをセットアップする必要があります。これを実現するには、SDKの`LoginAsync()`メソッドを使用して、ユーザーをAuth0のユニバーサルログインページにリダイレクトするログインボタンを作成します。
 
-```javascript
+```csharp lines
 var loginResult = await client.LoginAsync();
 ```
 
@@ -220,7 +222,7 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 プロジェクトにログインしたユーザーには、ログアウトする方法も必要です。SDKの`LogoutAsync()`メソッドを使用してログアウトボタンを作成します。ユーザーはログアウトすると、Auth0ログアウトエンドポイントにリダイレクトされてから、即座に、このクイックスタートで先ほどセットアップしたログアウトURLにリダイレクトで戻されます。
 
-```
+```csharp lines
 await client.LogoutAsync();
 ```
 
@@ -241,7 +243,7 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 AndroidまたはiOS用のAuth0 SDKでは、`LoginResult.User`プロパティを通じてユーザー情報を提供します。
 
-```
+```swift lines
 if loginResult.IsError == false {
 var user = loginResult.User
 var name = user.FindFirst(c => c.Type == "name")?.Value
@@ -268,7 +270,7 @@ Any suggestion or typo?
 
 [Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/native/net-android-ios/interactive.md)
 
-<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
 
 Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
 

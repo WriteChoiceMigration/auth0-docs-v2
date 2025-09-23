@@ -1,13 +1,13 @@
 ---
 title: "リソース固有のドキュメント"
 permalink: "resource-specific-documentation"
+'description': "Auth0 Deploy CLIのリソースドキュメントの詳細について説明します。"
 'og:title': "リソース固有のドキュメント"
 'og:description': "Auth0 Deploy CLIのリソースドキュメントの詳細について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "リソース固有のドキュメント"
 'twitter:description': "Auth0 Deploy CLIのリソースドキュメントの詳細について説明します。"
 ---
-# リソース固有のドキュメント
 
 一般に、Deploy CLI リソース構成ファイルは[Auth0 Management API](https://auth0.com/docs/api/management/v2)のペイロードスキーマとほぼ一致しますが、特に注意すべき微妙な違いがいくつかあります。
 
@@ -21,7 +21,7 @@ Deploy CLIの独自のクライアントの許可は、意図的にエクスポ�
 
 ### 階層
 
-```
+```yaml lines
 prompts:
   customText:
     <LANGUAGE>: # two character language code
@@ -32,7 +32,7 @@ prompts:
 
 ### 例
 
-```
+```yaml lines
 prompts:
   identifier_first: true
   universal_login_experience: classic
@@ -60,7 +60,7 @@ prompts:
 
 YAMLモードでのフォルダー構造：
 
-```
+``` lines
 ./databases/
     /Username-Password-Authentication
         /change_password.js   
@@ -74,7 +74,7 @@ YAMLモードでのフォルダー構造：
 
 `tenant.yaml`の内容：
 
-```
+```yaml lines
 databases:
   - name: Username-Password-Authentication
     # ...
@@ -93,7 +93,7 @@ databases:
 
 ディレクトリモードでのフォルダー構造：
 
-```
+``` lines
 ./database-connections/
     ./Username-Password-Authentication/
         ./change_password.js
@@ -107,7 +107,7 @@ databases:
 
 `database.json`の内容：
 
-```json
+```json lines
 {
   "options": {
     "customScripts": {
@@ -132,7 +132,7 @@ databases:
 
 YAMLモードでのフォルダー構造：
 
-```
+``` lines
 ./pages/
     /error_page.html
     /guardian_multifactor.html
@@ -143,7 +143,7 @@ YAMLモードでのフォルダー構造：
 
 `tenant.yaml`の内容：
 
-```
+```yaml lines
 pages:
   - name: error_page
     html: ./pages/error_page.html
@@ -164,7 +164,7 @@ pages:
 
 ディレクトリモードでのフォルダー構造：
 
-```
+``` lines
 ./pages/
     ./error_page.html
     ./error_page.json
@@ -178,7 +178,7 @@ pages:
 
 `login.json`の内容：
 
-```json
+```json lines
 {
   "name": "login",
   "enabled": false,
@@ -188,7 +188,7 @@ pages:
 
 `error_page.json`の内容：
 
-```json
+```json lines
 {
   "html": "./error_page.html",
   "show_log_link": false,
@@ -199,7 +199,7 @@ pages:
 
 `guardian_multifactor.json`の内容：
 
-```json
+```json lines
 {
   "enabled": true,
   "html": "./guardian_multifactor.html",
@@ -209,7 +209,7 @@ pages:
 
 `password_reset.json`の内容：
 
-```json
+```json lines
 {
   "enabled": true,
   "html": "./password_reset.html",

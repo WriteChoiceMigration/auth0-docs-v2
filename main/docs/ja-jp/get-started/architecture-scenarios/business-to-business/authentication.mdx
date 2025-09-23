@@ -1,13 +1,13 @@
 ---
 title: "認証（B2B）"
 permalink: "authentication"
+'description': "B2BのIAM実装で認証が行われる仕組みについて説明します。"
 'og:title': "認証（B2B）"
 'og:description': "B2BのIAM実装で認証が行われる仕組みについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "認証（B2B）"
 'twitter:description': "B2BのIAM実装で認証が行われる仕組みについて説明します。"
 ---
-# 認証（B2B）
 
 ユーザーにサービスを提供するためには、ユーザーが誰なのかを識別する必要があります。この処理はユーザー認証と呼ばれます。ソーシャルメディアのアカウント、ユーザー名とパスワード、パスワードレスなど、ユーザー認証にはいくつかの方法があります。また、多要素認証（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>）を有効にして、ユーザーを認証する際に第一要素のみに依存しないことが推奨されています。
 
@@ -35,7 +35,7 @@ permalink: "authentication"
 
 Auth0の[ユニバーサルログイン](#universal-login)は、サインインにユーザーIDとパスワードの資格情報を提供するのか、いわゆるBring Your Own Identity（BYOI：個人IDの持ち込み）のシナリオで[ソーシャルログイン](https://auth0.com/learn/social-login/)を許可するのかといった方法にかかわらず、安全でセキュリティー保護されたユーザーエクスペリエンスを提供します。また、製品固有の[ブランディング](/docs/ja-jp/get-started/architecture-scenarios/business-to-consumer/branding)要件がある場合でも、ユニバーサルログインでログインエクスペリエンスを中央集中化すると、ブランドの認知度を高める効果もあります。ユニバーサルログインで通常使用されるAuth0のUIウィジェットには、そのままで便利に使える対応として、異なる言語が要求されるユーザー向けの[国際化](/docs/ja-jp/customize/internationalization-and-localization/universal-login-internationalization)、ユーザーアカウントにアクセスしようとするハッカーからの保護障壁となる[MFA](#multi-factor-authentication-mfa-)や[攻撃防御](#anomaly-detection)も備わっています。
 
-ユーザーIDとパスワードの資格情報を使ってサインインできるようにすることは、サードパーティーIDプロバイダーのステータスに依存することなく、ユーザーによるシステムへのアクセスを許可することになります。また、会社の方針に合致した資格情報を要求する手段にもなります。これが実現できるように、Auth0には、ユーザーIDとパスワードのログインに対応する複数のオプションがあります。また、[提供しているガイダンス](#username-and-password-authentication)には、それらのオプションを活用する方法が説明されています。追加の主要な認証要素として、何らかのステージで[ソーシャル](#social-authentication)対応を追加すると、柔軟性が高まり、各種のソーシャルログイン[プロバイダー](/docs/connections/identity-providers-social)がすでに保管している情報を活用して、ユーザーに質問することなく、ユーザーについての理解を深めることができます。
+ユーザーIDとパスワードの資格情報を使ってサインインできるようにすることは、サードパーティーIDプロバイダーのステータスに依存することなく、ユーザーによるシステムへのアクセスを許可することになります。また、会社の方針に合致した資格情報を要求する手段にもなります。これが実現できるように、Auth0には、ユーザーIDとパスワードのログインに対応する複数のオプションがあります。また、[提供しているガイダンス](#username-and-password-authentication)には、それらのオプションを活用する方法が説明されています。追加の主要な認証要素として、何らかのステージで[ソーシャル](#social-authentication)対応を追加すると、柔軟性が高まり、各種のソーシャルログイン[プロバイダー](/docs/ja-jp/connections/identity-providers-social)がすでに保管している情報を活用して、ユーザーに質問することなく、ユーザーについての理解を深めることができます。
 
 既存のレガシーIDストアがある場合には、「[ユーザーの移行](/docs/ja-jp/get-started/architecture-scenarios/business-to-consumer/provisioning)」も併せて参照してください。そのセクションには、安全性とセキュリティー保護の面で、Auth0が管理するIDストレージへ移行することの利点が説明されています。
 
@@ -51,7 +51,7 @@ Auth0の[ユニバーサルログイン](#universal-login)は、サインイン�
 
 ### ベストプラクティス
 
-1つ以上のアプリケーションがある場合、ベストプラクティスは、[「一元化された場所」](/docs/universal-login)にリダイレクトし、ユーザーを認証することです。Auth0を使用する場合、これは[ユニバーサルログイン](/docs/universal-login)を活用することを意味します。[SSO](/docs/sso/current)を含む多くのセキュリティとユーザーエクスペリエンスの利点が、すぐに利用できます。
+1つ以上のアプリケーションがある場合、ベストプラクティスは、[「一元化された場所」](/docs/ja-jp/universal-login)にリダイレクトし、ユーザーを認証することです。Auth0を使用する場合、これは[ユニバーサルログイン](/docs/ja-jp/universal-login)を活用することを意味します。[SSO](/docs/ja-jp/sso/current)を含む多くのセキュリティとユーザーエクスペリエンスの利点が、すぐに利用できます。
 
 Auth0のユニバーサルログインでは、ユーザーの認証が以下の手軽な3ステップで完成し、プロセスが短く簡単になります（Quickstartsに実践的な説明があります。また、SDKを使うと複雑な手間を省くことができます）。
 
@@ -84,7 +84,7 @@ Organizationが2つ以上のIdPを必要とする場合、2巡目のHome Realm D
 
 ユーザーが1つのIDを使って複数の組織で共有されている場合には、[ユニバーサルログインページをHRD](#hrd-through-universal-login)に対応させる必要があります。ユニバーサルログインはユーザーを識別してから、そのユーザーに適したレルムを表示するため、ユーザーエクスペリエンスの向上に繋がります。
 
-組織や接続のパラメーターは、ユーザーを`/authorize`エンドポイントにリダイレクトする際にクエリパラメーターとして追加することにより送信できます。詳細については、[Authentication APIのドキュメント](/docs/api/authentication#authorization-code-flow)を参照してください。一般的に、アプリケーションの作成に使った言語が何であっても、これにはSDKを活用することができます。
+組織や接続のパラメーターは、ユーザーを`/authorize`エンドポイントにリダイレクトする際にクエリパラメーターとして追加することにより送信できます。詳細については、[Authentication APIのドキュメント](/docs/ja-jp/api/authentication#authorization-code-flow)を参照してください。一般的に、アプリケーションの作成に使った言語が何であっても、これにはSDKを活用することができます。
 
 ### ユニバーサルログインを使ったHRD
 
@@ -129,7 +129,7 @@ HRDには主に以下の3つの方法があります。
 
 ほとんどすべてのB2Cアプリケーションは、顧客が新しい資格情報セットを作成できる機能性を提供しています。すべてのユーザーに慣れ親しまれている、一般的な認証形式です。
 
-Auth0には、さまざまなユーザー名とパスワードの認証があります。アプリケーションが生まれたばかりで、既存のユーザーベースがない場合には、Auth0提供のそのままで使える簡素な[データベース接続](/docs/connections/database)が、ユーザーを認証し始めるのに必要なすべてを備えており便利です。しかし、レガシーのユーザーストア（独自のユーザーデータベースや既存のLDAPシステムなど）がある場合、「[ユーザーの移行](/docs/ja-jp/get-started/architecture-scenarios/business-to-business/provisioning)」のガイダンスにもあるように、ユーザーを移行する2つの方法があります。
+Auth0には、さまざまなユーザー名とパスワードの認証があります。アプリケーションが生まれたばかりで、既存のユーザーベースがない場合には、Auth0提供のそのままで使える簡素な[データベース接続](/docs/ja-jp/connections/database)が、ユーザーを認証し始めるのに必要なすべてを備えており便利です。しかし、レガシーのユーザーストア（独自のユーザーデータベースや既存のLDAPシステムなど）がある場合、「[ユーザーの移行](/docs/ja-jp/get-started/architecture-scenarios/business-to-business/provisioning)」のガイダンスにもあるように、ユーザーを移行する2つの方法があります。
 
 データベース接続のためにユーザーをどのようにプロビジョニングしたとしても、ユーザー認証は非常に似通っています。ユーザー名とパスワードの入力フォームをユーザーに提供する必要があります。[ユニバーサルログイン](#universal-login)のガイダンスでも説明したように、ユーザー名とパスワードを使ったユーザー認証で最もシンプルかつ安全な方法は、中央管理のログインページにリダイレクトして、そこでユーザー名とパスワードを収集することです。そうすると、Auth0がすでに認証済みかを判断し、必要でない場合にはログインフォームを完全にスキップできるようになります。
 
@@ -161,7 +161,7 @@ Auth0には、さまざまなユーザー名とパスワードの認証があり
   + 同じAuth0テナントを使用した別のアプリケーションにすでにアクセスしたことがあるか
   + これまでに（または最近）そのデバイスまたはブラウザーを使って認証したことがあるか
 
-匿名ユーザーがアプリケーションにアクセスする際には、ユーザーがすでに同じ系列の別のアプリケーションにログイン済みかをアプリケーションが発見できる、または、アプリケーションが状態のない[SPA](/docs/quickstart/spa)だとしても、ユーザーを覚えていることができる方が望ましいことがよくあります。たとえば、ユーザーがすでにログイン済みだと分かれば、アプリケーションのUIヘッダーにログインボタンを表示しないで、代わりにユーザーのアカウントやプロファイルのメニューを表示することができます。これを行うには、「[サイレント認証](/docs/ja-jp/authenticate/login/configure-silent-authentication)」を活用することになります。サイレント認証を使用すると、ユーザーにログインを促すことなく、ユーザーがログイン済みかを確認できます。ログインしていない場合、アプリケーションは必要に応じてログインボタンを表示することができます。ユーザーがすでにログイン済みの場合には、トークンを受け取るため、ログインボタンを再度ユーザーに表示する必要はありません。
+匿名ユーザーがアプリケーションにアクセスする際には、ユーザーがすでに同じ系列の別のアプリケーションにログイン済みかをアプリケーションが発見できる、または、アプリケーションが状態のない[SPA](/docs/ja-jp/quickstart/spa)だとしても、ユーザーを覚えていることができる方が望ましいことがよくあります。たとえば、ユーザーがすでにログイン済みだと分かれば、アプリケーションのUIヘッダーにログインボタンを表示しないで、代わりにユーザーのアカウントやプロファイルのメニューを表示することができます。これを行うには、「[サイレント認証](/docs/ja-jp/authenticate/login/configure-silent-authentication)」を活用することになります。サイレント認証を使用すると、ユーザーにログインを促すことなく、ユーザーがログイン済みかを確認できます。ログインしていない場合、アプリケーションは必要に応じてログインボタンを表示することができます。ユーザーがすでにログイン済みの場合には、トークンを受け取るため、ログインボタンを再度ユーザーに表示する必要はありません。
 
 <Warning>
 
@@ -194,7 +194,7 @@ Management APIへの呼び出しには[Auth0レート制限ポリシー](https:/
 
 <Warning>
 
-公開する前に、各アプリケーションで使用している付与**のみ**が[アプリケーションの構成](/docs/get-started/applications/update-grant-types)で有効になっていることを確認してください。
+公開する前に、各アプリケーションで使用している付与**のみ**が[アプリケーションの構成](/docs/ja-jp/get-started/applications/update-grant-types)で有効になっていることを確認してください。
 
 </Warning>
 
@@ -206,7 +206,7 @@ SDKが認可コード付与のみに対応しているか、アクセストー�
 
 Auth0では、IDトークンのみを必要とするブラウザーベースのアプリケーションに対して暗黙の付与を使用することが可能ですが、[PKCE](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce)を使った認可コード付与を推奨しています。詳細については、Auth0ブログの「[OAuth2の暗黙の付与とSPA](https://auth0.com/blog/oauth2-implicit-grant-and-spa/)」を参照してください。
 
-ユーザーを再認証することなく新しいアクセストークンやIDトークンを取得できるように[フレッシュトークン](/docs/ja-jp/secure/tokens/refresh-tokens)が必要な場合は、[認可コード付与](/docs/get-started/authentication-and-authorization-flow/authorization-code-flow/call-your-api-using-the-authorization-code-flow)を使用する必要があります。
+ユーザーを再認証することなく新しいアクセストークンやIDトークンを取得できるように[フレッシュトークン](/docs/ja-jp/secure/tokens/refresh-tokens)が必要な場合は、[認可コード付与](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow/call-your-api-using-the-authorization-code-flow)を使用する必要があります。
 
 </Warning>
 
@@ -216,14 +216,14 @@ Auth0では、IDトークンのみを必要とするブラウザーベースの�
 
 ### ベストプラクティス
 
-Auth0では異常の検出を水面下で行っており、お客様の製品に優れた安全機能を提供しています。この機能を活用するには、ユーザーへのメール配信を開始する前に、[メールプロバイダー](/docs/architecture-scenarios/b2b/operations#email-provider-setup)のセットアップと、[メールテンプレート](/docs/architecture-scenarios/b2b/branding#email-template-customization)の構成を行ってください。
+Auth0では異常の検出を水面下で行っており、お客様の製品に優れた安全機能を提供しています。この機能を活用するには、ユーザーへのメール配信を開始する前に、[メールプロバイダー](/docs/ja-jp/architecture-scenarios/b2b/operations#email-provider-setup)のセットアップと、[メールテンプレート](/docs/ja-jp/architecture-scenarios/b2b/branding#email-template-customization)の構成を行ってください。
 
 ## レガシーシステムを使ったSSO
 
 大規模な再編成では、すべてのアプリケーションを一度に更新することが常に可能（または現実的）だとは限りません。実際に、Auth0との統合に関して推奨されるベストプラクティスは、繰り返し（反復的に）更新する方法で計画することです。アプリケーションがすでにシングルサインオン（SSO）を利用し、レガシーシステムがOIDCや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">SAML</Tooltip>などのプロトコルに対応していて、Auth0と統合しながらもSSOを引き続き提供したい場合には、以下の2つのオプションがあります。
 
 * レガシーのSSOシステムに既存のIDプロバイダーを更新して、ログイン（[SAML](/docs/ja-jp/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider)を使うなど）はAuth0にリダイレクトする
-* ログインでは、Auth0がレガシーのSSOシステムにリダイレクトする。これには、レガシーシステムをAuth0でIdPとして構成（[SAML](/docs/ja-jp/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-service-provider)または[OIDC](/docs/connections/identity-providers-social)を使用）する必要があります。
+* ログインでは、Auth0がレガシーのSSOシステムにリダイレクトする。これには、レガシーシステムをAuth0でIdPとして構成（[SAML](/docs/ja-jp/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-service-provider)または[OIDC](/docs/ja-jp/connections/identity-providers-social)を使用）する必要があります。
 
 ### ベストプラクティス
 
@@ -233,7 +233,7 @@ Auth0では異常の検出を水面下で行っており、お客様の製品に
 
 ## エンタープライズログイン
 
-Bring Your Own Identity（BYOI：個人IDの持ち込み）のシナリオは、ほとんどすべてのB2Bアプリケーションに必須となりつつあります。ほとんどの大企業は、社員が別の資格情報セットを保管しなくてもいいように、独自のIdPをアプリケーションに統合することを期待しています。これは、セキュリティを危険にさらすことなく、ユーザー認証エクスペリエンスを簡素化できる貴重な方法です。[ユニバーサルログイン](#universal-login)を使用すると、変更に伴う影響を最小限に抑えつつ[エンタープライズ接続](/docs/connections/identity-providers-enterprise)への対応を追加しやすくなります。
+Bring Your Own Identity（BYOI：個人IDの持ち込み）のシナリオは、ほとんどすべてのB2Bアプリケーションに必須となりつつあります。ほとんどの大企業は、社員が別の資格情報セットを保管しなくてもいいように、独自のIdPをアプリケーションに統合することを期待しています。これは、セキュリティを危険にさらすことなく、ユーザー認証エクスペリエンスを簡素化できる貴重な方法です。[ユニバーサルログイン](#universal-login)を使用すると、変更に伴う影響を最小限に抑えつつ[エンタープライズ接続](/docs/ja-jp/connections/identity-providers-enterprise)への対応を追加しやすくなります。
 
 ### ベストプラクティス
 
@@ -243,7 +243,7 @@ Bring Your Own Identity（BYOI：個人IDの持ち込み）のシナリオは、
 
 ### ベストプラクティス
 
-「独自IDの使用」は提供する価値のある素晴らしい機能ですが、これを最初からサポートしていない場合、また場合によってはサポートしていても、長期間アプリケーションを使用してきた後では独自のIdPに切り替えたいOrganizationがあるかもしれません。旧来のデータベースIDに新しいIDを関連付ける効果的な方法を提供するためには、[ユーザーアカウントをリンクする](/docs/users/concepts/overview-user-account-linking)方法が必要になるでしょう。
+「独自IDの使用」は提供する価値のある素晴らしい機能ですが、これを最初からサポートしていない場合、また場合によってはサポートしていても、長期間アプリケーションを使用してきた後では独自のIdPに切り替えたいOrganizationがあるかもしれません。旧来のデータベースIDに新しいIDを関連付ける効果的な方法を提供するためには、[ユーザーアカウントをリンクする](/docs/ja-jp/users/concepts/overview-user-account-linking)方法が必要になるでしょう。
 
 ## 多要素認証（MFA）
 

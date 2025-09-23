@@ -1,17 +1,17 @@
 ---
 title: "組織の接続を有効にする"
 permalink: "enable-connections"
+'description': "Auth0 DashboardとManagement APIを使用して組織の接続を有効にする方法を説明します。"
 'og:title': "組織の接続を有効にする"
 'og:description': "Auth0 DashboardとManagement APIを使用して組織の接続を有効にする方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "組織の接続を有効にする"
 'twitter:description': "Auth0 DashboardとManagement APIを使用して組織の接続を有効にする方法を説明します。"
 ---
-# 組織の接続を有効にする
 
 [組織](/docs/ja-jp/manage-users/organizations/organizations-overview)のそれぞれに特定の接続を有効化すると、ユーザーに異なるログインオプションを提供できるようになります。有効にした接続は組織のログインプロンプトに追加され、ユーザーがその接続を使ってアプリケーションにアクセスできるようになります。
 
-組織に接続を有効にするには、テナントにその接続がなくては**なりません**。サポートされている接続には[データベース接続](/docs/connections/database)、[ソーシャル接続](/docs/connections/identity-providers-social)や[エンタープライズ接続](/docs/connections/identity-providers-enterprise)が含まれます。
+組織に接続を有効にするには、テナントにその接続がなくては**なりません**。サポートされている接続には[データベース接続](/docs/ja-jp/connections/database)、[ソーシャル接続](/docs/ja-jp/connections/identity-providers-social)や[エンタープライズ接続](/docs/ja-jp/connections/identity-providers-enterprise)が含まれます。
 
 ## 組織のプロパティ
 
@@ -92,15 +92,15 @@ Management APIを使って接続を有効にするには以下を行います。
 * **エンタープライズ接続のみ**：接続ボタンの設定に合わせて、`{showAsButtonOption}`を`true`または`false`に置き換えます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -110,7 +110,7 @@ request.AddParameter("application/json", "{ \"connection_id\": \"{connectionId}\
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -131,8 +131,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections")
 .header("content-type", "application/json")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
@@ -141,7 +141,7 @@ HttpResponse response = Unirest.post("https://%7ByourAuth0Domain%7D/api/v2/organ
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -158,8 +158,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer {yourMgmtApiAccessToken}",
@@ -184,7 +184,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections",
@@ -209,8 +209,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }"
@@ -225,7 +225,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -240,8 +240,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -286,28 +286,28 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>{orgId}</code></td>
+<td>`{orgId}`</td>
 <td>接続を有効にしたい組織のID。</td>
 </tr>
 <tr>
-<td><code>{mgmtApiAccessToken}</code></td>
-<td><code>create:organization_connections</code>のスコープを持つ［Management APIアクセストークン］（/tokens/management-api-access-tokens）</td>
+<td>`{mgmtApiAccessToken}`</td>
+<td>`create:organization_connections`のスコープを持つ［Management APIアクセストークン］（/tokens/management-api-access-tokens）</td>
 </tr>
 <tr>
-<td><code>{connectionId}</code></td>
+<td>`{connectionId}`</td>
 <td>特定の組織に有効化したい接続のID。</td>
 </tr>
 <tr>
-<td><code>{assignMembershipOption}</code></td>
-<td>この接続を使ってログインするユーザーに対して、組織のメンバーシップを自動的に付与したいかを指定する。<code>true</code>に設定すると、ユーザーに対して自動的にメンバーシップが付与されます。<code>false</code>に設定すると、メンバーシップは自動的に付与されません。</td>
+<td>`{assignMembershipOption}`</td>
+<td>この接続を使ってログインするユーザーに対して、組織のメンバーシップを自動的に付与したいかを指定する。`true`に設定すると、ユーザーに対して自動的にメンバーシップが付与されます。`false`に設定すると、メンバーシップは自動的に付与されません。</td>
 </tr>
 <tr>
-<td><code>{isSignupEnabled}</code></td>
-<td>ユーザーがログインプロンプトでセルフサービスのサインアップリンクにアクセスできるかどうかを指定します。<code>true</code>に設定すると、プロンプトにサインアップリンクが表示されます。<code>false</code>に設定すると、リンクは表示されません。<br/><br/><strong>注</strong>：このオプションを有効にするには、<code>{assignMembershipOption}</code>も<code>true</code>に設定する必要があります。</td>
+<td>`{isSignupEnabled}`</td>
+<td>ユーザーがログインプロンプトでセルフサービスのサインアップリンクにアクセスできるかどうかを指定します。`true`に設定すると、プロンプトにサインアップリンクが表示されます。`false`に設定すると、リンクは表示されません。<br/><br/><strong>注</strong>：このオプションを有効にするには、`{assignMembershipOption}`も`true`に設定する必要があります。</td>
 </tr>
 <tr>
-<td><code>{showAsButtonOption}</code></td>
-<td>組織のログインプロンプトに特定のエンタープライズ接続をオプションとして表示したいかを指定します。<code>true</code>に設定すると、プロンプトに接続がボタンとして表示されます。<code>false</code>に設定すると、プロンプトに接続は表示されません。</td>
+<td>`{showAsButtonOption}`</td>
+<td>組織のログインプロンプトに特定のエンタープライズ接続をオプションとして表示したいかを指定します。`true`に設定すると、プロンプトに接続がボタンとして表示されます。`false`に設定すると、プロンプトに接続は表示されません。</td>
 </tr>
 </tbody>
 </table>
@@ -326,37 +326,37 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>201</code></td>
+<td>`201`</td>
 <td></td>
 <td>接続が組織に正常に追加されました。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>無効なトークンです。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>JSON Web Tokenの検証に無効な署名を受信しました。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>401</code></td>
+<td>`401`</td>
 <td></td>
 <td>クライアントがグローバルではありません。</td>
 <td></td>
 </tr>
 <tr>
-<td><code>403</code></td>
-<td><code>insufficient_scope</code></td>
-<td>スコープが不足しています。<code>create:organizations_connections</code>のいずれかが予期されています。</td>
+<td>`403`</td>
+<td>`insufficient_scope`</td>
+<td>スコープが不足しています。`create:organizations_connections`のいずれかが予期されています。</td>
 <td>提供されたベアラートークンのスコープでは許可されないフィールドの読み込み/書き込みが試行された。</td>
 </tr>
 <tr>
-<td><code>429</code></td>
+<td>`429`</td>
 <td></td>
 <td>要求が多すぎます。X-RateLimit-Limit、X-RateLimit-Remaining、X-RateLimit-Resetヘッダーを確認してください。</td>
 <td></td>

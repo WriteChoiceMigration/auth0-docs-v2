@@ -1,17 +1,17 @@
 ---
 title: "Auth0をサービス プロバイダーおよびIDプロバイダーとして使用したSAML SSOのテスト"
 permalink: "configure-auth0-as-service-and-identity-provider"
+'description': "テスト用に、サービスプロバイダーとIDプロバイダーの両方としてAuth0を使用したSAML SSOを構成する方法について説明します。"
 'og:title': "Auth0をサービス プロバイダーおよびIDプロバイダーとして使用したSAML SSOのテスト"
 'og:description': "テスト用に、サービスプロバイダーとIDプロバイダーの両方としてAuth0を使用したSAML SSOを構成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0をサービス プロバイダーおよびIDプロバイダーとして使用したSAML SSOのテスト"
 'twitter:description': "テスト用に、サービスプロバイダーとIDプロバイダーの両方としてAuth0を使用したSAML SSOを構成する方法について説明します。"
 ---
-# Auth0をサービス プロバイダーおよびIDプロバイダーとして使用したSAML SSOのテスト
 
 Auth0をサービス プロバイダー（SP）と IDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>）の両方として構成して、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip> シングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SSO</Tooltip>）接続をテストできます。
 
-<Frame>![プロトコル - SAML SPとしてのAuth0とIdPの図](//images.ctfassets.net/cdy7uua7fh8z/7Ds9dLC3HaxGBLsG3ry7B9/b37a1c5dd22584c3af633b402ab68705/saml-case3.png)</Frame>
+<Frame>![プロトコル - SAML SPとしてのAuth0とIdPの図](/images/ja-jp/cdy7uua7fh8z/7Ds9dLC3HaxGBLsG3ry7B9/b37a1c5dd22584c3af633b402ab68705/saml-case3.png)</Frame>
 
 Auth0は、SAML 1.1またはSAML 2.0を使用したSAML構成でSPとしてのAuth0の使用のみをサポートしますが、SAML 2.0を使用したSAML構成ではIdPとしてAuth0を使用できます。
 
@@ -23,7 +23,7 @@ SAML IdPとして機能するセカンダリAuth0テナントがまだない場�
 
 1. [［Auth0 Dashboard］](https://manage.auth0.com/#/)に移動し、テナント名を選択して**［Create Tenant（テナントの作成）］**を選択します。
 
-   <Frame>![Dashboardのテナントのドロップダウンメニューにあるテナントの作成](//images.ctfassets.net/cdy7uua7fh8z/53KetqhNIGDs6N5cqJdQtz/56bfc6db04fcd17ef7440c9bfc95e885/2025-01-09_14-07-38.png)</Frame>
+   <Frame>![Dashboardのテナントのドロップダウンメニューにあるテナントの作成](/images/ja-jp/cdy7uua7fh8z/53KetqhNIGDs6N5cqJdQtz/56bfc6db04fcd17ef7440c9bfc95e885/2025-01-09_14-07-38.png)</Frame>
 
 2. **［Domain（ドメイン）］**を入力し、**［Region（リージョン）］**を選択して、**［Create（作成）］**をクリックします。
 
@@ -64,7 +64,7 @@ SAMLプロトコルを使用してSSOのIdPテナントと通信するようにS
 <tbody>
 <tr>
 <td>Connection Name（接続名）</td>
-<td><code>SAML-Auth0-IDP</code>などの名前を入力します。</td>
+<td>`SAML-Auth0-IDP`などの名前を入力します。</td>
 </tr>
 <tr>
 <td>Sign In URL（サインインURL）</td>
@@ -76,7 +76,7 @@ SAMLプロトコルを使用してSSOのIdPテナントと通信するようにS
 </tr>
 <tr>
 <td>X509 Signing Certificate（X509署名証明書）</td>
-<td>赤の**［UPLOAD CERTIFICATE...（証明書のアップロード）］**ボタンをクリックし、上でダウンロードした<code>.pem</code>ファイルを選択します。</td>
+<td>赤の**［UPLOAD CERTIFICATE...（証明書のアップロード）］**ボタンをクリックし、上でダウンロードした`.pem`ファイルを選択します。</td>
 </tr>
 </tbody>
 </table>
@@ -135,7 +135,7 @@ SAMLログインシーケンスをトリガーするLockウィジェットを呼
 
 1. HTMLページを作成し、次のHTMLとJavaScriptコードを挿入します。`{yourClientId}`と`{yourDomain}`を、上記で登録したアプリケーションの実際の値に置き換えます。（これらの値をメモしていない場合は、SPテナントの**［Application Settings（アプリケーションの設定）］**で確認できます。）
 
-   ```
+   ``` lines
    <!DOCTYPE html>
    <html lang="en">
    <body>

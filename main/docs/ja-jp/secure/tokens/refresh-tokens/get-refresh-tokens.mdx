@@ -1,19 +1,19 @@
 ---
 title: "リフレッシュトークンの取得"
 permalink: "get-refresh-tokens"
+'description': "認可エンドポイントを使用して要求を開始する際に、リフレッシュトークンを取得する方法について説明します。"
 'og:title': "リフレッシュトークンの取得"
 'og:description': "認可エンドポイントを使用して要求を開始する際に、リフレッシュトークンを取得する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "リフレッシュトークンの取得"
 'twitter:description': "認可エンドポイントを使用して要求を開始する際に、リフレッシュトークンを取得する方法について説明します。"
 ---
-# リフレッシュトークンの取得
 
 リフレッシュトークンを取得するには、`/authorize`エンドポイントを通じて認証要求を開始する際に、`offline_access`[スコープ](/docs/ja-jp/get-started/apis/scopes)を含める必要があります。必ずAPIでオフラインアクセスを開始してください。詳細については、「[API設定](/docs/ja-jp/get-started/apis/api-settings)」をお読みください。
 
 たとえば、[認可コードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow)を使用している場合、認証要求は以下のようになります。
 
-```
+``` lines
 https://{yourDomain}/authorize?
     audience={API_AUDIENCE}&
     scope=offline_access&
@@ -28,7 +28,7 @@ https://{yourDomain}/authorize?
 ユーザー認証が成功すると、アプリケーションは`redirect_uri`にリダイレクトされ、URLの一部として`code`が付加されます（`{https://yourApp/callback}?code=BPPLN3Z4qCTvSNOy`）。`/oauth/token`エンドポイントを使用して、このコードをアクセストークンと交換できます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -37,8 +37,8 @@ curl --request POST \
 --data 'client_secret={yourClientSecret}' \
 --data 'code={yourAuthorizationCode}' \
 --data 'redirect_uri={https://yourApp/callback}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -46,7 +46,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=authorizat
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -65,15 +65,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=authorization_code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&code=%7ByourAuthorizationCode%7D&redirect_uri={https://yourApp/callback}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -92,8 +92,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=authorization_code" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -120,7 +120,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -143,8 +143,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=authorization_code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&code=%7ByourAuthorizationCode%7D&redirect_uri={https://yourApp/callback}"
@@ -155,7 +155,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -168,8 +168,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=authorization_code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&code=%7ByourAuthorizationCode%7D&redirect_uri={https://yourApp/callback}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=authorization_code".data(using: String.Encoding.utf8)!)
@@ -198,7 +198,7 @@ dataTask.resume()
 
 応答には、アクセストークンとリフレッシュトークンが含まれているはずです。
 
-```json
+```json lines
 {
       "access_token": "eyJz93a...k4laUWw",
       "refresh_token": "GEbRxBN...edjnXbL",

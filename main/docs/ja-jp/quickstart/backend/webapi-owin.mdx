@@ -1,12 +1,14 @@
 ---
 title: "Auth0"
 permalink: "webapi-owin"
+'description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:title': "Auth0"
 'og:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0"
 'twitter:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
 ---
+
 # ASP.NET Web API (OWIN): Authorization
 
 <Frame>![Gravatar for damien.guard@auth0.com](//www.gravatar.com/avatar/3afad8f8d76c39d8b5b82578f030c53f?d=mm&r=g&s=50)</Frame>
@@ -38,7 +40,7 @@ System requirements: Microsoft Visual Studio 2015 Update 3 | System.IdentityMode
 
 <Note>
 
-**New to Auth0?** Learn [how Auth0 works](/docs/overview) and read about [implementing API authentication and authorization](/docs/api-auth)  using the OAuth 2.0 framework.
+**New to Auth0?** Learn [how Auth0 works](/docs/ja-jp/overview) and read about [implementing API authentication and authorization](/docs/ja-jp/api-auth)  using the OAuth 2.0 framework.
 
 </Note>
 
@@ -50,7 +52,7 @@ In the [APIs](https://manage.auth0.com/#/apis) section of the Auth0 dashboard, c
 
 <Frame>![Create API](https://cdn2.auth0.com/docs/1.14567.0/media/articles/server-apis/create-api.png)</Frame>
 
-By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
+By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/ja-jp/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
 
 ### Define permissions
 
@@ -69,13 +71,13 @@ This example uses the `read:messages` scope.
 This example demonstrates:
 
 * How to check for a JSON Web Token (JWT) in the `Authorization` header of an incoming HTTP request.
-* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/tokens/guides/validate-access-tokens).
+* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/ja-jp/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/ja-jp/tokens/guides/validate-access-tokens).
 
 ## Configure the Sample Project
 
 The sample code has an `appsettings` section in `Web.config` which configures it to use the correct Auth0 **Domain** and **API Identifier** for your API. If you download the code from this page it will be automatically filled. If you use the example from Github, you will need to fill it yourself.
 
-```javascript
+```xml lines
 // web.config
 
 <appSettings>
@@ -90,7 +92,7 @@ The sample code has an `appsettings` section in `Web.config` which configures it
 
 To use Auth0 Access Tokens with ASP.NET you will use the OWIN JWT Middleware which is available in the `Microsoft.Owin.Security.Jwt` NuGet package.
 
-```
+```bash lines
 Install-Package Microsoft.Owin.Security.Jwt
 ```
 
@@ -104,7 +106,7 @@ Such a custom resolver was previously published as part of the `Auth0.OpenIdConn
 
 </Note>
 
-```
+```javascript lines
 public class OpenIdConnectSigningKeyResolver
 {
     private readonly OpenIdConnectConfiguration openIdConfig;
@@ -130,7 +132,7 @@ Go to the `Configuration` method of your `Startup` class and add a call to `UseJ
 
 The `JwtBearerAuthenticationOptions` needs to specify your Auth0 API Identifier in the `ValidAudience` property, and the full path to your Auth0 domain as the `ValidIssuer`. You will need to configure the `IssuerSigningKeyResolver` to use the instance of `OpenIdConnectSigningKeyResolver` to resolve the signing key:
 
-```javascript
+```csharp lines
 // Startup.cs
 
 public void Configuration(IAppBuilder app)
@@ -166,7 +168,7 @@ The JWT middleware above verifies that the Access Token included in the request 
 
 Create a class called `ScopeAuthorizeAttribute` which inherits from `System.Web.Http.AuthorizeAttribute`. This Authorization Attribute will check that the `scope` claim issued by your Auth0 tenant is present, and if so it will ensure that the `scope` claim contains the requested scope.
 
-```javascript
+```csharp lines
 // Controllers/ScopeAuthorizeAttribute.cs
 
 public class ScopeAuthorizeAttribute : AuthorizeAttribute
@@ -215,7 +217,7 @@ The routes shown below are available for the following requests:
 
 The JWT middleware integrates with the standard ASP.NET Authentication and Authorization mechanisms, so you only need to decorate your controller action with the `[Authorize]` attribute to secure an endpoint.
 
-```javascript
+```csharp lines
 // Controllers/ApiController.cs
 
 [RoutePrefix("api")]
@@ -236,7 +238,7 @@ public class ApiController : ApiController
 
 To ensure that a scope is present in order to call a particular API endpoint, you simply need to decorate the action with the `ScopeAuthorize` attribute and pass the name of the required `scope` in the `scope` parameter.
 
-```javascript
+```csharp lines
 // Controllers/ApiController.cs
 
 [RoutePrefix("api")]
@@ -257,7 +259,7 @@ public class ApiController : ApiController
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/ja-jp/identityproviders)[* Enable multifactor authentication](/docs/ja-jp/multifactor-authentication)[* Learn about attack protection](/docs/ja-jp/attack-protection)[* Learn about rules](/docs/ja-jp/rules)
 
 ---
 

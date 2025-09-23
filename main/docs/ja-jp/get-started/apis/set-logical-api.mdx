@@ -1,13 +1,13 @@
 ---
 title: "複数のAPIの論理APIを構成する"
 permalink: "set-logical-api"
+'description': "Auth0で単一の論理APIを使用して複数のAPIへのアクセスを表し、制御する方法を学びます。"
 'og:title': "複数のAPIの論理APIを構成する"
 'og:description': "Auth0で単一の論理APIを使用して複数のAPIへのアクセスを表し、制御する方法を学びます。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "複数のAPIの論理APIを構成する"
 'twitter:description': "Auth0で単一の論理APIを使用して複数のAPIへのアクセスを表し、制御する方法を学びます。"
 ---
-# 複数のAPIの論理APIを構成する
 
 論理的にはすべて同じAPIの一部である複数の異なる API 実装がある場合、Auth0ダッシュボードで単一の論理APIを使用してそれらを表すことで、承認プロセスを簡素化できます。これを行うと、適切なスコープを割り当てることで個々のAPIへのアクセスを制御しながら、1つの承認フローのみを実装できます。
 
@@ -39,7 +39,7 @@ permalink: "set-logical-api"
 
 ## アプリケーションの接続を有効にする
 
-新しく登録したアプリケーションにはユーザーのソースが必要なので、[接続](/docs/connections)を構成する必要があります。このサンプルでは、​​ユーザーのメールアドレスとパスワードのみを要求するシンプルな[データベース接続](/docs/connections/database)を作成します。詳細については、[データベース接続の設定](/docs/ja-jp/get-started/applications/set-up-database-connections)をお読みください。
+新しく登録したアプリケーションにはユーザーのソースが必要なので、[接続](/docs/ja-jp/connections)を構成する必要があります。このサンプルでは、​​ユーザーのメールアドレスとパスワードのみを要求するシンプルな[データベース接続](/docs/ja-jp/connections/database)を作成します。詳細については、[データベース接続の設定](/docs/ja-jp/get-started/applications/set-up-database-connections)をお読みください。
 
 ## テストユーザーを作成する
 
@@ -73,7 +73,7 @@ permalink: "set-logical-api"
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
    scope=read:contacts%20read:calendar&
    audience=organize&
@@ -87,19 +87,19 @@ permalink: "set-logical-api"
 
    
 
-   <Frame>![Example application sign in page](//images.ctfassets.net/cdy7uua7fh8z/1ogYIaeDdyGL3Qo511m6Sh/5ab97c1535b2b62523a367594d44d66f/home.png)</Frame>
+   <Frame>![Example application sign in page](/images/ja-jp/cdy7uua7fh8z/1ogYIaeDdyGL3Qo511m6Sh/5ab97c1535b2b62523a367594d44d66f/home.png)</Frame>
 
 2. Auth0承認サーバーはユーザーをログインページにリダイレクトし、ユーザーは構成されたログインオプションの1つを使用して認証します。
 
-   <Frame>![Lock login page](//images.ctfassets.net/cdy7uua7fh8z/6z6aA5nfA1uwOyx8srhvvI/2435a0909cfe44a57bef3ff27ef24e5b/lock.png)</Frame>
+   <Frame>![Lock login page](/images/ja-jp/cdy7uua7fh8z/6z6aA5nfA1uwOyx8srhvvI/2435a0909cfe44a57bef3ff27ef24e5b/lock.png)</Frame>
 
 3. ユーザーがこのフローを初めて通過する場合は、Auth0がSPAに付与する権限をリストした同意プロンプトが表示されます。この場合、ユーザーはアプリが連絡先とカレンダーを読み取ることに同意するよう求められます。
 
-   <Frame>![Example application Lock Consent screen](//images.ctfassets.net/cdy7uua7fh8z/1te4FYRbu0aFcdohdXY2Rv/116bed5515eb2114c39374fb0a258912/consent-screen.png)</Frame>
+   <Frame>![Example application Lock Consent screen](/images/ja-jp/cdy7uua7fh8z/1te4FYRbu0aFcdohdXY2Rv/116bed5515eb2114c39374fb0a258912/consent-screen.png)</Frame>
 
 4. ユーザーが同意すると、Auth0はURIのハッシュフラグメントにトークンを含むSPAにユーザーをリダイレクトします。SPAは、JavaScriptを使用してハッシュフラグメントからトークンを抽出し、ユーザーに代わってAPIを呼び出すことができるようになりました。
 
-   ```javascript
+   ```javascript lines
    function getParameterByName(name) {
      var match = RegExp('[#&]' + name + '=([^&]*)').exec(window.location.hash);
      return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
@@ -116,7 +116,7 @@ permalink: "set-logical-api"
 
 サンプルでは、​​ログインに成功すると、論理APIから取得したアクセストークンを使用していずれかのAPIを呼び出すためのボタンが表示されます。
 
-<Frame>![Example application user authorized screen](//images.ctfassets.net/cdy7uua7fh8z/2pGWG5Wa7U1tBPhAJZ7Bat/7e194066560605cc842f20624b80d958/apis.png)</Frame>
+<Frame>![Example application user authorized screen](/images/ja-jp/cdy7uua7fh8z/2pGWG5Wa7U1tBPhAJZ7Bat/7e194066560605cc842f20624b80d958/apis.png)</Frame>
 
 ### シングルログアウト（SLO）またはシングルサインオン（SSO）を実装する
 

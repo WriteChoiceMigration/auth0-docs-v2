@@ -1,13 +1,13 @@
 ---
 title: "GDPR：Lockで同意を追跡する"
 permalink: "gdpr-track-consent-with-lock"
+'description': "Lockをカスタマイズして同意情報を取得する方法について説明します。"
 'og:title': "GDPR：Lockで同意を追跡する"
 'og:description': "Lockをカスタマイズして同意情報を取得する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "GDPR：Lockで同意を追跡する"
 'twitter:description': "Lockをカスタマイズして同意情報を取得する方法について説明します。"
 ---
-# GDPR：Lockで同意を追跡する
 
 このチュートリアルでは、Lockを使用して同意情報を求め、その入力をユーザーのメタデータに保存する方法を説明します。詳細については、「[ユーザープロファイルでのメタデータの使い方](/docs/ja-jp/manage-users/user-accounts/metadata)」をお読みください。
 
@@ -25,7 +25,7 @@ permalink: "gdpr-track-consent-with-lock"
 
 簡素なJavaScriptのシングルページアプリケーションとデータベース接続を構成します（独自のデータベースをセットアップするのではなく、Auth0のインフラストラクチャを使用します）。
 
-アプリをゼロから構築するのではなく、[Auth0のJavaScriptのクイックスタートにあるサンプルを使用](/docs/quickstart/spa/vanillajs)します。また、アプリにログインを組み込むのではなく、Auth0のユニバーサルログインページを使用して、ユニバーサルログインエクスペリエンスを実装できるようにします。ユニバーサルログインの詳細については、「[Auth0のユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)」をお読みください。ユニバーサルログインと埋め込みログインの違いについては、「[中央集中型ユニバーサルログインと埋め込みログイン](/docs/ja-jp/authenticate/login/universal-vs-embedded-login)」をお読みください。
+アプリをゼロから構築するのではなく、[Auth0のJavaScriptのクイックスタートにあるサンプルを使用](/docs/ja-jp/quickstart/spa/vanillajs)します。また、アプリにログインを組み込むのではなく、Auth0のユニバーサルログインページを使用して、ユニバーサルログインエクスペリエンスを実装できるようにします。ユニバーサルログインの詳細については、「[Auth0のユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)」をお読みください。ユニバーサルログインと埋め込みログインの違いについては、「[中央集中型ユニバーサルログインと埋め込みログイン](/docs/ja-jp/authenticate/login/universal-vs-embedded-login)」をお読みください。
 
 さまざまなシナリオで同意情報を取得して、ユーザーのメタデータに保存します。
 
@@ -36,7 +36,7 @@ permalink: "gdpr-track-consent-with-lock"
 
 例：
 
-```json
+```json lines
 {
   "consentGiven": "true"
   "consentTimestamp": "1525101183"
@@ -58,7 +58,7 @@ permalink: "gdpr-track-consent-with-lock"
 3. **［Client Id（クライアントID）］**と**［Domain（ドメイン）］**の値をコピーします。これらは後で必要になります。
 4. [［Auth0 Dashboard］>［Authentication（認証）］>［Database（データベース）］](https://manage.auth0.com/#/connections/database)に移動して、新しい接続を作成します。**［Create DB Connection（データベース接続を作成する）］**をクリックし、新しい接続の名前を設定して**［Save（保存）］**をクリックします。[［Auth0 Dashboard］>［Authentication（認証）］>［Social（ソーシャル）］](https://manage.auth0.com/#/connections/social)に移動してソーシャル接続を有効化することもできます（このチュートリアルではGoogleログインを有効化します）。
 5. 接続の**［Applications（アプリケーション）］**タブに移動して、新たに作成したアプリケーションが有効になっていることを確認します。
-6. [JavaScript SPAのサンプルをダウンロード](/docs/quickstart/spa/vanillajs)します。
+6. [JavaScript SPAのサンプルをダウンロード](/docs/ja-jp/quickstart/spa/vanillajs)します。
 
 ## オプション1：利用規約へのリンクを表示する
 
@@ -71,7 +71,7 @@ permalink: "gdpr-track-consent-with-lock"
 3. **［Default Templates（デフォルトのテンプレート）］**ドロップダウンから［`Lock`］を選択します。コードブロックが自動的に入力されます。
 4. `consentGiven`メタデータのフィールドを追加するには、`mustAcceptTerms`オプションを使用します。利用規約やプライバシーポリシーへのリンクを含めるには、`languageDictionary`オプションを使用します。詳細については、「[Lock構成オプション](/docs/ja-jp/libraries/lock/lock-configuration)」をお読みください。以下の例では、フラグの横に［`I agree to the terms of service and privacy policy`（利用規約およびプライバシーポリシーに同意します）］というテキスト（両方のページへのリンクを含む）が表示されます。
 
-   ```javascript
+   ```javascript lines
    //code reducted for simplicity
        var lock = new Auth0Lock(config.clientID, config.auth0Domain, {
          auth: {
@@ -91,7 +91,7 @@ permalink: "gdpr-track-consent-with-lock"
 5. このフラグは、ユーザーがサインアップする前に規約に同意することを強制しますが、メタデータは一切設定しません。ユーザーの選択を`consentGiven`メタデータプロパティに保存するには、[新しいアクションを作成](/docs/ja-jp/customize/actions/write-your-first-action)します。アクションに分かりやすい**名前**（「`Set consent flag upon signup`（サインアップ時に同意フラグを設定）」など）を入力し、［`Login / Post Login`（ログイン/ログイン後）］トリガーを選択（アクションをログインフローに追加することになるため）してから、**［Create（作成）］**を選択します。
 6. 以下はアクションコードエディターの画面です。以下のJavaScriptコードをコピーし、アクションコードエディターに貼り付けてから、**［Save Draft（下書きを保存）］**を選択して変更内容を保存します。
 
-   ```
+   ``` lines
    exports.onExecutePostLogin = async (event, api) => {
      const { consentGiven } = event.user.user_metadata || {};
 
@@ -128,7 +128,7 @@ permalink: "gdpr-track-consent-with-lock"
 3. **［Default Templates（デフォルトのテンプレート）］**ドロップダウンから［`Lock`］を選択します。コードブロックが自動的に入力されます。
 4. `consentGiven`メタデータのフィールドを追加するには、`additionalSignUpFields`オプションを使用します。詳細については、「[Lock構成オプション](/docs/ja-jp/libraries/lock/lock-configuration)」をお読みください。以下の例では、種類を`checkbox`（ラベルあり）、ラベルを［`I consent to data processing`（データーの処理に同意します）］、デフォルト値を`checked`に設定します。
 
-   ```javascript
+   ```javascript lines
    //code reducted for simplicity
        var lock = new Auth0Lock(config.clientID, config.auth0Domain, {
          auth: {
@@ -164,7 +164,7 @@ permalink: "gdpr-track-consent-with-lock"
    * **値**：`your-consent-form-url.com`（同意フォームのURLが一般からのアクセスに公開されていることを確認してください）
 3. 以下のJavaScriptコードをコピーし、アクションコードエディターに貼り付けてから、**［Save Draft（下書きを保存）］**を選択して変更内容を保存します。
 
-   ```
+   ``` lines
    exports.onExecutePostLogin = async (event, api) => {
        const { consentGiven } = event.user.user_metadata || {};
 
@@ -207,7 +207,7 @@ permalink: "gdpr-track-consent-with-lock"
 
 1. アプリケーションをダウンロードしたフォルダーに移動して、以下を実行します。
 
-   ```
+   ``` lines
    npm install
        npm run
    ```
@@ -222,7 +222,7 @@ permalink: "gdpr-track-consent-with-lock"
 
    **［I agree（同意する）］**フラグを選択しないで**［Submit（送信）］**をクリックすると、「`Unauthorized.Check the console for details.`（許可されていません。コンソールで詳細を確認してください。）」というエラーが表示されます。コンソールには以下のJSONが表示されます。
 
-   ```json
+   ```json lines
    {
          error: "unauthorized", 
          errorDescription: "User did not consent!", 
@@ -238,7 +238,7 @@ permalink: "gdpr-track-consent-with-lock"
 6. [［Auth0 Dashboard］>［User Management（ユーザー管理）］>［Users（ユーザー）］](https://manage.auth0.com/#/users)に移動し、新規ユーザを検索します。
 7. **［User Details（ユーザーの詳細）］**に移動して、**［Metadata（メタデータ）］**セクションまでスクロールします。**［user_metadata］**テキスト領域に以下が表示されるはずです。
 
-   ```json
+   ```json lines
    {
          "consentGiven": "true"
          "consentTimestamp": "1525101183"

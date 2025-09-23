@@ -1,13 +1,13 @@
 ---
 title: "Auth0.Androidでトークンを保存および更新する"
 permalink: "auth0-android-save-and-renew-tokens"
+'description': "Auth0.Androidでユーザーをログインした状態にする"
 'og:title': "Auth0.Androidでトークンを保存および更新する"
 'og:description': "Auth0.Androidでユーザーをログインした状態にする"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0.Androidでトークンを保存および更新する"
 'twitter:description': "Auth0.Androidでユーザーをログインした状態にする"
 ---
-# Auth0.Androidでトークンを保存および更新する
 
 `offline_access`スコープを含んだまま認証を行う場合、新しいユーザートークンの要求に使用するリフレッシュトークンが返され、ユーザーに再認証を強制する必要はありません。
 
@@ -28,7 +28,7 @@ Credential Managers（資格情報マネージャー）は、Auth0.Android SDK�
 
 `AuthenticationAPIClient`および`Storage`実装を渡して、新しいインスタンスを作成します。
 
-```
+```kotlin lines
 val auth0 = Auth0(this)
 val apiClient = AuthenticationAPIClient(auth0)
 val manager = CredentialsManager(apiClient, SharedPreferencesStorage(this))
@@ -38,13 +38,13 @@ val manager = CredentialsManager(apiClient, SharedPreferencesStorage(this))
 
 保存された資格情報は、期限切れになっていないか更新可能である場合は有効であるとみなされます。ユーザーが既にログインしているか確認します。
 
-```
+``` lines
 val loggedIn = manager.hasValidCredentials()
 ```
 
 ユーザーをアプリケーションからログアウトするには、保存された資格情報を削除し、ユーザーをログイン画面に誘導します。
 
-```
+``` lines
 manager.clearCredentials()
 ```
 
@@ -52,7 +52,7 @@ manager.clearCredentials()
 
 資格情報はAuth0 Serversに対して更新される必要があるため、この方法は非同期です。資格情報を受信したいコールバック実装を渡します。正常に実行された後、この方法で返される資格情報は常に有効です。
 
-```
+```kotlin lines
 manager.getCredentials(object: Callback<Credentials, CredentialsManagerException>() {
     override fun onSuccess(credentials: Credentials) {
         // Use credentials
@@ -70,7 +70,7 @@ manager.getCredentials(object: Callback<Credentials, CredentialsManagerException
 
 マネージャーで認証中に取得した資格情報を保存することができます。
 
-```
+``` lines
 manager.saveCredentials(credentials)
 ```
 
@@ -80,7 +80,7 @@ manager.saveCredentials(credentials)
 
 有効なAndroid `Context`、`AuthenticationAPIClient`、および`Storage`実装を渡して、新しいインスタンスを作成します。
 
-```
+```kotlin lines
 val auth0 = Auth0(this)
 val apiClient = AuthenticationAPIClient(auth0)
 val manager = SecureCredentialsManager(this, apiClient, SharedPreferencesStorage(this))
@@ -102,7 +102,7 @@ val manager = SecureCredentialsManager(this, apiClient, SharedPreferencesStorage
 
 また、アクティビティの結果からの要求コードが一致するように、要求コード定数を定義します。
 
-```
+```kotlin lines
 companion object {
   const val RC_UNLOCK_AUTHENTICATION = 123
 }
@@ -115,7 +115,7 @@ val available = manager.requireAuthentication(this, RC_UNLOCK_AUTHENTICATION, ge
 
 受け取った要求コードが構成手順で使用されたものに一致することを確認したら、受信したパラメーターをマネージャーにリダイレクトし、認証を終了します。資格情報が元のコールバックに渡ります。
 
-```
+```kotlin lines
 override fun onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == RC_UNLOCK_AUTHENTICATION && manager.checkAuthenticationResult(requestCode, resultCode)) {
         return

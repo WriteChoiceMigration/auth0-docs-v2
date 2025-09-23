@@ -1,19 +1,19 @@
 ---
 title: "Event Testing, Observability, and Failure Recovery"
 permalink: "event-testing-observability-and-failure-recovery"
+'description': "Learn more about testing and managing your events and event streams. "
 'og:title': "Event Testing, Observability, and Failure Recovery"
 'og:description': "Learn more about testing and managing your events and event streams. "
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Event Testing, Observability, and Failure Recovery"
 'twitter:description': "Learn more about testing and managing your events and event streams. "
 ---
-# Event Testing, Observability, and Failure Recovery
 
 <Warning>
 
-**Events are currently available in** [Early Access](/docs/troubleshoot/product-lifecycle/product-release-stages). By using this feature, you agree to the applicable Free Trial terms in Okta’s [Master Subscription Agreement](https://www.okta.com/legal/?_gl=1*agihqh*_gcl_au*NjM2NjA1MDg4LjE3NTM5ODE4NjY.*_ga*MTgyNDA4MjM2Ny4xNzE1MTAyMjQy*_ga_QKMSDV5369*czE3NTQ0NzQ3NTAkbzM1MyRnMSR0MTc1NDQ3NjU5MCRqNiRsMCRoMA..).
+**Events are currently available in Early Access**.
 
-To learn more about Auth0's product release cycle, review [Product Release Stages](/docs/troubleshoot/product-lifecycle/product-release-stages).
+To learn more about Auth0's product release cycle, review [Product Release Stages](/docs/ja-jp/troubleshoot/product-lifecycle/product-release-stages).
 
 </Warning>
 
@@ -27,13 +27,13 @@ To test your event stream, first create a user for your application by running t
 
 <Tabs><Tab title="Auth0 CLI">
 
-```
+``` lines
 auth0 users create # follow prompts to create a test user
 ```
 
 </Tab><Tab title="cURL">
 
-```bash
+```bash lines
 curl -s \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
@@ -49,7 +49,7 @@ curl -s \
 
 After the user is created, it should trigger the `user.created` event in your event stream and return a response. In this example, webhooks are used to facilitate the event stream.
 
-```
+```json lines
 Webhook received: {
   "id": "evt_6SfwXrtm8nVcjzzNCFFH1L",
   "source": "urn:auth0:",
@@ -86,13 +86,13 @@ You can list the event delivery failures for a specific event stream by running:
 
 <Tabs><Tab title="Auth0 CLI">
 
-```
+``` lines
 auth0 api get event-streams/$EVENT_STREAM_ID/deliveries
 ```
 
 </Tab><Tab title="cURL">
 
-```bash
+```bash lines
 curl -s -H "Authorization: Bearer $TOKEN" \
   "https://$TENANT/api/v2/event-streams/${EVENT_STREAM_ID}/deliveries" | jq .
 ```
@@ -111,13 +111,13 @@ Poll the Deliveries endpoint every **5 minutes** to check for failed events. Use
 
 <Tabs><Tab title="Auth0 CLI">
 
-```
+``` lines
 auth0 api get event-streams/$EVENT_STREAM_ID/deliveries
 ```
 
 </Tab><Tab title="cURL">
 
-```bash
+```bash lines
 curl -s -H "Authorization: Bearer $TOKEN" \
   "https://$TENANT/api/v2/event-streams/${EVENT_STREAM_ID}/deliveries" | jq .
 ```
@@ -141,14 +141,14 @@ To retry a specific failed event, use:
 
 <Tabs><Tab title="Auth0 CLI">
 
-```
+``` lines
 EVENT_ID=<your event id>
 auth0 api POST event-streams/$EVENT_STREAM_ID/redeliver/$EVENT_ID --data '{}'
 ```
 
 </Tab><Tab title="cURL">
 
-```bash
+```bash lines
 curl -s -X POST -H "Authorization: Bearer $TOKEN" \
   "https://<your-domain>/api/v2/event-streams/$EVENT_STREAM_ID/redeliver/$EVENT_ID"
 ```
@@ -161,13 +161,13 @@ To retry all failed events in the event stream:
 
 <Tabs><Tab title="Auth0 CLI">
 
-```
+``` lines
 auth0 api POST event-streams/$EVENT_STREAM_ID/redeliver --data '{}'
 ```
 
 </Tab><Tab title="cURL">
 
-```bash
+```bash lines
 curl -s -X POST -H "Authorization: Bearer $TOKEN" \
   "https://<your-tenant>.auth0.com/api/v2/event-streams/<event_stream_id>/redeliver"
 ```

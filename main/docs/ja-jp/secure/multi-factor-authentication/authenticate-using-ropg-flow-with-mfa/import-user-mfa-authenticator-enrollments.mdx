@@ -1,13 +1,13 @@
 ---
 title: "ユーザーのMFA認証システム登録のインポート"
 permalink: "import-user-mfa-authenticator-enrollments"
+'description': "既存のユーザーのMFA登録をインポートする方法について説明します。"
 'og:title': "ユーザーのMFA認証システム登録のインポート"
 'og:description': "既存のユーザーのMFA登録をインポートする方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユーザーのMFA認証システム登録のインポート"
 'twitter:description': "既存のユーザーのMFA登録をインポートする方法について説明します。"
 ---
-# ユーザーのMFA認証システム登録のインポート
 
 [自動移行](/docs/ja-jp/manage-users/user-migration/configure-automatic-migration-from-your-database)と[一括ユーザーインポート](/docs/ja-jp/manage-users/user-migration/bulk-user-imports)を使用して、ユーザーの<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>登録をインポートできます。サポートされている登録タイプは次のとおりです。
 
@@ -23,7 +23,7 @@ MFA登録をインポートすると、移行後にユーザーが再登録す�
 
 スキーマは、次の両方のワークフローのMFA要素に適用されます。
 
-```json
+```json lines
 {
     "type": "array",
     "items": {
@@ -76,11 +76,11 @@ MFA登録をインポートすると、移行後にユーザーが再登録す�
 
 ## 自動移行
 
-MFA登録は、[自動移行](/docs/connections/database/custom-db/overview-custom-db-connections#automatic-migration-scenario)中にインポートすることもできます。これは、カスタムDB[ログインスクリプト](/docs/ja-jp/authenticate/database-connections/custom-db/templates/login)の最後にコールバックに提供されるユーザーの`mfa_factors`フィールドに既存の登録を提供することで実現できます。
+MFA登録は、[自動移行](/docs/ja-jp/connections/database/custom-db/overview-custom-db-connections#automatic-migration-scenario)中にインポートすることもできます。これは、カスタムDB[ログインスクリプト](/docs/ja-jp/authenticate/database-connections/custom-db/templates/login)の最後にコールバックに提供されるユーザーの`mfa_factors`フィールドに既存の登録を提供することで実現できます。
 
 失敗はテナントログに失敗したログインとして表示され、次のような説明によって他の失敗と区別できます。`MFA要素をインポートできない`。例：
 
-```json
+```json lines
 {
   "_id": "5e9df3b29ebabe00571c04a7",
   "date": "2020-04-20T19:10:42.916Z",
@@ -114,7 +114,7 @@ MFA登録は、[自動移行](/docs/connections/database/custom-db/overview-cust
 
 `upsert`オプションを使用すると、既存のユーザーに対するMFAに関連しない更新がユーザーのプロファイルに適用されます。たとえば、次のエラーの概要は、ユーザーの`画像`属性が正常に`http://example.org/jdoe.png`に設定されたが、提供されたMFA要素をインポートできなかったことを示しています。このような場合、失敗したユーザーのインポートを再試行しても問題ありません。
 
-```json
+```json lines
 [
   {
     "user": {
@@ -152,7 +152,7 @@ MFA登録は、[自動移行](/docs/connections/database/custom-db/overview-cust
 
 Auth0では、復旧コードをインポートする方法は提供されていません。ユーザーのMFA要素がインポートされても、復旧コードは提供されません。
 
-ユーザーに復旧コードを提供するには、ユーザーが復旧コードを登録しているかどうかを確認し、登録していない場合は[復旧コード再生成エンドポイント](/docs/api/management/v2#!/Users/post_recovery_code_regeneration)を使用して新しいコードを生成します。
+ユーザーに復旧コードを提供するには、ユーザーが復旧コードを登録しているかどうかを確認し、登録していない場合は[復旧コード再生成エンドポイント](/docs/ja-jp/api/management/v2#!/Users/post_recovery_code_regeneration)を使用して新しいコードを生成します。
 
 ## もっと詳しく
 

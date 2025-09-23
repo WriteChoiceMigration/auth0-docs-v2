@@ -1,13 +1,13 @@
 ---
 title: "APIとSPAの構成（SPA + API）"
 permalink: "part-3"
+'description': "SPA + APIアーキテクチャシナリオでのAPIとSPAの構成"
 'og:title': "APIとSPAの構成（SPA + API）"
 'og:description': "SPA + APIアーキテクチャシナリオでのAPIとSPAの構成"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "APIとSPAの構成（SPA + API）"
 'twitter:description': "SPA + APIアーキテクチャシナリオでのAPIとSPAの構成"
 ---
-# APIとSPAの構成（SPA + API）
 
 このセクションでは、当社シナリオでAPIを実装する方法を説明します。
 
@@ -85,7 +85,7 @@ APIは以下の検証を実行すべきです。
 
 ユーザーの認証には[auth0.jsライブラリ](https://auth0.com/docs/libraries/auth0js)が使われます。Auth0アプリケーションの新しいインスタンスを次のように初期化できます。
 
-```javascript
+```javascript lines
 var auth0 = new auth0.WebAuth({
   clientID: '{yourClientId}',
   domain: '{yourDomain}',
@@ -107,7 +107,7 @@ var auth0 = new auth0.WebAuth({
 
 認証フローを開始するには、`authorize()`メソッドを呼び出すことができます。
 
-```
+```javascript lines
 auth0.authorize();
 ```
 
@@ -137,7 +137,7 @@ SPAにおけるセッションの処理方法については、[「JavaScriptシ
 
 ユーザーのプロファイル情報を取得するために、返された`authResult.accessToken`を渡して`client.userInfo`メソッドを呼び出すことができます。その場合、[/userinfoエンドポイント](https://auth0.com/docs/api/authentication#get-user-info)に要求が送られ、以下の例によく似た、ユーザー情報が入った`user`オブジェクトが返されます。
 
-```json
+```json lines
 {
     "email_verified": "false",
     "email": "test@example.com",
@@ -154,7 +154,7 @@ SPAにおけるセッションの処理方法については、[「JavaScriptシ
 
 これらのプロパティには`userInfo`関数を呼び出す際に渡されたコールバック関数でアクセスできます。
 
-```javascript
+```javascript lines
 const accessToken = authResult.accessToken;
 
 auth0.client.userInfo(accessToken, (err, profile) => {

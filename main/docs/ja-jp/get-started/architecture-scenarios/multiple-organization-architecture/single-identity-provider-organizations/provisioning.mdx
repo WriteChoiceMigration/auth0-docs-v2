@@ -1,13 +1,13 @@
 ---
 title: "シングルIDプロバイダー：プロビジョニング"
 permalink: "provisioning"
+'description': "複数テナントのアーキテクチャに向けて組織をプロビジョニングすることについて説明します。"
 'og:title': "シングルIDプロバイダー：プロビジョニング"
 'og:description': "複数テナントのアーキテクチャに向けて組織をプロビジョニングすることについて説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "シングルIDプロバイダー：プロビジョニング"
 'twitter:description': "複数テナントのアーキテクチャに向けて組織をプロビジョニングすることについて説明します。"
 ---
-# シングルIDプロバイダー：プロビジョニング
 
 Auth0 Organizations （組織）機能を使用することによって、シングルAuth0テナントを運用環境への導入に向けて準備することができます。最も複雑なアーキテクチャのシナリオ以外のすべてについて、運用環境での使用にシングルAuth0テナントをプロビジョニングしておくことが推奨されます。そうすることで、[シングルサインオン（SSO）](/docs/ja-jp/authenticate/single-sign-on)や ユーザー[プロファイル管理](/docs/ja-jp/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/profile-management)などの統合や使用が容易になります。実装によっては、Auth0テナントのセットアップや付随の統合に関して、いくつかの追加項目に対処する必要が出るかもしれません。
 
@@ -35,13 +35,13 @@ Auth0では、アプリケーションを個別に定義した方が、構成し
 
 ## 接続
 
-次に、ユーザーの認証に使われる[［Connections（接続）］](/docs/connections)を定義します。この例では、Hoekstra & Associatesの関連ユーザーのために[［Database Connection（データベース接続）］](/docs/connections/database)、MetaHexa Bankの関連ユーザーのためには[［Enterprise Connection（エンタープライズ接続）］](/docs/connections/identity-providers-enterprise) を定義します。
+次に、ユーザーの認証に使われる[［Connections（接続）］](/docs/ja-jp/connections)を定義します。この例では、Hoekstra & Associatesの関連ユーザーのために[［Database Connection（データベース接続）］](/docs/ja-jp/connections/database)、MetaHexa Bankの関連ユーザーのためには[［Enterprise Connection（エンタープライズ接続）］](/docs/ja-jp/connections/identity-providers-enterprise) を定義します。
 
 <Note>
 
 **ベストプラクティス**
 
-単一のIDプロバイダー（IdP）を使用している組織では、定義された組織ごとに接続を1つ作成して柔軟性を持たせ、多数のユースケースに対応します。たとえば、各組織につき1つの[データベース接続またはカスタムデータベース接続](/docs/connections/database)があれば、組織が閉鎖された場合に関連付けられているユーザーが簡単に削除できます。また、パスワードの複雑性に関して異なる要件を課している組織にとっても、柔軟性が高まります。
+単一のIDプロバイダー（IdP）を使用している組織では、定義された組織ごとに接続を1つ作成して柔軟性を持たせ、多数のユースケースに対応します。たとえば、各組織につき1つの[データベース接続またはカスタムデータベース接続](/docs/ja-jp/connections/database)があれば、組織が閉鎖された場合に関連付けられているユーザーが簡単に削除できます。また、パスワードの複雑性に関して異なる要件を課している組織にとっても、柔軟性が高まります。
 
 </Note>
 
@@ -61,7 +61,7 @@ Management APIまたはDashboardを介してユーザーをプロビジョニン
 
 <Note>
 
-ユーザーに手動で組織のメンバーシップを割り当てるためには、そのユーザーにAuth0で定義された[ユーザープロファイル](/docs/manage-users/user-accounts/user-profiles)がなければなりません。[メンバーシップを手動で割り当てる](/docs/ja-jp/manage-users/organizations/configure-organizations/assign-members)ときは、Auth0 Tenant DashboardまたはAuth0 Management APIを使用します。
+ユーザーに手動で組織のメンバーシップを割り当てるためには、そのユーザーにAuth0で定義された[ユーザープロファイル](/docs/ja-jp/manage-users/user-accounts/user-profiles)がなければなりません。[メンバーシップを手動で割り当てる](/docs/ja-jp/manage-users/organizations/configure-organizations/assign-members)ときは、Auth0 Tenant DashboardまたはAuth0 Management APIを使用します。
 
 </Note>
 
@@ -73,7 +73,7 @@ Auth0 Organization機能は、Member Invitation（メンバーの招待）の使
 
 Hoekstra & Associatesの例を使って、ユーザー招待の一部として使用されるデータベース接続にこの実装がどのように繋がっていくのかを見てみましょう。説明にあるワークフローのほとんどは通常、使用している技術スタックに関連するAuth0 SDKやライブラリーが処理するものです。
 
-<Frame>![アーキテクチャシナリオ - MOA - 分離されたユーザー、共有アプリ、招待フロー（データベース接続）](//images.ctfassets.net/cdy7uua7fh8z/2QMwMeBQ6U9TjLtbjPgNwe/f9268262c6dbc3d371ff3bf9dcc3a360/Isolated_Users__Shared_Apps__Invitation_Flow__Database_Connection_.png)</Frame>
+<Frame>![アーキテクチャシナリオ - MOA - 分離されたユーザー、共有アプリ、招待フロー（データベース接続）](/images/ja-jp/cdy7uua7fh8z/2QMwMeBQ6U9TjLtbjPgNwe/f9268262c6dbc3d371ff3bf9dcc3a360/Isolated_Users__Shared_Apps__Invitation_Flow__Database_Connection_.png)</Frame>
 
 1. Hoekstra & Associateに勤めるジェニファーは、Hoekstra & AssociatesのTravel0 Corporate Bookingインスタンスの代理として、Travel0のAuth0テナントからメールを受信します。
 
@@ -114,7 +114,7 @@ Hoekstra & Associatesの例を使って、ユーザー招待の一部として�
 
 MetaHexa Bankの例を使って、ユーザー招待の一部として使用されるエンタープライズ接続にこの実装がどのように繋がっていくのかを見てみましょう。今回も、説明にあるワークフローのほとんどは通常、使用している技術スタックに関連するAuth0 SDKやライブラリーが処理するものです。
 
-<Frame>![アーキテクチャシナリオ - MOA - 分離されたユーザー、共有アプリ、招待フロー（エンタープライズ接続）](//images.ctfassets.net/cdy7uua7fh8z/1IsdaHpprvIp17R5zYIg7q/dbf421b8458a63b23397852d56c01015/Isolated_Users__Shared_Apps__Invitation_Flow__Enterprise_Connection_.png)</Frame>
+<Frame>![アーキテクチャシナリオ - MOA - 分離されたユーザー、共有アプリ、招待フロー（エンタープライズ接続）](/images/ja-jp/cdy7uua7fh8z/1IsdaHpprvIp17R5zYIg7q/dbf421b8458a63b23397852d56c01015/Isolated_Users__Shared_Apps__Invitation_Flow__Enterprise_Connection_.png)</Frame>
 
 1. MetaHexa Bankに勤めるアミンサは、MetaHexa BankのTravel0 Corporate Bookingインスタンスの代理として、Travel0のAuth0テナントからメールを受信します。
 

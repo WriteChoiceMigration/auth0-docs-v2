@@ -1,13 +1,13 @@
 ---
 title: "ASP.NET Coreの実装（Webアプリ + SSO）"
 permalink: "implementation-aspnetcore"
+'description': "通常のWebアプリアーキテクチャーシナリオでのシングルサインオン（SSO）のためのASP.NET Coreの実装"
 'og:title': "ASP.NET Coreの実装（Webアプリ + SSO）"
 'og:description': "通常のWebアプリアーキテクチャーシナリオでのシングルサインオン（SSO）のためのASP.NET Coreの実装"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ASP.NET Coreの実装（Webアプリ + SSO）"
 'twitter:description': "通常のWebアプリアーキテクチャーシナリオでのシングルサインオン（SSO）のためのASP.NET Coreの実装"
 ---
-# ASP.NET Coreの実装（Webアプリ + SSO）
 
 ASP.NET Coreの実装で使用する全ソースコードは、[こちらのGitHubリポジトリ](https://github.com/auth0-samples/auth0-pnp-webapp-oidc)でご覧いただけます。
 
@@ -15,14 +15,14 @@ ASP.NET Coreの実装で使用する全ソースコードは、[こちらのGitH
 
 このガイドの目的のために、シンプルなホスト型ログインを使用します。標準クッキーと、ASP.NET Coreで利用できるOIDCミドルウェアを使用できるため、NuGetパッケージをインストールしてください。
 
-```
+``` lines
 Install-Package Microsoft.AspNetCore.Authentication.Cookies
 Install-Package Microsoft.AspNetCore.Authentication.OpenIdConnect
 ```
 
 その後、アプリケーションのミドルウェアパイプライン内でクッキーとOIDCミドルウェアを構成します。
 
-```
+```csharp lines
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
@@ -87,19 +87,19 @@ public class Startup
 
 クッキーミドルウェアのサインアウトと、それによるアプリケーションの認証クッキーの消去の例として、以下の呼び出しを作成できます。
 
-```
+```csharp lines
 await HttpContext.Authentication.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 ```
 
 同様に、`SignOutAsync`メソッドを呼び出し、サインアウトするために認証スキームとして`Auth0`を伝えることで、ユーザーをAuth0からログアウトできます。
 
-```
+```csharp lines
 await HttpContext.Authentication.SignOutAsync("Auth0");
 ```
 
 ただし上記が機能するためには、`OnRedirectToIdentityProviderForSignOut`イベントを処理して、OIDCミドルウェアを登録するときに別の構成を追加する必要があります。イベント内で、Auth0クッキーを消去する[Auth0ログアウトエンドポイント](https://auth0.com/docs/api/authentication/reference#logout)にリダイレクトする必要があります。
 
-```
+```csharp lines
 app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions("Auth0")
 {
     // Some code omitted for brevity
@@ -122,7 +122,7 @@ app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions("Auth0")
 
 グループをASP.NET Coreアプリケーションに組み入れる最も簡単な方法は、ASP.NET Coreで利用可能な組み込みの[ロールベースの認可](https://docs.asp.net/en/latest/security/authorization/roles.html)を使用することです。これを達成するには、ユーザーが割り当てられるそれぞれのグループについて、
 
-```
+``` lines
 http://schemas.microsoft.com/ws/2008/06/identity/claims/role
 ```
 
@@ -132,7 +132,7 @@ http://schemas.microsoft.com/ws/2008/06/identity/claims/role
 
 ASP.NET OIDCミドルウェアは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">JWT</Tooltip>で返されたすべてのクレームを、クレームとして`ClaimsIdentity`に自動的に追加します。このため、`authorization`クレームから情報を抽出し、クレームのJSONボディーを逆シリアル化して、グループごとに、`http://schemas.microsoft.com/ws/2008/06/identity/claims/role`クレームを`ClaimsIdentity`に追加する必要があります。
 
-```
+```csharp lines
 app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions("Auth0")
 {
     // Some configuration omitted for brevity
@@ -170,7 +170,7 @@ app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions("Auth0")
 
 その後、管理者にタイムシートの承認を許可するアクションを追加できます。
 
-```json
+```csharp lines
 [Authorize(Roles = "Admin")]
 public IActionResult TimesheetApproval()
 {          

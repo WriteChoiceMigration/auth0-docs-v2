@@ -1,13 +1,13 @@
 ---
 title: "新しいEntra ID接続のインバウンドSCIM"
 permalink: "inbound-scim-for-new-azure-ad-connections"
+'description': "Entra ID接続のセットアップをOpenID SCIM経由で行う手順"
 'og:title': "新しいEntra ID接続のインバウンドSCIM"
 'og:description': "Entra ID接続のセットアップをOpenID SCIM経由で行う手順"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "新しいEntra ID接続のインバウンドSCIM"
 'twitter:description': "Entra ID接続のセットアップをOpenID SCIM経由で行う手順"
 ---
-# 新しいEntra ID接続のインバウンドSCIM
 
 <Card title="Before you start">
 
@@ -26,11 +26,11 @@ Auth0は、[Microsoft Entra ID接続タイプ](/docs/ja-jp/authenticate/identity
 3. **［Provisioning（プロビジョニング）］**タブを選択し、[ログイン時に追加の属性を同期する](/docs/ja-jp/authenticate/protocols/scim/configure-inbound-scim)場合を除き、**［Sync user profile attributes at each login（ログインの度にユーザープロファイル属性を同期する）］**を無効にします。
 4. 同じセクションで、**［Sync user profiles using SCIM（SCIMを使用してユーザープロファイルを同期する）］**を有効にします。
 5. **［Mapping（マッピング）］**タブで、**［SCIM attribute containing the User ID（ユーザーIDを含むSCIM属性）］**が**［externalId］**に設定されていることを確認します。
-6. **［Additional Mappings（追加のマッピング）］**で、拡張されたSCIM属性が任意のAuth0属性にマッピングされていることを確認します。詳しくは、「[属性マッピング](/docs/authenticate/protocols/scim/configure-inbound-scim#attribute-mapping)」をご覧ください。
+6. **［Additional Mappings（追加のマッピング）］**で、拡張されたSCIM属性が任意のAuth0属性にマッピングされていることを確認します。詳しくは、「[属性マッピング](/docs/ja-jp/authenticate/protocols/scim/configure-inbound-scim#attribute-mapping)」をご覧ください。
 
 ### SCIMエンドポイントURLとトークンを取得する
 
-このセクションでは<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>を使用しますが、これらの手順は<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Management API</Tooltip>でも管理することができます。ベストプラクティスについては、「[導入のガイドライン](/docs/authenticate/protocols/scim/configure-inbound-scim#deployment-guidelines)」セクションをご覧ください。
+このセクションでは<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>を使用しますが、これらの手順は<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Management API</Tooltip>でも管理することができます。ベストプラクティスについては、「[導入のガイドライン](/docs/ja-jp/authenticate/protocols/scim/configure-inbound-scim#deployment-guidelines)」セクションをご覧ください。
 
 1. [Auth0 Dashboard](https://manage.auth0.com/#/)でSCIMの**［Setup（セットアップ）］**タブに移動し、**［SCIM Endpoint URL（SCIMエンドポイントURL）］**をコピーして、安全な場所に貼り付けます。
 2. **［Generate New Token（新しいトークンの生成）］**をクリックしてSCIMトークンを生成し、希望する場合はトークンの有効期限を設定します。
@@ -50,7 +50,7 @@ Auth0は、[Microsoft Entra ID接続タイプ](/docs/ja-jp/authenticate/identity
 10. **［Attribute Mappings（属性マッピング）］**に戻り、`emails[type eq "work"].value and mail`を含む行を選択します。
 11. **［Edit Attribute（属性の編集）］**画面から、**［Match object usng this attribute（この属性を使用してオブジェクトを一致させる）］**を**［Yes（はい）］**に、**［Matching precedence（一致の優先順位）］**を**［2］**に設定して、**［OK］**を選択します。属性マッピング画面はこのように表示され、SCIM属性を追加で構成するために**属性マッピング**セクションを使用し続けます：
 
-<Frame>![SAML Azure Attribute Mapping](//images.ctfassets.net/cdy7uua7fh8z/6JnGm4IeBglKiHNoVPX5vs/ddc17baeca48f02a6309b57ab87f845e/attributemap2.jpg)</Frame>
+<Frame>![SAML Azure Attribute Mapping](/images/ja-jp/cdy7uua7fh8z/6JnGm4IeBglKiHNoVPX5vs/ddc17baeca48f02a6309b57ab87f845e/attributemap2.jpg)</Frame>
 
 属性マッピングを**［Save（保存）］**し、右上にある**［X］**を選択すると、**［Provisioning（プロビジョニング）］**画面に戻ります。
 

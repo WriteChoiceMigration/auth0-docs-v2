@@ -1,13 +1,13 @@
 ---
 title: "複数組織のアーキテクチャ"
 permalink: "multiple-organization-architecture"
+'description': "複数のAuth0 Organizationsに対してアプリケーションのインスタンスを用意しなければならない複数テナントアーキテクチャの統合ガイドです。"
 'og:title': "複数組織のアーキテクチャ"
 'og:description': "複数のAuth0 Organizationsに対してアプリケーションのインスタンスを用意しなければならない複数テナントアーキテクチャの統合ガイドです。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "複数組織のアーキテクチャ"
 'twitter:description': "複数のAuth0 Organizationsに対してアプリケーションのインスタンスを用意しなければならない複数テナントアーキテクチャの統合ガイドです。"
 ---
-# 複数組織のアーキテクチャ
 
 ユーザーがサードパーティーの組織に属していて、指定のサービスでサインアップしなければならないユースケースはいくつかあります。そのようなユーザーは、サードパーティー組織の従業員や顧客、またはその両方であるかもしれません。状況にかかわらず、このガイドでは複数テナントのアプリケーションについて、一般的なユースケースの技術的な概要を説明します。
 
@@ -45,7 +45,7 @@ Auth0との統合はB2Bサービスプロバイダーが設計するため、顧
 
 組織ユーザーを分離する場合には、アプリケーションの種類を決めることが重要です。それぞれのユーザーを分離する場所と方法については、基本的に[組織でユーザーを分離する](#users-isolated-by-organization)方法と[組織間でユーザーを共有する](#users-shared-between-organizations)方法の2つがあります。
 
-<Frame>![Architecture Scenarios - Multitenancy - Diagram - Multiple organizations shared decision](//images.ctfassets.net/cdy7uua7fh8z/5PIUlQgG5PmnzaWjtD6J5t/3a7787c2a4cc35656e09ae02be7cf564/multiple-org-shared-decision.png)</Frame>
+<Frame>![Architecture Scenarios - Multitenancy - Diagram - Multiple organizations shared decision](/images/ja-jp/cdy7uua7fh8z/5PIUlQgG5PmnzaWjtD6J5t/3a7787c2a4cc35656e09ae02be7cf564/multiple-org-shared-decision.png)</Frame>
 
 上のフロー図は、意思決定のプロセスを表します。また、組織インスタンスに[管理者タイプのアクセス](#administrative-access-to-organizations)が必要かどうかも検討しなければなりません。これは、1つ以上の組織の管理者である貴社組織の社員や、ヘルプデスクサービスなどを提供する何らかのサードパーティーに必要かもしれません。
 
@@ -57,7 +57,7 @@ Auth0との統合はB2Bサービスプロバイダーが設計するため、顧
 
 このシナリオでは、所属する組織またはアクセス権のある組織にユーザーを直接結びつけます。どのようにログインするかについて、ユーザーには以下の2つのオプションがあります：Ａ）適切な組織にプロビジョニングされたIDストレージで資格情報を作成する（Auth0テナントにあるユーザーIDとパスワードのデータベース接続）か、B）ユーザーが自身の組織のIdPでログインする。このユースケースでは、ユーザーが複数組織に属することは理にかないません。それぞれの組織に個別のIDを作成する方が便利です。Travel0 Corporate Bookingを例にすると、下の図のようになります。
 
-<Frame>![Architecture Scenarios - Multitenancy - Diagram - Isolated users](//images.ctfassets.net/cdy7uua7fh8z/42jUyjrrYapzZaxEsCTvw6/3b48b7cac0801d2e557c7d384d7e10b4/isolated-users.png)</Frame>
+<Frame>![Architecture Scenarios - Multitenancy - Diagram - Isolated users](/images/ja-jp/cdy7uua7fh8z/42jUyjrrYapzZaxEsCTvw6/3b48b7cac0801d2e557c7d384d7e10b4/isolated-users.png)</Frame>
 
 Sallyは、典型的なユーザーです。MetaHexa Bankの社員で、MetaHexa BankのTravel0 Corporate Bookingインスタンスにのみアクセスできます。
 
@@ -81,7 +81,7 @@ Patの状況はおそらく稀なユースケースですが、ユーザーの�
 
 複数の組織に所属するユーザーでも、個別のID/アカウントを持たずに組織間を移動できれば便利です。そのような場合でも組織は専有のIdPを使用できます。
 
-<Frame>![Architecture Scenarios - Multitenancy - Diagram - Shared users](//images.ctfassets.net/cdy7uua7fh8z/3z920KV1sDj6v0xUM1PLy4/24aefd1fbe5c9aa6a9ad3fe817881fc1/shared-users.png)</Frame>
+<Frame>![Architecture Scenarios - Multitenancy - Diagram - Shared users](/images/ja-jp/cdy7uua7fh8z/3z920KV1sDj6v0xUM1PLy4/24aefd1fbe5c9aa6a9ad3fe817881fc1/shared-users.png)</Frame>
 
 このシナリオでは、ユーザーは、所属する組織、またはアクセス権のある組織に直接結びつけられません。どのようにログインするかについて、ユーザーには以下の2つのオプションがあります：Ａ）組織のAuth0テナントで特別に割り当てられたIDストアではなく、一般にプロビジョニングされたIDストレージで資格情報を作成する（Auth0テナントにある1つのユーザーIDとパスワードのデータベース接続）か、B）ユーザーが自身の組織のIdPでログインする。IDが作成されると、ユーザーに、各団体へのアクセス権限が与えられます。人によって、1組織だけにアクセスする場合もあれば、複数の組織にアクセスする場合もあります。ユーザーは、ログインが要求されたときに同じ資格情報でどの組織のインスタンスにもアクセスできることを理解する必要があります。Travel0 Adventure Managementを例にすると、上の図のようになります。
 
@@ -99,7 +99,7 @@ Patの状況はおそらく稀なユースケースですが、ユーザーの�
 
 **ベストプラクティス**
 
-Auth0 Dashboardを介したアクセス権限が与えられているAuth0テナント管理者に対しては、必ず多要素認証（MFA）を有効にします。Auth0テナント管理者に対してMFAを有効化するプロセスは、Auth0テナント自体に対してMFAを有効化するプロセスとは異なるので注意が必要です。Auth0のテナント管理者に対してMFAを有効化する方法については、「[多要素認証でDashboardへのアクセスを管理する](/docs/get-started/manage-dashboard-access/add-change-remove-mfa)」を参照してください。
+Auth0 Dashboardを介したアクセス権限が与えられているAuth0テナント管理者に対しては、必ず多要素認証（MFA）を有効にします。Auth0テナント管理者に対してMFAを有効化するプロセスは、Auth0テナント自体に対してMFAを有効化するプロセスとは異なるので注意が必要です。Auth0のテナント管理者に対してMFAを有効化する方法については、「[多要素認証でDashboardへのアクセスを管理する](/docs/ja-jp/get-started/manage-dashboard-access/add-change-remove-mfa)」を参照してください。
 
 </Note>
 

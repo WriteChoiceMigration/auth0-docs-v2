@@ -1,13 +1,13 @@
 ---
 title: "代替ログアウトでユーザーをリダイレクトする"
 permalink: "redirect-users-after-logout"
+'description': "レガシーログアウトのエンドポイントを使ってユーザーをリダイレクトする方法を説明します。"
 'og:title': "代替ログアウトでユーザーをリダイレクトする"
 'og:description': "レガシーログアウトのエンドポイントを使ってユーザーをリダイレクトする方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "代替ログアウトでユーザーをリダイレクトする"
 'twitter:description': "レガシーログアウトのエンドポイントを使ってユーザーをリダイレクトする方法を説明します。"
 ---
-# 代替ログアウトでユーザーをリダイレクトする
 
 ログアウト後にユーザーを特定のURLにリダイレクトできます。テナントまたはアプリケーションの設定で、リダイレクトURLを登録する必要があります。Auth0は、ログアウト後に許可リストURLのみにリダイレクトします。各アプリケーションごとに異なるリダイレクトが必要な場合は、アプリケーション設定の許可リストにURLを追加できます。
 
@@ -19,11 +19,11 @@ permalink: "redirect-users-after-logout"
 
      ユーザーがテナントレベルでログアウトした後にリダイレクト先となるURLのリストを追加するには、Auth0 Dashboard.の[［Tenant Settings（テナント設定）］ > ［Advanced（高度な設定）］](https://manage.auth0.com/#/tenant/advanced) に移動します。
 
-     <Frame>![Auth0 Dashboard 設定 高度な設定タブ ログインとログアウト](//images.ctfassets.net/cdy7uua7fh8z/77s6AWMuzH78ABObR3lg0o/c91ff62cd7688ce7b4484acf8a4aefa0/2025-02-27_11-15-05.png)</Frame>
+     <Frame>![Auth0 Dashboard 設定 高度な設定タブ ログインとログアウト](/images/ja-jp/cdy7uua7fh8z/77s6AWMuzH78ABObR3lg0o/c91ff62cd7688ce7b4484acf8a4aefa0/2025-02-27_11-15-05.png)</Frame>
 
    * **Auth0のApplication Settings（アプリケーションの設定）**：`client_id`パラメーターを含むログアウト要求については、関連するAuth0アプリケーションの**［Settings（設定）］**タブの**［Allowed Logout URLs（許可されているログアウトURL）］**リストに`returnTo` URLを追加する必要があります。
 
-     <Frame>![Dashboard アプリケーション アプリケーション設定 アプリケーションのURL](//images.ctfassets.net/cdy7uua7fh8z/1QhW2i4fTCCp8owey2tMPI/4df7b8f2bae9eea8cd2e4ba1867d0916/Application_URIs_-_Japanese.png)</Frame>
+     <Frame>![Dashboard アプリケーション アプリケーション設定 アプリケーションのURL](/images/ja-jp/cdy7uua7fh8z/1QhW2i4fTCCp8owey2tMPI/4df7b8f2bae9eea8cd2e4ba1867d0916/Application_URIs_-_Japanese.png)</Frame>
 
 URLリストを提供する際には、以下を行うことができます。
 
@@ -68,7 +68,7 @@ GoogleやFacebookなどのソーシャルIDプロバイダーを使用してい�
 
 Facebookについては、以下の例にあるコードでは、`returnTo`を使用して、リダイレクトのWebサイトを指定しています。
 
-```
+``` lines
 https://{yourDomain}/v2/logout?federated&
       returnTo=https://{yourDomain}/logout?returnTo=http://www.example.com
       &access_token={facebookAccessToken}

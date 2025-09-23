@@ -1,15 +1,15 @@
 ---
 title: "Lock.swift"
 permalink: "lock-swift"
+'description': "Webアプリにスムーズなログインおよびサインアップエクスペリエンスを提供するネイティブiOSです。"
 'og:title': "Lock.swift"
 'og:description': "Webアプリにスムーズなログインおよびサインアップエクスペリエンスを提供するネイティブiOSです。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Lock.swift"
 'twitter:description': "Webアプリにスムーズなログインおよびサインアップエクスペリエンスを提供するネイティブiOSです。"
 ---
-# Lock.swift
 
-このリファレンスガイドでは、Lockユーザーインターフェイスの実装方法と、認証ニーズに合わせてUIとして使用するためのLockの構成とカスタマイズの詳細について説明します。ただし、アクセストークンの保存、呼び出し、更新、ユーザー プロファイル情報の取得など、Auth0とSwiftでさらに多くのことを行う方法を学習したい場合は、[Auth0.swift SDK](/docs/ja-jp/libraries/auth0-swift)を確認してください。または、[Swiftクイックスタート](/docs/quickstart/native/ios-swift)を参照して、完全な例を確認し、Lockをインターフェイスとして使用する場合とカスタムインターフェイスを使用する場合の両方のオプションを確認してください。
+このリファレンスガイドでは、Lockユーザーインターフェイスの実装方法と、認証ニーズに合わせてUIとして使用するためのLockの構成とカスタマイズの詳細について説明します。ただし、アクセストークンの保存、呼び出し、更新、ユーザー プロファイル情報の取得など、Auth0とSwiftでさらに多くのことを行う方法を学習したい場合は、[Auth0.swift SDK](/docs/ja-jp/libraries/auth0-swift)を確認してください。または、[Swiftクイックスタート](/docs/ja-jp/quickstart/native/ios-swift)を参照して、完全な例を確認し、Lockをインターフェイスとして使用する場合とカスタムインターフェイスを使用する場合の両方のオプションを確認してください。
 
 GitHubの [Lock.swiftリポジトリ](https://github.com/auth0/Lock.swift)を確認してください。
 
@@ -60,7 +60,7 @@ SPMの詳細については、[公式ドキュメント](https://developer.apple
 
 アプリケーションがURLを開くように要求されたときに、Lockに通知する必要があります。これは、`AppDelegate`ファイルで行うことができます。
 
-```
+```swift lines
 func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
   return Lock.resumeAuth(url, options: options)
 }
@@ -78,7 +78,7 @@ Lock を使用するには、[Auth0 Dashboard](https://manage.auth0.com/#)のア
 
 アプリケーションバンドルに、次の形式の資格情報を含む`Auth0.plist`という名前の`plist`ファイルを追加できます。
 
-```
+```xml lines
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -99,7 +99,7 @@ Lock Classicは、データベース、ソーシャル、およびエンター�
 
 このSDKはOIDC準拠モードで使用することを強く推奨しています。このモードを有効にすると、SDKはAuth0の現在の認証パイプラインを使用するように強制され、レガシーエンドポイントに到達できなくなります。デフォルトでは`false`です
 
-```
+```swift lines
 .withOptions {
     $0.oidcConformant = true
 }
@@ -107,7 +107,7 @@ Lock Classicは、データベース、ソーシャル、およびエンター�
 
 Lockを表示するには、UIViewControllerに次のスニペットを追加します。
 
-```
+```swift lines
 Lock
     .classic()
     // withConnections, withOptions, withStyle, and so on
@@ -125,7 +125,7 @@ Lock
 
 ユーザープロファイル情報にアクセスするには、`Auth0.Swift`ライブラリを使用する必要があります。
 
-```
+```swift lines
 Auth0
    .authentication()
    .userInfo(withAccessToken: accessToken)
@@ -147,7 +147,7 @@ Lockは、アプリケーション用に構成された接続を自動的に読�
 
 データベース接続の追加:
 
-```
+```swift lines
 .withConnections {
     connections.database(name: "Username-Password-Authentication", requiresUsername: true)
 }
@@ -155,7 +155,7 @@ Lockは、アプリケーション用に構成された接続を自動的に読�
 
 複数のソーシャル接続の追加:
 
-```
+```swift lines
 .withConnections {
     connections.social(name: "facebook", style: .Facebook)
     connections.social(name: "google-oauth2", style: .Google)
@@ -168,7 +168,7 @@ Lockには、`withStyle`を使用して独自のブランド アイデンティ�
 
 ### タイトル、ロゴ、プライマリカラーをカスタマイズします
 
-```
+```swift lines
 .withStyle {
   $0.title = "Company LLC"
   $0.logo = LazyImage(named: "company_logo")
@@ -182,7 +182,7 @@ Lockには、`withStyle`を使用して独自のブランド アイデンティ�
 
 Lockの動作を構成するためのオプションは多数あります。以下は、Lockを閉じられるように設定し、ユーザー名のみ（メールは不可）に制限し、ログイン画面とパスワードのリセット画面のみを表示するように構成した例です。
 
-```
+```swift lines
 Lock
   .classic()
   .withOptions {
@@ -198,7 +198,7 @@ Lock
 
 デフォルトでは、[1Password](https://1password.com/)を使用したパスワードマネージャーのサポートは、データベース接続に対して有効になっています。1Passwordのサポートでは、ログイン画面とサインアップ画面にオプションが表示されるように、ユーザーが1Passwordアプリをインストールしている必要があります。passwordManagerのenabledプロパティを使用して、1Passwordサポートを無効にすることができます。
 
-```
+```swift lines
 .withOptions {
     $0.passwordManager.enabled = false
 }
@@ -206,7 +206,7 @@ Lock
 
 デフォルトでは、`appIdentifier`はアプリのバンドル ID に設定され、`displayName`はアプリの表示名に設定されます。これらは次のようにカスタマイズできます。
 
-```
+```swift lines
 .withOptions {
     $0.passwordManager.appIdentifier = "www.myapp.com"
     $0.passwordManager.displayName = "My App"
@@ -215,7 +215,7 @@ Lock
 
 アプリの`info.plist`に以下を追加する必要があります。
 
-```
+```xml lines
 <key>LSApplicationQueriesSchemes</key>
 <array>
     <string>org-appextension-feature-password-management</string>

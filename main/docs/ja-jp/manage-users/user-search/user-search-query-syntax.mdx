@@ -1,13 +1,13 @@
 ---
 title: "ユーザー検索のクエリ構文"
 permalink: "user-search-query-syntax"
+'description': "Auth0のユーザー検索クエリ文字列構文について説明します。"
 'og:title': "ユーザー検索のクエリ構文"
 'og:description': "Auth0のユーザー検索クエリ文字列構文について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユーザー検索のクエリ構文"
 'twitter:description': "Auth0のユーザー検索クエリ文字列構文について説明します。"
 ---
-# ユーザー検索のクエリ構文
 
 <Note>
 
@@ -40,52 +40,52 @@ permalink: "user-search-query-syntax"
 </thead>
 <tbody>
 <tr>
-<td><code>phone_number</code></td>
+<td>`phone_number`</td>
 <td>テキスト</td>
 <td>ユーザーの電話番号です。SMS接続のあるユーザーに対してのみ有効です。</td>
 </tr>
 <tr>
-<td><code>phone_verified</code></td>
+<td>`phone_verified`</td>
 <td>ブール値</td>
-<td><code>true/false</code>の値は、ユーザーの電話番号が検証されたかを示します。SMS接続のあるユーザーに対してのみ有効です。</td>
+<td>`true/false`の値は、ユーザーの電話番号が検証されたかを示します。SMS接続のあるユーザーに対してのみ有効です。</td>
 </tr>
 <tr>
-<td><code>logins_count</code></td>
+<td>`logins_count`</td>
 <td>整数</td>
-<td>ユーザーがログインした回数です。ブロックされているユーザーがログインした場合、ブロックされたセッションが<code>logins_count</code>に算入され、<code>last_login</code>の値が更新されます。</td>
+<td>ユーザーがログインした回数です。ブロックされているユーザーがログインした場合、ブロックされたセッションが`logins_count`に算入され、`last_login`の値が更新されます。</td>
 </tr>
 <tr>
-<td><code>created_at</code></td>
+<td>`created_at`</td>
 <td>日時</td>
 <td>ユーザープロファイルが最初に作成された日時を示すタイムスタンプです。</td>
 </tr>
 <tr>
-<td><code>updated_at</code></td>
+<td>`updated_at`</td>
 <td>日時</td>
 <td>ユーザープロファイルが最後に更新または変更された日を示すタイムスタンプです。</td>
 </tr>
 <tr>
-<td><code>last_login</code></td>
+<td>`last_login`</td>
 <td>日時</td>
-<td>ユーザーが最後にログインした日時を示すタイムスタンプです。このプロパティが<a href="/docs/rules">ルール</a>内から<code>user</code>オブジェクトを伴って実行される場合、値はルールを起動したログインと関連付けられます（ルールは実際のログインの後に実行されるからです）。</td>
+<td>ユーザーが最後にログインした日時を示すタイムスタンプです。このプロパティが<a href="/docs/ja-jp/rules">ルール</a>内から`user`オブジェクトを伴って実行される場合、値はルールを起動したログインと関連付けられます（ルールは実際のログインの後に実行されるからです）。</td>
 </tr>
 <tr>
-<td><code>last_ip</code></td>
+<td>`last_ip`</td>
 <td>テキスト（有効なIPアドレス）</td>
 <td>ユーザーの最後のログインと関連付けられたIPアドレスです。</td>
 </tr>
 <tr>
-<td><code>blocked</code></td>
+<td>`blocked`</td>
 <td>ブール値</td>
-<td><code>true</code>または<code>false</code>の値は、ユーザーがブロックされているかを示します。注意：<code>true</code>は、Admin DashboardまたはManagement APIを使用してブロックされたユーザー<em>のみ</em>復旧させます。総当たり攻撃の異常検知でブロックされたユーザーは復旧しません。</td>
+<td>`true`または`false`の値は、ユーザーがブロックされているかを示します。注意：`true`は、Admin DashboardまたはManagement APIを使用してブロックされたユーザー<em>のみ</em>復旧させます。総当たり攻撃の異常検知でブロックされたユーザーは復旧しません。</td>
 </tr>
 <tr>
-<td><code>email.domain</code></td>
+<td>`email.domain`</td>
 <td>テキスト</td>
 <td>ユーザーのメールアドレスのドメイン部分です。</td>
 </tr>
 <tr>
-<td><code>organization_id</code></td>
+<td>`organization_id`</td>
 <td>テキスト（有効な組織ID）</td>
 <td>ユーザーがメンバーである組織です。</td>
 </tr>
@@ -111,19 +111,19 @@ permalink: "user-search-query-syntax"
 たとえば、`jane smith`という名前のユーザーを検索するには、`q=name:"jane smith"`を使用します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/users?q=name%3A%22jane%20smith%22&search_engine=v3' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users?q=name%3A%22jane%20smith%22&search_engine=v3");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -140,14 +140,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/users?q=name%3A%22jane%20smith%22&search_engine=v3")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -160,8 +160,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users?q=name%3A%22jane%20smith%22&search_engine=v3"]
@@ -182,7 +182,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users?q=name%3A%22jane%20smith%22&search_engine=v3",
@@ -204,8 +204,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -215,7 +215,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -227,8 +227,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users?q=name%3A%22jane%20smith%22&search_engine=v3")! as URL,
@@ -261,19 +261,19 @@ dataTask.resume()
 * サフィックスの照合の場合、リテラルは3文字以上である必要があります。たとえば、`name:*usa`は使用できますが、`name:*sa`は使用できません。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/users?q=name%3Ajohn\*&search_engine=v3' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users?q=name%3Ajohn\*&search_engine=v3");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -290,14 +290,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/users?q=name%3Ajohn\*&search_engine=v3")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -310,8 +310,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users?q=name%3Ajohn\*&search_engine=v3"]
@@ -332,7 +332,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users?q=name%3Ajohn\*&search_engine=v3",
@@ -354,8 +354,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -365,7 +365,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -377,8 +377,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users?q=name%3Ajohn\*&search_engine=v3")! as URL,
@@ -409,19 +409,19 @@ dataTask.resume()
 * ワイルドカードと組み合わせて範囲を使用します。たとえば、100回以上ログインしているユーザーを見つけるには、 `q=logins_count:{100 TO *]`を使用します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/users?q=logins_count%3A%7B100%20TO%20\*%5D&search_engine=v3' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users?q=logins_count%3A%7B100%20TO%20\*%5D&search_engine=v3");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -438,14 +438,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/users?q=logins_count%3A%7B100%20TO%20\*%5D&search_engine=v3")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -458,8 +458,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users?q=logins_count%3A%7B100%20TO%20\*%5D&search_engine=v3"]
@@ -480,7 +480,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users?q=logins_count%3A%7B100%20TO%20\*%5D&search_engine=v3",
@@ -502,8 +502,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -513,7 +513,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -525,8 +525,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users?q=logins_count%3A%7B100%20TO%20\*%5D&search_engine=v3")! as URL,
@@ -555,7 +555,7 @@ Auth0管理API[リストまたは検索ユーザー](https://auth0.com/docs/api/
 
 以下は、ユーザープロファイル`user_metadata`の例です。
 
-```json
+```json lines
 {
   "favorite_color": "blue",
   "approved": false,

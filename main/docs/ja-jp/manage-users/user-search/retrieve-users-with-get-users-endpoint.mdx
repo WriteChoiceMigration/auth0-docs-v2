@@ -1,15 +1,15 @@
 ---
 title: "ユーザー取得エンドポイントを使用してユーザーを取得する"
 permalink: "retrieve-users-with-get-users-endpoint"
+'description': "get_usersエンドポイントを使用してユーザーのリストを取得する方法を説明します。"
 'og:title': "ユーザー取得エンドポイントを使用してユーザーを取得する"
 'og:description': "get_usersエンドポイントを使用してユーザーのリストを取得する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユーザー取得エンドポイントを使用してユーザーを取得する"
 'twitter:description': "get_usersエンドポイントを使用してユーザーのリストを取得する方法を説明します。"
 ---
-# ユーザー取得エンドポイントを使用してユーザーを取得する
 
-[`GET /api/v2/users`エンドポイント](/docs/api/management/v2#!/Users/get_users)を使うと、ユーザーのリストを取得できます。このエンドポイントを使用すると、次の操作を実行できます。
+[`GET /api/v2/users`エンドポイント](/docs/ja-jp/api/management/v2#!/Users/get_users)を使うと、ユーザーのリストを取得できます。このエンドポイントを使用すると、次の操作を実行できます。
 
 * さまざまな基準に基づいて検索する
 * 返されるフィールドを選択する
@@ -19,24 +19,24 @@ permalink: "retrieve-users-with-get-users-endpoint"
 
 ## 要求例
 
-ユーザーを検索するには、[`/api/v2/users`エンドポイント](/docs/api/management/v2#!/Users/get_users)に`GET`要求を送信します。要求には[Management APIのアクセストークン](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens)が含まれている必要があります。検索クエリを`q`パラメータに渡し、`search_engine`パラメータを`v3`に設定します。
+ユーザーを検索するには、[`/api/v2/users`エンドポイント](/docs/ja-jp/api/management/v2#!/Users/get_users)に`GET`要求を送信します。要求には[Management APIのアクセストークン](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens)が含まれている必要があります。検索クエリを`q`パラメータに渡し、`search_engine`パラメータを`v3`に設定します。
 
 たとえば、メールアドレスが`jane@exampleco.com`と完全一致するユーザーを検索するには、`q=email:"jane@exampleco.com"`を使用します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/users?q=email%3A%22jane%40exampleco.com%22&search_engine=v3' \
 --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users?q=email%3A%22jane%40exampleco.com%22&search_engine=v3");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -53,14 +53,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/users?q=email%3A%22jane%40exampleco.com%22&search_engine=v3")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -73,8 +73,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users?q=email%3A%22jane%40exampleco.com%22&search_engine=v3"]
@@ -95,7 +95,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users?q=email%3A%22jane%40exampleco.com%22&search_engine=v3",
@@ -117,8 +117,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
@@ -128,7 +128,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -140,8 +140,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users?q=email%3A%22jane%40exampleco.com%22&search_engine=v3")! as URL,
@@ -164,7 +164,7 @@ dataTask.resume()
 
 成功すると、次のような応答を受け取ります。
 
-```json
+```json lines
 [
   {
     "email": "jane@exampleco.com",
@@ -214,67 +214,67 @@ dataTask.resume()
 <tbody>
 <tr>
 <td>名前に「john」を含むすべてのユーザーを検索する</td>
-<td><code>name:*john*</code></td>
+<td>`name:*john*`</td>
 </tr>
 <tr>
 <td>名前が「jane」と一致するすべてのユーザーを検索する</td>
-<td><code>name:"jane"</code></td>
+<td>`name:"jane"`</td>
 </tr>
 <tr>
 <td>名前が「john」で始まるすべてのユーザーを検索する</td>
-<td><code>name:john*</code></td>
+<td>`name:john*`</td>
 </tr>
 <tr>
 <td>名前が「jane」で始まり「smith」で終わるすべてのユーザーを検索する</td>
-<td><code>name:jane*smith</code></td>
+<td>`name:jane*smith`</td>
 </tr>
 <tr>
 <td>メールアドレスが「john@exampleco.com」と一致するすべてのユーザーを検索する</td>
-<td><code>email:"john@exampleco.com"</code></td>
+<td>`email:"john@exampleco.com"`</td>
 </tr>
 <tr>
-<td><code>OR</code>を使用して、メールアドレスが「john@exampleco.com」または「jane@exampleco.com」と一致するすべてのユーザーを検索する</td>
-<td><code>email:("john@exampleco.com" OR "jane@exampleco.com")</code></td>
+<td>`OR`を使用して、メールアドレスが「john@exampleco.com」または「jane@exampleco.com」と一致するすべてのユーザーを検索する</td>
+<td>`email:("john@exampleco.com" OR "jane@exampleco.com")`</td>
 </tr>
 <tr>
 <td>メール検証されていないユーザーを検索する</td>
-<td><code>email_verified:false OR NOT _exists_:email_verified</code></td>
+<td>`email_verified:false OR NOT _exists_:email_verified`</td>
 </tr>
 <tr>
-<td><code>user_metadata</code>のフィールド名が<code>full_name</code>で値が「John Smith」のユーザーを検索する</td>
-<td><code>user_metadata.full_name:"John Smith"</code></td>
+<td>`user_metadata`のフィールド名が`full_name`で値が「John Smith」のユーザーを検索する</td>
+<td>`user_metadata.full_name:"John Smith"`</td>
 </tr>
 <tr>
 <td>指定された接続からのユーザーを検索する</td>
-<td><code>identities.connection:"google-oauth2"</code></td>
+<td>`identities.connection:"google-oauth2"`</td>
 </tr>
 <tr>
 <td>ログインしたことのないすべてのユーザーを検索する</td>
-<td><code>(NOT _exists_:logins_count OR logins_count:0)</code></td>
+<td>`(NOT _exists_:logins_count OR logins_count:0)`</td>
 </tr>
 <tr>
 <td>2018年よりも前にログインしたすべてのユーザーを検索する</td>
-<td><code>last_login:[* TO 2017-12-31]</code></td>
+<td>`last_login:[* TO 2017-12-31]`</td>
 </tr>
 <tr>
 <td>最終ログインが2017年12月であるすべてのユーザーを検索する</td>
-<td><code>last_login:{2017-11 TO 2017-12]</code>, <code>last_login:[2017-12-01 TO 2017-12-31]</code></td>
+<td>`last_login:{2017-11 TO 2017-12]`, `last_login:[2017-12-01 TO 2017-12-31]`</td>
 </tr>
 <tr>
 <td>ログイン回数が&gt;= 100、かつ、&lt;= 200であるすべてのユーザーを検索する</td>
-<td><code>logins_count:[100 TO 200]</code></td>
+<td>`logins_count:[100 TO 200]`</td>
 </tr>
 <tr>
 <td>ログイン回数が&gt;= 100であるすべてのユーザーを検索する</td>
-<td><code>logins_count:[100 TO *]</code></td>
+<td>`logins_count:[100 TO *]`</td>
 </tr>
 <tr>
 <td>ログイン回数が&gt;100、かつ、&lt;200であるすべてのユーザーを検索する</td>
-<td><code>logins_count:{100 TO 200}</code></td>
+<td>`logins_count:{100 TO 200}`</td>
 </tr>
 <tr>
 <td>メールドメインが「xampleco.com」と一致するすべてのユーザーを検索する</td>
-<td><code>email.domain:"exampleco.com"</code></td>
+<td>`email.domain:"exampleco.com"`</td>
 </tr>
 </tbody>
 </table>
@@ -285,9 +285,9 @@ dataTask.resume()
 
 50人を超えるユーザーを返す必要がある場合は、`page`パラメータを使用して、より多くの結果ページを表示します。各ページには50人のユーザーが含まれます。たとえば、`&page=2`を指定して51～100人目の結果を表示し、`&page=3`を指定して101～150人目の結果を表示するなどできます。ただし、このエンドポイントは、ページを使用しても、同じ検索条件で合計1000人を超えるユーザーを返すことはありません。
 
-[ユーザー検索エンドポイント](https://auth0.com/docs/api/management/v2/users/get-users)でインデックス作成、クエリ、返却できるユーザーデータには1ユーザーあたり1MBの制限があります。1MBを超えるカスタムメタデータにこれがどのように影響するかについては、「[メタデータフィールド名とデータタイプ](/docs/manage-users/user-accounts/metadata/metadata-fields-data#size-limits-and-storage)」を参照してください。オーバーサイズのユーザープロファイルについては、すべてのユーザー属性を取得するために、[ユーザー取得エンドポイント](https://auth0.com/docs/api/management/v2/users/get-users-by-id)を使用する必要があります。
+[ユーザー検索エンドポイント](https://auth0.com/docs/api/management/v2/users/get-users)でインデックス作成、クエリ、返却できるユーザーデータには1ユーザーあたり1MBの制限があります。1MBを超えるカスタムメタデータにこれがどのように影響するかについては、「[メタデータフィールド名とデータタイプ](/docs/ja-jp/manage-users/user-accounts/metadata/metadata-fields-data#size-limits-and-storage)」を参照してください。オーバーサイズのユーザープロファイルについては、すべてのユーザー属性を取得するために、[ユーザー取得エンドポイント](https://auth0.com/docs/api/management/v2/users/get-users-by-id)を使用する必要があります。
 
-すべてのユーザーを完全にエクスポートする必要がある場合は、[エクスポートジョブ](/docs/api/management/v2#!/Jobs/post_users_exports)または[ユーザーインポート/エクスポート](/docs/extensions/user-import-export)拡張機能を使用します。
+すべてのユーザーを完全にエクスポートする必要がある場合は、[エクスポートジョブ](/docs/ja-jp/api/management/v2#!/Jobs/post_users_exports)または[ユーザーインポート/エクスポート](/docs/ja-jp/extensions/user-import-export)拡張機能を使用します。
 
 エラー`414 Request-URI Too Large`（要求のURIが長すぎる）が発生した場合は、クエリ文字列がサポートされている長さを超過していることを意味します。その場合には、検索を絞り込みます。
 

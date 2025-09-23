@@ -1,13 +1,13 @@
 ---
 title: "TikTokのカスタムソーシャル接続を作成する"
 permalink: "tiktok"
+'description': "TikTokを使用してカスタムソーシャル接続を作成する方法について説明します。"
 'og:title': "TikTokのカスタムソーシャル接続を作成する"
 'og:description': "TikTokを使用してカスタムソーシャル接続を作成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "TikTokのカスタムソーシャル接続を作成する"
 'twitter:description': "TikTokを使用してカスタムソーシャル接続を作成する方法について説明します。"
 ---
-# TikTokのカスタムソーシャル接続を作成する
 
 <Card title="Before you start">
 
@@ -62,7 +62,7 @@ TikTokがソーシャル接続として使えるようにアプリケーショ�
 
    </Note>
 
-```javascript
+```javascript lines
 function fetchUserProfile(accessToken, context, cb) {
   const axios = require('axios@0.22.0');
   const userInfoEndpoint = 'https://open.tiktokapis.com/v2/user/info?fields=union_id';
@@ -104,7 +104,7 @@ Management APIを使用するには、アクセストークンを生成する必
 5. [Auth0 Management API Explorer](https://auth0.com/docs/api/management/v2)に移動します。プライベートウィンドウを開く必要があるかもしれません。
 6. 右上にある**［Set API Token（APIトークンの設定）］**をクリックします。
 
-   <Frame>![Screenshot of Set API Token for TikTok](//images.ctfassets.net/cdy7uua7fh8z/6994KjTIdvDNrye8ghN4og/a6d1eb83bce4a5b38f8ebce7188ee2ca/image2.png)</Frame>
+   <Frame>![Screenshot of Set API Token for TikTok](/images/ja-jp/cdy7uua7fh8z/6994KjTIdvDNrye8ghN4og/a6d1eb83bce4a5b38f8ebce7188ee2ca/image2.png)</Frame>
 
 7. トークンを貼り付けて、**［Set Token（トークンの設定）］**を選択します。
 
@@ -114,7 +114,7 @@ Management APIを使用するには、アクセストークンを生成する必
 
 1. [接続取得](https://auth0.com/docs/api/management/v2#!/Connections/get_connections_by_id)メソッドを使用して、optionsオブジェクトの値を取得します。以下は、応答オブジェクトの例です。
 
-```json
+```json lines
 {
   "options": {
     "client_id": "",
@@ -126,7 +126,7 @@ Management APIを使用するには、アクセストークンを生成する必
 
 2.`upstream_params`オブジェクトに`client_key`フィールドを指定して追加します。
 
-```json
+```json lines
 {
   "options": {
     "client_id": "",

@@ -1,17 +1,17 @@
 ---
 title: "Multiple Custom Domains (MCD)"
 permalink: "multiple-custom-domains"
+'description': "Multiple custom domains Beta capability enables you to configure up to 100 custom domains within a single Auth0 tenant."
 'og:title': "Multiple Custom Domains (MCD) "
 'og:description': "Multiple custom domains Beta capability enables you to configure up to 100 custom domains within a single Auth0 tenant."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Multiple Custom Domains (MCD) "
 'twitter:description': "Multiple custom domains Beta capability enables you to configure up to 100 custom domains within a single Auth0 tenant."
 ---
-# Multiple Custom Domains (MCD)
 
 <Warning>
 
-Multiple Custom Domains (MCD) support in a single tenant is currently available in [Early Access](/docs/troubleshoot/product-lifecycle/product-release-stages). This capability is available only for Enterprise customers. If you are interested in using this feature, please reach out to your Sales exec/Technical Account Manager or open a support ticket through the [Auth0 Support Center](https://support.auth0.com/). By using this feature, you agree to the applicable Free Trial terms in Okta’s [Master Subscription Agreement](https://www.okta.com/legal/?_gl=1*agihqh*_gcl_au*NjM2NjA1MDg4LjE3NTM5ODE4NjY.*_ga*MTgyNDA4MjM2Ny4xNzE1MTAyMjQy*_ga_QKMSDV5369*czE3NTQ0NzQ3NTAkbzM1MyRnMSR0MTc1NDQ3NjU5MCRqNiRsMCRoMA..).
+Multiple Custom Domains (MCD) support in a single tenant is currently available in [Early Access](/docs/ja-jp/troubleshoot/product-lifecycle/product-release-stages). This capability is available only for Enterprise customers. If you are interested in using this feature, please reach out to your Sales exec/Technical Account Manager or open a support ticket through the [Auth0 Support Center](https://support.auth0.com/). By using this feature, you agree to the applicable Free Trial terms in Okta’s [Master Subscription Agreement](https://www.okta.com/legal/?_gl=1*agihqh*_gcl_au*NjM2NjA1MDg4LjE3NTM5ODE4NjY.*_ga*MTgyNDA4MjM2Ny4xNzE1MTAyMjQy*_ga_QKMSDV5369*czE3NTQ0NzQ3NTAkbzM1MyRnMSR0MTc1NDQ3NjU5MCRqNiRsMCRoMA..).
 
 To learn more about Auth0's product release cycle, review Product Release Stages.
 
@@ -70,7 +70,7 @@ To create a custom domain with the Management API, you need a machine-to-machine
 You can create a new custom domain by sending a `POST` request to the `/api/v2/custom-domains` endpoint. See the example below to create a new custom domain using the Management API explorer, using the credentials retrieved above:
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/custom-domains' \
 --header 'accept: application/json' \
@@ -84,8 +84,8 @@ curl --request POST \
 "domain_metadata": {
 "environment": "development"}
 }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/custom-domains");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
@@ -95,7 +95,7 @@ request.AddParameter("application/json", "{ \n \"domain\": \"your.example-custom
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -116,8 +116,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/custom-domains")
 .header("authorization", "Bearer {yourMgmtApiAccessToken}")
 .header("content-type", "application/json")
@@ -126,7 +126,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/custom-domains
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -149,8 +149,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}",
 @"content-type": @"application/json",
@@ -180,7 +180,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/custom-domains",
@@ -205,8 +205,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \n \"domain\": \"your.example-custom-domain.com\", \n \"type\": \"auth0_managed_certs\", \n \"tls_policy\": \"recommended\", \n \"custom_client_ip_header\": \"true-client-ip\", \n \"domain_metadata\": {\n \"environment\": \"development\"} \n}"
@@ -221,7 +221,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -236,8 +236,8 @@ request["accept"] = 'application/json'
 request.body = "{ \n \"domain\": \"your.example-custom-domain.com\", \n \"type\": \"auth0_managed_certs\", \n \"tls_policy\": \"recommended\", \n \"custom_client_ip_header\": \"true-client-ip\", \n \"domain_metadata\": {\n \"environment\": \"development\"} \n}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer {yourMgmtApiAccessToken}",
@@ -273,7 +273,7 @@ dataTask.resume()
 
 If successful, you should see the following returned with the details of your new custom domain, including it's verification status. The `status` is initially returned as `pending`.
 
-```json
+```json lines
 {
     "custom_domain_id": "cd_abc123def456",
     "domain": "your.example-custom-domain.com",
@@ -345,7 +345,7 @@ For example, you could set the **From Address** of your email template to `suppo
 
 #### Customize email handling using the Management API
 
-If you configured Multiple Custom Domains and enabled [Use Custom Domains in Emails](/docs/customize/custom-domains/configure-features-to-use-custom-domains#use-custom-domains-in-emails), the `auth0-custom-domain` HTTP header is available when using the Auth0 Management API. The header is passed as the value for the `domain object` in email templates.
+If you configured Multiple Custom Domains and enabled [Use Custom Domains in Emails](/docs/ja-jp/customize/custom-domains/configure-features-to-use-custom-domains#use-custom-domains-in-emails), the `auth0-custom-domain` HTTP header is available when using the Auth0 Management API. The header is passed as the value for the `domain object` in email templates.
 
 <Note>
 
@@ -365,7 +365,7 @@ The following Management API endpoints accept the `auth0-custom-domain` HTTP hea
 
 For example: To create a password change ticket using Auth0 SDK for [Node.js](https://github.com/auth0/node-auth0).
 
-```javascript
+```javascript lines
 const { ManagementClient } = require('auth0');
 
 const auth0 = new ManagementClient({
@@ -393,7 +393,7 @@ const auth0 = new ManagementClient({
 
 Sample response: The custom domain is passed in the header used to generate the ticket URL.
 
-```json
+```json lines
 {
     "ticket": "https://my-custom-domain.com/u/reset-verify?ticket=abc123"
 }
@@ -411,16 +411,16 @@ When you provide the `auth0-custom-domain` HTTP header, the following additional
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><code>409</code></td>
+<td style="text-align:left">`409`</td>
 <td style="text-align:left">The tenant has multiple verified custom domains.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>400</code></td>
+<td style="text-align:left">`400`</td>
 <td style="text-align:left">The custom domain does not exist for the tenant.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>400</code></td>
-<td style="text-align:left">The <code>auth0-custom-domain</code> HTTP header has an invalid format.</td>
+<td style="text-align:left">`400`</td>
+<td style="text-align:left">The `auth0-custom-domain` HTTP header has an invalid format.</td>
 </tr>
 </tbody>
 </table>
@@ -435,7 +435,7 @@ If you enable MCD and use the Auth0 Dashboard to configure Email templates, the 
 
 Auth0 [Actions](/docs/ja-jp/customize/actions) allows you to create custom logic handling of your different transactions based on the custom domain.
 
-For example, you could create an Action that directs a user to an associated [Organization](/docs/ja-jp/manage-users/organizations), or enforce a specific [access control policy](/docs/customize/actions/use-cases#api-authorization).
+For example, you could create an Action that directs a user to an associated [Organization](/docs/ja-jp/manage-users/organizations), or enforce a specific [access control policy](/docs/ja-jp/customize/actions/use-cases#api-authorization).
 
 To facilitate this, post-login Actions features the object `event.request.hostname`, which provides the hostname being used for the authentication flow.
 
@@ -449,7 +449,7 @@ Create an Action that:
 2. Compares that domain with both lists
 3. Allows or denies the user access accordingly
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
 
     console.log(`org ${event?.organization?.name} accessed from domain ${event?.request?.hostname}`);
@@ -499,8 +499,8 @@ The MCD EA release introduces the following attributes related to custom domain 
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><code>status</code></td>
-<td style="text-align:left">A new enumeration value, <code>failed</code>, has been added to the <code>status</code> attribute. This value indicates that the custom domain verification process has encountered an error and was unsuccessful. This is in addition to the existing supported values <code>pending</code> and <code>ready</code>.</td>
+<td style="text-align:left">`status`</td>
+<td style="text-align:left">A new enumeration value, `failed`, has been added to the `status` attribute. This value indicates that the custom domain verification process has encountered an error and was unsuccessful. This is in addition to the existing supported values `pending` and `ready`.</td>
 </tr>
 </tbody>
 </table>
@@ -517,35 +517,35 @@ The following attributes are supported for Auth0-managed domains only:
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><code>verification.status</code></td>
-<td style="text-align:left">Status of the DNS record verification process. Possible values are: <code>verified</code>, <code>pending</code>, and <code>failed</code>.</td>
+<td style="text-align:left">`verification.status`</td>
+<td style="text-align:left">Status of the DNS record verification process. Possible values are: `verified`, `pending`, and `failed`.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>verification.error_msg</code></td>
-<td style="text-align:left">In the event that <code>verification.status</code> indicates a failure, this string attribute will contain a human-readable error message providing context for the verification failure.</td>
+<td style="text-align:left">`verification.error_msg`</td>
+<td style="text-align:left">In the event that `verification.status` indicates a failure, this string attribute will contain a human-readable error message providing context for the verification failure.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>verification.last_verified_at</code></td>
+<td style="text-align:left">`verification.last_verified_at`</td>
 <td style="text-align:left">This timestamp attribute records the date and time of the last successful verification of the custom domain. The format of this timestamp will adhere to ISO 8601.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>certificate</code></td>
+<td style="text-align:left">`certificate`</td>
 <td style="text-align:left">This object encapsulates information related to the SSL/TLS certificate associated with the custom domain.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>certificate.status</code></td>
-<td style="text-align:left">This attribute indicates the current provisioning status of the SSL/TLS certificate. Possible values will include states such as <code>provisioning</code>, <code>provisioned</code>, <code>provisioning_failed</code>, and <code>renewing_failed</code>.</td>
+<td style="text-align:left">`certificate.status`</td>
+<td style="text-align:left">This attribute indicates the current provisioning status of the SSL/TLS certificate. Possible values will include states such as `provisioning`, `provisioned`, `provisioning_failed`, and `renewing_failed`.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>certificate.error_msg</code></td>
-<td style="text-align:left">If the <code>certificate.status</code> is <code>provisioning_failed</code> or <code>renewing_failed</code>, this string attribute will provide a user-friendly error message detailing the reason for the failure.</td>
+<td style="text-align:left">`certificate.error_msg`</td>
+<td style="text-align:left">If the `certificate.status` is `provisioning_failed` or `renewing_failed`, this string attribute will provide a user-friendly error message detailing the reason for the failure.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>certificate.certificate_authority</code></td>
+<td style="text-align:left">`certificate.certificate_authority`</td>
 <td style="text-align:left">This string attribute specifies the Certificate Authority that issued the SSL/TLS certificate for the custom domain.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>certificate.renews_before</code></td>
+<td style="text-align:left">`certificate.renews_before`</td>
 <td style="text-align:left">For Auth0-managed custom domains, this new timestamp attribute indicates the date and time before which the SSL/TLS certificate must be renewed. The format of this timestamp will adhere to ISO 8601.</td>
 </tr>
 </tbody>

@@ -1,13 +1,13 @@
 ---
 title: "Auth0.swift"
 permalink: "auth0-swift"
+'description': "Auth0.swiftをインストールして開始する方法"
 'og:title': "Auth0.swift"
 'og:description': "Auth0.swiftをインストールして開始する方法"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0.swift"
 'twitter:description': "Auth0.swiftをインストールして開始する方法"
 ---
-# Auth0.swift
 
 <Card title="Overview">
 
@@ -57,7 +57,7 @@ Xcodeで以下のメニュー項目を開きます：
 
 **［Search or Enter Package URL（パッケージURLを検索または入力）］**検索ボックスに次のURLを入力します。
 
-```
+``` lines
 https://github.com/auth0/Auth0.swift
 ```
 
@@ -67,7 +67,7 @@ https://github.com/auth0/Auth0.swift
 
 以下のラインを`Podfile`に追加します。
 
-```
+``` lines
 pod 'Auth0', '~> 2.0'
 ```
 
@@ -77,7 +77,7 @@ pod 'Auth0', '~> 2.0'
 
 以下のラインを`Cartfile`に追加します。
 
-```
+``` lines
 github "auth0/Auth0.swift" ~> 2.0
 ```
 
@@ -93,7 +93,7 @@ Auth0.swiftはAuth0と通信するためにAuth0アプリケーションの**［
 
 `Auth0.plist`という名前の`plist`ファイルを、以下の内容でアプリバンドル内に作成します。
 
-```
+```xml lines
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -110,7 +110,7 @@ Auth0.swiftはAuth0と通信するためにAuth0アプリケーションの**［
 
 ##### Web Authの場合
 
-```
+```swift lines
 Auth0
     .webAuth(clientId: "{yourAuth0ClientID}", domain: "{yourAuth0Domain}")
     // ...
@@ -118,7 +118,7 @@ Auth0
 
 ##### Authentication APIクライアントの場合
 
-```
+```swift lines
 Auth0
     .authentication(clientId: "{yourAuth0ClientID}", domain: "{yourAuth0Domain}")
     // ...
@@ -126,7 +126,7 @@ Auth0
 
 ##### Management APIクライアント(ユーザー)の場合
 
-```
+```swift lines
 Auth0
     .users(token: credentials.accessToken, domain: "{yourAuth0Domain}")
     // ...
@@ -144,25 +144,25 @@ Auth0
 
 ##### iOS
 
-```json
+```json lines
 {yourBundleIdentifier}://{yourAuth0Domain}/ios/{yourBundleIdentifier}/callback
 ```
 
 ##### macOS
 
-```json
+```json lines
 {yourBundleIdentifier}://{yourAuth0Domain}/macos/{yourBundleIdentifier}/callback
 ```
 
 たとえば、iOSのバンドル識別子が`com.example.MyApp`でAuth0ドメインが`example.us.auth0.com`の場合には、次の値になります。
 
-```
+``` lines
 com.example.MyApp://example.us.auth0.com/ios/com.example.MyApp/callback
 ```
 
 <Warning>
 
-[**トークンエンドポイント認証方法**](/docs/get-started/applications/confidential-and-public-applications/view-application-type)の設定が［`None`（なし）］に設定されていることを確認してください。
+[**トークンエンドポイント認証方法**](/docs/ja-jp/get-started/applications/confidential-and-public-applications/view-application-type)の設定が［`None`（なし）］に設定されていることを確認してください。
 
 </Warning>
 
@@ -176,13 +176,13 @@ Xcodeで、アプリターゲット設定の**［Info（情報）］**タブを�
 
 ログインページを提示したいファイルに`Auth0`モジュールをインポートします。
 
-```
+```swift lines
 import Auth0
 ```
 
 それから**［Login（ログイン）］**ボタンのアクションで[ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)ページを提示します。
 
-```
+```swift lines
 Auth0
     .webAuth()
     .start { result in
@@ -197,7 +197,7 @@ Auth0
 
 #### async/awaitを使用する
 
-```
+```swift lines
 do {
     let credentials = try await Auth0.webAuth().start()
     print("Obtained credentials: \(credentials)")
@@ -208,7 +208,7 @@ do {
 
 #### Combineを使用する
 
-```
+```swift lines
 Auth0
     .webAuth()
     .start()
@@ -228,7 +228,7 @@ Auth0
 
 **［Logout（ログアウト）］**ボタンのアクションで`clearSession()`メソッドを呼び出します。セッションCookieがクリアされたら、[ユーザーの資格情報を削除します](https://github.com/auth0/Auth0.swift/blob/master/EXAMPLES.md#clear-stored-credentials)。
 
-```
+```swift lines
 Auth0
     .webAuth()
     .clearSession { result in
@@ -244,7 +244,7 @@ Auth0
 
 #### async/awaitを使用する
 
-```
+```swift lines
 do {
     try await Auth0.webAuth().clearSession()
     print("Session cookie cleared")
@@ -256,7 +256,7 @@ do {
 
 #### Combineを使用する
 
-```
+```swift lines
 Auth0
     .webAuth()
     .clearSession()
@@ -274,7 +274,7 @@ Auth0
 
 ### SSOアラートボックス（iOS/macOS）
 
-<Frame>![undefined](//images.ctfassets.net/cdy7uua7fh8z/c7JkfRnkm3HC12OqbNcpf/74cad82d875e50b2dca62088d44c2db9/sso-alert.png)</Frame>
+<Frame>![undefined](/images/ja-jp/cdy7uua7fh8z/c7JkfRnkm3HC12OqbNcpf/74cad82d875e50b2dca62088d44c2db9/sso-alert.png)</Frame>
 
 Web Authを使用しているときにデフォルトで表示されるアラートボックスの詳細については、[FAQ](https://github.com/auth0/Auth0.swift/blob/master/FAQ.md)を参照してください。
 

@@ -1,13 +1,13 @@
 ---
 title: "AWS API Gatewayチュートリアルの手順4"
 permalink: "aws-api-gateway-delegation-4"
+'description': "Amazon API Gatewayチュートリアルの手順4"
 'og:title': "AWS API Gatewayチュートリアルの手順4"
 'og:description': "Amazon API Gatewayチュートリアルの手順4"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "AWS API Gatewayチュートリアルの手順4"
 'twitter:description': "Amazon API Gatewayチュートリアルの手順4"
 ---
-# AWS API Gatewayチュートリアルの手順4
 
 <Warning>
 
@@ -39,11 +39,11 @@ permalink: "aws-api-gateway-delegation-4"
 
 **［Actions（アクション）］**と**［Create Resource（リソースを作成）］**をクリックします。新しい子リソースに「`Purchase（購入）`」という名前を付けます。［**Create Resource（リソースを作成）**］をクリックします。
 
-以前、`pets`用に[「手順2：CORSをセットアップしてAPIを導入する」の「Amazon API Gatewayの保護と導入」](/docs/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-2#set-up-cors-and-deploy-the-api)で説明した方法で、OPTIONSメソッドを`purchase`リソースに追加します。
+以前、`pets`用に[「手順2：CORSをセットアップしてAPIを導入する」の「Amazon API Gatewayの保護と導入」](/docs/ja-jp/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-2#set-up-cors-and-deploy-the-api)で説明した方法で、OPTIONSメソッドを`purchase`リソースに追加します。
 
 ペットを購入するために、`PetPurchase`という新しいAWS Lambda関数を作成します。これにより、以下のように、`isSold`と`soldTo`の属性がペットに追加されます。
 
-```javascript
+```javascript lines
 var AWS = require('aws-sdk');
 var DOC = require('dynamodb-doc');
 var dynamo = new DOC.DynamoDB();
@@ -99,11 +99,11 @@ exports.handler = function(event, context) {
 };
 ```
 
-Lambda関数を定義し終えたら、[POSTメソッドを`purchase`リソースに追加](/docs/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-1#method-post-pet-information)します。これは、`PetPurchase` Lambdaと呼ばれます。値が`*`の`Access-Control-Allow-Origin`ヘッダーも忘れずにPOSTメソッドに追加します。これには、「[手順2：CORSをセットアップしてAPIを導入する」の「Amazon API Gatewayの保護と導入」](/docs/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-2#set-up-cors-and-deploy-the-api)で説明されている、メソッド応答/統合応答の構成を使用します。
+Lambda関数を定義し終えたら、[POSTメソッドを`purchase`リソースに追加](/docs/ja-jp/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-1#method-post-pet-information)します。これは、`PetPurchase` Lambdaと呼ばれます。値が`*`の`Access-Control-Allow-Origin`ヘッダーも忘れずにPOSTメソッドに追加します。これには、「[手順2：CORSをセットアップしてAPIを導入する」の「Amazon API Gatewayの保護と導入」](/docs/ja-jp/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-2#set-up-cors-and-deploy-the-api)で説明されている、メソッド応答/統合応答の構成を使用します。
 
 入力メッセージとして以下を指定して、API Gatewayメソッドをテストします。
 
-```json
+```javascript lines
 {
     "petId": 1,
     "userName": "fred flintstone"
@@ -112,7 +112,7 @@ Lambda関数を定義し終えたら、[POSTメソッドを`purchase`リソー�
 
 テスト応答で、ID「1」のペットが、「Fred Flintstone」に販売されたことがわかります。
 
-```json
+```javascript lines
 [
   {
     "id": 1,
@@ -133,7 +133,7 @@ APIを保護するため、本チュートリアルの[パート2で実行](/doc
 
 IAMポリシーで保護するこのメソッドのARNは、次のようになります。
 
-```
+``` lines
 arn:aws:execute-api:us-east-1:your-accountid:your-api-id/*/pets/purchase
 ```
 
@@ -167,7 +167,7 @@ Amazonコンソールを使用してLWAを構成する際には、［Allowed Ret
 
 ##### APIを導入する
 
-[Amazon API Gatewayコンソール](https://console.aws.amazon.com/apigateway)を使用して、再び[APIを導入して新しいJavaScript SDKを生成](/docs/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-2#set-up-cors-and-deploy-the-api)します。
+[Amazon API Gatewayコンソール](https://console.aws.amazon.com/apigateway)を使用して、再び[APIを導入して新しいJavaScript SDKを生成](/docs/ja-jp/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-2#set-up-cors-and-deploy-the-api)します。
 
 この時点で、ペット購入を可能にするために必要な構成変更は完了しています。これを運用環境に反映させるには、新たにダウンロードしたSDKをコピーして、`pets`フォルダーにある以前のものおよびAmazon S3バケットと置き換えます。
 
@@ -181,7 +181,7 @@ Amazonコンソールを使用してLWAを構成する際には、［Allowed Ret
 
 この機能性をテストするには、`/pets/home/home.html`の`ng-show="isAdmin"`を削除することで、UIの削除ボタンを一時的に非表示にできます。
 
-```
+```html lines
 <button ng-show="isAdmin" class="btn delete-btn" ng-click="removePet(pet.id)">remove</button>
 ```
 
@@ -191,7 +191,7 @@ Amazonコンソールを使用してLWAを構成する際には、［Allowed Ret
 
 `home.js`で`buyPet`機能を変更して、ペット購入ができるようにします。
 
-```javascript
+```javascript lines
 function buyPet(user, id) {
     var apigClient = getSecureApiClient();
 
@@ -229,7 +229,7 @@ Auth0では、この設定をルールを使って行えます。ルールは、
 2. **［Empty rule（空のルール）］**テンプレートを選択します。
 3. ルールに「**AWS Pets**」のような名前を付けてから、以下のJavaScriptコードを使ってルールの本文を入力します。
 
-   ```javascript
+   ```javascript lines
    function (user, context, callback) {
      if(context.clientID === '{yourClientId}') {
        var socialRoleInfo = {

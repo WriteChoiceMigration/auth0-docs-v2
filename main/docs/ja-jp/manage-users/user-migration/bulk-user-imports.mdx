@@ -1,15 +1,15 @@
 ---
 title: "一括ユーザーインポート"
 permalink: "bulk-user-imports"
+'description': "Management APIを使用して一括ユーザーインポートを行う方法について説明します。"
 'og:title': "一括ユーザーインポート"
 'og:description': "Management APIを使用して一括ユーザーインポートを行う方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "一括ユーザーインポート"
 'twitter:description': "Management APIを使用して一括ユーザーインポートを行う方法について説明します。"
 ---
-# 一括ユーザーインポート
 
-ユーザーデータを一括してAuth0にインポートするには、[ユーザーインポートジョブ作成](/docs/api/management/v2#!/Jobs/post_users_imports)エンドポイントを使用します。一括インポートは、ユーザーを既存のデータベースやサービスからAuth0に移行するのに便利です。
+ユーザーデータを一括してAuth0にインポートするには、[ユーザーインポートジョブ作成](/docs/ja-jp/api/management/v2#!/Jobs/post_users_imports)エンドポイントを使用します。一括インポートは、ユーザーを既存のデータベースやサービスからAuth0に移行するのに便利です。
 
 <Warning>
 
@@ -51,15 +51,15 @@ JSONファイルのスキーマと例については、「[一括インポート
 一括ユーザーインポートジョブを始めるには、`POST`要求を[一括ユーザーインポートジョブ作成](https://auth0.com/docs/api/management/v2#!/Jobs/post_users_imports)エンドポイントに対して行います。必ず、`MGMT_API_ACCESS_TOKEN`、`USERS_IMPORT_FILE.json`、`CONNECTION_ID`、および`EXTERNAL_ID`のプレースホルダーの値をそれぞれManagement APIのアクセストークン、ユーザーのJSONファイル、データベース[接続ID](/docs/ja-jp/authenticate/identity-providers/locate-the-connection-id)と外部IDに置き換えます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/jobs/users-imports' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --form users=@USERS_IMPORT_FILE.json \
 --form connection_id=CONNECTION_ID \
 --form external_id=EXTERNAL_ID
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/jobs/users-imports");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
@@ -68,7 +68,7 @@ request.AddParameter("multipart/form-data; boundary=---011000010111000001101001"
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -88,8 +88,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/jobs/users-imports")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .header("content-type", "multipart/form-data; boundary=---011000010111000001101001")
@@ -97,7 +97,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/jobs/users-imp
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -113,8 +113,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
 @"content-type": @"multipart/form-data; boundary=---011000010111000001101001" };
@@ -159,7 +159,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/jobs/users-imports",
@@ -183,8 +183,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"users\"; filename=\"USERS_IMPORT_FILE.json\"\r\nContent-Type: text/json\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"connection_id\"\r\n\r\nCONNECTION_ID\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"external_id\"\r\n\r\nEXTERNAL_ID\r\n-----011000010111000001101001--\r\n"
@@ -198,7 +198,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -212,8 +212,8 @@ request["content-type"] = 'multipart/form-data; boundary=---01100001011100000110
 request.body = "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"users\"; filename=\"USERS_IMPORT_FILE.json\"\r\nContent-Type: text/json\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"connection_id\"\r\n\r\nCONNECTION_ID\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"external_id\"\r\n\r\nEXTERNAL_ID\r\n-----011000010111000001101001--\r\n"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer MGMT_API_ACCESS_TOKEN",
@@ -281,31 +281,31 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>users</code></td>
+<td>`users`</td>
 <td>インポートするユーザーを含むJSON形式のファイルです。</td>
 </tr>
 <tr>
-<td><code>connection_id</code></td>
+<td>`connection_id`</td>
 <td>ユーザーが投入される接続のIDです。IDは<a href="https://auth0.com/docs/ja-jp/api/management/v2#!/Connections/get_connections">GET /api/v2/connections</a>を使って取得することができます。</td>
 </tr>
 <tr>
-<td><code>upsert</code></td>
-<td>ブール値で、デフォルトは<code>false</code>です。<code>false</code>では、メールアドレス、ユーザーID、電話番号、またはユーザー名が一致する既存のユーザーの場合、エラーになります。trueでは、メールアドレスが一致する既存のユーザーは更新されますが、更新されるのはアップサートできる属性のみです。インポートでアップサート可能なユーザープロファイルのフィールドについては、「<a href="https://auth0.com/docs/ja-jp/users/user-profile-structure#user-profile-attributes">ユーザープロファイルの構造：ユーザープロファイル属性</a>」を参照してください。注意：インポートファイルに重複したユーザーが存在する場合はエラーになります。その場合、Auth0は投入や更新を行いません。</td>
+<td>`upsert`</td>
+<td>ブール値で、デフォルトは`false`です。`false`では、メールアドレス、ユーザーID、電話番号、またはユーザー名が一致する既存のユーザーの場合、エラーになります。trueでは、メールアドレスが一致する既存のユーザーは更新されますが、更新されるのはアップサートできる属性のみです。インポートでアップサート可能なユーザープロファイルのフィールドについては、「<a href="https://auth0.com/docs/ja-jp/users/user-profile-structure#user-profile-attributes">ユーザープロファイルの構造：ユーザープロファイル属性</a>」を参照してください。注意：インポートファイルに重複したユーザーが存在する場合はエラーになります。その場合、Auth0は投入や更新を行いません。</td>
 </tr>
 <tr>
-<td><code>external_id</code></td>
+<td>`external_id`</td>
 <td>任意のユーザー定義の文字列で、複数のジョブを関連付けるのに使うことができます。ジョブステータス応答の一部として返されます。</td>
 </tr>
 <tr>
-<td><code>send_completion_email</code></td>
-<td>ブール値で、デフォルトは<code>true</code>です。<code>true</code>では、インポートジョブが終了すると、すべてのテナント所有者に完了メールを送信します。メールを送信したく<em>ない</em>場合には、このパラメーターを<code>false</code>に設定する必要があります。</td>
+<td>`send_completion_email`</td>
+<td>ブール値で、デフォルトは`true`です。`true`では、インポートジョブが終了すると、すべてのテナント所有者に完了メールを送信します。メールを送信したく<em>ない</em>場合には、このパラメーターを`false`に設定する必要があります。</td>
 </tr>
 </tbody>
 </table>
 
 要求に成功すると、以下のような応答を受け取ります。
 
-```json
+```json lines
 {
   "status": "pending",
   "type": "users_import",
@@ -326,7 +326,7 @@ dataTask.resume()
 
 [ユーザーインポートジョブ作成](https://auth0.com/docs/api/management/v2#!/Jobs/post_users_imports)エンドポイントでは、同時に実行可能なインポートジョブが2つまでに制限されています。2つのジョブが保留中の場合に追加のジョブを要求すると、`429 Too Many Requests`（要求が多すぎます）応答が返されます。
 
-```json
+```json lines
 {
   "statusCode": 429,
   "error": "Too Many Requests",
@@ -339,13 +339,13 @@ dataTask.resume()
 ジョブのステータスを確認するには、`GET`要求を[ジョブ取得](https://auth0.com/docs/api/management/v2#!/Jobs/get_jobs_by_id)エンドポイントに対して行います。必ず、`MGMT_API_ACCESS_TOKEN`および`JOB_ID`のプレースホルダーの値をそれぞれManagement APIのアクセストークンとユーザーインポートジョブIDに置き換えます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/jobs/JOB_ID' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: application/json'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/jobs/JOB_ID");
 var request = new RestRequest(Method.GET);
 request.AddHeader("content-type", "application/json");
@@ -353,7 +353,7 @@ request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -371,15 +371,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/jobs/JOB_ID")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -394,8 +394,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
@@ -417,7 +417,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/jobs/JOB_ID",
@@ -440,8 +440,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = {
@@ -454,7 +454,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -467,8 +467,8 @@ request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -496,7 +496,7 @@ dataTask.resume()
 
 **保留中**
 
-```json
+```javascript lines
 {
   "status": "pending",
   "type": "users_import",
@@ -511,7 +511,7 @@ dataTask.resume()
 
 ジョブが完了すると、ジョブステータス応答には、成功、失敗、挿入、および更新レコードの総計が含めれます。
 
-```json
+```javascript lines
 {
   "status": "completed",
   "type": "users_import",
@@ -532,7 +532,7 @@ dataTask.resume()
 
 ジョブ内にエラーがある場合には、失敗が返されます。ただし、無効なメールなどの無効なユーザー情報では、ジョブが全体として失敗しないことに注意してください。
 
-```json
+```javascript lines
 {
   "status": "failed",
   "type": "users_import",
@@ -559,16 +559,16 @@ dataTask.resume()
 
 </Warning>
 
-ユーザーインポートジョブにエラーがある場合には、`GET`要求を[ジョブエラー詳細取得](/docs/api/management/v2#!/Jobs/get_errors)エンドポイントに行って、エラー詳細を取得することができます。必ず、`MGMT_API_ACCESS_TOKEN`および`JOB_ID`のプレースホルダーの値をそれぞれManagement APIのアクセストークンとユーザーインポートジョブIDに置き換えます。
+ユーザーインポートジョブにエラーがある場合には、`GET`要求を[ジョブエラー詳細取得](/docs/ja-jp/api/management/v2#!/Jobs/get_errors)エンドポイントに行って、エラー詳細を取得することができます。必ず、`MGMT_API_ACCESS_TOKEN`および`JOB_ID`のプレースホルダーの値をそれぞれManagement APIのアクセストークンとユーザーインポートジョブIDに置き換えます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/jobs/JOB_ID/errors' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: application/json'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/jobs/JOB_ID/errors");
 var request = new RestRequest(Method.GET);
 request.AddHeader("content-type", "application/json");
@@ -576,7 +576,7 @@ request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -594,15 +594,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/jobs/JOB_ID/errors")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -617,8 +617,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
@@ -640,7 +640,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/jobs/JOB_ID/errors",
@@ -663,8 +663,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = {
@@ -677,7 +677,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -690,8 +690,8 @@ request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -717,7 +717,7 @@ dataTask.resume()
 
 要求に成功すると、以下のような応答を受け取ります。`hash.value`などの機密フィールドは応答内でマスクされます。
 
-```json
+```json lines
 [
     {
         "user": {

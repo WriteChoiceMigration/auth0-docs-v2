@@ -1,13 +1,13 @@
 ---
 title: "サイレント認証を設定する"
 permalink: "configure-silent-authentication"
+'description': "サイレント認証を使用してユーザーがアプリケーションにログインしたままにする方法を説明します。"
 'og:title': "サイレント認証を設定する"
 'og:description': "サイレント認証を使用してユーザーがアプリケーションにログインしたままにする方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "サイレント認証を設定する"
 'twitter:description': "サイレント認証を使用してユーザーがアプリケーションにログインしたままにする方法を説明します。"
 ---
-# サイレント認証を設定する
 
 [OpenID Connectのプロトコル](/docs/ja-jp/authenticate/protocols/openid-connect-protocol)は、認証要求の`prompt=none`パラメーターをサポートしているので、アプリケーションは、認証サーバーにユーザーとのやりとり（認証や承諾、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>など）を一切表示しないよう指示できます。Auth0は要求された応答をアプリケーションに返すか、ユーザーがまだ認証されていない場合や、処理を進める前に何らかの同意やプロンプトが必要な場合はエラーを返します。
 
@@ -21,11 +21,11 @@ SPAで[暗黙フロー](/docs/ja-jp/get-started/authentication-and-authorization
 
 ## サイレント認証要求を開始する
 
-サイレント認証要求を開始するには、[Auth0の認証APIのエンドポイント`/authorize`](/docs/api/authentication#authorize-application)にユーザーをリダイレクトする際に、`prompt=none`パラメーターを追加します。（認証要求の個々のパラメーターは、アプリの特定のニーズに応じて異なります）。
+サイレント認証要求を開始するには、[Auth0の認証APIのエンドポイント`/authorize`](/docs/ja-jp/api/authentication#authorize-application)にユーザーをリダイレクトする際に、`prompt=none`パラメーターを追加します。（認証要求の個々のパラメーターは、アプリの特定のニーズに応じて異なります）。
 
 例：
 
-```
+``` lines
 GET https://{yourDomain}/authorize
     ?response_type=id_token token&
     client_id=...&
@@ -52,7 +52,7 @@ GET https://{yourDomain}/authorize
 
 たとえば、暗黙フロー（シングルページアプリケーションで使用される`response_type=id_token token`）を使用すると、Auth0は次のように、要求されたトークンを返します。
 
-```
+``` lines
 GET {https://yourApp/callback}
     #id_token=...&
     access_token=...&
@@ -66,7 +66,7 @@ GET {https://yourApp/callback}
 
 ユーザーがシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>）経由でログインしていなかった場合、またはSSOセッションが期限切れとなっていた場合、Auth0は次のように、指定された`redirect_uri`（コールバックURL）にエラーとともにリダイレクトします。
 
-```
+``` lines
 GET https://your_callback_url/
     #error=ERROR_CODE&
     error_description=ERROR_DESCRIPTION&
@@ -83,16 +83,16 @@ GET https://your_callback_url/
 </thead>
 <tbody>
 <tr>
-<td><code>login_required</code></td>
-<td>ユーザーがAuth0でログインしていないため、サイレント認証は不可能です。このエラーは、テナントレベルの**Log In Session Management（ログインセッション管理）**設定の構成方法に基づいて起こります。特に、**Require log in after（後にログインが必要）**設定で指定された期間後に起こります。詳細については、<a href="/docs/dashboard/guides/tenants/configure-session-lifetime-settings">セッションライフタイム設定の構成</a>をご覧ください。</td>
+<td>`login_required`</td>
+<td>ユーザーがAuth0でログインしていないため、サイレント認証は不可能です。このエラーは、テナントレベルの**Log In Session Management（ログインセッション管理）**設定の構成方法に基づいて起こります。特に、**Require log in after（後にログインが必要）**設定で指定された期間後に起こります。詳細については、<a href="/docs/ja-jp/dashboard/guides/tenants/configure-session-lifetime-settings">セッションライフタイム設定の構成</a>をご覧ください。</td>
 </tr>
 <tr>
-<td><code>consent_required</code></td>
+<td>`consent_required`</td>
 <td>ユーザーはAuth0でログインしましたが、アプリケーションの認可に同意が必要です。</td>
 </tr>
 <tr>
-<td><code>interaction_required</code></td>
-<td>ユーザーはAuth0でログインし、アプリケーションを認可しましたが、認証が完了する前にどこか他にリダイレクトされる必要があります。たとえば、<a href="/docs/rules/redirect">リダイレクトルール</a>を使用している場合などです。</td>
+<td>`interaction_required`</td>
+<td>ユーザーはAuth0でログインし、アプリケーションを認可しましたが、認証が完了する前にどこか他にリダイレクトされる必要があります。たとえば、<a href="/docs/ja-jp/rules/redirect">リダイレクトルール</a>を使用している場合などです。</td>
 </tr>
 </tbody>
 </table>
@@ -136,7 +136,7 @@ Safariブラウザーに関する他の重要な制限事項や回避方法に�
 
 状況によっては、同じブラウザーを使ってログインしているユーザーに対し、[多要素認証（MFA）](/docs/ja-jp/secure/multi-factor-authentication)を求めるプロンプトを毎回表示したくない場合があります。これを実行するには、セッションごとにMFAが1回だけ発生するようにアクションを設定します。これは、`allowRememberBrowser`を`true`に設定することなく、ユーザーのセッションの期間中に、SPA内で有効期限の短いアクセストークンを更新するためのサイレント認証（`prompt=none`）を行う場合に便利です。
 
-```
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   const authMethods = event.authentication?.methods || []
 

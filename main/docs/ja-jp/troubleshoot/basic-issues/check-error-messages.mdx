@@ -1,13 +1,13 @@
 ---
 title: "エラーメッセージを確認する"
 permalink: "check-error-messages"
+'description': "エラーメッセージを確認して問題をトラブルシューティングする方法を学びます"
 'og:title': "エラーメッセージを確認する"
 'og:description': "エラーメッセージを確認して問題をトラブルシューティングする方法を学びます"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "エラーメッセージを確認する"
 'twitter:description': "エラーメッセージを確認して問題をトラブルシューティングする方法を学びます"
 ---
-# エラーメッセージを確認する
 
 次のいずれかの場所に表示されているエラーメッセージを確認します:
 
@@ -59,19 +59,19 @@ Auth0ログをエクスポートして、自分で保存するか、外部ログ
 
 ### すべてのログを検索する/get_logsエンドポイント
 
-ログイベントを[検索するエンドポイント](/docs/api/management/v2#!/Logs/get_logs)は、指定した検索条件に一致するログエントリを取得します。検索条件を指定しない場合は、使用可能なすべてのエントリのリストが表示されます。
+ログイベントを[検索するエンドポイント](/docs/ja-jp/api/management/v2#!/Logs/get_logs)は、指定した検索条件に一致するログエントリを取得します。検索条件を指定しない場合は、使用可能なすべてのエントリのリストが表示されます。
 
 **q**パラメーターを使用して検索条件を指定し、**fields**パラメーターを使用して特定のフィールドを取得できます。
 
-APIにアクセスするには、[Management APIv2トークン](/docs/api/management/v2/tokens)が必要です。
+APIにアクセスするには、[Management APIv2トークン](/docs/ja-jp/api/management/v2/tokens)が必要です。
 
 このサンプル要求は、成功したログインのすべてのログを取得します（成功したログインのイベントの頭字語は`s`です）。ログエントリごとに取得するフィールドのリストは次のとおりです。**date**、**description**、**client_id**、および**log_id**。
 
-使用できる検索条件の詳細とイベントの頭字語のリストについては、[ログイベントの検索エンドポイント](/docs/api/management/v2#!/Logs/get_logs)を参照してください。
+使用できる検索条件の詳細とイベントの頭字語のリストについては、[ログイベントの検索エンドポイント](/docs/ja-jp/api/management/v2#!/Logs/get_logs)を参照してください。
 
 ### 単一のログエントリを取得する/get_logs_by_idエンドポイント
 
-IDによるログイベントの取得エンドポイントは、指定された[IDに関連付けられたログエントリ](/docs/api/management/v2#!/Logs/get_logs_by_id)を取得します。
+IDによるログイベントの取得エンドポイントは、指定された[IDに関連付けられたログエントリ](/docs/ja-jp/api/management/v2#!/Logs/get_logs_by_id)を取得します。
 
 このサンプル要求は、ID `90020180129170850881585554625888895190928456277777449010`のログエントリを1つ取得します。
 
@@ -81,7 +81,7 @@ Auth0の機能が非推奨になると、テナントログにエラーまたは
 
 ## レート制限とその他のエラー
 
-Auth0は、[レート制限を超えたとき](/docs/ja-jp/troubleshoot/customer-support/operational-policies/rate-limit-policy)に報告されるエラーに対して一意のエラーコードを提供します。レート制限エラーを確認するためにログの自動スキャンを設定する必要があります。そうすることで、ユーザーに大きな問題を引き起こす前に、レート制限に達するアクティビティにプロアクティブに対処できます。Auth0は他の種類のエラーのエラーコードも公開しており、認証エラーやAuth0 Management API呼び出しのエラーのログをスキャンすると便利です（Management APIエラーコードは、[Management API Explorer](/docs/api/management/v2)の各呼び出しの下に表示されます）。
+Auth0は、[レート制限を超えたとき](/docs/ja-jp/troubleshoot/customer-support/operational-policies/rate-limit-policy)に報告されるエラーに対して一意のエラーコードを提供します。レート制限エラーを確認するためにログの自動スキャンを設定する必要があります。そうすることで、ユーザーに大きな問題を引き起こす前に、レート制限に達するアクティビティにプロアクティブに対処できます。Auth0は他の種類のエラーのエラーコードも公開しており、認証エラーやAuth0 Management API呼び出しのエラーのログをスキャンすると便利です（Management APIエラーコードは、[Management API Explorer](/docs/ja-jp/api/management/v2)の各呼び出しの下に表示されます）。
 
 ルール内からユーザープロファイル情報を取得するためにManagement APIを呼び出すことは、レート制限の発生の一般的な原因になります。なぜなら、そのようなAPIはすべてのログインと定期的なセッションチェックを呼び出すからです。
 

@@ -1,17 +1,17 @@
 ---
 title: "Private Key JWT Client Authentication for Okta and OIDC Connections"
 permalink: "private-key-jwt-client-auth"
+'description': "Learn how to implement Private Key JWT Client Authentication for your enterprise connections. "
 'og:title': "Private Key JWT Client Authentication for Okta and OIDC Connections"
 'og:description': "Learn how to implement Private Key JWT Client Authentication for your enterprise connections. "
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Private Key JWT Client Authentication for Okta and OIDC Connections"
 'twitter:description': "Learn how to implement Private Key JWT Client Authentication for your enterprise connections. "
 ---
-# Private Key JWT Client Authentication for Okta and OIDC Connections
 
 <Warning>
 
-Private Key JWT Client Authentication for OpenID Connect (OIDC) and Okta Workforce connections is currently available in [Early Access](/docs/troubleshoot/product-lifecycle/product-release-stages). By using this feature, you agree to the applicable Free Trial terms in Okta’s [Master Subscription Agreement](https://www.okta.com/legal/).
+Private Key JWT Client Authentication for OpenID Connect (OIDC) and Okta Workforce connections is currently available in [Early Access](/docs/ja-jp/troubleshoot/product-lifecycle/product-release-stages). By using this feature, you agree to the applicable Free Trial terms in Okta’s [Master Subscription Agreement](https://www.okta.com/legal/).
 
 </Warning>
 
@@ -44,7 +44,7 @@ After a user completes authentication with an upstream <Tooltip data-tooltip-id=
 
 The following steps demonstrate a typical Private Key JWT Client Authentication flow.
 
-<Frame>![A diagram mapping the Private Key JWT Client Authentication flow. ](//images.ctfassets.net/cdy7uua7fh8z/4JOxbdG7aweqpDHCJ8VOZq/aea18936c0cbdbfbb39d0cd79af3987e/Client_Assertion_JWT_-_Diagram.png)</Frame>
+<Frame>![A diagram mapping the Private Key JWT Client Authentication flow. ](/images/ja-jp/cdy7uua7fh8z/4JOxbdG7aweqpDHCJ8VOZq/aea18936c0cbdbfbb39d0cd79af3987e/Client_Assertion_JWT_-_Diagram.png)</Frame>
 
 <Note>
 
@@ -128,7 +128,7 @@ You can use the Management API to configure Private Key JWT Client Authenticatio
 
 <Tabs><Tab title="New Connection">
 
-To create a new OIDC connection that uses Private Key JWT Client Authentication, call the [Create a Connection](/docs/api/management/v2/connections/post-connections) endpoint with the following `connection.options` properties set appropriately:
+To create a new OIDC connection that uses Private Key JWT Client Authentication, call the [Create a Connection](/docs/ja-jp/api/management/v2/connections/post-connections) endpoint with the following `connection.options` properties set appropriately:
 
 <table class="table"><thead>
 <tr>
@@ -138,23 +138,23 @@ To create a new OIDC connection that uses Private Key JWT Client Authentication,
 </thead>
 <tbody>
 <tr>
-<td><code>type</code></td>
-<td>Set this property to <code>back_channel</code>.</td>
+<td>`type`</td>
+<td>Set this property to `back_channel`.</td>
 </tr>
 <tr>
-<td><code>token_endpoint_auth_method</code></td>
-<td>Set this property to <code>private_key_jwt</code>. <br/><br/> <strong>Notes:</strong><ul><li> By default, this property is set to <code>client_secret_post</code>. </li><li>Errors may occur if this property is set to a value other than <code>private_key_jwt</code> or <code>client_secret_post</code>.</li></ul></td>
+<td>`token_endpoint_auth_method`</td>
+<td>Set this property to `private_key_jwt`. <br/><br/> <strong>Notes:</strong><ul><li> By default, this property is set to `client_secret_post`. </li><li>Errors may occur if this property is set to a value other than `private_key_jwt` or `client_secret_post`.</li></ul></td>
 </tr>
 <tr>
-<td><code>token_endpoint_auth_signing_alg</code></td>
-<td>Set this property to <code>RS256</code>. <br/><br/> <strong>Notes:</strong> <ul><li>This feature does not currently support additional algorithms.</li><li>Omitting this property will default its value to <code>RS256</code>.</li></ul></td>
+<td>`token_endpoint_auth_signing_alg`</td>
+<td>Set this property to `RS256`. <br/><br/> <strong>Notes:</strong> <ul><li>This feature does not currently support additional algorithms.</li><li>Omitting this property will default its value to `RS256`.</li></ul></td>
 </tr>
 </tbody>
 </table>
 
 **Example POST call**
 
-```
+```json lines
 POST /api2/connections
 
 {
@@ -170,7 +170,7 @@ POST /api2/connections
 
 </Tab><Tab title="Existing Connection">
 
-To modify an existing OIDC connection to use Private Key JWT Client Authentication, call the [Update a Connection](/docs/api/management/v2/connections/patch-connections-by-id) endpoint with the following `connection.options` properties set appropriately:
+To modify an existing OIDC connection to use Private Key JWT Client Authentication, call the [Update a Connection](/docs/ja-jp/api/management/v2/connections/patch-connections-by-id) endpoint with the following `connection.options` properties set appropriately:
 
 <table class="table"><thead>
 <tr>
@@ -180,19 +180,19 @@ To modify an existing OIDC connection to use Private Key JWT Client Authenticati
 </thead>
 <tbody>
 <tr>
-<td><code>type</code></td>
-<td>Set this property to <code>back_channel</code>.</td>
+<td>`type`</td>
+<td>Set this property to `back_channel`.</td>
 </tr>
 <tr>
-<td><code>token_endpoint_auth_method</code></td>
-<td>Set this property to <code>private_key_jwt</code>.<br/><br/> <b>Notes:</b> <ul><li> Errors may occur if this property is set to a value other than <code>private_key_jwt</code> or <code>client_secret_post</code>. </li></ul></td>
+<td>`token_endpoint_auth_method`</td>
+<td>Set this property to `private_key_jwt`.<br/><br/> <b>Notes:</b> <ul><li> Errors may occur if this property is set to a value other than `private_key_jwt` or `client_secret_post`. </li></ul></td>
 </tr>
 </tbody>
 </table>
 
 **Example PATCH call**
 
-```
+```json lines
 PATCH /api2/connections/{id}
 
 {
@@ -236,13 +236,13 @@ Use of this endpoint requires the `read:connections_keys` scope.
 
 **Example GET call**
 
-```
+```json lines
 GET /api2/connections/{id}/keys
 ```
 
 **Example response**
 
-```json
+```json lines
 {
     cert: "-----BEGIN CERTIFICATE-----
 MIIDDTCCAfWgAwIBAgIJP...Ek=
@@ -295,7 +295,7 @@ Some identity providers allow public keys for private_key_jwt to be provided in 
 
 If public keys have been generated for a connection, you can retrieve them by adding the following URI to your IdP configuration:
 
-```
+```json lines
 https://{auth0 domain}/oauth/connection/{connection name}/.well-known/jwks.json
 ```
 
@@ -339,7 +339,7 @@ Use of this endpoint requires both `create:connections_keys` and `update:connect
 
 </Warning>
 
-```
+```json lines
 POST /v2/connections/{id}/keys/rotate
 ```
 

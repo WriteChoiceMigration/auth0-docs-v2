@@ -1,13 +1,13 @@
 ---
 title: "Auth0.jsからAuth0シングルページアプリSDKに移行する"
 permalink: "migrate-from-auth0-js-to-the-auth0-single-page-app-sdk"
+'description': "シングルページアプリケーションをAuth0.jsからAuth0シングルページアプリSDKに移行する方法について説明します。"
 'og:title': "Auth0.jsからAuth0シングルページアプリSDKに移行する"
 'og:description': "シングルページアプリケーションをAuth0.jsからAuth0シングルページアプリSDKに移行する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0.jsからAuth0シングルページアプリSDKに移行する"
 'twitter:description': "シングルページアプリケーションをAuth0.jsからAuth0シングルページアプリSDKに移行する方法について説明します。"
 ---
-# Auth0.jsからAuth0シングルページアプリSDKに移行する
 
 この記事では、シングルサインアプリ（SPA）を[auth0.js](/docs/ja-jp/libraries/auth0js)から[auth0-spa-js](/docs/ja-jp/libraries/auth0-single-page-app-sdk)に移行する方法について説明します。以下は、auth0.jsとそれに相当するauth0-spa-jsコードを使ったシナリオです。
 
@@ -39,7 +39,7 @@ auth0-spa-jsを使用する場合、カスタムパラメーターは`camelCase`
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 import { WebAuth } from 'auth0.js';
 
 window.addEventListener('load', () => {
@@ -58,7 +58,7 @@ window.addEventListener('load', () => {
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```javascript lines
 import createAuth0Client from '@auth0/auth0-spa-js';
 
 window.addEventListener('load', () => {
@@ -76,7 +76,7 @@ window.addEventListener('load', () => {
 
 * [authorize()](https://auth0.github.io/auth0.js/WebAuth.html#authorize)
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', () => {
   auth0.authorize();
 });
@@ -87,7 +87,7 @@ document.getElementById('login').addEventListener('click', () => {
 * [Auth0Client.loginWithRedirect()](https://auth0.github.io/auth0-spa-js/classes/Auth0Client.html#loginWithRedirect)
 * [RedirectLoginOptions](https://auth0.github.io/auth0-spa-js/interfaces/RedirectLoginOptions.html)
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', async () => {
   await auth0.loginWithRedirect();
 });
@@ -99,7 +99,7 @@ document.getElementById('login').addEventListener('click', async () => {
 
 * [parseHash()](https://auth0.github.io/auth0.js/WebAuth.html#parseHash)
 
-```
+```javascript lines
 window.addEventListener('load', () => {
   auth0.parseHash({ hash: window.location.hash }, function(err, authResult) {
     if (err) {
@@ -114,7 +114,7 @@ window.addEventListener('load', () => {
 
 * [Auth0Client.handleRedirectCallback()](https://auth0.github.io/auth0-spa-js/classes/Auth0Client.html#handleRedirectCallback)
 
-```
+```javascript lines
 window.addEventListener('load', async () => {
   await auth0.handleRedirectCallback();
 });
@@ -128,7 +128,7 @@ window.addEventListener('load', async () => {
 
 * [userInfo()](https://auth0.github.io/auth0.js/Authentication.html#userInfo)
 
-```
+```javascript lines
 window.addEventListener('load', () => {
   auth0.client.userInfo(accessToken, function(err, user) {
     console.log(user)
@@ -142,7 +142,7 @@ auth0.jsとは異なり、Auth0 SPA SDKはユーザープロファイルのた�
 
 * [Auth0Client.getUser()](https://auth0.github.io/auth0-spa-js/classes/Auth0Client.html#getUser)
 
-```
+```javascript lines
 window.addEventListener('load', async () => {
   const user = await auth0.getUser();
   console.log(user);
@@ -153,7 +153,7 @@ window.addEventListener('load', async () => {
 
 ### auth0.js
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', () => {
   auth0.popup.authorize();
 });
@@ -164,7 +164,7 @@ document.getElementById('login').addEventListener('click', () => {
 * [Auth0Client.loginWithPopup()](https://auth0.github.io/auth0-spa-js/classes/Auth0Client.html#loginWithPopup)
 * [PopupLoginOptions](https://auth0.github.io/auth0-spa-js/interfaces/PopupLoginOptions.html)
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', async () => {
   await auth0.loginWithPopup();
 });
@@ -176,7 +176,7 @@ document.getElementById('login').addEventListener('click', async () => {
 
 * [checkSession()](https://auth0.github.io/auth0.js/WebAuth.html#checkSession)
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', () => {
   auth0.checkSession({}, function(err, authResult) {
     // Authentication tokens or error
@@ -190,7 +190,7 @@ Auth0 SPA SDKは、アクセストークンのリフレッシュを処理しま�
 
 * [Auth0Client.getTokenSilently()](https://auth0.github.io/auth0-spa-js/classes/Auth0Client.html#getTokenSilently)
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', async () => {
   await auth0.getTokenSilently();
 });
@@ -202,7 +202,7 @@ document.getElementById('login').addEventListener('click', async () => {
 
 * [checkSession()](https://auth0.github.io/auth0.js/WebAuth.html#checkSession)
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', () => {
   auth0.checkSession({
     audience: 'https://mydomain/another-api/',
@@ -220,7 +220,7 @@ Auth0 SPA SDKは、アクセストークンのリフレッシュを処理しま�
 * [Auth0Client.getTokenSilently()](https://auth0.github.io/auth0-spa-js/classes/Auth0Client.html#getTokenSilently)
 * [GetTokenSilentlyOptions](https://auth0.github.io/auth0-spa-js/interfaces/GetTokenSilentlyOptions.html)
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', async () => {
   await auth0.getTokenSilently({
     audience: 'https://mydomain/another-api/',
@@ -231,7 +231,7 @@ document.getElementById('login').addEventListener('click', async () => {
 
 [getTokenWithPopup](https://auth0.github.io/auth0-spa-js/classes/Auth0Client.html#getTokenWithPopup)を使ってポップアップを開き、ユーザーが新しいAPIに同意できるようにします。
 
-```
+```javascript lines
 document.getElementById('login').addEventListener('click', async () => {
   await auth0.getTokenWithPopup({
     audience: 'https://mydomain/another-api/',

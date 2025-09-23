@@ -1,13 +1,13 @@
 ---
 title: "OAuth 2.0の状態パラメーターを使って攻撃を防ぎ、ユーザーをリダイレクトする"
 permalink: "state-parameters"
+'description': "認証要求で状態パラメーター使ってCSRF攻撃を防ぎ、状態を復元する方法について説明します。"
 'og:title': "OAuth 2.0の状態パラメーターを使って攻撃を防ぎ、ユーザーをリダイレクトする"
 'og:description': "認証要求で状態パラメーター使ってCSRF攻撃を防ぎ、状態を復元する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "OAuth 2.0の状態パラメーターを使って攻撃を防ぎ、ユーザーをリダイレクトする"
 'twitter:description': "認証要求で状態パラメーター使ってCSRF攻撃を防ぎ、状態を復元する方法について説明します。"
 ---
-# OAuth 2.0の状態パラメーターを使って攻撃を防ぎ、ユーザーをリダイレクトする
 
 認可プロトコルは`state`パラメーターを提供して、アプリケーションを以前の状態に復元できるようにします。`state`パラメーターは、クライアントが認可要求で設定した状態オブジェクトの一部を保持して、応答でクライアントが使用できるようにします。
 
@@ -25,7 +25,7 @@ CSRF攻撃では、偽の要求に対する応答を知る手段が攻撃者に�
 
 1. IDプロバイダー（IdP）に要求をリダイレクトする前に、アプリを使ってランダムな文字列を生成します。例：
 
-   ```
+   ``` lines
    xyzABC123
    ```
 
@@ -36,7 +36,7 @@ CSRF攻撃では、偽の要求に対する応答を知る手段が攻撃者に�
    状態の長さは無限ではありません。`414 Request-URI Too Large`エラーが表示された場合は、より小さい値を試してください。
 2. 文字列をローカルに保管します。例：
 
-   ```
+   ``` lines
    storeStateLocally(xyzABC123)
    ```
 
@@ -45,7 +45,7 @@ CSRF攻撃では、偽の要求に対する応答を知る手段が攻撃者に�
    
 3. `state`パラメーターを要求（必要な場合はURLエンコード）に追加します。例：
 
-   ```javascript
+   ```javascript lines
    // Encode the String   
    tenant.auth0.com/authorize?...&state=xyzABC123
    ```
@@ -56,7 +56,7 @@ CSRF攻撃では、偽の要求に対する応答を知る手段が攻撃者に�
 
    要求を送信すると、Auth0がユーザーをアプリケーションにリダイレクトで戻します。`state`値が含まれています。使用している接続の種類に応じて、この値が要求のボディか、クエリ文字列に挿入されます。
 
-   ```
+   ``` lines
    /callback?...&state=xyzABC123
    ```
 
@@ -65,7 +65,7 @@ CSRF攻撃では、偽の要求に対する応答を知る手段が攻撃者に�
    
 4. 返された`state`値を取得して、保管してある値と比較します。値が一致した場合には認証要求が承認され、一致しない場合には拒否されます。
 
-   ```javascript
+   ```javascript lines
    // Decode the String
    var decodedString = Base64.decode(encodedString);
    if(receivedState === retrieveStateStoredLocally()) {
@@ -91,7 +91,7 @@ nonceを生成して、リダイレクトURLなどの必要な状態データと
 1. nonceの状態パラメーターに値を設定して、上記で説明したようにCSRF攻撃を軽減できるようにします。
 2. nonceをローカルに保管して、ユーザーがアクセスしたいURLなど、他のアプリケーションの状態情報を保管するためのキーとして使用します。例：
 
-   ```json
+   ```json lines
    {
      "xyzABC123" : {
        redirectUrl: '/protectedResource',

@@ -1,13 +1,13 @@
 ---
 title: "Auth0.swift：ユーザー管理"
 permalink: "auth0-swift-user-management"
+'description': "Auth0.Swiftを使用したユーザー管理"
 'og:title': "Auth0.swift：ユーザー管理"
 'og:description': "Auth0.Swiftを使用したユーザー管理"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Auth0.swift：ユーザー管理"
 'twitter:description': "Auth0.Swiftを使用したユーザー管理"
 ---
-# Auth0.swift：ユーザー管理
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>は[ユーザーアカウントのリンク](/docs/ja-jp/manage-users/user-accounts/user-account-linking)を提供して、ユーザーがさまざまなプロバイダーから取得した個別のユーザーアカウントを1つのプロファイルにリンクまたはリンク解除できるようにます。また、ユーザーメタデータや他のプロファイル情報を更新することもできます。
 
@@ -17,7 +17,7 @@ permalink: "auth0-swift-user-management"
 
 `link`メソッドは、プライマリープロファイルのユーザーIDとセカンダリープロファイルのアクセストークン（このIDでログインした後に取得するトークン）の2つのパラメーターを受け付けます。ユーザーIDはこのユーザーアカウントの一意の識別子です。IDの形式が`facebook|1234567890`の場合、必要なIDは区切り文字のパイプに後続する部分（この例では`1234567890`）です。
 
-```
+```swift lines
 Auth0
    .users(token: "user-scoped access token")
    .link(userId, withOtherUserToken: "another user token")
@@ -36,7 +36,7 @@ Auth0
 ユーザーのリンク解除は、リンクと同様の処理になります。`unlink`メソッドは、セカンダリープロファイルのユーザーID、セカンダリープロファイルのプロバイダー（接続のIDプロバイダー）とプライマリープロファイルのユーザーIDの3つのパラメーターを受け付けます。
 パラメーターは基本的に「この**セカンダリーユーザー**を（この**プロバイダー**で）この**プライマリーユーザー**からリンク解除する」と指示します。
 
-```
+```swift lines
 Auth0
    .users(token: "user-scoped access token")
    .unlink(identityId: identifier, provider: provider, fromUserId:userId)
@@ -54,7 +54,7 @@ Auth0
 
 ## ユーザーメタデータを取得する
 
-```
+```swift lines
 Auth0
     .users(token: "user-scoped access token")
     .get(userId, fields: ["user_metadata"], include: true)
@@ -72,7 +72,7 @@ Auth0
 
 メタデータの更新では、`userMetadata`オブジェクトを作成してから、`patch`メソッドを呼び出して、ユーザーIDと`userMetadata`オブジェクトを渡します。このオブジェクトの値は、同じキーを持つ既存の値を上書きするか、ユーザーメタデータに値がない場合は新しい値を追加します。
 
-```
+```swift lines
 Auth0
     .users(token: "user-scoped access token")
     .patch("user identifier", userMetadata: ["first_name": "John", "last_name": "Doe"])

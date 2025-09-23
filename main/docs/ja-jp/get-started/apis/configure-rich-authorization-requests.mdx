@@ -1,13 +1,13 @@
 ---
 title: "Rich Authorization Requests（RAR）を構成する"
 permalink: "configure-rich-authorization-requests"
+'description': "APIのRich Authorization Requests（RAR）を構成する方法をご説明します。"
 'og:title': "Rich Authorization Requests（RAR）を構成する"
 'og:description': "APIのRich Authorization Requests（RAR）を構成する方法をご説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Rich Authorization Requests（RAR）を構成する"
 'twitter:description': "APIのRich Authorization Requests（RAR）を構成する方法をご説明します。"
 ---
-# Rich Authorization Requests（RAR）を構成する
 
 <Note>
 
@@ -20,7 +20,7 @@ permalink: "configure-rich-authorization-requests"
 APIのRich Authorization Requests（RAR）構成する前に、以下をセットアップします。
 
 * [カスタムドメイン](/docs/ja-jp/customize/custom-domains)
-* [カスタムのユニバーサルログインページ](/docs/ja-jp/customize/login-pages/universal-login/customize-templates)テンプレート<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>を使用してユニバーサルログインページのテンプレートをカスタマイズする方法については、「[ページテンプレートAPI](/docs/customize/universal-login-pages/universal-login-page-templates#page-templates-api)」をお読みください。
+* [カスタムのユニバーサルログインページ](/docs/ja-jp/customize/login-pages/universal-login/customize-templates)テンプレート<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>を使用してユニバーサルログインページのテンプレートをカスタマイズする方法については、「[ページテンプレートAPI](/docs/ja-jp/customize/universal-login-pages/universal-login-page-templates#page-templates-api)」をお読みください。
 
 ## リソースサーバーを構成する
 
@@ -36,8 +36,8 @@ Auth0テナントに登録されているリソースサーバー（すなわち
 <tr>
 <th><strong>Rich Authorization Request？</strong></th>
 <th><strong>MFA必須？</strong></th>
-<th><strong><code>null</code>または未定義（デフォルト）</strong></th>
-<th><code>transactional-authorization-with-mfa</code></th>
+<th><strong>`null`または未定義（デフォルト）</strong></th>
+<th>`transactional-authorization-with-mfa`</th>
 </tr>
 </thead>
 <tbody>
@@ -50,19 +50,19 @@ Auth0テナントに登録されているリソースサーバー（すなわち
 <tr>
 <td>はい</td>
 <td>いいえ</td>
-<td>認可要求は<code>invalid_request</code>で拒否されます。</td>
+<td>認可要求は`invalid_request`で拒否されます。</td>
 <td>以前付与されたアクセス権に関わらずカスタマイズされた同意が表示されます。</td>
 </tr>
 <tr>
 <td>はい</td>
 <td>はい。プッシュ通知でない認証要素を使用</td>
-<td>認可要求は<code>invalid_request</code>で拒否されます。</td>
+<td>認可要求は`invalid_request`で拒否されます。</td>
 <td>ユーザーがMFAチャレンジを完了した後、カスタマイズされた同意が表示されます。</td>
 </tr>
 <tr>
 <td>はい</td>
 <td>はい。プッシュ通知要素を使用</td>
-<td>認可要求は<code>invalid_request</code>で拒否されます。</td>
+<td>認可要求は`invalid_request`で拒否されます。</td>
 <td>同意は表示されません。同意は、プッシュ通知チャレンジを受け取ったモバイルアプリケーションで対処されます。</td>
 </tr>
 </tbody>
@@ -77,13 +77,13 @@ Auth0 Dashboardを使用してAPI設定に同意ポリシーを設定します�
 3. **［Access Settings（アクセス設定）］**の下の、**［Transactional Authorization with MFA（MFAを使用したトランザクション認可）］**を選択します。
 4. 変更を保存します。
 
-<Frame>![Dashboard > Applications > APIs > Settings > Access Settings](//images.ctfassets.net/cdy7uua7fh8z/3gr8Sf98gh8CUkjnlodNk/38f1dfc8b036372a5d830509349d52fa/Transactional_Auth_with_MFA.png)</Frame>
+<Frame>![Dashboard > Applications > APIs > Settings > Access Settings](/images/ja-jp/cdy7uua7fh8z/3gr8Sf98gh8CUkjnlodNk/38f1dfc8b036372a5d830509349d52fa/Transactional_Auth_with_MFA.png)</Frame>
 
 </Tab><Tab title="Management API">
 
 Management APIの[リソースサーバーの更新](https://auth0.com/docs/api/management/v2/resource-servers/patch-resource-servers-by-id)エンドポイントへの次のPATCH要求は、既存のリソースサーバーに対する同意ポリシーを`transactional-authorization-with-mfa`に設定します。
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://$tenant/api/v2/resource-servers/$resource-server-id' \ --header 'Authorization: Bearer $management_access_token' \ --header 'Content-Type: application/json' \ --data-raw '{ "consent_policy": "standard" }'
 ```
 
@@ -118,7 +118,7 @@ Auth0 Dashboardで`authorization_details` を追加することができます�
 
 次のPATCH要求は、Management APIの[リソースサーバーの更新](https://auth0.com/docs/api/management/v2/resource-servers/patch-resource-servers-by-id)エンドポイントに対して、`payment_initiation`と`money_transfer`を既存のリソースサーバーの`authorization_details`タイプとして登録します。
 
-```bash
+```bash lines
 curl --location --request PATCH 'https://$tenant/api/v2/resource-servers/$resource-server-id' \
   --header 'Authorization: Bearer $management_access_token' \
   --header 'Content-Type: application/json' \
@@ -133,7 +133,7 @@ curl --location --request PATCH 'https://$tenant/api/v2/resource-servers/$resour
 
 以下のPOST要求はRich Authorization Requests（リッチ認可要求）を受け取るリソースサーバーを作成して構成します。
 
-```bash
+```bash lines
 curl --location --request POST 'https://$tenant/api/v2/resource-servers' \
   --header 'Authorization: Bearer $management_access_token' \
   --header 'Content-Type: application/json' \
@@ -151,7 +151,7 @@ Rich Authorization Requests（リッチ認可要求）の認可詳細を同意�
 
 以下のPUT要求は、カスタマイズされた同意のパーシャルを構成します。
 
-```bash
+```bash lines
 curl --location --request PUT "https://$tenant/api/v2/prompts/customized-consent/partials" \
     --header "Authorization: Bearer $management_access_token" \
     --header "Content-Type: application/json" \

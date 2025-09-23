@@ -1,13 +1,13 @@
 ---
 title: "データベースからの自動移行を構成する"
 permalink: "configure-automatic-migration-from-your-database"
+'description': "カスタムデータベースでユーザーの自動移行を有効にする方法を説明します。"
 'og:title': "データベースからの自動移行を構成する"
 'og:description': "カスタムデータベースでユーザーの自動移行を有効にする方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "データベースからの自動移行を構成する"
 'twitter:description': "カスタムデータベースでユーザーの自動移行を有効にする方法を説明します。"
 ---
-# データベースからの自動移行を構成する
 
 データベース接続を構成し、[カスタムデータベースのアクションスクリプト](/docs/ja-jp/authenticate/database-connections/custom-db/templates)を使用して、外部のユーザーストアからAuth0にユーザーを自動移行します。
 
@@ -24,7 +24,7 @@ permalink: "configure-automatic-migration-from-your-database"
 1. [［Auth0 Dashboard］>［Authentication（認証）］>［Database（データベース）］](https://manage.auth0.com/#/connections/database)に移動し、データベースを選択して表示します。
 2. **［Custom Database（カスタムデータベース）］**ビューを選択し、**［Use my own database（独自のデータベースを使用する）］**を有効にします。
 
-   <Frame>![Auth0 Dashboard 認証 データベース接続 カスタムデータベース設定 独自のデータベース使用有効](//images.ctfassets.net/cdy7uua7fh8z/11HPAdVwJMmnWbzMVjHCJ8/e8a63cd05212da39164cab0114d1f89b/2025-02-27_17-26-24.png)</Frame>
+   <Frame>![Auth0 Dashboard 認証 データベース接続 カスタムデータベース設定 独自のデータベース使用有効](/images/ja-jp/cdy7uua7fh8z/11HPAdVwJMmnWbzMVjHCJ8/e8a63cd05212da39164cab0114d1f89b/2025-02-27_17-26-24.png)</Frame>
 
 3. **［Settings（設定）］**ビューを選択し、**［Import Users to Auth0（ユーザーをAuth0にインポート）］**を有効にしたのち、**［Save（保存）］**を選択します。
 
@@ -32,7 +32,7 @@ permalink: "configure-automatic-migration-from-your-database"
 
 **［Custom Database（カスタムデータベース）］**ビューを選択し、**［Database Action Scripts（データベースのアクションスクリプト）］**を見つけます。
 
-<Frame>![Dashboard 認証 データベース接続 カスタムデータベースタブ データベースのアクションスクリプト](//images.ctfassets.net/cdy7uua7fh8z/4LBIvvjaABo51It4eVCmX3/2783d88846c74a5766908fda8005783e/Database_Action_Scripts.png)</Frame>
+<Frame>![Dashboard 認証 データベース接続 カスタムデータベースタブ データベースのアクションスクリプト](/images/ja-jp/cdy7uua7fh8z/4LBIvvjaABo51It4eVCmX3/2783d88846c74a5766908fda8005783e/Database_Action_Scripts.png)</Frame>
 
 ### ログイン
 
@@ -45,7 +45,7 @@ permalink: "configure-automatic-migration-from-your-database"
 * ユーザーがサインアップ試行を開始
 * ユーザーがパスワード変更フローを開始
 * ユーザーがIdentifier First + 生体認証を使用する際に、ログインIDを入力
-* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>の[ユーザーのメールアドレスまたはユーザー名の更新](/docs/api/v2#!/Users/patch_users_by_id)または[ユーザーの作成](/docs/api/management/v2#!/Users/post_users)エンドポイントが呼び出される
+* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>の[ユーザーのメールアドレスまたはユーザー名の更新](/docs/ja-jp/api/v2#!/Users/patch_users_by_id)または[ユーザーの作成](/docs/ja-jp/api/management/v2#!/Users/post_users)エンドポイントが呼び出される
 
 移行されていないユーザーがパスワード変更を承認し、ログインに成功すると、ユーザープロファイルが新しいパスワードでAuth0に作成されます。このユーザープロファイルは、ユーザー取得スクリプトで返されたすべてのデータを含みます。ユーザーのこれ以降のすべてのログインは、Auth0で直接実行されます。
 
@@ -54,7 +54,7 @@ permalink: "configure-automatic-migration-from-your-database"
 すべてのユーザーが<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>またはAuth0 Management APIを使用してAuth0ユーザーストアに移行されたことを確認します。
 
 1. [［Auth0 Dashboard］>［User Management（ユーザー管理）］>［Users（ユーザー）］](https://manage.auth0.com/#/users)に移動し、ユーザーのリストを確認します。
-2. Management APIの[ユーザーのリストまたは検索](/docs/api/v2#!/Users/get_users)エンドポイントを使用します。
+2. Management APIの[ユーザーのリストまたは検索](/docs/ja-jp/api/v2#!/Users/get_users)エンドポイントを使用します。
 
 ## 外部ユーザーストアの接続解除
 
@@ -70,7 +70,7 @@ permalink: "configure-automatic-migration-from-your-database"
 2. **［Custom Database（カスタムデータベース）］**ビューに切り替え、**［Database Action Scripts（データベースのアクションスクリプト）］**を見つけます。
 3. **ログイン**スクリプトを更新します。
 
-   ```javascript
+   ```javascript lines
    function login (email, password, callback) {
      return callback(null, null);
    }
@@ -81,7 +81,7 @@ permalink: "configure-automatic-migration-from-your-database"
    
 4. **ユーザー取得**スクリプトを更新します。
 
-   ```javascript
+   ```javascript lines
    function getByEmail (email, callback) {
      return callback(null, null);
    }
@@ -109,7 +109,7 @@ permalink: "configure-automatic-migration-from-your-database"
 
 1. [Real-time Webtask Logs拡張機能](/docs/ja-jp/customize/extensions/real-time-webtask-logs)で`console.log()`ステートメントを確認します。
 2. Management APIの[ユーザー削除](https://auth0.com/docs/api/management/v2#!/Users/delete_users_by_id)エンドポイントでユーザーを削除します。
-3. Management APIの[接続ユーザー削除](/docs/api/management/v2#!/Connections/delete_users_by_email)エンドポイントでユーザーを削除します。
+3. Management APIの[接続ユーザー削除](/docs/ja-jp/api/management/v2#!/Connections/delete_users_by_email)エンドポイントでユーザーを削除します。
 4. 移行を再試行するため、ユーザーにログインまたはパスワードの変更を指示します。
 
 ### メタデータの不足

@@ -1,18 +1,18 @@
 ---
 title: "M2Mアクセスにアプリケーションを構成する"
 permalink: "configure-your-application-for-m2m-access"
+'description': "Auth0 DashboardやManagement APIを使用して、M2Mアクセスにアプリケーションを構成する方法について説明します。"
 'og:title': "M2Mアクセスにアプリケーションを構成する"
 'og:description': "Auth0 DashboardやManagement APIを使用して、M2Mアクセスにアプリケーションを構成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "M2Mアクセスにアプリケーションを構成する"
 'twitter:description': "Auth0 DashboardやManagement APIを使用して、M2Mアクセスにアプリケーションを構成する方法について説明します。"
 ---
-# M2Mアクセスにアプリケーションを構成する
 
 アプリケーションを作成したら、以下の手順に従って、マシンツーマシンアクセスにアプリケーションを構成します。
 
 1. アクセスが必要なAPIのそれぞれについて、[組織の動作を定義](#define-organization-behavior)します。
-2. アプリケーションが（すべての組織ではなく）特定の組織にのみアクセスする場合は、それら特定の組織へのアクセスに必要なAPIのそれぞれについて、[M2Mアクセスを認可](/docs/manage-users/organizations/organizations-for-m2m-applications/authorize-m2m-access)します。
+2. アプリケーションが（すべての組織ではなく）特定の組織にのみアクセスする場合は、それら特定の組織へのアクセスに必要なAPIのそれぞれについて、[M2Mアクセスを認可](/docs/ja-jp/manage-users/organizations/organizations-for-m2m-applications/authorize-m2m-access)します。
 
 ## 組織の動作を定義する
 
@@ -33,12 +33,12 @@ APIのそれぞれについて、アプリケーションが組織を使用し�
 <tr>
 <td>Organization Support（組織対応）</td>
 <td>クライアントの資格情報フローを通したアクセスでアプリケーションが組織をどのように使用するか決定します。<p style="font-size: .875rem;"><br/>オプションには以下が含まれます：<br/></p><ul><li style="font-size: .875rem;"><b>None（なし）：</b>アプリケーションは組織を使用<i>してはいけません</i>。これはデフォルト値です。</li><li style="font-size: .875rem;"><b>Optional（任意）：</b>アプリケーションは組織の使用を<i>選択できます</i>。</li><li style="font-size: .875rem;"><b>Required（必須）：</b>アプリケーションは組織を使用<i>しなければなりません</i>。</li></ul></td>
-<td>Organization Support（組織対応）は<code>organization_usage</code>にマッピングされます。<p style="font-size: .875rem;"><br/>オプション：<br/></p><ul><li style="font-size: .875rem;"><b>［None（なし）］</b>は<code>deny</code>にマッピングします</li><li style="font-size: .875rem;"><b>［Optional（任意）］</b>は<code>allow</code>にマッピングします</li><li style="font-size: .875rem;"><b>［Required（必須）］</b>は<code>required</code>にマッピングします</li></ul></td>
+<td>Organization Support（組織対応）は`organization_usage`にマッピングされます。<p style="font-size: .875rem;"><br/>オプション：<br/></p><ul><li style="font-size: .875rem;"><b>［None（なし）］</b>は`deny`にマッピングします</li><li style="font-size: .875rem;"><b>［Optional（任意）］</b>は`allow`にマッピングします</li><li style="font-size: .875rem;"><b>［Required（必須）］</b>は`required`にマッピングします</li></ul></td>
 </tr>
 <tr>
 <td>Allow machine-to-machine access to any organization（任意の組織にマシンツーマシンアクセスを許可する）</td>
 <td>クライアント資格情報フローの使用でアプリケーションが任意の認証情報組織にアクセスできるのか、明示的に関連付けられている組織のセットに制限されるのかを決定します。デフォルトではこの動作は許可されません。<p style="font-size: .875rem;"><br/><b>警告：</b> 任意の組織にマシンツーマシンアクセスを許可すると、明示的に関連付けられていない組織にも、アプリケーションがアクセスできるようになります。信頼済みの内部アプリケーションにのみ有効化してください。<br/></p></td>
-<td>［Allow machine-to-machine access to any organization（任意の組織にマシンツーマシンアクセスを許可する）］は<code>allow_any_organization</code>にマッピングされます。<p style="font-size: .875rem;"><br/>オプション：‌‌<br/></p><ul><li style="font-size: .875rem;">選択は<code>true</code>にマッピングします</li><li style="font-size: .875rem;">選択解除は<code>false</code>にマッピングします</li></ul></td>
+<td>［Allow machine-to-machine access to any organization（任意の組織にマシンツーマシンアクセスを許可する）］は`allow_any_organization`にマッピングされます。<p style="font-size: .875rem;"><br/>オプション：‌‌<br/></p><ul><li style="font-size: .875rem;">選択は`true`にマッピングします</li><li style="font-size: .875rem;">選択解除は`false`にマッピングします</li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -56,7 +56,7 @@ APIのそれぞれについて、アプリケーションが組織を使用し�
 3. [Organizationの動作定義のテーブル](#define-organization-behavior-table)での説明に従い、適切な設定を行います。
 4. **［Save（保存）］**を選択します。
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/2GYvtLuuDm1mgyLivYeqJh/d309738b9a7cc473a2b0f0c5a5196bbc/Acme_Bot_-_API_config__1_.png)</Frame>
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/2GYvtLuuDm1mgyLivYeqJh/d309738b9a7cc473a2b0f0c5a5196bbc/Acme_Bot_-_API_config__1_.png)</Frame>
 
 または、マシンツーマシンアプリケーションではない場合：
 
@@ -66,7 +66,7 @@ APIのそれぞれについて、アプリケーションが組織を使用し�
 4. [Organizationの動作定義のテーブル](#define-organization-behavior-table)での説明に従い、適切な設定を行います。
 5. **［Save（保存）］**を選択します。
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/6wvsRl1mL4AbKzg5ycP8Pj/428494a27ae641b42f78c1d089512f23/Travel0_API_-_M2M_Config_-_Small.png)</Frame>
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/6wvsRl1mL4AbKzg5ycP8Pj/428494a27ae641b42f78c1d089512f23/Travel0_API_-_M2M_Config_-_Small.png)</Frame>
 
 </Tab><Tab title="Mangement API">
 
@@ -74,7 +74,7 @@ Management APIを使用して、アプリケーションに対するOrganization
 
 次のコードサンプルは、M2Mアクセスのある`client_grant`オブジェクトを作成します：
 
-```bash
+```json lines
 curl --request POST \
   --url 'https://{YOUR_DOMAIN}/api/v2/client-grants' \
   --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
@@ -93,7 +93,7 @@ curl --request POST \
 
 次のコードサンプルは、M2Mアクセスのある`client_grant`オブジェクトを更新します：
 
-```bash
+```json lines
 curl --request PATCH \
   --url 'https://{YOUR_DOMAIN}/api/v2/client-grants/CLIENT_GRANT_ID' \
   --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
@@ -131,7 +131,7 @@ API（例：対象オーディエンス）に対して`organization_usage=requir
 <tr>
 <td>Default Organization for Machine-to-Machine Access（マシンツーマシンアクセスにデフォルトの組織）</td>
 <td>組織を含まないクライアント資格情報の要求に適用する組織を定義します。</td>
-<td>M2Mアクセスにデフォルトの組織は、以下のプロパティを持つdefault_organizationオブジェクトにマッピングされます。<ul><li style="font-size: .875rem;"><code>organization_id</code>：使用する組織のIDです</li><li style="font-size: .875rem;"><code>flows</code>：デフォルトの組織に使用する認証フローです。<p style="font-size: .875rem;"><br/>この設定はUIでは表示されることなく、デフォルトの<code>["client_credentials"]</code><br/></p>が使用されます。</li></ul></td>
+<td>M2Mアクセスにデフォルトの組織は、以下のプロパティを持つdefault_organizationオブジェクトにマッピングされます。<ul><li style="font-size: .875rem;">`organization_id`：使用する組織のIDです</li><li style="font-size: .875rem;">`flows`：デフォルトの組織に使用する認証フローです。<p style="font-size: .875rem;"><br/>この設定はUIでは表示されることなく、デフォルトの`["client_credentials"]`<br/></p>が使用されます。</li></ul></td>
 </tr>
 </tbody>
 </table>
@@ -149,7 +149,7 @@ Auth0 Dashboardからアプリケーションのデフォルトの組織を有�
 3. [［Set default organization table（デフォルト組織テーブルの設定）］](#set-default-organization-table)の説明に従って、適切な設定を行います。
 4. ［Save（保存）］をクリックします。
 
-<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/29rhTFMnYDp7TbGS9S6b5J/59974080b8101829082e863864040ec1/2025-07-18_15-56-20.png)</Frame>
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/29rhTFMnYDp7TbGS9S6b5J/59974080b8101829082e863864040ec1/2025-07-18_15-56-20.png)</Frame>
 
 </Tab><Tab title="Mangement API">
 
@@ -157,7 +157,7 @@ Auth0 Dashboardからアプリケーションのデフォルトの組織を有�
 
 次のコードサンプルは、デフォルトの組織を持つクライアントを更新します。
 
-```bash
+```json lines
 curl -X PATCH --location "https://{YOUR_DOMAIN}/api/v2/clients/{CLIENT_ID}" \
   --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
   --header 'content-type: application/json' \

@@ -1,13 +1,13 @@
 ---
 title: "セッションライフタイムの設定を構成する"
 permalink: "configure-session-lifetime-settings"
+'description': "Auth0 DashboardまたはManagement APIを使用して、テナントでのセッションの長さと上限を構成する方法について説明します。"
 'og:title': "セッションライフタイムの設定を構成する"
 'og:description': "Auth0 DashboardまたはManagement APIを使用して、テナントでのセッションの長さと上限を構成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "セッションライフタイムの設定を構成する"
 'twitter:description': "Auth0 DashboardまたはManagement APIを使用して、テナントでのセッションの長さと上限を構成する方法について説明します。"
 ---
-# セッションライフタイムの設定を構成する
 
 セッションの**絶対有効期限**は、セッションが作られたときに定義されます。絶対有効期限を変更するには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を使ってセッション設定を構成し直します。
 
@@ -16,7 +16,7 @@ permalink: "configure-session-lifetime-settings"
 1. [［Dashboard］>［Settings（設定）］](https://manage.auth0.com/#/tenant)に移動して、**［Advanced（詳細設定）］**タブをクリックします。
 2. **［Session Expiration（セッションの有効期限）］**セクションまでスクロールして、**​［Idle Session Lifetime（アイドルセッションライフタイム）］**と**［Maximum Session Lifetime（最大セッションライフタイム）］**に希望する設定を入力し、​**［Save（保存）］**を選択します。
 
-   <Frame>![Dashboard テナント設定 詳細設定 ログインセッション管理](//images.ctfassets.net/cdy7uua7fh8z/q2fGPzoUqCcXj7OxcHhjy/ed80efb619cbc1b963dc3dcc1f3365b0/Tenant_Settings_-_Session_Expiration.png)</Frame>
+   <Frame>![Dashboard テナント設定 詳細設定 ログインセッション管理](/images/ja-jp/cdy7uua7fh8z/q2fGPzoUqCcXj7OxcHhjy/ed80efb619cbc1b963dc3dcc1f3365b0/Tenant_Settings_-_Session_Expiration.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -41,15 +41,15 @@ permalink: "configure-session-lifetime-settings"
 `PATCH`呼び出しを[テナント設定エンドポイント](https://auth0.com/docs/api/management/v2#!/tenants/patch_settings)に対して行います。`MGMT_API_ACCESS_TOKEN`、`SESSION_LIFETIME`、`IDLE_SESSION_LIFETIME`のプレースホルダーをそれぞれ使用しているManagement APIのアクセストークン、セッションライフタイム値、アイドルセッションライフタイム値で置き換えます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/tenants/settings' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "session_lifetime": SESSION_LIFETIME_VALUE, "idle_session_lifetime": IDLE_SESSION_LIFETIME_VALUE }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/tenants/settings");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -59,7 +59,7 @@ request.AddParameter("application/json", "{ \"session_lifetime\": SESSION_LIFETI
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -80,8 +80,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/settings")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -90,7 +90,7 @@ HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/setti
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -107,8 +107,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
@@ -133,7 +133,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/tenants/settings",
@@ -158,8 +158,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"session_lifetime\": SESSION_LIFETIME_VALUE, \"idle_session_lifetime\": IDLE_SESSION_LIFETIME_VALUE }"
@@ -174,7 +174,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -189,8 +189,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"session_lifetime\": SESSION_LIFETIME_VALUE, \"idle_session_lifetime\": IDLE_SESSION_LIFETIME_VALUE }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -225,15 +225,15 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><code>update:tenant_settings</code>スコープのある<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>です。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>`update:tenant_settings`スコープのある<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>です。</td>
 </tr>
 <tr>
-<td><code>IDLE_SESSION_LIFETIME_VALUE</code></td>
+<td>`IDLE_SESSION_LIFETIME_VALUE`</td>
 <td>認可サーバーとのやり取りがなくなってから、ユーザーのセッションが失効するまでの期間（時間）です。エッセンシャルプランとプロフェッショナルプランでは72時間（3日）、エンタープライズプランでは2,400時間（100日）を超えると、システム制限によって置き換えられます。</td>
 </tr>
 <tr>
-<td><code>SESSION_LIFETIME_VALUE</code></td>
+<td>`SESSION_LIFETIME_VALUE`</td>
 <td>アクティビティにかかわらず、ユーザーに再ログインを求めるまでの時間（時間）です。エッセンシャルプランとプロフェッショナルプランでは720時間（30日）、エンタープライズプランでは8,760時間（365日）を超えると、システム制限によって置き換えられます。</td>
 </tr>
 </tbody>

@@ -1,13 +1,13 @@
 ---
 title: "Lock.swift：構成オプション"
 permalink: "lock-swift-configuration-options"
+'description': "Lock.Swiftで使用できる動作構成オプション"
 'og:title': "Lock.swift：構成オプション"
 'og:description': "Lock.Swiftで使用できる動作構成オプション"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Lock.swift：構成オプション"
 'twitter:description': "Lock.Swiftで使用できる動作構成オプション"
 ---
-# Lock.swift：構成オプション
 
 Lockの動作を構成するためのオプションは多数あり、以下にリストされています。さらに、[［Style Customization Options（スタイルカスタマイズオプション）］](/docs/ja-jp/lock-swift-customization)ページでは、Lockの外観とスタイルを変更するためのオプションも多数あります。
 
@@ -15,7 +15,7 @@ Lockの動作を構成するためのオプションは多数あり、以下に�
 
 `withOptions`を使用して、ロックの初期化に構成オプションを追加できます。
 
-```
+```swift lines
 Lock
   .classic()
   .withOptions {
@@ -32,7 +32,7 @@ Lock
 
 ユーザーがロックを解除できるようにします。デフォルトでは`false`です。
 
-```
+```swift lines
 .withOptions {
   $0.closable = true
 }
@@ -42,7 +42,7 @@ Lock
 
 認証に使用されるスコープです。デフォルトでは`openid`です。**アクセストークン**だけでなく、ユーザー情報を含むJSON Webトークン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JWT</Tooltip>）である**IDトークン**も返します。認可スコープの詳細については、[スコープ](/docs/ja-jp/get-started/apis/scopes)に関するドキュメントを参照してください。
 
-```
+```swift lines
 .withOptions {
   $0.scope = "openid name email picture"
 }
@@ -50,13 +50,13 @@ Lock
 
 #### リフレッシュトークン
 
-ロックオプションで`offline_access`スコープを指定すると、access_token および id_token とともに[リフレッシュトークン](/docs/ja-jp/secure/tokens/refresh-tokens) が返されます。リフレッシュトークンを保存しておき、古いトークンの有効期限が切れたときに新しいアクセストークンを取得するために使用できます。Auth0認証にリフレッシュトークンを使用する方法の詳細については、リフレッシュ トークンを実装するために使用する[Auth0.Swift SDK](/docs/ja-jp/libraries/auth0-swift)の参照ドキュメント、またはリフレッシュトークンの管理を含むSwift開発でのAuth0の包括的な使用例を提供する[Swiftクイックスタートガイド](/docs/quickstart/native/ios-swift/03-user-sessions)を参照してください。
+ロックオプションで`offline_access`スコープを指定すると、access_token および id_token とともに[リフレッシュトークン](/docs/ja-jp/secure/tokens/refresh-tokens) が返されます。リフレッシュトークンを保存しておき、古いトークンの有効期限が切れたときに新しいアクセストークンを取得するために使用できます。Auth0認証にリフレッシュトークンを使用する方法の詳細については、リフレッシュ トークンを実装するために使用する[Auth0.Swift SDK](/docs/ja-jp/libraries/auth0-swift)の参照ドキュメント、またはリフレッシュトークンの管理を含むSwift開発でのAuth0の包括的な使用例を提供する[Swiftクイックスタートガイド](/docs/ja-jp/quickstart/native/ios-swift/03-user-sessions)を参照してください。
 
 ### termsOfService
 
 デフォルトでは、Lock は Auth0 の[利用規約](https://auth0.com/terms)および[プライバシーポリシー](https://auth0.com/privacy)を使用しますが、他のURLを入力して他の条件やポリシーにリンクすることもできます。
 
-```
+```swift lines
 .withOptions {
   $0.termsOfService = "https://mycompany.com/terms"
   $0.privacyPolicy = "https://mycompany.com/privacy"
@@ -67,7 +67,7 @@ Lock
 
 データベース接続ではサービス利用規約ダイアログが表示されます。デフォルトはtrueです。`mustAcceptTerms`フラグが有効になっている場合は、利用規約が常に表示されることに注意してください。
 
-```
+```swift lines
 .withOptions {
     $0.showTerms = true
 }
@@ -77,7 +77,7 @@ Lock
 
 データベース接続では利用規約への明示的な同意が必要です。
 
-```
+```swift lines
 .withOptions {
     $0.mustAcceptTerms = true
 }
@@ -89,7 +89,7 @@ Lock
 
 IDトークンの検証に使用されるクロックスキューです。IDトークンが有効とみなされる時間枠を拡張し、サーバー時間とクライアント時間の差を考慮します。デフォルトでは **60000ミリ秒**（60秒）です。
 
-```
+```swift lines
 .withOptions {
   $0.leeway = 30000 // 30 seconds
 }
@@ -99,7 +99,7 @@ IDトークンの検証に使用されるクロックスキューです。IDト�
 
 ユーザーが最後に認証されてから経過した許容時間（ミリ秒単位）。IDトークンの検証に使用されます。設定されている場合、IDトークンには認証タイムスタンプを含む`auth_time`クレームが含まれます。デフォルトは`nil`です。
 
-```
+```swift lines
 .withOptions {
   $0.maxAge = 86400000 // 1 day
 }
@@ -111,7 +111,7 @@ IDトークンの検証に使用されるクロックスキューです。IDト�
 
 アクセス可能なデータベース画面で、デフォルトでは`.Login, .Signup, .ResetPassword`などのすべての画面が有効になります。
 
-```
+```swift lines
 .withOptions {
   $0.allow = [.Login, .ResetPassword]
 }
@@ -121,7 +121,7 @@ IDトークンの検証に使用されるクロックスキューです。IDト�
 
 ユーザーに表示する最初の画面です。デフォルトは`.Login`で、他のオプションには`.Signup`と`ResetPassword`があります。
 
-```
+```swift lines
 .withOptions {
   $0.initialScreen = .Login
 }
@@ -131,7 +131,7 @@ IDトークンの検証に使用されるクロックスキューです。IDト�
 
 ログインに必要な識別子のタイプを指定します。デフォルトは次のいずれかです。`[.Username, .Email]`。ただし、`[.Username]`または`[.Email]`も受け入れることができます。ただし、このオプションは、[Auth0 Dashboard](https://manage.auth0.com/#/)で`requires_username`フラグを`true`に設定した場合にのみアクティブになることに注意してください。
 
-```
+```swift lines
 .withOptions {
   $0.usernameStyle = [.Username]
 }
@@ -141,7 +141,7 @@ IDトークンの検証に使用されるクロックスキューです。IDト�
 
 サインアップ時のデフォルトの情報要件は、ユーザーのメールアドレスとパスワードです。必要に応じて、データキャプチャ要件を拡張できます。ここで追加のサインアップフィールドをキャプチャすると、`user_metadata`に保存されます。詳細については、[メタデータ](/docs/ja-jp/manage-users/user-accounts/metadata)を参照してください。カスタムテキストフィールドで使用するアイコンを指定する必要があることに注意してください。
 
-```
+```swift lines
 .withOptions {
   $0.customSignupFields = [
     CustomTextField(name: "first_name", placeholder: "First Name", icon: LazyImage(name: "ic_person", bundle: Lock.bundle)),
@@ -161,7 +161,7 @@ CustomTextField(name:"slack_handle", placeholder:"Slack Handle", icon:LazyImage(
 
 デフォルトでは、エンタープライズ接続はWeb認証を使用します。ただし、資格情報認証を代わりに使用し、ユーザー名とパスワードの入力を求める接続を指定できます。
 
-```
+```swift lines
 .withOptions {
   $0.enterpriseConnectionUsingActiveAuth = ["enterprisedomain.com"]
 }
@@ -171,7 +171,7 @@ CustomTextField(name:"slack_handle", placeholder:"Slack Handle", icon:LazyImage(
 
 資格情報認証モードの場合、ユーザーは識別子としてメールアドレスを要求しますか?デフォルトは`false`で、代わりにユーザー名が必要です。
 
-```
+```swift lines
 .withOptions {
   $0.activeDirectoryEmailAsUsername = true
 }
@@ -185,7 +185,7 @@ Lockには、ログ機能のオン/オフを簡単に切り替えたり、その
 
 デフォルトでは`.off`Syslogログレベルがサポートされています。
 
-```
+```swift lines
 .withOptions {
   $0.logLevel = .all
 }
@@ -195,7 +195,7 @@ Lockには、ログ機能のオン/オフを簡単に切り替えたり、その
 
 Auth0.swift API クエストをログに記録するかどうか。デフォルトでは`false`です。
 
-```
+```swift lines
 .withOptions {
   $0.logHttpRequest = true
 }
@@ -205,7 +205,7 @@ Auth0.swift API クエストをログに記録するかどうか。デフォル�
 
 ロガー出力ハンドラーを指定します。デフォルトでは、`print`ステートメントが使用されます。
 
-```
+```swift lines
 .withOptions {
   $0.loggerOutput = CleanroomLockLogger()
 }
@@ -213,7 +213,7 @@ Auth0.swift API クエストをログに記録するかどうか。デフォル�
 
 上記のコードでは、loggerOutputは[CleanroomLogger](https://github.com/emaloney/CleanroomLogger)を使用するように設定されています。これは通常、loggerOutputプロトコルを実装することで実現できます。もちろん、お気に入りのロガーライブラリを使用することもできます。以下は、CleanroomLoggerでロガー出力を処理する使用例です。
 
-```
+```swift lines
 class CleanroomLockLogger: LoggerOutput {
   func message(_ message: String, level: LoggerLevel, filename: String, line: Int) {
     let channel: LogChannel?

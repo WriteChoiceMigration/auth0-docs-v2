@@ -1,13 +1,13 @@
 ---
 title: "SAMLサービスプロバイダーとしてHerokuを構成する"
 permalink: "configure-saml2-web-app-addon-for-heroku"
+'description': "Heroku用のSAML2 Webアプリアドオンを使用して、Auth0をIDプロバイダーとして構成する方法を説明します。"
 'og:title': "SAMLサービスプロバイダーとしてHerokuを構成する"
 'og:description': "Heroku用のSAML2 Webアプリアドオンを使用して、Auth0をIDプロバイダーとして構成する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "SAMLサービスプロバイダーとしてHerokuを構成する"
 'twitter:description': "Heroku用のSAML2 Webアプリアドオンを使用して、Auth0をIDプロバイダーとして構成する方法を説明します。"
 ---
-# SAMLサービスプロバイダーとしてHerokuを構成する
 
 以下のHeroku用<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip>構成を使用します。
 
@@ -17,11 +17,11 @@ permalink: "configure-saml2-web-app-addon-for-heroku"
 2. **［Addons（アドオン）］**タブに移動し、**［SAML2 Web App（SAML2 Webアプリ）］**トグルを有効にします。
 3. **［Settings（設定）］**タブで**［Application Callback URL（アプリケーションのCallback URL）］**を、HerokuのSSOセクションの設定ページにある組織の**ACS URL**に設定します。
 
-   <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 設定タブ](//images.ctfassets.net/cdy7uua7fh8z/6dJgYkcOgMZ73HVTkAWt1x/0126f55506d82cfd73d0bcb7ebd6fa9f/2025-02-27_14-00-16.png)</Frame>
+   <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 設定タブ](/images/ja-jp/cdy7uua7fh8z/6dJgYkcOgMZ73HVTkAWt1x/0126f55506d82cfd73d0bcb7ebd6fa9f/2025-02-27_14-00-16.png)</Frame>
 
 4. 以下のコードを**［Settings（設定）］**テキストボックスに貼り付け、**［Debug（デバッグ）］**をクリックします。
 
-   ```json
+   ```json lines
    {
         "audience":"THE-HEROKU-ENTITY-ID",
         "mappings": {
@@ -46,7 +46,7 @@ permalink: "configure-saml2-web-app-addon-for-heroku"
 5. ページの最後までスクロールし、**［Enable（有効化）］**をクリックします。
 6. **［Usage（使用状況）］**タブで**［Identity Provider Metadata（IDプロバイダーのメタデータ）］**を見つけ、**［Download（ダウンロード）］**をクリックしてメタデータファイルをダウンロードします。これは、HerokuでAuth0をIDプロバイダーとして構成する場合に必要になります。
 
-   <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 使用状況タブ](//images.ctfassets.net/cdy7uua7fh8z/3T90BDpyTXFUWDp1JkncBU/20060887bf494416b5831075fd4fce13/2025-01-28_10-16-30.png)</Frame>
+   <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 使用状況タブ](/images/ja-jp/cdy7uua7fh8z/3T90BDpyTXFUWDp1JkncBU/20060887bf494416b5831075fd4fce13/2025-01-28_10-16-30.png)</Frame>
 
 ## HerokuでSAML SSOを構成する
 

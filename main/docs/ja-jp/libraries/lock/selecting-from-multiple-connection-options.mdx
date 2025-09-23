@@ -1,19 +1,19 @@
 ---
 title: "複数の接続オプションから選択する"
 permalink: "selecting-from-multiple-connection-options"
+'description': "Lock V11で複数のログインオプションに異なる接続タイプを選択する方法について説明します。"
 'og:title': "複数の接続オプションから選択する"
 'og:description': "Lock V11で複数のログインオプションに異なる接続タイプを選択する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "複数の接続オプションから選択する"
 'twitter:description': "Lock V11で複数のログインオプションに異なる接続タイプを選択する方法について説明します。"
 ---
-# 複数の接続オプションから選択する
 
 Auth0では、ユーザーに複数の認証方法を提供することができます。これは、多くの組織で単一のアプリが使用される、SaaSやマルチテナントアプリでは重要です。各組織は、LDAP、Active Directory、Google Workspace、ユーザー名とパスワードのストアなど、異なるシステムを使用しているかもしれません。
 
 Auth0では、異なる接続（認証方法）を特定のアプリケーションに関連付けたり、直接テナントに（[ドメイン接続](/docs/ja-jp/authenticate/identity-providers/promote-connections-to-domain-level)として）関連付けたりできます。ユーザーがログインする際には、この中の1つの接続を選択して使う必要があります。
 
-<Frame>![Lockでのホームレルムディスカバリー](//images.ctfassets.net/cdy7uua7fh8z/1wnZRx9V1cyyV1nRgsu9fD/a88bb48f450ce1802ddda01ec4346f7f/2023-09-22_14-18-30.png)</Frame>
+<Frame>![Lockでのホームレルムディスカバリー](/images/ja-jp/cdy7uua7fh8z/1wnZRx9V1cyyV1nRgsu9fD/a88bb48f450ce1802ddda01ec4346f7f/2023-09-22_14-18-30.png)</Frame>
 
 複数のオプションから適切なIDプロバイダーを選択することを、「HRD：ホーム領域検出」と呼びます。
 
@@ -36,11 +36,11 @@ LockはIDプロバイダーを選択する機能性を備えています。ソ�
 
 Lockには、メールのドメインを使って認証要求をルーティングする機能も備わっています。Auth0のエンタープライズ接続`ドメイン`にマッピングすることができます。たとえば、ADFSや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>-P IDプロバイダーの構成では：
 
-<Frame>![Configuring ADFS or SAML-P identity providers](//images.ctfassets.net/cdy7uua7fh8z/6c8fqJpKCPNSqlop6ZJGYK/b20b1125302b8f5511825be1299e0f96/enterprise-connection.png)</Frame>
+<Frame>![Configuring ADFS or SAML-P identity providers](/images/ja-jp/cdy7uua7fh8z/6c8fqJpKCPNSqlop6ZJGYK/b20b1125302b8f5511825be1299e0f96/enterprise-connection.png)</Frame>
 
 マッピングされたドメインが接続に存在する場合、ユーザーがマッピングされたドメインのメールアドレスを入力すると、パスワード入力フィールドが自動的に無効になります。
 
-<Frame>![Mapped domain login screen](//images.ctfassets.net/cdy7uua7fh8z/6pb7kGpuHkj0rVPPaJw6Xb/373b9e7a2bf49748a1a306623c13b299/hrd-sso.png)</Frame>
+<Frame>![Mapped domain login screen](/images/ja-jp/cdy7uua7fh8z/6pb7kGpuHkj0rVPPaJw6Xb/373b9e7a2bf49748a1a306623c13b299/hrd-sso.png)</Frame>
 
 上の例では、ドメイン「`auth0.com`」がエンタープライズ接続にマッピングされています。
 
@@ -50,7 +50,7 @@ Lockには、メールのドメインを使って認証要求をルーティン�
 
 アプリケーションに複数のデータベース接続が有効化されている場合、Lockはどれを使用するべきなのか知る必要があります。[`connectionResolver`オプション](https://github.com/auth0/lock#other-options)を使用すると、ユーザーの入力とコンテキストに応じて接続を決定する関数を渡すことができます。この例では、メールドメインがauth0.comの場合には、別のデータベース接続が使用されます。
 
-```javascript
+```javascript lines
 var options = {
   connectionResolver: function (username, context, cb) {
     var domain = username.indexOf('@') !== -1 && username.split('@')[1];
@@ -65,17 +65,17 @@ var options = {
 }
 ```
 
-[`defaultDatabaseConnection`オプション](/docs/libraries/lock/v11/configuration#defaultdatabaseconnection-string-)を使用すると、デフォルトで使用するデータベース接続を指定することができます。
+[`defaultDatabaseConnection`オプション](/docs/ja-jp/libraries/lock/v11/configuration#defaultdatabaseconnection-string-)を使用すると、デフォルトで使用するデータベース接続を指定することができます。
 
 ## 利用可能な接続をプログラムでフィルターする
 
-Lockの[`allowedConnections`オプション](/docs/libraries/lock/v11/configuration#allowedconnections-array-)では、利用可能な接続の中からユーザーに提示できる接続を指定することができます。
+Lockの[`allowedConnections`オプション](/docs/ja-jp/libraries/lock/v11/configuration#allowedconnections-array-)では、利用可能な接続の中からユーザーに提示できる接続を指定することができます。
 
 そうすることで、他の入力やコンテキストを基にエクスペリエンスを調整することができます（「学生としてログインするならこちらをクリック、教員としてログインするならこちらをクリック」など）。
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript
+```javascript lines
 var lock = new Auth0Lock(
   '{yourClientId}',
   '{yourDomain}',
@@ -97,7 +97,7 @@ var lock = new Auth0Lock(
 
 デフォルトのホストされたログインページのコードは、これを使って、Lockのメールアドレス入力フィールドにあらかじめ入力しますが、コードを変更すれば、メールアドレスではなくレルムが渡されたときに使用されるデフォルトのデータベース接続を変更することができます。
 
-```javascript
+```java lines
 // from the default Hosted Login Page template
 var config = JSON.parse(decodeURIComponent(escape(window.atob('@@config@@'))));
 [...]

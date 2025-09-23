@@ -1,13 +1,13 @@
 ---
 title: "JAR（JWT-Secured Authorization Request）を構成する"
 permalink: "configure-jar"
+'description': "アプリケーションにJWT-secured Authorization Requests（JAR）を構成する方法を説明します。"
 'og:title': "JAR（JWT-Secured Authorization Request）を構成する"
 'og:description': "アプリケーションにJWT-secured Authorization Requests（JAR）を構成する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "JAR（JWT-Secured Authorization Request）を構成する"
 'twitter:description': "アプリケーションにJWT-secured Authorization Requests（JAR）を構成する方法を説明します。"
 ---
-# JAR（JWT-Secured Authorization Request）を構成する
 
 <Note>
 
@@ -41,11 +41,11 @@ Auth0 Dashboardを使用して、以前生成されたRSAキーでJARを使用�
 4. **［Authorization Requests（認可要求）］**セクションで、**［Require JWT-Secured Authorization Requests（JWT保護の認可要求をする）］**を有効にします。
 5. 資格情報が割り当てられておらず、利用可能な資格情報がある場合、既存の資格情報の割り当てを要求されます。
 
-   <Frame>![Dashboard > Application > Settings > Assign Existing Credentials](//images.ctfassets.net/cdy7uua7fh8z/HQHhFWTtdfNa5TnZ1dwx6/ccaa87631feab761d7d23c45a24674bf/Existing_Creds_-_Japanese.png)</Frame>
+   <Frame>![Dashboard > Application > Settings > Assign Existing Credentials](/images/ja-jp/cdy7uua7fh8z/HQHhFWTtdfNa5TnZ1dwx6/ccaa87631feab761d7d23c45a24674bf/Existing_Creds_-_Japanese.png)</Frame>
 
 6. 新しい資格情報を割り当てることもできます。
 
-   <Frame>![Auth0 Dashboard > Applications > Settings > Assign New Credentials](//images.ctfassets.net/cdy7uua7fh8z/7JfsCBwytWO6Q7hUvdtSwJ/f5ec2e430514faef17fb06c6735a0c61/New_Creds_-_JP.png)</Frame>
+   <Frame>![Auth0 Dashboard > Applications > Settings > Assign New Credentials](/images/ja-jp/cdy7uua7fh8z/7JfsCBwytWO6Q7hUvdtSwJ/f5ec2e430514faef17fb06c6735a0c61/New_Creds_-_JP.png)</Frame>
 
 7. 以前生成されたRSAキーペアをアップロードして、新しい資格情報を追加し、割り当ててください。要求された場合、次の情報を入力します：
 
@@ -73,7 +73,7 @@ Management APIから、新しいアプリケーション、または既存のア
 
 新しいアプリケーションを作成する際、`signed_request_object`としてPOST要求を送って、JARを構成します。そのPOST要求には、該当のクライアント資格情報（キーPEM）を登録することもできます。
 
-```
+```json lines
 POST https://{yourTenant}.auth0.com/api/v2/clients
 Authorization: Bearer [YOUR ACCESS TOKEN]
 Content-Type: application/json
@@ -100,7 +100,7 @@ Content-Type: application/json
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```json lines
 POST https://{yourTenant}.auth0.com/api/v2/clients/{yourClientId}/credentials
 Authorization: Bearer [YOUR ACCESS TOKEN]
 Content-Type: application/json
@@ -122,7 +122,7 @@ Content-Type: application/json
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```
+```json lines
 PATCH https://{yourTenant}.auth0.com/api/v2/clients/{yourClientId}
 Authorization: Bearer [YOUR ACCESS TOKEN]
 Content-Type: application/json

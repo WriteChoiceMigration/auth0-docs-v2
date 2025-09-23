@@ -1,13 +1,13 @@
 ---
 title: "AWS API Gatewayチュートリアルの手順1"
 permalink: "aws-api-gateway-delegation-1"
+'description': "Amazon API Gatewayチュートリアルの手順1"
 'og:title': "AWS API Gatewayチュートリアルの手順1"
 'og:description': "Amazon API Gatewayチュートリアルの手順1"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "AWS API Gatewayチュートリアルの手順1"
 'twitter:description': "Amazon API Gatewayチュートリアルの手順1"
 ---
-# AWS API Gatewayチュートリアルの手順1
 
 <Warning>
 
@@ -28,7 +28,7 @@ permalink: "aws-api-gateway-delegation-1"
 
 [Amazon DynamoDBコンソール](https://console.aws.amazon.com/dynamodb)で、**［Create Table（テーブルの作成）］**をクリックします。
 
-<Frame>![DynamoDB Console - Create Table](//images.ctfassets.net/cdy7uua7fh8z/2ZPhi7Ddx4TznSXEEhUSDK/52a06412f7c5e6d0ef0d13c6ffe17611/dynamodb-create-table.png)</Frame>
+<Frame>![DynamoDB Console - Create Table](/images/ja-jp/cdy7uua7fh8z/2ZPhi7Ddx4TznSXEEhUSDK/52a06412f7c5e6d0ef0d13c6ffe17611/dynamodb-create-table.png)</Frame>
 
 テーブルに関連する変数を構成します。
 
@@ -39,13 +39,13 @@ permalink: "aws-api-gateway-delegation-1"
 * **Read capacity units（読み込みキャパシティユニット）］**：3
 * **Write capacity units（書き込みキャパシティユニット）］**：3
 
-<Frame>![DynamoDB Console - Configure Newly Created Table](//images.ctfassets.net/cdy7uua7fh8z/6MYJV97Xa3DxajG8DYj2dx/e428ab2ce137176d7771c61a9c528f7c/configure-newly-created-table.png)</Frame>
+<Frame>![DynamoDB Console - Configure Newly Created Table](/images/ja-jp/cdy7uua7fh8z/6MYJV97Xa3DxajG8DYj2dx/e428ab2ce137176d7771c61a9c528f7c/configure-newly-created-table.png)</Frame>
 
 **［Create（作成）］**をクリックして、指定した設定でテーブルを作成します。
 
 テーブルが作成されている間、［Table details（テーブル詳細）］セクションにあるAmazon Resource Name (ARN)をメモしておきます。次の手順で、このテーブルのARNが必要になります。
 
-<Frame>![DynamoDB Console - Table Details - Amazon Resource Name](//images.ctfassets.net/cdy7uua7fh8z/4ZFemddtUD8tRi0NUvzXJ2/38abd951974cad385ef7417f48adf359/table-arn.png)</Frame>
+<Frame>![DynamoDB Console - Table Details - Amazon Resource Name](/images/ja-jp/cdy7uua7fh8z/4ZFemddtUD8tRi0NUvzXJ2/38abd951974cad385ef7417f48adf359/table-arn.png)</Frame>
 
 ### 2.DynamoDB PetsテーブルへのアクセスをAWS Lambda関数に付与するポリシーを作成する
 
@@ -53,13 +53,13 @@ permalink: "aws-api-gateway-delegation-1"
 
 左側のメニューの **［Roles（ロール）］**をクリックし、**［Create New Role（新しいロールを作成）］**ボタンをクリックします。
 
-<Frame>![IAM Console - Roles - Create New Roles](//images.ctfassets.net/cdy7uua7fh8z/4mgCTXLpycHLA8RbYoEFim/5d9eb81be979355aa9cd10d476ead515/roles.png)</Frame>
+<Frame>![IAM Console - Roles - Create New Roles](/images/ja-jp/cdy7uua7fh8z/4mgCTXLpycHLA8RbYoEFim/5d9eb81be979355aa9cd10d476ead515/roles.png)</Frame>
 
 ロールに`APIGatewayLambdaExecRole`という名前を付け、**［Next Step（次の手順）］**をクリックします。
 
 ［Role（ロール］タイプを選択します。［AWS Service Roles］の下の［AWS Lambda］を選択します。
 
-<Frame>![IAM Console - Select the Role Type - Service Roles - AWS Lambda](//images.ctfassets.net/cdy7uua7fh8z/326kKGbahlvIwVFTi61Gfw/026d1fc0c8c6e3a489ec4fb840f551da/select-role-type.png)</Frame>
+<Frame>![IAM Console - Select the Role Type - Service Roles - AWS Lambda](/images/ja-jp/cdy7uua7fh8z/326kKGbahlvIwVFTi61Gfw/026d1fc0c8c6e3a489ec4fb840f551da/select-role-type.png)</Frame>
 
 ［Attach Policy（ポリシーのアタッチ）］の画面で、**［Next Step（次の手順）］**をクリックしてこの手順をスキップします。この時点で、ご自身が提供した情報を確認します。すべて正しい場合は、**［Create Role（ロールの作成）］**をクリックします。終了したら、IAMホームページにロールが記載されていることが確認できます。
 
@@ -67,7 +67,7 @@ permalink: "aws-api-gateway-delegation-1"
 
 ［Custom Policy（カスタムポリシー）］を選択し、**［Select（選択）］**をクリックします。ポリシーに「`LogAndDynamoDBAccess`」という名前を付け、ポリシードキュメントとして以下のコードを追加します（必ずDynamoDBテーブルのAmazon Resource Name (ARN)を最初に更新してください）。**［Apply policy（ポリシーを適用）］**をクリックします。
 
-```json
+```json lines
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -113,7 +113,7 @@ permalink: "aws-api-gateway-delegation-1"
 
 DynamoDBテーブルからペット情報を読み込むために**［Lambda function code（Lambda関数コード）］**エリアに貼り付けます。
 
-```javascript
+```javascript lines
 var AWS = require('aws-sdk');
 var DOC = require('dynamodb-doc');
 var dynamo = new DOC.DynamoDB();
@@ -146,7 +146,7 @@ exports.handler = function(event, context) {
 
 `GetPetInfo`関数を作成するときに使用する手順方法を繰り返しますが、関数コードとして代わりに以下を使用します。
 
-```javascript
+```javascript lines
 var AWS = require('aws-sdk');
 var DOC = require('dynamodb-doc');
 var dynamo = new DOC.DynamoDB();
@@ -170,7 +170,7 @@ exports.handler = function(event, context) {
 
 関数をテストするために、［Actions（アクション）］ドロップダウンをクリックし、**［Configure sample event（サンプルイベントの構成）］**を選択します。サンプルデータとして以下を入力し、**［Submit（送信）］**をクリックします。
 
-```json
+```json lines
 {
   "pets": [{
     "id": 1,
@@ -190,7 +190,7 @@ exports.handler = function(event, context) {
 
 上述の手順を使用して、`NoOp`という名前のLambda関数を作成します。この関数コードは以下の通りです。
 
-```
+```javascript lines
 exports.handler = function(event, context) {
     context.succeed('');
 }
@@ -242,7 +242,7 @@ APIを「`SecurePets`」と名づけ、**［Create API（APIの作成）］**を
 
 **［Test（テスト）］**をクリックし、以下を要求本文に貼り付けます。
 
-```json
+```javascript lines
 {"pets": [
     {"id": 1, "type": "dog", "price": 249.99},
     {"id": 2, "type": "cat", "price": 124.99}
@@ -254,7 +254,7 @@ APIを「`SecurePets`」と名づけ、**［Create API（APIの作成）］**を
 
 GETメソッドに戻り、**［Test（テスト）］**を再びクリックし、テーブルにペットが2つ記載されていることを要求本文が示していることを確認します。
 
-```json
+```json lines
 [
   {
     "id": 1,

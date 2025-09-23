@@ -1,13 +1,13 @@
 ---
 title: "アプリをSAML IDプロバイダーに接続する"
 permalink: "saml"
+'description': "エンタープライズ接続を用いてSAML IDプロバイダーに接続する方法を説明します。"
 'og:title': "アプリをSAML IDプロバイダーに接続する"
 'og:description': "エンタープライズ接続を用いてSAML IDプロバイダーに接続する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "アプリをSAML IDプロバイダーに接続する"
 'twitter:description': "エンタープライズ接続を用いてSAML IDプロバイダーに接続する方法を説明します。"
 ---
-# アプリをSAML IDプロバイダーに接続する
 
 Auth0を使用すると、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip> IDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">IdP</Tooltip>）の接続を作成することができます。
 
@@ -52,7 +52,7 @@ SAMLログインでは、Auth0はサービスプロバイダーとして機能�
 
 1. [［Auth0 Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)に移動し、**［SAML］**の［`+`］を選択します。
 
-   <Frame>![Dashboard - 接続 -エンタープライズ](//images.ctfassets.net/cdy7uua7fh8z/1fSTcrZpkgkPR64NnI1lr8/101fc19f62d82b5c7b13d88f3a0a8e96/Enterprise_Connections_-_JP.png)</Frame>
+   <Frame>![Dashboard - 接続 -エンタープライズ](/images/ja-jp/cdy7uua7fh8z/1fSTcrZpkgkPR64NnI1lr8/101fc19f62d82b5c7b13d88f3a0a8e96/Enterprise_Connections_-_JP.png)</Frame>
 
 2. 接続の詳細を入力し、**［Create（作成）］**をクリックします。
 
@@ -85,7 +85,7 @@ SAMLログインでは、Auth0はサービスプロバイダーとして機能�
 </tr>
 <tr>
 <td><strong>User ID Attribute（ユーザーID属性）</strong>（任意）</td>
-<td>SAMLトークンに含まれる属性で、Auth0の<code>user_id</code>プロパティにマッピングされます。</td>
+<td>SAMLトークンに含まれる属性で、Auth0の`user_id`プロパティにマッピングされます。</td>
 </tr>
 <tr>
 <td><strong>Debug Mode（デバッグモード）</strong></td>
@@ -114,7 +114,7 @@ SAMLログインでは、Auth0はサービスプロバイダーとして機能�
 </tbody>
 </table>
 
-   <Frame>![Configure SAML Settings](//images.ctfassets.net/cdy7uua7fh8z/7hvlp8kjva9uFzm5nwsBTQ/81231feb1b5f384bad037afc51d349a0/2025-01-27_17-33-55.png)</Frame>
+   <Frame>![Configure SAML Settings](/images/ja-jp/cdy7uua7fh8z/7hvlp8kjva9uFzm5nwsBTQ/81231feb1b5f384bad037afc51d349a0/2025-01-27_17-33-55.png)</Frame>
 
 3. **［Provisioning（プロビジョニング）］**ビューでユーザープロファイルがAuth0で作成および更新される方法を構成することができます。
 
@@ -173,22 +173,22 @@ SAMLログインでは、Auth0はサービスプロバイダーとして機能�
 
 ### Management APIを使用してエンタープライズ接続を作成する
 
-[Management API](/docs/api/management/v2)を使用して、SAML接続を作成することもできます。その際には、SAMLの構成フィールドをそれぞれ手動で指定するか、構成値のあるSAMLメタデータドキュメントを指定することができます。
+[Management API](/docs/ja-jp/api/management/v2)を使用して、SAML接続を作成することもできます。その際には、SAMLの構成フィールドをそれぞれ手動で指定するか、構成値のあるSAMLメタデータドキュメントを指定することができます。
 
 #### 指定した値を使って接続を作成する
 
-[接続作成エンドポイント](/docs/api/management/v2#!/Connections/patch_connections_by_id)に`POST`呼び出しを行います。`MGMT_API_ACCESS_TOKEN`、`CONNECTION_NAME`、`SIGN_IN_ENDPOINT_URL`、`SIGN_OUT_ENDPOINT_URL`と`BASE64_SIGNING_CERT`のプレースホルダーをそれぞれManagement APIのアクセストークン、接続名、サインインURL、サインアウトURLとBase64エンコードされた署名証明書（PEMまたはCERの形式）に置き換えます。
+[接続作成エンドポイント](/docs/ja-jp/api/management/v2#!/Connections/patch_connections_by_id)に`POST`呼び出しを行います。`MGMT_API_ACCESS_TOKEN`、`CONNECTION_NAME`、`SIGN_IN_ENDPOINT_URL`、`SIGN_OUT_ENDPOINT_URL`と`BASE64_SIGNING_CERT`のプレースホルダーをそれぞれManagement APIのアクセストークン、接続名、サインインURL、サインアウトURLとBase64エンコードされた署名証明書（PEMまたはCERの形式）に置き換えます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/connections' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "strategy": "samlp", "name": "CONNECTION_NAME", "options": { "signInEndpoint": "SIGN_IN_ENDPOINT_URL", "signOutEndpoint": "SIGN_OUT_ENDPOINT_URL", "signatureAlgorithm": "rsa-sha256", "digestAlgorithm": "sha256", "fieldsMap": {}, "signingCert": "BASE64_SIGNING_CERT" } }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -198,7 +198,7 @@ request.AddParameter("application/json", "{ \"strategy\": \"samlp\", \"name\": \
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -219,8 +219,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/connections")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -229,7 +229,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/connections")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -257,8 +257,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
@@ -286,7 +286,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections",
@@ -311,8 +311,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"signInEndpoint\": \"SIGN_IN_ENDPOINT_URL\", \"signOutEndpoint\": \"SIGN_OUT_ENDPOINT_URL\", \"signatureAlgorithm\": \"rsa-sha256\", \"digestAlgorithm\": \"sha256\", \"fieldsMap\": {}, \"signingCert\": \"BASE64_SIGNING_CERT\" } }"
@@ -327,7 +327,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -342,8 +342,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"signInEndpoint\": \"SIGN_IN_ENDPOINT_URL\", \"signOutEndpoint\": \"SIGN_OUT_ENDPOINT_URL\", \"signatureAlgorithm\": \"rsa-sha256\", \"digestAlgorithm\": \"sha256\", \"fieldsMap\": {}, \"signingCert\": \"BASE64_SIGNING_CERT\" } }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -390,23 +390,23 @@ dataTask.resume()
 </thead>
 <tbody>
 <tr>
-<td><code>MGMT_API_ACCESS_TOKEN</code></td>
-<td><code>create:connections</code>のスコープを持つ<a href="/docs/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
+<td>`MGMT_API_ACCESS_TOKEN`</td>
+<td>`create:connections`のスコープを持つ<a href="/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
 </tr>
 <tr>
-<td><code>CONNECTION_NAME</code></td>
+<td>`CONNECTION_NAME`</td>
 <td>作成される接続の名前。</td>
 </tr>
 <tr>
-<td><code>SIGN_IN_ENDPONT_URL</code></td>
+<td>`SIGN_IN_ENDPONT_URL`</td>
 <td>作成される接続のSAMLシングルログインURL。</td>
 </tr>
 <tr>
-<td><code>SIGN_OUT_ENDPOINT_URL</code></td>
+<td>`SIGN_OUT_ENDPOINT_URL`</td>
 <td>作成される接続のSAMLシングルログアウトURL。</td>
 </tr>
 <tr>
-<td><code>BASE64_SIGNING_CERT</code></td>
+<td>`BASE64_SIGNING_CERT`</td>
 <td>IdPから取得したX.509署名証明書（PEMまたはCERでエンコード）。</td>
 </tr>
 </tbody>
@@ -414,7 +414,7 @@ dataTask.resume()
 
 または、以下のJSONを使用します。
 
-```json
+```json lines
 {
 	"strategy": "samlp",
   	"name": "CONNECTION_NAME",
@@ -440,15 +440,15 @@ SAMLの構成フィールドをそれぞれ指定する代わりに、構成値�
 `metadataXml`オプションを使用して、ドキュメントの内容を提供します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/connections' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "strategy": "samlp", "name": "CONNECTION_NAME", "options": { "metadataXml": "..." } }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -458,7 +458,7 @@ request.AddParameter("application/json", "{ \"strategy\": \"samlp\", \"name\": \
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -479,8 +479,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/connections")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -489,7 +489,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/connections")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -512,8 +512,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
@@ -541,7 +541,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections",
@@ -566,8 +566,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataXml\": \"...\" } }"
@@ -582,7 +582,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -597,8 +597,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataXml\": \"...\" } }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -635,15 +635,15 @@ dataTask.resume()
 `metadataUrl`オプションを使用して、ドキュメントのURLを提供します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/connections' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{ "strategy": "samlp", "name": "CONNECTION_NAME", "options": { "metadataUrl": "https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX" } }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
@@ -653,7 +653,7 @@ request.AddParameter("application/json", "{ \"strategy\": \"samlp\", \"name\": \
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -674,8 +674,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/connections")
 .header("content-type", "application/json")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
@@ -684,7 +684,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/connections")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -707,8 +707,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
 @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
@@ -736,7 +736,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections",
@@ -761,8 +761,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataUrl\": \"https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX\" } }"
@@ -777,7 +777,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -792,8 +792,8 @@ request["cache-control"] = 'no-cache'
 request.body = "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataUrl\": \"https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX\" } }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "content-type": "application/json",
@@ -855,7 +855,7 @@ B2Bを統合していて、独自のSAML IDプロバイダーでAuth0にフェ�
 
 以下のJSONの例を使用すると、カスタムエンティティIDを指定し、SAML IdPのメタデータURLを使って新しいSAML接続を作成することができます。エンティティIDは、接続名を使って作成されているため、一意のままになります。
 
-```json
+```json lines
 {
   "strategy": "samlp", 
   "name": "{yourConnectionName}", 
@@ -880,11 +880,11 @@ B2Bを統合していて、独自のSAML IDプロバイダーでAuth0にフェ�
 
 **［Mappings（マッピング）］**ビューを選択し、`{}`間のマッピングを入力してから**［Save（保存）］**を選択します。
 
-<Frame>![Configure SAML Mappings](//images.ctfassets.net/cdy7uua7fh8z/3matGqveShEDX89p8Bcmwr/13ba65490fd2670c4a540dbe269705fe/2025-02-25_09-36-38.png)</Frame>
+<Frame>![Configure SAML Mappings](/images/ja-jp/cdy7uua7fh8z/3matGqveShEDX89p8Bcmwr/13ba65490fd2670c4a540dbe269705fe/2025-02-25_09-36-38.png)</Frame>
 
 **非標準のPingFederateサーバーのマッピング**
 
-```json
+```json lines
 {
     "user_id": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
     "email": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
@@ -893,7 +893,7 @@ B2Bを統合していて、独自のSAML IDプロバイダーでAuth0にフェ�
 
 **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">SSO</Tooltip> Circleのマッピング**
 
-```json
+```json lines
 {
   "email": "EmailAddress",
   "given_name": "FirstName",
@@ -903,7 +903,7 @@ B2Bを統合していて、独自のSAML IDプロバイダーでAuth0にフェ�
 
 **1つのユーザー属性に2つのクレームのうち1つをマッピング**
 
-```json
+```json lines
 {
   "given_name": [
     "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname",
@@ -914,7 +914,7 @@ B2Bを統合していて、独自のSAML IDプロバイダーでAuth0にフェ�
 
 **名前識別子をユーザー属性にマッピングする方法**
 
-```json
+```json lines
 {
   "user_id": [
     "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",

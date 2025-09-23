@@ -1,13 +1,13 @@
 ---
 title: "インシデント対応：ログを使う"
 permalink: "incident-response-using-logs"
+'description': "インシデント対応計画の一部としてAuth0を使う方法を説明します。"
 'og:title': "インシデント対応：ログを使う"
 'og:description': "インシデント対応計画の一部としてAuth0を使う方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "インシデント対応：ログを使う"
 'twitter:description': "インシデント対応計画の一部としてAuth0を使う方法を説明します。"
 ---
-# インシデント対応：ログを使う
 
 ログをレビューして攻撃の影響を評価することは、インシデント対応計画において重要な手順の1つです。このページでは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>でどのようにログにアクセスするかを説明し、攻撃の徴候を見つけてアカウントアクティビティをレビューするためのログ検索クエリ例を示します。
 
@@ -17,7 +17,7 @@ permalink: "incident-response-using-logs"
 2. ［Logs（ログ）］ページは、左側メニューの**［Monitoring（モニタリング）］**の下にあります。
 3. ［Logs（ログ）］ページには、フィルターの選択肢と日付ピッカーとともに検索バーが表示されます。
 
-<Frame>![Dashboard - モニタリング - ログ](//images.ctfassets.net/cdy7uua7fh8z/2l9LfKEjrprVmHfWt80VX0/44fb4d1dad15f13ceb21e64d093ebf5c/2025-01-28_15-02-44.png)</Frame>
+<Frame>![Dashboard - モニタリング - ログ](/images/ja-jp/cdy7uua7fh8z/2l9LfKEjrprVmHfWt80VX0/44fb4d1dad15f13ceb21e64d093ebf5c/2025-01-28_15-02-44.png)</Frame>
 
 一覧からログイベントを選択して、イベントの**［Summary（概要）］**と、未加工JSONを含む**［Details（詳細）］**を表示します。
 
@@ -33,63 +33,63 @@ permalink: "incident-response-using-logs"
 </thead>
 <tbody>
 <tr>
-<td><code>date</code></td>
+<td>`date`</td>
 <td>イベント発生時のタイムスタンプです。</td>
 </tr>
 <tr>
-<td><code>log_id</code></td>
+<td>`log_id`</td>
 <td>ログイベントのIDです。</td>
 </tr>
 <tr>
-<td><code>type</code></td>
+<td>`type`</td>
 <td>ログイベントの種類です。</td>
 </tr>
 <tr>
-<td><code>description</code></td>
+<td>`description`</td>
 <td>イベントの説明です。</td>
 </tr>
 <tr>
-<td><code>connection</code></td>
+<td>`connection`</td>
 <td>イベントに関連する接続名です。</td>
 </tr>
 <tr>
-<td><code>connection_id</code></td>
+<td>`connection_id`</td>
 <td>イベントに関連する接続IDです。</td>
 </tr>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>イベントに関連するクライアントIDです。</td>
 </tr>
 <tr>
-<td><code>client_name</code></td>
+<td>`client_name`</td>
 <td>イベントに関連するクライアントの名前です。</td>
 </tr>
 <tr>
-<td><code>ip</code></td>
+<td>`ip`</td>
 <td>ログイベントを引き起こした要求の送信元のIPアドレスです。</td>
 </tr>
 <tr>
-<td><code>user_agent</code></td>
+<td>`user_agent`</td>
 <td>イベントに関連するユーザーエージェントです。</td>
 </tr>
 <tr>
-<td><code>details</code></td>
+<td>`details`</td>
 <td>このログイベントについての詳細情報を含むオブジェクトです。</td>
 </tr>
 <tr>
-<td><code>user_id</code></td>
+<td>`user_id`</td>
 <td>イベントに関連するユーザーIDです。</td>
 </tr>
 <tr>
-<td><code>user_name</code></td>
+<td>`user_name`</td>
 <td>イベントに関連するユーザー名です。</td>
 </tr>
 <tr>
-<td><code>strategy</code></td>
+<td>`strategy`</td>
 <td>イベントに関連する接続ストラテジーです。</td>
 </tr>
 <tr>
-<td><code>strategy_type</code></td>
+<td>`strategy_type`</td>
 <td>イベントに関連する接続ストラテジーの種類です。</td>
 </tr>
 </tbody>
@@ -99,7 +99,7 @@ permalink: "incident-response-using-logs"
 
 間違ったパスワードを入力したことでログインに失敗したログイベントの例：
 
-```json
+```json lines
 {
   "date": "2020-10-27T19:39:54.699Z",
   "type": "fp",
@@ -145,7 +145,7 @@ permalink: "incident-response-using-logs"
 
 <Note>
 
-「[ログ検索クエリ構文](/docs/deploy-monitor/logs/log-search-query-syntax)」ページに、Auth0のログクエリ構文に関する詳細やクエリの例があります。
+「[ログ検索クエリ構文](/docs/ja-jp/deploy-monitor/logs/log-search-query-syntax)」ページに、Auth0のログクエリ構文に関する詳細やクエリの例があります。
 
 </Note>
 

@@ -1,13 +1,13 @@
 ---
 title: "アカウントリンクに向けてアクセストークンに移行する"
 permalink: "link-user-accounts-with-access-tokens-migration"
+'description': "ユーザーアカウントをリンクするに当たり、IDトークンの使用からアクセストークンの使用へ移行する方法を説明します。"
 'og:title': "アカウントリンクに向けてアクセストークンに移行する"
 'og:description': "ユーザーアカウントをリンクするに当たり、IDトークンの使用からアクセストークンの使用へ移行する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "アカウントリンクに向けてアクセストークンに移行する"
 'twitter:description': "ユーザーアカウントをリンクするに当たり、IDトークンの使用からアクセストークンの使用へ移行する方法を説明します。"
 ---
-# アカウントリンクに向けてアクセストークンに移行する
 
 以前は、一部のケースで、IDトークンを使ってユーザーアカウントのリンクやリンク解除ができました。この機能は、廃止されます。今後は、すべてのケースでアクセストークンを使う必要があります。
 
@@ -40,39 +40,39 @@ permalink: "link-user-accounts-with-access-tokens-migration"
 </thead>
 <tbody>
 <tr>
-<td>Management APIの<code>POST /api/v2/users/{id}/identities</code>エンドポイントを使用し、プライマリアカウントのIDトークンを<code>Authorization</code>ヘッダーで送信する。</td>
+<td>Management APIの`POST /api/v2/users/{id}/identities`エンドポイントを使用し、プライマリアカウントのIDトークンを`Authorization`ヘッダーで送信する。</td>
 <td>影響あり</td>
 </tr>
 <tr>
-<td>Management APIの<code>POST /api/v2/users/{id}/identities</code>エンドポイントを使用し、（<code>update:users</code>スコープ付きの）アクセストークンを<code>authorization</code>ヘッダーで、セカンダリアカウントの<code>user_id</code>をペイロードとして送信する。</td>
+<td>Management APIの`POST /api/v2/users/{id}/identities`エンドポイントを使用し、（`update:users`スコープ付きの）アクセストークンを`authorization`ヘッダーで、セカンダリアカウントの`user_id`をペイロードとして送信する。</td>
 <td>影響なし</td>
 </tr>
 <tr>
-<td>Management APIの<code>POST /api/v2/users/{id}/identities</code>エンドポイントを使用し、（<code>update:current_user_identities</code>スコープ付きの）アクセストークンを<code>Authorization</code>ヘッダーで、セカンダリアカウントの<code>user_id</code>をペイロードとして送信する。</td>
+<td>Management APIの`POST /api/v2/users/{id}/identities`エンドポイントを使用し、（`update:current_user_identities`スコープ付きの）アクセストークンを`Authorization`ヘッダーで、セカンダリアカウントの`user_id`をペイロードとして送信する。</td>
 <td>影響あり</td>
 </tr>
 <tr>
-<td>Management APIの<code>POST /api/v2/users/{id}/identities</code>エンドポイントを使用し、アクセストークンを<code>Authorization</code>ヘッダーで、セカンダリアカウントのIDトークンをペイロードとして送信する。</td>
+<td>Management APIの`POST /api/v2/users/{id}/identities`エンドポイントを使用し、アクセストークンを`Authorization`ヘッダーで、セカンダリアカウントのIDトークンをペイロードとして送信する。</td>
 <td>新しいユースケース</td>
 </tr>
 <tr>
-<td><code>auth0.Management</code>のインスタンスを作成するために、auth0.jsライブラリーとプライマリアカウントのIDトークンを使用する。</td>
+<td>`auth0.Management`のインスタンスを作成するために、auth0.jsライブラリーとプライマリアカウントのIDトークンを使用する。</td>
 <td>影響あり</td>
 </tr>
 <tr>
-<td><code>auth0.Management</code>のインスタンスを作成するために、auth0.jsライブラリーと（<code>update:users</code>スコープ付きの）アクセストークンを使用する。</td>
+<td>`auth0.Management`のインスタンスを作成するために、auth0.jsライブラリーと（`update:users`スコープ付きの）アクセストークンを使用する。</td>
 <td>影響なし</td>
 </tr>
 <tr>
-<td><code>auth0.Management</code>のインスタンスを作成するために、auth0.jsライブラリーと（<code>update:current_user_identities</code>スコープ付きの）アクセストークンを使用する。</td>
+<td>`auth0.Management`のインスタンスを作成するために、auth0.jsライブラリーと（`update:current_user_identities`スコープ付きの）アクセストークンを使用する。</td>
 <td>影響あり</td>
 </tr>
 <tr>
-<td>Management APIの<code>DELETE /api/v2/users/{id}/identities/{provider}/{user_id}</code>エンドポイントを使用し、プライマリアカウントのIDトークンを<code>Authorization</code>ヘッダーで送信する。</td>
+<td>Management APIの`DELETE /api/v2/users/{id}/identities/{provider}/{user_id}`エンドポイントを使用し、プライマリアカウントのIDトークンを`Authorization`ヘッダーで送信する。</td>
 <td>影響あり</td>
 </tr>
 <tr>
-<td>Management APIの<code>DELETE /api/v2/users/{id}/identities/{provider}/{user_id}</code>エンドポイントを使用し、アクセストークンを<code>Authorization</code>ヘッダーで送信する。</td>
+<td>Management APIの`DELETE /api/v2/users/{id}/identities/{provider}/{user_id}`エンドポイントを使用し、アクセストークンを`Authorization`ヘッダーで送信する。</td>
 <td>影響なし</td>
 </tr>
 </tbody>
@@ -80,7 +80,7 @@ permalink: "link-user-accounts-with-access-tokens-migration"
 
 ## アクション
 
-[IDエンドポイント](/docs/api/management/v2/#!/Users/post_identities)にリンクするアカウントへのすべての呼び出しを確認し、上記の脆弱なフローを利用する呼び出しを更新します。呼び出しを更新する方法には、次のようなものがあります。
+[IDエンドポイント](/docs/ja-jp/api/management/v2/#!/Users/post_identities)にリンクするアカウントへのすべての呼び出しを確認し、上記の脆弱なフローを利用する呼び出しを更新します。呼び出しを更新する方法には、次のようなものがあります。
 
 * **クライアント側/ユーザー開始のリンクシナリオ:** クライアント側のリンク シナリオの場合、`update:current_user_identities`スコープのアクセス トークンを使用してIdentitiesエンドポイントへの呼び出しを行い、ペイロード（`link_with`）でセカンダリ アカウントの ID トークンを提供します。IDトークンは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OAuth</Tooltip>/OIDC準拠のフローを通じて取得しなければなりません。
 * **サーバー側リンクシナリオ**:サーバー側リンクシナリオの場合は、`update:users`スコープのアクセス トークンを使用してIdentitiesエンドポイントへの呼び出しを行い、ペイロードでセカンダリ アカウントの`user_id`を指定します。
@@ -104,7 +104,7 @@ permalink: "link-user-accounts-with-access-tokens-migration"
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
          scope=openid
          &response_type=id_token
@@ -122,7 +122,7 @@ permalink: "link-user-accounts-with-access-tokens-migration"
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
          audience=https://{yourDomain}/api/v2/
          &scope=update:current_user_identities
@@ -165,7 +165,7 @@ permalink: "link-user-accounts-with-access-tokens-migration"
    2. セカンダリアカウントのIDトークンの`aud`クレームはクライアントを識別し、要求の作成に使用されたアクセス トークンの`azp`クレームと同じ値を保持する必要があります。
 5. アクセストークンを取得したら、それを使ってユーザーアカウントをリンクします。この部分は同じで、要求のうち、`Bearer`トークンとして使用する値を除き変更はありません。応答も同じです。
 
-   ```json
+   ```json lines
    {
          "method": "POST",
          "url": "https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities",
@@ -198,7 +198,7 @@ permalink: "link-user-accounts-with-access-tokens-migration"
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```javascript
+   ```javascript lines
    // get an ID Token
        var webAuth = new auth0.WebAuth({
          clientID: '{yourClientId}',
@@ -222,7 +222,7 @@ permalink: "link-user-accounts-with-access-tokens-migration"
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```javascript
+   ```javascript lines
    // get an Access Token
        var webAuth = new auth0.WebAuth({
          clientID: '{yourClientId}',
@@ -243,9 +243,9 @@ permalink: "link-user-accounts-with-access-tokens-migration"
 
    
 
-   1. 応答でIDトークンとアクセストークンの両方を求めます（`` responseType: `token id_token` ``）。
-   2. Management APIを意図したトークンのオーディエンスとして設定します（`` audience: `https://{yourDomain}/api/v2/` ``）。
-   3. 必要な許可を要求します（`` scope: `update:current_user_identities` ``）。
+   1. 応答でIDトークンとアクセストークンの両方を求めます（`responseType: `token id_token``）。
+   2. Management APIを意図したトークンのオーディエンスとして設定します（`audience: `https://{yourDomain}/api/v2/``）。
+   3. 必要な許可を要求します（`scope: `update:current_user_identities``）。
    4. アクセストークンを使ってManagement APIで認証します。
 
 #### Management APIで任意のユーザーアカウントをリンクする
@@ -255,14 +255,14 @@ permalink: "link-user-accounts-with-access-tokens-migration"
 ただ、ここで紹介している新しいメソッドはその代わりになります。APIでの認証には引き続き`update:users`スコープを含むアクセストークンを使用しますが、要求のペイロードでセカンダリのアカウントIDトークンを（`user_id`および`プロバイダー`の代わりに）送信できます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities' \
 --header 'authorization: Bearer ACCESS_TOKEN' \
 --header 'content-type: application/json' \
 --data '{"link_with":"SECONDARY_ACCOUNT_ID_TOKEN"}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities");
 var request = new RestRequest(Method.POST);
 request.AddHeader("authorization", "Bearer ACCESS_TOKEN");
@@ -271,7 +271,7 @@ request.AddParameter("application/json", "{\"link_with\":\"SECONDARY_ACCOUNT_ID_
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -291,8 +291,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities")
 .header("authorization", "Bearer ACCESS_TOKEN")
 .header("content-type", "application/json")
@@ -300,7 +300,7 @@ HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/users/PRIMARY_
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -313,8 +313,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer ACCESS_TOKEN",
 @"content-type": @"application/json" };
@@ -339,7 +339,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities",
@@ -363,8 +363,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{\"link_with\":\"SECONDARY_ACCOUNT_ID_TOKEN\"}"
@@ -378,7 +378,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -392,8 +392,8 @@ request["content-type"] = 'application/json'
 request.body = "{\"link_with\":\"SECONDARY_ACCOUNT_ID_TOKEN\"}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer ACCESS_TOKEN",
@@ -434,7 +434,7 @@ IDトークンを使ってアカウントのリンクを解除するには、ア
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
          scope=openid
          &response_type=id_token
@@ -452,7 +452,7 @@ IDトークンを使ってアカウントのリンクを解除するには、ア
 
    codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
          audience=https://{yourDomain}/api/v2/
          &scope=update:current_user_identities
@@ -494,7 +494,7 @@ IDトークンを使ってアカウントのリンクを解除するには、ア
 4. アクセストークンを取得したら、`Authorization`ヘッダーでそれを使用して、Management API の[ユーザーIDエンドポイントのリンク解除](https://auth0.com/docs/api/management/v2#!/Users/delete_user_identity_by_user_id)を呼び出すことができます。
 5. 以前の方法では、呼び出しは次のようになります：
 
-   ```
+   ``` lines
    DELETE https://YOUR_DOMAIN/api/v2/users/{primaryAccountUserId}/identities/{secondaryAccountProvider}/{secondaryAccountUserId}
        Authorization: 'Bearer {yourIdTokenOrMgmtApiAccessToken}'
    ```
@@ -505,7 +505,7 @@ IDトークンを使ってアカウントのリンクを解除するには、ア
 
    新しい方法では、呼び出しは次のようになります：
 
-   ```
+   ``` lines
    DELETE https://{yourDomain}/api/v2/users/{primaryAccountUserId}/identities/{secondaryAccountProvider}/{secondaryAccountUserId}
        Authorization: 'Bearer {yourMgmtApiAccessToken}'
    ```

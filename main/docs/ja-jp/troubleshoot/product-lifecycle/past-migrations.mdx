@@ -1,13 +1,13 @@
 ---
 title: "過去の移行"
 permalink: "past-migrations"
+'description': "すべてのお客様に対してすでに有効なAuth0のアップデート一覧。"
 'og:title': "過去の移行"
 'og:description': "すべてのお客様に対してすでに有効なAuth0のアップデート一覧。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "過去の移行"
 'twitter:description': "すべてのお客様に対してすでに有効なAuth0のアップデート一覧。"
 ---
-# 過去の移行
 
 これらの移行は、すべてのお客様に対してすでに有効です。ご不明な点がありましたら、[サポートセンター](https://support.auth0.com)でチケットを作成してください。
 
@@ -17,7 +17,7 @@ permalink: "past-migrations"
 
 **サポート終了（EOL）**：2024年8月5日
 
-Auth0サポートセンター内にある[サブスクリプションチケット](/docs/troubleshoot/customer-support/open-and-manage-support-tickets)の閲覧アクセスは、2024年8月5日に変更されました。テナント内の全ユーザーによって作成された全サポートチケットを閲覧および管理するアクセスを維持するには、新しい「昇格されたサポートアクセス」ロールが必要です。
+Auth0サポートセンター内にある[サブスクリプションチケット](/docs/ja-jp/troubleshoot/customer-support/open-and-manage-support-tickets)の閲覧アクセスは、2024年8月5日に変更されました。テナント内の全ユーザーによって作成された全サポートチケットを閲覧および管理するアクセスを維持するには、新しい「昇格されたサポートアクセス」ロールが必要です。
 
 ## テナントログにあるパスワードリセットリンクとメール検証リンクの廃止
 
@@ -244,13 +244,13 @@ Auth0の旧ネットワークエッジはパブリッククラウド上で機能
 
 2021年1月26日以降、以下のManagement API v2エンドポイントへの要求は、パブリッククラウドテナントのアイテムを最大50返すようになりました。より多くのアイテムを取得するには、`page`および`per_page`パラメーターを含める必要があります。2020年7月21日から、Auth0はこの変更に備えて、テナントログおよび移行トグルを表示するようになりました。
 
-* [`GET /api/v2/clients`](/docs/api/management/v2#!/Clients/get_clients)
-* [`GET /api/v2/client-grants`](/docs/api/management/v2#!/Clients/client_grants)
-* [`GET /api/v2/grants`](/docs/api/management/v2#!/Clients/grants)
-* [`GET /api/v2/connections`](/docs/api/management/v2#!/Clients/connections)
-* [`GET /api/v2/device-crecentials`](/docs/api/management/v2#!/Clients/device_credentials)（`type`クエリパラメーターが使用される場合）
-* [`GET /api/v2/resource-servers`](/docs/api/management/v2#!/Clients/resource_servers)
-* [`GET /api/v2/rules`](/docs/api/management/v2#!/Clients/rules)
+* [`GET /api/v2/clients`](/docs/ja-jp/api/management/v2#!/Clients/get_clients)
+* [`GET /api/v2/client-grants`](/docs/ja-jp/api/management/v2#!/Clients/client_grants)
+* [`GET /api/v2/grants`](/docs/ja-jp/api/management/v2#!/Clients/grants)
+* [`GET /api/v2/connections`](/docs/ja-jp/api/management/v2#!/Clients/connections)
+* [`GET /api/v2/device-crecentials`](/docs/ja-jp/api/management/v2#!/Clients/device_credentials)（`type`クエリパラメーターが使用される場合）
+* [`GET /api/v2/resource-servers`](/docs/ja-jp/api/management/v2#!/Clients/resource_servers)
+* [`GET /api/v2/rules`](/docs/ja-jp/api/management/v2#!/Clients/rules)
 
 2020年7月21日より前に作成されたパブリッククラウドテナント、および`per_page`パラメーターを渡さずに、複数の結果を返す可能性があるクエリを作成し、影響を受けるエンドポイントをアクティブに呼び出しているパブリッククラウドテナントは、すべてこの影響を受けるようになりました。2020年7月21日以降に作成されたテナント、影響を受けるエンドポイントを使用しないテナント、影響を受けるエンドポイントを使用するが`per_page`パラメーターを渡すテナント、または結果を常に1つだけ返すクエリを作成するテナントについては、影響を受けません。詳細については、「[Management API v2エンドポイントの移行：クエリのページネーション](/docs/ja-jp/troubleshoot/product-lifecycle/past-migrations/migrate-to-paginated-queries)」をお読みください。
 
@@ -310,7 +310,7 @@ Auth0は、ロックを使用してFacebookとGoogleアナリティクスを追�
 
 **サポート終了（EOL）**：2020年12月17日
 
-Auth0では、[GET /api/v2/device-credentialsエンドポイント](/docs/api/management/v2/#!/Device_Credentials/get_device_credentials)を使用する際に`user_id`の提供が必須になりました。要求に`user_id`が含まれていない場合、400ステータスコードが返されます。テナントログで`depnote`をチェックして、この廃止の影響を受けるかどうかを確認してください。詳しくは、「[廃止エラーを確認する](/docs/ja-jp/troubleshoot/basic-issues/check-deprecation-errors)」をお読みください。
+Auth0では、[GET /api/v2/device-credentialsエンドポイント](/docs/ja-jp/api/management/v2/#!/Device_Credentials/get_device_credentials)を使用する際に`user_id`の提供が必須になりました。要求に`user_id`が含まれていない場合、400ステータスコードが返されます。テナントログで`depnote`をチェックして、この廃止の影響を受けるかどうかを確認してください。詳しくは、「[廃止エラーを確認する](/docs/ja-jp/troubleshoot/basic-issues/check-deprecation-errors)」をお読みください。
 
 Auth0ではこの廃止の影響を受けるテナントを特定し、各管理者にお知らせしています。ご利用のテナントが`user_id`を使用せずに要求を行っている場合は、早急に変更してください。
 
@@ -328,7 +328,7 @@ Auth0ではこの廃止の影響を受けるテナントを特定し、各管理
 
 Auth0では以前、Microsoft Entra IDおよびADFS接続の`email_verified`フィールドをtrueに設定していました。この廃止日より前にEntra ID/ADFS接続を利用していた場合は、メール検証の接続設定をオーバーライドして以前の動作を維持するテナント設定があります。
 
-パブリッククラウドでは2021年5月18日に、プライベートクラウドでは6月リリース（v2106）で、すべてのEntra ID/ADFS接続で接続レベルのプロパティの使用が開始されました。この日付の前に、すべての接続が正しく構成されていることをご確認ください。詳細は、「[Entra IDとADFSのメール検証](/docs/connections/azuread-adfs-email-verification)」をお読みください。
+パブリッククラウドでは2021年5月18日に、プライベートクラウドでは6月リリース（v2106）で、すべてのEntra ID/ADFS接続で接続レベルのプロパティの使用が開始されました。この日付の前に、すべての接続が正しく構成されていることをご確認ください。詳細は、「[Entra IDとADFSのメール検証](/docs/ja-jp/connections/azuread-adfs-email-verification)」をお読みください。
 
 ## sameSiteクッキー属性の変更
 

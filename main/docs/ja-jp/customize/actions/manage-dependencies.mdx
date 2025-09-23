@@ -1,13 +1,13 @@
 ---
 title: "依存関係を管理する"
 permalink: "manage-dependencies"
+'description': "Auth0 Actions内で依存関係をインストールして管理する方法について説明します。"
 'og:title': "依存関係を管理する"
 'og:description': "Auth0 Actions内で依存関係をインストールして管理する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "依存関係を管理する"
 'twitter:description': "Auth0 Actions内で依存関係をインストールして管理する方法について説明します。"
 ---
-# 依存関係を管理する
 
 Actionsでは[`npm`レジストリ](https://www.npmjs.com/)からのパッケージを使用することができます。<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>のアクションコードエディターまたはAuth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を使用して、アクションに依存関係をインストールし、管理することができます。
 
@@ -20,7 +20,7 @@ Actionsでは[`npm`レジストリ](https://www.npmjs.com/)からのパッケー
 3. **［Add Module（モジュールの追加）］**モジュールの名前を入力します。使用可能な最新バージョンのパッケージを使用するには、バージョンのフィールドを空のままにします。
 4. Actionsコードでモジュールを必須にします。たとえば、Axiosパッケージを追加した場合には、アクションコードエディターでコードの始めに以下の行を追加します。
 
-   ```javascript
+   ```javascript lines
    const axios = require('axios');
    ```
 
@@ -30,9 +30,9 @@ Actionsでは[`npm`レジストリ](https://www.npmjs.com/)からのパッケー
 
 ## Auth0 Management APIで依存関係を追加する
 
-Auth0 Management APIの[アクション作成エンドポイント](/docs/api/management/v2#!/Actions/post_action)を使用して、依存関係を追加することもできます。エンドポイントを呼び出す際には、ペイロード内で依存関係を指定します。
+Auth0 Management APIの[アクション作成エンドポイント](/docs/ja-jp/api/management/v2#!/Actions/post_action)を使用して、依存関係を追加することもできます。エンドポイントを呼び出す際には、ペイロード内で依存関係を指定します。
 
-```bash
+```bash lines
 curl -H "Authorization: Bearer {managementApiToken}" \
      -X POST  -H "Content-Type: application/json" \
      -d '{ \

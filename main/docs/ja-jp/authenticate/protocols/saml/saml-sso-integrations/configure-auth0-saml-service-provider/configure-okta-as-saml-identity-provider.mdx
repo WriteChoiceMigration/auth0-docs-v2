@@ -1,13 +1,13 @@
 ---
 title: "OktaをSAML IDプロバイダーとして構成する"
 permalink: "configure-okta-as-saml-identity-provider"
+'description': "Auth0のSAML IDプロバイダー（IdP）としてOktaを構成する方法を説明します。"
 'og:title': "OktaをSAML IDプロバイダーとして構成する"
 'og:description': "Auth0のSAML IDプロバイダー（IdP）としてOktaを構成する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "OktaをSAML IDプロバイダーとして構成する"
 'twitter:description': "Auth0のSAML IDプロバイダー（IdP）としてOktaを構成する方法を説明します。"
 ---
-# OktaをSAML IDプロバイダーとして構成する
 
 <Card title="Before you start">
 
@@ -44,12 +44,12 @@ Okta Developer ConsoleでSAMLアプリ統合を作成できます。
 <tr>
 <td>Single Sign-On URL（シングルサインオンURL）</td>
 <td>Auth0テナントのログインコールバックURL。</td>
-<td><code>https://{yourAuth0Domain}/login/callback?connection={yourAuth0ConnectionName}</code></td>
+<td>`https://{yourAuth0Domain}/login/callback?connection={yourAuth0ConnectionName}`</td>
 </tr>
 <tr>
 <td>Audience URI (SP Entity ID)（オーディエンスURI（SPエンティティID））Audience URI (SP Entity ID)</td>
 <td>Auth0接続のオーディエンス値。</td>
-<td><code>urn:auth0:{yourAuth0TenantName}:{yourAuth0ConnectionName}</code></td>
+<td>`urn:auth0:{yourAuth0TenantName}:{yourAuth0ConnectionName}`</td>
 </tr>
 </tbody>
 </table>
@@ -91,17 +91,17 @@ Okta Developer ConsoleでSAMLアプリ統合を作成できます。
 <tr>
 <td>接続名</td>
 <td>Auth0の接続名。</td>
-<td><code>myoktaconnection</code></td>
+<td>`myoktaconnection`</td>
 </tr>
 <tr>
 <td>サインインURL</td>
 <td>ユーザーログイン要求が送信されるOkta URL。<br/><br/>これは、前に記録した__IDプロバイダーのシングルサインオンURL__です。</td>
-<td><code>https://my_okta_tenant_name.okta.com/app/</code> <code>my_okta_tenant_namemy_okta_saml_app_integration_name/</code> <code>dakflkbzevu5i5zBi939/sso/saml</code></td>
+<td>`https://my_okta_tenant_name.okta.com/app/` `my_okta_tenant_namemy_okta_saml_app_integration_name/` `dakflkbzevu5i5zBi939/sso/saml`</td>
 </tr>
 <tr>
 <td>X509署名証明書</td>
 <td>Oktaテナントの公開鍵の署名証明書。<br/><br/>前にダウンロードした__X509証明書__をアップロードします。</td>
-<td><code>myOktaTenantSigningCertificate.pem</code></td>
+<td>`myOktaTenantSigningCertificate.pem`</td>
 </tr>
 </tbody>
 </table>
@@ -145,7 +145,7 @@ Auth0 Dashboardで接続をテストできます。
 
 **［Try（試行）］**ボタンは、Auth0 Dashboardにログインしているユーザーに対してのみ機能します。これを顧客などの匿名ユーザーに送信することはできません。
 
-Oktaユーザーがいない場合は、ユーザーを作成するか、[**IdP起点SSOを構成**](/docs/authenticate/protocols/saml/saml-sso-integrations/identity-provider-initiated-single-sign-on)する必要があります。
+Oktaユーザーがいない場合は、ユーザーを作成するか、[**IdP起点SSOを構成**](/docs/ja-jp/authenticate/protocols/saml/saml-sso-integrations/identity-provider-initiated-single-sign-on)する必要があります。
 
 </Warning>
 

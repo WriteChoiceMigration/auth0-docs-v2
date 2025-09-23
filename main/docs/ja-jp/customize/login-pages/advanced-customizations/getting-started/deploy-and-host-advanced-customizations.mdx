@@ -1,13 +1,13 @@
 ---
 title: "高度なカスタマイズをデプロイおよびホスティングする"
 permalink: "deploy-and-host-advanced-customizations"
+'description': "ユニバーサルログインの高度なカスタマイズのためのコードと手順"
 'og:title': "高度なカスタマイズをデプロイおよびホスティングする"
 'og:description': "ユニバーサルログインの高度なカスタマイズのためのコードと手順"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "高度なカスタマイズをデプロイおよびホスティングする"
 'twitter:description': "ユニバーサルログインの高度なカスタマイズのためのコードと手順"
 ---
-# 高度なカスタマイズをデプロイおよびホスティングする
 
 以下のガイドはカスタマイズしたユニバーサルログイン画面を運用環境にデプロイして、継続的インテグレーションと継続的な配信パイプラインを作成するのに役立ちます。
 
@@ -15,7 +15,7 @@ permalink: "deploy-and-host-advanced-customizations"
 
 アップロードする画面をすべて準備して、ACULプロジェクトに以下のファイル構造を使用します。
 
-<Frame>![undefined](//images.ctfassets.net/cdy7uua7fh8z/2Di2r84kXDTwYAgLOfd96T/caa1654e6c20fc09d766e5a2b2dfd9f2/ACUL_file_structure_diagram.png)</Frame>
+<Frame>![undefined](/images/ja-jp/cdy7uua7fh8z/2Di2r84kXDTwYAgLOfd96T/caa1654e6c20fc09d766e5a2b2dfd9f2/ACUL_file_structure_diagram.png)</Frame>
 
 ### 新しいVite構成を作成する
 
@@ -25,7 +25,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="vite.config.ts config">
 
-```
+```javascript lines
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
@@ -93,7 +93,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Viteを実行するscripts/build.ts">
 
-```
+```javascript lines
 import { build } from 'vite';
 async function buildScreens() {
   try {
@@ -117,7 +117,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="S3バケットを作成する">
 
-```
+```powershell lines
 #Create bucket
 
 aws s3 mb s3://your-acul-assets --region us-east-1
@@ -144,7 +144,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Auth0にCORSを構成する">
 
-```json
+```javascript lines
 {
   "CORSRules": [{
     "AllowedHeaders": ["*"],
@@ -168,7 +168,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="scripts/deploy.tsを作成する">
 
-```
+```javascript lines
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { CloudFrontClient, CreateInvalidationCommand } from '@aws-sdk/client-cloudfront';
 import { readFileSync } from 'fs';
@@ -232,7 +232,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="GitHub Actionsのワークフローをセットアップ">
 
-```
+```javascript lines
 name: Deploy ACUL Screens
 
 on:

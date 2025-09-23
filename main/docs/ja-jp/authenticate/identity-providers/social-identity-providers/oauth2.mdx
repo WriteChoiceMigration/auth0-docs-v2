@@ -1,13 +1,13 @@
 ---
 title: "汎用のOAuth2認可サーバーにアプリを接続する"
 permalink: "oauth2"
+'description': "Auth0のカスタムソーシャル接続を使用して、任意のOAuth2プロバイダーを追加する方法について説明します。"
 'og:title': "汎用のOAuth2認可サーバーにアプリを接続する"
 'og:description': "Auth0のカスタムソーシャル接続を使用して、任意のOAuth2プロバイダーを追加する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "汎用のOAuth2認可サーバーにアプリを接続する"
 'twitter:description': "Auth0のカスタムソーシャル接続を使用して、任意のOAuth2プロバイダーを追加する方法について説明します。"
 ---
-# 汎用のOAuth2認可サーバーにアプリを接続する
 
 最も一般的な[IDプロバイダー（IdP）](/docs/ja-jp/authenticate/identity-providers)は、[Auth0 Dashboard](https://manage.auth0.com/#)や[Auth0 Marketplace](https://marketplace.auth0.com/features/social-connections)から利用できます。ただし、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>では、任意の<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OAuth 2.0</Tooltip>プロバイダーを**カスタムソーシャル接続**として追加することもできます。
 
@@ -46,7 +46,7 @@ permalink: "oauth2"
 
 1. [`/get-connections-by-id`](https://auth0.com/docs/api/management/v2/connections/get-connections-by-id)エンドポイントに対して`GET`要求を行います。応答は以下のようになります。
 
-   ```json
+   ```json lines
    {
      "id": "[connectionID]",
      "options": {
@@ -85,7 +85,7 @@ permalink: "oauth2"
 
 ユーザーがOAuth2プロバイダーを使ってログインすると、ユーザープロファイルの取得スクリプトが呼び出されます。Auth0はこのスクリプトを実行して、OAuth2プロバイダーのAPIを呼び出し、ユーザープロファイルを取得します。
 
-```javascript
+```javascript lines
 function fetchUserProfile(accessToken, context, callback) {
   request.get(
     {
@@ -125,7 +125,7 @@ function fetchUserProfile(accessToken, context, callback) {
 
 カスタム接続でのユーザーログインには、Auth0の標準的なメカニズムであれば何でも使用することができます。直接リンクは以下のようになります。
 
-```
+``` lines
 https://{yourDomain}/authorize
   ?response_type=code
   &client_id={yourClientId}
@@ -136,7 +136,7 @@ https://{yourDomain}/authorize
 
 ## アイコンと表示名を変更する
 
-IDプロバイダーのログインボタンにアイコンを追加するには、`options`オブジェクトの`icon_url`プロパティ、ログインボタンのテキストを変更するには`display_name`プロパティを[Management API](/docs/api/management/v2#!/Connections/patch_connections_by_id)経由で使用します。
+IDプロバイダーのログインボタンにアイコンを追加するには、`options`オブジェクトの`icon_url`プロパティ、ログインボタンのテキストを変更するには`display_name`プロパティを[Management API](/docs/ja-jp/api/management/v2#!/Connections/patch_connections_by_id)経由で使用します。
 
 <Warning>
 
@@ -146,13 +146,13 @@ IDプロバイダーのログインボタンにアイコンを追加するには
 </Warning>
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/connections/CONNECTION-ID' \
 --header 'content-type: application/json' \
 --data '{ "options": { "client_id": "...", "client_secret": "...", "icon_url": "https://cdn.example.com/assets/icon.png", "scripts": { "fetchUserProfile": "..." }, "authorizationURL": "https://public-auth.example.com/oauth2/authorize", "tokenURL": "https://auth.example.com/oauth2/token", "scope": "auth" }, "enabled_clients": [ "..." ] }, "display_name": "Connection Name"'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/CONNECTION-ID");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -160,7 +160,7 @@ request.AddParameter("application/json", "{ \"options\": { \"client_id\": \"...\
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -179,15 +179,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/connections/CONNECTION-ID")
 .header("content-type", "application/json")
 .body("{ \"options\": { \"client_id\": \"...\", \"client_secret\": \"...\", \"icon_url\": \"https://cdn.example.com/assets/icon.png\", \"scripts\": { \"fetchUserProfile\": \"...\" }, \"authorizationURL\": \"https://public-auth.example.com/oauth2/authorize\", \"tokenURL\": \"https://auth.example.com/oauth2/token\", \"scope\": \"auth\" }, \"enabled_clients\": [ \"...\" ] }, \"display_name\": \"Connection Name\"")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -200,8 +200,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSData \*postData = [[NSData alloc] initWithData:[@"{ "options": { "client_id": "...", "client_secret": "...", "icon_url": "https://cdn.example.com/assets/icon.png", "scripts": { "fetchUserProfile": "..." }, "authorizationURL": "https://public-auth.example.com/oauth2/authorize", "tokenURL": "https://auth.example.com/oauth2/token", "scope": "auth" }, "enabled_clients": [ "..." ] }, "display_name": "Connection Name"" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -224,7 +224,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections/CONNECTION-ID",
@@ -247,8 +247,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"options\": { \"client_id\": \"...\", \"client_secret\": \"...\", \"icon_url\": \"https://cdn.example.com/assets/icon.png\", \"scripts\": { \"fetchUserProfile\": \"...\" }, \"authorizationURL\": \"https://public-auth.example.com/oauth2/authorize\", \"tokenURL\": \"https://auth.example.com/oauth2/token\", \"scope\": \"auth\" }, \"enabled_clients\": [ \"...\" ] }, \"display_name\": \"Connection Name\""
@@ -259,7 +259,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -272,8 +272,8 @@ request["content-type"] = 'application/json'
 request.body = "{ \"options\": { \"client_id\": \"...\", \"client_secret\": \"...\", \"icon_url\": \"https://cdn.example.com/assets/icon.png\", \"scripts\": { \"fetchUserProfile\": \"...\" }, \"authorizationURL\": \"https://public-auth.example.com/oauth2/authorize\", \"tokenURL\": \"https://auth.example.com/oauth2/token\", \"scope\": \"auth\" }, \"enabled_clients\": [ \"...\" ] }, \"display_name\": \"Connection Name\""
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let postData = NSData(data: "{ "options": { "client_id": "...", "client_secret": "...", "icon_url": "https://cdn.example.com/assets/icon.png", "scripts": { "fetchUserProfile": "..." }, "authorizationURL": "https://public-auth.example.com/oauth2/authorize", "tokenURL": "https://auth.example.com/oauth2/token", "scope": "auth" }, "enabled_clients": [ "..." ] }, "display_name": "Connection Name"".data(using: String.Encoding.utf8)!)
@@ -302,16 +302,16 @@ OAuth 2.0プロバイダーの認可エンドポイントには、プロバイ�
 
 ### 静的パラメーターを渡す
 
-静的パラメーター（すべての認可要求で送信されるパラメーター）を渡すには、[Management API](/docs/api/management/v2#!/Connections/patch_connections_by_id)を使ってOAuth 2.0接続を構成した場合、`option`の`authParams`要素を使用することができます。以下の呼び出しは、すべての認可要求について、`custom_param`の静的パラメーターを`custom.param.value`に設定します。
+静的パラメーター（すべての認可要求で送信されるパラメーター）を渡すには、[Management API](/docs/ja-jp/api/management/v2#!/Connections/patch_connections_by_id)を使ってOAuth 2.0接続を構成した場合、`option`の`authParams`要素を使用することができます。以下の呼び出しは、すべての認可要求について、`custom_param`の静的パラメーターを`custom.param.value`に設定します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/connections/CONNECTION-ID' \
 --header 'content-type: application/json' \
 --data '{ "options": { "client_id": "...", "client_secret": "...", "authParams": { "custom_param": "custom.param.value" }, "scripts": { "fetchUserProfile": "..." }, "authorizationURL": "https://public-auth.example.com/oauth2/authorize", "tokenURL": "https://auth.example.com/oauth2/token", "scope": "auth" }, "enabled_clients": [ "..." ] }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/CONNECTION-ID");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -319,7 +319,7 @@ request.AddParameter("application/json", "{ \"options\": { \"client_id\": \"...\
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -338,15 +338,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/connections/CONNECTION-ID")
 .header("content-type", "application/json")
 .body("{ \"options\": { \"client_id\": \"...\", \"client_secret\": \"...\", \"authParams\": { \"custom_param\": \"custom.param.value\" }, \"scripts\": { \"fetchUserProfile\": \"...\" }, \"authorizationURL\": \"https://public-auth.example.com/oauth2/authorize\", \"tokenURL\": \"https://auth.example.com/oauth2/token\", \"scope\": \"auth\" }, \"enabled_clients\": [ \"...\" ] }")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -370,8 +370,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"options": @{ @"client_id": @"...", @"client_secret": @"...", @"authParams": @{ @"custom_param": @"custom.param.value" }, @"scripts": @{ @"fetchUserProfile": @"..." }, @"authorizationURL": @"https://public-auth.example.com/oauth2/authorize", @"tokenURL": @"https://auth.example.com/oauth2/token", @"scope": @"auth" },
@@ -396,7 +396,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections/CONNECTION-ID",
@@ -419,8 +419,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"options\": { \"client_id\": \"...\", \"client_secret\": \"...\", \"authParams\": { \"custom_param\": \"custom.param.value\" }, \"scripts\": { \"fetchUserProfile\": \"...\" }, \"authorizationURL\": \"https://public-auth.example.com/oauth2/authorize\", \"tokenURL\": \"https://auth.example.com/oauth2/token\", \"scope\": \"auth\" }, \"enabled_clients\": [ \"...\" ] }"
@@ -431,7 +431,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -444,8 +444,8 @@ request["content-type"] = 'application/json'
 request.body = "{ \"options\": { \"client_id\": \"...\", \"client_secret\": \"...\", \"authParams\": { \"custom_param\": \"custom.param.value\" }, \"scripts\": { \"fetchUserProfile\": \"...\" }, \"authorizationURL\": \"https://public-auth.example.com/oauth2/authorize\", \"tokenURL\": \"https://auth.example.com/oauth2/token\", \"scope\": \"auth\" }, \"enabled_clients\": [ \"...\" ] }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = [
@@ -482,20 +482,20 @@ dataTask.resume()
 
 ### 動的パラメーターを渡す
 
-特定の状況で、OAuth 2.0 IDプロバイダーに動的な値を渡したいことがあります。この場合には、`options`の`authParamsMap`要素を使って、[Auth0](/docs/api/authentication#social)の[`/authorize`エンドポイント](/docs/api/authentication#social)が受け入れる既存の追加パラメーターの1つと、IDプロバイダーが受け入れるパラメーターのマッピングを指定することができます。
+特定の状況で、OAuth 2.0 IDプロバイダーに動的な値を渡したいことがあります。この場合には、`options`の`authParamsMap`要素を使って、[Auth0](/docs/ja-jp/api/authentication#social)の[`/authorize`エンドポイント](/docs/ja-jp/api/authentication#social)が受け入れる既存の追加パラメーターの1つと、IDプロバイダーが受け入れるパラメーターのマッピングを指定することができます。
 
 上の例で、`custom_param`パラメーターを認可エンドポイントに渡したい場合に、Auth0の`/authorize`エンドポイント呼び出しでパラメーターの実際の値を指定したいとします。
 
 この場合には、`/authorize`エンドポイントが受け入れる既存の追加パラメーターの1つ（`access_type`など）を使って、それを`custom_param`パラメーターにマッピングすることができます。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PATCH \
 --url 'https://{yourDomain}/api/v2/connections/CONNECTION-ID' \
 --header 'content-type: application/json' \
 --data '{ "options": { "client_id": "...", "client_secret": "...", "authParamsMap": { "custom_param": "access_type" }, "scripts": { "fetchUserProfile": "..." }, "authorizationURL": "https://auth.example.com/oauth2/authorize", "tokenURL": "https://auth.example.com/oauth2/token", "scope": "auth" }, "enabled_clients": [ "..." ] }'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/CONNECTION-ID");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("content-type", "application/json");
@@ -503,7 +503,7 @@ request.AddParameter("application/json", "{ \"options\": { \"client_id\": \"...\
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -522,15 +522,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/connections/CONNECTION-ID")
 .header("content-type", "application/json")
 .body("{ \"options\": { \"client_id\": \"...\", \"client_secret\": \"...\", \"authParamsMap\": { \"custom_param\": \"access_type\" }, \"scripts\": { \"fetchUserProfile\": \"...\" }, \"authorizationURL\": \"https://auth.example.com/oauth2/authorize\", \"tokenURL\": \"https://auth.example.com/oauth2/token\", \"scope\": \"auth\" }, \"enabled_clients\": [ \"...\" ] }")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PATCH',
@@ -554,8 +554,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json" };
 NSDictionary \*parameters = @{ @"options": @{ @"client_id": @"...", @"client_secret": @"...", @"authParamsMap": @{ @"custom_param": @"access_type" }, @"scripts": @{ @"fetchUserProfile": @"..." }, @"authorizationURL": @"https://auth.example.com/oauth2/authorize", @"tokenURL": @"https://auth.example.com/oauth2/token", @"scope": @"auth" },
@@ -580,7 +580,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/connections/CONNECTION-ID",
@@ -603,8 +603,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "{ \"options\": { \"client_id\": \"...\", \"client_secret\": \"...\", \"authParamsMap\": { \"custom_param\": \"access_type\" }, \"scripts\": { \"fetchUserProfile\": \"...\" }, \"authorizationURL\": \"https://auth.example.com/oauth2/authorize\", \"tokenURL\": \"https://auth.example.com/oauth2/token\", \"scope\": \"auth\" }, \"enabled_clients\": [ \"...\" ] }"
@@ -615,7 +615,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -628,8 +628,8 @@ request["content-type"] = 'application/json'
 request.body = "{ \"options\": { \"client_id\": \"...\", \"client_secret\": \"...\", \"authParamsMap\": { \"custom_param\": \"access_type\" }, \"scripts\": { \"fetchUserProfile\": \"...\" }, \"authorizationURL\": \"https://auth.example.com/oauth2/authorize\", \"tokenURL\": \"https://auth.example.com/oauth2/token\", \"scope\": \"auth\" }, \"enabled_clients\": [ \"...\" ] }"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/json"]
 let parameters = [
@@ -670,7 +670,7 @@ dataTask.resume()
 
 場合によっては、OAuth 2.0プロバイダーのトークンエンドポイントに追加のヘッダーを渡す必要があります。追加のヘッダーを構成するには、接続の設定を開いて、**［Custom Headers（カスタムヘッダー）］**フィールドに、カスタムヘッダーがキーと値のペアとして含まれるJSONオブジェクトを指定します。
 
-```json
+```json lines
 {
     "Header1" : "Value",
     "Header2" : "Value"
@@ -679,7 +679,7 @@ dataTask.resume()
 
 たとえば、IDプロバイダーに対して、`Authorization`ヘッダーで[Basic認証](https://en.wikipedia.org/wiki/Basic_access_authentication)の資格情報を渡す必要があるとします。このシナリオでは、**［Custom Headers（カスタムヘッダー）］**フィールドに以下のJSONオブジェクトを指定することができます。
 
-```json
+```json lines
 {
   "Authorization": "Basic [your credentials]"
 }

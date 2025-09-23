@@ -1,12 +1,14 @@
 ---
 title: "Authorization"
 permalink: "01-authorization"
+'description': "This guide demonstrates how to integrate Auth0 with a PHP backend API using the Auth0 PHP SDK."
 'og:title': "Authorization"
 'og:description': "This guide demonstrates how to integrate Auth0 with a PHP backend API using the Auth0 PHP SDK."
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/php.png"
 'twitter:title': "Authorization"
 'twitter:description': "This guide demonstrates how to integrate Auth0 with a PHP backend API using the Auth0 PHP SDK."
 ---
+
 # PHP API
 
 <Frame>![Gravatar for evan.sims@auth0.com](//www.gravatar.com/avatar/f18513f6431d78d0891c146bfd59fbe6?d=mm&r=g&s=50)</Frame>
@@ -36,7 +38,7 @@ System requirements: PHP 7.4+ (8.0 recommended) | Auth0-PHP 8.0 | Composer
 
 <Note>
 
-**New to Auth0?** Learn [how Auth0 works](/docs/overview) and read about [implementing API authentication and authorization](/docs/api-auth)  using the OAuth 2.0 framework.
+**New to Auth0?** Learn [how Auth0 works](/docs/ja-jp/overview) and read about [implementing API authentication and authorization](/docs/ja-jp/api-auth)  using the OAuth 2.0 framework.
 
 </Note>
 
@@ -48,7 +50,7 @@ In the [APIs](https://manage.auth0.com/#/apis) section of the Auth0 dashboard, c
 
 <Frame>![Create API](https://cdn2.auth0.com/docs/1.14567.0/media/articles/server-apis/create-api.png)</Frame>
 
-By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
+By default, your API uses RS256 as the algorithm for signing tokens. Since RS256 uses a private/public keypair, it verifies the tokens against the public key for your Auth0 account. The public key is in the [JSON Web Key Set (JWKS)](/docs/ja-jp/tokens/concepts/jwks) format, and can be accessed [here](https://{yourDomain}/.well-known/jwks.json).
 
 ### Define permissions
 
@@ -67,7 +69,7 @@ This example uses the `read:messages` scope.
 This example demonstrates:
 
 * How to check for a JSON Web Token (JWT) in the `Authorization` header of an incoming HTTP request.
-* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/tokens/guides/validate-access-tokens).
+* How to check if the token is valid, using the [JSON Web Key Set (JWKS)](/docs/ja-jp/tokens/concepts/jwks) for your Auth0 account. To learn more about validating Access Tokens, see [Validate Access Tokens](/docs/ja-jp/tokens/guides/validate-access-tokens).
 
 ## Integrating your PHP Backend API
 
@@ -79,7 +81,7 @@ The Auth0 PHP SDK supports many PHP-FIG standards to offer maximum interoperabil
 
 The most prolific networking library for PHP is Guzzle, although many are available to pick from within the PHP community. Let's use Guzzle for this sample application:
 
-```
+```bash lines
 composer require guzzlehttp/guzzle guzzlehttp/psr7 http-interop/http-factory-guzzle
 ```
 
@@ -89,7 +91,7 @@ The Auth0 PHP SDK requires [Composer](https://getcomposer.org/doc/00-intro.md#in
 
 Run the following shell command within your project directory to install the Auth0 PHP SDK:
 
-```
+```bash lines
 composer require auth0/auth0-php
 ```
 
@@ -99,7 +101,7 @@ This will create a `vendor` folder within your project and download all the depe
 
 To begin, let's create a `.env` file within the root of your project directory to store our sample application's configuration and fill in the environment variables:
 
-```
+```bash lines
 # The URL of our Auth0 Tenant Domain.
 # If we're using a Custom Domain, be sure to set this to that value instead.
 AUTH0_DOMAIN='https://{yourDomain}'
@@ -116,13 +118,13 @@ AUTH0_AUDIENCE='YOUR_API_IDENTIFIER'
 
 As PHP isn't able to read our `.env` file by itself, we'll want to install a library to help with that. Although we'll be using a particular library for our sample application's purposes, any 'dotenv' loader of preference will work in a real-world application. From our project directory, let's run the following shell command to install the library:
 
-```
+```bash lines
 composer require vlucas/phpdotenv
 ```
 
 Next, let's create the PHP source file we'll be using for these code samples, `index.php`, and let's configure an instance of the Auth0 PHP SDK for our sample application:
 
-```
+```php lines
 <?php
 
 // Import the Composer Autoloader to make the SDK classes accessible:
@@ -149,7 +151,7 @@ For this sample application, we're focusing on [authorization](https://auth0.com
 
 First, we need to extract the JSON Web Token (JWT) from the incoming HTTP request. Let's look for a `?token` parameter in a GET request or an `HTTP_AUTHORIZATION` or `Authorization` header.
 
-```javascript
+```php lines
 // 👆 We're continuing from the steps above. Append this to your index.php file.
 
 $jwt = $_GET['token'] ?? $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['Authorization'] ?? null;
@@ -157,7 +159,7 @@ $jwt = $_GET['token'] ?? $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['Authorizati
 
 Next, let's decode the token, if one is present:
 
-```javascript
+```php lines
 // 👆 We're continuing from the steps above. Append this to your index.php file.
 
 // If a token is present, process it.
@@ -184,7 +186,7 @@ if ($jwt !== null) {
 
 Depending on how you configure your API routing, how exactly you integrate these checks might look a little different, but the principle is the same: check the token, and in the event your API endpoint requires authorization, deny access if the token isn't valid or acceptable:
 
-```javascript
+```php lines
 // 👆 We're continuing from the steps above. Append this to your index.php file.
 
 // Is the request authorized?
@@ -216,13 +218,13 @@ This works, but in a real-world application, we'll want to use caching to ensure
 
 For our sample, let's use the [Symfony caching component](https://symfony.com/doc/current/components/cache.html) library. From our root project directory, issue the following shell command:
 
-```
+```bash lines
 composer require symfony/cache
 ```
 
 Next, we need to update our SdkConfiguration to tell the SDK to use it:
 
-```javascript
+```php lines
 // ✋ Insert this BEFORE the token handling we added in the step above, so the SDK uses the cache.
 
 $tokenCache = new \Symfony\Component\Cache\Adapter\FilesystemAdapter();
@@ -233,7 +235,7 @@ Our sample application will now cache our token-related network requests.
 
 ##### What can you do next?
 
-[* Configure other identity providers](/docs/identityproviders)[* Enable multifactor authentication](/docs/multifactor-authentication)[* Learn about attack protection](/docs/attack-protection)[* Learn about rules](/docs/rules)
+[* Configure other identity providers](/docs/ja-jp/identityproviders)[* Enable multifactor authentication](/docs/ja-jp/multifactor-authentication)[* Learn about attack protection](/docs/ja-jp/attack-protection)[* Learn about rules](/docs/ja-jp/rules)
 
 ---
 

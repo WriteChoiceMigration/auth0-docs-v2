@@ -1,13 +1,13 @@
 ---
 title: "IDプロバイダーAPIを呼び出す"
 permalink: "calling-an-external-idp-api"
+'description': "外部IDプロバイダーAPIを呼び出す方法について説明します。"
 'og:title': "IDプロバイダーAPIを呼び出す"
 'og:description': "外部IDプロバイダーAPIを呼び出す方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "IDプロバイダーAPIを呼び出す"
 'twitter:description': "外部IDプロバイダーAPIを呼び出す方法について説明します。"
 ---
-# IDプロバイダーAPIを呼び出す
 
 FacebookやGitHubなどの外部IDプロバイダー(<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>)でユーザーを正常に認証すると、多くの場合、IdPはAuth0に返すユーザープロファイルにアクセストークンを含めます。
 
@@ -30,17 +30,17 @@ FacebookやGitHubなどの外部IDプロバイダー(<Tooltip data-tooltip-id="r
 
 セキュリティとコンプライアンス上の理由から、Auth0はこのトークンをユーザープロファイルの一部としてアプリに送信しません。これを取得するには、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>にアクセスして、ユーザーの完全なプロファイルを取得する必要があります。
 
-1. [［Auth0 Management API］](/docs/api/management/v2)を呼び出すためのアクセストークンを取得します。
-2. ステップ1で取得したアクセストークンを使用して、Auth0 Management APIの[［Get Users by ID endpoint（IDエンドポイントによるユーザー取得）］](/docs/api/management/v2#!/Users/get_users_by_id)を呼び出します。このエンドポイントは、IdPアクセストークンを含む完全なユーザープロファイルを返します。
+1. [［Auth0 Management API］](/docs/ja-jp/api/management/v2)を呼び出すためのアクセストークンを取得します。
+2. ステップ1で取得したアクセストークンを使用して、Auth0 Management APIの[［Get Users by ID endpoint（IDエンドポイントによるユーザー取得）］](/docs/ja-jp/api/management/v2#!/Users/get_users_by_id)を呼び出します。このエンドポイントは、IdPアクセストークンを含む完全なユーザープロファイルを返します。
 3. 応答からIdPアクセストークンを抽出し、それを使用してIdPのAPIを呼び出します。
 
 ### ステップ1:トークンを取得
 
-[Management API](/docs/api/management/v2)を呼び出すには、アクセストークンが必要です。
+[Management API](/docs/ja-jp/api/management/v2)を呼び出すには、アクセストークンが必要です。
 
 #### Management APIのテストアプリケーションを作成
 
-[Management APIv2 Token](/docs/api/management/v2/tokens)（Management APIv2トークン）を初めて要求する場合は、Management APIを呼び出すために使用できるアプリケーションを作成して構成する必要があります。
+[Management APIv2 Token](/docs/ja-jp/api/management/v2/tokens)（Management APIv2トークン）を初めて要求する場合は、Management APIを呼び出すために使用できるアプリケーションを作成して構成する必要があります。
 
 1. [［Auth0 Dashboard］>［Applications（アプリケーション）］>［API］](https://manage.auth0.com/#/apis)に移動して、[［Auth0 Management API］](https://manage.auth0.com/#/apis/management/authorized-clients)を選択します。
 2. **［API Explorer（API エクスプローラー）］**ビューを選択し、**［Create & Authorize a Test Application（テストアプリケーションの作成と承認）］**をクリックします。
@@ -61,13 +61,13 @@ FacebookやGitHubなどの外部IDプロバイダー(<Tooltip data-tooltip-id="r
 
 <Warning>
 
-セキュリティ上の理由から、使用するアプリケーションには必要なスコープのみを割り当てるようにしてください。このケースで言うと、必要なスコープは、`read:users`と`read:user_idp_tokens`です。必要なスコープは[Management API Explorer](/docs/api/management/v2)でエンドポイントごとにリストされています。
+セキュリティ上の理由から、使用するアプリケーションには必要なスコープのみを割り当てるようにしてください。このケースで言うと、必要なスコープは、`read:users`と`read:user_idp_tokens`です。必要なスコープは[Management API Explorer](/docs/ja-jp/api/management/v2)でエンドポイントごとにリストされています。
 
 </Warning>
 
 [登録済みのAuth0 Management API](https://manage.auth0.com/#/apis/management/authorized-clients)からスコープを付与または削除するには、[**［Machine to Machine Applications（マシンツーマシンアプリケーション）］**ビュー](https://manage.auth0.com/#/apis/management/authorized-clients)を選択します。
 
-<Frame>![アプリケーションに付与されたスコープを編集](//images.ctfassets.net/cdy7uua7fh8z/6nuMjQMrTWhoVqtRwJBQz7/8570b1165a64a745199b2e24888c3a06/2025-01-13_15-35-44.png)</Frame>
+<Frame>![アプリケーションに付与されたスコープを編集](/images/ja-jp/cdy7uua7fh8z/6nuMjQMrTWhoVqtRwJBQz7/8570b1165a64a745199b2e24888c3a06/2025-01-13_15-35-44.png)</Frame>
 
 #### Management APIトークンの取得
 
@@ -80,7 +80,7 @@ FacebookやGitHubなどの外部IDプロバイダー(<Tooltip data-tooltip-id="r
 
 <Card title="スニペットの役目">
 
-スニペットは、`POST`操作を[Auth0の認証APIの/oauth/tokenエンドポイント](/docs/api/authentication#client-credentials)に**OAuth 2.0クライアント資格情報付与**を使って実行します。これはマシンツーマシンプロセスがAPIへのアクセス時に使用する付与です。フローの詳細については、「[Client Credentials Flow（クライアントの資格情報フロー）](/docs/ja-jp/get-started/authentication-and-authorization-flow/client-credentials-flow)」を参照してください。
+スニペットは、`POST`操作を[Auth0の認証APIの/oauth/tokenエンドポイント](/docs/ja-jp/api/authentication#client-credentials)に**OAuth 2.0クライアント資格情報付与**を使って実行します。これはマシンツーマシンプロセスがAPIへのアクセス時に使用する付与です。フローの詳細については、「[Client Credentials Flow（クライアントの資格情報フロー）](/docs/ja-jp/get-started/authentication-and-authorization-flow/client-credentials-flow)」を参照してください。
 
 </Card>
 
@@ -101,22 +101,22 @@ FacebookやGitHubなどの外部IDプロバイダー(<Tooltip data-tooltip-id="r
 
 ### ステップ2:完全なユーザープロファイルの取得
 
-ユーザーのプロファイルを取得するには、前のセクションで抽出したアクセストークンを使用して、Management APIの[［Get a User endpoint（ユーザーエンドポイントの取得）］](/docs/api/management/v2#!/Users/get_users_by_id)を呼び出します。
+ユーザーのプロファイルを取得するには、前のセクションで抽出したアクセストークンを使用して、Management APIの[［Get a User endpoint（ユーザーエンドポイントの取得）］](/docs/ja-jp/api/management/v2#!/Users/get_users_by_id)を呼び出します。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/users/%7BuserId%7D' \
 --header 'authorization: Bearer {yourAccessToken}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/%7BuserId%7D");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer {yourAccessToken}");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -133,14 +133,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/users/%7BuserId%7D")
 .header("authorization", "Bearer {yourAccessToken}")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -152,8 +152,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer {yourAccessToken}" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users/%7BuserId%7D"]
@@ -174,7 +174,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/users/%7BuserId%7D",
@@ -196,8 +196,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer {yourAccessToken}" }
@@ -207,7 +207,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -219,8 +219,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourAccessToken}'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer {yourAccessToken}"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users/%7BuserId%7D")! as URL,
@@ -250,7 +250,7 @@ dataTask.resume()
 
 * テストの場合には、[［Auth0 Dashboard］>［User Management（ユーザー管理）］>［Users（ユーザー）］](https://manage.auth0.com/#/users)で、ユーザーを見つけることができます。ユーザーを見つけたら、**user_id**フィールドの値をコピーします。
 
-* 実装の場合には、[IDトークン](/docs/secure/tokens/id-tokens)の`sub`クレームからユーザーIDを抽出するか、認証APIの[/userinfoエンドポイント](/docs/api/authentication#get-user-info)を呼び出して、`user_id`応答プロパティからユーザーIDを抽出します。
+* 実装の場合には、[IDトークン](/docs/ja-jp/secure/tokens/id-tokens)の`sub`クレームからユーザーIDを抽出するか、認証APIの[/userinfoエンドポイント](/docs/ja-jp/api/authentication#get-user-info)を呼び出して、`user_id`応答プロパティからユーザーIDを抽出します。
 
 </Card>
 
@@ -260,7 +260,7 @@ IdPのAPIを呼び出すために使用されるアクセストークンは、�
 
 <Note>
 
-Auth0は、特定のIDプロバイダーに対してリフレッシュトークンも保管します。保管されたトークンを使って、IdPから新しいアクセストークンを取得できます。この方法は、BitBucket、Google (OAuth 2.0)、OAuth 2.0、SharePoint、Entra IDで機能します。詳細については、「[IDプロバイダーのアクセストークン](/docs/secure/tokens/access-tokens/identity-provider-access-tokens)」をお読みください。
+Auth0は、特定のIDプロバイダーに対してリフレッシュトークンも保管します。保管されたトークンを使って、IdPから新しいアクセストークンを取得できます。この方法は、BitBucket、Google (OAuth 2.0)、OAuth 2.0、SharePoint、Entra IDで機能します。詳細については、「[IDプロバイダーのアクセストークン](/docs/ja-jp/secure/tokens/access-tokens/identity-provider-access-tokens)」をお読みください。
 
 </Note>
 
@@ -268,7 +268,7 @@ Auth0は、特定のIDプロバイダーに対してリフレッシュトーク�
 
 このサンプル応答では、ユーザーのIDが1つだけであることがわかります。`google-oauth2`。
 
-```json
+```json lines
 {
   "email": "john.doe@test.com",
   "email_verified": true,
@@ -332,9 +332,9 @@ IdPのAPIは同じバックエンドプロセスから呼び出すため、ア�
 
 <Card title="方法の説明">
 
-以前にこれを実装したことがないのであれば、[APIを使ったシングルページアプリケーション（SPA）](/docs/get-started/architecture-scenarios/spa-api)アーキテクチャ のシナリオが役に立つかもしれません。さまざまなシナリオを取り上げて、Auth0を構成する方法、SPAからAPIを呼び出す方法、API検証の実装方法を説明しています。[Angular 2](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-spa/angular)と[Node.js](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-api/node)を使ったサンプルもあります。
+以前にこれを実装したことがないのであれば、[APIを使ったシングルページアプリケーション（SPA）](/docs/ja-jp/get-started/architecture-scenarios/spa-api)アーキテクチャ のシナリオが役に立つかもしれません。さまざまなシナリオを取り上げて、Auth0を構成する方法、SPAからAPIを呼び出す方法、API検証の実装方法を説明しています。[Angular 2](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-spa/angular)と[Node.js](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-api/node)を使ったサンプルもあります。
 
-また、[APIを使ったモバイルアプリケーション](/docs/get-started/architecture-scenarios/mobile-api)のバリエーション（サンプルでは[Android](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-mobile/android)と[Node.js](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-api/node)を使用）もあります。
+また、[APIを使ったモバイルアプリケーション](/docs/ja-jp/get-started/architecture-scenarios/mobile-api)のバリエーション（サンプルでは[Android](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-mobile/android)と[Node.js](https://github.com/auth0-samples/auth0-pnp-exampleco-timesheets/tree/master/timesheets-api/node)を使用）もあります。
 
 </Card>
 

@@ -1,13 +1,13 @@
 ---
 title: "「サンプルユースケース」の「スコープとクレーム」"
 permalink: "sample-use-cases-scopes-and-claims"
+'description': "アプリケーションとAPIを用いたスコープとクレームの使用方法を説明します。"
 'og:title': "「サンプルユースケース」の「スコープとクレーム」"
 'og:description': "アプリケーションとAPIを用いたスコープとクレームの使用方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "「サンプルユースケース」の「スコープとクレーム」"
 'twitter:description': "アプリケーションとAPIを用いたスコープとクレームの使用方法を説明します。"
 ---
-# 「サンプルユースケース」の「スコープとクレーム」
 
 以下の例では、[認可コードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow)を使ってユーザーを認証し、必要な権限（スコープ）とトークンを要求します。要求パラメーターおよびこのフローの完全実装の詳細については、チュートリアル「[ログインを通常のWebアプリケーションに追加する](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow/add-login-auth-code-flow)」をお読みください。
 
@@ -17,7 +17,7 @@ permalink: "sample-use-cases-scopes-and-claims"
 
 1. ユーザーに認証URLを送信して、認可フローを開始します。
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
      response_type=code&
      client_id={yourClientId}&
@@ -42,7 +42,7 @@ permalink: "sample-use-cases-scopes-and-claims"
 2. ユーザーが同意し（必要な場合）、Auth0がアプリにリダイレクトした後、[トークンを要求します](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow/add-login-auth-code-flow)。
 3. 応答からIDトークンを抽出し、[解読します](/docs/ja-jp/secure/tokens/id-tokens)。次のクレームが表示されます。
 
-   ```json
+   ```json lines
    {
      "name": "John Doe",
      "nickname": "john.doe",
@@ -74,7 +74,7 @@ permalink: "sample-use-cases-scopes-and-claims"
 
 1. ユーザーに認証URLを送信して、認可フローを開始します。
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
      response_type=code&
      client_id={yourClientId}&
@@ -117,7 +117,7 @@ permalink: "sample-use-cases-scopes-and-claims"
 
 1. ユーザーに認証URLを送信して、認可フローを開始します。
 
-   ```
+   ``` lines
    https://{yourDomain}/authorize?
      response_type=code&
      client_id={yourClientId}&
@@ -161,11 +161,11 @@ Auth0では、名前空間を指定したクレームと名前空間を指定し
 以下のように仮定します。
 
 * ユーザーが`preferred_contact`メソッドに`email`、`favorite_color`に`red`をぞれぞれ選択し、ユーザーの`user_metadata`の一部として保存しました。
-* [Management API](/docs/api/management/v2#!/Users/patch_users_by_id)またはDashboardを使用して、このユーザーのアプリケーション固有情報を設定しました。
+* [Management API](/docs/ja-jp/api/management/v2#!/Users/patch_users_by_id)またはDashboardを使用して、このユーザーのアプリケーション固有情報を設定しました。
 
 この場合、Auth0に保存されている[正規化ユーザープロファイル](/docs/ja-jp/manage-users/user-accounts/user-profiles/normalized-user-profiles)は以下のとおりです。
 
-```json
+```json lines
 {
   "email": "jane@example.com",
   "email_verified": true,
@@ -179,7 +179,7 @@ Auth0では、名前空間を指定したクレームと名前空間を指定し
 
 このプロファイルでは、Auth0は通常、以下のIDトークンのクレームをアプリケーションに返します。
 
-```json
+```json lines
 {
   "email": "jane@example.com",
   "email_verified": true,
@@ -202,7 +202,7 @@ Auth0では、名前空間を指定したクレームと名前空間を指定し
 2. アクションにわかりやすい**名前**を入力し（たとえば、「`ユーザーメタデータをトークンに追加する`」）、`［Login / Post Login（ログイン/ログイン後）］`トリガーを選択し（アクションをログインフローに追加することになるため）、**［Create（作成）］**を選択します。
 3. Actions Code Editor（アクションコードエディター）を検索し、以下のJavaScriptコードをコピーし、**［Save Draft（下書きを保存）］**を選択して内容を保存します。
 
-   ```
+   ``` lines
    exports.onExecutePostLogin = async (event, api) => {
      const namespace = 'https://myapp.example.com';
      const { favorite_color, preferred_contact } = event.user.user_metadata;
@@ -225,7 +225,7 @@ Auth0では、名前空間を指定したクレームと名前空間を指定し
 
 このアクションが有効な場合、Auth0では、IDトークンに`favorite_color`および`preferred_contact`のカスタムクレームが含まれます。
 
-```json
+```json lines
 {
   "email": "jane@example.com",
   "email_verified": true,

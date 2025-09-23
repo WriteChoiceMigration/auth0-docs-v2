@@ -1,27 +1,27 @@
 ---
 title: "ルール内からManagement APIを使用"
 permalink: "use-management-api"
+'description': "ルール内からManagement APIを使用する方法について説明します。"
 'og:title': "ルール内からManagement APIを使用"
 'og:description': "ルール内からManagement APIを使用する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ルール内からManagement APIを使用"
 'twitter:description': "ルール内からManagement APIを使用する方法について説明します。"
 ---
-# ルール内からManagement APIを使用
 
 <Warning>
 
 RulesとHooksのサポート終了（EOL）日は**2026年11月18日**であり、**2023年10月16**日の時点で作成された新しいテナントは使用できなくなります。Hooksが有効な既存のテナントは、サポート終了までHooksを利用できます。
 
-今後はActionsに移行して、Auth0の機能を拡張することを強くお勧めします。Actionsを使用すると、豊富な情報やインラインドキュメント、パブリック`npm`パッケージにアクセスして、外部統合を使って全体的な拡張エクスペリエンスを強化することができます。Actionsの詳細については、「[Auth0 Actionsの仕組みを理解する](/docs/customize/actions/actions-overview)」をお読みください。
+今後はActionsに移行して、Auth0の機能を拡張することを強くお勧めします。Actionsを使用すると、豊富な情報やインラインドキュメント、パブリック`npm`パッケージにアクセスして、外部統合を使って全体的な拡張エクスペリエンスを強化することができます。Actionsの詳細については、「[Auth0 Actionsの仕組みを理解する](/docs/ja-jp/customize/actions/actions-overview)」をお読みください。
 
-当社では、移行の参考資料として、[RulesからActionsへの移行](/docs/customize/actions/migrate/migrate-from-rules-to-actions)と[HooksからActionsへの移行](/docs/customize/actions/migrate/migrate-from-hooks-to-actions)に関するガイドを提供しています。また、専用の「[Actionsへの移行](https://auth0.com/extensibility/movetoactions)」ページでは、機能の比較や[Actionsのデモ](https://www.youtube.com/watch?v=UesFSY1klrI)、その他のリソースを掲載して、円滑な移行をサポートしています。
+当社では、移行の参考資料として、[RulesからActionsへの移行](/docs/ja-jp/customize/actions/migrate/migrate-from-rules-to-actions)と[HooksからActionsへの移行](/docs/ja-jp/customize/actions/migrate/migrate-from-hooks-to-actions)に関するガイドを提供しています。また、専用の「[Actionsへの移行](https://auth0.com/extensibility/movetoactions)」ページでは、機能の比較や[Actionsのデモ](https://www.youtube.com/watch?v=UesFSY1klrI)、その他のリソースを掲載して、円滑な移行をサポートしています。
 
 RulesとHooksの廃止の詳細については、当社のブログ記事「[RulesとHooksの提供終了について](https://auth0.com/blog/preparing-for-rules-and-hooks-end-of-life/)」をお読みください。
 
 </Warning>
 
-作成した[Auth0 Rule](/docs/ja-jp/customize/rules)内から、`auth0`オブジェクトを使用してユーザーの`app_metadata`また`はuser_metadata`を更新できます。これは`ManagementClient`（[node-auth0](https://github.com/auth0/node-auth0) Node.jsクライアントライブラリで定義）の特別に制限されたインスタンスであり、[Auth0 Management API](/docs/api/management/v2)への制限付きアクセスを提供します。詳細については、[Rules Execution Best Practice（ルール実行のベストプラクティス）](/docs/ja-jp/rules-best-practices/rules-execution-best-practices)をお読みください。
+作成した[Auth0 Rule](/docs/ja-jp/customize/rules)内から、`auth0`オブジェクトを使用してユーザーの`app_metadata`また`はuser_metadata`を更新できます。これは`ManagementClient`（[node-auth0](https://github.com/auth0/node-auth0) Node.jsクライアントライブラリで定義）の特別に制限されたインスタンスであり、[Auth0 Management API](/docs/ja-jp/api/management/v2)への制限付きアクセスを提供します。詳細については、[Rules Execution Best Practice（ルール実行のベストプラクティス）](/docs/ja-jp/rules-best-practices/rules-execution-best-practices)をお読みください。
 
 ルール内から追加の<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>エンドポイントにアクセスするには、別のバージョンのライブラリを使用する必要があります。
 
@@ -43,7 +43,7 @@ RulesとHooksの廃止の詳細については、当社のブログ記事「[Rul
 
 </Warning>
 
-```javascript
+```javascript lines
 function (user, context, callback) {
   var ManagementClient = require('auth0@2.9.1').ManagementClient;
   var management = new ManagementClient({

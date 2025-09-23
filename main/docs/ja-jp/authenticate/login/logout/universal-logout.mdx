@@ -1,13 +1,13 @@
 ---
 title: "ユニバーサルログアウト"
 permalink: "universal-logout"
+'description': "Auth0の接続にグローバルなトークンの取り消しを構成する方法について説明します。"
 'og:title': "ユニバーサルログアウト"
 'og:description': "Auth0の接続にグローバルなトークンの取り消しを構成する方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユニバーサルログアウト"
 'twitter:description': "Auth0の接続にグローバルなトークンの取り消しを構成する方法について説明します。"
 ---
-# ユニバーサルログアウト
 
 Auth0はOkta Workforce Identity Cloudとのユニバーサルログアウト統合に対応しています。この機能は管理イベントやセキュリティイベントが発生したときに、ユーザーをアプリケーションからログアウトさせます。
 
@@ -23,7 +23,7 @@ Auth0のグローバルトークン取り消しエンドポイントは、[ア�
 
 Auth0がユーザーログアウトの要求を受け取ると、Okta Workforce Identity Cloudが発行したIDトークンや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>アサーションの検証に使用するのと同じキーセットで要求を検証します。そして、そのユーザーの[Auth0セッション](/docs/ja-jp/manage-users/sessions/session-layers)をすべて終了し、Auth0が発行した[リフレッシュトークン](/docs/ja-jp/secure/tokens/refresh-tokens)を取り消して、構成されている場合には[OpenID Connectのバックチャネルログアウト](/docs/ja-jp/authenticate/login/logout/back-channel-logout)をトリガーしてアプリケーションセッションを失効させます。
 
-<Frame>![User workflow using Universal Logout](//images.ctfassets.net/cdy7uua7fh8z/4tcRn1VmydyBGORCHlKuvt/725b95df1cddae8ed3b2d36f0c3495bb/universal_logout_flow_diagram.png)</Frame>
+<Frame>![User workflow using Universal Logout](/images/ja-jp/cdy7uua7fh8z/4tcRn1VmydyBGORCHlKuvt/725b95df1cddae8ed3b2d36f0c3495bb/universal_logout_flow_diagram.png)</Frame>
 
 アプリケーションのユーザーがアクセスを失うまでにかかる時間は、アプリケーションの種類とAuth0との統合方法によって異なります。OIDCや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">OAuth 2.0</Tooltip>のアイデンティティ標準への対応、そして、Auth0の[クイックスタートとSDK](https://auth0.com/docs/quickstarts)を通して、Auth0は以下を含む[アプリケーションのアーキテクチャ](/docs/ja-jp/get-started/applications)に幅広く対応しています。
 
@@ -60,7 +60,7 @@ Webアプリケーションが作成したセッションについては、Auth0
 
 </Note>
 
-1. Auth0 Dashboardで[**［Authentication（認証）］>［Enterprise（エンタープライズ）］>［OpenID Connect］**](/docs/%24manage_url#/connections/enterprise/oidc)に移動します。使用している接続を選択してから、**［Settings（設定）］**を選択します。
+1. Auth0 Dashboardで[**［Authentication（認証）］>［Enterprise（エンタープライズ）］>［OpenID Connect］**](/docs/ja-jp/%24manage_url#/connections/enterprise/oidc)に移動します。使用している接続を選択してから、**［Settings（設定）］**を選択します。
 2. Okta Workforce管理者に提供する**［Revocation Endpoint URL（取り消しエンドポイントのURL）］**をコピーします。
 
 ### SAML
@@ -97,7 +97,7 @@ Okta Workforce Identity Cloudでユニバーサルログアウトを構成して
 2. Auth0統合に登録済みのアプリケーションを選択します。
 3. **［General（一般設定）］**タブの下で**［Logout（ログアウト）］>［Edit（編集）］**を選択します。
 
-   <Frame>![Okta Dashboard image for Universal Logout configuration](//images.ctfassets.net/cdy7uua7fh8z/M957prYUhjyMxXgpdA8pB/224812ce3a76ac9d032abe50c4be3a1d/2025-01-23_13-03-21.png)</Frame>
+   <Frame>![Okta Dashboard image for Universal Logout configuration](/images/ja-jp/cdy7uua7fh8z/M957prYUhjyMxXgpdA8pB/224812ce3a76ac9d032abe50c4be3a1d/2025-01-23_13-03-21.png)</Frame>
 
 4. **［Okta system or admin initiates logout（Oktasのシステムまたは管理者がログアウトを開始する］**を選択します。
 5. Auth0からコピーしたURLを**［Logout Endpoint URL（ログアウトエンドポイントのURL）］**に入力します。
@@ -112,7 +112,7 @@ Okta Workforce Identity Cloudでユニバーサルログアウトを構成して
 2. Auth0アプリケーションにサインイン済みのユーザーを選択します。
 3. **［More Actions（その他のアクション）］>［Clear User Sessions（ユーザーセッションの消去）］**を選択します。
 
-   <Frame>![Test Universal Logout in Okta Dashboard](//images.ctfassets.net/cdy7uua7fh8z/Z8an5lN6WAlSAdgiBkKLa/fde264f71615c5eb7e07e0c48d8426bf/2025-01-23_13-08-29.png)</Frame>
+   <Frame>![Test Universal Logout in Okta Dashboard](/images/ja-jp/cdy7uua7fh8z/Z8an5lN6WAlSAdgiBkKLa/fde264f71615c5eb7e07e0c48d8426bf/2025-01-23_13-08-29.png)</Frame>
 
 4. ダイアログで**［Also include logout enabled apps and Okta API tokens（ログアウトが有効なアプリとOkta APIも含める）］**を選択します。
 5. **［Clear and Revoke（消去して取り消す）］**を選択します。
@@ -136,7 +136,7 @@ SAML接続ではエンドポイントのURLを共有する他にも、以下の�
 
 これらの属性を含めてManagement APIを呼び出し、SAML接続を[更新](https://auth0.com/docs/api/management/v2#!/Connections/patch_connections_by_id)または[作成](https://auth0.com/docs/api/management/v2/connections/post-connections)します。要求を作成する際には、以下のJSONの例を参考にしてください。
 
-```json
+```json lines
 {
 	"strategy": "samlp",
   	"name": "CONNECTION_NAME",

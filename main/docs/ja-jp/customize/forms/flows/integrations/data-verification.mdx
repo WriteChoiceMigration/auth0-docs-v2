@@ -1,13 +1,13 @@
 ---
 title: "データ検証"
 permalink: "data-verification"
+'description': "データ検証フローアクションを構成して、ワンタイムパスワード（OTP）を生成し、メールアドレスを検証する方法を説明します。"
 'og:title': "データ検証"
 'og:description': "データ検証フローアクションを構成して、ワンタイムパスワード（OTP）を生成し、メールアドレスを検証する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "データ検証"
 'twitter:description': "データ検証フローアクションを構成して、ワンタイムパスワード（OTP）を生成し、メールアドレスを検証する方法を説明します。"
 ---
-# データ検証
 
 このデータ検証アクションのリストは、メールアドレスを検証してワンタイムパスワードを生成・検証できるようにするものです。
 
@@ -15,7 +15,7 @@ permalink: "data-verification"
 
 メール、SMS、その他のメッセージアプリを使って送信できる、有効時間5分の数値コードを生成します。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/1h69FWzZwk9beKKjB4Cq38/16aa515e61cc6e9ebdfd0849201e3141/generate-one-time-password.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/1h69FWzZwk9beKKjB4Cq38/16aa515e61cc6e9ebdfd0849201e3141/generate-one-time-password.png)</Frame>
 
 ### 入力設定
 
@@ -52,7 +52,7 @@ permalink: "data-verification"
 </thead>
 <tbody>
 <tr>
-<td><code>code</code></td>
+<td>`code`</td>
 <td>文字列</td>
 <td>生成されたコードです。</td>
 </tr>
@@ -61,7 +61,7 @@ permalink: "data-verification"
 
 ### 出力オブジェクトの例
 
-```json
+```javascript lines
 {
   "code": "███",
 }
@@ -71,7 +71,7 @@ permalink: "data-verification"
 
 提供したワンタイムパスワードコードが有効かどうかを検証します。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/3bkT8QDN4dcl0YHTrSOIGj/9698a07f55353a11ca98164377cd4217/verify-otp.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/3bkT8QDN4dcl0YHTrSOIGj/9698a07f55353a11ca98164377cd4217/verify-otp.png)</Frame>
 
 ### 入力設定
 
@@ -108,18 +108,18 @@ permalink: "data-verification"
 </thead>
 <tbody>
 <tr>
-<td><code>有効</code></td>
+<td>`有効`</td>
 <td>ブール値</td>
-<td>指定されたコードが有効かどうかを示し、<code>true</code>または<code>false</code>の値を返します。</td>
+<td>指定されたコードが有効かどうかを示し、`true`または`false`の値を返します。</td>
 </tr>
 <tr>
-<td><code>result</code></td>
+<td>`result`</td>
 <td>文字列</td>
 <td>指定されたコードに基づき、以下のように異なる結果コードを返します。
-            <ul> <li> <code>MISSING（欠落）：</code> コードが指定されていません。</li>
-<li> <code>EXPIRED（有効期限切れ）：</code> 指定されたコードは有効期限切れです。</li>
-<li> <code>VALID（有効）：</code> 指定されたコードは有効です。</li>
-<li> <code>UNEQUAL（不一致）：</code> 指定されたコードは無効です。</li>
+            <ul> <li> `MISSING（欠落）：` コードが指定されていません。</li>
+<li> `EXPIRED（有効期限切れ）：` 指定されたコードは有効期限切れです。</li>
+<li> `VALID（有効）：` 指定されたコードは有効です。</li>
+<li> `UNEQUAL（不一致）：` 指定されたコードは無効です。</li>
 </ul></td>
 </tr>
 </tbody>
@@ -127,14 +127,14 @@ permalink: "data-verification"
 
 ### 出力オブジェクトの例
 
-```json
+```javascript lines
 {
   "valid": false,
   "result": "UNEQUAL"
 }
 ```
 
-```json
+```javascript lines
 {
   "valid": true
 }
@@ -144,7 +144,7 @@ permalink: "data-verification"
 
 提供されたメールアドレスに対して、選択されたいくつかの検証ルールを実行します。
 
-<Frame>![](//images.ctfassets.net/cdy7uua7fh8z/6qkqny1hhObFalHwdEG342/1a2e18195b29102c3f68744f42277917/verify-email.png)</Frame>
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/6qkqny1hhObFalHwdEG342/1a2e18195b29102c3f68744f42277917/verify-email.png)</Frame>
 
 ### 入力設定
 
@@ -202,19 +202,19 @@ permalink: "data-verification"
 </thead>
 <tbody>
 <tr>
-<td><code>valid</code></td>
+<td>`valid`</td>
 <td>ブール値</td>
-<td>メールが検証ルールを満たしたかによって、<code>true</code>または<code>false</code>を返します。</td>
+<td>メールが検証ルールを満たしたかによって、`true`または`false`を返します。</td>
 </tr>
 <tr>
-<td><code>cause</code></td>
+<td>`cause`</td>
 <td>文字列</td>
-<td>有効なプロパティが<code>false</code>の場合は、そのメールが満たしていない最初のルールについて以下の参照を返します。
-            <ul> <li> <code>MISSING_MX_RECORD</code>：メールのドメインにMXレコードがありません。</li>
-<li> <code>FREE_EMAIL</code>：メールのドメインが無料メールプロバイダーです。</li>
-<li> <code>DISPOSABLE_EMAIL</code>：使い捨てメールアドレスです。</li>
-<li> <code>BLOCKLISTED</code>：メールのドメインがブロックリストのドメイン設定に含まれています。</li>
-<li> <code>NOT_ALLOWED</code>：メールのドメインが許可リストのドメイン設定に含まれていません。</li>
+<td>有効なプロパティが`false`の場合は、そのメールが満たしていない最初のルールについて以下の参照を返します。
+            <ul> <li> `MISSING_MX_RECORD`：メールのドメインにMXレコードがありません。</li>
+<li> `FREE_EMAIL`：メールのドメインが無料メールプロバイダーです。</li>
+<li> `DISPOSABLE_EMAIL`：使い捨てメールアドレスです。</li>
+<li> `BLOCKLISTED`：メールのドメインがブロックリストのドメイン設定に含まれています。</li>
+<li> `NOT_ALLOWED`：メールのドメインが許可リストのドメイン設定に含まれていません。</li>
 </ul></td>
 </tr>
 </tbody>
@@ -222,14 +222,14 @@ permalink: "data-verification"
 
 ### 出力オブジェクトの例
 
-```json
+```javascript lines
 {
   "valid": false,
   "cause": "FREE_EMAIL"
 }
 ```
 
-```json
+```javascript lines
 {
   "valid": true,
   "cause": null

@@ -1,17 +1,17 @@
 ---
 title: "ユニバーサルログインのページテンプレートをカスタマイズする"
 permalink: "customize-templates"
+'description': "ユニバーサルログインエクスペリエンスのためにログインページのテンプレートを作成する方法を説明します。"
 'og:title': "ユニバーサルログインのページテンプレートをカスタマイズする"
 'og:description': "ユニバーサルログインエクスペリエンスのためにログインページのテンプレートを作成する方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "ユニバーサルログインのページテンプレートをカスタマイズする"
 'twitter:description': "ユニバーサルログインエクスペリエンスのためにログインページのテンプレートを作成する方法を説明します。"
 ---
-# ユニバーサルログインのページテンプレートをカスタマイズする
 
 [Liquidテンプレート言語](https://shopify.github.io/liquid/basics/introduction/)で作成したページテンプレートを提供することで、ユニバーサルログインページをカスタマイズできます。ページテンプレートを使用して、ログインボックスや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>チャレンジなどの、ユニバーサルログインプロンプトに関して表示するコンテンツを定義できます。同じページテンプレートがすべてのログインフローページに使用されるため、このカスタマイズ手法は、ユーザーに対して一貫性のあるブランドエクスペリエンスの実装を簡単にします。
 
-カスタマイズされたページテンプレートを使用するには、テナントに対して[カスタムドメイン](/docs/customize/custom-domains)を構成する必要があります。さらに、[Management API](/docs/api/management/v2)を使用してのみ、ユニバーサルログインのページテンプレートを更新できます。
+カスタマイズされたページテンプレートを使用するには、テナントに対して[カスタムドメイン](/docs/ja-jp/customize/custom-domains)を構成する必要があります。さらに、[Management API](/docs/ja-jp/api/management/v2)を使用してのみ、ユニバーサルログインのページテンプレートを更新できます。
 
 <Note>
 
@@ -31,11 +31,11 @@ permalink: "customize-templates"
 </thead>
 <tbody>
 <tr>
-<td><code>auth0:widget</code></td>
+<td>`auth0:widget`</td>
 <td>ログインフローの各ページ（ログインページやパスワードリセットページなど）に表示されるプロンプトのHTMLが含まれます。</td>
 </tr>
 <tr>
-<td><code>auth0:head</code></td>
+<td>`auth0:head`</td>
 <td>プロンプトの表示に必要なタグが含まれます。</td>
 </tr>
 </tbody>
@@ -58,7 +58,7 @@ permalink: "customize-templates"
 
 以下の例は、必要なタグを使用して作成できる最もシンプルなユニバーサルログインのページテンプレートを示しています。
 
-```
+```html lines
 <!DOCTYPE html>
 {% assign resolved_dir = dir | default: "auto" %}
 <html lang="{{locale}}" dir="{{resolved_dir}}">
@@ -77,7 +77,7 @@ Storybookを使用してテンプレートを表示する場合、`<script>`タ�
 
 **例**：
 
-`` <scr`+`ipt>console.log("test");</scr`+`ipt> ``
+`<scr`+`ipt>console.log("test");</scr`+`ipt>`
 
 </Warning>
 
@@ -106,24 +106,24 @@ Storybookを使用してテンプレートを表示する場合、`<script>`タ�
 </thead>
 <tbody>
 <tr>
-<td><code>application.id</code></td>
+<td>`application.id`</td>
 <td>アプリケーションクライアントID</td>
 <td>XXXXXXXXXXXXXXXXXXXXXXXXX</td>
 </tr>
 <tr>
-<td><code>application.name</code></td>
+<td>`application.name`</td>
 <td>アプリケーションの名前</td>
 <td>My Application</td>
 </tr>
 <tr>
-<td><code>application.logo_url</code></td>
+<td>`application.logo_url`</td>
 <td>アプリケーションロゴのURL</td>
 <td>https://example.com/mylogo.png</td>
 </tr>
 <tr>
-<td><code>application.metadata</code></td>
+<td>`application.metadata`</td>
 <td>アプリケーションのメタデータ</td>
-<td><code>{</code><br/><code>"attribute1": "value"</code><br/><code>"attribute2": "value"</code><br/><code>"attribute3": "value"</code><br/><code>}</code></td>
+<td>`{`<br/>`"attribute1": "value"`<br/>`"attribute2": "value"`<br/>`"attribute3": "value"`<br/>`}`</td>
 </tr>
 </tbody>
 </table>
@@ -139,17 +139,17 @@ Storybookを使用してテンプレートを表示する場合、`<script>`タ�
 </thead>
 <tbody>
 <tr>
-<td><code>branding.logo_url</code></td>
+<td>`branding.logo_url`</td>
 <td>アプリケーションロゴのURL</td>
 <td>https://example.com/mylogo.png</td>
 </tr>
 <tr>
-<td><code>branding.colors.primary</code></td>
+<td>`branding.colors.primary`</td>
 <td>メインのブランドカラー</td>
 <td>#000000</td>
 </tr>
 <tr>
-<td><code>branding.colors.page_background</code></td>
+<td>`branding.colors.page_background`</td>
 <td>ユニバーサルログインページの背景色</td>
 <td>#FFFFFF</td>
 </tr>
@@ -167,17 +167,17 @@ Storybookを使用してテンプレートを表示する場合、`<script>`タ�
 </thead>
 <tbody>
 <tr>
-<td><code>tenant.friendly_name</code></td>
+<td>`tenant.friendly_name`</td>
 <td>テナントの表示名</td>
 <td>My Tenant</td>
 </tr>
 <tr>
-<td><code>tenant.support_email</code></td>
+<td>`tenant.support_email`</td>
 <td>テナントのサポート用メールアドレス</td>
 <td>support@example.com</td>
 </tr>
 <tr>
-<td><code>tenant.support_url</code></td>
+<td>`tenant.support_url`</td>
 <td>テナントのサポートページのURL</td>
 <td>https://example.com/support</td>
 </tr>
@@ -197,37 +197,37 @@ Storybookを使用してテンプレートを表示する場合、`<script>`タ�
 </thead>
 <tbody>
 <tr>
-<td><code>organization.id</code></td>
+<td>`organization.id`</td>
 <td>Organization ID</td>
 <td>org_XXXXXXXXXXXXXXX</td>
 </tr>
 <tr>
-<td><code>organization.display_name</code></td>
+<td>`organization.display_name`</td>
 <td>Organizationの表示名</td>
 <td>My Organization</td>
 </tr>
 <tr>
-<td><code>organization.name</code></td>
+<td>`organization.name`</td>
 <td>Organizationの内部名</td>
 <td>my-organization</td>
 </tr>
 <tr>
-<td><code>organization.metadata</code></td>
+<td>`organization.metadata`</td>
 <td>Organizationのメタデータ</td>
-<td><code>{</code><br/><code>"attribute1": "value"</code><br/><code>"attribute2": "value"</code><br/><code>"attribute3": "value"</code><br/><code>}</code></td>
+<td>`{`<br/>`"attribute1": "value"`<br/>`"attribute2": "value"`<br/>`"attribute3": "value"`<br/>`}`</td>
 </tr>
 <tr>
-<td><code>organization.branding.logo_url</code></td>
+<td>`organization.branding.logo_url`</td>
 <td>OrganizationロゴのURL</td>
 <td>https://example.com/orglogo.png</td>
 </tr>
 <tr>
-<td><code>organization.branding.colors.primary</code></td>
+<td>`organization.branding.colors.primary`</td>
 <td>Organizationのプライマリブランディングカラー</td>
 <td>#000000</td>
 </tr>
 <tr>
-<td><code>organization.branding.colors.page_background</code></td>
+<td>`organization.branding.colors.page_background`</td>
 <td>Organizationのログインページの背景色</td>
 <td>#FFFFFF</td>
 </tr>
@@ -247,57 +247,57 @@ Storybookを使用してテンプレートを表示する場合、`<script>`タ�
 </thead>
 <tbody>
 <tr>
-<td><code>user.user_id</code></td>
+<td>`user.user_id`</td>
 <td>ユーザープロファイルのID</td>
 <td>auth0|XXXXXXXXXXXXXXXXXXXX</td>
 </tr>
 <tr>
-<td><code>user.picture</code></td>
+<td>`user.picture`</td>
 <td>ユーザープロファイルの写真のURL</td>
 <td>https://example.com/userimage</td>
 </tr>
 <tr>
-<td><code>user.email</code></td>
+<td>`user.email`</td>
 <td>ユーザーのメールアドレス</td>
 <td>user@example.com</td>
 </tr>
 <tr>
-<td><code>user.email_verified</code></td>
+<td>`user.email_verified`</td>
 <td>メール検証ステータスのブール値（true/false）</td>
 <td>true</td>
 </tr>
 <tr>
-<td><code>user.app_metadata</code></td>
-<td>ユーザープロファイルの<code>app_metadata</code>オブジェクト</td>
-<td><code>{</code><br/><code>"attribute1": "value"</code><br/><code>"attribute2": "value"</code><br/><code>"attribute3": "value"</code><br/><code>}</code></td>
+<td>`user.app_metadata`</td>
+<td>ユーザープロファイルの`app_metadata`オブジェクト</td>
+<td>`{`<br/>`"attribute1": "value"`<br/>`"attribute2": "value"`<br/>`"attribute3": "value"`<br/>`}`</td>
 </tr>
 <tr>
-<td><code>user.user_metadata</code></td>
-<td>ユーザープロファイルの<code>user_metadata</code>オブジェクト</td>
-<td><code>{</code><br/><code>"attribute1": "value"</code><br/><code>"attribute2": "value"</code><br/><code>"attribute3": "value"</code><br/><code>}</code></td>
+<td>`user.user_metadata`</td>
+<td>ユーザープロファイルの`user_metadata`オブジェクト</td>
+<td>`{`<br/>`"attribute1": "value"`<br/>`"attribute2": "value"`<br/>`"attribute3": "value"`<br/>`}`</td>
 </tr>
 <tr>
-<td><code>user.family_name</code></td>
+<td>`user.family_name`</td>
 <td>ユーザーの姓</td>
 <td>Smith</td>
 </tr>
 <tr>
-<td><code>user.given_name</code></td>
+<td>`user.given_name`</td>
 <td>ユーザーの名</td>
 <td>Abigail</td>
 </tr>
 <tr>
-<td><code>user.name</code></td>
+<td>`user.name`</td>
 <td>ユーザーのフルネーム</td>
 <td>Abigail Smith</td>
 </tr>
 <tr>
-<td><code>user.nickname</code></td>
+<td>`user.nickname`</td>
 <td>ユーザーのニックネーム（エイリアス）</td>
 <td>Abby</td>
 </tr>
 <tr>
-<td><code>user.username</code></td>
+<td>`user.username`</td>
 <td>ユーザーの内部名</td>
 <td>asmith</td>
 </tr>
@@ -315,27 +315,27 @@ Storybookを使用してテンプレートを表示する場合、`<script>`タ�
 </thead>
 <tbody>
 <tr>
-<td><code>locale</code></td>
-<td>ページの表示に使用されるロケール。<a href="/docs/customize/internationalization-and-localization/universal-login-internationalization">対応するテナント言語</a>のいずれかに一致する</td>
+<td>`locale`</td>
+<td>ページの表示に使用されるロケール。<a href="/docs/ja-jp/customize/internationalization-and-localization/universal-login-internationalization">対応するテナント言語</a>のいずれかに一致する</td>
 <td>en-US</td>
 </tr>
 <tr>
-<td><code>prompt.name</code></td>
+<td>`prompt.name`</td>
 <td>現在表示されている<a href="#prompts">ユニバーサルログインプロンプト</a>の名前</td>
 <td>mfa</td>
 </tr>
 <tr>
-<td><code>prompt.screen.name</code></td>
+<td>`prompt.screen.name`</td>
 <td>現在表示されているユニバーサルログイン画面の名前</td>
 <td>mfa-login-options</td>
 </tr>
 <tr>
-<td><code>prompt.screen.texts</code></td>
+<td>`prompt.screen.texts`</td>
 <td>現在の画面からローカライズされているすべてのテキスト</td>
-<td><code>{</code><br/><code>"pageTitle": "Available methods"</code><br/><code>}</code></td>
+<td>`{`<br/>`"pageTitle": "Available methods"`<br/>`}`</td>
 </tr>
 <tr>
-<td><code>state</code></td>
+<td>`state`</td>
 <td>状態値で現在のページをレンダリングします。この値は不透明で、セキュリティのために使用されます。</td>
 <td></td>
 </tr>
@@ -344,7 +344,7 @@ Storybookを使用してテンプレートを表示する場合、`<script>`タ�
 
 ### プロンプト
 
-`prompt`という用語は、ログインフローの特定の手順を意味します。特定のプロンプトは、1つ以上のウィンドウからなります。[Auth0 Dashboard](https://manage.auth0.com/#/custom_text)または[Management API](/docs/api/management/v2)のプロンプトエンドポイントで、プロンプトを管理できます。
+`prompt`という用語は、ログインフローの特定の手順を意味します。特定のプロンプトは、1つ以上のウィンドウからなります。[Auth0 Dashboard](https://manage.auth0.com/#/custom_text)または[Management API](/docs/ja-jp/api/management/v2)のプロンプトエンドポイントで、プロンプトを管理できます。
 
 以下のセクションでは、利用できるそれぞれのプロンプトについて詳細を説明しています。
 
@@ -354,7 +354,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：redeem-ticket
 
-<Frame>![redeem-ticketの参考スクリーンショット](//images.ctfassets.net/cdy7uua7fh8z/7H4DS8I8fnlUgtS4ttpMyK/90006ee36032cc1ee3d9674fe6bcf575/redeem-ticket.png)</Frame>
+<Frame>![redeem-ticketの参考スクリーンショット](/images/ja-jp/cdy7uua7fh8z/7H4DS8I8fnlUgtS4ttpMyK/90006ee36032cc1ee3d9674fe6bcf575/redeem-ticket.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -365,15 +365,15 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ロード中...</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>Javascriptはブラウザーで有効になっていません。続けるには、ボタンをクリックしてください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 </tbody>
 </table>
@@ -384,7 +384,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：consent
 
-<Frame>![consentの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/consent.png)</Frame>
+<Frame>![consentの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/consent.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -395,51 +395,51 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>${clientName}を認可してください</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>アプリの認可</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>${userName}さん、こんにちは。</td>
-<td><code>pickerTitle</code></td>
+<td>`pickerTitle`</td>
 </tr>
 <tr>
 <td>テナントとオーディエンスのセレクター</td>
-<td><code>audiencePickerAltText</code></td>
+<td>`audiencePickerAltText`</td>
 </tr>
 <tr>
 <td>${clientName}があなたのアカウントへのアクセスを要求しています。</td>
-<td><code>messageMultipleTenants</code></td>
+<td>`messageMultipleTenants`</td>
 </tr>
 <tr>
 <td>${clientName}が${companyName}アカウントへのアクセスを要求しています。</td>
-<td><code>messageSingleTenant</code></td>
+<td>`messageSingleTenant`</td>
 </tr>
 <tr>
 <td>許可</td>
-<td><code>acceptButtonText</code></td>
+<td>`acceptButtonText`</td>
 </tr>
 <tr>
 <td>拒否</td>
-<td><code>declineButtonText</code></td>
+<td>`declineButtonText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>無効なアクション</td>
-<td><code>invalid-action</code></td>
+<td>`invalid-action`</td>
 </tr>
 <tr>
 <td>オーディエンスが必要です</td>
-<td><code>invalid-audience</code></td>
+<td>`invalid-audience`</td>
 </tr>
 <tr>
 <td>無効なスコープです。配列でなければなりません。</td>
-<td><code>invalid-scope</code></td>
+<td>`invalid-scope`</td>
 </tr>
 </tbody>
 </table>
@@ -450,7 +450,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：device-code-activation
 
-<Frame>![device-code-activationの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/device-code-activation.png)</Frame>
+<Frame>![device-code-activationの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/device-code-activation.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -461,46 +461,46 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>${clientName}にログインするには、デバイスコードを入力してください</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>デバイスに表示されているコードを入力してください</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>ワンタイムコードを入力する</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>デバイスの有効化</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>ユーザーコードが無効または期限切れです</td>
-<td><code>invalid-expired-code</code></td>
+<td>`invalid-expired-code`</td>
 </tr>
 <tr>
 <td>デバイスに表示されているコードを入力してください</td>
-<td><code>no-code</code></td>
+<td>`no-code`</td>
 </tr>
 <tr>
 <td>入力したコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：device-code-activation-allowed
 
-<Frame>![device-code-activation-allowedの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/device-code-activation-allowed.png)</Frame>
+<Frame>![device-code-activation-allowedの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/device-code-activation-allowed.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -511,22 +511,22 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ログイン成功 ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>デバイスが接続されました。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>おめでとうございます。準備が整いました！</td>
-<td><code>eventTitle</code></td>
+<td>`eventTitle`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：device-code-activation-denied
 
-<Frame>![device-code-activation-deniedの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/device-code-activation-denied.png)</Frame>
+<Frame>![device-code-activation-deniedの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/device-code-activation-denied.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -537,22 +537,22 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ログイン失敗${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>デバイスを有効化できませんでした。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>有効化失敗</td>
-<td><code>eventTitle</code></td>
+<td>`eventTitle`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：device-code-confirmation
 
-<Frame>![device-code-confirmationの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/device-code-confirmation.png)</Frame>
+<Frame>![device-code-confirmationの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/device-code-confirmation.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -563,35 +563,35 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>${clientName}にログインするにはデバイスコードを確認してください</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>これが${clientName}に表示されたコードであることを確認してください：</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>セキュアコード</td>
-<td><code>inputCodeLabel</code></td>
+<td>`inputCodeLabel`</td>
 </tr>
 <tr>
 <td>デバイスの確認</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>確認</td>
-<td><code>confirmButtonText</code></td>
+<td>`confirmButtonText`</td>
 </tr>
 <tr>
 <td>キャンセル</td>
-<td><code>cancelButtonText</code></td>
+<td>`cancelButtonText`</td>
 </tr>
 <tr>
 <td>このアクションを実行していない場合、またはこのデバイスに心当たりがない場合はキャンセルを選択してください。</td>
-<td><code>confirmationText</code></td>
+<td>`confirmationText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 </tbody>
 </table>
@@ -602,7 +602,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：email-otp-challenge
 
-<Frame>![email-otp-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/email-otp-challenge.png)</Frame>
+<Frame>![email-otp-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/email-otp-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -613,51 +613,51 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>${clientName}にログインするには、メールコードを入力してください</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>コードを記載したメールを${email}に送りました</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>コードを入力する</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>再送</td>
-<td><code>resendActionText</code></td>
+<td>`resendActionText`</td>
 </tr>
 <tr>
 <td>メールが届きませんか？</td>
-<td><code>resendText</code></td>
+<td>`resendText`</td>
 </tr>
 <tr>
 <td>IDを検証してください</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>OTPコードは6桁の数字である必要があります</td>
-<td><code>invalid-otp-code-format</code></td>
+<td>`invalid-otp-code-format`</td>
 </tr>
 <tr>
 <td>入力されたコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>コードを検証できませんでした。後ほど再度お試しください。</td>
-<td><code>authenticator-error</code></td>
+<td>`authenticator-error`</td>
 </tr>
 <tr>
 <td>メール数の上限に達しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-email</code></td>
+<td>`too-many-email`</td>
 </tr>
 </tbody>
 </table>
@@ -668,7 +668,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：email-verification-result
 
-<Frame>![email-verification-resultの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/email-verification-result.png)</Frame>
+<Frame>![email-verification-resultの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/email-verification-result.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -679,51 +679,51 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>メール検証状況 ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>メールが検証されました</td>
-<td><code>verifiedTitle</code></td>
+<td>`verifiedTitle`</td>
 </tr>
 <tr>
 <td>エラー</td>
-<td><code>errorTitle</code></td>
+<td>`errorTitle`</td>
 </tr>
 <tr>
 <td>メールアドレスの検証に成功しました。</td>
-<td><code>verifiedDescription</code></td>
+<td>`verifiedDescription`</td>
 </tr>
 <tr>
 <td>このアカウントは検証済みです。</td>
-<td><code>alreadyVerifiedDescription</code></td>
+<td>`alreadyVerifiedDescription`</td>
 </tr>
 <tr>
 <td>ユーザーアカウントが存在しないか、検証コードが無効です。</td>
-<td><code>invalidAccountOrCodeDescription</code></td>
+<td>`invalidAccountOrCodeDescription`</td>
 </tr>
 <tr>
 <td>メールアドレスを検証できませんでした。</td>
-<td><code>unknownErrorDescription</code></td>
+<td>`unknownErrorDescription`</td>
 </tr>
 <tr>
 <td>${clientName}に戻る</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>このチケットの有効期限が切れました。</td>
-<td><code>auth0-users-expired-ticket</code></td>
+<td>`auth0-users-expired-ticket`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。later.</td>
-<td><code>custom-script-error-code</code></td>
+<td>`custom-script-error-code`</td>
 </tr>
 <tr>
 <td>このチケットは使用済みです。</td>
-<td><code>auth0-users-used-ticket</code></td>
+<td>`auth0-users-used-ticket`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください later</td>
-<td><code>auth0-users-validation</code></td>
+<td>`auth0-users-validation`</td>
 </tr>
 </tbody>
 </table>
@@ -734,7 +734,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：accept-invitation
 
-<Frame>![accept-invitationの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/accept-invitation.png)</Frame>
+<Frame>![accept-invitationの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/accept-invitation.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -745,23 +745,23 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>サインアップするには招待を受け入れてください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>招待されました！</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>${inviterName}さんがあなた(${email})を${clientName}の${companyName}に招待しました。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 </tbody>
 </table>
@@ -772,7 +772,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：login
 
-<Frame>![loginの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/login.png)</Frame>
+<Frame>![loginの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/login.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -787,187 +787,187 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>ようこそ</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>&lt;%= "${clientName}" %&gt;へ続行するには&lt;%= "${companyName}" %&gt;にログインしてください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>separatorText</code></td>
+<td>`separatorText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>&lt;%= "{yourConnectionName}" %&gt;で続行</td>
-<td><code>federatedConnectionButtonText</code></td>
+<td>`federatedConnectionButtonText`</td>
 </tr>
 <tr>
 <td>サインアップ</td>
-<td><code>signupActionLinkText</code></td>
+<td>`signupActionLinkText`</td>
 </tr>
 <tr>
 <td>アカウントをお持ちではありませんか？</td>
-<td><code>signupActionText</code></td>
+<td>`signupActionText`</td>
 </tr>
 <tr>
 <td>パスワードを忘れましたか？</td>
-<td><code>forgotPasswordText</code></td>
+<td>`forgotPasswordText`</td>
 </tr>
 <tr>
 <td>パスワード</td>
-<td><code>passwordPlaceholder</code></td>
+<td>`passwordPlaceholder`</td>
 </tr>
 <tr>
 <td>ユーザー名またはメールアドレス</td>
-<td><code>usernamePlaceholder</code></td>
+<td>`usernamePlaceholder`</td>
 </tr>
 <tr>
 <td>メールアドレス</td>
-<td><code>emailPlaceholder</code></td>
+<td>`emailPlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号</td>
-<td><code>phonePlaceholder</code></td>
+<td>`phonePlaceholder`</td>
 </tr>
 <tr>
 <td>ユーザー名</td>
-<td><code>usernameOnlyPlaceholder</code></td>
+<td>`usernameOnlyPlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号、ユーザー名またはメールアドレス</td>
-<td><code>phoneOrUsernameOrEmailPlaceholder</code></td>
+<td>`phoneOrUsernameOrEmailPlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号またはメールアドレス</td>
-<td><code>phoneOrEmailPlaceholder</code></td>
+<td>`phoneOrEmailPlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号またはユーザー名</td>
-<td><code>phoneOrUsernamePlaceholder</code></td>
+<td>`phoneOrUsernamePlaceholder`</td>
 </tr>
 <tr>
 <td>ユーザー名またはメールアドレス</td>
-<td><code>usernameOrEmailPlaceholder</code></td>
+<td>`usernameOrEmailPlaceholder`</td>
 </tr>
 <tr>
 <td>編集</td>
-<td><code>editEmailText</code></td>
+<td>`editEmailText`</td>
 </tr>
 <tr>
 <td>警告</td>
-<td><code>alertListTitle</code></td>
+<td>`alertListTitle`</td>
 </tr>
 <tr>
 <td>招待されました！</td>
-<td><code>invitationTitle</code></td>
+<td>`invitationTitle`</td>
 </tr>
 <tr>
 <td>&lt;%= "${clientName}" %&gt;で&lt;%= "${companyName}" %&gt;に参加する&lt;%= "${inviterName}" %&gt;さんの招待を受け入れるにはログインしてください。</td>
-<td><code>invitationDescription</code></td>
+<td>`invitationDescription`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>パスワードを表示する</td>
-<td><code>showPasswordText</code></td>
+<td>`showPasswordText`</td>
 </tr>
 <tr>
 <td>パスワードを表示しない</td>
-<td><code>hidePasswordText</code></td>
+<td>`hidePasswordText`</td>
 </tr>
 <tr>
 <td>ユーザー名またはパスワードが間違っています</td>
-<td><code>wrong-credentials</code></td>
+<td>`wrong-credentials`</td>
 </tr>
 <tr>
 <td>メールアドレスまたはパスワードが間違っています</td>
-<td><code>wrong-email-credentials</code></td>
+<td>`wrong-email-credentials`</td>
 </tr>
 <tr>
 <td>ユーザー名またはパスワードが間違っています</td>
-<td><code>wrong-username-credentials</code></td>
+<td>`wrong-username-credentials`</td>
 </tr>
 <tr>
 <td>電話番号またはパスワードが間違っています</td>
-<td><code>wrong-phone-credentials</code></td>
+<td>`wrong-phone-credentials`</td>
 </tr>
 <tr>
 <td>メールアドレス、ユーザー名またはパスワードが間違っています</td>
-<td><code>wrong-email-username-credentials</code></td>
+<td>`wrong-email-username-credentials`</td>
 </tr>
 <tr>
 <td>メールアドレス、電話番号、ユーザー名またはパスワードが間違っています。電話番号には国番号が必要です。</td>
-<td><code>wrong-email-phone-username-credentials</code></td>
+<td>`wrong-email-phone-username-credentials`</td>
 </tr>
 <tr>
 <td>メールアドレス、電話番号、またはパスワードが間違っています。電話番号には国番号が必要です。</td>
-<td><code>wrong-email-phone-credentials</code></td>
+<td>`wrong-email-phone-credentials`</td>
 </tr>
 <tr>
 <td>電話番号、ユーザー名、またはパスワードが間違っています。電話番号には国番号が必要です。</td>
-<td><code>wrong-phone-username-credentials</code></td>
+<td>`wrong-phone-username-credentials`</td>
 </tr>
 <tr>
 <td>入力されたコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>ユーザーコードが無効または有効期限切れです</td>
-<td><code>invalid-expired-code</code></td>
+<td>`invalid-expired-code`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほどもう一度やり直してください。</td>
-<td><code>custom-script-error-code</code></td>
+<td>`custom-script-error-code`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほどもう一度やり直してください</td>
-<td><code>auth0-users-validation</code></td>
+<td>`auth0-users-validation`</td>
 </tr>
 <tr>
 <td>申し訳ございませんが、ログイン試行中に問題が発生しました</td>
-<td><code>authentication-failure</code></td>
+<td>`authentication-failure`</td>
 </tr>
 <tr>
 <td>無効な接続</td>
-<td><code>invalid-connection</code></td>
+<td>`invalid-connection`</td>
 </tr>
 <tr>
 <td>不審なログインを検出したので、これ以上の試行はブロックされます。管理者にご連絡ください。</td>
-<td><code>ip-blocked</code></td>
+<td>`ip-blocked`</td>
 </tr>
 <tr>
 <td>無効な接続</td>
-<td><code>no-db-connection</code></td>
+<td>`no-db-connection`</td>
 </tr>
 <tr>
 <td>このアカウントで潜在的なセキュリティの問題を検出しました。アカウントを保護するために、このログインは阻止されました。続けるには、パスワードをリセットしてください。</td>
-<td><code>password-breached</code></td>
+<td>`password-breached`</td>
 </tr>
 <tr>
 <td>連続で複数回ログイン試行をしたため、アカウントがブロックされました。</td>
-<td><code>user-blocked</code></td>
+<td>`user-blocked`</td>
 </tr>
 <tr>
 <td>このユーザーはログイン試行回数が多すぎます。しばらくしてから再度お試しください。</td>
-<td><code>same-user-login</code></td>
+<td>`same-user-login`</td>
 </tr>
 <tr>
 <td>メールアドレスを入力してください</td>
-<td><code>no-email</code></td>
+<td>`no-email`</td>
 </tr>
 <tr>
 <td>パスワードは必須です</td>
-<td><code>no-password</code></td>
+<td>`no-password`</td>
 </tr>
 <tr>
 <td>ユーザー名は必須です</td>
-<td><code>no-username</code></td>
+<td>`no-username`</td>
 </tr>
 </tbody>
 </table>
@@ -978,7 +978,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：login-id
 
-<Frame>![login-idの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/login-id.png)</Frame>
+<Frame>![login-idの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/login-id.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -993,231 +993,231 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>ようこそ</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>&lt;%= "${clientName}" %&gt;へ続行するには&lt;%= "${companyName}" %&gt;にログインしてください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>separatorText</code></td>
+<td>`separatorText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>&lt;%= "{yourConnectionName}" %&gt;で続行</td>
-<td><code>federatedConnectionButtonText</code></td>
+<td>`federatedConnectionButtonText`</td>
 </tr>
 <tr>
 <td>アカウントにログインできませんか？</td>
-<td><code>forgotPasswordText</code></td>
+<td>`forgotPasswordText`</td>
 </tr>
 <tr>
 <td>サインアップ</td>
-<td><code>signupActionLinkText</code></td>
+<td>`signupActionLinkText`</td>
 </tr>
 <tr>
 <td>アカウントをお持ちではありませんか？</td>
-<td><code>signupActionText</code></td>
+<td>`signupActionText`</td>
 </tr>
 <tr>
 <td>パスワード</td>
-<td><code>passwordPlaceholder</code></td>
+<td>`passwordPlaceholder`</td>
 </tr>
 <tr>
 <td>ユーザー名またはメールアドレス</td>
-<td><code>usernamePlaceholder</code></td>
+<td>`usernamePlaceholder`</td>
 </tr>
 <tr>
 <td>メールアドレス</td>
-<td><code>emailPlaceholder</code></td>
+<td>`emailPlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号</td>
-<td><code>phonePlaceholder</code></td>
+<td>`phonePlaceholder`</td>
 </tr>
 <tr>
 <td>ユーザー名</td>
-<td><code>usernameOnlyPlaceholder</code></td>
+<td>`usernameOnlyPlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号、ユーザー名またはメールアドレス</td>
-<td><code>phoneOrUsernameOrEmailPlaceholder</code></td>
+<td>`phoneOrUsernameOrEmailPlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号またはメールアドレス</td>
-<td><code>phoneOrEmailPlaceholder</code></td>
+<td>`phoneOrEmailPlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号またはユーザー名</td>
-<td><code>phoneOrUsernamePlaceholder</code></td>
+<td>`phoneOrUsernamePlaceholder`</td>
 </tr>
 <tr>
 <td>ユーザー名またはメールアドレス</td>
-<td><code>usernameOrEmailPlaceholder</code></td>
+<td>`usernameOrEmailPlaceholder`</td>
 </tr>
 <tr>
 <td>編集</td>
-<td><code>editEmailText</code></td>
+<td>`editEmailText`</td>
 </tr>
 <tr>
 <td>警告</td>
-<td><code>alertListTitle</code></td>
+<td>`alertListTitle`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>パスキーで続行</td>
-<td><code>passkeyButtonText</code></td>
+<td>`passkeyButtonText`</td>
 </tr>
 <tr>
 <td>ユーザー名またはパスワードが間違っています</td>
-<td><code>wrong-credentials</code></td>
+<td>`wrong-credentials`</td>
 </tr>
 <tr>
 <td>メールアドレスまたはパスワードが間違っています</td>
-<td><code>wrong-email-credentials</code></td>
+<td>`wrong-email-credentials`</td>
 </tr>
 <tr>
 <td>ユーザー名またはパスワードが間違っています</td>
-<td><code>wrong-username-credentials</code></td>
+<td>`wrong-username-credentials`</td>
 </tr>
 <tr>
 <td>電話番号またはパスワードが間違っています</td>
-<td><code>wrong-phone-credentials</code></td>
+<td>`wrong-phone-credentials`</td>
 </tr>
 <tr>
 <td>メールアドレス、ユーザー名またはパスワードが間違っています</td>
-<td><code>wrong-email-username-credentials</code></td>
+<td>`wrong-email-username-credentials`</td>
 </tr>
 <tr>
 <td>メールアドレス、電話番号、ユーザー名またはパスワードが間違っています。電話番号には国番号が必要です。</td>
-<td><code>wrong-email-phone-username-credentials</code></td>
+<td>`wrong-email-phone-username-credentials`</td>
 </tr>
 <tr>
 <td>メールアドレス、電話番号、またはパスワードが間違っています。電話番号には国番号が必要です。</td>
-<td><code>wrong-email-phone-credentials</code></td>
+<td>`wrong-email-phone-credentials`</td>
 </tr>
 <tr>
 <td>電話番号、ユーザー名、またはパスワードが間違っています。電話番号には国番号が必要です。</td>
-<td><code>wrong-phone-username-credentials</code></td>
+<td>`wrong-phone-username-credentials`</td>
 </tr>
 <tr>
 <td>入力したコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>ユーザーコードが無効または期限切れです</td>
-<td><code>invalid-expired-code</code></td>
+<td>`invalid-expired-code`</td>
 </tr>
 <tr>
 <td>ユーザー名には英数字および次のもののみが含められます：'&lt;%= "${characters}" %&gt;'。ユーザー名は&lt;%= "${min}" %&gt;～&lt;%= "${max}" %&gt;文字以内でなければなりません。</td>
-<td><code>invalid-username</code></td>
+<td>`invalid-username`</td>
 </tr>
 <tr>
 <td>無効なログインIDが入力されました</td>
-<td><code>invalid-login-id</code></td>
+<td>`invalid-login-id`</td>
 </tr>
 <tr>
 <td>有効なメールアドレスまたは電話番号を入力してください。電話番号には国番号が必要です。</td>
-<td><code>invalid-email-phone</code></td>
+<td>`invalid-email-phone`</td>
 </tr>
 <tr>
 <td>有効なメールアドレスまたはユーザー名を入力してください。</td>
-<td><code>invalid-email-username</code></td>
+<td>`invalid-email-username`</td>
 </tr>
 <tr>
 <td>有効な電話番号またはユーザー名を入力してください。電話番号には国番号が必要です。</td>
-<td><code>invalid-phone-username</code></td>
+<td>`invalid-phone-username`</td>
 </tr>
 <tr>
 <td>有効なメールアドレス、電話番号またはユーザー名を入力してください。電話番号には国番号が必要です。</td>
-<td><code>invalid-email-phone-username</code></td>
+<td>`invalid-email-phone-username`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほどもう一度やり直してください。</td>
-<td><code>custom-script-error-code</code></td>
+<td>`custom-script-error-code`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほどもう一度やり直してください</td>
-<td><code>auth0-users-validation</code></td>
+<td>`auth0-users-validation`</td>
 </tr>
 <tr>
 <td>申し訳ございませんが、ログイン試行中に問題が発生しました</td>
-<td><code>authentication-failure</code></td>
+<td>`authentication-failure`</td>
 </tr>
 <tr>
 <td>無効な接続</td>
-<td><code>invalid-connection</code></td>
+<td>`invalid-connection`</td>
 </tr>
 <tr>
 <td>不審なログインを検出したので、これ以上の試行はブロックされます。管理者にお問い合わせください。</td>
-<td><code>ip-blocked</code></td>
+<td>`ip-blocked`</td>
 </tr>
 <tr>
 <td>無効な接続</td>
-<td><code>no-db-connection</code></td>
+<td>`no-db-connection`</td>
 </tr>
 <tr>
 <td>メールがどのエンタープライズディレクトリとも一致しません</td>
-<td><code>no-hrd-connection</code></td>
+<td>`no-hrd-connection`</td>
 </tr>
 <tr>
 <td>このアカウントで潜在的なセキュリティ問題を検出しました。アカウントを保護するために、このログインは阻止されました。続けるには、パスワードをリセットしてください。</td>
-<td><code>password-breached</code></td>
+<td>`password-breached`</td>
 </tr>
 <tr>
 <td>連続で複数回ログイン試行をしたため、アカウントがブロックされました。</td>
-<td><code>user-blocked</code></td>
+<td>`user-blocked`</td>
 </tr>
 <tr>
 <td>このユーザーはログイン試行回数が多すぎます。しばらくしてから、もう一度やり直してください。</td>
-<td><code>same-user-login</code></td>
+<td>`same-user-login`</td>
 </tr>
 <tr>
 <td>メールアドレスを入力してください</td>
-<td><code>no-email</code></td>
+<td>`no-email`</td>
 </tr>
 <tr>
 <td>パスワードは必須です</td>
-<td><code>no-password</code></td>
+<td>`no-password`</td>
 </tr>
 <tr>
 <td>ユーザー名は必須です</td>
-<td><code>no-username</code></td>
+<td>`no-username`</td>
 </tr>
 <tr>
 <td>有効な電話番号を入力してください</td>
-<td><code>invalid-phone-number</code></td>
+<td>`invalid-phone-number`</td>
 </tr>
 <tr>
 <td>パスワードとパスキーが許可されていません</td>
-<td><code>conflict-password-passkey</code></td>
+<td>`conflict-password-passkey`</td>
 </tr>
 <tr>
 <td>パスワードが許可されていません</td>
-<td><code>password-not-allowed</code></td>
+<td>`password-not-allowed`</td>
 </tr>
 <tr>
 <td>パスキーが許可されていません</td>
-<td><code>passkey-not-allowed</code></td>
+<td>`passkey-not-allowed`</td>
 </tr>
 <tr>
 <td>パスキーを選択してください</td>
-<td><code>no-passkey</code></td>
+<td>`no-passkey`</td>
 </tr>
 <tr>
 <td>パスキーの認証に失敗しました</td>
-<td><code>passkey-authentication-failed</code></td>
+<td>`passkey-authentication-failed`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほどもう一度やり直してください。</td>
-<td><code>invalid-passkey</code></td>
+<td>`invalid-passkey`</td>
 </tr>
 </tbody>
 </table>
@@ -1228,7 +1228,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：login-password
 
-<Frame>![login-passwordの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/login-password.png)</Frame>
+<Frame>![login-passwordの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/login-password.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -1243,171 +1243,171 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>パスワードの入力</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>&lt;%= "${clientName}" %&gt;へ続行するには&lt;%= "${companyName}" %&gt;のパスワードを入力してください</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>separatorText</code></td>
+<td>`separatorText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>&lt;%= "{yourConnectionName}" %&gt;で続行</td>
-<td><code>federatedConnectionButtonText</code></td>
+<td>`federatedConnectionButtonText`</td>
 </tr>
 <tr>
 <td>サインアップ</td>
-<td><code>signupActionLinkText</code></td>
+<td>`signupActionLinkText`</td>
 </tr>
 <tr>
 <td>アカウントをお持ちではありませんか？</td>
-<td><code>signupActionText</code></td>
+<td>`signupActionText`</td>
 </tr>
 <tr>
 <td>パスワードを忘れましたか？</td>
-<td><code>forgotPasswordText</code></td>
+<td>`forgotPasswordText`</td>
 </tr>
 <tr>
 <td>パスワード</td>
-<td><code>passwordPlaceholder</code></td>
+<td>`passwordPlaceholder`</td>
 </tr>
 <tr>
 <td>ユーザー名またはメールアドレス</td>
-<td><code>usernamePlaceholder</code></td>
+<td>`usernamePlaceholder`</td>
 </tr>
 <tr>
 <td>メールアドレス</td>
-<td><code>emailPlaceholder</code></td>
+<td>`emailPlaceholder`</td>
 </tr>
 <tr>
 <td>編集</td>
-<td><code>editEmailText</code></td>
+<td>`editEmailText`</td>
 </tr>
 <tr>
 <td>メールアドレスを編集する</td>
-<td><code>editLinkScreenReadableText</code></td>
+<td>`editLinkScreenReadableText`</td>
 </tr>
 <tr>
 <td>警告</td>
-<td><code>alertListTitle</code></td>
+<td>`alertListTitle`</td>
 </tr>
 <tr>
 <td>招待されました！</td>
-<td><code>invitationTitle</code></td>
+<td>`invitationTitle`</td>
 </tr>
 <tr>
 <td>&lt;%= "${inviterName}" %&gt;さんの招待を受けて&lt;%= "${clientName}" %&gt;で&lt;%= "${companyName}" %&gt;に参加するにはログインしてください。</td>
-<td><code>invitationDescription</code></td>
+<td>`invitationDescription`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>指紋または顔認証を使用する</td>
-<td><code>useBiometricsText</code></td>
+<td>`useBiometricsText`</td>
 </tr>
 <tr>
 <td>パスワードを表示する</td>
-<td><code>showPasswordText</code></td>
+<td>`showPasswordText`</td>
 </tr>
 <tr>
 <td>パスワードを表示しない</td>
-<td><code>hidePasswordText</code></td>
+<td>`hidePasswordText`</td>
 </tr>
 <tr>
 <td>ユーザー名またはパスワードが間違っています</td>
-<td><code>wrong-credentials</code></td>
+<td>`wrong-credentials`</td>
 </tr>
 <tr>
 <td>入力したコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>ユーザーコードが無効または期限切れです</td>
-<td><code>invalid-expired-code</code></td>
+<td>`invalid-expired-code`</td>
 </tr>
 <tr>
 <td>メールまたはパスワードが間違っています。</td>
-<td><code>wrong-email-credentials</code></td>
+<td>`wrong-email-credentials`</td>
 </tr>
 <tr>
 <td>ユーザー名またはパスワードが間違っています。</td>
-<td><code>wrong-username-credentials</code></td>
+<td>`wrong-username-credentials`</td>
 </tr>
 <tr>
 <td>電話番号またはパスワードが間違っています。</td>
-<td><code>wrong-phone-credentials</code></td>
+<td>`wrong-phone-credentials`</td>
 </tr>
 <tr>
 <td>メールアドレス、ユーザー名、またはパスワードが間違っています。</td>
-<td><code>wrong-email-username-credentials</code></td>
+<td>`wrong-email-username-credentials`</td>
 </tr>
 <tr>
 <td>メールアドレス、電話番号、ユーザー名、またはパスワードが間違っています。電話番号には国番号が必要です。</td>
-<td><code>wrong-email-phone-username-credentials</code></td>
+<td>`wrong-email-phone-username-credentials`</td>
 </tr>
 <tr>
 <td>メールアドレス、電話番号、またはパスワードが間違っています。電話番号には国番号が必要です。</td>
-<td><code>wrong-email-phone-credentials</code></td>
+<td>`wrong-email-phone-credentials`</td>
 </tr>
 <tr>
 <td>電話番号、ユーザー名、またはパスワードが間違っています。電話番号には国番号が必要です。</td>
-<td><code>wrong-phone-username-credentials</code></td>
+<td>`wrong-phone-username-credentials`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほどもう一度やり直してください。</td>
-<td><code>custom-script-error-code</code></td>
+<td>`custom-script-error-code`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほどもう一度やり直してください</td>
-<td><code>auth0-users-validation</code></td>
+<td>`auth0-users-validation`</td>
 </tr>
 <tr>
 <td>申し訳ございませんが、ログイン試行中に問題が発生しました</td>
-<td><code>authentication-failure</code></td>
+<td>`authentication-failure`</td>
 </tr>
 <tr>
 <td>無効な接続</td>
-<td><code>invalid-connection</code></td>
+<td>`invalid-connection`</td>
 </tr>
 <tr>
 <td>不審なログインを検出したので、これ以上の試行はブロックされます。管理者にご連絡ください。</td>
-<td><code>ip-blocked</code></td>
+<td>`ip-blocked`</td>
 </tr>
 <tr>
 <td>無効な接続</td>
-<td><code>no-db-connection</code></td>
+<td>`no-db-connection`</td>
 </tr>
 <tr>
 <td>このアカウントで潜在的なセキュリティの問題を検出しました。アカウントを保護するために、このログインは阻止されました。続けるには、パスワードをリセットしてください。</td>
-<td><code>password-breached</code></td>
+<td>`password-breached`</td>
 </tr>
 <tr>
 <td>連続で複数回ログイン試行をしたため、アカウントがブロックされました。</td>
-<td><code>user-blocked</code></td>
+<td>`user-blocked`</td>
 </tr>
 <tr>
 <td>このユーザーはログイン試行回数が多すぎます。しばらくしてから再度お試しください。</td>
-<td><code>same-user-login</code></td>
+<td>`same-user-login`</td>
 </tr>
 <tr>
 <td>メールアドレスを入力してください</td>
-<td><code>no-email</code></td>
+<td>`no-email`</td>
 </tr>
 <tr>
 <td>パスワードは必須です</td>
-<td><code>no-password</code></td>
+<td>`no-password`</td>
 </tr>
 <tr>
 <td>ユーザー名は必須です</td>
-<td><code>no-username</code></td>
+<td>`no-username`</td>
 </tr>
 </tbody>
 </table>
@@ -1418,7 +1418,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：login-passwordless-email-code
 
-<Frame>![login-passwordless-email-codeの参考スクリーンショット](//images.ctfassets.net/cdy7uua7fh8z/6zazshkUI5sdFDd2Fgbo6w/0193e17673250b5293d9581e34316c20/login-passwordless-email-code.png)</Frame>
+<Frame>![login-passwordless-email-codeの参考スクリーンショット](/images/ja-jp/cdy7uua7fh8z/6zazshkUI5sdFDd2Fgbo6w/0193e17673250b5293d9581e34316c20/login-passwordless-email-code.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -1429,54 +1429,54 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ログインするには、メールコードを入力してください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>コードを記載したメールを${email}に送りました</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>コードを入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>再送</td>
-<td><code>resendActionText</code></td>
+<td>`resendActionText`</td>
 </tr>
 <tr>
 <td>メールが届きませんか？</td>
-<td><code>resendText</code></td>
+<td>`resendText`</td>
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>コードが無効です</td>
-<td><code>invalid-verification-code</code></td>
+<td>`invalid-verification-code`</td>
 </tr>
 <tr>
 <td>コードを送信できませんでした。後ほど再度お試しください。</td>
-<td><code>passwordless-authenticator-error</code></td>
+<td>`passwordless-authenticator-error`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>passwordless-unknown-error</code></td>
+<td>`passwordless-unknown-error`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：login-passwordless-email-link
 
-<Frame>![login-passwordless-email-linkの参考スクリーンショット](//images.ctfassets.net/cdy7uua7fh8z/7EcEUmoEPC6GVgJjNyTugr/e160cb40af3a0c748ba1f9fe2307488b/login-passwordless-email-link.png)</Frame>
+<Frame>![login-passwordless-email-linkの参考スクリーンショット](/images/ja-jp/cdy7uua7fh8z/7EcEUmoEPC6GVgJjNyTugr/e160cb40af3a0c748ba1f9fe2307488b/login-passwordless-email-link.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -1487,30 +1487,30 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>メールのサインインリンク ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>メールが送られました</td>
-<td><code>successTitle</code></td>
+<td>`successTitle`</td>
 </tr>
 <tr>
 <td>問題が発生しました</td>
-<td><code>errorTitle</code></td>
+<td>`errorTitle`</td>
 </tr>
 <tr>
 <td>メールが送られました。受信トレイでログインリンクを確認してください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>後ほどお試しください。</td>
-<td><code>unknownErrorDescription</code></td>
+<td>`unknownErrorDescription`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：login-passwordless-sms-otp
 
-<Frame>![login-passwordless-sms-otpの参考スクリーンショット](//images.ctfassets.net/cdy7uua7fh8z/5dk4vZpc06UojLdnelUInO/f5fb02e0adeeceaa1b8ce6eef8151bc2/login-passwordless-sms-otp.png)</Frame>
+<Frame>![login-passwordless-sms-otpの参考スクリーンショット](/images/ja-jp/cdy7uua7fh8z/5dk4vZpc06UojLdnelUInO/f5fb02e0adeeceaa1b8ce6eef8151bc2/login-passwordless-sms-otp.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -1521,51 +1521,51 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ログインするには、電話コードを入力してください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>次の宛先にテキストメッセージを送りました：</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>編集</td>
-<td><code>editText</code></td>
+<td>`editText`</td>
 </tr>
 <tr>
 <td>6桁のコードを入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>再送</td>
-<td><code>resendActionText</code></td>
+<td>`resendActionText`</td>
 </tr>
 <tr>
 <td>コードが届きませんか？</td>
-<td><code>resendText</code></td>
+<td>`resendText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>コードが無効です</td>
-<td><code>invalid-verification-code</code></td>
+<td>`invalid-verification-code`</td>
 </tr>
 <tr>
 <td>コードを送信できませんでした。後ほど再度お試しください。</td>
-<td><code>passwordless-authenticator-error</code></td>
+<td>`passwordless-authenticator-error`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>passwordless-unknown-error</code></td>
+<td>`passwordless-unknown-error`</td>
 </tr>
 </tbody>
 </table>
@@ -1576,7 +1576,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：login-email-verification
 
-<Frame>![login-email-verificationの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/login-email-verification.png)</Frame>
+<Frame>![login-email-verificationの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/login-email-verification.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -1587,55 +1587,55 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ログインするには、メールコードを入力してください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>コードを記載したメールを${email}に送りました</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>コードを入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>再送</td>
-<td><code>resendActionText</code></td>
+<td>`resendActionText`</td>
 </tr>
 <tr>
 <td>メールが届きませんか？</td>
-<td><code>resendText</code></td>
+<td>`resendText`</td>
 </tr>
 <tr>
 <td>メールの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>OTPコードは6桁の数字である必要があります</td>
-<td><code>invalid-otp-code-format</code></td>
+<td>`invalid-otp-code-format`</td>
 </tr>
 <tr>
 <td>入力されたコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>ユーザーコードが無効または期限切れです</td>
-<td><code>invalid-expired-code</code></td>
+<td>`invalid-expired-code`</td>
 </tr>
 <tr>
 <td>コードを検証できませんでした。後ほど再度お試しください。</td>
-<td><code>authenticator-error</code></td>
+<td>`authenticator-error`</td>
 </tr>
 <tr>
 <td>メール数の上限に達しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-email</code></td>
+<td>`too-many-email`</td>
 </tr>
 </tbody>
 </table>
@@ -1646,7 +1646,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：logout
 
-<Frame>![logoutの参考スクリーンショット](//images.ctfassets.net/cdy7uua7fh8z/2lXg143oKAF4OlIilbwDCK/d770603ba5203adff07cf4e23e4fcbbb/logout.png)</Frame>
+<Frame>![logoutの参考スクリーンショット](/images/ja-jp/cdy7uua7fh8z/2lXg143oKAF4OlIilbwDCK/d770603ba5203adff07cf4e23e4fcbbb/logout.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -1657,31 +1657,31 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ログアウト ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>ログアウト</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>${userName}さん、こんにちは。</td>
-<td><code>userSalute</code></td>
+<td>`userSalute`</td>
 </tr>
 <tr>
 <td>${clientName}からログアウトしますか？</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>はい</td>
-<td><code>acceptButtonText</code></td>
+<td>`acceptButtonText`</td>
 </tr>
 <tr>
 <td>いいえ</td>
-<td><code>declineButtonText</code></td>
+<td>`declineButtonText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 </tbody>
 </table>
@@ -1692,7 +1692,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：mfa-detect-browser-capabilities
 
-<Frame>![mfa-detect-browser-capabilitiesの参考スクリーンショット](//images.ctfassets.net/cdy7uua7fh8z/2D7DbdMRJ7SdwxEzOYYsLX/595c1436aaa38ed342137c4a5227f4b0/mfa-detect-browser-capabilities.png)</Frame>
+<Frame>![mfa-detect-browser-capabilitiesの参考スクリーンショット](/images/ja-jp/cdy7uua7fh8z/2D7DbdMRJ7SdwxEzOYYsLX/595c1436aaa38ed342137c4a5227f4b0/mfa-detect-browser-capabilities.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -1703,26 +1703,26 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>再読込み</td>
-<td><code>reloadButtonText</code></td>
+<td>`reloadButtonText`</td>
 </tr>
 <tr>
 <td>JavaScriptが必要です</td>
-<td><code>noJSErrorTitle</code></td>
+<td>`noJSErrorTitle`</td>
 </tr>
 <tr>
 <td>ブラウザーでJavaScriptが有効になっていません。有効にし、［Reload page（ページの再読み込み）］ボタンを押してください。</td>
-<td><code>noJSErrorDescription</code></td>
+<td>`noJSErrorDescription`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-enroll-result
 
-<Frame>![mfa-enroll-resultの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-enroll-result.png)</Frame>
+<Frame>![mfa-enroll-resultの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-enroll-result.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -1733,54 +1733,54 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>MFA登録状況</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>完了しました！</td>
-<td><code>enrolledTitle</code></td>
+<td>`enrolledTitle`</td>
 </tr>
 <tr>
 <td>新しい認証要素の追加に成功しました。</td>
-<td><code>enrolledDescription</code></td>
+<td>`enrolledDescription`</td>
 </tr>
 <tr>
 <td>無効なリンク</td>
-<td><code>invalidTicketTitle</code></td>
+<td>`invalidTicketTitle`</td>
 </tr>
 <tr>
 <td>このリンクは無効または期限切れです。</td>
-<td><code>invalidTicketDescription</code></td>
+<td>`invalidTicketDescription`</td>
 </tr>
 <tr>
 <td>期限切れのリンク</td>
-<td><code>expiredTicketTitle</code></td>
+<td>`expiredTicketTitle`</td>
 </tr>
 <tr>
 <td>このリンクは期限切れです。</td>
-<td><code>expiredTicketDescription</code></td>
+<td>`expiredTicketDescription`</td>
 </tr>
 <tr>
 <td>使用済み</td>
-<td><code>alreadyUsedTitle</code></td>
+<td>`alreadyUsedTitle`</td>
 </tr>
 <tr>
 <td>このリンクは使用済みです。多要素認証で登録する新しいリンクを取得してください。</td>
-<td><code>alreadyUsedDescription</code></td>
+<td>`alreadyUsedDescription`</td>
 </tr>
 <tr>
 <td>2要素検証はすでに有効化されています。</td>
-<td><code>alreadyEnrolledDescription</code></td>
+<td>`alreadyEnrolledDescription`</td>
 </tr>
 <tr>
 <td>問題が生じました</td>
-<td><code>genericError</code></td>
+<td>`genericError`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-login-options
 
-<Frame>![mfa-login-optionsの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-login-options.png)</Frame>
+<Frame>![mfa-login-optionsの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-login-options.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -1791,62 +1791,62 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>その他のログイン方法のリスト ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>戻る</td>
-<td><code>backText</code></td>
+<td>`backText`</td>
 </tr>
 <tr>
 <td>他の方法</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>SMS</td>
-<td><code>authenticatorNamesSMS</code></td>
+<td>`authenticatorNamesSMS`</td>
 </tr>
 <tr>
 <td>電話</td>
-<td><code>authenticatorNamesVoice</code></td>
+<td>`authenticatorNamesVoice`</td>
 </tr>
 <tr>
 <td>電話</td>
-<td><code>authenticatorNamesPhone</code></td>
+<td>`authenticatorNamesPhone`</td>
 </tr>
 <tr>
 <td>${appName}アプリを通じた通知</td>
-<td><code>authenticatorNamesPushNotification</code></td>
+<td>`authenticatorNamesPushNotification`</td>
 </tr>
 <tr>
 <td>Google Authenticatorまたは類似のもの</td>
-<td><code>authenticatorNamesOTP</code></td>
+<td>`authenticatorNamesOTP`</td>
 </tr>
 <tr>
 <td>メール</td>
-<td><code>authenticatorNamesEmail</code></td>
+<td>`authenticatorNamesEmail`</td>
 </tr>
 <tr>
 <td>復旧コード</td>
-<td><code>authenticatorNamesRecoveryCode</code></td>
+<td>`authenticatorNamesRecoveryCode`</td>
 </tr>
 <tr>
 <td>DUOアプリを通じた通知</td>
-<td><code>authenticatorNamesDUO</code></td>
+<td>`authenticatorNamesDUO`</td>
 </tr>
 <tr>
 <td>セキュリティキー</td>
-<td><code>authenticatorNamesWebauthnRoaming</code></td>
+<td>`authenticatorNamesWebauthnRoaming`</td>
 </tr>
 <tr>
 <td>指紋または顔認証</td>
-<td><code>authenticatorNamesWebauthnPlatform</code></td>
+<td>`authenticatorNamesWebauthnPlatform`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-begin-enroll-options
 
-<Frame>![mfa-begin-enroll-optionsの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-begin-enroll-options.png)</Frame>
+<Frame>![mfa-begin-enroll-optionsの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-begin-enroll-options.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -1857,63 +1857,63 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>別の認証方法を追加する ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>戻る</td>
-<td><code>backText</code></td>
+<td>`backText`</td>
 </tr>
 <tr>
 <td>アカウントのセキュリティ保護</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>別の認証方法を追加します。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>SMS</td>
-<td><code>authenticatorNamesSMS</code></td>
+<td>`authenticatorNamesSMS`</td>
 </tr>
 <tr>
 <td>電話</td>
-<td><code>authenticatorNamesVoice</code></td>
+<td>`authenticatorNamesVoice`</td>
 </tr>
 <tr>
 <td>電話</td>
-<td><code>authenticatorNamesPhone</code></td>
+<td>`authenticatorNamesPhone`</td>
 </tr>
 <tr>
 <td>${appName}アプリを通じた通知</td>
-<td><code>authenticatorNamesPushNotification</code></td>
+<td>`authenticatorNamesPushNotification`</td>
 </tr>
 <tr>
 <td>Google Authenticatorまたは類似のもの</td>
-<td><code>authenticatorNamesOTP</code></td>
+<td>`authenticatorNamesOTP`</td>
 </tr>
 <tr>
 <td>メール</td>
-<td><code>authenticatorNamesEmail</code></td>
+<td>`authenticatorNamesEmail`</td>
 </tr>
 <tr>
 <td>復旧コード</td>
-<td><code>authenticatorNamesRecoveryCode</code></td>
+<td>`authenticatorNamesRecoveryCode`</td>
 </tr>
 <tr>
 <td>DUOアプリを通じた通知</td>
-<td><code>authenticatorNamesDUO</code></td>
+<td>`authenticatorNamesDUO`</td>
 </tr>
 <tr>
 <td>セキュリティキー</td>
-<td><code>authenticatorNamesWebauthnRoaming</code></td>
+<td>`authenticatorNamesWebauthnRoaming`</td>
 </tr>
 <tr>
 <td>指紋または顔認証</td>
-<td><code>authenticatorNamesWebauthnPlatform</code></td>
+<td>`authenticatorNamesWebauthnPlatform`</td>
 </tr>
 </tbody>
 </table>
@@ -1924,7 +1924,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：mfa-email-challenge
 
-<Frame>![mfa-email-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-email-challenge.png)</Frame>
+<Frame>![mfa-email-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-email-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -1935,82 +1935,82 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>${clientName}にログインするには、メールコードを入力してください</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>戻る</td>
-<td><code>backText</code></td>
+<td>`backText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>コードをメールで次のアドレスに送りました：</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>コードを入力する</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>30日間このデバイスを記憶する</td>
-<td><code>rememberMeText</code></td>
+<td>`rememberMeText`</td>
 </tr>
 <tr>
 <td>再送</td>
-<td><code>resendActionText</code></td>
+<td>`resendActionText`</td>
 </tr>
 <tr>
 <td>メールが届きませんか？</td>
-<td><code>resendText</code></td>
+<td>`resendText`</td>
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>OTPコードは6桁の数字である必要があります</td>
-<td><code>invalid-otp-code-format</code></td>
+<td>`invalid-otp-code-format`</td>
 </tr>
 <tr>
 <td>入力されたコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>コードを検証できませんでした。後ほど再度お試しください。</td>
-<td><code>authenticator-error</code></td>
+<td>`authenticator-error`</td>
 </tr>
 <tr>
 <td>通知を送信できませんでした。コードを再送してみてください。</td>
-<td><code>no-transaction-in-progress</code></td>
+<td>`no-transaction-in-progress`</td>
 </tr>
 <tr>
 <td>メール数の上限に達しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-email</code></td>
+<td>`too-many-email`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 <tr>
 <td>メールを送信できませんでした。後で再度お試しください。</td>
-<td><code>mfa-email-challenge-authenticator-error</code></td>
+<td>`mfa-email-challenge-authenticator-error`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-email-list
 
-<Frame>![mfa-email-listの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-email-list.png)</Frame>
+<Frame>![mfa-email-listの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-email-list.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2021,15 +2021,15 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>利用可能なメールアドレスのリスト ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>戻る</td>
-<td><code>backText</code></td>
+<td>`backText`</td>
 </tr>
 <tr>
 <td>登録済みメールアドレス</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 </tbody>
 </table>
@@ -2040,7 +2040,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：mfa-otp-enrollment-qr
 
-<Frame>![mfa-otp-enrollment-qrの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-otp-enrollment-qr.png)</Frame>
+<Frame>![mfa-otp-enrollment-qrの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-otp-enrollment-qr.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2051,66 +2051,66 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ワンタイムパスワードを使用してログインするにはコードをスキャンしてください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>アカウントのセキュリティ保護</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>推奨鑑別工具アプリを使用してQRコードをスキャンし、下に表示されたワンタイムコードを入力してください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>スキャンできませんか？</td>
-<td><code>codeEnrollmentText</code></td>
+<td>`codeEnrollmentText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>ワンタイムコードを入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>次</td>
-<td><code>separatorText</code></td>
+<td>`separatorText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>OTPコードは6桁の数字である必要があります</td>
-<td><code>invalid-otp-code-format</code></td>
+<td>`invalid-otp-code-format`</td>
 </tr>
 <tr>
 <td>入力されたコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>認証に失敗したコードが多すぎます。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-failures</code></td>
+<td>`too-many-failures`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度始めてください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 <tr>
 <td>MFAに登録済みです。</td>
-<td><code>user-already-enrolled</code></td>
+<td>`user-already-enrolled`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-otp-enrollment-code
 
-<Frame>![mfa-otp-enrollment-codeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-otp-enrollment-code.png)</Frame>
+<Frame>![mfa-otp-enrollment-codeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-otp-enrollment-code.png)</Frame>
 
 \
 
@@ -2123,58 +2123,58 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ワンタイムパスワードを使用してログインするにはコードをコピーしてください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>戻る</td>
-<td><code>backText</code></td>
+<td>`backText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>コピーするためにコードをセキュリティ保護します</td>
-<td><code>altText</code></td>
+<td>`altText`</td>
 </tr>
 <tr>
 <td>コードをコピーする</td>
-<td><code>copyCodeButtonText</code></td>
+<td>`copyCodeButtonText`</td>
 </tr>
 <tr>
 <td>推奨鑑別工具アプリに次のコードを手動で入力し、下に表示されたワンタイムコードを入力してください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>ワンタイムコードを入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>アカウントのセキュリティ保護</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>認証に失敗したコードが多すぎます。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-failures</code></td>
+<td>`too-many-failures`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度始めてください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-otp-challenge
 
-<Frame>![mfa-otp-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-otp-challenge.png)</Frame>
+<Frame>![mfa-otp-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-otp-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2185,51 +2185,51 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ログインするにはワンタイムパスワードを入力してください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>好みのワンタイムパスワードアプリでコードを確認してください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>ワンタイムコードを入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>30日間このデバイスを記憶する</td>
-<td><code>rememberMeText</code></td>
+<td>`rememberMeText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>パスワードを使用する</td>
-<td><code>usePasswordText</code></td>
+<td>`usePasswordText`</td>
 </tr>
 <tr>
 <td>コードを検証できませんでした。後ほど再度お試しください。</td>
-<td><code>authenticator-error</code></td>
+<td>`authenticator-error`</td>
 </tr>
 <tr>
 <td>失敗したコードが多すぎます。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-failures</code></td>
+<td>`too-many-failures`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 </tbody>
 </table>
@@ -2240,7 +2240,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：mfa-phone-challenge
 
-<Frame>![mfa-phone-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-phone-challenge.png)</Frame>
+<Frame>![mfa-phone-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-phone-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2251,86 +2251,86 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ログインするための電話番号を入力してください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>次の電話番号に6桁のコードを送ります：</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>continueButtonText</code></td>
+<td>`continueButtonText`</td>
 </tr>
 <tr>
 <td>別の電話番号を選んでください。</td>
-<td><code>changePhoneText</code></td>
+<td>`changePhoneText`</td>
 </tr>
 <tr>
 <td>テキストメッセージ</td>
-<td><code>smsButtonText</code></td>
+<td>`smsButtonText`</td>
 </tr>
 <tr>
 <td>音声電話</td>
-<td><code>voiceButtonText</code></td>
+<td>`voiceButtonText`</td>
 </tr>
 <tr>
 <td>コードをどのように受け取りますか？</td>
-<td><code>chooseMessageTypeText</code></td>
+<td>`chooseMessageTypeText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>電話番号を入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>SMSの送信に問題が生じました</td>
-<td><code>send-sms-failed</code></td>
+<td>`send-sms-failed`</td>
 </tr>
 <tr>
 <td>音声電話に問題が生じました</td>
-<td><code>send-voice-failed</code></td>
+<td>`send-voice-failed`</td>
 </tr>
 <tr>
 <td>電話番号には数字のみを含められます。</td>
-<td><code>invalid-phone-format</code></td>
+<td>`invalid-phone-format`</td>
 </tr>
 <tr>
 <td>電話番号が無効なようです。確認して再度お試しください。</td>
-<td><code>invalid-phone</code></td>
+<td>`invalid-phone`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-sms</code></td>
+<td>`too-many-sms`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-voice</code></td>
+<td>`too-many-voice`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 <tr>
 <td>電話番号を入力してください</td>
-<td><code>no-phone</code></td>
+<td>`no-phone`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-phone-enrollment
 
-<Frame>![mfa-phone-enrollmentの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-phone-enrollment.png)</Frame>
+<Frame>![mfa-phone-enrollmentの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-phone-enrollment.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2341,79 +2341,79 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>電話コードを使用してログインするために電話番号を入力してください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>アカウントのセキュリティ保護</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>6桁のコードを送ることのできる国番号および電話番号を入力してください：</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>continueButtonText</code></td>
+<td>`continueButtonText`</td>
 </tr>
 <tr>
 <td>テキストメッセージ</td>
-<td><code>smsButtonText</code></td>
+<td>`smsButtonText`</td>
 </tr>
 <tr>
 <td>音声電話</td>
-<td><code>voiceButtonText</code></td>
+<td>`voiceButtonText`</td>
 </tr>
 <tr>
 <td>コードをどのように受け取りますか？</td>
-<td><code>chooseMessageTypeText</code></td>
+<td>`chooseMessageTypeText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>電話番号を入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>SMSの送信に問題が生じました</td>
-<td><code>send-sms-failed</code></td>
+<td>`send-sms-failed`</td>
 </tr>
 <tr>
 <td>音声電話に問題が生じました</td>
-<td><code>send-voice-failed</code></td>
+<td>`send-voice-failed`</td>
 </tr>
 <tr>
 <td>SMSを送れませんでした。後ほど再度お試しください。</td>
-<td><code>sms-authenticator-error</code></td>
+<td>`sms-authenticator-error`</td>
 </tr>
 <tr>
 <td>電話番号には数字のみを入力してください。</td>
-<td><code>invalid-phone-format</code></td>
+<td>`invalid-phone-format`</td>
 </tr>
 <tr>
 <td>電話番号が無効なようです。確認して再度お試しください。</td>
-<td><code>invalid-phone</code></td>
+<td>`invalid-phone`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-sms</code></td>
+<td>`too-many-sms`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-voice</code></td>
+<td>`too-many-voice`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 <tr>
 <td>電話番号を入力してください</td>
-<td><code>no-phone</code></td>
+<td>`no-phone`</td>
 </tr>
 </tbody>
 </table>
@@ -2424,7 +2424,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：mfa-push-welcome
 
-<Frame>![mfa-push-welcomeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-push-welcome.png)</Frame>
+<Frame>![mfa-push-welcomeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-push-welcome.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2435,42 +2435,42 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>アプリケーションをインストールしてください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>アカウントのセキュリティ保護</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>続けるには、モバイルデバイスのアプリストアから${appName}アプリをインストールしてください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>Google Play</td>
-<td><code>androidButtonText</code></td>
+<td>`androidButtonText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>アプリストア</td>
-<td><code>iosButtonText</code></td>
+<td>`iosButtonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-push-enrollment-qr
 
-<Frame>![mfa-push-enrollment-qrの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-push-enrollment-qr.png)</Frame>
+<Frame>![mfa-push-enrollment-qrの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-push-enrollment-qr.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2481,38 +2481,38 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>プッシュ通知を使用してログインするにはコードをスキャンしてください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>アカウントのセキュリティ保護</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>モバイルデバイスの${appName}アプリを使用して下のQRコードをスキャンしてください</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>モバイルデバイスの${appName}アプリでQRコードをスキャンする必要があります。</td>
-<td><code>enrollment-transaction-pending</code></td>
+<td>`enrollment-transaction-pending`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-push-challenge-push
 
-<Frame>![mfa-push-challenge-pushの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-push-challenge-push.png)</Frame>
+<Frame>![mfa-push-challenge-pushの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-push-challenge-push.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2523,86 +2523,86 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ログインするにはプッシュ通知を許可してください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>${appName}アプリを通して次のデバイスに通知を送りました：</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>デバイスで返信しました</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>30日間このデバイスを記憶する</td>
-<td><code>rememberMeText</code></td>
+<td>`rememberMeText`</td>
 </tr>
 <tr>
 <td>再送</td>
-<td><code>resendActionText</code></td>
+<td>`resendActionText`</td>
 </tr>
 <tr>
 <td>通知が届きませんか？</td>
-<td><code>resendText</code></td>
+<td>`resendText`</td>
 </tr>
 <tr>
 <td>コードを手動入力する</td>
-<td><code>enterOtpCode</code></td>
+<td>`enterOtpCode`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>separatorText</code></td>
+<td>`separatorText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>モバイルデバイスの${appName}アプリから通知を許可する必要があります。</td>
-<td><code>challenge-transaction-pending</code></td>
+<td>`challenge-transaction-pending`</td>
 </tr>
 <tr>
 <td>確認が取れていないため、少々お待ちください。</td>
-<td><code>polling-interval-exceeded</code></td>
+<td>`polling-interval-exceeded`</td>
 </tr>
 <tr>
 <td>通知要求が多すぎます。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-push</code></td>
+<td>`too-many-push`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 <tr>
 <td>確認を受信していません。コードをもう一度スキャンしてみてください。</td>
-<td><code>mfa-push-verify-transaction-pending</code></td>
+<td>`mfa-push-verify-transaction-pending`</td>
 </tr>
 <tr>
 <td>登録を検証できませんでした。後ほど再度お試しください。</td>
-<td><code>mfa-push-verify-authenticator-error</code></td>
+<td>`mfa-push-verify-authenticator-error`</td>
 </tr>
 <tr>
 <td>通知を送信できませんでした。後ほど再度お試しください。</td>
-<td><code>mfa-push-challenge-authenticator-error</code></td>
+<td>`mfa-push-challenge-authenticator-error`</td>
 </tr>
 <tr>
 <td>通知が拒否されました</td>
-<td><code>transaction-rejected</code></td>
+<td>`transaction-rejected`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-push-list
 
-<Frame>![mfa-push-listの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-push-list.png)</Frame>
+<Frame>![mfa-push-listの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-push-list.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2613,15 +2613,15 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>利用可能なデバイスのリスト ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>戻る</td>
-<td><code>backText</code></td>
+<td>`backText`</td>
 </tr>
 <tr>
 <td>登録済みデバイス</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 </tbody>
 </table>
@@ -2632,7 +2632,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：mfa-recovery-code-enrollment
 
-<Frame>![mfa-recovery-code-enrollmentの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-recovery-code-enrollment.png)</Frame>
+<Frame>![mfa-recovery-code-enrollmentの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-recovery-code-enrollment.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2643,46 +2643,46 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>安全のために復旧コードをコピーしてください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>もうすぐ完了です！</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>この復旧コードをコピーし、別の安全な場所に保管してください。デバイスを使わずにログインする必要がある場合に必要になります。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>コードをコピーして安全に保管してください</td>
-<td><code>altText</code></td>
+<td>`altText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>このコードを安全に記録しました</td>
-<td><code>checkboxText</code></td>
+<td>`checkboxText`</td>
 </tr>
 <tr>
 <td>コードをコピーする</td>
-<td><code>copyCodeButtonText</code></td>
+<td>`copyCodeButtonText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>コードを記録したことを確認してください</td>
-<td><code>no-confirmation</code></td>
+<td>`no-confirmation`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-recovery-code-challenge
 
-<Frame>![mfa-recovery-code-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-recovery-code-challenge.png)</Frame>
+<Frame>![mfa-recovery-code-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-recovery-code-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2693,55 +2693,55 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ログインするには、復旧コードを入力してください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>最初の登録時に提供された復旧コードを入力してください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>復旧コードを入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>入力されたコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>復旧コードは24桁の英数字である必要があります</td>
-<td><code>invalid-code-format</code></td>
+<td>`invalid-code-format`</td>
 </tr>
 <tr>
 <td>コードを検証できませんでした。後ほど再度お試しください。</td>
-<td><code>authenticator-error</code></td>
+<td>`authenticator-error`</td>
 </tr>
 <tr>
 <td>コードを記録したことを確認してください</td>
-<td><code>no-confirmation</code></td>
+<td>`no-confirmation`</td>
 </tr>
 <tr>
 <td>失敗したコードが多すぎます。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-failures</code></td>
+<td>`too-many-failures`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 </tbody>
 </table>
@@ -2752,7 +2752,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：mfa-country-codes
 
-<Frame>![mfa-country-codesの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-country-codes.png)</Frame>
+<Frame>![mfa-country-codesの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-country-codes.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2763,22 +2763,22 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>国番号を選択してください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>戻る</td>
-<td><code>backText</code></td>
+<td>`backText`</td>
 </tr>
 <tr>
 <td>国番号の選択</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-sms-enrollment
 
-<Frame>![mfa-sms-enrollmentの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-sms-enrollment.png)</Frame>
+<Frame>![mfa-sms-enrollmentの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-sms-enrollment.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2789,66 +2789,66 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>テキストメッセージを使用してログインするには電話番号を入力してください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>アカウントのセキュリティ保護</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>下に電話番号を入力してください。次の画面で入力するための数字コードがSMSで送られてきます。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>電話番号を入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>SMSの送信に問題が発生しました</td>
-<td><code>send-sms-failed</code></td>
+<td>`send-sms-failed`</td>
 </tr>
 <tr>
 <td>SMSを送れませんでした。後ほど再度お試しください。</td>
-<td><code>sms-authenticator-error</code></td>
+<td>`sms-authenticator-error`</td>
 </tr>
 <tr>
 <td>電話番号には数字のみを入力してください。</td>
-<td><code>invalid-phone-format</code></td>
+<td>`invalid-phone-format`</td>
 </tr>
 <tr>
 <td>電話番号が無効なようです。確認して再度お試しください。</td>
-<td><code>invalid-phone</code></td>
+<td>`invalid-phone`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-sms</code></td>
+<td>`too-many-sms`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 <tr>
 <td>電話番号を入力してください</td>
-<td><code>no-phone</code></td>
+<td>`no-phone`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-sms-challenge
 
-<Frame>![mfa-sms-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-sms-challenge.png)</Frame>
+<Frame>![mfa-sms-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-sms-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2859,102 +2859,102 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ログインするには、電話コードを入力してください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>IDを検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>次の番号にテキストメッセージを送りました：</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>編集</td>
-<td><code>editText</code></td>
+<td>`editText`</td>
 </tr>
 <tr>
 <td>電話番号を編集する</td>
-<td><code>editLinkScreenReadableText</code></td>
+<td>`editLinkScreenReadableText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>6桁のコードを入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>30日間このデバイスを記憶する</td>
-<td><code>rememberMeText</code></td>
+<td>`rememberMeText`</td>
 </tr>
 <tr>
 <td>再送</td>
-<td><code>resendActionText</code></td>
+<td>`resendActionText`</td>
 </tr>
 <tr>
 <td>コードが届きませんか？</td>
-<td><code>resendText</code></td>
+<td>`resendText`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>resendVoiceActionSeparatorTextBefore</code></td>
+<td>`resendVoiceActionSeparatorTextBefore`</td>
 </tr>
 <tr>
 <td>電話をかけてもらう</td>
-<td><code>resendVoiceActionText</code></td>
+<td>`resendVoiceActionText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>OTPコードは6桁の数字である必要があります</td>
-<td><code>invalid-otp-code-format</code></td>
+<td>`invalid-otp-code-format`</td>
 </tr>
 <tr>
 <td>入力したコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>SMSの送信に問題が生じました</td>
-<td><code>send-sms-failed</code></td>
+<td>`send-sms-failed`</td>
 </tr>
 <tr>
 <td>コードを検証できませんでした。後ほど再度お試しください。</td>
-<td><code>authenticator-error</code></td>
+<td>`authenticator-error`</td>
 </tr>
 <tr>
 <td>SMSを送信できませんでした。後ほど再度お試しください。</td>
-<td><code>sms-authenticator-error</code></td>
+<td>`sms-authenticator-error`</td>
 </tr>
 <tr>
 <td>通知が送信されませんでした。コードを再送してみてください。</td>
-<td><code>no-transaction-in-progress</code></td>
+<td>`no-transaction-in-progress`</td>
 </tr>
 <tr>
 <td>失敗したコードが多すぎます。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-failures</code></td>
+<td>`too-many-failures`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-sms</code></td>
+<td>`too-many-sms`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-sms-list
 
-<Frame>![mfa-sms-listの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-sms-list.png)</Frame>
+<Frame>![mfa-sms-listの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-sms-list.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2965,15 +2965,15 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>利用可能な電話番号のリスト ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>戻る</td>
-<td><code>backText</code></td>
+<td>`backText`</td>
 </tr>
 <tr>
 <td>登録済み電話番号</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 </tbody>
 </table>
@@ -2984,7 +2984,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：mfa-voice-enrollment
 
-<Frame>![mfa-voice-enrollmentの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-voice-enrollment.png)</Frame>
+<Frame>![mfa-voice-enrollmentの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-voice-enrollment.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -2995,62 +2995,62 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>電話コードを使用してログインするには電話番号を入力してください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>アカウントのセキュリティ保護</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>下に電話番号を入力してください。次の画面で入力するためのコードが、その番号宛に音声通話で伝えられます。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>電話番号を入力する</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>SMSの送信に問題が発生しました</td>
-<td><code>send-sms-failed</code></td>
+<td>`send-sms-failed`</td>
 </tr>
 <tr>
 <td>電話番号には数字のみを含められます。</td>
-<td><code>invalid-phone-format</code></td>
+<td>`invalid-phone-format`</td>
 </tr>
 <tr>
 <td>電話番号が無効なようです。確認して再度お試しください。</td>
-<td><code>invalid-phone</code></td>
+<td>`invalid-phone`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-sms</code></td>
+<td>`too-many-sms`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 <tr>
 <td>電話番号を入力してください</td>
-<td><code>no-phone</code></td>
+<td>`no-phone`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-voice-challenge
 
-<Frame>![mfa-voice-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-voice-challenge.png)</Frame>
+<Frame>![mfa-voice-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-voice-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3061,99 +3061,99 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>${clientName}にログインするためには、電話コードを入力してください</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>次の電話番号に音声電話を通して6桁のコードを送りました：</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>編集</td>
-<td><code>editText</code></td>
+<td>`editText`</td>
 </tr>
 <tr>
 <td>電話番号を編集する</td>
-<td><code>editLinkScreenReadableText</code></td>
+<td>`editLinkScreenReadableText`</td>
 </tr>
 <tr>
 <td>別の電話番号を選択してください。</td>
-<td><code>changePhoneText</code></td>
+<td>`changePhoneText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>6桁のコードを入力する</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>30日間このデバイスを記憶する</td>
-<td><code>rememberMeText</code></td>
+<td>`rememberMeText`</td>
 </tr>
 <tr>
 <td>かけ直す</td>
-<td><code>resendActionText</code></td>
+<td>`resendActionText`</td>
 </tr>
 <tr>
 <td>電話がかかってきませんでしたか？</td>
-<td><code>resendText</code></td>
+<td>`resendText`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>resendSmsActionSeparatorTextBefore</code></td>
+<td>`resendSmsActionSeparatorTextBefore`</td>
 </tr>
 <tr>
 <td>テキストを送る</td>
-<td><code>resendSmsActionText</code></td>
+<td>`resendSmsActionText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>OTPコードは6桁の数字である必要があります</td>
-<td><code>invalid-otp-code-format</code></td>
+<td>`invalid-otp-code-format`</td>
 </tr>
 <tr>
 <td>入力したコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>音声電話をかける際に問題が生じました</td>
-<td><code>send-voice-failed</code></td>
+<td>`send-voice-failed`</td>
 </tr>
 <tr>
 <td>コードを検証できませんでした。後ほど再度お試しください。</td>
-<td><code>authenticator-error</code></td>
+<td>`authenticator-error`</td>
 </tr>
 <tr>
 <td>音声電話をかけることができませんでした。後ほど再度お試しください。</td>
-<td><code>voice-authenticator-error</code></td>
+<td>`voice-authenticator-error`</td>
 </tr>
 <tr>
 <td>通知が送信されませんでした。コードを再送してみてください。</td>
-<td><code>no-transaction-in-progress</code></td>
+<td>`no-transaction-in-progress`</td>
 </tr>
 <tr>
 <td>失敗したコードが多すぎます。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-failures</code></td>
+<td>`too-many-failures`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-voice</code></td>
+<td>`too-many-voice`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 </tbody>
 </table>
@@ -3164,7 +3164,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：mfa-webauthn-platform-enrollment
 
-<Frame>![mfa-webauthn-enrollmentの参考スクリーンショット](/docs/media/articles/universal-login/text-customization/mfa-webauth-platform-enrollment.png)</Frame>
+<Frame>![mfa-webauthn-enrollmentの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-webauth-platform-enrollment.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3175,54 +3175,54 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>このデバイスでより素早くログインする ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>このデバイスでより素早くログインする</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>このデバイスを信用しますか？このデバイスの指紋または顔認証を使用することで、次回から迅速かつ安全にログインすることができます。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>デバイス承認の待機中</td>
-<td><code>awaitingConfirmation</code></td>
+<td>`awaitingConfirmation`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>continueButtonText</code></td>
+<td>`continueButtonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>あとで知らせる</td>
-<td><code>snoozeEnrollmentButtonText</code></td>
+<td>`snoozeEnrollmentButtonText`</td>
 </tr>
 <tr>
 <td>このデバイスでは行わない</td>
-<td><code>refuseAddingDeviceText</code></td>
+<td>`refuseAddingDeviceText`</td>
 </tr>
 <tr>
 <td>あとで</td>
-<td><code>skipAddingDeviceText</code></td>
+<td>`skipAddingDeviceText`</td>
 </tr>
 <tr>
 <td>デバイスエンロールメントを始めることができませんでした。後ほど再度お試しください。</td>
-<td><code>webauthn-platform-associate-error</code></td>
+<td>`webauthn-platform-associate-error`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-webauthn-roaming-enrollment
 
-<Frame>![mfa-webauthn-guidance-enrollmentの参考スクリーンショット](/docs/media/articles/universal-login/text-customization/mfa-webauth-roaming-enrollment.png)</Frame>
+<Frame>![mfa-webauthn-guidance-enrollmentの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-webauth-roaming-enrollment.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3233,54 +3233,54 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>セキュリティキーを登録する${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>セキュリティキーの追加</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>セキュリティキーは追加の認証要素として使用できます。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>セキュリティキーを待っています</td>
-<td><code>awaitingConfirmation</code></td>
+<td>`awaitingConfirmation`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>セキュリティキーを使用する</td>
-<td><code>continueButtonText</code></td>
+<td>`continueButtonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>セキュリティキーを接続して、続けてください。</td>
-<td><code>instructions1</code></td>
+<td>`instructions1`</td>
 </tr>
 <tr>
 <td>ブラウザーのステップに従ってください。</td>
-<td><code>instructions2</code></td>
+<td>`instructions2`</td>
 </tr>
 <tr>
 <td>あとで簡単に識別できるようにセキュリティキーに名前をつけてください。</td>
-<td><code>instructions3</code></td>
+<td>`instructions3`</td>
 </tr>
 <tr>
 <td>セキュリティキー登録を始めることができませんでした。後ほど再度お試しください。</td>
-<td><code>webauthn-associate-error</code></td>
+<td>`webauthn-associate-error`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-webauthn-platform-challenge
 
-<Frame>![mfa-webauthn-challenge-user-initiatedの参考スクリーンショット](/docs/media/articles/universal-login/text-customization/mfa-webauth-platform-challenge.png)</Frame>
+<Frame>![mfa-webauthn-challenge-user-initiatedの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-webauth-platform-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3291,50 +3291,50 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ログインするために指紋または顔認証を使用してください ${clientName}</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>下のボタンを押し、ブラウザーのステップに従ってログインしてください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>デバイス認証の待機中</td>
-<td><code>awaitingConfirmation</code></td>
+<td>`awaitingConfirmation`</td>
 </tr>
 <tr>
 <td>認証試行の失敗が多すぎます。後ほど再度お試しください。</td>
-<td><code>too-many-webauthn-challenge-attempts-error</code></td>
+<td>`too-many-webauthn-challenge-attempts-error`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>continueButtonText</code></td>
+<td>`continueButtonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>パスワードを使用する</td>
-<td><code>usePasswordText</code></td>
+<td>`usePasswordText`</td>
 </tr>
 <tr>
 <td>30日間このデバイスを記憶する</td>
-<td><code>rememberMeText</code></td>
+<td>`rememberMeText`</td>
 </tr>
 <tr>
 <td>デバイス検証を始められませんでした。後ほど再度お試しください。</td>
-<td><code>webauthn-platform-challenge-error</code></td>
+<td>`webauthn-platform-challenge-error`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-webauthn-roaming-challenge
 
-<Frame>![mfa-webauthn-challenge-user-initiatedの参考スクリーンショット](/docs/media/articles/universal-login/text-customization/mfa-webauth-roaming-challenge.png)</Frame>
+<Frame>![mfa-webauthn-challenge-user-initiatedの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-webauth-roaming-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3345,50 +3345,50 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>ログインするにはセキュリティキーを使用する ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>セキュリティキーはお手元に控えておいてください。続けると、使用を促されます。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>セキュリティキーを待っています</td>
-<td><code>awaitingConfirmation</code></td>
+<td>`awaitingConfirmation`</td>
 </tr>
 <tr>
 <td>認証試行の失敗回数が多すぎます。後ほど再度お試しください。</td>
-<td><code>too-many-webauthn-challenge-attempts-error</code></td>
+<td>`too-many-webauthn-challenge-attempts-error`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>セキュリティキーを使用する</td>
-<td><code>continueButtonText</code></td>
+<td>`continueButtonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>30日間このデバイスを記憶する</td>
-<td><code>rememberMeText</code></td>
+<td>`rememberMeText`</td>
 </tr>
 <tr>
 <td>セキュリティキー検証を始めることができませんでした。後ほど再度お試しください。</td>
-<td><code>webauthn-challenge-error</code></td>
+<td>`webauthn-challenge-error`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-webauthn-change-key-nickname
 
-<Frame>![mfa-webauthn-change-key-nicknameの参考スクリーンショット](/docs/media/articles/universal-login/text-customization/mfa-webauth-change-key-nickname.png)</Frame>
+<Frame>![mfa-webauthn-change-key-nicknameの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-webauth-change-key-nickname.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3399,19 +3399,19 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>セキュリティキーに名前をつける ${clientName}</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>複数のキーを持っている場合、このエイリアスが正しいキーの識別に役立ちます。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>${userName}のキー</td>
-<td><code>nickname</code></td>
+<td>`nickname`</td>
 </tr>
 <tr>
 <td>セキュリティキー名</td>
-<td><code>nicknamePlaceholder</code></td>
+<td>`nicknamePlaceholder`</td>
 </tr>
 <tr>
 <td>デバイスに名前をつける</td>
@@ -3419,58 +3419,58 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>複数のデバイスを持っている場合、このエイリアスが正しいキーの識別に役立ちます。</td>
-<td><code>descriptionPlatform</code></td>
+<td>`descriptionPlatform`</td>
 </tr>
 <tr>
 <td>${userName}の${deviceName}</td>
-<td><code>nicknamePlatform</code></td>
+<td>`nicknamePlatform`</td>
 </tr>
 <tr>
 <td>デバイス名</td>
-<td><code>nicknamePlaceholderPlatform</code></td>
+<td>`nicknamePlaceholderPlatform`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>キー名をアップデートできませんでした。後ほど再度お試しください。</td>
-<td><code>webauthn-patch-nickname-error</code></td>
+<td>`webauthn-patch-nickname-error`</td>
 </tr>
 <tr>
 <td>デバイス名をアップデートできませんでした。後ほど再度お試しください。</td>
-<td><code>webauthn-platform-patch-nickname-error</code></td>
+<td>`webauthn-platform-patch-nickname-error`</td>
 </tr>
 <tr>
 <td>名前が必要です</td>
-<td><code>no-nickname</code></td>
+<td>`no-nickname`</td>
 </tr>
 <tr>
 <td>名前が短すぎます</td>
-<td><code>nickname-too-short</code></td>
+<td>`nickname-too-short`</td>
 </tr>
 <tr>
 <td>名前が長すぎます</td>
-<td><code>nickname-too-long</code></td>
+<td>`nickname-too-long`</td>
 </tr>
 <tr>
 <td>情報の取得中にエラーが発生しました。後ほど再度お試しください。</td>
-<td><code>error-while-retrieving-authenticator</code></td>
+<td>`error-while-retrieving-authenticator`</td>
 </tr>
 <tr>
 <td>名前の保存中にエラーが発生しました。後ほど再度お試しください。</td>
-<td><code>error-while-patching</code></td>
+<td>`error-while-patching`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-webauthn-enrollment-success
 
-<Frame>![mfa-webauthn-enrollment-successの参考スクリーンショット](/docs/media/articles/universal-login/text-customization/mfa-webauthn-enrollment-success.png)</Frame>
+<Frame>![mfa-webauthn-enrollment-successの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-webauthn-enrollment-success.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3481,34 +3481,34 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>セキュリティキー成功 ${clientName}</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>デバイスの登録成功 ${clientName}</td>
-<td><code>titlePlatform</code></td>
+<td>`titlePlatform`</td>
 </tr>
 <tr>
 <td>セキュリティキーの登録に成功しました。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>デバイスの登録に成功しました。</td>
-<td><code>descriptionPlatform</code></td>
+<td>`descriptionPlatform`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-webauthn-error
 
-<Frame>![mfa-webauthn-errorの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-webauthn-error.png)</Frame>
+<Frame>![mfa-webauthn-errorの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-webauthn-error.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3519,11 +3519,11 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>再度お試しください</td>
-<td><code>tryAgainLinkText</code></td>
+<td>`tryAgainLinkText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>セキュリティキー登録エラー</td>
@@ -3531,7 +3531,7 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>セキュリティキーの検証に失敗しました</td>
-<td><code>errorTitleChallenge</code></td>
+<td>`errorTitleChallenge`</td>
 </tr>
 <tr>
 <td>デバイス登録エラー</td>
@@ -3539,30 +3539,30 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>問題が発生しました</td>
-<td><code>errorTitlePlatformChallenge</code></td>
+<td>`errorTitlePlatformChallenge`</td>
 </tr>
 <tr>
 <td>問題が発生しました。再試行するか、別の方法をお試しください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>すでにこのデバイスを登録している場合、再度お試しください。していない場合は、別の方法をお試しください。</td>
-<td><code>descriptionPlatform</code></td>
+<td>`descriptionPlatform`</td>
 </tr>
 <tr>
 <td>結構です</td>
-<td><code>refuseAddingAuthenticatorText</code></td>
+<td>`refuseAddingAuthenticatorText`</td>
 </tr>
 <tr>
 <td>パスワードを使用する</td>
-<td><code>usePasswordText</code></td>
+<td>`usePasswordText`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：mfa-webauthn-not-available-error
 
-<Frame>![mfa-webauthn-not-available-errorの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/mfa-webauthn-not-available-error.png)</Frame>
+<Frame>![mfa-webauthn-not-available-errorの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-webauthn-not-available-error.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3573,23 +3573,23 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>セキュリティキーはサポートされていません${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>セキュリティキーはサポートされていません。</td>
-<td><code>errorTitle</code></td>
+<td>`errorTitle`</td>
 </tr>
 <tr>
 <td>申し訳ありませんが、ブラウザーまたはデバイスがセキュリティキーをサポートしていません。別のブラウザーを試すか、別のデバイスからログインしてください。</td>
-<td><code>errorDescription</code></td>
+<td>`errorDescription`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>パスワードを使用する</td>
-<td><code>usePasswordText</code></td>
+<td>`usePasswordText`</td>
 </tr>
 </tbody>
 </table>
@@ -3600,7 +3600,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：organization-selection
 
-<Frame>![organization-selectionの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/organization-selection.png)</Frame>
+<Frame>![organization-selectionの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/organization-selection.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3611,38 +3611,38 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>organizationを入力してください ${clientName}</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>続けるには${companyName}のOrganizationを入力してください</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>Organization名を入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>Organizationの入力</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>入力されたorganizationは無効です</td>
-<td><code>invalid-organization</code></td>
+<td>`invalid-organization`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：organization-picker
 
-<Frame>![organization-pickerの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/organization-picker.png)</Frame>
+<Frame>![organization-pickerの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/organization-picker.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3653,35 +3653,35 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>Organizationを選択してください</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>は複数のorganizationに含まれています。</td>
-<td><code>loggedInText</code></td>
+<td>`loggedInText`</td>
 </tr>
 <tr>
 <td>は個人アカウントとして使用されていて、かつ複数のorganizationに含まれています。</td>
-<td><code>loggedInTextB2C</code></td>
+<td>`loggedInTextB2C`</td>
 </tr>
 <tr>
 <td>Organizationの選択</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>アカウントを選択して続行</td>
-<td><code>titleB2C</code></td>
+<td>`titleB2C`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>separatorText</code></td>
+<td>`separatorText`</td>
 </tr>
 <tr>
 <td>個人アカウントで続行</td>
-<td><code>continueTextB2C</code></td>
+<td>`continueTextB2C`</td>
 </tr>
 </tbody>
 </table>
@@ -3692,7 +3692,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：reset-password-request
 
-<Frame>![reset-password-requestの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/reset-password-request.png)</Frame>
+<Frame>![reset-password-requestの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/reset-password-request.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3707,150 +3707,150 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>パスワードをお忘れですか？</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>&lt;%= "${clientName}" %&gt;に戻る</td>
-<td><code>backToLoginLinkText</code></td>
+<td>`backToLoginLinkText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>メールアドレスを入力すると、パスワードリセットについての案内が送信されます。</td>
-<td><code>descriptionEmail</code></td>
+<td>`descriptionEmail`</td>
 </tr>
 <tr>
 <td>ユーザー名を入力すると、パスワードリセットについての案内が送信されます。</td>
-<td><code>descriptionUsername</code></td>
+<td>`descriptionUsername`</td>
 </tr>
 <tr>
 <td>メールアドレス</td>
-<td><code>placeholderEmail</code></td>
+<td>`placeholderEmail`</td>
 </tr>
 <tr>
 <td>ユーザー名</td>
-<td><code>placeholderUsername</code></td>
+<td>`placeholderUsername`</td>
 </tr>
 <tr>
 <td>メールアドレス</td>
-<td><code>emailPlaceholder</code></td>
+<td>`emailPlaceholder`</td>
 </tr>
 <tr>
 <td>ユーザー名</td>
-<td><code>usernamePlaceholder</code></td>
+<td>`usernamePlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号</td>
-<td><code>phonePlaceholder</code></td>
+<td>`phonePlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号、ユーザー名またはメールアドレス</td>
-<td><code>phoneOrUsernameOrEmailPlaceholder</code></td>
+<td>`phoneOrUsernameOrEmailPlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号またはメールアドレス</td>
-<td><code>phoneOrEmailPlaceholder</code></td>
+<td>`phoneOrEmailPlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号またはユーザー名</td>
-<td><code>phoneOrUsernamePlaceholder</code></td>
+<td>`phoneOrUsernamePlaceholder`</td>
 </tr>
 <tr>
 <td>ユーザー名またはメールアドレス</td>
-<td><code>usernameOrEmailPlaceholder</code></td>
+<td>`usernameOrEmailPlaceholder`</td>
 </tr>
 <tr>
 <td>メールアドレスを入力すると、パスワードリセットについての案内が送信されます。</td>
-<td><code>emailDescription</code></td>
+<td>`emailDescription`</td>
 </tr>
 <tr>
 <td>ユーザー名を入力すると、パスワードリセットについての案内が送信されます。</td>
-<td><code>usernameDescription</code></td>
+<td>`usernameDescription`</td>
 </tr>
 <tr>
 <td>電話番号を入力すると、パスワードリセットについての案内が送信されます。</td>
-<td><code>phoneDescription</code></td>
+<td>`phoneDescription`</td>
 </tr>
 <tr>
 <td>電話番号、ユーザー名またはメールアドレスを入力すると、パスワードリセットについての案内が送信されます。</td>
-<td><code>phoneOrUsernameOrEmailDescription</code></td>
+<td>`phoneOrUsernameOrEmailDescription`</td>
 </tr>
 <tr>
 <td>電話番号またはメールアドレスを入力すると、パスワードリセットについての案内が送信されます。</td>
-<td><code>phoneOrEmailDescription</code></td>
+<td>`phoneOrEmailDescription`</td>
 </tr>
 <tr>
 <td>電話番またはユーザー名を入力すると、パスワードリセットについての案内が送信されます。</td>
-<td><code>phoneOrUsernameDescription</code></td>
+<td>`phoneOrUsernameDescription`</td>
 </tr>
 <tr>
 <td>ユーザー名またはメールアドレスを入力すると、パスワードリセットについての案内が送信されます。</td>
-<td><code>usernameOrEmailDescription</code></td>
+<td>`usernameOrEmailDescription`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>このチケットは期限切れです。</td>
-<td><code>auth0-users-expired-ticket</code></td>
+<td>`auth0-users-expired-ticket`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>custom-script-error-code</code></td>
+<td>`custom-script-error-code`</td>
 </tr>
 <tr>
 <td>このチケットは使用済みです。</td>
-<td><code>auth0-users-used-ticket</code></td>
+<td>`auth0-users-used-ticket`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください</td>
-<td><code>auth0-users-validation</code></td>
+<td>`auth0-users-validation`</td>
 </tr>
 <tr>
 <td>メールの送信に問題が発生しました。後ほど再度お試しください。</td>
-<td><code>reset-password-error</code></td>
+<td>`reset-password-error`</td>
 </tr>
 <tr>
 <td>メール数の上限に達しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-email</code></td>
+<td>`too-many-email`</td>
 </tr>
 <tr>
 <td>メール数の上限に達しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-requests</code></td>
+<td>`too-many-requests`</td>
 </tr>
 <tr>
 <td>メールアドレスを入力してください</td>
-<td><code>no-email</code></td>
+<td>`no-email`</td>
 </tr>
 <tr>
 <td>ユーザー名が必要です</td>
-<td><code>no-username</code></td>
+<td>`no-username`</td>
 </tr>
 <tr>
 <td>電話番号を入力してください</td>
-<td><code>no-phone_number</code></td>
+<td>`no-phone_number`</td>
 </tr>
 <tr>
 <td>電話番号が無効です。</td>
-<td><code>invalid-phone-format</code></td>
+<td>`invalid-phone-format`</td>
 </tr>
 <tr>
 <td>無効なログインIDが入力されました</td>
-<td><code>invalid-login-id</code></td>
+<td>`invalid-login-id`</td>
 </tr>
 <tr>
 <td>有効なメールアドレスまたは電話番号を入力してください。電話番号には国番号が必要です。</td>
-<td><code>invalid-email-phone</code></td>
+<td>`invalid-email-phone`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：reset-password-email
 
-<Frame>![reset-password-emailの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/reset-password-email.png)</Frame>
+<Frame>![reset-password-emailの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/reset-password-email.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3865,30 +3865,30 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>メールの確認</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>戻る</td>
-<td><code>backButtonText</code></td>
+<td>`backButtonText`</td>
 </tr>
 <tr>
 <td>メールアドレス&lt;%= "${email}" %&gt;を確認し、パスワードリセットのご案内について確認してください。</td>
-<td><code>emailDescription</code></td>
+<td>`emailDescription`</td>
 </tr>
 <tr>
 <td>メールを再送する</td>
-<td><code>resendLinkText</code></td>
+<td>`resendLinkText`</td>
 </tr>
 <tr>
 <td>ユーザー名に関連付いたメールアドレス&lt;%= "${email}" %&gt;をチェックし、パスワードリセットのご案内について確認してください。</td>
-<td><code>usernameDescription</code></td>
+<td>`usernameDescription`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：reset-password
 
-<Frame>![reset-passwordの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/reset-password.png)</Frame>
+<Frame>![reset-passwordの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/reset-password.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3903,86 +3903,86 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>パスワードの変更</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>パスワードを変更するには、下に新しいパスワードを入力してください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>パスワードをリセットする</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>新しいパスワード</td>
-<td><code>passwordPlaceholder</code></td>
+<td>`passwordPlaceholder`</td>
 </tr>
 <tr>
 <td>新しいパスワードを再入力してください</td>
-<td><code>reEnterpasswordPlaceholder</code></td>
+<td>`reEnterpasswordPlaceholder`</td>
 </tr>
 <tr>
 <td>パスワードには次のものを含める必要があります：</td>
-<td><code>passwordSecurityText</code></td>
+<td>`passwordSecurityText`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>パスワードを表示する</td>
-<td><code>showPasswordText</code></td>
+<td>`showPasswordText`</td>
 </tr>
 <tr>
 <td>パスワードを表示しない</td>
-<td><code>hidePasswordText</code></td>
+<td>`hidePasswordText`</td>
 </tr>
 <tr>
 <td>失敗</td>
-<td><code>accessibilityError</code></td>
+<td>`accessibilityError`</td>
 </tr>
 <tr>
 <td>成功</td>
-<td><code>accessibilityValid</code></td>
+<td>`accessibilityValid`</td>
 </tr>
 <tr>
 <td>このチケットは期限切れです。</td>
-<td><code>auth0-users-expired-ticket</code></td>
+<td>`auth0-users-expired-ticket`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>custom-script-error-code</code></td>
+<td>`custom-script-error-code`</td>
 </tr>
 <tr>
 <td>このチケットは使用済みです。</td>
-<td><code>auth0-users-used-ticket</code></td>
+<td>`auth0-users-used-ticket`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>auth0-users-validation</code></td>
+<td>`auth0-users-validation`</td>
 </tr>
 <tr>
 <td>新しいパスワードを入力してください。</td>
-<td><code>no-password-reset</code></td>
+<td>`no-password-reset`</td>
 </tr>
 <tr>
 <td>新しいパスワードの確認が完了していません</td>
-<td><code>no-re-enter-password</code></td>
+<td>`no-re-enter-password`</td>
 </tr>
 <tr>
 <td>パスワードにユーザー情報が含まれています</td>
-<td><code>password-contains-user-information</code></td>
+<td>`password-contains-user-information`</td>
 </tr>
 <tr>
 <td>パスワードが一致しません</td>
-<td><code>password-mismatch</code></td>
+<td>`password-mismatch`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：reset-password-success
 
-<Frame>![reset-password-successの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/reset-password-success.png)</Frame>
+<Frame>![reset-password-successの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/reset-password-success.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -3997,22 +3997,22 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>パスワードが変更されました！</td>
-<td><code>eventTitle</code></td>
+<td>`eventTitle`</td>
 </tr>
 <tr>
 <td>パスワードが無事に変更されました。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>&lt;%= "${clientName}" %&gt;に戻る</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：reset-password-error
 
-<Frame>![reset-password-errorの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/reset-password-error.png)</Frame>
+<Frame>![reset-password-errorの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/reset-password-error.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -4027,58 +4027,58 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>&lt;%= "${clientName}" %&gt;に戻る</td>
-<td><code>backToLoginLinkText</code></td>
+<td>`backToLoginLinkText`</td>
 </tr>
 <tr>
 <td>パスワードをリセットするには、ログインページに戻り、［Forgot Your Password（パスワードをお忘れですか）］を選択して、新しいメールが送られるようにしてください。</td>
-<td><code>descriptionExpired</code></td>
+<td>`descriptionExpired`</td>
 </tr>
 <tr>
 <td>問題が発生しました。ログインページに戻り、［Forgot Your Password（パスワードをお忘れですか）］を選択して再度お試しください。</td>
-<td><code>descriptionGeneric</code></td>
+<td>`descriptionGeneric`</td>
 </tr>
 <tr>
 <td>このリンクはすでに使用されています。パスワードをリセットするには、ログインページに戻り、［Forgot Your Password（パスワードをお忘れですか）］を選択して、新しいメールが送られるようにしてください。</td>
-<td><code>descriptionUsed</code></td>
+<td>`descriptionUsed`</td>
 </tr>
 <tr>
 <td>リンクが期限切れです</td>
-<td><code>eventTitleExpired</code></td>
+<td>`eventTitleExpired`</td>
 </tr>
 <tr>
 <td>再度お試しください</td>
-<td><code>eventTitleGeneric</code></td>
+<td>`eventTitleGeneric`</td>
 </tr>
 <tr>
 <td>無効なリンク</td>
-<td><code>eventTitleUsed</code></td>
+<td>`eventTitleUsed`</td>
 </tr>
 <tr>
 <td>このチケットは期限切れです。</td>
-<td><code>auth0-users-expired-ticket</code></td>
+<td>`auth0-users-expired-ticket`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>custom-script-error-code</code></td>
+<td>`custom-script-error-code`</td>
 </tr>
 <tr>
 <td>このチケットは使用済みです。</td>
-<td><code>auth0-users-used-ticket</code></td>
+<td>`auth0-users-used-ticket`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>auth0-users-validation</code></td>
+<td>`auth0-users-validation`</td>
 </tr>
 <tr>
 <td>メールの送信に問題が生じました。後ほど再度お試しください。</td>
-<td><code>reset-password-error</code></td>
+<td>`reset-password-error`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：reset-password-mfa-email-challenge
 
-<Frame>![reset-password-mfa-email-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/reset-password-mfa-email-challenge.png)</Frame>
+<Frame>![reset-password-mfa-email-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/reset-password-mfa-email-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -4093,78 +4093,78 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>戻る</td>
-<td><code>backText</code></td>
+<td>`backText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>コードをメールで次のアドレスに送りました：</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>コードを入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>30日間このデバイスを記憶する</td>
-<td><code>rememberMeText</code></td>
+<td>`rememberMeText`</td>
 </tr>
 <tr>
 <td>再送</td>
-<td><code>resendActionText</code></td>
+<td>`resendActionText`</td>
 </tr>
 <tr>
 <td>メールが届きませんか？</td>
-<td><code>resendText</code></td>
+<td>`resendText`</td>
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>OTPコードは6桁の数字である必要があります</td>
-<td><code>invalid-otp-code-format</code></td>
+<td>`invalid-otp-code-format`</td>
 </tr>
 <tr>
 <td>入力されたコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>コードを検証できませんでした。後ほど再度お試しください。</td>
-<td><code>authenticator-error</code></td>
+<td>`authenticator-error`</td>
 </tr>
 <tr>
 <td>通知を送信できませんでした。コードを再送してみてください。</td>
-<td><code>no-transaction-in-progress</code></td>
+<td>`no-transaction-in-progress`</td>
 </tr>
 <tr>
 <td>メール数の上限に達しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-email</code></td>
+<td>`too-many-email`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 <tr>
 <td>メールを送信できませんでした。後ほど再度お試しください。</td>
-<td><code>mfa-email-challenge-authenticator-error</code></td>
+<td>`mfa-email-challenge-authenticator-error`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：reset-password-mfa-otp-challenge
 
-<Frame>![reset-password-mfa-otp-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/reset-password-mfa-otp-challenge.png)</Frame>
+<Frame>![reset-password-mfa-otp-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/reset-password-mfa-otp-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -4179,54 +4179,54 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>お好きなワンタイムパスワードアプリケーションでコードを確認してください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>ワンタイムコードを入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>30日間このデバイスを記憶する</td>
-<td><code>rememberMeText</code></td>
+<td>`rememberMeText`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>パスワードを使用する</td>
-<td><code>usePasswordText</code></td>
+<td>`usePasswordText`</td>
 </tr>
 <tr>
 <td>コードを検証できませんでした。後ほど再度お試しください。</td>
-<td><code>authenticator-error</code></td>
+<td>`authenticator-error`</td>
 </tr>
 <tr>
 <td>失敗したコードが多すぎます。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-failures</code></td>
+<td>`too-many-failures`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：reset-password-mfa-phone-challenge
 
-<Frame>![reset-password-mfa-phone-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/reset-password-mfa-phone-challenge.png)</Frame>
+<Frame>![reset-password-mfa-phone-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/reset-password-mfa-phone-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -4241,82 +4241,82 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>次の電話番号に6桁のコードを送ります：</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>continueButtonText</code></td>
+<td>`continueButtonText`</td>
 </tr>
 <tr>
 <td>別の電話番号を選んでください。</td>
-<td><code>changePhoneText</code></td>
+<td>`changePhoneText`</td>
 </tr>
 <tr>
 <td>テキストメッセージ</td>
-<td><code>smsButtonText</code></td>
+<td>`smsButtonText`</td>
 </tr>
 <tr>
 <td>音声電話</td>
-<td><code>voiceButtonText</code></td>
+<td>`voiceButtonText`</td>
 </tr>
 <tr>
 <td>コードをどのように受け取りますか？</td>
-<td><code>chooseMessageTypeText</code></td>
+<td>`chooseMessageTypeText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>電話番号を入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>SMSの送信に問題が生じました</td>
-<td><code>send-sms-failed</code></td>
+<td>`send-sms-failed`</td>
 </tr>
 <tr>
 <td>音声電話に問題が生じました</td>
-<td><code>send-voice-failed</code></td>
+<td>`send-voice-failed`</td>
 </tr>
 <tr>
 <td>電話番号には数字のみを含めることができます。</td>
-<td><code>invalid-phone-format</code></td>
+<td>`invalid-phone-format`</td>
 </tr>
 <tr>
 <td>電話番号が無効のようです。確認して再度お試しください。</td>
-<td><code>invalid-phone</code></td>
+<td>`invalid-phone`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-sms</code></td>
+<td>`too-many-sms`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-voice</code></td>
+<td>`too-many-voice`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 <tr>
 <td>電話番号を入力してください</td>
-<td><code>no-phone</code></td>
+<td>`no-phone`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：reset-password-mfa-push-challenge-push
 
-<Frame>![reset-password-mfa-push-challenge-pushの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/reset-password-mfa-push-challenge-push.png)</Frame>
+<Frame>![reset-password-mfa-push-challenge-pushの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/reset-password-mfa-push-challenge-push.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -4331,82 +4331,82 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>&lt;%= "${appName}" %&gt;アプリを通して次のデバイスに通知を送りました：</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>デバイスで返信しました</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>30日間このデバイスを記憶する</td>
-<td><code>rememberMeText</code></td>
+<td>`rememberMeText`</td>
 </tr>
 <tr>
 <td>再送</td>
-<td><code>resendActionText</code></td>
+<td>`resendActionText`</td>
 </tr>
 <tr>
 <td>通知が届きませんか？</td>
-<td><code>resendText</code></td>
+<td>`resendText`</td>
 </tr>
 <tr>
 <td>コードを手動入力する</td>
-<td><code>enterOtpCode</code></td>
+<td>`enterOtpCode`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>separatorText</code></td>
+<td>`separatorText`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>モバイルデバイスで&lt;%= "${appName}" %&gt;アプリからの通知を許可する必要があります。</td>
-<td><code>challenge-transaction-pending</code></td>
+<td>`challenge-transaction-pending`</td>
 </tr>
 <tr>
 <td>承認が確認できていないので、少々お待ちください。</td>
-<td><code>polling-interval-exceeded</code></td>
+<td>`polling-interval-exceeded`</td>
 </tr>
 <tr>
 <td>通知要求が多すぎます。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-push</code></td>
+<td>`too-many-push`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 <tr>
 <td>確認を受信していません。コードをスキャンし直してください。</td>
-<td><code>mfa-push-verify-transaction-pending</code></td>
+<td>`mfa-push-verify-transaction-pending`</td>
 </tr>
 <tr>
 <td>登録を検証できませんでした。後ほど再度お試しください。</td>
-<td><code>mfa-push-verify-authenticator-error</code></td>
+<td>`mfa-push-verify-authenticator-error`</td>
 </tr>
 <tr>
 <td>通知を送信できませんでした。後ほど再度お試しください。</td>
-<td><code>mfa-push-challenge-authenticator-error</code></td>
+<td>`mfa-push-challenge-authenticator-error`</td>
 </tr>
 <tr>
 <td>通知が拒否されました</td>
-<td><code>transaction-rejected</code></td>
+<td>`transaction-rejected`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：reset-password-mfa-recovery-code-challenge
 
-<Frame>![reset-password-mfa-recovery-code-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/reset-password-mfa-recovery-code-challenge.png)</Frame>
+<Frame>![reset-password-mfa-recovery-code-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/reset-password-mfa-recovery-code-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -4421,58 +4421,58 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>最初の登録時に提供された復旧コードを入力する</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>復旧コードを入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>入力されたコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>復旧コードは24桁の英数字である必要があります</td>
-<td><code>invalid-code-format</code></td>
+<td>`invalid-code-format`</td>
 </tr>
 <tr>
 <td>コードを検証できませんでした。後ほど再度お試しください。</td>
-<td><code>authenticator-error</code></td>
+<td>`authenticator-error`</td>
 </tr>
 <tr>
 <td>コードを記録したことを確認してください</td>
-<td><code>no-confirmation</code></td>
+<td>`no-confirmation`</td>
 </tr>
 <tr>
 <td>失敗したコードが多すぎます。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-failures</code></td>
+<td>`too-many-failures`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：reset-password-mfa-sms-challenge
 
-<Frame>![reset-password-mfa-sms-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/reset-password-mfa-sms-challenge.png)</Frame>
+<Frame>![reset-password-mfa-sms-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/reset-password-mfa-sms-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -4487,98 +4487,98 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>次の宛先にテキストメッセージを送信しました：</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>編集</td>
-<td><code>editText</code></td>
+<td>`editText`</td>
 </tr>
 <tr>
 <td>電話番号を編集する</td>
-<td><code>editLinkScreenReadableText</code></td>
+<td>`editLinkScreenReadableText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>6桁のコードを入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>30日間このデバイスを記憶する</td>
-<td><code>rememberMeText</code></td>
+<td>`rememberMeText`</td>
 </tr>
 <tr>
 <td>再送</td>
-<td><code>resendActionText</code></td>
+<td>`resendActionText`</td>
 </tr>
 <tr>
 <td>コードが届きませんか？</td>
-<td><code>resendText</code></td>
+<td>`resendText`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>resendVoiceActionSeparatorTextBefore</code></td>
+<td>`resendVoiceActionSeparatorTextBefore`</td>
 </tr>
 <tr>
 <td>電話をかけてもらう</td>
-<td><code>resendVoiceActionText</code></td>
+<td>`resendVoiceActionText`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>OTPコードは6桁の数字である必要があります</td>
-<td><code>invalid-otp-code-format</code></td>
+<td>`invalid-otp-code-format`</td>
 </tr>
 <tr>
 <td>入力したコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>SMSの送信に問題が生じました</td>
-<td><code>send-sms-failed</code></td>
+<td>`send-sms-failed`</td>
 </tr>
 <tr>
 <td>コードを検証できませんでした。後ほど再度お試しください。</td>
-<td><code>authenticator-error</code></td>
+<td>`authenticator-error`</td>
 </tr>
 <tr>
 <td>SMSを送信できませんでした。後ほど再度お試しください。</td>
-<td><code>sms-authenticator-error</code></td>
+<td>`sms-authenticator-error`</td>
 </tr>
 <tr>
 <td>通知が送信されませんでした。コードを再送してみてください。</td>
-<td><code>no-transaction-in-progress</code></td>
+<td>`no-transaction-in-progress`</td>
 </tr>
 <tr>
 <td>失敗したコードが多すぎます。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-failures</code></td>
+<td>`too-many-failures`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-sms</code></td>
+<td>`too-many-sms`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：reset-password-mfa-voice-challenge
 
-<Frame>![reset-password-mfa-voice-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/reset-password-mfa-voice-challenge.png)</Frame>
+<Frame>![reset-password-mfa-voice-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/reset-password-mfa-voice-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -4593,102 +4593,102 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>次の電話番号に音声電話を通して6桁のコードを送りました：</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>編集</td>
-<td><code>editText</code></td>
+<td>`editText`</td>
 </tr>
 <tr>
 <td>電話番号を編集する</td>
-<td><code>editLinkScreenReadableText</code></td>
+<td>`editLinkScreenReadableText`</td>
 </tr>
 <tr>
 <td>別の電話番号を選択してください。</td>
-<td><code>changePhoneText</code></td>
+<td>`changePhoneText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>6桁のコードを入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>30日間このデバイスを記憶する</td>
-<td><code>rememberMeText</code></td>
+<td>`rememberMeText`</td>
 </tr>
 <tr>
 <td>かけ直す</td>
-<td><code>resendActionText</code></td>
+<td>`resendActionText`</td>
 </tr>
 <tr>
 <td>電話がかかってきませんか？</td>
-<td><code>resendText</code></td>
+<td>`resendText`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>resendSmsActionSeparatorTextBefore</code></td>
+<td>`resendSmsActionSeparatorTextBefore`</td>
 </tr>
 <tr>
 <td>テキストを送る</td>
-<td><code>resendSmsActionText</code></td>
+<td>`resendSmsActionText`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>OTPコードは6桁の数字である必要があります</td>
-<td><code>invalid-otp-code-format</code></td>
+<td>`invalid-otp-code-format`</td>
 </tr>
 <tr>
 <td>入力したコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>音声電話をかける際に問題が生じました</td>
-<td><code>send-voice-failed</code></td>
+<td>`send-voice-failed`</td>
 </tr>
 <tr>
 <td>コードを検証できませんでした。後ほど再度お試しください。</td>
-<td><code>authenticator-error</code></td>
+<td>`authenticator-error`</td>
 </tr>
 <tr>
 <td>音声電話をかけることができませんでした。後ほど再度お試しください。</td>
-<td><code>voice-authenticator-error</code></td>
+<td>`voice-authenticator-error`</td>
 </tr>
 <tr>
 <td>通知が送信されませんでした。コードを再送してみてください。</td>
-<td><code>no-transaction-in-progress</code></td>
+<td>`no-transaction-in-progress`</td>
 </tr>
 <tr>
 <td>失敗したコードが多すぎます。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-failures</code></td>
+<td>`too-many-failures`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-voice</code></td>
+<td>`too-many-voice`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：reset-password-mfa-webauthn-platform-challenge
 
-<Frame>![reset-password-mfa-webauthn-platform-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/reset-password-mfa-webauthn-platform-challenge.png)</Frame>
+<Frame>![reset-password-mfa-webauthn-platform-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/reset-password-mfa-webauthn-platform-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -4699,7 +4699,7 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>指紋または顔認証を使って検証してください</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>指紋または顔認証を使ってパスワードをリセット</td>
@@ -4707,46 +4707,46 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>下のボタンを押し、ブラウザーのステップに従ってログインしてください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>デバイス認証の待機中</td>
-<td><code>awaitingConfirmation</code></td>
+<td>`awaitingConfirmation`</td>
 </tr>
 <tr>
 <td>認証試行の失敗回数が多すぎます。後ほど再度お試しください。</td>
-<td><code>too-many-webauthn-challenge-attempts-error</code></td>
+<td>`too-many-webauthn-challenge-attempts-error`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>continueButtonText</code></td>
+<td>`continueButtonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>パスワードを使用する</td>
-<td><code>usePasswordText</code></td>
+<td>`usePasswordText`</td>
 </tr>
 <tr>
 <td>30日間このデバイスを記憶する</td>
-<td><code>rememberMeText</code></td>
+<td>`rememberMeText`</td>
 </tr>
 <tr>
 <td>デバイス検証を始められませんでした。後ほど再度お試しください。</td>
-<td><code>webauthn-platform-challenge-error</code></td>
+<td>`webauthn-platform-challenge-error`</td>
 </tr>
 </tbody>
 </table>
 
 ## スクリーン：reset-password-mfa-webauthn-roaming-challenge
 
-<Frame>![reset-password-mfa-webauthn-roaming-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/reset-password-mfa-webauthn-roaming-challenge.png)</Frame>
+<Frame>![reset-password-mfa-webauthn-roaming-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/reset-password-mfa-webauthn-roaming-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -4761,39 +4761,39 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>セキュリティキーはお手元に控えておいてください。この後、使用を促されます。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>セキュリティキーを待っています</td>
-<td><code>awaitingConfirmation</code></td>
+<td>`awaitingConfirmation`</td>
 </tr>
 <tr>
 <td>認証試行の失敗回数が多すぎます。後ほど再度お試しください。</td>
-<td><code>too-many-webauthn-challenge-attempts-error</code></td>
+<td>`too-many-webauthn-challenge-attempts-error`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>セキュリティキーを使用する</td>
-<td><code>continueButtonText</code></td>
+<td>`continueButtonText`</td>
 </tr>
 <tr>
 <td>別の方法を試す</td>
-<td><code>pickAuthenticatorText</code></td>
+<td>`pickAuthenticatorText`</td>
 </tr>
 <tr>
 <td>30日間このデバイスを記憶する</td>
-<td><code>rememberMeText</code></td>
+<td>`rememberMeText`</td>
 </tr>
 <tr>
 <td>セキュリティキー検証を始めることができませんでした。後ほど再度お試しください。</td>
-<td><code>webauthn-challenge-error</code></td>
+<td>`webauthn-challenge-error`</td>
 </tr>
 </tbody>
 </table>
@@ -4804,7 +4804,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：passkey-enrollment
 
-<Frame>![passkey-enrollmentの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/passkey-enrollment.png)</Frame>
+<Frame>![passkey-enrollmentの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/passkey-enrollment.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -4814,108 +4814,108 @@ accordion.expand_all/accordion.collapse_all
 </thead>
 <tbody>
 <tr>
-<td>このデバイス上で<code>${clientName}</code>のパスキーを作成します。</td>
-<td><code>title</code></td>
+<td>このデバイス上で`${clientName}`のパスキーを作成します。</td>
+<td>`title`</td>
 </tr>
 <tr>
-<td><code>${clientName}</code>にログインします。</td>
-<td><code>pageTitle</code></td>
+<td>`${clientName}`にログインします。</td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
-<td><code>${companyName}</code>にログインして<code>${clientName}</code>へ続行します。</td>
-<td><code>description</code></td>
+<td>`${companyName}`にログインして`${clientName}`へ続行します。</td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>パスワードを記憶する必要がありません。</td>
-<td><code>passkeyBenefit1Title</code></td>
+<td>`passkeyBenefit1Title`</td>
 </tr>
 <tr>
 <td>Webauthnプラットフォームのアイコン</td>
-<td><code>passkeyBenefit1ImgAltText</code></td>
+<td>`passkeyBenefit1ImgAltText`</td>
 </tr>
 <tr>
 <td>パスキーでは、指紋や顔などをログインに使えます。</td>
-<td><code>passkeyBenefit1Description</code></td>
+<td>`passkeyBenefit1Description`</td>
 </tr>
 <tr>
 <td>お手持ちのすべてのデバイスで動作します。</td>
-<td><code>passkeyBenefit2Title</code></td>
+<td>`passkeyBenefit2Title`</td>
 </tr>
 <tr>
 <td>デバイスグローブ</td>
-<td><code>passkeyBenefit2ImgAltText</code></td>
+<td>`passkeyBenefit2ImgAltText`</td>
 </tr>
 <tr>
 <td>同期したデバイスでパスキーが自動的に利用できるようになります。</td>
-<td><code>passkeyBenefit2Description</code></td>
+<td>`passkeyBenefit2Description`</td>
 </tr>
 <tr>
 <td>アカウントを安全に保ちます。</td>
-<td><code>passkeyBenefit3Title</code></td>
+<td>`passkeyBenefit3Title`</td>
 </tr>
 <tr>
 <td>チェックマークで保全します。</td>
-<td><code>passkeyBenefit3ImgAltText</code></td>
+<td>`passkeyBenefit3ImgAltText`</td>
 </tr>
 <tr>
 <td>パスキーはフィッシングに対する最先端の対抗策を提供します。</td>
-<td><code>passkeyBenefit3Description</code></td>
+<td>`passkeyBenefit3Description`</td>
 </tr>
 <tr>
 <td>パスキーを作成します。</td>
-<td><code>createButtonText</code></td>
+<td>`createButtonText`</td>
 </tr>
 <tr>
 <td>パスキーを使わずに続行します。</td>
-<td><code>continueButtonText</code></td>
+<td>`continueButtonText`</td>
 </tr>
 <tr>
 <td>新しいパスキーを作成します。</td>
-<td><code>createButtonResetText</code></td>
+<td>`createButtonResetText`</td>
 </tr>
 <tr>
 <td>新しいパスワードを作成します。</td>
-<td><code>usePasswordButtonText</code></td>
+<td>`usePasswordButtonText`</td>
 </tr>
 <tr>
 <td>戻る</td>
-<td><code>backButtonText</code></td>
+<td>`backButtonText`</td>
 </tr>
 <tr>
 <td>この内容を今後表示しないでください。</td>
-<td><code>checkboxText</code></td>
+<td>`checkboxText`</td>
 </tr>
 <tr>
 <td>既存のユーザーがいます。</td>
-<td><code>error_email-in-use</code></td>
+<td>`error_email-in-use`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>error_auth0-users-validation</code></td>
+<td>`error_auth0-users-validation`</td>
 </tr>
 <tr>
 <td>パスワードとパスキーが使用できません。</td>
-<td><code>error_conflict-password-passkey</code></td>
+<td>`error_conflict-password-passkey`</td>
 </tr>
 <tr>
 <td>パスワードが使用できません。</td>
-<td><code>error_password-not-allowed</code></td>
+<td>`error_password-not-allowed`</td>
 </tr>
 <tr>
 <td>パスキーが使用できません。</td>
-<td><code>error_passkey-not-allowed</code></td>
+<td>`error_passkey-not-allowed`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>error_invalid-passkey</code></td>
+<td>`error_invalid-passkey`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>error_passkey-enrollment-failure</code></td>
+<td>`error_passkey-enrollment-failure`</td>
 </tr>
 <tr>
 <td>アカウントで作成できるパスキーの最大数に到達しました。</td>
-<td><code>error_passkey-enrollment-max-allowed-reached</code></td>
+<td>`error_passkey-enrollment-max-allowed-reached`</td>
 </tr>
 </tbody>
 </table>
@@ -4926,7 +4926,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：passkey-enrollment-local
 
-<Frame>![passkey-enrollment-localの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/passkey-enrollment-local.png)</Frame>
+<Frame>![passkey-enrollment-localの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/passkey-enrollment-local.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -4936,60 +4936,60 @@ accordion.expand_all/accordion.collapse_all
 </thead>
 <tbody>
 <tr>
-<td>このデバイス上で<code>${clientName}</code>のパスキーを作成</td>
-<td><code>title</code></td>
+<td>このデバイス上で`${clientName}`のパスキーを作成</td>
+<td>`title`</td>
 </tr>
 <tr>
-<td>ログインしてください <code>${clientName}</code>.</td>
-<td><code>pageTitle</code></td>
+<td>ログインしてください `${clientName}`.</td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
-<td><code>${clientName}</code>へ続行するには<code>${companyName}</code>にログインしてください。</td>
-<td><code>description</code></td>
+<td>`${clientName}`へ続行するには`${companyName}`にログインしてください。</td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>このデバイスで素早くサインインしましょう。</td>
-<td><code>passkeyBenefit1Title</code></td>
+<td>`passkeyBenefit1Title`</td>
 </tr>
 <tr>
 <td>ロック</td>
-<td><code>passkeyBenefit1ImgAltText</code></td>
+<td>`passkeyBenefit1ImgAltText`</td>
 </tr>
 <tr>
 <td>次回ログイン時に他のデバイスのパスキーは必要ありません。</td>
-<td><code>passkeyBenefit1Description</code></td>
+<td>`passkeyBenefit1Description`</td>
 </tr>
 <tr>
 <td>パスワードを覚える必要がありません。</td>
-<td><code>passkeyBenefit2Title</code></td>
+<td>`passkeyBenefit2Title`</td>
 </tr>
 <tr>
 <td>Webauthnプラットフォームのアイコン。</td>
-<td><code>passkeyBenefit2ImgAltText</code></td>
+<td>`passkeyBenefit2ImgAltText`</td>
 </tr>
 <tr>
 <td>パスキーではログインに指紋や顔を使用できます。</td>
-<td><code>passkeyBenefit2Description</code></td>
+<td>`passkeyBenefit2Description`</td>
 </tr>
 <tr>
 <td>新しいパスキーの作成。</td>
-<td><code>createButtonText</code></td>
+<td>`createButtonText`</td>
 </tr>
 <tr>
 <td>新しいパスキーを使わずに続行。</td>
-<td><code>continueButtonText</code></td>
+<td>`continueButtonText`</td>
 </tr>
 <tr>
 <td>今後表示しない。</td>
-<td><code>checkboxText</code></td>
+<td>`checkboxText`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>error_passkey-enrollment-failure</code></td>
+<td>`error_passkey-enrollment-failure`</td>
 </tr>
 <tr>
 <td>アカウントで作成できるパスキーの最大数に到達しました。</td>
-<td><code>error_passkey-enrollment-max-allowed-reached</code></td>
+<td>`error_passkey-enrollment-max-allowed-reached`</td>
 </tr>
 </tbody>
 </table>
@@ -5000,7 +5000,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：phone-identifier-challenge
 
-<Frame>![phone-identifier-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/phone-identifier-challenge.png)</Frame>
+<Frame>![phone-identifier-challengeの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/phone-identifier-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -5015,107 +5015,107 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>次の電話番号にテキストメッセージを送りました：</td>
-<td><code>smsDescription</code></td>
+<td>`smsDescription`</td>
 </tr>
 <tr>
 <td>次の電話番号に音声電話を通して6桁のコードを送りました：</td>
-<td><code>voiceDescription</code></td>
+<td>`voiceDescription`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>戻る</td>
-<td><code>backButtonText</code></td>
+<td>`backButtonText`</td>
 </tr>
 <tr>
 <td>6桁のコードを入力する</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>再送信</td>
-<td><code>resendActionText</code></td>
+<td>`resendActionText`</td>
 </tr>
 <tr>
 <td>コードを受け取りませんでしたか？</td>
-<td><code>resendText</code></td>
+<td>`resendText`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>resendVoiceActionSeparatorTextBefore</code></td>
+<td>`resendVoiceActionSeparatorTextBefore`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>resendSmsActionSeparatorTextBefore</code></td>
+<td>`resendSmsActionSeparatorTextBefore`</td>
 </tr>
 <tr>
 <td>テキストを送る</td>
-<td><code>resendSmsActionText</code></td>
+<td>`resendSmsActionText`</td>
 </tr>
 <tr>
 <td>電話を受ける</td>
-<td><code>resendVoiceActionText</code></td>
+<td>`resendVoiceActionText`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>コードが再送信されました。</td>
-<td><code>resendLimitReachedText</code></td>
+<td>`resendLimitReachedText`</td>
 </tr>
 <tr>
 <td>OTPコードは6桁の数字である必要があります</td>
-<td><code>invalid-otp-code-format</code></td>
+<td>`invalid-otp-code-format`</td>
 </tr>
 <tr>
 <td>入力したコードは無効です</td>
-<td><code>invalid-code</code></td>
+<td>`invalid-code`</td>
 </tr>
 <tr>
 <td>音声電話をかける際に問題が生じました</td>
-<td><code>send-voice-failed</code></td>
+<td>`send-voice-failed`</td>
 </tr>
 <tr>
 <td>SMSを送信する際に問題が生じました</td>
-<td><code>send-sms-failed</code></td>
+<td>`send-sms-failed`</td>
 </tr>
 <tr>
 <td>コードを検証できませんでした。後ほど再度お試しください。</td>
-<td><code>authenticator-error</code></td>
+<td>`authenticator-error`</td>
 </tr>
 <tr>
 <td>音声電話をかけることができませんでした。後ほど再度お試しください。</td>
-<td><code>voice-authenticator-error</code></td>
+<td>`voice-authenticator-error`</td>
 </tr>
 <tr>
 <td>SMSを送信できませんでした。後ほど再度お試しください。</td>
-<td><code>sms-authenticator-error</code></td>
+<td>`sms-authenticator-error`</td>
 </tr>
 <tr>
 <td>通知が送信されませんでした。コードを再送してみてください。</td>
-<td><code>no-transaction-in-progress</code></td>
+<td>`no-transaction-in-progress`</td>
 </tr>
 <tr>
 <td>失敗したコードが多すぎます。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-failures</code></td>
+<td>`too-many-failures`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-voice</code></td>
+<td>`too-many-voice`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-sms</code></td>
+<td>`too-many-sms`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 </tbody>
 </table>
@@ -5126,7 +5126,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：phone-identifier-enrollment
 
-<Frame>![phone-identifier-enrollmentの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/phone-identifier-enrollment.png)</Frame>
+<Frame>![phone-identifier-enrollmentの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/phone-identifier-enrollment.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -5141,75 +5141,75 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>IDの検証</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>次の電話番号に6桁のコードを送ります：</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>continueButtonText</code></td>
+<td>`continueButtonText`</td>
 </tr>
 <tr>
 <td>別の電話番号を選んでください。</td>
-<td><code>changePhoneText</code></td>
+<td>`changePhoneText`</td>
 </tr>
 <tr>
 <td>テキストメッセージ</td>
-<td><code>smsButtonText</code></td>
+<td>`smsButtonText`</td>
 </tr>
 <tr>
 <td>音声電話</td>
-<td><code>voiceButtonText</code></td>
+<td>`voiceButtonText`</td>
 </tr>
 <tr>
 <td>コードをどのように受け取りますか？</td>
-<td><code>chooseMessageTypeText</code></td>
+<td>`chooseMessageTypeText`</td>
 </tr>
 <tr>
 <td>戻る</td>
-<td><code>backButtonText</code></td>
+<td>`backButtonText`</td>
 </tr>
 <tr>
 <td>電話番号を入力してください</td>
-<td><code>placeholder</code></td>
+<td>`placeholder`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>SMSの送信に問題が生じました</td>
-<td><code>send-sms-failed</code></td>
+<td>`send-sms-failed`</td>
 </tr>
 <tr>
 <td>音声電話に問題が生じました</td>
-<td><code>send-voice-failed</code></td>
+<td>`send-voice-failed`</td>
 </tr>
 <tr>
 <td>電話番号には数字のみを含められます。</td>
-<td><code>invalid-phone-format</code></td>
+<td>`invalid-phone-format`</td>
 </tr>
 <tr>
 <td>電話番号が無効のようです。確認して再度お試しください。</td>
-<td><code>invalid-phone</code></td>
+<td>`invalid-phone`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-sms</code></td>
+<td>`too-many-sms`</td>
 </tr>
 <tr>
 <td>1時間の最大電話メッセージ件数を超過しました。しばらくしてから、再度お試しください。</td>
-<td><code>too-many-voice</code></td>
+<td>`too-many-voice`</td>
 </tr>
 <tr>
 <td>登録トランザクションの有効期限が切れました。もう一度開始してください。</td>
-<td><code>transaction-not-found</code></td>
+<td>`transaction-not-found`</td>
 </tr>
 <tr>
 <td>電話番号を入力してください</td>
-<td><code>no-phone</code></td>
+<td>`no-phone`</td>
 </tr>
 </tbody>
 </table>
@@ -5220,7 +5220,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：signup
 
-<Frame>![signupの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/signup.png)</Frame>
+<Frame>![signupの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/signup.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -5235,191 +5235,191 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>ようこそ</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>&lt;%= "${clientName}" %&gt;へ続行するには&lt;%= "${companyName}" %&gt;にサインアップしてください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>separatorText</code></td>
+<td>`separatorText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>メールアドレス</td>
-<td><code>emailPlaceholder</code></td>
+<td>`emailPlaceholder`</td>
 </tr>
 <tr>
 <td>&lt;%= "{yourConnectionName}" %&gt;で続行</td>
-<td><code>federatedConnectionButtonText</code></td>
+<td>`federatedConnectionButtonText`</td>
 </tr>
 <tr>
 <td>ログイン</td>
-<td><code>loginActionLinkText</code></td>
+<td>`loginActionLinkText`</td>
 </tr>
 <tr>
 <td>すでにアカウントをお持ちですか？</td>
-<td><code>loginActionText</code></td>
+<td>`loginActionText`</td>
 </tr>
 <tr>
 <td>パスワード</td>
-<td><code>passwordPlaceholder</code></td>
+<td>`passwordPlaceholder`</td>
 </tr>
 <tr>
 <td>パスワードには次のものを含める必要があります：</td>
-<td><code>passwordSecurityText</code></td>
+<td>`passwordSecurityText`</td>
 </tr>
 <tr>
 <td>ユーザー名</td>
-<td><code>usernamePlaceholder</code></td>
+<td>`usernamePlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号</td>
-<td><code>phonePlaceholder</code></td>
+<td>`phonePlaceholder`</td>
 </tr>
 <tr>
 <td>メールアドレス（任意）</td>
-<td><code>emailOptionalPlaceholder</code></td>
+<td>`emailOptionalPlaceholder`</td>
 </tr>
 <tr>
 <td>ユーザー名（任意）</td>
-<td><code>usernameOptionalPlaceholder</code></td>
+<td>`usernameOptionalPlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号（任意）</td>
-<td><code>phoneOptionalPlaceholder</code></td>
+<td>`phoneOptionalPlaceholder`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>パスワードを表示する</td>
-<td><code>showPasswordText</code></td>
+<td>`showPasswordText`</td>
 </tr>
 <tr>
 <td>パスワードを表示しない</td>
-<td><code>hidePasswordText</code></td>
+<td>`hidePasswordText`</td>
 </tr>
 <tr>
 <td>失敗</td>
-<td><code>accessibilityError</code></td>
+<td>`accessibilityError`</td>
 </tr>
 <tr>
 <td>成功</td>
-<td><code>accessibilityValid</code></td>
+<td>`accessibilityValid`</td>
 </tr>
 <tr>
 <td>ユーザーがすでに存在しています。</td>
-<td><code>email-in-use</code></td>
+<td>`email-in-use`</td>
 </tr>
 <tr>
 <td>パスワードが弱すぎます</td>
-<td><code>password-too-weak</code></td>
+<td>`password-too-weak`</td>
 </tr>
 <tr>
 <td>パスワードが弱すぎます</td>
-<td><code>password-policy-not-conformant</code></td>
+<td>`password-policy-not-conformant`</td>
 </tr>
 <tr>
 <td>パスワードが一般的すぎます</td>
-<td><code>password-too-common</code></td>
+<td>`password-too-common`</td>
 </tr>
 <tr>
 <td>パスワードは以前すでに使用されています</td>
-<td><code>password-previously-used</code></td>
+<td>`password-previously-used`</td>
 </tr>
 <tr>
 <td>パスワードが一致しません</td>
-<td><code>password-mismatch</code></td>
+<td>`password-mismatch`</td>
 </tr>
 <tr>
 <td>パスワードにユーザー情報が含まれています</td>
-<td><code>password-contains-user-information</code></td>
+<td>`password-contains-user-information`</td>
 </tr>
 <tr>
 <td>ユーザー名に含められるのは英数字または次のもののみです： '&lt;%= "${characters}" %&gt;'。ユーザー名は&lt;%= "${min}" %&gt;～&lt;%= "${max}" %&gt;の文字数にしてください。</td>
-<td><code>invalid-username</code></td>
+<td>`invalid-username`</td>
 </tr>
 <tr>
 <td>ユーザー名は&lt;%= "${max}" %&gt;文字以内でなくてはなりません。</td>
-<td><code>invalid-username-max-length</code></td>
+<td>`invalid-username-max-length`</td>
 </tr>
 <tr>
 <td>ユーザー名は&lt;%= "${min}" %&gt;文字以上でなくてはなりません。</td>
-<td><code>invalid-username-min-length</code></td>
+<td>`invalid-username-min-length`</td>
 </tr>
 <tr>
 <td>ユーザー名に無効な文字が含まれています。</td>
-<td><code>invalid-username-invalid-characters</code></td>
+<td>`invalid-username-invalid-characters`</td>
 </tr>
 <tr>
 <td>ユーザー名にメールアドレスは使用できません。</td>
-<td><code>invalid-username-email-not-allowed</code></td>
+<td>`invalid-username-email-not-allowed`</td>
 </tr>
 <tr>
 <td>入力されたユーザー名はすでに使用されています。</td>
-<td><code>username-taken</code></td>
+<td>`username-taken`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>custom-script-error-code</code></td>
+<td>`custom-script-error-code`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>auth0-users-validation</code></td>
+<td>`auth0-users-validation`</td>
 </tr>
 <tr>
 <td>接続が無効です</td>
-<td><code>invalid-connection</code></td>
+<td>`invalid-connection`</td>
 </tr>
 <tr>
 <td>疑わしいログイン動作を検出したため、以降の試行はブロックされます。管理者にご連絡ください。</td>
-<td><code>ip-blocked</code></td>
+<td>`ip-blocked`</td>
 </tr>
 <tr>
 <td>同じIPからのサインアップが多すぎます</td>
-<td><code>ip-signup-blocked</code></td>
+<td>`ip-signup-blocked`</td>
 </tr>
 <tr>
 <td>接続が無効です</td>
-<td><code>no-db-connection</code></td>
+<td>`no-db-connection`</td>
 </tr>
 <tr>
 <td>メールアドレスを入力してください</td>
-<td><code>no-email</code></td>
+<td>`no-email`</td>
 </tr>
 <tr>
 <td>パスワードが必要です</td>
-<td><code>no-password</code></td>
+<td>`no-password`</td>
 </tr>
 <tr>
 <td>新しいパスワードを入力してください。</td>
-<td><code>no-password-reset</code></td>
+<td>`no-password-reset`</td>
 </tr>
 <tr>
 <td>新しいパスワードの確認が完了していません</td>
-<td><code>no-re-enter-password</code></td>
+<td>`no-re-enter-password`</td>
 </tr>
 <tr>
 <td>ユーザー名が必要です</td>
-<td><code>no-username</code></td>
+<td>`no-username`</td>
 </tr>
 <tr>
 <td>少なくとも1つの方法によるIDの認証が必要です</td>
-<td><code>no-identifier</code></td>
+<td>`no-identifier`</td>
 </tr>
 <tr>
 <td>この資格情報の組み合わせは、別のWebサイトで公開されているデータ漏洩で検出されました。アカウントを作成する前に、安全性を保つために異なるパスワードを使用してください。</td>
-<td><code>password-breached</code></td>
+<td>`password-breached`</td>
 </tr>
 <tr>
 <td>電話番号でサインアップを試行した際に問題が発生しました。サポートにお問い合わせください。</td>
-<td><code>invalid-phone-attribute-config</code></td>
+<td>`invalid-phone-attribute-config`</td>
 </tr>
 </tbody>
 </table>
@@ -5430,7 +5430,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：signup-id
 
-<Frame>![signup-idの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/signup-id.png)</Frame>
+<Frame>![signup-idの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/signup-id.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -5445,171 +5445,171 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>アカウントの作成</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>&lt;%= "${clientName}" %&gt;へ続行するには&lt;%= "${companyName}" %&gt;にサインアップしてください。</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>separatorText</code></td>
+<td>`separatorText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>電話番号</td>
-<td><code>phonePlaceholder</code></td>
+<td>`phonePlaceholder`</td>
 </tr>
 <tr>
 <td>メールアドレス</td>
-<td><code>emailPlaceholder</code></td>
+<td>`emailPlaceholder`</td>
 </tr>
 <tr>
 <td>&lt;%= "{yourConnectionName}" %&gt;で続行</td>
-<td><code>federatedConnectionButtonText</code></td>
+<td>`federatedConnectionButtonText`</td>
 </tr>
 <tr>
 <td>ログイン</td>
-<td><code>loginActionLinkText</code></td>
+<td>`loginActionLinkText`</td>
 </tr>
 <tr>
 <td>すでにアカウントをお持ちですか？</td>
-<td><code>loginActionText</code></td>
+<td>`loginActionText`</td>
 </tr>
 <tr>
 <td>パスワード</td>
-<td><code>passwordPlaceholder</code></td>
+<td>`passwordPlaceholder`</td>
 </tr>
 <tr>
 <td>パスワードには次のものを含める必要があります：</td>
-<td><code>passwordSecurityText</code></td>
+<td>`passwordSecurityText`</td>
 </tr>
 <tr>
 <td>ユーザー名</td>
-<td><code>usernamePlaceholder</code></td>
+<td>`usernamePlaceholder`</td>
 </tr>
 <tr>
 <td>メールアドレス（任意）</td>
-<td><code>emailOptionalPlaceholder</code></td>
+<td>`emailOptionalPlaceholder`</td>
 </tr>
 <tr>
 <td>ユーザー名（任意）</td>
-<td><code>usernameOptionalPlaceholder</code></td>
+<td>`usernameOptionalPlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号（任意）</td>
-<td><code>phoneOptionalPlaceholder</code></td>
+<td>`phoneOptionalPlaceholder`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>このユーザーはすでに存在します。</td>
-<td><code>email-in-use</code></td>
+<td>`email-in-use`</td>
 </tr>
 <tr>
 <td>パスワードが弱すぎます</td>
-<td><code>password-too-weak</code></td>
+<td>`password-too-weak`</td>
 </tr>
 <tr>
 <td>パスワードが弱すぎます</td>
-<td><code>password-policy-not-conformant</code></td>
+<td>`password-policy-not-conformant`</td>
 </tr>
 <tr>
 <td>パスワードが一般的すぎます</td>
-<td><code>password-too-common</code></td>
+<td>`password-too-common`</td>
 </tr>
 <tr>
 <td>パスワードは以前すでに使用されています</td>
-<td><code>password-previously-used</code></td>
+<td>`password-previously-used`</td>
 </tr>
 <tr>
 <td>パスワードが一致しません</td>
-<td><code>password-mismatch</code></td>
+<td>`password-mismatch`</td>
 </tr>
 <tr>
 <td>ユーザー名に含められるのは英数字または次のもののみです：'&lt;%= "${characters}" %&gt;'。ユーザー名は&lt;%= "${min}" %&gt;～&lt;%= "${max}" %&gt;の文字数にしてください。</td>
-<td><code>invalid-username</code></td>
+<td>`invalid-username`</td>
 </tr>
 <tr>
 <td>ユーザー名は&lt;%= "${max}" %&gt;文字以内でなくてはなりません。</td>
-<td><code>invalid-username-max-length</code></td>
+<td>`invalid-username-max-length`</td>
 </tr>
 <tr>
 <td>ユーザー名は&lt;%= "${min}" %&gt;文字以上でなくてはなりません。</td>
-<td><code>invalid-username-min-length</code></td>
+<td>`invalid-username-min-length`</td>
 </tr>
 <tr>
 <td>ユーザー名に無効な文字が含まれています。</td>
-<td><code>invalid-username-invalid-characters</code></td>
+<td>`invalid-username-invalid-characters`</td>
 </tr>
 <tr>
 <td>ユーザー名にメールアドレスは使用できません。</td>
-<td><code>invalid-username-email-not-allowed</code></td>
+<td>`invalid-username-email-not-allowed`</td>
 </tr>
 <tr>
 <td>入力されたユーザー名はすでに使用されています。</td>
-<td><code>username-taken</code></td>
+<td>`username-taken`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>custom-script-error-code</code></td>
+<td>`custom-script-error-code`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください</td>
-<td><code>auth0-users-validation</code></td>
+<td>`auth0-users-validation`</td>
 </tr>
 <tr>
 <td>接続が無効です</td>
-<td><code>invalid-connection</code></td>
+<td>`invalid-connection`</td>
 </tr>
 <tr>
 <td>疑わしいログイン動作を検出したため、以降の試行はブロックされます。管理者にご連絡ください。</td>
-<td><code>ip-blocked</code></td>
+<td>`ip-blocked`</td>
 </tr>
 <tr>
 <td>同じIPからのサインアップが多すぎます</td>
-<td><code>ip-signup-blocked</code></td>
+<td>`ip-signup-blocked`</td>
 </tr>
 <tr>
 <td>接続が無効です</td>
-<td><code>no-db-connection</code></td>
+<td>`no-db-connection`</td>
 </tr>
 <tr>
 <td>メールがどのエンタープライズディレクトリとも一致しません</td>
-<td><code>no-hrd-connection</code></td>
+<td>`no-hrd-connection`</td>
 </tr>
 <tr>
 <td>メールアドレスを入力してください</td>
-<td><code>no-email</code></td>
+<td>`no-email`</td>
 </tr>
 <tr>
 <td>パスワードが必要です</td>
-<td><code>no-password</code></td>
+<td>`no-password`</td>
 </tr>
 <tr>
 <td>新しいパスワードを入力してください。</td>
-<td><code>no-password-reset</code></td>
+<td>`no-password-reset`</td>
 </tr>
 <tr>
 <td>新しいパスワードの確認が完了していません</td>
-<td><code>no-re-enter-password</code></td>
+<td>`no-re-enter-password`</td>
 </tr>
 <tr>
 <td>ユーザー名が必要です</td>
-<td><code>no-username</code></td>
+<td>`no-username`</td>
 </tr>
 <tr>
 <td>少なくとも1つの方法によるIDの認証が必要です</td>
-<td><code>no-identifier</code></td>
+<td>`no-identifier`</td>
 </tr>
 <tr>
 <td>有効な電話番号を入力してください</td>
-<td><code>invalid-phone-number</code></td>
+<td>`invalid-phone-number`</td>
 </tr>
 </tbody>
 </table>
@@ -5620,7 +5620,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：signup-password
 
-<Frame>![signup-passwordの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/signup-password.png)</Frame>
+<Frame>![signup-passwordの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/signup-password.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -5635,83 +5635,83 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>アカウントの作成</td>
-<td><code>title</code></td>
+<td>`title`</td>
 </tr>
 <tr>
 <td>&lt;%= "${clientName}" %&gt;へ続行するには&lt;%= "${companyName}" %&gt;のパスワードを設定してください</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>または</td>
-<td><code>separatorText</code></td>
+<td>`separatorText`</td>
 </tr>
 <tr>
 <td>続行</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>電話番号</td>
-<td><code>phonePlaceholder</code></td>
+<td>`phonePlaceholder`</td>
 </tr>
 <tr>
 <td>メールアドレス</td>
-<td><code>emailPlaceholder</code></td>
+<td>`emailPlaceholder`</td>
 </tr>
 <tr>
 <td>編集</td>
-<td><code>editEmailText</code></td>
+<td>`editEmailText`</td>
 </tr>
 <tr>
 <td>編集</td>
-<td><code>editPhoneText</code></td>
+<td>`editPhoneText`</td>
 </tr>
 <tr>
 <td>編集</td>
-<td><code>editUsernameText</code></td>
+<td>`editUsernameText`</td>
 </tr>
 <tr>
 <td>メールアドレスを編集する</td>
-<td><code>editLinkScreenReadableText</code></td>
+<td>`editLinkScreenReadableText`</td>
 </tr>
 <tr>
 <td>&lt;%= "{yourConnectionName}" %&gt;で続行する</td>
-<td><code>federatedConnectionButtonText</code></td>
+<td>`federatedConnectionButtonText`</td>
 </tr>
 <tr>
 <td>ログイン</td>
-<td><code>loginActionLinkText</code></td>
+<td>`loginActionLinkText`</td>
 </tr>
 <tr>
 <td>アカウントをすでにお持ちですか？</td>
-<td><code>loginActionText</code></td>
+<td>`loginActionText`</td>
 </tr>
 <tr>
 <td>パスワード</td>
-<td><code>passwordPlaceholder</code></td>
+<td>`passwordPlaceholder`</td>
 </tr>
 <tr>
 <td>パスワードには次のものを含める必要があります：</td>
-<td><code>passwordSecurityText</code></td>
+<td>`passwordSecurityText`</td>
 </tr>
 <tr>
 <td>ユーザー名</td>
-<td><code>usernamePlaceholder</code></td>
+<td>`usernamePlaceholder`</td>
 </tr>
 <tr>
 <td>メールアドレス（任意）</td>
-<td><code>emailOptionalPlaceholder</code></td>
+<td>`emailOptionalPlaceholder`</td>
 </tr>
 <tr>
 <td>ユーザー名（任意）</td>
-<td><code>usernameOptionalPlaceholder</code></td>
+<td>`usernameOptionalPlaceholder`</td>
 </tr>
 <tr>
 <td>電話番号（任意）</td>
-<td><code>phoneOptionalPlaceholder</code></td>
+<td>`phoneOptionalPlaceholder`</td>
 </tr>
 <tr>
 <td>戻る</td>
-<td><code>backButtonText</code></td>
+<td>`backButtonText`</td>
 </tr>
 <tr>
 <td>招待状を受け入れてサインアップしてください</td>
@@ -5719,135 +5719,135 @@ accordion.expand_all/accordion.collapse_all
 </tr>
 <tr>
 <td>&lt;%= "${inviterName}" %&gt;からの招待状を受け入れて&lt;%= "${clientName}" %&gt;で&lt;%= "${companyName}" %&gt;に参加するにはサインアップしてください。</td>
-<td><code>invitationDescription</code></td>
+<td>`invitationDescription`</td>
 </tr>
 <tr>
 <td>&lt;%= "${companyName}" %&gt;</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 <tr>
 <td>パスワードを表示する</td>
-<td><code>showPasswordText</code></td>
+<td>`showPasswordText`</td>
 </tr>
 <tr>
 <td>パスワードを表示しない</td>
-<td><code>hidePasswordText</code></td>
+<td>`hidePasswordText`</td>
 </tr>
 <tr>
 <td>失敗</td>
-<td><code>accessibilityError</code></td>
+<td>`accessibilityError`</td>
 </tr>
 <tr>
 <td>成功</td>
-<td><code>accessibilityValid</code></td>
+<td>`accessibilityValid`</td>
 </tr>
 <tr>
 <td>ユーザーはすでに存在します。The user already exists.</td>
-<td><code>email-in-use</code></td>
+<td>`email-in-use`</td>
 </tr>
 <tr>
 <td>パスワードが弱すぎます</td>
-<td><code>password-too-weak</code></td>
+<td>`password-too-weak`</td>
 </tr>
 <tr>
 <td>パスワードが弱すぎます</td>
-<td><code>password-policy-not-conformant</code></td>
+<td>`password-policy-not-conformant`</td>
 </tr>
 <tr>
 <td>パスワードが一般的すぎます</td>
-<td><code>password-too-common</code></td>
+<td>`password-too-common`</td>
 </tr>
 <tr>
 <td>パスワードは以前使用されています</td>
-<td><code>password-previously-used</code></td>
+<td>`password-previously-used`</td>
 </tr>
 <tr>
 <td>パスワードが一致しません</td>
-<td><code>password-mismatch</code></td>
+<td>`password-mismatch`</td>
 </tr>
 <tr>
 <td>パスワードにユーザー情報が含まれています</td>
-<td><code>password-contains-user-information</code></td>
+<td>`password-contains-user-information`</td>
 </tr>
 <tr>
 <td>ユーザー名には英数字または次の記号のみを含められます： '&lt;%= "${characters}" %&gt;'。ユーザー名は&lt;%= "${min}" %&gt;～&lt;%= "${max}" %&gt;の文字数にしてください。</td>
-<td><code>invalid-username</code></td>
+<td>`invalid-username`</td>
 </tr>
 <tr>
 <td>ユーザー名は&lt;%= "${max}" %&gt;文字以内でなくてはなりません。</td>
-<td><code>invalid-username-max-length</code></td>
+<td>`invalid-username-max-length`</td>
 </tr>
 <tr>
 <td>ユーザー名は&lt;%= "${min}" %&gt;文字以上でなくてはなりません。</td>
-<td><code>invalid-username-min-length</code></td>
+<td>`invalid-username-min-length`</td>
 </tr>
 <tr>
 <td>ユーザー名に無効な文字が含まれています。</td>
-<td><code>invalid-username-invalid-characters</code></td>
+<td>`invalid-username-invalid-characters`</td>
 </tr>
 <tr>
 <td>ユーザー名にメールアドレスは使用できません。</td>
-<td><code>invalid-username-email-not-allowed</code></td>
+<td>`invalid-username-email-not-allowed`</td>
 </tr>
 <tr>
 <td>入力されたユーザー名はすでに使用されています。</td>
-<td><code>username-taken</code></td>
+<td>`username-taken`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>custom-script-error-code</code></td>
+<td>`custom-script-error-code`</td>
 </tr>
 <tr>
 <td>問題が発生しました。後ほど再度お試しください。</td>
-<td><code>auth0-users-validation</code></td>
+<td>`auth0-users-validation`</td>
 </tr>
 <tr>
 <td>接続が無効です</td>
-<td><code>invalid-connection</code></td>
+<td>`invalid-connection`</td>
 </tr>
 <tr>
 <td>疑わしいログイン動作を検出したため、以降の試行はブロックされます。管理者にご連絡ください。</td>
-<td><code>ip-blocked</code></td>
+<td>`ip-blocked`</td>
 </tr>
 <tr>
 <td>同じIPからのサインアップが多すぎます</td>
-<td><code>ip-signup-blocked</code></td>
+<td>`ip-signup-blocked`</td>
 </tr>
 <tr>
 <td>接続が無効です</td>
-<td><code>no-db-connection</code></td>
+<td>`no-db-connection`</td>
 </tr>
 <tr>
 <td>メールアドレスを入力してください</td>
-<td><code>no-email</code></td>
+<td>`no-email`</td>
 </tr>
 <tr>
 <td>パスワードは必須です</td>
-<td><code>no-password</code></td>
+<td>`no-password`</td>
 </tr>
 <tr>
 <td>新しいパスワードを入力してください。</td>
-<td><code>no-password-reset</code></td>
+<td>`no-password-reset`</td>
 </tr>
 <tr>
 <td>新しいパスワードの確認が完了していません</td>
-<td><code>no-re-enter-password</code></td>
+<td>`no-re-enter-password`</td>
 </tr>
 <tr>
 <td>ユーザー名は必須です</td>
-<td><code>no-username</code></td>
+<td>`no-username`</td>
 </tr>
 <tr>
 <td>有効な電話番号を入力してください</td>
-<td><code>invalid-phone-number</code></td>
+<td>`invalid-phone-number`</td>
 </tr>
 <tr>
 <td>この資格情報の組み合わせは、別のWebサイトで公開されているデータ漏洩で検出されました。アカウントを作成する前に、安全性を保つために異なるパスワードを使用してください。</td>
-<td><code>password-breached</code></td>
+<td>`password-breached`</td>
 </tr>
 <tr>
 <td>電話番号でサインアップを試行した際に問題が発生しました。サポートにお問い合わせください。</td>
-<td><code>invalid-phone-attribute-config</code></td>
+<td>`invalid-phone-attribute-config`</td>
 </tr>
 </tbody>
 </table>
@@ -5869,35 +5869,35 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>Something Went Wrong</td>
-<td><code>passwordless-no-session-title</code></td>
+<td>`passwordless-no-session-title`</td>
 </tr>
 <tr>
 <td>The link must be opened on the same device and browser from which you submitted your email address.</td>
-<td><code>passwordless-no-session</code></td>
+<td>`passwordless-no-session`</td>
 </tr>
 <tr>
 <td>Start over from this device or browser</td>
-<td><code>passwordless-no-session-link</code></td>
+<td>`passwordless-no-session-link`</td>
 </tr>
 <tr>
 <td>Something Went Wrong</td>
-<td><code>mfa-required-title</code></td>
+<td>`mfa-required-title`</td>
 </tr>
 <tr>
 <td>Two-factor authentication is required to access this application. To enable this, please contact your system administrator.</td>
-<td><code>mfa-required</code></td>
+<td>`mfa-required`</td>
 </tr>
 <tr>
 <td>Something went wrong, please try again later.</td>
-<td><code>custom-script-error-code</code></td>
+<td>`custom-script-error-code`</td>
 </tr>
 <tr>
 <td>Something went wrong, please try again later.</td>
-<td><code>auth0-users-validation</code></td>
+<td>`auth0-users-validation`</td>
 </tr>
 <tr>
 <td>We are sorry, something went wrong when attempting to log in</td>
-<td><code>authentication-failure</code></td>
+<td>`authentication-failure`</td>
 </tr>
 </tbody>
 </table>
@@ -5919,19 +5919,19 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>Unblock My Account</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>Unblock My Account</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>Continue</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 </tbody>
 </table>
@@ -5949,19 +5949,19 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>Unblock My Account</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>Unblock My Account</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>Continue</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 </tbody>
 </table>
@@ -5979,19 +5979,19 @@ accordion.expand_all/accordion.collapse_all
 <tbody>
 <tr>
 <td>Unblock My Account</td>
-<td><code>pageTitle</code></td>
+<td>`pageTitle`</td>
 </tr>
 <tr>
 <td>Unblock My Account</td>
-<td><code>description</code></td>
+<td>`description`</td>
 </tr>
 <tr>
 <td>Continue</td>
-<td><code>buttonText</code></td>
+<td>`buttonText`</td>
 </tr>
 <tr>
 <td>${companyName}</td>
-<td><code>logoAltText</code></td>
+<td>`logoAltText`</td>
 </tr>
 </tbody>
 </table>
@@ -6004,7 +6004,7 @@ accordion.expand_all/accordion.collapse_all
 
 以下の例では、ログインページのテンプレートに`ext-ga`および`ext-test`クエリパラメーターを使用しています。
 
-```
+```html lines
 <!DOCTYPE html>
 <html>
   <head>
@@ -6029,7 +6029,7 @@ accordion.expand_all/accordion.collapse_all
 
 ### カスタムサインアッププロンプト
 
-```
+```html lines
 <!DOCTYPE html>
 <html>
   <head>
@@ -6060,7 +6060,7 @@ accordion.expand_all/accordion.collapse_all
 
 ### ログインボックス + 画像のレイアウト
 
-```
+```html lines
 <!DOCTYPE html>
 <html lang="{{locale}}">
   <head>
@@ -6097,7 +6097,7 @@ accordion.expand_all/accordion.collapse_all
 </html>
 ```
 
-```
+```html lines
 <!DOCTYPE html>
 <html lang="{{locale}}">
   <head>
@@ -6134,11 +6134,11 @@ accordion.expand_all/accordion.collapse_all
 </html>
 ```
 
-<Frame>![メールユーザー名/パスワードのあるユニバーサルログインボックスと画像レイアウトの例](//images.ctfassets.net/cdy7uua7fh8z/7F2LIZ4qVdGqMUNnj66wcP/6e9d4cb34f84b77ed1ebd3f0ec7b7f09/Login_Screen_-_Background_-_JP.png)</Frame>
+<Frame>![メールユーザー名/パスワードのあるユニバーサルログインボックスと画像レイアウトの例](/images/ja-jp/cdy7uua7fh8z/7F2LIZ4qVdGqMUNnj66wcP/6e9d4cb34f84b77ed1ebd3f0ec7b7f09/Login_Screen_-_Background_-_JP.png)</Frame>
 
 ### ページのフッター
 
-```
+```html lines
 <!DOCTYPE html><html lang="{{locale}}">
   <head>
     {%- auth0:head -%}
@@ -6196,22 +6196,22 @@ accordion.expand_all/accordion.collapse_all
 
 ページテンプレートを設定するには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を使用する必要があります。まず最初に、`update:branding`、`read:branding`、`delete:branding`スコープでManagement APIトークンを取得する必要があります。トークンの生成に`API Explorer Application`を使用している場合は、これらのスコープが`Auth0 Management API`で有効になっていることを確認してください。
 
-<Frame>![メールアドレス/パスワードのあるユニバーサルログインボックスとフッターレイアウトの例](//images.ctfassets.net/cdy7uua7fh8z/17BeLStId6jsxSfEnVFPMa/ebb3160f5d8689b4e7a0e2526786c601/UL_Footer.png)</Frame>
+<Frame>![メールアドレス/パスワードのあるユニバーサルログインボックスとフッターレイアウトの例](/images/ja-jp/cdy7uua7fh8z/17BeLStId6jsxSfEnVFPMa/ebb3160f5d8689b4e7a0e2526786c601/UL_Footer.png)</Frame>
 
 ## ページテンプレートAPI
 
 テンプレートを設定するには、以下のエンドポイントを使用する必要があります。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request PUT \
 --url 'https://{yourDomain}/api/v2/branding/templates/universal-login' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: text/html' \
 --data '
 {%- auth0:head -%}{%- auth0:widget -%}'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/branding/templates/universal-login");
 var request = new RestRequest(Method.PUT);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
@@ -6221,7 +6221,7 @@ request.AddParameter("text/html", "
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -6242,8 +6242,8 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/branding/templates/universal-login")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .header("content-type", "text/html")
@@ -6252,7 +6252,7 @@ HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/branding/templa
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'PUT',
@@ -6266,8 +6266,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
 @"content-type": @"text/html" };
@@ -6292,7 +6292,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/branding/templates/universal-login",
@@ -6317,8 +6317,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "
@@ -6333,7 +6333,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -6348,8 +6348,8 @@ request.body = "
 {%- auth0:head -%}{%- auth0:widget -%}"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = [
 "authorization": "Bearer MGMT_API_ACCESS_TOKEN",
@@ -6379,19 +6379,19 @@ dataTask.resume()
 テンプレートを取得するには、以下のエンドポイントを使用する必要があります。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request GET \
 --url 'https://{yourDomain}/api/v2/branding/templates/universal-login' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/branding/templates/universal-login");
 var request = new RestRequest(Method.GET);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -6408,14 +6408,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/branding/templates/universal-login")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'GET',
@@ -6427,8 +6427,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/branding/templates/universal-login"]
@@ -6449,7 +6449,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/branding/templates/universal-login",
@@ -6471,8 +6471,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MGMT_API_ACCESS_TOKEN" }
@@ -6482,7 +6482,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -6494,8 +6494,8 @@ request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/branding/templates/universal-login")! as URL,
@@ -6519,19 +6519,19 @@ dataTask.resume()
 テンプレートを削除するには、以下のエンドポイントを使用する必要があります。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request DELETE \
 --url 'https://{yourDomain}/api/v2/branding/templates/universal-login' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/branding/templates/universal-login");
 var request = new RestRequest(Method.DELETE);
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -6548,14 +6548,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.delete("https://{yourDomain}/api/v2/branding/templates/universal-login")
 .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'DELETE',
@@ -6567,8 +6567,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
 NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/branding/templates/universal-login"]
@@ -6589,7 +6589,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/api/v2/branding/templates/universal-login",
@@ -6611,8 +6611,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 headers = { 'authorization': "Bearer MGMT_API_ACCESS_TOKEN" }
@@ -6622,7 +6622,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -6634,8 +6634,8 @@ request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["authorization": "Bearer MGMT_API_ACCESS_TOKEN"]
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/branding/templates/universal-login")! as URL,
@@ -6680,7 +6680,7 @@ dataTask.resume()
 
 </Warning>
 
-```
+```html lines
 <!DOCTYPE html>
 <html lang="{{locale}}">
 
@@ -6723,7 +6723,7 @@ dataTask.resume()
 
 現在の実装では、これ以上のCSSのカスタマイズはサポートしていません。生成されるHTMLを見ると、以下のようなコードが確認できます。
 
-```
+``` lines
 .c10d15918.c7b3b8672 {
   background: #D00E17;
 }
@@ -6743,11 +6743,11 @@ Auth0 CLIが、2つのウィンドウを開きます。
 
 * ページテンプレートコードのデフォルトエディター：
 
-<Frame>![Page Templates Storybook](//images.ctfassets.net/cdy7uua7fh8z/1Ms4jj0pdMowoSZi54i72S/a2adcffa34a491ed7a587094884ad0f1/storybook.png)</Frame>
+<Frame>![Page Templates Storybook](/images/ja-jp/cdy7uua7fh8z/1Ms4jj0pdMowoSZi54i72S/a2adcffa34a491ed7a587094884ad0f1/storybook.png)</Frame>
 
 * ページテンプレートコードのあるデフォルトのエディター：
 
-<Frame>![undefined](//images.ctfassets.net/cdy7uua7fh8z/3fTqpTmRRgVeLu5p8cioWa/e5a5c8a12dc93f5de95f12581ce0e5ff/vs-code.png)</Frame>
+<Frame>![undefined](/images/ja-jp/cdy7uua7fh8z/3fTqpTmRRgVeLu5p8cioWa/e5a5c8a12dc93f5de95f12581ce0e5ff/vs-code.png)</Frame>
 
 ウィンドウを閉じると、テンプレートを保存するか尋ねられます。**［Yes（はい）］**と答えると、テンプレートがテナントにアップロードされます。
 

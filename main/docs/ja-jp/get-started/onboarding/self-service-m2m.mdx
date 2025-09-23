@@ -1,13 +1,13 @@
 ---
 title: "セルフサービスマシンツーマシン"
 permalink: "self-service-m2m"
+'description': "M2Mビジネスケースをオンボーディングする方法について説明します。"
 'og:title': "セルフサービスマシンツーマシン"
 'og:description': "M2Mビジネスケースをオンボーディングする方法について説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "セルフサービスマシンツーマシン"
 'twitter:description': "M2Mビジネスケースをオンボーディングする方法について説明します。"
 ---
-# セルフサービスマシンツーマシン
 
 ビジネスケースがAPIやバックエンドサーバーなどの非インタラクティブなオーディエンスにサービスを提供する場合は、マシンツーマシン（M2M）構成でオンボードします。
 
@@ -72,8 +72,8 @@ Auth0 Dashboard内またはAuth0 Management APIを使用して、以下を作成
 
 * テナント名には、Auth0ドメインにおけるロールが含まれます。名前を決める前に、「[テナントの特性](https://auth0.com/docs/get-started/auth0-overview/create-tenants#create-a-tenant-and-domain)」をお読みください。
 * ユースケースに必要となるAuth0機能を検討します。機能によっては、プロフェッショナルおよびエンタープライズプラン以外では、ご利用いただけません。
-* 開発、ステージング、本番など、複数の環境に対応する必要があるか決定します。詳細については、「[複数の環境をセットアップする](/docs/get-started/auth0-overview/create-tenants/set-up-multiple-environments)」をお読みください。
-* テナント内に登録するサードパーティアプリケーションが関連するユースケースがある場合、[OIDCクライアント登録](https://openid.net/specs/openid-connect-registration-1_0.html)の仕様に基づいて、[動的アプリケーション登録](/docs/get-started/applications/dynamic-client-registration)を使用することができます。
+* 開発、ステージング、本番など、複数の環境に対応する必要があるか決定します。詳細については、「[複数の環境をセットアップする](/docs/ja-jp/get-started/auth0-overview/create-tenants/set-up-multiple-environments)」をお読みください。
+* テナント内に登録するサードパーティアプリケーションが関連するユースケースがある場合、[OIDCクライアント登録](https://openid.net/specs/openid-connect-registration-1_0.html)の仕様に基づいて、[動的アプリケーション登録](/docs/ja-jp/get-started/applications/dynamic-client-registration)を使用することができます。
 * 「[バックエンドサービスおよびAPIライブラリー](https://auth0.com/docs/libraries#backend)」をお読みのうえ、クイックスタートをお試しください。
 
 </Card>
@@ -123,22 +123,22 @@ Management API Explorerで提供されているサンプルを使用して、Man
 <tr>
 <td><strong>Name（名前）</strong></td>
 <td>APIのわかりやすい名前です。機能性には影響しません。</td>
-<td><code>yourDomain</code></td>
+<td>`yourDomain`</td>
 </tr>
 <tr>
 <td><strong>Identifier（識別子）</strong></td>
-<td>APIの一意の識別子です。URLの使用を推奨します。Auth0では、末尾にスラッシュを含むURLが区別されます。たとえば、<code>https://example.com</code>と<code>https://example.com/</code>は異なる識別子として扱われます。このURLは公開されているURLでなくても構いません。Auth0がAPIを呼び出すことはありません。この値は後で変更できません。</td>
-<td><code>https://{yourDomain}</code></td>
+<td>APIの一意の識別子です。URLの使用を推奨します。Auth0では、末尾にスラッシュを含むURLが区別されます。たとえば、`https://example.com`と`https://example.com/`は異なる識別子として扱われます。このURLは公開されているURLでなくても構いません。Auth0がAPIを呼び出すことはありません。この値は後で変更できません。</td>
+<td>`https://{yourDomain}`</td>
 </tr>
 <tr>
 <td><strong>JSON Web Token (JWT) Profile（JSON Web Token（JWT）プロファイル）</strong></td>
-<td>このプロファイルが、APIに発行されるアクセストークンの形式を決定します。使用できる値は<code>Auth0</code>と<code>RFC 9068</code>です。詳細については、「<a href="/docs/ja-jp/secure/tokens/access-tokens/access-token-profiles">アクセストークンのプロファイル</a>」を参照してください。</td>
-<td><code>access_token</code></td>
+<td>このプロファイルが、APIに発行されるアクセストークンの形式を決定します。使用できる値は`Auth0`と`RFC 9068`です。詳細については、「<a href="/docs/ja-jp/secure/tokens/access-tokens/access-token-profiles">アクセストークンのプロファイル</a>」を参照してください。</td>
+<td>`access_token`</td>
 </tr>
 <tr>
 <td><strong>JSON Web Token (JWT) Signing Algorithm（JSON Web Token（JWT）署名アルゴリズム）</strong></td>
-<td>アクセストークンの署名に使用されるアルゴリズムです。使用できる値は<code>HS256</code>、<code>PS256</code>、<code>RS256</code>です。<code>RS256</code>を選択すると、トークンはテナントの秘密鍵で署名されます。</td>
-<td><code>HS256</code></td>
+<td>アクセストークンの署名に使用されるアルゴリズムです。使用できる値は`HS256`、`PS256`、`RS256`です。`RS256`を選択すると、トークンはテナントの秘密鍵で署名されます。</td>
+<td>`HS256`</td>
 </tr>
 </tbody>
 </table>
@@ -151,7 +151,7 @@ Management API Explorerで提供されているサンプルを使用して、Man
 
 <Note>
 
-Auth0のAPIには、構成前に確認の必要がある設定が複数あります。詳細については、「[APIの設定](/docs/get-started/apis/api-settings)」をお読みください。
+Auth0のAPIには、構成前に確認の必要がある設定が複数あります。詳細については、「[APIの設定](/docs/ja-jp/get-started/apis/api-settings)」をお読みください。
 
 </Note>
 
@@ -164,7 +164,7 @@ DashboardでAPIを作成する場合、Auth0は自動的にテストアプリケ
 
    <Note>
 
-   後から開発向けまたは運用向けの別のアプリケーションを作成するには、[マシンツーマシン（M2M）アプリケーションを登録](/docs/get-started/auth0-overview/create-applications/machine-to-machine-apps)の手順に従います。
+   後から開発向けまたは運用向けの別のアプリケーションを作成するには、[マシンツーマシン（M2M）アプリケーションを登録](/docs/ja-jp/get-started/auth0-overview/create-applications/machine-to-machine-apps)の手順に従います。
 
    </Note>
 
@@ -172,7 +172,7 @@ DashboardでAPIを作成する場合、Auth0は自動的にテストアプリケ
 4. **［Authorize（認可）］**トグルを有効にし、右側にある矢印ボタンを選択してカードを展開します。
 5. **［Update（更新）］**を選択します。
 
-   <Frame>![［Dashboard］ > ［Applications（アプリケーション）］ > ［APIs］](//images.ctfassets.net/cdy7uua7fh8z/6L2R46XVdYw1kifRfMifRz/364292a89a04a152938e6901072ea662/Timesheet_API.png)</Frame>
+   <Frame>![［Dashboard］ > ［Applications（アプリケーション）］ > ［APIs］](/images/ja-jp/cdy7uua7fh8z/6L2R46XVdYw1kifRfMifRz/364292a89a04a152938e6901072ea662/Timesheet_API.png)</Frame>
 
    <Note>
 
@@ -206,7 +206,7 @@ Auth0 DashboardやManagement APIで、以下のことを行います。
 
 認証方式を構成する前に以下のことを行います。
 
-* マシンツーマシン認証については、「[クライアントの資格情報フロー](/docs/get-started/authentication-and-authorization-flow/client-credentials-flow)」を参照してください。これは非対話型の認証と認可のワークフローです。
+* マシンツーマシン認証については、「[クライアントの資格情報フロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/client-credentials-flow)」を参照してください。これは非対話型の認証と認可のワークフローです。
 * APIのアクセスレベルを決定します。これは、APIを作成する際に構成する[スコープ](/docs/ja-jp/get-started/apis/scopes/api-scopes)や権限を決めるのに役立ちます。
 
 </Card>
@@ -225,7 +225,7 @@ Auth0 DashboardまたはManagement APIを使用するには、「[付与タイ�
 
 <Note>
 
-Auth0は、資格情報としてクライアントIDとクライアントシークレットを提供するほか、他のクライアント認証方法もサポートしています。これらのメソッドは、M2Mの構成の[秘密鍵JWT](/docs/get-started/authentication-and-authorization-flow/authenticate-with-private-key-jwt)の推奨を含め、エンタープライズプランで利用できます。詳細については、「[アプリケーションの資格情報](/docs/secure/application-credentials)」をお読みください。
+Auth0は、資格情報としてクライアントIDとクライアントシークレットを提供するほか、他のクライアント認証方法もサポートしています。これらのメソッドは、M2Mの構成の[秘密鍵JWT](/docs/ja-jp/get-started/authentication-and-authorization-flow/authenticate-with-private-key-jwt)の推奨を含め、エンタープライズプランで利用できます。詳細については、「[アプリケーションの資格情報](/docs/ja-jp/secure/application-credentials)」をお読みください。
 
 </Note>
 
@@ -234,7 +234,7 @@ Auth0は、資格情報としてクライアントIDとクライアントシー�
 `/oauth/token`エンドポイントへの要求は、次のサンプルのようになります。
 
 <CodeGroup>
-```bash curl.sh
+```bash cURL lines
 curl --request POST \
 --url 'https://{yourDomain}/oauth/token' \
 --header 'content-type: application/x-www-form-urlencoded' \
@@ -242,8 +242,8 @@ curl --request POST \
 --data client_id=YOUR_CLIENT_ID \
 --data client_secret=YOUR_CLIENT_SECRET \
 --data audience=YOUR_API_IDENTIFIER
-```
-```csharp c_.cs
+``` lines
+```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -251,7 +251,7 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=client_cre
 IRestResponse response = client.Execute(request);
 ```
 
-```go go.go
+```go Go lines
 package main
 import (
 "fmt"
@@ -270,15 +270,15 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-```
-```java java.java
+``` lines
+```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
 .header("content-type", "application/x-www-form-urlencoded")
 .body("grant_type=client_credentials&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&audience=YOUR_API_IDENTIFIER")
 .asString();
 ```
 
-```javascript node_js.js
+```javascript Node.JS lines
 var axios = require("axios").default;
 var options = {
 method: 'POST',
@@ -296,8 +296,8 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-```
-```obj-c obj-c.obj-c
+``` lines
+```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
 NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=client_credentials" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -323,7 +323,7 @@ NSLog(@"%@", httpResponse);
 [dataTask resume];
 ```
 
-```php php.php
+```php PHP lines
 $curl = curl_init();
 curl_setopt_array($curl, [
 CURLOPT_URL => "https://{yourDomain}/oauth/token",
@@ -346,8 +346,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-```
-```python python.py
+``` lines
+```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
 payload = "grant_type=client_credentials&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&audience=YOUR_API_IDENTIFIER"
@@ -358,7 +358,7 @@ data = res.read()
 print(data.decode("utf-8"))
 ```
 
-```ruby ruby.rb
+```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -371,8 +371,8 @@ request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=client_credentials&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&audience=YOUR_API_IDENTIFIER"
 response = http.request(request)
 puts response.read_body
-```
-```swift swift.swift
+``` lines
+```swift Swift lines
 import Foundation
 let headers = ["content-type": "application/x-www-form-urlencoded"]
 let postData = NSMutableData(data: "grant_type=client_credentials".data(using: String.Encoding.utf8)!)
@@ -400,7 +400,7 @@ dataTask.resume()
 
 応答は、次のサンプルのようになります。
 
-```
+``` lines
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -440,7 +440,7 @@ Auth0ダッシュボードでは、次の操作を行う必要があります。
 
 * Auth0サービスで使用する前に、ドメインを登録して検証します。
 * 独自の証明書を管理するか、Auth0管理の証明書を使用するかを決定します。証明書の詳細については、「[証明書管理のオプション](https://auth0.com/docs/customize/custom-domains#certificate-management-options)」をお読みください。
-* 自己管理証明書に使用するTLS（SSL）のバージョンと暗号がAuth0でサポートされていることを確認します。詳細ついては、「[TLS（SSL）のバージョンと暗号](/docs/customize/custom-domains/self-managed-certificates/tls-ssl)」をお読みください。
+* 自己管理証明書に使用するTLS（SSL）のバージョンと暗号がAuth0でサポートされていることを確認します。詳細ついては、「[TLS（SSL）のバージョンと暗号](/docs/ja-jp/customize/custom-domains/self-managed-certificates/tls-ssl)」をお読みください。
 
 </Card>
 
@@ -501,7 +501,7 @@ Auth0の[負荷テストポリシー](/docs/ja-jp/troubleshoot/customer-support/
 
 準備チェックを確認するには、[［Auth0 Dashboard］>［Run Readiness Checks（準備状況チェックの実行）］](https://manage.auth0.com/#/production-checks)を選択し、テナント名と環境タグの下のドロップダウンメニューを選択します。
 
-<Frame>![Auth0 Dashboard > Readiness Checklist](//images.ctfassets.net/cdy7uua7fh8z/7iu1CzH0NgaXJbLBNWXZli/ea20f97de93711c0c995ea9fedcf20fa/Readiness_Checks_-_Japanese.png)</Frame>
+<Frame>![Auth0 Dashboard > Readiness Checklist](/images/ja-jp/cdy7uua7fh8z/7iu1CzH0NgaXJbLBNWXZli/ea20f97de93711c0c995ea9fedcf20fa/Readiness_Checks_-_Japanese.png)</Frame>
 
 フィルターを使用して、選択したアプリケーションに準備状況チェックを適用できます。**これらのチェックは、構成済みのAPIには適用されません**。
 

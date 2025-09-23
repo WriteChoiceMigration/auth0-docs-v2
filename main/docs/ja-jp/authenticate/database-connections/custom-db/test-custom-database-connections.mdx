@@ -1,13 +1,13 @@
 ---
 title: "カスタムデータベース接続をテストする"
 permalink: "test-custom-database-connections"
+'description': "Auth0 Dashboardでのカスタムデータベース接続をテストする方法を説明します。"
 'og:title': "カスタムデータベース接続をテストする"
 'og:description': "Auth0 Dashboardでのカスタムデータベース接続をテストする方法を説明します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "カスタムデータベース接続をテストする"
 'twitter:description': "Auth0 Dashboardでのカスタムデータベース接続をテストする方法を説明します。"
 ---
-# カスタムデータベース接続をテストする
 
 Auth0がホストするデータベース構造を使用してユーザーを保存する場合は、同じテナントまたは別のテナントに対してユーザーを認証することで接続をテストできます。
 
@@ -28,7 +28,7 @@ Auth0がホストするデータベース構造を使用してユーザーを保
 
 3. このアプリケーションに対して、**パスワード**と**クライアント資格情報**付与の両方を有効にします（このテストでは両方の付与を有効にしてください）。
 
-   <Frame>![Auth0 Dashboard > Applications > Advanced Settings](//images.ctfassets.net/cdy7uua7fh8z/4caAveuhYurCDb5F8mdImm/a32588c23fc0799266928f1d9dae8386/Grant_Types_-_CC_and_PW.png)</Frame>
+   <Frame>![Auth0 Dashboard > Applications > Advanced Settings](/images/ja-jp/cdy7uua7fh8z/4caAveuhYurCDb5F8mdImm/a32588c23fc0799266928f1d9dae8386/Grant_Types_-_CC_and_PW.png)</Frame>
 
 4. アプリケーションを承認するには、[［Applications（アプリケーション）］>［APIs］](https://manage.auth0.com/#/apis)に移動します。
 5. **［Management API］**を選択します。
@@ -43,7 +43,7 @@ Auth0がホストするデータベース構造を使用してユーザーを保
    * `update:users_app_metadata`
    * `create:users_app_metadata`
 
-     <Frame>![Auth0 Dashboard > APIs > Management API >  M2M Tab > App Permissions](//images.ctfassets.net/cdy7uua7fh8z/2vW8zD1iIObuqb0i59yw77/b2baf521c0d982ab982e4f75a9bf1dda/Management_API_-_M2M_-_Permissions.png)</Frame>
+     <Frame>![Auth0 Dashboard > APIs > Management API >  M2M Tab > App Permissions](/images/ja-jp/cdy7uua7fh8z/2vW8zD1iIObuqb0i59yw77/b2baf521c0d982ab982e4f75a9bf1dda/Management_API_-_M2M_-_Permissions.png)</Frame>
 
 ### データベース接続テストを作成する
 
@@ -85,24 +85,24 @@ Auth0がホストするデータベース構造を使用してユーザーを保
 </thead>
 <tbody>
 <tr>
-<td><code>client_id</code></td>
+<td>`client_id`</td>
 <td>作成したアプリケーションのクライアントID</td>
 </tr>
 <tr>
-<td><code>client_secret</code></td>
+<td>`client_secret`</td>
 <td>作成したアプリケーションのクライアントシークレット</td>
 </tr>
 <tr>
-<td><code>auth0_domain</code></td>
-<td>Auth0ドメイン内のテナント名：<code>yourTenant.us.auth0.com</code></td>
+<td>`auth0_domain`</td>
+<td>Auth0ドメイン内のテナント名：`yourTenant.us.auth0.com`</td>
 </tr>
 <tr>
-<td><code>source_database</code></td>
+<td>`source_database`</td>
 <td>ソース接続の名前</td>
 </tr>
 </tbody>
 </table>
-7. ターゲットデータベースで、[Login（ログイン）](/docs/authenticate/database-connections/test-custom-db#login)および[Get User（ユーザーの取得）](/docs/authenticate/database-connections/test-custom-db#get-user)のデータベースアクションスクリプトを更新します。データベースアクションスクリプトを使用したベストプラクティスに関する詳細は、「[カスタムデータベース接続とアクションスクリプトのベストプラクティス](/docs/ja-jp/authenticate/database-connections/custom-db/custom-database-connections-scripts)」をお読みください。
+7. ターゲットデータベースで、[Login（ログイン）](/docs/ja-jp/authenticate/database-connections/test-custom-db#login)および[Get User（ユーザーの取得）](/docs/ja-jp/authenticate/database-connections/test-custom-db#get-user)のデータベースアクションスクリプトを更新します。データベースアクションスクリプトを使用したベストプラクティスに関する詳細は、「[カスタムデータベース接続とアクションスクリプトのベストプラクティス](/docs/ja-jp/authenticate/database-connections/custom-db/custom-database-connections-scripts)」をお読みください。
 8. 各スクリプトで**［Save and Try（保存して試す）］**を選択します。Real-time Webtask Logs機能拡張の`console.log`出力を監視してください。詳細については、「[Real-time Webtask Logs機能拡張](/docs/ja-jp/customize/extensions/real-time-webtask-logs)」をお読みください。
 9. **［Try Connection（接続を試す）］**を選択して、接続ライブをテストします。
 
@@ -135,7 +135,7 @@ Get User（ユーザーの取得）スクリプトは、ユーザーが次の操
 
 #### 例
 
-```
+```javascript lines
 async function getUser(user, context, callback) {
     log(`Script started.`);
     log(`Requesting an Access Token from "${configuration.auth0_domain}".`);
@@ -209,7 +209,7 @@ async function getUser(user, context, callback) {
 
 #### 例
 
-```javascript
+```javascript lines
 function login(usernameOrEmail, password, context, callback) {
   log(`Script started.`);
   const jwt = require('jsonwebtoken');
@@ -262,7 +262,7 @@ function login(usernameOrEmail, password, context, callback) {
 
 #### 例
 
-```
+```javascript lines
 async function create(user, context, callback) {
   log(`Script started.`);
   log(`Requesting an Access Token from "${configuration.auth0_domain}".`);
@@ -336,7 +336,7 @@ async function create(user, context, callback) {
 
 #### 例
 
-```
+```javascript lines
 async function deleteUser(user, context, callback) {
   log(`Script started.`);
   log(`Requesting an Access Token from "${configuration.auth0_domain}".`);
@@ -402,7 +402,7 @@ async function deleteUser(user, context, callback) {
 
 #### 例
 
-```
+```javascript lines
 async function verify(user, context, callback) {
   log(`Script started.`);
   log(`Requesting an Access Token from "${configuration.auth0_domain}".`);
@@ -491,7 +491,7 @@ async function verify(user, context, callback) {
 
 #### 例
 
-```
+```javascript lines
 async function changePassword(user, newPassword, context, callback) {
   log(`Script started.`);
   log(`Requesting an Access Token from "${configuration.auth0_domain}".`);
@@ -578,11 +578,11 @@ async function changePassword(user, newPassword, context, callback) {
 
 [Change Email（メールの変更）スクリプト](/docs/ja-jp/authenticate/database-connections/custom-db/templates/change-email)は、ユーザーがメールアドレスまたはメールアドレスの検証ステータスを変更したときに、ユーザーのメールアドレスを更新する実行可能関数を実装します。
 
-このスクリプトはAuth0 Dashboardでは利用できません。Management API[接続を更新](/docs/api/management/v2/connections/patch-connections-by-id)エンドポイントを呼び出し、`options.customScripts.change_email`プロパティを提供する必要があります。
+このスクリプトはAuth0 Dashboardでは利用できません。Management API[接続を更新](/docs/ja-jp/api/management/v2/connections/patch-connections-by-id)エンドポイントを呼び出し、`options.customScripts.change_email`プロパティを提供する必要があります。
 
 #### 例
 
-```
+```javascript lines
 async function changeEmail(user, newEmail, verified, callback) {
   log(`Script started.`);
   log(`Requesting an Access Token from "${configuration.auth0_domain}".`);

@@ -1,13 +1,13 @@
 ---
 title: "OIDC接続のPKCEとクレームのマッピングを構成する"
 permalink: "configure-pkce-claim-mapping-for-oidc"
+'description': "Proof Key for Code Exchange（PKCE）と、OpenID Connect・Okta Workforce接続のマッピングテンプレートを構成します。"
 'og:title': "OIDC接続のPKCEとクレームのマッピングを構成する"
 'og:description': "Proof Key for Code Exchange（PKCE）と、OpenID Connect・Okta Workforce接続のマッピングテンプレートを構成します。"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "OIDC接続のPKCEとクレームのマッピングを構成する"
 'twitter:description': "Proof Key for Code Exchange（PKCE）と、OpenID Connect・Okta Workforce接続のマッピングテンプレートを構成します。"
 ---
-# OIDC接続のPKCEとクレームのマッピングを構成する
 
 IDプロバイダーに[OpenID Connect](/docs/ja-jp/authenticate/identity-providers/enterprise-identity-providers/oidc)または[Okta Workforce](/docs/ja-jp/authenticate/identity-providers/enterprise-identity-providers/okta)を使用しているエンタープライズ接続では、Proof Key for Code Exchange（PKCE）や、属性・トークンのマッピングをサポートできます。
 
@@ -38,7 +38,7 @@ Auth0 Dashboardでは、接続のPKCE構成を管理できます。
 
 #### ディスカバリーエンドポイントの使用
 
-```bash
+```bash lines
 curl --request POST \
 --url 'https://{yourDomain}/api/v2/connections' \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
@@ -60,7 +60,7 @@ curl --request POST \
 
 `discovery_url` がない場合、必要なフィールドで`oidc_metadata`オブジェクトを手動で入力する必要があります。
 
-```bash
+```bash lines
 curl --request POST \
   --url 'https://{yourDomain}/api/v2/connections' \
   --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
@@ -101,19 +101,19 @@ Auth0では、PKCEの構成に以下の値を使用できます。
 </thead>
 <tbody>
 <tr>
-<td><code>auto</code></td>
+<td>`auto`</td>
 <td>デフォルト値。最も強力なアルゴリズムを使用します。</td>
 </tr>
 <tr>
-<td><code>s256</code></td>
+<td>`s256`</td>
 <td>SHA-256アルゴリズムを使用します。Auth0は現在、RS512トークンをサポートしていません。</td>
 </tr>
 <tr>
-<td><code>plain</code></td>
+<td>`plain`</td>
 <td><a href="https://www.rfc-editor.org/rfc/rfc7636#section-4.2" title="Proof Key for Code Exchange by OAuth Public Clients - Code Challenge">PKCE仕様</a>で説明されたプレーンテキストを使用します。</td>
 </tr>
 <tr>
-<td><code>disabled</code></td>
+<td>`disabled`</td>
 <td>PKCEに対するサポートを無効にします。</td>
 </tr>
 </tbody>
@@ -131,7 +131,7 @@ Auth0では、PKCEの構成に以下の値を使用できます。
 
 **Entra IDでの制限**
 
-Entra IDにOpenID Connect接続を使用している場合は、接続のメタデータが使用されているハッシュアルゴリズムを公開しないため、`pkce`を`s256`に設定する必要があります。現在、[Entra ID Enterprise接続](/docs/authenticate/identity-providers/enterprise-identity-providers/azure-active-directory/v2)はPKCEに対応していません。
+Entra IDにOpenID Connect接続を使用している場合は、接続のメタデータが使用されているハッシュアルゴリズムを公開しないため、`pkce`を`s256`に設定する必要があります。現在、[Entra ID Enterprise接続](/docs/ja-jp/authenticate/identity-providers/enterprise-identity-providers/azure-active-directory/v2)はPKCEに対応していません。
 
 </Note>
 
@@ -141,7 +141,7 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 <Note>
 
-マッピングされたクレームは、自動的にAuth0のIDトークンに追加されるわけではありません。クレームをIDトークンに追加するには、「[カスタムクレームを作成する](/docs/secure/tokens/json-web-tokens/create-custom-claims#create-custom-claims)」を参照してください。
+マッピングされたクレームは、自動的にAuth0のIDトークンに追加されるわけではありません。クレームをIDトークンに追加するには、「[カスタムクレームを作成する](/docs/ja-jp/secure/tokens/json-web-tokens/create-custom-claims#create-custom-claims)」を参照してください。
 
 </Note>
 
@@ -158,17 +158,17 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 </thead>
 <tbody>
 <tr>
-<td><code>mapping_mode</code></td>
+<td>`mapping_mode`</td>
 <td>必須</td>
 <td>受信クレームをマッピングするために使用される方法。</td>
 </tr>
 <tr>
-<td><code>userinfo_scope</code></td>
+<td>`userinfo_scope`</td>
 <td>任意</td>
 <td>IdPのユーザー情報エンドポイントに送信するためのスコープ。</td>
 </tr>
 <tr>
-<td><code>attributes</code></td>
+<td>`attributes`</td>
 <td>必須</td>
 <td>受信クレームのマッピング詳細が含まれるオブジェクト。</td>
 </tr>
@@ -187,11 +187,11 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 </thead>
 <tbody>
 <tr>
-<td><code>use_map</code></td>
+<td>`use_map`</td>
 <td>提供されたテンプレートを使用してデータをマッピングする。</td>
 </tr>
 <tr>
-<td><code>bind_all</code></td>
+<td>`bind_all`</td>
 <td>IdPが提供したすべてのデータ要素をコピーする。</td>
 </tr>
 </tbody>
@@ -205,7 +205,7 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 `mapping_mode`を`use_map`に設定すれば、受け取る予約済みクレームを有効なクレームにマッピングできます。
 
-```
+``` lines
 "attribute_map": {
         "mapping_mode": "use_map",
         "attributes": {
@@ -223,7 +223,7 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 たとえば、UserInfoエンドポイントの要求時に標準のOIDCスコープと`groups`スコープを送信したい場合には、次のようにします。
 
-```
+``` lines
 "attribute_map": {
     . . .
     "mapping_mode": "bind_all",
@@ -238,7 +238,7 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 左側のキーは、Auth0のユーザープロファイル属性に対応します。右側の値は、IdPからのクレームで、リテラル値、動的なコンテキストオブジェクト、またはその組み合わせとして表されます。動的コンテキストオブジェクトは、おなじみの`${variable}`形式で作成されたテンプレート式です。
 
-```
+``` lines
 "attribute_map": {
     . . .
     "attributes": {
@@ -255,7 +255,7 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 たとえば、SalesForceのOIDC接続を構成していて、すべてのユーザープロファイルに同じSFDC Community IDを割り当てたい場合は、次のようにします。
 
-```
+``` lines
 "attribute_map": {
     . . .
     "attributes": {
@@ -279,16 +279,16 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 </thead>
 <tbody>
 <tr>
-<td><code>context.connection</code></td>
-<td>含まれるプロパティ：<br/><br/><li> <code>id</code>：接続の一意の識別子（<code>con_4423423423432423</code>など）。</li><br/><li><code>strategy</code>：接続戦略（<code>oidc</code>など）。</li></td>
+<td>`context.connection`</td>
+<td>含まれるプロパティ：<br/><br/><li> `id`：接続の一意の識別子（`con_4423423423432423`など）。</li><br/><li>`strategy`：接続戦略（`oidc`など）。</li></td>
 </tr>
 <tr>
-<td><code>context.tokenset</code></td>
-<td>含まれるプロパティ：<br/><br/><li><code>access_token</code>：IdPによって送信される検証済みアクセストークン全体。</li><br/><li><code>&lt;claim name&gt;</code>：IdPによって送信される任意のIDトークン。</li></td>
+<td>`context.tokenset`</td>
+<td>含まれるプロパティ：<br/><br/><li>`access_token`：IdPによって送信される検証済みアクセストークン全体。</li><br/><li>`&lt;claim name&gt;`：IdPによって送信される任意のIDトークン。</li></td>
 </tr>
 <tr>
-<td><code>context.userinfo</code></td>
-<td>含まれるプロパティ：<br/><br/><li><code>&lt;claim name&gt;</code>：IdPのUserInfoエンドポイントによって提供される任意の使用可能なクレーム。</li></td>
+<td>`context.userinfo`</td>
+<td>含まれるプロパティ：<br/><br/><li>`&lt;claim name&gt;`：IdPのUserInfoエンドポイントによって提供される任意の使用可能なクレーム。</li></td>
 </tr>
 </tbody>
 </table>
@@ -299,7 +299,7 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 この例では、IDトークンからのデータを使用して一般的なユーザークレームをAuth0のユーザープロファイルにマッピングしています。
 
-```
+``` lines
 "attribute_map": {
     . . .
     "attributes": {
@@ -314,7 +314,7 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 この例では、受信IdPからグループをAuth0のユーザープロファイルにマッピングしています。
 
-```
+``` lines
 "attribute_map": {
     . . .
     "attributes": {
@@ -329,7 +329,7 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 この例では、リテラル値と動的テンプレート式を組み合わせて、複雑な値をAuth0のユーザープロファイル属性にマッピングしています。
 
-```
+``` lines
 "attribute_map":{
     . . .
     "attributes": {
