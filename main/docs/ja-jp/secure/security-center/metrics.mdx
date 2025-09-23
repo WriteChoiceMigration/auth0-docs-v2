@@ -1,0 +1,174 @@
+---
+title: "メトリクス"
+permalink: "metrics"
+'og:title': "メトリクス"
+'og:description': "既知の攻撃タイプを示唆するパターンの識別に使用するテナントログイベントについて説明します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
+'twitter:title': "メトリクス"
+'twitter:description': "既知の攻撃タイプを示唆するパターンの識別に使用するテナントログイベントについて説明します。"
+---
+# メトリクス
+
+Security Center（セキュリティセンター）はテナントログイベントを使用して、既知の攻撃タイプを示唆するパターンを識別します。テナントログイベントは、通常トラフィック、資格情報スタッフィングの脅威、サインアップ攻撃の脅威、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>バイパスの脅威という複数のカテゴリーに分類されます。
+
+<Warning>
+
+イベントタイプコードの分類は変更される可能性があります。現在のログイベントコードの定義に依存したソリューションは実装しないでください。
+
+</Warning>
+
+## 通常トラフィック
+
+通常トラフィックは、観察される可能性があるさまざまな脅威についてのベンチマークとして使用されます。通常トラフィックには、1時間内に発生した成功と失敗イベントのすべてが含まれ、それらのイベントには以下のイベントコードが使用されます。
+
+<table class="table"><thead>
+<tr>
+<th>イベントコード</th>
+<th>イベント</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>ログイン成功</td>
+</tr>
+<tr>
+<td><code>ss</code></td>
+<td>サインアップ成功</td>
+</tr>
+<tr>
+<td><code>sepft</code></td>
+<td>アクセストークンのためのパスワード交換が成功</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td>ユーザーログイン失敗</td>
+</tr>
+<tr>
+<td><code>fu</code></td>
+<td>無効なユーザー名によりログイン失敗</td>
+</tr>
+<tr>
+<td><code>fp</code></td>
+<td>無効なパスワードによりログイン失敗</td>
+</tr>
+<tr>
+<td><code>pwd_leak</code></td>
+<td>漏洩したパスワードを使用したログイン試行</td>
+</tr>
+</tbody>
+</table>
+
+## 資格情報スタッフィング
+
+1時間内に観察した資格情報スタッフィングの脅威は、以下のイベントコードで特定されます。
+
+<table class="table"><thead>
+<tr>
+<th>イベントコード</th>
+<th>イベント</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td>ユーザーログインに失敗しました</td>
+</tr>
+<tr>
+<td><code>fu</code></td>
+<td>ユーザー名が無効なため、ユーザーログインに失敗しました</td>
+</tr>
+<tr>
+<td><code>fp</code></td>
+<td>パスワードが無効なため、ユーザーログインに失敗しました</td>
+</tr>
+<tr>
+<td><code>pwd_leak</code></td>
+<td>漏洩したパスワードでログインが試行されました</td>
+</tr>
+<tr>
+<td><code>limit_wc</code></td>
+<td>1つのアカウントへ10回以上ログインに失敗したため、IPがブロックされました</td>
+</tr>
+<tr>
+<td><code>limit_sul</code></td>
+<td>同じIPアドレスから1分当たり20回以上ログインに失敗したため、ユーザーがブロックされました</td>
+</tr>
+<tr>
+<td><code>limit_mu</code></td>
+<td>100回以上ログインに失敗したか、50回以上サインアップに失敗したため、IPがブロックされました</td>
+</tr>
+</tbody>
+</table>
+
+## サインアップ攻撃
+
+1時間内に観察したサインアップ攻撃の脅威は、以下のイベントコードで特定されます。
+
+<table class="table"><thead>
+<tr>
+<th>イベントコード</th>
+<th>イベント</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fs</code></td>
+<td>失敗したサインアップ</td>
+</tr>
+</tbody>
+</table>
+
+## MFAバイパス
+
+1時間内に観察したMFAバイパスの脅威は、以下のイベントコードで特定されます。
+
+<table class="table"><thead>
+<tr>
+<th>イベントコード</th>
+<th>イベント</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gd_send_email</code></td>
+<td>メールを送信しました</td>
+</tr>
+<tr>
+<td><code>gd_send_pn</code></td>
+<td>プッシュ通知を送信しました</td>
+</tr>
+<tr>
+<td><code>gd_send_sms</code></td>
+<td>SMSを送信しました</td>
+</tr>
+<tr>
+<td><code>gd_send_voice</code></td>
+<td>音声通話を送信しました</td>
+</tr>
+<tr>
+<td><code>gd_auth_failed</code></td>
+<td>OTP認証に失敗しました</td>
+</tr>
+<tr>
+<td><code>gd_auth_rejected</code></td>
+<td>OTP認証が拒否されました</td>
+</tr>
+<tr>
+<td><code>gd_otp_rate_limit_exceed</code></td>
+<td>OTP認証失敗の回数が多すぎます</td>
+</tr>
+<tr>
+<td><code>gd_recovery_failed</code></td>
+<td>復旧に失敗しました</td>
+</tr>
+<tr>
+<td><code>gd_recovery_rate_limit_exceed</code></td>
+<td>復旧失敗の回数が多すぎます</td>
+</tr>
+<tr>
+<td><code>gd_webauthn_challenge_failed</code></td>
+<td>WebAuthnブラウザー障害</td>
+</tr>
+</tbody>
+</table>

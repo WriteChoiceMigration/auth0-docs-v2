@@ -1,0 +1,266 @@
+---
+title: "アクションのトリガー：custom-phone-providerのイベントオブジェクト"
+permalink: "actions-triggers-custom-phone-provider-event-object"
+'og:title': "アクションのトリガー：custom-phone-providerのイベントオブジェクト"
+'og:description': "custom-phone-provider Eventオブジェクトを使用して、カスタム電話プロバイダーを構成する方法について説明します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
+'twitter:title': "アクションのトリガー：custom-phone-providerのイベントオブジェクト"
+'twitter:description': "custom-phone-provider Eventオブジェクトを使用して、カスタム電話プロバイダーを構成する方法について説明します。"
+---
+# アクションのトリガー：custom-phone-providerのイベントオブジェクト
+
+<Note>
+
+電話メッセージプロバイダーは、現在早期アクセス版として提供されています。Auth0のリリースについては、「[製品のリリース段階](https://auth0.com/docs/troubleshoot/product-lifecycle/product-release-stages)」を参照してください。
+
+</Note>
+
+`custom-phone-provider`アクショントリガーの`event`オブジェクトは、カスタム電話メッセージの送信と受信の要求に関するコンテキスト情報を提供します。
+
+<table class="table">
+<thead>
+<tr>
+<th>プロパティ</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p><code>event.client</code></p>
+</td>
+<td>
+<p>
+          このログイントランザクションが開始されたクライアントに関する情報です。
+        </p>
+<p>以下のプロパティを含みます。</p>
+<ul>
+<li>
+<code>client_id</code> <em>：文字列</em>。<span>ユーザーがログインしているアプリケーションのクライアントIDです。</span>
+</li>
+<li>
+<code>metadata</code> <em>：辞書</em>。<span>他のアプリケーションプロパティを含むオブジェクトです。</span>
+</li>
+<li>
+<code>name</code> <em>：文字列</em>。<span>アプリケーションの名前（Dashboardで定義）です。</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.connection</code></p>
+<p><em>（任意）</em></p>
+</td>
+<td>
+<p>
+          ユーザーの認証に使用された接続についての詳細です。
+        </p>
+<p>以下のプロパティを含みます。</p>
+<ul>
+<li>
+<code>id</code> <em>：任意の文字列</em>。<span>接続の一意の識別子です。</span>
+</li>
+<li>
+<code>metadata</code> <em>：任意の辞書</em>。<span>接続に関連付けられているメタデータです。</span>
+</li>
+<li>
+<code>name</code> <em>：任意の文字列</em>。<span>ユーザーの認証に使用される接続名（<code>twitter</code>や<code>some-g-suite-domain</code>など）です。</span>
+</li>
+<li>
+<code>strategy</code> <em>：任意の文字列</em>。<span>接続の種類です。ソーシャル接続の場合は<code>event.connection.strategy === event.connection.name</code>です。エンタープライズ接続の場合、ストラテジーは<code>waad</code>（Windows Azure AD）、<code>ad</code>（Active
+              Directory/LDAP）、<code>auth0</code>（データベース接続）などになります。</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.notification</code></p>
+</td>
+<td>
+<p>以下のプロパティを含みます。</p>
+<ul>
+<li>
+<code>from</code> <em>：文字列</em>。<span>‌‌E.164に準拠した送信者の電話番号です。</span>
+</li>
+<li>
+<code>locale</code> <em>：文字列</em>。<span>メッセージをレンダリングしたロケール（<code>en_US</code>など）で、BCP-47の仕様に従います。</span>
+</li>
+<li>
+<code>message_type</code> <em>：文字列</em>です。<p>
+              送信されるメッセージの種類（<code>otp_verify</code>や<code>blocked_account</code>など）です。
+            </p>
+<p>以下の値を使用できます。</p>
+<ul>
+<li><code>otp_verify</code></li>
+<li><code>otp_enroll</code></li>
+<li><code>blocked_account</code></li>
+<li><code>change_password</code></li>
+<li><code>password_breach</code></li>
+</ul>
+</li>
+<li>
+<code>recipient</code> <em>：文字列</em>。<span>E.164に準拠した受信者の電話番号です。</span>
+</li>
+<li>
+<code>delivery_method</code> <em>：列挙型</em>。<span>メッセージの送信方法です。<code>text</code>または<code>voice</code>になります。</span>
+</li>
+<li>
+<code>code</code> <em>：文字列</em>。<span>一部の <code>message_types</code>（<code>otp_verify</code>や<code>otp_enroll</code>など）で使用するワンタイムパスワードです。</span>
+</li>
+<li>
+<code>as_text</code> <em>：文字列</em>。<span>テキストメッセージとして送信可能なレンダリング済みのテキストです。</span>
+</li>
+<li>
+<code>as_voice</code> <em>：文字列</em>。<span>音声テキストメッセージとして送信可能なレンダリング済みのテキストです。</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.organization</code></p>
+<p><em>（任意）</em></p>
+</td>
+<td>
+<p>
+                    現在のトランザクションに関連付けられている組織の詳細です。
+        </p>
+<p>以下のプロパティを含みます。</p>
+<ul>
+<li>
+<code>display_name</code> <em>：文字列</em>。<span>組織のフレンドリー名です。</span>
+</li>
+<li>
+<code>id</code> <em>：文字列</em>。<span>組織の識別子です。</span>
+</li>
+<li>
+<code>metadata</code> <em>：辞書</em>。<span>組織に関連付けられているメタデータです。</span>
+</li>
+<li>
+<code>name</code> <em>：文字列</em>。<span>組織の名前です。</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.request</code></p>
+<p><em>（任意）</em></p>
+</td>
+<td>
+<p>トランザクションを開始した要求についての詳細です。</p>
+<p>以下のプロパティを含みます。</p>
+<ul>
+<li>
+<code>geoip</code> <em>：任意のオブジェクト</em>です。
+            <p>以下のプロパティを含みます。</p>
+<ul>
+<li><code>countryCode</code> <em>：任意の文字列</em></li>
+<li><code>countryCode3</code> <em>：任意の文字列</em></li>
+<li><code>cityName</code> <em>：任意の文字列</em></li>
+<li><code>latitude</code> <em>：任意の文字列</em></li>
+<li><code>longitude</code> <em>：任意の文字列</em></li>
+<li><code>timeZone</code> <em>：任意の文字列</em></li>
+<li><code>subdivisionCode</code> <em>：任意の文字列</em></li>
+<li><code>subdivisionName</code> <em>：任意の文字列</em></li>
+<li><code>continentCode</code> <em>：任意の文字列</em></li>
+<li><code>continentCode</code> <em>：任意の文字列</em></li>
+</ul>
+</li>
+<li>
+<code>ip</code> <em>：任意の文字列</em>。<span>要求の送信元のIPアドレスです。</span>
+</li>
+<li>
+<code>hostname</code> <em>：任意の文字列</em>。<span>認証フローに使用されているホスト名です。</span>
+</li>
+<li>
+<code>method</code> <em>：任意の文字列</em>。<span>要求に使用されたHTTPメソッドです。</span>
+</li>
+<li>
+<code>language</code> <em>：任意の文字列</em>。<span>ブラウザーから要求された言語です。</span>
+</li>
+<li>
+<code>user_agent</code> <em>：任意の文字列</em>。<span>トランザクションの開始で受信した<code>User-Agent</code>ヘッダーの値です。</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.tenant</code></p>
+</td>
+<td>
+<p>以下のプロパティを含みます。</p>
+<ul>
+<li>
+<code>friendly_name</code> <em>：任意の文字列</em>。<span>テナントのフレンドリー名です。通常は人間に読めるバージョンのIDです。</span>
+</li>
+<li>
+<code>home_url</code> <em>：任意の文字列</em>。<span>定義されている場合、設定にあるテナントのホームURLです</span>
+</li>
+<li>
+<code>id</code> <em>：文字列</em>。<span>テナントの名前です。</span>
+</li>
+<li>
+<code>logo_url</code> <em>：任意の文字列</em>。<span>定義されている場合、設定にあるテナントのロゴURLです。</span>
+</li>
+<li>
+<code>support_email</code> <em>：任意の文字列</em>。<span>定義されている場合、設定にあるテナントのサポートサービスのメールアドレスです。</span>
+</li>
+<li>
+<code>support_url</code> <em>：任意の文字列</em>。<span>定義されている場合、設定にあるテナントのサポートサービスのURLです。</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.user</code></p>
+</td>
+<td>
+<p>
+          代理で現在のトランザクションが開始されたユーザーを記述するオブジェクトです。
+        </p>
+<p>以下のプロパティを含みます。</p>
+<ul>
+<li>
+<code>app_metadata</code> <em>：辞書</em>。<span>サポートプラン、セキュリティロール、アクセス制御グループなどのユーザーアクセスに影響するユーザー情報を保管するカスタムフィールドです。</span>
+</li>
+<li>
+<code>email</code> <em>：任意の文字列</em>。<span>（一意）ユーザーのメールアドレスです。</span>
+</li>
+<li>
+<code>email_verified</code> <em>：ブール値</em>。<span>ユーザーのメールアドレスが検証済みかを示します。</span>
+</li>
+<li>
+<code>family_name</code> <em>：任意の文字列</em>。<span>ユーザーの姓です。</span>
+</li>
+<li>
+<code>given_name</code> <em>：任意の文字列</em>。<span>ユーザーの名です。</span>
+</li>
+<li>
+<code>name</code> <em>：任意の文字列</em>。<span>ユーザーのフルネームです。</span>
+</li>
+<li>
+<code>nickname</code> <em>：任意の文字列</em>。<span>ユーザーのニックネームです。</span>
+</li>
+<li>
+<code>picture</code> <em>：任意の文字列</em>。<span>
+<a href="https://auth0.com/docs/ja-jp/users/change-user-picture">ユーザーのプロフィール画像をポイントするURL</a>です。</span>
+</li>
+<li>
+<code>user_id</code> <em>：文字列</em>。<span>（一意）ユーザーの一意の識別子です。</span>
+</li>
+<li>
+<code>user_metadata</code> <em>：辞書</em>。<span>勤務先の住所、自宅の住所、ユーザーの設定など、ユーザーのアクセスに影響を与えないユーザー情報を保管するカスタムフィールドです。</span>
+</li>
+<li>
+<code>username</code> <em>：任意の文字列</em>。<span>（一意）ユーザーのユーザー名です。</span>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>

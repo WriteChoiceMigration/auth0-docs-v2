@@ -1,0 +1,349 @@
+---
+title: "Déclencheurs d’action - pre-user-registration - Objet d’événement"
+permalink: "pre-user-registration-event-object"
+'og:title': "Déclencheurs d’action - pre-user-registration - Objet d’événement"
+'og:description': "Découvrez l’objet d’événement du déclencheur d’action de pré-enregistrement de l’utilisateur, qui fournit des informations contextuelles sur la demande d’enregistrement d’un nouvel utilisateur."
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
+'twitter:title': "Déclencheurs d’action - pre-user-registration - Objet d’événement"
+'twitter:description': "Découvrez l’objet d’événement du déclencheur d’action de pré-enregistrement de l’utilisateur, qui fournit des informations contextuelles sur la demande d’enregistrement d’un nouvel utilisateur."
+---
+# Déclencheurs d’action - pre-user-registration - Objet d’événement
+
+L’objet `event` pour le déclencheur d’actions de pré-enregistrement de l’utilisateur fournit des informations contextuelles sur la demande d’enregistrement d’un nouvel utilisateur.
+
+<table class="table">
+<thead>
+<tr>
+<th>Propriété</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p><code>event.client</code></p>
+<p><em>(Facultatif)</em></p>
+</td>
+<td>
+<p>
+          Informations sur le client avec lequel la translation a
+          été initiée.
+        </p>
+<p>Comprend les propriétés suivantes :</p>
+<ul>
+<li>
+<code>client_id</code> <em>Chaîne</em>.
+            <span>L’ID client de l’application à laquelle l’utilisateur se connecte.</span>
+</li>
+<li>
+<code>metadata</code> <em>Dictionnaire</em>.
+            <span>Un objet qui contient les autres propriétés d’une application.</span>
+</li>
+<li>
+<code>name</code> <em>Chaîne</em>.
+            <span>Le nom de l’application (comme défini dans le Dashboard).</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.connection</code></p>
+</td>
+<td>
+<p>Détails à propos de la connexion utilisée pour enregistrer l’utilisateur.</p>
+<p>Comprend les propriétés suivantes :</p>
+<ul>
+<li>
+<code>id</code> <em>Chaîne</em>.
+            <span>L’identifiant unique de la connexion.</span>
+</li>
+<li>
+<code>metadata</code> <em>Dictionnaire facultatif</em>.
+            <span>Métadonnées associées à la connexion.</span>
+</li>
+<li>
+<code>name</code> <em>Chaîne</em>.
+            <span>Le nom de la connexion utilisée pour authentifier l’utilisateur (par ex. :
+              <code>twitter</code> ou <code>some-g-suite-domain</code>).</span>
+</li>
+<li>
+<code>strategy</code> <em>Chaîne</em>.
+            <span>Le type de connexion. Pour les connexions sociales,
+              <code>event.connection.strategy === event.connection.name</code>.
+              Pour les connexions d’entreprise, la stratégie est la suivante :
+              <code>waad</code> (Windows Entra ID), <code>ad</code> (Active
+              Directory/LDAP), <code>auth0</code> (connexions de base de données),
+              etc.</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.request</code></p>
+</td>
+<td>
+<p>Détails sur la demande à l’origine de la transaction.</p>
+<p>Comprend les propriétés suivantes :</p>
+<ul>
+<li>
+<code>body</code> <em>Dictionnaire</em>.
+            <span>Le corps de la requête POST. Ces données ne seront disponibles
+              que pendant les flux d’échange de jetons d’actualisation et de flux d’échange d’identifiants clients,
+              ainsi que lors de l’action PreUserRegistration.</span>
+</li>
+<li>
+<code>geoip</code> <em>Objet</em>.
+            <p>Comprend les propriétés suivantes :</p>
+<ul>
+<li><code>cityName</code> <em>Chaîne facultative</em>.</li>
+<li><code>continentCode</code> <em>Chaîne facultative</em>.</li>
+<li><code>countryCode</code> <em>Chaîne facultative</em>.</li>
+<li><code>countryCode3</code> <em>Chaîne facultative</em>.</li>
+<li><code>countryName</code> <em>Chaîne facultative</em>.</li>
+<li><code>latitude</code> <em>Numéro facultatif</em>.</li>
+<li><code>longitude</code> <em>Numéro facultatif</em>.</li>
+<li><code>subdivisionCode</code> <em>Chaîne facultative</em>.</li>
+<li><code>subdivisionName</code> <em>Chaîne facultative</em>.</li>
+<li><code>timeZone</code> <em>Chaîne facultative</em>.</li>
+</ul>
+</li>
+<li>
+<code>hostname</code> <em>Chaîne facultative</em>.
+            <span>Le nom d’hôte utilisé pour le flux
+              d’authentification.</span>
+</li>
+<li>
+<code>ip</code> <em>Chaîne</em>.
+            <span>L’adresse IP initiale de la demande.</span>
+</li>
+<li>
+<code>language</code> <em>Chaîne facultative</em>.
+            <span>La langue demandée par le navigateur.</span>
+</li>
+<li>
+<code>method</code> <em>Chaîne</em>.
+            <span>La méthode HTTP utilisée pour la demande.</span>
+</li>
+<li>
+<code>user_agent</code> <em>Chaîne facultative</em>.
+            <span>La valeur de l’en-tête <code>User-Agent</code> reçu lorsque de la transaction
+              a été initiée.</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.tenant</code></p>
+</td>
+<td>
+<p>Détails sur le locataire associé à la transaction en cours.</p>
+<p>Comprend les propriétés suivantes :</p>
+<ul>
+<li>
+<code>id</code> <em>Chaîne</em>.
+            <span>Nom du locataire.</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.transaction</code></p>
+<p><em>(Facultatif)</em></p>
+</td>
+<td>
+<p>Détails à propos de la transaction en cours.</p>
+<p>Comprend les propriétés suivantes :</p>
+<ul>
+<li>
+<code>acr_values</code> <em>Tableau de chaînes</em>.
+            <span>Toutes les acr_values fournies dans la demande
+              d’authentification initiale.</span>
+</li>
+<li>
+<code>locale</code> <em>Chaîne</em>.
+            <span>La langue locale à utiliser pour cette transaction, déterminée en
+              comparant les langues demandées par le navigateur aux paramètres
+              linguistiques du locataire.</span>
+</li>
+<li>
+<code>login_hint</code> <em>Chaîne facultative</em>.
+            <span>Indication au serveur d’autorisation de l’identifiant de connexion que
+              l’utilisateur final pourrait utiliser pour se connecter (si nécessaire).</span>
+</li>
+<li>
+<code>prompt</code> <em>Tableau de chaînes facultatif</em>.
+            <span>Liste d’instructions indiquant si l’utilisateur peut être invité à s’authentifier
+              à nouveau et à donner son consentement.</span>
+</li>
+<li>
+<code>protocol</code> <em>Chaîne facultative</em>.
+            <p>Les valeurs possibles sont les suivantes :</p>
+<ul>
+<li>
+<code>oidc-basic-profile</code>
+<span>Connexion Web la plus fréquemment utilisée.</span>
+</li>
+<li>
+<code>oidc-implicit-profile</code>
+<span>Utilisée sur les appareils mobiles et les applications à page unique.</span>
+</li>
+<li>
+<code>samlp</code> <span>Protocole SAML utilisé pour les applications SaaS.</span>
+</li>
+<li>
+<code>wsfed</code>
+<span>Protocole WS-Federation utilisé sur les produits Microsoft comme
+                  Office365.</span>
+</li>
+<li>
+<code>wstrust-usernamemixed</code>
+<span>Identifiants utilisateur/mot de passe WS-trust utilisés sur CRM et Office365.</span>
+</li>
+<li>
+<code>oauth2-webauthn</code>
+<span>Inscription par le biais de l’API Clés d’identification natives.</span>
+</li>
+<li>
+<code>oauth2-device-code</code>
+<span>Transaction utilisant le flux d’autorisation de l’appareil.</span>
+</li>
+<li>
+<code>oauth2-resource-owner</code>
+<span>Identifiants utilisateur/mot de passe généralement utilisés pour les connexions
+                  aux bases de données.</span>
+</li>
+<li>
+<code>oauth2-resource-owner-jwt-bearer</code>
+<span>Connexion utilisant un <dfn id="react-containers-DefinitionTooltip-0"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">JWT</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn> porteur signé par la clé privée
+                  de l’utilisateur.</span>
+</li>
+<li>
+<code>oauth2-password</code>
+<span>Connexion utilisant l’échange de mots de passe.</span>
+</li>
+<li>
+<code>oauth2-access-token</code>
+<span>Actualisation d’un jeton à l’aide de l’échange de jetons d’actualisation.</span>
+</li>
+<li>
+<code>oauth2-refresh-token</code>
+<span>Actualisation d’un jeton à l’aide de l’échange de jetons d’actualisation.</span>
+</li>
+<li><code>oauth2-token-exchange</code></li>
+<li>
+<code>oidc-hybrid-profile</code>
+<span>Permet à votre application d’avoir un accès immédiat à un jeton d’ID
+                  tout en assurant une récupération sûre et sécurisée des
+                  jetons d’accès et d’actualisation.</span>
+</li>
+</ul>
+</li>
+<li>
+<code>redirect_uri</code> <em>Chaîne facultative</em>.
+            <span>L’URL vers laquelle Auth0 redirigera le navigateur une fois
+              la transaction terminée.</span>
+</li>
+<li>
+<code>requested_scopes</code> <em>Tableau de chaînes</em>.
+            <span>Les permissions demandées (le cas échéant) lors du lancement de ce
+              flux d’authentification.</span>
+</li>
+<li>
+<code>response_mode</code> <em>Chaîne facultative</em>.
+            <p>
+              Informe le serveur d’autorisation du mécanisme à utiliser pour
+              renvoyer les paramètres à partir du point de terminaison d’autorisation.
+            </p>
+<p>Les valeurs possibles sont les suivantes :</p>
+<ul>
+<li><code>query</code></li>
+<li><code>fragment</code></li>
+<li><code>form_post</code></li>
+<li><code>web_message</code></li>
+</ul>
+</li>
+<li>
+<code>response_type</code> <em>Tableau de chaînes facultatif</em>.
+            <p>Les valeurs possibles sont les suivantes :</p>
+<ul>
+<li><code>code</code></li>
+<li><code>token</code></li>
+<li><code>id_token</code></li>
+</ul>
+</li>
+<li>
+<code>state</code> <em>Chaîne facultative</em>.
+            <span>Une chaîne alphanumérique arbitraire et opaque que votre application ajoute à la
+              requête initiale incluse par Auth0 lors de la redirection vers votre
+              application.</span>
+</li>
+<li>
+<code>ui_locales</code> <em>Tableau de chaînes</em>.
+            <span>Les ui_locales fournies dans la demande d’authentification
+              initiale.</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.user</code></p>
+</td>
+<td>
+<p>Objet décrivant l’utilisateur qui tente de s’enregistrer.</p>
+<p>Comprend les propriétés suivantes :</p>
+<ul>
+<li>
+<code>app_metadata</code> <em>Dictionnaire facultatif</em>.
+            <span>Champs personnalisés qui stockent des informations sur un utilisateur qui
+              influencent l’accès de l’utilisateur, comme le plan de soutien, les rôles de sécurité ou les groupes
+              de contrôle d’accès.</span>
+</li>
+<li>
+<code>email</code> <em>Chaîne facultative</em>.
+            <span>(unique) Adresse de courriel de l’utilisateur.</span>
+</li>
+<li>
+<code>family_name</code> <em>Chaîne facultative</em>.
+            <span>Nom de famille de l’utilisateur.</span>
+</li>
+<li>
+<code>given_name</code> <em>Chaîne facultative</em>.
+            <span>Prénom de l’utilisateur.</span>
+</li>
+<li>
+<code>name</code> <em>Chaîne facultative</em>.
+            <span>Nom complet de l’utilisateur.</span>
+</li>
+<li>
+<code>nickname</code> <em>Chaîne facultative</em>.
+            <span>Pseudonyme de l’utilisateur.</span>
+</li>
+<li>
+<code>phone_number</code> <em>Chaîne facultative</em>.
+            <span>Numéro de téléphone de l’utilisateur.</span>
+</li>
+<li>
+<code>picture</code> <em>Chaîne facultative</em>.
+            <span>URL pointant vers la
+              <a href="https://auth0.com/docs/users/change-user-picture">photo de profil de l’utilisateur</a>.</span>
+</li>
+<li>
+<code>user_metadata</code> <em>Dictionnaire facultatif</em>.
+            <span>Champs personnalisés qui stockent des informations sur un utilisateur qui n’ont pas d’incidence
+              sur les données auxquelles il peut ou ne peut pas accéder, comme l’adresse professionnelle,
+              l’adresse personnelle ou les préférences de l’utilisateur.</span>
+</li>
+<li>
+<code>username</code> <em>Chaîne facultative</em>.
+            <span>(unique) Nom d’utilisateur</span>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>

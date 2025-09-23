@@ -1,0 +1,312 @@
+---
+title: "Ruby on Railsアプリケーションにログインを追加する"
+permalink: "interactive"
+'og:title': "Ruby on Railsアプリケーションにログインを追加する"
+'og:description': "このチュートリアルは、Ruby on Railsアプリケーションにユーザーログインを追加する方法について説明します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/rails.png"
+'twitter:title': "Ruby on Railsアプリケーションにログインを追加する"
+'twitter:description': "このチュートリアルは、Ruby on Railsアプリケーションにユーザーログインを追加する方法について説明します。"
+---
+[Skip to main content](#maincontent)
+
+​
+
+[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+---
+
+​
+
+[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+[##### Ruby on Railsアプリケーションにログインを追加する](#Ruby on Railsアプリケーションにログインを追加する)
+
+[View on Github](https://github.com/auth0-samples/auth0-rubyonrails-sample/tree/master/sample) Log In & Download Sample
+
+1. [Docs](/docs/ja-jp)
+3. [Quickstarts](/docs/ja-jp/quickstarts)
+5. [Regular Web App](/docs/ja-jp/quickstart/webapp)
+7. [Ruby On Rails](/docs/ja-jp/quickstart/webapp/rails/interactive)
+
+# 
+
+# Ruby on Railsアプリケーションにログインを追加する
+
+[1
+
+## Auth0を構成する](#auth0を構成する)
+
+Auth0のサービスを利用するには、Auth0 Dashboadに設定済みのアプリケーションがある必要があります。Auth0アプリケーションは、開発中のプロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
+
+### アプリケーションを構成する
+
+対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0 APIを呼び出す際に使用されます。
+
+このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/#/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
+
+完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
+
+### Callback URLを構成する
+
+Callback URLとは、Auth0がユーザーを認証後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはログイン後にアプリケーションに戻りません。
+
+<Note>
+
+サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000/auth/auth0/callback`に設定してください。
+
+</Note>
+
+### ログアウトURLを構成する
+
+ログアウトURLとは、Auth0がユーザーをログアウト後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーを受け取ります。
+
+<Note>
+
+サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+
+</Note>
+
+### Allowed Web Origins（許可されているWebオリジン）を構成する
+
+Allowed Web Origin（許可されているWebオリジン）とは、認証フローへのアクセスを許可されるURLです。これにはプロジェクトのURLが含まれている必要があります。適切に設定されていない場合、プロジェクトが認証トークンを暗黙でリフレッシュできず、ユーザーがアプリケーションを再び訪問した時、またはページを再読み込みした時にログアウトした状態になってしまいます。
+
+<Note>
+
+サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+
+</Note>
+
+[2
+
+## 依存関係を追加する](#依存関係を追加する)
+
+認証フローをハンドリングするには、カスタム[OmniAuthストラテジー](https://github.com/intridea/omniauth#omniauth-standardized-multi-provider-authentication)である`omniauth-auth0`を使います。
+
+`Gemfile`に次の依存関係を追加します：
+
+```
+gem 'omniauth-auth0', '~> 3.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0' # prevents forged authentication requests
+```
+
+gemが追加されたら、`bundle install`でインストールします。
+
+[3
+
+## SDKを構成する](#sdkを構成する)
+
+構成ファイル`./config/auth0.yml`を作成して、Auth0 Dashboardにあるアプリケーションの**［Settings（設定）］**で確認できるAuth0ドメイン、クライアントID、クライアントシークレットの値を指定します。
+
+[4
+
+## OmniAuthミドルウェアを構成する](#omniauthミドルウェアを構成する)
+
+`./config/initializers/auth0.rb`という以下のイニシャライザーファイルを作成し、前の手順で作成した構成ファイルで**OmniAuth**ミドルウェアを[構成](https://github.com/auth0/omniauth-auth0/blob/master/EXAMPLES.md#send-additional-authentication-parameters)します。
+
+`callback_path`がAuth0アプリケーションの［Allowed Callback URLs（許可されているコールバックURL）］にある値と一致することを確認します。
+
+[5
+
+## Auth0コントローラーを追加する](#auth0コントローラーを追加する)
+
+ログアウトURLを構築するために、認証コールバック、`logout`アクション、メソッドをハンドリングするAuth0コントローラーを作成します。
+
+次のコマンドを実行します：`rails generate controller auth0 callback failure logout --skip-assets --skip-helper --skip-routes --skip-template-engine`。
+
+コールバックメソッドの内部で、（`request.env['omniauth.auth']`として返された）ユーザー情報のハッシュをアクティブセッションに割り当てます。
+
+ログアウトを構築するため、`logout`アクションの内部で`reset_session`メソッドを呼び出し、セッション内に保存されたオブジェクトをすべて消去します。それから、Auth0ログアウトエンドポイントにリダイレクトします。`reset_session`についての詳細は、[「Ruby on Rails ActionController」ドキュメント](http://api.rubyonrails.org/classes/ActionController/Base.html#M000668)をご覧ください。
+
+[6
+
+## ルートを構成する](#ルートを構成する)
+
+これらのルートを`./config/routes.rb`ファイルに追加します。
+
+ルートは所定の位置になければなりません。これにより、RailsはさまざまなAuth0 Callback URLを前の手順で作成したAuth0コントローラーにルートする方法を認識します。
+
+##### checkpoint.header
+
+アプリケーションを実行して、意図通りに動作し続け、Auth0に関連したエラーを受け取らないことを確認します。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[7
+
+## アプリケーションにログインを追加する](#アプリケーションにログインを追加する)
+
+ユーザーが`/auth/auth0`エンドポイントを訪れると、アプリケーションにログインできるようになりました。
+
+<Warning>
+
+[偽の認証要求を防ぐ](https://github.com/cookpad/omniauth-rails_csrf_protection)ためには、`link_to`または`button_to`ヘルパーメソッドを`:post`メソッドと一緒に使います。
+
+</Warning>
+
+```
+<!-- Place a login button anywhere on your application -->
+<%= button_to 'Login', '/auth/auth0', method: :post %>
+```
+
+##### checkpoint.header
+
+選択されるとユーザーを`/auth/auth0`エンドポイントにリダイレクトするボタンを、アプリケーションに追加します。ログインのためAuth0にリダイレクトされ、認証に成功するとアプリに戻されることを確認してください。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[8
+
+## アプリケーションにログアウトを追加する](#アプリケーションにログアウトを追加する)
+
+Railsアプリケーションにログインできるようになったら、ログアウトする方法が必要です。ユーザーを`auth/logout`アクションにリダイレクトしてログアウトさせると、ユーザーはAuth0ログアウトエンドポイントへリダイレクトされます。
+
+<Note>
+
+前の手順の後にこの手順をテストするには、セッションを消去して、ユーザーをAuth0ログアウトエンドポイントへリダイレクトしなければならない可能性があります。
+
+</Note>
+
+```
+<!-- Place a logout button anywhere on your application -->
+<%= button_to 'Logout', 'auth/logout', method: :get %>
+```
+
+##### checkpoint.header
+
+選択されるとユーザーを`/auth/logout`エンドポイントにリダイレクトするボタンを、アプリケーションに追加します。Auth0にリダイレクトされた後即座にアプリケーションに戻り、ログインした状態ではないことを確認します。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[9
+
+## ユーザープロファイル情報を表示する](#ユーザープロファイル情報を表示する)
+
+ユーザーのプロファイルを表示するには、アプリケーションに保護されたルートがなければなりません。ルートへのアクセスは[Concern](https://guides.rubyonrails.org/getting_started.html#using-concerns)で管理でき、複数のコントローラーで共有できます。Concernはユーザーが認証されていない場合、自動的にAuth0にリダイレクトしなければなりません。そうでない場合は、Concernは現在のユーザープロファイルを返します。
+
+Concernができたら、ログインユーザーを必要とするすべてのコントローラーに含めます。その後、次の例のように、`session[:userinfo]`セッションからユーザーにアクセスできます：
+
+```
+class DashboardController < ApplicationController
+include Secured
+def show
+@user = session[:userinfo]
+
+end
+end
+```
+
+ユーザーがセッションから読み込まれたら、フロントエンドで情報を表示するために使います：
+
+```
+<div>
+<p>Normalized User Profile:<%= JSON.pretty_generate(@user[:info])%></p>
+<p>Full User Profile:<%= JSON.pretty_generate(@user[:extra][:raw_info])%></p>
+</div>
+```
+
+##### checkpoint.header
+
+`Secured` concernをアプリに追加してから、認証されたユーザーがアクセスするために必要なコントローラーに含めます。 認証されたユーザーがこのコントローラー内でアクションにアクセスでき、認証されていないユーザーは認証のためにAuth0にリダイレクトされることを確認します。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+## Next Steps
+
+Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+
+This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+
+* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
+* [omniauth-auth0 SDK](https://github.com/auth0/omniauth-auth0) - Explore the SDK used in this tutorial more fully
+* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/webapp/rails/interactive.md)
+
+<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+
+Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+
+Sign Up
+
+Developers
+
+* [Developer Hub](https://developer.auth0.com/resources)
+* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
+* [Blog posts](https://auth0.com/blog/developers/)
+* [Videos](https://auth0.com/docs/videos)
+* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
+* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
+
+Documentation
+
+* [Articles](https://auth0.com/docs/articles)
+* [Quickstarts](https://auth0.com/docs/quickstarts)
+* [APIs](https://auth0.com/docs/api)
+* [SDK Libraries](https://auth0.com/docs/libraries)
+* [Blog](https://auth0.com/blog/)
+* [Reports](https://auth0.com/resources/ebooks)
+* [Webinars](https://auth0.com/resources/webinars)
+
+Get Involved
+
+* [Forum](https://community.auth0.com/)
+* [Events](https://developer.auth0.com/events)
+* [Ambassador Program](https://auth0.com/ambassador-program)
+* [Auth0 Research Program](https://auth0.com/research-program)
+
+Company
+
+* [Our Customers](https://auth0.com/customers)
+* [Compliance - Ensuring privacy and security](https://auth0.com/security)
+* [Partners](https://auth0.com/partners)
+* [Careers We're hiring!](https://www.okta.com/company/careers/)
+* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
+
+Support Center
+
+* [Community](https://community.auth0.com/)
+* [Support](https://support.auth0.com/)
+* [Help](https://community.auth0.com/c/help/6)
+* [FAQs](https://community.auth0.com/c/faq/42)
+* [Auth0 Marketplace](https://marketplace.auth0.com)
+
+Learning
+
+* [Learn](https://auth0.com/learn)
+* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
+* [Blog](https://auth0.com/blog/)
+
+Platform
+
+* [Access Management](https://auth0.com/platform/access-management)
+* [Extensibility](https://auth0.com/platform/extensibility)
+* [Security](https://auth0.com/platform/login-security)
+* [User Management](https://auth0.com/platform/user-management)
+* [Authentication](https://auth0.com/platform/authentication)
+
+Features
+
+* [Universal Login](https://auth0.com/features/universal-login)
+* [Single Sign On](https://auth0.com/features/single-sign-on)
+* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
+* [Actions](https://auth0.com/features/actions)
+* [Machine to Machine](https://auth0.com/features/machine-to-machine)
+* [Passwordless](https://auth0.com/features/passwordless)
+* [Breached Passwords](https://auth0.com/features/breached-passwords)
+
+© 2025 Okta, Inc. All Rights Reserved.
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+

@@ -1,0 +1,68 @@
+---
+title: "Auth0.Androidカスタムネットワーキングクライアント"
+permalink: "auth0-android-custom-networking-client"
+'og:title': "Auth0.Androidカスタムネットワーキングクライアント"
+'og:description': "Auth0 Android SDKによって行われた要求をカスタマイズするためのカスタムネットワーキングクライアントを提供する方法を説明します"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
+'twitter:title': "Auth0.Androidカスタムネットワーキングクライアント"
+'twitter:description': "Auth0 Android SDKによって行われた要求をカスタマイズするためのカスタムネットワーキングクライアントを提供する方法を説明します"
+---
+# Auth0.Androidカスタムネットワーキングクライアント
+
+このライブラリでは、一般的な構成のネットワーキングクライアントの動作をカスタマイズし、独自のネットワーキングクライアント実装を定義して使用できます。
+
+要求に使用される`NetworkingClient`を用いて、Auth0クラスを構成できます。カスタムタイムアウト値、すべての要求で送信するヘッダー、および要求や応答情報をログに記録するかどうか（非本番環境のデバッグ目的のみ）を使用して、デフォルトのクライアントを構成できます。より高度な構成を行うには、`NetworkingClient`の独自の実装を提供できます。
+
+### タイムアウト構成
+
+```
+val netClient = DefaultClient(
+    connectTimeout = 30,
+    readTimeout = 30
+)
+
+val account = Auth0("{YOUR_CLIENT_ID}", "{YOUR_DOMAIN}")
+account.networkingClient = netClient
+```
+
+### ロギング構成
+
+```
+val netClient = DefaultClient(
+    enableLogging = true
+)
+
+val account = Auth0("{YOUR_CLIENT_ID}", "{YOUR_DOMAIN}")
+account.networkingClient = netClient
+```
+
+### すべての要求に追加のヘッダーを設定する
+
+```
+val netClient = DefaultClient(
+    defaultHeaders = mapOf("{HEADER-NAME}" to "{HEADER-VALUE}")
+)
+
+val account = Auth0("{YOUR_CLIENT_ID}", "{YOUR_DOMAIN}")
+account.networkingClient = netClient
+```
+
+### Advanced configuration（高度な構成）
+
+ネットワーククライアントのより高度な構成を行うには、`NetworkingClient`のカスタムインプリメンテーションを提供できます。これは、独自のネットワーククライアントを再利用したり、プロキシを設定したりする場合などに役立ちます。
+
+```
+class CustomNetClient : NetworkingClient {
+    override fun load(url: String, options: RequestOptions): ServerResponse {
+        // Create and execute the request to the specified URL with the given options
+        val response = // ...
+
+        // Return a ServerResponse from the received response data
+        return ServerResponse(responseCode, responseBody, responseHeaders)        
+    }
+}
+
+val account = Auth0("{YOUR_CLIENT_ID}", "{YOUR_DOMAIN}")
+account.networkingClient = netClient
+```
+

@@ -1,0 +1,323 @@
+---
+title: "Ajouter une fonctionnalité de connexion à votre application Spring Web"
+permalink: "interactive"
+'og:title': "Ajouter une fonctionnalité de connexion à votre application Spring Web"
+'og:description': "Ce guide explique comment intégrer Auth0 à une application Spring Boot à l’aide de la trousse SDK Spring Boot Auth0."
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/spring.png"
+'twitter:title': "Ajouter une fonctionnalité de connexion à votre application Spring Web"
+'twitter:description': "Ce guide explique comment intégrer Auth0 à une application Spring Boot à l’aide de la trousse SDK Spring Boot Auth0."
+---
+[Skip to main content](#maincontent)
+
+​
+
+[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+---
+
+​
+
+[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+[##### Ajouter une fonctionnalité de connexion à votre application Spring Web](#Ajouter une fonctionnalité de connexion à votre application Spring Web)
+
+[View on Github](https://github.com/auth0-samples/auth0-spring-boot-login-samples/tree/master/mvc-login) Log In & Download Sample
+
+1. [Quickstarts](/docs/fr-ca/quickstarts)
+3. [Regular Web App](/docs/fr-ca/quickstart/webapp)
+5. [Java Spring Boot](/docs/fr-ca/quickstart/webapp/java-spring-boot/interactive)
+
+# 
+
+# Ajouter une fonctionnalité de connexion à votre application Spring Web
+
+<Note>
+
+### Vous utilisez Spring WebFlux?
+
+Ce tutoriel utilise [Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html). Si vous utilisez [Spring WebFlux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#spring-web-reactive), les étapes pour ajouter l’authentification sont similaires, mais certains détails d’implémentation sont différents. Reportez-vous au [Code d’exemple Spring Boot WebFlux](https://github.com/auth0-samples/auth0-spring-boot-login-samples/tree/master/webflux-login) pour voir comment intégrer Auth0 à votre application Spring Boot WebFlux.
+
+</Note>
+
+[1
+
+## Configuration d’Auth0](#configuration-d-auth0)
+
+Pour utiliser les services Auth0, vous devez avoir une application installée dans Auth0 Dashboard. L’application Auth0 est l’endroit où vous allez configurer le fonctionnement de l’authentification pour le projet que vous développez.
+
+### Configurer une application
+
+Utilisez le sélecteur interactif pour créer une nouvelle application Auth0 ou sélectionner une application existante qui représente le projet avec lequel vous souhaitez effectuer l’intégration. Dans Auth0, chaque application se voit attribuer un identifiant client unique alphanumérique que votre code d’application utilisera pour appeler les API Auth0 via la trousse SDK.
+
+Tous les paramètres que vous configurez à l’aide de ce guide de démarrage rapide seront automatiquement mis à jour pour votre application dans le [Tableau de bord](https://manage.auth0.com/#/), qui est l’endroit où vous pourrez gérer vos applications à l’avenir.
+
+Si vous préférez explorer une configuration complète, consultez plutôt un exemple d’application.
+
+### Configuration des URL de rappel
+
+Une URL de rappel est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur authentification. Si elle n’est pas définie, les utilisateurs ne seront pas redirigés vers votre application après s’être connectés.
+
+<Note>
+
+Si vous suivez notre projet à titre d’exemple, définissez ceci sur
+
+`http://localhost:3000/login/oauth2/code/okta`.
+
+</Note>
+
+### Configuration des URL de déconnexion
+
+Une URL de déconnexion est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur déconnexion. Si elle n’est pas définie, les utilisateurs ne pourront pas se déconnecter de votre application et recevront un message d’erreur.
+
+<Note>
+
+Si vous suivez notre projet à titre d’exemple, définissez ceci sur
+
+`http://localhost:3000`.
+
+</Note>
+
+[2
+
+## Configurer l’application Sprint Boot](#configurer-l-application-sprint-boot)
+
+### Ajouter les dépendances Spring
+
+Pour intégrer votre application Spring Boot avec Auth0, incluez [Okta Spring Boot Starter](https://github.com/okta/okta-spring-boot/) dans les dépendances de votre application.
+
+<Note>
+
+Ce guide utilise [Thymeleaf](https://www.thymeleaf.org/) et le [module d’intégration Spring Security](https://github.com/thymeleaf/thymeleaf-extras-springsecurity) pour la couche d’affichage. Si vous utilisez une technologie d’affichage différente, la configuration et les composants de Spring Security restent les mêmes.
+
+</Note>
+
+Si vous utilisez Gradle, vous pouvez inclure ces dépendances comme indiqué ci-dessous.
+
+```
+plugins {
+id 'java'
+id 'org.springframework.boot' version '3.1.4'
+id 'io.spring.dependency-management' version '1.1.3'
+}
+implementation 'com.okta.spring:okta-spring-boot-starter:3.0.5'
+implementation 'org.springframework.boot:spring-boot-starter-web'
+implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+```
+
+Si vous utilisez Maven :
+
+```
+<parent>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-parent</artifactId>
+<version>3.1.4</version>
+<relativePath/>
+</parent>
+<dependencies>
+<dependency>
+<groupId>com.okta</groupId>
+<artifactId>okta-spring-boot-starter</artifactId>
+<version>3.0.5</version>
+</dependency>
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-oauth2-client</artifactId>
+</dependency>
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-thymeleaf</artifactId>
+</dependency>
+<dependency>
+<groupId>org.thymeleaf.extras</groupId>
+<artifactId>thymeleaf-extras-springsecurity6</artifactId>
+</dependency>
+<dependency>
+<groupId>nz.net.ultraq.thymeleaf</groupId>
+<artifactId>thymeleaf-layout-dialect</artifactId>
+</dependency>
+</dependencies>
+```
+
+[3
+
+## Configurer Spring Security](#configurer-spring-security)
+
+Okta Spring Boot Starter facilite la configuration de votre application avec Auth0. L’exemple ci-dessous utilise un fichier `application.yml`, mais vous pouvez également utiliser des fichiers de propriétés ou tout autre [mécanisme d’externalisation pris en charge](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config).
+
+```
+#src/main/resources/application.yml
+okta:
+oauth2:
+issuer: https://{yourDomain}/
+
+client-id: {yourClientId}
+
+client-secret: {yourClientSecret}
+
+#The sample and instructions above for the callback and logout URL configuration use port 3000.
+#If you wish to use a different port, change this and be sure your callback and logout URLs are
+#configured with the correct port.
+server:
+port: 3000
+```
+
+[4
+
+## Ajouter une fonctionnalité de connexion à votre application](#ajouter-une-fonctionnalité-de-connexion-à-votre-application)
+
+Pour permettre aux utilisateurs de se connecter avec Auth0, créez une classe qui enregistrera une [SecurityFilterChain](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/web/SecurityFilterChain.html) et ajoutez l’annotation `@Configuration`.
+
+<Note>
+
+Vous pouvez configurer l’instance [HttpSecurity](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/config/annotation/web/builders/HttpSecurity.html) pour qu’elle exige une authentification sur tous les chemins ou seulement sur certains d’entre eux. Par exemple, pour exiger l’authentification sur tous les chemins à l’exception de la page d’accueil :
+
+`http`
+
+```
+.authorizeHttpRequests(authorize -&gt; authorize
+
+    .requestMatchers(&quot;/&quot;).permitAll()
+
+    .anyRequest().authenticated()
+
+);</code></p></div></p>
+```
+
+`## Ajouter une page d’accueil
+
+Okta Spring Boot Starter utilisera la configuration client que vous avez définie précédemment pour gérer la connexion lorsqu’un utilisateur visite le chemin //oauth2/authorization/okta de votre application. Vous pouvez l’utiliser pour créer un lien de connexion dans votre application.
+
+Cette page renvoie les attributs de l’utilisateur lorsque celui-ci s’authentifie. Vous utiliserez le lien /logout dans le modèle pour mettre en œuvre la fonctionnalité de déconnexion.
+
+## Ajouter un contrôleur
+
+Créez un contrôleur pour traiter la demande entrante. Ce contrôleur crée la page index.html. Lorsque l’utilisateur s’authentifie, l’application récupère les attributs d’information du profil utilisateur pour créer la page.
+
+##### checkpoint.header
+
+Lorsque vous cliquez sur le lien de connexion, vérifiez que l’application vous redirige vers la page Connexion universelle Auth0 et que vous pouvez maintenant vous connecter ou vous inscrire en utilisant un nom d’utilisateur et un mot de passe, ou un réseau social.
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+<Frame>![null](//images.ctfassets.net/cdy7uua7fh8z/7L6lZ6xCi1L7sJBFZUPb9g/215ad0b724c138290b0b217edb5ddf96/Login_Screen_-_French.png)</Frame>
+
+Auth0 active le fournisseur social Google par défaut sur les nouveaux locataires et vous offre des clés de développeur pour tester la connexion avec des fournisseurs d’identité sociale. Toutefois, ces clés de développeur présentent certaines limitations qui peuvent entraîner un comportement différent de votre application. Pour plus de détails sur ce comportement et comment le résoudre, consultez le document Tester les connexions sociales avec des clés de développeur Auth0.
+
+## Ajouter une fonctionnalité de déconnexion à votre application
+
+Maintenant que les utilisateurs peuvent se connecter à votre application, ils ont besoin d’un moyen de se déconnecter. Par défaut, lorsque la déconnexion est activée, Spring Security déconnecte l’utilisateur de votre application et efface la session. Pour permettre une déconnexion réussie de Auth0, vous pouvez fournir un LogoutHandler pour rediriger les utilisateurs vers votre point de terminaison de déconnexion Auth0 (https://{yourDomain}/v2/logout) et ensuite les rediriger immédiatement vers votre application.
+
+Dans la classe SecurityConfig, fournissez un LogoutHandler qui redirige vers le point de terminaison de déconnexion Auth0, et configurez HTTPSecurity pour ajouter le gestionnaire de déconnexion.
+
+##### checkpoint.header
+
+Lorsque vous cliquez sur le lien de déconnexion, l’application doit vous rediriger vers l’adresse que vous avez spécifiée comme l’une des « URL de déconnexion autorisées » dans les « Paramètres d’application » et vous n’êtes plus connecté à votre application.
+
+checkpoint.itWorked checkpoint.somethingNotRight`</Note>
+
+## Next Steps
+
+Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+
+This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+
+* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
+* [Okta Spring Boot Starter SDK](https://github.com/okta/okta-spring-boot/) - Explore the SDK used in this tutorial more fully
+* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/webapp/java-spring-boot/interactive.md)
+
+<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+
+Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+
+Sign Up
+
+Developers
+
+* [Developer Hub](https://developer.auth0.com/resources)
+* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
+* [Blog posts](https://auth0.com/blog/developers/)
+* [Videos](https://auth0.com/docs/videos)
+* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
+* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
+
+Documentation
+
+* [Articles](https://auth0.com/docs/articles)
+* [Quickstarts](https://auth0.com/docs/quickstarts)
+* [APIs](https://auth0.com/docs/api)
+* [SDK Libraries](https://auth0.com/docs/libraries)
+* [Blog](https://auth0.com/blog/)
+* [Reports](https://auth0.com/resources/ebooks)
+* [Webinars](https://auth0.com/resources/webinars)
+
+Get Involved
+
+* [Forum](https://community.auth0.com/)
+* [Events](https://developer.auth0.com/events)
+* [Ambassador Program](https://auth0.com/ambassador-program)
+* [Auth0 Research Program](https://auth0.com/research-program)
+
+Company
+
+* [Our Customers](https://auth0.com/customers)
+* [Compliance - Ensuring privacy and security](https://auth0.com/security)
+* [Partners](https://auth0.com/partners)
+* [Careers We're hiring!](https://www.okta.com/company/careers/)
+* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
+
+Support Center
+
+* [Community](https://community.auth0.com/)
+* [Support](https://support.auth0.com/)
+* [Help](https://community.auth0.com/c/help/6)
+* [FAQs](https://community.auth0.com/c/faq/42)
+* [Auth0 Marketplace](https://marketplace.auth0.com)
+
+Learning
+
+* [Learn](https://auth0.com/learn)
+* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
+* [Blog](https://auth0.com/blog/)
+
+Platform
+
+* [Access Management](https://auth0.com/platform/access-management)
+* [Extensibility](https://auth0.com/platform/extensibility)
+* [Security](https://auth0.com/platform/login-security)
+* [User Management](https://auth0.com/platform/user-management)
+* [Authentication](https://auth0.com/platform/authentication)
+
+Features
+
+* [Universal Login](https://auth0.com/features/universal-login)
+* [Single Sign On](https://auth0.com/features/single-sign-on)
+* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
+* [Actions](https://auth0.com/features/actions)
+* [Machine to Machine](https://auth0.com/features/machine-to-machine)
+* [Passwordless](https://auth0.com/features/passwordless)
+* [Breached Passwords](https://auth0.com/features/breached-passwords)
+
+© 2025 Okta, Inc. All Rights Reserved.
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+

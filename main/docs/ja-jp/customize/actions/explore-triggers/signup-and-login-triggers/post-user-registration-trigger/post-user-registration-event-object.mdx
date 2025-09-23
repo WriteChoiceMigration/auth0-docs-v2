@@ -1,0 +1,268 @@
+---
+title: "アクショントリガー：post-user-registration - Eventオブジェクト"
+permalink: "post-user-registration-event-object"
+'og:title': "アクショントリガー：post-user-registration - Eventオブジェクト"
+'og:description': "post-user-registrationアクショントリガーのeventオブジェクトについて説明します。このオブジェクトは、新規作成されたユーザーに関するコンテキスト情報を提供します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
+'twitter:title': "アクショントリガー：post-user-registration - Eventオブジェクト"
+'twitter:description': "post-user-registrationアクショントリガーのeventオブジェクトについて説明します。このオブジェクトは、新規作成されたユーザーに関するコンテキスト情報を提供します。"
+---
+# アクショントリガー：post-user-registration - Eventオブジェクト
+
+post-user-registrationアクショントリガーの`event`オブジェクトは、新規作成されたユーザーに関するコンテキスト情報を提供します。
+
+<table class="table">
+<thead>
+<tr>
+<th>プロパティ</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p><code>event.connection</code></p>
+</td>
+<td>
+<p>ユーザーの登録に使用された接続についての詳細。</p>
+<p>次のプロパティを含みます：</p>
+<ul>
+<li><code>id</code> <em>文字列</em>。<span>接続の一意の識別子。</span>
+</li>
+<li>
+<code>metadata</code> <em>任意の辞書</em>。<span>接続に関連したメタデータ。</span>
+</li>
+<li>
+<code>name</code> <em>文字列</em>。<span>ユーザー認証に使用される接続名（例：<code>twitter</code>または<code>some-g-suite-domain</code>）。</span>
+</li>
+<li>
+<code>strategy</code> <em>文字列</em>。<span>接続のタイプ。ソーシャル接続の場合、<code>event.connection.strategy === event.connection.name</code>。エンタープライズ接続では、<code>waad</code>（Microsoft Entra ID）、<code>ad</code>（Active               Directory/LDAP）、<code>auth0</code>（データベース接続）などです。</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.request</code></p>
+<p><em>（任意）</em></p>
+</td>
+<td>
+<p>トランザクションを開始した要求の詳細。</p>
+<p>次のプロパティを含みます：</p>
+<ul>
+<li><code>geoip</code> <em>オブジェクト</em>。<span>要求の地理情報を含みます。</span>
+<p>次のプロパティを含みます：</p>
+<ul>
+<li><code>cityName</code> <em>任意の文字列</em>。</li>
+<li><code>continentCode</code> <em>任意の文字列</em>。</li>
+<li><code>countryCode</code> <em>任意の文字列</em>。</li>
+<li><code>countryCode3</code> <em>任意の文字列</em>。</li>
+<li><code>countryName</code> <em>任意の文字列</em>。</li>
+<li><code>latitude</code> <em>任意の数字</em>。</li>
+<li><code>longitude</code> <em>任意の数字</em>。</li>
+<li><code>subdivisionCode</code> <em>任意の文字列</em>。</li>
+<li><code>subdivisionName</code> <em>任意の文字列</em>。</li>
+<li><code>timeZone</code> <em>任意の文字列</em>。</li>
+</ul>
+</li>
+<li><code>hostname</code> <em>任意の文字列</em>。<span>認証フローに使用されている
+              ホスト名。</span>
+</li>
+<li>
+<code>ip</code> <em>文字列</em>。<span>要求の発生元IPアドレス。</span>
+</li>
+<li>
+<code>language</code> <em>任意の文字列</em>。<span>ブラウザーから要求された言語。</span>
+</li>
+<li>
+<code>method</code> <em>文字列</em>。<span>要求に使用されたHTTPメソッド</span>
+</li>
+<li>
+<code>user_agent</code> <em>任意の文字列</em>。<span>トランザクションの開始時に受け取った<code>User-Agent</code>のヘッダーの値。</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.tenant</code></p>
+</td>
+<td>
+<p>現在のトランザクションに関連するテナントの詳細。</p>
+<p>次のプロパティを含みます：</p>
+<ul>
+<li><code>id</code> <em>文字列</em>。<span>テナント名。</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.transaction</code></p>
+<p><em>（任意）</em></p>
+</td>
+<td>
+<p>現在のトランザクションについての詳細。</p>
+<p>次のプロパティを含みます：</p>
+<ul>
+<li><code>acr_values</code> <em>文字列の配列</em>。<span>元の認証要求に提供されたすべての<code>acr_values</code>。
+              </span>
+</li>
+<li>
+<code>locale</code> <em>文字列</em>。<span>このトランザクションに使われるロケールで、ブラウザーの要求言語とテナントの言語設定を比較して決定される。</span>
+</li>
+<li>
+<code>login_hint</code> <em>任意の文字列</em>。<span>エンドユーザーが必要な場合にログインに使用する可能性のある、ログイン識別子に関する認可サーバーへのヒント。</span>
+</li>
+<li>
+<code>prompt</code> <em>任意の文字列の配列</em>。<span>ユーザーに再認証と同意を求めるかどうかを示す指示のリスト。</span>
+</li>
+<li>
+<code>protocol</code> <em>任意の文字列</em>。<span>認証プロトコルについての情報を含みます。</span>
+<p>可能性のある値には次のものが含まれます：</p>
+<ul>
+<li>
+<code>oidc-basic-profile</code>
+<span>最も使用されるWebベースのログイン。</span>
+</li>
+<li>
+<code>oidc-implicit-profile</code>
+<span>モバイルデバイスおよびシングルページアプリで使用されます。</span>
+</li>
+<li>
+<code>samlp</code> <span>SaaSアプリで使用されるSAMLプロトコール。</span>
+</li>
+<li>
+<code>wsfed</code>
+<span>Office365といったMicrosoft製品で使用されるWS-Federation。</span>
+</li>
+<li>
+<code>wstrust-usernamemixed</code>
+<span>CRMおよびOffice365で使用されるWS-trustユーザー/パスワードログイン。</span>
+</li>
+<li>
+<code>oauth2-device-code</code>
+<span>デバイスの認可フローで使用されるトランザクション。</span>
+</li>
+<li>
+<code>oauth2-resource-owner</code>
+<span>通常、データベース接続に使用されるユーザー/パスワードログイン。</span>
+</li>
+<li>
+<code>oauth2-resource-owner-jwt-bearer</code>
+<span>ユーザーの秘密鍵で署名されたBearer <dfn id="react-containers-DefinitionTooltip-0"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">JWT</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>を使用したログイン。</span>
+</li>
+<li>
+<code>oauth2-password</code>
+<span>パスワード交換を使用したログイン。</span>
+</li>
+<li>
+<code>oauth2-access-token</code>
+<span>リフレッシュトークン交換を使用したトークンのリフレッシュ。</span>
+</li>
+<li>
+<code>oauth2-refresh-token</code>
+<span>リフレッシュトークン交換を使用したトークンのリフレッシュ。</span>
+</li>
+<li><code>oauth2-token-exchange</code></li>
+<li>
+<code>oidc-hybrid-profile</code>
+<span>アクセストークンとリフレッシュトークンをアプリケーションが安全に取得できるようにしながら、IDトークンに即座にアクセスできるようにします。</span>
+</li>
+</ul>
+</li>
+<li><code>redirect_uri</code> <em>任意の文字列</em>。<span>トランザクションが完了した後にAuth0がリダイレクトするブラウザーのURL。</span>
+</li>
+<li>
+<code>requested_scopes</code> <em>文字列の配列</em>。<span>この認証フローを開始するときに要求（必要ある場合）されるスコープ。</span>
+</li>
+<li>
+<code>response_mode</code> <em>任意の文字列</em>。<p> 認可エンドポイントから返されたパラメーターに使用される認可サーバーのメカニズムに知らせます。</p>
+<p>含まれる可能性のある値は以下の通りです：</p>
+<ul>
+<li><code>query</code></li>
+<li><code>fragment</code></li>
+<li><code>form_post</code></li>
+<li><code>web_message</code></li>
+</ul>
+</li>
+<li><code>response_type</code> <em>任意の文字列の配列</em>。<p>含まれる可能性のある値は以下の通りです：</p>
+<ul>
+<li><code>code</code></li>
+<li><code>token</code></li>
+<li><code>id_token</code></li>
+</ul>
+</li>
+<li><code>state</code> <em>任意の文字列</em>。<span>Auth0がリダイレクトしてアプリケーションに戻る際に含まれ、アプリが初期要求に追加する不透明な任意の英数字の文字列。</span>
+</li>
+<li>
+<code>ui_locales</code> <em>文字列の配列</em>。<span>元の認証要求で提供された<code>ui_locales</code>。</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<p><code>event.user</code></p>
+</td>
+<td>
+<p>
+          現在のトランザクションが開始されたユーザーを表すオブジェクト。</p>
+<p>次のプロパティを含みます：</p>
+<ul>
+<li><code>app_metadata</code> <em>辞書</em>。<span>サポートプラン、セキュリティロール、アクセス制御グループなどのユーザーアクセスに影響するユーザーについての情報を保存するカスタムフィールドです。</span>
+</li>
+<li>
+<code>created_at</code> <em>文字列</em>。<span>ユーザープロファイルが最初に作成された日時を示すタイムスタンプ。</span>
+</li>
+<li>
+<code>email</code> <em>任意の文字列</em>。
+            <span>（一意）ユーザーのメールアドレス</span>
+</li>
+<li>
+<code>email_verified</code> <em>ブール値</em>。<span>ユーザーがメールアドレスを確認済みかどうかを示します。</span>
+</li>
+<li>
+<code>family_name</code> <em>任意の文字列</em>。<span>ユーザーの姓。</span>
+</li>
+<li>
+<code>given_name</code> <em>任意の文字列</em>。<span>ユーザーの名。</span>
+</li>
+<li>
+<code>last_password_reset</code> <em>任意の文字列</em>。<span>ユーザーパスワードがリセット/変更された最終日時を示すタイムスタンプ。ユーザーの作成時に、このフィールドは存在しません。このプロパティは、データベース接続でのみ利用できます。</span>
+</li>
+<li>
+<code>name</code> <em>任意の文字列</em>。<span>ユーザーの氏名。</span>
+</li>
+<li>
+<code>nickname</code> <em>任意の文字列</em>。<span>ユーザーのニックネーム。</span>
+</li>
+<li>
+<code>phone_number</code> <em>任意の文字列</em>。<span>ユーザーの電話番号。</span>
+</li>
+<li>
+<code>phone_verified</code> <em>任意のブール値</em>。<span>ユーザーが電話番号を確認済みかどうかを示します。</span>
+</li>
+<li>
+<code>picture</code> <em>任意の文字列</em>。<span><a href="/docs/users/change-user-picture">ユーザーのプロファイル写真</a>
+              を指すURL。</span>
+</li>
+<li>
+<code>updated_at</code> <em>文字列</em>。<span>ユーザーのプロファイルが最後に更新/変更された時を示すタイムスタンプ。</span>
+</li>
+<li>
+<code>user_id</code> <em>文字列</em>。
+            <span>（一意）ユーザーの一意の識別子。</span>
+</li>
+<li>
+<code>user_metadata</code> <em>辞書</em>。<span>勤務先住所、自宅住所、ユーザーの設定など、ユーザーのアクセスに影響を与えないユーザーの情報を保存するカスタムフィールド。</span>
+</li>
+<li>
+<code>username</code> <em>任意の文字列</em>。
+            <span>（一意）ユーザーのユーザー名。</span>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>

@@ -1,0 +1,306 @@
+---
+title: "Android - Facebookログイン"
+permalink: "interactive"
+'og:title': "Android - Facebookログイン"
+'og:description': "このチュートリアルは、ネイティブFacebookログインを使用して、Androidアプリケーションにユーザーログインを追加する方法について説明します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/android.png"
+'twitter:title': "Android - Facebookログイン"
+'twitter:description': "このチュートリアルは、ネイティブFacebookログインを使用して、Androidアプリケーションにユーザーログインを追加する方法について説明します。"
+---
+[Skip to main content](#maincontent)
+
+​
+
+[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+---
+
+​
+
+[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+[##### Android - Facebookログイン](#Android - Facebookログイン)
+
+[View on Github](https://github.com/auth0-samples/auth0-android-native-social-sample/tree/master/00-login-facebook) Log In & Download Sample
+
+1. [Quickstarts](/docs/ja-jp/quickstarts)
+3. [Native/Mobile App](/docs/ja-jp/quickstart/native)
+5. [Android - Facebook Login](/docs/ja-jp/quickstart/native/android-facebook-login/interactive)
+
+# 
+
+# Android - Facebookログイン
+
+このチュートリアルは、ネイティブFacebookログインを使用して、Androidアプリケーションにユーザーログインを追加する方法について説明します。ログインして、アカウント用に構成された例を参考にして、このクリックスタートに従うことをお勧めします。
+
+[1
+
+## システム要件](#システム要件)
+
+* Android Studio 3.6.1
+* Android SDK 25
+* Emulator - Nexus 5X - Android 6.0
+
+このチュートリアルは、[Facebook SDK](https://developers.facebook.com/docs/)でログインを実装する方法について説明します。​
+
+[2
+
+## 始める前に](#始める前に)
+
+* [FacebookログインSDK](https://developers.facebook.com/docs/facebook-login/)をインストールして構成します。[https://developers.facebook.com](https://developers.facebook.com/)でFacebookアプリの作成プロセスも行います。**この手順が終了したら、Facebookログインが統合された状態でモバイルアプリが稼働しているはずです。**
+
+DashboardでFacebookネイティブサインインを使用するようにAuth0アプリケーションを構成します。「[Facebookログインをネイティブアプリに追加する](https://auth0.com/docs/connections/nativesocial/facebook)」を参照してください。**この手順が終了したら、アプリケーションはFacebookネイティブログインを実装できるようになります。**
+
+[3
+
+## Facebookのアクセス許可を要求する](#facebookのアクセス許可を要求する)
+
+アプリケーションでは既にFacebookでサインインすることができますが、リッチユーザープロファイルを確保するには、Facebookログインボタンがセットアップされたアクセス許可を更新する必要があります。
+
+要求されたアクセス許可を`public_profile`と`email`に設定します。これで、アクセス要求がユーザーによって受け入れられたという前提で、ユーザーメールも応答の一部に含まれます。
+
+`loginButton.setPermissions(Arrays.asList("public_profile", "email"));`
+
+[4
+
+## performLoginメソッドを作成する](#performloginメソッドを作成する)
+
+次に、Auth0で認証プロセスを始めるために、送信するペイロードの準備を行う新しいメソッドを作成します。
+
+内部コールバックを処理するために、小さなインターフェイスを利用します。
+
+サンプルでは、メソッドの名前は`performLogin`、インターフェイスの名前は`SimpleCallback`に指定されています。両方を追加してください。
+
+[5
+
+## performLoginメソッドを呼び出す](#performloginメソッドを呼び出す)
+
+次に、Facebookログインのコールバックの`onSuccess`メソッドから特定のメソッドを呼び出します。
+
+[6
+
+## Facebookを統合する](#facebookを統合する)
+
+Auth0でFacebookを使ってサインインすると、バックエンドはユーザーが主張する通りの本人であることを確認するために、バックグラウンドで確認作業を実施します。これを実現するには、セッションアクセストークンを提供する必要があります。
+
+さらに、このFacebookユーザーを表すために、ユーザーをAuth0で作成する必要がある場合、バックエンドでは姓名やメールなどの一部の情報が必要になります。Auth0ユーザープロファイルでは、メールは（提供された場合）未検証としてフラグが付けられます。
+
+セッションアクセストークンとユーザープロファイルを取得するには、Facebook APIに対してさらに2つの要求を行う必要があります。
+
+[7
+
+## Facebookセッションアクセストークンを取得する](#facebookセッションアクセストークンを取得する)
+
+Facebook APIの`/oauth/access_token`エンドポイントに対して新しいGET要求を行います。以下のクエリパラメーターを使用します：
+
+* `grant_type`: `fb_attenuate_token`。
+* `fb_exchange_token`：ログイン時に受け取るアクセストークンです。
+* `client_id`：アプリIDです。この値は、Facebook開発者のダッシュボードから取得したもので、Facebookログインの統合に成功している場合は、アプリケーションで既に使用されているはずです。
+
+この手順で得たロジックを独自のメソッドに投入します。これを前に追加したメソッドから後で呼び出します。
+
+サンプルはFacebook SDKの`GraphRequest`クラスを使用して、この要求を実行します。
+
+[8
+
+## Facebookのユーザープロファイルを取得する](#facebookのユーザープロファイルを取得する)
+
+上の手順と同様に、別のGET要求を行います。エンドポイントパスは、Facebookログイン結果から得たユーザーID値（`/904636746222815`など）になります。次のパラメーターを使用します：
+
+* `access_token`：ログイン時に受け取るアクセストークンです。
+* `fields`：応答で取得したいユーザープロファイルからのフィールドです。これらは、初めに構成されたFacebookログインボタンのアクセス許可に直接関連付けられています。アクセス許可が任意の場合、ユーザーはまずアクセス許可を付与することに同意する必要があります。Auth0でユーザーをサインアップするには、フルネームとメールを入力するだけで十分です。
+
+[9
+
+## Auth0を統合する](#auth0を統合する)
+
+必要なアーティファクトを取得したら、IDやアクセストークンなどAuth0のユーザー資格情報に交換する準備ができました。しかしまず、その最後の要求を行うためにAuth0 SDKをセットアップする必要があります。
+
+### アプリケーションキーを取得する
+
+1. [Auth0 Dashboard](https://manage.auth0.com/)の**［Applications（アプリケーション）］**セクションで、**［Sign in with Facebook（Facebookでサインイン）］**を有効にした既存のアプリケーションを選択します。この手順で不明な点があれば、この記事の上に記載された要件セクションを確認してください。
+2. アプリケーションの設定ページから**［Domain（ドメイン）］**と**［Client ID（クライアントID）］**の値をコピーします。これらはSDKで必要です。
+3. Androidアプリケーションのstrings.xmlファイルで2つの新しいリソースを作成して保存します。キーの名前は以下で使用するキーと一致しなければなりません。
+
+   ```
+   <resources>
+   <string name="com_auth0_domain">{yourDomain}</string>
+   <string name="com_auth0_client_id">{yourClientId}</string>
+   </resources>
+   ```
+
+   
+
+   
+
+### Auth0 SDKをインストールする
+
+Androidアプリケーションで、この行をapp/build.gradleファイルに追加します：
+
+```
+dependencies {
+implementation 'com.auth0.android:auth0:1.+'
+}
+```
+
+次に、Gradle Syncタスクを実行し、プロジェクトとその依存関係を更新します。
+
+### Web認証のマニフェストを更新する
+
+アプリケーションがSDKによって提供されるWeb認証モジュールを利用する予定がない場合は、未使用のアクティビティをAndroidManifest.xmlファイルから削除し、マニフェストのプレースホルダー問題を防ぐ必要があります。これを実現するには、アクティビティの宣言を追加し、tools:node="remove"の注釈を加えます。
+
+```
+<application>
+<!-- Add the activity declaration line below -->
+<activity
+android:name="com.auth0.android.provider.AuthenticationActivity"
+tools:node="remove" />
+</application>
+```
+
+ただし、Web認証をサポートする予定の場合は、[ここ](https://auth0.com/docs/libraries/auth0-android#authentication-via-universal-login)でマニフェストのプレースホルダーを宣言する方法を確認してください。
+
+[10
+
+## 受け取ったデータをAuth0トークンに交換する](#受け取ったデータをauth0トークンに交換する)
+
+SDKは、使用する前にインスタンス化する必要があります。クラスレベルでフィールドを定義し、`onCreate`メソッドで初期化します。上の手順で定義した資格情報が`Auth0`コンストラクターに渡されたら、`AuthenticationAPIClient`の新しいインスタンスが作成されます。
+
+```
+private AuthenticationAPIClient auth0Client;
+@Override
+public void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+
+setContentView(R.layout.activity_login);
+
+Auth0 account = new Auth0(getString(R.string.com_auth0_client_id), getString(R.string.com_auth0_domain));
+
+auth0Client = new AuthenticationAPIClient(account);
+
+//...
+
+}
+```
+
+ロジックを維持するメソッドを作成し、取得した2つのアーティファクトをAuth0のユーザー資格情報に交換します。サンプルでは、このメソッドの名前は`exchangeTokens`です。
+
+APIクライアントは、トークンとサブジェクトタイプを受け取る`loginWithNativeSocialToken`メソッドを宣言します。前者はセッショントークンに対応し、後者はバックエンドが認証しようとする接続のタイプを示します。
+
+ネイティブFacebookログインでは、以下の値を使用します：`"http://auth0.com/oauth/token-type/facebook-info-session-access-token"`
+
+構成する必要がある他の値は、ユーザープロファイル（`user_profile`キーを使用）とAuth0トークンに含まれる要求されたスコープです。
+
+<Note>
+
+変化しないことを把握している値はすべて、クラスの上部で定数として維持しておくと便利です。サンプルは、件名トークンタイプ、Facebookのアクセス許可、およびAuth0のスコープに対して定数を利用します。Auth0のスコープの詳細については、特集記事をお読みください。
+
+</Note>
+
+[11
+
+## performLoginメソッドを更新する](#performloginメソッドを更新する)
+
+すべての手順が独自のメソッドで定義されたら、`performLogin`メソッドに全部まとめて入れましょう。
+
+すべて正常に実行されると、FacebookログインSDKでネイティブ認証ができるようになります。つまり、Facebookアプリがデバイスにインストールされていると、認証はブラウザーアプリでなくアプリケーションを介して処理されます。
+
+## Next Steps
+
+Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+
+This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+
+* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
+* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/native/android-facebook-login/interactive.md)
+
+<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+
+Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+
+Sign Up
+
+Developers
+
+* [Developer Hub](https://developer.auth0.com/resources)
+* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
+* [Blog posts](https://auth0.com/blog/developers/)
+* [Videos](https://auth0.com/docs/videos)
+* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
+* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
+
+Documentation
+
+* [Articles](https://auth0.com/docs/articles)
+* [Quickstarts](https://auth0.com/docs/quickstarts)
+* [APIs](https://auth0.com/docs/api)
+* [SDK Libraries](https://auth0.com/docs/libraries)
+* [Blog](https://auth0.com/blog/)
+* [Reports](https://auth0.com/resources/ebooks)
+* [Webinars](https://auth0.com/resources/webinars)
+
+Get Involved
+
+* [Forum](https://community.auth0.com/)
+* [Events](https://developer.auth0.com/events)
+* [Ambassador Program](https://auth0.com/ambassador-program)
+* [Auth0 Research Program](https://auth0.com/research-program)
+
+Company
+
+* [Our Customers](https://auth0.com/customers)
+* [Compliance - Ensuring privacy and security](https://auth0.com/security)
+* [Partners](https://auth0.com/partners)
+* [Careers We're hiring!](https://www.okta.com/company/careers/)
+* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
+
+Support Center
+
+* [Community](https://community.auth0.com/)
+* [Support](https://support.auth0.com/)
+* [Help](https://community.auth0.com/c/help/6)
+* [FAQs](https://community.auth0.com/c/faq/42)
+* [Auth0 Marketplace](https://marketplace.auth0.com)
+
+Learning
+
+* [Learn](https://auth0.com/learn)
+* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
+* [Blog](https://auth0.com/blog/)
+
+Platform
+
+* [Access Management](https://auth0.com/platform/access-management)
+* [Extensibility](https://auth0.com/platform/extensibility)
+* [Security](https://auth0.com/platform/login-security)
+* [User Management](https://auth0.com/platform/user-management)
+* [Authentication](https://auth0.com/platform/authentication)
+
+Features
+
+* [Universal Login](https://auth0.com/features/universal-login)
+* [Single Sign On](https://auth0.com/features/single-sign-on)
+* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
+* [Actions](https://auth0.com/features/actions)
+* [Machine to Machine](https://auth0.com/features/machine-to-machine)
+* [Passwordless](https://auth0.com/features/passwordless)
+* [Breached Passwords](https://auth0.com/features/breached-passwords)
+
+© 2025 Okta, Inc. All Rights Reserved.
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+

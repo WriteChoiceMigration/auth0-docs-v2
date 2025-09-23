@@ -1,0 +1,235 @@
+---
+title: "Profils des jetons d’accès"
+permalink: "access-token-profiles"
+'og:title': "Profils des jetons d’accès"
+'og:description': "Découvrez les profils de jetons d’accès pris en charge par Auth0."
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
+'twitter:title': "Profils des jetons d’accès"
+'twitter:description': "Découvrez les profils de jetons d’accès pris en charge par Auth0."
+---
+# Profils des jetons d’accès
+
+Les profils de jetons d’accès définissent le format et les demandes des jetons d’accès émis pour une API. Auth0 prend en charge les profils de jetons d’accès suivants, également appelés dialectes de jetons :
+
+* Profil de jeton Auth0 ou profil de jeton d’accès par défaut
+* Profil de jeton RFC 9068 ou profil de jeton d’accès qui suit le [profil IETF JWT pour les jetons d’accès OAuth 2.0 (RFC 9068)](https://datatracker.ietf.org/doc/html/rfc9068)
+
+<table class="table"><thead>
+<tr>
+<th><strong>Profil de jeton</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Dialecte de jeton</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Profil de jeton Auth0</td>
+<td>Le profil de jeton par défaut. Émet des jetons d’accès formatés en tant que <a href="/docs/secure/tokens/json-web-tokens">Jeton Web JSON (JWT)</a>.</td>
+<td>Le profil de jeton Auth0 est associé à deux dialectes de jeton :<ul><li style="font-size: .875rem;"><code>access_token</code></li><li style="font-size: .875rem;"><code>access_token_authz</code>, ou le profil <code>access_token</code> avec la demande de <code>permissions</code> incluse</li></ul></td>
+</tr>
+<tr>
+<td>Profil de jeton RFC 9068</td>
+<td>Émet des jetons d’accès formatés en tant que jeton Web JSON (JWT) suivant la <a href="https://datatracker.ietf.org/doc/html/rfc9068">norme IETF</a> pour le codage des jetons d’accès OAuth 2.0 au format JWT.</td>
+<td>Le profil de jeton RFC 9068 est associé à deux dialectes de jeton :<ul><li style="font-size: .875rem;"><code>rfc9068_profile</code></li><li style="font-size: .875rem;"><code>rfc9068_profile_authz</code>, ou le profil <code>rfc9068_profile</code> avec la demande de <code>permissions</code> incluse</li></ul></td>
+</tr>
+</tbody>
+</table>
+
+Bien que les deux profils de jeton d’accès émettent des jetons d’accès <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JSON Web Token</Tooltip> (JWT), les JWT ont des [formats de jeton différents](#token-profile-differences). Les deux profils de jeton d’accès peuvent activer le [contrôle d'accès basé sur les rôles (RBAC)](/docs/fr-ca/get-started/apis/enable-role-based-access-control-for-apis) et ajouter la demande d’autorisation au jeton d’accès.
+
+Pour configurer le profil de jeton d’accès pour une API, veuillez consulter l’article [Configurer le profil de jeton d’accès](/docs/fr-ca/get-started/apis/configure-access-token-profile).
+
+### Exemple de profil de jeton Auth0
+
+```json
+{
+  "iss": "https://my-domain.auth0.com/",
+  "sub": "auth0|123456",
+  "aud": [
+    "https://example.com/health-api",
+    "https://my-domain.auth0.com/userinfo"
+  ],
+  "azp": "my_client_id",
+  "exp": 1311281970,
+  "iat": 1311280970,
+  "scope": "openid profile read:patients read:admin",
+  "my_custom_claim": "my_custom_value"
+}
+```
+
+### Exemple de profil de jeton RFC 9068
+
+```json
+{
+  "iss": "https://my-domain.auth0.com/",
+  "sub": "auth0|123456",
+  "aud": [
+    "https://example.com/health-api",
+    "https://my-domain.auth0.com/userinfo"
+  ],
+  "client_id": "my_client_id",
+  "exp": 1311281970,
+  "iat": 1311280970,
+  "jti":"73WakrfVbNJBaAmhQtEeDv",
+  "scope": "openid profile read:patients read:admin",
+  "my_custom_claim": "my_custom_value"
+}
+```
+
+## Différences de profil de jeton
+
+Le profil Auth0 et le profil RFC 9068 émettent des jetons JWT qui ont des formats de jetons différents. Les principales différences sont les suivantes :
+
+* Le profil RFC 9068 intègre la demande `jti`, fournissant un identifiant unique pour le jeton JWT.
+* Le profil Auth0 utilise la demande `azp` pour représenter l’ID client, tandis que le profil RFC 9068 utilise la demande `client_ID`.
+* Le profil RFC 9068 n’utilise pas la demande `gty`, qui est une demande propre à Auth0 qui représente le flux d’authentification.
+
+### En-tête
+
+<table class="table"><thead>
+<tr>
+<th><strong>Donnée</strong></th>
+<th><strong>Profil RFC 9068</strong></th>
+<th><strong>Profil Auth0</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>at+jwt</code></td>
+<td><code>JWT</code></td>
+</tr>
+<tr>
+<td><code>alg</code></td>
+<td>Algorithme de signature, par exemple, <code>RS256</code></td>
+<td>Algorithme de signature, par exemple, <code>RS256</code></td>
+</tr>
+</tbody>
+</table>
+
+### Demandes
+
+<table class="table"><thead>
+<tr>
+<th><strong>Demande</strong></th>
+<th><div style="width:170px"><b>Description</b></div></th>
+<th><div style="width:90px"><b>Présente dans RFC 9068 Profile</b></div></th>
+<th><div style="width:90px"><b>Présente dans le profil Auth0 </b></div></th>
+<th><strong>Exemple de demande</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>iss</code></td>
+<td>Identifiant de l’émetteur pour le locataire Auth0 émettant le jeton d’accès.</td>
+<td>Oui</td>
+<td>Oui</td>
+<td>Domaine du locataire : <code>https://tenant.auth0.com/</code></td>
+</tr>
+<tr>
+<td><code>sub</code></td>
+<td>L’objet de la demande indique pour quel utilisateur ou application le jeton d’accès a été émis :<ul><li style="font-size: .875rem;"> Pour les autorisations dans lesquelles un utilisateur final est impliqué, comme le flux de code d’autorisation, la demande <code>sub&lt;/code&amp;gt ; est la suivante :<code>user_id</code>.</code></li><li style="font-size: .875rem;"><code>Pour les applications de communication entre machines utilisant l’autorisation d’identifiants client dans lesquelles aucun utilisateur final n’est impliqué, la demande <code>sub</code> est un identifiant unique pour l’application.</code></li></ul></td>
+<td>Oui</td>
+<td>Oui</td>
+<td><ul><li style="font-size: .875rem;">Identifiant utilisateur :<code>auth0|6553da60a54af58e29493993</code></li><li style="font-size: .875rem;">ID client avec le suffixe : <code>awZfdIir8YFdGZWkvCejDoUb7SjTDicx@clients</code></li></ul></td>
+</tr>
+<tr>
+<td><code>aud</code></td>
+<td>La demande audience définit le destinataire prévu pour le jeton d’accès.</td>
+<td>Oui</td>
+<td>Oui</td>
+<td><code>"https://test-server/api"</code> OU <code>[ "https://test-server/api", "https://test.local.dev.auth0.com/userinfo" ]</code></td>
+</tr>
+<tr>
+<td><code>client_id</code></td>
+<td>L’ID client pour l’application qui fait la requête du jeton d’accès.</td>
+<td>Oui</td>
+<td>Non</td>
+<td>Identifiant client : <code>K1AUPhZq8mRi0Q0pjhkfu1D7y6KjDQja</code></td>
+</tr>
+<tr>
+<td><code>azp</code></td>
+<td>ID client qui fait la requête du jeton d’accès.</td>
+<td>Non</td>
+<td>Oui</td>
+<td>ID client : <code>K1AUPhZq8mRi0Q0pjhkfu1D7y6KjDQja</code></td>
+</tr>
+<tr>
+<td><code>exp</code></td>
+<td>Durée de l’expiration à partir de laquelle le jeton d’accès ne doit pas être accepté pour traitement.</td>
+<td>Oui</td>
+<td>Oui</td>
+<td>Horodatage epoch en millisecondes : <code>1516238022</code></td>
+</tr>
+<tr>
+<td><code>iat</code></td>
+<td>Horodatage indiquant le moment auquel le jeton a été émis.</td>
+<td>Oui</td>
+<td>Oui</td>
+<td>Horodatage epoch en secondes : <code>1516239022</code></td>
+</tr>
+<tr>
+<td><code>scope</code></td>
+<td>Permission(s) du jeton d’accès émis. Pour en savoir plus, consultez <a href="/docs/get-started/apis/scopes">Permissions</a>.</td>
+<td>Oui</td>
+<td>Oui</td>
+<td><code>"openid profile offline_access"</code></td>
+</tr>
+<tr>
+<td><code>jti</code></td>
+<td>Identifiant unique pour le jeton d’accès.</td>
+<td>Oui</td>
+<td>Non</td>
+<td>Identifiant à chaîne unique : <code>aBv9njtYfwL4xfPZyEwz9m</code></td>
+</tr>
+<tr>
+<td><code>gty</code></td>
+<td><a href="/docs/get-started/applications/application-grant-types">Type d’autorisation</a> que l’application a utilisé pour demander le jeton d’accès. Présent seulement pour les types de d’autorisation <code>password</code> (mot de passe) et <code>refresh_token</code> (jeton d’actualisation).</td>
+<td>Non</td>
+<td>Selon le cas</td>
+<td>Type d’autorisation : <code>password</code></td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td>Autorisations disponibles pour un utilisateur ou une application selon son rôle. Inclus seulement lorsque les paramètres <strong>Enable RBAC</strong> and <strong>Add permissions in the Access Token</strong> sont activés pour l’API. Pour en savoir plus, consultez <a href="/docs/get-started/apis/enable-role-based-access-control-for-apis">Activer le contrôle d'accès basé sur les rôles (RBAC) pour les API.</a></td>
+<td>Spécifique au cas</td>
+<td>Selon le cas</td>
+<td><code>[ "create:bar", "create:foo", "read:bar", "read:foo" ]</code></td>
+</tr>
+<tr>
+<td><code>org_id</code></td>
+<td>Identifiant d’Organization. Ajouté lorsqu’un utilisateur s’est authentifié via une Organization et que le paramètre Organization Names in Authentication API__ (Noms d’Organization dans Authentication API) est activé. Pour en apprendre davantage, lisez <a href="/docs/manage-users/organizations/using-tokens">Travailler avec des jetons et Organizations.</a></td>
+<td>Selon le cas</td>
+<td>Selon le cas</td>
+<td>Identifiant de l’Organization : <code>org_9ybsU1dN2dKfDkBi</code></td>
+</tr>
+<tr>
+<td><code>org_name</code></td>
+<td>Nom de l’ Organization. Ajouté lorsqu’un utilisateur s’est authentifié via une Organization et que le paramètre <strong>Organization Names in Authentication API</strong> (Noms d’Organization dans Authentication API) est activé. Pour en savoir plus, consultez <a href="/docs/manage-users/organizations/configure-organizations/use-org-name-authentication-api">Utiliser les noms d’Organization dans Authentication API.</a></td>
+<td>Selon le cas</td>
+<td>Selon le cas</td>
+<td>Nom d’Organization: <code>my_organization</code></td>
+</tr>
+<tr>
+<td><code>authorization_details</code></td>
+<td>Détails d’autorisation utilisés dans les demandes d’autorisation riches (Rich Authorization Requests, RAR). Pour en savoir plus, consultez <a href="/docs/get-started/authentication-and-authorization-flow/authorization-code-flow/authorization-code-flow-with-rar">Flux de code d’autorisation avec RAR.</a></td>
+<td>Selon le cas</td>
+<td>Selon le cas</td>
+<td><code>{  "type": "money_transfer",  "instructedAmount": {"amount": 2500, "currency": "USD"},   "destinationAccount": "xxxxxxxxxxx9876",  "beneficiary": "Hanna Herwitz", }</code></td>
+</tr>
+<tr>
+<td><code>cnf</code></td>
+<td>Demande de confirmation prise en charge par la <a href="/docs/get-started/applications/configure-mtls/set-up-resource-server-for-token-binding">Liaison de jeton mTLS</a>.</td>
+<td>Selon le cas</td>
+<td>Selon le cas</td>
+<td><code>{"x5t#S256":"A4DtL2JmUMhAsvJj5tKyn64SqzmuXbMrJa0n761y5v0"}</code></td>
+</tr>
+<tr>
+<td>Demandes personnalisées</td>
+<td>Vous pouvez ajouter des demandes personnalisées aux jetons d'accès via Actions. Pour en savoir plus, consultez <a href="/docs/secure/tokens/json-web-tokens/create-custom-claims">Créer des demandes personnalisées</a>.</td>
+<td>Selon le cas</td>
+<td>Selon le cas</td>
+<td><code>"favorite_color": “blue”</code></td>
+</tr>
+</tbody>
+</table>

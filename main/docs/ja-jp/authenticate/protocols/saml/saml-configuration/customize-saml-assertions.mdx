@@ -1,0 +1,185 @@
+---
+title: "SAMLアサーションをカスタマイズする"
+permalink: "customize-saml-assertions"
+'og:title': "SAMLアサーションをカスタマイズする"
+'og:description': "SAMLアサーションと、SAMLおよびWS-Fedのプロトコルパラメーターをカスタマイズする方法を説明します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
+'twitter:title': "SAMLアサーションをカスタマイズする"
+'twitter:description': "SAMLアサーションと、SAMLおよびWS-Fedのプロトコルパラメーターをカスタマイズする方法を説明します。"
+---
+# SAMLアサーションをカスタマイズする
+
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip>アサーションと、SAMLおよび<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">WS-Fed</Tooltip>のプロトコルパラメーターはカスタマイズできます。
+
+## IDプロバイダーとしてのAuth0
+
+Dashboardでアドオンを構成するか、ルールを使用して、Auth0がIDプロバイダーとして機能する際のSAMLアサーションをカスタマイズします。
+
+### Dashboardの使用
+
+1. [［Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](https://manage.auth0.com/#/applications/{yourClientId}/addons)に移動し、アプリケーションの名前を選択して表示します。
+2. **［Addons（アドオン）］**タブを選択します。
+3. **［SAML2 Web App（SAML2 Webアプリ）］**を有効にして設定とオプションを表示します。
+
+   <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 設定タブ](//images.ctfassets.net/cdy7uua7fh8z/6dJgYkcOgMZ73HVTkAWt1x/0126f55506d82cfd73d0bcb7ebd6fa9f/2025-02-27_14-00-16.png)</Frame>
+
+4. **［Settings（設定）］**タブでは、以下のような何種類かのカスタマイズができます。
+
+   * SAML要求のデフォルトの発行者以外のオーディエンスを指定する
+   * 受信者を指定する
+   * プロファイル属性を特定の属性ステートメントにマッピングする
+   * 署名またはダイジェストアルゴリズムを変更する
+   * アサーションのみに署名するのか、応答全体に署名するのかを指定する
+
+### アクションを使用する
+
+アクションを使用すると、SAML応答にさらに広範囲または動的なカスタマイズを追加できます。アクションで行われたカスタマイズは、Dashboardの**［Application Addons（アプリケーションアドオン）］**ビューを使ったカスタマイズをオーバーライドします。
+
+デフォルトのSAML属性をオーバーライドするか、新しい属性を追加するためには、`api.samlResponse`オブジェクトを使用します。
+
+#### 例：SAMLトークンのライフタイムを変更し、UPNをNameIDとして使用する
+
+```
+exports.onExecutePostLogin = async (event, api) => {
+	api.samlResponse.setLifetimeInSeconds(36000);
+	if (event.user.upn) {
+		api.samlResponse.setAttribute('http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier', 'upn');
+	}
+};
+```
+
+#### 例：user_metadata属性をアサーションに含む
+
+```
+exports.onExecutePostLogin = (event, api) => {
+	event.user.user_metadata = event.user.user_metadata || {};
+	event.user.user_metadata.color = 'purple';
+	api.samlResponse.setAttribute('http://schemas.xmlsoap.org/ws/2005/05/identity/claims/color', event.user.user_metadata.color);
+};
+```
+
+## SAMLアサーション属性
+
+以下はSAMLアサーションのカスタマイズ属性のリストです。
+
+<table class="table"><thead>
+<tr>
+<th><strong>属性</strong></th>
+<th><strong>種類</strong></th>
+<th><strong>説明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>audience</code></td>
+<td>文字列</td>
+<td>SAMLアサーションのオーディエンスです。デフォルトは、SAMLRequestの発行者です。</td>
+</tr>
+<tr>
+<td><code>recipient</code></td>
+<td>文字列</td>
+<td>SAMLアサーション（<code>SubjectConfirmationData</code>）の受信者です。デフォルトは、SAMLRequestの<code>AssertionConsumerUrl</code>、またはSAMLRequestが送られなかった場合はCallback URLです。</td>
+</tr>
+<tr>
+<td><code>issuer</code></td>
+<td>文字列</td>
+<td>SAML IDプロバイダーの一意の識別子で、URLとして形式化されます。</td>
+</tr>
+<tr>
+<td><code>mappings</code></td>
+<td>オブジェクト</td>
+<td>Auth0プロファイルとSAMLアサーションの出力属性のマッピングです。デフォルトのマッピングについては、上記の説明を参照してください。</td>
+</tr>
+<tr>
+<td><code>createUpnClaim</code></td>
+<td>ブール値</td>
+<td>UPNクレームを作成するかどうかを指定します。デフォルトは<code>true</code>です。</td>
+</tr>
+<tr>
+<td><code>passthroughClaimsWithNoMapping</code></td>
+<td>ブール値</td>
+<td><code>true</code>の場合（デフォルト）、共通プロファイルにマッピングされていない各クレームは、Auth0がそれらを通じて出力アサーションに渡します。<code>false</code>の場合、それらのクレームはマッピングされません。</td>
+</tr>
+<tr>
+<td><code>mapUnknownClaimsAsIs</code></td>
+<td>ブール値</td>
+<td><code>passthroughClaimsWithNoMapping</code>が<code>true</code>で、これが<code>false</code>の場合（デフォルト）、共通プロファイルにマッピングされていない各クレームには、Auth0がプレフィックス「<code>http://schema.auth0.com</code>」を追加します。<code>true</code>の場合は、クレームをそのままパススルーします。</td>
+</tr>
+<tr>
+<td><code>mapIdentities</code></td>
+<td>ブール値</td>
+<td><code>true</code>の場合（デフォルト）、これによりプロバイダー（Google、ADFS、ADなど）や、利用可能な場合アクセストークンなどの追加情報がトークンに付け足されます。</td>
+</tr>
+<tr>
+<td><code>signatureAlgorithm</code></td>
+<td>文字列</td>
+<td>SAMLアサーションまたは応答の署名に使用する署名アルゴリズムです。デフォルトは<code>rsa-sha1</code>です。</td>
+</tr>
+<tr>
+<td><code>digestAlgorithm</code></td>
+<td>文字列</td>
+<td>SAMLアサーションまたは応答のダイジェストを演算するダイジェストアルゴリズムです。デフォルトは<code>sha1</code>です。</td>
+</tr>
+<tr>
+<td><code>destination</code></td>
+<td>オブジェクト</td>
+<td>SAML応答の送信先です。指定されていない場合、SAMLRequest の<code>AssertionConsumerUrl</code>になり、SAMLRequestがない場合は、Callback URLになります。</td>
+</tr>
+<tr>
+<td><code>lifetimeInSeconds</code></td>
+<td>整数値</td>
+<td>トークンの有効期限です。デフォルトは、<code>3600</code>秒（1時間）です。</td>
+</tr>
+<tr>
+<td><code>signResponse</code></td>
+<td>ブール値</td>
+<td>SAML応答が署名されるべきかを指定します。デフォルトでは、SAMLアサーションは署名されますが、SAML応答は署名されません。<code>true</code>の場合、SAMLアサーションではなく、SAML応答が署名されます。</td>
+</tr>
+<tr>
+<td><code>nameIdentifierFormat</code></td>
+<td>文字列</td>
+<td>デフォルトは、<code>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</code>です。</td>
+</tr>
+<tr>
+<td><code>nameIdentifierProbes</code></td>
+<td>配列</td>
+<td>Auth0はこの配列の各属性を順番に試します。その1つが値を持つ場合は、それを<code>Subject/NameID</code>に使用します。順番：<code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier</code>（<code>user_id</code>からマッピング）、<code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress</code>（<code>email</code>からマッピング）、http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name`（名前からマッピング）</td>
+</tr>
+<tr>
+<td><code>authnContextClassRef</code></td>
+<td>文字列</td>
+<td>デフォルトは、<code>urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified</code>です。</td>
+</tr>
+<tr>
+<td><code>typedAttributes</code></td>
+<td>ブール値</td>
+<td>デフォルトは<code>true</code>です。<code>true</code>に設定すると、要素の<code>xs:type</code>を推測します。種類は<code>xs:string</code>、<code>xs:boolean</code>、<code>xs:double </code>、および<code>xs:anyType</code>です。<code>false</code>に設定すると、すべての<code>xs:type</code>が<code>xs:anyType</code>になります。</td>
+</tr>
+<tr>
+<td><code>includeAttributeNameFormat</code></td>
+<td>ブール値</td>
+<td>デフォルトは<code>true</code>です。<code>true</code>に設定すると、属性名を基に<code>NameFormat</code>を推測します。<code>NameFormat</code>の値は、<code>urn:oasis:names:tc:SAML:2.0:attrname-format:uri</code>、<code>urn:oasis:names:tc:SAML:2.0:attrname-format:basic</code>、および<code>urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified</code>です。<code>false</code>に設定すると、<code>NameFormat</code>属性はアサーションに設定されません。</td>
+</tr>
+<tr>
+<td><code>logout</code></td>
+<td>オブジェクト</td>
+<td>SAMLログアウトを制御します。2つのプロパティーを含むことができます。<code>callback</code>（文字列）には、サービスプロバイダー（クライアントアプリケーション）のシングルログアウトサービスURLが含まれ、Auth0はそこにログアウトの要求と応答を送信します。<code>slo_enabled</code>（ブール値）は、Auth0がサービスプロバイダーにセッション終了を通知するかを指定します。デフォルト値は<code>true</code>（プロバイダーに通知する）です。</td>
+</tr>
+<tr>
+<td><code>binding</code></td>
+<td>文字列</td>
+<td>SAMLログアウト応答に使用されるプロトコルバインディングを任意に示します。Auth0はデフォルトで<code>HTTP-POST</code>を使用しますが、<code>binding</code>を<code>urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect</code>に設定すると、<code>HTTP-Redirect</code>に変更することができます。</td>
+</tr>
+<tr>
+<td><code>signingCert</code></td>
+<td>文字列</td>
+<td>SAML要求の検証に使用される公開鍵証明書を任意に示します。設定された場合、SAML要求の署名が必要になります。サンプルの値は、「<code>-----BEGIN CERTIFICATE-----\nMIIC8jCCAdqgAwIBAgIJObB6jmhG0QIEMA0GCSqGSIb3DQEBBQUAMCAxHjAcBgNV\n[..all the other lines..]-----END CERTIFICATE-----\n</code>」です。</td>
+</tr>
+</tbody>
+</table>
+
+## もっと詳しく
+
+* [SAML構成のトラブルシューティング](/docs/ja-jp/troubleshoot/authentication-issues/troubleshoot-saml-configurations)
+* [SAMLエラーのトラブルシューティング](/docs/ja-jp/troubleshoot/authentication-issues/saml-errors)
+* [SAML IDプロバイダー起点のシングルサインオンを構成する](/docs/ja-jp/authenticate/protocols/saml/saml-sso-integrations/identity-provider-initiated-single-sign-on)

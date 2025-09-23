@@ -1,0 +1,237 @@
+---
+title: "Blazor Serverアプリケーションにログインを追加する"
+permalink: "interactive"
+'og:title': "Blazor Serverアプリケーションにログインを追加する"
+'og:description': "このガイドは、新規または既存のBlazor ServerアプリケーションにAuth0.AspNetCore.Authentication SDKを使ってAuth0を統合する方法を説明します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/asp.png"
+'twitter:title': "Blazor Serverアプリケーションにログインを追加する"
+'twitter:description': "このガイドは、新規または既存のBlazor ServerアプリケーションにAuth0.AspNetCore.Authentication SDKを使ってAuth0を統合する方法を説明します。"
+---
+[Skip to main content](#maincontent)
+
+​
+
+[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+---
+
+​
+
+[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+[##### Blazor Serverアプリケーションにログインを追加する](#Blazor Serverアプリケーションにログインを追加する)
+
+[View on Github](https://github.com/auth0-samples/auth0-aspnetcore-blazor-server-samples/tree/main/Quickstart/Sample) Log In & Download Sample
+
+1. [Quickstarts](/docs/ja-jp/quickstarts)
+3. [Regular Web App](/docs/ja-jp/quickstart/webapp)
+5. [ASP.NET Core Blazor Server](/docs/ja-jp/quickstart/webapp/aspnet-core-blazor-server/interactive)
+
+# 
+
+# Blazor Serverアプリケーションにログインを追加する
+
+Auth0を使用すると、アプリケーションに手軽に認証を追加して、ユーザープロファイル情報にアクセスすることができます。このガイドは、新規または既存のBlazor Serverアプリケーションに**Auth0.AspNetCore.Authentication** SDKを使ってAuth0を統合する方法を説明します。
+
+[1
+
+## Auth0を構成する](#auth0を構成する)
+
+Auth0のサービスを利用するには、Auth0 Dashboadに設定済みのアプリケーションがある必要があります。Auth0アプリケーションは、開発中のプロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
+
+### アプリケーションを構成する
+
+対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0 APIを呼び出す際に使用されます。
+
+このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/dashboard/us/auth0-dsepaid/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
+
+完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
+
+### Callback URLを構成する
+
+Callback URLとは、Auth0がユーザーを認証後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはログイン後にアプリケーションに戻りません。
+
+<Note>
+
+サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000``/callback`に設定してください。
+
+</Note>
+
+### ログアウトURLを構成する
+
+ログアウトURLとは、Auth0がユーザーをログアウト後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーを受け取ります。
+
+<Note>
+
+サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+
+</Note>
+
+[2
+
+## SDKをインストールして構成する](#sdkをインストールして構成する)
+
+### NuGetからインストールする
+
+Auth0をBlazor Serverと統合するには、`Auth0.AspNetCore.Authentication`[NuGetパッケージ](https://www.nuget.org/packages/Auth0.AspNetCore.Authentication/)をアプリケーションにインストールすることでSDKを使用できます。
+
+### ミドルウェアを構成する
+
+Blazor Serverアプリケーションで認証を可能にするには、SDKが提供するミドルウェアを使います。`Program.cs`ファイルに移動して`builder.Services.AddAuth0WebAppAuthentication()`を呼び出し、SDKのミドルウェアを登録します。
+
+`Domain`と`ClientId`は必ず構成してください。SDKがどのAuth0テナントとアプリケーションを使用すべきかを認識するために必要となるフィールドです。
+
+認証と認可が`Program.cs`ファイルで有効になったことを確認します。
+
+[3
+
+## ログイン](#ログイン)
+
+Blazor Serverアプリケーションにユーザーをログインさせるには、`LoginModel`を`Pages`ディレクトリに追加します。
+
+`LoginModel`の`OnGet`メソッド内で`HttpContext.ChallengeAsync()`を呼び出し、`Auth0Constants.AuthenticationScheme`を認証スキームとして渡します。これにより当社のSDKが内部に登録しているOIDC認証ハンドラーが発動されます。関連する`authenticationProperties`も必ず指定してください。構築は`LoginAuthenticationPropertiesBuilder`で行えます。
+
+`HttpContext.ChallengeAsync()`の呼び出し成功後、ユーザーはAuth0にリダイレクトされます。その後アプリケーションにリダイレクトで戻された際に、OIDCミドルウェアとクッキーミドルウェアの両方にサインインしています。これにより、ユーザーは後続の要求でも認証されるようになります。
+
+##### checkpoint.header
+
+Loginの構成が完了したら、アプリケーションを実行して次の点を確認します：
+
+* `Login`ページに移動すると、Auth0にリダイレクトされる。
+* 資格情報を入力すると、リダイレクトでアプリケーションに戻る。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[4
+
+## ユーザープロファイルを表示する](#ユーザープロファイルを表示する)
+
+ミドルウェアはAuth0からトークンを取得すると、IDトークンからユーザー情報とクレームを抽出し、`AuthenticationState`を介して利用できるようにします。これは`CascadingParameter`として追加できます。
+
+ユーザーの名前や追加クレーム（メールアドレスや画像など）を表示するカスタムのユーザープロファイルページは、`AuthenticationState`の`User`プロパティから関連情報を取得し、Blazorコード内からビューに渡すことで作成できます。
+
+##### checkpoint.header
+
+ユーザープロファイルを表示するようセットアップし終えたら、アプリケーションを実行して次の点を確認します：
+
+* ログイン成功後にプロファイルを含んだエンドポイントに移動すると、ユーザーのプロファイルが表示される。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[5
+
+## ログアウト](#ログアウト)
+
+`LogoutModel`の`OnGet`メソッド内から`HttpContext.SignOutAsync`を`CookieAuthenticationDefaults.AuthenticationScheme`認証スキームで呼び出すと、ユーザーをアプリケーションからログアウトさせられます。
+
+さらに、ユーザーをAuth0からもログアウトさせたい場合は（これによりシングルサインオンに依拠している他のアプリケーションからもログアウトさせる可能性があります）、`HttpContext.SignOutAsync`を`Auth0Constants.AuthenticationScheme`認証スキームで呼び出します。また、`LogoutAuthenticationPropertiesBuilder`を使って構築できる適切な`authenticationProperties`も同じ認証スキームで呼び出します。
+
+##### checkpoint.header
+
+Logoutの構成が完了したら、アプリケーションを実行して次の点を確認します：
+
+* `Logout`ページに移動すると、ユーザーがログアウトする。
+* Auth0からもログアウトすると、Auth0にリダイレクトされ、即座にアプリケーションにリダイレクトで戻される。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+## Next Steps
+
+Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+
+This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+
+* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
+* [auth0-aspnetcore-authentication SDK](https://github.com/auth0/auth0-aspnetcore-authentication) - Explore the SDK used in this tutorial more fully
+* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/webapp/aspnet-core-blazor-server/interactive.md)
+
+<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+
+Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+
+Sign Up
+
+Developers
+
+* [Developer Hub](https://developer.auth0.com/resources)
+* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
+* [Blog posts](https://auth0.com/blog/developers/)
+* [Videos](https://auth0.com/docs/videos)
+* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
+* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
+
+Documentation
+
+* [Articles](https://auth0.com/docs/articles)
+* [Quickstarts](https://auth0.com/docs/quickstarts)
+* [APIs](https://auth0.com/docs/api)
+* [SDK Libraries](https://auth0.com/docs/libraries)
+* [Blog](https://auth0.com/blog/)
+* [Reports](https://auth0.com/resources/ebooks)
+* [Webinars](https://auth0.com/resources/webinars)
+
+Get Involved
+
+* [Forum](https://community.auth0.com/)
+* [Events](https://developer.auth0.com/events)
+* [Ambassador Program](https://auth0.com/ambassador-program)
+* [Auth0 Research Program](https://auth0.com/research-program)
+
+Company
+
+* [Our Customers](https://auth0.com/customers)
+* [Compliance - Ensuring privacy and security](https://auth0.com/security)
+* [Partners](https://auth0.com/partners)
+* [Careers We're hiring!](https://www.okta.com/company/careers/)
+* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
+
+Support Center
+
+* [Community](https://community.auth0.com/)
+* [Support](https://support.auth0.com/)
+* [Help](https://community.auth0.com/c/help/6)
+* [FAQs](https://community.auth0.com/c/faq/42)
+* [Auth0 Marketplace](https://marketplace.auth0.com)
+
+Learning
+
+* [Learn](https://auth0.com/learn)
+* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
+* [Blog](https://auth0.com/blog/)
+
+Platform
+
+* [Access Management](https://auth0.com/platform/access-management)
+* [Extensibility](https://auth0.com/platform/extensibility)
+* [Security](https://auth0.com/platform/login-security)
+* [User Management](https://auth0.com/platform/user-management)
+* [Authentication](https://auth0.com/platform/authentication)
+
+Features
+
+* [Universal Login](https://auth0.com/features/universal-login)
+* [Single Sign On](https://auth0.com/features/single-sign-on)
+* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
+* [Actions](https://auth0.com/features/actions)
+* [Machine to Machine](https://auth0.com/features/machine-to-machine)
+* [Passwordless](https://auth0.com/features/passwordless)
+* [Breached Passwords](https://auth0.com/features/breached-passwords)
+
+© 2025 Okta, Inc. All Rights Reserved.
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+

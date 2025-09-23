@@ -1,0 +1,238 @@
+---
+title: "ユーザーの組織メンバーシップを取得する"
+permalink: "retrieve-user-membership"
+'og:title': "ユーザーの組織メンバーシップを取得する"
+'og:description': "Auth0 Management APIを使用してユーザーのOrganizationメンバーシップを取得する方法について説明します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
+'twitter:title': "ユーザーの組織メンバーシップを取得する"
+'twitter:description': "Auth0 Management APIを使用してユーザーのOrganizationメンバーシップを取得する方法について説明します。"
+---
+# ユーザーの組織メンバーシップを取得する
+
+[組織](/docs/ja-jp/manage-users/organizations/organizations-overview)をプログラム的に操作する際、ユーザーがメンバーシップを割り当てられている組織のリストを取得する必要があります。
+
+## Mangement API
+
+<Warning>
+
+Auth0 DashboardまたはManagement APIを使用して表示できる組織メンバーの数は、何人存在する場合でも1000人に限られています。
+
+</Warning>
+
+`Get User Organizations`エンドポイントに対して`GET`呼び出しを行います。`USER_ID`と`MGMT_API_ACCESS_TOKEN`のプレースホルダーの値を、それぞれユーザーIDと<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>のアクセストークンに置き換えてください。
+
+<CodeGroup>
+```bash curl.sh
+curl --request GET \
+--url 'https://{yourDomain}/api/v2/users/USER_ID/organizations' \
+--header 'authorization: Bearer MGMT_API_ACCESS_TOKEN'
+```
+```csharp c_.cs
+var client = new RestClient("https://{yourDomain}/api/v2/users/USER_ID/organizations");
+var request = new RestRequest(Method.GET);
+request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
+IRestResponse response = client.Execute(request);
+```
+
+```go go.go
+package main
+import (
+"fmt"
+"net/http"
+"io/ioutil"
+)
+func main() {
+url := "https://{yourDomain}/api/v2/users/USER_ID/organizations"
+req, _ := http.NewRequest("GET", url, nil)
+req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+res, _ := http.DefaultClient.Do(req)
+defer res.Body.Close()
+body, _ := ioutil.ReadAll(res.Body)
+fmt.Println(res)
+fmt.Println(string(body))
+}
+```
+```java java.java
+HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/users/USER_ID/organizations")
+.header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+.asString();
+```
+
+```javascript node_js.js
+var axios = require("axios").default;
+var options = {
+method: 'GET',
+url: 'https://{yourDomain}/api/v2/users/USER_ID/organizations',
+headers: {authorization: 'Bearer MGMT_API_ACCESS_TOKEN'}
+};
+axios.request(options).then(function (response) {
+console.log(response.data);
+}).catch(function (error) {
+console.error(error);
+});
+```
+```obj-c obj-c.obj-c
+#import 
+NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
+NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users/USER_ID/organizations"]
+cachePolicy:NSURLRequestUseProtocolCachePolicy
+timeoutInterval:10.0];
+[request setHTTPMethod:@"GET"];
+[request setAllHTTPHeaderFields:headers];
+NSURLSession \*session = [NSURLSession sharedSession];
+NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
+completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
+if (error) {
+NSLog(@"%@", error);
+} else {
+NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
+NSLog(@"%@", httpResponse);
+}
+}];
+[dataTask resume];
+```
+
+```php php.php
+$curl = curl_init();
+curl_setopt_array($curl, [
+CURLOPT_URL => "https://{yourDomain}/api/v2/users/USER_ID/organizations",
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_ENCODING => "",
+CURLOPT_MAXREDIRS => 10,
+CURLOPT_TIMEOUT => 30,
+CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+CURLOPT_CUSTOMREQUEST => "GET",
+CURLOPT_HTTPHEADER => [
+"authorization: Bearer MGMT_API_ACCESS_TOKEN"
+],
+]);
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+if ($err) {
+echo "cURL Error #:" . $err;
+} else {
+echo $response;
+}
+```
+```python python.py
+import http.client
+conn = http.client.HTTPSConnection("")
+headers = { 'authorization': "Bearer MGMT_API_ACCESS_TOKEN" }
+conn.request("GET", "/{yourDomain}/api/v2/users/USER_ID/organizations", headers=headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
+```
+
+```ruby ruby.rb
+require 'uri'
+require 'net/http'
+require 'openssl'
+url = URI("https://{yourDomain}/api/v2/users/USER_ID/organizations")
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+request = Net::HTTP::Get.new(url)
+request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
+response = http.request(request)
+puts response.read_body
+```
+```swift swift.swift
+import Foundation
+let headers = ["authorization": "Bearer MGMT_API_ACCESS_TOKEN"]
+let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users/USER_ID/organizations")! as URL,
+cachePolicy: .useProtocolCachePolicy,
+timeoutInterval: 10.0)
+request.httpMethod = "GET"
+request.allHTTPHeaderFields = headers
+let session = URLSession.shared
+let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+if (error != nil) {
+print(error)
+} else {
+let httpResponse = response as? HTTPURLResponse
+print(httpResponse)
+}
+})
+dataTask.resume()
+```
+</CodeGroup>
+
+<Note>
+
+**Auth0ドメインを見つける**
+
+テナント名がAuth0ドメインである場合は、地域のサブドメイン（テナントが米国地域にあり、2020年6月より前に作成された場合を除く）の後に「`.auth0.com`」が続きます。たとえば、テナント名が「`travel0`」の場合、Auth0のドメイン名は「`travel0.us.auth0.com`」になります。（テナントが米国内にあって、2020年6月よりも前に作成された場合、ドメイン名は「`https://travel0.auth0.com`」になります。）
+
+カスタムドメインを使用している場合には、これがカスタムドメイン名になります。
+
+</Note>
+
+| 値 | 説明 |
+| `USER_ID` | 組織のメンバーシップを取得したいユーザーのID。|
+| `MGMT_API_ACCESS_TOKEN` | スコープ`read:organizations`を持つ[Management APIのアクセストークン](/docs/tokens/management-api-access-tokens)。|
+
+### 応答ステータスコード
+
+可能性のある応答ステータスコードは以下のとおりです。
+
+<table class="table"><thead>
+<tr>
+<th>ステータスコード</th>
+<th>エラーコード</th>
+<th>メッセージ</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td></td>
+<td>Organizations successfully retrieved.（組織を正常に取得しました。）</td>
+<td></td>
+</tr>
+<tr>
+<td><code>400</code></td>
+<td><code>invalid_uri</code></td>
+<td><code>invalid_request_uri</code></td>
+<td>The path is not valid.（パスが有効ではありません。）</td>
+</tr>
+<tr>
+<td><code>400</code></td>
+<td><code>invalid_query_string</code></td>
+<td>Invalid request query string.（無効な要求クエリ文字列です。）メッセージは原因によって異なります。</td>
+<td>クエリ文字列が有効ではありません。</td>
+</tr>
+<tr>
+<td><code>401</code></td>
+<td></td>
+<td>Invalid token.（無効なトークンです。）</td>
+<td></td>
+</tr>
+<tr>
+<td><code>401</code></td>
+<td></td>
+<td>Invalid signature received for JSON Web Token validation.（JSON Web Tokenの検証に無効な署名を受け取りました。）</td>
+<td></td>
+</tr>
+<tr>
+<td><code>403</code></td>
+<td><code>insufficient_scope</code></td>
+<td>Insufficient scope; expected any of: <code>read:organizations</code>.（スコープが不足しています。<code>read:organizations</code>が必要です。）</td>
+<td>渡されたベアラートークンのスコープでは許可されないフィールドの読み出しや書き込みが試行されました。</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td></td>
+<td>User not found（ユーザーが見つかりません）</td>
+<td></td>
+</tr>
+<tr>
+<td><code>429</code></td>
+<td></td>
+<td>Too many requests.Check the X-RateLimit-Limit, X-RateLimit-Remaining and X-RateLimit-Reset headers.（要求が多すぎます。X-RateLimit-Limit、X-RateLimit-Remaining、X-RateLimit-Resetヘッダーを確認してください。）</td>
+<td></td>
+</tr>
+</tbody>
+</table>

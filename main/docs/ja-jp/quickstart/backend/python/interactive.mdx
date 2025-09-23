@@ -1,0 +1,350 @@
+---
+title: "Flask APIアプリケーションに認可を追加する"
+permalink: "interactive"
+'og:title': "Flask APIアプリケーションに認可を追加する"
+'og:description': "このガイドは、Flaskを使ってビルドされた新規または既存のPython APIにAuth0を統合する方法を説明します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/python.png"
+'twitter:title': "Flask APIアプリケーションに認可を追加する"
+'twitter:description': "このガイドは、Flaskを使ってビルドされた新規または既存のPython APIにAuth0を統合する方法を説明します。"
+---
+[Skip to main content](#maincontent)
+
+​
+
+[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+---
+
+​
+
+[Articles](/docs/articles)[Quickstarts](/docs/quickstarts)[Auth0 APIs](/docs/api)[SDKs](/docs/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+[##### Flask APIアプリケーションに認可を追加する](#Flask APIアプリケーションに認可を追加する)
+
+[View on Github](https://github.com/auth0-samples/auth0-python-api-samples/tree/master/00-Starter-Seed) Log In & Download Sample
+
+1. [Docs](/docs/ja-jp)
+3. [Quickstarts](/docs/ja-jp/quickstarts)
+5. [Backend/API](/docs/ja-jp/quickstart/backend)
+7. [Python API](/docs/ja-jp/quickstart/backend/python/interactive)
+
+# 
+
+# Flask APIアプリケーションに認可を追加する
+
+このガイドは、[Flask](https://flask.palletsprojects.com/)を使ってビルドされた新規または既存のPython APIにAuth0を統合する方法を説明します。
+
+Auth0 DashboardでAPIをまだ作成していない場合は、対話型のセレクターを使ってAuth0 APIを新規作成します。そうでない場合は、統合したいプロジェクトを表す既存のAPIを選択することができます。
+
+または、Auth0 Dashboardを使って初めてAPIをセットアップする方法を[使用の開始ガイド](https://auth0.com/docs/get-started/auth0-overview/set-up-apis)で確認することもできます。
+
+Auth0にあるAPIはそれぞれAPI識別子を使って構成され、アプリケーションのコードはAPI識別子をオーディエンスとしてアクセストークンを検証します。
+
+<Note>
+
+**Auth0を初めてご利用ですか？**[Auth0の仕組み](https://auth0.com/docs/overview)と、OAuth 2.0フレームワークを用いた[API認証と認可の実装](https://auth0.com/docs/api-auth)について説明します。
+
+</Note>
+
+[1
+
+## アクセス許可を定義する](#アクセス許可を定義する)
+
+アクセス許可は、ユーザーの代わりに、提供されたアクセストークンを使ってどのようにしてリソースにアクセスできるのかを定義できるようにします。たとえば、ユーザーがマネージャーアクセスレベルを持つ場合には、`messages`リソースに対して読み出しアクセスを付与し、管理者アクセスレベルを持つ場合には、書き込みアクセスを付与することができます。
+
+Auth0 Dashboardの[［APIs］](https://manage.auth0.com/#/apis)セクションにある**［Permissions（権限）］**ビューで使用可能なアクセス許可を定義することができます。
+
+<Frame>![［Auth0 Dashboard］>［Applications（アプリケーション）］>［APIs］>［Specific API（特定のAPI］>［Permissions（権限）］タブ](//images.ctfassets.net/cdy7uua7fh8z/1s3Yp5zqJiKiSWqbPSezNO/acef814282795bef6921535f044f96e9/Quickstarts_API.png)</Frame>
+
+<Note>
+
+以下の例では`read:messages`スコープを使用します。
+
+</Note>
+
+[2
+
+## 依存関係をインストールする](#依存関係をインストールする)
+
+`requirements.txt`に次の依存関係を追加します：
+
+```
+# /requirements.txt
+flask
+
+Authlib
+```
+
+[3
+
+## JWTバリデーターを作成する](#jwtバリデーターを作成する)
+
+[Authlib](https://github.com/lepture/authlib)という名前のライブラリーを使用して、[ResourceProtector](https://docs.authlib.org/en/latest/flask/1/resource-server.html)を作成します。これは[Flaskデコレーター](https://flask.palletsprojects.com/patterns/viewdecorators/)の一種で、該当するバリデーターを使ってリソース（APIルート）を保護します。
+
+バリデーターは、リソースに渡すアクセストークンに有効な署名とクレームがあることを検証します。
+
+AuthLibの`JWTBearerTokenValidator`バリデーターに多少の変更を加えて、[アクセストークンの検証](https://auth0.com/docs/secure/tokens/access-tokens/validate-access-tokens)要件が満たされるようにします。
+
+`Auth0JWTBearerTokenValidator`を作成するには、`domain`と`audience`（API識別子）に渡すことが必要です。そうすると、トークンの署名を検証するのに必要な公開鍵が取得され、`JWTBearerTokenValidator`クラスに渡されます。
+
+そして、クラスの`claims_options`をオーバーライドし、トークンのexpiry、audience、issueクレームが要件を満たして有効であることを確認します。
+
+[4
+
+## Flaskアプリケーションを作成する](#flaskアプリケーションを作成する)
+
+次に、3つのAPIルートを使ってFlaskアプリケーションを作成します。
+
+* `/api/public`：認証を必要としないパブリックエンドポイントです。
+* `/api/private`：有効なJWTアクセストークンを必要とするプライベートエンドポイントです。
+* `/api/private-scoped`：与えられた`scope`を含む有効なJWTアクセストークンを必要とするプライベートエンドポイントです。
+
+保護されたルートには`require_auth`デコレーターがあり、これは、以前に作成した`Auth0JWTBearerTokenValidator`を使用する`ResourceProtector`です。
+
+`Auth0JWTBearerTokenValidator`を作成するには、テナントのドメインと以前に作成したAPIのAPI識別子に渡します。
+
+`private_scoped`ルートの`require_auth`デコレーターは、追加の引数である`"read:messages"`を受け付けます。これは、以前に作成したアクセス許可（スコープ）について、アクセストークンをチェックします。
+
+### APIを呼び出す
+
+APIを呼び出すにはアクセストークンが必要です。テスト用のアクセストークンは、[API設定](https://manage.auth0.com/#/apis)の**［Test（テスト）］**ビューから取得することができます。
+
+<Frame>![［Auth0 Dashboard］>［Applications（アプリケーション）］>［API］>［Specific API（特定のAPI］>［Test（テスト）］タブ](//images.ctfassets.net/cdy7uua7fh8z/6jeVBuypOGX5qMRXeJn5ow/dd20eb74e1e9079287762ce33dcf8e2d/Quickstart_Example_App_API.png)</Frame>
+
+要求の`Authorization`ヘッダーにアクセストークンを指定します。
+
+<CodeGroup>
+```bash curl.sh
+curl --request get \
+--url 'http:///{yourDomain}/api_path' \
+--header 'authorization: Bearer YOUR_ACCESS_TOKEN_HERE'
+```
+```csharp c_.cs
+var client = new RestClient("http:///{yourDomain}/api_path");
+var request = new RestRequest(Method.GET);
+request.AddHeader("authorization", "Bearer YOUR_ACCESS_TOKEN_HERE");
+IRestResponse response = client.Execute(request);
+```
+
+```go go.go
+package main
+import (
+"fmt"
+"net/http"
+"io/ioutil"
+)
+func main() {
+url := "http:///{yourDomain}/api_path"
+req, _ := http.NewRequest("get", url, nil)
+req.Header.Add("authorization", "Bearer YOUR_ACCESS_TOKEN_HERE")
+res, _ := http.DefaultClient.Do(req)
+defer res.Body.Close()
+body, _ := ioutil.ReadAll(res.Body)
+fmt.Println(res)
+fmt.Println(string(body))
+}
+```
+```java java.java
+HttpResponse response = Unirest.get("http:///{yourDomain}/api_path")
+.header("authorization", "Bearer YOUR_ACCESS_TOKEN_HERE")
+.asString();
+```
+
+```javascript node_js.js
+var axios = require("axios").default;
+var options = {
+method: 'get',
+url: 'http:///{yourDomain}/api_path',
+headers: {authorization: 'Bearer YOUR_ACCESS_TOKEN_HERE'}
+};
+axios.request(options).then(function (response) {
+console.log(response.data);
+}).catch(function (error) {
+console.error(error);
+});
+```
+```obj-c obj-c.obj-c
+#import 
+NSDictionary \*headers = @{ @"authorization": @"Bearer YOUR_ACCESS_TOKEN_HERE" };
+NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http:///{yourDomain}/api_path"]
+cachePolicy:NSURLRequestUseProtocolCachePolicy
+timeoutInterval:10.0];
+[request setHTTPMethod:@"get"];
+[request setAllHTTPHeaderFields:headers];
+NSURLSession \*session = [NSURLSession sharedSession];
+NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
+completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
+if (error) {
+NSLog(@"%@", error);
+} else {
+NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
+NSLog(@"%@", httpResponse);
+}
+}];
+[dataTask resume];
+```
+
+```php php.php
+$curl = curl_init();
+curl_setopt_array($curl, [
+CURLOPT_URL => "http:///{yourDomain}/api_path",
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_ENCODING => "",
+CURLOPT_MAXREDIRS => 10,
+CURLOPT_TIMEOUT => 30,
+CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+CURLOPT_CUSTOMREQUEST => "get",
+CURLOPT_HTTPHEADER => [
+"authorization: Bearer YOUR_ACCESS_TOKEN_HERE"
+],
+]);
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+if ($err) {
+echo "cURL Error #:" . $err;
+} else {
+echo $response;
+}
+```
+```python python.py
+import http.client
+conn = http.client.HTTPConnection("")
+headers = { 'authorization': "Bearer YOUR_ACCESS_TOKEN_HERE" }
+conn.request("get", "/{yourDomain}/api_path", headers=headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
+```
+
+```ruby ruby.rb
+require 'uri'
+require 'net/http'
+url = URI("http:///{yourDomain}/api_path")
+http = Net::HTTP.new(url.host, url.port)
+request = Net::HTTP::Get.new(url)
+request["authorization"] = 'Bearer YOUR_ACCESS_TOKEN_HERE'
+response = http.request(request)
+puts response.read_body
+```
+```swift swift.swift
+import Foundation
+let headers = ["authorization": "Bearer YOUR_ACCESS_TOKEN_HERE"]
+let request = NSMutableURLRequest(url: NSURL(string: "http:///{yourDomain}/api_path")! as URL,
+cachePolicy: .useProtocolCachePolicy,
+timeoutInterval: 10.0)
+request.httpMethod = "get"
+request.allHTTPHeaderFields = headers
+let session = URLSession.shared
+let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+if (error != nil) {
+print(error)
+} else {
+let httpResponse = response as? HTTPURLResponse
+print(httpResponse)
+}
+})
+dataTask.resume()
+```
+</CodeGroup>
+
+## Next Steps
+
+Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+
+This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+
+* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
+* [auth0-python SDK](https://github.com/auth0/auth0-python) - Explore the SDK used in this tutorial more fully
+* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/backend/python/interactive.md)
+
+<Frame>![Sign Up](/docs/img/quickstarts/action_hero_dashboard.svg)</Frame>
+
+Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+
+Sign Up
+
+Developers
+
+* [Developer Hub](https://developer.auth0.com/resources)
+* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
+* [Blog posts](https://auth0.com/blog/developers/)
+* [Videos](https://auth0.com/docs/videos)
+* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
+* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
+
+Documentation
+
+* [Articles](https://auth0.com/docs/articles)
+* [Quickstarts](https://auth0.com/docs/quickstarts)
+* [APIs](https://auth0.com/docs/api)
+* [SDK Libraries](https://auth0.com/docs/libraries)
+* [Blog](https://auth0.com/blog/)
+* [Reports](https://auth0.com/resources/ebooks)
+* [Webinars](https://auth0.com/resources/webinars)
+
+Get Involved
+
+* [Forum](https://community.auth0.com/)
+* [Events](https://developer.auth0.com/events)
+* [Ambassador Program](https://auth0.com/ambassador-program)
+* [Auth0 Research Program](https://auth0.com/research-program)
+
+Company
+
+* [Our Customers](https://auth0.com/customers)
+* [Compliance - Ensuring privacy and security](https://auth0.com/security)
+* [Partners](https://auth0.com/partners)
+* [Careers We're hiring!](https://www.okta.com/company/careers/)
+* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
+
+Support Center
+
+* [Community](https://community.auth0.com/)
+* [Support](https://support.auth0.com/)
+* [Help](https://community.auth0.com/c/help/6)
+* [FAQs](https://community.auth0.com/c/faq/42)
+* [Auth0 Marketplace](https://marketplace.auth0.com)
+
+Learning
+
+* [Learn](https://auth0.com/learn)
+* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
+* [Blog](https://auth0.com/blog/)
+
+Platform
+
+* [Access Management](https://auth0.com/platform/access-management)
+* [Extensibility](https://auth0.com/platform/extensibility)
+* [Security](https://auth0.com/platform/login-security)
+* [User Management](https://auth0.com/platform/user-management)
+* [Authentication](https://auth0.com/platform/authentication)
+
+Features
+
+* [Universal Login](https://auth0.com/features/universal-login)
+* [Single Sign On](https://auth0.com/features/single-sign-on)
+* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
+* [Actions](https://auth0.com/features/actions)
+* [Machine to Machine](https://auth0.com/features/machine-to-machine)
+* [Passwordless](https://auth0.com/features/passwordless)
+* [Breached Passwords](https://auth0.com/features/breached-passwords)
+
+© 2025 Okta, Inc. All Rights Reserved.
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+

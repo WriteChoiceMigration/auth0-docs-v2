@@ -1,0 +1,45 @@
+---
+title: "Surveiller les événements liés aux clés d’identification dans les journaux des locataires"
+permalink: "monitor-passkey-events-in-tenant-logs"
+'og:title': "Surveiller les événements liés aux clés d’identification dans les journaux des locataires"
+'og:description': "Comment identifier et surveiller les événements liés aux clés dans les journaux de vos locataires."
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
+'twitter:title': "Surveiller les événements liés aux clés d’identification dans les journaux des locataires"
+'twitter:description': "Comment identifier et surveiller les événements liés aux clés dans les journaux de vos locataires."
+---
+# Surveiller les événements liés aux clés d’identification dans les journaux des locataires
+
+Vous pouvez surveiller les flux de clés de chiffrement associés à vos connexions de base de données par l’intermédiaire des [journaux des locataires](/docs/fr-ca/deploy-monitor/logs).
+
+Vous pouvez afficher les événements de journaux dans <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip> ([Surveillance> Journaux](https://manage.auth0.com/#/logs)) ou récupérer des journaux en utilisant [Management API](https://auth0.com/docs/api/management/v2/logs/get-logs).
+
+<table class="table"><thead>
+<tr>
+<th>__ Code d’événement __</th>
+<th><strong>Scénario</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ss</code></td>
+<td>Lors de l’inscription, un utilisateur a enregistré une clé d’identification comme méthode d’authentification principale.</td>
+<td>Cet événement de journal contient le champ de tableau <code>details.authentication_methods</code> avec la valeur d’entrée <code>passkey</code>.<br/><br/>Si un utilisateur s’est enregistré avec un mot de passe, ce champ de tableau contient la valeur <code>pwd</code>.</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>Lors de la connexion, un utilisateur s’est authentifié avec une clé d’identification.</td>
+<td>Cet événement de journal contient le tableau <code>details.prompts</code> qui répertorie l’ensemble des invites qu’un utilisateur a parcourues lors de la connexion.<br/><br/>Si un utilisateur s’est authentifié à l’aide d’une clé d’identification, le tableau contient un élément avec le champ suivant : <code>"performed_amr": ["phr"]</code>.</td>
+</tr>
+<tr>
+<td><code>gd_enrollment_complete</code></td>
+<td>Un flux d’enregistrement progressif ou local a été complété avec succès.</td>
+<td>Cet événement de journal contient le champ <code>details.authenticator.type</code> avec la valeur <code>passkey</code> si un utilisateur a inscrit une clé d’identification.</td>
+</tr>
+<tr>
+<td><code>gd_webauthn_enrollment_failed</code></td>
+<td>Une erreur s’est produite lors d’un flux d’enregistrement progressif ou local.</td>
+<td>Cet événement de journal contient le champ <code>details.authentication_methods array</code> avec la valeur <code>passkey</code> si un utilisateur a essayé d’enregistrer une clé d’identification.</td>
+</tr>
+</tbody>
+</table>
