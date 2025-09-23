@@ -45,11 +45,11 @@ exports.onExecutePostLogin = async (event, api) => {
 
 Les actions finiront d’exécuter cette action, puis suspendront le pipeline d’actions pour envoyer l’utilisateur à l’adresse `https://my-app.exampleco.com`. En d’autres termes, toutes les actions liées aux déclencheurs post-connexion qui s’exécutent après l’Action invoquant la redirection ne s’exécuteront pas tant que le flux d’authentification n’aura pas été rétabli. Si vous connaissez les Règles de redirection, notez qu’il s’agit là d’une différence essentielle entre les actions et les Règles de redirection.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Contrairement aux règles de redirection, les actions de redirection suspendent le pipeline d’actions lorsqu’une redirection est effectuée et reprennent dans la même action que celle qui a effectué la redirection lorsque le flux d’authentification se poursuit.
 
-</Note>
+</Callout>
 
 Une fois l’action exécutée, Auth0 redirige l’utilisateur vers l’URL spécifiée dans la fonction `api.redirect.sendUserTo()`. Auth0 transmet également un paramètre `state` dans cette URL. Par exemple :
 

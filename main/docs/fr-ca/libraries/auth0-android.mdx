@@ -71,13 +71,13 @@ Next, replace `{YOUR_APP_PACKAGE_NAME}` with your actual application’s package
 
 Ensuite, dans le fichier `app/build.gradle` de votre application, ajoutez les [paramètres fictifs manifestes](https://developer.android.com/studio/build/manifest-build-variables.html) pour les propriétés Auth0 Domain et Auth0 Scheme. La bibliothèque les utilisera pour enregistrer un élément intent-filter qui capture l’URI de rappel.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous n’avez pas l’intention d’utiliser la fonctionnalité d’ authentification Web  et de ne pas déclarer les espaces réservés dans le manifeste, vous pouvez redéclarer manuellement l’activité dans le fichier manifeste de votre application Android afin de la supprimer du fichier manifeste fusionné. Cela empêchera Gradle de signaler l’absence d’espaces réservés dans le manifeste.
 
 Veuillez [lire la FAQ](https://github.com/auth0/Auth0.Android/tree/master#is-the-web-authentication-module-setup-optional) pour plus d’informations.
 
-</Note>
+</Callout>
 
 ```kotlin lines
 apply plugin: 'com.android.application'
@@ -98,11 +98,11 @@ android {
 }
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Nous recommandons de définir des ressources réutilisables, telles que `@string/com_auth0_domain` plutôt que de les coder en dur.
 
-</Note>
+</Callout>
 
 ## Initialiser Auth0
 

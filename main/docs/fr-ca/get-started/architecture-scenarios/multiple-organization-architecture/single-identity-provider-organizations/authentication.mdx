@@ -11,21 +11,21 @@ permalink: "authentication"
 
 Dans nos scénarios d’architecture, nous fournissons des recommandations générales sur  [B2B Authentication (authentification C3E)](/docs/fr-ca/get-started/architecture-scenarios/business-to-business/authentication), y compris l’utilisation de la [Universal Login (Connexion universelle)](/docs/fr-ca/authenticate/login/auth0-universal-login) en tant que meilleure pratique. Nous vous recommandons d’y réfléchir tout en prenant connaissance des conseils donnés ici.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **Meilleure pratique**
 
 Bien que de nombreux flux d’authentification soient pris en charge dans Auth0, les flux utilisant la connexion universelle Auth0 sont considérés à la fois comme meilleures pratiques de l’industrie et d’Auth0 parce qu’ils fournissent des [fonctionnalités d’authentification et de sécurité](/docs/fr-ca/authenticate/login/universal-vs-embedded-login). En particulier, la connexion universelle dispose de la [SSO (Connexion unique) prête à l’emploi](https://auth0.com/learn/how-to-implement-single-sign-on/) et contribue à repousser les cyber-attaques de type [hameçonnage](https://auth0.com/blog/all-you-need-to-know-about-the-google-docs-phishing-attack/) et [bucket brigade](/docs/fr-ca/secure/security-guidance/prevent-threats), c’est pourquoi elle devrait être privilégiée lorsque l’utilisateur fournit un mot de passe. Qui plus est, la [nouvelle expérience de connexion universelle](/docs/fr-ca/authenticate/login/auth0-universal-login/universal-login-vs-classic-login/universal-experience) est le seul mécanisme pris en charge lors de l’utilisation de la fonctionnalité Auth0 Organizations.
 
-</Note>
+</Callout>
 
 L’authentification des utilisateurs nécessite le traitement d’identifiants de premier facteur. Que cette opération soit effectuée par Auth0 ou par un fournisseur d’identité tiers, lorsque vous utilisez la fonction Organizations d’Auth0, vous devez également avoir recours à la [Universal Login Experience (Expérience de Connexion Universelle)](/docs/fr-ca/authenticate/login/auth0-universal-login/universal-login-vs-classic-login/universal-experience) de la plateforme.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Auth0 ne prend en charge qu’un seul contexte d’utilisateur authentifié par locataire Auth0; les locataires ne peuvent pas passer sélectivement d’un contexte d’utilisateur authentifié à un autre. Le changement de contexte utilisateur a un impact sur toute session SSO active, et cela s’étend à la fonction Organizations d’Auth0. Si les contextes par organisation sont absolument nécessaires, plusieurs locataires Auth0 devront être déployés en production. Étant donné que l’utilisation de plusieurs locataires a des conséquences qui affectent l’authentification unique (SSO), la gestion des profils utilisateurs, etc., vous devriez bien réfléchir avant de suivre cette voie.
 
-</Note>
+</Callout>
 
 ## Connexion à la base de données
 
@@ -58,11 +58,11 @@ Prenons l’exemple de Hoekstra & Associates, et voyons comment cette implément
 4. L’utilisateur saisit ses identifiants et clique sur `Login (Se connecter)`.
 5. Le locataire Travel0 Auth0 vérifie les identifiants de l’utilisateur; s’ils sont valides, le pipeline Règles s’exécute. Les [Règles](/docs/fr-ca/customize/rules) peuvent être utilisées pour gérer le contrôle d’accès, comme décrit dans la section [Autorisation](/docs/fr-ca/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/authorization). Si les identifiants de l’utilisateur ne sont pas valides, l’utilisateur sera invité à les saisir à nouveau.
 
-   <Note>
+   <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
    L’affectation automatique des membres sera effectuée si cette option a été spécifiée. Pour en savoir plus, consultez [Octroi d’une adhésion en temps voulu à une connexion d’organisation](/docs/fr-ca/manage-users/organizations/configure-organizations/grant-just-in-time-membership). Pour [manually-assigned Membership (adhésion affectée manuellement)](/docs/fr-ca/manage-users/organizations/configure-organizations/assign-members) la validation échouera si l’utilisateur n’est pas déjà affecté en tant que membre de l’organisation.
 
-   </Note>
+   </Callout>
 
 6. Une fois l’authentification de premier facteur et l’exécution des règles réussies, l’utilisateur est redirigé vers le `redirect_uri` ([`https://hoekstra.corp.travel0.net/login/callback`](https://hoekstra.corp.travel0.net/login/callback)) avec le `state` passé à l’étape 2, ainsi qu’un `code`.
 7. L’instance de Travel0 Corporate Booking de Hoekstra & Associates valide le `state`, puis appelle le locataire Travel0 Auth0 à [`https://auth.travel0.net/oauth/token`](https://auth.travel0.net/oauth/token), en passant le `code` et son `ID client` et son `secret client` en échange du [jeton d’ID](https://auth0.com/docs/tokens/id-tokens). Le jeton d’ID est ensuite utilisé pour générer une session pour [`https://hoekstra.corp.travel0.net`](https://hoekstra.corp.travel0.net).
@@ -95,13 +95,13 @@ L’authentification par le biais d’une connexion d’entreprise suit un proce
 
    8. `connection` : nom de la connexion d’entreprise Auth0 configurée pour MetaHexa Bank.
 
-      <Note>
+      <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
       **Meilleure pratique**
 
       Fournissez toujours le paramètre `connection`. S’il n’est pas fourni, l’utilisateur est invité à sélectionner la connexion d’entreprise associée au fournisseur d’identités en amont (IdP), ce qui constitue une étape supplémentaire du point de vue de l’expérience utilisateur.
 
-      </Note>
+      </Callout>
 
 3. Le locataire Travel Auth0 redirige le fournisseur d’identité de MetaHexa pour authentifier les identifiants de premier facteur.
 
@@ -109,11 +109,11 @@ L’authentification par le biais d’une connexion d’entreprise suit un proce
 4. L’utilisateur saisit ses identifiants et clique sur `Login (Se connecter)`.
 5. Le pipeline Règles s’exécute dès que l’authentification par le premier facteur est réussie. Les [Règles](/docs/fr-ca/customize/rules) peuvent être utilisées pour gérer le contrôle d’accès, comme décrit dans la section [Autorisation](/docs/fr-ca/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/authorization). Si les identifiants de l’utilisateur ne sont pas valides, l’utilisateur sera invité à les saisir à nouveau.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 L’affectation automatique des membres sera effectuée si cette option a été spécifiée. Pour en savoir plus, consultez [Octroi d’une adhésion en temps voulu à une connexion d’organisation](/docs/fr-ca/manage-users/organizations/configure-organizations/grant-just-in-time-membership). Pour [manually-assigned Membership (adhésion affectée manuellement)](/docs/fr-ca/manage-users/organizations/configure-organizations/assign-members) la validation échouera si l’utilisateur n’est pas déjà affecté en tant que membre de l’organisation.
 
-</Note>
+</Callout>
 
 Les étapes 6 à 8 correspondent à celles décrites dans le scénario [Connexion à une base de données](#database-connection), mais où Amintha est l’utilisateur plutôt que Jennifer et où MetaHexa Bank (`metahexa.corp.travel0.net`) remplacera Hoekstra & Associates.
 

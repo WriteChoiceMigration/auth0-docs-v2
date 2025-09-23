@@ -57,11 +57,11 @@ Auth0 a restreint la charge utile des demandes personnalisées (100 Ko max.). Il
 
 Pour éviter que des erreurs se produisent, Auth0 recommande d’utiliser la plus petite charge utile de jeton nécessaire au fonctionnement de votre application. Vous devrez peut-être supprimer toutes les propriétés qui ne sont pas cruciales avant de définir la valeur de la demande personnalisée.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Cette restriction s’applique à l’intégralité de la taille de la charge de toutes vos demandes personnalisées. Cela inclut les noms des demandes personnalisées ainsi que les valeurs associées, qu’elles soient publiques avec espace de noms ou privées sans espace de noms.
 
-</Note>
+</Callout>
 
 La limite de 100 Ko s’applique aux jetons d’accès et aux jetons d’ID séparément. À titre d’exemple, un jeton d’accès de 100 Ko et un jeton d’ID de 100 Ko peuvent être renvoyés au cours de la même transaction.
 
@@ -198,12 +198,12 @@ exports.onExecutePostLogin = async (event, api) => {
 
 Auth0 restreindra la création de demandes personnalisées privées, sans espace de noms, sur les jetons d’accès dont l'<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">audience</Tooltip> est une API Auth0. Toute tentative de définition d’une demande personnalisée privée, sans espace de nommage, sur un jeton d’accès dont l'audience est une API Auth0 sera ignorée. La transaction n’échouera pas, mais la demande ne sera pas ajoutée à votre jeton. Auth0 recommande de ne pas définir de demandes personnalisées sur les jetons qui doivent être consommés par les API d’Auth0.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 * Les jetons d’ID ne sont pas concernés par cette restriction.
 * Les demandes personnalisées publiques à espace de noms ne sont pas concernées par cette restriction.
 
-</Note>
+</Callout>
 
 L'audience suivante restreint la création de demandes personnalisées privées, sans espacement de noms :
 
@@ -315,11 +315,11 @@ Auth0 restreindra la création de demandes personnalisées avec espace de nommag
 
 Auth0 restreindra la création de demandes personnalisées avec espace de nommage comportant un domaine Auth0 comme identifiant d’espace de nommage. Les domaines Auth0 sont :
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Avant cette migration, la définition d’une demande personnalisée à espace de noms avec un identifiant de domaine Auth0 entraînait l’affichage de la demande dans la réponse `/userinfo`. Ce comportement disparaît après la migration et ces demandes personnalisées sont complètement ignorées.
 
-</Note>
+</Callout>
 
 ```javascript lines
 // an Auth0 action 
@@ -339,11 +339,11 @@ Auth0 permet désormais d’ajouter aux jetons d’accès des demandes de profil
 
 Auth0 permet désormais d’ajouter aux jetons d’accès des demandes de profil utilisateur OIDC.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous ajoutez des demandes de profil utilisateur OIDC à des jetons d’accès, les mêmes restrictions de permissions que celles applicables aux jetons d’ID s’appliquent. Par exemple, pour ajouter la demande de `courriel` aux jetons d’accès, le flux doit être déclenché avec une `permission` contenant le `courriel`.
 
-</Note>
+</Callout>
 
 Vous pouvez ajouter les demandes de profil d’utilisateur OIDC suivantes aux jetons d’accès :
 
@@ -522,11 +522,11 @@ Réponse SAML avec le comportement mis à jour :
 
 ### Ajouter des demandes privées, sans espace de noms, aux jetons
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Le comportement des demandes personnalisées ne changera pas pour les membres du programme Bêta concerné. Cette fonctionnalité est déjà activée.
 
-</Note>
+</Callout>
 
 Vous pouvez désormais ajouter des demandes personnalisées privées, sans espace de noms, à la charge utile des jetons d’accès et d’ID.
 
@@ -676,11 +676,11 @@ Si vous définissez des demandes `app_metadata` ou `user_metadata` sur l’objet
 
 ### Désactiver le comportement hérité
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Avant de désactiver l’ancien comportement, nous vous recommandons de consulter la liste des modifications et de vérifier que vos applications et intégrations sont compatibles.
 
-</Note>
+</Callout>
 
 <Warning>
 

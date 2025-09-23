@@ -26,11 +26,11 @@ Vous pouvez utiliser l’une des trousses SDK Auth0 pour qu’elle crée une ass
 
 L’assertion est un jeton Web JSON (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JWT</Tooltip>) qui doit contenir les propriétés et les demandes suivantes :
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Toutes les demandes sont requises sauf si mentionné autrement. Pour en savoir plus sur les demandes JWT, consultez [Demandes de jetons Web JSON](/docs/fr-ca/secure/tokens/json-web-tokens/json-web-token-claims).
 
-</Note>
+</Callout>
 
 * En-tête
 
@@ -42,11 +42,11 @@ Toutes les demandes sont requises sauf si mentionné autrement. Pour en savoir p
   + `sub`**:** L’ID client de votre application. Vous pouvez également trouver cette valeur dans les paramètres de votre application. Vous trouverez cette valeur dans les paramètres de votre application sous [Auth0 Dashboard > Applications > Applications](https://manage.auth0.com/dashboard/#/applications/), onglet **Settings (Paramètres)**.
   + `aud`**:** L’URL du locataire Auth0 ou du domaine personnalisé qui reçoit l’assertion. Par exemple : `https://{yourTenant}.auth0.com/`**.** Inclure la barre oblique finale.
 
-    <Note>
+    <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
     Si vous avez configuré un domaine personnalisé pour votre locataire Auth0, il peut être utilisé en tant que demande `aud`. Nous recommandons dans ce cas d’utiliser le domaine personnalisé.
 
-    </Note>
+    </Callout>
 
   + `iat`  (facultatif) et `exp` : Les affirmations « Issued At » (Émis le) et « Expiration » (expiré) sont définies sur les horodatages corrects. L’assertion client est un jeton à usage unique, et nous recommandons le délai d’expiration le plus court possible. Auth0 prend en charge un maximum de 5 minutes pour la durée de vie d’un jeton.
   + `jti` : Un identifiant de demande unique créé par le client. Nous recommandons d’utiliser le format UUID (Identifiant universellement unique).
@@ -119,11 +119,11 @@ Après avoir généré le jeton JWT avec les informations requises, vous êtes p
 
 ## Échanger une assertion contre des jetons d’accès
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 L’exemple suivant utilise le [Flux Identifiants clients](/docs/fr-ca/get-started/authentication-and-authorization-flow/client-credentials-flow). L’authentification par clé privée JWT peut être utilisée pour les autres types d’autorisation qui autorisent également le remplacement de `client_secret` par `client_assertion`.
 
-</Note>
+</Callout>
 
 Pour échanger l’assertion JWT contre un jeton d’accès, appelez le [point de terminaison](https://auth0.com/docs/api/authentication#authenticate-user) de jeton de l’Authentication API avec les paramètres suivants :
 

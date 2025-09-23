@@ -63,31 +63,31 @@ Les informations suivantes sont nécessaires :
 * **Client ID (Identifiant client)**
 * **Client Secret (Secret client)**
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 En téléchargeant l’exemple en haut de cette page, les détails vous seront automatiquement fournis.
 
-</Note>
+</Callout>
 
 ### Configurer les URL de rappel
 
 Une URL de rappel est une URL dans votre application où Auth0 redirige l’utilisateur après qu’il se soit authentifié. La callbackc URL de votre application doit être ajoutée au champ **URL de rappel autorisées** dansples [Paramètres de l’application](https://manage.auth0.com/#/applications). Si ce champ n’est pas défini, les utilisateurs ne pourront pas se connecter à l’application et obtiendront un message d’erreur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous suivez l’exemple de projet que vous avez téléchargé à partir du haut de cette page, l’URL de rappel que vous devez ajouter au champ **URL de rappel autorisées** est `http://localhost:3000/callback`.
 
-</Note>
+</Callout>
 
 ### Configuration des URL de déconnexion
 
 Une URL de déconnexion est une URL de votre application à laquelle Auth0 peut retourner après la déconnexion de l’utilisateur du serveur d’autorisation. Elle est indiquée dans le paramètre de requête `returnTo`. L’URL de déconnexion de votre application doit être ajoutée au champ **URL de déconnexion autorisées** dans les [paramètres de l’application](https://manage.auth0.com/#/applications). Si ce champ n’est pas défini, les utilisateurs ne pourront pas se déconnecter de l’application et obtiendront un message d’erreur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous suivez l’exemple de projet que vous avez téléchargé à partir du haut de cette page, l’URL de déconnexion que vous devez ajouter au champ **URL de déconnexion autorisées** est `http://localhost:3000/`.
 
-</Note>
+</Callout>
 
 [3
 
@@ -135,11 +135,11 @@ implementation 'com.auth0:mvc-auth-commons:1. '
 
 ### Configurez votre application Java EE
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 L’exemple qui accompagne ce tutoriel est écrit en JSP et testé avec le serveur d’application [WildFly](https://wildfly.org/). Il se peut que vous deviez adapter certaines des étapes si vous travaillez avec un conteneur d’application ou des technologies différents.
 
-</Note>
+</Callout>
 
 Votre application Java EE a besoin de certaines informations pour authentifier les utilisateurs avec votre application Auth0. Le fichier descripteur de déploiement `web.xml`  peut être utilisé pour stocker ces informations, bien que vous puissiez les stocker dans un autre emplacement sécurisé.
 
@@ -254,11 +254,11 @@ Avant d’implémenter l’interface `HttpAuthenticationMechanism` qui utilisera
 * Si votre application Auth0 est configurée pour utiliser l’algorithme de signature **RS256**  (par défaut lors de la création d’une nouvelle application Auth0), vous devez configurer un `JwkProvider` pour récupérer la clé publique utilisée pour vérifier la signature du jeton. Voir le référentiel [jwks-rsa-java](https://github.com/auth0/jwks-rsa-java) pour connaître les options de configuration supplémentaires.
 * Si votre application Auth0 est configurée pour utiliser l’algorithme de signature **HS256**, il n’est pas nécessaire de configurer le `JwkProvider`.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Pour en savoir plus sur les algorithmes de signature disponibles, consultez la [documentation](https://auth0.com/docs/tokens/concepts/signing-algorithms).
 
-</Note>
+</Callout>
 
 L’exemple ci-dessous montre comment configurer le `AuthenticationController` pour l’utiliser avec l’algorithme de signature **RS256** :
 

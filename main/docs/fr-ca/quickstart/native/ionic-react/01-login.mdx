@@ -46,11 +46,11 @@ This quickstart assumes you already have an [Ionic](https://ionicframework.com/)
 
 You should also be familiar with the [Capacitor development workflow](https://capacitorjs.com/docs/basics/workflow).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **New to Auth?** Learn [How Auth0 works](/docs/fr-ca/overview), how it [integrates with Native Applications](/docs/fr-ca/architecture-scenarios/application/mobile-api) and which [protocol](/docs/fr-ca/api-auth/grant/authorization-code-pkce) it uses.
 
-</Note>
+</Callout>
 
 ## Configure Auth0
 
@@ -60,32 +60,32 @@ When you signed up for Auth0, a new application was created for you, or you coul
 
 <Frame>![App Dashboard](https://cdn2.auth0.com/docs/1.14567.0/media/articles/dashboard/client_settings.png)</Frame>
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 When using the Default App with a Native or Single Page Application, ensure to update the **Token Endpoint Authentication Method** to `None` and set the **Application Type** to either `SPA` or `Native`.
 
-</Note>
+</Callout>
 
 You need the following information:
 
 * **Domain**
 * **Client ID**
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 If you download the sample from the top of this page, these details are filled out for you.
 
-</Note>
+</Callout>
 
 ### Configure Callback URLs
 
 A callback URL is a URL in your application where Auth0 redirects the user after they have authenticated. The callback URL for your app must be added to the **Allowed Callback URLs** field in your [Application Settings](https://manage.auth0.com/#/applications). If this field is not set, users will be unable to log in to the application and will get an error.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Throughout this article, `YOUR_PACKAGE_ID` is your application's package ID. This can be found and configured in the `appId` field in your `capacitor.config.ts` file. See [Capacitor's Config schema](https://capacitorjs.com/docs/config#schema) for more info.
 
-</Note>
+</Callout>
 
 Go to the [Application Settings](https://manage.auth0.com/#/applications/{yourClientId}/settings) section in your Auth0 dashboard and set your **Callback URL** in the **Allowed Callback URLs** box.
 
@@ -138,11 +138,11 @@ npm install @capacitor/browser @capacitor/app
 * [`@capacitor/browser`](https://capacitorjs.com/docs/apis/browser) - allows you to interact with the device's system browser and is used to open the URL to Auth0's authorizaction endpoint
 * [`@capacitor/app`](https://capacitorjs.com/docs/apis/app) - allows you to subscribe to high-level app events, useful for handling callbacks from Auth0
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Capacitor's Browser plugin on iOS uses [`SFSafariViewController`](https://developer.apple.com/documentation/safariservices/sfsafariviewcontroller), which on iOS 11+ does not share cookies with Safari on the device. This means that [SSO](https://auth0.com/docs/sso) will not work on those devices. If you need SSO, please instead use a compatible plugin that uses [ASWebAuthenticationSession](https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession).
 
-</Note>
+</Callout>
 
 ### Configure the Auth0Provider component
 
@@ -199,11 +199,11 @@ Now that you have configured `Auth0Provider`, run your application to verify tha
 
 In a Capacitor application, the [Capacitor's Browser plugin](https://capacitorjs.com/docs/apis/browser) performs a redirect to the Auth0 [Universal Login Page](https://auth0.com/universal-login). Set the `openUrl` parameter on the `loginWithRedirect` function to use `Browser.open` so that the URL is opened using the device's system browser component ([SFSafariViewController](https://developer.apple.com/documentation/safariservices/sfsafariviewcontroller) on iOS, and [Chrome Custom Tabs](https://developer.chrome.com/docs/android/custom-tabs) on Android).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 By default, the SDK's `loginWithRedirect` method uses `window.location.href` to navigate to the login page in the default browser application on the user's device rather than the system browser component appropriate for the platform. The user would leave your application to authenticate and could make for a suboptimal user experience.
 
-</Note>
+</Callout>
 
 Add a new file `LoginButton.tsx` with the following code:
 
@@ -239,11 +239,11 @@ This component:
 * uses `loginWithRedirect` to login using Auth0's Universal Login page
 * uses the `openUrl` callback to use Capacitor's Browser plugin to open the URL and show the login page to the user
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 This guide focuses on using the `useAuth0()` custom React Hook. If you are using class components, check out [these samples using the `withAuth0()` higher-order component](https://github.com/auth0/auth0-react/blob/master/EXAMPLES.md#use-with-a-class-component).
 
-</Note>
+</Callout>
 
 ### Handling the callback
 
@@ -284,11 +284,11 @@ const App: React.FC = () => {
 };
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 This article assumes you will be using Custom URL Schemes to handle the callback within your application. To do this, register your `YOUR_PACKAGE_ID` as a URL scheme for your chosen platform. To learn more, read [Defining a Custom URL Scheme](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app) for iOS, or [Create Deep Links to App Content](https://developer.android.com/training/app-links/deep-linking) for Android.
 
-</Note>
+</Callout>
 
 ### Checkpoint
 
@@ -306,11 +306,11 @@ To achieve this with Ionic and Capacitor in conjunction with the Auth0 SDK:
 * Logout from the SDK by calling `logout`, and pass your redirect URL back as the `logoutParams.returnTo` parameter.
 * Set the `openUrl` parameter to a callback that uses the Capacitor browser plugin to open the URL using `Browser.open`.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Similar to the login step, if you do not set `openUrl` when calling `logout`, the SDK redirects the user to the logout URL using the default browser application on the device, which provides a suboptimal user experience.
 
-</Note>
+</Callout>
 
 Create a new file `LogoutButton.tsx` and add the following code to the file. Then, add the `LogoutButton` component to your app.
 

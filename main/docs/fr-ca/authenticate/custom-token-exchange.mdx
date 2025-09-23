@@ -9,11 +9,11 @@ permalink: "custom-token-exchange"
 'twitter:description': "Découvrez les fonctionnalités d’accès anticipé à l’échange de jetons personnalisé."
 ---
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 L’échange de jetons personnalisés est actuellement en accès anticipé. Pour en savoir plus sur les étapes de publication d’Auth0, consultez [Étapes de publication des produits)](/docs/fr-ca/troubleshoot/product-lifecycle/product-release-stages).
 
-</Note>
+</Callout>
 
 Comme défini dans [RFC 8693](https://datatracker.ietf.org/doc/html/rfc8693), l’échange de jetons personnalisé permet aux applications d’échanger leurs jetons existants contre des jetons Auth0 lors de l’appel du point de terminaison `/oauth/token`. Cela est utile pour des cas d’intégration avancés tels que :
 
@@ -27,7 +27,7 @@ Pour gérer l’échange de jetons et l’adapter aux besoins particuliers de vo
 
 Vous pouvez utiliser l’échange de jetons personnalisé pour authentifier les utilisateurs. Par exemple, dans une action, vous pouvez appliquer la logique d’autorisation adaptée à votre cas d’utilisation et définir l’utilisateur pour la transaction. Auth0 émettra alors des jetons d’accès, d’ID et d’actualisation pour l’utilisateur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 L’échange de jeton personnalisé vous permet de désigner l’utilisateur d’une transaction, tout en prenant en charge la validation du jeton correspondant, ce qui identifie l’utilisateur de la transaction.
 
@@ -35,7 +35,7 @@ Sachez que les jetons sujets soumis à l’échange de jetons personnalisé peuv
 
 Pour connaître les différentes options de mise en œuvre de la validation sécurisée de vos jetons sujets, consultez et appliquez les recommandations incluses dans [Exemples de cas d’utilisation et de code](#example-use-cases-and-code-samples). Veillez également à prendre en considération et à appliquer les fonctionnalités de [Protection contre les attaques](#attack-protection).
 
-</Note>
+</Callout>
 
 ## Configuration
 
@@ -59,11 +59,11 @@ Lorsque vous créez une nouvelle application :
 
 3. Assurez-vous que votre application est marquée comme étant de[première partie](/docs/fr-ca/get-started/applications/confidential-and-public-applications/first-party-and-third-party-applications) et qu’elle est configurée comme étant [conforme à l'OIDC dans le tableau de bord > Applications > Paramètres avancés > OAuth](/docs/fr-ca/get-started/applications/application-settings#oauth).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Les bases de données personnalisées ne sont prises en charge que pour les opérations `setUserById`. La prise en charge sera étendue à `setUserByConnection` dans les prochaines itérations de l’accès anticipés de l’échange de jetons personnalisés.
 
-</Note>
+</Callout>
 
 Une fois l’application créée, notez le `client_id` et le `client_secret` pour une utilisation ultérieure lors de l’appel du point de terminaison `/oauth/token`.
 
@@ -203,13 +203,13 @@ Pour d’autres besoins, tels que l’ajout de demandes personnalisées aux jeto
 
 Pour identifier une transaction qui utilise le type d’autorisation d’échange de jetons, recherchez une valeur `event.transaction.protocol` égale à `oauth2-token-exchange` dans votre [Action post-connexion](/docs/fr-ca/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger). Étant donné que le type d’autorisation d’échange de jetons est utilisé à la fois par les transactions d’échange de jetons personnalisé et de connexion native via réseau social, vous pouvez utiliser la valeur de `subject_token_type` pour faire la distinction entre les deux, où `subject_token_type` correspond à l’un de vos profils d’échange de jetons personnalisés.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 L’accès anticipé à l’échange de jeton personnalisé ne prend pas en charge [authentification multifacteur (MFA)](/docs/fr-ca/secure/multi-factor-authentication). L’activation de la MFA en tant que politique de locataire ou en utilisant `api.multifactor.enable()`, `api.authentication.challengeWith(),` ou `api.authentication.enrollWith()` n’est pas encore pris en charge pour l’échange de jeton personnalisé et, dans votre déclencheur d’action post-connexion, entraînera l’échec de la transaction avec une erreur non récupérable. Assurez-vous d’ignorer l’activation de la MFA lorsque `event.transaction.protocol==oauth2-token-exchange` selon la valeur `subject_token_type`.
 
 La prise en charge de laºMFA sera ajoutée dans les prochaines itérations de l’accès anticipé de l’échange de jeton personnalisé.
 
-</Note>
+</Callout>
 
 ### Utiliser Actions API
 
@@ -217,7 +217,7 @@ Auth0 fournit plusieurs méthodes API à utiliser avec votre action d’échang
 
 Chaque transaction d’échange de jetons personnalisé génère un journal des événements de locataire. Les transactions réussies génèrent des journaux d’événements de type `secte`, tandis que les transactions échouées génèrent des journaux d’événements de type `fecte`. Utilisez ces types de journaux pour mieux comprendre les erreurs que vous pourriez rencontrer. Les erreurs provenant du point de terminaison `/oauth/token` révèlent moins de détails.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 L’échange de jeton personnalisé vous permet de désigner l’utilisateur d’une transaction, tout en prenant en charge la validation du jeton correspondant, ce qui identifie l’utilisateur de la transaction.
 
@@ -225,7 +225,7 @@ Sachez que les jetons sujets soumis à l’échange de jetons personnalisé peuv
 
 Pour connaître les différentes options de mise en œuvre de la validation sécurisée de vos jetons sujets, consultez et appliquez les recommandations incluses dans [Exemples de cas d’utilisation et de code](#example-use-cases-and-code-samples). Veillez également à prendre en considération et à appliquer les fonctionnalités de [Protection contre les attaques](#attack-protection).
 
-</Note>
+</Callout>
 
 #### api.authentication.setUserById(user_id)
 
@@ -270,11 +270,11 @@ Définit un utilisateur et ses attributs de profil associés dans une connexion 
 
 Le nombre de connexions sera incrémenté pour chaque utilisateur connecté via `setUserByConnection()`. Cette méthode échoue systématiquement pour les utilisateurs bloqués.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 L’accès anticipé à l’échange de jetons personnalisés prend actuellement en charge les connexions à la base de données Auth0 ainsi que les connexions d’entreprise et de réseaux sociaux. Les futures itérations de l’accès anticipé à l’échange de jetons personnalisés ajouteront la prise en charge des bases de données personnalisées avec le mode d’importation sur `OFF`.
 
-</Note>
+</Callout>
 
 <table class="table"><thead>
 <tr>
@@ -391,13 +391,13 @@ Lors de la création d’utilisateurs :
 
 Un mot de passe aléatoire est généré pour les utilisateurs créés dynamiquement dans les connexions de base de données Auth0. Différentes options permettent de déclencher un [flux de réinitialisation de mot de passe](/docs/fr-ca/authenticate/database-connections/password-change) si nécessaire après la création de l’utilisateur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Configurez `creationBehavior` sur `none` lorsque vous souhaitez connecter l’utilisateur, mais que vous ne souhaitez pas créer l’utilisateur s’il n’existe pas déjà dans la connexion.
 
 Les futures itérations de Custom Token Exchange rendront l’attribut courriel facultatif en fonction de la configuration de la connexion.
 
-</Note>
+</Callout>
 
 ##### Mise à jour de comportement
 
@@ -411,17 +411,17 @@ Les attributs suivants ne peuvent pas être modifiés et Auth0 renvoie une erreu
 * `email_verified`
 * `phone_verified`
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous souhaitez utiliser `setUserByConnection()` pour mettre à jour un profil utilisateur qui contient déjà les attributs `email`, `username` ou `phone_number`, vous devez transmettre ces attributs avec la même valeur que celle qu’ils ont déjà. Dans le cas contraire, la méthode renvoie une erreur.
 
-</Note>
+</Callout>
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Définissez `updateBehavior` sur `none` lorsque vous souhaitez connecter l’utilisateur, sans toutefois vouloir modifier ses attributs de profil s’ils existent déjà.
 
-</Note>
+</Callout>
 
 ##### Vérification de l’adresse de courriel
 
@@ -874,11 +874,11 @@ Pour utiliser l’échange de jetons personnalisé, envoyez une demande `POST` a
 
 Les autres paramètres d’extension sont ignorés, bien qu’ils soient inclus dans `event.request.body` dans l’action correspondante.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Les Organizations ne sont pas encore prises en charge dans Custom Token Exchange EA. L’ajout d’un paramètre organization entraîne le rejet de la demande. La prise en charge des Organizations sera ajoutée dans les prochaines itérations de Custom Token Exchange.
 
-</Note>
+</Callout>
 
 ### Exemple de requête
 
@@ -971,11 +971,11 @@ curl --location --request PATCH 'https://{{YOUR _TENANT}}/api/v2//attack-protect
 
 Vous pouvez utiliser l’échange de jetons personnalisé pour résoudre des scénarios d’intégration avancés où les stratégies de connexion fédérée classiques basées sur la redirection de l’utilisateur final ne peuvent pas être appliquées en raison de contraintes techniques ou d’expérience utilisateur. Le code fourni pour les cas d’utilisation est incomplet et vise uniquement à illustrer les étapes logiques à suivre pour résoudre le cas d’utilisation. Consultez les [exemples de code](#code-samples) pour plus de détails.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Auth0 recommande d’utiliser une connexion fédérée normale et prête à l’emploi dans la mesure du possible. En vous permettant de définir l’utilisateur pour la transaction, Custom Token Exchange vous offre plus de flexibilité en assumant la responsabilité supplémentaire de valider et de gérer la transaction en toute sécurité.
 
-</Note>
+</Callout>
 
 Cette section décrit des exemples de cas d’utilisation et des exemples de code particuliers, accompagnés de recommandations pour la mise en œuvre de votre scénario. Pour illustrer ces cas d’utilisation, nous utiliserons GearUp, une société fictive de location de voitures.
 
@@ -1203,11 +1203,11 @@ Les exemples de code suivants présentent les meilleures pratiques pour les scé
 
 Utilisez des algorithmes et des clés asymétriques autant que possible, car vous n’avez pas besoin de partager de secret avec Auth0. Cela simplifie également la rotation des clés, par exemple lors de l’exposition d’un point de terminaison URI JWKS pour annoncer les clés publiques applicables.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Il est de votre responsabilité de vous assurer que les jetons de sujet sont protégés par un algorithme puissant et des clés/secrets avec suffisamment d’entropie.
 
-</Note>
+</Callout>
 
 #### Valider les JWT signés avec des clés asymétriques
 

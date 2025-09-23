@@ -9,11 +9,11 @@ permalink: "email-templates"
 'twitter:description': "Apprenez à personnaliser vos courriels à l’aide de la syntaxe Liquid Templating."
 ---
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Vous devez configurer une adresse From (De) au niveau du fournisseur ou du modèle pour envoyer des courriels personnalisés. Pour en savoir plus, lisez la section **Configurer une adresse De** dans [Configurer les champs du modèle](#configure-template-fields).
 
-</Note>
+</Callout>
 
 Vous devez configurer votre propre fournisseur de messagerie en utilisant un service tiers (tel que Amazon SES, Mandrill, SendGrid, SparkPost, Mailgun, ou un fournisseur SMTP personnalisé) pour pouvoir personnaliser vos courriels. Pour en savoir plus, lisez [Configurer les fournisseurs SMTP externes](/docs/fr-ca/customize/email/smtp-email-providers).
 
@@ -23,13 +23,13 @@ Vous ne pouvez utiliser qu’un seul modèle pour chaque type de modèle. Auth0 
 
 Vous pouvez personnaliser les champs **Adresse d’origine**, **Objet**et **Corps du message** de chaque modèle de courriel. Vous pouvez utiliser la syntaxe Liquid pour générer dynamiquement du contenu, en accédant à un certain nombre de variables contextuelles qui seront remplacées par les valeurs appropriées lors du rendu des courriels.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Lorsque vous cliquez sur le bouton **Essayer**, Auth0 envoie un courriel pour une application par défaut nommée d’après le nom brut de votre locataire (et non le nom amical). Pour tester les modèles de différentes applications, créez un exemple d’utilisateur et passez en revue les flux pertinents.
 
 Les courriels de vérification peuvent toutefois être déclenchés manuellement pour des applications et des utilisateurs spécifiques à l’aide du point de terminaison [Envoyer un courriel de vérification de l’adresse courriel](https://auth0.com/docs/api/management/v2#!/Jobs/post_verification_email) de Auth0 Management API.
 
-</Note>
+</Callout>
 
 ## Variables communes
 
@@ -59,7 +59,7 @@ Vous pouvez accéder aux variables communes suivantes lorsque vous utilisez la s
   + `support_email`
   + `support_url`
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Les propriétés utilisateur suivantes sont jugées de confiance et doivent être transmises à la fonction Liquid `escape` (`{{ user.name | escape }}`):
 
@@ -71,7 +71,7 @@ Les propriétés utilisateur suivantes sont jugées de confiance et doivent êtr
 
 En outre, toutes les propriétés `user.user_metadata` susceptibles de contenir des informations fournies par l'utilisateur doivent faire l'objet d'un échappement.
 
-</Note>
+</Callout>
 
 Les modèles de courriels suivants peuvent être personnalisés pour les [Organizations](/docs/fr-ca/manage-users/organizations/organizations-overview) :
 

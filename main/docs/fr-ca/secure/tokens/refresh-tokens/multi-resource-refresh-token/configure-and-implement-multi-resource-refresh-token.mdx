@@ -42,11 +42,11 @@ You can define MRRT policies in the `refresh_token.policies` property of the app
 </tbody>
 </table>
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 The audience and scope properties must correspond to an existing application in your tenant, otherwise the refresh token exchange will silently ignore them.
 
-</Note>
+</Callout>
 
 For existing applications, make a PATCH call to the [Update a Client](/docs/fr-ca/api/management/v2/clients/patch-clients-by-id) endpoint. To create a new application, make a POST call to the [Create a Client](/docs/fr-ca/api/management/v2/clients/post-clients) endpoint:
 
@@ -302,7 +302,7 @@ To facilitate this, your application needs to initiate a login flow using either
 
 To receive a refresh token, include the `offline_access` scope when initiating the authentication request. To learn more, read [Get Refresh Tokens](/docs/fr-ca/secure/tokens/refresh-tokens/get-refresh-tokens).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 If you do not receive a refresh token, confirm that:
 
@@ -310,7 +310,7 @@ If you do not receive a refresh token, confirm that:
 * `offline_access` is included in the scope.
 * The `audience` used in the request matches a configured API in your tenant.
 
-</Note>
+</Callout>
 
 ### Step 2: Exchange the refresh token for a different API
 
@@ -530,14 +530,14 @@ To learn more, read [Auth0 Android SDK](https://github.com/auth0/Auth0.Android/b
 
 Use the access token to call the secured API using the [Bearer HTTP authorization scheme](https://datatracker.ietf.org/doc/html/rfc6750). To learn more, read [Use Access Tokens](/docs/fr-ca/secure/tokens/access-tokens/use-access-tokens).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 You can decode the access token on [jwt.io](https://jwt.io) to verify:
 
 * The `aud` claim matches the requested API. (for example: https://billing.example.com).
 * The `scope` claim includes only permitted values.
 
-</Note>
+</Callout>
 
 ## Use Multi-resource refresh token with Actions
 

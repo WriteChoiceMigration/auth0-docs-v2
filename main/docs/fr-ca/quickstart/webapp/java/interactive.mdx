@@ -57,21 +57,21 @@ Si vous préférez explorer une configuration complète, consultez plutôt un ex
 
 Une URL de rappel est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur authentification. Si elle n’est pas définie, les utilisateurs ne seront pas redirigés vers votre application après s’être connectés.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000``/callback`.
 
-</Note>
+</Callout>
 
 ### Configuration des URL de déconnexion
 
 Une URL de déconnexion est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur déconnexion. Si elle n’est pas définie, les utilisateurs ne pourront pas se déconnecter de votre application et recevront un message d’erreur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000/logout`.
 
-</Note>
+</Callout>
 
 [2
 
@@ -166,11 +166,11 @@ Le projet contient également quatre servlets :
 
 Pour permettre aux utilisateurs de s’authentifier, créez une instance de l’`AuthenticationController` fournie par la trousse SDK `auth0-java-mvc-commons` en utilisant le `domain`, `clientId`, et `clientSecret`. L’exemple présente comment configurer le composant pour l’utiliser avec des jetons signés à l’aide de l’algorithme de signature asymétrique RS256, en précisant un `JwkProvider` pour récupérer la clé publique utilisée pour vérifier la signature du jeton. Consultez le [référentiel jwks-rsa-java](https://github.com/auth0/jwks-rsa-java) pour en savoir plus sur les options de configuration supplémentaires. Si vous utilisez HS256, il n’est pas nécessaire de configurer `JwkProvider`.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 `AuthenticationController` ne stocke aucun contexte et est destiné à être réutilisé. Une création inutile peut entraîner la génération de ressources supplémentaires, ce qui peut avoir une incidence sur les performances.
 
-</Note>
+</Callout>
 
 [5
 
@@ -186,11 +186,11 @@ Après que l’utilisateur s’est connecté, le résultat sera reçu dans notre
 
 La requête contient le contexte d’appel que la bibliothèque a précédemment défini en générant l’URL d’autorisation avec `AuthenticationController`. Lorsqu’il est passé au contrôleur, vous recevez soit une instance `Tokens` valide soit une Exception indiquant ce qui a mal tourné. En cas d’appel réussi, vous devez enregistrer les identifiants afin de pouvoir y accéder ultérieurement. Vous pouvez utiliser `HttpSession` de la requête en utilisant la classe `SessionsUtils` comprise dans la bibliothèque.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Il est recommandé d’enregistrer le moment où nous avons demandé les jetons ainsi que la valeur `expiresIn` reçue, afin que la prochaine fois que nous utiliserons le jeton, nous puissions vérifier s’il a déjà expiré ou s’il est encore valide. Pour les besoins de cet exemple, nous ignorerons cette validation.
 
-</Note>
+</Callout>
 
 [7
 

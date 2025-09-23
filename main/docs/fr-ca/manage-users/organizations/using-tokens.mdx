@@ -28,11 +28,11 @@ Pour en savoir plus sur les demandes, consultez [Demandes de jetons Web JSON](/
 
 Pour authentifier un utilisateur par l’intermédiaire d’une organization, un paramètre `organization` est ajouté à un appel au point de terminaison `/authorize`. Des exemples de jetons renvoyés lorsqu’un utilisateur se connecte par l’intermédiaire d’une organization sont présentés ci-dessous.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Par défaut, les jetons d’accessibilité et d’ID n’incluent que des ID d’organisation. Cependant, vous pouvez configurer votre locataire pour permettre l’utilisation de noms d’organisation dans la Authentication API. Lorsqu’ils sont configurés, les jetons d’accès et d’ID contiennent tous deux les demandes `org_id` et `org_name`. Pour en savoir plus, consultez [Utiliser des noms d’organisation dans la Authentication API](/docs/fr-ca/manage-users/organizations/configure-organizations/use-org-name-authentication-api).
 
-</Note>
+</Callout>
 
 ### Jeton d’ID
 
@@ -82,11 +82,11 @@ Dans l’exemple suivant, notez que `https://marketplace/roles` et `https://name
 
 Dans les cas de communication entre machines, un paramètre `organization` est ajouté à la demande Client Credentials au point de terminaison `/oauth/token` afin qu’une application puisse obtenir un jeton d’accès pour elle-même plutôt que pour un utilisateur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Par défaut, les jetons d’accessibilité et d’ID n’incluent que des ID d’organisation. Cependant, vous pouvez configurer votre locataire pour permettre l’utilisation de noms d’organisation dans la Authentication API. Lorsqu’ils sont configurés, les jetons d’accès et d’ID contiennent tous deux les demandes `org_id` et `org_name`. Pour en savoir plus, consultez [Utiliser les noms d’Organisation dans Authentication API](/docs/fr-ca/manage-users/organizations/configure-organizations/use-org-name-authentication-api).
 
-</Note>
+</Callout>
 
 L’exemple de code suivant est un exemple de jeton d’accès renvoyé dans les cas d’une communication entre machines.
 
@@ -109,13 +109,13 @@ L’exemple de code suivant est un exemple de jeton d’accès renvoyé dans les
 
 Lorsque le paramètre `organization` est ajouté à un appel au point de terminaison `/authorize` ou au point de terminaison `/oauth/token`, les trousses SDK Auth0 valident automatiquement la demande `org_id`, qui est renvoyée dans le cadre de tout jeton généré. Toutefois, à des fins de sécurité, une validation supplémentaire doit être effectuée lors de la réception des jetons.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous avez configuré votre locataire pour permettre l’utilisation de noms d’organisation dans la Authentication API, les jetons d’accès et d’ID contiennent tous les deux les demandes `org_id` et `org_name`. S’il existe, validez la demande `org_name` et `org_id` pour vous assurer que les valeurs reçues correspondent à une entité de confiance.
 
 En général, utiliser des ID d’organisation est une méthode préférable pour la validation des jetons. Cependant, les noms d’organisation peuvent être utilisés s’ils sont plus appropriés pour le cas d’utilisation. Pour comprendre les implications potentielles d’utiliser des noms d’organisation pour valider des jetons, consultez [Utiliser des noms d’organisation dans la Authentication API](/docs/fr-ca/manage-users/organizations/configure-organizations/use-org-name-authentication-api).
 
-</Note>
+</Callout>
 
 **Pour les applications web :**
 

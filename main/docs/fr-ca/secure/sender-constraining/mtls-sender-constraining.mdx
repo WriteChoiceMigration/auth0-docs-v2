@@ -9,11 +9,11 @@ permalink: "mtls-sender-constraining"
 'twitter:description': "Learn how to sender constrain tokens using mTLS in Auth0."
 ---
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Pour utiliser les fonctionnalités de l’identité très réglementée (HRI), vous devez disposer d’un plan Enterprise avec le module complémentaire Identité très réglementée. Consultez [Tarification Auth0](https://auth0.com/pricing/) pour plus de détails.
 
-</Note>
+</Callout>
 
 [Sender constraining](/docs/fr-ca/secure/sender-constraining) is an <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OAuth 2.0</Tooltip> security mechanism that cryptographically binds access and <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">refresh tokens</Tooltip> to the client application that requested them. This ensures that only the legitimate client that obtained the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">access token</Tooltip> can use it to access protected resources, providing a strong defense against token theft and replay attacks.
 
@@ -85,11 +85,11 @@ In the mTLS certificate-bound access token example, `x5t#S256` indicates that th
 Authorization: DPoP {your_mtls_bound_access_token}
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 While RFC 8705 allows for a Bearer scheme with mTLS-bound tokens, Auth0 recommends using DPoP to enforce mTLS-bound access tokens. This explicitly signals to the resource server to expect a cryptographically bound token.
 
-</Note>
+</Callout>
 
 ### Step 5: Resource server verifies token and certificate
 

@@ -62,13 +62,13 @@ Consultez un exemple d’application si vous préférez explorer une configurati
 
 Auth0 fait appel aux Callback URL et aux URL de déconnexion pour rediriger les utilisateurs vers votre application. Auth0 fait appel à une URL de rappel après avoir authentifié l’utilisateur et à une URL de déconnexion après avoir supprimé le témoin de session. Si vous ne définissez pas les Callback URL et les URL de déconnexion, les utilisateurs ne pourront pas se connecter et se déconnecter de l’application, et votre application produira une erreur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Sur iOS 17.4+ et macOS 14.4+, il est possible d’utiliser des liens universels comme callback URL et URL de déconnexion. Lorsqu’activé, Auth0.swift reviendra à l’utilisation d’un schéma d’URL personnalisé sur les anciennes versions iOS/MacOS.
 
 **Cette fonctionnalité nécessite un Xcode 15.3+ et un compte Apple Developer payant.**
 
-</Note>
+</Callout>
 
 Ajoutez les URL suivantes aux **URL de rappel** et **URL de déconnexion**, selon la plateforme de votre app. Si vous avez un domaine personnalisé, utilisez-le à la place du domaine de votre locataire Auth0.
 
@@ -123,11 +123,11 @@ webcredentials:labs-fundtraining.us.auth0.com
 
 Si vous avez un domaine personnalisé, utilisez-le à la place du domaine de votre locataire Auth0.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Pour que le domaine associé fonctionne, votre application doit être signée avec votre certificat d’équipe **même lors de la construction du simulateur iOS**. Assurez-vous d’utiliser l’équipe Apple dont l’ID d’équipe est configuré dans la page des paramètres de votre application Auth0.
 
-</Note>
+</Callout>
 
 [2
 
@@ -147,11 +147,11 @@ https://github.com/auth0/Auth0.swift
 
 Ensuite, sélectionnez la règle de dépendance et appuyez sur **Add Package (Ajouter le package)**.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Pour plus d’informations sur SPM consultez la  [documentation officielle](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app).
 
-</Note>
+</Callout>
 
 ### Utilisation de Cocoapods
 
@@ -163,11 +163,11 @@ pod 'Auth0', '~> 2.0'
 
 Ensuite, exécutez `pod install`.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Pour plus d’informations sur CocoaPods, consultez la [documentation officielle](https://guides.cocoapods.org/using/getting-started.html).
 
-</Note>
+</Callout>
 
 ### Utilisation de Carthage
 
@@ -179,11 +179,11 @@ github "auth0/Auth0.swift" ~> 2.0
 
 Ensuite, exécutez `carthage bootstrap --use-xcframeworks`.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Pour en savoir plus sur Carthage, consultez la [documentation officielle](https://github.com/Carthage/Carthage#getting-started).
 
-</Note>
+</Callout>
 
 [3
 
@@ -196,11 +196,11 @@ La trousse SDK Auth0.swift a besoin de votre **domain (domaine)** Auth0 et de v
 
 Créez un fichier `plist` nommé `Auth0.plist` dans votre ensemble d’application contenant les valeurs du domaine Auth0 et de l’identifiant client.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Vous pouvez également configurer la trousse SDK de manière programmatique. Consultez [README](https://github.com/auth0/Auth0.swift#configure-client-id-and-domain-programmatically) pour en savoir plus.
 
-</Note>
+</Callout>
 
 ##### checkpoint.header
 
@@ -214,11 +214,11 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 Importez le module `Auth0` dans le fichier où vous souhaitez présenter la page de connexion. Ensuite, présentez la page Universal Login (Connexion universelle) dans l’action de votre bouton **Login (Connexion)**.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Vous pouvez utiliser async/await ou Combine au lieu de l’API basée sur les rappels. Consultez [README](https://github.com/auth0/Auth0.swift#web-auth-login-ios--macos) pour en savoir plus.
 
-</Note>
+</Callout>
 
 <Frame>![Un exemple d’écran de connexion universelle pour une application iOS.](/images/fr-ca/cdy7uua7fh8z/3ZRDXpjlUXEcQpXq6Q00L1/f3a4616c28881bbb5a3711fcbbf1f7b1/Staff0_Login_screen_-_French.png)</Frame>
 
@@ -257,11 +257,11 @@ L’instance `Credentials` que vous avez obtenue après vous être connecté inc
 
 La trousse SDK Auth0.swift inclut un [utilitaire](https://github.com/auth0/JWTDecode.swift) pour décoder les [JWT](https://jwt.io/), comme le jeton d’ID. Commencez par importer le module `JWTDecode` dans le fichier où vous souhaitez accéder aux informations du profil utilisateur. Ensuite, utilisez la méthode `decode(jwt:)` pour décoder le jeton d’ID et accéder aux demandes qu’il contient.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Vous pouvez récupérer les dernières informations utilisateur avec la méthode `userInfo(withAccessToken:)`. Consultez les [EXAMPLES (EXEMPLES)](https://github.com/auth0/Auth0.swift/blob/master/EXAMPLES.md#retrieve-user-information) pour en savoir plus.
 
-</Note>
+</Callout>
 
 ##### checkpoint.header
 

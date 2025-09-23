@@ -29,11 +29,11 @@ Pour en savoir plus sur ces objets, consultez :
 
 La méthode post-connexion **api.refreshToken.revoke(reason)** vous permet de réagir aux risques associés à une transaction. Révoquer le jeton d’actualisation invalide celui-ci, renvoie un code d’état HTTP 403 pour refuser la transaction en cours et enregistre un événement révoqué de jeton d’actualisation dans les [journaux du client](/docs/fr-ca/deploy-monitor/logs/log-event-type-codes) (`srrt`).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous souhaitez utiliser la méthode `api.refreshToken.revoke(reason)`, assurez-vous que l’objet event.refresh_token existe.
 
-</Note>
+</Callout>
 
 ### Surveiller les événements de révocation du journal
 
@@ -58,7 +58,7 @@ Vous pouvez utiliser ces méthodes pour personnaliser dynamiquement les stratég
 * L’évaluation des risques
 * Tout autre critère dynamique disponible lors de l’exécution de l’Action
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 `api.refreshToken.setExpiresAt(absolute)` et `api.refreshToken.setIdleExpiresAt(idle)` permettent de définir l’expiration d’un jeton d’actualisation, avant son émission, ou de modifier l’expiration d’un jeton d’actualisation existant au cours d’un flux [échange de jetons d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens/use-refresh-tokens).
 
@@ -66,7 +66,7 @@ Vous pouvez utiliser ces méthodes pour personnaliser dynamiquement les stratég
 
 `api.refreshToken.setIdleExpiresAt(idle)` définit le délai d’inactivité pour les jetons d’actualisation. Si la méthode n’est pas appelée dans tous les échanges réussis, le délai d’inactivité sera écrasé à l’aide des paramètres de l’application de durée de vie du jeton d’actualisation.
 
-</Note>
+</Callout>
 
 ## Limites
 

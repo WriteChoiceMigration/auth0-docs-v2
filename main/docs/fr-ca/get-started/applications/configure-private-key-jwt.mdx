@@ -9,11 +9,11 @@ permalink: "configure-private-key-jwt"
 'twitter:description': "Décrit comment configurer les applications nouvelles et existantes pour utiliser l’authentification par clé privée JWT."
 ---
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 La Clé privée JWT est disponible pour les clients du plan Enterprise. Pour mettre votre plan à niveau, contactez le service [Tarification Auth0](https://auth0.com/pricing/).
 
-</Note>
+</Callout>
 
 L’authentification par clé privée <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JWT</Tooltip> prend en charge l’authentification client [OIDC Connect Core Client Authentication 1.0](https://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication) en utilisant des assertions signées par des paires de clés asymétriques. Vous pouvez créer une nouvelle application pour qu’elle utilise `private_key_jwt` ou permettre aux applications existantes d’utiliser des paires de clés privées pour l’authentification.
 
@@ -158,7 +158,7 @@ curl --location --request POST 'https://{domain}/api/v2/clients' \
 </tbody>
 </table>
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 La clé publique PEM devrait être échappée par JSON avant d’être transmise à Auth0. Dans notre exemple, voici le contenu que nous devrions transmettre :
 
@@ -172,17 +172,17 @@ IF+t0HbO1E387fvLcuSyai1yWbSr1PXyiB2aXyDpbD4u7d3ux4ahU2opH11lBqvx
 +wIDAQAB
 -----END PUBLIC KEY-----`
 
-</Note>
+</Callout>
 
 La réponse contient la propriété `client_id`, qui liera votre application au serveur de ressources. La réponse contient également un `kid` généré pour l’identifiant que vous avez créé. Celui-ci sera utilisé plus tard pour générer la valeur `client_assertion`.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Auth0 utilise la norme [Schéma de clé Web JSON](https://datatracker.ietf.org/doc/html/rfc7638) pour générer l’enfant de vos identifiants.
 
 L’enfant consiste en un ensemble SHA256 codé en base64URL de la représentation JWK de votre clé publique.
 
-</Note>
+</Callout>
 
 #### Configurer une application existante
 
@@ -251,7 +251,7 @@ curl --location --request POST 'https://{domain}/api/v2/clients/{clientId}/crede
 </tbody>
 </table>
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 La clé publique PEM doit être décodée en JSON avant d’être transmise à Auth0. Dans cet exemple, le contenu à inclure est le suivant :
 
@@ -267,7 +267,7 @@ IF+t0HbO1E387fvLcuSyai1yWbSr1PXyiB2aXyDpbD4u7d3ux4ahU2opH11lBqvx
 -----END PUBLIC KEY-----
 ```
 
-</Note>
+</Callout>
 
 Un identifiant est retourné dans la réponse. Utilisez l’identifiant pour l’étape suivante.
 

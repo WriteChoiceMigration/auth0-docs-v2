@@ -13,11 +13,11 @@ Le [protocole OpenID Connect](/docs/fr-ca/authenticate/protocols/openid-connect-
 
 L’utilisation du [flux implicite](/docs/fr-ca/get-started/authentication-and-authorization-flow/implicit-flow-with-form-post) dans les applications Web monopages soulève des problèmes de sécurité qui doivent être résolus par des mesures correctives explicites. Vous pouvez utiliser le [Flux de code d’autorisation avec PKCE](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce) en conjonction avec l’authentification silencieuse pour renouveler les sessions dans les applications Web monopages.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Les progrès récents en matière de contrôle de la vie privée dans les navigateurs ont un impact négatif sur l’expérience de l’utilisateur en empêchant l’accès aux témoins tiers; par conséquent, les flux basés sur les navigateurs doivent utiliser la [Rotation des jetons d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens/refresh-token-rotation), qui offre une méthode sécurisée pour utiliser les jetons d’actualisation dans les SPA, tout en fournissant un accès intégré aux ressources sans interruption dans l’expérience utilisateur causée par les technologies de confidentialité comme ITP.
 
-</Note>
+</Callout>
 
 ## Lancer des demandes d’authentification silencieuse
 
@@ -40,11 +40,11 @@ GET https://{yourDomain}/authorize
 
 Le paramètre `prompt=none` oblige Auth0 à envoyer immédiatement un résultat à la `redirection_uri` (URL de rappel) indiquée, en utilisant le `response_mode` indiqué, avec l’une des deux réponses possibles : réussite ou erreur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Toutes les [règles](/docs/fr-ca/customize/rules) applicables seront exécutées dans le cadre du processus d’authentification silencieuse.
 
-</Note>
+</Callout>
 
 ### Réponses d’authentification réussie
 
@@ -103,11 +103,11 @@ Si l’une de ces erreurs est renvoyée, l’utilisateur doit être redirigé ve
 
 Vous pouvez effectuer une demande d’authentification silencieuse pour obtenir de nouveaux jetons tant que l’utilisateur dispose toujours d’une session valide sur Auth0. La méthode [`checkSession`](/docs/fr-ca/libraries/auth0js)[de auth0.js](/docs/fr-ca/libraries/auth0js) utilise une requête de jeton silencieuse en combinaison avec `response_mode=web_message` pour les application Web monopages afin que la requête se produise dans un iframe caché. Avec les application Web monopages, Auth0.js gère le traitement des résultats (soit le jeton, soit le code d’erreur) et transmet les informations à l’aide d’une fonction de rappel fournie par l’application. Cela n’entraîne aucune perturbation de l’expérience utilisateur (pas d’actualisation de page ni de perte d’état).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Consultez [Renouvellement des jetons avec Safari](/docs/fr-ca/troubleshoot/authentication-issues/renew-tokens-when-using-safari) pour d’autres limitations importantes et des solutions de contournement avec le navigateur Safari.
 
-</Note>
+</Callout>
 
 ### Expiration du jeton d’accès
 

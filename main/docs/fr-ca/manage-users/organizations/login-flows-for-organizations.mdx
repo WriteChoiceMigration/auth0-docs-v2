@@ -35,11 +35,11 @@ Après avoir sélectionné **Business Users (Utilisateurs professionnels)** ou *
 
 La plupart des organizations devraient choisir **Prompt for Credentials (Inviter à fournir des identifiants)**, puis activer l’[Authentification Identifier First](/docs/fr-ca/authenticate/login/auth0-universal-login/identifier-first). Si vous connaissez déjà l’organization avec laquelle un utilisateur tente de se connecter, l’option **No Prompt (Aucune invite)** et [Développement personnalisé avec les Organizations](/docs/fr-ca/manage-users/organizations/custom-development) permettent à votre application de conserver un flux de connexion personnalisé et associé à une marque. Les administrateurs peuvent encore améliorer l’expérience de l’utilisateur final en activant l’option **Prompt for Organization (Invite concernant l’organization)**, qui demande aux utilisateurs d’identifier l’organization à laquelle ils se connectent.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **Remarque** : Même si vous sélectionnez Invite d’identifiants, vous pouvez tout de même demander aux utilisateurs de [se connecter avec l’invite de connexion d’une organisation spécifique](/docs/fr-ca/manage-users/organizations/custom-development#i-want-users-to-log-in-to-a-specified-organization), le cas échéant.
 
-</Note>
+</Callout>
 
 Vous pouvez configurer le flux de connexion pour votre application via Auth0 Dashboard (tel que décrit ci-dessus) ou Management API. Plus précisément, utilisez le paramètre `organization_require_behavior` du point de terminaison [Mettre à jour un client](/docs/fr-ca/api/management/v2/clients/patch-clients-by-id) pour définir le flux approprié. Pour plus d’informations sur les deux méthodes, consultez [Définir le comportement de l’organization](/docs/fr-ca/manage-users/organizations/configure-organizations/define-organization-behavior).
 
@@ -53,11 +53,11 @@ Dans ce flux, une seule [connexion par base de données](/docs/fr-ca/authenticat
 
 Après qu’un utilisateur a fourni une adresse courriel, Auth0 la compare aux connexions d’entreprise activées pour cette application  **et**  à toutes les connexions d’entreprise activées pour les organizations. Si une correspondance est trouvée, l’utilisateur est invité à s’authentifier auprès de l’IdP associé. Si aucune correspondance n’est trouvée, un champ de mot de passe s’affiche.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Il existe des cas d’utilisation (par exemple avec plusieurs configurations de bases de données assignées à différentes organisations) pour lesquels Auth0 ne peut déterminer quel IdP ou courriel utilisateur est associé. Dans ces cas, sélectionnez Prompt for Organization (Invite pour organisation) comme invite d’invitation de connexion, ou envoyez le paramètre `organization` à Auth0.
 
-</Note>
+</Callout>
 
 Vous pouvez utiliser <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip> pour configurer Identifier First. Plus précisément, utilisez le paramètre `identifier_first` du point de terminaison [Update prompts settings (Mise à jour des paramètres des invites)](/docs/fr-ca/api/management/v2/prompts/patch-prompts).
 

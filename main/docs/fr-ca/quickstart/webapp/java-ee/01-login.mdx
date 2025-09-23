@@ -41,11 +41,11 @@ Log In & Download Sample[View on Github](https://github.com/auth0-samples/auth0-
 
 System requirements: Java 11
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **New to Auth?** Learn [How Auth0 works](/docs/fr-ca/overview), how it [integrates with Regular Web Applications](/docs/fr-ca/architecture-scenarios/web-app-sso) and which [protocol](/docs/fr-ca/flows) it uses.
 
-</Note>
+</Callout>
 
 ## Configure Auth0
 
@@ -61,31 +61,31 @@ You need the following information:
 * **Client ID**
 * **Client Secret**
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 If you download the sample from the top of this page, these details are filled out for you.
 
-</Note>
+</Callout>
 
 ### Configure Callback URLs
 
 A callback URL is a URL in your application where Auth0 redirects the user after they have authenticated. The callback URL for your app must be added to the **Allowed Callback URLs** field in your [Application Settings](https://manage.auth0.com/#/applications). If this field is not set, users will be unable to log in to the application and will get an error.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 If you are following along with the sample project you downloaded from the top of this page, the callback URL you need to add to the **Allowed Callback URLs** field is `http://localhost:3000/callback`.
 
-</Note>
+</Callout>
 
 ### Configure Logout URLs
 
 A logout URL is a URL in your application that Auth0 can return to after the user has been logged out of the authorization server. This is specified in the `returnTo` query parameter. The logout URL for your app must be added to the **Allowed Logout URLs** field in your [Application Settings](https://manage.auth0.com/#/applications). If this field is not set, users will be unable to log out from the application and will get an error.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 If you are following along with the sample project you downloaded from the top of this page, the logout URL you need to add to the **Allowed Logout URLs** field is `http://localhost:3000/`.
 
-</Note>
+</Callout>
 
 ## Configure Java EE to use Auth0
 
@@ -133,11 +133,11 @@ implementation 'com.auth0:mvc-auth-commons:1.+'
 
 ### Configure your Java EE application
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 The sample that accompanies this tutorial is written using JSP and tested with the [WildFly](https://wildfly.org/) application server. You may need to adjust some of the steps if you working with a different application container or technologies.
 
-</Note>
+</Callout>
 
 Your Java EE application needs some information in order to authenticate users with your Auth0 application. The deployment descriptor `web.xml` file can be used to store this information, though you could store them in a different secured location. The required information is:
 
@@ -298,11 +298,11 @@ Before implementing the `HttpAuthenticationMechanism` interface that will use al
 * If your Auth0 Application is configured to use the **RS256 signing algorithm** (the default when creating a new Auth0 Application), you need to configure a `JwkProvider` to fetch the public key used to verify the token's signature. See the [jwks-rsa-java repository](https://github.com/auth0/jwks-rsa-java) to learn about additional configuration options.
 * If your Auth0 Application is configured to use the **HS256 signing algorithm**, there is no need to configure the `JwkProvider`.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 To learn more about the available signing algorithms, refer to the [documentation](https://auth0.com/docs/tokens/concepts/signing-algorithms).
 
-</Note>
+</Callout>
 
 The sample below shows how to configure the `AuthenticationController` for use with the **RS256 signing algorithm**:
 

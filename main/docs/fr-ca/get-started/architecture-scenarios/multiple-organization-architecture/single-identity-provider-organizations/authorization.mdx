@@ -13,7 +13,7 @@ Pour ce qui est de l’autorisation, vous devez généralement réfléchir à la
 
 * Les [jetons d’ID](/docs/fr-ca/secure/tokens/id-tokens) sont souvent utilisés pour transmettre des informations sur l’autorisation de l’utilisateur aux applications par le biais de demandes personnalisées, qui peuvent être ajoutées grâce à l’extensibilité des [Règles](/docs/fr-ca/customize/rules). Les demandes ajoutées vous permettent de présenter une interface utilisateur dans laquelle les utilisateurs n’ont pas la possibilité de tenter une action non autorisée. Les informations d’autorisation contenues dans un jeton d’ID fournissent également à toute application dorsale un moyen d’empêcher les utilisateurs de contourner les contrôles du côté client pour les applications web traditionnelles.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **Meilleure pratique**
 
@@ -21,18 +21,18 @@ Vous pouvez tirer parti du [contrôle d’accès basé sur les rôles (RBAC) Aut
 
 La fonctionnalité RBAC d’Auth0 peut également fournir des informations que vous pouvez ajouter en tant que demandes personnalisées aux jetons d’ID (et aux jetons d’accès, si vous préférez une application manuelle). Les organisations Auth0 peuvent exploiter la fonctionnalité RBAC d’Auth0 via un ou plusieurs rôles attribués aux membres. Pour en savoir plus, consultez [Ajout de rôles aux membres d’une organisation](/docs/fr-ca/manage-users/organizations/configure-organizations/add-member-roles).
 
-</Note>
+</Callout>
 
 * Les API qui fournissent un accès public à des services de ressources partagées sont généralement protégées par des mécanismes de contrôle d’accès. À cette fin, Auth0 permet de créer un jeton porteur d’autorisation, ou [jeton d’accès](/docs/fr-ca/manage-users/organizations/configure-organizations/add-member-roles) <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OAuth</Tooltip> 2, qui peut transmettre des informations sur l’autorisation de l’utilisateur à une API, généralement en utilisant le [contrôle d’accès basé sur les rôles (RBAC)](/docs/fr-ca/manage-users/access-control/configure-core-rbac) pour appliquer [un ou plusieurs rôles attribués en fonction de l’appartenance](/docs/fr-ca/secure/tokens/access-tokens) ou en ajoutant des demandes personnalisées via l’extensibilité des [Règles](/docs/fr-ca/customize/rules). Vous pouvez également exploiter la capacité RBAC d’Auth0 pour ajuster automatiquement la demande de `permission` d’un jeton d’accès. Les API peuvent alors utiliser ces informations pour appliquer le niveau approprié de contrôle d’accès, ce qui permet à votre API d’appliquer les règles de stratégie sans avoir à effectuer une recherche supplémentaire pour obtenir des informations sur l’utilisateur.
 * Dans certains cas, vous pouvez implémenter des stratégies au niveau de l’application dans le locataire Auth0, ce qui vous permet d’appliquer des stratégies à toute une série d’applications et de services de ressources (API) sans avoir à modifier chacun d’entre eux de manière indépendante. Vous mettez généralement cela en œuvre par le biais de l’extensibilité des [Règles](/docs/fr-ca/customize/rules).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **Meilleure pratique**
 
 Auth0 Organizations fournit des règles d'Auth0 avec accès à des informations centrées sur l’organisation qui peuvent être consultées lors de l’authentification d’un utilisateur. Ces informations sont disponibles via l’objet `organization` contenu dans l’objet contextuel `Rules` (règles). L’objet `organization` permet également d’accéder à toutes les métadonnées fournies pour une définition Organization dans Auth0. Pour en savoir plus, consultez [Développement personnalisé pour les organisations](/docs/fr-ca/manage-users/organizations/custom-development).
 
-</Note>
+</Callout>
 
 ## Demandes relatives aux jetons d’ID
 
@@ -107,11 +107,11 @@ Vous pouvez également créer une <Tooltip data-tooltip-id="react-containers-Def
 
 La fonction Auth0 Organizations prend également en charge le [Contrôle d’accès basé sur les rôles (RBAC)](/docs/fr-ca/manage-users/access-control/rbac) par l’intermédiaire de la fonction [Authorization Core](/docs/fr-ca/manage-users/access-control/configure-core-rbac) associée à un locataire Auth0. Le contrôle d’accès basé sur les rôles est [appliqué au niveau Auth0 Organization](/docs/fr-ca/manage-users/organizations/configure-organizations/add-member-roles).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Vous pouvez [activer Auth0 Authorization Core RBAC pour une API](/docs/fr-ca/get-started/apis/enable-role-based-access-control-for-apis), ce qui entraînera l’activation de la demande de `permission` par défaut dans des jetons d’accès en cours de modification automatique et l’ajout d’une demande `d’autorisation` par défaut (pour obtenir un exemple, consultez [Travailler avec des jetons et Organizations](/docs/fr-ca/manage-users/organizations/using-tokens)). Vous pouvez également ajouter des informations sur les rôles aux jetons d’ID en tant que demandes personnalisées en accédant à l’objet `d’autorisation` disponible dans l’objet `context` des règles. Pour en savoir plus, consultez [Règles avec autorisation - Exemples de cas d’utilisation : Ajouter des rôles d’utilisateur aux jetons](/docs/fr-ca/manage-users/access-control/sample-use-cases-rules-with-authorization).
 
-</Note>
+</Callout>
 
 ## Contrôle d’accès
 

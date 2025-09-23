@@ -9,11 +9,11 @@ permalink: "native-passkeys-for-mobile-applications"
 'twitter:description': "Découvrez comment implémenter des flux de clés d’identification natives pour les applications Android et iOS"
 ---
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Clés d’identification natives est actuellement proposé en accès anticipé limité. Pour en savoir plus sur les étapes de diffusion d’Auth0, consultez [Étapes de la diffusion du produit](/docs/fr-ca/troubleshoot/product-lifecycle/product-release-stages).
 
-</Note>
+</Callout>
 
 Les clés d’identification sont une forme d’authentification résistante à l’hameçonnage et peuvent remplacer les formes traditionnelles d’authentification (telles que le nom d’utilisateur et le mot de passe); de plus, elles offrent à l’utilisateur une expérience plus facile et mieux sécurisée. Elles sont modélisées à partir des [spécifications](https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html#intro)) FIDO® W3C Web Authentication (WebAuthn) et du protocole client-authentificateur (CTAP).
 
@@ -86,9 +86,10 @@ Si l’utilisateur fournit un identifiant qui existe déjà, il est recommandé 
 1. Un utilisateur visite votre application et choisit d’enregistrer un nouveau compte. L’utilisateur fournit un identifiant demandé par votre application, tel que son adresse courriel.
 2. Votre application lance ensuite le défi-réponse d’inscription en appelant le point de terminaison [Demander un défi-réponse d’inscription](/docs/fr-ca/native-passkeys-api#request-signup-challenge) d’Auth0 Authentication API :
 
-   <Note>
+   <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
    * Si vous ne spécifiez pas de `realm`, le répertoire par défaut de votre locataire est utilisé.
-   * Par défaut, le courriel est l’identifiant requis. Si vous avez activé [Identifiants flexibles](/docs/fr-ca/authenticate/database-connections/activate-and-configure-attributes-for-flexible-identifiers) pour votre connexion de base de données, vous pouvez utiliser une combinaison de `email`, `phone_number`, ou `username` à la place. Ces options peuvent être obligatoires ou facultatives et doivent correspondre à votre configuration d’identificateur flexible.</Note>
+   * Par défaut, le courriel est l’identifiant requis. Si vous avez activé [Identifiants flexibles](/docs/fr-ca/authenticate/database-connections/activate-and-configure-attributes-for-flexible-identifiers) pour votre connexion de base de données, vous pouvez utiliser une combinaison de `email`, `phone_number`, ou `username` à la place. Ces options peuvent être obligatoires ou facultatives et doivent correspondre à votre configuration d’identificateur flexible.
+   </Callout>
 
    ``` lines
    POST /passkey/register
@@ -203,11 +204,11 @@ Un utilisateur existant lance le flux de connexion par clé d’identification l
 
 1. Un utilisateur lance votre application et commence le processus de connexion. Votre application lance ensuite le défi-réponse de connexion en appelant le point de terminaison[Demander un défi-réponse de connexion](/docs/fr-ca/native-passkeys-api#request-login-challenge) d’Authentication API :
 
-   <Note>
+   <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
    Si vous ne spécifiez pas de `realm`, le répertoire par défaut de votre locataire est utilisé.
 
-   </Note>
+   </Callout>
 
    ``` lines
    POST /passkey/challenge

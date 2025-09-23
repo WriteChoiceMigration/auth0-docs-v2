@@ -16,11 +16,11 @@ L’identité très réglementée permet l’autorisation transactionnelle avec 
 
 Cet article vous présente le parcours de bout en bout de l’approbation d’un virement bancaire. Le même flux d’autorisation transactionnelle peut être appliqué à d’autres cas d’utilisation.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Vous devez configurer l’autorisation transactionnelle pour chaque API. Une fois activée, elle s’applique aux permissions et aux `authorization_details.types` de cette API.
 
-</Note>
+</Callout>
 
 ## Prérequis
 
@@ -167,11 +167,11 @@ exports.onExecutePostLogin = async (event, api) => {
 };
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 vous pouvez appeler `api.multifactor.enable('any', { allowRememberBrowser: false })` avant `api.authentication.challengeWith` pour supprimer l’option permettant de se souvenir de cet appareil et obliger l’utilisateur à valider le défi poussé pour toutes les transactions.
 
-</Note>
+</Callout>
 
 La notification poussée inclut le `event.transaction.linking_id`, que [la trousse SDK Gardien Auth0](/docs/fr-ca/secure/multi-factor-authentication/auth0-guardian) transmet à l’application mobile. Pendant la transaction, le nom de la propriété est abrégé à `txlnkid`. Avec le `linking_id`, l’application mobile peut maintenant récupérer les détails de la transaction et les montrer à l’utilisateur. Une fois que l’utilisateur approuve ou refuse l’opération, l’application mobile peut autoriser ou rejeter le défi MFA respectivement. La transaction passe à la phase [Compléter l’opération](#complete-the-operation).
 
@@ -185,11 +185,11 @@ Pour le facteur d’authentification par téléphone, Auth0 envoie un code de v�
 
 <Frame>![null](/images/fr-ca/cdy7uua7fh8z/kYn2A0p2jTY5CUn1FsjVf/20602f70df44f09c161e97124b1ef1ed/Phone_Challenge_-_French.png)</Frame>
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 vous pouvez appeler `api.multifactor.enable('any', { allowRememberBrowser: false })` avant `api.authentication.challengeWith` pour supprimer l’option permettant de se souvenir de cet appareil et obliger l’utilisateur à valider le défi poussé pour toutes les transactions.
 
-</Note>
+</Callout>
 
 L’utilisateur reçoit ensuite le SMS contenant le code de vérification.
 

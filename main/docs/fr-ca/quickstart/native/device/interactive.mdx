@@ -230,11 +230,11 @@ Le `device_code` n’est pas destiné directement à l’utilisateur et ne doit 
 
 </Warning>
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Lorsque vous créez une CLI, vous pouvez ignorer cette étape et ouvrir directement le navigateur avec `verification_uri_complete`.
 
-</Note>
+</Callout>
 
 [5
 
@@ -242,11 +242,11 @@ Lorsque vous créez une CLI, vous pouvez ignorer cette étape et ouvrir directem
 
 Pendant que votre application attend que l’utilisateur l’active, elle doit appeler le [point de terminaison POST /oauth/token](/docs/fr-ca/api/authentication#-post-oauth-token-) d’Authentication API de manière intermittente et traiter la réponse de manière appropriée.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Assurez-vous que votre application attend la durée de `interval` (en secondes) ou jusqu’à ce qu’elle reçoive une réponse positive, la durée la plus longue étant retenue, afin d’éviter les problèmes de latence du réseau.
 
-</Note>
+</Callout>
 
 ```bash lines
 curl --request POST \ 
@@ -429,11 +429,11 @@ L’interrogation est trop rapide. Ralentissez et utilisez l’intervalle suggé
 
 L’utilisateur n’a pas autorisé l’appareil assez rapidement, par conséquent le `device_code` a expiré. Votre application doit avertir l’utilisateur que le flux a expiré et l’inviter à le réinitialiser.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Le `expired_token` n’est renvoyé qu’une seule fois. Ensuite, le point de terminaison renvoie l’erreur `invalid_grant`.
 
-</Note>
+</Callout>
 
 ``` lines
 `HTTP 403`

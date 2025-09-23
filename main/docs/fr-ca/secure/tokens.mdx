@@ -15,11 +15,11 @@ Il existe deux types de jetons liés à l’identité : les jetons d’ID et les
 
 Les [jetons d’ID](/docs/fr-ca/secure/tokens/id-tokens) sont des [Jetons Web JSON (JWT)](/docs/fr-ca/secure/tokens/json-web-tokens) destinés à être utilisés uniquement par l’application. Par exemple, si une application utilise Google pour connecter les utilisateurs et synchroniser leurs calendriers, Google envoie à l’application un jeton d’ID contenant des informations sur l’utilisateur. L’application analyse ensuite le [contenu du jeton](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims) et utilise les informations (y compris des détails tels que le nom et la photo de profil) pour personnaliser l’expérience de l’utilisateur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Assurez-vous de [valider les jetons d’ID](/docs/fr-ca/secure/tokens/id-tokens/validate-id-tokens) avant d’utiliser les informations qu’ils contiennent. Vous pouvez utiliser une [bibliothèque](https://jwt.io/#libraries-io) pour vous aider dans cette tâche.
 
-</Note>
+</Callout>
 
 N’utilisez **pas** de jetons d’ID pour accéder à une API. Chaque jeton contient des informations destinées à l’<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">audience</Tooltip> visée (qui est généralement le destinataire). Selon la spécification <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OpenID</Tooltip> Connect, l’audiance du jeton d’ID (indiquée par la demande **aud**) doit être l’ID client de l’application qui fait la demande d’authentification. Si ce n’est pas le cas, vous ne devez pas faire confiance au jeton.
 

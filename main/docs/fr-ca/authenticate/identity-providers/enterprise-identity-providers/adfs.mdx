@@ -26,11 +26,11 @@ Vous pouvez utiliser un script pour configurer la connexion ou la configurer man
 
 Exécutez les deux commandes suivantes dans la fenêtre Windows PowerShell.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Vous devez exécuter ce script en tant qu’administrateur de votre système.
 
-</Note>
+</Callout>
 
 ```powershell lines
 (new-object Net.WebClient -property @{Encoding = [Text.Encoding]::UTF8}).DownloadString("https://raw.github.com/auth0/adfs-auth0/master/adfs.ps1") | iex
@@ -42,11 +42,11 @@ AddRelyingParty "urn:auth0:{yourTenant}" "https://{yourDomain}/login/callback"
 
 Pour l’intégration automatisée, ce script utilise le [composant logiciel enfichable ADFS PowerShell](http://technet.microsoft.com/en-us/library/adfs2-powershell-basics.aspx) pour créer et configurer un **Partie de confiance** qui émettra, pour l’utilisateur authentifié, les revendications suivantes : **email**, **upn**, **prénom**, et **nom de famille**.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous utilisez la fonctionnalité [domaines personnalisés](/docs/fr-ca/customize/custom-domains) vous devrez remplacer la valeur `$webAppEndpoint` par `https://<YOUR CUSTOM DOMAIN>/login/callback`.
 
-</Note>
+</Callout>
 
 Le script crée l’approbation de la partie de confiance, comme suit :
 

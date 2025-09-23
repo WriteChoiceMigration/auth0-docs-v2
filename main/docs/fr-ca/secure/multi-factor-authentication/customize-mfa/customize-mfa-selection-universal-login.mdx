@@ -11,12 +11,12 @@ permalink: "customize-mfa-selection-universal-login"
 
 Auth0 prend en charge une variété de facteurs pour sécuriser l’accès des utilisateurs avec grâce à l’[authentification multifacteur (MFA)](/docs/fr-ca/secure/multi-factor-authentication/multi-factor-authentication-factors). À l’aide des actions `post-connexion`, vous pouvez personnaliser vos flux <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip> afin de proposer aux utilisateurs un facteur spécifique ou une séquence de facteurs. Vous pouvez également utiliser des informations contextuelles sur les utilisateurs et leurs organisations dans le but de créer des expériences plus individualisées. Par exemple, vous pouvez personnaliser vos flux pour mettre les utilisateurs au défi avec des facteurs spécifiques en fonction de leur appartenance à certaines organisations ou en fonction des rôles d’utilisateur qui leur sont attribués.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 * Cette fonctionnalité vous permet de personnaliser les flux de sélection MFA. Si vous souhaitez personnaliser les flux d’inscription MFA, consultez [Personnaliser les inscriptions MFA dans la connexion universelle](/docs/fr-ca/secure/multi-factor-authentication/customize-mfa/customize-mfa-enrollments-universal-login).
 * La personnalisation des flux MFA à l’aide d’actions n’est possible que si vous utilisez la [connexion universelle](/docs/fr-ca/authenticate/login/auth0-universal-login/universal-login-vs-classic-login/universal-experience).
 
-</Note>
+</Callout>
 
 ## Fonctionnement
 
@@ -119,13 +119,13 @@ Pour personnaliser vos flux, vous **devez activer** Personnaliser les facteurs M
 
 <Frame>![Auth0 Dashboard > Sécurité > Authentification multifacteur > paramètres additionnels](/images/fr-ca/cdy7uua7fh8z/2hv0ELTkkka3t230SXfxw/1a926ebd33f62b00448f62a1f069db7d/MFA_-_Actions_toggle_-_French.png)</Frame>
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 * Les Actions qui invoquent les commandes `challengeWith` et `challengeWithAny` remplacent et écrasent tous les défis activés via [api.multifactor.enable](/docs/fr-ca/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/post-login-api-object). Elles ont également priorité sur les configurations MFA disponibles sous **Définir les politiques**.
 * Pour garantir que les utilisateurs effectuent une authentification multifacteur lorsqu’ils tentent d’accéder à votre application, définissez le paramètre **Exiger l’authentification multifacteur** sur **Utiliser l’authentification multifacteur (MFA) adaptative** ou **Toujours**. Dans le cas où votre code d’actions ne s’exécute pas, ce paramètre sert de sauvegarde et empêche les utilisateurs de contourner l’authentification multifacteur (MFA).
 * Si vous souhaitez utiliser des évaluateurs de risques dans vos commandes, activez le bouton bascule **Évaluation de risque de l'authentification multifacteur (MFA) adaptative** et utilisez [event.authentication.riskAssessment](/docs/fr-ca/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/post-login-api-object) dans votre code d’actions `post-login`.
 
-</Note>
+</Callout>
 
 ### Inscrire les utilisateurs dans des facteurs
 

@@ -159,11 +159,11 @@ L’**ID client global** et le **Secret client global** sont utilisés pour gén
 * **Enable email verification flow during login for Azure AD and ADFS connections (Activer le flux de vérification des courriels pendant la connexion pour les connexions Entra ID et ADFS)** : Lorsque cette option est activée, les utilisateurs reçoivent une invite de vérification par courriel lors de leur première connexion lorsqu’ils utilisent des connexions Entra ID ou ADFS.
 * **La révocation du jeton d'actualisation supprime l'autorisation** : Lorsqu’elle est activée, elle supprime l’autorisation sous-jacente lorsque vous révoquez un jeton d’actualisation à l’aide de l’Authentication API du point de terminaison `/oauth/revoke`.
 
-  <Note>
+  <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
   Pour les locataires existants, cette fonctionnalité est activée par défaut pour préserver le comportement existant. Pour les nouveaux locataires (à partir du 13 janvier 2021), cette fonctionnalité est désactivée par défaut pour garantir que la révocation d’un jeton d’actualisation ne révoque pas l’autorisation. Si une révocation d’autorisation est nécessaire, une demande séparée doit être envoyée à partir d’un point de terminaison de révocation d’autorisations.
 
-  </Note>
+  </Callout>
 
 * **Autoriser les noms d’organizations dans l’Authentication API** : Lorsque cette option est activée, [/authorize](https://auth0.com/docs/api/authentication#authorize-application) et les point de terminaison [SAML](https://auth0.com/docs/api/authentication#saml) peuvent accepter à la fois les noms et les IDs d’organization. De plus, les identificateurs et jetons d’accès comprendront les demandes `org_id` et `org_name`. Avant d’activer ce paramètre, consultez [Utiliser des noms d’organization dans les Authentication API](/docs/fr-ca/manage-users/organizations/configure-organizations/use-org-name-authentication-api) pour connaître les facteurs importants et les répercussions potentielles.
 * **Autoriser les demandes d’autorisation poussées (PAR) :** Lorsqu’il est activé, le point de terminaison `/par` peut accepter les demandes d’autorisation qui lui sont envoyées à partir d’une application client. Cela empêche l’application cliente d’envoyer des demandes via le canal frontal non sécurisé (c.-à-d. le navigateur).
@@ -175,13 +175,13 @@ L’**ID client global** et le **Secret client global** sont utilisés pour gén
 * **Temps d’exécution** : Sélectionnez la version de l’environnement d’exécution Node.js que vous souhaitez utiliser pour les fonctionnalités d’extensibilité Auth0, y compris les [scripts d’action de base de données personnalisés](/docs/fr-ca/authenticate/database-connections/custom-db/templates) et les [connexions via réseau social personnalisées](/docs/fr-ca/authenticate/identity-providers/social-identity-providers/oauth2).
 * **Vérifier les scripts de bases de données personnalisés :** Sélectionnez et exécutez une vérification de compatibilité des versions d’exécution de Node.js pour les bases de données personnalisées activées.
 
-  <Note>
+  <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
   La fonctionnalité Verify Custom Database Action Scripts (Vérifier les scripts d’action de la base de données personnalisée) :
 
   + Est proposée si votre locataire dispose de 1 à 10 [connexions de base de données](/docs/fr-ca/authenticate/database-connections/custom-db/create-db-connection).
   + Nécessite l’activation des [scripts de base de données personnalisés](/docs/fr-ca/authenticate/database-connections/custom-db/templates).
-  + Vérifie uniquement la compatibilité de l’exécution de Node.js. La fonctionnalité n’est pas vérifiée.</Note>
+  + Vérifie uniquement la compatibilité de l’exécution de Node.js. La fonctionnalité n’est pas vérifiée.</Callout>
 
 ### Migrations
 

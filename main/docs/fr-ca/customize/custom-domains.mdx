@@ -38,19 +38,19 @@ Le fait de regrouper vos services d’authentification en un seul endroit rend l
 
 Vous configurez un domaine personnalisé dans l’onglet [Auth0 Dashboard > Branding (Image de marque) > Custom Domains (Domaines personnalisés)](https://manage.auth0.com/#/custom_domains) dans l’<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>. Ajoutez votre domaine personnalisé, choisissez votre type de certification et suivez les instructions. Vous effectuerez une procédure de vérification pour votre domaine qui varie selon que vous utilisez un certificat géré par Auth0 ou un certificat autogéré. Lorsque vous créez un CNAME, vous devez le déclarer à Auth0 afin que ce dernier puisse le vérifier et utiliser le domaine personnalisé. Après avoir configuré et vérifié le domaine personnalisé, vous devez [configurer les fonctionnalités d’Auth0](/docs/fr-ca/customize/custom-domains/configure-features-to-use-custom-domains) pour utiliser le nouveau domaine personnalisé.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Pour configurer un domaine personnalisé gratuit, les locataires d’Auth0 doivent avoir une carte de crédit valide dans leur dossier à des fins de vérification et de prévention de la fraude. La carte de crédit ne sera pas débitée.
 
-</Note>
+</Callout>
 
 Auth0 vous recommande de créer votre domaine personnalisé pendant la phase de développement (avant de passer à la production) afin de vous assurer que vous avez géré le CNAME correctement. Par exemple, vous pouvez créer un CNAME qui établit une correspondance entre `login.YOUR_DOMAIN.com` et `YOUR_DOMAIN.auth0.com`.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Auth0 ne fournit pas de liste statique d’adresses IP car celles-ci sont susceptibles de changer. Nous vous recommandons d’ajouter votre domaine personnalisé à la [Liste d’autorisations](/docs/fr-ca/secure/security-guidance/data-security/allowlist).
 
-</Note>
+</Callout>
 
 Vous pouvez mettre à jour un locataire existant pour utiliser un domaine personnalisé. Vos intégrations existantes utilisant `YOUR_DOMAIN.auth0.com` continueront de fonctionner. Après la modification, vos utilisateurs doivent se reconnecter car les sessions existantes ne seront plus valides. En outre, les utilisateurs peuvent avoir besoin de supprimer le témoin du navigateur associé à votre domaine personnalisé si des erreurs se produisent lors de la connexion. Si vous utilisez un Lock intégré ou une trousse SDK, vous pouvez choisir d’utiliser le paramètre de domaine standard ou un domaine personnalisé.
 

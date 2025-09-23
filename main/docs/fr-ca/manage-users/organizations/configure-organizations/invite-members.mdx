@@ -29,14 +29,14 @@ Pour configurer le flux d’invitations :
 2. [Personnalisez le flux d’invitations des utilisateurs](#customize-the-user-invitation-flow)
 3. [Envoyez des invitations d’adhésion](#send-membership-invitations)
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **Limitations**
 
 * Auth0 peut envoyer des invitations d’utilisateurs uniquement par courriel. Si vous préférez envoyer l’invitation d’une autre manière, vous pouvez choisir de générer uniquement une URL d’invitation.
 * Les utilisateurs invités doivent se connecter ou créer un compte avec l’adresse électronique à laquelle l’invitation a été envoyée.
 
-</Note>
+</Callout>
 
 ## Intégrez le flux d’invitations d’adhésion dans votre application
 
@@ -50,21 +50,21 @@ Si l’URI doit être partagé par toutes vos applications, vous pouvez définir
 
 La route de votre application doit accepter les paramètres `invitation` et `organization` dans la chaîne de requête, puis appeler le point de terminaison [Autorisation](https://auth0.com/docs/api/authentication#authorize-application) de Authentication API Auth0 avec les deux paramètres.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Pour prendre en charge les scénarios multilocataires dans lesquels le nom de l’organisation est utilisé comme sous-domaine ou variable de chemin dans votre application (par exemple, `acme.myapp.com`), le paramètre `organization_name` est également inclus dans le lien d’invitation envoyé aux utilisateurs. Il n’est pas obligatoire d’envoyer ce paramètre au point de terminaison [Authorization](https://auth0.com/docs/api/authentication#authorize-application) d’Authentication API.
 
-</Note>
+</Callout>
 
 Par exemple, si vous avez une application activée par l’organisation avec un **Application Login URI (URI de connexion à l’application)** défini sur `https://myapp.com/login`, le lien dans le courrier électronique d’invitation envoyé à l’utilisateur final sera le suivant : `https://myapp.com/login?invitation={invitation_ticket_id}&organization={organization_id}&organization_name={organization_name}`.
 
 ## Personnaliser le flux d’invitations des utilisateurs
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Pour personnaliser le flux d’invitations des utilisateurs, vous devez utiliser des domaines personnalisés, fonctionnalité disponible dans tous les abonnements payants.
 
-</Note>
+</Callout>
 
 Pour personnaliser l’invite d’invitation et le courriel que l’utilisateur reçoit, modifiez les modèles d’invite et de courriel de connexion universelle. Pour en savoir plus, consultez les pages suivantes :
 
@@ -82,7 +82,7 @@ Pour que l’utilisateur invité voie l’invitation dans la langue appropriée,
 
 Vous pouvez [envoyer des invitations d’adhésion à une organization](/docs/fr-ca/manage-users/organizations/configure-organizations/send-membership-invitations) aux utilisateurs à l’aide de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip> ou de Management API. Si vous préférez envoyer l’invitation en utilisant votre propre service de courrier électronique, vous pouvez le faire en générant uniquement une URL d’invitation. Dans le cas contraire, l’utilisateur recevra un courriel contenant le lien qui lui permettra de se connecter à l’organization à l’aide d’une connexion configurée.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Lorsqu’un utilisateur accepte une invitation, son adresse courriel est marquée comme vérifiée.
 
@@ -90,5 +90,5 @@ Si l’utilisateur accepte une invitation par le biais d’une connexion fédér
 
 Si l’utilisateur n’accepte pas une invitation avant qu’elle n’expire, l’invitation sera marquée comme expirée et éventuellement supprimée d’[Auth0 Dashboard](/docs/fr-ca/get-started/auth0-overview/dashboard).
 
-</Note>
+</Callout>
 

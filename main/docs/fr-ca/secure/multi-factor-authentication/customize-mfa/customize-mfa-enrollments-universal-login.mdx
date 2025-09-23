@@ -113,11 +113,11 @@ Ces deux actions fusionnent pour créer un scénario où les utilisateurs **sans
 
 L’Action 1 examine les `app_metadata` pour déterminer si l’utilisateur est un administrateur, puis l’invite à s’inscrire dans des facteurs spécifiques. Si un utilisateur administrateur ne s’est inscrit qu’à l’OTP, il est d’abord confronté à l’OTP pour terminer son authentification. Ils sont ensuite invités à s’inscrire avec des clés de sécurité (`webauthn-roaming`).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Afin de protéger les comptes d’utilisateurs, ces derniers doivent effectuer une vérification MFA à l’aide de leur enrolledFactors existants avant de pouvoir s’inscrire à des facteurs supplémentaires. Cette condition vous permet de mettre en œuvre de façon sécurisée une politique d’inscription MFA personnalisée après l’utilisation d’une application comportant différents facteurs et configurations.
 
-</Note>
+</Callout>
 
 Le flux fait une pause après l’exécution de l’Action 1, et `event.user.enrolledFactors` et `event.authentication.methods` seront mises à jour lorsque l’Action 2 s’exécutera. Cela permet au code de l’Action de prendre des décisions en fonction des données réelles de l’utilisateur lorsque les utilisateurs ont le choix de se confronter à ou de s’inscrire dans différents facteurs.
 

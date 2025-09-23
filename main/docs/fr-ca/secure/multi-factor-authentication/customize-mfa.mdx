@@ -9,11 +9,11 @@ permalink: "customize-mfa"
 'twitter:description': "Apprenez à personnaliser les pages d’authentification multifacteur (MFA) qui s’affichent pour les utilisateurs en utilisant les options de marque de la connexion universelle."
 ---
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Ces personnalisations ne s’appliquent pas à Duo, qui possède sa propre interface utilisateur.
 
-</Note>
+</Callout>
 
 Vous pouvez personnaliser les pages <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip> qui s’affichent à vos utilisateurs en ajustant les options d’image de marque de la connexion universelle dans la section [Paramètres de connexion universelle](https://manage.auth0.com/#/login_settings) d’Auth0 Dashboard.
 
@@ -52,13 +52,13 @@ Vous pouvez utiliser des actions pour personnaliser la politique MFA de votre l
 
 Si vous n’êtes pas familier avec la création d’actions, consultez [Créer votre première action](/docs/fr-ca/customize/actions/write-your-first-action).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Tous les comportements liés à la MFA définis dans les Actions sont prioritaires sur les paramètres de la **politique Définir** configurés dans la section **Authentification multifacteur** du Dashboard.
 
 Pour en savoir plus, consultez [Activer l’authentification multifacteur (MFA)](/docs/fr-ca/secure/multi-factor-authentication/enable-mfa).
 
-</Note>
+</Callout>
 
 Lors de la création d’actions, vous pouvez utiliser le paramètre `provider` pour préciser si vous souhaitez imposer la MFA et quel facteur vous utilisez. Le comportement diffère selon que vous utilisez l’expérience de connexion classique ou l’expérience de connexion universelle :
 
@@ -95,11 +95,11 @@ Lors de la création d’actions, vous pouvez utiliser le paramètre `provider` 
 
 Si vous utilisez la connexion universelle, vous pouvez obtenir le comportement de l’expérience de connexion classique en activant la personnalisation de la page de connexion MFA.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Les options `guardian` et `google-authenticator` sont des paramètres anciens qui sont conservés pour des raisons de rétro-compatibilité; il n’est pas conseillé de continuer à les utiliser. Nous recommandons d’utiliser `any` à la place. L’option `google-authenticator` n’autorise pas les utilisateurs à s’inscrire à un code de récupération.
 
-</Note>
+</Callout>
 
 Définir le `provider (fournisseur)` sur une option particulière remplace manuellement les options activés/désactivés dans le tableau de bord. Vous pouvez utiliser l’action suivante pour inciter l’utilisateur à s’enregistrer dans Duo même si d’autres facteurs sont activés dans le tableau de bord :
 
@@ -114,13 +114,13 @@ exports.onExecutePostLogin = async (event, api) => {
 
 Voici quelques scénarios courants d’authentification multifacteur (MFA) contextuelle qui peuvent être gérés par des actions.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Pour vous assurer que votre locataire ne déclenche la MFA que lorsque vous l’exigez explicitement dans vos Actions, définissez la politique MFA par défaut de votre locataire sur **Jamais**.
 
 Pour en savoir plus, lisez la section « Politique » dans [Facteurs d’authentification multifacteur (MFA)](https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors#policies).
 
-</Note>
+</Callout>
 
 ### Exiger une authentification multifacteur (MFA) pour des applications spécifiques
 

@@ -23,7 +23,7 @@ La façon dont vous implémentez la réauthentification dépend de votre cas d�
 
 La [spécification OIDC](https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest) définit le paramètre `prompt=login` qui peut être utilisé pour déclencher une interface utilisateur de réauthentification (généralement une invite de connexion) :
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **invite**
 
@@ -33,7 +33,7 @@ FACULTATIF : Liste de valeurs de chaînes ASCII, délimitée par des espaces e
 
 Le serveur d’autorisations doit inviter l’utilisateur final à se réauthentifier. S’il ne peut pas réauthentifier l’utilisateur final, il doit renvoyer une erreur, typiquement `login_required`.
 
-</Note>
+</Callout>
 
 Cependant, il y a un problème avec l’utilisation de ce paramètre pour garantir la réauthentification : **la partie de confiance n’a aucun moyen de valider le fait qu’une action de réauthentification a eu lieu**. Examinons le trafic pour en connaître les raisons. Le flux pour une demande d’authentification de la part de la partie de confiance est le suivant :
 
@@ -77,13 +77,13 @@ Le(s) jeton(s) renvoyé(s) par le premier flux ci-dessus seront identiques au(x)
 
 Contrairement à `prompt=login`, le paramètre de requête d’authentification `max_age` fournit un mécanisme permettant aux parties de confiance de confirmer positivement que la réauthentification a eu lieu dans un intervalle de temps donné. La [spécification OIDC](https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest) stipule :
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **max_age**
 
 FACULTATIF : Durée maximale d’authentification. Indique le temps d’écoulement autorisé en secondes depuis la dernière authentification active de l’utilisateur final par OP. Si le temps écoulé est supérieur à cette valeur, OP doit tenter de réauthentifier activement l’utilisateur final. (Le paramètre de requête `max_age` correspond au paramètre de requête `max_auth_age` d’OpenID 2.0 PAPE). Lorsque `max_age` est utilisé, le jeton d’ID renvoyé doit inclure une valeur de demande `auth_time`.
 
-</Note>
+</Callout>
 
 La dernière phrase de la définition est la partie la plus importante. Lorsque `max_age` est demandé par la partie de confiance, une demande `auth_time` doit être présente dans cette requête. Cela signifie que `max_age` peut être utilisé de deux manières :
 
@@ -114,11 +114,11 @@ Au lieu de cela, Auth0 a choisi d’envoyer la demande `auth_time` dans le jeton
 
 ### Exemple de validation auth_time
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Vous devez veiller à mettre en œuvre une validation pour vous assurer que la réauthentification a bien eu lieu. Vous devez valider qu’un `auth_time` adéquat a été renvoyé.
 
-</Note>
+</Callout>
 
 L’exemple suivant utilise le module [passport-auth0-openidconnect](https://github.com/auth0/passport-auth0-openidconnect) pour démontrer comment valider la réauthentification. La première (et la plus simple) façon consiste à ajouter l’option `max_age=0` à `Auth0OidcStrategy`:
 

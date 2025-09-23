@@ -70,11 +70,11 @@ Agissant comme serveur d’autorisations, et avec le consentement de l’utilisa
 
 Que vous ayez une seule API ou peut-être une suite de [microservices API](/docs/fr-ca/get-started/apis/set-logical-api) liés de manière logique, vous pouvez tirer parti des jetons d’accès fournis par Auth0 pour sécuriser l’accès à vos services. Bien qu’il soit relativement facile de configurer cela dans [Auth0 Dashboard](https://manage.auth0.com/) ou via la [Management API Auth0](/docs/fr-ca/api/management/v2#!/Resource_Servers/post_resource_servers), il est important d’examiner les différents scénarios d’application et les structures des API pour déterminer la meilleure architecture pour votre système.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Les jetons d’accès OAuth2 sont principalement conçus pour sécuriser les API publiques; lorsqu’il est exprimé sous la forme d’un JWT, un jeton d’accès est une entité autonome qui peut être vérifiée sans qu’il soit nécessaire d’effectuer un appel supplémentaire à une API tierce. Si vos API n’entrent pas dans cette catégorie – par exemple, si elles font partie d’une application (c’est-à-dire qu’elles ne sont appelées que par cette application) ou qu’elles sont placées derrière votre pare-feu – alors les protéger avec des jetons peut s’avérer excessif, et votre flux de travail actuel basé sur les témoins (et autres) peut suffire.
 
-</Note>
+</Callout>
 
 OAuth2 a été conçu spécifiquement en tenant compte de l’accès de tiers. Par exemple, un scénario pourrait être qu’un utilisateur (propriétaire des ressources) souhaite utiliser une application (un client) qui n’appartient pas à la même organisation que le service qui fournit les données de l’utilisateur (le serveur de ressources). Dans ce cas, lorsque l’application a besoin d’accéder aux données que possède l’utilisateur, elle redirige vers l’organisation où se trouvent les données de l’utilisateur, qui authentifie ensuite l’utilisateur et l’invite à donner à l’application la permission d’accéder à ses données. Cette demande de permission est appelée fourniture de [consentement](/docs/fr-ca/get-started/applications/confidential-and-public-applications/user-consent-and-third-party-applications) et constitue une grande partie de ce que signifie apporter un soutien aux [applications tierces](/docs/fr-ca/scopes/api-scopes#example-an-api-called-by-a-third-party-application). Si vous prévoyez d’intégrer des applications tierces, il est important de les marquer comme tierces dès le départ afin qu’Auth0 gère la demande de consentement de l’utilisateur.
 

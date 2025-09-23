@@ -17,11 +17,11 @@ Cette spécification exploite l’identifiant de session (`sid`) inclus dans les
 
 Pour utiliser la déconnexion par canal d’appui, une application doit exposer un URI de déconnexion par canal d’appui, accessible depuis le serveur du locataire, où l’application s’attend à recevoir les requêtes avec le jeton de déconnexion. Lorsqu’une application reçoit cette requête, elle est obligée d’effacer l’état de la session locale correspondant aux demandes contenues dans le jeton.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Pour que la déconnexion de communication par canal d’appui fonctionne, l’application doit recevoir des communications back-channel.
 
-</Note>
+</Callout>
 
 ### Jetons dans les communications de déconnexion du canal d’appui OIDC
 
@@ -36,11 +36,11 @@ Lorsque les utilisateurs finaux s’authentifient avec succès auprès d’Auth0
 3. Déconnexion – L’IdP appelle l’URL de rappel de déconnexion préenregistrée et envoie le jeton de déconnexion à ce point de terminaison. Le jeton contient le `user_id` (`sub`) et le `sid` ainsi que d’autres paramètres.
 4. Déconnexion – Le système dorsal de l’application doit valider le jeton de déconnexion conformément à la spécification OIDC et extraire le `sid`. Le programme dorsal peut ensuite utiliser ce jeton pour trouver la session associée à l’identifiant et y mettre fin si nécessaire.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 La réponse attendue est `HTTP 200` pour une déconnexion réussie. Si vous recevez `HTTP 400`, une requête incorrecte ou incomprise, vous pouvez alors appliquer nos conseils pour corriger le problème. Pour en savoir plus, consultez [Configuration de déconnexion du canal d’appui](/docs/fr-ca/authenticate/login/logout/back-channel-logout/configure-back-channel-logout).
 
-</Note>
+</Callout>
 
 ### Fonctionnement
 
@@ -51,13 +51,13 @@ L’exemple de cas d’utilisation montre comment la déconnexion par canal d’
 1. Lors de la configuration de l’application, l’application A enregistre un URI de déconnexion du canal d’appui auprès d’Auth0.
 2. Lors de la configuration de l’application, l’application B enregistre un URI de déconnexion du canal d’appui auprès d’Auth0.
 
-   <Note>
+   <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
    Les URL de déconnexion du canal d’appui OIDC doivent :
 
    * Être accessibles à partir de l’IdP
    * Utiliser des points de terminaison avec chiffrement TLS
-   * [Valider les jetons de déconnexion](https://openid.net/specs/openid-connect-backchannel-1_0.html#Validation)</Note>
+   * [Valider les jetons de déconnexion](https://openid.net/specs/openid-connect-backchannel-1_0.html#Validation)</Callout>
 
 3. Lors de la connexion de l’utilisateur final, un utilisateur s’authentifie auprès d’Auth0 pour accéder à l’application A.
 4. Auth0 envoie un jeton d’ID avec `sid` à l’application A. Pour en savoir plus, consultez [Structure du jeton d’ID](/docs/fr-ca/secure/tokens/id-tokens/id-token-structure).
@@ -104,11 +104,11 @@ L’exemple de stockage de session est construit en Node (Express) et basé sur 
 
 Dans l’onglet des sessions de votre application, exposez la route que vous avez configurée pour recevoir le jeton de déconnexion. Validez le jeton et mettez fin à la session de l’utilisateur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Cet exemple utilise une note de session stockée pour les besoins de la démonstration.
 
-</Note>
+</Callout>
 
 **routes/index.js**
 

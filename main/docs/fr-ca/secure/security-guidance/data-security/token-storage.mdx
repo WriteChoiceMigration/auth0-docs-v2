@@ -76,11 +76,11 @@ Lorsque la SPA appelle plusieurs API qui résident dans un domaine différent, l
 * Si le système dorsal de la SPA ne peut pas gérer les appels d’API, son fonctionnement est similaire à celui d’une application mobile qui stocke les jetons dans le système dorsal de la SPA, mais la SPA doit aller chercher les jetons dans le système dorsal pour effectuer des requêtes à l’API. Un protocole doit être établi entre le système dorsal et la SPA pour permettre le transfert sécurisé du jeton du système dorsal à la SPA.
 * Si vous avez une application à page unique (SPA) **sans** serveur dorsal correspondant, votre SPA devrait demander de nouveaux jetons au moment de la connexion et les stocker en mémoire sans aucune persistance. Pour effectuer des appels d’API, votre SPA utilisera alors la copie du jeton en mémoire.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 En conformité avec les spécifications OAuth2, lorsqu’un navigateur demande un jeton d’actualisation à partir du point de terminaison /token, Auth0 ne renverra un jeton d’actualisation que si la [Rotation des jetons d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens/refresh-token-rotation) est activée pour ce client.
 
-</Note>
+</Callout>
 
 Pour plus de détails, consultez la [trousse SDK Auth0 pour les applications à page unique (SPA) dans GitHub](https://github.com/auth0/auth0-spa-js).
 
@@ -94,11 +94,11 @@ Si vous ne pouvez pas utiliser des Web Workers, Auth0 recommande comme alternati
 
 Utilisez la trousse SDK Auth0 pour les applications à page unique (SPA) dont l’option de stockage par défaut est le stockage en mémoire pour tirer parti à la fois des Web Workers et des fermetures JavaScript en fonction du type de jeton.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 La méthode de stockage en mémoire du navigateur **n'assure pas** la persistance des jetons entre les actualisations de pages et les onglets du navigateur.
 
-</Note>
+</Callout>
 
 ### Scénarios de stockage local dans le navigateur
 

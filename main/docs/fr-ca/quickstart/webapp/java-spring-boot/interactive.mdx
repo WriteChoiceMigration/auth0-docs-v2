@@ -37,13 +37,13 @@ permalink: "interactive"
 
 # Ajouter une fonctionnalité de connexion à votre application Spring Web
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 ### Vous utilisez Spring WebFlux?
 
 Ce tutoriel utilise [Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html). Si vous utilisez [Spring WebFlux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#spring-web-reactive), les étapes pour ajouter l’authentification sont similaires, mais certains détails d’implémentation sont différents. Reportez-vous au [Code d’exemple Spring Boot WebFlux](https://github.com/auth0-samples/auth0-spring-boot-login-samples/tree/master/webflux-login) pour voir comment intégrer Auth0 à votre application Spring Boot WebFlux.
 
-</Note>
+</Callout>
 
 [1
 
@@ -63,25 +63,25 @@ Si vous préférez explorer une configuration complète, consultez plutôt un ex
 
 Une URL de rappel est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur authentification. Si elle n’est pas définie, les utilisateurs ne seront pas redirigés vers votre application après s’être connectés.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous suivez notre projet à titre d’exemple, définissez ceci sur
 
 `http://localhost:3000/login/oauth2/code/okta`.
 
-</Note>
+</Callout>
 
 ### Configuration des URL de déconnexion
 
 Une URL de déconnexion est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur déconnexion. Si elle n’est pas définie, les utilisateurs ne pourront pas se déconnecter de votre application et recevront un message d’erreur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous suivez notre projet à titre d’exemple, définissez ceci sur
 
 `http://localhost:3000`.
 
-</Note>
+</Callout>
 
 [2
 
@@ -91,11 +91,11 @@ Si vous suivez notre projet à titre d’exemple, définissez ceci sur
 
 Pour intégrer votre application Spring Boot avec Auth0, incluez [Okta Spring Boot Starter](https://github.com/okta/okta-spring-boot/) dans les dépendances de votre application.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Ce guide utilise [Thymeleaf](https://www.thymeleaf.org/) et le [module d’intégration Spring Security](https://github.com/thymeleaf/thymeleaf-extras-springsecurity) pour la couche d’affichage. Si vous utilisez une technologie d’affichage différente, la configuration et les composants de Spring Security restent les mêmes.
 
-</Note>
+</Callout>
 
 Si vous utilisez Gradle, vous pouvez inclure ces dépendances comme indiqué ci-dessous.
 
@@ -179,7 +179,7 @@ port: 3000
 
 Pour permettre aux utilisateurs de se connecter avec Auth0, créez une classe qui enregistrera une [SecurityFilterChain](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/web/SecurityFilterChain.html) et ajoutez l’annotation `@Configuration`.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Vous pouvez configurer l’instance [HttpSecurity](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/config/annotation/web/builders/HttpSecurity.html) pour qu’elle exige une authentification sur tous les chemins ou seulement sur certains d’entre eux. Par exemple, pour exiger l’authentification sur tous les chemins à l’exception de la page d’accueil :
 
@@ -225,7 +225,7 @@ Dans la classe SecurityConfig, fournissez un LogoutHandler qui redirige vers le 
 
 Lorsque vous cliquez sur le lien de déconnexion, l’application doit vous rediriger vers l’adresse que vous avez spécifiée comme l’une des « URL de déconnexion autorisées » dans les « Paramètres d’application » et vous n’êtes plus connecté à votre application.
 
-checkpoint.itWorked checkpoint.somethingNotRight`</Note>
+checkpoint.itWorked checkpoint.somethingNotRight`</Callout>
 
 ## Next Steps
 

@@ -23,24 +23,24 @@ En utilisant notre exemple Hoekstra & Associates, le diagramme suivant illustr
    1. `returnTo` : [`https://hoekstra.corp.travel0.net/logoutComplete`](https://hoekstra.corp.travel0.net/logoutComplete)
    2. `client_id` : L’ID client associé à l’application créée dans le locataire Travel0 Auth0 pour l’instance Hoekstra & Associates de Travel0 Corporate Booking.
 
-      <Note>
+      <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
       **Meilleure pratique**
 
       Définissez les applications indépendamment dans Auth0 pour faciliter la configuration de l’URL `returnTo`, où le `client_id` correspondant sert à fournir la validation correcte de l’URL fournie. Pour en savoir plus, consultez [Provisionnement](/docs/fr-ca/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/provisioning).
 
-      </Note>
+      </Callout>
 
 3. Le locataire Travel0 Auth0 met fin à la session Auth0 établie au nom de l’utilisateur, supprime toute information SSO et redirige le navigateur vers l’URL `returnTo` indiquée.
 4. L’instance Hoekstra & Associates de Travel0 Corporate Booking affiche une page pour informer Jennifer qu’elle s’est déconnectée avec succès, probablement avec un bouton pour se reconnecter si elle le souhaite.
 
    1. À ce stade, l’instance de Travel0 Corporate Booking voudra également nettoyer la session d’application associée à l’utilisateur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous ne souhaitez pas supprimer la session SSO de l’utilisateur avec Auth0, alors l’application peut simplement arrêter la session de l’application sans rediriger vers le point de terminaison `/logout` sur le locataire Auth0. Bien que l’utilisateur soit déconnecté de l’application, il aura toujours une session SSO avec Auth0. Dans ce cas, vous devez informer l’utilisateur que sa connexion au locataire Auth0 est maintenue et que, s’il clique à nouveau sur le bouton `login`, il pourra ne pas être invité à saisir des identifiants de premier facteur.
 
-</Note>
+</Callout>
 
 ## connexion d’entreprise
 
@@ -57,13 +57,13 @@ En utilisant notre exemple MetaHexa Bank, voyons comment cette implémentation 
    2. `client_id` : ID client associé à l’application créée dans le locataire Travel0 Auth0 pour l’instance MetaHexa Bank de Travel0 Corporate Booking.
    3. `federated` : Paramètre facultatif utilisé pour déconnecter l’utilisateur de l’IdP de MetaHexa Bank. Lorsqu’il est précisé, le navigateur est redirigé vers le point de terminaison `/logout` associé à l’IdP de MetaHexa Bank, qui met fin à la session de l’utilisateur avant de rediriger le navigateur vers le locataire Travel0 Auth0.
 
-      <Note>
+      <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
       **Meilleure pratique**
 
       Définissez les applications indépendamment dans Auth0 pour faciliter la configuration de l’URL `returnTo`, où le `client_id` correspondant sert à fournir la validation correcte de l’URL fournie. Pour en savoir plus, consultez [Provisionnement](/docs/fr-ca/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/provisioning).
 
-      </Note>
+      </Callout>
 
 Les étapes 3 et 4 correspondent à celles décrites dans le scénario [Connexion à une base de données](#database-connection), mais Amintha remplace Jennifer et MetaHexa Bank (`metahexa.corp.travel0.net`) remplace Hoekstra & Associates.
 

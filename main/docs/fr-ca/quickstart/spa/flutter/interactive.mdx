@@ -39,11 +39,11 @@ permalink: "interactive"
 
 Auth0 vous permet d’ajouter rapidement l’authentification et d’accéder aux informations relatives au profil de l’utilisateur dans votre application. Ce guide explique comment intégrer Auth0 à une application Flutter à l’aide de la trousse [SDK Auth0 Flutter](https://github.com/auth0/auth0-flutter).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 La trousse SDK Flutter ne prend actuellement en charge que les applications Flutter s’exécutant sur les plateformes Android, iOS ou Web.
 
-</Note>
+</Callout>
 
 Ce guide rapide suppose que vous avez déjà une application [Flutter](https://flutter.dev/) installée et active. Si ce n’est pas le cas, consultez les [guides de démarrage de Flutter](https://docs.flutter.dev/get-started/install) pour commencer l’utilisation d’une application simple.
 
@@ -57,52 +57,52 @@ Lorsque vous vous êtes inscrit à Auth0, une nouvelle application a été cré�
 
 <Frame>![null](/images/fr-ca/cdy7uua7fh8z/6SC7KnyzCyO8cwXQfril1X/7f204d6b4eb87562043e7f1083aca651/My_App_-_Settings_-_French.png)</Frame>
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous utilisez l’application par défaut avec une application native ou une application à page unique, veillez à mettre à jour la **méthode d’authentification du point de terminaison des jetons** en la réglant sur `None` et à définir le **type d’application** sur `SPA` ou `Native`.
 
-</Note>
+</Callout>
 
 Les informations suivantes sont nécessaires :
 
 * **Domaine**
 * **Identifiant client**
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous téléchargez l’exemple en haut de cette page, les détails sont renseignés pour vous.
 
-</Note>
+</Callout>
 
 ### Configuration des URL de rappel
 
 Une URL de rappel est une URL intégrée dans votre application vers laquelle Auth0 redirige l’utilisateur après qu’il s’est authentifié. L’URL de rappel de votre application doit être ajoutée au champ **URL de rappel autorisées** dans les [Paramètres d’application](https://manage.auth0.com/#/applications). Si ce champ n’est pas défini, les utilisateurs ne pourront pas se connecter à l’application et obtiendront un message d’erreur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous suivez l’exemple de projet que vous avez téléchargé en haut de cette page, vous devez définir l’**URL de rappel autorisée** sur `http://localhost:3000`.
 
-</Note>
+</Callout>
 
 ### Configuration des URL de déconnexion
 
 Une URL de déconnexion est une URL intégrée dans votre application vers laquelle Auth0 peut se rediriger une fois que l’utilisateur a été déconnecté du serveur d’autorisations. Cette URL est spécifiée dans le paramètre de requête `returnTo`. L’URL de déconnexion de votre application doit être ajoutée au champ **URL de déconnexions autorisées** dans les [Application Settings (Paramètres d’application)](https://manage.auth0.com/#/applications). Si ce champ n’est pas défini, les utilisateurs ne pourront pas se déconnecter de l’application et obtiendront un message d’erreur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous suivez l’exemple de projet que vous avez téléchargé en haut de cette page, l’URL de déconnexion que vous devez ajouter au champ **URL de déconnexions autorisées** est `http://localhost:3000`.
 
-</Note>
+</Callout>
 
 ### Configurer les origines Web autorisées
 
 Vous devez ajouter l’URL de votre application au champ **Origines Web autorisées** dans vos [Application Settings (Paramètres d’application)](https://manage.auth0.com/#/applications/%7ByourClientId%7D/settings). Si vous n’enregistrez pas l’URL de votre application ici, l’application ne pourra pas actualiser silencieusement les jetons d’authentification et vos utilisateurs seront déconnectés la prochaine fois qu’ils visiteront l’application ou qu’ils actualiseront la page.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous suivez l’exemple de projet que vous avez téléchargé en haut de cette page, vous devez définir l’option **Origines Web autorisées** sur `http://localhost:3000`.
 
-</Note>
+</Callout>
 
 [2
 
@@ -128,11 +128,11 @@ La [connexion universelle](https://auth0.com/docs/authenticate/login/auth0-unive
 
 Intégrez la connexion universelle Auth0 dans votre application Flutter (Web) en utilisant la classe `Auth0Web`. Redirigez vos utilisateurs vers la page de connexion universelle Auth0 en utilisant `loginWithRedirect()`.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Vous devrez normalement définir le paramètre `redirectUrl` sur `loginWithRedirect`. Si ce paramètre n’est pas spécifié, Auth0 utilisera la [route de connexion par défaut](https://auth0.com/docs/authenticate/login/auth0-universal-login/configure-default-login-routes), qui n’est pas configurée par défaut.
 
-</Note>
+</Callout>
 
 Lorsqu’un utilisateur se connecte, il est redirigé vers votre application. Vous pouvez alors accéder à l’identificateur et aux jetons d’accès de cet utilisateur en appelant `onLoad` lors du démarrage et en gérant les informations d’identification qui vous sont communiquées :
 
@@ -159,11 +159,11 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 Pour déconnecter les utilisateurs, redirigez-les vers le point de terminaison Auth0 pour effacer leur session de connexion en appelant la trousse SDK Flutter Auth0 `logout()`. [En savoir plus sur la déconnexion d’Auth0](https://auth0.com/docs/authenticate/login/logout).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Vous devez normalement spécifier `returnToUrl` lorsque vous appelez `logout`, sinon Auth0 [utilisera par défaut la première URL de la liste URL de déconnexion autorisées](https://auth0.com/docs/authenticate/login/logout/redirect-users-after-logout).
 
-</Note>
+</Callout>
 
 ##### checkpoint.header
 

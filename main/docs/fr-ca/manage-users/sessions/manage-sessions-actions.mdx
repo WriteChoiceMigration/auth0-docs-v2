@@ -41,13 +41,13 @@ Vous pouvez utiliser cette méthode pour :
 
   + Il s’agit d’une option personnalisable, vous pouvez choisir de conserver les jetons d’actualisation plutôt que de les révoquer. Cette opération s’exécute de manière asynchrone et devient finalement cohérente.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous souhaitez utiliser la méthode `api.session.revoke(reason,options)`, assurez-vous que la propriété event.session.id existe.
 
 Contrairement à `api.access.deny()`, `api.session.revoke()` refusera la transaction en cours et révoquera également la session, par conséquent l’authentification du premier facteur sera à nouveau requise.
 
-</Note>
+</Callout>
 
 ### Surveiller les événements de révocation du journal
 
@@ -70,13 +70,13 @@ Vous pouvez utiliser ces méthodes pour personnaliser dynamiquement les stratég
 * L’évaluation des risques
 * Tout autre critère dynamique disponible lors de l’exécution de l’Action
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous souhaitez utiliser les méthodes `api.session.setExpiresAt(absolute)` et `api.session.setIdleExpiresAt(idle)`, assurez-vous qu’une propriété de l’objet event.session existe, telle que `event.session.id`.
 
 La `méthode api.session.setIdleExpiresAt(idle)` définit le délai d’inactivité de la session pour l’interaction en cours. Si la méthode n’est pas réappliquée, les interactions ultérieures réussies remplaceront le délai d’inactivité à l’aide des paramètres de délai d’inactivité de la session.
 
-</Note>
+</Callout>
 
 ## Limites
 

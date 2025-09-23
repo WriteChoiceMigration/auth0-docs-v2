@@ -9,11 +9,11 @@ permalink: "authorization-code-flow-with-rar"
 'twitter:description': "Apprenez à utiliser les demandes d’autorisation poussées avec le flux de code d’autorisation."
 ---
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Pour utiliser les fonctionnalités de l’identité très réglementée (HRI), vous devez disposer d’un plan Enterprise avec le module complémentaire Identité très réglementée. Consultez [Tarification Auth0](https://auth0.com/pricing/) pour plus de détails.
 
-</Note>
+</Callout>
 
 Les[Demandes d’autorisation poussées (RAR)](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rar) étendent le protocole OAuth2 pour permettre aux clients de demander et obtenir les données d’autorisation détaillées de la part des propriétaires de ressources, tels que les utilisateurs finaux, pendant le flux de code d’autorisation.
 
@@ -39,11 +39,11 @@ curl --location 'https://$tenant/oauth/par' \
 --data-urlencode 'authorization_details=[{"type": "money_transfer", "instructedAmount": {"amount": 2500, "currency": "USD"},   "sourceAccount": "xxxxxxxxxxx1234", "destinationAccount": "xxxxxxxxxxx9876", "beneficiary": "Hanna Herwitz", "subject": "A Lannister Always Pays His Debts"}]'
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Afin de protéger les données sensibles dans le canal frontal (c’est-à-dire le navigateur) et d’effectuer une validation anticipée des types reçus, Auth0 ne vous permet pas d’ajouter `authorization_details` directement sur le point de terminaison `/authorize`. Vous devez les transmettre au point de terminaison `/par`, puis utiliser le flux Code d’autorisation, comme expliqué dans [Flux Code d’autorisation avec les demandes d’autorisation push](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow/authorization-code-flow-with-par).
 
-</Note>
+</Callout>
 
 Chaque élément `authorization_details` peut être entièrement personnalisé tant qu’il contient un champ `type`.
 
@@ -105,11 +105,11 @@ Si l'<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">audi
 
 En plus de la prise en charge du protocole standard, nous exposons également les RAR dans l’action post-connexion via la propriété `event.transaction.requested_authorization_details`. Utilisez cette propriété pour prendre des décisions concernant la transaction, notamment pour appliquer l’authentification multifacteur (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">MFA</Tooltip>).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Auth0 ne permet pas actuellement de mettre à jour RAR à l’aide d’Actions.
 
-</Note>
+</Callout>
 
 ## Qu’est-ce qu’Auth0 ne prend pas en charge?
 

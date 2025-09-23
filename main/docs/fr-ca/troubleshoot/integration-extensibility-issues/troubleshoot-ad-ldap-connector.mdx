@@ -93,11 +93,11 @@ Pour atténuer l’impact, corrigez toute affectation de groupe récursive ou pr
 
 Vérifiez si le nombre d’utilisateurs actifs utilisant le Connecteur AD/LDAP a augmenté depuis son déploiement initial. Vous pouvez évaluer cela en utilisant votre propre [solution de surveillance](/docs/fr-ca/customize/log-streams), ou vous pouvez obtenir une estimation à partir du [rapport des utilisateurs actifs d’Auth0](/docs/fr-ca/troubleshoot/customer-support/manage-subscriptions/monitor-subscription-usage).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Dans les environnements Microsoft Windows Server, Microsoft System Center Operations Manager (SCOM) peut être configuré pour surveiller et alerter sur l’état du service du connecteur AD/LDAP. Pour en savoir plus, consultez [Surveillance du connecteur AD/LDAP avec System Center Operations Manager](https://auth0.com/docs/authenticate/identity-providers/enterprise-identity-providers/active-directory-ldap/ad-ldap-connector/ad-ldap-connector-scom).
 
-</Note>
+</Callout>
 
 Si le nombre d’utilisateurs actifs a augmenté et que toutes les étapes ci-dessus ont déjà été suivies, il se peut que vous deviez mettre à niveau les spécifications matérielles de votre machine hôte ou configurer un [environnement à haute disponibilité](/docs/fr-ca/authenticate/identity-providers/enterprise-identity-providers/active-directory-ldap/ad-ldap-connector/ad-ldap-high-availability).
 
@@ -140,11 +140,11 @@ Ce message d’erreur se produit lorsque le Connecteur AD/LDAP ne démarre pas p
 
 Si la machine hébergeant le Connecteur est derrière un proxy, vous pouvez définir une variable d’environnement système `HTTP_PROXY`, ou vous pouvez définir la variable `HTTP_PROXY` dans le [fichier de configuration du Connecteur AD/LDAP](/docs/fr-ca/authenticate/identity-providers/enterprise-identity-providers/active-directory-ldap/ad-ldap-connector/ad-ldap-connector-config-file-schema). Si vous utilisez un proxy authentifié, l’URL doit être au format `http://USERNAME:PASSWORD@SERVER_URL:PORT`.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous définissez des variables d’environnement système ou si vous modifiez le [fichier de configuration du connecteur AD/LDAP](https://auth0.com/docs/authenticate/identity-providers/enterprise-identity-providers/active-directory-ldap/ad-ldap-connector/ad-ldap-connector-config-file-schema), vous devez redémarrer le connecteur AD/LDAP pour que les modifications soient prises en compte.
 
-</Note>
+</Callout>
 
 L’URL `HTTP_PROXY` doit être l’URL du proxy lui-même et ne peut pas pointer vers un fichier (auto-config) `.pac`. Si votre proxy est configuré via un fichier `.pac`, téléchargez le fichier `.pac` et trouvez-y l’URL du proxy.
 

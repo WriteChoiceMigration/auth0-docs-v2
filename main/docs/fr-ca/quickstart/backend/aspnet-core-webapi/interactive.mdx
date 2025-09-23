@@ -46,11 +46,11 @@ Vous pouvez également consulter notre guide de démarrage, qui vous aidera à c
 
 Notez que chaque API dans Auth0 est configurée à l’aide d’un identifiant d’API; votre code d’application utilisera l’identifiant d’API comme Public pour valider le jeton d’accès.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **Vous ne connaissez pas Auth0 ?** Découvrez Auth0 et l’implémentation de l’authentification et de l’autorisation d’API en utilisant le cadre d’applications OAuth 2.0.
 
-</Note>
+</Callout>
 
 [1
 
@@ -81,11 +81,11 @@ Configurez le logiciel médiateur d’authentification dans le fichier `Program.
 1. Enregistrez les services d’authentification en appelant la méthode `AddAuthentication`. Configurez `JwtBearerDefaults.AuthenticationScheme` comme schéma par défaut.
 2. Enregistrez le schéma d’authentification du porteur JWT en faisant un appel à la méthode `AddJwtBearer`. Configurez votre domaine Auth0 comme autorité et votre identifiant API Auth0 comme public, et assurez-vous que votre domaine Auth0 et votre identifiant API sont définis dans le fichier **appsettings.json** de votre application.
 
-   <Note>
+   <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
    Dans certains cas, le jeton d’accès n’aura pas de `sub` demande; dans ce cas, le nom `User.Identity.Name` sera `null`. Si vous souhaitez mapper une demande différente à `User.Identity.Name`, ajoutez-la aux `options.TokenValidationParameters` dans l’appel `AddJwtBearer()`.
 
-   </Note>
+   </Callout>
 
    .
 3. Ajoutez l’authentification et l’autorisation de le logiciel médiateur au pipeline du logiciel médiateur en ajoutant des appels aux méthodes `UseAuthentication`  et `UseAuthorization`  sous la méthode `var app = builder.Build();` .
@@ -132,11 +132,11 @@ Si vous appelez l’API à partir d’un outil de ligne de commande ou d’un au
 * **Secret client** comme paramètre `client_secret`.
 * **Identifiant API** (la même valeur utilisée pour configurer l’intergiciel plus tôt dans ce guide rapide) comme paramètre `audience`.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Pour en savoir plus sur l’obtention de l’identificateur client et du secret client pour votre application de communication entre machines, lisez la section Paramètres de l’application.
 
-</Note>
+</Callout>
 
 **Exemple de demande**
 

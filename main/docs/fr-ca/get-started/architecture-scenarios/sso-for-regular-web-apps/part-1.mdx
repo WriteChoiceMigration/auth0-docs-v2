@@ -15,21 +15,21 @@ Dans cette section, nous aborderons la solution que nous mettons en œuvre, y co
 
 ExampleCo a décidé d’utiliser Auth0 comme fournisseur d’identité en tant que service (IDaaS). Cette décision s’explique par le fait que l’entreprise ne souhaitait pas consacrer de ressources à la formation, à la mise en œuvre et à la maintenance de la gestion des identités et des accès. En outre, l’entreprise prévoit de développer cette solution à l’avenir, en ajoutant éventuellement une application mobile native et une API pour envoyer les feuilles de temps approuvées vers leurs systèmes internes. Auth0 offre la flexibilité nécessaire pour intégrer de tels changements dans leur architecture avec un minimum d’effort.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 L’identité en tant que service (Identity-as-Service/IDaaS) est un service basé sur le nuage pour la gestion des identités et des accès. Les services proposés comprennent souvent l’authentification unique (SSO), l’identité fédérée, la gestion des mots de passe, etc.
 
-</Note>
+</Callout>
 
 ## Quel protocole utiliser?
 
 La décision suivante concerne le protocole à utiliser : <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OAuth 2.0</Tooltip> avec <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OpenID</Tooltip> Connect (OIDC) ou <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SAML</Tooltip>.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Auth0 met en œuvre des protocoles d’identité éprouvés, communs et populaires, à la fois pour les produits Web orientés vers le consommateur (OAuth 2.0, OAuth 1.0, OpenID) et pour les déploiements d’entreprise (SAML, WS-Federation, LDAP). Vous êtes totalement libre d’utiliser celui qui répond le mieux aux besoins de votre entreprise.
 
-</Note>
+</Callout>
 
 **OpenID Connect** est un protocole d’authentification basé sur la famille de spécifications OAuth 2.0. Il utilise de simples jetons d’identité JSON (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">JWT</Tooltip>) délivrés via le protocole OAuth 2.0.
 
@@ -89,9 +89,9 @@ La validation d’un jeton d’ID nécessite plusieurs étapes :
 12. Si la demande `acr` a été émise, l’application doit vérifier que la valeur de l’allégation affirmée est appropriée.
 13. Si la demande `auth_time` a été émise, soit par une demande particulière pour cette allégation, soit en utilisant le paramètre `max_age`, l’application doit vérifier la valeur de la demande `auth_time` et demander une réauthentification si elle détermine que trop de temps s’est écoulé depuis la dernière authentification de l’utilisateur final.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous stockez des jetons d’ID sur votre serveur, faites-le de manière sécurisée.
 
-</Note>
+</Callout>
 

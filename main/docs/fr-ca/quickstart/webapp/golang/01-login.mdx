@@ -41,11 +41,11 @@ Log In & Download Sample[View on Github](https://github.com/auth0-samples/auth0-
 
 System requirements: Go 1.21+
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **New to Auth?** Learn [How Auth0 works](/docs/fr-ca/overview), how it [integrates with Regular Web Applications](/docs/fr-ca/architecture-scenarios/web-app-sso) and which [protocol](/docs/fr-ca/flows) it uses.
 
-</Note>
+</Callout>
 
 ## Configure Auth0
 
@@ -61,31 +61,31 @@ You need the following information:
 * **Client ID**
 * **Client Secret**
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 If you download the sample from the top of this page, these details are filled out for you.
 
-</Note>
+</Callout>
 
 ### Configure Callback URLs
 
 A callback URL is a URL in your application where Auth0 redirects the user after they have authenticated. The callback URL for your app must be added to the **Allowed Callback URLs** field in your [Application Settings](https://manage.auth0.com/#/applications). If this field is not set, users will be unable to log in to the application and will get an error.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 If you are following along with the sample project you downloaded from the top of this page, the callback URL you need to add to the **Allowed Callback URLs** field is `http://localhost:3000/callback`.
 
-</Note>
+</Callout>
 
 ### Configure Logout URLs
 
 A logout URL is a URL in your application that Auth0 can return to after the user has been logged out of the authorization server. This is specified in the `returnTo` query parameter. The logout URL for your app must be added to the **Allowed Logout URLs** field in your [Application Settings](https://manage.auth0.com/#/applications). If this field is not set, users will be unable to log out from the application and will get an error.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 If you are following along with the sample project you downloaded from the top of this page, the logout URL you need to add to the **Allowed Logout URLs** field is `http://localhost:3000`.
 
-</Note>
+</Callout>
 
 ## Configure Go to Use Auth0
 
@@ -115,11 +115,11 @@ We can now make the dependencies available for us by running the following shell
 go mod download
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 This example uses `gin` for routing, but you can use whichever router you want.
 
-</Note>
+</Callout>
 
 ### Configure your application
 
@@ -259,12 +259,12 @@ func New(auth *authenticator.Authenticator) *gin.Engine {
 }
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 The router uses the [github.com/gin-contrib/sessions](https://github.com/gin-contrib/sessions) middleware to manage
 our cookie based sessions.
 
-</Note>
+</Callout>
 
 ### Serving your application
 
@@ -517,11 +517,11 @@ func Handler(ctx *gin.Context) {
 }
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 The redirect URL needs to be in the list of Allowed Logout URLs in the settings section of the application, For more information, see [Redirect Users After Logout](/docs/fr-ca/logout/guides/redirect-users-after-logout).
 
-</Note>
+</Callout>
 
 Create a file called `user.js` in the folder `web/static/js`, and add the code to remove the cookie from a logged-in
 user.
@@ -534,12 +534,12 @@ $(document).ready(function () {
 });
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 This sample is using [js.cookie](https://github.com/js-cookie/js-cookie/tree/latest#readme) for cookie handling.
 You need to add the `js.cookie.js` file to the `web/static/js` folder to use it.
 
-</Note>
+</Callout>
 
 ## Optional Steps
 

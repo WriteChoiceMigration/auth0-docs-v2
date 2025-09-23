@@ -53,11 +53,11 @@ Vous devez également être familiarisé avec [Capacitor development workflow (l
 
 Pour utiliser les services Auth0, vous devez avoir une application installée dans Auth0 Dashboard. L’application Auth0 est l’endroit où vous allez configurer le fonctionnement de l’authentification pour votre projet.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Tout au long de cet article, `YOUR_PACKAGE_ID` est l’identifiant du package de votre application. Ceci peut être trouvé et configuré dans le champ `appId` de votre fichier `capacitor.config.ts` . Voir [Capacitor’s Config schema (Schéma de configuration du Capacitor)](https://capacitorjs.com/docs/config#schema) pour plus d’informations.
 
-</Note>
+</Callout>
 
 ### Configurer une application
 
@@ -71,35 +71,35 @@ Si vous préférez explorer une configuration complète, consultez plutôt un ex
 
 Une URL de rappel est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur authentification. Si elle n’est pas définie, les utilisateurs ne seront pas redirigés vers votre application après s’être connectés.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous suivez notre projet à titre d’exemple, définissez ceci sur :
 
 `YOUR_PACKAGE_ID://{yourTenant}.auth0.com/capacitor/YOUR_PACKAGE_ID/callback`.
 
-</Note>
+</Callout>
 
 ### Configuration des URL de déconnexion
 
 Une URL de déconnexion est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur déconnexion. Si elle n’est pas définie, les utilisateurs ne pourront pas se déconnecter de votre application et recevront un message d’erreur.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous suivez notre projet à titre d’exemple, définissez ceci sur :
 
 `YOUR_PACKAGE_ID://{yourTenant}.auth0.com/capacitor/YOUR_PACKAGE_ID/callback`.
 
-</Note>
+</Callout>
 
 ### Configurer les origines autorisées
 
 Pour pouvoir faire des requêtes à partir de votre application d’origine vers Auth0, définissez les **origines autorisées** dans vos [Application Settings (Paramètres d’application)](https://manage.auth0.com/dashboard/#/applications/%7ByourClientId%7D/settings).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si vous suivez notre projet faisant office d’exemple, définissez ceci sur `capacitor://localhost, http://localhost` pour iOS et Android respectivement.
 
-</Note>
+</Callout>
 
 Enfin, assurez-vous que le **type d’application** pour votre application est défini sur **Native** dans les [Application Settings (Paramètres d’application)](https://manage.auth0.com/dashboard/#/applications/%7ByourClientId%7D/settings).
 
@@ -122,11 +122,11 @@ Ce guide rapide et cet exemple utilisent certains des plugiciels officiels Capac
 * [`@capacitor/browser`](https://capacitorjs.com/docs/apis/browser) : Vous permet d’interagir avec le navigateur de système de l’appareil, et est utilisé pour ouvrir l’URL vers le point de terminaison d’autorisation d’Auth0.
 * [`@capacitor/app`](https://capacitorjs.com/docs/apis/app) : Vous permet de vous abonner à des événements d’application de haut niveau, utiles pour la gestion des Callbacks depuis Auth0.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Le plugiciel de navigateur de Capacitor sur iOS utilise [`SFSafariViewController`](https://developer.apple.com/documentation/safariservices/sfsafariviewcontroller), qui sur iOS 11+ ne partage pas les témoins avec Safari sur l’appareil. Cela signifie que SSO ne fonctionnera pas sur ces appareils. Si vous avez besoin de SSO, veuillez utiliser un plugiciel compatible qui utilise [ASWebAuthenticationSession](https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession).
 
-</Note>
+</Callout>
 
 [4
 
@@ -164,11 +164,11 @@ checkpoint.itWorked checkpoint.somethingNotRight
 
 Dans une application Capacitor, le plugiciel [Capacitor’s Browser](https://capacitorjs.com/docs/apis/browser) effectue une redirection vers la [Universal Login Page (page de connexion universelle) d’Auth0](https://auth0.com/universal-login) Auth0. Définissez le paramètre `openUrl` sur la fonction `loginWithRedirect` pour utiliser `Browser.open` afin que l’URL soit ouverte à l’aide du composant de navigateur système de l’appareil ([SFSafariViewController](https://developer.apple.com/documentation/safariservices/sfsafariviewcontroller) sur iOS et [Chrome Custom Tabs [Onglets personnalisés Chrome]](https://developer.chrome.com/docs/android/custom-tabs) sur Android).
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Par défaut, la méthode `loginWithRedirect` de la trousse SDK utilise `window.location.href` pour accéder à la page de connexion dans l’application de navigateur par défaut sur l’appareil de l’utilisateur plutôt que dans le composant de navigateur système approprié pour la plate-forme. L’utilisateur quitterait votre application pour s’authentifier et pourrait rendre l’expérience utilisateur sous-optimale.
 
-</Note>
+</Callout>
 
 ##### checkpoint.header
 
@@ -186,11 +186,11 @@ Vous pouvez utiliser cette méthode uniquement sur une redirection depuis Auth0.
 
 La méthode `Browser.close()` devrait fermer le navigateur lorsque cet événement est déclenché.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Cet article suppose que vous utiliserez des schémas d’URL personnalisés pour gérer le rappel dans votre application. Pour ce faire, enregistrez votre `YOUR_PACKAGE_ID` comme schéma d’URL pour la plateforme de votre choix. Pour en savoir plus, lire [Defining a Custom URL Scheme (Définition d’un schéma d’URL personnalisé)](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app) pour iOS ou [Create Deep Links to App Content (Création de liens profonds vers le contenu des applications)](https://developer.android.com/training/app-links/deep-linking) pour Android.
 
-</Note>
+</Callout>
 
 ##### checkpoint.header
 
@@ -210,11 +210,11 @@ Pour y parvenir avec Ionic et Capacitor en conjonction avec le SDK Auth0 :
 * Déconnectez-vous de la trousse SDK en appelant `logout` et transmettez votre URL de redirection comme paramètre `logoutParams.returnTo`.
 * Définissez le paramètre `openUrl` sur un callback qui utilise le plugiciel de navigateur Capacitor pour ouvrir l’URL à l’aide de `Browser.open`.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 De la même manière que pour l’étape de connexion, si vous ne définissez pas `openUrl` lors de l’appel de `logout`, le SDK redirige l’utilisateur vers l’URL de déconnexion à l’aide de l’application de navigateur par défaut sur l’appareil, ce qui offre une expérience utilisateur sous-optimale.
 
-</Note>
+</Callout>
 
 ##### checkpoint.header
 

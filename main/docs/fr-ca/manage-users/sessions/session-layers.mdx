@@ -24,11 +24,11 @@ Auth0 fournit des outils pour vous aider à donner aux utilisateurs la possibili
 * **Déconnexion de la couche session de l’application** : La déconnexion des utilisateurs de vos applications entraîne généralement l’effacement de leur session, ce qui doit être géré par votre application : pour la couche de session de l’application, il n’y a rien dans votre locataire Auth0 que vous devez utiliser pour faciliter la fin de la session. Vous devrez donc utiliser la pile de session d’application que vous utilisez pour effacer toutes les informations relatives à la session. Notez que certaines trousses SDK Auth0 fournissent un certain degré de prise en charge des sessions d’application; veuillez vérifier la documentation pour voir s’il y a une suppression de session de trousse SDK locale qui doit être faite.
 * **Déconnexion de la couche de session d’Auth0** : Vous pouvez déconnecter les utilisateurs de la couche de session d’Auth0 en les redirigeant vers le point de terminaison de déconnexion Auth0 afin qu’Auth0 puisse effacer le témoin de l’authentification unique
 
-  <Note>
+  <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
   Généralement, vous effacez une session Auth0 en redirigeant les utilisateurs vers le point de terminaison `/logout`. Cependant, si vous appelez le point de terminaison [Update a User](/docs/fr-ca/api/management/v2/#!/Users/patch_users_by_id) pour réinitialiser les attributs de l’utilisateur (en transmettant les valeurs `email`, `email_verified`, `phone_number` et `password`), `auth0.checkSession` ne renouvellera pas la session et l’utilisateur devra se reconnecter.
 
-  </Note>
+  </Callout>
 
 * **Déconnexion de la couche de session du fournisseur d’identité** : Il n’est pas nécessaire de déconnecter les utilisateurs de cette couche de session, mais vous pouvez utiliser Auth0 pour forcer la déconnexion si nécessaire.
 

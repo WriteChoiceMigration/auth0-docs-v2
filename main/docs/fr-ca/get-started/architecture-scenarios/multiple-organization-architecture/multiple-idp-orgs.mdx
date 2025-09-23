@@ -22,23 +22,23 @@ context.idToken['http://travel0.net/connection'] = context.connection;     // 
 context.accessToken['http://travel0.net/connection'] = context.connection; // Connection name claim
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 L’objet contextuel Règles permet d’accéder à divers aspects de la connexion utilisée pour l’authentification à premier facteur d’un utilisateur, notamment le nom de la `connection`, `connectionID` et `connectionStrategy`. Cela permet également l’extensibilité de la Règle avec des informations supplémentaires qui peuvent être utilisées dans le cadre de n’importe quelle [application de politique centralisée](/docs/fr-ca/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/authorization).
 
-</Note>
+</Callout>
 
 ### Connexion à la base de données
 
 Bien qu’Auth0 vous permette de [fournir](/docs/fr-ca/get-started/architecture-scenarios/multiple-organization-architecture/single-identity-provider-organizations/provisioning) plusieurs [connexions à des bases de données et à des bases de données personnalisées](/docs/fr-ca/connections/database), nous ne vous recommandons pas d’associer plus d’un de ces types de connexion à une organisation Auth0. Étant donné que les connexions aux bases de données et aux bases de données personnalisées ne prennent pas actuellement en charge la découverte du domaine d’accueil, qui est un élément clé de l’[authentification Identifier-First](/docs/fr-ca/authenticate/login/auth0-universal-login/identifier-first), la nouvelle expérience de connexion universelle ne peut pas choisir entre ces deux types de connexions si plusieurs d’entre elles sont définies.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 **Meilleure pratique**
 
 Si vous définissez une connexion de base de données personnalisée à utiliser avec une Organization Auth0, assurez-vous qu’une (et une seule) connexion de base de données personnalisée est associée à cette Organization Auth0 à un moment donné.
 
-</Note>
+</Callout>
 
 ### connexion d’entreprise
 

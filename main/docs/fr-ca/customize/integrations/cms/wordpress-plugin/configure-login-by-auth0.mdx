@@ -11,11 +11,11 @@ permalink: "configure-login-by-auth0"
 
 Connexion par Auth0 peut être configuré à l’aide de l’assistant de configuration dans le plugiciel ou manuellement pour plus de contrôle sur le processus. Pour en savoir plus, veuillez consulter [Installer la connexion par Auth0](/docs/fr-ca/customize/integrations/cms/wordpress-plugin/install-login-by-auth0). Les instructions ci-dessous peuvent également être utilisées si l’assistant de configuration n’a pas été complété ou dans le cadre de la résolution des problèmes de connexion.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Vous devez être connecté à votre compte Auth0 avant de commencer les étapes ci-dessous. Si vous n’en avez pas encore, [créez-en un](https://auth0.com/signup).
 
-</Note>
+</Callout>
 
 ## Configuration Auth0
 
@@ -42,11 +42,11 @@ L’URL de rappel **ne doit pas** être mise en cache, sinon une erreur « Éta
 2. Entrez la URL de connexion dans le champ **URL de déconnexion autorisées**
 3. Laisser le champ **Allowed Origins (CORS)** (Origines autorisées) vide (il utilisera les valeurs des **URL de rappel autorisées** ci-dessus)
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Veillez à faire correspondre le protocole de votre site (HTTP ou HTTPS) et à utiliser l’URL de la page d’accueil comme base, que l’on trouve dans **wp-admin > Paramètres > Général > Adresse WordPress (URL)** pour tous les champs d’URL ci-dessus.
 
-</Note>
+</Callout>
 
 1. Faites défiler l’écran vers le bas et sélectionnez **Afficher les paramètres avancés**, puis sélectionnez l’affichage **OAuth** et assurez-vous que le **Algorithme de signature JsonWebToken** est défini sur RS256. Si cela doit être modifié plus tard, il faut le faire ici ainsi que dans wp-admin (voir Paramètres > Configuration de base ci-dessous).
 2. Activer la fonction **OIDC Conformant**.
@@ -143,11 +143,11 @@ Les options ici n’affectent pas la page de connexion universelle (pour en savo
 * **URL Lock JS personnalisée** : Une URL valide vers une version de Lock. Ce champ sera automatiquement masqué lorsque **Utiliser l’URL Lock JS personnalisée** est désactivée. Le nom de l’option est `cdn_url`.
 * **Connexions à afficher** : Énumérez ici chacun des fournisseurs d’identité que vous autorisez les utilisateurs à utiliser pour se connecter. Si laissé vide, tous les fournisseurs activés seront autorisés. (Pour en savoir plus, veuillez consulter [Personnalisation de l’interface utilisateur Lock](/docs/fr-ca/libraries/lock/lock-ui-customization)). Le nom de l’option est `lock_connections`.
 
-  <Note>
+  <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
   Si vous avez activé la connexion sans mot de passe, vous devez énumérer ici tous les fournisseurs d’identité sociale autorisés. Pour en savoir plus, consultez [.social(options, callback) dans notre référentiel GitHub](https://github.com/auth0/lock-passwordless#socialoptions-callback).
 
-  </Note>
+  </Callout>
 
 ### Avancé
 
@@ -162,11 +162,11 @@ Les options ici n’affectent pas la page de connexion universelle (pour en savo
 * **Forcer le rappel HTTPS** : Activez cette option si votre site autorise le HTTPS mais ne l’applique pas. Cela forcera les rappels Auth0 vers HTTPS dans le cas où votre URLd’accueil n’est pas configurée pour HTTPS. Le nom de l’option est `force_https_callback`.
 * **Approvisionnement automatique** : Les nouveaux utilisateurs de Auth0 doivent-ils être stockés dans la base de données WordPress si les nouvelles inscriptions ne sont pas autorisées? Cela va créer des utilisateurs WordPress qui n’existent pas lorsqu’ils se connectent via Auth0 (par exemple, si un utilisateur est créé dans le Auth0 Dashboard). Le nom de l’option est `auto_provisioning`.
 
-  <Note>
+  <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
   Si les enregistrements sont autorisés dans WordPress, de nouveaux utilisateurs seront créés indépendamment de ce paramètre.
 
-  </Note>
+  </Callout>
 
 * **Migration des utilisateurs** : Activer cette option exposera les services Web de migration Auth0. Cependant, la connexion devra être configurée manuellement dans le [Auth0 Dashboard](https://manage.auth0.com/#). Pour en savoir plus sur le processus de migration, veuillez consulter [Migration des utilisateurs dans le plugiciel Login by Auth0 pour WordPress](/docs/fr-ca/customize/integrations/cms/wordpress-plugin/user-migration-in-login-by-auth0). Le bouton **Générer un nouveau jeton de migration** peut être utilisé pour remplacer le jeton enregistré par un nouveau. Assurez-vous que votre page de configuration de la connexion à la base de données est ouverte dans l’onglet **Base de données personnalisée** afin de pouvoir remplacer le jeton existant par le nouveau dans les deux scripts. Le nom de l’option est `migration_ws`. Le nom de l’option du jeton de migration est `migration_token`.
 * **Liste des IP de migration** : Seules les demandes provenant des IP répertoriées seront autorisées à accéder au service Web de migration. Le nom de l’option est `migration_ips_filter`.

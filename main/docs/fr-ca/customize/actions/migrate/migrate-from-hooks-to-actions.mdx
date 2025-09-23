@@ -50,11 +50,11 @@ Pour convertir un Hook en Action, vous devez remplacer le code spécifique à le
 
 ### Copier le code du hook dans une nouvelle action
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Nous vous recommandons de copier le code de votre hook dans une nouvelle action et d’utiliser l’éditeur de code d’actions dans le Auth0 Dashboard; cela vous aidera à identifier les problèmes en suspens dans votre code.
 
-</Note>
+</Callout>
 
 1. Connectez-vous à votre locataire de production et copiez le code du hook que vous souhaitez convertir.
 2. Passez à un locataire hors production et accédez à [Auth0 Dashboard > Actions > Bibliothèque](https://manage.auth0.com/#/select-tenant?path=/actions/library).
@@ -161,11 +161,11 @@ exports.onExecuteSendPhoneMessage = async (event) => {}
 
 Les Hooks et les Actions gèrent les dépendances de la même manière. Dans les deux cas, les dépendances sont ajoutées séparément via l’interface utilisateur ou Management API et incluses dans le code. Avec les deux, vous pouvez également demander n’importe quel package disponible dans le registre `npm`.
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Si la version de vos modules `npm` n’est pas la plus récente, c’est le bon moment pour une mise à jour!
 
-</Note>
+</Callout>
 
 1. Rechercher les déclarations `require` à l’intérieur de votre code du Hook.
 2. Supprimez les numéros de version, après les avoir notés.
@@ -238,11 +238,11 @@ async (event, api) => {
 };
 ```
 
-<Note>
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
 Contrairement à l’objet `context` lié aux hooks, les données stockées ou modifiées dans les propriétés de l’objet `event` ne persistent pas dans les Actions suivantes. Si votre Hook définit des données sur ces propriétés pour déclencher des fonctionnalités de base, vous devrez utiliser l’interface `api` disponible dans les flux d’action [machine-machine](/docs/fr-ca/customize/actions/explore-triggers/machine-to-machine-trigger/credentials-exchange-api-object) et [Enregistrement pré-utilisateur](/docs/fr-ca/customize/actions/explore-triggers/signup-and-login-triggers/pre-user-registration-trigger/pre-user-registration-api-object) pour que les données persistent sur les Actions.
 
-</Note>
+</Callout>
 
 ### Convertir les rappels
 
