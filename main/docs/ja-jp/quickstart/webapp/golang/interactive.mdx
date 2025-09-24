@@ -7,279 +7,333 @@ permalink: "interactive"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/golang.png"
 'twitter:title': "Goアプリケーションにログインを追加する"
 'twitter:description': "このガイドは、新規または既存のGo WebアプリケーションにAuth0を統合する方法を説明します。"
+sidebarTitle: Go
 ---
 
-[Skip to main content](#maincontent)
+import { Recipe, Content, Section, SideMenu, SideMenuSectionItem, SignUpForm } from "/snippets/recipe.jsx";
+import { LoggedInForm } from "/snippets/Login.jsx";
+import Auth from "/snippets/quickstart/webapp/golang/auth.go.mdx";
+import Callback from "/snippets/quickstart/webapp/golang/callback.go.mdx";
+import Env from "/snippets/quickstart/webapp/golang/.env.mdx";
+import Go from "/snippets/quickstart/webapp/golang/go.mod.mdx";
+import Isauthenticated from "/snippets/quickstart/webapp/golang/isAuthenticated.go.mdx";
+import Login from "/snippets/quickstart/webapp/golang/login.go.mdx";
+import Logout from "/snippets/quickstart/webapp/golang/logout.go.mdx";
+import Main from "/snippets/quickstart/webapp/golang/main.go.mdx";
+import Router from "/snippets/quickstart/webapp/golang/router.go.mdx";
+import User from "/snippets/quickstart/webapp/golang/user.go.mdx";
 
-​
+export const sections = [
+  { id: "auth0を構成する", title: "Auth0を構成する" },
+  { id: "依存関係をインストールする", title: "依存関係をインストールする" },
+  { id: "環境変数を構成する", title: "環境変数を構成する" },
+  { id: "oauth2パッケージとopenid-connectパッケージを構成する", title: "OAuth2パッケージとOpenID Connectパッケージを構成する" },
+  { id: "アプリケーションルートをセットアップする", title: "アプリケーションルートをセットアップする" },
+  { id: "アプリケーションにログインを追加する", title: "アプリケーションにログインを追加する" },
+  { id: "認証コールバックを処理する", title: "認証コールバックを処理する" },
+  { id: "ユーザープロファイル情報を表示する", title: "ユーザープロファイル情報を表示する" },
+  { id: "アプリケーションにログアウトを追加する", title: "アプリケーションにログアウトを追加する" },
+  { id: "ルートを保護する", title: "ルートを保護する" },
+  { id: "アプリケーションを仕上げる", title: "アプリケーションを仕上げる" }
+]
 
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+<Recipe>
+  <Content>
+    Auth0を使用すると、アプリケーションに手軽に認証を追加して、ユーザープロファイル情報にアクセスすることができますこのガイドは、新規または既存のGo WebアプリケーションにAuth0を統合する方法を説明します。
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+    <Section id={sections[0].id} title={sections[0].title} stepNumber="1">
+      Auth0のサービスを利用するには、Auth0 Dashboadに設定済みのアプリケーションがある必要があります。Auth0アプリケーションは、開発中のプロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
 
----
+      ### アプリケーションを構成する
 
-​
+      対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0
+            APIを呼び出す際に使用されます。
 
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+      このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/dashboard/us/auth0-dsepaid/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
 
-[##### Goアプリケーションにログインを追加する](#Goアプリケーションにログインを追加する)
+      ### Callback URLを構成する
 
-[View on Github](https://github.com/auth0-samples/auth0-golang-web-app/tree/master/01-Login) Log In & Download Sample
+      Callback URLとは、Auth0がユーザーを認証後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはログイン後にアプリケーションに戻りません。
 
-1. [Quickstarts](/docs/ja-jp/quickstarts)
-3. [Regular Web App](/docs/ja-jp/quickstart/webapp)
-5. [Go](/docs/ja-jp/quickstart/webapp/golang/interactive)
+      <Info>
+      サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000``/callback`に設定してください。
+      </Info>
 
-# 
+      ### ログアウトURLを構成する
 
-# Goアプリケーションにログインを追加する
+      ログアウトURLとは、Auth0がユーザーをログアウト後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーを受け取ります。
 
-Auth0を使用すると、アプリケーションに手軽に認証を追加して、ユーザープロファイル情報にアクセスすることができますこのガイドは、新規または既存のGo WebアプリケーションにAuth0を統合する方法を説明します。
+      <Info>
+      サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+      </Info>
+    </Section>
 
-[1
+    <Section id={sections[1].id} title={sections[1].title} stepNumber="2">
+      `go.mod`ファイルを作成して、アプリケーションの依存関係をすべてリストします。
 
-## Auth0を構成する](#auth0を構成する)
+      GoアプリケーションでAuth0を統合するには、`coreos/go-oidc/v3`パッケージと`x/oauth2`パッケージを追加します。
 
-Auth0のサービスを利用するには、Auth0 Dashboadに設定済みのアプリケーションがある必要があります。Auth0アプリケーションは、開発中のプロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
+      OIDCパッケージとOAuth2パッケージに加え、`joho/godotenv`、`gin-gonic/gin`、`gin-contrib/sessions`を追加します。
 
-### アプリケーションを構成する
+      <Info>
+      この例ではルーティングに`gin`を使用しますが、お好きなルーターを使用できます。
+      </Info>
 
-対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0 APIを呼び出す際に使用されます。
+      `go.mod`ファイルを必要な依存関係で保存し、ターミナルで次のコマンドを使ってインストールします：
 
-このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/dashboard/us/auth0-dsepaid/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
+      ```text lines
+      go mod download
+      ```
+    </Section>
 
-完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
+    <Section id={sections[2].id} title={sections[2].title} stepNumber="3">
+      プロジェクトディレクトリのルート内の`.env`で以下の環境変数を設定してください：
 
-### Callback URLを構成する
+      - **AUTH0_DOMAIN**：Auth0テナントのドメインです。Auth0
+                Dashboardにあるアプリケーションの［Settings（設定）］の［Domain（ドメイン）］フィールドで確認してください。カスタムドメインを使用する場合は、この値をカスタムドメインの値に設定してください。
+      - **AUTH0_CLIENT_ID**：このクイックスタートで前にセットアップしたAuth0アプリケーションのIDです。Auth0
+                Dashboardにあるアプリケーションの［Settings（設定）］の［Client ID（クライアントID）］フィールドで確認してください。
+      - **AUTH0_CLIENT_SECRET**：このクイックスタートで前にセットアップしたAuth0アプリケーションのシークレットです。Auth0
+                Dashboardにあるアプリケーションの［Settings（設定）］の［Client Secret（クライアントシークレット）］フィールドで確認してください。
+      - **AUTH0_CALLBACK_URL**：認証成功後にユーザーをリダイレクトするためにAuth0が使用するURLです。
+    </Section>
 
-Callback URLとは、Auth0がユーザーを認証後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはログイン後にアプリケーションに戻りません。
+    <Section id={sections[3].id} title={sections[3].title} stepNumber="4">
+      次にOAuth2パッケージとOpenID Connectパッケージを構成します。
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      `platform/authenticator`フォルダーに`auth.go`という名前のファイルを作成します。このパッケージ内で、[OAuth2](https://godoc.org/golang.org/x/oauth2)クライアントと[OIDC](https://godoc.org/github.com/coreos/go-oidc)クライアントを構成してリターンするメソッドを作成し、IDトークンを検証するもう1つのメソッドを作成します。
+    </Section>
 
-サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000``/callback`に設定してください。
+    <Section id={sections[4].id} title={sections[4].title} stepNumber="5">
+      `platform/router`フォルダーに`router.go`という名前のファイルを作成します。このパッケージで、[github.com/gin-gonic/gin](https://github.com/gin-gonic/gin)を使ってルートを構成、リターンするメソッドを作成します。`login`ハンドラーと`callback`ハンドラーで使用するために、`Authenticator`のインスタンスをメソッドに渡すことになります。
+    </Section>
 
-</Callout>
+    <Section id={sections[5].id} title={sections[5].title} stepNumber="6">
+      ユーザーが自分で認証するには、`/login`ルートを処理するハンドラー関数を作成する必要があります。
 
-### ログアウトURLを構成する
+      `web/app/login`フォルダーに`login.go`という名前のファイルを作成し、`Handler`関数を追加します。ハンドラーの実行時にユーザーはAuth0へリダイレクトされ、資格情報を入力できるようになります。
 
-ログアウトURLとは、Auth0がユーザーをログアウト後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーを受け取ります。
+      `/login`ルートを呼び出すには、`web/template`ディレクトリにある`home.html`テンプレートに`/login`へのリンクを追加します。
+    </Section>
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+    <Section id={sections[6].id} title={sections[6].title} stepNumber="7">
+      ユーザーはAuth0ユニバーサルログインページを使って認証すると、 `/callback`ルートでアプリに戻ります。
 
-サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+      `web/app/callback`フォルダーに`callback.go`という名前のファイルを作成し、`Handler`関数を追加します。
 
-</Callout>
+      このハンドラーはAuth0によって提供された`code`クエリ文字列を受け取り、IDトークンおよびアクセストークンと交換します。
 
-[2
+      IDトークンが有効である場合、セッションにプロファイル情報とアクセストークンが保存されます。プロファイル情報はIDトークンに含まれるクレームに基づいています。セッションストレージは、必要に応じてアプリケーションがこの情報にアクセスすることを許可します。
+    </Section>
 
-## 依存関係をインストールする](#依存関係をインストールする)
+    <Section id={sections[7].id} title={sections[7].title} stepNumber="8">
+      ユーザーがログインできるようになったら、認証済みのユーザーに関連付けられたプロファイル情報を取得し、使用できるようにしたいと考えるはずです。
 
-`go.mod`ファイルを作成して、アプリケーションの依存関係をすべてリストします。
+      ニックネームやプロフィール写真といったプロファイル情報は、前のセッションで保存された`profile`からアクセスできます。
 
-GoアプリケーションでAuth0を統合するには、`coreos/go-oidc/v3`パッケージと`x/oauth2`パッケージを追加します。
+      `web/app/user/user.go`で`/user`エンドポイント用のハンドラーを作成し、対応するHTMLファイルを返します。`profile`が`ctx.HTML()`に渡されているため、同じHTMLファイル内の`picture`や`nickname`といったプロファイル情報にアクセスできます。
 
-OIDCパッケージとOAuth2パッケージに加え、`joho/godotenv`、`gin-gonic/gin`、`gin-contrib/sessions`を追加します。
-
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
-
-この例ではルーティングに`gin`を使用しますが、お好きなルーターを使用できます。
-
-</Callout>
-
-`go.mod`ファイルを必要な依存関係で保存し、ターミナルで次のコマンドを使ってインストールします：
-
-`go mod download`
-
-[3
-
-## 環境変数を構成する](#環境変数を構成する)
-
-プロジェクトディレクトリのルート内の`.env`で以下の環境変数を設定してください：
-
-* **AUTH0_DOMAIN**：Auth0テナントのドメインです。Auth0 Dashboardにあるアプリケーションの［Settings（設定）］の［Domain（ドメイン）］フィールドで確認してください。カスタムドメインを使用する場合は、この値をカスタムドメインの値に設定してください。
-* **AUTH0_CLIENT_ID**：このクイックスタートで前にセットアップしたAuth0アプリケーションのIDです。Auth0 Dashboardにあるアプリケーションの［Settings（設定）］の［Client ID（クライアントID）］フィールドで確認してください。
-* **AUTH0_CLIENT_SECRET**：このクイックスタートで前にセットアップしたAuth0アプリケーションのシークレットです。Auth0 Dashboardにあるアプリケーションの［Settings（設定）］の［Client Secret（クライアントシークレット）］フィールドで確認してください。
-* **AUTH0_CALLBACK_URL**：認証成功後にユーザーをリダイレクトするためにAuth0が使用するURLです。
-
-[4
-
-## OAuth2パッケージとOpenID Connectパッケージを構成する](#oauth2パッケージとopenid-connectパッケージを構成する)
-
-次にOAuth2パッケージとOpenID Connectパッケージを構成します。
-
-`platform/authenticator`フォルダーに`auth.go`という名前のファイルを作成します。このパッケージ内で、[OAuth2](https://godoc.org/golang.org/x/oauth2)クライアントと[OIDC](https://godoc.org/github.com/coreos/go-oidc)クライアントを構成してリターンするメソッドを作成し、IDトークンを検証するもう1つのメソッドを作成します。
-
-[5
-
-## アプリケーションルートをセットアップする](#アプリケーションルートをセットアップする)
-
-`platform/router`フォルダーに`router.go`という名前のファイルを作成します。このパッケージで、[github.com/gin-gonic/gin](https://github.com/gin-gonic/gin)を使ってルートを構成、リターンするメソッドを作成します。`login`ハンドラーと`callback`ハンドラーで使用するために、`Authenticator`のインスタンスをメソッドに渡すことになります。
-
-[6
-
-## アプリケーションにログインを追加する](#アプリケーションにログインを追加する)
-
-ユーザーが自分で認証するには、`/login`ルートを処理するハンドラー関数を作成する必要があります。
-
-`web/app/login`フォルダーに`login.go`という名前のファイルを作成し、`Handler`関数を追加します。ハンドラーの実行時にユーザーはAuth0へリダイレクトされ、資格情報を入力できるようになります。
-
-`/login`ルートを呼び出すには、`web/template`ディレクトリにある`home.html`テンプレートに`/login`へのリンクを追加します。
-
-[7
-
-## 認証コールバックを処理する](#認証コールバックを処理する)
-
-ユーザーはAuth0ユニバーサルログインページを使って認証すると、 `/callback`ルートでアプリに戻ります。
-
-`web/app/callback`フォルダーに`callback.go`という名前のファイルを作成し、`Handler`関数を追加します。
-
-このハンドラーはAuth0によって提供された`code`クエリ文字列を受け取り、IDトークンおよびアクセストークンと交換します。
-
-IDトークンが有効である場合、セッションにプロファイル情報とアクセストークンが保存されます。プロファイル情報はIDトークンに含まれるクレームに基づいています。セッションストレージは、必要に応じてアプリケーションがこの情報にアクセスすることを許可します。
-
-[8
-
-## ユーザープロファイル情報を表示する](#ユーザープロファイル情報を表示する)
-
-ユーザーがログインできるようになったら、認証済みのユーザーに関連付けられたプロファイル情報を取得し、使用できるようにしたいと考えるはずです。
-
-ニックネームやプロフィール写真といったプロファイル情報は、前のセッションで保存された`profile`からアクセスできます。
-
-`web/app/user/user.go`で`/user`エンドポイント用のハンドラーを作成し、対応するHTMLファイルを返します。`profile`が`ctx.HTML()`に渡されているため、同じHTMLファイル内の`picture`や`nickname`といったプロファイル情報にアクセスできます。
-
-このようなHTMLファイルは以下の例のように見えることがありますが、カスタムクレームを含め、いかなるプロファイル情報も取得できます。
-
-[9
-
-## アプリケーションにログアウトを追加する](#アプリケーションにログアウトを追加する)
-
-ユーザーをログアウトさせるには、セッションのデータを消去し、ユーザーをAuth0ログアウトエンドポイントにリダイレクトします。詳細は[ログアウトドキュメント](https://auth0.com/docs/logout)をご覧ください。
-
-`web/app/logout`フォルダーに`logout.go`という名前のファイルを作成し、ユーザーをAuth0ログアウトエンドポイントにリダイレクトするために`Handler`関数を追加します。
-
-`returnTo` URLは、アプリケーションの設定セクションで［Allowed Logout URLs（許可されているログアウトURL）］のリストに載っていなければなりません。詳細は「[ログアウト後にユーザーをリダイレクトする](https://auth0.com/docs/logout/guides/redirect-users-after-logout)」をご覧ください。
-
-`web/static/js`フォルダーに`user.js`という名前のファイルを作成し、ログインしたユーザーからクッキーを削除するためのコードを追加します。
-
-[10
-
-## ルートを保護する](#ルートを保護する)
-
-推奨プラクティスでは、認証されたユーザーだけが特定のルートにアクセスできるようにするべきです。認証されていないユーザーが保護されたルートにアクセスしようとした場合、アプリケーションによってリダイレクトされる必要があります。
-
-この場合、HTTPの要求に接続するミドルウェアを実装します。ミドルウェアの関数は、要求がエンドポイントハンドラーにルートされるべきか、ブロックされるべきかを決定します。
-
-`platform/middleware`に`isAuthenticated.go`という名前のファイルを作成し、`profile`セッションキーに基づいてユーザーが認証されているかいないかをチェックする関数を追加します。認証されていないユーザーは、ミドルウェアがアプリケーションのルートへリダイレクトします。
-
-ミドルウェアを作成すると、ルーターに追加することで、認証を必要とするすべてのルートにセットアップできます。
-
-[11
-
-## アプリケーションを仕上げる](#アプリケーションを仕上げる)
-
-鑑別工具とルーターの構成が完了したら、アプリケーションのエントリーポイントを使って全体を結び付けます。`main.go`内で、鑑別工具とルーターのインスタンスを作成すると鑑別工具インスタンスが渡されます。
-
-`.env`ファイルを使用している場合は、`main()`関数の冒頭で`godotenv.Load()`を呼び出さなくてはなりません。
-
-ターミナルで次のコマンドを使いアプリケーションを仕上げます：
-
-`go run main.go`
-
-## Next Steps
-
-Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
-
-This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
-
-* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
-* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
-
-Did it work?
-
-Yes No
-
-Any suggestion or typo?
-
-[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/webapp/golang/interactive.md)
-
-<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
-
-Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
-
-Sign Up
-
-Developers
-
-* [Developer Hub](https://developer.auth0.com/resources)
-* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
-* [Blog posts](https://auth0.com/blog/developers/)
-* [Videos](https://auth0.com/docs/videos)
-* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
-* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
-
-Documentation
-
-* [Articles](https://auth0.com/docs/articles)
-* [Quickstarts](https://auth0.com/docs/quickstarts)
-* [APIs](https://auth0.com/docs/api)
-* [SDK Libraries](https://auth0.com/docs/libraries)
-* [Blog](https://auth0.com/blog/)
-* [Reports](https://auth0.com/resources/ebooks)
-* [Webinars](https://auth0.com/resources/webinars)
-
-Get Involved
-
-* [Forum](https://community.auth0.com/)
-* [Events](https://developer.auth0.com/events)
-* [Ambassador Program](https://auth0.com/ambassador-program)
-* [Auth0 Research Program](https://auth0.com/research-program)
-
-Company
-
-* [Our Customers](https://auth0.com/customers)
-* [Compliance - Ensuring privacy and security](https://auth0.com/security)
-* [Partners](https://auth0.com/partners)
-* [Careers We're hiring!](https://www.okta.com/company/careers/)
-* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
-
-Support Center
-
-* [Community](https://community.auth0.com/)
-* [Support](https://support.auth0.com/)
-* [Help](https://community.auth0.com/c/help/6)
-* [FAQs](https://community.auth0.com/c/faq/42)
-* [Auth0 Marketplace](https://marketplace.auth0.com)
-
-Learning
-
-* [Learn](https://auth0.com/learn)
-* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
-* [Blog](https://auth0.com/blog/)
-
-Platform
-
-* [Access Management](https://auth0.com/platform/access-management)
-* [Extensibility](https://auth0.com/platform/extensibility)
-* [Security](https://auth0.com/platform/login-security)
-* [User Management](https://auth0.com/platform/user-management)
-* [Authentication](https://auth0.com/platform/authentication)
-
-Features
-
-* [Universal Login](https://auth0.com/features/universal-login)
-* [Single Sign On](https://auth0.com/features/single-sign-on)
-* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
-* [Actions](https://auth0.com/features/actions)
-* [Machine to Machine](https://auth0.com/features/machine-to-machine)
-* [Passwordless](https://auth0.com/features/passwordless)
-* [Breached Passwords](https://auth0.com/features/breached-passwords)
-
-© 2025 Okta, Inc. All Rights Reserved.
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
+      このようなHTMLファイルは以下の例のように見えることがありますが、カスタムクレームを含め、いかなるプロファイル情報も取得できます。
+    </Section>
+
+    <Section id={sections[8].id} title={sections[8].title} stepNumber="9">
+      ユーザーをログアウトさせるには、セッションのデータを消去し、ユーザーをAuth0ログアウトエンドポイントにリダイレクトします。詳細は[ログアウトドキュメント](https://auth0.com/docs/logout)をご覧ください。
+
+      `web/app/logout`フォルダーに`logout.go`という名前のファイルを作成し、ユーザーをAuth0ログアウトエンドポイントにリダイレクトするために`Handler`関数を追加します。
+
+      `returnTo` URLは、アプリケーションの設定セクションで［Allowed Logout URLs（許可されているログアウトURL）］のリストに載っていなければなりません。詳細は「[ログアウト後にユーザーをリダイレクトする](https://auth0.com/docs/logout/guides/redirect-users-after-logout)」をご覧ください。
+
+      `web/static/js`フォルダーに`user.js`という名前のファイルを作成し、ログインしたユーザーからクッキーを削除するためのコードを追加します。
+    </Section>
+
+    <Section id={sections[9].id} title={sections[9].title} stepNumber="10">
+      推奨プラクティスでは、認証されたユーザーだけが特定のルートにアクセスできるようにするべきです。認証されていないユーザーが保護されたルートにアクセスしようとした場合、アプリケーションによってリダイレクトされる必要があります。
+
+      この場合、HTTPの要求に接続するミドルウェアを実装します。ミドルウェアの関数は、要求がエンドポイントハンドラーにルートされるべきか、ブロックされるべきかを決定します。
+
+      `platform/middleware`に`isAuthenticated.go`という名前のファイルを作成し、`profile`セッションキーに基づいてユーザーが認証されているかいないかをチェックする関数を追加します。認証されていないユーザーは、ミドルウェアがアプリケーションのルートへリダイレクトします。
+
+      ミドルウェアを作成すると、ルーターに追加することで、認証を必要とするすべてのルートにセットアップできます。
+    </Section>
+
+    <Section id={sections[10].id} title={sections[10].title} stepNumber="11">
+      鑑別工具とルーターの構成が完了したら、アプリケーションのエントリーポイントを使って全体を結び付けます。`main.go`内で、鑑別工具とルーターのインスタンスを作成すると鑑別工具インスタンスが渡されます。
+
+      `.env`ファイルを使用している場合は、`main()`関数の冒頭で`godotenv.Load()`を呼び出さなくてはなりません。
+
+      ターミナルで次のコマンドを使いアプリケーションを仕上げます：
+
+      ```text lines
+      go run main.go
+      ```
+    </Section>
+
+    ## 次のステップ
+
+    成功です！ここまで来れば、アプリケーションにログイン、ログアウト、ユーザープロファイル情報が備わっているはずです。
+
+    これでクイックスタートチュートリアルは終了ですが、機能はまだまだたくさんあります。Auth0でできることについて詳しくは、以下をご覧ください。
+
+    *   [Auth0 Dashboard](https://manage.auth0.com/#) - Auth0のテナントやアプリケーションを構成して管理する方法について説明します
+    *   [Auth0 Marketplace](https://marketplace.auth0.com/) - Auth0の機能性を拡張できる各種の統合を見つけられます
+  </Content>
+
+  <SideMenu sections={sections}>
+    <SideMenuSectionItem id={sections[0].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[1].id}>
+      <CodeGroup>
+        <User/>
+        <Auth/>
+        <Callback/>
+        <Env/>
+        <Go/>
+        <Isauthenticated/>
+        <Login/>
+        <Logout/>
+        <Main/>
+        <Router/>
+      </CodeGroup>
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[2].id}>
+      <CodeGroup>
+        <Env/>
+        <Auth/>
+        <Callback/>
+        <Go/>
+        <Isauthenticated/>
+        <Login/>
+        <Logout/>
+        <Main/>
+        <Router/>
+        <User/>
+      </CodeGroup>
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[3].id}>
+      <CodeGroup>
+        <Auth/>
+        <Callback/>
+        <Env/>
+        <Go/>
+        <Isauthenticated/>
+        <Login/>
+        <Logout/>
+        <Main/>
+        <Router/>
+        <User/>
+      </CodeGroup>
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[4].id}>
+      <CodeGroup>
+        <Router/>
+        <Auth/>
+        <Callback/>
+        <Env/>
+        <Go/>
+        <Isauthenticated/>
+        <Login/>
+        <Logout/>
+        <Main/>
+        <User/>
+      </CodeGroup>
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[5].id}>
+      <CodeGroup>
+        <Login/>
+        <Auth/>
+        <Callback/>
+        <Env/>
+        <Go/>
+        <Isauthenticated/>
+        <Logout/>
+        <Main/>
+        <Router/>
+        <User/>
+      </CodeGroup>
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[6].id}>
+      <CodeGroup>
+        <Callback/>
+        <Auth/>
+        <Env/>
+        <Go/>
+        <Isauthenticated/>
+        <Login/>
+        <Logout/>
+        <Main/>
+        <Router/>
+        <User/>
+      </CodeGroup>
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[7].id}>
+      <CodeGroup>
+        <User/>
+        <Auth/>
+        <Callback/>
+        <Env/>
+        <Go/>
+        <Isauthenticated/>
+        <Login/>
+        <Logout/>
+        <Main/>
+        <Router/>
+      </CodeGroup>
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[8].id}>
+      <CodeGroup>
+        <Logout/>
+        <Auth/>
+        <Callback/>
+        <Env/>
+        <Go/>
+        <Isauthenticated/>
+        <Login/>
+        <Main/>
+        <Router/>
+        <User/>
+      </CodeGroup>
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[9].id}>
+      <CodeGroup>
+        <Isauthenticated/>
+        <Auth/>
+        <Callback/>
+        <Env/>
+        <Go/>
+        <Login/>
+        <Logout/>
+        <Main/>
+        <Router/>
+        <User/>
+      </CodeGroup>
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[10].id}>
+      <CodeGroup>
+        <Main/>
+        <Auth/>
+        <Callback/>
+        <Env/>
+        <Go/>
+        <Isauthenticated/>
+        <Login/>
+        <Logout/>
+        <Router/>
+        <User/>
+      </CodeGroup>
+    </SideMenuSectionItem>
+
+  </SideMenu>
+</Recipe>

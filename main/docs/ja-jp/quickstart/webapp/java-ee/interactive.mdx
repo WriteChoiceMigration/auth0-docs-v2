@@ -7,549 +7,516 @@ permalink: "interactive"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/java.png"
 'twitter:title': "Java EEアプリケーションにログインを追加する"
 'twitter:description': "このチュートリアルは、Java EE Webアプリケーションにユーザーログインを追加する方法について説明します。"
+sidebarTitle: Java EE
 ---
 
-[Skip to main content](#maincontent)
+import { Recipe, Content, Section, SideMenu, SideMenuSectionItem, SignUpForm } from "/snippets/recipe.jsx";
+import { LoggedInForm } from "/snippets/Login.jsx";
+import Web from "/snippets/quickstart/webapp/java-ee/web.xml.mdx";
+import Auth0authenticationconfig from "/snippets/quickstart/webapp/java-ee/Auth0AuthenticationConfig.java.mdx";
+import Loginservlet from "/snippets/quickstart/webapp/java-ee/LoginServlet.java.mdx";
+import Homeservlet from "/snippets/quickstart/webapp/java-ee/HomeServlet.java.mdx";
+import Logoutservlet from "/snippets/quickstart/webapp/java-ee/LogoutServlet.java.mdx";
+
+export const sections = [
+  { id: "システム要件", title: "システム要件" },
+  { id: "auth0を構成する", title: "Auth0を構成する" },
+  { id: "javaeeにauth0の使用を構成する", title: "JavaEEにAuth0の使用を構成する" },
+  { id: "java-ee-securityを構成する", title: "Java EE Securityを構成する" },
+  { id: "認証をトリガーする", title: "認証をトリガーする" },
+  { id: "ユーザー情報を表示する", title: "ユーザー情報を表示する" },
+  { id: "ログアウトを処理する", title: "ログアウトを処理する" },
+  { id: "サンプルを実行する", title: "サンプルを実行する" }
+]
+
+<Recipe>
+  <Content>
+    このチュートリアルは、Java EE Webアプリケーションにユーザーログインを追加する方法について説明します。ログインして、アカウント用に構成された例を参考にこのクイックタートに従うことをお勧めします。
+
+    <Section id={sections[0].id} title={sections[0].title} stepNumber="1">
+      このチュートリアルとサンプルプロジェクトは次を使用してテストが完了しています：
+
+      - Java 11
+    </Section>
+
+    <Section id={sections[1].id} title={sections[1].title} stepNumber="2">
+      ### アプリケーションキーを取得する
+
+      Auth0にサインアップしたときには、新しいアプリケーションが作成されたか、すでに作成済みであった可能性があります。Auth0と通信するには、アプリケーションについての詳細が必要になります。これらの詳細は、Auth0
+            Dashboardの[アプリケーションの設定](https://manage.auth0.com/#/applications)セクションで入手できます。
+
+      <Frame>
+        <img src="/images/ja-jp/cdy7uua7fh8z/1NtemqhRTHLFgWkGyAVSC6/ae66506a56ffab891e8a36e1344e6376/uwp.png" />
+      </Frame>
+
+      以下の情報が必要です。
+
+      - **Domain (ドメイン)**
+      - **Client ID（クライアントID）**
+      - **Client Secret（クライアントシークレット）**
+
+      <Info>
+      このページの上部からサンプルをダウンロードした場合は、これらの詳細が入力されます。
+      </Info>
+
+      ### Callback URLを構成する
+
+      Callback URLはアプリケーション内にあるURLで、Auth0は認証後にユーザーをここにリダイレクトします。アプリのCallback URLは[アプリケーションの設定](https://manage.auth0.com/#/applications)にある**［Allowed Callback
+              URLs（許可されているコールバックURL）］**フィールドに追加する必要があります。このフィールドが設定されていない場合、ユーザーはアプリケーションにログインできず、エラーが返されます。
+
+      <Info>
+      このページの上部からダウンロードしたサンプルプロジェクトに沿って進めている場合には、**［Allowed Callback
+                        URLs（許可されているコールバックURL）］**フィールドに`http://localhost:3000/callback`を追加する必要があります。
+      </Info>
 
-​
+      ### ログアウトURLを構成する
 
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+      ログアウトURLはアプリケーション内にあるURLで、Auth0は認可サーバーからのログアウト後にユーザーをここに戻すことができます。これは、`returnTo`クエリパラメーターで指定されます。アプリのログアウトURLは[アプリケーションの設定](https://manage.auth0.com/#/applications)にある**［Allowed Logout
+              URLs（許可されているログアウトURL）］**フィールドに追加する必要があります。このフィールドが設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーが返されます。
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      <Info>
+      このページの上部からダウンロードしたサンプルプロジェクトに沿って進めている場合には、**［Allowed Logout
+                        URLs（許可されているログアウトURL）］**フィールドに`http://localhost:3000/`を追加する必要があります。
+      </Info>
+    </Section>
 
----
+    <Section id={sections[2].id} title={sections[2].title} stepNumber="3">
+      ### 依存関係をセットアップする
 
-​
+      Java EEアプリケーションをAuth0と統合するには、以下の依存関係を追加します。
 
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+      - **javax.javaee-api**：Java EE 8を使ってアプリケーションを作成するために必要なJava EE 8
+                APIです。実際の統合はアプリケーションコンテナーが提供するため、WARファイルに含める必要はありません。
+      - **javax.security.enterprise**：EEアプリケーションでセキュリティ上の懸念に対処できるようにするJava EE 8 Security
+                APIです。`javax.javaee-api`の依存関係と同様に、統合はアプリケーションコンテナーが提供するため、WARファイルには含まれません。
+      - **auth0-java-mvc-commons**：[Auth0 Java MVC SDK](https://github.com/auth0/auth0-java-mvc-common)は、サーバー側のMVC
+                WebアプリケーションにAuth0とJavaを使用できるようにします。これは、アプリケーションがAuth0を使ったユーザー認証で呼び出すべき認可URLを生成します。
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      Mavenを使用している場合は、次の依存関係を`pom.xml`に追加します：
 
-[##### Java EEアプリケーションにログインを追加する](#Java EEアプリケーションにログインを追加する)
+      ```xml lines
+      <!-- pom.xml -->
+      <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>mvc-auth-commons</artifactId>
+      <version>[1.0, 2.0)</version>
+      </dependency>
+      <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>8.0.1</version>
+      <scope>provided</scope>
+      </dependency>
+      <dependency>
+      <groupId>javax.security.enterprise</groupId>
+      <artifactId>javax.security.enterprise-api</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+      </dependency>
+      ```
 
-[View on Github](https://github.com/auth0-samples/auth0-java-ee-sample/tree/master/01-Login) Log In & Download Sample
+      Gradleを使用している場合は、次を`build.gradle`に追加します：
 
-1. [Quickstarts](/docs/ja-jp/quickstarts)
-3. [Regular Web App](/docs/ja-jp/quickstart/webapp)
-5. [Java EE](/docs/ja-jp/quickstart/webapp/java-ee/interactive)
+      ```java lines
+      // build.gradle
+      providedCompile 'javax:javaee-api:8.0.1'
+      providedCompile 'javax.security.enterprise:javax.security.enterprise-api:1.0'
+      implementation 'com.auth0:mvc-auth-commons:1. '
+      ```
 
-# 
+      ### Java EEアプリケーションを構成する
 
-# Java EEアプリケーションにログインを追加する
+      <Info>
+      このチュートリアルに付属のサンプルはJSPを使用して作成され、[WildFly](https://wildfly.org/)アプリケーションサーバーでテストが完了しています。他のアプリケーションコンテナーや技術を使用して作業する場合には、一部の手順を調整する必要があるかもしれません。
+      </Info>
 
-このチュートリアルは、Java EE Webアプリケーションにユーザーログインを追加する方法について説明します。ログインして、アカウント用に構成された例を参考にこのクイックタートに従うことをお勧めします。
+      Java
+            EEアプリケーションは、Auth0アプリケーションを使ってユーザーを認証するために、いくつかの情報を必要とします。この情報の保管にはデプロイメント記述子である`web.xml`ファイルを使用できますが、別の安全な場所に保管することもできます。
 
-[1
+      この情報は、ユーザーがアプリケーションにログインできるように、**auth0-java-mvc-commons**ライブラリーを構成するために使用されます。ライブラリーとその構成オプションについては、ライブラリーの[README](https://github.com/auth0/auth0-java-mvc-common/blob/master/README.md)を参照してください。
+    </Section>
 
-## システム要件](#システム要件)
+    <Section id={sections[3].id} title={sections[3].title} stepNumber="4">
+      Java EE 8 Security
+            APIには新たに`HttpAuthenticationMechanism`インターフェイスが搭載され、アプリケーションがユーザーの資格情報を取得できるようにしています。Basic認証とフォームベースの認証にはデフォルトの実装があり、カスタム認証ストラテジーを構成しやすくしています。
 
-このチュートリアルとサンプルプロジェクトは次を使用してテストが完了しています：
+      Auth0を使用して認証するには、以下のインターフェイスをカスタムで実装します。
 
-* Java 11
+      - HttpAuthenticationMechanism：Auth0から戻されるユーザーの認証ワークフローを処理します（[JavaDoc](https://javaee.github.io/javaee-spec/javadocs/javax/security/enterprise/authentication/mechanism/http/HttpAuthenticationMechanism.html)）。
+      - IdentityStore：ユーザーの資格情報を検証します（[JavaDoc](https://javaee.github.io/javaee-spec/javadocs/javax/security/enterprise/identitystore/IdentityStore.html)）。
+      - CallerPrincipal：現在のHTTP要求の呼び出し元プリンシパルを表します（[JavaDoc](https://javaee.github.io/javaee-spec/javadocs/javax/security/enterprise/CallerPrincipal.html)）。
+      - Credential：呼び出し元が認証に使用する資格情報を表します（[JavaDoc](https://javaee.github.io/javaee-spec/javadocs/javax/security/enterprise/credential/Credential.html)）。
 
-[2
+      まず、アプリケーションがAuth0設定を使用できるように、@ApplicationScoped Beanを作成してWebコンテキストから値を取得し、getterを通して利用できるようにします。
 
-## Auth0を構成する](#auth0を構成する)
+      次に、現在の要求の呼び出し元を表すカスタムの`CallerPrincipal`を作成します：
 
-### アプリケーションキーを取得する
+      ```java lines
+      // src/main/java/com/auth0/example/security/Auth0JwtPrincipal.java
+      public class Auth0JwtPrincipal extends CallerPrincipal {
+      private final DecodedJWT idToken;
 
-Auth0にサインアップしたときには、新しいアプリケーションが作成されたか、すでに作成済みであった可能性があります。Auth0と通信するには、アプリケーションについての詳細が必要になります。これらの詳細は、Auth0 Dashboardの[アプリケーションの設定](https://manage.auth0.com/#/applications)セクションで入手できます。
 
-<Frame>![](/images/ja-jp/cdy7uua7fh8z/1NtemqhRTHLFgWkGyAVSC6/ae66506a56ffab891e8a36e1344e6376/uwp.png)</Frame>
 
-以下の情報が必要です。
+      Auth0JwtPrincipal(DecodedJWT idToken) {
 
-* **Domain (ドメイン)**
-* **Client ID（クライアントID）**
-* **Client Secret（クライアントシークレット）**
+          super(idToken.getClaim(&quot;name&quot;).asString());
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+          this.idToken = idToken;
 
-このページの上部からサンプルをダウンロードした場合は、これらの詳細が入力されます。
+      }
 
-</Callout>
 
-### Callback URLを構成する
 
-Callback URLはアプリケーション内にあるURLで、Auth0は認証後にユーザーをここにリダイレクトします。アプリのCallback URLは[アプリケーションの設定](https://manage.auth0.com/#/applications)にある**［Allowed Callback URLs（許可されているコールバックURL）］**フィールドに追加する必要があります。このフィールドが設定されていない場合、ユーザーはアプリケーションにログインできず、エラーが返されます。
+      public DecodedJWT getIdToken() {
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+          return this.idToken;
 
-このページの上部からダウンロードしたサンプルプロジェクトに沿って進めている場合には、**［Allowed Callback URLs（許可されているコールバックURL）］**フィールドに`http://localhost:3000/callback`を追加する必要があります。
+      }
 
-</Callout>
+      }
+      ```
 
-### ログアウトURLを構成する
+      これで、ユーザーの資格情報を表すために使用されるカスタムの`Credential`が実装できるようになりました。これには、プリンシパルについての情報が保管されます：
 
-ログアウトURLはアプリケーション内にあるURLで、Auth0は認可サーバーからのログアウト後にユーザーをここに戻すことができます。これは、`returnTo`クエリパラメーターで指定されます。アプリのログアウトURLは[アプリケーションの設定](https://manage.auth0.com/#/applications)にある**［Allowed Logout URLs（許可されているログアウトURL）］**フィールドに追加する必要があります。このフィールドが設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーが返されます。
+      ```java lines
+      // src/main/java/com/auth0/example/security/Auth0JwtCredential.java
+      class Auth0JwtCredential implements Credential {
+      private Auth0JwtPrincipal auth0JwtPrincipal;
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-このページの上部からダウンロードしたサンプルプロジェクトに沿って進めている場合には、**［Allowed Logout URLs（許可されているログアウトURL）］**フィールドに`http://localhost:3000/`を追加する必要があります。
 
-</Callout>
+      Auth0JwtCredential(String token) {
 
-[3
+          DecodedJWT decodedJWT = JWT.decode(token);
 
-## JavaEEにAuth0の使用を構成する](#javaeeにauth0の使用を構成する)
+          this.auth0JwtPrincipal = new Auth0JwtPrincipal(decodedJWT);
 
-### 依存関係をセットアップする
+      }
 
-Java EEアプリケーションをAuth0と統合するには、以下の依存関係を追加します。
 
-* **javax.javaee-api**：Java EE 8を使ってアプリケーションを作成するために必要なJava EE 8 APIです。実際の統合はアプリケーションコンテナーが提供するため、WARファイルに含める必要はありません。
-* **javax.security.enterprise**：EEアプリケーションでセキュリティ上の懸念に対処できるようにするJava EE 8 Security APIです。`javax.javaee-api`の依存関係と同様に、統合はアプリケーションコンテナーが提供するため、WARファイルには含まれません。
-* **auth0-java-mvc-commons**：[Auth0 Java MVC SDK](https://github.com/auth0/auth0-java-mvc-common)は、サーバー側のMVC WebアプリケーションにAuth0とJavaを使用できるようにします。これは、アプリケーションがAuth0を使ったユーザー認証で呼び出すべき認可URLを生成します。
 
-Mavenを使用している場合は、次の依存関係を`pom.xml`に追加します：
+      Auth0JwtPrincipal getAuth0JwtPrincipal() {
 
-```xml lines
-<!-- pom.xml -->
-<dependency>
-<groupId>com.auth0</groupId>
-<artifactId>mvc-auth-commons</artifactId>
-<version>[1.0, 2.0)</version>
-</dependency>
-<dependency>
-<groupId>javax</groupId>
-<artifactId>javaee-api</artifactId>
-<version>8.0.1</version>
-<scope>provided</scope>
-</dependency>
-<dependency>
-<groupId>javax.security.enterprise</groupId>
-<artifactId>javax.security.enterprise-api</artifactId>
-<version>1.0</version>
-<scope>provided</scope>
-</dependency>
-```
+          return auth0JwtPrincipal;
 
-Gradleを使用している場合は、次を`build.gradle`に追加します：
+      }
 
-```powershell lines
-// build.gradle
-providedCompile 'javax:javaee-api:8.0.1'
-providedCompile 'javax.security.enterprise:javax.security.enterprise-api:1.0'
-implementation 'com.auth0:mvc-auth-commons:1. '
-```
+      }
+      ```
 
-### Java EEアプリケーションを構成する
+      これで、呼び出し元プリンシパルと資格情報を表すクラスが定義できました。次に、`IdentityStore`のカスタム実装を作成します。このクラスはユーザー資格情報の検証に使用されます。
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      ```java lines
+      // src/main/java/com/auth0/example/security/Auth0JwtIdentityStore.java
+      @ApplicationScoped
+      public class Auth0JwtIdentityStore implements IdentityStore {
+      @Override
 
-このチュートリアルに付属のサンプルはJSPを使用して作成され、[WildFly](https://wildfly.org/)アプリケーションサーバーでテストが完了しています。他のアプリケーションコンテナーや技術を使用して作業する場合には、一部の手順を調整する必要があるかもしれません。
+      public CredentialValidationResult validate(final Credential credential) {
 
-</Callout>
+          CredentialValidationResult result = CredentialValidationResult.NOT_VALIDATED_RESULT;
 
-Java EEアプリケーションは、Auth0アプリケーションを使ってユーザーを認証するために、いくつかの情報を必要とします。この情報の保管にはデプロイメント記述子である`web.xml`ファイルを使用できますが、別の安全な場所に保管することもできます。
+          if (credential instanceof Auth0JwtCredential) {
 
-この情報は、ユーザーがアプリケーションにログインできるように、**auth0-java-mvc-commons**ライブラリーを構成するために使用されます。ライブラリーとその構成オプションについては、ライブラリーの[README](https://github.com/auth0/auth0-java-mvc-common/blob/master/README.md)を参照してください。
+              Auth0JwtCredential auth0JwtCredential = (Auth0JwtCredential) credential;
 
-<table class="table"><thead>
-<tr>
-<th>**入力済みの属性を確認する**</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>このサンプルを__［Download Sample（サンプルをダウンロード）］__ボタンでダウンロードした場合は、`domain`、`clientId`、`clientSecret`の属性が自動的に入力されます。アカウントに複数のAuth0アプリケーションがある場合は特に、値が正しいことを確認してください。</td>
-</tr>
-</tbody>
-</table>
+              result = new CredentialValidationResult(auth0JwtCredential.getAuth0JwtPrincipal());
 
-[4
+          }
 
-## Java EE Securityを構成する](#java-ee-securityを構成する)
+          return result;
 
-Java EE 8 Security APIには新たに`HttpAuthenticationMechanism`インターフェイスが搭載され、アプリケーションがユーザーの資格情報を取得できるようにしています。Basic認証とフォームベースの認証にはデフォルトの実装があり、カスタム認証ストラテジーを構成しやすくしています。
+      }
 
-Auth0を使用して認証するには、以下のインターフェイスをカスタムで実装します。
+      }
+      ```
 
-* HttpAuthenticationMechanism：Auth0から戻されるユーザーの認証ワークフローを処理します（[JavaDoc](https://javaee.github.io/javaee-spec/javadocs/javax/security/enterprise/authentication/mechanism/http/HttpAuthenticationMechanism.html)）。
-* IdentityStore：ユーザーの資格情報を検証します（[JavaDoc](https://javaee.github.io/javaee-spec/javadocs/javax/security/enterprise/identitystore/IdentityStore.html)）。
-* CallerPrincipal：現在のHTTP要求の呼び出し元プリンシパルを表します（[JavaDoc](https://javaee.github.io/javaee-spec/javadocs/javax/security/enterprise/CallerPrincipal.html)）。
-* Credential：呼び出し元が認証に使用する資格情報を表します（[JavaDoc](https://javaee.github.io/javaee-spec/javadocs/javax/security/enterprise/credential/Credential.html)）。
+      `credential`が`Auth0Credential`の場合はユーザーの呼び出しが認証され有効であるため、正常として、資格情報を使って作成された`CredentialValidationResult`が返されます。`Auth0Credential`でない場合には、`CredentialValidationResult.NOT_VALIDATED_RESULT`が返されます。
 
-まず、アプリケーションがAuth0設定を使用できるように、@ApplicationScoped Beanを作成してWebコンテキストから値を取得し、getterを通して利用できるようにします。
+      これらのすべてを使用する`HttpAuthenticationMechanism`インターフェイスを実装する前に、Beanを作成して、Auth0 Java MVC
+            SDKにある構成済みの`AuthenticationController`インスタンスが提供されるようにします。`AuthenticationController`はユーザーがログインする認可URLの構築と、ユーザーを認証するトークン交換の処理に使用されます。
 
-次に、現在の要求の呼び出し元を表すカスタムの`CallerPrincipal`を作成します：
+      - Auth0アプリケーションに**RS256署名アルゴリズム**（新しいAuth0アプリケーション作成時のデフォルト）の使用が構成されている場合には、`JwkProvider`を構成して、トークン署名の検証に使われる公開鍵を取得するようにします。その他の構成オプションについては、[jwks-rsa-javaレポジトリ](https://github.com/auth0/jwks-rsa-java)を参照してください。
+      - Auth0アプリケーションに**HS256署名アルゴリズム**の使用が構成されている場合には、`JwkProvider`を構成する必要はありません。
 
-```java lines
-// src/main/java/com/auth0/example/security/Auth0JwtPrincipal.java
-public class Auth0JwtPrincipal extends CallerPrincipal {
-private final DecodedJWT idToken;
+      <Info>
+      使用可能な署名アルゴリズムについては、[こちらのドキュメント](https://auth0.com/docs/tokens/concepts/signing-algorithms)を参照してください。
+      </Info>
 
-Auth0JwtPrincipal(DecodedJWT idToken) {
+      以下のサンプルは、**RS256署名アルゴリズム**の使用に`AuthenticationController`をどのように構成するのかを示しています。
 
-    super(idToken.getClaim(&quot;name&quot;).asString());
+      ```java lines
+      // src/main/java/com/auth0/example/security/Auth0AuthenticationProvider.java
+      @ApplicationScoped
+      public class Auth0AuthenticationProvider {
+      @Produces
 
-    this.idToken = idToken;
+      public AuthenticationController authenticationController(Auth0AuthenticationConfig config) {
 
-}
+          JwkProvider jwkProvider = new JwkProviderBuilder(config.getDomain()).build();
 
-public DecodedJWT getIdToken() {
+          return AuthenticationController.newBuilder(config.getDomain(), config.getClientId(), config.getClientSecret())
 
-    return this.idToken;
+                  .withJwkProvider(jwkProvider)
 
-}
+                  .build();
 
-}
-```
+      }
 
-これで、ユーザーの資格情報を表すために使用されるカスタムの`Credential`が実装できるようになりました。これには、プリンシパルについての情報が保管されます：
+      }
+      ```
 
-```javascript lines
-// src/main/java/com/auth0/example/security/Auth0JwtCredential.java
-class Auth0JwtCredential implements Credential {
-private Auth0JwtPrincipal auth0JwtPrincipal;
+      最後に、カスタムの`HttpAuthenticationMechanism`を実装します。
 
-Auth0JwtCredential(String token) {
+      ```java lines expandable
+      // src/main/java/com/auth0/example/security/Auth0AuthenticationMechanism.java
+      @ApplicationScoped
+      @AutoApplySession
+      public class Auth0AuthenticationMechanism implements HttpAuthenticationMechanism {
+      private final AuthenticationController authenticationController;
 
-    DecodedJWT decodedJWT = JWT.decode(token);
+      private final IdentityStoreHandler identityStoreHandler;
 
-    this.auth0JwtPrincipal = new Auth0JwtPrincipal(decodedJWT);
 
-}
 
-Auth0JwtPrincipal getAuth0JwtPrincipal() {
+      @Inject
 
-    return auth0JwtPrincipal;
+      Auth0AuthenticationMechanism(AuthenticationController authenticationController, IdentityStoreHandler identityStoreHandler) {
 
-}
+          this.authenticationController = authenticationController;
 
-}
-```
+          this.identityStoreHandler = identityStoreHandler;
 
-これで、呼び出し元プリンシパルと資格情報を表すクラスが定義できました。次に、`IdentityStore`のカスタム実装を作成します。このクラスはユーザー資格情報の検証に使用されます。
+      }
 
-```java lines
-// src/main/java/com/auth0/example/security/Auth0JwtIdentityStore.java
-@ApplicationScoped
-public class Auth0JwtIdentityStore implements IdentityStore {
-@Override
 
-public CredentialValidationResult validate(final Credential credential) {
 
-    CredentialValidationResult result = CredentialValidationResult.NOT_VALIDATED_RESULT;
+      @Override
 
-    if (credential instanceof Auth0JwtCredential) {
+      public AuthenticationStatus validateRequest(HttpServletRequest httpServletRequest,
 
-        Auth0JwtCredential auth0JwtCredential = (Auth0JwtCredential) credential;
+                                                  HttpServletResponse httpServletResponse,
 
-        result = new CredentialValidationResult(auth0JwtCredential.getAuth0JwtPrincipal());
+                                                  HttpMessageContext httpMessageContext) throws AuthenticationException {
 
-    }
 
-    return result;
 
-}
+          // Exchange the code for the ID token, and notify container of result.
 
-}
-```
+          if (isCallbackRequest(httpServletRequest)) {
 
-`credential`が`Auth0Credential`の場合はユーザーの呼び出しが認証され有効であるため、正常として、資格情報を使って作成された`CredentialValidationResult`が返されます。`Auth0Credential`でない場合には、`CredentialValidationResult.NOT_VALIDATED_RESULT`が返されます。
+              try {
 
-これらのすべてを使用する`HttpAuthenticationMechanism`インターフェイスを実装する前に、Beanを作成して、Auth0 Java MVC SDKにある構成済みの`AuthenticationController`インスタンスが提供されるようにします。`AuthenticationController`はユーザーがログインする認可URLの構築と、ユーザーを認証するトークン交換の処理に使用されます。
+                  Tokens tokens = authenticationController.handle(httpServletRequest, httpServletResponse);
 
-* Auth0アプリケーションに**RS256署名アルゴリズム**（新しいAuth0アプリケーション作成時のデフォルト）の使用が構成されている場合には、`JwkProvider`を構成して、トークン署名の検証に使われる公開鍵を取得するようにします。その他の構成オプションについては、[jwks-rsa-javaレポジトリ](https://github.com/auth0/jwks-rsa-java)を参照してください。
-* Auth0アプリケーションに**HS256署名アルゴリズム**の使用が構成されている場合には、`JwkProvider`を構成する必要はありません。
+                  Auth0JwtCredential auth0JwtCredential = new Auth0JwtCredential(tokens.getIdToken());
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+                  CredentialValidationResult result = identityStoreHandler.validate(auth0JwtCredential);
 
-使用可能な署名アルゴリズムについては、[こちらのドキュメント](https://auth0.com/docs/tokens/concepts/signing-algorithms)を参照してください。
+                  return httpMessageContext.notifyContainerAboutLogin(result);
 
-</Callout>
+              } catch (IdentityVerificationException e) {
 
-以下のサンプルは、**RS256署名アルゴリズム**の使用に`AuthenticationController`をどのように構成するのかを示しています。
+                  return httpMessageContext.responseUnauthorized();
 
-```javascript lines
-// src/main/java/com/auth0/example/security/Auth0AuthenticationProvider.java
-@ApplicationScoped
-public class Auth0AuthenticationProvider {
-@Produces
+              }
 
-public AuthenticationController authenticationController(Auth0AuthenticationConfig config) {
+          }
 
-    JwkProvider jwkProvider = new JwkProviderBuilder(config.getDomain()).build();
+          return httpMessageContext.doNothing();
 
-    return AuthenticationController.newBuilder(config.getDomain(), config.getClientId(), config.getClientSecret())
+      }
 
-            .withJwkProvider(jwkProvider)
 
-            .build();
 
-}
+      private boolean isCallbackRequest(HttpServletRequest request) {
 
-}
-```
+          return request.getRequestURI().equals(&quot;/callback&quot;) &amp;&amp; request.getParameter(&quot;code&quot;) != null;
 
-最後に、カスタムの`HttpAuthenticationMechanism`を実装します。
+      }
 
-```javascript lines
-// src/main/java/com/auth0/example/security/Auth0AuthenticationMechanism.java
-@ApplicationScoped
-@AutoApplySession
-public class Auth0AuthenticationMechanism implements HttpAuthenticationMechanism {
-private final AuthenticationController authenticationController;
+      }
+      ```
 
-private final IdentityStoreHandler identityStoreHandler;
+      このクラスは`validateRequest`メソッドをオーバーライドします。このメソッドはAuth0アプリケーションに対するすべての要求で呼び出され、コンテナーに認証ステータスを通知します。
 
-@Inject
+      このサンプルでは、[認可コードフロー](https://auth0.com/docs/flows/concepts/auth-code)を使用して、認証フロー中に認可コードをトークンと交換します。この要求が`/callback`エンドポイントに対するもので、`code`要求パラメーターが含まれている場合には、以下にあるいくつかの重要な処理を行います。
 
-Auth0AuthenticationMechanism(AuthenticationController authenticationController, IdentityStoreHandler identityStoreHandler) {
+      - `AuthenticationController`の`handle`メソッドを呼び出して、認可コードをIDトークンおよびアクセストークンと交換する。
+      - IDトークンを使用して、新たに`Auth0Credential`を作成する。
+      - カスタムの`IdentityStore`実装の`validate`メソッドを呼び出して、検証結果を取得する。
+      - アプリケーションコンテナーにログインステータスを通知する。
 
-    this.authenticationController = authenticationController;
+      要求されたリソースが`/callback`でない場合には、`httpMessageContext.doNothing()`を返して、要求の処理が続行できるようにします。後ほど、認証のトリガーやWebビューの表示で認証情報をどのように使用するかについて説明します。
 
-    this.identityStoreHandler = identityStoreHandler;
+      最後に、認証したユーザーのセッションをコンテナーが作成できるように、`@AutoApplySession`アノテーションが追加されたことに注意してください。
+    </Section>
 
-}
+    <Section id={sections[4].id} title={sections[4].title} stepNumber="5">
+      ユーザーがログインできるようにするには、`/login`パスへの要求を処理するサーブレットを作成します。
 
-@Override
+      `LoginController`は、ユーザーがAuth0で認証できるように、正しい認可URLに要求をリダイレクトします。正しい認可URLの構築には、`Auth0AuthenticationConfig`を通して投入された構成値と、Auth0
+            Java MVC
+            SDKが提供する`AuthenticationController`が使用されます。このサンプルはデフォルトで`openid profile email`スコープを要求して、アプリケーションが基本的なプロファイル情報を認証済みのユーザーから取得できるようにします。これらのスコープについては、[OpenID Connectスコープ](https://auth0.com/docs/scopes/current/oidc-scopes)のドキュメントをお読みください。
 
-public AuthenticationStatus validateRequest(HttpServletRequest httpServletRequest,
+      ユーザーが資格情報を入力し、要求されたアクセス権を認可すると、Auth0は`callbackUrl`に対して要求を発行し、IDトークンおよびアクセストークンと交換できる`code`クエリパラメーターを含めます。先ほど説明したように、上記で作成した`Auth0HttpAuthenticationMechanism`がこの交換を処理し、アプリケーションコンテナーに認証ステータスを通知できるようにします。そうすることで、`/callback`パスへの要求を処理するサーブレットは、ログイン前に要求された元のリソースに要求を転送するか、ホームページにリダイレクトするだけで済みます。
 
-                                            HttpServletResponse httpServletResponse,
+      ```java lines
+      // src/main/com/auth0/example/web/CallbackServlet.java
+      @WebServlet(urlPatterns = {"/callback"})
+      public class CallbackServlet extends HttpServlet {
+      @Override
 
-                                            HttpMessageContext httpMessageContext) throws AuthenticationException {
+      public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    // Exchange the code for the ID token, and notify container of result.
+          String referer = (String) request.getSession().getAttribute(&quot;Referer&quot;);
 
-    if (isCallbackRequest(httpServletRequest)) {
+          String redirectTo = referer != null ? referer : &quot;/&quot;;
 
-        try {
 
-            Tokens tokens = authenticationController.handle(httpServletRequest, httpServletResponse);
 
-            Auth0JwtCredential auth0JwtCredential = new Auth0JwtCredential(tokens.getIdToken());
+          response.sendRedirect(redirectTo);
 
-            CredentialValidationResult result = identityStoreHandler.validate(auth0JwtCredential);
+      }
 
-            return httpMessageContext.notifyContainerAboutLogin(result);
+      }
+      ```
+    </Section>
 
-        } catch (IdentityVerificationException e) {
+    <Section id={sections[5].id} title={sections[5].title} stepNumber="6">
+      認証したユーザーのプロファイル情報を取得するには、`Auth0JwtPrincipal`を使用することができます。`HomeServlet.java`のサンプルコードでは、[IDトークン](https://auth0.com/docs/tokens/id-token)でクレームを使ってプロファイルデータを要求属性に設定する方法を例示しています。
 
-            return httpMessageContext.responseUnauthorized();
+      そのプロファイル情報は、ユーザーについての情報を表示するビューで使用できます。
 
-        }
+      ```xml lines
+      <!-- src/main/webapp/WEB-INF/jsp/fragments/navbar.jspf -->
+      <c:choose>
+      <c:when test="{empty profile}">
+      <li>
+      <form action="/login" method="GET">
+      <input type="submit" value="Login"/>
+      </form>
+      </li>
+      </c:when>
+      <c:otherwise>
+      <li>
+      <a href="#">
+      <!-- Profile image should be set to the profile picture from the id token -->
+      <img src="{profile.get('picture').asString()}" alt="Profile picture"/>
+      </a>
+      <div>
+      <!-- Show the user's full name from the id token here -->
+      <div>"{profile.get('name').asString()}"</div>
+      <a href="/profile">Profile</a>
+      <a href="/logout">Log out</a>
+      </div>
+      </li>
+      </c:otherwise>
+      </c:choose>
+      ```
+    </Section>
 
-    }
+    <Section id={sections[6].id} title={sections[6].title} stepNumber="7">
+      ユーザーをログアウトさせるには、アプリケーションセッションを消去して、Auth0からユーザーをログアウトさせる必要があります。これは`LogoutServlet`で処理されます。
 
-    return httpMessageContext.doNothing();
+      まず、`request.getSession().invalidate()`を呼び出して、セッションを消去します。それから、ログアウトURLを構築して、必ず`returnTo`クエリパラメーターを含めます。ユーザーはログアウト後にこのURLにリダイレクトされます。最後に、アプリケーションのをログアウトURLに応答をリダイレクトします。
+    </Section>
 
-}
+    <Section id={sections[7].id} title={sections[7].title} stepNumber="8">
+      サンプルを構築し実行するには、Mavenゴールに対してwildfly:runを実行し、このアプリケーションをデプロイした組み込みのWildFlyアプリケーションサーバーを起動します。詳細については、[WildFly
+              Maven Plugin](https://docs.jboss.org/wildfly/plugins/maven/latest/)のドキュメントを参照してください。
 
-private boolean isCallbackRequest(HttpServletRequest request) {
+      LinuxまたはMacOSを使用している場合は、次を行います：
 
-    return request.getRequestURI().equals(&quot;/callback&quot;) &amp;&amp; request.getParameter(&quot;code&quot;) != null;
+      ```sh lines
+      ./mvnw clean wildfly:run
+      ```
 
-}
+      Windows:
 
-}
-```
+      ```sh lines
+      mvnw.cmd clean wildfly:run
+      ```
 
-このクラスは`validateRequest`メソッドをオーバーライドします。このメソッドはAuth0アプリケーションに対するすべての要求で呼び出され、コンテナーに認証ステータスを通知します。
+      使用しているブラウザーで`http:``//localhost:3000`をポイントします。**ログイン**リンクを使用して、Auth0テナントにログインまたはサインアップします。
 
-このサンプルでは、[認可コードフロー](https://auth0.com/docs/flows/concepts/auth-code)を使用して、認証フロー中に認可コードをトークンと交換します。この要求が`/callback`エンドポイントに対するもので、`code`要求パラメーターが含まれている場合には、以下にあるいくつかの重要な処理を行います。
+      ログインに成功すると、ユーザーのプロフィール画像とログインリンクのあるドロップダウンメニューが表示されます。**プロファイル**リンクをクリックすると、ユーザーのプロファイルページを表示することができます。ドロップダウンメニューにある**ログアウト**リンクをクリックすると、ログアウトできます。
+    </Section>
 
-* `AuthenticationController`の`handle`メソッドを呼び出して、認可コードをIDトークンおよびアクセストークンと交換する。
-* IDトークンを使用して、新たに`Auth0Credential`を作成する。
-* カスタムの`IdentityStore`実装の`validate`メソッドを呼び出して、検証結果を取得する。
-* アプリケーションコンテナーにログインステータスを通知する。
+    ## 次のステップ
 
-要求されたリソースが`/callback`でない場合には、`httpMessageContext.doNothing()`を返して、要求の処理が続行できるようにします。後ほど、認証のトリガーやWebビューの表示で認証情報をどのように使用するかについて説明します。
+    成功です！ここまで来れば、アプリケーションにログイン、ログアウト、ユーザープロファイル情報が備わっているはずです。
 
-最後に、認証したユーザーのセッションをコンテナーが作成できるように、`@AutoApplySession`アノテーションが追加されたことに注意してください。
+    これでクイックスタートチュートリアルは終了ですが、機能はまだまだたくさんあります。Auth0でできることについて詳しくは、以下をご覧ください。
 
-[5
+    *   [Auth0 Dashboard](https://manage.auth0.com/#) - Auth0のテナントやアプリケーションを構成して管理する方法について説明します
+    *   [auth0-java-mvc-common SDK](https://github.com/auth0/auth0-java-mvc-common) - このチュートリアルで使用されているSDKをより詳しく説明します
+    *   [Auth0 Marketplace](https://marketplace.auth0.com/) - Auth0の機能性を拡張できる各種の統合を見つけられます
+  </Content>
 
-## 認証をトリガーする](#認証をトリガーする)
+  <SideMenu sections={sections}>
+    <SideMenuSectionItem id={sections[0].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
 
-ユーザーがログインできるようにするには、`/login`パスへの要求を処理するサーブレットを作成します。
+    <SideMenuSectionItem id={sections[1].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
 
-`LoginController`は、ユーザーがAuth0で認証できるように、正しい認可URLに要求をリダイレクトします。正しい認可URLの構築には、`Auth0AuthenticationConfig`を通して投入された構成値と、Auth0 Java MVC SDKが提供する`AuthenticationController`が使用されます。このサンプルはデフォルトで`openid profile email`スコープを要求して、アプリケーションが基本的なプロファイル情報を認証済みのユーザーから取得できるようにします。これらのスコープについては、[OpenID Connectスコープ](https://auth0.com/docs/scopes/current/oidc-scopes)のドキュメントをお読みください。
+    <SideMenuSectionItem id={sections[2].id}>
+      <CodeGroup>
+        <Web/>
+        <Auth0authenticationconfig/>
+        <Loginservlet/>
+        <Homeservlet/>
+        <Logoutservlet/>
+      </CodeGroup>
+    </SideMenuSectionItem>
 
-ユーザーが資格情報を入力し、要求されたアクセス権を認可すると、Auth0は`callbackUrl`に対して要求を発行し、IDトークンおよびアクセストークンと交換できる`code`クエリパラメーターを含めます。先ほど説明したように、上記で作成した`Auth0HttpAuthenticationMechanism`がこの交換を処理し、アプリケーションコンテナーに認証ステータスを通知できるようにします。そうすることで、`/callback`パスへの要求を処理するサーブレットは、ログイン前に要求された元のリソースに要求を転送するか、ホームページにリダイレクトするだけで済みます。
+    <SideMenuSectionItem id={sections[3].id}>
+      <CodeGroup>
+        <Auth0authenticationconfig/>
+        <Web/>
+        <Loginservlet/>
+        <Homeservlet/>
+        <Logoutservlet/>
+      </CodeGroup>
+    </SideMenuSectionItem>
 
-```javascript lines
-// src/main/com/auth0/example/web/CallbackServlet.java
-@WebServlet(urlPatterns = {"/callback"})
-public class CallbackServlet extends HttpServlet {
-@Override
+    <SideMenuSectionItem id={sections[4].id}>
+      <CodeGroup>
+        <Loginservlet/>
+        <Web/>
+        <Auth0authenticationconfig/>
+        <Homeservlet/>
+        <Logoutservlet/>
+      </CodeGroup>
+    </SideMenuSectionItem>
 
-public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    <SideMenuSectionItem id={sections[5].id}>
+      <CodeGroup>
+        <Homeservlet/>
+        <Web/>
+        <Auth0authenticationconfig/>
+        <Loginservlet/>
+        <Logoutservlet/>
+      </CodeGroup>
+    </SideMenuSectionItem>
 
-    String referer = (String) request.getSession().getAttribute(&quot;Referer&quot;);
+    <SideMenuSectionItem id={sections[6].id}>
+      <CodeGroup>
+        <Logoutservlet/>
+        <Web/>
+        <Auth0authenticationconfig/>
+        <Loginservlet/>
+        <Homeservlet/>
+      </CodeGroup>
+    </SideMenuSectionItem>
 
-    String redirectTo = referer != null ? referer : &quot;/&quot;;
+    <SideMenuSectionItem id={sections[7].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
 
-    response.sendRedirect(redirectTo);
-
-}
-
-}
-```
-
-[6
-
-## ユーザー情報を表示する](#ユーザー情報を表示する)
-
-認証したユーザーのプロファイル情報を取得するには、`Auth0JwtPrincipal`を使用することができます。`HomeServlet.java`のサンプルコードでは、[IDトークン](https://auth0.com/docs/tokens/id-token)でクレームを使ってプロファイルデータを要求属性に設定する方法を例示しています。
-
-そのプロファイル情報は、ユーザーについての情報を表示するビューで使用できます。
-
-```html lines
-<!-- src/main/webapp/WEB-INF/jsp/fragments/navbar.jspf -->
-<c:choose>
-<c:when test="{empty profile}">
-<li>
-<form action="/login" method="GET">
-<input type="submit" value="Login"/>
-</form>
-</li>
-</c:when>
-<c:otherwise>
-<li>
-<a href="#">
-<!-- Profile image should be set to the profile picture from the id token -->
-<Frame><img src="{profile.get('picture').asString()}" alt="Profile picture"/></Frame>
-
-</a>
-<div>
-<!-- Show the user's full name from the id token here -->
-<div>"{profile.get('name').asString()}"</div>
-<a href="/profile">Profile</a>
-<a href="/logout">Log out</a>
-</div>
-</li>
-</c:otherwise>
-</c:choose>
-```
-
-[7
-
-## ログアウトを処理する](#ログアウトを処理する)
-
-ユーザーをログアウトさせるには、アプリケーションセッションを消去して、Auth0からユーザーをログアウトさせる必要があります。これは`LogoutServlet`で処理されます。
-
-まず、`request.getSession().invalidate()`を呼び出して、セッションを消去します。それから、ログアウトURLを構築して、必ず`returnTo`クエリパラメーターを含めます。ユーザーはログアウト後にこのURLにリダイレクトされます。最後に、アプリケーションのをログアウトURLに応答をリダイレクトします。
-
-[8
-
-## サンプルを実行する](#サンプルを実行する)
-
-サンプルを構築し実行するには、Mavenゴールに対してwildfly:runを実行し、このアプリケーションをデプロイした組み込みのWildFlyアプリケーションサーバーを起動します。詳細については、[WildFly Maven Plugin](https://docs.jboss.org/wildfly/plugins/maven/latest/)のドキュメントを参照してください。
-
-LinuxまたはMacOSを使用している場合は、次を行います：
-
-```powershell lines
-./mvnw clean wildfly:run
-```
-
-Windows：
-
-```powershell lines
-mvnw.cmd clean wildfly:run
-```
-
-使用しているブラウザーで`http:``//localhost:3000`をポイントします。**ログイン**リンクを使用して、Auth0テナントにログインまたはサインアップします。
-
-<Frame>![null](/images/ja-jp/cdy7uua7fh8z/5Lp4Zahxd2v6wSJmy9JaM4/717068d1dafc0637c4dad2cdcf5a29a5/Login_Screen_-_Japanese.png)</Frame>
-
-ログインに成功すると、ユーザーのプロフィール画像とログインリンクのあるドロップダウンメニューが表示されます。**プロファイル**リンクをクリックすると、ユーザーのプロファイルページを表示することができます。ドロップダウンメニューにある**ログアウト**リンクをクリックすると、ログアウトできます。
-
-## Next Steps
-
-Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
-
-This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
-
-* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
-* [auth0-java-mvc-common SDK](https://github.com/auth0/auth0-java-mvc-common) - Explore the SDK used in this tutorial more fully
-* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
-
-Did it work?
-
-Yes No
-
-Any suggestion or typo?
-
-[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/webapp/java-ee/interactive.md)
-
-<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
-
-Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
-
-Sign Up
-
-Developers
-
-* [Developer Hub](https://developer.auth0.com/resources)
-* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
-* [Blog posts](https://auth0.com/blog/developers/)
-* [Videos](https://auth0.com/docs/videos)
-* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
-* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
-
-Documentation
-
-* [Articles](https://auth0.com/docs/articles)
-* [Quickstarts](https://auth0.com/docs/quickstarts)
-* [APIs](https://auth0.com/docs/api)
-* [SDK Libraries](https://auth0.com/docs/libraries)
-* [Blog](https://auth0.com/blog/)
-* [Reports](https://auth0.com/resources/ebooks)
-* [Webinars](https://auth0.com/resources/webinars)
-
-Get Involved
-
-* [Forum](https://community.auth0.com/)
-* [Events](https://developer.auth0.com/events)
-* [Ambassador Program](https://auth0.com/ambassador-program)
-* [Auth0 Research Program](https://auth0.com/research-program)
-
-Company
-
-* [Our Customers](https://auth0.com/customers)
-* [Compliance - Ensuring privacy and security](https://auth0.com/security)
-* [Partners](https://auth0.com/partners)
-* [Careers We're hiring!](https://www.okta.com/company/careers/)
-* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
-
-Support Center
-
-* [Community](https://community.auth0.com/)
-* [Support](https://support.auth0.com/)
-* [Help](https://community.auth0.com/c/help/6)
-* [FAQs](https://community.auth0.com/c/faq/42)
-* [Auth0 Marketplace](https://marketplace.auth0.com)
-
-Learning
-
-* [Learn](https://auth0.com/learn)
-* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
-* [Blog](https://auth0.com/blog/)
-
-Platform
-
-* [Access Management](https://auth0.com/platform/access-management)
-* [Extensibility](https://auth0.com/platform/extensibility)
-* [Security](https://auth0.com/platform/login-security)
-* [User Management](https://auth0.com/platform/user-management)
-* [Authentication](https://auth0.com/platform/authentication)
-
-Features
-
-* [Universal Login](https://auth0.com/features/universal-login)
-* [Single Sign On](https://auth0.com/features/single-sign-on)
-* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
-* [Actions](https://auth0.com/features/actions)
-* [Machine to Machine](https://auth0.com/features/machine-to-machine)
-* [Passwordless](https://auth0.com/features/passwordless)
-* [Breached Passwords](https://auth0.com/features/breached-passwords)
-
-© 2025 Okta, Inc. All Rights Reserved.
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
+  </SideMenu>
+</Recipe>
