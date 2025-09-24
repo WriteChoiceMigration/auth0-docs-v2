@@ -7,292 +7,211 @@ permalink: "interactive"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/html5.png"
 'twitter:title': "JavaScriptアプリケーションにログインを追加する"
 'twitter:description': "このガイドは、単純なJavaScriptを使用するシングルページアプリケーション（SPA）にAuth0 SPA SDKを使ってAuth0を統合し、認証の追加とユーザープロファイル情報の表示を行う方法について説明します。"
+sidebarTitle: JavaScript
+mode: wide
 ---
 
-[Skip to main content](#maincontent)
+import { Recipe, Content, Section, SideMenu, SideMenuSectionItem, SignUpForm } from "/snippets/recipe.jsx";
+import { LoggedInForm } from "/snippets/Login.jsx";
+import App from "/snippets/quickstart/spa/vanillajs/app.mdx"
+import App2 from "/snippets/quickstart/spa/vanillajs/app2.mdx"
+import App3 from "/snippets/quickstart/spa/vanillajs/app3.mdx"
+import App4 from "/snippets/quickstart/spa/vanillajs/app4.mdx"
+import App5 from "/snippets/quickstart/spa/vanillajs/app5.mdx"
 
-​
+export const sections = [
+  { id: "auth0を構成する", title: "Auth0を構成する" },
+  { id: "auth0-spa-sdkを追加する", title: "Auth0 SPA SDKを追加する" },
+  { id: "auth0クライアントを作成する", title: "Auth0クライアントを作成する" },
+  { id: "アプリケーションにログインを追加する", title: "アプリケーションにログインを追加する" },
+  { id: "auth0からのコールバックを処理する", title: "Auth0からのコールバックを処理する" },
+  { id: "アプリケーションにログアウトを追加する", title: "アプリケーションにログアウトを追加する" },
+  { id: "ユーザープロファイル情報を表示する", title: "ユーザープロファイル情報を表示する" }
+]
 
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+<Recipe>
+  <Content>
+    Auth0を使用すると、アプリケーションに手軽に認証を追加することができます。このガイドは、単純なJavaScriptを使用するシングルページアプリケーション（SPA）に[Auth0 SPA
+          SDK](https://github.com/auth0/auth0-spa-js)を使ってAuth0を統合し、認証の追加とユーザープロファイル情報の表示を行う方法について説明します。
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+    このクイックスタートを使用するには、以下の手順に従います：
 
----
+    <Info>
+    このクイックスタートでは、ReactやAngularなどのフレームワークを使用しているのでなく、単純なJavaScriptアプリケーションにAuth0を追加しているものとします。
+    </Info>
 
-​
+    <Section id={sections[0].id} title={sections[0].title} stepNumber="1">
+      Auth0のサービスを利用するには、Auth0 Dashboadでセットアップしたアプリケーションが必要です。Auth0アプリケーションは、開発中のプロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
 
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+      ### アプリケーションを構成する
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0
+            APIを呼び出す際に使用されます。
 
-[##### JavaScriptアプリケーションにログインを追加する](#JavaScriptアプリケーションにログインを追加する)
+      このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/#/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
 
-[View on Github](https://github.com/auth0-samples/auth0-javascript-samples/tree/master/01-Login) Log In & Download Sample
+      代わりに完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
 
-1. [Docs](/docs/ja-jp/ja-jp)
-3. [Quickstarts](/docs/ja-jp/quickstarts)
-5. [Single Page App](/docs/ja-jp/quickstart/spa)
-7. [JavaScript](/docs/ja-jp/quickstart/spa/vanillajs/interactive)
+      ### Callback URLを構成する
 
-# 
+      Callback URLとは、Auth0がユーザーを認証後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはログイン後にアプリケーションに戻りません。
 
-# JavaScriptアプリケーションにログインを追加する
+      <Info>
+      サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+      </Info>
 
-Auth0を使用すると、アプリケーションに手軽に認証を追加することができます。このガイドは、単純なJavaScriptを使用するシングルページアプリケーション（SPA）に[Auth0 SPA SDK](https://github.com/auth0/auth0-spa-js)を使ってAuth0を統合し、認証の追加とユーザープロファイル情報の表示を行う方法について説明します。
+      ### ログアウトURLを構成する
 
-このクイックスタートを使用するには、以下の手順に従います：
+      ログアウトURLとは、Auth0がユーザーをログアウト後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーを受け取ります。
 
-* Auth0の無料アカウントにサインアップするか、Auth0にログインします。
-* 統合したいプロジェクトを用意します。または、ログインした後に、サンプルアプリケーションを表示してダウンロードすることもできます。
+      <Info>
+      サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+      </Info>
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      ### Allowed Web Origins（許可されているWebオリジン）を構成する
 
-このクイックスタートでは、ReactやAngularなどのフレームワークを使用しているのでなく、単純なJavaScriptアプリケーションにAuth0を追加しているものとします。
+      ［Allowed Web
+            Origin（許可されているWebオリジン）］とは、認証フローにアクセスすることを許可して欲しいURLです。これにはプロジェクトのURLが含まれている必要があります。適切に設定されていない場合、プロジェクトが認証トークンを暗黙でリフレッシュできず、ユーザーがアプリケーションを再び訪問した時、またはページを再読み込みした時にログアウトした状態になってしまいます。
 
-</Callout>
+      <Info>
+      サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+      </Info>
+    </Section>
 
-[1
+    <Section id={sections[1].id} title={sections[1].title} stepNumber="2">
+      JavaScriptアプリで、Auth0の認証・認可を手軽に実装できるように、Auth0はSPA SDK（auth0-spa-js）を提供しています。Auth0 SPA
+            SDKはNPMパッケージとして、またはCDNからインストールすることができます。このクイックスタートの目的上、CDNを使用します。HTMLページにこのスクリプトタグを含めます。
 
-## Auth0を構成する](#auth0を構成する)
+      ```html
+      <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+      ```
+    </Section>
 
-Auth0のサービスを利用するには、Auth0 Dashboadでセットアップしたアプリケーションが必要です。Auth0アプリケーションは、開発中のプロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
+    <Section id={sections[2].id} title={sections[2].title} stepNumber="3">
+      Auth0 SPA SDKで提供されているAuth0クライアントの新規インスタンスを作成し、このクイックスタートで前に作成したAuth0アプリケーションの詳細を提供します。
 
-### アプリケーションを構成する
+      ユーザーが以前にログインしている場合、クライアントはページの読み込み時に認証状態を更新します。ページが更新されても、ユーザーはこれまでと変わらずログインされます。
+    </Section>
 
-対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0 APIを呼び出す際に使用されます。
+    <Section id={sections[3].id} title={sections[3].title} stepNumber="4">
+      Auth0アプリケーションの構成、Auth0 SPA
+            SDKの追加、Auth0クライアントの作成が完了したら、プロジェクトのためにログインをセットアップする必要があります。これを実現するには、SDKの`loginWithRedirect()`メソッドを使用して、ユーザーをAuth0のユニバーサルログインページにリダイレクトします。ここでAuth0はユーザーを認証することができます。ユーザーが認証に成功すると、このクイックスタートで前にセットアップしたCallback
+            URLへリダイレクトされます。
 
-このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/#/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
+      アプリケーションで選択時に`loginWithRedirect()`を呼び出すログインボタンを作成します。
 
-代わりに完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
+      <Note>
+      ##### チェックポイント
 
-### Callback URLを構成する
+      アプリケーションにログインできるようになります。
 
-Callback URLとは、Auth0がユーザーを認証後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはログイン後にアプリケーションに戻りません。
+      アプリケーションを実行し、ログインボタンを選択します。以下の点を確認します：
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      - ユーザー名とパスワードを使って、ログインまたはサインアップできる
+      - アプリケーションによって[Auth0ユニバーサルログイン](https://auth0.com/universal-login)ページにリダイレクトされる
+      - 認証用にAuth0にリダイレクトされる
+      - 認証した後、Auth0はユーザーをアプリケーションにリダイレクトで戻す
+      - コンソールでAuth0に関連したエラーを受け取らない
+      </Note>
+    </Section>
 
-サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+    <Section id={sections[4].id} title={sections[4].title} stepNumber="5">
+      ブラウザーでアプリケーションプロセスへとリダイレクトで戻されると、アプリケーションはAuth0からのコールバックを検出した場合にのみ、Auth0クライアントで`handleRedirectCallback()`関数を呼び出します。これを実行する1つの方法は、`code`と`state`のクエリパラメーターが検出されたときに、`handleRedirectCallback()`のみを呼び出すことです。
 
-</Callout>
+      コールバックの処理に成功すると、パラメーターはURLから削除されます。これによって、次回ページが読み込まれても、コールバックハンドラーがトリガーされることはありません。
 
-### ログアウトURLを構成する
+      <Note>
+      ##### チェックポイント
 
-ログアウトURLとは、Auth0がユーザーをログアウト後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーを受け取ります。
+      Auth0からのコールバックが正しく処理されます。
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      アプリケーションを実行し、ログインボタンをもう一度選択します。以下の点を確認します：
 
-サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+      - 認証した後、Auth0はアプリケーションにリダイレクトで戻される。
+      - クエリパラメータがURLから削除される。
+      </Note>
+    </Section>
 
-</Callout>
+    <Section id={sections[5].id} title={sections[5].title} stepNumber="6">
+      プロジェクトにログインしたユーザーには、[ログアウトする方法](https://auth0.com/docs/logout/guides/logout-auth0)も必要です。Auth0クライアントには、アプリからユーザーをログアウトするのに使用できる`logout()`メソッドが用意されています。ユーザーはログアウトすると、[Auth0ログアウトエンドポイント](https://auth0.com/docs/api/authentication?javascript#logout)にリダイレクトされてから、即座に、アプリケーションとこのクイックスタートで先ほどセットアップしたログアウトURLへとリダイレクトで戻されます。
 
-### Allowed Web Origins（許可されているWebオリジン）を構成する
+      アプリケーションで選択時に`logout()`を呼び出すログアウトボタンを作成します。
 
-［Allowed Web Origin（許可されているWebオリジン）］とは、認証フローにアクセスすることを許可して欲しいURLです。これにはプロジェクトのURLが含まれている必要があります。適切に設定されていない場合、プロジェクトが認証トークンを暗黙でリフレッシュできず、ユーザーがアプリケーションを再び訪問した時、またはページを再読み込みした時にログアウトした状態になってしまいます。
+      <Info>
+      SDKによって`isAuthenticated()`関数が公開されることで、ユーザーが認証されているかどうかを確認することができます。`isAuthenticated()`関数の値に基づいて、条件付きでログインボタンとログアウトボタンを表示することができます。または、シングルボタンを使って、ログインとログアウトの両方のボタンと条件付きレンダリングを組み合わせることができます。
+      </Info>
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      <Note>
+      ##### チェックポイント
 
-サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+      アプリケーションからログアウトできるようになります。
 
-</Callout>
+      アプリケーションを実行し、ログインし、ログアウトボタンを選択します。以下の点を確認します：
 
-[2
+      - Auth0のログアウトエンドポイントにリダイレクトされている。
+      - Auth0がアプリケーションと正しいログアウトURLへのリダイレクトで戻される。
+      - アプリケーションにログインしていない。
+      - コンソールでAuth0に関連したエラーを受け取らない。
+      </Note>
+    </Section>
 
-## Auth0 SPA SDKを追加する](#auth0-spa-sdkを追加する)
+    <Section id={sections[6].id} title={sections[6].title} stepNumber="7">
+      ユーザーがログインやログアウトできるようになったら、認証済みのユーザーに関連付けられた[プロファイル情報](https://auth0.com/docs/users/concepts/overview-user-profile)を取得できるようにしたいと考えるはずです。たとえば、ログインしたユーザーの名前やプロフィール写真を表示することで、ユーザーインターフェイスをパーソナライズできるようになりたいかもしれません。
 
-JavaScriptアプリで、Auth0の認証・認可を手軽に実装できるように、Auth0はSPA SDK（auth0-spa-js）を提供しています。Auth0 SPA SDKはNPMパッケージとして、またはCDNからインストールすることができます。このクイックスタートの目的上、CDNを使用します。HTMLページにこのスクリプトタグを含めます。
+      Auth0 SPA
+            SDKは、Auth0クライアントによって公開された`getUser()`関数を介してユーザー情報を提供します。Auth0クライアントは、ユーザーが認証されているかどうかを確認することができる`isAuthenticated()`関数も公開します。これを使って、たとえば、UI要素を表示・非表示にするかを判断することができます。インタラクティブパネルでコードを確認し、これらの関数の使用方法の例をチェックします。
 
-```javascript lines
-<script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
-```
+      <Note>
+      ##### チェックポイント
 
-[3
+      ユーザープロファイル情報を表示することができるようになります。
 
-## Auth0クライアントを作成する](#auth0クライアントを作成する)
+      アプリケーションを実行して次の点を確認します：
 
-Auth0 SPA SDKで提供されているAuth0クライアントの新規インスタンスを作成し、このクイックスタートで前に作成したAuth0アプリケーションの詳細を提供します。
+      - ログイン後にユーザー情報が正しく表示される。
+      - ログアウト後にユーザー情報が表示されない。
+      </Note>
+    </Section>
 
-ユーザーが以前にログインしている場合、クライアントはページの読み込み時に認証状態を更新します。ページが更新されても、ユーザーはこれまでと変わらずログインされます。
+    ## 次のステップ
 
-[4
+    成功です！ここまで来れば、アプリケーションにログイン、ログアウト、ユーザープロファイル情報が備わっているはずです。
 
-## アプリケーションにログインを追加する](#アプリケーションにログインを追加する)
+    これでクイックスタートチュートリアルは終了ですが、機能はまだまだたくさんあります。Auth0でできることについて詳しくは、以下をご覧ください。
 
-Auth0アプリケーションの構成、Auth0 SPA SDKの追加、Auth0クライアントの作成が完了したら、プロジェクトのためにログインをセットアップする必要があります。これを実現するには、SDKの`loginWithRedirect()`メソッドを使用して、ユーザーをAuth0のユニバーサルログインページにリダイレクトします。ここでAuth0はユーザーを認証することができます。ユーザーが認証に成功すると、このクイックスタートで前にセットアップしたCallback URLへリダイレクトされます。
+    *   [Auth0 Dashboard](https://manage.auth0.com/#) - Auth0のテナントやアプリケーションを構成して管理する方法について説明します
+    *   [auth0-spa-js SDK](https://github.com/auth0/auth0-spa-js) - このチュートリアルで使用されているSDKをより詳しく説明します
+    *   [Auth0 Marketplace](https://marketplace.auth0.com/) - Auth0の機能性を拡張できる各種の統合を見つけられます
+  </Content>
 
-アプリケーションで選択時に`loginWithRedirect()`を呼び出すログインボタンを作成します。
+  <SideMenu sections={sections}>
+    <SideMenuSectionItem id={sections[0].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
 
-##### checkpoint.header
+    <SideMenuSectionItem id={sections[1].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
 
-アプリケーションにログインできるようになります。
+    <SideMenuSectionItem id={sections[2].id}>
+      <App />
+    </SideMenuSectionItem>
 
-アプリケーションを実行し、ログインボタンを選択します。以下の点を確認します：
+    <SideMenuSectionItem id={sections[3].id}>
+      <App2 />
+    </SideMenuSectionItem>
 
-* ユーザー名とパスワードを使って、ログインまたはサインアップできる
-* アプリケーションによって[Auth0ユニバーサルログイン](https://auth0.com/universal-login)ページにリダイレクトされる
-* 認証用にAuth0にリダイレクトされる
-* 認証した後、Auth0はユーザーをアプリケーションにリダイレクトで戻す
-* コンソールでAuth0に関連したエラーを受け取らない
+    <SideMenuSectionItem id={sections[4].id}>
+      <App3 />
+    </SideMenuSectionItem>
 
-checkpoint.itWorked checkpoint.somethingNotRight
+    <SideMenuSectionItem id={sections[5].id}>
+      <App4 />
+    </SideMenuSectionItem>
 
-[5
+    <SideMenuSectionItem id={sections[6].id}>
+      <App5 />
+    </SideMenuSectionItem>
 
-## Auth0からのコールバックを処理する](#auth0からのコールバックを処理する)
-
-ブラウザーでアプリケーションプロセスへとリダイレクトで戻されると、アプリケーションはAuth0からのコールバックを検出した場合にのみ、Auth0クライアントで`handleRedirectCallback()`関数を呼び出します。これを実行する1つの方法は、`code`と`state`のクエリパラメーターが検出されたときに、`handleRedirectCallback()`のみを呼び出すことです。
-
-コールバックの処理に成功すると、パラメーターはURLから削除されます。これによって、次回ページが読み込まれても、コールバックハンドラーがトリガーされることはありません。
-
-##### checkpoint.header
-
-Auth0からのコールバックが正しく処理されます。
-
-アプリケーションを実行し、ログインボタンをもう一度選択します。以下の点を確認します：
-
-* 認証した後、Auth0はアプリケーションにリダイレクトで戻される。
-* クエリパラメータがURLから削除される。
-
-checkpoint.itWorked checkpoint.somethingNotRight
-
-[6
-
-## アプリケーションにログアウトを追加する](#アプリケーションにログアウトを追加する)
-
-プロジェクトにログインしたユーザーには、[ログアウトする方法](https://auth0.com/docs/logout/guides/logout-auth0)も必要です。Auth0クライアントには、アプリからユーザーをログアウトするのに使用できる`logout()`メソッドが用意されています。ユーザーはログアウトすると、[Auth0ログアウトエンドポイント](https://auth0.com/docs/api/authentication?javascript#logout)にリダイレクトされてから、即座に、アプリケーションとこのクイックスタートで先ほどセットアップしたログアウトURLへとリダイレクトで戻されます。
-
-アプリケーションで選択時に`logout()`を呼び出すログアウトボタンを作成します。
-
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
-
-SDKによって`isAuthenticated()`関数が公開されることで、ユーザーが認証されているかどうかを確認することができます。`isAuthenticated()`関数の値に基づいて、条件付きでログインボタンとログアウトボタンを表示することができます。または、シングルボタンを使って、ログインとログアウトの両方のボタンと条件付きレンダリングを組み合わせることができます。
-
-</Callout>
-
-##### checkpoint.header
-
-アプリケーションからログアウトできるようになります。
-
-アプリケーションを実行し、ログインし、ログアウトボタンを選択します。以下の点を確認します：
-
-* Auth0のログアウトエンドポイントにリダイレクトされている。
-* Auth0がアプリケーションと正しいログアウトURLへのリダイレクトで戻される。
-* アプリケーションにログインしていない。
-* コンソールでAuth0に関連したエラーを受け取らない。
-
-checkpoint.itWorked checkpoint.somethingNotRight
-
-[7
-
-## ユーザープロファイル情報を表示する](#ユーザープロファイル情報を表示する)
-
-ユーザーがログインやログアウトできるようになったら、認証済みのユーザーに関連付けられた[プロファイル情報](https://auth0.com/docs/users/concepts/overview-user-profile)を取得できるようにしたいと考えるはずです。たとえば、ログインしたユーザーの名前やプロフィール写真を表示することで、ユーザーインターフェイスをパーソナライズできるようになりたいかもしれません。
-
-Auth0 SPA SDKは、Auth0クライアントによって公開された`getUser()`関数を介してユーザー情報を提供します。Auth0クライアントは、ユーザーが認証されているかどうかを確認することができる`isAuthenticated()`関数も公開します。これを使って、たとえば、UI要素を表示・非表示にするかを判断することができます。インタラクティブパネルでコードを確認し、これらの関数の使用方法の例をチェックします。
-
-##### checkpoint.header
-
-ユーザープロファイル情報を表示することができるようになります。
-
-アプリケーションを実行して次の点を確認します：
-
-* ログイン後にユーザー情報が正しく表示される。
-* ログアウト後にユーザー情報が表示されない。
-
-checkpoint.itWorked checkpoint.somethingNotRight
-
-## Next Steps
-
-Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
-
-This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
-
-* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
-* [auth0-spa-js SDK](https://github.com/auth0/auth0-spa-js) - Explore the SDK used in this tutorial more fully
-* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
-
-Did it work?
-
-Yes No
-
-Any suggestion or typo?
-
-[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/spa/vanillajs/interactive.md)
-
-<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
-
-Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
-
-Sign Up
-
-Developers
-
-* [Developer Hub](https://developer.auth0.com/resources)
-* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
-* [Blog posts](https://auth0.com/blog/developers/)
-* [Videos](https://auth0.com/docs/videos)
-* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
-* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
-
-Documentation
-
-* [Articles](https://auth0.com/docs/articles)
-* [Quickstarts](https://auth0.com/docs/quickstarts)
-* [APIs](https://auth0.com/docs/api)
-* [SDK Libraries](https://auth0.com/docs/libraries)
-* [Blog](https://auth0.com/blog/)
-* [Reports](https://auth0.com/resources/ebooks)
-* [Webinars](https://auth0.com/resources/webinars)
-
-Get Involved
-
-* [Forum](https://community.auth0.com/)
-* [Events](https://developer.auth0.com/events)
-* [Ambassador Program](https://auth0.com/ambassador-program)
-* [Auth0 Research Program](https://auth0.com/research-program)
-
-Company
-
-* [Our Customers](https://auth0.com/customers)
-* [Compliance - Ensuring privacy and security](https://auth0.com/security)
-* [Partners](https://auth0.com/partners)
-* [Careers We're hiring!](https://www.okta.com/company/careers/)
-* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
-
-Support Center
-
-* [Community](https://community.auth0.com/)
-* [Support](https://support.auth0.com/)
-* [Help](https://community.auth0.com/c/help/6)
-* [FAQs](https://community.auth0.com/c/faq/42)
-* [Auth0 Marketplace](https://marketplace.auth0.com)
-
-Learning
-
-* [Learn](https://auth0.com/learn)
-* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
-* [Blog](https://auth0.com/blog/)
-
-Platform
-
-* [Access Management](https://auth0.com/platform/access-management)
-* [Extensibility](https://auth0.com/platform/extensibility)
-* [Security](https://auth0.com/platform/login-security)
-* [User Management](https://auth0.com/platform/user-management)
-* [Authentication](https://auth0.com/platform/authentication)
-
-Features
-
-* [Universal Login](https://auth0.com/features/universal-login)
-* [Single Sign On](https://auth0.com/features/single-sign-on)
-* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
-* [Actions](https://auth0.com/features/actions)
-* [Machine to Machine](https://auth0.com/features/machine-to-machine)
-* [Passwordless](https://auth0.com/features/passwordless)
-* [Breached Passwords](https://auth0.com/features/breached-passwords)
-
-© 2025 Okta, Inc. All Rights Reserved.
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
+  </SideMenu>
+</Recipe>
