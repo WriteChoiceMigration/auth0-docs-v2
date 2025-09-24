@@ -78,18 +78,18 @@ permalink: "universal-experience"
 
 * ユーザーが複数の<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">MFA</Tooltip>要素（たとえば、SMSおよびプッシュ通知）を登録している場合は、ユニバーサルログインのMFAページで、ユーザーは好みのオプションを選択できます。
 * MFA要素として音声またはメールを使用できます。詳細については、「[MFAのためにSMSと音声通知を構成する](/docs/ja-jp/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-sms-voice-notifications-mfa)」と「[MFA要素](/docs/ja-jp/secure/multi-factor-authentication/multi-factor-authentication-factors)」を参照してください。
-* Guardian SDKを使用してプッシュ通知を処理する独自のネイティブアプリケーションを作成する場合は、[Dashboard >［Security（セキュリティ）］>［Multi-Factor Auth（多要素認証）］](https://manage.auth0.com/#/mfa)セクションの**［Push via Auth0 Guardian（Auth0 Guardianを介したプッシュ）］**オプションでアプリケーションの名前とURLを構成して、ダウンロードできます。
+* Guardian SDKを使用してプッシュ通知を処理する独自のネイティブアプリケーションを作成する場合は、[Dashboard >［Security（セキュリティ）］>［Multi-Factor Auth（多要素認証）］](https://manage.auth0.com/#/mfa)セクションの**［Push via Auth0 Guardian（Auth0 Guardianを介したプッシュ）］** オプションでアプリケーションの名前とURLを構成して、ダウンロードできます。
 * MFAプロバイダーを`google-authenticator`に設定したルールがある場合は、[Dashboard >［Security（セキュリティ）］>［Multi-Factor Auth（多要素認証）］](https://manage.auth0.com/#/mfa)セクションでOTP要素を有効にする必要があります。
 * MFAのために[WebAuthn](/docs/ja-jp/secure/multi-factor-authentication/fido-authentication-with-webauthn)を使用できます。
 * [Actions](/docs/ja-jp/customize/actions)を使用することで、MFAフローをカスタマイズし、指定要素または要素のシリーズでユーザーにチャレンジできます。ロールや組織メンバーシップなどのユーザーメタデータを利用して、より個別化されたエクスペリエンスを作成することもできます。詳細については、「[ユニバーサルログインのMFA選択をカスタマイズする](/docs/ja-jp/secure/multi-factor-authentication/customize-mfa/customize-mfa-selection-universal-login)」をご覧ください。
 
 ## パスワードリセット
 
-* ユニバーサルログインエクスペリエンスでは、成功するとユーザーをデフォルトのログインルートにリダイレクトし、ユニバーサルログインフローの一部としてエラーケースを処理します。メールテンプレート内のリダイレクトURLは無視されます。リダイレクトURLが機能するように、[Dashboard >［Applications（アプリケーション）］>［Applications（アプリケーション）］](/docs/ja-jp/get-started/applications/application-settings)**［Settings（設定）］**タブに**［Application Login URI（アプリケーションログインURL）］**を提供する必要がありますのでご注意ください。
-* データベース接続に**［Require Username（ユーザー名の要求）］**が設定されている場合は、パスワードリセットフローが、ユーザーにユーザー名の入力を促し、関連するメールアドレスにパスワードリセットのメールを送信します。詳細については、「[データベース接続へのユーザー名の追加](/docs/ja-jp/authenticate/database-connections/require-username)」を参照してください。
+* ユニバーサルログインエクスペリエンスでは、成功するとユーザーをデフォルトのログインルートにリダイレクトし、ユニバーサルログインフローの一部としてエラーケースを処理します。メールテンプレート内のリダイレクトURLは無視されます。リダイレクトURLが機能するように、[Dashboard >［Applications（アプリケーション）］>［Applications（アプリケーション）］](/docs/ja-jp/get-started/applications/application-settings)**［Settings（設定）］** タブに**［Application Login URI（アプリケーションログインURL）］** を提供する必要がありますのでご注意ください。
+* データベース接続に**［Require Username（ユーザー名の要求）］** が設定されている場合は、パスワードリセットフローが、ユーザーにユーザー名の入力を促し、関連するメールアドレスにパスワードリセットのメールを送信します。詳細については、「[データベース接続へのユーザー名の追加](/docs/ja-jp/authenticate/database-connections/require-username)」を参照してください。
 * [Actions](/docs/ja-jp/customize/actions)を使用して、[パスワードリセットフロー](/docs/ja-jp/customize/actions/explore-triggers/password-reset-triggers)に2番目のチャレンジを組み込むことができます。特に、`post-challenge`トリガーを使用すると、ユーザーが最初のステップ（通常はパスワードリセットメール内のリンク）を完了した後、新しいパスワードを作成する前に追加のチャレンジをユーザーに提示できます。このトリガーを使用すると、ユーザーをサードパーティ検証ツールなどの外部サイトにリダイレクトしたり、追加のMFA要素でユーザーに情報の入力を求めたりできます。ユーザーがパスワードを更新するには、この2番目のチャレンジを完了する必要があります。
 
-  + **注意**：パスワードリセットフロー中にユーザーに表示されるMFAプロンプトはカスタマイズできます。詳細については、「[ユニバーサルログインのテキストプロンプトのカスタマイズ](/docs/ja-jp/customize/login-pages/universal-login/customize-text-elements)
+  +**注意** ：パスワードリセットフロー中にユーザーに表示されるMFAプロンプトはカスタマイズできます。詳細については、「[ユニバーサルログインのテキストプロンプトのカスタマイズ](/docs/ja-jp/customize/login-pages/universal-login/customize-text-elements)
 
 ## カスタムデータベース接続
 

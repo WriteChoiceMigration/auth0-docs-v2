@@ -37,11 +37,11 @@ aws s3 cp --recursive --acl "public-read" ./ s3://{yourBucket}/
 
 進める前に、ユーザー名-パスワード-認証（または使用しているアプリケーションと関連するデータベース接続）接続と関連するユーザーが少なくとも1名いることを確認してください。サンプルアプリの機能性およびAWSとの統合を完全に利用するには、認証をテストしてアクセスを得るために、そのユーザーが必要になります。
 
-最後になりますが、アプリケーションの［Settings（設定）］ページの**［Allowed Origins（許可されたオリジン）］**フィールドにURLを提供することで、Auth0がWebサイトからの認証を許可することを確認してください。WebサイトのURLはこのようになっているはずです。
+最後になりますが、アプリケーションの［Settings（設定）］ページの**［Allowed Origins（許可されたオリジン）］** フィールドにURLを提供することで、Auth0がWebサイトからの認証を許可することを確認してください。WebサイトのURLはこのようになっているはずです。
 
 `http://your-bucket.s3-website-us-east-1.amazonaws.com`
 
-URLが分からない場合は、S3バケットの**［Properties（プロパティ）］**タブのリストで確認できます。
+URLが分からない場合は、S3バケットの**［Properties（プロパティ）］** タブのリストで確認できます。
 
 先に進める前に、アプリケーションへのログインをテストします。ブラウザーで`http://your-bucket-domain/index.html`を開きます。ログインしたら、「getPets not implemented（getPetsが実装されていません）」という警告ボックスが表示されます。
 
@@ -212,9 +212,9 @@ function putPets(updatedPets) {
 
 1. ログアウトし、ログインし直します
 2. `Pet Type`および`Pet Price`の値に入力します。
-3. **［Save（保存）］**をクリックしてデータをポストします。
+3.**［Save（保存）］** をクリックしてデータをポストします。
 
-「We have a <Pet Type> for sale for <Pet Price>（`<Pet Price>`で販売されている`<Pet Type>`がいます）」のメッセージと、左側に赤色の**［REMOVE（削除）］**ボタンが表示されます。
+「We have a <Pet Type> for sale for <Pet Price>（`<Pet Price>`で販売されている`<Pet Type>`がいます）」のメッセージと、左側に赤色の**［REMOVE（削除）］** ボタンが表示されます。
 
 セキュリティを追加するために、`putPets`メソッドの始めに`getSecureApiClient`関数を追加します。
 

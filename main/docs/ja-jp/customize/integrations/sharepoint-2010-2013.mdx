@@ -21,7 +21,7 @@ Auth0は、Auth0 Claims Provider for SharePoint 2010/2013のサポートを終�
 
 ### 1.アカウント統合を追加する
 
-最初に、Dashboardの[［SSO Integrations（SSO統合）］](https://manage.auth0.com/#/externalapps/create)セクションに移動し、アプリのリストから**［SharePoint］**を選択します。
+最初に、Dashboardの[［SSO Integrations（SSO統合）］](https://manage.auth0.com/#/externalapps/create)セクションに移動し、アプリのリストから**［SharePoint］** を選択します。
 
 ### 2.ライブマニュアルに従う
 
@@ -31,7 +31,7 @@ SharePointサーバーがインターネットに接続していない場合は�
 
 </Callout>
 
-**［Settings（設定）］**タブで、SharePoint WebアプリケーションのURLと外部URL（通常、代替アクセスマッピングのインターネットエンドポイント）を入力する必要があります。
+**［Settings（設定）］** タブで、SharePoint WebアプリケーションのURLと外部URL（通常、代替アクセスマッピングのインターネットエンドポイント）を入力する必要があります。
 
 ライブマニュアルは、SharePoint用Auth0 CmdLetsのインストールから始まります。
 
@@ -181,13 +181,13 @@ SharePoint 2013では、ログに統合ログサービスを使用せず、代�
 
 ### 認可
 
-Auth0から渡されるクレームは、SharePointの認可にも利用できます。たとえば、ロールクレームに**Fabrikam HR**が含まれるユーザーは、特定のサイトへのアクセス権を持つか、あるいはそのサイトで共同作業者としての権限を持つべきです。
+Auth0から渡されるクレームは、SharePointの認可にも利用できます。たとえば、ロールクレームに**Fabrikam HR** が含まれるユーザーは、特定のサイトへのアクセス権を持つか、あるいはそのサイトで共同作業者としての権限を持つべきです。
 
 例として Azure ADを取り上げてみましょう。このクラウドディレクトリでは、ユーザーはグループの一員になることができ、田中さんは Fabrikam HRに所属しています。
 
 田中さんがAzure ADアカウントを使用してログインすると（その接続でSecurity Groups属性が有効になっている場合）、グループメンバーシップ情報がユーザープロファイルの`groups`属性に保存されます。
 
-これらのグループをSharePointのロールとして利用できるようにするためには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>設定にこれを追加する[ルール](https://manage.auth0.com/#/rules)を作成する必要があります。このルールは、**Fabrikam Intranet (SharePoint)**という名前のアプリケーションに対してのみ実行されます。
+これらのグループをSharePointのロールとして利用できるようにするためには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>設定にこれを追加する[ルール](https://manage.auth0.com/#/rules)を作成する必要があります。このルールは、**Fabrikam Intranet (SharePoint)** という名前のアプリケーションに対してのみ実行されます。
 
 ```javascript lines
 function (user, context, callback) {
@@ -225,7 +225,7 @@ Enable-Auth0
 
 デフォルトでは、ユーザーはサイトへのアクセス権を持っていません。
 
-現在は、特定のユーザーをSharePointグループ（例:Contributors）に追加する代わりに、**ロール**をSharePointグループに追加できるようになりました。以下は、「Fabrikam HR」のメンバーをContributorsグループに追加する方法を示すPowerShellスクリプトのサンプルです。
+現在は、特定のユーザーをSharePointグループ（例:Contributors）に追加する代わりに、**ロール** をSharePointグループに追加できるようになりました。以下は、「Fabrikam HR」のメンバーをContributorsグループに追加する方法を示すPowerShellスクリプトのサンプルです。
 
 ```bash lines
 $webName = "http://fabrikam-sp"

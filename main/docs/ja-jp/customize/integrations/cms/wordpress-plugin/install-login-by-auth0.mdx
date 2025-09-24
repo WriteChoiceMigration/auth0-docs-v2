@@ -15,22 +15,22 @@ permalink: "install-login-by-auth0"
 
 </Callout>
 
-このプラグインをWordPressサイトに追加するには、wp-adminの**［Plugins（プラグイン）］**画面で以下を行います。
+このプラグインをWordPressサイトに追加するには、wp-adminの**［Plugins（プラグイン）］** 画面で以下を行います。
 
 1. 既存のWordPressサイトに管理者としてログインします。
-2. 左の管理メニューから**［Plugins（プラグイン）］>［Add New（新規追加）］**を選択します。
+2. 左の管理メニューから**［Plugins（プラグイン）］>［Add New（新規追加）］** を選択します。
 3. 「Login by Auth0」を見つけます。
-4. Login by Auth0プラグインで**［Install Now（今すぐインストール）］**をクリックしてから、**［Activate（アクティブ化）］**を選択します。
+4. Login by Auth0プラグインで**［Install Now（今すぐインストール）］** をクリックしてから、**［Activate（アクティブ化）］** を選択します。
 
 このプロセスについては、wordpress.com提供の「[WordPress.comとWordPress.org](https://wordpress.com/support/com-vs-org/)」をお読みください。
 
 プラグインがアクティブ化されると、セットアップウィザードの開始画面にリダイレクトされます。
 
-Auth0アカウントをまだ持っていない場合には、まず[**無料でサインアップ**](https://auth0.com/signup)してから手順を進めてください。
+Auth0アカウントをまだ持っていない場合には、まず[**無料でサインアップ** ](https://auth0.com/signup)してから手順を進めてください。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-Auth0は、［Settings（設定）］タブの［Basic Information（基本情報）］で**Domain（ドメイン）**、**Client ID（クライアントID）**、**Clienet Secret（クライアントシークレット）**が入力されるまでログインフォームを置き換えません。
+Auth0は、［Settings（設定）］タブの［Basic Information（基本情報）］で**Domain（ドメイン）** 、**Client ID（クライアントID）** 、**Clienet Secret（クライアントシークレット）** が入力されるまでログインフォームを置き換えません。
 
 </Callout>
 
@@ -40,17 +40,17 @@ Login by Auth0プラグインは、WordPressのマルチサイトネットワー
 
 Auth0でサイトのネットワークをセットアップするには、いくつかの方法があります。
 
-1. **すべてのサイトでアプリケーションとデータベース接続の両方を共有する**
+1.**すべてのサイトでアプリケーションとデータベース接続の両方を共有する**
 
    1. メインサイトにセットアップウィザードの手順を実行して、完了させます。
-   2. 他のすべてのサイトを手動で構成します。その際には、Auth0の設定ページの［Basic（基本）］タブにあるメインサイトの**ドメイン**、**クライアントID**、**クライアントシークレット**を使用します。
-   3. アプリケーションの**Allowed Callback URLs（許可されているCallback URL）**、**Allowed Web Origins（許可されているWebオリジン）**、および**Allowed Logout URLs（許可されているログアウトURL）**に各サイトを含めて更新します（ネットワークにサブドメインがある場合には、ワイルドカードを使うことができます）。
-2. **各サイトに独自のアプリケーションがあり、データベース接続を共有する**
+   2. 他のすべてのサイトを手動で構成します。その際には、Auth0の設定ページの［Basic（基本）］タブにあるメインサイトの**ドメイン** 、**クライアントID** 、**クライアントシークレット** を使用します。
+   3. アプリケーションの**Allowed Callback URLs（許可されているCallback URL）** 、**Allowed Web Origins（許可されているWebオリジン）** 、および**Allowed Logout URLs（許可されているログアウトURL）** に各サイトを含めて更新します（ネットワークにサブドメインがある場合には、ワイルドカードを使うことができます）。
+2.**各サイトに独自のアプリケーションがあり、データベース接続を共有する**
 
    1. メインサイトにセットアップウィザードの手順を実行して、完了させます。
    2. [それぞれのサイトに手動で1つのアプリケーションを作成](/docs/ja-jp/customize/integrations/cms/wordpress-plugin/configure-login-by-auth0)し、作成済みのデータベース接続に追加します。
-   3. それぞれのサイトについて、Auth0の設定ページにある［Basic（基本）］タブに**ドメイン**、**クライアントID**、**クライアントシークレット**の値を追加します。
-3. **各サイトに独自のアプリケーションと独自のデータベース接続がある**。この場合には、それぞれのサイトにセットアップウィザードの手順を実行して、完了させます。
+   3. それぞれのサイトについて、Auth0の設定ページにある［Basic（基本）］タブに**ドメイン** 、**クライアントID** 、**クライアントシークレット** の値を追加します。
+3.**各サイトに独自のアプリケーションと独自のデータベース接続がある** 。この場合には、それぞれのサイトにセットアップウィザードの手順を実行して、完了させます。
 
 上記のオプションにはいずれも妥協しなければならない側面があります。オプション1では、Auth0で管理する個別のエンティティの数は最小ですが、ネットワークに何百ものサイトがあり、サブドメインが使われてない場合には、Callback URLの数が制限されてしまいます。オプション2では、多くの異なるアプリケーションを管理しなければなりませんが、各サイトのアプリケーションを個別に構成できます。
 
@@ -64,19 +64,19 @@ Auth0でサイトのネットワークをセットアップするには、いく
 
 サイトにアプリケーションとデータベース接続を作成して構成します。
 
-まず、[Management APIトークンを生成](/docs/ja-jp/api/management/v2/get-access-tokens-for-test#get-access-tokens-manually)します。トークンが生成されたら、**［Settings（設定）］**タブの**［Identifier（識別子）］**で使用されているドメイン名を書き留めておきます。たとえば、識別子が「`https://tenant-name.auth0.com/api/v2/`」の場合、テナントのドメインは「`tenant-name.auth0.com`」になります。テナントのドメインについては、「[テナントを作成する](/docs/ja-jp/get-started/auth0-overview/create-tenants)」をお読みください。
+まず、[Management APIトークンを生成](/docs/ja-jp/api/management/v2/get-access-tokens-for-test#get-access-tokens-manually)します。トークンが生成されたら、**［Settings（設定）］** タブの**［Identifier（識別子）］** で使用されているドメイン名を書き留めておきます。たとえば、識別子が「`https://tenant-name.auth0.com/api/v2/`」の場合、テナントのドメインは「`tenant-name.auth0.com`」になります。テナントのドメインについては、「[テナントを作成する](/docs/ja-jp/get-started/auth0-overview/create-tenants)」をお読みください。
 
-WordPress管理のセットアップウィザードに戻って、**［Standard（標準）］**をクリックします。表示された画面で**［Start Standard Setup（標準セットアップの開始）］**をクリックします。
+WordPress管理のセットアップウィザードに戻って、**［Standard（標準）］** をクリックします。表示された画面で**［Start Standard Setup（標準セットアップの開始）］** をクリックします。
 
 テナントのドメインと、上記で生成したAPIトークンを入力します。このトークンはセットアップのプロセスでのみ使用され、データベースには保管されません。
 
-セットアップの最初の手順が完了すると、［Configure your social connections（ソーシャル接続を構成する）］画面が表示されます。**［Next（次へ）］**をクリックして、管理者アカウントの移行に進みます。
+セットアップの最初の手順が完了すると、［Configure your social connections（ソーシャル接続を構成する）］画面が表示されます。**［Next（次へ）］** をクリックして、管理者アカウントの移行に進みます。
 
 に準拠していることを確認してください。詳細については、「[Auth0データベース接続のパスワード強度：パスワードポリシー](/docs/ja-jp/connections/database/password-strength#password-policies)」をお読みください。
 
-サイトを正しく構成するには、セットアップウィザードを最後まで完了させる必要があります。何らかの理由でウイザードが失敗して、［setup successful（セットアップの成功）］画面に到達できなかった場合には、**wp-admin >［Auth0］>［Error Log（エラーログ）］**でプラグインのエラーログを確認し、提供されている手順で原因を特定します。
+サイトを正しく構成するには、セットアップウィザードを最後まで完了させる必要があります。何らかの理由でウイザードが失敗して、［setup successful（セットアップの成功）］画面に到達できなかった場合には、**wp-admin >［Auth0］>［Error Log（エラーログ）］** でプラグインのエラーログを確認し、提供されている手順で原因を特定します。
 
-完全に最初からやり直すには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>で作成したアプリケーションやデータベース接続を削除します。WordPressで**［Auth0］>［Settings（設定）］>［Basic（基本）］**に移動し、ドメイン、クライアントID、およびクライアントシークレットを削除してから、**［Save（保存）］**をクリックします。管理メニューにある**［Setup Wizard（セットアップウィザード）］**をクリックして、プロセスをもう一度最初から始めます。
+完全に最初からやり直すには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>で作成したアプリケーションやデータベース接続を削除します。WordPressで**［Auth0］>［Settings（設定）］>［Basic（基本）］** に移動し、ドメイン、クライアントID、およびクライアントシークレットを削除してから、**［Save（保存）］** をクリックします。管理メニューにある**［Setup Wizard（セットアップウィザード）］** をクリックして、プロセスをもう一度最初から始めます。
 
 それでもインストールできない場合は、エラーログに記録されているエラーメッセージも含めて[Auth0 Communityにスレッドを投稿](https://community.auth0.com/tags/wordpress)してください。喜んでお手伝いさせていただきます！
 
@@ -115,8 +115,8 @@ Auth0に1つ以上のカスタムデータベース接続がある場合は、�
 
 プラグインは、内蔵のセットアップウィザード（以下を参照）を使って構成するか、アプリケーションの作成と接続の割り当てを行い手動で構成することができます。ウィザードで問題が発生する場合、以前にセットアップを実行した場合、もしくは、アプリケーション間でデータベース接続を共有したい場合には、完全に手動でセットアップすることができます。
 
-1. [［Auth0 Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](https://manage.auth0.com/#)に移動して、**［Create（作成）］**を選択します。
-2. アプリケーションに分かりやすい名前を入力し、**［Regular Web Applications（通常のWebアプリケーション）］**を選択してから**［Create（作成）］**を選択します。
+1. [［Auth0 Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](https://manage.auth0.com/#)に移動して、**［Create（作成）］** を選択します。
+2. アプリケーションに分かりやすい名前を入力し、**［Regular Web Applications（通常のWebアプリケーション）］** を選択してから**［Create（作成）］** を選択します。
 3. WordPressをインストールするために、アプリケーションを構成します。アプリケーションの構成方法については、「[Login by Auth0を構成する](/docs/ja-jp/customize/integrations/cms/wordpress-plugin/configure-login-by-auth0)」を参照し、「WordPressでAuth0の設定を更新する」の全セクションにある手順に従います。
 
 上記の手順が完了したら、構成したサイトを使い始めることができます。

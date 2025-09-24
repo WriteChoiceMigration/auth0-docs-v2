@@ -30,18 +30,18 @@ Auth0では、ロールベースのアクセス制御（RBAC）を2つの方法�
 
 ## 拡張機能を構成
 
-1. [［Auth0 Dashboard］>［Extensions（拡張機能）］](https://manage.auth0.com/#/extensions)に移動し、**［Auth0 Authorization（Auth0認可）］**を選択します。
-2. **［Authorization Dashboard（認可ダッシュボード）］**の右上にある**［Configuration（設定）］**を選択します。
+1. [［Auth0 Dashboard］>［Extensions（拡張機能）］](https://manage.auth0.com/#/extensions)に移動し、**［Auth0 Authorization（Auth0認可）］** を選択します。
+2.**［Authorization Dashboard（認可ダッシュボード）］** の右上にある**［Configuration（設定）］** を選択します。
 
    <Frame>![Dashboard - Authorization Extension Dashboard - Configuration](/images/ja-jp/cdy7uua7fh8z/r8Ic6OYMcVfXDvIKePLrb/ed9c75536d20c12149e8b8e62a8edc44/click-configuration.png)</Frame>
 
-3. これにより、**［Configuration（構成）］**ページの**［Rule Configuration（ルールの構成）］**セクションが表示されます。グループ、ロール、権限に関連する変更など、**［Token Contents（トークンの内容）］**の下のセクションで行ったすべての変更は、この手順の完了時にエクスポートするルールに反映されます。
+3. これにより、**［Configuration（構成）］** ページの**［Rule Configuration（ルールの構成）］** セクションが表示されます。グループ、ロール、権限に関連する変更など、**［Token Contents（トークンの内容）］** の下のセクションで行ったすべての変更は、この手順の完了時にエクスポートするルールに反映されます。
 
    <Frame>![Authorization Extension Configuration](/images/ja-jp/cdy7uua7fh8z/4ydHJBdKGs4XVLnRst66A3/1f61ad2e087252c6c3aa10add13d99cd/configuration0auth.png)</Frame>
 
 ### ApiKey（Apiキー）
 
-ルールは、ApiKeyを使用してAuthorization Extension API（認可拡張機能API）と通信し、ポリシーを取得します。ApiKeyはルール構成として保存され、ルールが公開されると自動的に作成されます。ApiKeyを回転するには、**［Rotate（ローテーション）］**ボタンをクリックします。ApiKeyが回転すると、ルール構成が自動的に更新されます。
+ルールは、ApiKeyを使用してAuthorization Extension API（認可拡張機能API）と通信し、ポリシーを取得します。ApiKeyはルール構成として保存され、ルールが公開されると自動的に作成されます。ApiKeyを回転するには、**［Rotate（ローテーション）］** ボタンをクリックします。ApiKeyが回転すると、ルール構成が自動的に更新されます。
 
 ## 発行されたトークンに認可情報を追加
 
@@ -57,11 +57,11 @@ Auth0では、ロールベースのアクセス制御（RBAC）を2つの方法�
 
 ### IdPからの認可データのマージ
 
-Active Directoryなど、使用しているIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>）からグループ、ロール、または権限を受け取るユーザーがいる場合があります。これらの項目を認可拡張機能で定義されている項目とマージ（保持）する場合は、適切な**［Passthrough（パススルー）］**オプションを有効にしてください。有効にする適切なマージの横にあるスライダーを有効にします。
+Active Directoryなど、使用しているIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>）からグループ、ロール、または権限を受け取るユーザーがいる場合があります。これらの項目を認可拡張機能で定義されている項目とマージ（保持）する場合は、適切な**［Passthrough（パススルー）］** オプションを有効にしてください。有効にする適切なマージの横にあるスライダーを有効にします。
 
 ### ユーザープロファイルに認可情報を保存
 
-認可コンテキストが大きい場合（たとえば、ユーザーが多くのグループに属している場合や、多くの権限が付与されている場合などです。）、認可コンテンツの一部をユーザーのプロファイルに保存すると便利な場合があります。これにより、トークンに保存する情報が少なくなり、パフォーマンス関連の問題やトークン発行の問題が発生する可能性が低くなります。**［Persistence（永続化）］**は、グループ、ロール、および権限情報をユーザーのプロファイルに保存するプロセスです。
+認可コンテキストが大きい場合（たとえば、ユーザーが多くのグループに属している場合や、多くの権限が付与されている場合などです。）、認可コンテンツの一部をユーザーのプロファイルに保存すると便利な場合があります。これにより、トークンに保存する情報が少なくなり、パフォーマンス関連の問題やトークン発行の問題が発生する可能性が低くなります。**［Persistence（永続化）］** は、グループ、ロール、および権限情報をユーザーのプロファイルに保存するプロセスです。
 
 データはユーザーの`app_metadata`フィールドに保存され、ユーザーがログインした後、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>または[Dashboard](https://manage.auth0.com/#/users)を使用してこの情報を取得できます。
 
@@ -69,7 +69,7 @@ Active Directoryなど、使用しているIDプロバイダー（<Tooltip data-
 
 ## ルールの変更を保存
 
-ルールを構成したら、**［Publish Rule（ルールの公開）］**をクリックします。これにより、各ユーザーログイン後に実行されるテナントのルールが作成されます。
+ルールを構成したら、**［Publish Rule（ルールの公開）］** をクリックします。これにより、各ユーザーログイン後に実行されるテナントのルールが作成されます。
 
 ### ルールを表示
 

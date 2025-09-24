@@ -9,15 +9,15 @@ permalink: "oauth2"
 'twitter:description': "Auth0のカスタムソーシャル接続を使用して、任意のOAuth2プロバイダーを追加する方法について説明します。"
 ---
 
-最も一般的な[IDプロバイダー（IdP）](/docs/ja-jp/authenticate/identity-providers)は、[Auth0 Dashboard](https://manage.auth0.com/#)や[Auth0 Marketplace](https://marketplace.auth0.com/features/social-connections)から利用できます。ただし、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>では、任意の<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OAuth 2.0</Tooltip>プロバイダーを**カスタムソーシャル接続**として追加することもできます。
+最も一般的な[IDプロバイダー（IdP）](/docs/ja-jp/authenticate/identity-providers)は、[Auth0 Dashboard](https://manage.auth0.com/#)や[Auth0 Marketplace](https://marketplace.auth0.com/features/social-connections)から利用できます。ただし、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>では、任意の<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OAuth 2.0</Tooltip>プロバイダーを**カスタムソーシャル接続** として追加することもできます。
 
 1. Dashboardから、[［Authentication（認証）］>［Social（ソーシャル）］](https://manage.auth0.com/#/connections/social)に移動します。
-2. **［Create Connection（接続を作成）］**を選択し、リストの下部に移動してから**［Create Custom（カスタムを作成）］**を選択します。
+2.**［Create Connection（接続を作成）］** を選択し、リストの下部に移動してから**［Create Custom（カスタムを作成）］** を選択します。
 
 表示されるフォームには、カスタム接続の構成に使用しなければならないフィールドがいくつかあります。
 
-* **Connection Name（接続名）**：作成している接続の論理識別子です。この名前は変更できません。先頭と末尾が英数字でなければなりません。英数字とダッシュ以外は使用できません。
-* **Authorization URL（認可URL）**：URLユーザーがログインのためにリダイレクトされるURLです。
+* **Connection Name（接続名）** ：作成している接続の論理識別子です。この名前は変更できません。先頭と末尾が英数字でなければなりません。英数字とダッシュ以外は使用できません。
+* **Authorization URL（認可URL）** ：URLユーザーがログインのためにリダイレクトされるURLです。
 
   <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -25,12 +25,12 @@ permalink: "oauth2"
 
   </Callout>
 
-* **Token URL（トークンURL）**：URL受け取った認可コードをアクセストークンとIDトークン（要求された場合）に交換するために使用されます。
-* **Scope（スコープ）**：認可要求と一緒に送信する`scope`パラメーターです。複数のスコープはスペースで区切ります。
-* **Separate scopes using a space（スコープをスペースで区切る）**：`connection_scope`パラメーターが[IdPのAPI呼び出し](/docs/ja-jp/authenticate/identity-providers/calling-an-external-idp-api)に含まれる場合に、スコープの区切り方を決めるトグルです。デフォルトでは、スコープはカンマで区切られます。このトグルを有効にすると、スコープがスペースで区切られます。詳細については、「[IDプロバイダーのAPI呼び出しにスコープ/許可を追加する](/docs/ja-jp/authenticate/identity-providers/adding-scopes-for-an-external-idp)」をお読みください。
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Client ID</Tooltip>（クライアントID）**：アプリケーションとしてAuth0を使う場合のクライアントIDで、認可の要求や認可コードの交換に使用されます。クライアントIDを取得するには、IDプロバイダーに登録する必要があります。
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Client Secret</Tooltip>（クライアントシークレット）**：アプリケーションとしてAuth0をを使う場合のクライアントシークレットで、認可コードの交換に使用されます。クライアントシークレットを取得するには、IDプロバイダーに登録する必要があります。
-* **Fetch User Profile Script（ユーザープロファイルの取得スクリプト）**：提供されたアクセストークンでユーザー情報URLを呼び出すためのNode.jsスクリプトです。このスクリプトの詳細については、「[ユーザープロファイルの取得スクリプト](#fetch-user-profile-script)」を参照してください。
+* **Token URL（トークンURL）** ：URL受け取った認可コードをアクセストークンとIDトークン（要求された場合）に交換するために使用されます。
+* **Scope（スコープ）** ：認可要求と一緒に送信する`scope`パラメーターです。複数のスコープはスペースで区切ります。
+* **Separate scopes using a space（スコープをスペースで区切る）** ：`connection_scope`パラメーターが[IdPのAPI呼び出し](/docs/ja-jp/authenticate/identity-providers/calling-an-external-idp-api)に含まれる場合に、スコープの区切り方を決めるトグルです。デフォルトでは、スコープはカンマで区切られます。このトグルを有効にすると、スコープがスペースで区切られます。詳細については、「[IDプロバイダーのAPI呼び出しにスコープ/許可を追加する](/docs/ja-jp/authenticate/identity-providers/adding-scopes-for-an-external-idp)」をお読みください。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Client ID</Tooltip>（クライアントID）** ：アプリケーションとしてAuth0を使う場合のクライアントIDで、認可の要求や認可コードの交換に使用されます。クライアントIDを取得するには、IDプロバイダーに登録する必要があります。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Client Secret</Tooltip>（クライアントシークレット）** ：アプリケーションとしてAuth0をを使う場合のクライアントシークレットで、認可コードの交換に使用されます。クライアントシークレットを取得するには、IDプロバイダーに登録する必要があります。
+* **Fetch User Profile Script（ユーザープロファイルの取得スクリプト）** ：提供されたアクセストークンでユーザー情報URLを呼び出すためのNode.jsスクリプトです。このスクリプトの詳細については、「[ユーザープロファイルの取得スクリプト](#fetch-user-profile-script)」を参照してください。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -38,7 +38,7 @@ permalink: "oauth2"
 
 </Callout>
 
-カスタム接続を作成すると、**［Application（アプリケーション）］**ビューが表示され、その接続がAuth0の[レート制限ポリシー](/docs/ja-jp/troubleshoot/customer-support/operational-policies/rate-limit-policy)の対象となります。ここでは、接続を表示したいアプリケーションを有効または無効にすることができます。
+カスタム接続を作成すると、**［Application（アプリケーション）］** ビューが表示され、その接続がAuth0の[レート制限ポリシー](/docs/ja-jp/troubleshoot/customer-support/operational-policies/rate-limit-policy)の対象となります。ここでは、接続を表示したいアプリケーションを有効または無効にすることができます。
 
 ## 認証フローを更新する
 
@@ -668,7 +668,7 @@ dataTask.resume()
 
 ## 追加のヘッダーを渡す
 
-場合によっては、OAuth 2.0プロバイダーのトークンエンドポイントに追加のヘッダーを渡す必要があります。追加のヘッダーを構成するには、接続の設定を開いて、**［Custom Headers（カスタムヘッダー）］**フィールドに、カスタムヘッダーがキーと値のペアとして含まれるJSONオブジェクトを指定します。
+場合によっては、OAuth 2.0プロバイダーのトークンエンドポイントに追加のヘッダーを渡す必要があります。追加のヘッダーを構成するには、接続の設定を開いて、**［Custom Headers（カスタムヘッダー）］** フィールドに、カスタムヘッダーがキーと値のペアとして含まれるJSONオブジェクトを指定します。
 
 ```json lines
 {
@@ -677,7 +677,7 @@ dataTask.resume()
 }
 ```
 
-たとえば、IDプロバイダーに対して、`Authorization`ヘッダーで[Basic認証](https://en.wikipedia.org/wiki/Basic_access_authentication)の資格情報を渡す必要があるとします。このシナリオでは、**［Custom Headers（カスタムヘッダー）］**フィールドに以下のJSONオブジェクトを指定することができます。
+たとえば、IDプロバイダーに対して、`Authorization`ヘッダーで[Basic認証](https://en.wikipedia.org/wiki/Basic_access_authentication)の資格情報を渡す必要があるとします。このシナリオでは、**［Custom Headers（カスタムヘッダー）］** フィールドに以下のJSONオブジェクトを指定することができます。
 
 ```json lines
 {

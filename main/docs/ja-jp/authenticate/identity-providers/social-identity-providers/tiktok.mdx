@@ -24,19 +24,19 @@ TikTokがソーシャル接続として使えるようにアプリケーショ�
 
 アプリケーションのソーシャルログインとして、TikTokを使用することができます。TikTokの開発者アカウントにアクセスして構成するには、以下を行います。
 
-1. TikTok Developerで**［Manage apps（アプリ管理）］**を選択します。
-2. **［Connect an app（アプリを接続）］**を選択します。
-3. **［Configuration（構成）］**セクションに、アプリケーションのアイコン、アプリケーション名と説明を追加します。
-4. **［Platforms（プラットフォーム）］**で、アプリケーションの種類を選択します。
+1. TikTok Developerで**［Manage apps（アプリ管理）］** を選択します。
+2.**［Connect an app（アプリを接続）］** を選択します。
+3.**［Configuration（構成）］** セクションに、アプリケーションのアイコン、アプリケーション名と説明を追加します。
+4.**［Platforms（プラットフォーム）］** で、アプリケーションの種類を選択します。
 
    1. Webアプリケーションの場合には、有効なURLを追加します。
    2. Androidの場合には、Androidのパッケージ名、Play StoreのURLとアプリケーションの署名を追加します。
    3. iOSの場合には、App StoreのURLとバンドルIDを追加します。
-5. ［Product（プロダクト）］メニューから**［Add Product（プロダクトの追加］**を選択します。
-6. **［Login Kit（ログインキット）］**を選択します。
-7. **［TikTok API］**を選択します。
-8. ［Product（プロダクト）］セクションに、サービス利用規約ページのURL、プライバシーポリシーページのURLとログインキットへのリダイレクトドメインを追加します。リダイレクトドメインであるAuth0ドメインは、[［Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](http://manage.auth0.com/#/applications)に移動して、**［Settings（設定）］**タブで確認できます。例：`dev-test-1.us.auth0.com`
-9. **［Save Changes（変更の保存）］**を選択します。そして、**［Submit for review（審査に提出）］**を選択します。
+5. ［Product（プロダクト）］メニューから**［Add Product（プロダクトの追加］** を選択します。
+6.**［Login Kit（ログインキット）］** を選択します。
+7.**［TikTok API］** を選択します。
+8. ［Product（プロダクト）］セクションに、サービス利用規約ページのURL、プライバシーポリシーページのURLとログインキットへのリダイレクトドメインを追加します。リダイレクトドメインであるAuth0ドメインは、[［Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](http://manage.auth0.com/#/applications)に移動して、**［Settings（設定）］** タブで確認できます。例：`dev-test-1.us.auth0.com`
+9.**［Save Changes（変更の保存）］** を選択します。そして、**［Submit for review（審査に提出）］** を選択します。
 10. アプリケーションのステータスが`［Staging（ステージング）］`から`［Production（運用）］`に変わるまで待ちます。TikTokがアプリケーションを審査して、ステータスが更新されるまでには数時間かかることがあります。
 
 ## Auth0を構成する
@@ -44,9 +44,9 @@ TikTokがソーシャル接続として使えるようにアプリケーショ�
 カスタム接続を作成して、TikTokインスタンスをAuth0と関連付ける必要があります。
 
 1. [［Auth0 Dashboard］>［Authentication（認証）］>［Social（ソーシャル）］](http://manage.auth0.com/#/social)に移動します。
-2. **［Create Connection（接続を作成する）］**を選択します。
-3. ページの最後までスクロールし、**［Create Custom（カスタムの作成）］**をクリックします。
-4. 以下を入力して、**新しいカスタムソーシャル接続**を作成します。
+2.**［Create Connection（接続を作成する）］** を選択します。
+3. ページの最後までスクロールし、**［Create Custom（カスタムの作成）］** をクリックします。
+4. 以下を入力して、**新しいカスタムソーシャル接続** を作成します。
 
    1. Name（名前）：TikTok
    2. Authorization URL（認可URL）：TikTokのAuthorization URL `https://www.tiktok.com/auth/authorize/`
@@ -85,11 +85,11 @@ function fetchUserProfile(accessToken, context, cb) {
 }
 ```
 
-6.**［Create（作成）］**をクリックします。
+6.**［Create（作成）］** をクリックします。
 
 7.[［Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](http://manage.auth0.com/#/applications)に移動して、TikTok接続に使用したいアプリケーションを選択します。
 
-8.**［Connections（接続）］**タブでTikTokトグルを有効にします。
+8.**［Connections（接続）］** タブでTikTokトグルを有効にします。
 
 ## Management APIでカスタムパラメーターをTikTokに渡す
 
@@ -97,16 +97,16 @@ TikTokは`client_id`ではなく、`client_key`パラメーターを使用する
 
 Management APIを使用するには、アクセストークンを生成する必要があります。
 
-1. [［Auth0 Dashboard］>［Applications（アプリケーション）］>［APIs（API）］](http://manage.auth0.com/#/apis)に移動して、**［Auth0 Management API］**を選択します。
-2. **［API Explorer］**タブを選択します。
-3. **［Create & Authorize Test Application（テストアプリケーションを作成して認可する）］**を選択します。
+1. [［Auth0 Dashboard］>［Applications（アプリケーション）］>［APIs（API）］](http://manage.auth0.com/#/apis)に移動して、**［Auth0 Management API］** を選択します。
+2.**［API Explorer］** タブを選択します。
+3.**［Create & Authorize Test Application（テストアプリケーションを作成して認可する）］** を選択します。
 4. 提供されたトークンをコピーします。
 5. [Auth0 Management API Explorer](https://auth0.com/docs/api/management/v2)に移動します。プライベートウィンドウを開く必要があるかもしれません。
-6. 右上にある**［Set API Token（APIトークンの設定）］**をクリックします。
+6. 右上にある**［Set API Token（APIトークンの設定）］** をクリックします。
 
    <Frame>![Screenshot of Set API Token for TikTok](/images/ja-jp/cdy7uua7fh8z/6994KjTIdvDNrye8ghN4og/a6d1eb83bce4a5b38f8ebce7188ee2ca/image2.png)</Frame>
 
-7. トークンを貼り付けて、**［Set Token（トークンの設定）］**を選択します。
+7. トークンを貼り付けて、**［Set Token（トークンの設定）］** を選択します。
 
 これで、Management APIを使用して、Auth0テナントが構成できるようになります。
 

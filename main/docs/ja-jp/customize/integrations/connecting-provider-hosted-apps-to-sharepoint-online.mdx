@@ -15,11 +15,11 @@ Auth0を使用すると、SharePointアプリの認証プロセスを大幅に�
 
 ## 1.Auth0にアプリケーションを登録する
 
-通常どおり、Auth0に新しいアプリケーションを登録するだけです。**［Applications（アプリケーション）］ > ［NEW（新規）］**。詳細なステップについては、利用可能なSDKのいずれかを選択してください。次のステップで必要になるので、`client_id`を手元に置いてください。
+通常どおり、Auth0に新しいアプリケーションを登録するだけです。**［Applications（アプリケーション）］ > ［NEW（新規）］** 。詳細なステップについては、利用可能なSDKのいずれかを選択してください。次のステップで必要になるので、`client_id`を手元に置いてください。
 
 ## 2.アプリケーションのパッケージを作成する
 
-アプリケーションの**クライアントID**と**クライアントシークレット**を取得する必要があります。想定される使用方法に応じて、アプリケーションを登録する方法は多数あります。
+アプリケーションの**クライアントID** と**クライアントシークレット** を取得する必要があります。想定される使用方法に応じて、アプリケーションを登録する方法は多数あります。
 
 [SharePointアドインの登録（Microsoft Docs）](https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/register-sharepoint-add-ins)では、SharePointにアプリケーションを登録するさまざまな方法について説明しています。このチュートリアルステップでは、最も単純な形式、つまり特定のテナント（自分のテナント）での自己登録を使用します。
 
@@ -35,11 +35,11 @@ Auth0を使用すると、SharePointアプリの認証プロセスを大幅に�
 
 Auth0はアプリとOffice 365インフラストラクチャの間にあるため、アプリにはこのURLを使用する必要があります。
 
-**アプリドメイン**:
+**アプリドメイン** :
 
 {yourDomain}
 
-**リダイレクトURI**:
+**リダイレクトURI** :
 
 [https://{yourDomain}/login/callback?SP_APP_TOKEN&connection=CONNECTION&client_id={yourClientId}&redirect_uri={https://yourApp/callback}](https://{yourDomain}/login/callback?SP_APP_TOKEN&connection=CONNECTION&client_id={yourClientId}&redirect_uri={https://yourApp/callback})
 
@@ -55,9 +55,9 @@ Visual Studioでアプリマニフェストの情報を入力します:
 
 `Query文字列`は、前に入力した`リダイレクトURI`とまったく同じになることに注意してください。次に、プロジェクトを右クリックして`［Publish（発行）］`を選択します。
 
-**Publishing Profile（発行プロファイル）**を作成します（SharePointダッシュボードで取得した同じ**クライアントID**と**クライアントシークレット**を入力する必要があります）。
+**Publishing Profile（発行プロファイル）** を作成します（SharePointダッシュボードで取得した同じ**クライアントID** と**クライアントシークレット** を入力する必要があります）。
 
-**［Package（パッケージ）］**をクリックし、結果のファイルをSharePointにアップロードします。
+**［Package（パッケージ）］** をクリックし、結果のファイルをSharePointにアップロードします。
 
 ## 3.Auth0で接続を作成する
 

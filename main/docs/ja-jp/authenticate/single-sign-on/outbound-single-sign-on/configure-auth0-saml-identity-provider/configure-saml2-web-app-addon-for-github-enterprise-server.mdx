@@ -13,13 +13,13 @@ permalink: "configure-saml2-web-app-addon-for-github-enterprise-server"
 
 ## Auth0でSAML SSOを構成する
 
-1. [［Auth0 Dashboard］>［Applications（アプリケーション）］>［APIs（API）］](https://manage.auth0.com/#/applications)に移動して、新しいAPIを作成します。**GitHub**など、分かりやすい名前を入力します。アプリケーションの種類は任意ですが、**［Regular Web App（通常のWebアプリ）］**が推奨されます。
-2. [［Addons（アドオン）］](https://manage.auth0.com/#/applications/{yourClientId}/addons)タブに移動し、**［SAML2 Web App（SAML2 Webアプリ）］**トグルを有効にします。
-3. **［Settings（設定）］**タブで、**［Application Callback URL（アプリケーションのCallback URL）］**を次に設定します：`https://github.com/orgs/{yourGitHubOrgName}/saml/consume`
+1. [［Auth0 Dashboard］>［Applications（アプリケーション）］>［APIs（API）］](https://manage.auth0.com/#/applications)に移動して、新しいAPIを作成します。**GitHub** など、分かりやすい名前を入力します。アプリケーションの種類は任意ですが、**［Regular Web App（通常のWebアプリ）］** が推奨されます。
+2. [［Addons（アドオン）］](https://manage.auth0.com/#/applications/{yourClientId}/addons)タブに移動し、**［SAML2 Web App（SAML2 Webアプリ）］** トグルを有効にします。
+3.**［Settings（設定）］** タブで、**［Application Callback URL（アプリケーションのCallback URL）］** を次に設定します：`https://github.com/orgs/{yourGitHubOrgName}/saml/consume`
 
    <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 設定タブ](/images/ja-jp/cdy7uua7fh8z/6dJgYkcOgMZ73HVTkAWt1x/0126f55506d82cfd73d0bcb7ebd6fa9f/2025-02-27_14-00-16.png)</Frame>
 
-4. 以下のコードを**［Settings（設定）］**テキストボックスに貼り付け、**［Debug（デバッグ）］**をクリックします。
+4. 以下のコードを**［Settings（設定）］** テキストボックスに貼り付け、**［Debug（デバッグ）］** をクリックします。
 
    ```json lines
    {
@@ -44,10 +44,10 @@ permalink: "configure-saml2-web-app-addon-for-github-enterprise-server"
    
 
    `{yourGitHubOrgName}`をGitHubサブスクリプションに対応するGitHubの組織名で置き換えます。例：`https://github.yourname.com`
-   1. 上にあるマッピングは、`user_id`を**［Name Identifier（名前識別子）］**としてGitHubに送信します。GitHubアプリケーションに1つ以上の接続を有効化する場合には、このオプションを使用して、確実に一意になるようにします（ユーザーがそれぞれ異なるIDを持つようになります）。
-   2. 使用する接続が1つだけの場合には、`nickname`（ニックネーム）などの一意の識別子を分かりやすい**［Name Identifier（名前識別子）］**として使用しても構いませんが、そのプロパティが一意であることを必ず確認してください。
-5. タブの最後までスクロールし、**［Enable（有効）］**をクリックします。
-6. **［Usage（使用状況）］**タブで**［Identity Provider Metadata（IDプロバイダーのメタデータ）］**を見つけ、**［Download（ダウンロード）］**をクリックしてメタデータファイルをダウンロードします。これは、Auth0をIDプロバイダーとして構成する際に必要になります。
+   1. 上にあるマッピングは、`user_id`を**［Name Identifier（名前識別子）］** としてGitHubに送信します。GitHubアプリケーションに1つ以上の接続を有効化する場合には、このオプションを使用して、確実に一意になるようにします（ユーザーがそれぞれ異なるIDを持つようになります）。
+   2. 使用する接続が1つだけの場合には、`nickname`（ニックネーム）などの一意の識別子を分かりやすい**［Name Identifier（名前識別子）］** として使用しても構いませんが、そのプロパティが一意であることを必ず確認してください。
+5. タブの最後までスクロールし、**［Enable（有効）］** をクリックします。
+6.**［Usage（使用状況）］** タブで**［Identity Provider Metadata（IDプロバイダーのメタデータ）］** を見つけ、**［Download（ダウンロード）］** をクリックしてメタデータファイルをダウンロードします。これは、Auth0をIDプロバイダーとして構成する際に必要になります。
 
    <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 使用状況タブ](/images/ja-jp/cdy7uua7fh8z/3T90BDpyTXFUWDp1JkncBU/20060887bf494416b5831075fd4fce13/2025-01-28_10-16-30.png)</Frame>
 

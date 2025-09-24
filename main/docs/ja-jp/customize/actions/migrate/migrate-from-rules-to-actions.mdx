@@ -60,12 +60,12 @@ Post-Loginアクションは既存のルールの後に実行されるため、D
 
 1. 運用テナントにログインし、変換元となるルールのコードをコピーします。
 2. 非運用テナントに切り替えて、[［Auth0 Dashboard］ > ［Actions（アクション）］ > ［Library（ライブラリ）］](https://manage.auth0.com/#/select-tenant?path=/actions/library)に移動します。
-3. **［Build Custom（カスタムの構築）］**を選択した後、
+3.**［Build Custom（カスタムの構築）］** を選択した後、
 
-   * 変換するルールの名前と一致するアクションの**名前**を入力します。
-   * **トリガー**を見つけて、**ログイン/ログイン**後を選択します。
-   * **［Runtime（ランタイム）］**で、**［Node 22］**を選択します。
-   * **［Create（作成）］**を選択します。
+   * 変換するルールの名前と一致するアクションの**名前** を入力します。
+   * **トリガー** を見つけて、**ログイン/ログイン** 後を選択します。
+   * **［Runtime（ランタイム）］** で、**［Node 22］** を選択します。
+   * **［Create（作成）］** を選択します。
 4. アクションコードエディターのコードブロックで、エクスポートされた`onExecutePostLogin`関数の下に変換するルールコードを貼り付けます。
 5. コードを関数に移動するときに、この記事で後述している変更を加えます。
 
@@ -257,7 +257,7 @@ exports.onExecutePostLogin = async (event, api) => {
 シークレットをルールからアクションに変換するには：
 
 1. 操作中の特定のアクションに必要な値を保存します。
-2. アクション内からアクセスする必要がある値ごとにシークレットを追加します。方法については、「[初めてアクションを作成する](/docs/ja-jp/customize/actions/write-your-first-action)」の「**シークレットを追加する**」セクションをお読みください。
+2. アクション内からアクセスする必要がある値ごとにシークレットを追加します。方法については、「[初めてアクションを作成する](/docs/ja-jp/customize/actions/write-your-first-action)」の「**シークレットを追加する** 」セクションをお読みください。
 3. コードを変換します。
 
 **変更前**
@@ -398,7 +398,7 @@ exports.onExecutePostLogin = async (event, api) => {
 ただし、呼び出しが必要で、それらがレート制限を回避するように構成されている場合は、アクション内からManagement APIを呼び出すことができます。前述の「制限事項を理解する」セクションで説明しているように、アクションにはManagement APIのアクセストークンが提供されないため、アクションを有効にする前にアクセストークンを取得する必要があります。
 
 1. [M2Mアプリケーションを登録し、Management APIに対して認可します](/docs/ja-jp/get-started/auth0-overview/create-applications/machine-to-machine-apps)。
-2. アクションに**クライアントID**と**クライアントシークレット**を保存します。
+2. アクションに**クライアントID** と**クライアントシークレット** を保存します。
 3. [Management APIのアクセストークンを取得します](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-production)。
 4. Management APIを呼び出します。
 

@@ -29,8 +29,8 @@ Okta OIDCアプリ統合の作成方法については、[Okta Help CenterのOID
 
 OktaのOIDCアプリ統合をセットアップするには、以下の設定を使用します。
 
-1. **［Sign-in method（サインイン方法）］**として**［OIDC］**を選択します。
-2. **［Application type（アプリケーションタイプ）］**として**［Web application（Webアプリケーション）］**を選択し、以下のパラメーターを設定します。
+1.**［Sign-in method（サインイン方法）］** として**［OIDC］** を選択します。
+2.**［Application type（アプリケーションタイプ）］** として**［Web application（Webアプリケーション）］** を選択し、以下のパラメーターを設定します。
 
    <table class="table"><thead>
    <tr>
@@ -58,37 +58,37 @@ OktaのOIDCアプリ統合をセットアップするには、以下の設定を
 
    上記で、 [カスタムドメイン](/docs/ja-jp/customize/custom-domains)機能を使っていないのにAuth0ドメイン名が表示されない場合は、ドメイン名がテナント名、地域のサブドメイン、および「`auth0.com`」をドット記号（「`.`」）で区切って連結したものだからです。
 
-   たとえば、テナント名が「`exampleco-enterprises`」でテナントがUS地域にある場合、Auth0ドメイン名は「`exampleco-enterprises.us.auth0.com`」、**Redirect URI（リダイレクトURI）**は「`https://exampleco-enterprises.us.auth0.com/login/callback`」になります。
+   たとえば、テナント名が「`exampleco-enterprises`」でテナントがUS地域にある場合、Auth0ドメイン名は「`exampleco-enterprises.us.auth0.com`」、**Redirect URI（リダイレクトURI）** は「`https://exampleco-enterprises.us.auth0.com/login/callback`」になります。
 
-   ただし、テナントがUS地域にあり、2020年6月よりも前に作成された場合、Auth0ドメイン名は「`exampleco-enterprises.auth0.com` 」、**Redirect URI（リダイレクトURI）**は「`https://exampleco-enterprises.auth0.com/login/callback`」になります。
+   ただし、テナントがUS地域にあり、2020年6月よりも前に作成された場合、Auth0ドメイン名は「`exampleco-enterprises.auth0.com` 」、**Redirect URI（リダイレクトURI）** は「`https://exampleco-enterprises.auth0.com/login/callback`」になります。
 
-   [カスタムドメイン](/docs/ja-jp/customize/custom-domains)を使っている場合、**Redirect URI（リダイレクトURI）**は「`https://<YOUR CUSTOM DOMAIN>/login/callback`」になります。
+   [カスタムドメイン](/docs/ja-jp/customize/custom-domains)を使っている場合、**Redirect URI（リダイレクトURI）** は「`https://<YOUR CUSTOM DOMAIN>/login/callback`」になります。
 
    </Card>
 
-3. アプリ統合のためにOktaが生成した**［Client ID（クライアントID）］**と**［Client Secret（クライアントシークレット）］**を記録しておきます。
+3. アプリ統合のためにOktaが生成した**［Client ID（クライアントID）］** と**［Client Secret（クライアントシークレット）］** を記録しておきます。
 
 ## Oktaのアプリ統合にテストユーザーを追加する
 
 アプリの統合をテストするため、Oktaディレクトリでテストユーザーを作成します。
 
-1. Okta Admin Dashboardで、［**Directory（ディレクトリ）］>［People（ピープル）］**の順に移動します。
-2. **［Add Person（ユーザーの追加）］**を選択します。
+1. Okta Admin Dashboardで、［**Directory（ディレクトリ）］>［People（ピープル）］** の順に移動します。
+2.**［Add Person（ユーザーの追加）］** を選択します。
 3. パスワードを含むユーザーテストの詳細を入力します。
 4. テストユーザーを保存します。
-5. **［Directory（ディレクトリ）］**で、新しいユーザーを選択します。
-6. ユーザーの**［Applications（アプリケーション）］**タブに移動し、**［Assign Applications（アプリケーションの割り当て）］**を選択します。
+5.**［Directory（ディレクトリ）］** で、新しいユーザーを選択します。
+6. ユーザーの**［Applications（アプリケーション）］** タブに移動し、**［Assign Applications（アプリケーションの割り当て）］** を選択します。
 7. さきほど作成したアプリケーション名を選択します。
 
 ## Auth0でOkta Workforcのエンタープライズ接続を作成する
 
-Okta OIDCアプリ統合の**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Client ID</Tooltip>（クライアントID）］**と**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Client Secret</Tooltip>（クライアントシークレット）］**が利用可能なことを確認します。
+Okta OIDCアプリ統合の**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Client ID</Tooltip>（クライアントID）］** と**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Client Secret</Tooltip>（クライアントシークレット）］** が利用可能なことを確認します。
 
-1. [［Auth0 Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)に移動し、**［Okta Workforce］**を見つけて、**［+］** ボタンを選択します。
+1. [［Auth0 Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)に移動し、**［Okta Workforce］** を見つけて、**［+］** ボタンを選択します。
 
    <Frame>![Dashboard - 接続 -エンタープライズ](/images/ja-jp/cdy7uua7fh8z/1fSTcrZpkgkPR64NnI1lr8/101fc19f62d82b5c7b13d88f3a0a8e96/Enterprise_Connections_-_JP.png)</Frame>
 
-2. 接続の詳細を入力し、 **［Create（作成）］**をクリックします。
+2. 接続の詳細を入力し、**［Create（作成）］** をクリックします。
 
    <table class="table"><thead>
    <tr>
@@ -115,7 +115,7 @@ Okta OIDCアプリ統合の**［<Tooltip data-tooltip-id="react-containers-Defin
    </tr>
    </tbody>
    </table>
-3. **［Provisioning（プロビジョニング）］**ビューでユーザープロファイルがAuth0で作成および更新される方法を構成することができます。
+3.**［Provisioning（プロビジョニング）］** ビューでユーザープロファイルがAuth0で作成および更新される方法を構成することができます。
 
    <table class="table"><thead>
    <tr>
@@ -134,7 +134,7 @@ Okta OIDCアプリ統合の**［<Tooltip data-tooltip-id="react-containers-Defin
    </tr>
    </tbody>
    </table>
-4. **［Login Experience（ログインエクスペリエンス）］**ビューに切り替えて、この接続でのユーザーログインの方法を構成することができます:
+4.**［Login Experience（ログインエクスペリエンス）］** ビューに切り替えて、この接続でのユーザーログインの方法を構成することができます:
 
    <table class="table"><thead>
    <tr>

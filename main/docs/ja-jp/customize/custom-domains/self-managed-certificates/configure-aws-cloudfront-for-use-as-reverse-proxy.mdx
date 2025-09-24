@@ -18,8 +18,8 @@ permalink: "configure-aws-cloudfront-for-use-as-reverse-proxy"
 Auth0テナントのカスタムドメイン名を持つリバースプロキシとしてAWS CloudFrontを構成することができます。
 
 1. AWSにログインし、[［CloudFront］](https://console.aws.amazon.com/cloudfront)に移動します。
-2. **［Create Distribution（ディストリビューションの作成）］**をクリックします。
-3. コンテンツの配信方法を選択することができます。**［Web］**セクションの**［Get Started（今すぐ始める）］**をクリックします。
+2.**［Create Distribution（ディストリビューションの作成）］** をクリックします。
+3. コンテンツの配信方法を選択することができます。**［Web］** セクションの**［Get Started（今すぐ始める）］** をクリックします。
 4. ディストリビューション設定を構成します。変更する必要がある値は以下のとおりです。
 
    <table class="table"><thead>
@@ -31,7 +31,7 @@ Auth0テナントのカスタムドメイン名を持つリバースプロキシ
    <tbody>
    <tr>
    <td>Origin Domain Name（オリジンドメイン名）</td>
-   <td>これをカスタムドメイン設定プロセス中にAuth0 Dashboardから取得した**Origin Domain Name（オリジンドメイン名）**の値に設定します。</td>
+   <td>これをカスタムドメイン設定プロセス中にAuth0 Dashboardから取得した**Origin Domain Name（オリジンドメイン名）** の値に設定します。</td>
    </tr>
    <tr>
    <td>Origin ID（オリジンID）</td>
@@ -51,7 +51,7 @@ Auth0テナントのカスタムドメイン名を持つリバースプロキシ
    </tr>
    </tbody>
    </table>
-5. **［Origin Custom Headers（オリジンカスタムヘッダー）］**に情報を入力します（**［Header Name（ヘッダー名）］**と**［Value（値）］**フィールドは、**［Origin Domain Name（オリジンドメイン名）］**を入力した後にのみ表示されます）。
+5.**［Origin Custom Headers（オリジンカスタムヘッダー）］** に情報を入力します（**［Header Name（ヘッダー名）］** と**［Value（値）］** フィールドは、**［Origin Domain Name（オリジンドメイン名）］** を入力した後にのみ表示されます）。
 
    <table class="table"><thead>
    <tr>
@@ -70,7 +70,7 @@ Auth0テナントのカスタムドメイン名を持つリバースプロキシ
    </tr>
    </tbody>
    </table>
-6. **［Default Cache Behavior Settings（キャッシュ動作のデフォルト設定）］**を構成します。変更する必要がある値は以下のとおりです。
+6.**［Default Cache Behavior Settings（キャッシュ動作のデフォルト設定）］** を構成します。変更する必要がある値は以下のとおりです。
 
    <table class="table"><thead>
    <tr>
@@ -81,35 +81,35 @@ Auth0テナントのカスタムドメイン名を持つリバースプロキシ
    <tbody>
    <tr>
    <td>ビューワープロトコルポリシー</td>
-   <td>**［Redirect HTTP to HTTPS（HTTPからHTTPSにリダイレクト）］**を選択する</td>
+   <td>**［Redirect HTTP to HTTPS（HTTPからHTTPSにリダイレクト）］** を選択する</td>
    </tr>
    <tr>
    <td>許可されるHTTPメソッド</td>
-   <td>**［GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE］**を選択する</td>
+   <td>**［GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE］** を選択する</td>
    </tr>
    <tr>
    <td>キャッシュとオリジンリクエストの設定</td>
-   <td>**［Legacy cache settings（レガシーキャッシュ設定）］**を選択する</td>
+   <td>**［Legacy cache settings（レガシーキャッシュ設定）］** を選択する</td>
    </tr>
    <tr>
    <td>選択されたリクエストヘッダーに基づいたキャッシュ</td>
-   <td>**［Include the following headers（次のヘッダーを含める）］**を選択する</td>
+   <td>**［Include the following headers（次のヘッダーを含める）］** を選択する</td>
    </tr>
    <tr>
    <td>ヘッダーの追加</td>
-   <td>`User-Agent`を入力し、**［Add Custom（カスタムの追加）］&gt;&gt;**をクリックしてカスタムヘッダーを追加します。`Authorization`、`Origin`、`Referer`、`Accept-Language`、`Accept`の各ヘッダーにも同様の処理をします。</td>
+   <td>`User-Agent`を入力し、**［Add Custom（カスタムの追加）］&gt;&gt;** をクリックしてカスタムヘッダーを追加します。`Authorization`、`Origin`、`Referer`、`Accept-Language`、`Accept`の各ヘッダーにも同様の処理をします。</td>
    </tr>
    <tr>
    <td>クッキーの転送</td>
-   <td>**［All（すべて）］**を選択する</td>
+   <td>**［All（すべて）］** を選択する</td>
    </tr>
    <tr>
    <td>クエリ文字列</td>
-   <td>**［All（すべて）］**を選択する</td>
+   <td>**［All（すべて）］** を選択する</td>
    </tr>
    </tbody>
    </table>
-7. ページの最後までスクロールし、**［Create Distribution（ディストリビューションの作成）］**をクリックします。
+7. ページの最後までスクロールし、**［Create Distribution（ディストリビューションの作成）］** をクリックします。
    新しく作成されたディストリビューションが、CloudFrontディストリビューションリストに表示されます。ディストリビューションがデプロイされるまで、ステータスは`In progress`（進行中）になります。
 8. 新しいCNAMEレコードを、ディストリビューション用のCloudFrontサービスドメイン名をポイントするカスタムドメインのDNSに追加します。これは、［General（全般）］タブで、［Distribution ID（ディストリビューションID）］のドメイン名（`e2zwy42nt1feu7.cloudfront.net`など）をクリックすることで確認できます。
 

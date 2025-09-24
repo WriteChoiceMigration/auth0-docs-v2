@@ -13,8 +13,8 @@ permalink: "oidc"
 
 * [Auth0にアプリケーションを登録します](/docs/ja-jp/get-started/auth0-overview/create-applications)。
 
-  + 適切な**［Application Type（アプリケーションタイプ）］**を選択します。
-  + **`{https://yourApp/callback}`**の**［Allowed Callback URL（許可されているコールバックURL）］**を追加します。
+  + 適切な**［Application Type（アプリケーションタイプ）］** を選択します。
+  +**`{https://yourApp/callback}`** の**［Allowed Callback URL（許可されているコールバックURL）］** を追加します。
   + アプリケーションの[［Grant Types（付与タイプ）］](/docs/ja-jp/get-started/applications/update-grant-types)に適切なフローが必ず含まれていることを確認してください。
 
 ## 手順
@@ -36,19 +36,19 @@ OIDCのIDプロバイダーを使用してユーザーがログインできる�
 
 上記で、 [カスタムドメイン](/docs/ja-jp/customize/custom-domains)機能を使っていないのにAuth0ドメイン名が表示されない場合は、ドメイン名がテナント名、地域のサブドメイン、および「`auth0.com`」をドット記号（「`.`」）で区切って連結したものだからです。
 
-たとえば、テナント名が「`exampleco-enterprises`」でテナントがUS地域にある場合、Auth0ドメイン名は「`exampleco-enterprises.us.auth0.com`」、**Redirect URI（リダイレクトURI）**は「`https://exampleco-enterprises.us.auth0.com/login/callback`」になります。
+たとえば、テナント名が「`exampleco-enterprises`」でテナントがUS地域にある場合、Auth0ドメイン名は「`exampleco-enterprises.us.auth0.com`」、**Redirect URI（リダイレクトURI）** は「`https://exampleco-enterprises.us.auth0.com/login/callback`」になります。
 
-ただし、テナントがUS地域にあり、2020年6月よりも前に作成された場合、Auth0ドメイン名は「`exampleco-enterprises.auth0.com` 」、**Redirect URI（リダイレクトURI）**は「`https://exampleco-enterprises.auth0.com/login/callback`」になります。
+ただし、テナントがUS地域にあり、2020年6月よりも前に作成された場合、Auth0ドメイン名は「`exampleco-enterprises.auth0.com` 」、**Redirect URI（リダイレクトURI）** は「`https://exampleco-enterprises.auth0.com/login/callback`」になります。
 
-[カスタムドメイン](/docs/ja-jp/customize/custom-domains)を使っている場合、**Redirect URI（リダイレクトURI）**は「`https://<YOUR CUSTOM DOMAIN>/login/callback`」になります。
+[カスタムドメイン](/docs/ja-jp/customize/custom-domains)を使っている場合、**Redirect URI（リダイレクトURI）** は「`https://<YOUR CUSTOM DOMAIN>/login/callback`」になります。
 
 </Card>
 
-このプロセス中に、OIDCのIDプロバイダーは、通常**クライアントID**または**アプリケーションID**と呼ばれる、登録済みAPIに対する一意の識別子を生成します。この値は書きとめておいてください。後で必要になります。
+このプロセス中に、OIDCのIDプロバイダーは、通常**クライアントID** または**アプリケーションID** と呼ばれる、登録済みAPIに対する一意の識別子を生成します。この値は書きとめておいてください。後で必要になります。
 
 ## Auth0でエンタープライズ接続を作成する
 
-次に、Auth0でOIDCのエンタープライズ接続を作成・構成する必要があります。OIDCプロバイダーでアプリをセットアップする際に、**［Application (client) ID（アプリケーション（クライアント）ID）］**と**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Client secret</Tooltip>（クライアントシークレット）］**が生成されていることを確認してください。
+次に、Auth0でOIDCのエンタープライズ接続を作成・構成する必要があります。OIDCプロバイダーでアプリをセットアップする際に、**［Application (client) ID（アプリケーション（クライアント）ID）］** と**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Client secret</Tooltip>（クライアントシークレット）］** が生成されていることを確認してください。
 
 ### Auth0 Dashboardを使用してエンタープライズ接続を作成する
 
@@ -58,11 +58,11 @@ Auth0 Dashboardを介した構成を可能にするためには、OpenID Connect
 
 </Warning>
 
-1. [［Auth0 Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)に移動し、**Open ID Connect**の［`+`］記号をクリックします。
+1. [［Auth0 Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)に移動し、**Open ID Connect** の［`+`］記号をクリックします。
 
    <Frame>![Dashboard - 接続 -エンタープライズ](/images/ja-jp/cdy7uua7fh8z/1fSTcrZpkgkPR64NnI1lr8/101fc19f62d82b5c7b13d88f3a0a8e96/Enterprise_Connections_-_JP.png)</Frame>
 
-2. 接続の詳細を入力し、**［Create（作成）］**をクリックします。
+2. 接続の詳細を入力し、**［Create（作成）］** をクリックします。
 
    <table class="table"><thead>
    <tr>
@@ -77,11 +77,11 @@ Auth0 Dashboardを介した構成を可能にするためには、OpenID Connect
    </tr>
    <tr>
    <td><strong>OpenID Connect Discovery URL</strong></td>
-   <td>**<a href="https://openid.net/specs/openid-connect-discovery-1_0.html">広く認識されているOpenID Connect Discoveryエンドポイント</a>**をAuth0が見つけられるURLで、通常は`/.well-known/openid-configuration`エンドポイントにあります。ベースURLまたは完全URLを入力できます。その場所で見つかった場合には緑のチェックマーク、見つからない場合には赤いチェックマークが表示されます。ファイルは見つかったものの、構成ファイルに必要な情報がない場合には、エラーメッセージが表示されます。詳細については、「<a href="https://auth0.com/docs/ja-jp/get-started/applications/configure-applications-with-oidc-discovery">OIDC Discoveryを使用してアプリケーションを構成する</a>をお読みください。</td>
+   <td>**<a href="https://openid.net/specs/openid-connect-discovery-1_0.html">広く認識されているOpenID Connect Discoveryエンドポイント</a>** をAuth0が見つけられるURLで、通常は`/.well-known/openid-configuration`エンドポイントにあります。ベースURLまたは完全URLを入力できます。その場所で見つかった場合には緑のチェックマーク、見つからない場合には赤いチェックマークが表示されます。ファイルは見つかったものの、構成ファイルに必要な情報がない場合には、エラーメッセージが表示されます。詳細については、「<a href="https://auth0.com/docs/ja-jp/get-started/applications/configure-applications-with-oidc-discovery">OIDC Discoveryを使用してアプリケーションを構成する</a>をお読みください。</td>
    </tr>
    <tr>
    <td><strong>Communication Channel（通信チャネル）</strong></td>
-   <td>**［Front Channel（フロントチャネル）］<strong>または</strong>［Back Channel（バックチャネル）］**に設定します。フロントチャネルは使用するOIDCプロトコルに`response_mode=form_post`と`response_type=id_token`を指定します。バックチャネルは`response_type=code`を使用します。</td>
+   <td>**［Front Channel（フロントチャネル）］<strong>または</strong>［Back Channel（バックチャネル）］** に設定します。フロントチャネルは使用するOIDCプロトコルに`response_mode=form_post`と`response_type=id_token`を指定します。バックチャネルは`response_type=code`を使用します。</td>
    </tr>
    <tr>
    <td><strong>Client ID（クライアントID）</strong></td>
@@ -89,7 +89,7 @@ Auth0 Dashboardを介した構成を可能にするためには、OpenID Connect
    </tr>
    <tr>
    <td><strong>Client Secret（クライアントシークレット）</strong></td>
-   <td>上記で**［Back Channel（バックチャネル）］**を選択した場合にのみ使用できます。シークレットはプロバイダーが提供し、この手順を独自の方法で管理しています。</td>
+   <td>上記で**［Back Channel（バックチャネル）］** を選択した場合にのみ使用できます。シークレットはプロバイダーが提供し、この手順を独自の方法で管理しています。</td>
    </tr>
    <tr>
    <td><strong>Callback URL</strong></td>
@@ -103,7 +103,7 @@ Auth0 Dashboardを介した構成を可能にするためには、OpenID Connect
    </table>
 3. <Frame>![OIDC接続の詳細を入力する](/images/ja-jp/cdy7uua7fh8z/4PO4eBhEM3R0ZMhaTlDVfB/4811760e0343a8129485a2282eeae1ea/2025-02-25_09-45-59.png)</Frame>
 
-   必要であれば、**［Settings（設定）］**ビューで、他の構成を調整します。
+   必要であれば、**［Settings（設定）］** ビューで、他の構成を調整します。
 
    <table class="table"><thead>
    <tr>
@@ -122,7 +122,7 @@ Auth0 Dashboardを介した構成を可能にするためには、OpenID Connect
    </tr>
    <tr>
    <td><strong>Communication Channel（通信チャネル）</strong></td>
-   <td>**［Front Channel（フロントチャネル）］<strong>または</strong>［Back Channel（バックチャネル）］**に設定します。フロントチャネルはOIDCプロトコルを`response_mode=form_post`と`response_type=id_token`のパラメーターで使用します。バックチャネルは`response_type=code`を使用します。</td>
+   <td>**［Front Channel（フロントチャネル）］<strong>または</strong>［Back Channel（バックチャネル）］** に設定します。フロントチャネルはOIDCプロトコルを`response_mode=form_post`と`response_type=id_token`のパラメーターで使用します。バックチャネルは`response_type=code`を使用します。</td>
    </tr>
    <tr>
    <td><strong>Client ID（クライアントID）</strong></td>
@@ -150,7 +150,7 @@ Auth0 Dashboardを介した構成を可能にするためには、OpenID Connect
    </tr>
    </tbody>
    </table>
-4. **［Provisioning（プロビジョニング）］**ビューでユーザープロファイルがAuth0で作成および更新される方法を構成することができます。
+4.**［Provisioning（プロビジョニング）］** ビューでユーザープロファイルがAuth0で作成および更新される方法を構成することができます。
 
    <table class="table"><thead>
    <tr>
@@ -169,7 +169,7 @@ Auth0 Dashboardを介した構成を可能にするためには、OpenID Connect
    </tr>
    </tbody>
    </table>
-5. **［Login Experience（ログインエクスペリエンス）］**ビューでこの接続でのユーザーログインの方法を構成することができます。
+5.**［Login Experience（ログインエクスペリエンス）］** ビューでこの接続でのユーザーログインの方法を構成することができます。
 
    <table class="table"><thead>
    <tr>
@@ -203,7 +203,7 @@ Auth0 Dashboardを介した構成を可能にするためには、OpenID Connect
 
    </Callout>
 
-6. **［Save Changes（変更の保存）］**を選択します。
+6.**［Save Changes（変更の保存）］** を選択します。
 
 ### Management APIを使用してエンタープライズ接続を作成する
 
@@ -933,11 +933,11 @@ dataTask.resume()
 
 ## 発行者のメタデータを手動で構成する
 
-発行者URLエンドポイントの**［Show Issuer Details（発行者の詳細を表示）］**をクリックすると、データが表示され、必要であれば調整することができます。
+発行者URLエンドポイントの**［Show Issuer Details（発行者の詳細を表示）］** をクリックすると、データが表示され、必要であれば調整することができます。
 
 ## Auth0とのフェデレーション
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OpenID</Tooltip> Connectのエンタープライズ接続は、別のAuth0テナントとのフェデレーションで大いに役立ちます。**［Issuer（発行者）］**フィールドにAuth0テナントURL（たとえば、`https://<tenant>.us.auth0.com`）を入力して、**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Client ID</Tooltip>（クライアントID）］**フィールドに、フェデレーション（連合）したいテナントのアプリケーションのクライアントIDを入力するだけです。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OpenID</Tooltip> Connectのエンタープライズ接続は、別のAuth0テナントとのフェデレーションで大いに役立ちます。**［Issuer（発行者）］** フィールドにAuth0テナントURL（たとえば、`https://<tenant>.us.auth0.com`）を入力して、**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Client ID</Tooltip>（クライアントID）］** フィールドに、フェデレーション（連合）したいテナントのアプリケーションのクライアントIDを入力するだけです。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 

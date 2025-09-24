@@ -93,7 +93,7 @@ env.AUTH0_SECRET='{yourAuth0Secret}';
 module.exports = env;
 ```
 
-ファイルのあるディレクトリから**npm install**を実行して、内容をZIP形式で圧縮し（`index.js`は必ずZIPのルート）、Lambda関数の`PurchasePet`が使えるようにアップロードします。これをテストすると、JWTがメッセージの本文にないため、認証が失敗します。
+ファイルのあるディレクトリから**npm install** を実行して、内容をZIP形式で圧縮し（`index.js`は必ずZIPのルート）、Lambda関数の`PurchasePet`が使えるようにアップロードします。これをテストすると、JWTがメッセージの本文にないため、認証が失敗します。
 
 `index.js`でロジックを確認します。60行目辺りのロジックではトークンが検証して解読され、購入ロジックで使われるID情報が含まれた、デコードされた情報が抽出されています。
 
