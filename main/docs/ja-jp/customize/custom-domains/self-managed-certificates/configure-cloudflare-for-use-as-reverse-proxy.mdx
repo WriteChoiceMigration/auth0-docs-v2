@@ -19,8 +19,8 @@ permalink: "configure-cloudflare-for-use-as-reverse-proxy"
 
 <table class="table"><thead>
 <tr>
-<th><strong>機能</strong></th>
-<th><strong>説明</strong></th>
+<th><b>機能</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -45,13 +45,13 @@ permalink: "configure-cloudflare-for-use-as-reverse-proxy"
 
 Cloudflareをリバースプロキシとして構成するには、CloudflareでCNAMEレコード、ページルール、変換ルールを作成する必要があります。
 
-1. [カスタムドメインを構成して自己管理証明書を使って検証する](https://auth0.com/docs/customize/custom-domains/self-managed-certificates)作業がまだ済んでいない場合は、ここで行います。**［Origin Domain Name（オリジンのドメイン名）］** と**cname-api-key** の値が後で必要になるのでメモしておきます。
+1. [カスタムドメインを構成して自己管理証明書を使って検証する](https://auth0.com/docs/customize/custom-domains/self-managed-certificates)作業がまだ済んでいない場合は、ここで行います。 **［Origin Domain Name（オリジンのドメイン名）］** と **cname-api-key** の値が後で必要になるのでメモしておきます。
 2. 目的のゾーンのCloudflareダッシュボードで、以下の設定の[CNAMEレコードを作成](https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-dns-records/#create-dns-records)します。
 
    <table class="table"><thead>
    <tr>
-   <th><strong>設定</strong></th>
-   <th><strong>値</strong></th>
+   <th><b>設定</b></th>
+   <th><b>値</b></th>
    </tr>
    </thead>
    <tbody>
@@ -73,8 +73,8 @@ Cloudflareをリバースプロキシとして構成するには、Cloudflareで
 
    <table class="table"><thead>
    <tr>
-   <th><strong>設定</strong></th>
-   <th><strong>値</strong></th>
+   <th><b>設定</b></th>
+   <th><b>値</b></th>
    </tr>
    </thead>
    <tbody>
@@ -90,15 +90,15 @@ Cloudflareをリバースプロキシとして構成するには、Cloudflareで
    </table>
 4. [変換ルールを作成](https://developers.cloudflare.com/rules/transform/request-header-modification/create-dashboard/)します。
 
-   1.**［要求ヘッダーを修正する］** ビューに切り替えます。
-   2.**［ルールを作成］** を選択して、任意の名前を入力します。
-   3.**［受信要求が一致する場合］** の下にある**［カスタムフィルター式］** を選択し、選択したカスタムドメインと紐づけられた要求にルールのスコープを定める式を設定します。たとえば、**［ホスト名］** フィールドに完全一致を使用します。
-   4. ［要求ヘッダーを修正する］で、**［スタティック設定］** を選択し、以下のフィールドを設定します。
+   1. **［要求ヘッダーを修正する］** ビューに切り替えます。
+   2. **［ルールを作成］** を選択して、任意の名前を入力します。
+   3. **［受信要求が一致する場合］** の下にある **［カスタムフィルター式］** を選択し、選択したカスタムドメインと紐づけられた要求にルールのスコープを定める式を設定します。たとえば、 **［ホスト名］** フィールドに完全一致を使用します。
+   4. ［要求ヘッダーを修正する］で、 **［スタティック設定］** を選択し、以下のフィールドを設定します。
 
       <table class="table"><thead>
       <tr>
-      <th><strong>フィールド</strong></th>
-      <th><strong>値</strong></th>
+      <th><b>フィールド</b></th>
+      <th><b>値</b></th>
       </tr>
       </thead>
       <tbody>
@@ -112,7 +112,7 @@ Cloudflareをリバースプロキシとして構成するには、Cloudflareで
       </tr>
       </tbody>
       </table>
-5. [［常にHTTPSを使用］](https://developers.cloudflare.com/ssl/edge-certificates/additional-options/always-use-https/)が有効で、選択したカスタムドメインの[［暗号化モード］](https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/)が少なくとも**［フル］** に設定されていることを確認します。
+5. [［常にHTTPSを使用］](https://developers.cloudflare.com/ssl/edge-certificates/additional-options/always-use-https/)が有効で、選択したカスタムドメインの[［暗号化モード］](https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/)が少なくとも **［フル］** に設定されていることを確認します。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 

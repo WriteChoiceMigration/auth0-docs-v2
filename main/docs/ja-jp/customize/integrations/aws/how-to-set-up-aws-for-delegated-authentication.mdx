@@ -13,7 +13,7 @@ Auth0では、Amazon Web Servicesを委任認証用に構成することがで�
 
 ## AWSでSAMLプロバイダーを作成する
 
-1. AWSにログインし、[［IAM console（IAMコンソール）］](https://console.aws.amazon.com/iam)に移動します。左のナビゲーションメニューの**［Identity Providers（IDプロバイダー）］** を選択します。**［Create Provider（プロバイダーの作成）］** をクリックします。次のパラメーターを設定します。
+1. AWSにログインし、[［IAM console（IAMコンソール）］](https://console.aws.amazon.com/iam)に移動します。左のナビゲーションメニューの **［Identity Providers（IDプロバイダー）］** を選択します。 **［Create Provider（プロバイダーの作成）］** をクリックします。次のパラメーターを設定します。
 
    <table class="table"><thead>
 <tr>
@@ -32,18 +32,18 @@ Auth0では、Amazon Web Servicesを委任認証用に構成することがで�
 </tr>
 <tr>
 <td>Metadata Document（メタデータドキュメント）</td>
-<td>Auth0メタデータが含まれるファイルをアップロードします。ファイルは**［Dashboard］&gt;［Applications（アプリケーション）］&gt;［Application Settings（アプリケーション設定）］&gt;［Advanced Settings（高度な設定）］&gt;［Endpoints（エンドポイント）］&gt;［SAML Metadata URL（SAMLメタデータのURL）］** にあります。</td>
+<td>Auth0メタデータが含まれるファイルをアップロードします。ファイルは **［Dashboard］&gt;［Applications（アプリケーション）］&gt;［Application Settings（アプリケーション設定）］&gt;［Advanced Settings（高度な設定）］&gt;［Endpoints（エンドポイント）］&gt;［SAML Metadata URL（SAMLメタデータのURL）］** にあります。</td>
 </tr>
 </tbody>
 </table>
-2.**［Next Step（次の手順）］** をクリックします。
-3. 設定を確認し、問題がなければ**［Create（作成）］** をクリックします。
+2. **［Next Step（次の手順）］** をクリックします。
+3. 設定を確認し、問題がなければ **［Create（作成）］** をクリックします。
 
 ## SAMLプロバイダーのロールを作成します。
 
 プロバイダーを使用するには、ロールの信頼ポリシーのプロバイダーを使ってIAMロールを作成する必要があります。
 
-1. IAMコンソールで[［Roles（ロール）］](https://console.aws.amazon.com/iam/home#/roles)に移動します。**［Create role（ロールの作成）］** をクリックします。**［Trust（信頼）］** ページにリダイレクトされます。**［Select type of trusted entity（信頼されたエンティティのタイプの選択）］** で**［SAML 2.0 federation（SAML 2.0フェデレーション）］** を示します。以下の値を入力します。
+1. IAMコンソールで[［Roles（ロール）］](https://console.aws.amazon.com/iam/home#/roles)に移動します。 **［Create role（ロールの作成）］** をクリックします。 **［Trust（信頼）］** ページにリダイレクトされます。 **［Select type of trusted entity（信頼されたエンティティのタイプの選択）］** で **［SAML 2.0 federation（SAML 2.0フェデレーション）］** を示します。以下の値を入力します。
 
    <table class="table"><thead>
 <tr>
@@ -66,9 +66,9 @@ Auth0では、Amazon Web Servicesを委任認証用に構成することがで�
 </tr>
 </tbody>
 </table>
-2.**［Next:Permissions（次へ：アクセス許可）］** をクリックして続行します。
-3. アクセス許可ポリシーを新しいロールにアタッチする必要があります。カスタムポリシーをアタッチします。1つ作成するには、**［Create Policy（ポリシーの作成）］** をクリックします。
-4.**［Create policy（ポリシーの作成）］** エディターが起動したら、**［JSON］** タブに切り替えます。カスタムポリシーを用意します。
+2. **［Next:Permissions（次へ：アクセス許可）］** をクリックして続行します。
+3. アクセス許可ポリシーを新しいロールにアタッチする必要があります。カスタムポリシーをアタッチします。1つ作成するには、 **［Create Policy（ポリシーの作成）］** をクリックします。
+4. **［Create policy（ポリシーの作成）］** エディターが起動したら、 **［JSON］** タブに切り替えます。カスタムポリシーを用意します。
 
    ```json lines
    {
@@ -89,13 +89,13 @@ Auth0では、Amazon Web Servicesを委任認証用に構成することがで�
 
    
 
-   これによって、AWSでこのロールに含まれるユーザーが付与したアクセス権が定義されます。**［Review policy（ポリシーの確認）］** をクリックします。
-5. 作成したポリシーを確認します。ポリシーの**［Name（名前）］** （必須）と**［Description（説明）］** （任意）を入力してください。
-6. 完了したら、**［Create policy（ポリシーの作成）］** をクリックします。成功すると、新しいポリシーが作成されたことを示す次のメッセージが表示されます：「auth0SamlRolePolicy has been created（auth0SamlRolePolicyが作成されました）」
-7. ロール作成ウィザードに戻り（手順**2 - アクセス許可** に進んでいるはずです）、作成したばかりの新しいポリシーを見つけ、チェックボックスにチェックを入れてポリシーをロールにアタッチします。ポリシーを見つける際には、**［Customer managed（カスタマー管理）］** フィルターを使用することを推奨します。
-8.**［Next:Review（次へ：確認）］** をクリックして続行します。
-9. ロールに関する情報を確認し、**［Role name（ロール名）］** （必須）と**［Role description（ロールの説明）］** （任意）を入力します。アタッチしたポリシーも表示されます。すべて正しければ、**［Create role（ロールの作成）］** をクリックして続行します。
-10. 作成したら、プライマリ**ロール** ページにロールが表示されます。
+   これによって、AWSでこのロールに含まれるユーザーが付与したアクセス権が定義されます。 **［Review policy（ポリシーの確認）］** をクリックします。
+5. 作成したポリシーを確認します。ポリシーの **［Name（名前）］** （必須）と **［Description（説明）］** （任意）を入力してください。
+6. 完了したら、 **［Create policy（ポリシーの作成）］** をクリックします。成功すると、新しいポリシーが作成されたことを示す次のメッセージが表示されます：「auth0SamlRolePolicy has been created（auth0SamlRolePolicyが作成されました）」
+7. ロール作成ウィザードに戻り（手順 **2 - アクセス許可** に進んでいるはずです）、作成したばかりの新しいポリシーを見つけ、チェックボックスにチェックを入れてポリシーをロールにアタッチします。ポリシーを見つける際には、 **［Customer managed（カスタマー管理）］** フィルターを使用することを推奨します。
+8. **［Next:Review（次へ：確認）］** をクリックして続行します。
+9. ロールに関する情報を確認し、 **［Role name（ロール名）］** （必須）と **［Role description（ロールの説明）］** （任意）を入力します。アタッチしたポリシーも表示されます。すべて正しければ、 **［Create role（ロールの作成）］** をクリックして続行します。
+10. 作成したら、プライマリ **ロール** ページにロールが表示されます。
 
 ## ARN値をコピーします。
 
@@ -103,8 +103,8 @@ Auth0では、Amazon Web Servicesを委任認証用に構成することがで�
 
 ### プロバイダーARN
 
-IAMコンソールで[［Identity providers（IDプロバイダー）］](https://console.aws.amazon.com/iam/home#/providers)に移動します。お探しのロールを選択し、その概要ページを開きます。**［Summary（概要）］** の先頭に表示されている**［Provider ARN（プロバイダーARN）］** 値をコピーします。
+IAMコンソールで[［Identity providers（IDプロバイダー）］](https://console.aws.amazon.com/iam/home#/providers)に移動します。お探しのロールを選択し、その概要ページを開きます。 **［Summary（概要）］** の先頭に表示されている **［Provider ARN（プロバイダーARN）］** 値をコピーします。
 
 ### ロールARN
 
-IAMコンソールで[［Roles（ロール）］](https://console.aws.amazon.com/iam/home#/roles)に移動します。お探しのロールを選択し、その概要ページを開きます。**［Summary（概要）］** の先頭に表示されている**［Role ARN（ロールARN）］** 値をコピーします。
+IAMコンソールで[［Roles（ロール）］](https://console.aws.amazon.com/iam/home#/roles)に移動します。お探しのロールを選択し、その概要ページを開きます。 **［Summary（概要）］** の先頭に表示されている **［Role ARN（ロールARN）］** 値をコピーします。

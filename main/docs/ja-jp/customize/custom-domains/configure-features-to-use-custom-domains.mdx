@@ -21,8 +21,8 @@ Auth0をしばらく使用していて、カスタムドメインを有効化す
 
 <table class="table"><thead>
 <tr>
-<th><strong>機能</strong></th>
-<th><strong>参照するセクション</strong></th>
+<th><b>機能</b></th>
+<th><b>参照するセクション</b></th>
 </tr>
 </thead>
 <tbody>
@@ -83,7 +83,7 @@ Auth0をしばらく使用していて、カスタムドメインを有効化す
 
 ## ユニバーサルログイン
 
-[Auth0のユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)を使用していて、ログインページをカスタマイズした場合には、カスタムドメインを使用するようにコードを更新しなければなりません。カスタマイズすることなく、**デフォルト** のログインページを使用している場合には、変更の必要はありません。詳細については、「Auth0のユニバーサルログイン」をお読みください。
+[Auth0のユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)を使用していて、ログインページをカスタマイズした場合には、カスタムドメインを使用するようにコードを更新しなければなりません。カスタマイズすることなく、 **デフォルト** のログインページを使用している場合には、変更の必要はありません。詳細については、「Auth0のユニバーサルログイン」をお読みください。
 
 [Web用のLock](/docs/ja-jp/libraries/lock)を使用している場合には、`configurationBaseUrl`と`overrides`のオプションを以下のスクリプト例のように設定しなければなりません。
 
@@ -169,7 +169,7 @@ const auth0 = await createAuth0Client({
 Auth0のメールにカスタムドメインを使用したい場合には、この機能を有効化する必要があります。
 
 1. [［Auth0 Dashboard］>［Branding（ブランディング）］>［Custom Domains（カスタムドメイン）］](https://manage.auth0.com/#/branding/custom_domains)に移動します。
-2.**［Use Custom Domain in Emails（メールにカスタムドメインを使用する）］** トグルを有効にします。
+2. **［Use Custom Domain in Emails（メールにカスタムドメインを使用する）］** トグルを有効にします。
 
 ## ソーシャルIDプロバイダーを構成する
 
@@ -179,7 +179,7 @@ Auth0のメールにカスタムドメインを使用したい場合には、こ
 
 ## Google Workspace接続を構成する
 
-Google Workspace接続でカスタムドメインを使用したい場合には、［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OAuth</Tooltip> Client Settings（OAuthクライアント設定）］の［Authorized Redirect URIs（認可されているリダイレクトURI）］リストを更新する必要があります。Google Developer Consoleで**［Credentials（資格情報）］** に移動し、使用しているOAuthクライアントをリストから選択すると、クライアントIDやシークレットなどのフィールドを含む設定ページが表示されます。**［Authorized redirect URIs（認可されているリダイレクトURI）］** フィールドにURLを追加します。URLには`https://<YOUR-CUSTOM-DOMAIN>/login/callback`の形式でカスタムドメイン（`https://login.northwind.com/login/callback`など）を含めます。
+Google Workspace接続でカスタムドメインを使用したい場合には、［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OAuth</Tooltip> Client Settings（OAuthクライアント設定）］の［Authorized Redirect URIs（認可されているリダイレクトURI）］リストを更新する必要があります。Google Developer Consoleで **［Credentials（資格情報）］** に移動し、使用しているOAuthクライアントをリストから選択すると、クライアントIDやシークレットなどのフィールドを含む設定ページが表示されます。 **［Authorized redirect URIs（認可されているリダイレクトURI）］** フィールドにURLを追加します。URLには`https://<YOUR-CUSTOM-DOMAIN>/login/callback`の形式でカスタムドメイン（`https://login.northwind.com/login/callback`など）を含めます。
 
 ## API
 
@@ -224,7 +224,7 @@ app.use(jwt({
 
 ## SAML IDプロバイダーを構成する
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-6" tip="">SAML</Tooltip> IDプロバイダー（IdP）でカスタムドメインを使用する場合には、IDプロバイダーで**Assertion Consumer Service（ACS）のURL** を更新する必要があります。これは、IdPでの対応に合わせて、以下のいずれかの方法で実行できます。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-6" tip="">SAML</Tooltip> IDプロバイダー（IdP）でカスタムドメインを使用する場合には、IDプロバイダーで **Assertion Consumer Service（ACS）のURL** を更新する必要があります。これは、IdPでの対応に合わせて、以下のいずれかの方法で実行できます。
 
 1. サービスプロバイダーのメタデータをAuth0から`https://<YOUR-CUSTOM-DOMAIN>/samlp/metadata?connection=<YOUR-CONNECTION-NAME>`を使って取得します。これには、更新済みのACS URLが含まれています。そして、IdPの設定でこの値を手動で更新します。IdPに対するこの変更は、アプリケーションでカスタムドメインの使用を始めるのと同時に行わなければなりません。構成するべきIdPが複数ある場合には、これが問題となる可能性があります。
 2. IdPに対応があれば、この要件を満たすのに、署名付きの要求を使用することができます。
@@ -232,13 +232,13 @@ app.use(jwt({
 * 署名証明書を`https://<TENANT>.auth0.com/pem`からダウンロードします。同じ証明書が`https://<YOUR-CUSTOM-DOMAIN>.com/pem`からも返されることに注意してください。
 * 証明書をIdPにアップロードして提供します。これで、Auth0がIdPに送信する`AuthnRequest`メッセージの署名を、IdPが検証できるようになります。
 * IdPが証明書をインポートして、必要であれば、署名の検証を有効化します（実際の手順はIdPによって異なります）。
-* Dashboardの**［Sign Request（要求を署名する）］** トグルをオンにします。これは**［Connections（接続）］>［Enterprise（エンタープライズ）］>［SAML］>［CONNECTION（接続）］** にあります。これで、Auth0がIdPに送信する`AuthnRequest`のSAMLメッセージが署名されるようになります。
+* Dashboardの **［Sign Request（要求を署名する）］** トグルをオンにします。これは **［Connections（接続）］>［Enterprise（エンタープライズ）］>［SAML］>［CONNECTION（接続）］** にあります。これで、Auth0がIdPに送信する`AuthnRequest`のSAMLメッセージが署名されるようになります。
 
-これが完了して、アプリケーションで認証要求を開始したときにカスタムドメインが使用され始めると、IdPが署名付き要求でカスタムドメインを受け取ります。アプリケーションの署名付き要求は信頼されているため、IdPはACS URLとして構成されているものをすべて自動的にオーバーライドし、署名付き要求に含めて送られた値に置き換えます。ただし、署名付き要求内のACS URLを受け付け**ない** IdPもあるため、まず、これが対応されているかを確認する必要があります。
+これが完了して、アプリケーションで認証要求を開始したときにカスタムドメインが使用され始めると、IdPが署名付き要求でカスタムドメインを受け取ります。アプリケーションの署名付き要求は信頼されているため、IdPはACS URLとして構成されているものをすべて自動的にオーバーライドし、署名付き要求に含めて送られた値に置き換えます。ただし、署名付き要求内のACS URLを受け付け **ない** IdPもあるため、まず、これが対応されているかを確認する必要があります。
 
 対応されている場合には、1つ以上のIdPで設定が同時に変更できないため、署名付き要求の受け付けを事前に準備できるようになっています。また、後の時点で、静的に構成されたACS URLをIdPの設定で変更することもできます。
 
-SAML IDプロバイダーでカスタムドメインの使用が構成されている場合、Dashboardの**［Try（試す）］** ボタンは動作**しません** 。Auth0からメタデータをダウンロードするデフォルトのリンクとして、カスタムドメインではなく、デフォルトのドメインが表示されます。
+SAML IDプロバイダーでカスタムドメインの使用が構成されている場合、Dashboardの **［Try（試す）］** ボタンは動作 **しません** 。Auth0からメタデータをダウンロードするデフォルトのリンクとして、カスタムドメインではなく、デフォルトのドメインが表示されます。
 
 IdP起点の認証フローがある場合には、カスタムドメインの使用について、IdPとアプリケーションを同時に更新する必要があります。
 
@@ -254,7 +254,7 @@ IdP起点の認証フローがある場合には、その実行に使用され�
 
 ## Azure AD接続を構成する
 
-Azure AD接続でカスタムドメインを使用したい場合には、Azure ADの設定で［Allowed Reply URL（許可されている応答URL）］を更新する必要があります。Azure Active Directoryで**［Apps registrations（アプリの登録）］** に移動して、アプリを選択します。それから、**［Settings（設定）］>［Reply URLs（応答URL）］** を選択して、カスタムドメインのURLを追加します。URLには`https://<YOUR-CUSTOM-DOMAIN>/login/callback`の形式でカスタムドメイン（`https://login.northwind.com/login/callback`など）を含めます。
+Azure AD接続でカスタムドメインを使用したい場合には、Azure ADの設定で［Allowed Reply URL（許可されている応答URL）］を更新する必要があります。Azure Active Directoryで **［Apps registrations（アプリの登録）］** に移動して、アプリを選択します。それから、 **［Settings（設定）］>［Reply URLs（応答URL）］** を選択して、カスタムドメインのURLを追加します。URLには`https://<YOUR-CUSTOM-DOMAIN>/login/callback`の形式でカスタムドメイン（`https://login.northwind.com/login/callback`など）を含めます。
 
 ## ADFS接続を構成する
 

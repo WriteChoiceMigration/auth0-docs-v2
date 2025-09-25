@@ -37,7 +37,7 @@ permalink: "aws-api-gateway-delegation-4"
 
 [Amazon API Gatewayコンソール](https://console.aws.amazon.com/apigateway)を使用して、Pets APIを選択します。［Resources（リソース）］ページが表示されます。
 
-**［Actions（アクション）］** と**［Create Resource（リソースを作成）］** をクリックします。新しい子リソースに「`Purchase（購入）`」という名前を付けます。［**Create Resource（リソースを作成）** ］をクリックします。
+**［Actions（アクション）］** と **［Create Resource（リソースを作成）］** をクリックします。新しい子リソースに「`Purchase（購入）`」という名前を付けます。［ **Create Resource（リソースを作成）** ］をクリックします。
 
 以前、`pets`用に[「手順2：CORSをセットアップしてAPIを導入する」の「Amazon API Gatewayの保護と導入」](/docs/ja-jp/customize/integrations/aws/aws-api-gateway-delegation/aws-api-gateway-delegation-2#set-up-cors-and-deploy-the-api)で説明した方法で、OPTIONSメソッドを`purchase`リソースに追加します。
 
@@ -139,7 +139,7 @@ arn:aws:execute-api:us-east-1:your-accountid:your-api-id/*/pets/purchase
 
 信頼ポリシーも必ず更新してください。
 
-[Amazon API Gatewayコンソール](https://console.aws.amazon.com/apigateway)に移動して、`/pets/purchase`リソースのPOSTメソッドを選択します。**［Method Request（メソッド要求）］** を選択して、**［Authorization Type（認可タイプ）］** を「AWS_IAM」に変更します。チェックマークをクリックして設定を保存します。
+[Amazon API Gatewayコンソール](https://console.aws.amazon.com/apigateway)に移動して、`/pets/purchase`リソースのPOSTメソッドを選択します。 **［Method Request（メソッド要求）］** を選択して、 **［Authorization Type（認可タイプ）］** を「AWS_IAM」に変更します。チェックマークをクリックして設定を保存します。
 
 この時点で2つのロールの定義が終わり、API Gatewayに使用できるようになりました。
 
@@ -152,16 +152,16 @@ Login with Amazon（LWA）を使用してソーシャルロールを作成する
 
 このチュートリアルではLogin with Amazonの使い方をご説明しますが、他のソーシャルプロバイダーも利用できます。
 
-1. [［Auth0 Dashboard］>［Authentication（認証）］>［Social（ソーシャル）］](https://manage.auth0.com/#/connections/social)に移動して、**［Create Connection（接続の作成）］** を選択します。
+1. [［Auth0 Dashboard］>［Authentication（認証）］>［Social（ソーシャル）］](https://manage.auth0.com/#/connections/social)に移動して、 **［Create Connection（接続の作成）］** を選択します。
 2. セットアップしたい接続を選択して、同意します。
-3. ソーシャルIDプロバイダーで`クライアントID`と`クライアントシークレット`をコピーして、貼り付けます。**［Attributes（属性）］** （と、該当する場合は**［Permissions（アクセス許可）］** ）を選択して、**［Save（保存）］** をクリックします。
-4.**［Applications（アプリケーション）］** ビューを選択して、この接続を使用する各Auth0アプリケーションの切替を有効にして、**［Save（保存）］** を選択します。
+3. ソーシャルIDプロバイダーで`クライアントID`と`クライアントシークレット`をコピーして、貼り付けます。 **［Attributes（属性）］** （と、該当する場合は **［Permissions（アクセス許可）］** ）を選択して、 **［Save（保存）］** をクリックします。
+4. **［Applications（アプリケーション）］** ビューを選択して、この接続を使用する各Auth0アプリケーションの切替を有効にして、 **［Save（保存）］** を選択します。
 
-適切な情報を入力したら、**［Try Connection（接続を試す）］** を選択して間違いがないかを確認します。
+適切な情報を入力したら、 **［Try Connection（接続を試す）］** を選択して間違いがないかを確認します。
 
 Amazonコンソールを使用してLWAを構成する際には、［Allowed Return URLs（許可されているリターンURL）］に、`https://johndoe.auth0.com/login/callback`のような、Auth0アプリケーションのコールバックURLを必ず入力してください。入力する具体的なURLは、Auth0のヘルプページに記載されています。
 
-[［Auth0 Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)に移動し、設定を表示するアプリケーションを選択します。**［Connections（接続）］** ビューを選択して、**［Social（ソーシャル）］** セクションに進み、**［Amazon］** が有効になっていることを確認します。
+[［Auth0 Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)に移動し、設定を表示するアプリケーションを選択します。 **［Connections（接続）］** ビューを選択して、 **［Social（ソーシャル）］** セクションに進み、 **［Amazon］** が有効になっていることを確認します。
 
 #### APIを導入して、シングルページアプリケーションを更新する
 
@@ -177,7 +177,7 @@ Amazonコンソールを使用してLWAを構成する際には、［Allowed Ret
 
 `pets/login/login.js`ファイルで、先ほど作成したソーシャルユーザーIAMロールの非管理者ユーザーの`role`と`principal`の値を変更します。
 
-この時点で、Amazon資格情報**または** 先ほど作成したデータベースユーザーを使ってログインできるはずです。UIを確認すると、ソーシャルユーザーにはペットの購入が、管理者ユーザーにはペットの追加と削除ができるようになっていることが分かります。
+この時点で、Amazon資格情報 **または** 先ほど作成したデータベースユーザーを使ってログインできるはずです。UIを確認すると、ソーシャルユーザーにはペットの購入が、管理者ユーザーにはペットの追加と削除ができるようになっていることが分かります。
 
 この機能性をテストするには、`/pets/home/home.html`の`ng-show="isAdmin"`を削除することで、UIの削除ボタンを一時的に非表示にできます。
 
@@ -208,7 +208,7 @@ function buyPet(user, id) {
 …
 ```
 
-コードをS3バケットにコピーして、ログアウトし、LockのログインダイアログにあるAmazonアイコンをクリックする方法で、再びソーシャルユーザーとしてログインし直します。Lockペインに以前のログインが残っている場合は、**［SHOW ALL（すべて表示）］** をクリックする必要があります。
+コードをS3バケットにコピーして、ログアウトし、LockのログインダイアログにあるAmazonアイコンをクリックする方法で、再びソーシャルユーザーとしてログインし直します。Lockペインに以前のログインが残っている場合は、 **［SHOW ALL（すべて表示）］** をクリックする必要があります。
 
 Amazonユーザーとしては、ペットを購入することはできても、ペットを追加・削除することはできません。一方、データベース接続に紐づけられたユーザーとしてログインした場合は、ペットを追加・削除することはできても、ペットを購入することはできません。
 
@@ -225,9 +225,9 @@ Auth0では、この設定をルールを使って行えます。ルールは、
 
 ユーザーによって要求されたロールが許可されたものかを確認するルールを追加します。これは、紐づけられているのがソーシャル接続なのか、データベース接続なのかに応じて異なります。
 
-1. [［Auth0 Dashboard］>［Auth Pipeline（Authパイプライン）］>［Rules（ルール）］](https://manage.auth0.com/#/rules)に移動して、**［Create Rule（ルールの作成）］** を選択します。
-2.**［Empty rule（空のルール）］** テンプレートを選択します。
-3. ルールに「**AWS Pets** 」のような名前を付けてから、以下のJavaScriptコードを使ってルールの本文を入力します。
+1. [［Auth0 Dashboard］>［Auth Pipeline（Authパイプライン）］>［Rules（ルール）］](https://manage.auth0.com/#/rules)に移動して、 **［Create Rule（ルールの作成）］** を選択します。
+2. **［Empty rule（空のルール）］** テンプレートを選択します。
+3. ルールに「 **AWS Pets** 」のような名前を付けてから、以下のJavaScriptコードを使ってルールの本文を入力します。
 
    ```javascript lines
    function (user, context, callback) {
@@ -276,8 +276,8 @@ Auth0では、この設定をルールを使って行えます。ルールは、
 
    
 
-   上記のコードは、必ず、実際の統合に合わせて正しい値に調整してください。フィールドは、**［Princial ARN（プリンシパルARN）］** 、**［Role ARN（ロールARN）］** 、および**［Client Secret（クライアントシークレット）］** となります。
-4. 変更を**保存します** 。
+   上記のコードは、必ず、実際の統合に合わせて正しい値に調整してください。フィールドは、 **［Princial ARN（プリンシパルARN）］** 、 **［Role ARN（ロールARN）］** 、および **［Client Secret（クライアントシークレット）］** となります。
+4. 変更を **保存します** 。
 
 #### 注意事項
 
@@ -287,6 +287,6 @@ Auth0では、この設定をルールを使って行えます。ルールは、
 
 #### ルールをデバッグする
 
-ルールをデバッグする準備ができました。**［Try this Rule（このルールを試す）］** を選択すると、ルールのロジックを試行するスクリプトが表示されます。**［Try（試す）］** を選択します。
+ルールをデバッグする準備ができました。 **［Try this Rule（このルールを試す）］** を選択すると、ルールのロジックを試行するスクリプトが表示されます。 **［Try（試す）］** を選択します。
 
 ルールを実行した結果が表示されます。

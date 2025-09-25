@@ -14,13 +14,13 @@ AD/LDAPコネクターを介してActive Directoryとフェデレーションを
 ## Active Directoryを設定
 
 1. [［Auth0 Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］>［Active Directory（AD）/LDAP］](https://manage.auth0.com/#/connections/enterprise/ad)に移動して、構成したい接続を選択します。
-2.**［Use Windows Integrated Auth (Kerberos)（Windows統合認証（Kerberos）を使用する）］** スイッチを有効にします。
+2. **［Use Windows Integrated Auth (Kerberos)（Windows統合認証（Kerberos）を使用する）］** スイッチを有効にします。
 
 ### Kerberosの自動検出範囲
 
 Kerberos認証が有効な場合、ADコネクターが稼働しているサーバーのIPアドレスは、ネットワークIPアドレス範囲に明示的に追加されます。つまり、ユーザーの要求がADコネクターのものと同じIPアドレスから送られてきた場合は、Kerberos認証が試行されます。
 
-1.**IP範囲** を構成します。[CIDR表記](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)を使用します。範囲はAuth0で表示される範囲で指定します。Auth0がクラウドで稼働している場合は、ユーザーの内部IPアドレスを表示することはできません。その場合は、会社のパブリック向け/WAN IPアドレスを構成することになります。
+1. **IP範囲** を構成します。[CIDR表記](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)を使用します。範囲はAuth0で表示される範囲で指定します。Auth0がクラウドで稼働している場合は、ユーザーの内部IPアドレスを表示することはできません。その場合は、会社のパブリック向け/WAN IPアドレスを構成することになります。
 2. この設定が変更されるたびに、ADコネクターをホストするWindows Serviceを再起動することを推奨します。再起動することで、変更がただちに有効になります。
 
 ## 認証フロー
@@ -131,7 +131,7 @@ function useKerberos() {
 2. 警告メッセージを消し、検索ボックスに`negotiate`と入力します。
 3. `network.negotiate-auth.trusted-uris`項目を検索し、ダブルクリックして値を変更します。
 4. コネクターがインストールされているサーバーのドメイン名を入力します。ロードバランサーの背後に複数のコネクターのインスタンスがある場合は、バランサーのDNS名を追加します。値はURLの接頭辞またはドメインのカンマ区切りのリストを、`mydomain.com, https://myotherdomain.com`の形式で受け入れます。
-5.**［OK］** をクリックします。変更を有効にするのに、サーバーを再起動する必要はありません。
+5. **［OK］** をクリックします。変更を有効にするのに、サーバーを再起動する必要はありません。
 
 ## Kerberosに対するHTTPSのサポート
 

@@ -32,8 +32,8 @@ Auth0へのプロキシには、TLS（SSL）バージョン1.2以降を使用し
 
 ## ドメイン名をAuth0に渡します。
 
-1. [［Dashboard］>［Settings（設定）］>［Custom Domains（カスタムドメイン）］](https://manage.auth0.com/#/tenant/custom_domains)または[［Dashboard］>［Branding（ブランディング）］>［Custom Domains（カスタムドメイン）］](https://manage.auth0.com/#/custom_domains)に移動します。カスタムドメインを指定されたボックスに入力し、ドロップダウンメニューから**［Self-managed Certificates（自己管理証明書）］** を選択します。
-2.**［Add Domain（ドメインを追加）］** をクリックします。ドメインを追加した後でも**［Add Domain（ドメインを追加）］** ボタンは表示されたままですが、テナントごとに追加できるドメインは1つだけです。
+1. [［Dashboard］>［Settings（設定）］>［Custom Domains（カスタムドメイン）］](https://manage.auth0.com/#/tenant/custom_domains)または[［Dashboard］>［Branding（ブランディング）］>［Custom Domains（カスタムドメイン）］](https://manage.auth0.com/#/custom_domains)に移動します。カスタムドメインを指定されたボックスに入力し、ドロップダウンメニューから **［Self-managed Certificates（自己管理証明書）］** を選択します。
+2. **［Add Domain（ドメインを追加）］** をクリックします。ドメインを追加した後でも **［Add Domain（ドメインを追加）］** ボタンは表示されたままですが、テナントごとに追加できるドメインは1つだけです。
 
 ## 所有権を確認する
 
@@ -51,8 +51,8 @@ Auth0でドメインを使用するには、先にドメインを所有してい
 
       <table class="table"><thead>
       <tr>
-      <th><strong>パラメーター</strong></th>
-      <th><strong>値</strong></th>
+      <th><b>パラメーター</b></th>
+      <th><b>値</b></th>
       </tr>
       </thead>
       <tbody>
@@ -62,7 +62,7 @@ Auth0でドメインを使用するには、先にドメインを所有してい
       </tr>
       <tr>
       <td>Name（名前）</td>
-      <td>Auth0から取得したドメインの**［TXT Record（TXTレコード）］** の値をコピーして貼り付けます。</td>
+      <td>Auth0から取得したドメインの **［TXT Record（TXTレコード）］** の値をコピーして貼り付けます。</td>
       </tr>
       <tr>
       <td>Time to Live (TTL)（有効期限（TTL））</td>
@@ -70,16 +70,16 @@ Auth0でドメインを使用するには、先にドメインを所有してい
       </tr>
       <tr>
       <td>Value（値）</td>
-      <td>Auth0から取得したドメインの**［TXT Content（TXTコンテンツ）］** の値をコピーして貼り付けます。</td>
+      <td>Auth0から取得したドメインの **［TXT Content（TXTコンテンツ）］** の値をコピーして貼り付けます。</td>
       </tr>
       </tbody>
       </table>
-3. 続行するには**［Verify（確認）］** をクリックします。
+3. 続行するには **［Verify（確認）］** をクリックします。
 
    DNS設定によっては、ドメインが確認されるまで数分かかることがあります。
 
    Auth0がドメイン名を正常に検証すると、確認の画面が表示されます。
-   この画面に入力された情報（具体的には`cname-api-key`値）を保存してください。この値を表示できるのはこのとき**だけ** です。
+   この画面に入力された情報（具体的には`cname-api-key`値）を保存してください。この値を表示できるのはこのとき **だけ** です。
 
    <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -96,7 +96,7 @@ Auth0でドメインを使用するには、先にドメインを所有してい
 [Cloudflare](/docs/ja-jp/customize/custom-domains/self-managed-certificates/configure-cloudflare-for-use-as-reverse-proxy)、[Azure CDN](/docs/ja-jp/customize/custom-domains/self-managed-certificates/configure-azure-cdn-for-use-as-reverse-proxy)、[Google Cloud Platform](/docs/ja-jp/customize/custom-domains/self-managed-certificates/configure-gcp-as-reverse-proxy)、または[AWS Cloudfront](/docs/ja-jp/customize/custom-domains/self-managed-certificates/configure-aws-cloudfront-for-use-as-reverse-proxy)などのサービスを使用し、カスタムドメインの設定を構成することができます。新しいCNAME値を、ディストリビューション用リバースプロキシのサーバードメイン名をポイントするカスタムドメインのDNSに追加します。
 
 1. サービス上でリバースプロキシ設定を作成したら、[［Auth0 Dashboard］>［Branding（ブランディング）］>［Custom Domains（カスタムドメイン）］](https://manage.auth0.com/#/branding/custom_domains)タブの順に移動します。
-2. 新しいCNAMEレコードを、ディストリビューション用のサービスドメイン名をポイントするカスタムドメインのDNSに追加します。これを見つけるには、リバースプロキシのサーバー構成で**［Distribution ID（ディストリビューションID）］** を検索します。CNAMEレコードを追加したら、証明書の更新中に問題が発生するのを避けるために、このレコードは常時必要となります。
+2. 新しいCNAMEレコードを、ディストリビューション用のサービスドメイン名をポイントするカスタムドメインのDNSに追加します。これを見つけるには、リバースプロキシのサーバー構成で **［Distribution ID（ディストリビューションID）］** を検索します。CNAMEレコードを追加したら、証明書の更新中に問題が発生するのを避けるために、このレコードは常時必要となります。
 3. プロキシサーバーの構成方法は、使用するサービスごとに異なります。構成が必要となる可能性の高い設定タイプは以下のとおりです。
 
 * [ディストリビューション](#distribution-settings)
@@ -108,14 +108,14 @@ Auth0でドメインを使用するには、先にドメインを所有してい
 
 <table class="table"><thead>
 <tr>
-<th><strong>設定</strong></th>
-<th><strong>値</strong></th>
+<th><b>設定</b></th>
+<th><b>値</b></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>オリジンドメイン名</td>
-<td>カスタムドメイン設定プロセス中にAuth0 Dashboardから取得した<strong>オリジンドメイン名</strong>の値に設定します。</td>
+<td>カスタムドメイン設定プロセス中にAuth0 Dashboardから取得した<b>オリジンドメイン名</b>の値に設定します。</td>
 </tr>
 <tr>
 <td>オリジンID</td>
@@ -136,8 +136,8 @@ Auth0でドメインを使用するには、先にドメインを所有してい
 
 <table class="table"><thead>
 <tr>
-<th><strong>設定</strong></th>
-<th><strong>値</strong></th>
+<th><b>設定</b></th>
+<th><b>値</b></th>
 </tr>
 </thead>
 <tbody>
@@ -156,8 +156,8 @@ Auth0でドメインを使用するには、先にドメインを所有してい
 
 <table class="table"><thead>
 <tr>
-<th><strong>設定</strong></th>
-<th><strong>値</strong></th>
+<th><b>設定</b></th>
+<th><b>値</b></th>
 </tr>
 </thead>
 <tbody>
@@ -178,22 +178,22 @@ Auth0でドメインを使用するには、先にドメインを所有してい
 
 <table class="table"><thead>
 <tr>
-<th><strong>設定</strong></th>
-<th><strong>値</strong></th>
+<th><b>設定</b></th>
+<th><b>値</b></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>［Viewer Protocol Policy（ビューワープロトコルポリシー）］</td>
-<td>**［Redirect HTTP to HTTPS（HTTPをHTTPSにリダイレクト）］** を選択します。</td>
+<td> **［Redirect HTTP to HTTPS（HTTPをHTTPSにリダイレクト）］** を選択します。</td>
 </tr>
 <tr>
 <td>［Allowed HTTP Methods（許可されたHTTPメソッド）］</td>
-<td>**［GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE］** を選択します。</td>
+<td> **［GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE］** を選択します。</td>
 </tr>
 <tr>
 <td>［Cache Based on Selected Request Headers（選択されたリクエストヘッダーに基づいたキャッシュ）］</td>
-<td>**［Allow list（許可リスト）］** を選択します。</td>
+<td> **［Allow list（許可リスト）］** を選択します。</td>
 </tr>
 <tr>
 <td>［Allow List Headers（許可リストヘッダー）］</td>
@@ -201,11 +201,11 @@ Auth0でドメインを使用するには、先にドメインを所有してい
 </tr>
 <tr>
 <td>［Forward Cookies（クッキーの転送）］</td>
-<td>**［All（すべて）］** を選択します。</td>
+<td> **［All（すべて）］** を選択します。</td>
 </tr>
 <tr>
 <td>［Query String Forwarding and Caching（クエリ文字列の転送とキャッシュ）］</td>
-<td>**［Forward all, cache based on all（すべて転送、すべてに基づいてキャッシュ）］** を選択します。</td>
+<td> **［Forward all, cache based on all（すべて転送、すべてに基づいてキャッシュ）］** を選択します。</td>
 </tr>
 </tbody>
 </table>

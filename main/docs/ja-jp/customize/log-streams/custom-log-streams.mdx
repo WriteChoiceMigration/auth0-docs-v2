@@ -29,61 +29,61 @@ Webhookの構成につきペイロードURLを1つだけサブスクライブで
 
 ## ログストリームを構成する
 
-1. [［Dashboard］>［Monitoring（モニタリング）］>［Streams（ストリーム）］](https://manage.auth0.com/#/log-streams)に移動して、**［Create Stream（ストリームの作成）］** をクリックします。
+1. [［Dashboard］>［Monitoring（モニタリング）］>［Streams（ストリーム）］](https://manage.auth0.com/#/log-streams)に移動して、 **［Create Stream（ストリームの作成）］** をクリックします。
 
    <Frame>![Dashboard Monitoring Streams](/images/ja-jp/cdy7uua7fh8z/5ZY6sT68DabXNL9Dr4bhss/ff0f7306fcf9d64247a61a48b12a39a9/log_stream.png)</Frame>
 
-2.**［Custom Webhook（カスタムWebhook）］** を選択し、新しいストリームに対して一意の名前を入力します。
+2. **［Custom Webhook（カスタムWebhook）］** を選択し、新しいストリームに対して一意の名前を入力します。
 3. 次の設定を行います。
 
    <Frame>![Dashboard モニタリング ストリーム カスタムウェブフック設定タブ](/images/ja-jp/cdy7uua7fh8z/5vJVD09aqSF0xEZZFk6wh2/3886c59282d49515e58ac5f9f972e97b/Custom_Webhook_config_form.png)</Frame>
 
    <table class="table"><thead>
 <tr>
-<th><strong>設定</strong></th>
-<th><strong>説明</strong></th>
+<th><b>設定</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Name（名前）</strong></td>
+<td><b>Name（名前）</b></td>
 <td>この統合を他の統合と区別する一意の表示名です。</td>
 </tr>
 <tr>
-<td><strong>Payload URL（ペイロードURL）</strong></td>
+<td><b>Payload URL（ペイロードURL）</b></td>
 <td>イベントのペイロードをHTTP POST要求として送信するURLです。</td>
 </tr>
 <tr>
-<td><strong>Authorization Token（認可トークン）</strong></td>
+<td><b>Authorization Token（認可トークン）</b></td>
 <td>（任意）要求のAuthorizationヘッダーに含まれる値です。</td>
 </tr>
 <tr>
-<td><strong>Content Type（コンテンツタイプ）</strong></td>
+<td><b>Content Type（コンテンツタイプ）</b></td>
 <td>Webhookに転送されるペイロードのメディアタイプです。</td>
 </tr>
 <tr>
-<td><strong>Content Format（コンテンツ形式）</strong></td>
+<td><b>Content Format（コンテンツ形式）</b></td>
 <td>JSONの行、配列またはオブジェクトでデータを受信します。</td>
 </tr>
 <tr>
-<td><strong>Filter by Event Category（イベントカテゴリーでフィルター）</strong></td>
+<td><b>Filter by Event Category（イベントカテゴリーでフィルター）</b></td>
 <td>ログストリームフィルターのリストです。</td>
 </tr>
 <tr>
-<td><strong>Starting Cursor（開始カーソル）</strong></td>
+<td><b>Starting Cursor（開始カーソル）</b></td>
 <td>（任意）ストリームを開始する日時を指定します。</td>
 </tr>
 </tbody>
 </table>
-4.**［Save（保存）］** をクリックします。
+4. **［Save（保存）］** をクリックします。
 
 ## 構成をテストする
 
-1.**［Health（ヘルス）］** ビューに切り替え、**［Stream Status（ストリームステータス）］** が**［Active（アクティブ）］** になっていることを確認してください。
+1. **［Health（ヘルス）］** ビューに切り替え、 **［Stream Status（ストリームステータス）］** が **［Active（アクティブ）］** になっていることを確認してください。
 2. ログイン、トークン交換、Auth0 Management APIの呼び出しなどのテナントログイベントを作成するアクションを実行します。
 3. イベントがテナントログに作成されたことを確認します。
 4. APIがイベントデータと一緒に`HTTP POST`要求を受け取ったことを確認します。
-5.**［Health（ヘルス）］** ビューに移動し、エラーが起きていないことを確認します。
+5. **［Health（ヘルス）］** ビューに移動し、エラーが起きていないことを確認します。
 
 ## Webhookのトラブルシューティング
 

@@ -60,7 +60,7 @@ For existing applications, make a `PATCH` call to the [Update a Client](https://
 
 Once a user is authenticated, Auth0 returns an [Access token](/docs/ja-jp/secure/tokens/access-tokens), and [ID token](/docs/ja-jp/secure/tokens/id-tokens), and (optionally) a [Refresh token](/docs/ja-jp/secure/tokens/refresh-tokens).
 
-You can configure your native application to exchange a <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">refresh token</Tooltip> for a Session Transfer Token. If your web application does not support cookie injection, your native application also needs to configure your web application’s**Login URI** to inject the Session Transfer Token as a URI parameter.
+You can configure your native application to exchange a <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">refresh token</Tooltip> for a Session Transfer Token. If your web application does not support cookie injection, your native application also needs to configure your web application’s **Login URI** to inject the Session Transfer Token as a URI parameter.
 
 * Update your native application using your Management API <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Access Token</Tooltip> with the [Update a Client](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) endpoint:
 
@@ -87,7 +87,7 @@ auth0 apps session-transfer update {yourClientId} --can-create-token=true --enfo
 
 ### Configure web applications
 
-Before you enable Session Transfer Token, make sure you have configured your web application’s**Application Login URI** to handle extra parameters. To learn more about URIs, read [Application Settings](https://auth0.com/docs/get-started/applications/application-settings#application-uris).
+Before you enable Session Transfer Token, make sure you have configured your web application’s **Application Login URI** to handle extra parameters. To learn more about URIs, read [Application Settings](https://auth0.com/docs/get-started/applications/application-settings#application-uris).
 
 * Update your web application using the Management API Access Token with the [Update a Client](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) endpoint:
 
@@ -686,7 +686,7 @@ dataTask.resume()
 
 Using `session_transfer_token` with [Actions](/docs/ja-jp/customize/actions) allows you to configure post-authentication risk detection and response capabilities to enhance user protection.
 
-To facilitate this, the post-login Action object**event.session_transfer_token** provides relevant information including unique `client_id`, `scope`, `request` information such as `ip`, `asn`, `user_agent` and `geoip` information such as, `cityName`, `countryCode` among others. To learn more, read [Actions Triggers: post-login - Event Object](/docs/ja-jp/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/post-login-event-object).
+To facilitate this, the post-login Action object **event.session_transfer_token** provides relevant information including unique `client_id`, `scope`, `request` information such as `ip`, `asn`, `user_agent` and `geoip` information such as, `cityName`, `countryCode` among others. To learn more, read [Actions Triggers: post-login - Event Object](/docs/ja-jp/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/post-login-event-object).
 
 The Action code below allows you to dynamically reject a transaction based on geolocation information:
 

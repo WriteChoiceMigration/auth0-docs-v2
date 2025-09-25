@@ -78,14 +78,14 @@ _enableIdPInitiatedLogin: true
 
 ## IDP起点SSOをセットアップする
 
-1. [［Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)の順に移動し、**［SAMLP Identity Provider（SAMLP IDプロバイダー）］** を選択します。
-2.**［Settings（設定）］** で、IdP起点SSOの構成を確認できます。
+1. [［Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)の順に移動し、 **［SAMLP Identity Provider（SAMLP IDプロバイダー）］** を選択します。
+2. **［Settings（設定）］** で、IdP起点SSOの構成を確認できます。
 
    <Frame>![プロトコル - IdP起点SSOの構成画面](/images/ja-jp/cdy7uua7fh8z/1HORCAp4fZQg0BOoIopvoS/11f3b6071383ddc6967c40138d5d1794/2025-01-28_13-46-21.png)</Frame>
 
-* **IdP-initiated SSO Behavior（IdP起点SSOの動作）** ：このオプションを使用すると、SAML接続に対してIdP起点のログインを有効にすることができます。**［Accept Requests（要求を受け入れる）］** を選択し、すべての必須フィールドに値を入力します。
+* **IdP-initiated SSO Behavior（IdP起点SSOの動作）** ：このオプションを使用すると、SAML接続に対してIdP起点のログインを有効にすることができます。 **［Accept Requests（要求を受け入れる）］** を選択し、すべての必須フィールドに値を入力します。
 * **Default Application（デフォルトのアプリケーション）** ：IdP起点のログインが成功すると、これがユーザーをルーティングするアプリケーションとなります。この設定には、この接続で有効になっている利用可能なアプリケーションが表示されます。IdP起点でユーザーにログインさせるアプリケーションをドロップダウンから選択します。1つのSAML接続につき、IdP起点のログインに対して選択できるアプリケーションは1つだけです。
-* **Response Protocol（応答プロトコル）** ：これは、選択した**デフォルトのアプリケーション** の接続に使用するプロトコルです。通常、アプリケーションはOpenID Connectプロトコルを使って構成されます（上記を参照）。ただし、アプリケーションにSAML2 Webアプリアドオンを構成しており、SAMLアサーションをルーティングしたい場合は、SAMLを選択する必要があります。有効なSAMLアサーションがポストバックURLに渡されると、Auth0は、選択された応答プロトコルを使用して、構成されたデフォルトのアプリケーションの最初に許可されたコールバックURLにログイン応答を送信します。OIDCを使用する場合、クエリ文字列フィールドを使用してこのプロトコルを変更し、`redirect_uri`を指定することができます。
+* **Response Protocol（応答プロトコル）** ：これは、選択した **デフォルトのアプリケーション** の接続に使用するプロトコルです。通常、アプリケーションはOpenID Connectプロトコルを使って構成されます（上記を参照）。ただし、アプリケーションにSAML2 Webアプリアドオンを構成しており、SAMLアサーションをルーティングしたい場合は、SAMLを選択する必要があります。有効なSAMLアサーションがポストバックURLに渡されると、Auth0は、選択された応答プロトコルを使用して、構成されたデフォルトのアプリケーションの最初に許可されたコールバックURLにログイン応答を送信します。OIDCを使用する場合、クエリ文字列フィールドを使用してこのプロトコルを変更し、`redirect_uri`を指定することができます。
 * **Query String（クエリ文字列）** ：クエリ文字列のオプションは、OpenID Connectプロトコルが使用されるときの動作をカスタマイズするのに役立ちます。[クエリ文字列](https://en.wikipedia.org/wiki/Query_string)を使用して、パラメーターの設定に類似した複数のオプションを設定することができます。以下のように設定できます。
 
   <table class="table"><thead>
@@ -121,7 +121,7 @@ _enableIdPInitiatedLogin: true
 
 ## 100に制限されているアプリケーションドロップダウンリスト
 
-IdP起点SSOでアプリケーションを**Default Application（デフォルトのアプリケーション）** として選択する場合で、かつそのアプリケーションがテナントのドロップダウンリストの最初の100個のアプリケーションに含まれていない場合は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Management API</Tooltip>を使用してそのアプリケーションを選択する必要があります。パッチを実行する必要があります。
+IdP起点SSOでアプリケーションを **Default Application（デフォルトのアプリケーション）** として選択する場合で、かつそのアプリケーションがテナントのドロップダウンリストの最初の100個のアプリケーションに含まれていない場合は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Management API</Tooltip>を使用してそのアプリケーションを選択する必要があります。パッチを実行する必要があります。
 
 ```javascript lines
 {

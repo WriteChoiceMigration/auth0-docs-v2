@@ -28,10 +28,10 @@ You can create an event stream using either AWS EventBridge or webhooks. The sec
 
 Event streams can either be provisioned using the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 dashboard</Tooltip> or the [Auth0 Management API](/docs/ja-jp/api/management/v2). If using the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>, before you can set up an event stream, you need to create a machine-to-machine (M2M) application and authenticate with a Management API token. For more information, review [Management API Access Tokens](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens).
 
-1. Navigate to [Dashboard > Applications > Applications](https://manage.auth0.com/#/applications) and select**Create Application** .
-2. Enter a descriptive name for your application and choose**Machine to Machine Applications** . Then, select**Create** .
-3. Select the API you want to call from your application. In this case, use the**Auth0 Management API** .
-4. Choose the permissions that you want to be issued as part of your application's access token, then select**Authorize** . For testing purposes, select:
+1. Navigate to [Dashboard > Applications > Applications](https://manage.auth0.com/#/applications) and select **Create Application** .
+2. Enter a descriptive name for your application and choose **Machine to Machine Applications** . Then, select **Create** .
+3. Select the API you want to call from your application. In this case, use the **Auth0 Management API** .
+4. Choose the permissions that you want to be issued as part of your application's access token, then select **Authorize** . For testing purposes, select:
 
    * `read:event_streams`
    * `create:event_streams`
@@ -40,7 +40,7 @@ Event streams can either be provisioned using the <Tooltip data-tooltip-id="reac
    * `read:event_deliveries`
    * `update:event_deliveries`
    * `create:users`
-5. Navigate to the**Settings** tab to gather your**Client ID** ,**Client Secret** , and**Domain** .
+5. Navigate to the **Settings** tab to gather your **Client ID** , **Client Secret** , and **Domain** .
 6. Review [Get Management API Access Tokens](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-production) to retrieve and store your access token.
 
 ## AWS EventBridge
@@ -101,10 +101,10 @@ If successful, this call returns the following JSON with your event stream `id`.
 
 To create an event stream in the Auth0 Dashboard using AWS EventBridge:
 
-1. Navigate to**Auth0 Dashboard** >**Event Streams (Early)** .
-2. Select**+Create Event Stream** .
-3. From the list of stream types, select**AWS EventBridge** . This will open the configuration form for your new EventBridge stream.
-4.**Configure Stream Details:** In the configuration form, you will need to provide the following information:
+1. Navigate to **Auth0 Dashboard** > **Event Streams (Early)** .
+2. Select **+Create Event Stream** .
+3. From the list of stream types, select **AWS EventBridge** . This will open the configuration form for your new EventBridge stream.
+4. **Configure Stream Details:** In the configuration form, you will need to provide the following information:
 
    * **Stream Name:**
 
@@ -115,8 +115,8 @@ To create an event stream in the Auth0 Dashboard using AWS EventBridge:
    * **AWS Region:**
 
      Select the specific AWS Region where your EventBridge event bus is located.
-5.**Select Event Types:** In the**Select Event Types** section, choose the specific Auth0 event types you want to include in this stream. You can select multiple event types based on your requirements (e.g., `user.created`, `user.updated`, `user.deleted`).
-6.**Save Changes:** Once you have configured the stream name, AWS details, and selected your desired event types, click the**Save Changes** button.
+5. **Select Event Types:** In the **Select Event Types** section, choose the specific Auth0 event types you want to include in this stream. You can select multiple event types based on your requirements (e.g., `user.created`, `user.updated`, `user.deleted`).
+6. **Save Changes:** Once you have configured the stream name, AWS details, and selected your desired event types, click the **Save Changes** button.
 
 Your new event stream is now created, and Auth0 can begin publishing the selected event types to the specified AWS EventBridge event bus. You can monitor the status and manage your event stream from the Event Streams (Early) page in the Auth0 Dashboard.
 
@@ -324,19 +324,19 @@ auth0 events show <EVENT_STREAM_ID>
 
 To create an event stream in the Auth0 Dashboard using AWS EventBridge:
 
-1. Navigate to**Auth0 Dashboard** >**Event Streams (Early)** .
-2. Select**+Create Event Stream** .
-3. From the list of stream types, select**Webhook** . This will open the configuration form for your new webhook stream.
-4.**Configure Stream Details:** In the configuration form, you will need to provide the following information:
+1. Navigate to **Auth0 Dashboard** > **Event Streams (Early)** .
+2. Select **+Create Event Stream** .
+3. From the list of stream types, select **Webhook** . This will open the configuration form for your new webhook stream.
+4. **Configure Stream Details:** In the configuration form, you will need to provide the following information:
 
    * **Stream Name:**
 
      Enter a descriptive name for your event stream. This will help you identify it within the Auth0 Dashboard.
    * **Endpoint:** Enter the complete URL of the HTTP endpoint where you want Auth0 to send the events. This is the service that will receive and process the event data.
    * **Authentication Method:** Choose the authentication method required by your endpoint.
-   * **Authorization Token:** If you selected**Bearer Token** as the authentication method, enter the required authorization token here.
-5.**Select Event Types:** In the**Select Event Types** section, choose the specific Auth0 event types you want to include in this stream. You can select multiple event types based on your requirements (e.g., `user.created`, `user.updated`, `user.deleted`).
-6.**Save Changes:** Once you have configured the stream name, AWS details, and selected your desired event types, click the**Save Changes** button.
+   * **Authorization Token:** If you selected **Bearer Token** as the authentication method, enter the required authorization token here.
+5. **Select Event Types:** In the **Select Event Types** section, choose the specific Auth0 event types you want to include in this stream. You can select multiple event types based on your requirements (e.g., `user.created`, `user.updated`, `user.deleted`).
+6. **Save Changes:** Once you have configured the stream name, AWS details, and selected your desired event types, click the **Save Changes** button.
 
 Your new event stream is now created, and Auth0 can begin publishing the selected event types to the specified Webhook. You can monitor the status and manage your event stream from the Event Streams (Early) page in the Auth0 Dashboard.
 

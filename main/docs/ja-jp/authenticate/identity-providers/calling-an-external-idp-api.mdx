@@ -43,7 +43,7 @@ FacebookやGitHubなどの外部IDプロバイダー(<Tooltip data-tooltip-id="r
 [Management APIv2 Token](/docs/ja-jp/api/management/v2/tokens)（Management APIv2トークン）を初めて要求する場合は、Management APIを呼び出すために使用できるアプリケーションを作成して構成する必要があります。
 
 1. [［Auth0 Dashboard］>［Applications（アプリケーション）］>［API］](https://manage.auth0.com/#/apis)に移動して、[［Auth0 Management API］](https://manage.auth0.com/#/apis/management/authorized-clients)を選択します。
-2.**［API Explorer（API エクスプローラー）］** ビューを選択し、**［Create & Authorize a Test Application（テストアプリケーションの作成と承認）］** をクリックします。
+2. **［API Explorer（API エクスプローラー）］** ビューを選択し、 **［Create & Authorize a Test Application（テストアプリケーションの作成と承認）］** をクリックします。
 
 これにより、新しいアプリケーションが作成され、Management APIのすべてのスコープが付与されます。つまり、このアプリケーション用に生成されたトークンは、すべてのManagement APIエンドポイントにアクセスできるようになります。
 
@@ -51,11 +51,11 @@ FacebookやGitHubなどの外部IDプロバイダー(<Tooltip data-tooltip-id="r
 
 このボタンが表示されない場合は、Management APIに少なくとも1つの認可済みアプリケーションがすでに存在しています。既存のアプリケーションのスコープを更新して使用するか、以下の手順で新しいものを作成してください。
 
-1. [［Auth0 Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)に移動して、**［Create Application（アプリケーションの作成）］** を選択します。
-2.**［Machine to Machine Applications（マシンツーマシンアプリケーション）］** を選択して**［Create（作成）］** をクリックします。
-3.**［Select an API（APIの選択）］** ドロップダウンから ［`Auth0 Management API`］を選択します。
-4. 必要なスコープを有効にして、**［Authorize（認可）］** を選択します。
-5.**API** ビューを選択して、**Auth0 Management API** を有効に設定します。
+1. [［Auth0 Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)に移動して、 **［Create Application（アプリケーションの作成）］** を選択します。
+2. **［Machine to Machine Applications（マシンツーマシンアプリケーション）］** を選択して **［Create（作成）］** をクリックします。
+3. **［Select an API（APIの選択）］** ドロップダウンから ［`Auth0 Management API`］を選択します。
+4. 必要なスコープを有効にして、 **［Authorize（認可）］** を選択します。
+5. **API** ビューを選択して、 **Auth0 Management API** を有効に設定します。
 
 </Card>
 
@@ -74,13 +74,13 @@ FacebookやGitHubなどの外部IDプロバイダー(<Tooltip data-tooltip-id="r
 これで構成が完了し、Management APIトークンを取得する準備が整いました。
 
 1. 登録済みの[Auth0 Management API](https://manage.auth0.com/#/apis/management/authorized-clients)から、[**［Test（テスト）］** ビュー](https://manage.auth0.com/#/apis/management/test)を選択します。
-2. ドロップダウンから**［Application（アプリケーション）］** を選択し、カスタマイズされた変数を使用してすぐに使用できるスニペットを事前に設定します。
+2. ドロップダウンから **［Application（アプリケーション）］** を選択し、カスタマイズされた変数を使用してすぐに使用できるスニペットを事前に設定します。
 3. スニペットの優先言語を選択し、コピーして実行します。
 4. 応答から`access_token`プロパティを抽出します。これは、Management APIにアクセスするために使用します。
 
 <Card title="スニペットの役目">
 
-スニペットは、`POST`操作を[Auth0の認証APIの/oauth/tokenエンドポイント](/docs/ja-jp/api/authentication#client-credentials)に**OAuth 2.0クライアント資格情報付与** を使って実行します。これはマシンツーマシンプロセスがAPIへのアクセス時に使用する付与です。フローの詳細については、「[Client Credentials Flow（クライアントの資格情報フロー）](/docs/ja-jp/get-started/authentication-and-authorization-flow/client-credentials-flow)」を参照してください。
+スニペットは、`POST`操作を[Auth0の認証APIの/oauth/tokenエンドポイント](/docs/ja-jp/api/authentication#client-credentials)に **OAuth 2.0クライアント資格情報付与** を使って実行します。これはマシンツーマシンプロセスがAPIへのアクセス時に使用する付与です。フローの詳細については、「[Client Credentials Flow（クライアントの資格情報フロー）](/docs/ja-jp/get-started/authentication-and-authorization-flow/client-credentials-flow)」を参照してください。
 
 </Card>
 
@@ -89,13 +89,13 @@ FacebookやGitHubなどの外部IDプロバイダー(<Tooltip data-tooltip-id="r
 デフォルトでは、受け取ったトークンの有効期限は24時間（86,400秒）です。これを変更するには、
 
 1. [［Auth0 Dashboard］>［Applications（アプリケーション）］>［API］](https://manage.auth0.com/#/apis)に移動して、[［Auth0 Management API］](https://manage.auth0.com/#/apis/management/authorized-clients)を選択します。
-2.**［Settings（設定）］** ビューを選択し、**［Token Expiration (Seconds)（トークンの有効期限(秒)）］** フィールドを見つけて新しい値を入力し、**［Save（保存）］** をクリックします。設定できる最大値は2,592,000秒(30日)ですが、デフォルト値のままにしておくことをお勧めします。
+2. **［Settings（設定）］** ビューを選択し、 **［Token Expiration (Seconds)（トークンの有効期限(秒)）］** フィールドを見つけて新しい値を入力し、 **［Save（保存）］** をクリックします。設定できる最大値は2,592,000秒(30日)ですが、デフォルト値のままにしておくことをお勧めします。
 
 次に生成するトークンでは、更新された有効期限が使用されます。
 
 <Warning>
 
-これらのトークンを**取り消すことはできません** 。リスクを最小限に抑えるために、有効期間の短いトークンを発行し、各アプリケーションに必要なスコープのみを付与することをお勧めします。運用環境の場合は、古いトークンの有効期限が切れたときに新しいトークンを取得する、単純なCLIを構成できます。
+これらのトークンを **取り消すことはできません** 。リスクを最小限に抑えるために、有効期間の短いトークンを発行し、各アプリケーションに必要なスコープのみを付与することをお勧めします。運用環境の場合は、古いトークンの有効期限が切れたときに新しいトークンを取得する、単純なCLIを構成できます。
 
 </Warning>
 
@@ -248,7 +248,7 @@ dataTask.resume()
 
 <Card title="ユーザーIDを見つけるには">
 
-* テストの場合には、[［Auth0 Dashboard］>［User Management（ユーザー管理）］>［Users（ユーザー）］](https://manage.auth0.com/#/users)で、ユーザーを見つけることができます。ユーザーを見つけたら、**user_id** フィールドの値をコピーします。
+* テストの場合には、[［Auth0 Dashboard］>［User Management（ユーザー管理）］>［Users（ユーザー）］](https://manage.auth0.com/#/users)で、ユーザーを見つけることができます。ユーザーを見つけたら、 **user_id** フィールドの値をコピーします。
 
 * 実装の場合には、[IDトークン](/docs/ja-jp/secure/tokens/id-tokens)の`sub`クレームからユーザーIDを抽出するか、認証APIの[/userinfoエンドポイント](/docs/ja-jp/api/authentication#get-user-info)を呼び出して、`user_id`応答プロパティからユーザーIDを抽出します。
 
@@ -316,9 +316,9 @@ IDプロバイダーアクセストークンの特定のスコープを要求す
 
 パブリックアプリケーション(SPA、ネイティブデスクトップ、またはモバイルアプリケーション)を使用している場合は、ここを参照してください。
 
-フロントエンドアプリを使用する場合、フロントエンドアプリは**資格情報を安全に保持できない** パブリックアプリケーションであるため、IdP APIを呼び出すプロセスはバックエンドプロセスとは異なります。SPAコードは表示および変更でき、ネイティブ/モバイルアプリは逆コンパイルおよび検査できるため、秘密鍵やパスワードなどの機密情報を保持することはできません。
+フロントエンドアプリを使用する場合、フロントエンドアプリは **資格情報を安全に保持できない** パブリックアプリケーションであるため、IdP APIを呼び出すプロセスはバックエンドプロセスとは異なります。SPAコードは表示および変更でき、ネイティブ/モバイルアプリは逆コンパイルおよび検査できるため、秘密鍵やパスワードなどの機密情報を保持することはできません。
 
-具体的には、バックエンドプロセスの最初のステップで`/oauth/token`を呼び出すために使用するマシンツーマシンアプリケーションの**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Client Secret</Tooltip>（クライアントシークレット）］** を安全に保持できません。
+具体的には、バックエンドプロセスの最初のステップで`/oauth/token`を呼び出すために使用するマシンツーマシンアプリケーションの **［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Client Secret</Tooltip>（クライアントシークレット）］** を安全に保持できません。
 
 代わりに、バックエンドのプロキシを構築し、それをAPIとしてアプリケーションに公開する必要があります。
 

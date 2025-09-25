@@ -37,14 +37,14 @@ Auth0 will enable the MCD feature on tenants requested by EA participants. You c
 
 To create a custom domain in the Auth0 Dashboard:
 
-1. Navigate to**Auth0 Dashboard** >**Branding > Custom Domains** .
-2. Select**+Add custom domain** .
+1. Navigate to **Auth0 Dashboard** > **Branding > Custom Domains** .
+2. Select **+Add custom domain** .
 3. In the configuration form, provide the following information:
 
    * **Domain:** A [fully-qualified domain name](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) that you own. For example: `my.custom-domain.com`.
    * **Certificate type:** Choose [**Auth0-managed certificates** ](/docs/ja-jp/customize/custom-domains/auth0-managed-certificates) or [**Self-managed certificates** ](/docs/ja-jp/customize/custom-domains/self-managed-certificates).
    * **Metadata (Key/Value):** Add optional metadata like `region`, `client_name`, or `client_id`, to help organize and filter your domains.
-4. Once you have configured the custom domain details, select**Save** .
+4. Once you have configured the custom domain details, select **Save** .
 
 Your newly added domain name will show as `pending` until verification is complete.
 
@@ -52,17 +52,17 @@ Your newly added domain name will show as `pending` until verification is comple
 
 To create a custom domain with the Management API, you need a machine-to-machine (M2M) application that is  authorized to use the  Management API. For more information, review. For more information, review [Management API Access Tokens](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens).
 
-1. Navigate to [Dashboard > Applications > Applications](https://manage.auth0.com/#/applications) and select**Create Application** .
-2. Enter a descriptive name for your application and choose**Machine to Machine Applications** . Then, select**Create** .
-3. Switch to the**APIs** view and then enable toggle for the `Auth0 Management API`.
+1. Navigate to [Dashboard > Applications > Applications](https://manage.auth0.com/#/applications) and select **Create Application** .
+2. Enter a descriptive name for your application and choose **Machine to Machine Applications** . Then, select **Create** .
+3. Switch to the **APIs** view and then enable toggle for the `Auth0 Management API`.
 4. Expand the row to configure API’s permissions. For MCD, you must select the following:
 
    * `read:custom_domains`
    * `create:custom_domains`
    * `update:custom_domains`
    * `delete:custom_domains`
-5. Select**Update** .
-6. Navigate to the**Settings** tab to gather your**Client ID** ,**Client Secret** , and**Domain** .
+5. Select **Update** .
+6. Navigate to the **Settings** tab to gather your **Client ID** , **Client Secret** , and **Domain** .
 7. Review [Get Management API Access Tokens](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-production) to retrieve and store your access token.
 
 #### Create a Custom Domain
@@ -302,7 +302,7 @@ If successful, you should see the following returned with the details of your ne
 
 MCD offers many key features and functionalities to more effectively manage your Auth0 implementation and improve user experience. You are responsible for owning and registering your desired custom domains with a domain name registrar.
 
-The [Auth0 Management API](https://auth0.com/docs/api/management/v2/custom-domains/get-custom-domains) provides comprehensive support for**Create, Read, Update, Delete, and Verify** operations for these custom domains, offering full programmatic control over their lifecycle.
+The [Auth0 Management API](https://auth0.com/docs/api/management/v2/custom-domains/get-custom-domains) provides comprehensive support for **Create, Read, Update, Delete, and Verify** operations for these custom domains, offering full programmatic control over their lifecycle.
 
 MCD EA supports the following Auth0 SDKs: [Node.js](https://github.com/auth0/node-auth0) and [Go](https://github.com/auth0/go-auth0).
 
@@ -312,19 +312,19 @@ The method for verifying domain name ownership depends on your chosen management
 
 <table class="table"><thead>
 <tr>
-<th style="text-align:left"><strong>Domain Type</strong></th>
-<th style="text-align:left"><strong>Verification Method</strong></th>
-<th style="text-align:left"><strong>Details</strong></th>
+<th style="text-align:left"><b>Domain Type</b></th>
+<th style="text-align:left"><b>Verification Method</b></th>
+<th style="text-align:left"><b>Details</b></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><strong><a href="https://auth0.com/docs/customize/custom-domains/auth0-managed-certificates">Auth0-Managed</a></strong></td>
+<td style="text-align:left"><b><a href="https://auth0.com/docs/customize/custom-domains/auth0-managed-certificates">Auth0-Managed</a></b></td>
 <td style="text-align:left">CNAME DNS record</td>
 <td style="text-align:left">Configure this record to confirm domain ownership and activate your domain.</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong><a href="https://auth0.com/docs/customize/custom-domains/self-managed-certificates">Self-Managed</a></strong></td>
+<td style="text-align:left"><b><a href="https://auth0.com/docs/customize/custom-domains/self-managed-certificates">Self-Managed</a></b></td>
 <td style="text-align:left">TXT DNS record</td>
 <td style="text-align:left">Specific TXT record details are provided in the Create API response.</td>
 </tr>
@@ -341,7 +341,7 @@ You can provision up to 10 metadata fields per custom domain for easier organiza
 
 Leverage your custom domain information to personalize and brand your email templates, ensuring a consistent user experience.  To facilitate this, MCD provides the `custom_domain.domain` variable for use in Liquid Syntax.
 
-For example, you could set the**From Address** of your email template to `support@{{ custom_domain.domain }}` , which would render as `support@my.custom-domain.com`. This variable is available through Liquid Syntax in the**From Address** ,**Subject** , and**Message** fields. To learn more, read [Customize Email Templates](/docs/ja-jp/customize/email/email-templates).
+For example, you could set the **From Address** of your email template to `support@{{ custom_domain.domain }}` , which would render as `support@my.custom-domain.com`. This variable is available through Liquid Syntax in the **From Address** , **Subject** , and **Message** fields. To learn more, read [Customize Email Templates](/docs/ja-jp/customize/email/email-templates).
 
 #### Customize email handling using the Management API
 
@@ -405,8 +405,8 @@ When you provide the `auth0-custom-domain` HTTP header, the following additional
 
 <table class="table"><thead>
 <tr>
-<th style="text-align:left"><strong>HTTP status code</strong></th>
-<th style="text-align:left"><strong>Message</strong></th>
+<th style="text-align:left"><b>HTTP status code</b></th>
+<th style="text-align:left"><b>Message</b></th>
 </tr>
 </thead>
 <tbody>
@@ -427,7 +427,7 @@ When you provide the `auth0-custom-domain` HTTP header, the following additional
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-If you enable MCD and use the Auth0 Dashboard to configure Email templates, the**Try** feature will not allow you to test with a custom domain.
+If you enable MCD and use the Auth0 Dashboard to configure Email templates, the **Try** feature will not allow you to test with a custom domain.
 
 </Callout>
 
@@ -493,8 +493,8 @@ The MCD EA release introduces the following attributes related to custom domain 
 
 <table class="table"><thead>
 <tr>
-<th style="text-align:left"><strong>Attribute</strong></th>
-<th style="text-align:left"><strong>Description</strong></th>
+<th style="text-align:left"><b>Attribute</b></th>
+<th style="text-align:left"><b>Description</b></th>
 </tr>
 </thead>
 <tbody>
@@ -511,8 +511,8 @@ The following attributes are supported for Auth0-managed domains only:
 
 <table class="table"><thead>
 <tr>
-<th style="text-align:left"><strong>Attribute</strong></th>
-<th style="text-align:left"><strong>Description</strong></th>
+<th style="text-align:left"><b>Attribute</b></th>
+<th style="text-align:left"><b>Description</b></th>
 </tr>
 </thead>
 <tbody>

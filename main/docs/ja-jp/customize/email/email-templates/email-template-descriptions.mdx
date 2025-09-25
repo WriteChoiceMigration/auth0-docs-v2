@@ -13,11 +13,11 @@ permalink: "email-template-descriptions"
 
 **［Verification Email（確認メール）］** をオンにするとデータベース接続にサインアップするユーザーにメールアドレスが正しいかどうかをたずねる確認メッセージが送られてくるので、メッセージに含まれるURLをクリックしてください。
 
-すべてのメールテンプレートで利用できる共通変数のほかに、**［Verification Email（確認メール）］** には、ユーザーがクリックしなければならないURLを指す`url`変数もあります。これを**［Message（メッセージ）］** フィールドで使用し、ユーザーが従うことができるリンクを作成します。
+すべてのメールテンプレートで利用できる共通変数のほかに、 **［Verification Email（確認メール）］** には、ユーザーがクリックしなければならないURLを指す`url`変数もあります。これを **［Message（メッセージ）］** フィールドで使用し、ユーザーが従うことができるリンクを作成します。
 
 ### 確認メールテンプレートのリダイレクト先の結果
 
-メール確認操作を試行した後に、**Redirect To（リダイレクト先）** URLをユーザーに送信するよう構成することができます。デフォルトでは、Auth0には以下のパラメーターが含まれます。
+メール確認操作を試行した後に、 **Redirect To（リダイレクト先）** URLをユーザーに送信するよう構成することができます。デフォルトでは、Auth0には以下のパラメーターが含まれます。
 
 * `success`（`true`または`false`の値を持つ）はメール確認が正常に行われたかどうかを示します。
 * `message`（結果に関する追加説明付き）。取り得る値は次のとおりです。
@@ -52,9 +52,9 @@ PATCH /api/v2/email-templates/verify_email
 
 ## ウェルカムメール
 
-ユーザーがメールアドレスを確認すると、**ウェルカムメール** が送られてきます。**確認メール** 機能をオフにすると、**ウェルカムメール** がユーザーのサインアップ時（または初回ログイン時）にユーザーに送られます。
+ユーザーがメールアドレスを確認すると、 **ウェルカムメール** が送られてきます。 **確認メール** 機能をオフにすると、 **ウェルカムメール** がユーザーのサインアップ時（または初回ログイン時）にユーザーに送られます。
 
-すべてのメールテンプレートで利用できる共通変数のほかに、**Welcome（ようこそ）** テンプレートでは以下の変数も利用することができます。
+すべてのメールテンプレートで利用できる共通変数のほかに、 **Welcome（ようこそ）** テンプレートでは以下の変数も利用することができます。
 
 * ユーザーが[Organization（組織）](/docs/ja-jp/manage-users/organizations/organizations-overview)からログインした場合：
 
@@ -68,11 +68,11 @@ PATCH /api/v2/email-templates/verify_email
 
 ## パスワード変更メール
 
-ユーザーがパスワードの変更を要求すると、URLリンクを含んだ**Change Password（パスワードの変更）** メールが送られてきます。ユーザーがそのリンクをクリックすると、新しいパスワードを入力するための[パスワードリセットページ](/docs/ja-jp/customize/login-pages/classic-login/customize-password-reset-page)が表示されます。
+ユーザーがパスワードの変更を要求すると、URLリンクを含んだ **Change Password（パスワードの変更）** メールが送られてきます。ユーザーがそのリンクをクリックすると、新しいパスワードを入力するための[パスワードリセットページ](/docs/ja-jp/customize/login-pages/classic-login/customize-password-reset-page)が表示されます。
 
-すべてのメールテンプレートで利用できる共通変数のほかに、**User Invitation（ユーザー招待）** テンプレートでは以下の変数も利用することができます。
+すべてのメールテンプレートで利用できる共通変数のほかに、 **User Invitation（ユーザー招待）** テンプレートでは以下の変数も利用することができます。
 
-* `url`：URLパスワードを変更するためにユーザーが選択します。これを**［Message（メッセージ）］** フィールドで使用し、次の例に示すように、ユーザーが従うことができるリンクを作成することができます。
+* `url`：URLパスワードを変更するためにユーザーが選択します。これを **［Message（メッセージ）］** フィールドで使用し、次の例に示すように、ユーザーが従うことができるリンクを作成することができます。
   `<a href="/docs/ja-jp/{{ url }}">Click here to change your password</a>`
 * ユーザーが[Organization（組織）](/docs/ja-jp/manage-users/organizations/organizations-overview)からログインした場合：
 
@@ -86,7 +86,7 @@ PATCH /api/v2/email-templates/verify_email
 
 ### パスワード変更テンプレートのリダイレクト先の結果
 
-パスワード変更操作を試行した後に、**Redirect To（リダイレクト先）** URLをユーザーに送信するよう構成することができます。デフォルトでは、Auth0には以下のパラメーターが含まれます。
+パスワード変更操作を試行した後に、 **Redirect To（リダイレクト先）** URLをユーザーに送信するよう構成することができます。デフォルトでは、Auth0には以下のパラメーターが含まれます。
 
 * `success`（`true`または`false`の値を持つ）はパスワード変更が正常に行われたかどうかを示します。
 * `message`（結果に関する追加説明付き）。取り得る値は次のとおりです。
@@ -106,11 +106,11 @@ PATCH /api/v2/email-templates/verify_email
 
 ## ブロックされたアカウントメール
 
-ユーザーが同じIPアドレスから10回以上ログインに失敗した場合、ユーザーアカウントはロックされ、**Blocked Account（ブロックされたアカウント）** メールが送られてきます。このメールを受け取ったら、メールに含まれるリンクをクリックしないと、そのIPアドレスからログインし直すことはできません。
+ユーザーが同じIPアドレスから10回以上ログインに失敗した場合、ユーザーアカウントはロックされ、 **Blocked Account（ブロックされたアカウント）** メールが送られてきます。このメールを受け取ったら、メールに含まれるリンクをクリックしないと、そのIPアドレスからログインし直すことはできません。
 
 10回ログインに失敗する前にログインに成功すると、カウントがリセットされます。
 
-すべてのメールテンプレートで利用できる共通変数のほかに、**Blocked Account Email（ブロックされたアカウントメール）** テンプレートでは以下の変数も利用することができます。
+すべてのメールテンプレートで利用できる共通変数のほかに、 **Blocked Account Email（ブロックされたアカウントメール）** テンプレートでは以下の変数も利用することができます。
 
 * `user.source_ip`
 * `user.city`
@@ -131,7 +131,7 @@ PATCH /api/v2/email-templates/verify_email
 
 ### ブロックされたアカウントメールテンプレートのリダイレクト先の結果
 
-アカウントのブロック解除操作を試行した後に、**Redirect To（リダイレクト先）** URLをユーザーに送信するよう構成することができます。リダイレクト時に、Auth0には以下のパラメーターが含まれます。
+アカウントのブロック解除操作を試行した後に、 **Redirect To（リダイレクト先）** URLをユーザーに送信するよう構成することができます。リダイレクト時に、Auth0には以下のパラメーターが含まれます。
 
 * `email`はユーザーのメールを示します。
 * `success`（`true`または`false`の値を持つ）はアカウントのブロック解除が正常に行われたかどうかを示します。
@@ -145,9 +145,9 @@ PATCH /api/v2/email-templates/verify_email
 
 ## 侵害されたパスワードのアラートメール
 
-サードパーティーによって漏洩したパスワードを使ってアプリケーションにアクセスしようとしていることがAuth0で検出されると、このメールタイプが必ず送られてきます。このタイプのメールは、Dashboardの[攻撃防御](https://manage.auth0.com/#/security/attack-protection)セクションの**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Breached Password Detection</Tooltip>（侵害されたパスワードの検出）］** を有効にした後でのみ設定されます。詳細については、「[侵害されたパスワードの検出](/docs/ja-jp/secure/attack-protection/breached-password-detection)」を参照してください。
+サードパーティーによって漏洩したパスワードを使ってアプリケーションにアクセスしようとしていることがAuth0で検出されると、このメールタイプが必ず送られてきます。このタイプのメールは、Dashboardの[攻撃防御](https://manage.auth0.com/#/security/attack-protection)セクションの **［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Breached Password Detection</Tooltip>（侵害されたパスワードの検出）］** を有効にした後でのみ設定されます。詳細については、「[侵害されたパスワードの検出](/docs/ja-jp/secure/attack-protection/breached-password-detection)」を参照してください。
 
-すべてのメールテンプレートで利用できる共通変数のほかに、**侵害されたパスワード（侵害されたパスワードのアラート）** メールでは以下の変数も利用することができます。
+すべてのメールテンプレートで利用できる共通変数のほかに、 **侵害されたパスワード（侵害されたパスワードのアラート）** メールでは以下の変数も利用することができます。
 
 * ユーザーが[Organization（組織）](/docs/ja-jp/manage-users/organizations/organizations-overview)からログインした場合：
 
@@ -177,7 +177,7 @@ PATCH /api/v2/email-templates/verify_email
 
 ## ユーザー招待メール
 
-ユーザーが[Organization（組織）](/docs/ja-jp/manage-users/organizations/organizations-overview)のメンバーになるよう招待されると、URLリンクを含んだ**User Invitation（ユーザー招待）** メールが送られてきます。リンクをクリックすると、デフォルトのログインルートにリダイレクトされます。詳細については、「[デフォルトのログインルートを設定する](/docs/ja-jp/authenticate/login/auth0-universal-login/configure-default-login-routes)」を参照してください。
+ユーザーが[Organization（組織）](/docs/ja-jp/manage-users/organizations/organizations-overview)のメンバーになるよう招待されると、URLリンクを含んだ **User Invitation（ユーザー招待）** メールが送られてきます。リンクをクリックすると、デフォルトのログインルートにリダイレクトされます。詳細については、「[デフォルトのログインルートを設定する](/docs/ja-jp/authenticate/login/auth0-universal-login/configure-default-login-routes)」を参照してください。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -189,7 +189,7 @@ PATCH /api/v2/email-templates/verify_email
 
 </Callout>
 
-すべてのメールテンプレートで利用できる共通変数のほかに、**User Invitation（ユーザー招待）** テンプレートでは以下の変数も利用することができます。
+すべてのメールテンプレートで利用できる共通変数のほかに、 **User Invitation（ユーザー招待）** テンプレートでは以下の変数も利用することができます。
 
 * ユーザー招待情報（すべての情報をユーザー招待チケットから取得）
 
@@ -219,7 +219,7 @@ PATCH /api/v2/email-templates/verify_email
 * `organization`：ユーザーが招待されている組織のID
 * `organization_name`：ユーザーが招待されている組織の名前
 
-たとえば、組織対応のアプリケーションで**［Application Login URI（アプリケーションログインURI）］** が`https://myapp.com/login`に設定されている場合、エンドユーザーが受け取る招待メールには、以下のリンクが含まれます。`https://myapp.com/login?invitation={invitation_ticket_id}&organization={organization_id}&organization_name={organization_name}`
+たとえば、組織対応のアプリケーションで **［Application Login URI（アプリケーションログインURI）］** が`https://myapp.com/login`に設定されている場合、エンドユーザーが受け取る招待メールには、以下のリンクが含まれます。`https://myapp.com/login?invitation={invitation_ticket_id}&organization={organization_id}&organization_name={organization_name}`
 
 対象のログインルートは、用意された`invitation`と`organization`のキー値ペアを含んだ`/authorize`へのトランザクションを開始します。また、他に考えられるメッセージを適切に処理するための準備もしておく必要があります。
 
@@ -229,7 +229,7 @@ PATCH /api/v2/email-templates/verify_email
 
 パスワードレスメールは、パスワードレスアクセスが要求されたときに、コード（アプリケーションに入力されたコードをユーザーに送られてくる）かリンク（リンクをクリックするとユーザーがアプリケーションに直接移動する）のいずれかの方法で送信されます。
 
-すべてのテンプレートで利用できる共通変数のほかに、**<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Passwordless</Tooltip> Email（パスワードレスメール）** テンプレート用に特別に定義された以下の変数も使用することができます。
+すべてのテンプレートで利用できる共通変数のほかに、 **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Passwordless</Tooltip> Email（パスワードレスメール）** テンプレート用に特別に定義された以下の変数も使用することができます。
 
 * `send`：要求されたパスワードレスメールのタイプに応じて、`link`、`link_ios`、`link_android`、または`code`の値が含まれます。
 * `code`：アプリケーションにアクセスするための1回限りの使用コードが含まれます。

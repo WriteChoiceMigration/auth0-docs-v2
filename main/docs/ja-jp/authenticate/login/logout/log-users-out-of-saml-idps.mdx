@@ -20,9 +20,9 @@ Auth0で[ユーザーをIDプロバイダーからログアウトする](/docs/j
 Auth0が<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip> <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">IdP</Tooltip>のログアウトエンドポイントにログアウト要求を送信するためには、SAML接続に追加の設定を構成しなければならない場合があります。
 
 1. [［Auth0 Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］>［SAML］](https://manage.auth0.com/#/connections/enterprise/samlp)の順に進み、接続を選択します。
-2.**［Enable Sign Out（サインアウトを有効にする）］** トグルをオンにします。
-3. SAML Idpで提供されたSAMLログアウトURLを**［Sign Out URL（サインアウトURL）］** フィールドに入力します。このフィールドを空白のままにすると、Auth0ではデフォルトでURLが**［Sign In URL（サインインURL）］** フィールドに入力されます。
-4.**［Protocol Binding（プロトコルバインディング）］** フィールドが、SAML IdPで予想されるものに一致することを確認します。
+2. **［Enable Sign Out（サインアウトを有効にする）］** トグルをオンにします。
+3. SAML Idpで提供されたSAMLログアウトURLを **［Sign Out URL（サインアウトURL）］** フィールドに入力します。このフィールドを空白のままにすると、Auth0ではデフォルトでURLが **［Sign In URL（サインインURL）］** フィールドに入力されます。
+4. **［Protocol Binding（プロトコルバインディング）］** フィールドが、SAML IdPで予想されるものに一致することを確認します。
 
 ## Auth0がSAML IdPであるときにSLOを構成する
 
@@ -34,9 +34,9 @@ Auth0がSAML IdPであるときに検討すべきログアウトシナリオは2
 両方のシナリオでは、ログアウト応答の送信場所がわかるように、[SAML2 Webアプリのアドオンを構成する](/docs/ja-jp/authenticate/protocols/saml/saml-sso-integrations/enable-saml2-web-app-addon)必要があります。
 
 1. [［Auth0 Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)の順に進み、アプリケーションを選択します。
-2.**［Addons（アドオン）］** タブに移動し、**［SAML2 Web App（SAML2 Webアプリ）］** を選択します。
-3.**［Settings（設定）］** タブに移動します。
-4.**［Settings（設定）］** ボックスを見つけ、次のプロパティを使って`logout`オブジェクトを追加（または更新）します。
+2. **［Addons（アドオン）］** タブに移動し、 **［SAML2 Web App（SAML2 Webアプリ）］** を選択します。
+3. **［Settings（設定）］** タブに移動します。
+4. **［Settings（設定）］** ボックスを見つけ、次のプロパティを使って`logout`オブジェクトを追加（または更新）します。
 
    * `callback`：アプリケーションのSLO URLを入力します。
    * `slo_enabled`：IdP起点のSLOを有効にしたい場合は`true`を入力します。ここでは、ユーザーがAuth0 SAML IdPからログアウトすると、SAMLログアウト要求がアプリケーションに送信されます。そうでない場合は、`false`を入力します。
