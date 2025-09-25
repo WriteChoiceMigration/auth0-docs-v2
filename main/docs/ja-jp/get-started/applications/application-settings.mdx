@@ -15,16 +15,16 @@ Dashboardの[［Applications（アプリケーション）］](https://manage.au
 
 ## 基本設定
 
-既存のアプリケーションの設定を編集したり、新しいアプリケーションを作成したりする際には、**［Settings（設定）］**ビューでアプリケーションに関する情報を入力します。
+既存のアプリケーションの設定を編集したり、新しいアプリケーションを作成したりする際には、**［Settings（設定）** ビューでアプリケーションに関する情報を入力します。
 
 ### Basic Information（基本情報）
 
 <Frame>![Dashboard アプリケーション アプリケーション設定タブ 基本情報](/images/ja-jp/cdy7uua7fh8z/2GPUw7BODYuYYH3658Upz3/e7a6df376f8bd58c2bec78ebb28d5dcd/App_Settings_-_Basic_Info.png)</Frame>
 
 * **Name（名前）**：アプリケーションの名前。編集可能で、ポータル、メール、ログなどに表示されます。
-* **Domain（ドメイン）**：Auth0のテナント名。これは、新しいAuth0テナントを作成する際に選択するもので、変更できません。別のドメインが必要な場合は、右上のメニューで**［+ Create Tenant（テナントの作成）］**を選択して、新しいテナントを登録する必要があります。
+* **Domain（ドメイン）**：Auth0のテナント名。これは、新しいAuth0テナントを作成する際に選択するもので、変更できません。別のドメインが必要な場合は、右上のメニューで **［+ Create Tenant（テナントの作成）］** を選択して、新しいテナントを登録する必要があります。
 * **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Client ID</Tooltip>（クライアントID）**：アプリケーションに一意の識別子。Auth0で認証を構成する際に使用します。新しいアプリケーションを作成する際にシステムによって生成されるもので、変更できません。
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Client Secret</Tooltip>（クライアントシークレット）**：認証フローでIDトークンに署名し、検証するため、また特定のAuth0 APIエンドポイントにアクセスするために使用される文字列。デフォルトでは値が非表示になっているため、表示するには**［Reveal Client Secret（クライアントシークレットを表示）］**ボックスを選択します。クライアントIDは公開情報とみなされますが、クライアントシークレットは**機密扱いとする必要があります**。誰でもクライアントシークレットにアクセスできるとなると、トークンを発行して、本来アクセスできないはずのリソースにアクセスすることが可能になってしまうからです。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Client Secret</Tooltip>（クライアントシークレット）** ：認証フローでIDトークンに署名し、検証するため、また特定のAuth0 APIエンドポイントにアクセスするために使用される文字列。デフォルトでは値が非表示になっているため、表示するには **［Reveal Client Secret（クライアントシークレットを表示）］** ボックスを選択します。クライアントIDは公開情報とみなされますが、クライアントシークレットは **機密扱いとする必要があります** 。誰でもクライアントシークレットにアクセスできるとなると、トークンを発行して、本来アクセスできないはずのリソースにアクセスすることが可能になってしまうからです。
 * **Description（説明）**：アプリケーションの目的を自由テキスト形式で説明したもの。最大文字数は140文字です。
 
 ### アプリケーションのプロパティ
@@ -47,34 +47,34 @@ Dashboardの[［Applications（アプリケーション）］](https://manage.au
 * **Allowed Callback URL（許可されているコールバックURL）**：Auth0が認証後にユーザーをリダイレクトできるURLのセット。複数の有効なURLをカンマで区切って指定することができます（通常はQAやテストなど、異なる環境に対応する場合）。運用環境では、そのURLがローカルホストをポイントしていないことを確認してください。[サブドメインのワイルドカードプレースホルダー](/docs/ja-jp/get-started/applications/wildcards-for-subdomains)として「\*」記号を使用することができます（「`*.google.com`」）。Organizations機能を使用している場合、運用環境のアプリケーションでは、`{organization_name}`をプレースホルダーとして使用し、登録された組織名を動的にURLに指定することができます（`https://{organization_name}.exampleco.com`）。`{organization_name}`プレースホルダーを含むURLは、ご自身が完全に管理しているドメインでのみ使用する必要があります（例：`exampleco.com`ドメインを管理している場合に`https://{organization_name}.exampleco.com`）。
 
   アプリケーションのコールバックや許可されたオリジンなどのフィールドに、ワイルドカードのプレースホルダーやlocalhostのURLを使用しないでください。ワイルドカードのプレースホルダーが含まれるリダイレクトURLを使用すると、アプリケーションが攻撃に対して脆弱になる可能性があります。詳しくは、owasp.orgの「[Unvalidated Redirects and Forwards Cheat Sheet（未検証のリダイレクトと転送早見表）](https://www.owasp.org/index.php/Unvalidated_Redirects_and_Forwards_Cheat_Sheet)」をご覧ください。代わりに、該当する場合は`{organization_name}`プレースホルダーを使用したURLが推奨されます。詳細については、「[サブドメインURLのプレースホルダー](/docs/ja-jp/get-started/applications/wildcards-for-subdomains)」をお読みください。
-* **Allowed Logout URLs（許可されているログアウトURL）**：ユーザーがAuth0からログアウトした後、`returnTo`クエリパラメーターを使ってリダイレクトさせることができます。`returnTo`で使用するURLは、こちらに記載されている必要があります。複数の有効なURLを指定するには、カンマで区切って指定します運用環境では、そのURLがローカルホストをポイントしていないことを確認してください。サブドメインのワイルドカードプレースホルダーとして「\*」記号を使用することができます（「`*.google.com`」）。これらのURLを検証する際、クエリ文字列やハッシュ情報は考慮されないことにご注意ください。「[ログアウト](/docs/ja-jp/authenticate/login/logout)」を参照してください。**［Allowed Logout URLs（許可されているログアウトURL）］**フィールドには最大100個のURLを指定することができます。
-* **Allowed Web Origins（許可されているWebオリジン）**：[クロスオリジン認証](/docs/ja-jp/authenticate/login/cross-origin-authentication)、[デバイスフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/device-authorization-flow)、および`web_message`を応答モードとして使用する認可要求が発信元に使用できるURLのリスト。複数の有効なURLを指定するには、カンマで区切って指定します運用環境では、そのURLがローカルホストをポイントしていないことを確認してください。サブドメインのワイルドカードプレースホルダーとして「\*」記号を使用することができます（「`*.google.com`」）。これらのURLを検証する際、パス、クエリ文字列、ハッシュ情報は考慮されません（実際、照合が失敗する原因となることもあります）。**［Allowed Web Origins（許可されているWebオリジン）］**フィールドには最大100個のURLを指定することができます。
+* **Allowed Logout URLs（許可されているログアウトURL）**：ユーザーがAuth0からログアウトした後、`returnTo`クエリパラメーターを使ってリダイレクトさせることができます。`returnTo`で使用するURLは、こちらに記載されている必要があります。複数の有効なURLを指定するには、カンマで区切って指定します運用環境では、そのURLがローカルホストをポイントしていないことを確認してください。サブドメインのワイルドカードプレースホルダーとして「\*」記号を使用することができます（「`*.google.com`」）。これらのURLを検証する際、クエリ文字列やハッシュ情報は考慮されないことにご注意ください。「[ログアウト](/docs/ja-jp/authenticate/login/logout)」を参照してください。 **［Allowed Logout URLs（許可されているログアウトURL）］** フィールドには最大100個のURLを指定することができます。
+* **Allowed Web Origins（許可されているWebオリジン）**：[クロスオリジン認証](/docs/ja-jp/authenticate/login/cross-origin-authentication)、[デバイスフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/device-authorization-flow)、および`web_message`を応答モードとして使用する認可要求が発信元に使用できるURLのリスト。複数の有効なURLを指定するには、カンマで区切って指定します運用環境では、そのURLがローカルホストをポイントしていないことを確認してください。サブドメインのワイルドカードプレースホルダーとして「\*」記号を使用することができます（「`*.google.com`」）。これらのURLを検証する際、パス、クエリ文字列、ハッシュ情報は考慮されません（実際、照合が失敗する原因となることもあります）。 **［Allowed Web Origins（許可されているWebオリジン）］** フィールドには最大100個のURLを指定することができます。
 
 ### IDトークン
 
-**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">ID Token</Tooltip>（IDトークン）］**セクションで、**IDトークンの有効期限**（Auth0の`id_token`の期限が切れるまでの時間）を秒単位で入力します。デフォルトの値は、36000秒（10時間）です。
+**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">ID Token</Tooltip>（IDトークン）］** セクションで、 **IDトークンの有効期限** （Auth0の`id_token`の期限が切れるまでの時間）を秒単位で入力します。デフォルトの値は、36000秒（10時間）です。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-**［Use Auth0 instead of the IdP to do Single Sign-on（シングルサインオンにIDプロバイダーではなくAuth0を使用する）］**：有効にした場合、Auth0は、IDプロバイダー（FacebookやADFSなど）に有効なセッションのある認証済みユーザーをリダイレクトできません。**レガシーテナントのみの設定です。**
+**［Use Auth0 instead of the IdP to do Single Sign-on（シングルサインオンにIDプロバイダーではなくAuth0を使用する）］**：有効にした場合、Auth0は、IDプロバイダー（FacebookやADFSなど）に有効なセッションのある認証済みユーザーをリダイレクトできません。 **レガシーテナントのみの設定です。**
 
 </Callout>
 
 ### リフレッシュトークンのローテーション
 
-**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Refresh Token</Tooltip> Rotation（リフレッシュトークンのローテーション）］**セクションで、ローテーションを有効または無効に設定します。有効にすると、リフレッシュトークンを交換した結果として新しいリフレッシュトークンが発行され、既存のトークンが無効になります。そうすることで、トークンが漏洩した場合に、トークンの再利用が自動的に検知できます。また、**［Rotation Overlap Period（ローテーションのオーバーラップ期間）］**を秒単位で入力します。この期間は、再利用の自動検知をトリガーすることなく、同じ`refresh_token`を使って`access_token`を要求できる猶予期間です。詳細については、「[リフレッシュトークンのローテーション](/docs/ja-jp/secure/tokens/refresh-tokens/refresh-token-rotation)」をお読みください。
+**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Refresh Token</Tooltip> Rotation（リフレッシュトークンのローテーション）］** セクションで、ローテーションを有効または無効に設定します。有効にすると、リフレッシュトークンを交換した結果として新しいリフレッシュトークンが発行され、既存のトークンが無効になります。そうすることで、トークンが漏洩した場合に、トークンの再利用が自動的に検知できます。また、**［Rotation Overlap Period（ローテーションのオーバーラップ期間）］** を秒単位で入力します。この期間は、再利用の自動検知をトリガーすることなく、同じ`refresh_token`を使って`access_token`を要求できる猶予期間です。詳細については、「[リフレッシュトークンのローテーション](/docs/ja-jp/secure/tokens/refresh-tokens/refresh-token-rotation)」をお読みください。
 
 <Frame>![Dashboard アプリケーション アプリケーション設定タブ リフレッシュトークンのローテーション](/images/ja-jp/cdy7uua7fh8z/Rk6i8MUVWZG34P7K6aurb/2633d759038770c7cc6f82afff26d50f/2025-01-28_14-28-18.png)</Frame>
 
 ### リフレッシュトークンの有効期限
 
-**［Refresh Token Expiration（リフレッシュトークンの有効期限）］**セクションで、絶対的な有効期限と非アクティブな期間の有効期限を有効または無効にし、それぞれのライフタイムを秒単位で設定します。詳細については、「[リフレッシュトークンの有効期限を設定する](/docs/ja-jp/secure/tokens/refresh-tokens/configure-refresh-token-expiration)」をお読みください。
+**［Refresh Token Expiration（リフレッシュトークンの有効期限）］** セクションで、絶対的な有効期限と非アクティブな期間の有効期限を有効または無効にし、それぞれのライフタイムを秒単位で設定します。詳細については、「[リフレッシュトークンの有効期限を設定する](/docs/ja-jp/secure/tokens/refresh-tokens/configure-refresh-token-expiration)」をお読みください。
 
 <Frame>![Dashboard アプリケーション アプリケーション設定タブ リフレッシュトークンの有効期限](/images/ja-jp/cdy7uua7fh8z/2EnpIEc4kBxjnS3T67xPzC/6e46d561cab7eebe0b214931295aa129/Refresh_Token_Expiration_-_Japanese.png)</Frame>
 
 ## 高度な設定
 
-**［Advanced Settings（高度な設定）］**セクションでは、以下のことができます。
+**［Advanced Settings（高度な設定）］** セクションでは、以下のことができます。
 
 * アプリケーションメタデータ、デバイス、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">OAuth</Tooltip>、およびWS-Federationの設定を管理または追加する
 * 証明書とトークンのエンドポイントに関する情報を取得する
@@ -90,8 +90,8 @@ Dashboardの[［Applications（アプリケーション）］](https://manage.au
 
 モバイルアプリケーションを開発している場合は、必要なiOS/Androidパラメーターを入力します。
 
-* iOSアプリを開発する際には、**［Team ID（チームID）］**と**［App ID（アプリID）］**を入力します。詳細については、「[Apple Xcodeでユニバーサルリンクの対応を有効にする](/docs/ja-jp/get-started/applications/enable-universal-links-support-in-apple-xcode)」を参照してください。
-* Androidアプリを開発する際には、**［App Package Name（アプリパッケージ名）］**と**［Key Hashes（キーハッシュ）］**を入力します。詳細については、「[Androidアプリリンクの対応を有効にする](/docs/ja-jp/get-started/applications/enable-android-app-links-support)」をお読みください。
+* iOSアプリを開発する際には、**［Team ID（チームID）］** と **［App ID（アプリID）］** を入力します。詳細については、「[Apple Xcodeでユニバーサルリンクの対応を有効にする](/docs/ja-jp/get-started/applications/enable-universal-links-support-in-apple-xcode)」を参照してください。
+* Androidアプリを開発する際には、 **［App Package Name（アプリパッケージ名）］** と **［Key Hashes（キーハッシュ）］** を入力します。詳細については、「[Androidアプリリンクの対応を有効にする](/docs/ja-jp/get-started/applications/enable-android-app-links-support)」をお読みください。
 
 <Frame>![Dashboard アプリケーション アプリケーション設定タブ 詳細設定 デバイス設定タブ](/images/ja-jp/cdy7uua7fh8z/YKKPtWtswHn2FZGFSVWNw/daf45c579fcaa82179dce4a03e9d7276/Device_Settings_-_JP.png)</Frame>
 
@@ -99,11 +99,11 @@ Dashboardの[［Applications（アプリケーション）］](https://manage.au
 
 <Frame>![Dashboard アプリケーション アプリケーションの設定タブ 高度な設定 OAuthタブ](/images/ja-jp/cdy7uua7fh8z/5bbq6VrI9tUMht0PwMimre/04454945e118ce22b1287ce0b0dffb45/OAuth_-_Japanese.png)</Frame>
 
-* デフォルトでは、すべてのアプリ/APIが委任要求を行うことができますが、特定のアプリ/APIに対して明示的に権限を付与したい場合は、**［Allowed Apps/APIs（許可されているアプリ/API）］**でこれを行うことができます。
-* **［Compliance Enforcement Level（準拠適合レベル）］**を使用して、準拠レベルを設定します。詳細については、「[FAPI準拠の構成](/docs/ja-jp/get-started/applications/configure-fapi-compliance)」を参照してください。
+* デフォルトでは、すべてのアプリ/APIが委任要求を行うことができますが、特定のアプリ/APIに対して明示的に権限を付与したい場合は、 **［Allowed Apps/APIs（許可されているアプリ/API）］** でこれを行うことができます。
+* **［Compliance Enforcement Level（準拠適合レベル）］** を使用して、準拠レベルを設定します。詳細については、「[FAPI準拠の構成](/docs/ja-jp/get-started/applications/configure-fapi-compliance)」を参照してください。
 * <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">JSON Web Token</Tooltip>の署名に使用されるアルゴリズム（[**HS256**](https://en.wikipedia.org/wiki/Symmetric-key_algorithm)または[**RS256**](https://en.wikipedia.org/wiki/Public-key_cryptography)）を設定します。詳細については、「[JSON Web Tokenの署名アルゴリズム](/docs/ja-jp/get-started/applications/signing-algorithms)」をお読みください。`RS256`を選択すると（推奨）、トークンはテナントの秘密鍵で署名されます。
-* **［Trust Token Endopoint IP Header（トークンエンドポイントIPヘッダーを信頼）］**設定を切り替えます。これを有効にすると、総当たり攻撃からトークンエンドポイントを保護するために、`auth0-forwarded-for`が信頼できるものとして、エンドユーザーのIP情報のソースに使用されます。この設定は、通常のWebアプリ、およびM2Mアプリでのみ使用できます。
-* スイッチを切り替えて、アプリケーションが**OIDC準拠**であるかどうかを指定します。OIDC準拠のフラグが付いたアプリケーションは、OIDC仕様に厳密に従います。
+* **［Trust Token Endopoint IP Header（トークンエンドポイントIPヘッダーを信頼）］** 設定を切り替えます。これを有効にすると、総当たり攻撃からトークンエンドポイントを保護するために、`auth0-forwarded-for`が信頼できるものとして、エンドユーザーのIP情報のソースに使用されます。この設定は、通常のWebアプリ、およびM2Mアプリでのみ使用できます。
+* スイッチを切り替えて、アプリケーションが **OIDC準拠** であるかどうかを指定します。OIDC準拠のフラグが付いたアプリケーションは、OIDC仕様に厳密に従います。
 
 トラブルシューティングのヘルプが必要な場合は、「[無効なトークンエラーのトラブルシューティング](/docs/ja-jp/troubleshoot/basic-issues/invalid-token-errors)」を参照してください。
 
