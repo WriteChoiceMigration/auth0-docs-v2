@@ -89,22 +89,27 @@ Notez que l’indicateur `enableIdPInitiatedLogin` est précédé d’un trait d
 * **Chaîne de requête :** les options de la chaîne de requête permettent de personnaliser le comportement lorsque le protocole OpenID Connect est utilisé. Vous pouvez définir plusieurs options de la même manière que pour les paramètres d’une [chaîne de requête](https://en.wikipedia.org/wiki/Query_string). Vous pouvez définir :
 
   <table class="table"><thead>
-<tr>
-<th>Paramètre</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>`redirect_uri`</td>
-<td>Lorsque la connexion initiée par l’IdP est terminée, la demande est ensuite redirigée vers la première URL répertoriée dans les <strong>URL de rappel autorisées</strong> pour l’application. Cependant, si vous définissez un `redirect_uri`, l’IdP redirigera vers cette URL. Cela ajoute de la flexibilité au cas où, par exemple, vous avez un schéma de sous-domaine défini avec un caractère générique et que vous souhaitez uniquement rediriger vers un sous-domaine spécifique.</td>
-</tr>
-</tbody>
-</table>
-
-  | `scope` | Définit les permissions du jeton d’ID envoyé. Vous pouvez définir plusieurs permissions. |
-  | `response_type` | Définir le jeton pour le Flux d’autorisation implicite pour applications à page unique. Vous pouvez définir le code pour le flux de code d’autorisation pour les applications web classiques. |
-
+  <tr>
+  <th>Paramètre</th>
+  <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>`redirect_uri`</td>
+  <td>Lorsque la connexion initiée par l'IdP est terminée, la demande est ensuite redirigée vers la première URL répertoriée dans les <strong>URL de rappel autorisées</strong> pour l'application. Cependant, si vous définissez un `redirect_uri`, l'IdP redirigera vers cette URL. Cela ajoute de la flexibilité au cas où, par exemple, vous avez un schéma de sous-domaine défini avec un caractère générique et que vous souhaitez uniquement rediriger vers un sous-domaine spécifique.</td>
+  </tr>
+  <tr>
+  <td>`scope`</td>
+  <td>Définit les permissions du jeton d’ID envoyé. Vous pouvez définir plusieurs permissions.</td>
+  </tr>
+  <tr>
+  <td>`response_type`</td>
+  <td>Définir le jeton pour le Flux d’autorisation implicite pour applications à page unique. Vous pouvez définir le code pour le flux de code d’autorisation pour les applications web classiques.</td>
+  </tr>
+  </tbody>
+  </table>
+  
   <Warning>
 
   Dans un flux initié par IdP, les serveurs Auth0 suppriment les permissions dans un jeton si l’URL de rappel correspond à un domaine non vérifié. Auth0 définit uniquement `localhost` et [127.0.0.1](http://127.0.0.1/) comme des domaines non vérifiés. Si vous utilisez l’un ou l’autre comme URL de rappel, les jetons du point de terminaison `/userinfo` renverront une réponse vide. Pour obtenir une réponse de jeton avec les permissions demandées, utilisez un domaine vérifié.
