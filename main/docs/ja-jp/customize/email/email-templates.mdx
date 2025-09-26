@@ -142,7 +142,7 @@ SPFを構成するには、ドメインのゾーンファイルにTXTレコー�
 
 DKIMを構成するには、ドメインのゾーンファイルにTXTレコードを追加します。このドメインはメールの送信に使用するものにしてください。たとえば、[Mandrill](https://www.mandrill.com/signup/)を使用している場合、このレコードのホスト名は`mandrill._domainkey`に、値は次のように設定します。
 
-```javascript lines
+```text lines
 v=DKIM1; k=rsa; 
 p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrLHiExVd55zd/IQ/J/mRwSRMAocV/hMB3jXwaHH36d9NaVynQFYV8NaWi69c1veUtRzGt7yAioXqLj7Z4TeEUoOLgrKsn8YnckGs9i3B3tVFB+Ch/4mPhXWiNfNdynHWBcPcbJ8kjEQ2U8y78dHZj1YeRXXVvWob2OaKynO8/lQIDAQAB;
 ```
@@ -164,7 +164,7 @@ p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrLHiExVd55zd/IQ/J/mRwSRMAocV/hMB3jXwaHH
 
 例：
 
-```javascript lines
+```liquid lines
 {% assign language = request_language %}
   {% if language %}
     {% assign language = request_language | slice: 0,2 %}
@@ -238,7 +238,7 @@ New Universal Loginエクスペリエンスでは、ユーザーがパスワー�
 
 これにより、ユーザは次のURLにリダイレクトされます：
 
-``` lines
+```http lines
 http://localhost:3000/?supportSignUp=true
   &supportForgotPassword=true
   &email=john.doe%40exampleco.com

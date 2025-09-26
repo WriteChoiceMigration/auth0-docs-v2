@@ -9,7 +9,7 @@ permalink: "inbound-scim-for-azure-ad-saml-connections"
 'twitter:description': "SAML SCIM経由のEntra ID接続セットアップの手順"
 ---
 
-<Card title="Before you start">
+<Card title="始める前に">
 
 この機能を使用するには、Auth0プランまたはカスタム契約にエンタープライズ接続が含まれている必要があります。詳細については、「[Auth0の価格設定](https://auth0.com/pricing)」ページを参照してください。
 
@@ -27,7 +27,7 @@ permalink: "inbound-scim-for-azure-ad-saml-connections"
 4. **［Mapping（マッピング）］** タブで、 **［SCIM attribute containing the User ID（ユーザーIDを含むSCIM属性）］** 設定が **［userName］** になっていることを確認します。
 5. **［Additional Mappings（追加マッピング）］** 領域に移動して、以下を：
 
-```javascript lines
+```json lines
 {
 		"scim": "emails[primary eq true].value",
 		"auth0": "email"
@@ -36,7 +36,7 @@ permalink: "inbound-scim-for-azure-ad-saml-connections"
 
 以下に置き換えます。
 
-```javascript lines
+```json lines
 {
 		"scim": "emails[type eq \"work\"].value",
 		"auth0": "email"

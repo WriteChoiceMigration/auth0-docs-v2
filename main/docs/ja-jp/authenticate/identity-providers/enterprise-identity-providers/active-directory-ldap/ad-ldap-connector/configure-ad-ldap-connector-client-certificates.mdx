@@ -32,7 +32,7 @@ Auth0でAD/LDAP接続が構成されると、AD/LDAPコネクターで証明書�
 
 3. テストするには、Windows上で **makecert.exe** （Windows SDKに含まれる）を使って自己署名のCA証明書とクライアント証明書を生成します。
 
-   ``` lines
+   ```bash lines
    SET ClientCertificateName=jon
        SET RootCertificateName=FabrikamRootCA
        "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Bin\makecert.exe" -sky exchange -r -n "CN=%RootCertificateName%" -pe -a sha1 -len 2048 -ss My "%RootCertificateName%.cer"
@@ -47,7 +47,7 @@ Auth0でAD/LDAP接続が構成されると、AD/LDAPコネクターで証明書�
 
 アプリケーションでユーザーがAD/LDAP接続を使ってサインインフローを始めると、以下が実行されます。
 
-```javascript lines
+```js lines
 auth.signin({
        popup: true,
        connection: 'FabrikamAD',

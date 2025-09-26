@@ -154,7 +154,7 @@ To create a new OIDC connection that uses Private Key JWT Client Authentication,
 
 **Example POST call**
 
-```json lines
+```js lines
 POST /api2/connections
 
 {
@@ -192,7 +192,7 @@ To modify an existing OIDC connection to use Private Key JWT Client Authenticati
 
 **Example PATCH call**
 
-```json lines
+```js lines
 PATCH /api2/connections/{id}
 
 {
@@ -236,13 +236,13 @@ Use of this endpoint requires the `read:connections_keys` scope.
 
 **Example GET call**
 
-```json lines
+```js lines
 GET /api2/connections/{id}/keys
 ```
 
 **Example response**
 
-```json lines
+```js lines expandable
 {
     cert: "-----BEGIN CERTIFICATE-----
 MIIDDTCCAfWgAwIBAgIJP...Ek=
@@ -295,7 +295,7 @@ Some identity providers allow public keys for private_key_jwt to be provided in 
 
 If public keys have been generated for a connection, you can retrieve them by adding the following URI to your IdP configuration:
 
-```json lines
+```http wrap lines
 https://{auth0 domain}/oauth/connection/{connection name}/.well-known/jwks.json
 ```
 
@@ -339,7 +339,7 @@ Use of this endpoint requires both `create:connections_keys` and `update:connect
 
 </Warning>
 
-```json lines
+```js lines
 POST /v2/connections/{id}/keys/rotate
 ```
 

@@ -75,7 +75,7 @@ Post-Loginアクションは既存のルールの後に実行されるため、D
 
 **変更前**
 
-```javascript lines
+```js lines
 async function myRulesFunction(user, context, callback) {
     // ... additional code
 }
@@ -83,7 +83,7 @@ async function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
 	// ... additional code
 };
@@ -115,7 +115,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
 	const userEmail = event.user.email;
 	const userId = event.user.user_id;
@@ -157,7 +157,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
 	const clientId = event.client.client_id;
 	const clientMetadata = event.client.metadata;
@@ -234,7 +234,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
 	if (event.user.app_metadata.condition === "success") {
 		// This Action succeeded, proceed with next Action.
@@ -272,7 +272,7 @@ function myRulesFunction (user, context, callback) {
 
 **変換後**
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const { CLIENT_ID, CLIENT_SECRET } = event.secrets;
 
@@ -302,7 +302,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
 	const namespace = "https://namespace/";
 
@@ -341,7 +341,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
 	if (event.user.app_metadata.needs_mfa === true) {
 		api.multifactor.enable("any", { allowRememberBrowser: false });
@@ -376,7 +376,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
 	const userRolesUpdated = event.user.app_metadata.roles || [];
 	userRolesUpdated.push("administrator"); 
@@ -503,7 +503,7 @@ function myRulesFunction(user, context, callback) {
 
 **変換後**
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
     api.accessToken.setClaim("https://dev.TLD/wasRedirected", true)
 ```
@@ -529,7 +529,7 @@ function (user, context, callback) {
 
 **変換後**
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const clients = event?.session?.clients ?? []; 
 

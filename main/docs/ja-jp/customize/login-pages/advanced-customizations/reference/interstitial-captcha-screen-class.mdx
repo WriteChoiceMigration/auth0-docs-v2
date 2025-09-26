@@ -17,7 +17,7 @@ permalink: "interstitial-captcha-screen-class"
 
 インタースティシャルCAPTCHA画面クラスのインポートとインスタンス化
 
-```javascript lines
+```js lines
 import InterstitialCaptcha from "@auth0/auth0-acul-js/interstitial-captcha";
 const interstitialCaptcha = new InterstitialCaptcha();
 
@@ -36,7 +36,7 @@ interstitialCaptcha.screenData();
 
 <Tabs><Tab title="branding">
 
-```javascript lines
+```ts lines expandable
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -71,7 +71,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```javascript lines
+```ts lines
 interface client {
   description: null | string;
   id: string;
@@ -83,7 +83,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```javascript lines
+```ts lines
 interface organization {
   branding: null | {
     colors?: {
@@ -102,7 +102,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```javascript lines
+```ts lines
 interface prompt{
   name: string;
 }
@@ -110,7 +110,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```javascript lines
+```ts lines expandable
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -142,7 +142,7 @@ interface PhonePrefix {
 
 </Tab><Tab title="tenant">
 
-```javascript lines
+```ts lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -153,7 +153,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```javascript lines
+```ts lines expandable
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -186,7 +186,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```javascript lines
+```ts lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -206,7 +206,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```javascript lines
+```ts lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -242,7 +242,7 @@ ShortEntity<Key>: {
 
 このメソッドはCAPTCHA返答を検証し、ユーザーを次のステップに誘導します。
 
-```javascript lines
+```js lines
 interstitialCaptchaManager.submitCaptcha({
   captcha: <CaptchaCodeResponse>
 });

@@ -33,13 +33,13 @@ OIDCアプリケーションを使用する場合、最良のオプションは�
 
 IdP起点SSOを使用する場合は、必ずポストバックURLに接続パラメーターを含めてください。
 
-``` lines
+```http wrap lines
 https://{yourDomain}/login/callback?connection={yourConnectionName}
 ```
 
 [Organizations](https://auth0.com/docs/manage-users/organizations)機能を使用している場合は、必要に応じて、目的の組織の組織IDを含む、次の組織パラメーターを含めることもできます。
 
-``` lines
+```http wrap lines
 https://{yourDomain}/login/callback?connection={yourConnectionName}&organization={yourCustomersOrganizationId}
 ```
 
@@ -123,7 +123,7 @@ _enableIdPInitiatedLogin: true
 
 IdP起点SSOでアプリケーションを **Default Application（デフォルトのアプリケーション）** として選択する場合で、かつそのアプリケーションがテナントのドロップダウンリストの最初の100個のアプリケーションに含まれていない場合は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Management API</Tooltip>を使用してそのアプリケーションを選択する必要があります。パッチを実行する必要があります。
 
-```javascript lines
+```json lines
 {
 "options": {
 "signInEndpoint": "yourIdpSignInUrl",

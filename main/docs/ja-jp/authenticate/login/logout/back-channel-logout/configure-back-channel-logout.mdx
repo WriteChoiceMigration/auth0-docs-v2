@@ -9,7 +9,7 @@ permalink: "configure-back-channel-logout"
 'twitter:description': "Auth0のサービスでOIDCバックチャネルログアウトを構成する方法について説明します。"
 ---
 
-<Card title="Before you start">
+<Card title="始める前に">
 
 バックチャネルログアウトを使用するには、アプリケーションが以下の要件を満たす必要があります。
 
@@ -24,7 +24,7 @@ permalink: "configure-back-channel-logout"
 
 OIDCバックチャネルログアウトは、すべてのエンタープライズプランのお客様が利用するためのものです。アプリケーションが要件を満たしているかを確認するには、OIDC標準の`/.well-known/*`メタデータエンドポイントを確認する必要があります。
 
-```javascript lines
+```json lines
 GET https://acme.eu.auth0.com/.well-known/openid-configuration
 
 HTTP 200
@@ -84,7 +84,7 @@ HTTP 200
 
 API Managementを通してクライアントを`PATCH`するために、`oidc_logout`プロパティを追加します。
 
-```javascript lines
+```bash cURL lines
 PATCH /api/v2/clients/{id}
 "oidc_logout": {
   "backchannel_logout_urls": ["http://acme.eu.auth0.com/events"]
@@ -101,7 +101,7 @@ PATCH /api/v2/clients/{id}
 
 `oidc_logout`パラメーターを削除します：
 
-```javascript lines
+```bash cURL lines
 PATCH https://acme.eu.auth0.com/api/v2/clients/{id}
 {
   "oidc_logout": {
@@ -137,7 +137,7 @@ Auth0 DashboardまたはManagement APIを使用してバックチャネルログ
 
 エンコードされたトークンのペイロード：
 
-```javascript lines
+```bash cURL lines
 POST /backchannel-logout HTTP/1.1
 Host: rp.example.org
 Content-Type: application/x-www-form-urlencoded
@@ -153,19 +153,19 @@ logout_token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImdwY3ZFT0FPREE2T3pXRmw
 
 デコードされたトークンのペイロード：
 
-```javascript lines
+```json JSON lines
 {
-  "iss": "https://artex-dev.eu.auth0.com/",
-  "sub": "auth0|602e93db83fa6f00749a23e6",
-  "aud": "TuhNLv7ulXD3RfyLlSMbOvszzwJJFPpO",
-  "iat": 1698160928,
-  "exp": 1698161048,
-  "jti": "44a91215-dfb4-4dfe-a1eb-fcafa911deba",
-  "events": {
-    "http://schemas.openid.net/event/backchannel-logout": {}
-  },
-  "trace_id": "81b336a94a4a5707",
-  "sid": "375UIp_ID5mCTClIeBEHpXfGwq51tF_L"
+   "iss": "https://artex-dev.eu.auth0.com/",
+   "sub": "auth0|602e93db83fa6f00749a23e6",
+   "aud": "TuhNLv7ulXD3RfyLlSMbOvszzwJJFPpO",
+   "iat": 1698160928,
+   "exp": 1698161048,
+   "jti": "44a91215-dfb4-4dfe-a1eb-fcafa911deba",
+   "events": {
+         "http://schemas.openid.net/event/backchannel-logout": {}
+   },
+   "trace_id": "81b336a94a4a5707",
+   "sid": "375UIp_ID5mCTClIeBEHpXfGwq51tF_L"
 }
 ```
 

@@ -83,7 +83,7 @@ WebAuthn生体認証デバイスでパスワードレスを有効にするには
 * ユーザーがWebAuthn生体認証を唯一の認証方法として使用して認証する場合、IDトークンの`amr`値は`mfa`に設定されます。
 * 拡張性プラットフォームからMFAを有効にしたい場合、ユーザーの認証方法を考慮し、MFAのプロンプトを表示するかどうかを決定できます。以下のルールは、ユーザーが`webauthn-platform`認証方法で認証しなかった場合にのみMFAを実行します。
 
-```javascript lines
+```javascript javascript lines
 function (user, context, callback) {
   let authMethods = context.authentication.methods;
 
@@ -101,7 +101,7 @@ function (user, context, callback) {
 
 このログイン後のアクションでも効果は同じです。
 
-```javascript lines
+```javascript javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   let authMethods = event.authentication.methods;
 

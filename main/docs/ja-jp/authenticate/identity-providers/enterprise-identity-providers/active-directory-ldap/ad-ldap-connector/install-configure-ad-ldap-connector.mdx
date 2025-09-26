@@ -120,7 +120,7 @@ LDAPの設定を入力します。
 
 2. パッケージを展開し、依存関係ファイルをインストールします。
 
-   ``` lines
+   ```text lines
    mkdir /opt/auth0-adldap
    tar -xzf /tmp/adldap.tar.gz -C /opt/auth0-adldap --strip-components=1
    cd /opt/auth0-adldap
@@ -132,11 +132,11 @@ LDAPの設定を入力します。
 
 4. LDAP接続および認証の詳細を使用して、`config.json`構成ファイルを編集するよう求められます。
 
-   ``` lines
+   ```text lines
    "LDAP_URL": "ldap://{yourLdapServerFqdn}",
-       "LDAP_BASE": "dc={yourDomain},dc=com",
-       "LDAP_BIND_USER":"{yourLdapUser}",
-       "LDAP_BIND_PASSWORD":"{yourLdapUserPassword}" //cleartextpassword
+   "LDAP_BASE": "dc={yourDomain},dc=com",
+   "LDAP_BIND_USER":"{yourLdapUser}",
+   "LDAP_BIND_PASSWORD":"{yourLdapUserPassword}" //cleartextpassword
    ```
 
 5. `node server.js`をもう一度実行して、コネクターを起動します。この時点で、`config.json`の`LDAP_BIND_PASSWORD`の行が`LDAP_BIND_CREDENTIALS`に変わります。

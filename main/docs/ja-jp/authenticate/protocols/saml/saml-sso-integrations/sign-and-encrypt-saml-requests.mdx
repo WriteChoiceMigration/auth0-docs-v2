@@ -55,7 +55,7 @@ deflateエンコードを無効にするには、[Management APIの接続の更�
 
 次のコマンドを使用して、独自の証明書と秘密鍵を生成できます。
 
-```bash lines
+```bash wrap lines
 openssl req -x509 -nodes -sha256 -days 3650 -newkey rsa:2048 -keyout private_key.key -out certificate.crt
 ```
 
@@ -174,7 +174,7 @@ SAMLアサーションに署名するには：
 
 デフォルトでは、Auth0はSAML応答やアサーションに署名するためのテナントに割り当てられた秘密鍵/公開鍵のペアを使用します。非常に特殊なシナリオでは、独自のキーペアを提供する必要がある場合があります。次のようなルールでこれを行うことができます：
 
-```javascript lines
+```javascript lines expandable
 /**
 * Handler that will be called during the execution of a PostLogin flow.
 *
@@ -240,7 +240,7 @@ Auth0がSAML IDプロバイダーである場合は、[Actions](/docs/ja-jp/cust
 
 証明書と公開鍵ファイルを取得したら、[それらを文字列に変換](/docs/ja-jp/authenticate/protocols/saml/saml-sso-integrations/work-with-certificates-and-keys-as-strings)してActionで使用する必要があります。Actionは次のようになります。
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
 
 // this Action sets a specific public key to encrypt the SAML assertion generated from Auth0

@@ -68,7 +68,7 @@ Before setting up an event stream, you need to identify the [event types](/docs/
 
 This example uses the Auth0 CLI to create an event stream that subscribes to the `user.created` event, which triggers whenever a new user is registered in your tenant.
 
-``` lines
+```bash wrap lines
 auth0 events create --name ng-demo-eventbridge --type eventbridge --subscriptions "user.created" --configuration '{"aws_account_id":"<your-aws-account-id>","aws_region":"<your-aws-region>"}'
 ```
 
@@ -150,7 +150,7 @@ Ensure you have the following installed to properly write your webhook handler:
 2. Install `dotenv` to your root directory to use a `.env` file for storing environment variables.
 3. Create a `webhook.js` fle to receive the `user.created` event and store it in a database.
 
-   ```javascript lines
+   ```javascript lines expandable
    const express = require('express');
    const app = express();
 
@@ -232,7 +232,7 @@ Ensure you have the following installed to properly write your webhook handler:
    
 4. In the root of your project, create a `.env` file and add your API token using:
 
-   ``` lines
+   ```bash lines
    API_TOKEN=`openssl rand -hex 32`
    echo "API_TOKEN=$API_TOKEN" > .env
    ```
@@ -242,7 +242,7 @@ Ensure you have the following installed to properly write your webhook handler:
    
 5. Start your server:
 
-   ``` lines
+   ```bash lines
    node webhook.js
    ```
 
@@ -251,7 +251,7 @@ Ensure you have the following installed to properly write your webhook handler:
    
 6. To test the Webhook, expose your webhook handler using a tool like ngrok:
 
-   ``` lines
+   ```bash lines
    ngrok http 3000
    ```
 
@@ -261,7 +261,7 @@ Ensure you have the following installed to properly write your webhook handler:
 
    This provides a public URL for your local webhook handler, for example:
 
-   ``` lines
+   ```bash lines
    http://localhost:3000
    ```
 
@@ -279,7 +279,7 @@ Before setting up an event stream, you need to identify the [event types](/docs/
 
 This example uses the Auth0 CLI to create an event stream that subscribes to the `user.created` event, which triggers whenever a new user is registered in your tenant. The event data is then forwarded to a webhook endpoint for further processing.
 
-``` lines
+```bash lines
 source .env # Make sure you are in the webhook directory where you created your .env file
 WEBHOOK_URL="<ngrok URL>/webhook"
 
@@ -316,7 +316,7 @@ If successful, this returns the following JSON with your event stream `id`. New 
 
 After you create an event stream, you can verify that the event stream exists using the following command:
 
-``` lines
+```bash lines
 auth0 events show <EVENT_STREAM_ID>
 ```
 

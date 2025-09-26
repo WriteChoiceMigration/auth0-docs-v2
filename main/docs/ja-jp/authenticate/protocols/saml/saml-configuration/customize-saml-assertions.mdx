@@ -39,7 +39,7 @@ Dashboardでアドオンを構成するか、ルールを使用して、Auth0が
 
 #### 例：SAMLトークンのライフタイムを変更し、UPNをNameIDとして使用する
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
 	api.samlResponse.setLifetimeInSeconds(36000);
 	if (event.user.upn) {
@@ -50,7 +50,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 #### 例：user_metadata属性をアサーションに含む
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = (event, api) => {
 	event.user.user_metadata = event.user.user_metadata || {};
 	event.user.user_metadata.color = 'purple';

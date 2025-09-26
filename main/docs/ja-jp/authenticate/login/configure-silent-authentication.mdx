@@ -25,7 +25,7 @@ SPAで[暗黙フロー](/docs/ja-jp/get-started/authentication-and-authorization
 
 例：
 
-``` lines
+```json lines
 GET https://{yourDomain}/authorize
     ?response_type=id_token token&
     client_id=...&
@@ -52,7 +52,7 @@ GET https://{yourDomain}/authorize
 
 たとえば、暗黙フロー（シングルページアプリケーションで使用される`response_type=id_token token`）を使用すると、Auth0は次のように、要求されたトークンを返します。
 
-``` lines
+```bash cURL lines
 GET {https://yourApp/callback}
     #id_token=...&
     access_token=...&
@@ -66,7 +66,7 @@ GET {https://yourApp/callback}
 
 ユーザーがシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>）経由でログインしていなかった場合、またはSSOセッションが期限切れとなっていた場合、Auth0は次のように、指定された`redirect_uri`（コールバックURL）にエラーとともにリダイレクトします。
 
-``` lines
+```json lines
 GET https://your_callback_url/
     #error=ERROR_CODE&
     error_description=ERROR_DESCRIPTION&
@@ -136,7 +136,7 @@ Safariブラウザーに関する他の重要な制限事項や回避方法に�
 
 状況によっては、同じブラウザーを使ってログインしているユーザーに対し、[多要素認証（MFA）](/docs/ja-jp/secure/multi-factor-authentication)を求めるプロンプトを毎回表示したくない場合があります。これを実行するには、セッションごとにMFAが1回だけ発生するようにアクションを設定します。これは、`allowRememberBrowser`を`true`に設定することなく、ユーザーのセッションの期間中に、SPA内で有効期限の短いアクセストークンを更新するためのサイレント認証（`prompt=none`）を行う場合に便利です。
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const authMethods = event.authentication?.methods || []
 

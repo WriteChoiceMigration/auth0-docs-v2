@@ -41,7 +41,7 @@ Auth0がSAML IdPであるときに検討すべきログアウトシナリオは2
    * `callback`：アプリケーションのSLO URLを入力します。
    * `slo_enabled`：IdP起点のSLOを有効にしたい場合は`true`を入力します。ここでは、ユーザーがAuth0 SAML IdPからログアウトすると、SAMLログアウト要求がアプリケーションに送信されます。そうでない場合は、`false`を入力します。
 
-     ```
+     ```bash cURL lines
      {
        "logout": {
          "callback": "https://myapp.exampleco.com/saml/logout",
@@ -56,7 +56,7 @@ Auth0がSAML IdPであるときに検討すべきログアウトシナリオは2
 
 デフォルトでは、Auth0は`HTTP-POST`プロトコルバインディングを使ってSAMLログアウト応答を送信します。アプリケーションで`HTTP-Redirect`プロトコルバインディングを必要とする場合は、そのような`binding`プロパティを追加（または更新）します。
 
-```json lines
+```json JSON lines
 {
   "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
 }

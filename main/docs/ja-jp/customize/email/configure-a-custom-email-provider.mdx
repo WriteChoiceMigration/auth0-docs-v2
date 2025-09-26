@@ -71,10 +71,7 @@ permalink: "configure-a-custom-email-provider"
 
 </Callout>
 
-```javascript lines
-// Import necessary modules
-const { request } = require('undici');
-
+```javascript lines expandable
 /**
  * Handler to be executed while sending an email notification.
  * @param {Event} event - Details about the user and the context in which they are logging in.
@@ -92,10 +89,9 @@ exports.onExecuteCustomEmailProvider = async (event, api) => {
     html: event.notification.html,
     text: event.notification.text,
   };
-
   try {
     // Make the API call to send the email
-    const { statusCode, body } = await request('https://api.example.com/send-email', {
+    const response = await fetch('https://api.example.com/send-email', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${event.secrets.api_key}`,
@@ -103,25 +99,18 @@ exports.onExecuteCustomEmailProvider = async (event, api) => {
       },
       body: JSON.stringify(emailPayload),
     });
-
-    if (statusCode === 200) {
+    if (response.ok) {
       console.log('Email sent successfully');
-      // Handle the body or discard it if not needed
-      // await res.body.json() || await res.body.dump()
-    } else if (statusCode >= 500) {
-      // Retry on server errors
+    } else if (response.status >= 500) {
       api.notification.retry(
-        `Internal Server Error received from Messaging Proxy. Status code: ${statusCode}.`
+        `Internal Server Error received from Messaging Proxy. Status code: ${response.status}.`
       );
       return;
     }
   } catch (error) {
     console.error(`Error sending email: ${error.message}`);
-    api.notification.drop(
-      `An unexpected error occurred. Error: ${error.message}`
-    );
+    api.notification.drop(`An unexpected error occurred. Error: ${error.message}`);
   }
-
   return;
 };
 ```

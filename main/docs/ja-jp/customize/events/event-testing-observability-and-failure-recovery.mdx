@@ -27,7 +27,7 @@ To test your event stream, first create a user for your application by running t
 
 <Tabs><Tab title="Auth0 CLI">
 
-``` lines
+```bash lines
 auth0 users create # follow prompts to create a test user
 ```
 
@@ -49,8 +49,8 @@ curl -s \
 
 After the user is created, it should trigger the `user.created` event in your event stream and return a response. In this example, webhooks are used to facilitate the event stream.
 
-```json lines
-Webhook received: {
+```json lines expandable
+"Webhook received": {
   "id": "evt_6SfwXrtm8nVcjzzNCFFH1L",
   "source": "urn:auth0:",
   "specversion": "1.0",
@@ -86,7 +86,7 @@ You can list the event delivery failures for a specific event stream by running:
 
 <Tabs><Tab title="Auth0 CLI">
 
-``` lines
+```bash lines
 auth0 api get event-streams/$EVENT_STREAM_ID/deliveries
 ```
 
@@ -111,7 +111,7 @@ Poll the Deliveries endpoint every **5 minutes** to check for failed events. Use
 
 <Tabs><Tab title="Auth0 CLI">
 
-``` lines
+```bash lines
 auth0 api get event-streams/$EVENT_STREAM_ID/deliveries
 ```
 
@@ -141,7 +141,7 @@ To retry a specific failed event, use:
 
 <Tabs><Tab title="Auth0 CLI">
 
-``` lines
+```bash lines
 EVENT_ID=<your event id>
 auth0 api POST event-streams/$EVENT_STREAM_ID/redeliver/$EVENT_ID --data '{}'
 ```
@@ -161,7 +161,7 @@ To retry all failed events in the event stream:
 
 <Tabs><Tab title="Auth0 CLI">
 
-``` lines
+```bash wrap lines
 auth0 api POST event-streams/$EVENT_STREAM_ID/redeliver --data '{}'
 ```
 

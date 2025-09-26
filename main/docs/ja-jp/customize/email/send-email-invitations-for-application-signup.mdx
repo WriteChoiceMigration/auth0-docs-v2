@@ -47,7 +47,7 @@ Organizationメンバーの招待は、この記事にあるユーザー招待�
 
 詳細については、「[デフォルトのログインルートを構成する](/docs/ja-jp/authenticate/login/auth0-universal-login/configure-default-login-routes)」をお読みください。
 
-```json lines
+```bash lines
 curl -- request POST \
   --url 'https://{yourAuth0Tenant}/api/v2/tickets/password-change' \
   --header "Content-Type: application/json" \
@@ -60,13 +60,13 @@ curl -- request POST \
 
 パラメーターを追加して、設定パスワードワークフローUIを指定します。例：
 
-```html lines
+```http lines
 #type=invite
 ```
 
 パラメーターを追加してターゲットアプリを識別します。例：
 
-```html lines
+```http lines
 #app=AppName
 ```
 
@@ -80,7 +80,7 @@ curl -- request POST \
 
 たとえば、招待するユーザーを作成するときに、このユーザーアカウントが招待されたことを示すプロパティを`user.app_metadata`に追加することができます。さらに、メールテンプレートでこのプロパティをチェックできます。
 
-```javascript lines
+```liquid lines
 {% if user.app_metadata.invitedToMyApp == true %}
   // user invitation email
 {% else %}

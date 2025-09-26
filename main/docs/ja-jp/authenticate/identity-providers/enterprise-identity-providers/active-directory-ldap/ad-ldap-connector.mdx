@@ -43,10 +43,10 @@ AD/LDAPコネクターはユーザープロファイルと資格情報をキャ�
 
 コネクターはデフォルトで、Active Directory用に高度に最適化されています。他のLDAPディレクトリ（OpenLDAPなど）で構成する場合は、`config.json`ファイルでこれらの設定をカスタマイズする必要があります。
 
-```javascript lines
+```json lines
 "LDAP_USER_BY_NAME": "(cn={0})",
-      "LDAP_SEARCH_QUERY": "(&(objectClass=person)(cn={0}))",
-      "LDAP_SEARCH_ALL_QUERY": "(objectClass=person)",
+"LDAP_SEARCH_QUERY": "(&(objectClass=person)(cn={0}))",
+"LDAP_SEARCH_ALL_QUERY": "(objectClass=person)",
 ```
 
 `cn`の代わりに`uid`を使用した方がよい場合もあります。

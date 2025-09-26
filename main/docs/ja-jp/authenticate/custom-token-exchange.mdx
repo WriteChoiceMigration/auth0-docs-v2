@@ -245,7 +245,7 @@ MFA対応は次回のカスタムトークン交換のEAに追加される予定
 </tbody>
 </table>
 
-```javascript lines
+```js lines
 exports.onExecuteCustomTokenExchange = async (event, api) => {
 
   // 1. Validate subject_token
@@ -298,7 +298,7 @@ exports.onExecuteCustomTokenExchange = async (event, api) => {
 </tbody>
 </table>
 
-```javascript lines
+```js lines expandable
 exports.onExecuteCustomTokenExchange = async (event, api) => {
 
   // 1. Validate subject_token
@@ -427,7 +427,7 @@ Auth0のデータベース接続では、ユーザーのためにランダムな
 
 `email_verified=false`でユーザーが作成されると、Auth0は自動的に確認メールを送信します。この動作をオーバーライドするには、`verify_email=false`をユーザープロファイル属性として指定します。ユーザープロファイルの一部として保管はされません。
 
-```javascript lines
+```js lines
 exports.onExecuteCustomTokenExchange = async (event, api) => {
 
   // Validate subject_token
@@ -482,7 +482,7 @@ exports.onExecuteCustomTokenExchange = async (event, api) => {
 </tbody>
 </table>
 
-```javascript lines
+```js lines
 exports.onExecuteCustomTokenExchange = async (event, api) => {
   // Validate subject_token
   const subject_token = await validateToken(event.transaction.subject_token, jwksUri);
@@ -521,7 +521,7 @@ exports.onExecuteCustomTokenExchange = async (event, api) => {
 </tbody>
 </table>
 
-```javascript lines
+```js lines
 exports.onExecuteCustomTokenExchange = async (event, api) => {
   // Validate subject_token
   const subject_token = await validateToken(event.transaction.subject_token, jwksUri);
@@ -558,7 +558,7 @@ exports.onExecuteCustomTokenExchange = async (event, api) => {
 </tbody>
 </table>
 
-```javascript lines
+```js lines
 exports.onExecuteCustomTokenExchange = async (event, api) => {
 
   // 1. Validate subject_token
@@ -599,7 +599,7 @@ exports.onExecuteCustomTokenExchange = async (event, api) => {
 </tbody>
 </table>
 
-```javascript lines
+```js lines
 exports.onExecuteCustomTokenExchange = async (event, api) => {
 
   try {
@@ -1005,7 +1005,7 @@ GearUpには何百万人もが使用するモバイルアプリがあり、ア�
 
 Auth0は外部IdPのユーザーIDを使用して、該当する接続でユーザーを設定します。
 
-```javascript lines
+```javascript lines expandable
 /**
 * Handler to be executed while executing a custom token exchange request
 * @param {Event} event - Details about the incoming token exchange request.
@@ -1079,7 +1079,7 @@ async function getUserProfile(refreshToken, clientSecret) {
 * ユーザーがすでに存在する場合のために、より完全な属性のセットがフェデレーションログインで取得できるのであれば、Auth0はユーザープロファイルを置換しません。
 * Auth0はユーザーの作成時にメールを検証しません。
 
-```javascript lines
+```javascript lines expandable
 const jwksUri = "https://example.com/.well-known/jwks.json";
 
 /**
@@ -1163,7 +1163,7 @@ GearUpアプリケーションは当初、API Aをユーザーに代わって使
 
 このユースケースに関する詳しいサンプルコードについては、「[非対称鍵で署名されたJWTを検証する](#validate-jwts-signed-with-asymmetric-keys)」を参照してください。
 
-```javascript lines
+```javascript lines expandable
 const jwksUri = "https://example.com/.well-known/jwks.json";
 
 /**
@@ -1223,7 +1223,7 @@ Auth0とシークレットを共有する必要がない場合は、できる限
 * noneアルゴリズムを使用したり、受け入れたりしてはいけません。
 * 最小長2048ビットのRSAを使用します。
 
-```javascript lines
+```javascript lines expandable
 const { jwtVerify } = require("jose");
 
 const jwksUri = "https://example.com/.well-known/jwks.json";
@@ -1332,7 +1332,7 @@ exports.onExecuteCustomTokenExchange = async (event, api) => {
 * [RFC8725](https://www.rfc-editor.org/rfc/rfc8725.txt)のベストプラクティスに従います。
 * HS256などのセキュリティ保護されたアルゴリズムと、高エントロピーでランダムなシークレット（256ビッドの最小長など）を使用します。
 
-```javascript lines
+```javascript lines expandable
 const { jwtVerify } = require("jose");
 
 const validIssuer = "urn:my-issuer"; // Replace with your issuer
@@ -1394,7 +1394,7 @@ async function validateToken(subjectToken, symmetricKey) {
 
 [Actionsシークレット](/docs/ja-jp/customize/actions/write-your-first-action#add-a-secret)を使用して、外部IdPのクライアントシークレットを安全に保管します。
 
-```javascript lines
+```javascript lines expandable
 const tokenEndpoint = "EXTERNAL_TOKEN_ ENDPOINT";
 const userInfoEndpoint = "EXTERNAL_USER_INFO_ENDPOINT";
 const clientId = "EXTERNAL_CLIENT_ID";

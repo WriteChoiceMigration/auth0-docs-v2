@@ -43,7 +43,7 @@ permalink: "aws-api-gateway-delegation-4"
 
 ペットを購入するために、`PetPurchase`という新しいAWS Lambda関数を作成します。これにより、以下のように、`isSold`と`soldTo`の属性がペットに追加されます。
 
-```javascript lines
+```javascript lines expandable
 var AWS = require('aws-sdk');
 var DOC = require('dynamodb-doc');
 var dynamo = new DOC.DynamoDB();
@@ -103,7 +103,7 @@ Lambda関数を定義し終えたら、[POSTメソッドを`purchase`リソー�
 
 入力メッセージとして以下を指定して、API Gatewayメソッドをテストします。
 
-```javascript lines
+```json lines
 {
     "petId": 1,
     "userName": "fred flintstone"
@@ -112,7 +112,7 @@ Lambda関数を定義し終えたら、[POSTメソッドを`purchase`リソー�
 
 テスト応答で、ID「1」のペットが、「Fred Flintstone」に販売されたことがわかります。
 
-```javascript lines
+```json lines
 [
   {
     "id": 1,
@@ -133,7 +133,7 @@ APIを保護するため、本チュートリアルの[パート2で実行](/doc
 
 IAMポリシーで保護するこのメソッドのARNは、次のようになります。
 
-``` lines
+```bash wrap lines
 arn:aws:execute-api:us-east-1:your-accountid:your-api-id/*/pets/purchase
 ```
 
@@ -181,7 +181,7 @@ Amazonコンソールを使用してLWAを構成する際には、［Allowed Ret
 
 この機能性をテストするには、`/pets/home/home.html`の`ng-show="isAdmin"`を削除することで、UIの削除ボタンを一時的に非表示にできます。
 
-```html lines
+```html wrap lines
 <button ng-show="isAdmin" class="btn delete-btn" ng-click="removePet(pet.id)">remove</button>
 ```
 
@@ -229,7 +229,7 @@ Auth0では、この設定をルールを使って行えます。ルールは、
 2. **［Empty rule（空のルール）］** テンプレートを選択します。
 3. ルールに「 **AWS Pets** 」のような名前を付けてから、以下のJavaScriptコードを使ってルールの本文を入力します。
 
-   ```javascript lines
+   ```javascript lines expandable
    function (user, context, callback) {
      if(context.clientID === '{yourClientId}') {
        var socialRoleInfo = {

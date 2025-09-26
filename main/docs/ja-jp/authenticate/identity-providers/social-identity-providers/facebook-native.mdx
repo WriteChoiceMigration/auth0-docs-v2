@@ -53,7 +53,7 @@ Auth0経由でネイティブアプリのFacebook ネイティブログインを
 
 この要求は次のようになります：
 
-``` lines
+```json wrap lines
 GET https://graph.facebook.com/v5.0/oauth/access_token?grant_type=fb_attenuate_token&client_id=457704041391802&fb_exchange_token=<facebook_access_token>
 ```
 
@@ -71,7 +71,7 @@ GET https://graph.facebook.com/v5.0/oauth/access_token?grant_type=fb_attenuate_t
 
 アプリケーションは、Facebook SDK を使用してFacebookからユーザープロファイルを取得する必要があります。これは次のような要求で終わります：
 
-``` lines
+```json wrap lines
 GET https://graph.facebook.com/v5.0/<facebook user id>?access_token=<facebook access token>&fields=email,name
 ```
 
@@ -79,7 +79,7 @@ GET https://graph.facebook.com/v5.0/<facebook user id>?access_token=<facebook ac
 
 その後、アプリケーションは、`facebook-session-access-token`トークンタイプでトークン交換フローを使用して Auth0の`/oauth/token`エンドポイントを呼び出すことにより、セッション情報アクセストークンと Facebookユーザープロファイルを使用してAuth0で認証できます。すべてがうまくいけば、Auth0はユーザープロファイルを追加した通常の応答をExchangeから返します。ユーザープロファイルは、文字列としてエンコードされたJSONオブジェクトである必要があります。
 
-``` lines
+```json lines
 POST https://{yourDomain}/oauth/token
 
 grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange'

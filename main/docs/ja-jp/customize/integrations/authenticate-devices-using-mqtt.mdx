@@ -31,7 +31,7 @@ MQTTプロトコルは、`usernames`および`passwords`に基づいて基本的
 
 **mosca** はホストにとっては簡単で、他のサーバーに埋め込むことができます。このサンプルの目的上、 **mosca** サーバーを自己ホストします。
 
-```javascript lines
+```javascript lines expandable
 var mosca = require('mosca')
 var Auth0Mosca = require('auth0mosca');
 
@@ -70,7 +70,7 @@ server.on('clientConnected', function(client) {
 
 この小さな[モジュール](https://www.npmjs.org/package/auth0mosca)には、 **mosca** で使用される4つの関数（`authenticateWithCredentials`、`authenticateWithJWT`、`authorizePublish`、`authorizeSubscribe`）があります。
 
-```javascript lines
+```javascript lines expandable
 var request = require('request');
 var jwt = require('jsonwebtoken');
 
@@ -178,7 +178,7 @@ module.exports = Auth0Mosca;
 
 このサンプルの場合、パブリッシャーは`mqtt`モジュールを使用する単純なnodejsプログラムであり、正しい資格情報を追加します。
 
-```javascript lines
+```javascript lines expandable
 var mqtt = require('mqtt')
   , host = 'localhost'
   , port = '9999';
@@ -213,7 +213,7 @@ function sendTemperature(client){
 
 サブスクライバーはパブリッシャーに非常に似ています。
 
-```javascript lines
+```javascript lines expandable
 var mqtt = require('mqtt')
   , host = 'localhost'
   , port = '9999';
@@ -229,6 +229,7 @@ var settings = {
 
 // client connection
 var client = mqtt.createClient(port, host, settings);
+
 
 client.subscribe('temperature');
 

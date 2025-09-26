@@ -58,7 +58,7 @@ permalink: "email-magic-link"
 
 例えば、`request_language`パラメーターを参照し、メッセージの言語を変更できます：
 
-```json lines
+```liquid lines
 {% if request_language contains 'dutch' %}
    Hier is uw verificatie code: {{ code }}
 {% endif %}
@@ -107,7 +107,7 @@ permalink: "email-magic-link"
 2. **［Login（ログイン）］** ビューに切り替え、 **［Default Templates（デフォルトのテンプレート）］** ドロップダウンから **［Lock (passwordless)（ロック(パスワードレス)）** を選択します。
 3. 続いて、コードの`Auth0LockPasswordless`セクションを新しいパラメーターに更新します。`passwordlessMethod`をテンプレートに追加してください。
 
-   ```javascript lines
+   ```bash lines
    passwordlessMethod: 'link',
    ```
 

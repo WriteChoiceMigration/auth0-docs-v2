@@ -23,13 +23,13 @@ permalink: "saml-identity-provider-configuration-settings"
 
 IdP起点<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SSO</Tooltip>を使用する場合は、必ずポストバックURLに接続パラメーターを含めてください。
 
-``` lines
+```http wrap lines
 https://{yourDomain}/login/callback?connection={yourConnectionName}
 ```
 
 [Organizations](https://auth0.com/docs/manage-users/organizations)機能を使用している場合は、必要に応じて、目的の組織の組織IDを含む、次の組織パラメーターを含めることもできます。
 
-``` lines
+```http wrap lines
 https://{yourDomain}/login/callback?connection={yourConnectionName}&organization={yourCustomersOrganizationId}
 ```
 
@@ -43,7 +43,7 @@ https://{yourDomain}/login/callback?connection={yourConnectionName}&organization
 
 サービスプロバイダーのID：
 
-``` lines
+```http lines
 urn:auth0:{yourTenant}:{yourConnectionName}
 ```
 
@@ -54,9 +54,9 @@ urn:auth0:{yourTenant}:{yourConnectionName}
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
---url 'https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D' \
---header 'authorization: Bearer {yourAccessToken}'
-``` lines
+  --url 'https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D' \
+  --header 'authorization: Bearer {yourAccessToken}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D");
 var request = new RestRequest(Method.GET);
@@ -66,92 +66,115 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D"
-req, _ := http.NewRequest("GET", url, nil)
-req.Header.Add("authorization", "Bearer {yourAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D"
+
+	req, _ := http.NewRequest("GET", url, nil)
+
+	req.Header.Add("authorization", "Bearer {yourAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D")
-.header("authorization", "Bearer {yourAccessToken}")
-.asString();
+HttpResponse<String> response = Unirest.get("https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D")
+  .header("authorization", "Bearer {yourAccessToken}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'GET',
-url: 'https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D',
-headers: {authorization: 'Bearer {yourAccessToken}'}
+  method: 'GET',
+  url: 'https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D',
+  headers: {authorization: 'Bearer {yourAccessToken}'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourAccessToken}" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourAccessToken}" };
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
 [request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "GET",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourAccessToken}"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourAccessToken}"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 headers = { 'authorization': "Bearer {yourAccessToken}" }
+
 conn.request("GET", "/{yourDomain}/api/v2/connections/%7ByourConnectionID%7D", headers=headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -159,32 +182,40 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourAccessToken}'
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["authorization": "Bearer {yourAccessToken}"]
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/connections/%7ByourConnectionID%7D")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "GET"
 request.allHTTPHeaderFields = headers
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -235,7 +266,7 @@ SAMLアサーションとSAML応答は、個別または同時に署名するこ
 
 これは、SAML IDプロバイダーがログアウトの要求と応答を送信する場所です。
 
-``` lines
+```http lines
 https://{yourDomain}/logout
 ```
 
@@ -261,7 +292,7 @@ IdP起点のシングルサインオンについての詳細は、「[IdP起点�
 
 SAML IDプロバイダーによっては、すべての必要な情報を含めたメタデータを直接インポートできるものもあります。Auth0では、接続のメタデータは以下からアクセスできます。
 
-``` lines
+```http wrap lines
 https://{yourDomain}/samlp/metadata?connection={yourConnectionName}
 ```
 
@@ -269,7 +300,7 @@ https://{yourDomain}/samlp/metadata?connection={yourConnectionName}
 
 フェデレーションIdPにある組織のACS URLを使用して、組織ログインフローを開始します。
 
-``` lines
+```http wrap lines
 https://{yourDomain}/samlp?connection={yourConnectionName}&organization=${yourOrgID}
 ```
 

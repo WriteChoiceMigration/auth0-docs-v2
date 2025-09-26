@@ -57,7 +57,7 @@ Auth0の委任機能を使用して、Auth0 IDトークンに基づいたAWSア�
 
 `auth.signin`でサインイン後にIDトークンからAWS委任トークンを取得するために、以下のように`pets/login/login.js`を更新します。ソーシャル接続を使用してログインしていないユーザーを管理者として取り扱っていることにご注意ください。後で、2つ目のロールをコーディングし、ロール選択を強制する、より良い方法をご紹介します。
 
-```javascript lines
+```js lines expandable
 auth.signin(params, function(profile, token) {
   //Set user as admin if they did not use a social login.
   profile.isAdmin = !profile.identities[0].isSocial;
@@ -112,7 +112,7 @@ function (user, context, callback) {
 
 オプションとして、ブラウザーのブレークポイントを`store.set('awstoken', delegation.Credentials);`に設定できます。ログアウトして再びログインした時に、ブレークポイントに到達したときの`delegation.Credentials`を調べます。AccessKeyIdやSecretAccessKeyなどの馴染みのある値が表示されます。
 
-```javascript lines
+```js lines
 {
     AccessKeyId: "ASIAJB...BNQ",
     SecretAccessKey: "vS+b6...2Noav",
@@ -143,18 +143,18 @@ function (user, context, callback) {
 
 ```html lines
 <!-- scripts for aws api gateway include after you create your package from aws for api gateway. -->
-<script type="text/javascript" src="/docs/ja-jp/lib/axios/dist/axios.standalone.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/CryptoJS/rollups/hmac-sha256.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/CryptoJS/rollups/sha256.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/CryptoJS/components/hmac.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/CryptoJS/components/enc-base64.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/moment/moment.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/url-template/url-template.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/apiGatewayCore/sigV4Client.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/apiGatewayCore/apiGatewayClient.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/apiGatewayCore/simpleHttpClient.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/apiGatewayCore/utils.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/apigClient.js"></script>
+<script type="text/javascript" src="/docs/lib/axios/dist/axios.standalone.js"></script>
+<script type="text/javascript" src="/docs/lib/CryptoJS/rollups/hmac-sha256.js"></script>
+<script type="text/javascript" src="/docs/lib/CryptoJS/rollups/sha256.js"></script>
+<script type="text/javascript" src="/docs/lib/CryptoJS/components/hmac.js"></script>
+<script type="text/javascript" src="/docs/lib/CryptoJS/components/enc-base64.js"></script>
+<script type="text/javascript" src="/docs/lib/moment/moment.js"></script>
+<script type="text/javascript" src="/docs/lib/url-template/url-template.js"></script>
+<script type="text/javascript" src="/docs/lib/apiGatewayCore/sigV4Client.js"></script>
+<script type="text/javascript" src="/docs/lib/apiGatewayCore/apiGatewayClient.js"></script>
+<script type="text/javascript" src="/docs/lib/apiGatewayCore/simpleHttpClient.js"></script>
+<script type="text/javascript" src="/docs/lib/apiGatewayCore/utils.js"></script>
+<script type="text/javascript" src="/docs/apigClient.js"></script>
 ```
 
 `apigClient.js`を開くと、ダウンロード済みのライブラリーが、APIメソッドに`petsPost`および`petsGet`などのラッパーを作成していることを確認できます。これらの生成されたコードを変更する必要はありません。

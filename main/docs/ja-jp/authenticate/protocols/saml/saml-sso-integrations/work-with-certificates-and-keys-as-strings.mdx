@@ -11,7 +11,7 @@ permalink: "work-with-certificates-and-keys-as-strings"
 
 UNIXシェルで以下のコマンドを実行すると、PEM形式の証明書が`\n`（エスケープされた改行）を使って単一の文字列に結合されます。
 
-```bash lines
+```bash wrap lines
 awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' certificate.pem | pbcopy
 ```
 
@@ -23,7 +23,7 @@ awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' certificate.pem | pbcopy
 
 テキストエディターで証明書ファイル（`cer`、`pem`）を開くと、以下のように表示されます。
 
-``` lines
+```text lines
 -----BEGIN CERTIFICATE-----
 MIICzDCCAbQCCQDH8GvxPIeH+DANBgkqhkiG9w0BAQsFADAoMQswCQYDVQQGEwJh
 cjEZMBcGA1UEAwwQaHR0cHM6Ly9uaWNvLmNvbTAeFw0xOTA0MDgxODA3NTVaFw0y
@@ -38,7 +38,7 @@ nSWyabd+LiBGtLTMB+ZLbOIi3EioWPGw/nHOI8jzPrqhiCLuZCSQmiqrLQYNsc1W
 
 証明書やキーのファイルの文字列表現では、改行を`\n`（エスケープされた改行）に置き換えて、すべてを単一の行に結合する必要があります。そのため、上のサンプルは以下のようになります。
 
-``` lines
+```text lines
 "-----BEGIN CERTIFICATE-----
 \nMIICzDCCAbQCCQDH8GvxPIeH+DANBgkqhkiG9w0BAQsFADAoMQswCQYDVQQGEwJh\n
 [..all the other lines..]

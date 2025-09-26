@@ -22,7 +22,7 @@ The following steps outline how to a custom email provider using Terraform:
 
 1. Create an [`auth0_action`](https://registry.terraform.io/providers/auth0/auth0/latest/docs/resources/phone_provider):
 
-```javascript lines
+```terraform lines
 resource "auth0_action" "custom_email_provider" {
   name    = "Custom Email Provider"
   runtime = "node20"
@@ -53,7 +53,7 @@ In order to bind a Terraform `auth0_action` to an `auth0_trigger_action`, set th
 
 2. Bind the `auth0_action` to the custom-email-provider `auth0_trigger_action`:
 
-```javascript lines
+```terraform lines
 resource "auth0_trigger_action" "custom_email_provider" {
   trigger = "custom-email-provider"
   actions {
@@ -67,7 +67,7 @@ resource "auth0_trigger_action" "custom_email_provider" {
 
 3. Configure the `auth0_email_provider` resource to use the `auth0_action`:
 
-```javascript lines
+```terraform lines
 resource "auth0_email_provider" "custom_email_provider" {
   name                 = "custom"
   enabled              = true

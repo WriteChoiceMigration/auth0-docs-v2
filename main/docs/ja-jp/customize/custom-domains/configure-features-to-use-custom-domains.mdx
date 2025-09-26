@@ -144,7 +144,7 @@ CDNのURLは地域によって異なります。2020年6月11日より前に作�
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript lines
+```js lines
 webAuth = new auth0.WebAuth({
   domain: '{yourCustomDomain}',
   clientID: '{yourClientId}'
@@ -195,7 +195,7 @@ Auth0はトークンを発行するのに、トークンの取得に使用した
 
 また、カスタムドメインを用いた認証フローを使って、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Management API</Tooltip>へのアクセスにアクセストークンを要求する場合には、そのカスタムドメインでManagement APIを呼び出す必要があります。
 
-``` lines
+```json lines
 POST https://mycustomdomain.com/oauth/token
 ... // other parameters 
 ...
@@ -204,7 +204,7 @@ audience:https://defaulttenant.eu.auth0.com/api/v2/
 
 アクセストークン要求は以下のようになるはずです。
 
-``` lines
+```json lines
 GET https://mycustomdomain.com/api/v2/clients
 
 Headers:
@@ -215,7 +215,7 @@ Authorization: Bearer <access_token>
 
 Auth0でカスタムドメインを使ってAPIにアクセストークンを発行する場合には、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">JWT</Tooltip>の発行者をカスタムドメインに照らし合わせて検証しなければなりません。たとえば、[express-jwt](https://github.com/auth0/express-jwt)ミドルウェアの使用では、以下の変更を行う必要があります。
 
-```javascript lines
+```js lines
 app.use(jwt({
   issuer: 'https://<YOUR-CUSTOM-DOMAIN>/',
   //code omitted for brevity

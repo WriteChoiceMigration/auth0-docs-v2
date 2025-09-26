@@ -205,11 +205,11 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 `mapping_mode`を`use_map`に設定すれば、受け取る予約済みクレームを有効なクレームにマッピングできます。
 
-``` lines
+```json lines
 "attribute_map": {
         "mapping_mode": "use_map",
         "attributes": {
-            "amr": "{context.tokenset.amr}" // `amr` is a restricted claim and will not be mapped
+            "amr": "{context.tokenset.amr}", // `amr` is a restricted claim and will not be mapped
             "federated_amr": "{context.tokenset.amr}" // `federated_amr` is not a restricted claim and will be mapped
         }
     }
@@ -223,7 +223,7 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 たとえば、UserInfoエンドポイントの要求時に標準のOIDCスコープと`groups`スコープを送信したい場合には、次のようにします。
 
-``` lines
+```json lines
 "attribute_map": {
     . . .
     "mapping_mode": "bind_all",
@@ -238,7 +238,7 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 左側のキーは、Auth0のユーザープロファイル属性に対応します。右側の値は、IdPからのクレームで、リテラル値、動的なコンテキストオブジェクト、またはその組み合わせとして表されます。動的コンテキストオブジェクトは、おなじみの`${variable}`形式で作成されたテンプレート式です。
 
-``` lines
+```json lines
 "attribute_map": {
     . . .
     "attributes": {
@@ -255,7 +255,7 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 たとえば、SalesForceのOIDC接続を構成していて、すべてのユーザープロファイルに同じSFDC Community IDを割り当てたい場合は、次のようにします。
 
-``` lines
+```json lines
 "attribute_map": {
     . . .
     "attributes": {
@@ -299,7 +299,7 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 この例では、IDトークンからのデータを使用して一般的なユーザークレームをAuth0のユーザープロファイルにマッピングしています。
 
-``` lines
+```json lines
 "attribute_map": {
     . . .
     "attributes": {
@@ -314,7 +314,7 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 この例では、受信IdPからグループをAuth0のユーザープロファイルにマッピングしています。
 
-``` lines
+```json lines
 "attribute_map": {
     . . .
     "attributes": {
@@ -329,7 +329,7 @@ OpenID ConnectとOkta Workforce接続は、IDプロバイダー（IdP）から�
 
 この例では、リテラル値と動的テンプレート式を組み合わせて、複雑な値をAuth0のユーザープロファイル属性にマッピングしています。
 
-``` lines
+```json lines
 "attribute_map":{
     . . .
     "attributes": {

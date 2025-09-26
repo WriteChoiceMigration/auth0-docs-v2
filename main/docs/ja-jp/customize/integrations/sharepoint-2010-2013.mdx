@@ -57,7 +57,7 @@ SharePointサーバーがインターネットに接続していない場合は�
 
 以下の例では、ロールクレームをクレームマッピングに追加し、Windows認証を許可しています。
 
-``` lines
+```powershell lines
 Enable-Auth0
   -auth0Domain:"fabrikam.auth0.com"
   -clientId:"bOFty3tWgpijnwMcltysNFqHgO1ziz1I"
@@ -89,7 +89,7 @@ Auth0をSSOブローカーとして使用するようにSharePointを設定し�
 
 以下の例では、ロールクレームをクレームマッピングに追加し、Windows認証を許可しています。
 
-``` lines
+```powershell lines
 Enable-Auth0
   -auth0Domain:"fabrikam.auth0.com"
   -clientId:"bOFty3tWgpijnwMcltysNFqHgO1ziz1I"
@@ -115,13 +115,13 @@ Enable-Auth0
 
 カスタマイズしたログインページの`<body>`セクションの先頭に、jQueryへの参照を追加する必要があります。
 
-```html lines
+```html wrap lines
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 ```
 
 `lock.show()`を呼び出す前に、リンクを追加するHTML DOMに修正を加えるためのコードを追加します。
 
-```javascript lines
+```javascript lines expandable
 // construct Lock
 // var lock = ...
 [...]
@@ -152,7 +152,7 @@ if (sharepointClientIDs.indexOf(config.clientID) >= 0) {
     $('.auth0-lock-tabs-container') 
     .after('<div><p class="auth0-lock-alternative" style="padding:5px 0;">' + 
       '<a class="auth0-lock-alternative-link" ' + 
-      'href="/docs/ja-jp/'+ windowsAuthURL + '">' + 
+      'href="/docs/'+ windowsAuthURL + '">' + 
       'Login with Windows Authentication!!!</a>' + 
       '</p><p><span>or</span></p></div>').attr('href','https://nowhere');
   });
@@ -211,7 +211,7 @@ function (user, context, callback) {
 
 クレームプロバイダーをインストールする際には、ロールクレームをクレームマッピングリストに追加することで、そのクレームがSharePointに渡されるようにする必要があります。
 
-``` lines
+```powershell lines
 Enable-Auth0
   -auth0Domain:"fabrikam.auth0.com"
   ...
@@ -227,7 +227,7 @@ Enable-Auth0
 
 現在は、特定のユーザーをSharePointグループ（例:Contributors）に追加する代わりに、 **ロール** をSharePointグループに追加できるようになりました。以下は、「Fabrikam HR」のメンバーをContributorsグループに追加する方法を示すPowerShellスクリプトのサンプルです。
 
-```bash lines
+```powershell lines
 $webName = "http://fabrikam-sp"
 $groupName = "Contributors"
 $roleClaim = "Fabrikam HR"
@@ -250,7 +250,7 @@ SharePointはデフォルトでActive Directoryから発信されたユーザー
 
 最初のアプローチとして、数時間ごとに実行されるタイマージョブを作成して、Auth0のユーザーエンドポイントをクエリし、それらのユーザーのプロファイル情報を同期する方法があります。
 
-```csharp lines
+```csharp lines expandable
 using System;
 
 using Microsoft.SharePoint;

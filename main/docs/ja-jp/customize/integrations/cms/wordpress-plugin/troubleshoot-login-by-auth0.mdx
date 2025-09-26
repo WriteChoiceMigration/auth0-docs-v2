@@ -28,7 +28,7 @@ permalink: "troubleshoot-login-by-auth0"
 
 これは通常、サーバーの時刻設定が間違っていることが原因になります。エラーメッセージが「早すぎる」と告知している場合には、サーバーの時刻が将来に設定されています。トークンの有効期限が切れていると告知される場合には、サーバーの時刻がかなり過去に設定されています。2つのサーバー間で時刻が異なることはよくあります。サーバー上のPHPで`echo date(DateTime::ISO8601)`を出力し、それを現在のUTC時間と秒まで比較します。サーバーの時刻がUCT時間よりも60秒（デフォルトの許容誤差）以上違っている場合には、サーバーのクロックスキューを調整するために許容誤差をより長く設定する必要があります。以下のコードをテーマの`functions.php`に貼り付けるか、そのコードの実行をプラグインが読み込まれた後、ログインのフックが実行される前に処理できる場所に貼り付けます。
 
-```php lines
+```js wrap lines
 add_filter( 'auth0_jwt_leeway', function( $default_leeway ) { return 120; } );
 ```
 
@@ -110,7 +110,7 @@ Chromiumベースのブラウザーを使用している場合には、サード
 
 これは、コールバックURLがAllowListに追加されていないために起きます。以下のコードを`my_forcelogin_whitelist`フィルターに追加してみてください。
 
-```php lines
+```javascript lines
 function wp_auth0_forcelogin_whitelist( $whitelist ) {
   if ( ! empty( $_GET['auth0'] ) ) {
     $whitelist[] = site_url($_SERVER['REQUEST_URI']);
