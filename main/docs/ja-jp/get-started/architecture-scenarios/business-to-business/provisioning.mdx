@@ -11,9 +11,12 @@ permalink: "provisioning"
 
 ユーザーがどのようにしてサインアップするかを決めることは、早期に検討するべき重要事項です。そこでの決定内容が、今後必要となる多くの決定事項に影響を与えます。ユーザーがシステムに追加される方法には一般的なパターンがあり、ワークフローの設計を考える際に注意するべき事柄があります。
 
-### ベストプラクティス
+<Info>
+  ### ベストプラクティス
 
 Auth0はさまざまなワークフローをサポートしていますが、サインアップにはAuth0[ユニバーサルログイン](/docs/ja-jp/login/universal-login)を使用したWebベースのワークフローが、最適な機能性と最高のセキュリティを提供するという点で、業界でもAuth0にとってもベストプラクティスとみなされています。
+
+</Info>
 
 Auth0は、いくつかの異なる[IDプロバイダー](/docs/ja-jp/authenticate/identity-providers)を通したサインアップに対応しています。サインアップ中には、Auth0がユーザープロファイルをプロビジョニングするため、ユーザーのアカウント情報が含まれます。機能性とワークフローを検討する際には、以下のように、考慮するべき事柄がいくつかあります。
 
@@ -34,9 +37,12 @@ Auth0はそのままで便利に使えるIDストレージを提供している�
 
 ## 組織をプロビジョニングする
 
-### Auth0ビデオで始める
+<Info>
+  ### Auth0ビデオで始める
 
 [「準備：ユーザーストア」](/docs/ja-jp/videos/get-started/02-provision-user-stores)と[「準備：ユーザーのインポート」](/docs/ja-jp/videos/get-started/03-provision-import-users)の2つのビデオを観て、Auth0テナント内でユーザープロファイルがプロビジョニングされる方法と、Auth0がAuth0ユーザーストアに既存ユーザーを移動させる方法について学びましょう。
+
+</Info>
 
 組織のプロビジョニングに必要なことは、システム内で組織一般がどのように存在しているかによります。それには、これらの組織のユーザーがどのようにアプリケーションとやり取りするかを考慮するための時間が必要になるかもしれません。「[複数組織のアーキテクチャ](/docs/ja-jp/get-started/architecture-scenarios/multiple-organization-architecture)」を参照して、IAMシステムに組織をどのように構成するか決定してください。
 
@@ -76,9 +82,12 @@ Auth0はそのままで便利に使えるIDストレージを提供している�
 
 [ユーザープロファイル](/docs/ja-jp/get-started/architecture-scenarios/business-to-business/profile-management)をホストするだけでなく、Auth0はレガシーIDストアの[プロキシ](#identity-store-proxy)機能を備え、安全なAuth0ホストのIDストアを提供しています。これらの機能はどちらも、Auth0の[データベース接続](/docs/ja-jp/authenticate/database-connections)を使うことでサポートされます。レガシーIDストアの代わりにAuth0を使うことに決めた場合は、一括移行で一気に[ユーザーを移行](/docs/ja-jp/manage-users/user-migration)するか、自動移行で段階的に移行することができます。
 
-### ベストプラクティス
+<Info>
+  ### ベストプラクティス
 
 当社の多くの顧客の方は、2段階でのユーザー移行を選びます。まず自動移行を行ってできるだけ多くのアクティブユーザーを移行し、次に自動移行をオフにして一括移行で残りのユーザーを移行する、というアプローチです。詳細については、[「ユーザー移行シナリオ」](/docs/ja-jp/users/import-and-export-users/user-migration-scenarios)をご覧ください。
+
+</Info>
 
 自動移行は、ユーザーを個別に移行したい場合にお勧めします。また、ほぼすべての状況で、ユーザーは既存のパスワードを維持することができます。一括移行では、[Management API](/docs/ja-jp/api/management/v2#!/Jobs/post_users_imports)の使用をお勧めします。[User Import/Export（ユーザーインポート/エクスポート）拡張機能](/docs/ja-jp/manage-users/user-migration/user-import-export-extension)に比べて、Management APIには高い柔軟性と制御が備わっているため、シンプルな状況のほとんどで有効です。
 
@@ -92,9 +101,12 @@ Auth0はそのままで便利に使えるIDストレージを提供している�
 
 ### IDストアプロキシ
 
-### ベストプラクティス
+<Info>
+  ### ベストプラクティス
 
 Management APIへの呼び出しは、[「Auth0のレート制限ポリシー」](/docs/ja-jp/support/policies/rate-limit-policy)の対象となります。Auth0は通常、APIを直接呼び出す代わりに、開発環境に適した[Auth0 SDK](/docs/ja-jp/libraries)の使用を推奨していることにご注意ください。
+
+</Info>
 
 ## 組織のユーザーをプロビジョニングする
 
@@ -119,9 +131,12 @@ Auth0のデータベース接続タイプは、既存の（レガシー）IDス�
 
 ### 組織間で共有のユーザーをプロビジョニングする
 
-### ベストプラクティス
+<Info>
+  ### ベストプラクティス
 
 [「Organization機能」](/docs/ja-jp/organizations)を活用できれば、ログインシステムを大幅に簡易化でき、今後の維持と拡張がしやすくなります。詳細は、[「複数のOrganizationアーキテクチャ」](/docs/ja-jp/architecture-scenarios/multiple-organization-architecture)をご覧ください。
+
+</Info>
 
 ### デプロビジョニングの制限
 
@@ -151,9 +166,12 @@ OIDCの主な原則の1つは、ユーザー本人以外にパスワードを知
 
 エンタープライズサインアップは、[エンタープライズログイン](/docs/ja-jp/get-started/architecture-scenarios/business-to-business/authentication)を使ったサインアップと同じです。初回のエンタープライズログインでユーザー[プロファイル](/docs/ja-jp/get-started/architecture-scenarios/business-to-business/profile-management)が自動的に作成されるため、本質的な違いはありません。
 
-### ベストプラクティス
+<Info>
+  ### ベストプラクティス
 
 顧客が独自のIdPを使用できるようにすることの利点の1つは、顧客が独自のIdPセットアップでユーザーを管理し、ロールとアクセスを割り当てることができるため、顧客のために管理機能を構築する必要がないということです。顧客のマッピングを解決することで、これははるかに簡単になります。 :::
+
+</Info>
 
 <Warning>
 
