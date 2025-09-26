@@ -23,7 +23,7 @@ curl --request PATCH \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{"initiate_login_uri": ""}'
-``` lines
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/clients/{yourClientId}");
 var request = new RestRequest(Method.PATCH);
@@ -55,14 +55,14 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/clients/{yourClientId}")
-.header("content-type", "application/json")
-.header("authorization", "Bearer API2_ACCESS_TOKEN")
-.header("cache-control", "no-cache")
-.body("{\"initiate_login_uri\": \"\"}")
-.asString();
+HttpResponse<String> response = Unirest.patch("https://{yourDomain}/api/v2/clients/{yourClientId}")
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer API2_ACCESS_TOKEN")
+  .header("cache-control", "no-cache")
+  .body("{\"initiate_login_uri\": \"<login_url>\"}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
@@ -82,7 +82,7 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
@@ -134,7 +134,7 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
@@ -165,7 +165,7 @@ request["cache-control"] = 'no-cache'
 request.body = "{\"initiate_login_uri\": \"\"}"
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
 let headers = [
@@ -204,7 +204,7 @@ curl --request PATCH \
 --header 'cache-control: no-cache' \
 --header 'content-type: application/json' \
 --data '{"default_redirection_uri": ""}'
-``` lines
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/tenants/settings");
 var request = new RestRequest(Method.PATCH);
@@ -236,7 +236,7 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-``` lines
+```
 ```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/settings")
 .header("content-type", "application/json")
@@ -263,7 +263,7 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
@@ -315,7 +315,7 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
@@ -346,7 +346,7 @@ request["cache-control"] = 'no-cache'
 request.body = "{\"default_redirection_uri\": \"\"}"
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
 let headers = [
@@ -412,7 +412,7 @@ curl --request POST \
 --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
 --header 'content-type: application/json' \
 --data '{ "user_id": "A_USER_ID", "client_id": "A_CLIENT_ID" }'
-``` lines
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/tickets/password-change");
 var request = new RestRequest(Method.POST);
@@ -442,7 +442,7 @@ body, _ := ioutil.ReadAll(res.Body)
 fmt.Println(res)
 fmt.Println(string(body))
 }
-``` lines
+```
 ```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/tickets/password-change")
 .header("content-type", "application/json")
@@ -467,7 +467,7 @@ console.log(response.data);
 }).catch(function (error) {
 console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
 #import 
 NSDictionary \*headers = @{ @"content-type": @"application/json",
@@ -518,7 +518,7 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
 conn = http.client.HTTPSConnection("")
@@ -547,7 +547,7 @@ request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 request.body = "{ \"user_id\": \"A_USER_ID\", \"client_id\": \"A_CLIENT_ID\" }"
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
 let headers = [
