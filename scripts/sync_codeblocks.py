@@ -73,26 +73,37 @@ def replace_segments(
     locale_segments: list[Segment],
     replacements: list[str],
     label: str,
-) -> tuple[str, bool]:
+    *,
+    strict: bool,
+) -> tuple[str, bool, str | None]:
     """Replace locale segments with originals, ensuring counts stay aligned."""
     locale_count = len(locale_segments)
     original_count = len(replacements)
 
     if locale_count == 0 and original_count == 0:
-        return locale_text, False
+        return locale_text, False, None
 
     plural_label = f"{label}s"
 
     if original_count == 0:
-        raise ValueError(f"Original has no {plural_label}")
+        message = f"Original has no {plural_label}"
+        if strict:
+            raise ValueError(message)
+        return locale_text, False, message
 
     if locale_count == 0:
-        raise ValueError(f"Locale has no {plural_label}")
+        message = f"Locale has no {plural_label}"
+        if strict:
+            raise ValueError(message)
+        return locale_text, False, message
 
     if locale_count != original_count:
-        raise ValueError(
+        message = (
             f"Mismatch in {label} count: locale={locale_count} original={original_count}"
         )
+        if strict:
+            raise ValueError(message)
+        return locale_text, False, message
 
     result_parts: list[str] = []
     last_idx = 0
@@ -103,7 +114,7 @@ def replace_segments(
     result_parts.append(locale_text[last_idx:])
 
     new_text = "".join(result_parts)
-    return new_text, new_text != locale_text
+    return new_text, new_text != locale_text, None
 
 
 def sync_file(locale_path: Path, original_path: Path) -> SyncOutcome:
@@ -116,35 +127,49 @@ def sync_file(locale_path: Path, original_path: Path) -> SyncOutcome:
 
     groups_present = bool(locale_groups or original_groups)
     groups_changed = False
+    messages: list[str] = []
+
     if groups_present:
         try:
-            locale_text, groups_changed = replace_segments(
-                locale_text, locale_groups, original_groups, "CodeGroup"
+            locale_text, groups_changed, msg = replace_segments(
+                locale_text,
+                locale_groups,
+                original_groups,
+                "CodeGroup",
+                strict=True,
             )
         except ValueError as exc:
             return SyncOutcome(False, f"Skipped: {exc}")
-
+        if msg:
+            messages.append(msg)
+    
     locale_blocks = list_codeblocks(locale_text)
     original_blocks = [segment.text for segment in list_codeblocks(original_text)]
 
     blocks_present = bool(locale_blocks or original_blocks)
     blocks_changed = False
     if blocks_present:
-        try:
-            locale_text, blocks_changed = replace_segments(
-                locale_text, locale_blocks, original_blocks, "codeblock"
-            )
-        except ValueError as exc:
-            return SyncOutcome(False, f"Skipped: {exc}")
+        locale_text, blocks_changed, msg = replace_segments(
+            locale_text,
+            locale_blocks,
+            original_blocks,
+            "codeblock",
+            strict=False,
+        )
+        if msg:
+            messages.append(msg)
 
     if not groups_present and not blocks_present:
         return SyncOutcome(False, "No codeblocks or CodeGroups in either file")
 
     if not (groups_changed or blocks_changed):
+        if messages:
+            return SyncOutcome(False, "; ".join(messages))
         return SyncOutcome(False, "Already matched")
 
     locale_path.write_text(locale_text, encoding="utf-8")
-    return SyncOutcome(True, "Updated")
+    summary = "; ".join(messages) if messages else "Updated"
+    return SyncOutcome(True, summary)
 
 
 def main() -> None:
