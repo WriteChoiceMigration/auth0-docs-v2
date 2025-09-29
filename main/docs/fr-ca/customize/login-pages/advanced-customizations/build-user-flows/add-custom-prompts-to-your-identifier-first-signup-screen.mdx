@@ -31,18 +31,18 @@ In your <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">A
 
 Run Auth0's single-page ACUL boilerplate application by executing the code below, which provides additional context for Advanced Customizations interfaces.
 
-```javascript lines
+```bash lines
 git clone https://github.com/auth0/auth0-acul-react-boilerplate
 ```
 
 After cloning the boilerplate app, change the directory to the `auth0-acul-react-boilerplate` folder and install the [Advanced Customizations SDK](/docs/fr-ca/customize/login-pages/advanced-customizations/getting-started/sdk-quickstart).
 
-```javascript lines
-//Clone the ACUL sample application into the root folder of your project
+```bash lines
+#Clone the ACUL sample application into the root folder of your project
 
 git clone https://github.com/auth0-samples/auth0-acul-samples.git
 
-//Change directory to install the ACUL sample application 
+#Change directory to install the ACUL sample application 
 
 cd auth0-acul-samples && npm i
 ```
@@ -59,7 +59,7 @@ accordion.expand_all/accordion.collapse_all
 
 <Accordion title="Add Custom Prompts">
 
-```javascript lines
+```jsx lines expandable
 export const SignupIdScreen = () => {
   const signupManager = new SignupId();
   const [firstName, setfirstName] = useState('');
@@ -102,7 +102,7 @@ The signup-id `POST` payload now includes `ulp-firstName`.
 
 Complete the validation section of [Customize Signup and Login Prompts](/docs/fr-ca/customize/login-pages/universal-login/customize-signup-and-login-prompts#validate-and-save-captured-data) using the code below to capture and save the data.
 
-```javascript lines
+```js lines
 exports.onExecutePreUserRegistration = async (event, api) => {
   const firstName = event.request.body['ulp-firstName'];
   if(!firstName) {

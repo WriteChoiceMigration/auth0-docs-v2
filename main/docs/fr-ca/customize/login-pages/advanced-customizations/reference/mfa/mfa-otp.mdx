@@ -17,7 +17,7 @@ The <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</
 
 Import and instantiate the MFA OTP Challenge screen class:
 
-```javascript lines
+```js lines
 import MfaOtpChallenge from '@auth0/auth0-acul-js/mfa-otp-challenge';
 const mfaOtpChallenge = new MfaOtpChallenge();
 
@@ -38,7 +38,7 @@ The MFA OTP Challenge screen class properties are:
 
 <Tabs><Tab title="image de marque">
 
-```javascript lines
+```ts lines expandable
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -73,7 +73,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```javascript lines
+```ts lines
 interface client {
   description: null | string;
   id: string;
@@ -85,7 +85,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```javascript lines
+```ts lines
 interface organization {
   branding: null | {
     colors?: {
@@ -104,7 +104,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```javascript lines
+```ts lines
 interface prompt{
   name: string;
 }
@@ -112,7 +112,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```javascript lines
+```ts lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -134,7 +134,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```javascript lines
+```ts lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -145,7 +145,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```javascript lines
+```ts lines expandable
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -178,7 +178,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```javascript lines
+```ts lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -198,7 +198,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```javascript lines
+```ts lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -234,7 +234,7 @@ The MFA OTP Challenge screen class methods are:
 
 This method continues with the OTP challenge using the provided code.
 
-```javascript lines
+```js lines
 import MfaOtpChallenge from '@auth0/auth0-acul-js/mfa-otp-challenge';
 const mfaOtpChallenge = new MfaOtpChallenge();
 
@@ -272,7 +272,7 @@ await mfaOtpChallenge.continue({
 
 This method allows the user to try another MFA method.
 
-```javascript lines
+```js lines
 import MfaOtpChallenge from '@auth0/auth0-acul-js/mfa-otp-challenge';
 const mfaOtpChallenge = new MfaOtpChallenge();
 
@@ -305,7 +305,7 @@ The MFA OTP Enrollment Code screen class provides methods associated with the mf
 
 Import and instantiate the MFA OTP Enrollment Code screen class:
 
-```javascript lines
+```js lines
 import MfaOtpEnrollmentCode from '@auth0/auth0-acul-js/mfa-otp-enrollment-code';
 const mfaOtpEnrollmentCode = new MfaOtpEnrollmentCode();
 
@@ -325,7 +325,7 @@ The MFA OTP Enrollment Code screen class properties are:
 
 <Tabs><Tab title="image de marque">
 
-```javascript lines
+```ts lines expandable
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -360,7 +360,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```javascript lines
+```ts lines
 interface client {
   description: null | string;
   id: string;
@@ -372,7 +372,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```javascript lines
+```ts lines
 interface organization {
   branding: null | {
     colors?: {
@@ -391,7 +391,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```javascript lines
+```ts lines
 interface prompt{
   name: string;
 }
@@ -399,7 +399,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```javascript lines
+```ts lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -421,7 +421,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```javascript lines
+```ts lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -432,7 +432,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```javascript lines
+```ts lines expandable
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -465,7 +465,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```javascript lines
+```ts lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -485,7 +485,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```javascript lines
+```ts lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -521,7 +521,7 @@ The MFA OTP Enrollment Code screen class methods are:
 
 This method continues the MFA OTP enrollment process by submitting the OTP code.
 
-```javascript lines
+```js lines
 import MfaOtpEnrollmentCode from '@auth0/auth0-acul-js/mfa-otp-enrollment-code';
 const mfaOtpEnrollmentCode = new MfaOtpEnrollmentCode();
 
@@ -552,7 +552,7 @@ await mfaOtpEnrollmentCode.continue({
 
 This method allows the user to try another MFA method.
 
-```javascript lines
+```js lines
 import MfaOtpEnrollmentCode from '@auth0/auth0-acul-js/mfa-otp-enrollment-code';
 const mfaOtpEnrollmentCode = new MfaOtpEnrollmentCode();
 
@@ -585,7 +585,7 @@ The MFA OTP Enrollment QR screen class provides methods associated with the mfa-
 
 Import and instantiate the MFA OTP Enrollment QR screen class:
 
-```javascript lines
+```js lines
 import MfaOtpEnrollmentQr from '@auth0/auth0-acul-js/mfa-otp-enrollment-qr';
 const mfaOtpEnrollmentQr = new MfaOtpEnrollmentQr();
 
@@ -603,7 +603,7 @@ The MFA OTP Enrollment QR screen class properties are:
 
 <Tabs><Tab title="image de marque">
 
-```javascript lines
+```ts lines expandable
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -638,7 +638,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```javascript lines
+```ts lines
 interface client {
   description: null | string;
   id: string;
@@ -650,7 +650,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```javascript lines
+```ts lines
 interface organization {
   branding: null | {
     colors?: {
@@ -669,7 +669,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```javascript lines
+```ts lines
 interface prompt{
   name: string;
 }
@@ -677,7 +677,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```javascript lines
+```ts lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -699,7 +699,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```javascript lines
+```ts lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -710,7 +710,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```javascript lines
+```ts lines expandable
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -743,7 +743,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```javascript lines
+```ts lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -763,7 +763,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```javascript lines
+```ts lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -799,7 +799,7 @@ The MFA OTP Enrollment QR screen class methods are:
 
 This method continues the MFA OTP enrollment QR process by submitting the OTP code.
 
-```javascript lines
+```js lines
 import MfaOtpEnrollmentQr from '@auth0/auth0-acul-js/mfa-otp-enrollment-qr';
 const mfaOtpEnrollmentQr = new MfaOtpEnrollmentQr();
 
@@ -834,7 +834,7 @@ await mfaOtpEnrollmentQr.continue({ code: '123456' });
 
 This method navigates to the authenticator selection screen.
 
-```javascript lines
+```js lines
 import MfaOtpEnrollmentQr from '@auth0/auth0-acul-js/mfa-otp-enrollment-qr';
 const mfaOtpEnrollmentQr = new MfaOtpEnrollmentQr();
 
@@ -869,7 +869,7 @@ await mfaOtpEnrollmentQr.toggleView();
 
 This method allows the user to try another MFA method.
 
-```javascript lines
+```js lines
 import MfaOtpEnrollmentQr from '@auth0/auth0-acul-js/mfa-otp-enrollment-qr';
 const mfaOtpEnrollmentQr = new MfaOtpEnrollmentQr();
 
