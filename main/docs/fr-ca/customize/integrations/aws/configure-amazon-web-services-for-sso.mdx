@@ -48,23 +48,23 @@ Pour utiliser le fournisseur, vous devez créer un rôle IAM en utilisant le fo
 5. Le troisième écran **Créer un rôle** est **Ajouter des balises**. Vous pouvez utiliser des balises pour organiser les rôles que vous créez si vous en prévoyez un grand nombre.
 6. Sur la page **Révision**, indiquez le **Nom du rôle** et révisez vos paramètres. Fournissez les valeurs des paramètres suivants :
 
-   <table class="table"><thead>
-<tr>
-<th><strong>Field (Champ)</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Role name (Nom du rôle)</strong></td>
-<td>Nom descriptif de votre rôle.</td>
-</tr>
-<tr>
-<td><strong>Role description ( Description du rôle)</strong></td>
-<td>Description de la fonction pour laquelle votre rôle est utilisé.</td>
-</tr>
-</tbody>
-</table>
+    <table class="table"><thead>
+    <tr>
+    <th><strong>Field (Champ)</strong></th>
+    <th><strong>Description</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Role name (Nom du rôle)</strong></td>
+    <td>Nom descriptif de votre rôle.</td>
+    </tr>
+    <tr>
+    <td><strong>Role description ( Description du rôle)</strong></td>
+    <td>Description de la fonction pour laquelle votre rôle est utilisé.</td>
+    </tr>
+    </tbody>
+    </table>
 7. Révisez l’information des **Entités de confiance** et des **Autorisations**, puis cliquez sur **Créer un rôle**.
 
 ## Mapper un rôle AWS pour un utilisateur
@@ -103,7 +103,7 @@ Les **rôles AWS** indiqués seront associés à une **autorisation IAM** qui 
    1. Votre règle peut obtenir ces deux valeurs de plusieurs façons. Vous pouvez obtenir ces valeurs à partir de la console IAM en sélectionnant les éléments créés dans AWS lors des étapes précédentes dans la barre latérale gauche. Le fournisseur d’identité et le rôle que vous avez créé ont tous deux un ARN qui peut être copié si vous les sélectionnez dans la console.
    2. Dans l’exemple ci-dessus, ces deux valeurs sont codées en dur dans la règle. Vous pouvez également stocker ces valeurs dans le profil utilisateur ou les obtenir à l’aide d’autres attributs. Par exemple, si vous utilisez Active Directory, vous pouvez mapper les propriétés associées aux utilisateurs, telles que le `group`, au rôle AWS approprié :
 
-      ```
+      ```javascript
       var awsRoles = {
         'DomainUser': 'arn:aws:iam::951887872838:role/TestSAML,arn:aws:iam::95123456838:saml-provider/MyAuth0',
         'DomainAdmins': 'arn:aws:iam::957483571234:role/SysAdmins,arn:aws:iam::95123456838:saml-provider/MyAuth0'
