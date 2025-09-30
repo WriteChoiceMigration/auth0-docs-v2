@@ -137,7 +137,7 @@ Auth0とのアクティブな<Tooltip data-tooltip-id="react-containers-Definiti
 * 各組織の管理者。ユーザーの作成を担当している可能性があります。
 * ユーザーの作成を行う別のシステム。Auth0でもユーザーを作成している可能性があります。オーディエンスにかかわらず、手段は同様です。アプリケーションに適した認可モデルを使用することだけが問題となります。
 
-以下の異なる3つのペルソナが[ユーザーを招待](https://auth0.com/docs/design/creating-invite-only-applications)する可能性があります。
+以下の異なる3つのペルソナが[ユーザーを招待](/docs/ja-jp/design/creating-invite-only-applications)する可能性があります。
 
 ユーザーを招待するには、[Organizations機能](/docs/ja-jp/manage-users/organizations/configure-organizations/invite-members)の使用をお勧めします。ユーザー招待の実装にOrganization機能を使用して**おらず**、独自の機能を構築している場合は、`user.email_verified`パラメーターに`false`を設定して各ユーザーを作成し、ランダムで一時的なパスワードを持たせるようにすることが重要です。生成されたパスワードを知っているのはAuth0だけにします。外部システムで保管したり、ユーザーに渡したりしては**いけません**。それから、[Management API](https://auth0.com/docs/api/management/v2#!/Tickets/post_password_change)を使って、パスワードのリセットリンクをメールでユーザーに送信します。メールテンプレートはAuth0で編集して、招待でのサインアップワークフローに沿ったものにカスタマイズできます。これにより、ユーザーのメールアドレスが、作成されたユーザーのものだと保証され、パスワードを知っているのはユーザー自身だけになります。
 

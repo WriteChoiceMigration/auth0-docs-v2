@@ -140,7 +140,7 @@ npm install @capacitor/browser @capacitor/app
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-Capacitor's Browser plugin on iOS uses [`SFSafariViewController`](https://developer.apple.com/documentation/safariservices/sfsafariviewcontroller), which on iOS 11+ does not share cookies with Safari on the device. This means that [SSO](https://auth0.com/docs/sso) will not work on those devices. If you need SSO, please instead use a compatible plugin that uses [ASWebAuthenticationSession](https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession).
+Capacitor's Browser plugin on iOS uses [`SFSafariViewController`](https://developer.apple.com/documentation/safariservices/sfsafariviewcontroller), which on iOS 11+ does not share cookies with Safari on the device. This means that [SSO](/docs/ja-jp/sso) will not work on those devices. If you need SSO, please instead use a compatible plugin that uses [ASWebAuthenticationSession](https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession).
 
 </Callout>
 
@@ -183,7 +183,7 @@ The `Auth0Provider` component takes the following props:
 
 <Warning>
 
-To persist authentication after closing and reopening the application, you may want to set `cacheLocation` to `localstorage` when configuring the SDK, but please be aware of [the risks of storing tokens in localstorage](https://auth0.com/docs/libraries/auth0-single-page-app-sdk#change-storage-options). Also, localstorage should be treated as **transient** in Capacitor app as the data might be recovered unexpectedly in certain circumstances. Please read the [guidance on storage in the Capacitor docs](https://capacitorjs.com/docs/guides/storage#why-cant-i-just-use-localstorage-or-indexeddb).
+To persist authentication after closing and reopening the application, you may want to set `cacheLocation` to `localstorage` when configuring the SDK, but please be aware of [the risks of storing tokens in localstorage](/docs/ja-jp/libraries/auth0-single-page-app-sdk#change-storage-options). Also, localstorage should be treated as **transient** in Capacitor app as the data might be recovered unexpectedly in certain circumstances. Please read the [guidance on storage in the Capacitor docs](https://capacitorjs.com/docs/guides/storage#why-cant-i-just-use-localstorage-or-indexeddb).
 
 Additionally, the SDK has the ability to [use a custom cache implementation](https://github.com/auth0/auth0-spa-js/blob/master/EXAMPLES.md#creating-a-custom-cache) to store tokens, if you have a requirement to use a more secure and persistent storage mechanism.
 
@@ -298,7 +298,7 @@ Once that's complete, verify that Auth0 redirects you back to your application.
 
 ## Add Logout to Your Application
 
-Now that users can log in, you need to configure [a way to log out](https://auth0.com/docs/logout/guides/logout-auth0). Users must redirect to the Auth0 logout endpoint in the browser to clear their browser session. Again, Capacitor's Browser plugin should perform this redirect so that the user does not leave your app and receive a suboptimal experience.
+Now that users can log in, you need to configure [a way to log out](/docs/ja-jp/logout/guides/logout-auth0). Users must redirect to the Auth0 logout endpoint in the browser to clear their browser session. Again, Capacitor's Browser plugin should perform this redirect so that the user does not leave your app and receive a suboptimal experience.
 
 To achieve this with Ionic and Capacitor in conjunction with the Auth0 SDK:
 
@@ -353,7 +353,7 @@ Add the `LogoutButton` component to your application. When you click it, verify 
 
 ## Show User Profile Information
 
-The Auth0 React SDK helps you retrieve the [profile information](https://auth0.com/docs/users/concepts/overview-user-profile) associated with logged-in users quickly in whatever component you need, such as their name or profile picture, to personalize the user interface. The profile information is available through the `user` property exposed by the `useAuth0()` hook. Take this `Profile` component as an example of how to use it:
+The Auth0 React SDK helps you retrieve the [profile information](/docs/ja-jp/users/concepts/overview-user-profile) associated with logged-in users quickly in whatever component you need, such as their name or profile picture, to personalize the user interface. The profile information is available through the `user` property exposed by the `useAuth0()` hook. Take this `Profile` component as an example of how to use it:
 
 ```javascript lines
 import { useAuth0 } from '@auth0/auth0-react';
@@ -381,7 +381,7 @@ The `user` property contains sensitive information and artifacts related to the 
 
 ### Checkpoint
 
-Add the `Profile` component to your application, and verify that you can display the `user.name` or [any other `user` property](https://auth0.com/docs/users/references/user-profile-structure#user-profile-attributes) within a component correctly after you have logged in.
+Add the `Profile` component to your application, and verify that you can display the `user.name` or [any other `user` property](/docs/ja-jp/users/references/user-profile-structure#user-profile-attributes) within a component correctly after you have logged in.
 
 ##### What can you do next?
 

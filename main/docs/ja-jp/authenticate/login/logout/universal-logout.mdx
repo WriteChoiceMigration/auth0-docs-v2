@@ -25,7 +25,7 @@ Auth0がユーザーログアウトの要求を受け取ると、Okta Workforce 
 
 <Frame>![User workflow using Universal Logout](/images/ja-jp/cdy7uua7fh8z/4tcRn1VmydyBGORCHlKuvt/725b95df1cddae8ed3b2d36f0c3495bb/universal_logout_flow_diagram.png)</Frame>
 
-アプリケーションのユーザーがアクセスを失うまでにかかる時間は、アプリケーションの種類とAuth0との統合方法によって異なります。OIDCや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">OAuth 2.0</Tooltip>のアイデンティティ標準への対応、そして、Auth0の[クイックスタートとSDK](https://auth0.com/docs/quickstarts)を通して、Auth0は以下を含む[アプリケーションのアーキテクチャ](/docs/ja-jp/get-started/applications)に幅広く対応しています。
+アプリケーションのユーザーがアクセスを失うまでにかかる時間は、アプリケーションの種類とAuth0との統合方法によって異なります。OIDCや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">OAuth 2.0</Tooltip>のアイデンティティ標準への対応、そして、Auth0の[クイックスタートとSDK](/docs/ja-jp/quickstarts)を通して、Auth0は以下を含む[アプリケーションのアーキテクチャ](/docs/ja-jp/get-started/applications)に幅広く対応しています。
 
 * 従来型のWebアプリケーション：独自の[アプリケーションセッション](/docs/ja-jp/manage-users/sessions/session-layers)を作成し、リフレッシュトークンとアクセストークンを使ってセキュリティ保護されたバックエンドでAPIにアクセスします。
 * ブラウザーベースのJavaScriptアプリケーション：[Auth0のセッションレイヤー](/docs/ja-jp/authenticate/login/configure-silent-authentication)を活用するか、[リフレッシュトークンのローテーション](/docs/ja-jp/secure/tokens/refresh-tokens/refresh-token-rotation)などの技術を使用して、Webブラウザー内でAPIへのアクセスに必要なアクセストークンを取得します。
@@ -35,12 +35,12 @@ Auth0がユーザーログアウトの要求を受け取ると、Okta Workforce 
 
 ユニバーサルログアウト統合を有効化すると、アプリケーションがリフレッシュトークンやAuth0セッションを利用する場合にセキュリティの面でメリットがあります。
 
-* [Auth0セッション](/docs/ja-jp/authenticate/login/configure-silent-authentication)を利用するブラウザーベースのアプリでは、アプリケーションが次回に[Auth0セッションをポーリング](https://auth0.com/docs/authenticate/login/configure-silent-authentication#poll-with-checksession-)するとユーザーがアクセスを失ってしまうため、Auth0はリダイレクト時にユーザーに再度認証を求めます。
+* [Auth0セッション](/docs/ja-jp/authenticate/login/configure-silent-authentication)を利用するブラウザーベースのアプリでは、アプリケーションが次回に[Auth0セッションをポーリング](/docs/ja-jp/authenticate/login/configure-silent-authentication#poll-with-checksession-)するとユーザーがアクセスを失ってしまうため、Auth0はリダイレクト時にユーザーに再度認証を求めます。
 * リフレッシュトークンを使用するアプリでは、現在のアクセストークンの有効期限が切れると、ユーザーがアクセスを失います。この際の有効期限は、Auth0で構成される[アクセストークンの最大ライフタイム](/docs/ja-jp/secure/tokens/access-tokens/update-access-token-lifetime)や数秒に至るまで大きな幅があります。
 
 ### アプリケーションのユーザーセッションを取り消す
 
-Webアプリケーションが作成したセッションについては、Auth0に既存の[OpenID Connectのバックチャネルログアウト](/docs/ja-jp/authenticate/login/logout/back-channel-logout/configure-back-channel-logout)機能を使用して、ユニバーサルログアウトがAuth0のユーザーセッションを終了したときに終了します。詳細については、「[Auth0 SDK実装の例](https://auth0.com/docs/authenticate/login/logout/back-channel-logout#auth0-sdks)」をお読みください。
+Webアプリケーションが作成したセッションについては、Auth0に既存の[OpenID Connectのバックチャネルログアウト](/docs/ja-jp/authenticate/login/logout/back-channel-logout/configure-back-channel-logout)機能を使用して、ユニバーサルログアウトがAuth0のユーザーセッションを終了したときに終了します。詳細については、「[Auth0 SDK実装の例](/docs/ja-jp/authenticate/login/logout/back-channel-logout#auth0-sdks)」をお読みください。
 
 ## Auth0でユニバーサルログアウトを構成する
 
@@ -155,4 +155,4 @@ SAML接続ではエンドポイントのURLを共有する他にも、以下の�
 }
 ```
 
-詳細については、「[Management APIを使用してエンタープライズ接続を作成する](https://auth0.com/docs/authenticate/identity-providers/enterprise-identity-providers/saml#create-an-enterprise-connection-using-the-management-api)」をお読みください。
+詳細については、「[Management APIを使用してエンタープライズ接続を作成する](/docs/ja-jp/authenticate/identity-providers/enterprise-identity-providers/saml#create-an-enterprise-connection-using-the-management-api)」をお読みください。

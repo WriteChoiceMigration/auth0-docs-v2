@@ -300,7 +300,7 @@ Before implementing the `HttpAuthenticationMechanism` interface that will use al
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-To learn more about the available signing algorithms, refer to the [documentation](https://auth0.com/docs/tokens/concepts/signing-algorithms).
+To learn more about the available signing algorithms, refer to the [documentation](/docs/ja-jp/tokens/concepts/signing-algorithms).
 
 </Callout>
 
@@ -366,7 +366,7 @@ public class Auth0AuthenticationMechanism implements HttpAuthenticationMechanism
 
 The class overrides the `validateRequest` method, which is called on every request to our application, and is responsible for notifying the container of the authentication status.
 
-This sample uses the [Authorization Code Flow](https://auth0.com/docs/flows/concepts/auth-code) to exchange an Authorization Code for a token during the authentication flow. If this request is to the `/callback` endpoint and contains the `code` request parameter, it does a few important things:
+This sample uses the [Authorization Code Flow](/docs/ja-jp/flows/concepts/auth-code) to exchange an Authorization Code for a token during the authentication flow. If this request is to the `/callback` endpoint and contains the `code` request parameter, it does a few important things:
 
 * Calls the `handle` method of the `AuthenticationController` to exchange the Authorization Code for an ID token and an access token.
 * Uses the ID token to create a new `Auth0Credential`.
@@ -415,7 +415,7 @@ public class LoginServlet extends HttpServlet {
 }
 ```
 
-The `LoginController` is responsible for redirecting the request to the proper authorization URL, where the user can authenticate with Auth0. It uses the `AuthenticationController` from the Auth0 Java MVC SDK to build the correct authorization URL, using the configuration values injected via `Auth0AuthenticationConfig`. By default, this sample requests the `"openid profile email"` scopes, to allow the application to retrieve basic profile information from the authenticated user. You can read more about these scopes in the [OpenID Connect Scopes](https://auth0.com/docs/scopes/current/oidc-scopes) documentation.
+The `LoginController` is responsible for redirecting the request to the proper authorization URL, where the user can authenticate with Auth0. It uses the `AuthenticationController` from the Auth0 Java MVC SDK to build the correct authorization URL, using the configuration values injected via `Auth0AuthenticationConfig`. By default, this sample requests the `"openid profile email"` scopes, to allow the application to retrieve basic profile information from the authenticated user. You can read more about these scopes in the [OpenID Connect Scopes](/docs/ja-jp/scopes/current/oidc-scopes) documentation.
 
 Once the user has entered their credentials and authorized the requested permissions, Auth0 will issue a request to the `callbackUrl`, and include a `code` query parameter which can be exchanged for an ID token and an access token. Recall that the `Auth0HttpAuthenticationMechanism` created above handles this exchange so that it can notify the application container of authentication status. This allows the Servlet that handles requests to the `/callback` path to simply forward the request on to the originally requested resource prior to logging in, or simply redirect to the home page:
 
@@ -437,7 +437,7 @@ public class CallbackServlet extends HttpServlet {
 
 ## Display user information
 
-You can use the `Auth0JwtPrincipal` to get profile information for the authenticated user. The following code sample demonstrates how to use the claims on the [ID token](https://auth0.com/docs/tokens/id-token) to set profile data as a request attribute:
+You can use the `Auth0JwtPrincipal` to get profile information for the authenticated user. The following code sample demonstrates how to use the claims on the [ID token](/docs/ja-jp/tokens/id-token) to set profile data as a request attribute:
 
 ```java lines
 // src/main/java/com/auth0/example/web/HomeServlet.java

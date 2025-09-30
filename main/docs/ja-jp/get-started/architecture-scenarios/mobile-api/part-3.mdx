@@ -33,7 +33,7 @@ permalink: "part-3"
 
 `/timesheets`エンドポイントへの`HTTP GET`要求は、ユーザーがタイムシートを取得できるようにし、`/timesheets`への`HTTP POST`要求は、ユーザーが新たなタイムシートを追加できるようにします。
 
-[Node.js](https://auth0.com/docs/architecture-scenarios/application/mobile-api/api-implementation-nodejs#1-define-the-api-endpoints)
+[Node.js](/docs/ja-jp/architecture-scenarios/application/mobile-api/api-implementation-nodejs#1-define-the-api-endpoints)
 
 ### エンドポイントのセキュリティ確保
 
@@ -53,17 +53,17 @@ APIは以下の検証を実行すべきです。
 
 検証プロセスにはクライアント権限（スコープ）の確認も含まれますが、これに関しては次の段落で別に説明します。
 
-アクセストークン検証の詳細については、[「アクセストークンを検証する」](https://auth0.com/docs/tokens/guides/validate-access-tokens)を参照してください。
+アクセストークン検証の詳細については、[「アクセストークンを検証する」](/docs/ja-jp/tokens/guides/validate-access-tokens)を参照してください。
 
-[Node.js](https://auth0.com/docs/architecture-scenarios/application/mobile-api/api-implementation-nodejs#2-secure-the-api-endpoints)
+[Node.js](/docs/ja-jp/architecture-scenarios/application/mobile-api/api-implementation-nodejs#2-secure-the-api-endpoints)
 
 ### クライアントの権限の確認
 
 この段階ではJWTの有効性が検証されています。最後の手順は、クライアントが保護されたリソースにアクセスするために必要な権限を持っているかどうかを検証することです。
 
-そのためには、APIがデコードされたJWTの[スコープ](https://auth0.com/docs/scopes)を確認する必要があります。このクレームはペイロードの一部で、スペースで区切られた文字列のリストです。
+そのためには、APIがデコードされたJWTの[スコープ](/docs/ja-jp/scopes)を確認する必要があります。このクレームはペイロードの一部で、スペースで区切られた文字列のリストです。
 
-[Node.js](https://auth0.com/docs/architecture-scenarios/application/mobile-api/api-implementation-nodejs#3-check-the-client-permissions)
+[Node.js](/docs/ja-jp/architecture-scenarios/application/mobile-api/api-implementation-nodejs#3-check-the-client-permissions)
 
 ### ユーザーIDの判断
 
@@ -75,17 +75,17 @@ APIは以下の検証を実行すべきです。
 
 また、カスタムクレームを使って、メールアドレスなど別のユーザー属性をアクセストークンに追加し、ユーザーを一意に識別することもできます。
 
-[Node.js](https://auth0.com/docs/architecture-scenarios/application/mobile-api/api-implementation-nodejs#4-determine-the-user-identity)
+[Node.js](/docs/ja-jp/architecture-scenarios/application/mobile-api/api-implementation-nodejs#4-determine-the-user-identity)
 
 ## モバイルアプリの実装
 
 このセクションでは、当社シナリオでモバイルアプリケーションを実装する方法を説明します。
 
-[Androidでの実装を参照してください。](https://auth0.com/docs/architecture-scenarios/application/mobile-api/mobile-implementation-android#1-set-up-the-application)
+[Androidでの実装を参照してください。](/docs/ja-jp/architecture-scenarios/application/mobile-api/mobile-implementation-android#1-set-up-the-application)
 
 ### ユーザーの認可
 
-ユーザーを認可するには、[Proof Key for Code Exchange（PKCE）での認可コードフロー](https://auth0.com/docs/flows/guides/auth-code-pkce/call-api-auth-code-pkce)を実装します。モバイルアプリケーションは最初に、`code_challenge`および生成するために使用するメソッドと一緒に、ユーザーを[認可URL](https://auth0.com/docs/api/authentication#authorization-code-grant-pkce-)に送信する必要があります。
+ユーザーを認可するには、[Proof Key for Code Exchange（PKCE）での認可コードフロー](/docs/ja-jp/flows/guides/auth-code-pkce/call-api-auth-code-pkce)を実装します。モバイルアプリケーションは最初に、`code_challenge`および生成するために使用するメソッドと一緒に、ユーザーを[認可URL](https://auth0.com/docs/api/authentication#authorization-code-grant-pkce-)に送信する必要があります。
 
 ``` lines
 https://{yourDomain}/authorize?
@@ -138,7 +138,7 @@ https://{yourDomain}/authorize?
 </tbody>
 </table>
 
-[Androidでの実装を参照してください。](https://auth0.com/docs/architecture-scenarios/application/mobile-api/mobile-implementation-android#2-authorize-the-user)
+[Androidでの実装を参照してください。](/docs/ja-jp/architecture-scenarios/application/mobile-api/mobile-implementation-android#2-authorize-the-user)
 
 ### 資格情報の取得
 
@@ -370,11 +370,11 @@ dataTask.resume()
 
 APIの呼び出しとユーザープロファイルの取得に使用するために、上記の資格情報をローカルストレージに保存しておく必要があります。
 
-[Androidでの実装を参照してください。](https://auth0.com/docs/architecture-scenarios/application/mobile-api/mobile-implementation-android#store-credentials)
+[Androidでの実装を参照してください。](/docs/ja-jp/architecture-scenarios/application/mobile-api/mobile-implementation-android#store-credentials)
 
 ### ユーザープロファイルの取得
 
-[ユーザープロファイル](https://auth0.com/docs/api/authentication?http#user-profile)を取得するために、モバイルアプリケーションは[JWTライブラリー](https://jwt.io/#libraries-io)の１つを使用して、[IDトークン](https://auth0.com/docs/tokens/concepts/id-tokens)をデコードすることができます。これは、[署名を検証](https://auth0.com/docs/tokens/guides/validate-id-token#verify-the-signature)して、トークンの[クレームを検証](https://auth0.com/docs/tokens/guides/validate-id-token#verify-the-claims)することで行えます。IDトークンを検証したら、ユーザー情報を含んだペイロードにアクセスできます。
+[ユーザープロファイル](https://auth0.com/docs/api/authentication?http#user-profile)を取得するために、モバイルアプリケーションは[JWTライブラリー](https://jwt.io/#libraries-io)の１つを使用して、[IDトークン](/docs/ja-jp/tokens/concepts/id-tokens)をデコードすることができます。これは、[署名を検証](/docs/ja-jp/tokens/guides/validate-id-token#verify-the-signature)して、トークンの[クレームを検証](/docs/ja-jp/tokens/guides/validate-id-token#verify-the-claims)することで行えます。IDトークンを検証したら、ユーザー情報を含んだペイロードにアクセスできます。
 
 ```json lines
 {
@@ -391,19 +391,19 @@ APIの呼び出しとユーザープロファイルの取得に使用するた�
 }
 ```
 
-[Androidでの実装を参照してください。](https://auth0.com/docs/architecture-scenarios/application/mobile-api/mobile-implementation-android#3-get-the-user-profile)
+[Androidでの実装を参照してください。](/docs/ja-jp/architecture-scenarios/application/mobile-api/mobile-implementation-android#3-get-the-user-profile)
 
 ### スコープに基づいた条件付きUI要素の表示
 
 ユーザーの`scope`に基づいて、特定のUI要素を表示または非表示にしたい場合があります。ユーザーに発行されたスコープを特定するには、ユーザーが認証されたときに付与された`scope`を調べる必要があります。これは、すべてのスコープを含んでいる文字列であるため、この文字列を調べて必要な`scope`が含まれているかどうかを調べる必要があります。そしてそれに基づいて、特定のUI要素を表示するかどうかを決定できます。
 
-[Androidでの実装を参照してください](https://auth0.com/docs/architecture-scenarios/application/mobile-api/mobile-implementation-android#4-display-ui-elements-conditionally-based-on-scope)
+[Androidでの実装を参照してください](/docs/ja-jp/architecture-scenarios/application/mobile-api/mobile-implementation-android#4-display-ui-elements-conditionally-based-on-scope)
 
 ### APIの呼び出し
 
 APIから安全なリソースにアクセスするには、認証されたユーザーのアクセストークンを、送信される要求に入れる必要があります。これには、`Bearer`スキームを使用して、`Authorization`ヘッダー内でアクセストークンを送る必要があります。
 
-[Androidでの実装を参照してください。](https://auth0.com/docs/architecture-scenarios/application/mobile-api/mobile-implementation-android#5-call-the-api)
+[Androidでの実装を参照してください。](/docs/ja-jp/architecture-scenarios/application/mobile-api/mobile-implementation-android#5-call-the-api)
 
 ### トークンの更新
 
@@ -415,7 +415,7 @@ APIから安全なリソースにアクセスするには、認証されたユ�
 
 アクセストークンをリフレッシュするには、認可結果のリフレッシュトークンを使用して、`/oauth/token`エンドポイントへの`POST`要求を実行します。
 
-[リフレッシュトークン](https://auth0.com/docs/tokens/concepts/refresh-tokens)は、`offline_access`スコープを先行の認可要求に含め、DashboardでAPIの**［Allow Offline Access（オフラインアクセスの許可）］**を有効にした場合にのみ表示されます。
+[リフレッシュトークン](/docs/ja-jp/tokens/concepts/refresh-tokens)は、`offline_access`スコープを先行の認可要求に含め、DashboardでAPIの**［Allow Offline Access（オフラインアクセスの許可）］**を有効にした場合にのみ表示されます。
 
 要求には以下を含める必要があります。
 
@@ -595,4 +595,4 @@ dataTask.resume()
 }
 ```
 
-[Androidでの実装を参照してください。](https://auth0.com/docs/architecture-scenarios/application/mobile-api/mobile-implementation-android#store-the-credentials)
+[Androidでの実装を参照してください。](/docs/ja-jp/architecture-scenarios/application/mobile-api/mobile-implementation-android#store-the-credentials)

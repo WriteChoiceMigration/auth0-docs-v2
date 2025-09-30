@@ -42,7 +42,7 @@ Visit the [Integrate React with an API Server](https://developer.auth0.com/resou
 
 </Callout>
 
-The focus of this guide is to show you how to configure the SDK to call APIs protected by OAuth 2. Instead of creating a demo API to test the client-server connection, you'll use the [Auth0 Management API](https://auth0.com/docs/api#management-api), which comes bundled with your Auth0 tenant. However, you can adapt this guide to work with any API that you are securing with Auth0.
+The focus of this guide is to show you how to configure the SDK to call APIs protected by OAuth 2. Instead of creating a demo API to test the client-server connection, you'll use the [Auth0 Management API](/docs/ja-jp/api#management-api), which comes bundled with your Auth0 tenant. However, you can adapt this guide to work with any API that you are securing with Auth0.
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -52,9 +52,9 @@ If you followed the [previous section where you added user log in to React](/doc
 
 ## Set Up the Auth0 Service
 
-The `Auth0Provider` setup is similar to the one discussed in the [Configure the `Auth0Provider` component](/docs/ja-jp/quickstart/spa/auth0-react#configure-the-auth0provider-component) section: you wrap your root component with `Auth0Provider` to which you pass the `domain` and `clientId` props. The values of these two props come from the ["Settings" values](https://auth0.com/docs/quickstart/spa/react#configure-auth0) of the single-page application you've registered with Auth0.
+The `Auth0Provider` setup is similar to the one discussed in the [Configure the `Auth0Provider` component](/docs/ja-jp/quickstart/spa/auth0-react#configure-the-auth0provider-component) section: you wrap your root component with `Auth0Provider` to which you pass the `domain` and `clientId` props. The values of these two props come from the ["Settings" values](/docs/ja-jp/quickstart/spa/react#configure-auth0) of the single-page application you've registered with Auth0.
 
-However, your React application needs to pass an access token when it calls a target API to access private resources. You can [request an access token](https://auth0.com/docs/tokens/guides/get-access-tokens) in a format that the API can verify by passing the `audience` and `scope` props to `Auth0Provider` as follows:
+However, your React application needs to pass an access token when it calls a target API to access private resources. You can [request an access token](/docs/ja-jp/tokens/guides/get-access-tokens) in a format that the API can verify by passing the `audience` and `scope` props to `Auth0Provider` as follows:
 
 ```javascript lines
 import React from 'react';
@@ -81,7 +81,7 @@ root.render(
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-As Auth0 can only issue tokens for custom scopes that exist on your API, ensure that you define the scopes used above when [setting up an API](https://auth0.com/docs/getting-started/set-up-api) with Auth0.
+As Auth0 can only issue tokens for custom scopes that exist on your API, ensure that you define the scopes used above when [setting up an API](/docs/ja-jp/getting-started/set-up-api) with Auth0.
 
 </Callout>
 
@@ -89,15 +89,15 @@ Auth0 uses the value of the `authorizationParams.audience` prop to determine whi
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-In the case of the Auth0 Management API, the audience is `https://{yourDomain}/api/v2/`. In the case of your APIs, you create an *Identifier* value that serves as the *Audience* value whenever you [set up an API](https://auth0.com/docs/getting-started/set-up-api) with Auth0.
+In the case of the Auth0 Management API, the audience is `https://{yourDomain}/api/v2/`. In the case of your APIs, you create an *Identifier* value that serves as the *Audience* value whenever you [set up an API](/docs/ja-jp/getting-started/set-up-api) with Auth0.
 
 </Callout>
 
-The actions that your React application can perform on the API depend on the [scopes](https://auth0.com/docs/scopes/current) that your access token contains, which you define as the value of `authorizationParams.scope`. Your React application will request authorization from the user to access the requested scopes, and the user will approve or deny the request.
+The actions that your React application can perform on the API depend on the [scopes](/docs/ja-jp/scopes/current) that your access token contains, which you define as the value of `authorizationParams.scope`. Your React application will request authorization from the user to access the requested scopes, and the user will approve or deny the request.
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-In the case of the Auth0 Management API, the `read:current_user` and `update:current_user_metadata` scopes let you get an access token that can retrieve user details and update the user's information. In the case of your APIs, you'll define custom [API scopes](https://auth0.com/docs/scopes/current/api-scopes) to implement access control, and you'll identify them in the calls that your client applications make to that API.
+In the case of the Auth0 Management API, the `read:current_user` and `update:current_user_metadata` scopes let you get an access token that can retrieve user details and update the user's information. In the case of your APIs, you'll define custom [API scopes](/docs/ja-jp/scopes/current/api-scopes) to implement access control, and you'll identify them in the calls that your client applications make to that API.
 
 </Callout>
 
@@ -191,11 +191,11 @@ Your application will show "No user metadata defined" if you have not set any `u
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-The `getAccessTokenSilently()` method can renew the access and ID token for you using [refresh tokens](https://auth0.com/docs/tokens/concepts/refresh-tokens). To [get a refresh token](https://auth0.com/docs/tokens/guides/get-refresh-tokens) when a user logs in, pass `useRefreshTokens={true}` as a prop to `Auth0Provider`.
+The `getAccessTokenSilently()` method can renew the access and ID token for you using [refresh tokens](/docs/ja-jp/tokens/concepts/refresh-tokens). To [get a refresh token](/docs/ja-jp/tokens/guides/get-refresh-tokens) when a user logs in, pass `useRefreshTokens={true}` as a prop to `Auth0Provider`.
 
 </Callout>
 
-As a final reminder, consult the [Auth0 API quickstarts](https://auth0.com/docs/quickstart/backend) to learn how to integrate Auth0 with your backend platform.
+As a final reminder, consult the [Auth0 API quickstarts](/docs/ja-jp/quickstart/backend) to learn how to integrate Auth0 with your backend platform.
 
 ##### What can you do next?
 

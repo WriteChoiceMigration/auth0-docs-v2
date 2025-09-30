@@ -372,11 +372,11 @@ Now go and access it at [http://localhost:3000](http://localhost:3000). You shou
 
 Users who are logged in with **username/password** will be silently reauthenticated automatically when the application reloads. No further action is needed for this type of login.
 
-If you are using the [classic Universal Login experience](https://auth0.com/docs/universal-login/classic) and would like users to authenticate using **[social identity providers](https://auth0.com/docs/connections#social)** (such as Google, Apple, Facebook, etc.), then you will need to configure those connections in your [Auth0 Dashboard](https://manage.auth0.com/dashboard).
+If you are using the [classic Universal Login experience](/docs/ja-jp/universal-login/classic) and would like users to authenticate using **[social identity providers](/docs/ja-jp/connections#social)** (such as Google, Apple, Facebook, etc.), then you will need to configure those connections in your [Auth0 Dashboard](https://manage.auth0.com/dashboard).
 
 In the navigation menu, choose **Connections** - **Social**, and select the social connection you’d like to support. In the connection’s settings, click “How to obtain a Client ID?“ and follow the instructions to set up your own ID and secret.
 
-If you are using the [new Universal Login experience](https://auth0.com/docs/universal-login/new), the default enabled social connections will silently reauthenticate without additional configuration. However, you should still set up your own keys and avoid using [default Auth0 development keys](https://auth0.com/docs/connections/social/devkeys#limitations-of-developer-keys) in a production app.
+If you are using the [new Universal Login experience](/docs/ja-jp/universal-login/new), the default enabled social connections will silently reauthenticate without additional configuration. However, you should still set up your own keys and avoid using [default Auth0 development keys](/docs/ja-jp/connections/social/devkeys#limitations-of-developer-keys) in a production app.
 
 ## Evaluate the authentication state
 
@@ -407,7 +407,7 @@ const updateUI = async () => {
 
 ## Log In to the Application
 
-Authentication is achieved through a redirect to the Auth0 [Universal Login Page](https://auth0.com/docs/hosted-pages/login). Once the user signs up or logs in, the result will be passed to your app's redirect URI, which is provided with the authorization request.
+Authentication is achieved through a redirect to the Auth0 [Universal Login Page](/docs/ja-jp/hosted-pages/login). Once the user signs up or logs in, the result will be passed to your app's redirect URI, which is provided with the authorization request.
 
 Inside the `app.js` file, provide a `login` function that calls `auth0Client.loginWithRedirect()` to perform the login step. The `login` function is called by the **Log in** button previously defined in the HTML page. In this sample, you will redirect the user back to the same page they are now. You can obtain that value from `window.location.origin` property:
 

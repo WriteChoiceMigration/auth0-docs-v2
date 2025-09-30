@@ -33,7 +33,7 @@ permalink: "part-3"
 
 `/timesheets`エンドポイントへの`HTTP GET`要求は、ユーザーがタイムシートを取得できるようにし、`/timesheets`への`HTTP POST`要求は、ユーザーが新たなタイムシートを追加できるようにします。
 
-[**Node.js**](https://auth0.com/docs/architecture-scenarios/application/spa-api/api-implementation-nodejs#1-define-the-api-endpoints)**での実装を参照してください**。
+[**Node.js**](/docs/ja-jp/architecture-scenarios/application/spa-api/api-implementation-nodejs#1-define-the-api-endpoints)**での実装を参照してください**。
 
 ### エンドポイントのセキュリティ確保
 
@@ -53,17 +53,17 @@ APIは以下の検証を実行すべきです。
 
 検証プロセスにはアプリケーション権限（スコープ）の確認も含まれますが、これに関しては次の段落で別に説明します。
 
-アクセストークン検証の詳細については、[「アクセストークンを検証する」](https://auth0.com/docs/tokens/guides/validate-access-tokens)を参照してください。
+アクセストークン検証の詳細については、[「アクセストークンを検証する」](/docs/ja-jp/tokens/guides/validate-access-tokens)を参照してください。
 
-[**Node.js**](https://auth0.com/docs/architecture-scenarios/application/spa-api/api-implementation-nodejs#2-secure-the-api-endpoints)**での実装を参照してください**。
+[**Node.js**](/docs/ja-jp/architecture-scenarios/application/spa-api/api-implementation-nodejs#2-secure-the-api-endpoints)**での実装を参照してください**。
 
 ### アプリケーション権限の確認
 
 この段階ではJWTの有効性が検証されています。最後の手順は、アプリケーションが保護されたリソースにアクセスするために必要な権限を持っているかどうかを検証することです。
 
-そのためには、APIがデコードされたJWTの[スコープ](https://auth0.com/docs/scopes)を確認する必要があります。このクレームはペイロードの一部で、スペースで区切られた文字列のリストです。
+そのためには、APIがデコードされたJWTの[スコープ](/docs/ja-jp/scopes)を確認する必要があります。このクレームはペイロードの一部で、スペースで区切られた文字列のリストです。
 
-[**Node.js**](https://auth0.com/docs/architecture-scenarios/application/spa-api/api-implementation-nodejs#3-check-the-client-permissions)**での実装を参照してください**。
+[**Node.js**](/docs/ja-jp/architecture-scenarios/application/spa-api/api-implementation-nodejs#3-check-the-client-permissions)**での実装を参照してください**。
 
 ### ユーザーIDの判断
 
@@ -75,7 +75,7 @@ APIは以下の検証を実行すべきです。
 
 また、カスタムクレームを使って、メールアドレスなど別のユーザー属性をアクセストークンに追加し、ユーザーを一意に識別することもできます。
 
-[**Node.js**](https://auth0.com/docs/architecture-scenarios/application/spa-api/api-implementation-nodejs#4-determine-the-user-identity)**での実装を参照してください**。
+[**Node.js**](/docs/ja-jp/architecture-scenarios/application/spa-api/api-implementation-nodejs#4-determine-the-user-identity)**での実装を参照してください**。
 
 ## SPAの実装
 
@@ -83,7 +83,7 @@ APIは以下の検証を実行すべきです。
 
 ### ユーザーの認証
 
-ユーザーの認証には[auth0.jsライブラリ](https://auth0.com/docs/libraries/auth0js)が使われます。Auth0アプリケーションの新しいインスタンスを次のように初期化できます。
+ユーザーの認証には[auth0.jsライブラリ](/docs/ja-jp/libraries/auth0js)が使われます。Auth0アプリケーションの新しいインスタンスを次のように初期化できます。
 
 ```javascript lines
 var auth0 = new auth0.WebAuth({
@@ -103,7 +103,7 @@ var auth0 = new auth0.WebAuth({
 * **responseType**：使用する認証フローです。**暗黙フロー**を使うSPAの場合は、`token id_token`に設定します。`token`の部分はURLフラグメントでアクセストークンを返すフローをトリガーし、`id_token`の部分はIDトークンも返すフローをトリガーします。
 * **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">audience</Tooltip>**：API識別子の値。これはDashboardにある[［Settings of your API（APIの設定）］](https://manage.auth0.com/#/apis%7D)で取得できます。
 * **redirectUri**：ユーザー認証後のAuth0のリダイレクト先URL。
-* **scope**：IDトークンとアクセストークンで返される情報を決定する[スコープ](https://auth0.com/docs/scopes)。`openid profile`のスコープは、IDトークン中のユーザープロファイル情報をすべて返します。APIを呼び出すために必要なスコープも要求する必要があります。この場合は、`read:timesheets create:timesheets`スコープです。そうすることで、アクセストークンにこれらのスコープがあるようにします。
+* **scope**：IDトークンとアクセストークンで返される情報を決定する[スコープ](/docs/ja-jp/scopes)。`openid profile`のスコープは、IDトークン中のユーザープロファイル情報をすべて返します。APIを呼び出すために必要なスコープも要求する必要があります。この場合は、`read:timesheets create:timesheets`スコープです。そうすることで、アクセストークンにこれらのスコープがあるようにします。
 
 認証フローを開始するには、`authorize()`メソッドを呼び出すことができます。
 
@@ -119,13 +119,13 @@ parseHashが返すauthResultオブジェクトの内容は、どの認証パラ�
 * **accessToken**：**audience**で指定されたAPIのアクセストークン
 * **expiresIn**：アクセストークンの有効期限（秒数）を含む文字列
 
-[トークンを保管する](https://auth0.com/docs/tokens/concepts/token-storage)ための最適な場所を決定します。シングルページアプリ（SPA）に1つでもバックエンドサーバーがあれば、トークンは[認可コードフロー](https://auth0.com/docs/flows/concepts/auth-code)または[Proof Key for Code Exchange（PKCE）を使った認可コードフロー](https://auth0.com/docs/flows/concepts/auth-code-pkce)を使ってサーバー側で処理します。
+[トークンを保管する](/docs/ja-jp/tokens/concepts/token-storage)ための最適な場所を決定します。シングルページアプリ（SPA）に1つでもバックエンドサーバーがあれば、トークンは[認可コードフロー](/docs/ja-jp/flows/concepts/auth-code)または[Proof Key for Code Exchange（PKCE）を使った認可コードフロー](/docs/ja-jp/flows/concepts/auth-code-pkce)を使ってサーバー側で処理します。
 
 対応するバックエンドサーバーがないSPAの場合、ログイン時に新しいトークンを要求し、それらをメモリ内に保存しますが、永続的に保存しないようにします。APIの呼び出しをするには、SPAがトークンのインメモリコピーを使用します。
 
-SPAにおけるセッションの処理方法については、[「JavaScriptシングルページアプリのQuickstart」](https://auth0.com/docs/quickstart/spa/vanillajs)で、[「認可トークンの処理」](https://auth0.com/docs/quickstart/spa/vanillajs#handle-authentication-tokens)セクションに記載されている例を参照してください。
+SPAにおけるセッションの処理方法については、[「JavaScriptシングルページアプリのQuickstart」](/docs/ja-jp/quickstart/spa/vanillajs)で、[「認可トークンの処理」](/docs/ja-jp/quickstart/spa/vanillajs#handle-authentication-tokens)セクションに記載されている例を参照してください。
 
-[**Angular 2**](https://auth0.com/docs/architecture-scenarios/application/spa-api/spa-implementation-angular2#2-authorize-the-user)**での実装を参照してください**。
+[**Angular 2**](/docs/ja-jp/architecture-scenarios/application/spa-api/spa-implementation-angular2#2-authorize-the-user)**での実装を参照してください**。
 
 ### ユーザープロファイルの取得
 
@@ -166,7 +166,7 @@ auth0.client.userInfo(accessToken, (err, profile) => {
 });
 ```
 
-[**Angular 2**](https://auth0.com/docs/architecture-scenarios/application/spa-api/spa-implementation-angular2#3-get-the-user-profile)**での実装を参照してください**。
+[**Angular 2**](/docs/ja-jp/architecture-scenarios/application/spa-api/spa-implementation-angular2#3-get-the-user-profile)**での実装を参照してください**。
 
 ### スコープに基づいた条件付きUI要素の表示
 
@@ -174,13 +174,13 @@ auth0.client.userInfo(accessToken, (err, profile) => {
 
 `authResult`の`scope`が空だと、要求したすべてのスコープが認められたことになります。`authResult`の`scope`が空でない場合は、異なる一連のスコープが認められ、`authResult.scope`にあるスコープを使用すべきであることを意味します。
 
-[**Angular 2**](https://auth0.com/docs/architecture-scenarios/application/spa-api/spa-implementation-angular2#4-display-ui-elements-conditionally-based-on-scope)**での実装を参照してください**。
+[**Angular 2**](/docs/ja-jp/architecture-scenarios/application/spa-api/spa-implementation-angular2#4-display-ui-elements-conditionally-based-on-scope)**での実装を参照してください**。
 
 ### APIの呼び出し
 
 APIから安全なリソースにアクセスするには、認証されたユーザーのアクセストークンを、送信される要求に入れる必要があります。これには、`Bearer`スキームを使用して、`Authorization`ヘッダー内でアクセストークンを送る必要があります。
 
-[**Angular 2**](https://auth0.com/docs/architecture-scenarios/application/spa-api/spa-implementation-angular2#5-call-the-api)**での実装を参照してください**。
+[**Angular 2**](/docs/ja-jp/architecture-scenarios/application/spa-api/spa-implementation-angular2#5-call-the-api)**での実装を参照してください**。
 
 ### アクセストークンの更新
 
@@ -190,6 +190,6 @@ APIから安全なリソースにアクセスするには、認証されたユ�
 
 最初のアクセストークンを取得する際に使った認証フローを繰り返すことで、新しいアクセストークンを取得できます。しかしこれは、SPAでは最適な方法とはいえません。ユーザーを現在のタスクからリダイレクトして再び認証フローを完了させるような手間をかけさせたくない場合があるからです。
 
-そのような場合は、[サイレント認証](https://auth0.com/docs/api-auth/tutorials/silent-authentication)を使うとよいでしょう。サイレント認証で使われる認証フローでは、Auth0はリダイレクトでのみ返答して、ログインページで返答することはありません。しかし、このためにはユーザーはすでに[シングルサインオン](https://auth0.com/docs/sso)経由でログインしている必要があります。
+そのような場合は、[サイレント認証](/docs/ja-jp/api-auth/tutorials/silent-authentication)を使うとよいでしょう。サイレント認証で使われる認証フローでは、Auth0はリダイレクトでのみ返答して、ログインページで返答することはありません。しかし、このためにはユーザーはすでに[シングルサインオン](/docs/ja-jp/sso)経由でログインしている必要があります。
 
-[**Angular 2**](https://auth0.com/docs/architecture-scenarios/application/spa-api/spa-implementation-angular2#6-renew-the-access-token)**での実装を参照してください**。
+[**Angular 2**](/docs/ja-jp/architecture-scenarios/application/spa-api/spa-implementation-angular2#6-renew-the-access-token)**での実装を参照してください**。

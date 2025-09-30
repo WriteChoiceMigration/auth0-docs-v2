@@ -33,7 +33,7 @@ Gigya、Okta、StormpathからAuth0にユーザーを移行するためのサン
 ## シナリオ2：OktaからAuth0へのユーザー移行
 
 1. ユーザーのインポートを有効にする：[Auth0 Dashboard>Authentication>Database](https://manage.auth0.com/#/connections/database)に移動し、データベース接続を選択します。**［Settings（設定）］**で、**［Import Users to Auth0（Auth0 にユーザーをインポート）］**オプションを有効にします。
-2. [ログインスクリプト](/docs/ja-jp/authenticate/database-connections/custom-db/templates/login)を作成する：**［Login（ログイン）］**スクリプトは、ユーザーがログインしようとしたときに、そのアカウントがAuth0データベースに見つからない場合に実行されます。メールとパスワードを`username`および`password`のパラメータとして渡して、Okta[プライマリ認証](https://developer.okta.com/docs/api/resources/authn.html#primary-authentication)エンドポイントを呼び出すスクリプトを作成する必要があります。認証が成功すると、Oktaは[埋め込みリソース](https://developer.okta.com/docs/api/resources/authn.html#embedded-resources)内の[ユーザーのプロファイル](https://developer.okta.com/docs/api/resources/authn.html#user-profile-object)を含む[認証トランザクションオブジェクト](https://developer.okta.com/docs/api/resources/authn.html#authentication-transaction-model)を返します。その後、ユーザーの情報を抽出し、コールバック関数でAuth0に渡すことができます。
+2. [ログインスクリプト](/docs/ja-jp/authenticate/database-connections/custom-db/templates/login)を作成する：**［Login（ログイン）］**スクリプトは、ユーザーがログインしようとしたときに、そのアカウントがAuth0データベースに見つからない場合に実行されます。メールとパスワードを`username`および`password`のパラメータとして渡して、Okta[プライマリ認証](https://developer.okta.comhttps://auth0.com/docs/api/resources/authn.html#primary-authentication)エンドポイントを呼び出すスクリプトを作成する必要があります。認証が成功すると、Oktaは[埋め込みリソース](https://developer.okta.comhttps://auth0.com/docs/api/resources/authn.html#embedded-resources)内の[ユーザーのプロファイル](https://developer.okta.comhttps://auth0.com/docs/api/resources/authn.html#user-profile-object)を含む[認証トランザクションオブジェクト](https://developer.okta.comhttps://auth0.com/docs/api/resources/authn.html#authentication-transaction-model)を返します。その後、ユーザーの情報を抽出し、コールバック関数でAuth0に渡すことができます。
 
    データベース接続の**［Custom Database（カスタムデータベース）］**ビューで、 **［Database Action Scripts（データベースアクションスクリプト）］**を見つけて、**Login（ログイン）］**を選択します。
 
@@ -87,7 +87,7 @@ Gigya、Okta、StormpathからAuth0にユーザーを移行するためのサン
    
 
    スクリプトが機能するかどうかをテストするには、スクリプトの上にある**［Try（試す）］**ボタンをクリックします。
-3. [ユーザー取得](/docs/ja-jp/authenticate/database-connections/custom-db/templates/get-user)スクリプトを作成します：**［Get User（ユーザー取得）］**スクリプトは、ユーザーがパスワードをリセットしようとしたが、Auth0データベースにそのアカウントが見つからない場合に実行されます。ユーザーのメールアドレスを`login`パラメータとして渡して、Okta[ログインでユーザー取得](https://developer.okta.com/docs/api/resources/users.html#get-user-with-login)エンドポイントを呼び出すスクリプトを作成する必要があります。また、`Authorization`ヘッダーでこのエンドポイントに渡す必要がある[API トークンを作成する](https://developer.okta.com/docs/api/getting_started/getting_a_token.html)必要があります。成功した場合、Oktaはユーザーの情報を含む[ユーザーオブジェクト](https://developer.okta.com/docs/api/resources/users.html#user-model)を返します。ここでも、ユーザーの情報を抽出し、コールバック関数でAuth0に渡すことができます。
+3. [ユーザー取得](/docs/ja-jp/authenticate/database-connections/custom-db/templates/get-user)スクリプトを作成します：**［Get User（ユーザー取得）］**スクリプトは、ユーザーがパスワードをリセットしようとしたが、Auth0データベースにそのアカウントが見つからない場合に実行されます。ユーザーのメールアドレスを`login`パラメータとして渡して、Okta[ログインでユーザー取得](https://developer.okta.comhttps://auth0.com/docs/api/resources/users.html#get-user-with-login)エンドポイントを呼び出すスクリプトを作成する必要があります。また、`Authorization`ヘッダーでこのエンドポイントに渡す必要がある[API トークンを作成する](https://developer.okta.comhttps://auth0.com/docs/api/getting_started/getting_a_token.html)必要があります。成功した場合、Oktaはユーザーの情報を含む[ユーザーオブジェクト](https://developer.okta.comhttps://auth0.com/docs/api/resources/users.html#user-model)を返します。ここでも、ユーザーの情報を抽出し、コールバック関数でAuth0に渡すことができます。
 
    データベース接続の**［Custom Database（カスタムデータベース）］**ビューで、**［Database Action Scripts（データベースアクションスクリプト）］**を見つけて、**［Get User（ユーザーの取得）］**を選択します。
 
@@ -98,7 +98,7 @@ Gigya、Okta、StormpathからAuth0にユーザーを移行するためのサン
 
      // Make a GET request to find a user by email
      // Replace {yourOktaApiToken} with an Okta API Token 
-     // (see https://developer.okta.com/docs/api/getting_started/getting_a_token.html) 
+     // (see https://developer.okta.comhttps://auth0.com/docs/api/getting_started/getting_a_token.html) 
      request({
        url: url,
        method: 'GET',

@@ -166,7 +166,7 @@ Auth0は、[ユーザーリソースのためにSCIM 2.0 コアスキーマ](htt
 </tr>
 <tr>
 <td>ルート属性のマッピング</td>
-<td><a href="https://auth0.com/docs/ja-jp/manage-users/user-accounts/user-profiles/root-attributes">ルート</a>属性へのマッピングでは、<a href="https://auth0.com/docs/ja-jp/manage-users/user-accounts/user-profiles/user-profile-structure#user-profile-attributes">ユーザープロファイル属性</a>にあるルート属性のみがSCIMクエリを使って検索できることにご注意ください。このリストに含まれない属性の検索が必要な場合は、app_metadataに追加してください。</td>
+<td><a href="/docs/ja-jp/manage-users/user-accounts/user-profiles/root-attributes">ルート</a>属性へのマッピングでは、<a href="/docs/ja-jp/manage-users/user-accounts/user-profiles/user-profile-structure#user-profile-attributes">ユーザープロファイル属性</a>にあるルート属性のみがSCIMクエリを使って検索できることにご注意ください。このリストに含まれない属性の検索が必要な場合は、app_metadataに追加してください。</td>
 </tr>
 <tr>
 <td>メタデータ属性のマッピング</td>
@@ -183,7 +183,7 @@ Auth0は、[ユーザーリソースのためにSCIM 2.0 コアスキーマ](htt
 
 ### ログおよびアウトバウンド通知
 
-Auth0 Dashboardの[**［Monitoring（モニタリング）］ > ［Logs（ログ）］**](https://manage.auth0.com/#/logs)セクションで、Auth0が受け取るSCIＭ要求の詳細を確認できます。さらに、SCIMおよびSCIMログストリーム[フィルターカテゴリー](https://auth0.com/docs/customize/log-streams/event-filters#scim-events)を使用してユーザーが作成、更新、削除されたときに通知されるように、[カスタムログストリーム](/docs/ja-jp/customize/log-streams)を統合できます。
+Auth0 Dashboardの[**［Monitoring（モニタリング）］ > ［Logs（ログ）］**](https://manage.auth0.com/#/logs)セクションで、Auth0が受け取るSCIＭ要求の詳細を確認できます。さらに、SCIMおよびSCIMログストリーム[フィルターカテゴリー](/docs/ja-jp/customize/log-streams/event-filters#scim-events)を使用してユーザーが作成、更新、削除されたときに通知されるように、[カスタムログストリーム](/docs/ja-jp/customize/log-streams)を統合できます。
 
 ### セッションの取り消しおよびバックチャネルログアウト
 
@@ -221,7 +221,7 @@ Auth0 SCIMエンドポイントを顧客に提供する場合、正しく使用�
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SAML</Tooltip>/OIDC全体およびSCIMで同じユーザー属性セットをサポートしていないIDプロバイダーと統合する場合、SCIMプロビジョニングと並行して**［Sync user profile attributes at login（ログイン時にユーザープロファイル属性を同期する）］**を有効にすることで、追加属性にアクセスできます。
 
-**［Sync user profile attributes at login（ログイン時にユーザープロファイル属性を同期する）］**が有効の場合、ユーザープロファイルのすべての[ルート](https://auth0.com/docs/manage-users/user-accounts/user-profiles/root-attributes)属性 は、ユーザーがログインするたびに上書きされます。SCIMとログイン同期との間の滞在的な競合を避けるために、以下のガイドラインに従ってください。
+**［Sync user profile attributes at login（ログイン時にユーザープロファイル属性を同期する）］**が有効の場合、ユーザープロファイルのすべての[ルート](/docs/ja-jp/manage-users/user-accounts/user-profiles/root-attributes)属性 は、ユーザーがログインするたびに上書きされます。SCIMとログイン同期との間の滞在的な競合を避けるために、以下のガイドラインに従ってください。
 
 * `email` および`username`などの一般的なAuth0ルート属性が、SCIM属性マップにも含まれている場合は、[SAML](/docs/ja-jp/authenticate/protocols/saml/saml-configuration)または[OpenID Connect](/docs/ja-jp/authenticate/identity-providers/enterprise-identity-providers/configure-pkce-claim-mapping-for-oidc)属性マップにマッピングされていることを確認します。
 * SCIM属性マップで、その他SCIM属性のすべてを（`active`属性を除く）、Auth0 `app_metadata`属性内の値にマッピングします。
