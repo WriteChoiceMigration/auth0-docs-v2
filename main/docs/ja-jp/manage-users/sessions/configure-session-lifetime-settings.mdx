@@ -9,14 +9,12 @@ permalink: "configure-session-lifetime-settings"
 'twitter:description': "Auth0 DashboardまたはManagement APIを使用して、テナントでのセッションの長さと上限を構成する方法について説明します。"
 ---
 
-セッションの**絶対有効期限**は、セッションが作られたときに定義されます。絶対有効期限を変更するには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を使ってセッション設定を構成し直します。
+セッションの**絶対有効期限** は、セッションが作られたときに定義されます。絶対有効期限を変更するには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を使ってセッション設定を構成し直します。
 
 ## Dashboard
 
-1. [［Dashboard］>［Settings（設定）］](https://manage.auth0.com/#/tenant)に移動して、**［Advanced（詳細設定）］**タブをクリックします。
-2. **［Session Expiration（セッションの有効期限）］**セクションまでスクロールして、**​［Idle Session Lifetime（アイドルセッションライフタイム）］**と**［Maximum Session Lifetime（最大セッションライフタイム）］**に希望する設定を入力し、​**［Save（保存）］**を選択します。
-
-   <Frame>![Dashboard テナント設定 詳細設定 ログインセッション管理](/images/ja-jp/cdy7uua7fh8z/q2fGPzoUqCcXj7OxcHhjy/ed80efb619cbc1b963dc3dcc1f3365b0/Tenant_Settings_-_Session_Expiration.png)</Frame>
+1. [［Dashboard］>［Settings（設定）］](https://manage.auth0.com/#/tenant)に移動して、**［Advanced（詳細設定）］** タブをクリックします。
+2. **［Session Expiration（セッションの有効期限）］** セクションまでスクロールして、**​［Idle Session Lifetime（アイドルセッションライフタイム）］** と **［Maximum Session Lifetime（最大セッションライフタイム）］** に希望する設定を入力し、**［Save（保存）］** を選択します。
 
 <table class="table"><thead>
 <tr>
@@ -36,6 +34,10 @@ permalink: "configure-session-lifetime-settings"
 </tbody>
 </table>
 
+   <Frame>![Dashboard テナント設定 詳細設定 ログインセッション管理](/images/ja-jp/cdy7uua7fh8z/q2fGPzoUqCcXj7OxcHhjy/ed80efb619cbc1b963dc3dcc1f3365b0/Tenant_Settings_-_Session_Expiration.png)</Frame>
+
+
+
 ## Management API
 
 `PATCH`呼び出しを[テナント設定エンドポイント](https://auth0.com/docs/api/management/v2#!/tenants/patch_settings)に対して行います。`MGMT_API_ACCESS_TOKEN`、`SESSION_LIFETIME`、`IDLE_SESSION_LIFETIME`のプレースホルダーをそれぞれ使用しているManagement APIのアクセストークン、セッションライフタイム値、アイドルセッションライフタイム値で置き換えます。
@@ -43,12 +45,12 @@ permalink: "configure-session-lifetime-settings"
 <CodeGroup>
 ```bash cURL lines
 curl --request PATCH \
---url 'https://{yourDomain}/api/v2/tenants/settings' \
---header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
---header 'cache-control: no-cache' \
---header 'content-type: application/json' \
---data '{ "session_lifetime": SESSION_LIFETIME_VALUE, "idle_session_lifetime": IDLE_SESSION_LIFETIME_VALUE }'
-``` lines
+  --url 'https://{yourDomain}/api/v2/tenants/settings' \
+  --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
+  --header 'cache-control: no-cache' \
+  --header 'content-type: application/json' \
+  --data '{ "session_lifetime": SESSION_LIFETIME_VALUE, "idle_session_lifetime": IDLE_SESSION_LIFETIME_VALUE }'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/tenants/settings");
 var request = new RestRequest(Method.PATCH);
@@ -59,118 +61,144 @@ request.AddParameter("application/json", "{ \"session_lifetime\": SESSION_LIFETI
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/tenants/settings"
-payload := strings.NewReader("{ \"session_lifetime\": SESSION_LIFETIME_VALUE, \"idle_session_lifetime\": IDLE_SESSION_LIFETIME_VALUE }")
-req, _ := http.NewRequest("PATCH", url, payload)
-req.Header.Add("content-type", "application/json")
-req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
-req.Header.Add("cache-control", "no-cache")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/tenants/settings"
+
+	payload := strings.NewReader("{ \"session_lifetime\": SESSION_LIFETIME_VALUE, \"idle_session_lifetime\": IDLE_SESSION_LIFETIME_VALUE }")
+
+	req, _ := http.NewRequest("PATCH", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+	req.Header.Add("cache-control", "no-cache")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/settings")
-.header("content-type", "application/json")
-.header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
-.header("cache-control", "no-cache")
-.body("{ \"session_lifetime\": SESSION_LIFETIME_VALUE, \"idle_session_lifetime\": IDLE_SESSION_LIFETIME_VALUE }")
-.asString();
+HttpResponse<String> response = Unirest.patch("https://{yourDomain}/api/v2/tenants/settings")
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+  .header("cache-control", "no-cache")
+  .body("{ \"session_lifetime\": SESSION_LIFETIME_VALUE, \"idle_session_lifetime\": IDLE_SESSION_LIFETIME_VALUE }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'PATCH',
-url: 'https://{yourDomain}/api/v2/tenants/settings',
-headers: {
-'content-type': 'application/json',
-authorization: 'Bearer MGMT_API_ACCESS_TOKEN',
-'cache-control': 'no-cache'
-},
-data: '{ "session_lifetime": SESSION_LIFETIME_VALUE, "idle_session_lifetime": IDLE_SESSION_LIFETIME_VALUE }'
+  method: 'PATCH',
+  url: 'https://{yourDomain}/api/v2/tenants/settings',
+  headers: {
+    'content-type': 'application/json',
+    authorization: 'Bearer MGMT_API_ACCESS_TOKEN',
+    'cache-control': 'no-cache'
+  },
+  data: '{ "session_lifetime": SESSION_LIFETIME_VALUE, "idle_session_lifetime": IDLE_SESSION_LIFETIME_VALUE }'
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json",
-@"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
-@"cache-control": @"no-cache" };
-NSData \*postData = [[NSData alloc] initWithData:[@"{ "session_lifetime": SESSION_LIFETIME_VALUE, "idle_session_lifetime": IDLE_SESSION_LIFETIME_VALUE }" dataUsingEncoding:NSUTF8StringEncoding]];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/tenants/settings"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/json",
+                           @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
+                           @"cache-control": @"no-cache" };
+
+NSData *postData = [[NSData alloc] initWithData:[@"{ "session_lifetime": SESSION_LIFETIME_VALUE, "idle_session_lifetime": IDLE_SESSION_LIFETIME_VALUE }" dataUsingEncoding:NSUTF8StringEncoding]];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/tenants/settings"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"PATCH"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/tenants/settings",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PATCH",
-CURLOPT_POSTFIELDS => "{ \"session_lifetime\": SESSION_LIFETIME_VALUE, \"idle_session_lifetime\": IDLE_SESSION_LIFETIME_VALUE }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer MGMT_API_ACCESS_TOKEN",
-"cache-control: no-cache",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/tenants/settings",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PATCH",
+  CURLOPT_POSTFIELDS => "{ \"session_lifetime\": SESSION_LIFETIME_VALUE, \"idle_session_lifetime\": IDLE_SESSION_LIFETIME_VALUE }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer MGMT_API_ACCESS_TOKEN",
+    "cache-control: no-cache",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"session_lifetime\": SESSION_LIFETIME_VALUE, \"idle_session_lifetime\": IDLE_SESSION_LIFETIME_VALUE }"
+
 headers = {
-'content-type': "application/json",
-'authorization': "Bearer MGMT_API_ACCESS_TOKEN",
-'cache-control': "no-cache"
-}
+    'content-type': "application/json",
+    'authorization': "Bearer MGMT_API_ACCESS_TOKEN",
+    'cache-control': "no-cache"
+    }
+
 conn.request("PATCH", "/{yourDomain}/api/v2/tenants/settings", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -178,41 +206,50 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/tenants/settings")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Patch.new(url)
 request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 request["cache-control"] = 'no-cache'
 request.body = "{ \"session_lifetime\": SESSION_LIFETIME_VALUE, \"idle_session_lifetime\": IDLE_SESSION_LIFETIME_VALUE }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"content-type": "application/json",
-"authorization": "Bearer MGMT_API_ACCESS_TOKEN",
-"cache-control": "no-cache"
+  "content-type": "application/json",
+  "authorization": "Bearer MGMT_API_ACCESS_TOKEN",
+  "cache-control": "no-cache"
 ]
+
 let postData = NSData(data: "{ "session_lifetime": SESSION_LIFETIME_VALUE, "idle_session_lifetime": IDLE_SESSION_LIFETIME_VALUE }".data(using: String.Encoding.utf8)!)
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/tenants/settings")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "PATCH"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>

@@ -17,31 +17,11 @@ permalink: "enable-connections"
 
 組織を使う場合、接続によっては以下のようなプロパティを追加で構成することができます。
 
-<table class="table"><thead>
-<tr>
-<th><strong>プロパティ</strong></th>
-<th><strong>接続の種類</strong></th>
-<th><strong>説明</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Membership On Authentication（認証時のメンバーシップ）</td>
-<td>全種類の接続</td>
-<td>有効にすると、指定の接続を使用した初回の認証でエンドユーザーに組織のメンバーシップを自動的に割り当てます。<br/><br/>これは、その接続で認証可能なすべてのユーザーが組織のメンバーになる場合に便利です。</td>
-</tr>
-<tr>
-<td>Organization Signup（組織のサインアップ）</td>
-<td>データベース接続のみ</td>
-<td>エンドユーザーがログインプロンプトでサインアップリンクを使用して、組織のメンバーシップも獲得できるかを決定します。これ使用するには、［Membership On Authentication（認証時のメンバーシップ）］も有効にする必要があります。<br/><br/>以下のように、ユーザーの自主的な組織への参加が必要な場合に使用します。<ul><li style="font-size: .875rem;">ワークスペースなど、組織が自由参加のユーザー集団をモデルにしている</li><li style="font-size: .875rem;">B2B2C（ビジネス対ビジネス対消費者）のユースケースで、ユーザーが自由にアカウントにサインアップできる</li></ul></td>
-</tr>
-<tr>
-<td>Display connection as a button（接続をボタンとして表示する）</td>
-<td>エンタープライズ接続のみ</td>
-<td>この任意のプロパティは、組織のログインプロンプトで特定の接続をオプションとして表示するかを決定します。<br/><br/><strong>注意</strong>：このオプションが接続に無効な場合でも、接続パラメーターを認可要求に含めて直接送信すると、エンドユーザーはその接続で認証し、組織のアプリケーションにログインできます。また、<a href="/docs/ja-jp/authenticate/login/auth0-universal-login/identifier-first">ホーム領域検出を使用したIdentifier First</a>認証プロファイルを<a href="/docs/ja-jp/manage-users/organizations/login-flows-for-organizations#configure-the-login-flow-for-your-application">［Prompt for Credentials（資格情報を求める）］</a>組織ログインフローと組み合わせて使っている場合も、ユーザーはその接続で認証できます。</td>
-</tr>
-</tbody>
-</table>
+| **プロパティ** | **接続の種類** | **説明** |
+| :--- | :--- | :--- |
+| Membership On Authentication（認証時のメンバーシップ） | 全種類の接続 | 有効にすると、指定の接続を使用した初回の認証でエンドユーザーに組織のメンバーシップを自動的に割り当てます。<br/><br/>これは、その接続で認証可能なすべてのユーザーが組織のメンバーになる場合に便利です。 |
+| Organization Signup（組織のサインアップ） | データベース接続のみ | エンドユーザーがログインプロンプトでサインアップリンクを使用して、組織のメンバーシップも獲得できるかを決定します。これ使用するには、［Membership On Authentication（認証時のメンバーシップ）］も有効にする必要があります。<br/><br/>以下のように、ユーザーの自主的な組織への参加が必要な場合に使用します。<ul><li style="font-size: .875rem;">ワークスペースなど、組織が自由参加のユーザー集団をモデルにしている</li><li style="font-size: .875rem;">B2B2C（ビジネス対ビジネス対消費者）のユースケースで、ユーザーが自由にアカウントにサインアップできる</li></ul> |
+| Display connection as a button（接続をボタンとして表示する） | エンタープライズ接続のみ | この任意のプロパティは、組織のログインプロンプトで特定の接続をオプションとして表示するかを決定します。<br/><br/><strong>注意</strong>：このオプションが接続に無効な場合でも、接続パラメーターを認可要求に含めて直接送信すると、エンドユーザーはその接続で認証し、組織のアプリケーションにログインできます。また、<a href="/docs/ja-jp/authenticate/login/auth0-universal-login/identifier-first">ホーム領域検出を使用したIdentifier First</a>認証プロファイルを<a href="/docs/ja-jp/manage-users/organizations/login-flows-for-organizations#configure-the-login-flow-for-your-application">［Prompt for Credentials（資格情報を求める）］</a>組織ログインフローと組み合わせて使っている場合も、ユーザーはその接続で認証できます。 |
 
 <Warning>
 
@@ -53,7 +33,8 @@ permalink: "enable-connections"
 
 組織の接続は<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を使って構成することができます。
 
-<Tabs><Tab title="Auth0 Dashboard">
+<Tabs>
+<Tab title="Auth0 Dashboard">
 
 #### Auth0 Dashboard
 
@@ -76,7 +57,8 @@ Auth0 Dashboardを使って接続を有効にするには以下を行います�
 
 7. **［Save（保存）］**を選択します。
 
-</Tab><Tab title="Management API">
+</Tab>
+<Tab title="Management API">
 
 #### Management API
 
@@ -92,14 +74,16 @@ Management APIを使って接続を有効にするには以下を行います。
 * **エンタープライズ接続のみ**：接続ボタンの設定に合わせて、`{showAsButtonOption}`を`true`または`false`に置き換えます。
 
 <CodeGroup>
+
 ```bash cURL lines
 curl --request POST \
---url https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections \
---header 'authorization: Bearer {yourMgmtApiAccessToken}' \
---header 'cache-control: no-cache' \
---header 'content-type: application/json' \
---data '{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }'
-``` lines
+  --url https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
+  --header 'cache-control: no-cache' \
+  --header 'content-type: application/json' \
+  --data '{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }'
+```
+
 ```csharp C# lines
 var client = new RestClient("https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections");
 var request = new RestRequest(Method.POST);
@@ -110,118 +94,147 @@ request.AddParameter("application/json", "{ \"connection_id\": \"{connectionId}\
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections"
-payload := strings.NewReader("{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "application/json")
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-req.Header.Add("cache-control", "no-cache")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections"
+
+	payload := strings.NewReader("{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+	req.Header.Add("cache-control", "no-cache")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
+
 ```java Java lines
-HttpResponse response = Unirest.post("https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections")
-.header("content-type", "application/json")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.header("cache-control", "no-cache")
-.body("{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }")
-.asString();
+HttpResponse<String> response = Unirest.post("https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections")
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .header("cache-control", "no-cache")
+  .body("{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections',
-headers: {
-'content-type': 'application/json',
-authorization: 'Bearer {yourMgmtApiAccessToken}',
-'cache-control': 'no-cache'
-},
-data: '{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }'
+  method: 'POST',
+  url: 'https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections',
+  headers: {
+    'content-type': 'application/json',
+    authorization: 'Bearer {yourMgmtApiAccessToken}',
+    'cache-control': 'no-cache'
+  },
+  data: '{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }'
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json",
-@"authorization": @"Bearer {yourMgmtApiAccessToken}",
-@"cache-control": @"no-cache" };
-NSData \*postData = [[NSData alloc] initWithData:[@"{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }" dataUsingEncoding:NSUTF8StringEncoding]];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/json",
+                           @"authorization": @"Bearer {yourMgmtApiAccessToken}",
+                           @"cache-control": @"no-cache" };
+
+NSData *postData = [[NSData alloc] initWithData:[@"{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }" dataUsingEncoding:NSUTF8StringEncoding]];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}",
-"cache-control: no-cache",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}",
+    "cache-control: no-cache",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
+
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }"
+
 headers = {
-'content-type': "application/json",
-'authorization': "Bearer {yourMgmtApiAccessToken}",
-'cache-control': "no-cache"
-}
+    'content-type': "application/json",
+    'authorization': "Bearer {yourMgmtApiAccessToken}",
+    'cache-control': "no-cache"
+    }
+
 conn.request("POST", "%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -229,43 +242,54 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request["cache-control"] = 'no-cache'
 request.body = "{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"content-type": "application/json",
-"authorization": "Bearer {yourMgmtApiAccessToken}",
-"cache-control": "no-cache"
+  "content-type": "application/json",
+  "authorization": "Bearer {yourMgmtApiAccessToken}",
+  "cache-control": "no-cache"
 ]
+
 let postData = NSData(data: "{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }".data(using: String.Encoding.utf8)!)
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
+
 </CodeGroup>
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
@@ -278,91 +302,28 @@ dataTask.resume()
 
 </Callout>
 
-<table class="table"><thead>
-<tr>
-<th><strong>値</strong></th>
-<th><strong>説明</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>`{orgId}`</td>
-<td>接続を有効にしたい組織のID。</td>
-</tr>
-<tr>
-<td>`{mgmtApiAccessToken}`</td>
-<td>`create:organization_connections`のスコープを持つ［Management APIアクセストークン］（/tokens/management-api-access-tokens）</td>
-</tr>
-<tr>
-<td>`{connectionId}`</td>
-<td>特定の組織に有効化したい接続のID。</td>
-</tr>
-<tr>
-<td>`{assignMembershipOption}`</td>
-<td>この接続を使ってログインするユーザーに対して、組織のメンバーシップを自動的に付与したいかを指定する。`true`に設定すると、ユーザーに対して自動的にメンバーシップが付与されます。`false`に設定すると、メンバーシップは自動的に付与されません。</td>
-</tr>
-<tr>
-<td>`{isSignupEnabled}`</td>
-<td>ユーザーがログインプロンプトでセルフサービスのサインアップリンクにアクセスできるかどうかを指定します。`true`に設定すると、プロンプトにサインアップリンクが表示されます。`false`に設定すると、リンクは表示されません。<br/><br/><strong>注</strong>：このオプションを有効にするには、`{assignMembershipOption}`も`true`に設定する必要があります。</td>
-</tr>
-<tr>
-<td>`{showAsButtonOption}`</td>
-<td>組織のログインプロンプトに特定のエンタープライズ接続をオプションとして表示したいかを指定します。`true`に設定すると、プロンプトに接続がボタンとして表示されます。`false`に設定すると、プロンプトに接続は表示されません。</td>
-</tr>
-</tbody>
-</table>
+| **値** | **説明** |
+| :--- | :--- |
+| `{orgId}` | 接続を有効にしたい組織のID。 |
+| `{mgmtApiAccessToken}` | `create:organization_connections`のスコープを持つ［Management APIアクセストークン］（/tokens/management-api-access-tokens） |
+| `{connectionId}` | 特定の組織に有効化したい接続のID。 |
+| `{assignMembershipOption}` | この接続を使ってログインするユーザーに対して、組織のメンバーシップを自動的に付与したいかを指定する。`true`に設定すると、ユーザーに対して自動的にメンバーシップが付与されます。`false`に設定すると、メンバーシップは自動的に付与されません。 |
+| `{isSignupEnabled}` | ユーザーがログインプロンプトでセルフサービスのサインアップリンクにアクセスできるかどうかを指定します。`true`に設定すると、プロンプトにサインアップリンクが表示されます。`false`に設定すると、リンクは表示されません。<br/><br/>**注**：このオプションを有効にするには、`{assignMembershipOption}`も`true`に設定する必要があります。 |
+| `{showAsButtonOption}` | 組織のログインプロンプトに特定のエンタープライズ接続をオプションとして表示したいかを指定します。`true`に設定すると、プロンプトに接続がボタンとして表示されます。`false`に設定すると、プロンプトに接続は表示されません。 |
 
 ##### 応答ステータスコード
 
 可能性のある応答ステータスコードは以下のとおりです。
 
-<table class="table"><thead>
-<tr>
-<th><strong>ステータス コード</strong></th>
-<th><strong>エラーコード</strong></th>
-<th><strong>メッセージ</strong></th>
-<th><strong>原因</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>`201`</td>
-<td></td>
-<td>接続が組織に正常に追加されました。</td>
-<td></td>
-</tr>
-<tr>
-<td>`401`</td>
-<td></td>
-<td>無効なトークンです。</td>
-<td></td>
-</tr>
-<tr>
-<td>`401`</td>
-<td></td>
-<td>JSON Web Tokenの検証に無効な署名を受信しました。</td>
-<td></td>
-</tr>
-<tr>
-<td>`401`</td>
-<td></td>
-<td>クライアントがグローバルではありません。</td>
-<td></td>
-</tr>
-<tr>
-<td>`403`</td>
-<td>`insufficient_scope`</td>
-<td>スコープが不足しています。`create:organizations_connections`のいずれかが予期されています。</td>
-<td>提供されたベアラートークンのスコープでは許可されないフィールドの読み込み/書き込みが試行された。</td>
-</tr>
-<tr>
-<td>`429`</td>
-<td></td>
-<td>要求が多すぎます。X-RateLimit-Limit、X-RateLimit-Remaining、X-RateLimit-Resetヘッダーを確認してください。</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| **ステータス コード** | **エラーコード** | **メッセージ** | **原因** |
+| :--- | :--- | :--- | :--- |
+| `201` | | 接続が組織に正常に追加されました。 | |
+| `401` | | 無効なトークンです。 | |
+| `401` | | JSON Web Tokenの検証に無効な署名を受信しました。 | |
+| `401` | | クライアントがグローバルではありません。 | |
+| `403` | `insufficient_scope` | スコープが不足しています。`create:organizations_connections`のいずれかが予期されています。 | 提供されたベアラートークンのスコープでは許可されないフィールドの読み込み/書き込みが試行された。 |
+| `429` | | 要求が多すぎます。X-RateLimit-Limit、X-RateLimit-Remaining、X-RateLimit-Resetヘッダーを確認してください。 | |
 
-</Tab></Tabs>
+</Tab>
+</Tabs>
 
