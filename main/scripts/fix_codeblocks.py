@@ -12,6 +12,8 @@ CODEBLOCK_PATTERN = re.compile(r"```[^\n]*\n.*?```", re.DOTALL)
 DEFAULT_JSON = Path("pages_paths.json")
 LOCALE_SEGMENT = "fr-ca"
 SEARCH_PREFIXES = (Path("main"), Path("output_docs_translated"))
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parents[1]
 CODEGROUP_PATTERN = re.compile(r"<CodeGroup\b.*?</CodeGroup>", re.DOTALL)
 
 
@@ -44,7 +46,7 @@ def list_codegroups(text: str) -> list[Segment]:
 
 
 def remove_locale_segment(path: Path, locale: str = LOCALE_SEGMENT) -> Path:
-    """Drop the locale segment (e.g. ja-jp) from the given relative path."""
+    """Drop the locale segment (e.g. ja-jp) from the given path."""
     parts = []
     locale_removed = False
     for part in path.parts:
@@ -54,18 +56,58 @@ def remove_locale_segment(path: Path, locale: str = LOCALE_SEGMENT) -> Path:
         parts.append(part)
     if not locale_removed:
         raise ValueError(f"Locale segment '{locale}' not found in path: {path}")
+    if path.is_absolute():
+        anchor = Path(path.anchor) if path.anchor else Path("/")
+        return anchor.joinpath(*parts)
     return Path(*parts)
 
 
-def resolve_locale_path(relative: Path) -> Path | None:
-    """Return the first existing path for the locale file, testing known prefixes."""
+def resolve_search_roots() -> list[Path]:
+    """Return unique roots to search when resolving relative paths."""
+    roots: list[Path] = []
+    for root in (Path.cwd().resolve(), REPO_ROOT):
+        if root not in roots:
+            roots.append(root)
+    return roots
+
+
+def resolve_path(relative: Path) -> Path | None:
+    """Return the first existing absolute path for the given relative path."""
     candidates = [relative]
-    for prefix in SEARCH_PREFIXES:
-        candidates.append(prefix / relative)
+    candidates.extend(prefix / relative for prefix in SEARCH_PREFIXES)
+
+    roots = resolve_search_roots()
+    seen: set[Path] = set()
+
     for candidate in candidates:
-        if candidate.exists():
-            return candidate
+        if candidate.is_absolute():
+            resolved = candidate
+            if resolved in seen:
+                continue
+            seen.add(resolved)
+            if resolved.exists():
+                return resolved
+            continue
+
+        for root in roots:
+            resolved = (root / candidate).resolve()
+            if resolved in seen:
+                continue
+            seen.add(resolved)
+            if resolved.exists():
+                return resolved
+
     return None
+
+
+def format_path(path: Path) -> str:
+    """Return a repo-relative string when possible for display."""
+    if not path.is_absolute():
+        return str(path)
+    try:
+        return str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        return str(path)
 
 
 def replace_segments(
@@ -183,27 +225,30 @@ def main() -> None:
     skipped = 0
     for relative in paths:
         relative_path = Path(relative)
-        locale_path = resolve_locale_path(relative_path)
+        locale_path = resolve_path(relative_path)
         if locale_path is None:
-            print(f"[MISSING] {relative_path}")
+            print(f"[MISSING] {format_path(relative_path)}")
             skipped += 1
             continue
 
         try:
-            original_path = remove_locale_segment(locale_path)
+            original_relative = remove_locale_segment(relative_path)
         except ValueError as exc:
-            print(f"[ERROR] {locale_path}: {exc}")
+            print(f"[ERROR] {format_path(relative_path)}: {exc}")
             skipped += 1
             continue
 
-        if not original_path.exists():
-            print(f"[MISSING ORIGINAL] {locale_path} -> {original_path}")
+        original_path = resolve_path(original_relative)
+        if original_path is None:
+            print(
+                f"[MISSING ORIGINAL] {format_path(locale_path)} -> {format_path(original_relative)}"
+            )
             skipped += 1
             continue
 
         outcome = sync_file(locale_path, original_path)
         label = "UPDATED" if outcome.changed else "SKIPPED"
-        print(f"[{label}] {locale_path} -> {outcome.message}")
+        print(f"[{label}] {format_path(locale_path)} -> {outcome.message}")
 
         if outcome.changed:
             updated += 1

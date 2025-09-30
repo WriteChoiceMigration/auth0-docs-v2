@@ -53,7 +53,7 @@ The screenshot below shows the following information:
 
 Check if the values of the JWT token match exactly the values in your JWT middleware registration. This includes the trailing slash for the Issuer.
 
-```csharp lines
+```cs lines
 var options = new JwtBearerOptions
 {
     Audience = "https://rs256.test.api",
@@ -74,7 +74,7 @@ The screenshot below shows the following information:
 
 If your token is signed with the HS256 algorithm, the middleware needs to be configured in the following way:
 
-```csharp lines
+```cs lines
 var options = new JwtBearerOptions
 {
     TokenValidationParameters =
@@ -103,7 +103,7 @@ If you are not passing the token, you will see the following warning:
 
 Look for the following warning message:
 
-``` lines
+```
 Authorization failed for the request at filter 'Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter'
 ```
 
@@ -124,7 +124,7 @@ The following example shows that the JWT is signed with the HS256 algorithm and 
 
 Look for the following warning message:
 
-``` lines
+```
 System.ArgumentException: IDX10634: Unable to create the SignatureProvider.
 
 SignatureAlgorithm: 'HS256', SecurityKey: 'Microsoft.IdentityModel.Tokens.RsaSecurityKey' is not supported.
@@ -136,7 +136,7 @@ The following example shows that the JWT is signed with the RS256 algorithm and 
 
 Look for the following warning message:
 
-``` lines
+```
 Bearer was not authenticated. Failure message: IDX10501: Signature validation failed. Unable to match 'kid': 'NTF...'
 ```
 
@@ -150,7 +150,7 @@ Each JSON Web Token is valid until the time defined in the `exp` claim runs out.
 
 Look for the following error message:
 
-``` lines
+```
 IDX10223: Lifetime validation failed. The token is expired
 ```
 
@@ -176,7 +176,7 @@ You will get this message only for the tokens signed with the HS256 algorithm.
 
 </Callout>
 
-``` lines
+```
 IDX10205: Issuer validation failed.
 ```
 
@@ -200,7 +200,7 @@ Check if the audience specified in your token matches your JWT middleware config
 
 Look for the following error message:
 
-``` lines
+```
 IDX10214: Audience validation failed
 ```
 

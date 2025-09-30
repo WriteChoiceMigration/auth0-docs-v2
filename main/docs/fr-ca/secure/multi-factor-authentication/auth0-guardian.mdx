@@ -485,7 +485,7 @@ Vous pouvez [installer la trousse SDK Guardian](/docs/fr-ca/secure/multi-factor
 
 Pour activer Gardien Auth0 dans une Action, passez `guardian` comme paramètre `provider` lorsque vous activez l’authentification multifacteur (MFA) :
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   api.multifactor.enable('guardian', { allowRememberBrowser: false });
 };
@@ -499,7 +499,7 @@ Ce modèle fournit un exemple et un point de départ pour déclencher l’authen
 
 Lors de la première connexion, l’utilisateur peut inscrire l’appareil. Consultez Activer l’authentification multifacteur (MFA) pour plus d’informations sur l’authentification multifacteur (MFA).
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
 const groups = event.user.app_metadata.authorization.groups;
 const GROUPS_WITH_MFA = {

@@ -16,11 +16,11 @@ Faites une requête `POST` au point de terminaison [Créer une tâche pour impor
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/api/v2/jobs/usersimports' \
---header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
---header 'content-type: multipart/form-data ' \
---data '{ "connection_id": "CONNECTION_ID", "users": "JSON_USER_FILE_PATH" }'
-``` lines
+  --url 'https://{yourDomain}/api/v2/jobs/usersimports' \
+  --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
+  --header 'content-type: multipart/form-data ' \
+  --data '{ "connection_id": "CONNECTION_ID", "users": "JSON_USER_FILE_PATH" }'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/jobs/usersimports");
 var request = new RestRequest(Method.POST);
@@ -30,112 +30,138 @@ request.AddParameter("multipart/form-data ", "{ \"connection_id\": \"CONNECTION_
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/jobs/usersimports"
-payload := strings.NewReader("{ \"connection_id\": \"CONNECTION_ID\", \"users\": \"JSON_USER_FILE_PATH\" }")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "multipart/form-data ")
-req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/jobs/usersimports"
+
+	payload := strings.NewReader("{ \"connection_id\": \"CONNECTION_ID\", \"users\": \"JSON_USER_FILE_PATH\" }")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "multipart/form-data ")
+	req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/jobs/usersimports")
-.header("content-type", "multipart/form-data ")
-.header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
-.body("{ \"connection_id\": \"CONNECTION_ID\", \"users\": \"JSON_USER_FILE_PATH\" }")
-.asString();
+HttpResponse<String> response = Unirest.post("https://{yourDomain}/api/v2/jobs/usersimports")
+  .header("content-type", "multipart/form-data ")
+  .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+  .body("{ \"connection_id\": \"CONNECTION_ID\", \"users\": \"JSON_USER_FILE_PATH\" }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/api/v2/jobs/usersimports',
-headers: {
-'content-type': 'multipart/form-data ',
-authorization: 'Bearer MGMT_API_ACCESS_TOKEN'
-},
-data: '{ "connection_id": "CONNECTION_ID", "users": "JSON_USER_FILE_PATH" }'
+  method: 'POST',
+  url: 'https://{yourDomain}/api/v2/jobs/usersimports',
+  headers: {
+    'content-type': 'multipart/form-data ',
+    authorization: 'Bearer MGMT_API_ACCESS_TOKEN'
+  },
+  data: '{ "connection_id": "CONNECTION_ID", "users": "JSON_USER_FILE_PATH" }'
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"multipart/form-data ",
-@"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
-NSData \*postData = [[NSData alloc] initWithData:[@"{ "connection_id": "CONNECTION_ID", "users": "JSON_USER_FILE_PATH" }" dataUsingEncoding:NSUTF8StringEncoding]];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/jobs/usersimports"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"multipart/form-data ",
+                           @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN" };
+
+NSData *postData = [[NSData alloc] initWithData:[@"{ "connection_id": "CONNECTION_ID", "users": "JSON_USER_FILE_PATH" }" dataUsingEncoding:NSUTF8StringEncoding]];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/jobs/usersimports"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/jobs/usersimports",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{ \"connection_id\": \"CONNECTION_ID\", \"users\": \"JSON_USER_FILE_PATH\" }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer MGMT_API_ACCESS_TOKEN",
-"content-type: multipart/form-data "
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/jobs/usersimports",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{ \"connection_id\": \"CONNECTION_ID\", \"users\": \"JSON_USER_FILE_PATH\" }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer MGMT_API_ACCESS_TOKEN",
+    "content-type: multipart/form-data "
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"connection_id\": \"CONNECTION_ID\", \"users\": \"JSON_USER_FILE_PATH\" }"
+
 headers = {
-'content-type': "multipart/form-data ",
-'authorization': "Bearer MGMT_API_ACCESS_TOKEN"
-}
+    'content-type': "multipart/form-data ",
+    'authorization': "Bearer MGMT_API_ACCESS_TOKEN"
+    }
+
 conn.request("POST", "/{yourDomain}/api/v2/jobs/usersimports", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -143,39 +169,48 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/jobs/usersimports")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'multipart/form-data '
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 request.body = "{ \"connection_id\": \"CONNECTION_ID\", \"users\": \"JSON_USER_FILE_PATH\" }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"content-type": "multipart/form-data ",
-"authorization": "Bearer MGMT_API_ACCESS_TOKEN"
+  "content-type": "multipart/form-data ",
+  "authorization": "Bearer MGMT_API_ACCESS_TOKEN"
 ]
+
 let postData = NSData(data: "{ "connection_id": "CONNECTION_ID", "users": "JSON_USER_FILE_PATH" }".data(using: String.Encoding.utf8)!)
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/jobs/usersimports")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -189,7 +224,7 @@ dataTask.resume()
 <tbody>
 <tr>
 <td>`MGMT_API_ACCESS_TOKEN`</td>
-<td><a href="/docs/fr-ca/api/management/v2/tokens">Jeton d’accès à Management API</a> with the <dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">scope</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn> `create:users`.</td>
+<td><a href="/docs/fr-ca/api/management/v2/tokens">Jeton d’accès à Management API</a> with the <dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">scope</span></dfn> `create:users`.</td>
 </tr>
 <tr>
 <td>`CONNECTION_ID`</td>

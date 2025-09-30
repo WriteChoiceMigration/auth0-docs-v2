@@ -55,15 +55,15 @@ Comme leur nom l’indique, les [jetons d’accès](https://auth0.com/docs/secur
 
 **Si vous n’avez pas déjà configuré une application Laravel**, ouvrez un shell dans un répertoire approprié pour un nouveau projet et exécutez la commande suivante :
 
-```bash lines
-composer create-project --prefer-dist laravel/laravel auth0-laravel-api ^9.0
-```
+```bash lines wrap
+      composer create-project --prefer-dist laravel/laravel auth0-laravel-api ^9.0
+      ```
 
 Toutes les commandes de ce guide supposent que vous les exécutez à partir de la racine de votre projet Laravel, donc vous devez bous placer `cd` dans le nouveau répertoire du projet :
 
 ```bash lines
-cd auth0-laravel-api
-```
+      cd auth0-laravel-api
+      ```
 
 [2
 
@@ -72,14 +72,14 @@ cd auth0-laravel-api
 Exécutez la commande suivante dans le répertoire de votre projet pour installer la [trousse SDK Laravel Auth0](https://github.com/auth0/laravel-auth0) :
 
 ```bash lines
-composer require auth0/login:^7.8 --update-with-all-dependencies
-```
+      composer require auth0/login:^7.8 --update-with-all-dependencies
+      ```
 
 Générez ensuite un fichier de configuration de la trousse SDK pour votre application :
 
 ```bash lines
-php artisan vendor:publish --tag auth0
-```
+      php artisan vendor:publish --tag auth0
+      ```
 
 [3
 
@@ -87,48 +87,48 @@ php artisan vendor:publish --tag auth0
 
 Exécuter la commande suivante à partir du répertoire de votre projet pour télécharger le [Interface de ligne de commande (CLI) Auth0](https://github.com/auth0/auth0-cli) :
 
-```bash lines
-curl -sSfL https://raw.githubusercontent.com/auth0/auth0-cli/main/install.sh | sh -s -- -b .
-```
+```bash lines wrap
+      curl -sSfL https://raw.githubusercontent.com/auth0/auth0-cli/main/install.sh | sh -s -- -b .
+      ```
 
 Authentifiez ensuite la CLI avec votre compte Auth0 en choisissant « as a user (en tant qu’utilisateur) » lorsque vous y êtes invité :
 
 ```bash lines
-./auth0 login
-```
+      ./auth0 login
+      ```
 
 Puis créez une nouvelle application avec Auth0 :
 
 ```bash lines
-./auth0 apps create \
---name "My Laravel Backend" \
---type "regular" \
---auth-method "post" \
---callbacks "http://localhost:8000/callback" \
---logout-urls "http://localhost:8000" \
---reveal-secrets \
---no-input \
---json > .auth0.app.json
-```
+      ./auth0 apps create \
+        --name "My Laravel Backend" \
+        --type "regular" \
+        --auth-method "post" \
+        --callbacks "http://localhost:8000/callback" \
+        --logout-urls "http://localhost:8000" \
+        --reveal-secrets \
+        --no-input \
+        --json > .auth0.app.json
+      ```
 
 Vous devez également créer une nouvelle API :
 
 ```bash lines
-./auth0 apis create \
---name "My Laravel Backend API" \
---identifier "https://github.com/auth0/laravel-auth0" \
---offline-access \
---no-input \
---json > .auth0.api.json
-```
+      ./auth0 apis create \
+        --name "My Laravel Backend API" \
+        --identifier "https://github.com/auth0/laravel-auth0" \
+        --offline-access \
+        --no-input \
+        --json > .auth0.api.json
+      ```
 
 Cela produit deux fichiers qui configurent la trousse SDK dans votre répertoire de projet.
 
 Comme ces fichiers contiennent des renseignements personnels, il est important de les traiter comme étant sensibles. Vous devez vous assurer de ne pas les soumettre au contrôle de version. Si vous utilisez Git, vous devez les ajouter à votre fichier `.gitignore` :
 
 ```bash lines
-echo ".auth0.*.json" >> .gitignore
-```
+      echo ".auth0.*.json" >> .gitignore
+      ```
 
 [4
 
@@ -147,22 +147,22 @@ Vous pouvez utiliser la protection d’autorisation de la trousse SDK Auth0 pour
 Pour rejeter les demandes qui ne contiennent pas de jeton d’accès valide dans l’en-tête `Authorization`, vous pouvez utiliser le logiciel médiateur `auth` de Laravel :
 
 ```php lines
-Route::get('/private', function () {
-return response()->json([
-'message' => 'Your token is valid; you are authorized.',
-]);
-})->middleware('auth');
-```
+      Route::get('/private', function () {
+      return response()->json([
+      'message' => 'Your token is valid; you are authorized.',
+      ]);
+      })->middleware('auth');
+      ```
 
 Vous pouvez également exiger que le jeton fourni dispose des [permissions](https://auth0.com/docs/manage-users/access-control/rbac) spécifiques en le combinant avec le logiciel médiateur `can` de Laravel :
 
 ```php lines
-Route::get('/scope', function () {
-return response()->json([
-'message' => 'Your token is valid and has the read:messages permission; you are authorized.',
-]);
-})->middleware('auth')->can('read:messages');
-```
+      Route::get('/scope', function () {
+      return response()->json([
+      'message' => 'Your token is valid and has the read:messages permission; you are authorized.',
+      ]);
+      })->middleware('auth')->can('read:messages');
+      ```
 
 [5
 
@@ -173,19 +173,19 @@ Les informations sur le jeton d’accès fourni sont disponibles via la façade 
 Par exemple, pour récupérer l’identificateur et l’adresse courriel de l’utilisateur :
 
 ```php lines
-Route::get('/', function () {
-if (! auth()->check()) {
-return response()->json([
-'message' => 'You did not provide a valid token.',
-]);
-}
-return response()->json([
-'message' => 'Your token is valid; you are authorized.',
-'id' => auth()->id(),
-'token' => auth()?->user()?->getAttributes(),
-]);
-});
-```
+      Route::get('/', function () {
+      if (! auth()->check()) {
+      return response()->json([
+      'message' => 'You did not provide a valid token.',
+      ]);
+      }
+      return response()->json([
+      'message' => 'Your token is valid; you are authorized.',
+      'id' => auth()->id(),
+      'token' => auth()?->user()?->getAttributes(),
+      ]);
+      });
+      ```
 
 [6
 
@@ -198,24 +198,24 @@ Vous pouvez récupérer des informations sur l’utilisateur créateur du jeton 
 Dans l’exemple suivant, vous devez accorder la permission `read:users`. Une liste des points de terminaison API et les permissions requises peuvent être trouvées dans la [documentation de Management API](https://auth0.com/docs/api/management/v2).
 
 ```php lines
-use Auth0\Laravel\Facade\Auth0;
-Route::get('/me', function () {
-$user = auth()->id();
-$profile = cache()->get($user);
-if (null === $profile) {
-$endpoint = Auth0::management()->users();
-$profile = $endpoint->get($user);
-$profile = Auth0::json($profile);
-cache()->put($user, $profile, 120);
-}
-$name = $profile['name'] ?? 'Unknown';
-$email = $profile['email'] ?? 'Unknown';
-return response()->json([
-'name' => $name,
-'email' => $email,
-]);
-})->middleware('auth');
-```
+      use Auth0\Laravel\Facade\Auth0;
+      Route::get('/me', function () {
+      $user = auth()->id();
+      $profile = cache()->get($user);
+      if (null === $profile) {
+      $endpoint = Auth0::management()->users();
+      $profile = $endpoint->get($user);
+      $profile = Auth0::json($profile);
+      cache()->put($user, $profile, 120);
+      }
+      $name = $profile['name'] ?? 'Unknown';
+      $email = $profile['email'] ?? 'Unknown';
+      return response()->json([
+      'name' => $name,
+      'email' => $email,
+      ]);
+      })->middleware('auth');
+      ```
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -229,9 +229,9 @@ return response()->json([
 
 Vous êtes maintenant prêt à lancer votre application Laravel, de sorte qu’elle puisse accepter les demandes :
 
-```php lines
-php artisan serve
-```
+```bash lines
+      php artisan serve
+      ```
 
 [8
 

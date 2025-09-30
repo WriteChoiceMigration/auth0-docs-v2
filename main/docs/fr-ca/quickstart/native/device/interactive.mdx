@@ -62,142 +62,155 @@ Lorsque l’utilisateur démarre l’application de l’appareil et souhaite l�
 Pour obtenir le code de l’appareil, votre application doit appeler le [Authorize endpoint (Point de terminaison d’autorisation)](/docs/fr-ca/api/authentication#-post-oauth-device-code-) d’Authentication API du flux d’autorisation de l’appareil :
 
 <CodeGroup>
-```bash cURL lines
-curl --request post \
---url 'https://{yourDomain}/oauth/device/code' \
---header 'content-type: application/x-www-form-urlencoded'
-``` lines
-```csharp C# lines
-var client = new RestClient("https://{yourDomain}/oauth/device/code");
-var request = new RestRequest(Method.POST);
-request.AddHeader("content-type", "application/x-www-form-urlencoded");
-IRestResponse response = client.Execute(request);
-```
+      ```bash cURL lines
+      curl --request post \
+        --url 'https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code' \
+        --header 'content-type: application/x-www-form-urlencoded'
+      ```
+      ```csharp C# lines
+      var client = new RestClient("https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code");
+      var request = new RestRequest(Method.POST);
+      request.AddHeader("content-type", "application/x-www-form-urlencoded");
+      IRestResponse response = client.Execute(request);
+      ```
 
-```go Go lines
-package main
-import (
-"fmt"
-"net/http"
-"io/ioutil"
-)
-func main() {
-url := "https://{yourDomain}/oauth/device/code"
-req, _ := http.NewRequest("post", url, nil)
-req.Header.Add("content-type", "application/x-www-form-urlencoded")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
-}
-``` lines
-```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/oauth/device/code")
-.header("content-type", "application/x-www-form-urlencoded")
-.asString();
-```
+      ```go Go lines 
+      package main
+      import (
+      "fmt"
+      "net/http"
+      "io/ioutil"
+      )
+      func main() {
+      url := "https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code"
+      req, _ := http.NewRequest("post", url, nil)
+      req.Header.Add("content-type", "application/x-www-form-urlencoded")
+      res, _ := http.DefaultClient.Do(req)
+      defer res.Body.Close()
+      body, _ := ioutil.ReadAll(res.Body)
+      fmt.Println(res)
+      fmt.Println(string(body))
+      }
+      ```
+      ```java Java lines
+      HttpResponse<String> response = Unirest.post("https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code")
+        .header("content-type", "application/x-www-form-urlencoded")
+        .asString();
+      ```
+      ```javascript Node.JS lines
+      var axios = require("axios").default;
+      var options = {
+      method: 'post',
+      url: 'https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code',
+      headers: {'content-type': 'application/x-www-form-urlencoded'}
+      };
+      axios.request(options).then(function (response) {
+      console.log(response.data);
+      }).catch(function (error) {
+      console.error(error);
+      });
+      ```
+      ```obj-c Obj-C lines 
+      #import <Foundation/Foundation.h>
+      NSDictionary *headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
+      NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code"]
+                                                        cachePolicy:NSURLRequestUseProtocolCachePolicy
 
-```javascript Node.JS lines
-var axios = require("axios").default;
-var options = {
-method: 'post',
-url: 'https://{yourDomain}/oauth/device/code',
-headers: {'content-type': 'application/x-www-form-urlencoded'}
-};
-axios.request(options).then(function (response) {
-console.log(response.data);
-}).catch(function (error) {
-console.error(error);
-});
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/device/code"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
-[request setHTTPMethod:@"post"];
-[request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
-[dataTask resume];
-```
+                                                    timeoutInterval:10.0];
 
-```php PHP lines
-$curl = curl_init();
-curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/oauth/device/code",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "post",
-CURLOPT_HTTPHEADER => [
-"content-type: application/x-www-form-urlencoded"
-],
-]);
-$response = curl_exec($curl);
-$err = curl_error($curl);
-curl_close($curl);
-if ($err) {
-echo "cURL Error #:" . $err;
-} else {
-echo $response;
-}
-``` lines
-```python Python lines
-import http.client
-conn = http.client.HTTPSConnection("")
-headers = { 'content-type': "application/x-www-form-urlencoded" }
-conn.request("post", "/{yourDomain}/oauth/device/code", headers=headers)
-res = conn.getresponse()
-data = res.read()
-print(data.decode("utf-8"))
-```
+      [request setHTTPMethod:@"post"];
+      [request setAllHTTPHeaderFields:headers];
+      NSURLSession *session = [NSURLSession sharedSession];
+      NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                              completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
-```ruby Ruby lines
-require 'uri'
-require 'net/http'
-require 'openssl'
-url = URI("https://{yourDomain}/oauth/device/code")
-http = Net::HTTP.new(url.host, url.port)
-http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-request = Net::HTTP::Post.new(url)
-request["content-type"] = 'application/x-www-form-urlencoded'
-response = http.request(request)
-puts response.read_body
-``` lines
-```swift Swift lines
-import Foundation
-let headers = ["content-type": "application/x-www-form-urlencoded"]
-let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/device/code")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
-request.httpMethod = "post"
-request.allHTTPHeaderFields = headers
-let session = URLSession.shared
-let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
-})
-dataTask.resume()
-```
-</CodeGroup>
+                                                  if (error) {
+
+                                                      NSLog(@&quot;%@&quot;, error);
+
+                                                  } else {
+
+                                                      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+
+                                                      NSLog(@&quot;%@&quot;, httpResponse);
+
+                                                  }
+
+                                              }];
+
+      [dataTask resume];
+      ```
+      ```php PHP lines 
+      $curl = curl_init();
+      curl_setopt_array($curl, [
+      CURLOPT_URL => "https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code",
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "post",
+      CURLOPT_HTTPHEADER => [
+      &quot;content-type: application/x-www-form-urlencoded&quot;
+
+      ],
+      ]);
+      $response = curl_exec($curl);
+      $err = curl_error($curl);
+      curl_close($curl);
+      if ($err) {
+      echo "cURL Error #:" . $err;
+      } else {
+      echo $response;
+      }
+      ```
+      ```python Python lines
+      import http.client
+      conn = http.client.HTTPSConnection("")
+      headers = { 'content-type': "application/x-www-form-urlencoded" }
+      conn.request("post", "/dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code", headers=headers)
+      res = conn.getresponse()
+      data = res.read()
+      print(data.decode("utf-8"))
+      ```
+      ```ruby Ruby lines
+      require 'uri'
+      require 'net/http'
+      require 'openssl'
+      url = URI("https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code")
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      request = Net::HTTP::Post.new(url)
+      request["content-type"] = 'application/x-www-form-urlencoded'
+      response = http.request(request)
+      puts response.read_body
+      ```
+      ```swift Swift lines 
+      import Foundation
+      let headers = ["content-type": "application/x-www-form-urlencoded"]
+      let request = NSMutableURLRequest(url: NSURL(string: "https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code")! as URL,
+                                          cachePolicy: .useProtocolCachePolicy,
+
+                                      timeoutInterval: 10.0)
+
+      request.httpMethod = "post"
+      request.allHTTPHeaderFields = headers
+      let session = URLSession.shared
+      let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+      if (error != nil) {
+      print(error)
+
+      } else {
+      let httpResponse = response as? HTTPURLResponse
+
+      print(httpResponse)
+
+      }
+      })
+      dataTask.resume()
+      ```
+      </CodeGroup>
 
 [3
 
@@ -206,15 +219,15 @@ dataTask.resume()
 L’application de l’appareil devrait recevoir une réponse HTTP 200 et une charge utile similaire à celle-ci :
 
 ```json lines
-{
-"device_code": "GmRh...k9eS",
-"user_code": "WDJB-MJHT",
-"verification_uri": "https://my-tenant.auth0.com/device",
-"verification_uri_complete": "https://my-tenant.auth0.com/device?user_code=WDJB-MJHT",
-"expires_in": 900,
-"interval": 5
-}
-```
+      {
+        "device_code": "GmRh...k9eS",
+        "user_code": "WDJB-MJHT",
+        "verification_uri": "https://my-tenant.auth0.com/device",
+        "verification_uri_complete": "https://my-tenant.auth0.com/device?user_code=WDJB-MJHT",
+        "expires_in": 900,
+        "interval": 5
+      }
+      ```
 
 [4
 
@@ -248,14 +261,14 @@ Assurez-vous que votre application attend la durée de `interval` (en secondes) 
 
 </Callout>
 
-```bash lines
-curl --request POST \ 
---url 'https://{yourDomain}/oauth/token' \
---header 'content-type: application/x-www-form-urlencoded' \
---data grant_type=urn:ietf:params:oauth:grant-type:device_code \
---data device_code=AUTH0_SCOPES \
---data 'client_id={yourClientId}'
-```
+```bash
+      curl --request POST \ 
+        --url 'https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/token' \
+        --header 'content-type: application/x-www-form-urlencoded' \
+        --data grant_type=urn:ietf:params:oauth:grant-type:device_code \
+        --data device_code=AUTH0_SCOPES \
+        --data 'client_id=mz9iNEIo2PHu7oeh8QRt19ndTyyCIgai'
+      ```
 
 [6
 
@@ -291,14 +304,14 @@ Une fois l’authentification et le consentement obtenus, la demande de confirma
 Une fois que l’utilisateur a autorisé l’application, celle-ci reçoit une réponse HTTP 200 et la charge utile suivante :
 
 ```json lines
-{
-"access_token": "eyJz93a...k4laUWw",
-"refresh_token": "GEbRxBN...edjnXbL",
-"id_token": "eyJ0XAi...4faeEoQ",
-"token_type": "Bearer",
-"expires_in": 86400
-}
-```
+      {
+        "access_token": "eyJz93a...k4laUWw",
+        "refresh_token": "GEbRxBN...edjnXbL",
+        "id_token": "eyJ0XAi...4faeEoQ",
+        "token_type": "Bearer",
+        "expires_in": 86400
+      }
+      ```
 
 <Warning>
 
@@ -319,11 +332,11 @@ Les jetons d’actualisation sont utilisés pour obtenir un nouveau jeton d’ac
 Pour appeler votre API, votre application doit transmettre le jeton d’accès en tant que jeton de porteur dans l’en-tête `Authorization` de votre requête HTTP.
 
 ```bash lines
-curl --request GET \
---url https://myapi.com/api \
---header 'authorization: Bearer AUTH0_API_ACCESS_TOKEN' \
---header 'content-type: application/json'
-```
+      curl --request GET \
+        --url https://myapi.com/api \
+        --header 'authorization: Bearer AUTH0_API_ACCESS_TOKEN' \
+        --header 'content-type: application/json'
+      ```
 
 [9
 
@@ -332,26 +345,26 @@ curl --request GET \
 Pour obtenir un nouveau jeton d’accès pour un utilisateur, l’application de votre appareil peut appeler [le point de terminaison POST /oauth/token](/docs/fr-ca/api/authentication#-post-oauth-token-) de l’API d’authentication avec le paramètre `refresh_token`.
 
 ```bash lines
-curl --request POST \
---url 'https://{yourDomain}/oauth/token' \
---header 'content-type: application/x-www-form-urlencoded' \
---data grant_type=refresh_token \
---data 'client_id={yourClientId}' \
---data 'client_secret={yourClientSecret}' \
---data refresh_token=AUTH0_REFRESH_TOKEN
-```
+      curl --request POST \
+        --url 'https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/token' \
+        --header 'content-type: application/x-www-form-urlencoded' \
+        --data grant_type=refresh_token \
+        --data 'client_id=mz9iNEIo2PHu7oeh8QRt19ndTyyCIgai' \
+        --data 'client_secret=yLTW7npKO4g1HHsCENiZbOaHHXLmhVefJxdNnXcyhOBOomZ2tgjJjSC2pMK7Swvr' \
+        --data refresh_token=AUTH0_REFRESH_TOKEN
+      ```
 
 Si la requête a réussi, l’application de votre appareil reçoit une réponse HTTP 200 avec la charge utile suivante :
 
 ```json lines
-{
-"access_token": "eyJ...MoQ",
-"expires_in": 86400,
-"scope": "openid offline_access",
-"id_token": "eyJ...0NE",
-"token_type": "Bearer"
-}
-```
+      {
+        "access_token": "eyJ...MoQ",
+        "expires_in": 86400,
+        "scope": "openid offline_access",
+        "id_token": "eyJ...0NE",
+        "token_type": "Bearer"
+      }
+      ```
 
 Pour en savoir plus sur les jetons d’actualisation, veuillez consulter [Jetons d’actualisation](https://auth0.com/docs/secure/tokens/refresh-tokens).
 
@@ -405,25 +418,25 @@ Il est possible de recevoir plusieurs réponses HTTP 4xx différentes pendant 
 
 Vous verrez cette erreur pendant que vous attendez que l’utilisateur agisse. Poursuivez l’interrogation en utilisant `interval` suggéré dans l’étape précédente de ce tutoriel.
 
-``` lines
-`HTTP 403`
-{
-"error": "authorization_pending",
-"error_description": "..."
-}
-```
+```json lines
+      `HTTP 403`
+      {
+      "error": "authorization_pending",
+      "error_description": "..."
+      }
+      ```
 
 #### Ralentissement
 
 L’interrogation est trop rapide. Ralentissez et utilisez l’intervalle suggéré dans l’étape précédente de ce tutoriel. Pour éviter de recevoir cette erreur en raison de la latence du réseau, vous devez commencer à compter chaque intervalle après la réception de la réponse de la dernière demande d’interrogation.
 
-``` lines
-`HTTP 429`
-{
-"error": "slow_down",
-"error_description": "..."
-}
-```
+```json lines
+      `HTTP 429`
+      {
+      "error": "slow_down",
+      "error_description": "..."
+      }
+      ```
 
 #### Jeton expiré
 
@@ -435,25 +448,25 @@ Le `expired_token` n’est renvoyé qu’une seule fois. Ensuite, le point de te
 
 </Callout>
 
-``` lines
-`HTTP 403`
-{
-"error": "expired_token",
-"error_description": "..."
-}
-```
+```json lines
+      `HTTP 403`
+      {
+      "error": "expired_token",
+      "error_description": "..."
+      }
+      ```
 
 #### Accès refusé
 
 Si l’accès est refusé, vous recevez :
 
-``` lines
-`HTTP 403`
-{
-"error": "access_denied",
-"error_description": "..."
-}
-```
+```json lines
+      `HTTP 403`
+      {
+      "error": "access_denied",
+      "error_description": "..."
+      }
+      ```
 
 Cela peut se produire pour diverses raisons, notamment :
 

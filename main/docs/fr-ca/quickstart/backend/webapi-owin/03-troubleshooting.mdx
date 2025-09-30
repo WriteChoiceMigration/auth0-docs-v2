@@ -44,7 +44,7 @@ In the screenshot above you can see that the token was signed using the **RS256*
 
 So in other words these values in your JWT middleware registration must match **exactly** - including the trailing slash for the Issuer, such as
 
-```csharp lines
+```cs lines
 var keyResolver = new OpenIdConnectSigningKeyResolver("https://jerrie.auth0.com/");
 app.UseJwtBearerAuthentication(
     new JwtBearerAuthenticationOptions
@@ -67,7 +67,7 @@ In the screenshot above you can see that the token was signed using the **HS256*
 
 In this case, the middleware needs to be configured as follows:
 
-```csharp lines
+```cs lines
 app.UseJwtBearerAuthentication(
     new JwtBearerAuthenticationOptions
     {
@@ -111,7 +111,7 @@ In the following screenshot, you can see that we get an error message that the s
 
 The relevant error message to look for is the following:
 
-``` lines
+```
 IDX10503: Signature validation failed. Keys tried: 'null'.
 ```
 
@@ -121,7 +121,7 @@ In the case where you configured your middleware for HS256, but you are sending 
 
 In this case, the relevant error message to look for is the following:
 
-``` lines
+```
 IDX10500: Signature validation failed. Unable to resolve SecurityKeyIdentifier...
 ```
 
@@ -135,7 +135,7 @@ Each JSON Web Token is only valid until the time specified in the `exp` claim. I
 
 The error message to look for is the following:
 
-``` lines
+```
 Expired bearer token received
 ```
 
@@ -153,7 +153,7 @@ The Issuer specified in your token must match exactly with what is configured in
 
 The error message to look for is the following:
 
-``` lines
+```
 IDX10205: Issuer validation failed.
 ```
 
@@ -169,7 +169,7 @@ The audience specified in your token must match exactly with what is configured 
 
 The error message to look for is the following:
 
-``` lines
+```
 IDX10214: Audience validation failed.
 ```
 

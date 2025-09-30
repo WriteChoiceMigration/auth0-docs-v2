@@ -128,7 +128,7 @@ L’objet `riskAssessment` contient le pointage de confiance total, les informat
 </tbody>
 </table>
 
-```javascript lines
+```js lines expandable
 exports.onExecutePostLogin = async (event, api) => {
   if (event.authentication && event.authentication.riskAssessment) {
     event.authentication.riskAssessment = {
@@ -536,7 +536,7 @@ Auth0 propose deux modèles d’actions basés sur l’authentification multifac
 
 Ce modèle fournit un exemple et un point de départ sur la manière de créer un flux commercial personnalisé en utilisant des évaluations de risques individuelles.
 
-```javascript lines
+```javascript lines expandable
 /**
 * Handler that will be called during the execution of a PostLogin flow.
 *
@@ -605,7 +605,7 @@ Voici quelques suggestions sur la manière de créer des actions personnalisées
 
 Évaluez la propriété `RiskAssessment.confidence`, puis comparez-la aux constantes `high`, `medium` ou `low` :
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const riskIsMedium = riskAssessment && riskAssessment.confidence === 'medium';
@@ -622,7 +622,7 @@ Les pointages de confiance sont des valeurs discrètes (et non comprises dans un
 
 Utilisez plusieurs conditions pour combiner logiquement tous les pointages de confiance que vous souhaitez gérer. Par exemple, si vous souhaitez savoir quand le pointage de confiance est plus élevé que `low`, vérifiez s’il est égale à `medium` ou à `high` :
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const riskIsMediumOrHigh = riskAssessment && 
@@ -641,7 +641,7 @@ L’objet `riskAssessment` est enregistré dans vos journaux de locataire. Vous 
 
 Vous pouvez afficher l’objet `riskAssessment` et signaler les résultats à un autre endroit. Par exemple, vous pouvez envoyer un courriel ou sauvegarder un enregistrement dans une base de données externe.
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const riskIsLow = riskAssessment && riskAssessment.confidence === 'low';
@@ -656,7 +656,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 Utilisez l’objet [assessments](#assessments-object) pour accéder aux détails des évaluations individuelles, y compris la propriété du `code` :
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const { ImpossibleTravel } = riskAssessment && riskAssessment.assessments;
@@ -679,7 +679,7 @@ Utilisez l’objet [assessments](#assessments-object) pour accéder aux détails
 
 Empêchez la transaction de connexion de se terminer en renvoyant la fonction de rappel avec un objet `UnauthorizedError` comme [paramètre d’erreur](/docs/fr-ca/troubleshoot/error-handling-best-practices). L’objet `UnauthorizedError` définit toujours `error` sur `unauthorized`, mais vous pouvez personnaliser le`error_message` :
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const { ImpossibleTravel } = riskAssessment && riskAssessment.assessments;

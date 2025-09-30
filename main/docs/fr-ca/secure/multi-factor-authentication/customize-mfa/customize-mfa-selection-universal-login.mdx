@@ -201,7 +201,7 @@ L’exemple suivant met un utilisateur à l’épreuve avec MFA s’il est inscr
 * Mot de passe à usage unique (OTP)
 * Téléphone
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
 
  api.authentication.challengeWithAny([{type: 'otp'}, {type: 'phone'}]);
@@ -213,7 +213,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 L’exemple suivant met au défi tous les utilisateurs avec un mot de passe à usage unique. Si un utilisateur dispose du rôle d’administrateur et nécessite un niveau d’accès plus élevé à votre application, il est confronté à un facteur supplémentaire sous forme d’[authentification renforcée](/docs/fr-ca/secure/multi-factor-authentication/step-up-authentication).
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
     api.authentication.challengeWith({type: 'otp'});
 
@@ -231,7 +231,7 @@ Dans cet exemple, les facteurs MFA sont activés au niveau de l’[Organisation]
 * **Métadonnées de l’organisation** : Données au niveau de l’organisation, comme les facteurs spécifiques activés pour une organisation.
 * **Métadonnées de l’utilisateur** : Données au niveau de l’utilisateur, par exemple si un utilisateur dispose d’un numéro de téléphone associé à son profil.
 
-```javascript lines
+```js lines expandable
 exports.onExecutePostLogin = async (event, api) => {
   const orgFactors = event.organization?.metadata.factors.split(',') ?? [];
 
@@ -284,7 +284,7 @@ Pour y parvenir, incluez le paramètre `additionalFactors` dans votre code d’a
 
 L’exemple suivant met les utilisateurs au défi en mettant par défaut un mot de passe à usage unique. S’ils le souhaitent, ces derniers peuvent accéder au lien Essayer une autre méthode pour s’authentifier par courriel.
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   api.authentication.challengeWith({ type: 'otp' }, 
     { additionalFactors: [{type: 'email'}] })
@@ -295,7 +295,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 L’exemple suivant met les utilisateurs au défi en mettant par défaut un mot de passe à usage unique. S’ils le souhaitent, les utilisateurs peuvent accéder au lien Essayer une autre méthode pour s’authentifier à l’aide d’un autre facteur inscrit.
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const enrolledFactors = event.user.enrolledFactors.map((f) => ({type: f.type}));
 
@@ -312,7 +312,7 @@ L’authentification multifacteur (MFA) adaptative est une politique MFA flexibl
 
 Dans ce cas, les utilisateurs sont invités à utiliser la MFA s’ils se connectent à partir d’un appareil qui n’est pas reconnu et que leur pointage de confiance global est faible ou moyen.
 
-```javascript lines
+```javascript lines expandable
 /**
 * Handler that will be called during the execution of a PostLogin flow.
 *
@@ -360,7 +360,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 Vous pouvez utiliser des actions pour personnaliser les flux MFA en modifiant le déclencheur `post-connexion` duflux de connexion. Cet exemple utilise la méthode d’authentification par `téléphone` et `preferredMethod : 'both'`, faisant référence aux facteurs MFA actifs associés au compte d’un utilisateur. Pour plus d’information, référez-vous à [Déclencheurs d’actions : post-connexion - Objet d’événement](/docs/fr-ca/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/post-login-event-object).
 
-``` lines
+```js lines
 api.authentication.challengeWith({ 
   type: 'phone', 
   options: { preferredMethod: 'both'} 

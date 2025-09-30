@@ -35,7 +35,7 @@ L’exécution asynchrone entraînera l’exécution d’un rappel (JavaScript) 
 
 L’objet `context` fournit des informations sur le contexte dans lequel une règle est exécutée (identifiant du client, nom de la connexion, identifiant de la session, contexte de la demande, protocole, etc.) À l’aide de l’objet context, une règle peut déterminer la raison de l’exécution. Par exemple, comme l’illustre le fragment d’exemple ci-dessous, `context.clientID` ainsi que `context.protocol` peuvent être utilisés pour mettre en œuvre un traitement conditionnel afin de déterminer quand la logique de la règle est exécutée. L’exemple montre également quelques bonnes pratiques pour la gestion des exceptions, l’utilisation des modules `npm` (pour un traitement de type `Promise`) et l’objet `callback`. Pour en savoir plus, lisez [Meilleures pratiques de l’environnement de script d’action des bases de données personnalisées](/docs/fr-ca/authenticate/database-connections/custom-db/custom-database-connections-scripts/environment)`.`
 
-```javascript lines
+```js lines expandable
 switch (context.protocol) {
     case 'redirect-callback':
       return callback(null, user, context);

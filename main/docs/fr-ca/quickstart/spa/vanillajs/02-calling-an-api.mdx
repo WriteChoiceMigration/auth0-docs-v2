@@ -61,7 +61,7 @@ In this section, you will modify the [ExpressJS](https://expressjs.com) that you
 
 To begin, let's install an NPM package that will be used to validate incoming tokens to the server. From the terminal:
 
-```bash lines
+```sh lines
 npm install express-oauth2-jwt-bearer
 ```
 
@@ -90,7 +90,7 @@ This code configures the `express-oauth2-jwt-bearer` middleware with the setting
 
 Next, open the `auth_config.json` file and modify the data so that the `audience` appears as a key within the JSON, using the value that you just used when creating the API:
 
-```json lines
+```json  lines
 {
   "domain": "{yourDomain}",
   "clientId": "{yourClientId}",
@@ -204,7 +204,7 @@ curl -I localhost:3000/api/external
 
 You should find that a 401 Unauthorized result is returned, because it requires a valid access token:
 
-```bash lines
+```http lines
 HTTP/1.1 401 Unauthorized
 X-DNS-Prefetch-Control: off
 X-Frame-Options: SAMEORIGIN

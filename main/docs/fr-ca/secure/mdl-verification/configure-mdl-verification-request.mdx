@@ -116,7 +116,7 @@ You can request the following claims:
    1. `Content-Type: application/json`
    2. `Authorization: bearer`
 
-      ```
+      ```text lines
       curl -X POST --location "https://{domain}/api/v2/verifiable_credentils/templates" \
           -H "Authorization: Bearer {managementAccessToken}" \
           -H "Content-Type: application/json" \
@@ -155,7 +155,7 @@ A **Verification Presentation Request** keeps track of a verification request in
 3. Create a new file named **start.js** in the **api/verify** folder.
 4. Add the following code snippet to the **start.js** file:
 
-   ```javascript lines
+   ```text lines
    import fetch from "node-fetch";
    ```
 
@@ -194,7 +194,7 @@ A **Verification Presentation Request** keeps track of a verification request in
       * `engagement`: The URIwith the verification request information for the end user’s wallet to consume.
       * `verificationId`: Auth0’s unique identifier of the verification request.
 
-        ```
+        ```text lines expandable
         export default async function handler(req, res) {
             try {
                 const result = await run();
@@ -254,7 +254,7 @@ Once you create a verification request, the application needs to know if the use
    
 3. The `HTTP` handler is similar to the previous one, but the Verification ID must be extracted from the Verification `POST` request body so your application can exchange the requested claims with Auth0:
 
-   ```javascript lines
+   ```text lines
    export default async function handler(req, res) {
        try {
            const verificationId = req.body.verificationId;
@@ -271,7 +271,7 @@ Once you create a verification request, the application needs to know if the use
    
 4. Implement the `run()` function. This function uses the Verification ID to exchange the requested claims with Auth0 and returns the result.
 
-   ```javascript lines
+   ```text lines
    async function run(verificationId) {
        if (!verificationId) throw new Error("verificationId not found");
 

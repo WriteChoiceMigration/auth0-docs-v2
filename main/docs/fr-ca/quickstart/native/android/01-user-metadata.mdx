@@ -55,7 +55,7 @@ Find the code in your project that initializes the `WebAuthProvider` class, and 
 * amend the argument given to `withScope` to be `openid profile email offline_access read:current_user update:current_user_metadata`
 * add a call to `withAudience` and pass the audience for the Auth0 Management API: `https://{yourDomain}/api/v2/` (please note the trailing slash - this is required)
 
-```kotlin lines
+```kt lines
 WebAuthProvider.login(account)
   .withScheme("demo")
   // modify the scopes to enable read and write of user_metadata
@@ -83,7 +83,7 @@ Fields such as `user_metadata` and `app_metadata` are not available on the user 
 
 The metadata can then be retrieved by using the `getUserMetadata` method on the `UserProfile` object.
 
-```kotlin lines
+```kt lines
 fun getUserMetadata(userId: String, accessToken: String) {
   // Get the user ID and call the full getUser Management API endpoint, to retrieve the full profile information
   // Create the user API client using the account details and the access token from Credentials
@@ -119,7 +119,7 @@ Add the above code to your application at the point where you already get the ba
 
 Updating user metadata is done in a very similar fashion. Call the `updateMetadata` method on the `UsersAPIClient` object to update the metadata for a specific user. You must also supply a map of data that is used to update the user metadata with.
 
-```kotlin lines
+```kt lines
 fun patchUserMetadata(userId: String, accessToken: String) {
   // Create the UsersAPIClient with the account details
   // and the access token from the Credentials object

@@ -75,7 +75,7 @@ import { authHttpInterceptorFn } from '@auth0/auth0-angular';
 
 Next, add `provideHttpClient` to the `providers` of the `bootstrapApplication` function, and add `authHttpInterceptorFn` using `withInterceptors`:
 
-```javascript lines
+```js lines
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(withInterceptors([authHttpInterceptorFn])),
@@ -87,7 +87,7 @@ Finally, modify the configuration given to `provideAuth0()` to specify the `audi
 
 In this case, the audience and scope for the Auth0 Management API are given, which allows your app to retrieve information about the current user.
 
-```javascript lines
+```js lines
 provideAuth0({
   // The domain and clientId were configured in the previous chapter
   domain: '{yourDomain}',
@@ -138,7 +138,7 @@ With your app module configured with the HTTP interceptor from the Angular SDK, 
 
 The following component demonstrates how to display the `user_metadata` field from the authenticated user's profile, by making a call to the `/api/v2/users` endpoint using `HttpClient`:
 
-```javascript lines
+```js lines
 import { Component, OnInit } from '@angular/core';
 import { concatMap, tap, map } from 'rxjs/operators';
 

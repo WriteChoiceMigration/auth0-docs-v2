@@ -47,7 +47,7 @@ The following are troubleshooting topics that you might run into when using the 
 
 The `redirect_uri` parameter that OmniAuth generates when redirecting to login is based on the `Host` header that is passed to Rails. This can cause incorrect callback URLs to be passed when using this strategy (and OmniAuth in general) with a reverse proxy. You can adjust the host used by OmniAuth with the following snippet:
 
-```ruby lines
+```
 OmniAuth.config.full_host = lambda do |env|
     scheme         = env['rack.url_scheme']
     local_host     = env['HTTP_HOST']
@@ -62,13 +62,13 @@ end
 
 This is likely caused by a missing CSRF token needed to POST the login request. If you inspect the login button in your browser, you should see something like this:
 
-```html lines
+```erb lines
 <a data-method="post" href="auth/auth0">Login</a>
 ```
 
 ... and in the `<head>` element for the page, you should have CSRF meta tags like these:
 
-```html lines
+```erb lines
 <meta name="csrf-param" content="authenticity_token">
 <meta name="csrf-token" content="UY2XpKwxzwBWalxFVJ8yKsao/33it7If09BnZewpHifVPSpFJd2LrA7xgQn6VQrhZNGjgZoLI3kV+bkQHtr+Rw==">
 ```
@@ -81,13 +81,13 @@ This error means that a cookie session is being used and because the whole profi
 
 Go to `/config/initializers/session_store.rb` (or create it if it does not exist) and add the following:
 
-```ruby lines
+```
 Rails.application.config.session_store :cache_store
 ```
 
 Go to `/config/environments/development.rb` and add the following:
 
-```ruby lines
+```
 config.cache_store = :memory_store
 ```
 
@@ -111,7 +111,7 @@ curl -L -o lib/ca-bundle.crt http://curl.haxx.se/ca/ca-bundle.crt
 
 Add this initializer to `config/initializers/fix_ssl.rb`:
 
-```ruby lines
+```rb lines
 # config/initializers/fix_ssl.rb
 
 require 'open-uri'
@@ -135,13 +135,13 @@ end
 
 This issue doesn't occur when working locally but may happen in a staging or production environment. The error message may be displayed as:
 
-``` lines
+```
 omniauth: (auth0) Authentication failure! invalid_credentials: OAuth2::Error, server_error: The redirect URI is wrong. You send [wrong url], and we expected [callback url set in your app settings]
 ```
 
 To solve this, add the following to `config/environments/staging.rb` or `production.rb`:
 
-```ruby lines
+```
 OmniAuth.config.full_host = "http://www.example.com"
 ```
 

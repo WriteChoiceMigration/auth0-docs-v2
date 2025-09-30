@@ -110,7 +110,7 @@ Pour configurer les notifications poussées iOS dans votre Auth0 Dashboard, réc
 4. Exportez le certificat et la clé privée associée dans un fichier P12 sans mot de passe (nom par défaut : `Certificates.p12`).
 5. Pour générer un fichier P12 en utilisant Triple DES au lieu de RC2, exécutez
 
-   ``` lines
+   ```bash lines
    openssl pkcs12 -in Certificates.p12 -legacy -nocerts -nodes -out pk.pem -passin pass:"" &&
    openssl pkcs12 -in Certificates.p12 -legacy -nokeys -out cert.crt -passin pass:"" &&
    openssl pkcs12 -export -inkey pk.pem -in cert.crt -descert -out Certificate_3des.p12 -passout pass:"" &&
