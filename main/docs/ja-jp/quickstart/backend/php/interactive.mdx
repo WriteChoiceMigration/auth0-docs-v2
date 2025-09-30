@@ -7,230 +7,165 @@ permalink: "interactive"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/php.png"
 'twitter:title': "PHPアプリケーションに認可を追加する"
 'twitter:description': "このガイドは、Auth0 PHP SDKを使ってAuth0を統合し、トークンベースの認可の追加とアプリケーションルートの保護を行う方法について説明します。"
+sidebarTitle: PHP API
 ---
 
-[Skip to main content](#maincontent)
+import { Recipe, Content, Section, SideMenu, SideMenuSectionItem, SignUpForm , CodeGroup } from "/snippets/recipe.jsx";
+import { LoggedInForm } from "/snippets/Login.jsx";
+import Index from "/snippets/quickstart/backend/php/index.php.mdx";
+import Index2 from "/snippets/quickstart/backend/php/index.php2.mdx";
+import Router from "/snippets/quickstart/backend/php/router.php.mdx";
+import Router2 from "/snippets/quickstart/backend/php/router.php2.mdx";
+import Router3 from "/snippets/quickstart/backend/php/router.php3.mdx";
 
-​
+export const sections = [
+  { id: "auth0を構成する", title: "Auth0を構成する" },
+  { id: "auth0-php-sdkをインストールする", title: "Auth0 PHP SDKをインストールする" },
+  { id: "ベアラートークンをリッスンする", title: "ベアラートークンをリッスンする" },
+  { id: "ルートを作成-構成する", title: "ルートを作成・構成する" },
+  { id: "エンドポイント認可を構成する", title: "エンドポイント認可を構成する" },
+  { id: "スコープで認可する", title: "スコープで認可する" }
+]
 
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+<Recipe>
+  <Content>
+    Auth0を使用すると、アプリケーションに手軽にトークンベースのエンドポイント認可を追加することができます。このガイドは、Auth0 PHP SDKを使ってAuth0を統合し、トークンベースの認可の追加とアプリケーションルートの保護を行う方法について説明します。
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+    このクイックスタートを使用するには、以下の手順に従います：
 
----
+    - Auth0の無料アカウントにサインアップするか、Auth0にログインします。
+    - Auth0に統合したいPHPプロジェクトを用意します。または、ログインした後に、サンプルアプリケーションを表示してダウンロードすることもできます。
 
-​
+      <Section id={sections[0].id} title={sections[0].title} stepNumber="1">
+      Auth0のサービスを利用するには、Auth0 Dashboadに登録済みのアプリケーションがある必要があります。Auth0アプリケーションは、プロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
 
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+      ### アプリケーションを構成する
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0 APIを呼び出す際に使用されます。
 
-[##### PHPアプリケーションに認可を追加する](#PHPアプリケーションに認可を追加する)
+      このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/#/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
 
-[View on Github](https://github.com/auth0-samples/auth0-php-api-samples/tree/main/app) Log In & Download Sample
+      代わりに完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
 
-1. [Quickstarts](/docs/ja-jp/quickstarts)
-3. [Backend/API](/docs/ja-jp/quickstart/backend)
-5. [PHP API](/docs/ja-jp/quickstart/backend/php/interactive)
+      ### APIを構成する
 
-# 
+      同様に、Auth0 APIを新規作成するか、[Dashboard](https://manage.auth0.com/#/)から統合するプロジェクトを表す既存のAPIを使用する必要があります。APIに一意の識別子を選択して記録します。以下のアプリケーションを構成するには、その識別子が必要です。
+      </Section>
 
-# PHPアプリケーションに認可を追加する
+      <Section id={sections[1].id} title={sections[1].title} stepNumber="2">
+      PHPアプリで、Auth0の認証・認可を手軽に実装できるように、Auth0は[PHP SDK](https://github.com/auth0/auth0-PHP)（Auth0-PHP）を提供しています。
 
-Auth0を使用すると、アプリケーションに手軽にトークンベースのエンドポイント認可を追加することができます。このガイドは、Auth0 PHP SDKを使ってAuth0を統合し、トークンベースの認可の追加とアプリケーションルートの保護を行う方法について説明します。
+      Auth0 PHP SDKでは、ネットワーク要求を管理するために、[PSR-17](https://www.php-fig.org/psr/psr-17/)と[PSR-18](https://www.php-fig.org/psr/psr-18/)対応HTTPライブラリーをインストールする必要があります。ライブラリーがない場合は、ターミナルで以下のコマンドを実行して、信頼できる選択肢をインストールすることができます：
 
-このクイックスタートを使用するには、以下の手順に従います：
+      ```
+      cd <your-project-directory>
+      composer require symfony/http-client nyholm/psr7
+      ```
 
-* Auth0の無料アカウントにサインアップするか、Auth0にログインします。
-* Auth0に統合したいPHPプロジェクトを用意します。または、ログインした後に、サンプルアプリケーションを表示してダウンロードすることもできます。
+      ターミナルで以下のコマンドを実行してAuth0 PHP SDKをインストールします：
 
-[1
+      ```
+      composer require auth0/auth0-php
+      ```
 
-## Auth0を構成する](#auth0を構成する)
+      ### Auth0 SDKを構成する
 
-Auth0のサービスを利用するには、Auth0 Dashboadに登録済みのアプリケーションがある必要があります。Auth0アプリケーションは、プロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
+      SDKが正しく機能するためには、次のプロパティを初期化中にAuth0 SDKで設定しなければなりません：
 
-### アプリケーションを構成する
+      - `strategy`：アプリのユースケースでSDKの動作を導くのに役立ちます。この場合は、以下の定数に設定します。
 
-対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0 APIを呼び出す際に使用されます。
+        `Auth0\SDK\Configuration\SdkConfiguration::STRATEGY_API`
+      - domain：Auth0テナントのドメインです。通常、Auth0 Dashboardにあるアプリケーションの［Settings（設定）］の［Domain（ドメイン）］フィールドで確認できます。カスタムドメインを使用している場合は、この値をカスタムドメインの値に設定してください。
+      - clientId：このクイックスタートで前にセットアップした、Auth0アプリケーションのIDです。Auth0 Dashboardにあるアプリケーションの［Settings（設定）］の［Client ID（クライアントID）］フィールドで確認できます。
+      - clientSecret：このクイックスタートで前にセットアップしたAuth0アプリケーションのシークレットです。Auth0 Dashboardにあるアプリケーションの［Settings（設定）］の［Client Secret（クライアントシークレット）］フィールドにあります。
+      - audience：上で登録したAuth0 APIの識別子です。配列として指定されている必要があります。
 
-このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/#/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
+      <Note>
+      ##### チェックポイント
+      Auth0 SDKが正しく構成されました。アプリケーションを実行して次の点を確認します：
+      SDKが正しく初期化している。
+      アプリケーションがAuth0に関連したエラーを投入していない。
+      </Note>
+      </Section>
 
-代わりに完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
+      <Section id={sections[2].id} title={sections[2].title} stepNumber="3">
+      次に、ベアラートークンを取得し処理するためにアプリケーションを拡張します。ベアラートークンはAPIに提供されるアクセストークンで、ユーザーに代わってクライアントから要求されます。アクセストークンは、アプリケーションでルートへのアクセスを承認または拒否します。これは、エンドポイント認可と呼ばれます。
 
-### APIを構成する
+      要求からアクセストークンを取得する最も簡単な方法は、PHP SDKの`getBearerToken()`メソッドを使用するものです。このメソッドは、GETパラメーター、POST本文、要求ヘッダー、および他のソースからトークンを取得します。この場合、PHP SDKは`token`パラメーターのGET要求、またはHTTP `Authorization`ヘッダーから渡されたトークンを処理します。
+      </Section>
 
-同様に、Auth0 APIを新規作成するか、[Dashboard](https://manage.auth0.com/#/)から統合するプロジェクトを表す既存のAPIを使用する必要があります。APIに一意の識別子を選択して記録します。以下のアプリケーションを構成するには、その識別子が必要です。
+      <Section id={sections[3].id} title={sections[3].title} stepNumber="4">
+      次に、受信する要求をアプリケーションにダイレクトするために、ルーティングライブラリーをインストールします。これは必須手順ではありませんが、本クイックスタートの目的上、アプリケーション構造が簡略化されます。
 
-[2
+      ```
+      composer require steampixel/simple-php-router
+      ```
 
-## Auth0 PHP SDKをインストールする](#auth0-php-sdkをインストールする)
+      アプリケーションで`router.php`と呼ばれる新規ファイルを作成し、ルートを定義します。**router.php**タブにある、右のインタラクティブパネルからコードをコピーします。
+      </Section>
 
-PHPアプリで、Auth0の認証・認可を手軽に実装できるように、Auth0は[PHP SDK](https://github.com/auth0/auth0-PHP)（Auth0-PHP）を提供しています。
+      <Section id={sections[4].id} title={sections[4].title} stepNumber="5">
+      Auth0アプリケーションとAuth0 PHP SDKを構成し、アプリケーションで要求からベアラートークンを取得したら、次の手順はプロジェクトにエンドポイント認可をセットアップすることです。上で実装した`getBearerToken()`メソッドは、要求のアクセスに関する詳細を含む`Token`クラスを返します。
 
-Auth0 PHP SDKでは、ネットワーク要求を管理するために、[PSR-17](https://www.php-fig.org/psr/psr-17/)と[PSR-18](https://www.php-fig.org/psr/psr-18/)対応HTTPライブラリーをインストールする必要があります。ライブラリーがない場合は、ターミナルで以下のコマンドを実行して、信頼できる選択肢をインストールすることができます：
+      `getBearerToken()`メソッドは受信要求を自動的に検証・確認するため、アプリケーションはメソッドの応答を評価することで、アクセストークンの詳細を判定します。応答がnullの場合、提供される有効なトークンはありません。そうでない場合は、応答の内容を検査し、要求の詳細を確認してください。
 
-```powershell lines
-cd <your-project-directory>
-composer require symfony/http-client nyholm/psr7
-```
-
-ターミナルで以下のコマンドを実行してAuth0 PHP SDKをインストールします：
-
-```powershell lines
-composer require auth0/auth0-php
-```
-
-### Auth0 SDKを構成する
-
-SDKが正しく機能するためには、次のプロパティを初期化中にAuth0 SDKで設定しなければなりません：
-
-* `strategy`：アプリのユースケースでSDKの動作を導くのに役立ちます。この場合は、以下の定数に設定します。
-
-  `Auth0\SDK\Configuration\SdkConfiguration::STRATEGY_API`
-* domain：Auth0テナントのドメインです。通常、Auth0 Dashboardにあるアプリケーションの［Settings（設定）］の［Domain（ドメイン）］フィールドで確認できます。カスタムドメインを使用している場合は、この値をカスタムドメインの値に設定してください。
-* clientId：このクイックスタートで前にセットアップした、Auth0アプリケーションのIDです。Auth0 Dashboardにあるアプリケーションの［Settings（設定）］の［Client ID（クライアントID）］フィールドで確認できます。
-* clientSecret：このクイックスタートで前にセットアップしたAuth0アプリケーションのシークレットです。Auth0 Dashboardにあるアプリケーションの［Settings（設定）］の［Client Secret（クライアントシークレット）］フィールドにあります。
-* audience：上で登録したAuth0 APIの識別子です。配列として指定されている必要があります。
-
-##### checkpoint.header
-
-Auth0 SDKが正しく構成されました。アプリケーションを実行して次の点を確認します：
-
-* SDKが正しく初期化している。
-* アプリケーションがAuth0に関連したエラーを投入していない。
-
-checkpoint.itWorked checkpoint.somethingNotRight
-
-[3
-
-## ベアラートークンをリッスンする](#ベアラートークンをリッスンする)
-
-次に、ベアラートークンを取得し処理するためにアプリケーションを拡張します。ベアラートークンはAPIに提供されるアクセストークンで、ユーザーに代わってクライアントから要求されます。アクセストークンは、アプリケーションでルートへのアクセスを承認または拒否します。これは、エンドポイント認可と呼ばれます。
-
-要求からアクセストークンを取得する最も簡単な方法は、PHP SDKの`getBearerToken()`メソッドを使用するものです。このメソッドは、GETパラメーター、POST本文、要求ヘッダー、および他のソースからトークンを取得します。この場合、PHP SDKは`token`パラメーターのGET要求、またはHTTP `Authorization`ヘッダーから渡されたトークンを処理します。
-
-[4
-
-## ルートを作成・構成する](#ルートを作成-構成する)
-
-次に、受信する要求をアプリケーションにダイレクトするために、ルーティングライブラリーをインストールします。これは必須手順ではありませんが、本クイックスタートの目的上、アプリケーション構造が簡略化されます。
-
-```powershell lines
-composer require steampixel/simple-php-router
-```
-
-アプリケーションで`router.php`と呼ばれる新規ファイルを作成し、ルートを定義します。**router.php**タブにある、右のインタラクティブパネルからコードをコピーします。
-
-[5
-
-## エンドポイント認可を構成する](#エンドポイント認可を構成する)
-
-Auth0アプリケーションとAuth0 PHP SDKを構成し、アプリケーションで要求からベアラートークンを取得したら、次の手順はプロジェクトにエンドポイント認可をセットアップすることです。上で実装した`getBearerToken()`メソッドは、要求のアクセスに関する詳細を含む`Token`クラスを返します。
-
-`getBearerToken()`メソッドは受信要求を自動的に検証・確認するため、アプリケーションはメソッドの応答を評価することで、アクセストークンの詳細を判定します。応答がnullの場合、提供される有効なトークンはありません。そうでない場合は、応答の内容を検査し、要求の詳細を確認してください。
-
-右のインタラクティブパネルで、応答がnullであるかどうかをチェックし、`/api/private`ルートへのアクセスをフィルターすることができます。
-
-[6
-
-## スコープで認可する](#スコープで認可する)
-
-アクセストークンで要求されたスコープに基づいて、特定のルートへのアクセスをフィルターしたい場合もあるでしょう。右のインタラクティブパネルに示すように、`getBearerToken()`メソッドの応答から'scope'プロパティのコンテンツを評価し、アクセストークンで付与されたスコープをチェックします。
-
-## Next Steps
-
-Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
-
-This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
-
-* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
-* [Auth0-PHP SDK](https://github.com/auth0/auth0-php) - Explore the SDK used in this tutorial more fully
-* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
-
-Did it work?
-
-Yes No
-
-Any suggestion or typo?
-
-[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/backend/php/interactive.md)
-
-<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
-
-Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
-
-Sign Up
-
-Developers
-
-* [Developer Hub](https://developer.auth0.com/resources)
-* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
-* [Blog posts](https://auth0.com/blog/developers/)
-* [Videos](https://auth0.com/docs/videos)
-* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
-* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
-
-Documentation
-
-* [Articles](https://auth0.com/docs/articles)
-* [Quickstarts](https://auth0.com/docs/quickstarts)
-* [APIs](https://auth0.com/docs/api)
-* [SDK Libraries](https://auth0.com/docs/libraries)
-* [Blog](https://auth0.com/blog/)
-* [Reports](https://auth0.com/resources/ebooks)
-* [Webinars](https://auth0.com/resources/webinars)
-
-Get Involved
-
-* [Forum](https://community.auth0.com/)
-* [Events](https://developer.auth0.com/events)
-* [Ambassador Program](https://auth0.com/ambassador-program)
-* [Auth0 Research Program](https://auth0.com/research-program)
-
-Company
-
-* [Our Customers](https://auth0.com/customers)
-* [Compliance - Ensuring privacy and security](https://auth0.com/security)
-* [Partners](https://auth0.com/partners)
-* [Careers We're hiring!](https://www.okta.com/company/careers/)
-* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
-
-Support Center
-
-* [Community](https://community.auth0.com/)
-* [Support](https://support.auth0.com/)
-* [Help](https://community.auth0.com/c/help/6)
-* [FAQs](https://community.auth0.com/c/faq/42)
-* [Auth0 Marketplace](https://marketplace.auth0.com)
-
-Learning
-
-* [Learn](https://auth0.com/learn)
-* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
-* [Blog](https://auth0.com/blog/)
-
-Platform
-
-* [Access Management](https://auth0.com/platform/access-management)
-* [Extensibility](https://auth0.com/platform/extensibility)
-* [Security](https://auth0.com/platform/login-security)
-* [User Management](https://auth0.com/platform/user-management)
-* [Authentication](https://auth0.com/platform/authentication)
-
-Features
-
-* [Universal Login](https://auth0.com/features/universal-login)
-* [Single Sign On](https://auth0.com/features/single-sign-on)
-* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
-* [Actions](https://auth0.com/features/actions)
-* [Machine to Machine](https://auth0.com/features/machine-to-machine)
-* [Passwordless](https://auth0.com/features/passwordless)
-* [Breached Passwords](https://auth0.com/features/breached-passwords)
-
-© 2025 Okta, Inc. All Rights Reserved.
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
+      右のインタラクティブパネルで、応答がnullであるかどうかをチェックし、`/api/private`ルートへのアクセスをフィルターすることができます。
+      </Section>
+
+      <Section id={sections[5].id} title={sections[5].title} stepNumber="6">
+      アクセストークンで要求されたスコープに基づいて、特定のルートへのアクセスをフィルターしたい場合もあるでしょう。右のインタラクティブパネルに示すように、`getBearerToken()`メソッドの応答から'scope'プロパティのコンテンツを評価し、アクセストークンで付与されたスコープをチェックします。
+      </Section>
+
+    ## 次のステップ
+
+    成功です！ここまで来れば、アプリケーションにログイン、ログアウト、ユーザープロファイル情報が備わっているはずです。
+
+    これでクイックスタートチュートリアルは終了ですが、機能はまだまだたくさんあります。Auth0でできることについて詳しくは、以下をご覧ください。
+
+    *   [Auth0 Dashboard](https://manage.auth0.com/#) - Auth0のテナントやアプリケーションを構成して管理する方法について説明します
+    *   [Auth0-PHP SDK](https://github.com/auth0/auth0-php) - このチュートリアルで使用されているSDKをより詳しく説明します
+    *   [Auth0 Marketplace](https://marketplace.auth0.com/) - Auth0の機能性を拡張できる各種の統合を見つけられます
+  </Content>
+
+  <SideMenu sections={sections}>
+      <SideMenuSectionItem id={sections[0].id}>
+        <SignUpForm />
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[1].id}>
+        <CodeGroup>
+          <Index />
+          <Router />
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[2].id}>
+        <CodeGroup>
+          <Index2 />
+          <Router />
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[3].id}>
+        <CodeGroup>
+          <Router />
+          <Index />
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[4].id}>
+        <CodeGroup>
+          <Router2 />
+          <Index />
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[5].id}>
+        <CodeGroup>
+          <Router3 />
+          <Index />
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+    </SideMenu>
+</Recipe>
