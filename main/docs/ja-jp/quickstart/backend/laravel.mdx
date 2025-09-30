@@ -45,13 +45,13 @@ System requirements: Laravel 9 / 10 | PHP 8.0+ | Composer
 
 ---
 
-**Backend applications differ from traditional web applications in that they do not handle user authentication or have a user interface. They provide an API that other applications can interact with. They accept [access tokens](https://auth0.com/docs/secure/tokens/access-tokens) from `Authorization` headers in requests to control access to routes.**
+**Backend applications differ from traditional web applications in that they do not handle user authentication or have a user interface. They provide an API that other applications can interact with. They accept [access tokens](/docs/ja-jp/secure/tokens/access-tokens) from `Authorization` headers in requests to control access to routes.**
 
-Separate front-end applications are usually built to interact with these types of backends. These can be anything from [single-page applications](https://auth0.com/docs/quickstart/spa) or [native or mobile apps](https://auth0.com/docs/quickstart/native) (all of which Auth0 also provides SDKs for!)
+Separate front-end applications are usually built to interact with these types of backends. These can be anything from [single-page applications](/docs/ja-jp/quickstart/spa) or [native or mobile apps](/docs/ja-jp/quickstart/native) (all of which Auth0 also provides SDKs for!)
 
 When users need to interact with your backend application, they first authenticate with Auth0 using the frontend application. The frontend application then retrieves an access token from Auth0, which it can use to make requests to your backend application on behalf of the user.
 
-As their name implies, [access tokens](https://auth0.com/docs/secure/tokens/access-tokens) are designed to address matters of access control (authorization), and do not contain information about the user. **Backend applications work exclusively with access tokens.** You can retrieve information about the user who created the token using the [Management API](https://auth0.com/docs/api/management/v2), which we will demonstrate later.
+As their name implies, [access tokens](/docs/ja-jp/secure/tokens/access-tokens) are designed to address matters of access control (authorization), and do not contain information about the user. **Backend applications work exclusively with access tokens.** You can retrieve information about the user who created the token using the [Management API](https://auth0.com/docs/api/management/v2), which we will demonstrate later.
 
 ## Laravel Installation
 
@@ -142,7 +142,7 @@ Route::get('/private', function () {
 })->middleware('auth');
 ```
 
-You can also require the provided token to have specific [permissions](https://auth0.com/docs/manage-users/access-control/rbac) by combining this with Laravel's `can` middleware:
+You can also require the provided token to have specific [permissions](/docs/ja-jp/manage-users/access-control/rbac) by combining this with Laravel's `can` middleware:
 
 ```php lines
 Route::get('/scope', function () {
@@ -223,7 +223,7 @@ php artisan serve
 
 ## Retrieve a Test Token
 
-You can learn more about [retrieving access tokens here](https://auth0.com/docs/secure/tokens/access-tokens/get-access-tokens). For this quickstart, however, you can simply use an access token from [your API settings' "test" view](https://manage.auth0.com/#/apis).
+You can learn more about [retrieving access tokens here](/docs/ja-jp/secure/tokens/access-tokens/get-access-tokens). For this quickstart, however, you can simply use an access token from [your API settings' "test" view](https://manage.auth0.com/#/apis).
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 

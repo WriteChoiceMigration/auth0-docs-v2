@@ -270,13 +270,13 @@ Once that's complete, verify that Auth0 redirects you to your application and th
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-Auth0 enables the Google social provider by default on new tenants and offers you developer keys to test logging in with [social identity providers](https://auth0.com/docs/connections/identity-providers-social). However, these developer keys have some limitations that may cause your application to behave differently. For more details on what this behavior may look like and how to fix it, consult the [Test Social Connections with Auth0 Developer Keys](https://auth0.com/docs/connections/social/devkeys#limitations-of-developer-keys) document.
+Auth0 enables the Google social provider by default on new tenants and offers you developer keys to test logging in with [social identity providers](/docs/ja-jp/connections/identity-providers-social). However, these developer keys have some limitations that may cause your application to behave differently. For more details on what this behavior may look like and how to fix it, consult the [Test Social Connections with Auth0 Developer Keys](/docs/ja-jp/connections/social/devkeys#limitations-of-developer-keys) document.
 
 </Callout>
 
 ## Add Logout to Your Application
 
-Now that users can log into your application, they need [a way to log out](https://auth0.com/docs/logout/guides/logout-auth0). By default, when logout is enabled, Spring Security will log the user out of your application and clear the session. To enable successful logout of Auth0, you can provide a `LogoutHandler` to redirect users to your [Auth0 logout endpoint](https://auth0.com/docs/api/authentication?javascript#logout) (`https://{yourDomain}/v2/logout`) and then immediately redirect them to your application.
+Now that users can log into your application, they need [a way to log out](/docs/ja-jp/logout/guides/logout-auth0). By default, when logout is enabled, Spring Security will log the user out of your application and clear the session. To enable successful logout of Auth0, you can provide a `LogoutHandler` to redirect users to your [Auth0 logout endpoint](https://auth0.com/docs/api/authentication?javascript#logout) (`https://{yourDomain}/v2/logout`) and then immediately redirect them to your application.
 
 In the `SecurityConfig` class, provide a `LogoutHandler` that redirects to the Auth0 logout endpoint, and configure the `HttpSecurity` to add the logout handler:
 
@@ -350,7 +350,7 @@ Add the logout link in the view of your application. When you click it, verify t
 
 ## Show User Profile Information
 
-You can retrieve the [profile information](https://auth0.com/docs/users/concepts/overview-user-profile) associated with logged-in users through the [OidcUser](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/oauth2/core/oidc/user/OidcUser.html) class, which can be used with the [AuthenticationPrincipal annotation](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/annotation/AuthenticationPrincipal.html).
+You can retrieve the [profile information](/docs/ja-jp/users/concepts/overview-user-profile) associated with logged-in users through the [OidcUser](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/oauth2/core/oidc/user/OidcUser.html) class, which can be used with the [AuthenticationPrincipal annotation](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/annotation/AuthenticationPrincipal.html).
 
 In your controller, add the user's profile information to the model:
 
@@ -382,7 +382,7 @@ You can then use this profile information in your view, as shown below.
 
 ### Checkpoint
 
-Verify that you can display the user name or [any other `user` property](https://auth0.com/docs/users/references/user-profile-structure#user-profile-attributes) after you have logged in.
+Verify that you can display the user name or [any other `user` property](/docs/ja-jp/users/references/user-profile-structure#user-profile-attributes) after you have logged in.
 
 ##### What can you do next?
 
