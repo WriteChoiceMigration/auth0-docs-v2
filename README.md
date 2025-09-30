@@ -2,7 +2,7 @@
 
 This is a monorepo for hosting the content for the documentation of various projects in Auth0.
 
-We use [Mintlify](https://mintlify.com/) for our documentation needs.
+We use [Mintlify](https://mintlify.com/) for our documentation needs. 
 
 ## Directories
 
