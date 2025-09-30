@@ -38,15 +38,15 @@ permalink: "get-user"
 
 `getUser`関数は2つのパラメーターを受け取り、`callback`関数を返します。
 
-```javascript lines
+```js lines
 getUser(email, callback): function
 ```
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong></th>
-<th><strong>種類</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b></th>
+<th><b>種類</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -67,7 +67,7 @@ getUser(email, callback): function
 
 これは疑似JavaScriptを使った例で、どのようにすれば`getUser`関数を実装できるかがわかります。言語固有の例については、「[言語固有のスクリプトの例](#language-specific-script-examples)」をお読みください。
 
-```javascript lines
+```javascript lines expandable
 function getUser(email, callback) {
   // Send user identifier to external database API
   let options = {
@@ -106,16 +106,16 @@ function getUser(email, callback) {
 
 `callback`関数は2つまでのパラメーターを受け取り、1つの関数を返します。
 
-```javascript lines
+```js lines
 callback(error[,profile]): function
 ```
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong></th>
-<th><strong>種類</strong></th>
-<th><strong>必須</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b></th>
+<th><b>種類</b></th>
+<th><b>必須</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -146,7 +146,7 @@ Get Userスクリプトがユーザーについて返すプロファイルデー
 
 #### 例
 
-```javascript lines
+```js lines
 return callback(null, {
     username: "username",
     user_id: "my-custom-db|username@domain.com",
@@ -174,7 +174,7 @@ return callback(null, {
 
 #### 例
 
-```javascript lines
+```js lines
 return callback(null);
 ```
 
@@ -184,7 +184,7 @@ return callback(null);
 
 #### 例
 
-```javascript lines
+```js lines
 return callback(new Error("My custom error message."));
 ```
 
@@ -228,7 +228,7 @@ function getByEmail(email, callback) {
 
 ### ASP.NET Membership Provider（MVC3 - Universal Providers）
 
-```javascript lines
+```javascript lines expandable
 function getByEmail(email, callback) {
   const sqlserver = require('tedious@1.11.0');
   const Connection = sqlserver.Connection;
@@ -278,7 +278,7 @@ function getByEmail(email, callback) {
 
 ### ASP.NET Membership Provider（MVC4 - Simple Membership）
 
-```javascript lines
+```javascript lines expandable
 function getByEmail(email, callback) {
   const sqlserver = require('tedious@1.11.0');
   const Connection = sqlserver.Connection;
@@ -403,7 +403,7 @@ function loginByEmail(email, callback) {
 
 ### SQL Server
 
-```javascript lines
+```javascript lines expandable
 function getByEmail(email, callback) {
   //this example uses the "tedious" library
   //more info here: http://pekim.github.io/tedious/index.html
@@ -461,7 +461,7 @@ function getByEmail (name, callback) {
 
 ### Axios
 
-```javascript lines
+```js lines expandable
 async function getUserAsync(email, callback) {
   //should be updated as new versions of axios are made available (https://auth0-extensions.github.io/canirequire/#axios)
   const axios = require("axios@0.22.0");
@@ -513,7 +513,7 @@ async function getUserAsync(email, callback) {
 
 ### Stormpath
 
-```javascript lines
+```javascript lines expandable
 function getByEmail(email, callback) {
   // Replace the {yourStormpathClientId} with your Stormpath ID
   var url = 'https://api.stormpath.com/v1/applications/{yourStormpathClientId}/accounts';

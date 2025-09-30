@@ -77,7 +77,7 @@ Auth0でログアウトトークンとして使用するには、アプリケー
 
 アプリケーションがトークンを検証してデコードすると、コンテンツは以下の例のようになります。
 
-```bash lines
+```json JSON lines
 {
   "iss": "https://artex-dev.eu.auth0.com/",
   "sub": "auth0|602e93db83fa6f00749a23e6",
@@ -95,7 +95,7 @@ Auth0でログアウトトークンとして使用するには、アプリケー
 
 ### Auth0 SDK
 
-完全な例と製品コードは、[express-openid-connect SDK](https://github.com/auth0/express-openid-connect/blob/master/EXAMPLES.md#11-back-channel-logout)の**バックチャネルログアウト例**のセクションにすでに含まれています。
+完全な例と製品コードは、[express-openid-connect SDK](https://github.com/auth0/express-openid-connect/blob/master/EXAMPLES.md#11-back-channel-logout)の **バックチャネルログアウト例** のセクションにすでに含まれています。
 
 ## 実装例
 
@@ -113,7 +113,7 @@ Auth0でログアウトトークンとして使用するには、アプリケー
 
 **routes/index.js**
 
-```javascript lines
+```javascript JavaScript lines expandable
 const express = require('express');
 const router = express.Router();
 const { requiresAuth } = require('express-openid-connect');
@@ -170,7 +170,7 @@ module.exports = router;
 
 **middlewares/validateLogoutToken.js**
 
-```javascript lines
+```javascript JavaScript lines expandable
 // This middleware validates the logout token as defined here:
 // https://openid.net/specs/openid-connect-backchannel-1_0.html#Validation
 

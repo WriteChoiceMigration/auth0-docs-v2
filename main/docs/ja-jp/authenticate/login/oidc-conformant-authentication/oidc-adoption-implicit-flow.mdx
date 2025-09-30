@@ -19,7 +19,7 @@ permalink: "oidc-adoption-implicit-flow"
 
 ### 旧
 
-``` lines
+```http lines
 GET /authorize?
     response_type=token
     &scope=openid email favorite_color offline_access
@@ -33,7 +33,7 @@ GET /authorize?
 
 ### OIDC準拠
 
-``` lines
+```http lines
 GET /authorize?
     response_type=token id_token
     &scope=openid email
@@ -54,7 +54,7 @@ GET /authorize?
 
 ### 旧
 
-``` lines
+```json lines
 HTTP/1.1 302 Found
 Location: https://app.example.com/#
     access_token=SlAV32hkKG
@@ -70,7 +70,7 @@ Location: https://app.example.com/#
 
 ### OIDC準拠
 
-``` lines
+```json lines
 HTTP/1.1 302 Found
 Location: https://app.example.com/#
     access_token=eyJ...
@@ -87,7 +87,7 @@ Location: https://app.example.com/#
 
 ### 旧
 
-```json lines
+```json JSON lines
 {
     "sub": "auth0|alice",
     "iss": "https://{yourDomain}/",
@@ -102,7 +102,7 @@ Location: https://app.example.com/#
 
 ### OIDC準拠
 
-```json lines
+```json JSON lines
 {
     "sub": "auth0|alice",
     "iss": "https://{yourDomain}/",
@@ -123,7 +123,7 @@ Location: https://app.example.com/#
 
 ### 旧
 
-```json lines
+```bash HTTP lines
 SlAV32hkKG
 ```
 
@@ -131,7 +131,7 @@ SlAV32hkKG
 
 ### OIDC準拠
 
-```json lines
+```json JSON lines
 {
     "sub": "auth0|alice",
     "iss": "https://{yourDomain}/",

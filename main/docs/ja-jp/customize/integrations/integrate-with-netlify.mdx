@@ -31,7 +31,7 @@ To begin integrating Auth0 into your Netlify project, there are a few requiremen
 After creating your Netlify account and logging in to your dashboard, you can begin the process of adding an integration. To add the Auth0 integration to an existing Netlify project:
 
 1. From the Netlify dashboard, navigate to **Extensions > Directory.**
-2. Search for [**Auth0**](https://app.netlify.com/extensions/auth0)and select **Install.**
+2. Search for [**Auth0** ](https://app.netlify.com/extensions/auth0)and select **Install.**
 3. Select **Install** to proceed with the installation to your Auth0 integration portal.
 
 <Frame>![](/images/ja-jp/cdy7uua7fh8z/18pdegCJ6AHGyWsWY53aQt/f5ecef993ef893f1920dda33246e6840/netlify-directory.png)</Frame>
@@ -50,8 +50,8 @@ To connect your site to Auth0:
 
    <Frame>![](/images/ja-jp/cdy7uua7fh8z/7mrUvgQh70cgtri09aOHso/a76600ebf472dcddb3977a8b9e726e01/netlify-link.png)</Frame>
 
-5. After you have linked your tenant, select **Add tenant**.
-6. Fill out the required information for your tenant and application, enable the **Redeploy site** checkbox and select **Create site tenant**.
+5. After you have linked your tenant, select **Add tenant** .
+6. Fill out the required information for your tenant and application, enable the **Redeploy site** checkbox and select **Create site tenant** .
 
    <Frame>![](/images/ja-jp/cdy7uua7fh8z/hPxAU8mwd9035AXOPMqxp/f74d0864a6cc5a4aed963bfc77237d7c/auth0_tenant.png)</Frame>
 
@@ -61,26 +61,26 @@ To connect your site to Auth0:
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-You should now see your client application and API in your Auth0 dashboard under **Applications**.
+You should now see your client application and API in your Auth0 dashboard under **Applications** .
 
 </Callout>
 
 ## Set up the integration
 
-When integrating Auth0 with your Netlify project, you'll need to provide your application with authentication settings such as the **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Client ID</Tooltip>** and **Auth0 domain**.
+When integrating Auth0 with your Netlify project, you'll need to provide your application with authentication settings such as the **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Client ID</Tooltip>** and **Auth0 domain** .
 
 If your application is reading these settings from environment variables, they are injected automatically by extension.
 
 1. Go to your Netlify dashboard.
 2. Navigate to **Site configuration > Environment variables.**
-3. Click **Add a variable**, and enter:
+3. Click **Add a variable** , and enter:
 
    * `AUTH0_CLIENT_ID` (your Auth0 Client ID)
    * `AUTH0_DOMAIN` (your Auth0 domain)
 
      <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-     These variables, along with all other application information, can be found in your Auth0 dashboard under **Applications > [Your app] > Settings**.
+     These variables, along with all other application information, can be found in your Auth0 dashboard under **Applications > [Your app] > Settings** .
 
      </Callout>
 
@@ -93,10 +93,10 @@ If your application reads Auth0 settings from a file, you can automate this proc
 To do this:
 
 1. Go to your Netlify dashboard.
-2. Navigate to **Site configuration > Build & deploy > Build settings**.
+2. Navigate to **Site configuration > Build & deploy > Build settings** .
 3. Modify the **Build command** to include a shell script before starting the build:
 
-   ```php lines
+   ```bash wrap lines
    echo "{\"clientId\": \"${AUTH0_CLIENT_ID}\", \"domain\": \"${AUTH0_DOMAIN}\"}" > auth_config.json && npm run build
    ```
 
@@ -112,6 +112,6 @@ After adding the Auth0 integration to your Netlify project, the <Tooltip data-to
 
 1. Navigate to the Auth0 Dashboard.
 2. Select **Applications > Applications > [Your Netlify application]**
-3. Confirm the Netlify application URI under **Settings > Application URIs**.
+3. Confirm the Netlify application URI under **Settings > Application URIs** .
 
 You can now customize and modify this application similar to any other application in your Auth0 Dashboard.

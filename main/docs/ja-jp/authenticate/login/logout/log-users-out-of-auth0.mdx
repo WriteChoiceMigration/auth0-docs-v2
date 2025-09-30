@@ -27,28 +27,28 @@ RP起点のログアウトを構成するには、アプリケーションがAut
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-2023年11月14日以降に作成されたAuth0テナントに対しては、**［RP-Initiated Logout End Session Endpoint Discovery（RP起点のログアウトのセッション終了エンドポイント検出）］**がデフォルトで有効に設定されています。
+2023年11月14日以降に作成されたAuth0テナントに対しては、 **［RP-Initiated Logout End Session Endpoint Discovery（RP起点のログアウトのセッション終了エンドポイント検出）］** がデフォルトで有効に設定されています。
 
 </Callout>
 
-**RP-Initiated Logout End Session Endpoint Discovery（RP起点のログアウトのセッション終了エンドポイント検出）**は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>またはAuth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Management API</Tooltip>を使用して有効にすることができます。
+**RP-Initiated Logout End Session Endpoint Discovery（RP起点のログアウトのセッション終了エンドポイント検出）** は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>またはAuth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Management API</Tooltip>を使用して有効にすることができます。
 
 <Tabs><Tab title="Dashboard（ダッシュボード）">
 
-Dashboard（ダッシュボード）の**［RP-Initiated Logout End Session Endpoint Discovery（RP起点のログアウトエンドセッションエンドポイント検出）］**を有効にする方法：
+Dashboard（ダッシュボード）の **［RP-Initiated Logout End Session Endpoint Discovery（RP起点のログアウトエンドセッションエンドポイント検出）］** を有効にする方法：
 
 1. [［Dashboard（ダッシュボード）］ > ［Settings（設定）］ > ［Advanced（詳細設定）］](https://manage.auth0.com/#/tenant/advanced)に移動します。
-2. **［Login and Logout（ログインとログアウト）］**セクションを見つけます。
-3. **［RP-Initiated Logout End Session Endpoint Discovery（RP起点のログアウトエンドセッションエンドポイント検出）］**の切り替えを有効にします。
+2. **［Login and Logout（ログインとログアウト）］** セクションを見つけます。
+3. **［RP-Initiated Logout End Session Endpoint Discovery（RP起点のログアウトエンドセッションエンドポイント検出）］** の切り替えを有効にします。
 
 </Tab><Tab title="Mangement API">
 
-Management APIで**［RP-Initiated Logout End Session Endpoint Discovery（RP起点のログアウトエンドセッションエンドポイント検出）］**を有効にする方法：
+Management APIで **［RP-Initiated Logout End Session Endpoint Discovery（RP起点のログアウトエンドセッションエンドポイント検出）］** を有効にする方法：
 
 1. `update:tenant_settings`スコープを持つ[Management APIのアクセストークンを取得します](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-production)。
 2. 次のペイロードで、Management APIの[テナント設定の更新](/docs/ja-jp/api/management/v2/tenants/patch-settings)を呼び出します。
 
-   ```json lines
+   ```json JSON lines
    {
      "oidc_logout": {
        "rp_logout_end_session_endpoint_discovery": true
@@ -90,9 +90,9 @@ Authentication APIの[OIDCログアウト](/docs/ja-jp/api/authentication#oidc-l
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong></th>
-<th><strong>必要？</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b></th>
+<th><b>必要？</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -150,13 +150,13 @@ OIDCログアウトエンドポイントを呼び出す際には、`id_token_hin
 
 <Tabs><Tab title="HTTP">
 
-```bash lines
+```http HTTP wrap lines
 https://{yourDomain}/oidc/logout?id_token_hint={yourIdToken}&post_logout_redirect_uri={yourCallbackUrl}
 ```
 
 </Tab><Tab title="cURL">
 
-```bash lines
+```bash cURL lines
 curl --request GET \
   --url 'https://{yourDomain}/oidc/logout' \
   --header 'content-type: application/x-www-form-urlencoded' \
@@ -180,37 +180,37 @@ curl --request GET \
 
 ##### 例
 
-codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```bash lines
+
+```http wrap lines
 https://{yourDomain}/oidc/logout?{clientId}={yourClientId}&logout_hint={sessionId}
 ```
 
 #### post_logout_redirect_uriパラメーター
 
-`post_logout_redirect_uri`パラメーターの値は、エンコードされた有効なURLとして、以下で**Allowed Logout URLs（許可されているログアウトURL）**リストに登録されていなければなりません。
+`post_logout_redirect_uri`パラメーターの値は、エンコードされた有効なURLとして、以下で **Allowed Logout URLs（許可されているログアウトURL）** リストに登録されていなければなりません。
 
 1. [アプリケーションの設定](/docs/ja-jp/get-started/applications/application-settings#application-uris)：`id_token_hint`パラメーター、または`logout_hint`パラメーターと`client_id`パラメーターを提供した場合
 2. [テナントの設定](/docs/ja-jp/get-started/tenant-settings#login-and-logout)：`logout_hint`パラメーターのみを提供した場合。
 
 ##### 例
 
-```bash lines
+```bash HTTP wrap lines
 https://{yourDomain}/oidc/logout?post_logout_redirect_uri=http%3A%2F%2Fwww.example.com
 ```
 
 ##### アプリケーションのAllowed Logout URLs（許可されているログアウトURL）を更新する
 
-URLをアプリケーションの**Allowed Logout URLs（許可されているログアウトURL）**リストに登録するには、Auth0 DashboardまたはAuth0 Management APIを使用することができます。
+URLをアプリケーションの **Allowed Logout URLs（許可されているログアウトURL）** リストに登録するには、Auth0 DashboardまたはAuth0 Management APIを使用することができます。
 
 <Tabs><Tab title="Dashboard（ダッシュボード）">
 
-Dashboard（ダッシュボード）で**［Allowed Logout URLs（許可されているログアウトURL）］**のアプリケーションリストでURLを登録する方法：
+Dashboard（ダッシュボード）で **［Allowed Logout URLs（許可されているログアウトURL）］** のアプリケーションリストでURLを登録する方法：
 
 1. [［Dashboard（ダッシュボード）］ > ［Applications（アプリケーション）］ > ［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)に移動します。
 2. アプリケーションを選択します。
-3. **［Application URIs（アプリケーションURL）］**セクションを見つけます。
-4. [提供されたガイドライン](#allowed-logout-urls-guidelines)に従って、**［Allowed Logout URLs（許可されているログアウトURL）］**を更新します。
+3. **［Application URIs（アプリケーションURL）］** セクションを見つけます。
+4. [提供されたガイドライン](#allowed-logout-urls-guidelines)に従って、 **［Allowed Logout URLs（許可されているログアウトURL）］** を更新します。
 
 </Tab><Tab title="Mangement API">
 
@@ -222,12 +222,12 @@ Management APIの[クライアントの更新](/docs/ja-jp/api/management/v2/cli
 
 </Warning>
 
-Management APIから**［Allowed Logout URLs（許可されているログアウトURL）］**のアプリケーションリストでURLを登録する方法：
+Management APIから **［Allowed Logout URLs（許可されているログアウトURL）］** のアプリケーションリストでURLを登録する方法：
 
 1. `update:clients`スコープを含む[Management APIのアクセストークンを取得](https://auth0.com/docs/secure/tokens/access-tokens/get-management-api-access-tokens-for-production)します。
 2. Management APIの[クライアントの更新](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) エンドポイントを呼び出し、要求本文の`allowed_logout_urls`フィールド値にURLを含むようにしてください。
 
-   ``` lines
+   ```json lines
    PATCH https://{yourDomain}/api/v2/clients/{clientId}
    Authorization: Bearer {yourMgmtApiAccessToken}
    Content-Type: application/json
@@ -248,15 +248,15 @@ Management APIから**［Allowed Logout URLs（許可されているログアウ
 
 ##### テナントのAllowed Logout URLs（許可されているログアウトURL）を更新する
 
-URLをテナントの**Allowed Logout URLs（許可されているログアウト）**リストに登録するには、Auth0 DashboardまたはAuth0 Management APIを使用することができます。
+URLをテナントの **Allowed Logout URLs（許可されているログアウト）** リストに登録するには、Auth0 DashboardまたはAuth0 Management APIを使用することができます。
 
 <Tabs><Tab title="Dashboard（ダッシュボード）">
 
-Dashboard（ダッシュボード）で**［Allowed Logout URLs（許可されているログアウトURL）］**のテナントリストでURLを登録する方法：
+Dashboard（ダッシュボード）で **［Allowed Logout URLs（許可されているログアウトURL）］** のテナントリストでURLを登録する方法：
 
 1. [［Dashboard（ダッシュボード）］ > ［Settings（設定）］ > ［Advanced（詳細設定）］](https://manage.auth0.com/#/tenant/advanced)に移動します。
-2. **［Login and Logout（ログインとログアウト）］**セクションを見つけます。
-3. [提供されたガイドライン](#allowed-logout-urls-guidelines)に従って、**Allowed Logout URLs（許可されているログアウトURL）**を更新します。
+2. **［Login and Logout（ログインとログアウト）］** セクションを見つけます。
+3. [提供されたガイドライン](#allowed-logout-urls-guidelines)に従って、 **Allowed Logout URLs（許可されているログアウトURL）** を更新します。
 
 </Tab><Tab title="Mangement API">
 
@@ -268,12 +268,12 @@ Management APIの[テナント設定の更新](/docs/ja-jp/api/management/v2/ten
 
 </Warning>
 
-Management APIから**［Allowed Logout URLs（許可されているログアウトURL）］**のテナントリストでURLを登録する方法：
+Management APIから **［Allowed Logout URLs（許可されているログアウトURL）］** のテナントリストでURLを登録する方法：
 
 1. `update:tenant_settings`スコープを含む[Management APIのアクセストークンを取得](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-production)します。
 2. Management APIの[テナント設定の更新](/docs/ja-jp/api/management/v2/tenants/patch-settings)エンドポイントを呼び出し、要求本文の`allowed_logout_urls`フィールド値にURLを含むようにしてください。
 
-   ``` lines
+   ```json lines
    PATCH https://{yourDomain}/api/v2/tenants/settings
    Authorization: Bearer {yourMgmtApiAccessToken}
    Content-Type: application/json
@@ -294,7 +294,7 @@ Management APIから**［Allowed Logout URLs（許可されているログアウ
 
 ##### Allowed Logout URLs（許可されているログアウトURL）のガイドライン
 
-**Allowed Logout URLs（許可されているログアウト）**の更新では、検証エラーを避けるために以下のガイドラインに従ってください。
+**Allowed Logout URLs（許可されているログアウト）** の更新では、検証エラーを避けるために以下のガイドラインに従ってください。
 
 * 複数のURL値はカンマ（`,`）で区切ります。
 * URLのスキーム部分を含めます（例：`https://`）。
@@ -305,9 +305,9 @@ Management APIから**［Allowed Logout URLs（許可されているログアウ
 
 OIDCログアウトエンドポイントは、`post_logout_redirect_uri`パラメーターに提供されたURLのクエリ文字列パラメーターを解析します。
 
-これらのクエリ文字列パラメーターは、**Allowed Logout URLs（許可されているログアウトURL）**に含める必要があります。含まれていない場合には、ログアウト要求が拒否される可能性があります。
+これらのクエリ文字列パラメーターは、 **Allowed Logout URLs（許可されているログアウトURL）** に含める必要があります。含まれていない場合には、ログアウト要求が拒否される可能性があります。
 
-たとえば、`https://example.com/logout?myParam=1234`を`post_logout_redirect_uri`パラメーター（`https%3A%2F%2Fexample.com%2Flogout%3FmyParam%3D1234`としてエンコード）に渡す場合は、`https://example.com/logout?myParam`を**Allowed Logout URLs（許可されているログアウトURL）**に含める必要があります。
+たとえば、`https://example.com/logout?myParam=1234`を`post_logout_redirect_uri`パラメーター（`https%3A%2F%2Fexample.com%2Flogout%3FmyParam%3D1234`としてエンコード）に渡す場合は、`https://example.com/logout?myParam`を **Allowed Logout URLs（許可されているログアウトURL）** に含める必要があります。
 
 #### ui_localesパラメーター
 
@@ -342,7 +342,7 @@ Auth0では、以下のいずれかの条件を検出した場合に、ログア
 Dashboardを使ってログアウトの同意プロンプトを無効にするには、以下を行います。
 
 1. [［Dashboard］>［設定］>［Advanced（詳細設定）］](https://manage.auth0.com/#/tenant/advanced)に移動します。
-2. **［Show RP-Initiated Logout End-User Confirmation（RP起点のログアウトにエンドユーザー確認を表示する）］**を無効にします。
+2. **［Show RP-Initiated Logout End-User Confirmation（RP起点のログアウトにエンドユーザー確認を表示する）］** を無効にします。
 
    <Frame>![null](/images/ja-jp/cdy7uua7fh8z/37K4hLjhSBMGvdGP9OEP7W/2ea2e8542e0041684e331e6bebd591d5/Login_and_Logout_-_Japanese.png)</Frame>
 

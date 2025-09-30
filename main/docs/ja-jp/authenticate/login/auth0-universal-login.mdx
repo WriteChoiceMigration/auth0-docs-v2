@@ -25,8 +25,8 @@ Auth0 Dashboardの[［Branding（ブランディング）］>［Universal Login�
 
 Auth0には、2種類のホストされたログインエクスペリエンスが用意されています。
 
-* **ユニバーサルログイン**では、ユーザー向けに効率化されたエクスペリエンスを受けることができ、カスタマイズにJavaScriptを使用する必要はありません。
-* **クラシックログイン**では、ログインフローの各ページにJavaScript制御を使用します。
+* **ユニバーサルログイン** では、ユーザー向けに効率化されたエクスペリエンスを受けることができ、カスタマイズにJavaScriptを使用する必要はありません。
+* **クラシックログイン** では、ログインフローの各ページにJavaScript制御を使用します。
 
 現時点では、Auth0の開発作業は主にユニバーサルログインに焦点を当てており、クラシックログインは更新されなくなりました。特定のユースケースでクラシックエクスペリエンスが必要でない限り、ユニバーサルログインの実装をお勧めします。
 
@@ -39,13 +39,13 @@ Auth0は、以下の標準に従って、アシスティブテクノロジーを
 * [Web Content Accessibility Guidelines (WCAG) version 2.2 AA](https://www.w3.org/WAI/standards-guidelines/wcag/)
 * [EN 301 549](https://www.etsi.org/human-factors-accessibility/en-301-549-v3-the-harmonized-european-standard-for-ict-accessibility)
 
-任意で、Auth0 Dashboardの[**［Branding（ブランディング）］>［Universal Login（ユニバーサルログイン）］>［Advanced Options（高度なオプション）］**](https://manage.auth0.com/#/universal-login/customizations-new)に移動し、トグルを使用して、これらの規格を有効にすることができます。
+任意で、Auth0 Dashboardの[**［Branding（ブランディング）］>［Universal Login（ユニバーサルログイン）］>［Advanced Options（高度なオプション）］** ](https://manage.auth0.com/#/universal-login/customizations-new)に移動し、トグルを使用して、これらの規格を有効にすることができます。
 
 <Frame>![早期アクセスでは、このトグルでサインインフローのWCAG要素を有効にします。 ](/images/ja-jp/cdy7uua7fh8z/5O4DDy1h0rgbYNzKwm1lKY/2302115935d5096c679425402a78a1c2/WCAG_-_JP.png)</Frame>
 
 また、`enable_ulp_wcag_compliance`フラグを[プロンプト設定更新エンドポイント](/docs/ja-jp/api/management/v2/prompts/patch-prompts)で更新し、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Management API</Tooltip>でこの機能を有効にすることもできます。
 
-```javascript lines
+```bash cURL lines
 curl -L -X PATCH 'https://<tenant_name>.auth0.com/api/v2/prompts' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
@@ -91,7 +91,7 @@ curl -L -X PATCH 'https://<tenant_name>.auth0.com/api/v2/prompts' \
 
 [ログインエンドポイント](/docs/ja-jp/api/authentication#login)は任意のブラウザーから直接呼び出すことができます。
 
-``` lines
+```bash cURL lines
 https://{yourDomain}/authorize?
   response_type=code|token&
   client_id={yourClientId}&

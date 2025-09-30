@@ -64,9 +64,9 @@ You can configure your native application to exchange a <Tooltip data-tooltip-id
 
 * Update your native application using your Management API <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Access Token</Tooltip> with the [Update a Client](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) endpoint:
 
-codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```bash lines
+
+```bash cURL lines
 curl --request PATCH \
   --url 'https://{yourDomain}/api/v2/clients/{yourClientId}' \
   --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
@@ -81,7 +81,7 @@ curl --request PATCH \
 
 * Update your native application using [Auth0 CLI](https://auth0.github.io/auth0-cli/auth0_apps_session-transfer_update.html):
 
-```bash lines
+```sh wrap lines
 auth0 apps session-transfer update {yourClientId} --can-create-token=true --enforce-device-binding=asn
 ```
 
@@ -91,9 +91,9 @@ Before you enable Session Transfer Token, make sure you have configured your web
 
 * Update your web application using the Management API Access Token with the [Update a Client](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) endpoint:
 
-codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```bash lines
+
+```bash cURL lines
 curl --request PATCH \
   --url '{yourDomain}/api/v2/clients//{yourClientId}' \
   --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
@@ -107,7 +107,7 @@ curl --request PATCH \
 
 * Update your web application using [Auth0 CLI](https://auth0.github.io/auth0-cli/auth0_apps_session-transfer_update.html):
 
-```bash lines
+```sh wrap lines
 auth0 apps session-transfer update {yourClientId}  --allowed-auth-methods=cookie,query
 ```
 
@@ -157,7 +157,7 @@ do {
 
 </Tab><Tab title="Android SDK">
 
-```javascript lines
+```swift lines
 authentication
 .ssoExchange("refresh_token")
 .start(object : Callback<SSOCredentials, AuthenticationException> {
@@ -175,9 +175,9 @@ authentication
 
 * Exchange a refresh token for a session transfer token using HTTP:
 
-codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```html lines
+
+```bash cURL lines
 curl -X POST https://{yourDomain}/oauth/token \
   -H 'Content-type: application/json' \
   -d '{"grant_type":"refresh_token", 
@@ -223,7 +223,7 @@ If your web application using WebView or browser supports cookie injection, you 
 * Open the web application using WebView or browser.
 * Log the web application to your Auth0 tenant or <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Custom Domain</Tooltip>. As the `session_transfer_token` is included in the cookie, the user is not prompted for first-factor authentication.
 
-```html lines
+```bash cURL lines
 curl --cookie auth0_session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN
       https://{yourDomain}/authorize?{authorize_params}
 ```
@@ -239,8 +239,8 @@ If your web application does not support cookie injection, you can configure you
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
---url 'https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN'
-``` lines
+  --url 'https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN'
+```
 ```csharp C# lines
 var client = new RestClient("https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN");
 var request = new RestRequest(Method.GET);
@@ -249,84 +249,104 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN"
-req, _ := http.NewRequest("GET", url, nil)
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN"
+
+	req, _ := http.NewRequest("GET", url, nil)
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.get("https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")
-.asString();
+HttpResponse<String> response = Unirest.get("https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'GET',
-url: 'https://your_web_app_login_url/',
-params: {session_transfer_token: 'YOUR_SESSION_TRANSFER_TOKEN'}
+  method: 'GET',
+  url: 'https://your_web_app_login_url/',
+  params: {session_transfer_token: 'YOUR_SESSION_TRANSFER_TOKEN'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_URL => "https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("your_web_app_login_url")
+
 conn.request("GET", "/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -334,29 +354,36 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Get.new(url)
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://your_web_app_login_url/?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "GET"
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -378,8 +405,8 @@ From the application login URL, redirect to the `/authorize` endpoint when the `
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
---url 'https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code'
-``` lines
+  --url 'https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code");
 var request = new RestRequest(Method.GET);
@@ -388,89 +415,109 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code"
-req, _ := http.NewRequest("GET", url, nil)
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code"
+
+	req, _ := http.NewRequest("GET", url, nil)
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.get("https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code")
-.asString();
+HttpResponse<String> response = Unirest.get("https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'GET',
-url: 'https://{yourDomain}/authorize',
-params: {
-session_transfer_token: 'YOUR_SESSION_TRANSFER_TOKEN',
-client_ID: '{yourClientId}',
-redirect_uri: 'YOUR_REDIRECT_URI',
-response_type: 'code'
-}
+  method: 'GET',
+  url: 'https://{yourDomain}/authorize',
+  params: {
+    session_transfer_token: 'YOUR_SESSION_TRANSFER_TOKEN',
+    client_ID: '{yourClientId}',
+    redirect_uri: 'YOUR_REDIRECT_URI',
+    response_type: 'code'
+  }
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_URL => "https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 conn.request("GET", "/{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code")
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -478,29 +525,36 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Get.new(url)
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/authorize?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN&client_ID={yourClientId}&redirect_uri=YOUR_REDIRECT_URI&response_type=code")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "GET"
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -515,7 +569,7 @@ Below are examples of web applications using Auth0 SDKs to redirect the `session
 
 If your web application uses [Express.js](https://expressjs.com/) or the [Auth0 Express SDK](https://github.com/auth0/express-openid-connect), you can use the code below to add middleware support for `session_transfer_token`.
 
-```javascript lines
+```javascript javascript lines
 const config = {
   authRequired: false,
   auth0Logout: true
@@ -545,10 +599,10 @@ If your web application uses <Tooltip data-tooltip-id="react-containers-Definiti
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
---url 'https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN' \
---header 'cookie: session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN' \
---cookie session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN
-``` lines
+  --url 'https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN' \
+  --header 'cookie: session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN' \
+  --cookie session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN");
 var request = new RestRequest(Method.GET);
@@ -558,93 +612,115 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN"
-req, _ := http.NewRequest("GET", url, nil)
-req.Header.Add("cookie", "session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN"
+
+	req, _ := http.NewRequest("GET", url, nil)
+
+	req.Header.Add("cookie", "session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
 }
-``` lines
+```
 ```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")
-.header("cookie", "session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")
-.asString();
+  .header("cookie", "session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'GET',
-url: 'https://{yourDomain}/samlp//{yourClientId}',
-params: {session_transfer_token: 'YOUR_SESSION_TRANSFER_TOKEN'},
-headers: {cookie: 'session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN'}
+  method: 'GET',
+  url: 'https://{yourDomain}/samlp//{yourClientId}',
+  params: {session_transfer_token: 'YOUR_SESSION_TRANSFER_TOKEN'},
+  headers: {cookie: 'session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"cookie": @"session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"cookie": @"session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN" };
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
 [request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "GET",
-CURLOPT_HTTPHEADER => [
-"cookie: session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN"
-],
+  CURLOPT_URL => "https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => [
+    "cookie: session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 headers = { 'cookie': "session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN" }
+
 conn.request("GET", "/{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN", headers=headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -652,32 +728,40 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Get.new(url)
 request["cookie"] = 'session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN'
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["cookie": "session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN"]
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/samlp//{yourClientId}?session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "GET"
 request.allHTTPHeaderFields = headers
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -690,7 +774,7 @@ To facilitate this, the post-login Action object **event.session_transfer_token*
 
 The Action code below allows you to dynamically reject a transaction based on geolocation information:
 
-```javascript lines
+```javascript javascript lines
 /**
 * Handler that will be called during the execution of a PostLogin flow.
 *

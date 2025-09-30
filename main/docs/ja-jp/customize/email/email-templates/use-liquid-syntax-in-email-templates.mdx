@@ -21,7 +21,7 @@ Liquidには、出力とタグの2種類のマークアップがあります。
 
 ### 出力マークアップ
 
-**［Output（出力）］**マークアップはテキストに変換され、2組の対応する波括弧で囲まれます。
+**［Output（出力）］** マークアップはテキストに変換され、2組の対応する波括弧で囲まれます。
 
 `こんにちは {{ name }}!`
 
@@ -201,7 +201,7 @@ Liquidには、出力とタグの2種類のマークアップがあります。
 
 ### タグマークアップ
 
-**［Tag（タグ）］**マークアップはテキストに解決されず、対応する一対の波括弧とパーセント記号で囲まれます。
+**［Tag（タグ）］** マークアップはテキストに解決されず、対応する一対の波括弧とパーセント記号で囲まれます。
 
 `{％これはテキスト％に解決されません}`
 
@@ -211,12 +211,8 @@ Liquidには、出力とタグの2種類のマークアップがあります。
 
 例：
 
-```
-{% if user.user_metadata.lang == 'en' %}
-[英語の電子メール本文]
-{% elsif user.user_metadata.lang == 'de' %}
-[ドイツ語の電子メール本文]
-{% endif %}
+```liquid wrap lines
+{% if user.user_metadata.lang == 'en' %} [email body in English] {% elsif user.user_metadata.lang == 'de' %} [email body in German] {% endif %}
 ```
 
 追加の条件を使用する必要がある場合は、caseステートメントの使用を検討してください。caseステートメントの詳細については、Githubの[［Liquid for Designers（デザイナー向けLiquid）］](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers#case-statement)を参照してください。
@@ -233,10 +229,8 @@ Liquidマークアップの処理を一時的に無効にするには、`{% raw 
 
 たとえば、次の`Mustache.js`行を次のようにエスケープできます。
 
-```
-{% raw %}
-var clients = "Clients:<ul>{{#client}}<li>{{fn}} {{ln}}" + {{phone}}</li>{{/client}}</ul>";
-{% endraw %}
+```liquid wrap lines
+{% raw %} var clients = "Clients:<ul>{{#client}}<li>{{fn}} {{ln}}" + {{phone}}</li>{{/client}}</ul>"; {% endraw %}
 ```
 
 ## デバッグ変数

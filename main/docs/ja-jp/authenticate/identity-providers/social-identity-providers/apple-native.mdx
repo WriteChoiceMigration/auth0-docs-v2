@@ -17,7 +17,7 @@ permalink: "apple-native"
 
 <Frame>![Diagram of the Sign In with Apple Authentication Flow](/images/ja-jp/cdy7uua7fh8z/I7xtPQoqoAFiHQiT2p7p5/ad2c3c1487ef8756e74c8f08f9b3301c/apple-siwa-authn-flow.png)</Frame>
 
-* **ステップ1と2**：ユーザーはiOSデバイス上のAppleのSDKを介して認証し、応答で認可コードを受け取ります。ユーザーはアプリを離れてブラウザを使用してログインする必要はありません。
+* **ステップ1と2** ：ユーザーはiOSデバイス上のAppleのSDKを介して認証し、応答で認可コードを受け取ります。ユーザーはアプリを離れてブラウザを使用してログインする必要はありません。
 
   <Warning>
 
@@ -25,9 +25,9 @@ permalink: "apple-native"
 
   </Warning>
 
-* **ステップ3**：アプリケーションはAuth0 の`/oauth/token`エンドポイントを呼び出して、Apple認可コードをAuth0トークンと交換します。
-* **ステップ4と5**：Auth0プラットフォームは、トークンと引き換えにAppleと認可コードを交換します。Auth0はトークンを検証し、トークン内のクレームを使用してユーザーのIDを構築します。
-* **ステップ6**：Auth0はユーザープロファイルを保存し、ルールと認可を実行してから、要求に応じてAuth0のアクセストークン（更新トークンとIDトークン）を発行します。これらのトークンは、Auth0によって管理されるAPIとユーザーを保護するために使用されます。
+* **ステップ3** ：アプリケーションはAuth0 の`/oauth/token`エンドポイントを呼び出して、Apple認可コードをAuth0トークンと交換します。
+* **ステップ4と5** ：Auth0プラットフォームは、トークンと引き換えにAppleと認可コードを交換します。Auth0はトークンを検証し、トークン内のクレームを使用してユーザーのIDを構築します。
+* **ステップ6** ：Auth0はユーザープロファイルを保存し、ルールと認可を実行してから、要求に応じてAuth0のアクセストークン（更新トークンとIDトークン）を発行します。これらのトークンは、Auth0によって管理されるAPIとユーザーを保護するために使用されます。
 
 ## 前提条件
 
@@ -47,14 +47,14 @@ Auth0でネイティブアプリに「Appleでサインイン」を構成する�
 Apple Developerアカウントから必要な資格情報を取得したら、Auth0でアプリケーションクライアントと接続設定を構成する必要があります。
 
 1. [［Auth0 Dashboard（Auth0ダッシュボード）］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)に移動して、アプリケーションを選択し、ギアアイコンを選択して設定ページを表示します。
-2. ページ下部で**［Show Advanced Settings（詳細設定を表示）］**を選択し、**［Device Settings（デバイス設定）］**ビューを選択します。**［Native Social Login（ネイティブソーシャルログイン）］**で**［Enable Sign In with Apple（Appleでサインインを有効にする）］**を有効にします。
+2. ページ下部で **［Show Advanced Settings（詳細設定を表示）］** を選択し、 **［Device Settings（デバイス設定）］** ビューを選択します。 **［Native Social Login（ネイティブソーシャルログイン）］** で **［Enable Sign In with Apple（Appleでサインインを有効にする）］** を有効にします。
 
    <Frame>![Application Client Settings: Advanced Device Settings](/images/ja-jp/cdy7uua7fh8z/2xkQ13r9yCb4GBZdeczZjJ/3e0bc35176c035c789bfc8d4eeaa0135/Native_App_-_Device_Settings_-_Japanese.png)</Frame>
 
-3. **iOS**で、**App ID**フィールドにネイティブアプリのApp ID/バンドル識別子を入力します。
-4. [［Auth0 Dashboard］>［Authentication（認証）］>［Social（ソーシャル）］](https://manage.auth0.com/#/connections/social)に移動して、**［Create Connection（接続の作成）］**を選択します。
-5. **Apple**接続を選択し、同意します。
-6. **［Settings（設定）］**タブで、次のフィールドを記入しします。
+3. **iOS** で、 **App ID** フィールドにネイティブアプリのApp ID/バンドル識別子を入力します。
+4. [［Auth0 Dashboard］>［Authentication（認証）］>［Social（ソーシャル）］](https://manage.auth0.com/#/connections/social)に移動して、 **［Create Connection（接続の作成）］** を選択します。
+5. **Apple** 接続を選択し、同意します。
+6. **［Settings（設定）］** タブで、次のフィールドを記入しします。
 
    * **［Apple Team ID（AppleチームID）］**
    * **クライアントシークレット署名鍵**
@@ -62,12 +62,12 @@ Apple Developerアカウントから必要な資格情報を取得したら、Au
 
      <Frame>![Apple Social Connection Settings](/images/ja-jp/cdy7uua7fh8z/3mTTVYnrwbVYnUx5Mzy0V9/aac5097ada46262dbcff18030ab129e5/2025-01-13_16-45-07.png)</Frame>
 
-7. **［Applications（アプリケーション）］**ビューにを選択し、アプリケーションの接続を有効にします。
-8. **［Save（保存）］**をクリックします。
+7. **［Applications（アプリケーション）］** ビューにを選択し、アプリケーションの接続を有効にします。
+8. **［Save（保存）］** をクリックします。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-ネイティブアプリをブラウザーからテストすることはできません。Apple接続にある**［Try Connection（接続を試す）］**ボタンは、Webベースのフローをテストするときに使用します。
+ネイティブアプリをブラウザーからテストすることはできません。Apple接続にある **［Try Connection（接続を試す）］** ボタンは、Webベースのフローをテストするときに使用します。
 
 </Callout>
 
@@ -82,7 +82,7 @@ Apple Developerアカウントから必要な資格情報を取得したら、Au
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-AppleのIdPの特徴は、**最初の**応答で、要求されたスコープ（email、first name、last nameなど）のみをIDトークンに含めて返すことです。より破壊的なログアウトの方法（ユーザーを削除するなど）を採用すると、プロファイル情報が失われ、エンドユーザーがアプリの認証を解除して再認証しなければならなくなります。
+AppleのIdPの特徴は、 **最初の** 応答で、要求されたスコープ（email、first name、last nameなど）のみをIDトークンに含めて返すことです。より破壊的なログアウトの方法（ユーザーを削除するなど）を採用すると、プロファイル情報が失われ、エンドユーザーがアプリの認証を解除して再認証しなければならなくなります。
 
 </Callout>
 

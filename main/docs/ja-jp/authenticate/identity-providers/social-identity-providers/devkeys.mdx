@@ -9,7 +9,7 @@ permalink: "devkeys"
 'twitter:description': "ソーシャルIPプロバイダーにAuth0開発者キーを使用する際の注意点を見ていきます。"
 ---
 
-<Card title="Overview">
+<Card title="概要">
 
 重要なコンセプト
 
@@ -54,8 +54,8 @@ Auth0開発者キーを使った場合は、各IDプロバイダーの認証フ�
 [クラシックログインエクスペリエンス](/docs/ja-jp/authenticate/login/auth0-universal-login/universal-login-vs-classic-login/classic-experience)を使用している場合、また状況によっては[ユニバーサルログインエクスペリエンス](https://auth0.com/docs/authenticate/login/auth0-universal-login/new-experience)を使用している場合は、次の制限も適用されます。
 
 1. [カスタムドメイン](/docs/ja-jp/customize/custom-domains)では開発者キーを使用できません。
-2. [シングルサインオン](/docs/ja-jp/authenticate/single-sign-on)は、Auth0開発者キーを使用していると正常に機能しません。その理由は、関連するすべてのIDプロバイダーを備えたAuth0開発者アプリケーションが、独自のテナント（`https://{yourDomain}/login/callback`）への**コールバックURL**ではなく、URL `https://login.auth0.com/login/callback`へのコールバックを行うように構成されているためです。
-   その結果、SSOクッキーがテナントドメイン上で設定されず、アプリケーションで**シングルサインオンを実行するためにIDプロバイダーではなくAuth0を使用**するように構成した場合でも、ユーザーの次回認証時にSSOクッキーが検出されなくなります（レガシーテナントのみ）。
+2. [シングルサインオン](/docs/ja-jp/authenticate/single-sign-on)は、Auth0開発者キーを使用していると正常に機能しません。その理由は、関連するすべてのIDプロバイダーを備えたAuth0開発者アプリケーションが、独自のテナント（`https://{yourDomain}/login/callback`）への **コールバックURL** ではなく、URL `https://login.auth0.com/login/callback`へのコールバックを行うように構成されているためです。
+   その結果、SSOクッキーがテナントドメイン上で設定されず、アプリケーションで **シングルサインオンを実行するためにIDプロバイダーではなくAuth0を使用** するように構成した場合でも、ユーザーの次回認証時にSSOクッキーが検出されなくなります（レガシーテナントのみ）。
 3. [ルールからのユーザーのリダイレクト](/docs/ja-jp/customize/rules/redirect-users)は正常に機能しません。これは、リダイレクトルールがエンドポイント`https://{yourDomain}/continue`で再開されるためです。Auth0の開発者キーを使うと、セッションは、汎用でテナントに依存しない特別なエンドポイントで確立され、`/continue`を呼び出しても以前のセッションが見つからないため、エラーが発生します。
 4. [フェデレーションログアウト](/docs/ja-jp/authenticate/login/logout)は機能しません。Auth0開発者キーを使用するときに、`/v2/logout?federated`を呼び出すとユーザーはAuth0からサインアウトしますが、ソーシャルIDプロバイダーからはサインアウトしません。
 5. `prompt=none`は[/authorize](/docs/ja-jp/api/authentication/reference#social)エンドポイントでは動作しません。[Auth0.js](/docs/ja-jp/libraries/auth0js)のcheckSession()メソッドは`prompt=none`を内部で使用するため、これも動作しません。

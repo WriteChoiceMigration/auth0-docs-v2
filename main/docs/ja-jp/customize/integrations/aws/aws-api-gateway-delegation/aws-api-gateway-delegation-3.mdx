@@ -37,11 +37,11 @@ aws s3 cp --recursive --acl "public-read" ./ s3://{yourBucket}/
 
 進める前に、ユーザー名-パスワード-認証（または使用しているアプリケーションと関連するデータベース接続）接続と関連するユーザーが少なくとも1名いることを確認してください。サンプルアプリの機能性およびAWSとの統合を完全に利用するには、認証をテストしてアクセスを得るために、そのユーザーが必要になります。
 
-最後になりますが、アプリケーションの［Settings（設定）］ページの**［Allowed Origins（許可されたオリジン）］**フィールドにURLを提供することで、Auth0がWebサイトからの認証を許可することを確認してください。WebサイトのURLはこのようになっているはずです。
+最後になりますが、アプリケーションの［Settings（設定）］ページの **［Allowed Origins（許可されたオリジン）］** フィールドにURLを提供することで、Auth0がWebサイトからの認証を許可することを確認してください。WebサイトのURLはこのようになっているはずです。
 
 `http://your-bucket.s3-website-us-east-1.amazonaws.com`
 
-URLが分からない場合は、S3バケットの**［Properties（プロパティ）］**タブのリストで確認できます。
+URLが分からない場合は、S3バケットの **［Properties（プロパティ）］** タブのリストで確認できます。
 
 先に進める前に、アプリケーションへのログインをテストします。ブラウザーで`http://your-bucket-domain/index.html`を開きます。ログインしたら、「getPets not implemented（getPetsが実装されていません）」という警告ボックスが表示されます。
 
@@ -57,7 +57,7 @@ Auth0の委任機能を使用して、Auth0 IDトークンに基づいたAWSア�
 
 `auth.signin`でサインイン後にIDトークンからAWS委任トークンを取得するために、以下のように`pets/login/login.js`を更新します。ソーシャル接続を使用してログインしていないユーザーを管理者として取り扱っていることにご注意ください。後で、2つ目のロールをコーディングし、ロール選択を強制する、より良い方法をご紹介します。
 
-```javascript lines
+```js lines expandable
 auth.signin(params, function(profile, token) {
   //Set user as admin if they did not use a social login.
   profile.isAdmin = !profile.identities[0].isSocial;
@@ -112,7 +112,7 @@ function (user, context, callback) {
 
 オプションとして、ブラウザーのブレークポイントを`store.set('awstoken', delegation.Credentials);`に設定できます。ログアウトして再びログインした時に、ブレークポイントに到達したときの`delegation.Credentials`を調べます。AccessKeyIdやSecretAccessKeyなどの馴染みのある値が表示されます。
 
-```javascript lines
+```js lines
 {
     AccessKeyId: "ASIAJB...BNQ",
     SecretAccessKey: "vS+b6...2Noav",
@@ -143,18 +143,18 @@ function (user, context, callback) {
 
 ```html lines
 <!-- scripts for aws api gateway include after you create your package from aws for api gateway. -->
-<script type="text/javascript" src="/docs/ja-jp/lib/axios/dist/axios.standalone.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/CryptoJS/rollups/hmac-sha256.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/CryptoJS/rollups/sha256.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/CryptoJS/components/hmac.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/CryptoJS/components/enc-base64.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/moment/moment.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/url-template/url-template.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/apiGatewayCore/sigV4Client.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/apiGatewayCore/apiGatewayClient.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/apiGatewayCore/simpleHttpClient.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/lib/apiGatewayCore/utils.js"></script>
-<script type="text/javascript" src="/docs/ja-jp/apigClient.js"></script>
+<script type="text/javascript" src="/docs/lib/axios/dist/axios.standalone.js"></script>
+<script type="text/javascript" src="/docs/lib/CryptoJS/rollups/hmac-sha256.js"></script>
+<script type="text/javascript" src="/docs/lib/CryptoJS/rollups/sha256.js"></script>
+<script type="text/javascript" src="/docs/lib/CryptoJS/components/hmac.js"></script>
+<script type="text/javascript" src="/docs/lib/CryptoJS/components/enc-base64.js"></script>
+<script type="text/javascript" src="/docs/lib/moment/moment.js"></script>
+<script type="text/javascript" src="/docs/lib/url-template/url-template.js"></script>
+<script type="text/javascript" src="/docs/lib/apiGatewayCore/sigV4Client.js"></script>
+<script type="text/javascript" src="/docs/lib/apiGatewayCore/apiGatewayClient.js"></script>
+<script type="text/javascript" src="/docs/lib/apiGatewayCore/simpleHttpClient.js"></script>
+<script type="text/javascript" src="/docs/lib/apiGatewayCore/utils.js"></script>
+<script type="text/javascript" src="/docs/apigClient.js"></script>
 ```
 
 `apigClient.js`を開くと、ダウンロード済みのライブラリーが、APIメソッドに`petsPost`および`petsGet`などのラッパーを作成していることを確認できます。これらの生成されたコードを変更する必要はありません。
@@ -212,9 +212,9 @@ function putPets(updatedPets) {
 
 1. ログアウトし、ログインし直します
 2. `Pet Type`および`Pet Price`の値に入力します。
-3. **［Save（保存）］**をクリックしてデータをポストします。
+3. **［Save（保存）］** をクリックしてデータをポストします。
 
-「We have a <Pet Type> for sale for <Pet Price>（`<Pet Price>`で販売されている`<Pet Type>`がいます）」のメッセージと、左側に赤色の**［REMOVE（削除）］**ボタンが表示されます。
+「We have a `<Pet Type>` for sale for `<Pet Price>`（`<Pet Price>`で販売されている`<Pet Type>`がいます）」のメッセージと、左側に赤色の **［REMOVE（削除）］** ボタンが表示されます。
 
 セキュリティを追加するために、`putPets`メソッドの始めに`getSecureApiClient`関数を追加します。
 

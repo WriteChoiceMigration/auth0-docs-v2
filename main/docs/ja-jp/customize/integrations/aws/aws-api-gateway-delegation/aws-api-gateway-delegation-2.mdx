@@ -55,9 +55,9 @@ AWSトークンと交換するSAMLトークンに対して、AWS IAMロールを
 
 #### Auth0の設定
 
-Auth0アカウントにログインします。Management Dashboardが表示されます。ページの右上隅にある**［+ New Application（+新しいアプリケーション）］**をクリックします。
+Auth0アカウントにログインします。Management Dashboardが表示されます。ページの右上隅にある **［+ New Application（+新しいアプリケーション）］** をクリックします。
 
-新しいアプリケーションに「AWS API Gateway」と名前を付け、このアプリケーションがシングルページアプリケーションであることを指定します。**［Create（作成）］**をクリックします。
+新しいアプリケーションに「AWS API Gateway」と名前を付け、このアプリケーションがシングルページアプリケーションであることを指定します。 **［Create（作成）］** をクリックします。
 
 新しく作成したアプリケーションの［Addons（アドオン）］タブに移動します。適切なスライドを使用して、Amazon Web Servicesを有効にします。これで、AWSの委任が有効になります。
 
@@ -80,7 +80,7 @@ AWS IAMロールを構成したら、API Gatewayのメソッドを実行でき�
 1. [Amazon API Gatewayコンソール](https://console.aws.amazon.com/apigateway)に移動し、ログインします。
 2. 適切なAPIを選択します。
 3. APIに関連する任意のメソッドをクリックして、［Method Execution（メソッドの実行）］ページを表示します。
-4. ［Method Execution（メソッドの実行）］ページの左上隅にある［Method Request（メソッドの要求）］ボックスに、メソッド名を含むAPIの**ARN**が表示されます。
+4. ［Method Execution（メソッドの実行）］ページの左上隅にある［Method Request（メソッドの要求）］ボックスに、メソッド名を含むAPIの **ARN** が表示されます。
 
 `arn:aws:execute-api:us-east-2:484857107747:97i1dwv0j4/*/POST/`
 
@@ -92,13 +92,13 @@ AWS IAMロールを構成したら、API Gatewayのメソッドを実行でき�
 
 先ほど作成した`auth0-api-role`ロールを選択して、その［Summary（サマリー）］ページを開きます。
 
-**［Inline Policies（インラインポリシー）］**を展開し、**［click here（ここをクリック）］**をクリックします。
+**［Inline Policies（インラインポリシー）］** を展開し、 **［click here（ここをクリック）］** をクリックします。
 
-**［Custom Policy（カスタムポリシー）］**を選択し、**［Select（選択）］**をクリックします。
+**［Custom Policy（カスタムポリシー）］** を選択し、 **［Select（選択）］** をクリックします。
 
-ポリシードキュメントを編集します。**［Policy Name（ポリシー名）］**は任意の名前に設定できますが、`api-gateway-policy`のような名前をお勧めします。このロールに対してAPIメソッドへのアクセスを有効にするために、API用にARNを更新した後、以下のポリシーを適用します。
+ポリシードキュメントを編集します。 **［Policy Name（ポリシー名）］** は任意の名前に設定できますが、`api-gateway-policy`のような名前をお勧めします。このロールに対してAPIメソッドへのアクセスを有効にするために、API用にARNを更新した後、以下のポリシーを適用します。
 
-```javascript lines
+```json lines
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -115,13 +115,13 @@ AWS IAMロールを構成したら、API Gatewayのメソッドを実行でき�
 }
 ```
 
-**［Apply policy（ポリシーを適用）］**をクリックします。
+**［Apply policy（ポリシーを適用）］** をクリックします。
 
 API Gatewayがユーザーに代わってこのロールを引き受けるため、信頼ポリシーはこのアクションを許可する必要があります。そのため、ロールの［Summary（サマリー）］ページのこのタブに移動して、ロールの信頼関係を編集します。
 
 最終的な信頼関係は以下のようになるはずです。
 
-```javascript lines
+```json lines expandable
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -152,36 +152,36 @@ API Gatewayがユーザーに代わってこのロールを引き受けるため
 
 この時点で、[API Gateway](https://console.aws.amazon.com/apigateway)の認可設定を指定する必要があります。
 
-**［Resources（リソース）］**ビューで、`/pets`の下にあるPOSTメソッドを選択します。
+**［Resources（リソース）］** ビューで、`/pets`の下にあるPOSTメソッドを選択します。
 
-**［Method Request（メソッドの要求）］**リンクをクリックします。
+**［Method Request（メソッドの要求）］** リンクをクリックします。
 
-**［Authorization Type（認可タイプ）］**の横にある編集アイコンをクリックし、「AWS_IAM」を選択します。フィールドの横にある**チェックボタン**をクリックして、設定を保存します。
+**［Authorization Type（認可タイプ）］** の横にある編集アイコンをクリックし、「AWS_IAM」を選択します。フィールドの横にある **チェックボタン** をクリックして、設定を保存します。
 
 ### 2.CORSをセットアップし、APIをデプロイする
 
 シングルページアプリケーション（SPA）は、ページとは異なるドメインからWeb APIメソッドにアクセスします。Cross-Originリソース共有設定では、ブラウザーがAWS API Gatewayへのアクセスを許可できるようにするために、このアクションを明示的に許可する必要があります。通常、ブラウザーは最初に`OPTIONS`要求を発行して、サイトがどのアクションを許可するかを確認します。
 
-［Resources（リソース）］の下にある`/pets`を選択し、**［Create Method（メソッドの作成）］**をクリックします。ドロップダウンで、**OPTIONS**を選択し、**チェックマーク**をクリックして設定を保存します。
+［Resources（リソース）］の下にある`/pets`を選択し、 **［Create Method（メソッドの作成）］** をクリックします。ドロップダウンで、 **OPTIONS** を選択し、 **チェックマーク** をクリックして設定を保存します。
 
 Optionsメソッドは、ブラウザーが必要なHTTPヘッダーを取得するために使用しますが、この関数には、何をすべきかについてさらに指示を出す必要があります。`OPTIONS`セットアップ画面で、以下の変数/パラメーターを設定します。
 
-* **［Integration type（統合タイプ）］**：Lambda関数
-* **［Use Lambda Proxy Integration（Lambdaプロキシ統合を使用する）］**：チェックなしのまま
-* **［Lambda Region（Lambdaリージョン）］**：ご自身のリージョンを選択
-* **［Lambda Function（Lambda関数）］**：NoOp.
+* **［Integration type（統合タイプ）］** ：Lambda関数
+* **［Use Lambda Proxy Integration（Lambdaプロキシ統合を使用する）］** ：チェックなしのまま
+* **［Lambda Region（Lambdaリージョン）］** ：ご自身のリージョンを選択
+* **［Lambda Function（Lambda関数）］** ：NoOp.
 
-**［Save（保存）］**をクリックします。次のポップアップ画面で、Lambda関数に必要な権限を付与します。
+**［Save（保存）］** をクリックします。次のポップアップ画面で、Lambda関数に必要な権限を付与します。
 
 すると、`OPTIONS`の［Method Execution（メソッドの実行）］ページが自動的に表示されます。［Method Respose（メソッドの応答）］ページを開きます。
 
-HTTPステータスバーの下にある**200**セクションを展開し、以下の応答ヘッダーを追加します。
+HTTPステータスバーの下にある **200** セクションを展開し、以下の応答ヘッダーを追加します。
 
 * Access-Control-Allow-Headers
 * Access-Control-Allow-Methods
 * Access-Control-Allow-Origin
 
-次に、各応答ヘッダーに適切な値をマッピングします。［Method Execution（メソッドの実行）］ページに戻ったら、**［Integration Response（統合応答）］**をクリックします。**200**メソッド応答ステータスに関連付けられた行を展開した後、**［Header Mappings（ヘッダーのマッピング）］**を展開し、以下のマッピングを適用します。
+次に、各応答ヘッダーに適切な値をマッピングします。［Method Execution（メソッドの実行）］ページに戻ったら、 **［Integration Response（統合応答）］** をクリックします。 **200** メソッド応答ステータスに関連付けられた行を展開した後、 **［Header Mappings（ヘッダーのマッピング）］** を展開し、以下のマッピングを適用します。
 
 * Access-Control-Allow-Headers：`'Content-Type,X-Amz-Date,Authorization,x-api-key,x-amz-security-token'`;
 * Access-Control-Allow-Origin：`'*'`
@@ -191,10 +191,10 @@ HTTPステータスバーの下にある**200**セクションを展開し、以
 
 ### APIをデプロイする
 
-APIの**［Resources（リソース）］**ビューに戻ります。**［Actions］**をクリックし、**［DEPLOY API（APIのデプロイ）］**を選択します。
+APIの **［Resources（リソース）］** ビューに戻ります。 **［Actions］** をクリックし、 **［DEPLOY API（APIのデプロイ）］** を選択します。
 
-デプロイ状態に**［New Stage（新しい段階）］**を選択し、この段階に`Test`と名前を付けます。**［Deploy（デプロイ）］**ボタンをクリックします。
+デプロイ状態に **［New Stage（新しい段階）］** を選択し、この段階に`Test`と名前を付けます。 **［Deploy（デプロイ）］** ボタンをクリックします。
 
-結果のページで、**［SDK Generation（SDK生成）］**に移動します。**プラットフォーム**にJavaScriptを選択します。**［Generate SDK（SDKの生成）］**ボタンをクリックします。
+結果のページで、 **［SDK Generation（SDK生成）］** に移動します。 **プラットフォーム** にJavaScriptを選択します。 **［Generate SDK（SDKの生成）］** ボタンをクリックします。
 
 ダウンロードしたzipファイルは、後で使用するために保存しておきます。
