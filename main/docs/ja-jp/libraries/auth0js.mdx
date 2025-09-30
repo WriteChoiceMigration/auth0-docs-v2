@@ -35,7 +35,7 @@ auth0.jsライブラリーの[サンプルディレクトリ](https://github.com
 
 埋め込みログインを実装するときは、ライブラリが隠しiframe内でのオリジン間の呼び出しを使用して認証を行います。これを安全に行うためには、Auth0がアプリケーションをホストしているドメインを知っている必要があります。
 
-**［Allowed Web Origins（許可されているWebオリジン）］**フィールドにドメインを追加します。このフィールドがDashboardの[［Application Settings（アプリケーションの設定）］](https://manage.auth0.com/#/application/{yourClientId}/settings)に表示されます。
+**［Allowed Web Origins（許可されているWebオリジン）］** フィールドにドメインを追加します。このフィールドがDashboardの[［Application Settings（アプリケーションの設定）］](https://manage.auth0.com/#/application/{yourClientId}/settings)に表示されます。
 
 ### インストールオプション
 
@@ -104,7 +104,7 @@ Auth0アプリケーションの新しいインスタンスを次のように初
 <tr>
 <td>`scope`</td>
 <td>任意</td>
-<td>（文字列）アプリケーションが使用するデフォルトの<dfn id="react-containers-DefinitionTooltip-0"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">スコープ</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>です。スコープを使用すると、要求にある特定のフィールドで特定のクレームを返すことができます。詳細については、[スコープについてのドキュメント]（/scopes）をお読みください。</td>
+<td>（文字列）アプリケーションが使用するデフォルトの<Tooltip id="react-containers-DefinitionTooltip-0"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">スコープ</span></Tooltip>です。スコープを使用すると、要求にある特定のフィールドで特定のクレームを返すことができます。詳細については、[スコープについてのドキュメント]（/scopes）をお読みください。</td>
 </tr>
 <tr>
 <td>`audience`</td>
@@ -268,7 +268,7 @@ webAuth.popup.authorize({
 ```
 
 このような最小限の機能性のみを備えた（この応答を処理するためだけにアプリケーション全体を再読み込みしない）ハンドラーが理想的です。
-Dashboardのアプリケーション構成ページで、`redirectUri`をアプリケーションの**［Allowed Callback URLs（許可されているコールバックURL）］**リストに追加する必要があります。
+Dashboardのアプリケーション構成ページで、`redirectUri`をアプリケーションの **［Allowed Callback URLs（許可されているコールバックURL）］** リストに追加する必要があります。
 
 ### webAuth.login()
 
@@ -327,7 +327,6 @@ webAuth.login({
 
 `buildAuthorizeUrl`メソッドを使用して`/authorize` URLを構築し、新しいトランザクションを初期化することができます。ブラウザーベースの（パッシブ）認証を実装したいときは、このメソッドを使用します。
 
-codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
 ```javascript lines
 // Calculate URL to redirect to
@@ -360,7 +359,6 @@ var url = webAuth.client.buildAuthorizeUrl({
 
 パスワードレスを使用するには、auth0.jsを`redirectUri`で初期化し、`responseType: 'token'`をに設定します。
 
-codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
 ```javascript lines
 var webAuth = new auth0.WebAuth({
@@ -489,7 +487,7 @@ webAuth.passwordlessLogin({
 <td>（文字列）アプリケーションにリダイレクトされるときにAuth0が含める最初の要求にアプリケーションが追加する不透明型の値。この値は、CSRF攻撃を防ぐために、auth0.jsで使用されます。</td>
 </tr>
 <tr>
-<td><dfn id="react-containers-DefinitionTooltip-2"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">`nonce`</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn></td>
+<td><Tooltip id="react-containers-DefinitionTooltip-2"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">`nonce`</span></Tooltip></td>
 <td>任意</td>
 <td>（文字列）IDトークンの検証に使用される</td>
 </tr>
@@ -512,7 +510,7 @@ webAuth.passwordlessLogin({
 <tbody>
 <tr>
 <td>`accessToken`</td>
-<td>`audience`によって指定されたAPIの<dfn id="react-containers-DefinitionTooltip-3"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">アクセストークン</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn></td>
+<td>`audience`によって指定されたAPIの<Tooltip id="react-containers-DefinitionTooltip-3"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">アクセストークン</span></Tooltip></td>
 </tr>
 <tr>
 <td>`expiresIn`</td>
@@ -650,7 +648,7 @@ Auth0.jsが埋め込みログインに使用される場合、`/co/authenticate`
 
 ユーザーをログアウトさせるには、`logout()`メソッドを使用します。このメソッドは、次のようなパラメータを含むoptionsオブジェクトを受け取ります。
 
-`clientID`パラメーターが含まれている場合、提供された`returnTo` URLは、[Auth0 Dashboard](https://manage.auth0.com/#)のアプリケーションの**［Allowed Logout URLs（許可されているログアウトURL）］**に記載されている必要があります。ただし、`clientID`パラメーターが含まれていない場合は、`returnTo`URLは[Auth0 dashboard](https://manage.auth0.com/#)のアカウントレベルの**［Allowed Logout URLs（許可されているログアウトURL）］**に記載されている必要があります。
+`clientID`パラメーターが含まれている場合、提供された`returnTo` URLは、[Auth0 Dashboard](https://manage.auth0.com/#)のアプリケーションの **［Allowed Logout URLs（許可されているログアウトURL）］** に記載されている必要があります。ただし、`clientID`パラメーターが含まれていない場合は、`returnTo`URLは[Auth0 dashboard](https://manage.auth0.com/#)のアカウントレベルの **［Allowed Logout URLs（許可されているログアウトURL）］** に記載されている必要があります。
 
 ```javascript lines
 webAuth.logout({
@@ -754,9 +752,9 @@ webAuth.checkSession(
 
 `/authorize`への実際のリダイレクトはiframe内で起こるため、アプリケーションの再読み込みやアプリケーションからのリダイレクトは行われません。
 
-ただし、ブラウザーではサードパーティのクッキーが有効になっている**必要があります**。有効になっていなければ、**checkSession()**は現在のユーザーのセッションにアクセスできません（ユーザーに何も表示せずに新しいトークンを取得することが不可能になります）。ユーザーが[SafariのITPを有効](/docs/ja-jp/troubleshoot/authentication-issues/renew-tokens-when-using-safari)にしている場合にも同様のことが起こります。
+ただし、ブラウザーではサードパーティのクッキーが有効になっている **必要があります**。有効になっていなければ、**checkSession()** は現在のユーザーのセッションにアクセスできません（ユーザーに何も表示せずに新しいトークンを取得することが不可能になります）。ユーザーが[SafariのITPを有効](/docs/ja-jp/troubleshoot/authentication-issues/renew-tokens-when-using-safari)にしている場合にも同様のことが起こります。
 
-[Dashboard](https://manage.auth0.com/#)のアプリケーションの**［Settings（設定）］**の下にあるAuth0アプリケーションの**［Allowed Web Origins（許可されたWebオリジン）］**リストに、認可要求の送信元となるURLを追加することを忘れないでください。
+[Dashboard](https://manage.auth0.com/#)のアプリケーションの **［Settings（設定）］** の下にあるAuth0アプリケーションの **［Allowed Web Origins（許可されたWebオリジン）］** リストに、認可要求の送信元となるURLを追加することを忘れないでください。
 
 <Warning>
 
@@ -860,4 +858,4 @@ var auth0Manage = new auth0.Management({
 `auth0Manage.linkUser(userId, secondaryUserToken, cb);`
 
 アカウントをリンクすると、セカンダリーアカウントは、ユーザーデータベースの中で別途のアカウントとして存在しなくなり、プライマリーアカウントの一部としてしかアクセスできなくなります。
-アカウントがリンクされている場合、セカンダリ―アカウントのメタデータはプライマリーアカウントのメタデータと**統合されません**。また、リンクが解除されると、セカンダリーアカウントが再び独立した際にプライマリーアカウントのメタデータは保持されません。
+アカウントがリンクされている場合、セカンダリ―アカウントのメタデータはプライマリーアカウントのメタデータと **統合されません**。また、リンクが解除されると、セカンダリーアカウントが再び独立した際にプライマリーアカウントのメタデータは保持されません。
