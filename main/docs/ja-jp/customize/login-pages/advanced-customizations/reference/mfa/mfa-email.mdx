@@ -17,7 +17,7 @@ permalink: "mfa-email"
 
 MFAメールチャレンジ画面クラスのインポートとインスタンス化
 
-```javascript lines
+```js lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 const mfaEmailChallengeManager = new MfaEmailChallenge();
 
@@ -39,7 +39,7 @@ MFAメールチャレンジ画面クラスには以下のプロパティがあ�
 
 <Tabs><Tab title="branding">
 
-```javascript lines
+```ts lines expandable
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -74,7 +74,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```javascript lines
+```ts lines
 interface client {
   description: null | string;
   id: string;
@@ -86,7 +86,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```javascript lines
+```ts lines
 interface organization {
   branding: null | {
     colors?: {
@@ -105,7 +105,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```javascript lines
+```ts lines
 interface prompt{
   name: string;
 }
@@ -113,7 +113,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```javascript lines
+```ts lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -138,7 +138,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="tenant">
 
-```javascript lines
+```ts lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -149,7 +149,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```javascript lines
+```ts lines expandable
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -182,7 +182,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```javascript lines
+```ts lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -202,7 +202,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```javascript lines
+```ts lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -238,7 +238,7 @@ MFAメールチャレンジ画面クラスには以下のメソッドがあり�
 
 このメソッドは提供されたコードを使用してメールチャレンジを続行します。
 
-```javascript lines
+```js lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 
 const mfaEmailChallenge = new MfaEmailChallenge();
@@ -250,10 +250,10 @@ await mfaEmailChallenge.continue({
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong>                 </th>
-<th><strong>タイプ</strong></th>
-<th><strong>必須</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b>                 </th>
+<th><b>タイプ</b></th>
+<th><b>必須</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -282,7 +282,7 @@ await mfaEmailChallenge.continue({
 
 このメソッドはユーザーが利用可能な別のメールを選択できるようにします。
 
-```javascript lines
+```js lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 
 const mfaEmailChallenge = new MfaEmailChallenge();
@@ -291,10 +291,10 @@ await mfaEmailChallenge.pickEmail();
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong>                 </th>
-<th><strong>タイプ</strong></th>
-<th><strong>必須</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b>                 </th>
+<th><b>タイプ</b></th>
+<th><b>必須</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -311,7 +311,7 @@ await mfaEmailChallenge.pickEmail();
 
 このメソッドはメールコードを再度送信します。
 
-```javascript lines
+```js lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 
 const mfaEmailChallenge = new MfaEmailChallenge();
@@ -320,10 +320,10 @@ await mfaEmailChallenge.resendCode();
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong>                 </th>
-<th><strong>タイプ</strong></th>
-<th><strong>必須</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b>                 </th>
+<th><b>タイプ</b></th>
+<th><b>必須</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -340,7 +340,7 @@ await mfaEmailChallenge.resendCode();
 
 このメソッドはユーザーが別のMFAオプションを選択できるようにします。
 
-```javascript lines
+```js lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 
 const mfaEmailChallenge = new MfaEmailChallenge();
@@ -349,10 +349,10 @@ await mfaEmailChallenge.tryAnotherMethod();
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong>                 </th>
-<th><strong>タイプ</strong></th>
-<th><strong>必須</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b>                 </th>
+<th><b>タイプ</b></th>
+<th><b>必須</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -373,7 +373,7 @@ MFAメールリスト画面クラスは、ユーザーがMFAに登録済みの�
 
 MFAメールリスト画面クラスのインポートとインスタンス化
 
-```javascript lines
+```js lines
 import MfaEmailList from '@auth0/auth0-acul-js/mfa-email-list';
 const mfaEmailList = new MfaEmailList();
 
@@ -393,7 +393,7 @@ MFAメールリスト画面クラスには以下のプロパティがありま�
 
 <Tabs><Tab title="branding">
 
-```javascript lines
+```ts lines expandable
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -428,7 +428,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```javascript lines
+```ts lines
 interface client {
   description: null | string;
   id: string;
@@ -440,7 +440,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```javascript lines
+```ts lines
 interface organization {
   branding: null | {
     colors?: {
@@ -459,7 +459,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```javascript lines
+```ts lines
 interface prompt{
   name: string;
 }
@@ -467,7 +467,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```javascript lines
+```ts lines expandable
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -514,7 +514,7 @@ interface PasskeyCreate {
 
 </Tab><Tab title="tenant">
 
-```javascript lines
+```ts lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -525,7 +525,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```javascript lines
+```ts lines expandable
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -558,7 +558,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```javascript lines
+```ts lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -578,7 +578,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```javascript lines
+```ts lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -614,7 +614,7 @@ MFAメールリスト画面クラスには以下のメソッドがあります�
 
 このメソッドはユーザーが前の画面に戻れるようにします。
 
-```javascript lines
+```js lines
 import MfaEmailList from '@auth0/auth0-acul-js/mfa-email-list';
 
 const mfaEmailList = new MfaEmailList();
@@ -623,10 +623,10 @@ await mfaEmailList.goBack();
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong>                 </th>
-<th><strong>タイプ</strong></th>
-<th><strong>必須</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b>                 </th>
+<th><b>タイプ</b></th>
+<th><b>必須</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -643,7 +643,7 @@ await mfaEmailList.goBack();
 
 このメソッドは、ユーザーが登録済みのメールアドレスのリストから選択できるようにします。
 
-```javascript lines
+```js lines
 import MfaEmailList from '@auth0/auth0-acul-js/mfa-email-list';
 
 const mfaEmailList = new MfaEmailList();
@@ -654,10 +654,10 @@ await mfaEmailList.selectMfaEmail({
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong>                 </th>
-<th><strong>タイプ</strong></th>
-<th><strong>必須</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b>                 </th>
+<th><b>タイプ</b></th>
+<th><b>必須</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>

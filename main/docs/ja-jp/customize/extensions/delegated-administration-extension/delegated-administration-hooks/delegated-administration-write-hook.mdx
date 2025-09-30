@@ -25,28 +25,28 @@ Auth0は、データベース接続でのユーザー作成しかサポートし
 
 ## フックコントラクト
 
-* **ctx**：コンテキストオブジェクトです。
+* **ctx** ：コンテキストオブジェクトです。
 
-  + **request.originalUser**：**payload**が新しいフィールドセットである現在のユーザーの値です。メソッドが**update**の場合にのみ使用できます。
-  + **payload**：ペイロードオブジェクトです。
+  + **request.originalUser** ： **payload** が新しいフィールドセットである現在のユーザーの値です。メソッドが **update** の場合にのみ使用できます。
+  + **payload** ：ペイロードオブジェクトです。
 
-    - **memberships**：ユーザーの作成時にUIで選択されたメンバーシップの配列です。
-    - **email**：ユーザーのメールアドレスです。
-    - **password**：ユーザーのパスワードです。
-    - **connection**：データベース接続の名前です。
-    - **app_metada**：編集されたカスタムフィールドが`app_metadata`に保存されている場合に含まれるデータです。
-    - **user_metadata**：編集されたカスタムフィールドが`user_metadata`に保存されている場合に含まれるデータです。
-  + **userFields**：ユーザーフィールドの配列です（設定クエリで指定されている場合）
-  + **methods**：設定を呼び出した結果か、それとも更新を呼び出した結果かに応じて、**create**または**update**になります。
-* **callback(error, user)**：<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>に送信するべきエラーとユーザーオブジェクトを返すことができるコールバックです。
+    - **memberships** ：ユーザーの作成時にUIで選択されたメンバーシップの配列です。
+    - **email** ：ユーザーのメールアドレスです。
+    - **password** ：ユーザーのパスワードです。
+    - **connection** ：データベース接続の名前です。
+    - **app_metada** ：編集されたカスタムフィールドが`app_metadata`に保存されている場合に含まれるデータです。
+    - **user_metadata** ：編集されたカスタムフィールドが`user_metadata`に保存されている場合に含まれるデータです。
+  + **userFields** ：ユーザーフィールドの配列です（設定クエリで指定されている場合）
+  + **methods** ：設定を呼び出した結果か、それとも更新を呼び出した結果かに応じて、 **create** または **update** になります。
+* **callback(error, user)** ：<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>に送信するべきエラーとユーザーオブジェクトを返すことができるコールバックです。
 
-**userFields**の詳細については、「[委任管理：設定クエリフック](/docs/ja-jp/customize/extensions/delegated-administration-extension/delegated-administration-hooks/delegated-administration-settings-query-hook)」をお読みください。
+**userFields** の詳細については、「[委任管理：設定クエリフック](/docs/ja-jp/customize/extensions/delegated-administration-extension/delegated-administration-hooks/delegated-administration-settings-query-hook)」をお読みください。
 
 ## 使用例
 
 Kellyは経理部を管理しています。Kellyがユーザーが作成するときには、ユーザーが経理部のメンバーとして割り当てられなければなりません。
 
-```javascript lines
+```javascript lines expandable
 function(ctx, callback) {
   var newProfile = {
     email: ctx.payload.email,

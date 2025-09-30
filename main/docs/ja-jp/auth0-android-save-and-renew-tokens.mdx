@@ -38,13 +38,13 @@ val manager = CredentialsManager(apiClient, SharedPreferencesStorage(this))
 
 保存された資格情報は、期限切れになっていないか更新可能である場合は有効であるとみなされます。ユーザーが既にログインしているか確認します。
 
-``` lines
+```kotlin lines
 val loggedIn = manager.hasValidCredentials()
 ```
 
 ユーザーをアプリケーションからログアウトするには、保存された資格情報を削除し、ユーザーをログイン画面に誘導します。
 
-``` lines
+```kotlin lines
 manager.clearCredentials()
 ```
 
@@ -70,7 +70,7 @@ manager.getCredentials(object: Callback<Credentials, CredentialsManagerException
 
 マネージャーで認証中に取得した資格情報を保存することができます。
 
-``` lines
+```text lines
 manager.saveCredentials(credentials)
 ```
 

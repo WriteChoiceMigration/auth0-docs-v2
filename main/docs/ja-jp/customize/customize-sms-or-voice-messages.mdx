@@ -11,13 +11,13 @@ permalink: "customize-sms-or-voice-messages"
 
 登録（Guardianにデバイスを関連付ける場合）や検証（デバイスに認証メッセージが送られた場合）中にAuth0から送られたSMSや音声メッセージをカスタマイズすることができます。
 
-1. [［Dashboard］>［Security（セキュリティ）］>［Multi-factor Auth（多要素認証）］](https://manage.auth0.com/#/security/mfa)に移動し、**［Phone Message（電話メッセ―ジ）］**をクリックします。
-2. メッセージのテンプレートをカスタマイズし、**［Save（保存）］**をクリックします。
+1. [［Dashboard］>［Security（セキュリティ）］>［Multi-factor Auth（多要素認証）］](https://manage.auth0.com/#/security/mfa)に移動し、 **［Phone Message（電話メッセ―ジ）］** をクリックします。
+2. メッセージのテンプレートをカスタマイズし、 **［Save（保存）］** をクリックします。
 
 2つのメッセージタイプにテンプレートをカスタマイズできます。
 
-* **［Enrollment（登録）］**：デバイスエンロールメント中にAuth0から送られたメッセージ。
-* **［Verification（検証）］**：デバイスの所有を検証するためにAuth0から送られたメッセージ。
+* **［Enrollment（登録）］** ：デバイスエンロールメント中にAuth0から送られたメッセージ。
+* **［Verification（検証）］** ：デバイスの所有を検証するためにAuth0から送られたメッセージ。
 
 ## 構文
 
@@ -48,14 +48,14 @@ permalink: "customize-sms-or-voice-messages"
 </tr>
 <tr>
 <td>`tenant.friendlyName`</td>
-<td><strong>［Dashboard］&gt;［Tenant Settings（テナント設定）］<strong>で設定された</strong>フレンドリー名前</strong>。</td>
+<td><b>［Dashboard］&gt;［Tenant Settings（テナント設定）］<b>で設定された</b>フレンドリー名前</b>。</td>
 </tr>
 </tbody>
 </table>
 
 ## 例
 
-```json lines
+```liquid lines
 {% if message_type == "voice" %}
   {% if locale contains "fr" %}
   Bonjour, vous avez demandé à recevoir un code de vérification pour vous enregister avec {{tenant.friendly_name}}. Votre code est: {{pause}} {{code}}. Je répète, votre code est: {{pause}}{{code}}.
@@ -81,7 +81,7 @@ permalink: "customize-sms-or-voice-messages"
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip> API（`POST /mfa/associate`と`POST /mfa/challenge`エンドポイント）でもサポートされています。送られたら、そのロケールはMFA SMS/音声テンプレートの`locale`変数で利用可能です。
 
-これらを機能させるためには、**［Tenant（テナント）］>［Settings（設定）］**（**［Supported Languages（サポートされる言語）］**の下）から対象言語を選択する必要があります。
+これらを機能させるためには、 **［Tenant（テナント）］>［Settings（設定）］** （ **［Supported Languages（サポートされる言語）］** の下）から対象言語を選択する必要があります。
 
 ## もっと詳しく
 

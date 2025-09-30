@@ -30,15 +30,15 @@ permalink: "create"
 
 `create`関数は2つのパラメーターを受け取り、`callback`関数を返します。
 
-```javascript lines
+```js lines
 create(user, callback): function
 ```
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong></th>
-<th><strong>タイプ</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b></th>
+<th><b>タイプ</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -59,7 +59,7 @@ create(user, callback): function
 
 これは疑似JavaScriptを使った例で、どのようにすれば`create`関数を実装できるかがわかります。言語固有の例については、「[言語固有のスクリプトの例](#language-specific-script-examples)」をお読みください。
 
-```javascript lines
+```javascript lines expandable
 function create(user, callback) {
   // Send user profile data to external database API
   let hashedPassword = hash(user.password);
@@ -100,7 +100,7 @@ function create(user, callback) {
 
 #### 例
 
-```javascript lines
+```js lines
 bcrypt.hash(password, 10, function (err, hash) {
     if (err) {
         return callback(err);
@@ -116,16 +116,16 @@ bcrypt.hash(password, 10, function (err, hash) {
 
 ### 定義
 
-```javascript lines
+```js lines
 callback(error): function
 ```
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong></th>
-<th><strong>タイプ</strong></th>
-<th><strong>必須</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b></th>
+<th><b>タイプ</b></th>
+<th><b>必須</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -144,7 +144,7 @@ callback(error): function
 
 #### 例
 
-```javascript lines
+```js lines
 return callback(null);
 ```
 
@@ -160,14 +160,14 @@ return callback(null);
 
 `ValidationError`コンストラクターは、最大2つのパラメーターを受け取ります。
 
-```javascript lines
+```js lines
 new ValidationError(errorCode[, message]): ValidationError
 ```
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -188,27 +188,27 @@ new ValidationError(errorCode[, message]): ValidationError
 
 ##### 例
 
-```javascript lines
+```js wrap lines
 return callback(new ValidationError("user_exists", "My custom error message."));
 ```
 
 <table class="table"><thead>
 <tr>
-<th><strong>テナントのログイベントのフィールド</strong></th>
-<th><strong>値</strong></th>
+<th><b>テナントのログイベントのフィールド</b></th>
+<th><b>値</b></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Code（コード）</strong></td>
+<td><b>Code（コード）</b></td>
 <td>`fs`</td>
 </tr>
 <tr>
-<td><strong>Event（イベント）</strong></td>
+<td><b>Event（イベント）</b></td>
 <td>Failed Signup</td>
 </tr>
 <tr>
-<td><strong>Description（説明）</strong></td>
+<td><b>Description（説明）</b></td>
 <td>`My custom error message.`</td>
 </tr>
 </tbody>
@@ -220,8 +220,8 @@ return callback(new ValidationError("user_exists", "My custom error message."));
 
 <table class="table"><thead>
 <tr>
-<th><strong>プロパティ</strong></th>
-<th><strong>説明</strong></th>
+<th><b>プロパティ</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -243,7 +243,7 @@ return callback(new ValidationError("user_exists", "My custom error message."));
 </tr>
 <tr>
 <td>`username`</td>
-<td>ユーザーのユーザー名です。カスタムデータベース接続の<a href="/docs/ja-jp/connections/database/require-username"><strong>［Requires Username（ユーザー名を要求する）］</strong></a>設定が有効の場合は、必須です。</td>
+<td>ユーザーのユーザー名です。カスタムデータベース接続の<a href="/docs/ja-jp/connections/database/require-username"><b>［Requires Username（ユーザー名を要求する）］</b></a>設定が有効の場合は、必須です。</td>
 </tr>
 <tr>
 <td>`connection`</td>
@@ -274,7 +274,7 @@ return callback(new ValidationError("user_exists", "My custom error message."));
 
 ### 例
 
-```javascript lines
+```js lines
 {
     client_id: "8tkMo6n1QkKOazqPcSQd8wU7LzXYibgK",
     tenant: "{yourAuth0Tenant}",
@@ -306,7 +306,7 @@ Auth0は、以下の言語や技術で使用できるサンプルスクリプト
 
 ### JavaScript
 
-```javascript lines
+```javascript lines expandable
 function create(user, callback) {
   // This script should create a user entry in your existing database. It will
   // be executed when a user attempts to sign up, or when a user is created
@@ -338,7 +338,7 @@ function create(user, callback) {
 
 ### ASP.NET Membership Provider（MVC3 - Universal Providers）
 
-```javascript lines
+```javascript lines expandable
 function create(user, callback) {
   const crypto = require('crypto');
   const sqlserver = require('tedious@1.11.0');
@@ -442,7 +442,7 @@ function create(user, callback) {
 
 ### ASP.NET Membership Provider（MVC4 - Simple Membership）
 
-```javascript lines
+```javascript lines expandable
 function create(user, callback) {
   const crypto = require('crypto');
   const sqlserver = require('tedious@1.11.0');
@@ -521,7 +521,7 @@ function create(user, callback) {
 
 ### MongoDB
 
-```javascript lines
+```javascript lines expandable
 function create(user, callback) {
   const bcrypt = require('bcrypt');
   const MongoClient = require('mongodb@3.1.4').MongoClient;
@@ -608,7 +608,7 @@ function create(user, callback) {
 
 ### SQL Server
 
-```javascript lines
+```javascript lines expandable
 function create(user, callback) {
   //this example uses the "tedious" library
   //more info here: http://pekim.github.io/tedious/index.html
@@ -651,7 +651,7 @@ function create(user, callback) {
 
 ### Windows Azure SQL Database
 
-```javascript lines
+```javascript lines expandable
 function create (user, callback) {
   //this example uses the "tedious" library
   //more info here: http://pekim.github.io/tedious/index.html
@@ -718,7 +718,7 @@ function create(user, callback) {
 
 1. Auth0の[Real-time Webtask Logs拡張機能](/docs/ja-jp/customize/extensions/real-time-webtask-logs)で`console.log()`のステートメントを確認します。
 2. レガシーデータベースでユーザーを探し、適宜削除します。ユーザーの状態の一部がAuth0にある場合は、Management APIの[ユーザー削除](https://auth0.com/docs/api/management/v2#!/Users/delete_users_by_id)エンドポイントまたは[接続ユーザー削除](/docs/ja-jp/api/management/v2#!/Connections/delete_users_by_email)エンドポイントを使用します。
-3. **［Import Mode（インポートモード）］**が無効になっていることを確認してから、作成スクリプトを構成します。
+3. **［Import Mode（インポートモード）］** が無効になっていることを確認してから、作成スクリプトを構成します。
 
 ## もっと詳しく
 

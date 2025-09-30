@@ -27,20 +27,20 @@ Office 365のデフォルトのセットアップには、Active DirectoryとDir
 
 1. [Azureポータル](https://portal.azure.com)にログインします。
 2. [左のナビゲーションにあるMicrosoft Entra ID](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview)を選択します。
-3. 新しいメニューで**［App registrations（アプリの登録）］**を選択します。
-4. **［New application registration（アプリケーションの新規登録）］**をクリックします。
+3. 新しいメニューで **［App registrations（アプリの登録）］** を選択します。
+4. **［New application registration（アプリケーションの新規登録）］** をクリックします。
 5. フォームに記入します。
 
    1. アプリケーションの名前（`Auth0 Provisioning`など）を入力します。
-   2. **［Application type（アプリケーションの種類）］**に**［Web app / API（Webアプリ/API）］**を選択します。
+   2. **［Application type（アプリケーションの種類）］** に **［Web app / API（Webアプリ/API）］** を選択します。
    3. サインオンURLを挿入します。任意の有効なURLを入力できますが、実際にはあまり使用されません。
-6. **［App registrations（アプリの登録）］**リストに最近作成されたアプリが表示されます。これを選択します。
-7. **［Settings（設定）］**ブレード（これらのセクションをMicrosoftでは「ブレード」と呼びます）で、**［Keys（キー）］**を選択します。
-8. **［Description（説明）］**（`Auth0 Provision`など）を入力し、新しいキーの**［Duration（期間）］**を選択します。非永続キーを発行する場合は、有効期限を書き留め、期限切れになる前に新しいキーと置き換えるためのリマインダーを作成します。
-9. クリックしてキーを保存し、**［App Key（アプリのキー）］**をコピーします。このキーは一度しか表示されず、Auth0のルールに必要です。
-10. **［Required permissions（必要なアクセス許可）］**を選択して、新しいブレードの**［Add（追加）］**をクリックします。
-11. **［Microsoft Graph］**APIを選択してから、**［Application Permissions（アプリケーションのアクセス許可）］**の`［Read and write directory data（ディレクトリデータの読み取りと書き込み）］`を有効にします。
-12. **［Required permissions（必要なアクセス許可）］**に戻り、**［Grant Permissions（アクセス許可の付与）］**ボタンをクリックしてから、**［Yes（はい）］**をクリックすることで、要求されたアクセス許可を付与します。
+6. **［App registrations（アプリの登録）］** リストに最近作成されたアプリが表示されます。これを選択します。
+7. **［Settings（設定）］** ブレード（これらのセクションをMicrosoftでは「ブレード」と呼びます）で、 **［Keys（キー）］** を選択します。
+8. **［Description（説明）］** （`Auth0 Provision`など）を入力し、新しいキーの **［Duration（期間）］** を選択します。非永続キーを発行する場合は、有効期限を書き留め、期限切れになる前に新しいキーと置き換えるためのリマインダーを作成します。
+9. クリックしてキーを保存し、 **［App Key（アプリのキー）］** をコピーします。このキーは一度しか表示されず、Auth0のルールに必要です。
+10. **［Required permissions（必要なアクセス許可）］** を選択して、新しいブレードの **［Add（追加）］** をクリックします。
+11. **［Microsoft Graph］** APIを選択してから、 **［Application Permissions（アプリケーションのアクセス許可）］** の`［Read and write directory data（ディレクトリデータの読み取りと書き込み）］`を有効にします。
+12. **［Required permissions（必要なアクセス許可）］** に戻り、 **［Grant Permissions（アクセス許可の付与）］** ボタンをクリックしてから、 **［Yes（はい）］** をクリックすることで、要求されたアクセス許可を付与します。
 
 ## Microsoft Entra IDのプロビジョニングルールを作成する
 
@@ -59,7 +59,7 @@ Office 365のデフォルトのセットアップには、Active DirectoryとDir
 
 コードでは、ユーザーがプロビジョニングされた後にルールが約15秒待つこともわかります。これは、プロビジョニングされたユーザーがOffice 365で利用可能になるのに数秒かかるためです。
 
-```javascript lines
+```javascript lines expandable
 function (user, context, callback) {
   // Require the Node.js packages that we are going to use.
   // Check this website for a complete list of the packages available:
@@ -273,7 +273,7 @@ function (user, context, callback) {
 
 ユーザーを（たとえば`https://office.travel0.com`などの「スマートリンク」を使用して）以下のURLにリダイレクトする必要があります。
 
-``` lines
+```http wrap lines
 https://{yourDomain}/login?client=AUTH0_OFFICE365_CLIENT_ID&protocol=wsfed&state=&redirect_uri=&
 ```
 
@@ -285,7 +285,7 @@ https://{yourDomain}/login?client=AUTH0_OFFICE365_CLIENT_ID&protocol=wsfed&state
 
 実装に（たとえば、SharePoint Onlineへの）ディープリンキングが必要になることがあります。その場合は、Office 365のログインページで開始するスマートリンクを構築してください。
 
-``` lines
+```http wrap lines
 https://login.microsoftonline.com/login.srf?wa=wsignin1.0&whr={yourCustomDomain}&wreply={deepLink}
 ```
 
@@ -295,7 +295,7 @@ https://login.microsoftonline.com/login.srf?wa=wsignin1.0&whr={yourCustomDomain}
 
 URLの例：
 
-``` lines
+```http wrap lines
 https://login.microsoftonline.com/login.srf?wa=wsignin1.0&whr=travel0.com&wreply=https%3A%2F%2Ftravel0%2Esharepoint%2Ecom
 ```
 

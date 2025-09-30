@@ -35,12 +35,12 @@ permalink: "max-age-reauthentication"
 
 </Callout>
 
-ただし、このパラメーターで再認証を確実にするには問題があります。**RPには、再認証の操作が行われたことを確認する方法がありません**。なぜそうなのかを理解するために、トラフィックを調べてみましょう。RPからの認証要求のフローは以下のようになります。
+ただし、このパラメーターで再認証を確実にするには問題があります。 **RPには、再認証の操作が行われたことを確認する方法がありません** 。なぜそうなのかを理解するために、トラフィックを調べてみましょう。RPからの認証要求のフローは以下のようになります。
 
-``` lines
+```http lines
 https://mydomain.auth0.com/authorize?
 client_id=abcd1234
-&redirect_uri= https://mydomain.com/callback 
+&redirect_uri= https://mydomain.com/callback
 &scope=openid profile
 &response_type=id_token
 &prompt=login
@@ -48,7 +48,7 @@ client_id=abcd1234
 
 ASで認証が成功すると、RPは以下のIDトークンを受け取ります。
 
-```javascript lines
+```json JSON lines
 {
   "nickname": "user",
   "name": "user@mydomain.auth0.com",
@@ -61,7 +61,7 @@ ASで認証が成功すると、RPは以下のIDトークンを受け取りま�
 }
 ```
 
-ASが返す信頼されたIDドキュメントには、**最終ログインの時期を確認するクレームがありません**。これは、当初の認可要求がエンドユーザーのブラウザーから302のリダイレクトとして送信された場合に問題となります。RPが要求した再認証の手順を悪意のある行為者が迂回したい場合、`prompt=login`パラメーターを削除するだけで済むため、IDトークンに含まれるフィールドではRPがその違いを判別できません。
+ASが返す信頼されたIDドキュメントには、 **最終ログインの時期を確認するクレームがありません** 。これは、当初の認可要求がエンドユーザーのブラウザーから302のリダイレクトとして送信された場合に問題となります。RPが要求した再認証の手順を悪意のある行為者が迂回したい場合、`prompt=login`パラメーターを削除するだけで済むため、IDトークンに含まれるフィールドではRPがその違いを判別できません。
 
 下の図は、`prompt=login`パラメーターを用いた暗黙フローを簡単に説明したものです。
 
@@ -87,8 +87,8 @@ ASが返す信頼されたIDドキュメントには、**最終ログインの�
 
 定義にある最後の文章が最も重要な部分です。RPが`max_age`を要求した場合、RPに`auth_time`クレームを渡す必要があります。つまり、`max_age`の用途には以下の2つがあります。
 
-* **セッションのフレッシュネスを指定する**：アプリがユーザーに1日1回の再認証を要求する場合には、`max_age`に値を指定すると、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>セッションの有効期間を長くすることができます。これは秒単位で定義します。
-* **即座の再認証を強制する**：アプリがユーザーにアクセス前の再認証を要求する場合には、`max_age`パラメーターの値を0に設定すると、ASが新たにログインを強制します。
+* **セッションのフレッシュネスを指定する** ：アプリがユーザーに1日1回の再認証を要求する場合には、`max_age`に値を指定すると、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>セッションの有効期間を長くすることができます。これは秒単位で定義します。
+* **即座の再認証を強制する** ：アプリがユーザーにアクセス前の再認証を要求する場合には、`max_age`パラメーターの値を0に設定すると、ASが新たにログインを強制します。
 
 下の図はこの要件を説明したものです。
 
@@ -106,9 +106,9 @@ ASが返す信頼されたIDドキュメントには、**最終ログインの�
 
 OIDCの仕様により、再認証の実行を確実に確認する方法として、`max_age`パラメーターは使用できても、`prompt=login`が使用できないことを説明しました。これは、再認証を強制したい場合に安全なオプションを提供しません。
 
-* **imprompt=login**：`prompt`のみを含み、ASが実際に再認証したことは確認しません。
-* **prompt=login & max_age=999999**：`auth_time`クレームが使用されるように、任意の`max_age`を含めます。再認証が行われたことは確認できますが、パラメーターが乱雑になります。
-* **max_age=0**：`max_age`パラメーターのみを使用して、ログインプロンプトを強制的に表示します。最近更新された仕様ではこのパラメーターをさらに明確化し、実質的には`prompt=login`と同等だとしています。これは、UXパラメーターであるべきものをセッション維持パラメーターと混合させるため、適切ではありません。
+* **imprompt=login** ：`prompt`のみを含み、ASが実際に再認証したことは確認しません。
+* **prompt=login & max_age=999999** ：`auth_time`クレームが使用されるように、任意の`max_age`を含めます。再認証が行われたことは確認できますが、パラメーターが乱雑になります。
+* **max_age=0** ：`max_age`パラメーターのみを使用して、ログインプロンプトを強制的に表示します。最近更新された仕様ではこのパラメーターをさらに明確化し、実質的には`prompt=login`と同等だとしています。これは、UXパラメーターであるべきものをセッション維持パラメーターと混合させるため、適切ではありません。
 
 そうではなく、Auth0は`prompt=login`要求パラメーターへの応答で、IDトークンに`auth_time`クレームを含めて送信するようにしています。つまり、`prompt=login`を使用すると同時に、再認証が行われたことを確認することができます。
 
@@ -122,7 +122,7 @@ OIDCの仕様により、再認証の実行を確実に確認する方法とし�
 
 以下の例では、[passport-auth0-openidconnect](https://github.com/auth0/passport-auth0-openidconnect)モジュールを使用して、再認証の確認方法を説明します。最初の（最も簡単な）例としては、`max_age=0`オプションを`Auth0OidcStrategy`に追加して確認する方法です。
 
-```javascript lines
+```javascript JavaScript lines
 var strategy = new Auth0OidcStrategy(
   {
     domain: process.env.AUTH0_DOMAIN,
@@ -139,7 +139,7 @@ var strategy = new Auth0OidcStrategy(
 
 ストラテジーがすでに`max_age`パラメーターの確認を処理しているため、確認の手順がこれ以上必要にならないことに注意してください。
 
-```javascript lines
+```javascript JavaScript lines
 // https://openid.net/specs/openid-connect-basic-1_0.html#IDTokenValidation - check 8.
 if (meta.params.max_age && (!jwtClaims.auth_time || ((meta.timestamp - meta.params.max_age) > jwtClaims.auth_time))) {
   return self.error(new Error('auth_time in id_token not included or too old'));
@@ -148,7 +148,7 @@ if (meta.params.max_age && (!jwtClaims.auth_time || ((meta.timestamp - meta.para
 
 同じコンテキストで`prompt=login`を使うこともできますが、規格として`auth_time`はIDトークン応答の付随的な発生を要求しないため、手動で確認を処理しなければなりません。このストラテジーコンストラクターは以下のようになります。
 
-```javascript lines
+```javascript JavaScript lines
 var strategy = new Auth0OidcStrategy(
   {
     domain: process.env.AUTH0_DOMAIN,

@@ -20,12 +20,12 @@ permalink: "sign-and-encrypt-saml-requests"
 
 ### SAML認証要求に署名する
 
-Auth0がSAML**サービスプロバイダー**の場合、Auth0が<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">IdP</Tooltip>に送信する認証要求に署名することができます。
+Auth0がSAML **サービスプロバイダー** の場合、Auth0が<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">IdP</Tooltip>に送信する認証要求に署名することができます。
 
-1. [［Auth0 Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)に移動し、**［SAML］**を選択します。
+1. [［Auth0 Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)に移動し、 **［SAML］** を選択します。
 2. 表示する接続の名前を選択します。
-3. **［Sign Request（要求に署名する）］**を見つけて、そのスイッチを有効にします。
-4. **［Sign Request（要求に署名する）］**スイッチの下にある証明書をダウンロードし、署名を検証してもらえるようにIdPに提供します。
+3. **［Sign Request（要求に署名する）］** を見つけて、そのスイッチを有効にします。
+4. **［Sign Request（要求に署名する）］** スイッチの下にある証明書をダウンロードし、署名を検証してもらえるようにIdPに提供します。
 
 #### deflateエンコードの有効化/無効化
 
@@ -51,11 +51,11 @@ deflateエンコードを無効にするには、[Management APIの接続の更�
 
 ### カスタムキーを使用して要求に署名します
 
-デフォルトでは、Auth0はテナントの秘密鍵を使用してSAML要求に署名します（**Sign Request（要求に署名する）**トグルが有効になっている場合）。また、独自の秘密鍵/公開鍵のペアを指定して、特定の接続からの要求に署名することもできます。
+デフォルトでは、Auth0はテナントの秘密鍵を使用してSAML要求に署名します（ **Sign Request（要求に署名する）** トグルが有効になっている場合）。また、独自の秘密鍵/公開鍵のペアを指定して、特定の接続からの要求に署名することもできます。
 
 次のコマンドを使用して、独自の証明書と秘密鍵を生成できます。
 
-```bash lines
+```bash wrap lines
 openssl req -x509 -nodes -sha256 -days 3650 -newkey rsa:2048 -keyout private_key.key -out certificate.crt
 ```
 
@@ -85,14 +85,14 @@ openssl req -x509 -nodes -sha256 -days 3650 -newkey rsa:2048 -keyout private_key
 
 ### 署名付きSAML認証応答を受信する
 
-Auth0がSAML**サービスプロバイダー**の場合、IDプロバイダーからのすべてのSAML応答に署名して、承認されていないサードパーティによって改ざんされていないことを示す必要があります。
+Auth0がSAML **サービスプロバイダー** の場合、IDプロバイダーからのすべてのSAML応答に署名して、承認されていないサードパーティによって改ざんされていないことを示す必要があります。
 
 IDプロバイダーから署名証明書を取得し、その証明書をIDプロバイダーからAuth0接続に読み込むことで、応答の署名を検証するようにAuth0を構成する必要があります。
 
-1. [［Auth0 Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)に移動し、**［SAML］**を選択します。
+1. [［Auth0 Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)に移動し、 **［SAML］** を選択します。
 2. 表示する接続の名前を選択します。
-3. **X509署名証明書**を見つけ、証明書をアップロードします。
-4. **［Save Changes（変更の保存）］**を選択します。
+3. **X509署名証明書** を見つけ、証明書をアップロードします。
+4. **［Save Changes（変更の保存）］** を選択します。
 
 Auth0はアサーション、応答、またはその両方に対して署名付き応答を受け入れることができます。
 
@@ -139,7 +139,7 @@ IdPが要求する形式の証明書をダウンロードしてください。
 
 ## SAML IDプロバイダーとしてのAuth0
 
-このシナリオは、Auth0がアプリケーションのSAML IDプロバイダーである場合に適用されます。これは、DashboardでSAML Web Appアドオンが有効になっている**アプリケーション**によって表されます。
+このシナリオは、Auth0がアプリケーションのSAML IDプロバイダーである場合に適用されます。これは、DashboardでSAML Web Appアドオンが有効になっている **アプリケーション** によって表されます。
 
 ### SAML応答/アサーションに署名する
 
@@ -148,16 +148,16 @@ Auth0がSAML IDプロバイダーである場合、テナントの秘密鍵を�
 SAMLアサーションに署名するには：
 
 1. [Auth0 Dashboard > Applications](https://manage.auth0.com/#/applications)に移動し、表示するアプリケーションの名前を選択します。
-2. **［Settings（設定）］**ページの下までスクロールし、**［Show Advanced Settings（詳細設定を表示）］**、**［Certificates（証明書）］**ビューの順に選択します。
-3. **［Download Certificate（証明書のダウンロード）］**を選択し、署名証明書を受け取る形式を選択します。
+2. **［Settings（設定）］** ページの下までスクロールし、 **［Show Advanced Settings（詳細設定を表示）］** 、 **［Certificates（証明書）］** ビューの順に選択します。
+3. **［Download Certificate（証明書のダウンロード）］** を選択し、署名証明書を受け取る形式を選択します。
 4. 証明書をサービスプロバイダーに送信します。
 
-デフォルトでは、Auth0は応答内でSAML**アサーション**に署名します。SAML**応答**に署名するには：
+デフォルトでは、Auth0は応答内でSAML **アサーション** に署名します。SAML **応答** に署名するには：
 
 1. [Auth0 Dashboard > Applications](https://manage.auth0.com/#/applications)に移動し、表示するアプリケーションの名前を選択します。
-2. **［Addons（アドオン）］**ビューを選択します。
-3. **SAML2 Web**アプリを選択して設定を表示し、**［（Settings）設定］**コードブロックを見つけます。
-4. **"****`signResponse"`**キーを見つけます。コメントを解除（または必要に応じて追加）し、値を`true`に設定します（デフォルト値は`false`）。構成はこのようになっているはずです。
+2. **［Addons（アドオン）］** ビューを選択します。
+3. **SAML2 Web** アプリを選択して設定を表示し、 **［（Settings）設定］** コードブロックを見つけます。
+4. **"* ***`signResponse"`** キーを見つけます。コメントを解除（または必要に応じて追加）し、値を`true`に設定します（デフォルト値は`false`）。構成はこのようになっているはずです。
 
    ```json lines
    {
@@ -174,7 +174,7 @@ SAMLアサーションに署名するには：
 
 デフォルトでは、Auth0はSAML応答やアサーションに署名するためのテナントに割り当てられた秘密鍵/公開鍵のペアを使用します。非常に特殊なシナリオでは、独自のキーペアを提供する必要がある場合があります。次のようなルールでこれを行うことができます：
 
-```javascript lines
+```javascript lines expandable
 /**
 * Handler that will be called during the execution of a PostLogin flow.
 *
@@ -215,9 +215,9 @@ Auth0がSAML IDプロバイダーの場合、サービスプロバイダーの�
 
 1. 公開鍵を使用してサービスプロバイダーの証明書をダウンロードします。
 2. [Auth0 Dashboard > Applications](https://manage.auth0.com/#/applications)に移動し、表示するアプリケーションの名前を選択します。
-3. **［Addons（アドオン）］**ビューを選択します。
-4. **SAML2 Web**アプリを選択して設定を表示し、**［（Settings）設定］**コードブロックを見つけます。
-5. **"****`signingCert"`**キーを見つけます。コメントを解除し（または、必要に応じて追加）、その値をサービスプロバイダーからダウンロードした証明書に設定します。構成はこのようになっているはずです。
+3. **［Addons（アドオン）］** ビューを選択します。
+4. **SAML2 Web** アプリを選択して設定を表示し、 **［（Settings）設定］** コードブロックを見つけます。
+5. **"* ***`signingCert"`** キーを見つけます。コメントを解除し（または、必要に応じて追加）、その値をサービスプロバイダーからダウンロードした証明書に設定します。構成はこのようになっているはずです。
 
    ```json lines
    {
@@ -240,7 +240,7 @@ Auth0がSAML IDプロバイダーである場合は、[Actions](/docs/ja-jp/cust
 
 証明書と公開鍵ファイルを取得したら、[それらを文字列に変換](/docs/ja-jp/authenticate/protocols/saml/saml-sso-integrations/work-with-certificates-and-keys-as-strings)してActionで使用する必要があります。Actionは次のようになります。
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
 
 // this Action sets a specific public key to encrypt the SAML assertion generated from Auth0

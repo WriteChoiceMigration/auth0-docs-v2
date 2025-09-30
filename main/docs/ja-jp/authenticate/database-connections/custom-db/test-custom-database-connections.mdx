@@ -22,17 +22,17 @@ Auth0がホストするデータベース構造を使用してユーザーを保
 
    <Warning>
 
-   カスタムデータベーススクリプトを作成する際には、**クライアントID**と**クライアントシークレット**をメモしておく必要があります。また、Management APIでスコープを有効にするためには、**クライアントID**をメモしておく必要があります。
+   カスタムデータベーススクリプトを作成する際には、 **クライアントID** と **クライアントシークレット** をメモしておく必要があります。また、Management APIでスコープを有効にするためには、 **クライアントID** をメモしておく必要があります。
 
    </Warning>
 
-3. このアプリケーションに対して、**パスワード**と**クライアント資格情報**付与の両方を有効にします（このテストでは両方の付与を有効にしてください）。
+3. このアプリケーションに対して、 **パスワード** と **クライアント資格情報** 付与の両方を有効にします（このテストでは両方の付与を有効にしてください）。
 
    <Frame>![Auth0 Dashboard > Applications > Advanced Settings](/images/ja-jp/cdy7uua7fh8z/4caAveuhYurCDb5F8mdImm/a32588c23fc0799266928f1d9dae8386/Grant_Types_-_CC_and_PW.png)</Frame>
 
 4. アプリケーションを承認するには、[［Applications（アプリケーション）］>［APIs］](https://manage.auth0.com/#/apis)に移動します。
-5. **［Management API］**を選択します。
-6. **［Machine-to-Machine Applications（マシンツーマシンアプリケーション）］**タブで、トグルを使用してテストアプリケーションを承認します。
+5. **［Management API］** を選択します。
+6. **［Machine-to-Machine Applications（マシンツーマシンアプリケーション）］** タブで、トグルを使用してテストアプリケーションを承認します。
 7. ドロップダウンメニューを選択して、次のAuth0 Management APIのスコープを有効にします。
 
    * `read:users`
@@ -50,11 +50,11 @@ Auth0がホストするデータベース構造を使用してユーザーを保
 ダッシュボードでテナントとアプリケーションを作成したら、ソースデータベース接続とターゲットデータベース接続を作成します。
 
 1. [［Authentication（認証）］>［Database（データベース）］](https://manage.auth0.com/#/connections/database)に移動して、新しいデータベース接続を作成してソースにします。
-2. テストソース接続に名前を付け、**［Requires Username（ユーザー名の要求）］**を有効にし、**［Create（作成）］**を選択します。
+2. テストソース接続に名前を付け、 **［Requires Username（ユーザー名の要求）］** を有効にし、 **［Create（作成）］** を選択します。
 
    <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-   テスト用にユーザーを作成するには、[［User Management（ユーザー管理）］>［Users（ユーザー）］](https://manage.auth0.com/#/users)に移動します。**［Create Users（ユーザーの作成）］**を選択して必要なフィールドに入力し、**［Connection（接続）］**フィールドでソースデータベースを選択します。
+   テスト用にユーザーを作成するには、[［User Management（ユーザー管理）］>［Users（ユーザー）］](https://manage.auth0.com/#/users)に移動します。 **［Create Users（ユーザーの作成）］** を選択して必要なフィールドに入力し、 **［Connection（接続）］** フィールドでソースデータベースを選択します。
 
    </Callout>
 
@@ -62,25 +62,25 @@ Auth0がホストするデータベース構造を使用してユーザーを保
 
    <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-   ターゲットDBとソースDBの両方で**パスワードポリシー**を**［Non-empty password required（空でないパスワードが必要）］**に設定すれば、テストで簡素なパスワードを使うことができます。
+   ターゲットDBとソースDBの両方で **パスワードポリシー** を **［Non-empty password required（空でないパスワードが必要）］** に設定すれば、テストで簡素なパスワードを使うことができます。
 
    </Callout>
 
-4. ターゲットデータベースでは、**［Custom Database（カスタムデータベース）］**ビューに切り替え、**［Use my own database（自分自身のデータベースを使用する）］**のトグルをオンにします。
+4. ターゲットデータベースでは、 **［Custom Database（カスタムデータベース）］** ビューに切り替え、 **［Use my own database（自分自身のデータベースを使用する）］** のトグルをオンにします。
 
    <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-   Organizationsを使ってカスタムデータベースをテストしたい場合は、**［Context object in database scripts（データベーススクリプト内のコンテキストオブジェクト）］**を有効にします。
+   Organizationsを使ってカスタムデータベースをテストしたい場合は、 **［Context object in database scripts（データベーススクリプト内のコンテキストオブジェクト）］** を有効にします。
 
    </Callout>
 
-5. **［Settings（設定）］**ビューに切り替え、**［Import Users to Auth0（Auth0にユーザーをインポート）］**を有効にします。
-6. **［Custom Database（カスタムデータベース）］**ビューに切り替え、**［Database settings（データベースの設定）］**を見つけます。手順1で作成したソースデータベースから次の情報を追加します。
+5. **［Settings（設定）］** ビューに切り替え、 **［Import Users to Auth0（Auth0にユーザーをインポート）］** を有効にします。
+6. **［Custom Database（カスタムデータベース）］** ビューに切り替え、 **［Database settings（データベースの設定）］** を見つけます。手順1で作成したソースデータベースから次の情報を追加します。
 
     <table class="table"><thead>
     <tr>
-    <th><strong>キー</strong></th>
-    <th><strong>値</strong></th>
+    <th><b>キー</b></th>
+    <th><b>値</b></th>
     </tr>
     </thead>
     <tbody>
@@ -103,21 +103,21 @@ Auth0がホストするデータベース構造を使用してユーザーを保
     </tbody>
     </table>
 7. ターゲットデータベースで、[Login（ログイン）](/docs/ja-jp/authenticate/database-connections/test-custom-db#login)および[Get User（ユーザーの取得）](/docs/ja-jp/authenticate/database-connections/test-custom-db#get-user)のデータベースアクションスクリプトを更新します。データベースアクションスクリプトを使用したベストプラクティスに関する詳細は、「[カスタムデータベース接続とアクションスクリプトのベストプラクティス](/docs/ja-jp/authenticate/database-connections/custom-db/custom-database-connections-scripts)」をお読みください。
-8. 各スクリプトで**［Save and Try（保存して試す）］**を選択します。Real-time Webtask Logs機能拡張の`console.log`出力を監視してください。詳細については、「[Real-time Webtask Logs機能拡張](/docs/ja-jp/customize/extensions/real-time-webtask-logs)」をお読みください。
-9. **［Try Connection（接続を試す）］**を選択して、接続ライブをテストします。
+8. 各スクリプトで **［Save and Try（保存して試す）］** を選択します。Real-time Webtask Logs機能拡張の`console.log`出力を監視してください。詳細については、「[Real-time Webtask Logs機能拡張](/docs/ja-jp/customize/extensions/real-time-webtask-logs)」をお読みください。
+9. **［Try Connection（接続を試す）］** を選択して、接続ライブをテストします。
 
 ## ユーザーインポートを有効にせずにテストする
 
 1. [テストテナントおよびアプリケーションを作成する](https://www.auth0.com/docs/authenticate/database-connections/test-custom-db#create-a-test-tenant-and-application)で手順を繰り返します。
 2. 1つのテストデータベース接続を作成します。
-3. ソース データベース設定の**［Import Users to Auth0（ユーザーをAuth0にインポート）］**が無効になっていることを確認します。ユーザーは、ログイン試行ごとに外部ユーザーストアに対して認証を行います。
+3. ソース データベース設定の **［Import Users to Auth0（ユーザーをAuth0にインポート）］** が無効になっていることを確認します。ユーザーは、ログイン試行ごとに外部ユーザーストアに対して認証を行います。
 4. 次のサンプルですべてのデータベースアクションスクリプトを更新します。
 
 ### Get User（ユーザーの取得）スクリプト
 
 [Get User（ユーザーの取得）](/docs/ja-jp/authenticate/database-connections/custom-db/templates/get-user)スクリプトは、ユーザーの現在の状態を判別する実行可能関数を実装します。
 
-**［Import Users to Auth0（ユーザーをAuth0にインポート）］**が有効になっている場合、ユーザーがサインアップしようとすると、Get User（ユーザーの取得）スクリプトが実行され、ユーザーが外部ユーザーストアに既に存在するかどうかが確認されます。
+**［Import Users to Auth0（ユーザーをAuth0にインポート）］** が有効になっている場合、ユーザーがサインアップしようとすると、Get User（ユーザーの取得）スクリプトが実行され、ユーザーが外部ユーザーストアに既に存在するかどうかが確認されます。
 
 Get User（ユーザーの取得）スクリプトは、ユーザーが次の操作を試みる場合にも実行されます。
 
@@ -125,7 +125,7 @@ Get User（ユーザーの取得）スクリプトは、ユーザーが次の操
 * ログインする（[Login（ログイン）](/docs/ja-jp/authenticate/database-connections/custom-db/templates/login)スクリプト）
 * ユーザーのパスワードを変更する（[Change Password（パスワードの変更）](/docs/ja-jp/authenticate/database-connections/custom-db/templates/change-password)スクリプト）
 
-**［Import Users to Auth0（ユーザーをAuth0にインポート）］**が無効になっている場合、ユーザーがサインアップしようとすると、Get Userスクリプトが実行され、ユーザーが外部ユーザーストアに既に存在するかどうかが確認されます。ユーザーが外部ユーザーストアに存在している場合、Create（作成）スクリプトは実行されません。
+**［Import Users to Auth0（ユーザーをAuth0にインポート）］** が無効になっている場合、ユーザーがサインアップしようとすると、Get Userスクリプトが実行され、ユーザーが外部ユーザーストアに既に存在するかどうかが確認されます。ユーザーが外部ユーザーストアに存在している場合、Create（作成）スクリプトは実行されません。
 
 Get User（ユーザーの取得）スクリプトは、ユーザーが次の操作を試みる場合にも実行されます。
 
@@ -135,7 +135,7 @@ Get User（ユーザーの取得）スクリプトは、ユーザーが次の操
 
 #### 例
 
-```javascript lines
+```js lines expandable
 async function getUser(user, context, callback) {
     log(`Script started.`);
     log(`Requesting an Access Token from "${configuration.auth0_domain}".`);
@@ -209,7 +209,7 @@ async function getUser(user, context, callback) {
 
 #### 例
 
-```javascript lines
+```javascript lines expandable
 function login(usernameOrEmail, password, context, callback) {
   log(`Script started.`);
   const jwt = require('jsonwebtoken');
@@ -262,7 +262,7 @@ function login(usernameOrEmail, password, context, callback) {
 
 #### 例
 
-```javascript lines
+```js lines expandable
 async function create(user, context, callback) {
   log(`Script started.`);
   log(`Requesting an Access Token from "${configuration.auth0_domain}".`);
@@ -336,7 +336,7 @@ async function create(user, context, callback) {
 
 #### 例
 
-```javascript lines
+```js lines expandable
 async function deleteUser(user, context, callback) {
   log(`Script started.`);
   log(`Requesting an Access Token from "${configuration.auth0_domain}".`);
@@ -402,7 +402,7 @@ async function deleteUser(user, context, callback) {
 
 #### 例
 
-```javascript lines
+```js lines expandable
 async function verify(user, context, callback) {
   log(`Script started.`);
   log(`Requesting an Access Token from "${configuration.auth0_domain}".`);
@@ -491,7 +491,7 @@ async function verify(user, context, callback) {
 
 #### 例
 
-```javascript lines
+```js lines expandable
 async function changePassword(user, newPassword, context, callback) {
   log(`Script started.`);
   log(`Requesting an Access Token from "${configuration.auth0_domain}".`);
@@ -582,7 +582,7 @@ async function changePassword(user, newPassword, context, callback) {
 
 #### 例
 
-```javascript lines
+```js lines expandable
 async function changeEmail(user, newEmail, verified, callback) {
   log(`Script started.`);
   log(`Requesting an Access Token from "${configuration.auth0_domain}".`);
