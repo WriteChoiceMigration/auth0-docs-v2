@@ -1,0 +1,528 @@
+---
+title: "Ajouter une autorisation à votre application API ASP.NET Core Web"
+permalink: "interactive"
+'description': "Ce tutoriel explique comment ajouter une autorisation à une application API ASP.NET Core Web en utilisant le logiciel médiateur JWT standard."
+'og:title': "Ajouter une autorisation à votre application API ASP.NET Core Web"
+'og:description': "Ce tutoriel explique comment ajouter une autorisation à une application API ASP.NET Core Web en utilisant le logiciel médiateur JWT standard."
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/asp.png"
+'twitter:title': "Ajouter une autorisation à votre application API ASP.NET Core Web"
+'twitter:description': "Ce tutoriel explique comment ajouter une autorisation à une application API ASP.NET Core Web en utilisant le logiciel médiateur JWT standard."
+---
+
+[Skip to main content](#maincontent)
+
+​
+
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+---
+
+​
+
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+[##### Ajouter une autorisation à votre application API ASP.NET Core Web](#Ajouter une autorisation à votre application API ASP.NET Core Web)
+
+[View on Github](https://github.com/auth0-samples/auth0-aspnetcore-webapi-samples/tree/master/Quickstart/01-Authorization) Log In & Download Sample
+
+1. [Docs](/docs/fr-ca/fr-ca)
+3. [Quickstarts](/docs/fr-ca/quickstarts)
+5. [Backend/API](/docs/fr-ca/quickstart/backend)
+7. [ASP.NET Core Web API](/docs/fr-ca/quickstart/backend/aspnet-core-webapi/interactive)
+
+# 
+
+# Ajouter une autorisation à votre application API ASP.NET Core Web
+
+Auth0 vous permet d’ajouter rapidement l’authentification et d’accéder aux informations relatives au profil de l’utilisateur dans presque tous les types d’applications. Ce guide explique comment intégrer Auth0 à n’importe quelle application API ASP.NET Web, nouvelle ou existante, à l’aide du package `Microsoft.AspNetCore.Authentication.JwtBearer` .
+
+Si vous n’avez pas encore créé d’API dans votre Auth0 Dashboard, vous pouvez utiliser le sélecteur interactif pour créer une nouvelle API Auth0 ou sélectionner une API existante qui représente le projet avec lequel vous souhaitez effectuer l’intégration.
+
+Vous pouvez également consulter notre guide de démarrage, qui vous aidera à configurer votre première API via Auth0 Dashboard.
+
+Notez que chaque API dans Auth0 est configurée à l’aide d’un identifiant d’API; votre code d’application utilisera l’identifiant d’API comme Public pour valider le jeton d’accès.
+
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+
+**Vous ne connaissez pas Auth0 ?** Découvrez Auth0 et l’implémentation de l’authentification et de l’autorisation d’API en utilisant le cadre d’applications OAuth 2.0.
+
+</Callout>
+
+[1
+
+## Définir les autorisations](#définir-les-autorisations)
+
+Les autorisations vous permettent de définir comment les ressources peuvent être accessibles au nom de l’utilisateur avec un jeton d’accès donné. Par exemple, vous pouvez choisir d’accorder un accès en lecture à la ressource `messages` si les utilisateurs ont le niveau d’accès gestionnaire et accorder un accès en écriture à cette ressource s’ils ont le niveau d’accès administrateur.
+
+Vous pouvez définir les autorisations autorisées dans la vue **Permissions (Autorisations)** de la section [API](https://manage.auth0.com/#/apis) d’Auth0 Dashboard. L’exemple suivant utilise la permission `read:messages`.
+
+![Auth0 Dashboard> Applications > APIs (API) > [Specific API (API précise)] > Onglet Permissions (Autorisations)](/images/fr-ca/cdy7uua7fh8z/1s3Yp5zqJiKiSWqbPSezNO/677a3405b2853f5fdf9e42f6e83ceba7/Quickstarts_API_-_French.png)
+
+[2
+
+## Installer les dépendances](#installer-les-dépendances)
+
+Pour permettre à votre application de valider les jetons d’accès, ajoutez une référence au package NuGet `Microsoft.AspNetCore.Authentication.JwtBearer` :
+
+```powershell lines
+Install-Package Microsoft.AspNetCore.Authentication.JwtBearer
+```
+
+[3
+
+## Configurer le logiciel médiateur](#configurer-le-logiciel-médiateur)
+
+Configurez le logiciel médiateur d’authentification dans le fichier `Program.cs` de votre application :
+
+1. Enregistrez les services d’authentification en appelant la méthode `AddAuthentication`. Configurez `JwtBearerDefaults.AuthenticationScheme` comme schéma par défaut.
+2. Enregistrez le schéma d’authentification du porteur JWT en faisant un appel à la méthode `AddJwtBearer`. Configurez votre domaine Auth0 comme autorité et votre identifiant API Auth0 comme public, et assurez-vous que votre domaine Auth0 et votre identifiant API sont définis dans le fichier **appsettings.json** de votre application.
+
+   <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+
+   Dans certains cas, le jeton d’accès n’aura pas de `sub` demande; dans ce cas, le nom `User.Identity.Name` sera `null`. Si vous souhaitez mapper une demande différente à `User.Identity.Name`, ajoutez-la aux `options.TokenValidationParameters` dans l’appel `AddJwtBearer()`.
+
+   </Callout>
+
+   .
+3. Ajoutez l’authentification et l’autorisation de le logiciel médiateur au pipeline du logiciel médiateur en ajoutant des appels aux méthodes `UseAuthentication`  et `UseAuthorization`  sous la méthode `var app = builder.Build();` .
+
+[4
+
+## Valider les permissions](#valider-les-permissions)
+
+Pour s’assurer qu’un jeton d’accès contient les permissions adéquates, utilisez [Policy-Based Authorization (Autorisation basée sur une politique)](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/policies) dans ASP.NET Core :
+
+1. Créez une nouvelle exigence d’autorisation appelée `HasScopeRequirement`, qui vérifiera si la demande de `scope` émise par votre locataire Auth0 est présente et, le cas échéant, vérifiera que la demande contient la permission demandée.
+2. Dans la méthode `var builder = WebApplication.CreateBuilder(args);`  du fichier `Program.cs`, ajoutez un appel à la méthode `app.AddAuthorization`.
+3. Ajoutez des politiques pour les permissions en appelant `AddPolicy`  pour chaque permission.
+4. Enregistrez un singleton pour la classe `HasScopeHandler`.
+
+[5
+
+## Protéger les points de terminaison des API](#protéger-les-points-de-terminaison-des-api)
+
+Le logiciel médiateur JWT s’intègre aux mécanismes d’[authentification](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/) et d’[autorisation](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/) standard de ASP.NET Core.
+
+Pour sécuriser un point de terminaison, ajoutez l’attribut `[Authorize]` à votre action de contrôleur (ou à tout le contrôleur si vous souhaitez protéger toutes ses actions).
+
+Lors de la sécurisation des points de terminaison qui nécessitent des permissions particulières, assurez-vous que la bonne permission est présente dans `access_token`. Pour ce faire, ajoutez l’attribut `Authorize` à l’action `Scoped` et passez `read:messages` comme paramètre de la `policy`.
+
+[6
+
+## Appeler votre API](#appeler-votre-api)
+
+La façon dont vous appelez votre API dépend du type d’application que vous développez et du cadre que vous utilisez. Pour en savoir plus, lire le Guide rapide de l’application concernée :
+
+* [Applications à page unique](/docs/fr-ca/quickstart/spa)
+* [Application mobile/native](/docs/fr-ca/quickstart/native)
+
+### Obtenir un jeton d’accès
+
+Quel que soit le type d’application que vous développez ou le cadre que vous utilisez, vous aurez besoin d’un jeton d’accès pour appeler votre API.
+
+Si vous appelez votre API à partir d’une application à page unique (SPA) ou native, vous recevrez un jeton d’accès une fois l’autorisation obtenue.
+
+Si vous appelez l’API à partir d’un outil de ligne de commande ou d’un autre service sans identifiants utilisateur, utilisez le [Flux des identifiants client d’OAuth](https://auth0.com/docs/api/authentication#client-credentials). Pour ce faire, enregistrez une [Application de communication entre machines](https://manage.auth0.com/#/applications) et incluez les valeurs suivantes à votre requête :
+
+* **ID client** comme paramètre `client_id`.
+* **Secret client** comme paramètre `client_secret`.
+* **Identifiant API** (la même valeur utilisée pour configurer l’intergiciel plus tôt dans ce guide rapide) comme paramètre `audience`.
+
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+
+Pour en savoir plus sur l’obtention de l’identificateur client et du secret client pour votre application de communication entre machines, lisez la section Paramètres de l’application.
+
+</Callout>
+
+**Exemple de demande**
+
+<CodeGroup>
+```bash cURL lines
+curl --request post \
+--url 'https://{yourDomain}/oauth/token' \
+--header 'content-type: application/x-www-form-urlencoded'
+``` lines
+```csharp C# lines
+var client = new RestClient("https://{yourDomain}/oauth/token");
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/x-www-form-urlencoded");
+IRestResponse response = client.Execute(request);
+```
+
+```go Go lines
+package main
+import (
+"fmt"
+"net/http"
+"io/ioutil"
+)
+func main() {
+url := "https://{yourDomain}/oauth/token"
+req, _ := http.NewRequest("post", url, nil)
+req.Header.Add("content-type", "application/x-www-form-urlencoded")
+res, _ := http.DefaultClient.Do(req)
+defer res.Body.Close()
+body, _ := ioutil.ReadAll(res.Body)
+fmt.Println(res)
+fmt.Println(string(body))
+}
+``` lines
+```java Java lines
+HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
+.header("content-type", "application/x-www-form-urlencoded")
+.asString();
+```
+
+```javascript Node.JS lines
+var axios = require("axios").default;
+var options = {
+method: 'post',
+url: 'https://{yourDomain}/oauth/token',
+headers: {'content-type': 'application/x-www-form-urlencoded'}
+};
+axios.request(options).then(function (response) {
+console.log(response.data);
+}).catch(function (error) {
+console.error(error);
+});
+``` lines
+```obj-c Obj-C lines
+#import 
+NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
+NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
+cachePolicy:NSURLRequestUseProtocolCachePolicy
+timeoutInterval:10.0];
+[request setHTTPMethod:@"post"];
+[request setAllHTTPHeaderFields:headers];
+NSURLSession \*session = [NSURLSession sharedSession];
+NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
+completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
+if (error) {
+NSLog(@"%@", error);
+} else {
+NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
+NSLog(@"%@", httpResponse);
+}
+}];
+[dataTask resume];
+```
+
+```php PHP lines
+$curl = curl_init();
+curl_setopt_array($curl, [
+CURLOPT_URL => "https://{yourDomain}/oauth/token",
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_ENCODING => "",
+CURLOPT_MAXREDIRS => 10,
+CURLOPT_TIMEOUT => 30,
+CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+CURLOPT_CUSTOMREQUEST => "post",
+CURLOPT_HTTPHEADER => [
+"content-type: application/x-www-form-urlencoded"
+],
+]);
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+if ($err) {
+echo "cURL Error #:" . $err;
+} else {
+echo $response;
+}
+``` lines
+```python Python lines
+import http.client
+conn = http.client.HTTPSConnection("")
+headers = { 'content-type': "application/x-www-form-urlencoded" }
+conn.request("post", "/{yourDomain}/oauth/token", headers=headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
+```
+
+```ruby Ruby lines
+require 'uri'
+require 'net/http'
+require 'openssl'
+url = URI("https://{yourDomain}/oauth/token")
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+request = Net::HTTP::Post.new(url)
+request["content-type"] = 'application/x-www-form-urlencoded'
+response = http.request(request)
+puts response.read_body
+``` lines
+```swift Swift lines
+import Foundation
+let headers = ["content-type": "application/x-www-form-urlencoded"]
+let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/token")! as URL,
+cachePolicy: .useProtocolCachePolicy,
+timeoutInterval: 10.0)
+request.httpMethod = "post"
+request.allHTTPHeaderFields = headers
+let session = URLSession.shared
+let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+if (error != nil) {
+print(error)
+} else {
+let httpResponse = response as? HTTPURLResponse
+print(httpResponse)
+}
+})
+dataTask.resume()
+```
+</CodeGroup>
+
+### Appeler un point de terminaison sécurisé
+
+Maintenant que vous avez un jeton d’accès, vous pouvez l’utiliser pour appeler des points de terminaison API sécurisés. Lorsque vous appelez un point de terminaison sécurisé, vous devez inclure le jeton d’accès en tant que jeton de porteur dans l’en-tête **Authorization** de la requête. Par exemple, vous pouvez faire une requête au point de terminaison `/api/private` :
+
+<CodeGroup>
+```bash cURL lines
+curl --request get \
+--url http://localhost:3010/api/private \
+--header 'authorization: Bearer YOUR_ACCESS_TOKEN'
+``` lines
+```csharp C# lines
+var client = new RestClient("http://localhost:3010/api/private");
+var request = new RestRequest(Method.GET);
+request.AddHeader("authorization", "Bearer YOUR_ACCESS_TOKEN");
+IRestResponse response = client.Execute(request);
+```
+
+```go Go lines
+package main
+import (
+"fmt"
+"net/http"
+"io/ioutil"
+)
+func main() {
+url := "http://localhost:3010/api/private"
+req, _ := http.NewRequest("get", url, nil)
+req.Header.Add("authorization", "Bearer YOUR_ACCESS_TOKEN")
+res, _ := http.DefaultClient.Do(req)
+defer res.Body.Close()
+body, _ := ioutil.ReadAll(res.Body)
+fmt.Println(res)
+fmt.Println(string(body))
+}
+``` lines
+```java Java lines
+HttpResponse response = Unirest.get("http://localhost:3010/api/private")
+.header("authorization", "Bearer YOUR_ACCESS_TOKEN")
+.asString();
+```
+
+```javascript Node.JS lines
+var axios = require("axios").default;
+var options = {
+method: 'get',
+url: 'http://localhost:3010/api/private',
+headers: {authorization: 'Bearer YOUR_ACCESS_TOKEN'}
+};
+axios.request(options).then(function (response) {
+console.log(response.data);
+}).catch(function (error) {
+console.error(error);
+});
+``` lines
+```obj-c Obj-C lines
+#import 
+NSDictionary \*headers = @{ @"authorization": @"Bearer YOUR_ACCESS_TOKEN" };
+NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:3010/api/private"]
+cachePolicy:NSURLRequestUseProtocolCachePolicy
+timeoutInterval:10.0];
+[request setHTTPMethod:@"get"];
+[request setAllHTTPHeaderFields:headers];
+NSURLSession \*session = [NSURLSession sharedSession];
+NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
+completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
+if (error) {
+NSLog(@"%@", error);
+} else {
+NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
+NSLog(@"%@", httpResponse);
+}
+}];
+[dataTask resume];
+```
+
+```php PHP lines
+$curl = curl_init();
+curl_setopt_array($curl, [
+CURLOPT_PORT => "3010",
+CURLOPT_URL => "http://localhost:3010/api/private",
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_ENCODING => "",
+CURLOPT_MAXREDIRS => 10,
+CURLOPT_TIMEOUT => 30,
+CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+CURLOPT_CUSTOMREQUEST => "get",
+CURLOPT_HTTPHEADER => [
+"authorization: Bearer YOUR_ACCESS_TOKEN"
+],
+]);
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+if ($err) {
+echo "cURL Error #:" . $err;
+} else {
+echo $response;
+}
+``` lines
+```python Python lines
+import http.client
+conn = http.client.HTTPConnection("localhost:3010")
+headers = { 'authorization': "Bearer YOUR_ACCESS_TOKEN" }
+conn.request("get", "/api/private", headers=headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
+```
+
+```ruby Ruby lines
+require 'uri'
+require 'net/http'
+url = URI("http://localhost:3010/api/private")
+http = Net::HTTP.new(url.host, url.port)
+request = Net::HTTP::Get.new(url)
+request["authorization"] = 'Bearer YOUR_ACCESS_TOKEN'
+response = http.request(request)
+puts response.read_body
+``` lines
+```swift Swift lines
+import Foundation
+let headers = ["authorization": "Bearer YOUR_ACCESS_TOKEN"]
+let request = NSMutableURLRequest(url: NSURL(string: "http://localhost:3010/api/private")! as URL,
+cachePolicy: .useProtocolCachePolicy,
+timeoutInterval: 10.0)
+request.httpMethod = "get"
+request.allHTTPHeaderFields = headers
+let session = URLSession.shared
+let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+if (error != nil) {
+print(error)
+} else {
+let httpResponse = response as? HTTPURLResponse
+print(httpResponse)
+}
+})
+dataTask.resume()
+```
+</CodeGroup>
+
+Appelez le point de terminaison `/api/private-scoped` de manière similaire, mais assurez-vous que les autorisations API sont configurées correctement et que le jeton d’accès inclut la permission `read:messages`.
+
+##### checkpoint.header
+
+Vous devriez maintenant pouvoir appeler les points de terminaison `/api/private` et `/api/private-scoped`.
+
+Exécutez votre application et vérifiez que :
+
+* `GET /api/private` est disponible pour les demandes authentifiées.
+* `GET /api/private-scoped` est disponible pour les demandes authentifiées contenant un jeton d’accès avec la permission `read:messages`.
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+## Next Steps
+
+Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+
+This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+
+* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
+* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/backend/aspnet-core-webapi/interactive.md)
+
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
+
+Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+
+Sign Up
+
+Developers
+
+* [Developer Hub](https://developer.auth0.com/resources)
+* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
+* [Blog posts](https://auth0.com/blog/developers/)
+* [Videos](https://auth0.com/docs/videos)
+* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
+* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
+
+Documentation
+
+* [Articles](https://auth0.com/docs/articles)
+* [Quickstarts](https://auth0.com/docs/quickstarts)
+* [APIs](https://auth0.com/docs/api)
+* [SDK Libraries](https://auth0.com/docs/libraries)
+* [Blog](https://auth0.com/blog/)
+* [Reports](https://auth0.com/resources/ebooks)
+* [Webinars](https://auth0.com/resources/webinars)
+
+Get Involved
+
+* [Forum](https://community.auth0.com/)
+* [Events](https://developer.auth0.com/events)
+* [Ambassador Program](https://auth0.com/ambassador-program)
+* [Auth0 Research Program](https://auth0.com/research-program)
+
+Company
+
+* [Our Customers](https://auth0.com/customers)
+* [Compliance - Ensuring privacy and security](https://auth0.com/security)
+* [Partners](https://auth0.com/partners)
+* [Careers We're hiring!](https://www.okta.com/company/careers/)
+* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
+
+Support Center
+
+* [Community](https://community.auth0.com/)
+* [Support](https://support.auth0.com/)
+* [Help](https://community.auth0.com/c/help/6)
+* [FAQs](https://community.auth0.com/c/faq/42)
+* [Auth0 Marketplace](https://marketplace.auth0.com)
+
+Learning
+
+* [Learn](https://auth0.com/learn)
+* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
+* [Blog](https://auth0.com/blog/)
+
+Platform
+
+* [Access Management](https://auth0.com/platform/access-management)
+* [Extensibility](https://auth0.com/platform/extensibility)
+* [Security](https://auth0.com/platform/login-security)
+* [User Management](https://auth0.com/platform/user-management)
+* [Authentication](https://auth0.com/platform/authentication)
+
+Features
+
+* [Universal Login](https://auth0.com/features/universal-login)
+* [Single Sign On](https://auth0.com/features/single-sign-on)
+* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
+* [Actions](https://auth0.com/features/actions)
+* [Machine to Machine](https://auth0.com/features/machine-to-machine)
+* [Passwordless](https://auth0.com/features/passwordless)
+* [Breached Passwords](https://auth0.com/features/breached-passwords)
+
+© 2025 Okta, Inc. All Rights Reserved.
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+

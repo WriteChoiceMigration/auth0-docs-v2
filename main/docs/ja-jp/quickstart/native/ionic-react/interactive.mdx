@@ -1,0 +1,333 @@
+---
+title: "Capacitorを用いたIonic React アプリにログインを追加する"
+permalink: "interactive"
+'description': "このガイドは、Ionic（React）とCapacitorのアプリケーションにAuth0 React SDKを使ってAuth0を統合する方法を説明します。"
+'og:title': "Capacitorを用いたIonic React アプリにログインを追加する"
+'og:description': "このガイドは、Ionic（React）とCapacitorのアプリケーションにAuth0 React SDKを使ってAuth0を統合する方法を説明します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/ionic.jpeg"
+'twitter:title': "Capacitorを用いたIonic React アプリにログインを追加する"
+'twitter:description': "このガイドは、Ionic（React）とCapacitorのアプリケーションにAuth0 React SDKを使ってAuth0を統合する方法を説明します。"
+---
+
+[Skip to main content](#maincontent)
+
+​
+
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+---
+
+​
+
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+[##### Capacitorを用いたIonic React アプリにログインを追加する](#Capacitorを用いたIonic React アプリにログインを追加する)
+
+[View on Github](https://github.com/auth0-samples/auth0-ionic-samples/tree/main/react) Log In & Download Sample
+
+1. [Quickstarts](/docs/ja-jp/quickstarts)
+3. [Native/Mobile App](/docs/ja-jp/quickstart/native)
+5. [Ionic & Capacitor (React)](/docs/ja-jp/quickstart/native/ionic-react/interactive)
+
+# 
+
+# Capacitorを用いたIonic React アプリにログインを追加する
+
+Auth0を使用すると、アプリケーションに手軽に認証を追加して、ユーザープロファイル情報にアクセスすることができます。このガイドは、Ionic（React）とCapacitorのアプリケーションに[Auth0 React SDK](https://github.com/auth0/auth0-react)を使ってAuth0を統合する方法を説明します。
+
+[1
+
+## 使用を開始する](#使用を開始する)
+
+このクイックスタートは、[Ionic](https://ionicframework.com/)アプリケーションが[Capacitor](https://capacitorjs.com/)を使ってすでに実行されていることを前提としています。そうでない場合には、[IonicフレームワークでCapacitorを使用する](https://capacitorjs.com/docs/getting-started/with-ionic)ガイドを参照しながら簡単なアプリから始めるか、[サンプリアプリ](https://github.com/auth0-samples/auth0-ionic-samples)を複製してください。
+
+また、[Capacitorの開発ワークフロー](https://capacitorjs.com/docs/basics/workflow)を理解しておく必要もあります。
+
+[2
+
+## Auth0を構成する](#auth0を構成する)
+
+Auth0のサービスを利用するには、Auth0 Dashboadに設定済みのアプリケーションがある必要があります。Auth0アプリケーションは、プロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
+
+<Note>
+
+以下の説明では、「`YOUR_PACKAGE_ID`」を実際のアプリケーションのパッケージIDに置き換えてください。これは、`capacitor.config.ts`ファイルの`appId`フィールドで見つけて構成することができます。詳細については、[Capacitorの構成スキーマ](https://capacitorjs.com/docs/config#schema)を参照してください。
+
+</Note>
+
+### アプリケーションを構成する
+
+対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0 APIを呼び出す際に使用されます。
+
+このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/#/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
+
+完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
+
+### Callback URLを構成する
+
+Callback URLとは、Auth0がユーザーを認証後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはログイン後にアプリケーションに戻りません。
+
+<Note>
+
+サンプルプロジェクトに沿って進めている場合には、次の値に設定します：
+
+`YOUR_PACKAGE_ID://{yourTenant}.auth0.com/capacitor/YOUR_PACKAGE_ID/callback`
+
+</Note>
+
+### ログアウトURLを構成する
+
+ログアウトURLとは、Auth0がユーザーをログアウト後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーを受け取ります。
+
+<Note>
+
+サンプルプロジェクトに沿って進めている場合には、次の値に設定します：
+
+`YOUR_PACKAGE_ID://{yourTenant}.auth0.com/capacitor/YOUR_PACKAGE_ID/callback`
+
+</Note>
+
+### 許可されているオリジンを構成する
+
+ネイティブアプリケーションからAuth0へ要求を送信できるようにするには、[アプリケーションの設定](https://manage.auth0.com/dashboard/#/applications/%7ByourClientId%7D/settings)で次の**許可されているオリジン**を設定します。
+
+<Note>
+
+サンプルプロジェクトに沿って進めている場合、capacitorにiOSとAndroidでそれぞれ`capacitor://localhost, http://localhost`を設定します。
+
+</Note>
+
+最後に、アプリケーションの**［Application Type（アプリケーションタイプ）］**が**［Native（ネイティブ）］**になっていることを[アプリケーションの設定](https://manage.auth0.com/dashboard/#/applications/%7ByourClientId%7D/settings)で必ず確認してください。
+
+[3
+
+## Auth0 React SDKをインストールする](#auth0-react-sdkをインストールする)
+
+プロジェクトディレクトリで次のコマンドを実行して、Auth0 React SDKをインストールします：
+
+`npm install @auth0/auth0-react`
+
+SDKは、慣用的に[React Hooks](https://reactjs.org/docs/hooks-overview.html)や[高階コンポーネント（HOC）](https://reactjs.org/docs/higher-order-components.html)を使用して、Auth0をReactアプリケーションに統合しやすくするメソッドや変数を公開しています。
+
+### Capacitorプラグインをインストールする
+
+このクイックスタートとサンプルでは、Capacitorの公式プラグインをいくつか使用しています。次のコマンドを使用して、これらをアプリにインストールします：
+
+`npm install @capacitor/browser @capacitor/app`
+
+* [`@capacitor/browser`](https://capacitorjs.com/docs/apis/browser)：デバイスのシステムブラウザーと対話できるようになり、Auth0の認可エンドポイントへのURLを開くために使用されます。
+* [`@capacitor/app`](https://capacitorjs.com/docs/apis/app)：高レベルのアプリイベントを受け取れるようになるため、Auth0からのコールバックを扱うのに便利です。
+
+<Note>
+
+iOSのCapacitorのBrowserプラグインは[`SFSafariViewController`](https://developer.apple.com/documentation/safariservices/sfsafariviewcontroller)を使用し、iOS 11以降ではデバイス上のSafariとクッキーを共有しません。つまり、これらのデバイスではSSOが機能しません。SSOが必要な場合には、[ASWebAuthenticationSession](https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession)を使用する互換のプラグインを使用してください。
+
+</Note>
+
+[4
+
+## Auth0Providerコンポーネントを構成する](#auth0providerコンポーネントを構成する)
+
+内部では、Auth0 React SDKは[React Context](https://reactjs.org/docs/context.html)を使用して、ユーザーの認証状態を管理します。Auth0をReactアプリに統合する1つの方法として、SDKからインポート可能な`Auth0Provider`でルートコンポーネントをラップすることができます。
+
+`Auth0Provider`コンポーネントは以下のプロパティを使用します。
+
+* `domain`：Auth0 Dashboardで作成したアプリケーションの**設定**にある`domain`値、またはAuth0のカスタムドメイン機能を使用する場合のカスタムドメインです。
+* `clientId`：Auth0 Dashboardで作成したアプリケーションの**設定**にあるクライアントID値です。
+* `useRefreshTokens`：AndroidまたはiOSでauth0-reactをIonicと使用するには、リフレッシュトークンを有効にする必要があります。
+* `useRefreshTokensFallback`：AndroidまたはiOSでauth0-reactをIonicと使用するには、iframeのフォールバックを無効にする必要があります。
+* `authorizationParams.redirect_uri`：Auth0で認証した後に、ユーザーをリダイレクトするURLです。
+
+<Warning>
+
+アプリケーションの閉開後に認証を継続するには、SDKを構成する際に`cacheLocation`を`localstorage`に設定することをお勧めします。ただし、[localstorageにトークンを保管するリスク](/docs/ja-jp/libraries/auth0-single-page-app-sdk#change-storage-options)を理解してください。また、状況によってはlocalstorageのデータが思いがけず復元される可能性もあるため、Capacitorアプリ内では**一次的**なものとして扱ってください。[Capacitorドキュメントに記載のストレージに関するガイド](https://capacitorjs.com/docs/guides/storage#why-cant-i-just-use-localstorage-or-indexeddb)をお読みください。
+
+さらに、より安全で永続的なストレージの仕組みが要件である場合、SDKを使用すると、[カスタムのキャッシュを実装](https://github.com/auth0/auth0-spa-js/blob/master/EXAMPLES.md#creating-a-custom-cache)してトークンを保管することができます。
+
+**注意**：[CapacitorのStorageプラグイン](https://capacitorjs.com/docs/apis/storage)は、iOSでは[UserDefaults](https://developer.apple.com/documentation/foundation/userdefaults)、Androidでは[SharedPreferences](https://developer.android.com/reference/android/content/SharedPreferences)によってバックアップされるため、トークンの保管に使用**しない**ことをお勧めします。これらのAPIを使って保管されたデータは暗号化されません。セキュリティで保護されることもなく、クラウドと同期される可能性があります。
+
+</Warning>
+
+##### checkpoint.header
+
+`Auth0Provider`コンポーネントが`App`コンポーネントをラップするようにして追加してから、アプリケーションを実行し、SDKが正しく初期化されていること、そして、アプリケーションがAuth0に関連したエラーを投入していないことを確認します。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[5
+
+## アプリケーションにログインを追加する](#アプリケーションにログインを追加する)
+
+Capacitorアプリケーションでは、[CapacitorのBrowserプラグイン](https://capacitorjs.com/docs/apis/browser)によって、Auth0の[ユニバーサルログインページ](https://auth0.com/universal-login)にリダイレクトされます。`loginWithRedirect`関数の`openUrl`パラメーターに`Browser.open`の使用を設定し、デバイスのシステムブラウザーコンポーネント（iOSでは[SFSafariViewController](https://developer.apple.com/documentation/safariservices/sfsafariviewcontroller)、Androidでは[Chrome Custom Tabs](https://developer.chrome.com/docs/android/custom-tabs)）でURLが開くようにします。
+
+<Note>
+
+SDKの`loginWithRedirect`メソッドは、デフォルトで`window.location.href`を使用して、ユーザーのデバイスにあるデフォルトのブラウザーアプリケーションでログインページを開きます。プラットフォームに適切なシステムブラウザーコンポーネントは使用しません。ユーザーが認証でアプリケーションを離れるため、ユーザーエクスペリエンスとしては最適ではありません。
+
+</Note>
+
+##### checkpoint.header
+
+`loginWithRedirect`関数は、SDKにログインフローを開始するように指示します。`openUrl`パラメーターにログインURLを設定して、`Browser.open`関数を呼び出し、プラットフォームのシステムブラウザーコンポーネントでログインURLを開きます。これは、ユーザーがアプリケーションにログインする方法を提供します。ユーザーはAuth0のログインページにリダイレクトされ、エラーは一切受け取りません。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[6
+
+## ログインコールバックを処理する](#ログインコールバックを処理する)
+
+ユーザーがユニバーサルログインページでログインすると、カスタムURLスキームを使ったURLでアプリにリダイレクトされます。`appUrlOpen`イベントがアプリ内で処理されなければなりません。Auth0 SDKの`handleRedirectCallback`メソッドを呼び出すと、認証状態を初期化することができます。
+
+このメソッドは、Auth0からのリダイレクトでのみ使用することができます。正常に機能していることを確認するには、URL内の`code`と`state`パラメーターを確認します。
+
+このイベントが発生した際に、`Browser.close()`メソッドがブラウザーを閉じるようにします。
+
+<Note>
+
+以下の説明では、カスタムURLスキームを使用して、アプリケーション内でコールバックを処理することを前提にしています。このためには、`YOUR_PACKAGE_ID`を選択したプラットのURLスキームで置き換えて登録します。詳細については、iOSには「[カスタムURLスキームを定義する](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app)」、Androidには「[アプリコンテンツ用のディープリンクを作成する](https://developer.android.com/training/app-links/deep-linking)」をお読みください。
+
+</Note>
+
+##### checkpoint.header
+
+アプリケーションの`App`コンポーネントに`appUrlOpen`を追加して、ログインします。ユーザーが認証して、アプリにログインすると、ブラウザーのウィンドウが閉じます。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[7
+
+## アプリケーションにログアウトを追加する](#アプリケーションにログアウトを追加する)
+
+ユーザーがログインできるようになりました。今度は、[ログアウトする方法](https://auth0.com/docs/logout/guides/logout-auth0)を構成する必要があります。ユーザーをAuth0のログアウトエンドポイントにリダイレクトし、ブラウザー内のセッションをクリアする必要があります。他の場合と同様に、ユーザーがアプリから離れることでユーザーエクスペリエンスが損なわれないように、CapacitorのBrowserプラグインがリダイレクトを処理するようにします。
+
+Auth0 SDKを使用してIonicとCapacitorで実現するには、以下を行います。
+
+* アプリについて、ログアウト後にAuth0のリダイレクト先となるURLを構築します。これは、登録済みのカスタムスキームとAuth0ドメインを使ったURLです。これを、Auth0 Dashboardの**［Allowed Logout URLs（許可されているログアウトURL）］**の構成に追加します。
+* `logout`を呼び出し、`logoutParams.returnTo`パラメーターにリダイレクト先のURLを渡して、SDKからログアウトします。
+* CapacitorのBrowserプラグインを使用して`Browser.open`でURLを開くコールバックに、`openUrl`パラメーターを設定します。
+
+<Note>
+
+ログインの手順と同様に、`logout`を呼び出す際に`openUrl`を設定しないと、SDKがユーザーをログアウトURLにリダイレクトするのに、デバイスのデフォルトのブラウザーアプリケーションが使用されるため、ユーザーエクスペリエンスとしては最適ではありません。
+
+</Note>
+
+##### checkpoint.header
+
+ユーザーがアプリケーションからログアウトする方法を提供します。Auth0にリダイレクトしてから、`returnTo`パラメーターで指定したアドレスへ移動することを確認します。アプリケーションにログインしていないことを確認します。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[8
+
+## ユーザープロファイルを表示する](#ユーザープロファイルを表示する)
+
+Auth0 React SDKは必要な任意のコンポーネントについて、名前やプロフィール写真など、ログイン済みのユーザーに関連付けられたユーザープロファイルを取得し、ユーザーインターフェイスをパーソナライズします。プロファイル情報は、`useAuth0()`フックが公開する`user`プロパティを介して使用することができます。
+
+SDKの初期化は非同期に行われます。`isLoading`と`user`プロパティを確認して、ユーザープロファイルを保護する必要があります。`isLoading`が`false`になり、`user`が値を持つと、ユーザープロファイルを利用することができます。
+
+##### checkpoint.header
+
+ユーザーがアプリ内でユーザープロファイルの詳細を表示できる手段を提供し、ログインした後に自分のプロファイル情報を取得して画面に表示できることを確認します。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+## Next Steps
+
+Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+
+This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+
+* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
+* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/native/ionic-react/interactive.md)
+
+<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
+
+Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+
+Sign Up
+
+Developers
+
+* [Developer Hub](https://developer.auth0.com/resources)
+* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
+* [Blog posts](https://auth0.com/blog/developers/)
+* [Videos](https://auth0.com/docs/videos)
+* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
+* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
+
+Documentation
+
+* [Articles](https://auth0.com/docs/articles)
+* [Quickstarts](https://auth0.com/docs/quickstarts)
+* [APIs](https://auth0.com/docs/api)
+* [SDK Libraries](https://auth0.com/docs/libraries)
+* [Blog](https://auth0.com/blog/)
+* [Reports](https://auth0.com/resources/ebooks)
+* [Webinars](https://auth0.com/resources/webinars)
+
+Get Involved
+
+* [Forum](https://community.auth0.com/)
+* [Events](https://developer.auth0.com/events)
+* [Ambassador Program](https://auth0.com/ambassador-program)
+* [Auth0 Research Program](https://auth0.com/research-program)
+
+Company
+
+* [Our Customers](https://auth0.com/customers)
+* [Compliance - Ensuring privacy and security](https://auth0.com/security)
+* [Partners](https://auth0.com/partners)
+* [Careers We're hiring!](https://www.okta.com/company/careers/)
+* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
+
+Support Center
+
+* [Community](https://community.auth0.com/)
+* [Support](https://support.auth0.com/)
+* [Help](https://community.auth0.com/c/help/6)
+* [FAQs](https://community.auth0.com/c/faq/42)
+* [Auth0 Marketplace](https://marketplace.auth0.com)
+
+Learning
+
+* [Learn](https://auth0.com/learn)
+* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
+* [Blog](https://auth0.com/blog/)
+
+Platform
+
+* [Access Management](https://auth0.com/platform/access-management)
+* [Extensibility](https://auth0.com/platform/extensibility)
+* [Security](https://auth0.com/platform/login-security)
+* [User Management](https://auth0.com/platform/user-management)
+* [Authentication](https://auth0.com/platform/authentication)
+
+Features
+
+* [Universal Login](https://auth0.com/features/universal-login)
+* [Single Sign On](https://auth0.com/features/single-sign-on)
+* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
+* [Actions](https://auth0.com/features/actions)
+* [Machine to Machine](https://auth0.com/features/machine-to-machine)
+* [Passwordless](https://auth0.com/features/passwordless)
+* [Breached Passwords](https://auth0.com/features/breached-passwords)
+
+© 2025 Okta, Inc. All Rights Reserved.
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+

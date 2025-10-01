@@ -1,0 +1,352 @@
+---
+title: "Ajouter une autorisation à votre application API Flask"
+permalink: "interactive"
+'description': "Ce guide explique comment intégrer Auth0 à n’importe quelle API Python, nouvelle ou ancienne, développée avec Flask."
+'og:title': "Ajouter une autorisation à votre application API Flask"
+'og:description': "Ce guide explique comment intégrer Auth0 à n’importe quelle API Python, nouvelle ou ancienne, développée avec Flask."
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/python.png"
+'twitter:title': "Ajouter une autorisation à votre application API Flask"
+'twitter:description': "Ce guide explique comment intégrer Auth0 à n’importe quelle API Python, nouvelle ou ancienne, développée avec Flask."
+---
+
+[Skip to main content](#maincontent)
+
+​
+
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+---
+
+​
+
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+[##### Ajouter une autorisation à votre application API Flask](#Ajouter une autorisation à votre application API Flask)
+
+[View on Github](https://github.com/auth0-samples/auth0-python-api-samples/tree/master/00-Starter-Seed) Log In & Download Sample
+
+1. [Docs](/docs/fr-ca/fr-ca)
+3. [Quickstarts](/docs/fr-ca/quickstarts)
+5. [Backend/API](/docs/fr-ca/quickstart/backend)
+7. [Python API](/docs/fr-ca/quickstart/backend/python/interactive)
+
+# 
+
+# Ajouter une autorisation à votre application API Flask
+
+Ce guide explique comment intégrer Auth0 à n’importe quelle API Python, nouvelle ou ancienne, développée avec [Flask](https://flask.palletsprojects.com/).
+
+Si vous n’avez pas encore créé d’API dans votre Auth0 Dashboard, vous pouvez utiliser le sélecteur interactif pour créer une nouvelle API Auth0 ou sélectionner une API existante qui représente le projet avec lequel vous souhaitez vous intégrer.
+
+Vous pouvez également lire [notre guide de démarrage](https://auth0.com/docs/get-started/auth0-overview/set-up-apis) qui vous aide à configurer votre première API via Auth0 Dashboard.
+
+Toute API dans Auth0 est configurée à l’aide d’un identificateur d’API que votre code d’application utilisera comme Audience (Public) pour valider le jeton d’accès.
+
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+
+**Vous ne connaissez pas Auth0?** Découvrez [Auth0](https://auth0.com/docs/overview) et [l’implémentation de l’authentification et de l’autorisation d’API](https://auth0.com/docs/api-auth) en utilisant le cadre d’applications OAuth 2.0.
+
+</Callout>
+
+[1
+
+## Définir les autorisations](#définir-les-autorisations)
+
+Les autorisations vous permettent de définir comment les ressources peuvent être accessibles au nom de l’utilisateur avec un jeton d’accès en particulier. Par exemple, vous pouvez choisir d’accorder un accès en lecture à la ressource `messages` si les utilisateurs ont le niveau d’accès gestionnaire et un accès en écriture à cette ressource s’ils ont le niveau d’accès administrateur.
+
+Vous pouvez définir les autorisations autorisées dans la vue **Permissions (Autorisations)** de la section [APIs (API)](https://manage.auth0.com/#/apis) d'Auth0 Dashboard.
+
+![Auth0 Dashboard> Applications > APIs (API) > [Specific API (API précise)] > Onglet Permissions (Autorisations)](/images/fr-ca/cdy7uua7fh8z/1s3Yp5zqJiKiSWqbPSezNO/677a3405b2853f5fdf9e42f6e83ceba7/Quickstarts_API_-_French.png)
+
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+
+Cet exemple utilise la permission `read:messages`.
+
+</Callout>
+
+[2
+
+## Installer des dépendances](#installer-des-dépendances)
+
+Ajoutez les dépendances suivantes à votre fichier `requirements.txt` :
+
+```powershell lines
+# /requirements.txt
+flask
+
+Authlib
+```
+
+[3
+
+## Créer le validateur JWT](#créer-le-validateur-jwt)
+
+Nous allons utiliser une bibliothèque appelée [Authlib](https://github.com/lepture/authlib) pour créer un [ResourceProtector](https://docs.authlib.org/en/latest/flask/1/resource-server.html), qui est un type de [Flask decorator](https://flask.palletsprojects.com/patterns/viewdecorators/) qui protège nos ressources (routes API) avec un validateur donné.
+
+Le validateur validera le jeton d’accès que nous transmettons à la ressource en vérifiant qu’il a une signature et des demandes valides.
+
+Nous pouvons utiliser le validateur `JWTBearerTokenValidator` d’AuthLib avec quelques ajustements pour nous assurer qu’il est conforme à nos exigences de [validation des jetons d’accès](https://auth0.com/docs/secure/tokens/access-tokens/validate-access-tokens).
+
+Pour créer notre `Auth0JWTBearerTokenValidator`, nous devons lui transmettre notre `domain` et notre `audience` (Identificateur API). Il obtiendra alors la clé publique nécessaire pour vérifier la signature du jeton et la transmettra à la classe `JWTBearerTokenValidator`.
+
+Nous remplacerons ensuite les `claims_options` de la classe pour nous assurer que les demandes d’échéance, de public et d’émission du jeton sont validées selon nos exigences.
+
+[4
+
+## Créer une application Flask](#créer-une-application-flask)
+
+Ensuite, nous allons créer une application Flask avec 3 routes API :
+
+* `/api/public` Un point de terminaison public qui ne nécessite aucune authentification.
+* `/api/private` Un point de terminaison privé qui nécessite un jeton d’accès JWT valide.
+* `/api/private-scoped` Un point de terminaison privé qui nécessite un jeton d’accès JWT valide contenant la `scope` donnée.
+
+Les routes protégées auront un décorateur `require_auth`, qui est un `ResourceProtector` qui utilise le `Auth0JWTBearerTokenValidator` que nous avons créé précédemment.
+
+Pour créer `Auth0JWTBearerTokenValidator`, nous devons lui transmettre le domaine de notre locataire et l’identificateur de l’API que nous avons créée précédemment.
+
+Le decorator `require_auth` sur la route `private_scoped` prend en charge un argument supplémentaire `"read:messages"`, qui vérifie la permission du jeton d’accès que nous avons créé précédemment.
+
+### Faire un appel à votre API
+
+Pour appeler votre API, vous avez besoin d’un jeton d’accès. Vous pouvez obtenir un jeton d’accès à des fins de test dans la vue **Test** dans vos [API settings (Paramètres API)](https://manage.auth0.com/#/apis).
+
+![Auth0 Dashboard> Applications > API > [API specifique] > Onglet Test](/images/fr-ca/cdy7uua7fh8z/6jeVBuypOGX5qMRXeJn5ow/8aa621c6d95e3f21115493a19ab05f7a/Quickstart_Example_App_-_API.png)
+
+Fournir le jeton d’accès comme un en-tête `Authorization` dans vos demandes.
+
+<CodeGroup>
+```bash cURL lines
+curl --request get \
+--url 'http:///{yourDomain}/api_path' \
+--header 'authorization: Bearer YOUR_ACCESS_TOKEN_HERE'
+``` lines
+```csharp C# lines
+var client = new RestClient("http:///{yourDomain}/api_path");
+var request = new RestRequest(Method.GET);
+request.AddHeader("authorization", "Bearer YOUR_ACCESS_TOKEN_HERE");
+IRestResponse response = client.Execute(request);
+```
+
+```go Go lines
+package main
+import (
+"fmt"
+"net/http"
+"io/ioutil"
+)
+func main() {
+url := "http:///{yourDomain}/api_path"
+req, _ := http.NewRequest("get", url, nil)
+req.Header.Add("authorization", "Bearer YOUR_ACCESS_TOKEN_HERE")
+res, _ := http.DefaultClient.Do(req)
+defer res.Body.Close()
+body, _ := ioutil.ReadAll(res.Body)
+fmt.Println(res)
+fmt.Println(string(body))
+}
+``` lines
+```java Java lines
+HttpResponse response = Unirest.get("http:///{yourDomain}/api_path")
+.header("authorization", "Bearer YOUR_ACCESS_TOKEN_HERE")
+.asString();
+```
+
+```javascript Node.JS lines
+var axios = require("axios").default;
+var options = {
+method: 'get',
+url: 'http:///{yourDomain}/api_path',
+headers: {authorization: 'Bearer YOUR_ACCESS_TOKEN_HERE'}
+};
+axios.request(options).then(function (response) {
+console.log(response.data);
+}).catch(function (error) {
+console.error(error);
+});
+``` lines
+```obj-c Obj-C lines
+#import 
+NSDictionary \*headers = @{ @"authorization": @"Bearer YOUR_ACCESS_TOKEN_HERE" };
+NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http:///{yourDomain}/api_path"]
+cachePolicy:NSURLRequestUseProtocolCachePolicy
+timeoutInterval:10.0];
+[request setHTTPMethod:@"get"];
+[request setAllHTTPHeaderFields:headers];
+NSURLSession \*session = [NSURLSession sharedSession];
+NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
+completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
+if (error) {
+NSLog(@"%@", error);
+} else {
+NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
+NSLog(@"%@", httpResponse);
+}
+}];
+[dataTask resume];
+```
+
+```php PHP lines
+$curl = curl_init();
+curl_setopt_array($curl, [
+CURLOPT_URL => "http:///{yourDomain}/api_path",
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_ENCODING => "",
+CURLOPT_MAXREDIRS => 10,
+CURLOPT_TIMEOUT => 30,
+CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+CURLOPT_CUSTOMREQUEST => "get",
+CURLOPT_HTTPHEADER => [
+"authorization: Bearer YOUR_ACCESS_TOKEN_HERE"
+],
+]);
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+if ($err) {
+echo "cURL Error #:" . $err;
+} else {
+echo $response;
+}
+``` lines
+```python Python lines
+import http.client
+conn = http.client.HTTPConnection("")
+headers = { 'authorization': "Bearer YOUR_ACCESS_TOKEN_HERE" }
+conn.request("get", "/{yourDomain}/api_path", headers=headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
+```
+
+```ruby Ruby lines
+require 'uri'
+require 'net/http'
+url = URI("http:///{yourDomain}/api_path")
+http = Net::HTTP.new(url.host, url.port)
+request = Net::HTTP::Get.new(url)
+request["authorization"] = 'Bearer YOUR_ACCESS_TOKEN_HERE'
+response = http.request(request)
+puts response.read_body
+``` lines
+```swift Swift lines
+import Foundation
+let headers = ["authorization": "Bearer YOUR_ACCESS_TOKEN_HERE"]
+let request = NSMutableURLRequest(url: NSURL(string: "http:///{yourDomain}/api_path")! as URL,
+cachePolicy: .useProtocolCachePolicy,
+timeoutInterval: 10.0)
+request.httpMethod = "get"
+request.allHTTPHeaderFields = headers
+let session = URLSession.shared
+let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+if (error != nil) {
+print(error)
+} else {
+let httpResponse = response as? HTTPURLResponse
+print(httpResponse)
+}
+})
+dataTask.resume()
+```
+</CodeGroup>
+
+## Next Steps
+
+Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+
+This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+
+* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
+* [auth0-python SDK](https://github.com/auth0/auth0-python) - Explore the SDK used in this tutorial more fully
+* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/backend/python/interactive.md)
+
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
+
+Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+
+Sign Up
+
+Developers
+
+* [Developer Hub](https://developer.auth0.com/resources)
+* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
+* [Blog posts](https://auth0.com/blog/developers/)
+* [Videos](https://auth0.com/docs/videos)
+* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
+* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
+
+Documentation
+
+* [Articles](https://auth0.com/docs/articles)
+* [Quickstarts](https://auth0.com/docs/quickstarts)
+* [APIs](https://auth0.com/docs/api)
+* [SDK Libraries](https://auth0.com/docs/libraries)
+* [Blog](https://auth0.com/blog/)
+* [Reports](https://auth0.com/resources/ebooks)
+* [Webinars](https://auth0.com/resources/webinars)
+
+Get Involved
+
+* [Forum](https://community.auth0.com/)
+* [Events](https://developer.auth0.com/events)
+* [Ambassador Program](https://auth0.com/ambassador-program)
+* [Auth0 Research Program](https://auth0.com/research-program)
+
+Company
+
+* [Our Customers](https://auth0.com/customers)
+* [Compliance - Ensuring privacy and security](https://auth0.com/security)
+* [Partners](https://auth0.com/partners)
+* [Careers We're hiring!](https://www.okta.com/company/careers/)
+* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
+
+Support Center
+
+* [Community](https://community.auth0.com/)
+* [Support](https://support.auth0.com/)
+* [Help](https://community.auth0.com/c/help/6)
+* [FAQs](https://community.auth0.com/c/faq/42)
+* [Auth0 Marketplace](https://marketplace.auth0.com)
+
+Learning
+
+* [Learn](https://auth0.com/learn)
+* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
+* [Blog](https://auth0.com/blog/)
+
+Platform
+
+* [Access Management](https://auth0.com/platform/access-management)
+* [Extensibility](https://auth0.com/platform/extensibility)
+* [Security](https://auth0.com/platform/login-security)
+* [User Management](https://auth0.com/platform/user-management)
+* [Authentication](https://auth0.com/platform/authentication)
+
+Features
+
+* [Universal Login](https://auth0.com/features/universal-login)
+* [Single Sign On](https://auth0.com/features/single-sign-on)
+* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
+* [Actions](https://auth0.com/features/actions)
+* [Machine to Machine](https://auth0.com/features/machine-to-machine)
+* [Passwordless](https://auth0.com/features/passwordless)
+* [Breached Passwords](https://auth0.com/features/breached-passwords)
+
+© 2025 Okta, Inc. All Rights Reserved.
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+

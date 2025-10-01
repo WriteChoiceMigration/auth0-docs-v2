@@ -1,0 +1,296 @@
+---
+title: "Angularアプリケーションにログインを追加する"
+permalink: "interactive"
+'description': "このガイドは、AngularアプリケーションにAuth0 Angular SDKを使ってAuth0を統合し、認証の追加とユーザープロファイル情報の表示を行う方法について説明します。"
+'og:title': "Angularアプリケーションにログインを追加する"
+'og:description': "このガイドは、AngularアプリケーションにAuth0 Angular SDKを使ってAuth0を統合し、認証の追加とユーザープロファイル情報の表示を行う方法について説明します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/angular.png"
+'twitter:title': "Angularアプリケーションにログインを追加する"
+'twitter:description': "このガイドは、AngularアプリケーションにAuth0 Angular SDKを使ってAuth0を統合し、認証の追加とユーザープロファイル情報の表示を行う方法について説明します。"
+---
+
+[Skip to main content](#maincontent)
+
+​
+
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+---
+
+​
+
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+[##### Angularアプリケーションにログインを追加する](#Angularアプリケーションにログインを追加する)
+
+[View on Github](https://github.com/auth0-samples/auth0-angular-samples/tree/main/Sample-01) Log In & Download Sample
+
+1. [Docs](/docs/ja-jp/ja-jp)
+3. [Quickstarts](/docs/ja-jp/quickstarts)
+5. [Single Page App](/docs/ja-jp/quickstart/spa)
+7. [Angular](/docs/ja-jp/quickstart/spa/angular/interactive)
+
+# 
+
+# Angularアプリケーションにログインを追加する
+
+<Note>
+
+Angularでユーザー認証を実装するための詳しい情報については、「[例を挙げて説明するAngular認証ガイド](https://developer.auth0.com/resources/guides/spa/angular/basic-authentication)」を参照してください。このガイドでは、サインアップボタンを作成する方法、ルートガードを追加する方法、そして保護されたAPIをAngularから呼び出す方法が詳しく説明されています。
+
+</Note>
+
+Auth0を使用すると、アプリケーションに手軽に認証を追加することができます。このガイドは、Angularアプリケーションに[Auth0 Angular SDK](https://github.com/auth0/auth0-angular)を使ってAuth0を統合し、認証の追加とユーザープロファイル情報の表示を行う方法について説明します。
+
+このクイックスタートを使用するには、以下の手順に従います：
+
+* Auth0の無料アカウントにサインアップするか、Auth0にログインします。
+* 統合したいAngularプロジェクトを用意します。または、ログインした後に、サンプルアプリケーションを表示してダウンロードすることもできます。
+
+[1
+
+## Auth0を構成する](#auth0を構成する)
+
+Auth0のサービスを利用するには、Auth0 Dashboadに設定済みのアプリケーションがある必要があります。Auth0アプリケーションは、開発中のプロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
+
+### アプリケーションを構成する
+
+対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0 APIを呼び出す際に使用されます。
+
+このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/#/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
+
+代わりに完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
+
+### Callback URLを構成する
+
+Callback URLとは、Auth0がユーザーを認証後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはログイン後にアプリケーションに戻りません。
+
+<Note>
+
+サンプルプロジェクトに沿って進めている場合は、`http://localhost:4200`に設定してください。
+
+</Note>
+
+### ログアウトURLを構成する
+
+ログアウトURLとは、Auth0がユーザーをログアウト後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーを受け取ります。
+
+<Note>
+
+サンプルプロジェクトに沿って進めている場合は、`http://localhost:4200`に設定してください。
+
+</Note>
+
+### Allowed Web Origins（許可されているWebオリジン）を構成する
+
+［Allowed Web Origin（許可されているWebオリジン）］とは、認証フローにアクセスすることを許可して欲しいURLです。これにはプロジェクトのURLが含まれている必要があります。適切に設定されていない場合、プロジェクトが認証トークンを暗黙でリフレッシュできず、ユーザーがアプリケーションを再び訪問した時、またはページを再読み込みした時にログアウトした状態になってしまいます。
+
+<Note>
+
+サンプルプロジェクトに沿って進めている場合は、`http://localhost:4200`に設定してください。
+
+</Note>
+
+[2
+
+## Auth0 Angular SDKをインストールする](#auth0-angular-sdkをインストールする)
+
+Angularアプリで、Auth0の認証・認可を手軽に実装できるように、Auth0は[Angular SDK](https://github.com/auth0/auth0-angular)を提供しています。
+
+ターミナルで以下のコマンドを実行してAuth0 Angular SDKをインストールします：
+
+`npm install @auth0/auth0-angular`
+
+SDKはモジュールや認証サービスなど、Auth0をAngularアプリケーションに慣用的に統合しやすくする種類をいくつか公開しています。
+
+[3
+
+## Auth0を登録・提供する](#auth0を登録-提供する)
+
+SDKは、SDKが機能するために必要なすべてのサービスを含んだprovide関数である、`provideAuth0`をエクスポートします。これをアプリケーションで登録するには、以下のようにします。
+
+1. `main.ts`ファイルを開きます。
+2. `@auth0/auth0-angular`パッケージから`provideAuth0`関数をインポートします。
+3. `provideAuth0`を`bootstrapApplication`内の`providers`に追加することで、アプリケーションに追加します。
+4. `AuthService`を`AppComponent`に注入します。
+
+`provideAuth0`関数は`domain`プロパティと`clientId`プロパティを取ります。これらのプロパティの値は、Auth0で登録したシングルページアプリケーション（SPA）の**［Settings（設定）］**にある**Domain（ドメイン）**と**Client ID（クライアントID）**の値に対応します。その上に、`authorizationParams.redirect_uri`を構成します。これによって、認証に成功した後、Auth0はユーザーを特定のURLにリダイレクトで戻すことができます。
+
+<Note>
+
+[Auth0を使用したカスタムドメイン](https://auth0.com/docs/custom-domains)では、ドメインプロパティの値は［Settings（設定）］タブに反映された値でなく、カスタムドメインの値になります。
+
+</Note>
+
+[4
+
+## アプリケーションにログインを追加する](#アプリケーションにログインを追加する)
+
+Auth0アプリケーションとAuth0 Angular SDKの構成が完了したら、プロジェクトのためにログインをセットアップする必要があります。これを実現するには、`AuthService`クラスからSDKの`loginWithRedirect()`メソッドを使用して、ユーザーをAuth0のユニバーサルログインページにリダイレクトします。そこでAuth0はユーザーを認証することができます。ユーザーが認証に成功すると、アプリケーション、およびこのクイックスタートで前にセットアップしたCallback URLへリダイレクトされます。
+
+アプリケーションで選択時に`loginWithRedirect()`を呼び出すログインボタンを作成します。
+
+##### checkpoint.header
+
+アプリケーションにログインできるようになります。
+
+アプリケーションを実行し、ログインボタンを選択します。以下の点を確認します：
+
+* ユーザー名とパスワードを使って、ログインまたはサインアップできる。
+* アプリケーションによって[Auth0ユニバーサルログイン](https://auth0.com/universal-login)ページにリダイレクトされる。
+* 認証用にAuth0にリダイレクトされる。
+* 認証した後、Auth0はアプリケーションにリダイレクトで戻される。
+* コンソールでAuth0に関連したエラーを受け取らない。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[5
+
+## アプリケーションにログアウトを追加する](#アプリケーションにログアウトを追加する)
+
+プロジェクトにログインしたユーザーには、[ログアウトする方法](https://auth0.com/docs/logout/guides/logout-auth0)も必要です。SDKには、`AuthService`クラスでアプリからユーザーをログアウトするのに使用できる`logout()`メソッドが用意されています。ユーザーはログアウトすると、[Auth0ログアウトエンドポイント](https://auth0.com/docs/api/authentication?javascript#logout)にリダイレクトされてから、即座に、アプリケーションとこのクイックスタートで先ほどセットアップしたログアウトURLへとリダイレクトで戻されます。
+
+アプリケーションで選択時に`logout()`を呼び出すログアウトボタンを作成します。
+
+<Note>
+
+SDKによって`AuthService`クラスで`isAuthenticated$` Observableが公開されることで、ユーザーが認証されているかどうかを確認することができます。`isAuthenticated$` Observableの値に基づいて、条件付きでログインボタンとログアウトボタンを作成することができます。または、シングルボタンを使って、ログインとログアウトの両方のボタンと条件付きレンダリングを組み合わせることができます。
+
+</Note>
+
+##### checkpoint.header
+
+アプリケーションからログアウトできるようになります。
+
+アプリケーションを実行し、ログインし、ログアウトボタンを選択します。以下の点を確認します：
+
+* Auth0のログアウトエンドポイントにリダイレクトされている。
+* Auth0がアプリケーションと正しいログアウトURLへのリダイレクトで戻される。
+* アプリケーションにログインしていない。
+* コンソールでAuth0に関連したエラーを受け取らない。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[6
+
+## ユーザープロファイル情報を表示する](#ユーザープロファイル情報を表示する)
+
+ユーザーがログインやログアウトできるようになったら、認証済みのユーザーに関連付けられた[プロファイル情報](https://auth0.com/docs/users/concepts/overview-user-profile)を取得できるようにしたいと考えるはずです。たとえば、ログインしたユーザーの名前やプロフィール写真を表示することで、ユーザーインターフェイスをパーソナライズできるようになりたいかもしれません。
+
+Auth0 Angular SDKは、`AuthService`クラスによって公開された`user$` Observableを介してユーザー情報を提供します。`user$` Observableにはユーザーのアイデンティティに関する機密情報とアーティファクトが含まれるため、この方法が使用できるかはユーザーの認証ステータスによります。幸い、`user$` Observableは、`isAuthenticated$` Observableがtrueである場合にのみ値を出力するよう構成されています。そのため、ユーザープロファイルデータにアクセスする前に、認証状態を手動で確認する必要はありません。
+
+SDKは、`AuthService`クラスでユーザーが認証されているかどうかを確認することができる`isAuthenticated$` Observableも公開します。これを使って、たとえば、UI要素を表示・非表示にするかを判断することができます。
+
+インタラクティブパネルで`UserProfileComponent`コードを確認し、これらの関数の使用方法の例をチェックします。
+
+##### checkpoint.header
+
+ユーザープロファイル情報を表示することができるようになります。
+
+アプリケーションを実行して次の点を確認します：
+
+* ログイン後にユーザー情報が正しく表示される。
+* ログアウト後にユーザー情報が表示されない。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+## Next Steps
+
+Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+
+This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+
+* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
+* [auth0-angular SDK](https://github.com/auth0/auth0-angular) - Explore the SDK used in this tutorial more fully
+* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/spa/angular/interactive.md)
+
+<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
+
+Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+
+Sign Up
+
+Developers
+
+* [Developer Hub](https://developer.auth0.com/resources)
+* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
+* [Blog posts](https://auth0.com/blog/developers/)
+* [Videos](https://auth0.com/docs/videos)
+* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
+* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
+
+Documentation
+
+* [Articles](https://auth0.com/docs/articles)
+* [Quickstarts](https://auth0.com/docs/quickstarts)
+* [APIs](https://auth0.com/docs/api)
+* [SDK Libraries](https://auth0.com/docs/libraries)
+* [Blog](https://auth0.com/blog/)
+* [Reports](https://auth0.com/resources/ebooks)
+* [Webinars](https://auth0.com/resources/webinars)
+
+Get Involved
+
+* [Forum](https://community.auth0.com/)
+* [Events](https://developer.auth0.com/events)
+* [Ambassador Program](https://auth0.com/ambassador-program)
+* [Auth0 Research Program](https://auth0.com/research-program)
+
+Company
+
+* [Our Customers](https://auth0.com/customers)
+* [Compliance - Ensuring privacy and security](https://auth0.com/security)
+* [Partners](https://auth0.com/partners)
+* [Careers We're hiring!](https://www.okta.com/company/careers/)
+* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
+
+Support Center
+
+* [Community](https://community.auth0.com/)
+* [Support](https://support.auth0.com/)
+* [Help](https://community.auth0.com/c/help/6)
+* [FAQs](https://community.auth0.com/c/faq/42)
+* [Auth0 Marketplace](https://marketplace.auth0.com)
+
+Learning
+
+* [Learn](https://auth0.com/learn)
+* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
+* [Blog](https://auth0.com/blog/)
+
+Platform
+
+* [Access Management](https://auth0.com/platform/access-management)
+* [Extensibility](https://auth0.com/platform/extensibility)
+* [Security](https://auth0.com/platform/login-security)
+* [User Management](https://auth0.com/platform/user-management)
+* [Authentication](https://auth0.com/platform/authentication)
+
+Features
+
+* [Universal Login](https://auth0.com/features/universal-login)
+* [Single Sign On](https://auth0.com/features/single-sign-on)
+* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
+* [Actions](https://auth0.com/features/actions)
+* [Machine to Machine](https://auth0.com/features/machine-to-machine)
+* [Passwordless](https://auth0.com/features/passwordless)
+* [Breached Passwords](https://auth0.com/features/breached-passwords)
+
+© 2025 Okta, Inc. All Rights Reserved.
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+

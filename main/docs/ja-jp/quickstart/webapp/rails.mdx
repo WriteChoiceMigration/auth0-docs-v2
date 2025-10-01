@@ -1,0 +1,290 @@
+---
+title: "Auth0"
+permalink: "rails"
+'description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
+'og:title': "Auth0"
+'og:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
+'twitter:title': "Auth0"
+'twitter:description': "Get started using Auth0. Implement authentication for any kind of application in minutes."
+---
+
+# Ruby On Rails: Login
+
+<Frame>![Gravatar for david.patrick@auth0.com](//www.gravatar.com/avatar/94167463a175f9bb522a432acef01351?d=mm&r=g&s=50)</Frame>
+
+##### By David Patrick
+
+This tutorial demonstrates how to add user login to a Ruby on Rails application.We recommend that you log in to follow this quickstart with examples configured for your account.
+
+### I want to integrate with my app
+
+15 minutes
+
+1. [Configure Auth0](#configure-auth0)
+2. [Install the Auth0 SDK](#install-the-auth0-sdk)
+3. [Add Login to Your Application](#add-login-to-your-application)
+4. [Add Logout to Your Application](#add-logout-to-your-application)
+5. [Show User Profile Information](#show-user-profile-information)
+
+Or
+
+### I want to explore a sample app
+
+2 minutes
+
+Get a sample configured with your account settings or check it out on Github.
+
+Log In & Download Sample[View on Github](https://github.com/auth0-samples/auth0-rubyonrails-sample/tree/master/sample)
+
+System requirements: Ruby 2.5.0+ | Rails 6.0+ or Rails 5.0+ or Rails 4.2+
+
+<Note>
+
+**New to Auth?** Learn [How Auth0 works](/docs/ja-jp/overview), how it [integrates with Regular Web Applications](/docs/ja-jp/architecture-scenarios/web-app-sso) and which [protocol](/docs/ja-jp/flows) it uses.
+
+</Note>
+
+## Configure Auth0
+
+### Get Your Application Keys
+
+When you signed up for Auth0, a new application was created for you, or you could have created a new one. You will need some details about that application to communicate with Auth0. You can get these details from the [Application Settings](https://manage.auth0.com/#/applications) section in the Auth0 dashboard.
+
+<Frame>![App Dashboard](/docs/ja-jp/media/articles/dashboard/client_settings.png)</Frame>
+
+You need the following information:
+
+* **Domain**
+* **Client ID**
+* **Client Secret**
+
+<Note>
+
+If you download the sample from the top of this page, these details are filled out for you.
+
+</Note>
+
+### Configure Callback URLs
+
+A callback URL is a URL in your application where Auth0 redirects the user after they have authenticated. The callback URL for your app must be added to the **Allowed Callback URLs** field in your [Application Settings](https://manage.auth0.com/#/applications). If this field is not set, users will be unable to log in to the application and will get an error.
+
+<Note>
+
+If you are following along with the sample project you downloaded from the top of this page, the callback URL you need to add to the **Allowed Callback URLs** field is `http://localhost:3000/auth/auth0/callback`.
+
+</Note>
+
+### Configure Logout URLs
+
+A logout URL is a URL in your application that Auth0 can return to after the user has been logged out of the authorization server. This is specified in the `returnTo` query parameter. The logout URL for your app must be added to the **Allowed Logout URLs** field in your [Application Settings](https://manage.auth0.com/#/applications). If this field is not set, users will be unable to log out from the application and will get an error.
+
+<Note>
+
+If you are following along with the sample project you downloaded from the top of this page, the logout URL you need to add to the **Allowed Logout URLs** field is `http://localhost:3000`.
+
+</Note>
+
+## Install the Auth0 SDK
+
+### Install Dependencies
+
+This tutorial uses `omniauth-auth0`, a custom [OmniAuth strategy](https://github.com/intridea/omniauth#omniauth-standardized-multi-provider-authentication), to handle the authentication flow. Add the following dependencies to your `Gemfile`:
+
+```ruby lines
+gem 'omniauth-auth0', '~> 3.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0' # prevents forged authentication requests
+```
+
+Once your gems are added, install the gems with `bundle install`:
+
+### Initialize Auth0 Configuration
+
+Create an Auth0 config file `./config/auth0.yml`
+
+```yaml lines
+# ./config/auth0.yml
+development:
+  auth0_domain: {yourDomain}
+  auth0_client_id: {yourClientId}
+  auth0_client_secret: <YOUR AUTH0 CLIENT SECRET>
+```
+
+Create the following initializer file `./config/initializers/auth0.rb` and [configure](https://github.com/auth0/omniauth-auth0/blob/master/EXAMPLES.md#send-additional-authentication-parameters) the **OmniAuth** middleware.
+
+```ruby lines
+# ./config/initializers/auth0.rb
+AUTH0_CONFIG = Rails.application.config_for(:auth0)
+
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider(
+    :auth0,
+    AUTH0_CONFIG['auth0_client_id'],
+    AUTH0_CONFIG['auth0_client_secret'],
+    AUTH0_CONFIG['auth0_domain'],
+    callback_path: '/auth/auth0/callback',
+    authorize_params: {
+      scope: 'openid profile'
+    }
+  )
+end
+```
+
+### Add an Auth0 controller
+
+Create an Auth0 controller for handling the authentication callback. Run the command `rails generate controller auth0 callback failure logout --skip-assets --skip-helper --skip-routes --skip-template-engine`.
+
+Inside of the callback method assign the hash of user information, returned as `request.env['omniauth.auth']`, to the active session.
+
+```ruby lines
+# ./app/controllers/auth0_controller.rb
+class Auth0Controller < ApplicationController
+  def callback
+    # OmniAuth stores the information returned from Auth0 and the IdP in request.env['omniauth.auth'].
+    # In this code, you will pull the raw_info supplied from the id_token and assign it to the session.
+    # Refer to https://github.com/auth0/omniauth-auth0/blob/master/EXAMPLES.md#example-of-the-resulting-authentication-hash for complete information on 'omniauth.auth' contents.
+    auth_info = request.env['omniauth.auth']
+    session[:userinfo] = auth_info['extra']['raw_info']
+
+    # Redirect to the URL you want after successful auth
+    redirect_to '/dashboard'
+  end
+
+  def failure
+    # Handles failed authentication -- Show a failure page (you can also handle with a redirect)
+    @error_msg = request.params['message']
+  end
+
+  def logout
+    # you will finish this in a later step
+  end
+end
+```
+
+Add the following routes to your `./config/routes.rb` file:
+
+```ruby lines
+# ./config/routes.rb
+Rails.application.routes.draw do
+  # ..
+  get '/auth/auth0/callback' => 'auth0#callback'
+  get '/auth/failure' => 'auth0#failure'
+  get '/auth/logout' => 'auth0#logout'
+end
+```
+
+## Add Login to Your Application
+
+A user can now log into your application by visiting the `/auth/auth0` endpoint.
+
+<Warning>
+
+To [prevent forged authentication requests](https://github.com/cookpad/omniauth-rails_csrf_protection), use the `link_to` or `button_to` helper methods with the `:post` method
+
+</Warning>
+
+``` lines
+<!-- Place a login button anywhere on your application -->
+  <%= button_to 'Login', '/auth/auth0', method: :post, data: { turbo: false } %>
+```
+
+## Add Logout to Your Application
+
+Now that you can log in to your Rails application, you need [a way to log out](https://auth0.com/docs/logout/guides/logout-auth0). Revisit the Auth0Controller you created earlier, and finish up the logout method added there.
+
+You will need to clear out your session and then redirect the user to the Auth0 logout endpoint.
+
+To clear out all the objects stored within the session, call the `reset_session` method within the `auth0_controller/logout` method. [Learn more about reset_session here](http://api.rubyonrails.org/classes/ActionController/Base.html#M000668). Add the following code to `./app/controllers/auth0_controller.rb`:
+
+```ruby lines
+# ./app/controllers/auth0_controller.rb
+class Auth0Controller < ApplicationController
+  # ..
+  # ..Insert the code below
+  def logout
+    reset_session
+    redirect_to logout_url, allow_other_host: true
+  end
+
+  private
+
+  def logout_url
+    request_params = {
+      returnTo: root_url,
+      client_id: AUTH0_CONFIG['auth0_client_id']
+    }
+
+    URI::HTTPS.build(host: AUTH0_CONFIG['auth0_domain'], path: '/v2/logout', query: request_params.to_query).to_s
+  end
+end
+```
+
+<Note>
+
+The final destination URL (the `returnTo` value) needs to be in the list of `Allowed Logout URLs` . See the [logout documentation](/docs/ja-jp/logout/guides/redirect-users-after-logout) for more.
+
+</Note>
+
+The user will now be able to logout of your application by visiting the `/auth/logout` endpoint.
+
+``` lines
+<!-- Place a logout button anywhere on your application -->
+  <%= button_to 'Logout', 'auth/logout', method: :get, data: { turbo: false } %>
+```
+
+## Show User Profile Information
+
+To display the user's profile, your application should provide a protected route. You can use a controller `concern` to control access to routes. Create the following file `./app/controllers/concerns/secured.rb`
+
+```ruby lines
+# ./app/controllers/concerns/secured.rb
+module Secured
+  extend ActiveSupport::Concern
+
+  included do
+    before_action :logged_in_using_omniauth?
+  end
+
+  def logged_in_using_omniauth?
+    redirect_to '/' unless session[:userinfo].present?
+  end
+end
+```
+
+After you have created the secured controller concern, include it in any controller that requires a logged in user. You can then access the user from the session `session[:userinfo]`.
+
+```ruby lines
+# ./app/controllers/dashboard_controller.rb
+class DashboardController < ApplicationController
+  include Secured
+
+  def show
+    # session[:userinfo] was saved earlier on Auth0Controller#callback
+    @user = session[:userinfo]
+  end
+end
+```
+
+Now that you have loaded the user from the session, you can use it to display information in your frontend.
+
+``` lines
+<!-- ./app/views/dashboard/show.html.erb -->
+<div>
+  <p>Normalized User Profile:<%= JSON.pretty_generate(@user[:info])%></p>
+  <p>Full User Profile:<%= JSON.pretty_generate(@user[:extra][:raw_info])%></p>
+</div>
+```
+
+##### What can you do next?
+
+[* Configure other identity providers](/docs/ja-jp/identityproviders)[* Enable multifactor authentication](/docs/ja-jp/multifactor-authentication)[* Learn about attack protection](/docs/ja-jp/attack-protection)[* Learn about rules](/docs/ja-jp/rules)
+
+---
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/webapp/rails/01-login.md)

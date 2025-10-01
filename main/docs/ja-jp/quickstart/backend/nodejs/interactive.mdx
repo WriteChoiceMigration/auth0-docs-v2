@@ -1,0 +1,349 @@
+---
+title: "Express.js APIアプリケーションに認可を追加する"
+permalink: "interactive"
+'description': "このガイドは、新規または既存のExpress.js APIアプリケーションにexpress-oauth2-jwt-bearerパッケージを使ってAuth0を統合する方法を説明します。"
+'og:title': "Express.js APIアプリケーションに認可を追加する"
+'og:description': "このガイドは、新規または既存のExpress.js APIアプリケーションにexpress-oauth2-jwt-bearerパッケージを使ってAuth0を統合する方法を説明します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/node.png"
+'twitter:title': "Express.js APIアプリケーションに認可を追加する"
+'twitter:description': "このガイドは、新規または既存のExpress.js APIアプリケーションにexpress-oauth2-jwt-bearerパッケージを使ってAuth0を統合する方法を説明します。"
+---
+
+[Skip to main content](#maincontent)
+
+​
+
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+---
+
+​
+
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+[##### Express.js APIアプリケーションに認可を追加する](#Express.js APIアプリケーションに認可を追加する)
+
+[View on Github](https://github.com/auth0-samples/auth0-express-api-samples/tree/master/01-Authorization-RS256) Log In & Download Sample
+
+1. [Docs](/docs/ja-jp/ja-jp)
+3. [Quickstarts](/docs/ja-jp/quickstarts)
+5. [Backend/API](/docs/ja-jp/quickstart/backend)
+7. [Node (Express) API](/docs/ja-jp/quickstart/backend/nodejs/interactive)
+
+# 
+
+# Express.js APIアプリケーションに認可を追加する
+
+このガイドは、新規または既存のExpress.js APIアプリケーションに`express-oauth2-jwt-bearer`パッケージを使ってAuth0を統合する方法を説明します。
+
+Auth0 DashboardでAPIをまだ作成していない場合は、対話型のセレクターを使ってAuth0 APIを新規作成します。そうでない場合は、既存のプロジェクトAPIを選択します。
+
+Auth0 Dashboardを使って初めてAPIをセットアップする場合には、[使用の開始ガイド](https://auth0.com/docs/get-started/auth0-overview/set-up-apis)を確認してください。それぞれのAuth0 APIにはAPI識別子があり、アプリケーションにアクセストークンの検証で使用されます。
+
+<Note>
+
+**Auth0を初めてご利用ですか？**[Auth0の仕組み](https://auth0.com/docs/overview)と、OAuth 2.0フレームワークを用いた[API認証と認可の実装](https://auth0.com/docs/api-auth)について説明します。
+
+</Note>
+
+[1
+
+## アクセス許可を定義する](#アクセス許可を定義する)
+
+アクセス許可は、ユーザーの代わりに、提供されたアクセストークンを使ってどのようにしてリソースにアクセスできるのかを定義できるようにします。たとえば、ユーザーがマネージャーアクセスレベルを持つ場合には、`messages`リソースに対して読み出しアクセスを付与し、管理者アクセスレベルを持つ場合には、書き込みアクセスを付与することができます。
+
+Auth0 Dashboardの[［APIs］](https://manage.auth0.com/#/apis)セクションにある**［Permissions（権限）］**ビューで使用可能なアクセス許可を定義することができます。
+
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/5EnGfdqLVZ8fuIxbUn7gm1/ee4278d6ae1910497771f3b9762c86f8/Quickstarts_API.png)</Frame>
+
+<Note>
+
+以下の例では`read:messages`スコープを使用します。
+
+</Note>
+
+[2
+
+## 依存関係をインストールする](#依存関係をインストールする)
+
+まず、`npm`でSDKをインストールします。
+
+```powershell lines
+npm install --save express-oauth2-jwt-bearer
+```
+
+[3
+
+## ミドルウェアを構成する](#ミドルウェアを構成する)
+
+ドメインとAPI識別子を使って、`express-oauth2-jwt-bearer`を構成します。
+
+右に示した`checkJwt`ミドルウェアは、要求に含まれるユーザーのアクセストークンが有効かを確認します。トークンが有効でない場合、ユーザーがエンドポイントにアクセスしようとすると、「401 Authorization」というエラーが発生します。
+
+ミドルウェアは、トークンに要求されたリソースにアクセスするだけの十分なスコープがあるかを確認しません。
+
+[4
+
+## APIエンドポイントを保護する](#apiエンドポイントを保護する)
+
+有効なJWTを必須して個々のルートを保護するには、`express-oauth2-jwt-bearer`から構築された`checkJwt`ミドルウェアでルートを構成します。
+
+特定のスコープを検索するために、個々のルートを構成することができます。これを実現するには、`requiresScope`メソッドで別のミドルウェアをセットアップします。必要なスコープを提供し、認可を追加したいルートにミドルウェアを適用します。
+
+`checkJwt`と`requiredScopes`ミドルウェアを保護したいルートに渡します。
+
+この構成では、`read:messages`スコープを持つアクセストークンのみがエンドポイントにアクセスすることができます。
+
+### APIを呼び出す
+
+APIを呼び出すにはアクセストークンが必要です。テスト用のアクセストークンは、[API設定](https://manage.auth0.com/#/apis)の**［Test（テスト）］**ビューから取得することができます。
+
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/5HUMcKGXoNOvdJNXFI73oi/f50dd78093814054a81903d1e478f3aa/API_access_tokens.png)</Frame>
+
+要求の`Authorization`ヘッダーにアクセストークンを指定します。
+
+<CodeGroup>
+```bash cURL lines
+curl --request get \
+--url http:///%7ByourDomain%7D/api_path \
+--header 'authorization: Bearer YOUR_ACCESS_TOKEN_HERE'
+``` lines
+```csharp C# lines
+var client = new RestClient("http:///%7ByourDomain%7D/api_path");
+var request = new RestRequest(Method.GET);
+request.AddHeader("authorization", "Bearer YOUR_ACCESS_TOKEN_HERE");
+IRestResponse response = client.Execute(request);
+```
+
+```go Go lines
+package main
+import (
+"fmt"
+"net/http"
+"io/ioutil"
+)
+func main() {
+url := "http:///%7ByourDomain%7D/api_path"
+req, _ := http.NewRequest("get", url, nil)
+req.Header.Add("authorization", "Bearer YOUR_ACCESS_TOKEN_HERE")
+res, _ := http.DefaultClient.Do(req)
+defer res.Body.Close()
+body, _ := ioutil.ReadAll(res.Body)
+fmt.Println(res)
+fmt.Println(string(body))
+}
+``` lines
+```java Java lines
+HttpResponse response = Unirest.get("http:///%7ByourDomain%7D/api_path")
+.header("authorization", "Bearer YOUR_ACCESS_TOKEN_HERE")
+.asString();
+```
+
+```javascript Node.JS lines
+var axios = require("axios").default;
+var options = {
+method: 'get',
+url: 'http:///%7ByourDomain%7D/api_path',
+headers: {authorization: 'Bearer YOUR_ACCESS_TOKEN_HERE'}
+};
+axios.request(options).then(function (response) {
+console.log(response.data);
+}).catch(function (error) {
+console.error(error);
+});
+``` lines
+```obj-c Obj-C lines
+#import 
+NSDictionary \*headers = @{ @"authorization": @"Bearer YOUR_ACCESS_TOKEN_HERE" };
+NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http:///%7ByourDomain%7D/api_path"]
+cachePolicy:NSURLRequestUseProtocolCachePolicy
+timeoutInterval:10.0];
+[request setHTTPMethod:@"get"];
+[request setAllHTTPHeaderFields:headers];
+NSURLSession \*session = [NSURLSession sharedSession];
+NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
+completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
+if (error) {
+NSLog(@"%@", error);
+} else {
+NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
+NSLog(@"%@", httpResponse);
+}
+}];
+[dataTask resume];
+```
+
+```php PHP lines
+$curl = curl_init();
+curl_setopt_array($curl, [
+CURLOPT_URL => "http:///%7ByourDomain%7D/api_path",
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_ENCODING => "",
+CURLOPT_MAXREDIRS => 10,
+CURLOPT_TIMEOUT => 30,
+CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+CURLOPT_CUSTOMREQUEST => "get",
+CURLOPT_HTTPHEADER => [
+"authorization: Bearer YOUR_ACCESS_TOKEN_HERE"
+],
+]);
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+if ($err) {
+echo "cURL Error #:" . $err;
+} else {
+echo $response;
+}
+``` lines
+```python Python lines
+import http.client
+conn = http.client.HTTPConnection("")
+headers = { 'authorization': "Bearer YOUR_ACCESS_TOKEN_HERE" }
+conn.request("get", "%7ByourDomain%7D/api_path", headers=headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
+```
+
+```ruby Ruby lines
+require 'uri'
+require 'net/http'
+url = URI("http:///%7ByourDomain%7D/api_path")
+http = Net::HTTP.new(url.host, url.port)
+request = Net::HTTP::Get.new(url)
+request["authorization"] = 'Bearer YOUR_ACCESS_TOKEN_HERE'
+response = http.request(request)
+puts response.read_body
+``` lines
+```swift Swift lines
+import Foundation
+let headers = ["authorization": "Bearer YOUR_ACCESS_TOKEN_HERE"]
+let request = NSMutableURLRequest(url: NSURL(string: "http:///%7ByourDomain%7D/api_path")! as URL,
+cachePolicy: .useProtocolCachePolicy,
+timeoutInterval: 10.0)
+request.httpMethod = "get"
+request.allHTTPHeaderFields = headers
+let session = URLSession.shared
+let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+if (error != nil) {
+print(error)
+} else {
+let httpResponse = response as? HTTPURLResponse
+print(httpResponse)
+}
+})
+dataTask.resume()
+```
+</CodeGroup>
+
+##### checkpoint.header
+
+アプリケーションの構成が完了したら、アプリケーションを実行して次の点を確認します：
+
+* `GET /api/public`が認証を必要としない要求に使用できる。
+* `GET /api/private`が認証された要求に使用できる。
+* `GET /api/private-scoped`が`read:messages`スコープが付与されたアクセストークンを含む認証された要求に使用できる。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+## Next Steps
+
+Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+
+This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+
+* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
+* [express-oauth2-jwt-bearer SDK](https://github.com/auth0/node-oauth2-jwt-bearer/tree/main/packages/express-oauth2-jwt-bearer) - Explore the SDK used in this tutorial more fully
+* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/backend/nodejs/interactive.md)
+
+<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
+
+Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+
+Sign Up
+
+Developers
+
+* [Developer Hub](https://developer.auth0.com/resources)
+* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
+* [Blog posts](https://auth0.com/blog/developers/)
+* [Videos](https://auth0.com/docs/videos)
+* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
+* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
+
+Documentation
+
+* [Articles](https://auth0.com/docs/articles)
+* [Quickstarts](https://auth0.com/docs/quickstarts)
+* [APIs](https://auth0.com/docs/api)
+* [SDK Libraries](https://auth0.com/docs/libraries)
+* [Blog](https://auth0.com/blog/)
+* [Reports](https://auth0.com/resources/ebooks)
+* [Webinars](https://auth0.com/resources/webinars)
+
+Get Involved
+
+* [Forum](https://community.auth0.com/)
+* [Events](https://developer.auth0.com/events)
+* [Ambassador Program](https://auth0.com/ambassador-program)
+* [Auth0 Research Program](https://auth0.com/research-program)
+
+Company
+
+* [Our Customers](https://auth0.com/customers)
+* [Compliance - Ensuring privacy and security](https://auth0.com/security)
+* [Partners](https://auth0.com/partners)
+* [Careers We're hiring!](https://www.okta.com/company/careers/)
+* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
+
+Support Center
+
+* [Community](https://community.auth0.com/)
+* [Support](https://support.auth0.com/)
+* [Help](https://community.auth0.com/c/help/6)
+* [FAQs](https://community.auth0.com/c/faq/42)
+* [Auth0 Marketplace](https://marketplace.auth0.com)
+
+Learning
+
+* [Learn](https://auth0.com/learn)
+* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
+* [Blog](https://auth0.com/blog/)
+
+Platform
+
+* [Access Management](https://auth0.com/platform/access-management)
+* [Extensibility](https://auth0.com/platform/extensibility)
+* [Security](https://auth0.com/platform/login-security)
+* [User Management](https://auth0.com/platform/user-management)
+* [Authentication](https://auth0.com/platform/authentication)
+
+Features
+
+* [Universal Login](https://auth0.com/features/universal-login)
+* [Single Sign On](https://auth0.com/features/single-sign-on)
+* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
+* [Actions](https://auth0.com/features/actions)
+* [Machine to Machine](https://auth0.com/features/machine-to-machine)
+* [Passwordless](https://auth0.com/features/passwordless)
+* [Breached Passwords](https://auth0.com/features/breached-passwords)
+
+© 2025 Okta, Inc. All Rights Reserved.
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+

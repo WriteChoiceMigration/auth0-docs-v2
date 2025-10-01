@@ -1,0 +1,262 @@
+---
+title: "Ajouter une connexion à votre application WPF ou WinForms"
+permalink: "interactive"
+'description': "Ce tutoriel explique comment ajouter la connexion utilisateur avec Auth0 à une application WPF et WinForms."
+'og:title': "Ajouter une connexion à votre application WPF ou WinForms"
+'og:description': "Ce tutoriel explique comment ajouter la connexion utilisateur avec Auth0 à une application WPF et WinForms."
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/asp.png"
+'twitter:title': "Ajouter une connexion à votre application WPF ou WinForms"
+'twitter:description': "Ce tutoriel explique comment ajouter la connexion utilisateur avec Auth0 à une application WPF et WinForms."
+---
+
+[Skip to main content](#maincontent)
+
+​
+
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+---
+
+​
+
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+[##### Ajouter une connexion à votre application WPF ou WinForms](#Ajouter une connexion à votre application WPF ou WinForms)
+
+[View on Github](https://github.com/auth0-samples/auth0-WinFormsWPF-oidc-samples/tree/master/Quickstart/00-Starter-Seed) Log In & Download Sample
+
+1. [Quickstarts](/docs/fr-ca/quickstarts)
+3. [Native/Mobile App](/docs/fr-ca/quickstart/native)
+5. [WPF / Winforms](/docs/fr-ca/quickstart/native/wpf-winforms/interactive)
+
+# 
+
+# Ajouter une connexion à votre application WPF ou WinForms
+
+Auth0 vous permet d’ajouter rapidement l’authentification à presque tous les types d’application. Ce guide explique comment intégrer Auth0, ajouter l’authentification et afficher les informations de profil utilisateur dans n’importe quelle application WPF et WinForms à l’aide des SDK Auth0 de [WPF](https://www.nuget.org/packages/Auth0.OidcClient.WPF/) et [WinForms](https://www.nuget.org/packages/Auth0.OidcClient.WinForms).
+
+Pour utiliser ce guide rapide, vous devez :
+
+* Vous inscrire à un compte Auth0 gratuit ou vous connecter à Auth0.
+* Disposer d’un projet WPF ou WinForms fonctionnel avec lequel vous souhaitez vous intégrer. Vous pouvez également consulter ou télécharger une application faisant office d’exemple lorsque vous vous connectez.
+
+[1
+
+## Configuration d’Auth0](#configuration-d-auth0)
+
+Pour utiliser les services Auth0, vous devez avoir une application installée dans Auth0 Dashboard. L’application Auth0 est l’endroit où vous allez configurer le fonctionnement de l’authentification pour le projet que vous développez.
+
+### Configurer une application
+
+Utilisez le sélecteur interactif pour créer une nouvelle application Auth0 ou sélectionner une application existante qui représente le projet avec lequel vous souhaitez effectuer l’intégration. Dans Auth0, chaque application se voit attribuer un identifiant client unique alphanumérique que votre code d’application utilisera pour appeler les API Auth0 via la trousse SDK.
+
+Tous les paramètres que vous configurez à l’aide de ce guide de démarrage rapide seront automatiquement mis à jour pour votre application dans le [Tableau de bord](https://manage.auth0.com/#/), qui est l’endroit où vous pourrez gérer vos applications à l’avenir.
+
+Si vous préférez explorer une configuration complète, consultez plutôt un exemple d’application.
+
+### Configuration des URL de rappel
+
+Une URL de rappel est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur authentification. Si elle n’est pas définie, les utilisateurs ne seront pas redirigés vers votre application après s’être connectés.
+
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+
+Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://{yourDomain}:4200/mobile`.
+
+</Callout>
+
+### Configuration des URL de déconnexion
+
+Une URL de déconnexion est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur déconnexion. Si elle n’est pas définie, les utilisateurs ne pourront pas se déconnecter de votre application et recevront un message d’erreur.
+
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+
+Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://{yourDomain}:4200/mobile`.
+
+</Callout>
+
+[2
+
+## Installer la trousse SDK Auth0](#installer-la-trousse-sdk-auth0)
+
+Auth0 propose une trousse SDK [WPF](https://www.nuget.org/packages/Auth0.OidcClient.WPF/) et [WinForms](https://www.nuget.org/packages/Auth0.OidcClient.WinForms) pour simplifier le processus d’implémentation de l’authentification Auth0 dans les applications WPF et WinForms.
+
+Utilisez le gestionnaire de packages NuGet (Tools (Outils) -> Library Package Manager (Gestionnaire de packages de bibliothèque) -> Package Manager Console (Console du gestionnaire de packages)) pour installer le package `Auth0.OidcClient.WPF` ou `Auth0.OidcClient.WinForms` en fonction de si vous générez une application WPF ou Windows Forms.
+
+Sinon, vous pouvez utiliser la Console du gestionnaire de packages NuGet (`Install-Package`) ou le `dotnet` CLI (`dotnet add`).
+
+``` lines
+Install-Package Auth0.OidcClient.WPF
+Install-Package Auth0.OidcClient.WinForms
+```
+
+``` lines
+dotnet add Auth0.OidcClient.WPF
+dotnet add Auth0.OidcClient.WinForms
+```
+
+[3
+
+## Instancier Auth0Client.](#instancier-auth0client-)
+
+Pour intégrer Auth0 dans votre application, instanciez une instance de la classe Auth0Client en passant une instance de Auth0ClientOptions qui contient votre domaine Auth0 et votre identifiant client.
+
+Par défaut, la trousse SDK exploitera [WebView2](https://learn.microsoft.com/en-us/microsoft-edge/webview2/) pour .NET6 et les versions ultérieures, tout en s’appuyant sur l’ancien WebView pour les applications utilisant une version antérieure à .NET6.
+
+##### checkpoint.header
+
+Votre `Auth0Client` devrait maintenant être correctement instancié. Exécutez votre application pour vérifier que :
+
+* le `client Auth0` est instancié correctement.
+* votre application ne génère aucune erreur liée à Auth0.
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[4
+
+## Ajouter une fonctionnalité de connexion à votre application](#ajouter-une-fonctionnalité-de-connexion-à-votre-application)
+
+À présent que vous avez configuré votre application Auth0 et la trousse SDK Auth0, vous devez configurer la connexion pour votre projet. Pour ce faire, vous utiliserez la méthode `LoginAsync()` de la trousse SDK pour créer un bouton de connexion qui redirige les utilisateurs vers la page de connexion universelle Auth0. Une fois un utilisateur authentifié avec succès, il est redirigé vers l’URL de rappel que vous avez configurée précédemment dans ce démarrage rapide.
+
+S’il n’y a pas d’erreur, vous pouvez accéder à `User (Utilisateur)`, `IdentityToken`, `AccessToken` et `RefreshToken` dans le `LoginResult` renvoyé par `LoginAsync()`.
+
+##### checkpoint.header
+
+Vous devez désormais pouvoir vous connecter ou vous inscrire en utilisant un nom d’utilisateur et un mot de passe.
+
+Appuyez sur le bouton de connexion et vérifiez que :
+
+* Votre application WPF ou WinForms vous redirige vers la page Connexion universelle Auth0.
+* Vous pouvez vous connecter ou vous inscrire.
+* Auth0 vous redirige vers votre application.
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[5
+
+## Ajouter une fonctionnalité de déconnexion à votre application](#ajouter-une-fonctionnalité-de-déconnexion-à-votre-application)
+
+Les utilisateurs qui se connectent à votre projet auront également besoin d’un moyen de se déconnecter. Créez un bouton de déconnexion en utilisant la méthode `LogoutAsync()` de la trousse SDK. Lorsque les utilisateurs se déconnectent, ils seront redirigés vers votre point de terminaison de déconnexion Auth0, qui par la suite les redirigera immédiatement vers l’URL de déconnexion que vous avez configurée précédemment dans ce démarrage rapide.
+
+##### checkpoint.header
+
+Exécutez votre application et cliquez sur le bouton de déconnexion, vérifiez que :
+
+* Votre application WPF ou WinForms vous redirige vers l’adresse que vous avez indiquée comme l’une des URL de déconnexion autorisées dans les paramètres de votre application.
+* Vous n’êtes plus connecté à votre application.
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[6
+
+## Afficher les informations du profil utilisateur](#afficher-les-informations-du-profil-utilisateur)
+
+Vu que vos utilisateurs peuvent désormais se connecter et se déconnecter, vous voudrez probablement pouvoir récupérer les informations de profil associées aux utilisateurs authentifiés. Par exemple, vous voudrez peut-être afficher le nom ou la photo de profil d’un utilisateur connecté dans votre projet.
+
+La trousse SDK Auth0 de WPF et WinForms fournit des informations sur l’utilisateur par l’intermédiaire de la propriété `LoginResult.User`.
+
+##### checkpoint.header
+
+Vérifiez que vous pouvez afficher le nom de l’utilisateur ou une autre propriété de l’utilisateur après la connexion.
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+## Next Steps
+
+Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+
+This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+
+* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
+* [auth0-oidc-client-net SDK](https://github.com/auth0/auth0-oidc-client-net) - Explore the SDK used in this tutorial more fully
+* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/native/wpf-winforms/interactive.md)
+
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
+
+Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+
+Sign Up
+
+Developers
+
+* [Developer Hub](https://developer.auth0.com/resources)
+* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
+* [Blog posts](https://auth0.com/blog/developers/)
+* [Videos](https://auth0.com/docs/videos)
+* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
+* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
+
+Documentation
+
+* [Articles](https://auth0.com/docs/articles)
+* [Quickstarts](https://auth0.com/docs/quickstarts)
+* [APIs](https://auth0.com/docs/api)
+* [SDK Libraries](https://auth0.com/docs/libraries)
+* [Blog](https://auth0.com/blog/)
+* [Reports](https://auth0.com/resources/ebooks)
+* [Webinars](https://auth0.com/resources/webinars)
+
+Get Involved
+
+* [Forum](https://community.auth0.com/)
+* [Events](https://developer.auth0.com/events)
+* [Ambassador Program](https://auth0.com/ambassador-program)
+* [Auth0 Research Program](https://auth0.com/research-program)
+
+Company
+
+* [Our Customers](https://auth0.com/customers)
+* [Compliance - Ensuring privacy and security](https://auth0.com/security)
+* [Partners](https://auth0.com/partners)
+* [Careers We're hiring!](https://www.okta.com/company/careers/)
+* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
+
+Support Center
+
+* [Community](https://community.auth0.com/)
+* [Support](https://support.auth0.com/)
+* [Help](https://community.auth0.com/c/help/6)
+* [FAQs](https://community.auth0.com/c/faq/42)
+* [Auth0 Marketplace](https://marketplace.auth0.com)
+
+Learning
+
+* [Learn](https://auth0.com/learn)
+* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
+* [Blog](https://auth0.com/blog/)
+
+Platform
+
+* [Access Management](https://auth0.com/platform/access-management)
+* [Extensibility](https://auth0.com/platform/extensibility)
+* [Security](https://auth0.com/platform/login-security)
+* [User Management](https://auth0.com/platform/user-management)
+* [Authentication](https://auth0.com/platform/authentication)
+
+Features
+
+* [Universal Login](https://auth0.com/features/universal-login)
+* [Single Sign On](https://auth0.com/features/single-sign-on)
+* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
+* [Actions](https://auth0.com/features/actions)
+* [Machine to Machine](https://auth0.com/features/machine-to-machine)
+* [Passwordless](https://auth0.com/features/passwordless)
+* [Breached Passwords](https://auth0.com/features/breached-passwords)
+
+© 2025 Okta, Inc. All Rights Reserved.
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+

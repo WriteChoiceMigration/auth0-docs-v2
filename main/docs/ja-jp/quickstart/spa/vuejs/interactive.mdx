@@ -1,0 +1,291 @@
+---
+title: "Vueアプリケーションにログインを追加する"
+permalink: "interactive"
+'description': "このガイドは、VueアプリケーションにAuth0 Vue SDKを使ってAuth0を統合し、認証の追加とユーザープロファイル情報の表示を行う方法について説明します。"
+'og:title': "Vueアプリケーションにログインを追加する"
+'og:description': "このガイドは、VueアプリケーションにAuth0 Vue SDKを使ってAuth0を統合し、認証の追加とユーザープロファイル情報の表示を行う方法について説明します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/vue.png"
+'twitter:title': "Vueアプリケーションにログインを追加する"
+'twitter:description': "このガイドは、VueアプリケーションにAuth0 Vue SDKを使ってAuth0を統合し、認証の追加とユーザープロファイル情報の表示を行う方法について説明します。"
+---
+
+[Skip to main content](#maincontent)
+
+​
+
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+---
+
+​
+
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+[##### Vueアプリケーションにログインを追加する](#Vueアプリケーションにログインを追加する)
+
+[View on Github](https://github.com/auth0-samples/auth0-vue-samples/tree/master/01-Login) Log In & Download Sample
+
+1. [Docs](/docs/ja-jp/ja-jp)
+3. [Quickstarts](/docs/ja-jp/quickstarts)
+5. [Single Page App](/docs/ja-jp/quickstart/spa)
+7. [Vue](/docs/ja-jp/quickstart/spa/vuejs/interactive)
+
+# 
+
+# Vueアプリケーションにログインを追加する
+
+Auth0を使用すると、アプリケーションに認証を追加することができます。このガイドは、VueアプリケーションにAuth0 Vue SDKを使ってAuth0を統合し、認証の追加とユーザープロファイル情報の表示を行う方法について説明します。
+
+<Warning>
+
+このクイックスタートは、Vue 3アプリケーションで[Auth0 Vue](https://github.com/auth0/auth0-vue)を使用するために設計されています。Vue 2を使用している場合は、[Auth0 SPA SDKを使ったVue 2チュートリアル](https://github.com/auth0/auth0-vue/blob/main/tutorial/vue2-login.md)を確認するか、「[例を挙げて説明するVue.js認証2](https://developer.auth0.com/resources/guides/spa/vue/basic-authentication/v2-javascript)」ガイドを参照してください。
+
+</Warning>
+
+このクイックスタートを使用するには、以下の手順に従います：
+
+* Auth0の無料アカウントを使用するか、Auth0にサインアップします。
+* 統合する作業中のVueプロジェクト、または、ログインした後に、サンプルアプリケーションをダウンロードすることができます。
+
+[1
+
+## Auth0を構成する](#auth0を構成する)
+
+Auth0のサービスを利用するには、Auth0 Dashboadに設定済みのアプリケーションがある必要があります。Auth0アプリケーションは、開発中のプロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
+
+### アプリケーションを構成する
+
+対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0 APIを呼び出す際に使用されます。
+
+このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/dashboard/us/dev-1-2s2aq0/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
+
+代わりに完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
+
+### Callback URLを構成する
+
+Callback URLとは、Auth0がユーザーを認証後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはログイン後にアプリケーションに戻りません。
+
+<Note>
+
+サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+
+</Note>
+
+### ログアウトURLを構成する
+
+ログアウトURLとは、Auth0がユーザーをログアウト後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーを受け取ります。
+
+<Note>
+
+サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+
+</Note>
+
+### Allowed Web Origins（許可されているWebオリジン）を構成する
+
+［Allowed Web Origin（許可されているWebオリジン）］とは、認証フローにアクセスすることを許可して欲しいURLです。これにはプロジェクトのURLが含まれている必要があります。適切に設定されていない場合、プロジェクトが認証トークンを暗黙でリフレッシュできず、ユーザーがアプリケーションを再び訪問した時、またはページを再読み込みした時にログアウトした状態になってしまいます。
+
+<Note>
+
+サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+
+</Note>
+
+[2
+
+## Auth0 Vue SDKをインストールする](#auth0-vue-sdkをインストールする)
+
+Vue 3アプリで、Auth0の認証・認可を手軽に実装できるように、Auth0は[Vue SDK](https://github.com/auth0/auth0-vue)を提供しています。
+
+ターミナルで以下のコマンドを実行してAuth0 Vue SDKをインストールします：
+
+```bash lines
+cd <your-project-directory>
+npm install @auth0/auth0-vue
+```
+
+### プラグインを登録する
+
+SDKが機能するには、以下のプロパティを使ってVueアプリケーションでプラグインを登録する必要があります。
+
+* `domain`：Auth0テナントのドメインです。この値は、Auth0 Dashboardにあるアプリケーションの［Settings（設定）］の［Domain（ドメイン）］フィールドにあります。[カスタムドメイン](https://auth0.com/docs/custom-domains)を使用している場合は、この値をカスタムドメインの値に設定してください。
+* `clientId`：このクイックスタートで前にセットアップした、Auth0アプリケーションのIDです。Auth0 Dashboardにあるアプリケーションの［Settings（設定）］の［Client ID（クライアントID）］フィールドで確認してください。
+* `authorizationParams.redirect_uri`：ユーザー認証の後、Auth0にユーザーをリダイレクトして欲しいアプリケーション内URLです。このクイックスタートで前にセットアップしたCallback URLと呼応します。この値は、Auth0 Dashboardにあるアプリケーションの［Settings（設定）］の［Callback URLs（コールバックURL）］フィールドにあります。コードに入力した値と前にセットアップした値は必ず一致させてください。異なった場合はユーザーにエラーが表示されます。
+
+プラグインは、`provide`と`app.config.globalProperties`の両方を使ってSDKを登録します。これによって、[Composition API](https://vuejs.org/guide/introduction.html#composition-api)と[Options API](https://vuejs.org/guide/introduction.html#options-api)の両方が有効になります。
+
+##### checkpoint.header
+
+プラグインが構成されました。アプリケーションを実行して次の点を確認します：
+
+* SDKが正しく初期化している
+* アプリケーションがAuth0に関連したエラーを投入していない
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[3
+
+## アプリケーションにログインを追加する](#アプリケーションにログインを追加する)
+
+次に、プロジェクト用のログインを設定します。`useAuth0`の返り値に表示されたSDKの`loginWithRedirect`関数を使用します。これには、コンポーネントのsetup関数でアクセスすることができます。ユーザーはAuth0ユニバーサルログインページにリダイレクトされ、ユーザーの認証後、このクイックスタートで前に設定したCallback URLにリダイレクトされます。
+
+### Options APIの使用
+
+Options APIでは、`this`アクセサを通じてグローバル`$auth0`プロパティからの同じ`loginWithRedirect`メソッドを使用することができます。
+
+##### checkpoint.header
+
+Auth0ユニバーサルログインからログインできるようになります。
+
+ログインボタンをクリックして次の点を確認します：
+
+* VueアプリケーションによってAuth0ユニバーサルログインページにリダイレクトされる
+* ログインまたはサインアップできる
+* Auth0が、プラグインを構成するために使った`authorizationParams.redirect_uri`の値を使用し、アプリケーションへリダイレクトする。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[4
+
+## アプリケーションにログアウトを追加する](#アプリケーションにログアウトを追加する)
+
+プロジェクトにログインしたユーザーには、ログアウトする方法も必要です。ユーザーがログアウトすると、アプリケーションによって[Auth0 logout](https://auth0.com/docs/api/authentication?javascript#logout)エンドポイントにリダイレクトされてから、指定された`logoutParams.returnTo`パラメーターにリダイレクトされます。
+
+`useAuth0`の返り値に表示された`logout`関数を使用します。これには、コンポーネントの`setup`関数でアクセスすることができ、ユーザーをアプリケーションからログアウトします。
+
+### Options APIの使用
+
+Options APIでは、`this`アクセサを通じてグローバル`$auth0`プロパティからの同じ`logout`メソッドを使用することができます。
+
+##### checkpoint.header
+
+アプリケーションを実行してログアウトボタンをクリックし、次の点を検証します：
+
+* Vueアプリケーションによって`logoutParams.returnTo`アドレスにリダイレクトされる
+* アプリケーションにログインしていない
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[5
+
+## ユーザープロファイル情報を表示する](#ユーザープロファイル情報を表示する)
+
+次に、認証ユーザーに関連する[プロファイル情報](https://auth0.com/docs/users/concepts/overview-user-profile)を取得する方法を構成します。たとえば、ログインしたユーザーの名前やプロフィール写真をプロジェクトに表示したいかもしれません。ユーザーが認証を行うと、SDKはユーザーのプロファイル情報を抽出し、メモリ内に保存します。アプリケーションは、リアクティブな`user`プロパティを使ってユーザープロファイルにアクセスすることができます。このプロパティにアクセスするには、コンポーネントの`setup`関数を確認し、`userAuth0`返り値を見つけます。
+
+`user`プロパティには、ユーザーIDに関する機微な情報が含まれています。これは、ユーザーの認証ステータスに基づいてのみ利用できます。エラーを防ぐため、常に以下を行ってください：
+
+* Vueが`user`プロパティを使用するコンポーネントを呼び出す前に、`isAuthenticated`プロパティを使用してAuth0がユーザーを認証したかどうかを定義する。
+* `isAuthenticated`プロパティにアクセスする前に、`isLoading`がfalseであることをチェックして、SDKの読み込みが完了したことを確認する。
+
+### Options APIの使用
+
+Options APIでは、アクセサ`this`を通じてグローバル`$auth0`プロパティからの同じリアクティブな`user`、`isLoading`、および`isAuthenticated`プロパティを使用します。
+
+##### checkpoint.header
+
+以下の点を確認します：
+
+* ログイン後、コンポーネント内の`user`やその他のユーザープロパティをすべて正しく表示できる
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+## Next Steps
+
+Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+
+This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+
+* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
+* [auth0-vue SDK](https://www.github.com/auth0/auth0-vue) - Explore the SDK used in this tutorial more fully
+* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/spa/vuejs/interactive.md)
+
+<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
+
+Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+
+Sign Up
+
+Developers
+
+* [Developer Hub](https://developer.auth0.com/resources)
+* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
+* [Blog posts](https://auth0.com/blog/developers/)
+* [Videos](https://auth0.com/docs/videos)
+* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
+* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
+
+Documentation
+
+* [Articles](https://auth0.com/docs/articles)
+* [Quickstarts](https://auth0.com/docs/quickstarts)
+* [APIs](https://auth0.com/docs/api)
+* [SDK Libraries](https://auth0.com/docs/libraries)
+* [Blog](https://auth0.com/blog/)
+* [Reports](https://auth0.com/resources/ebooks)
+* [Webinars](https://auth0.com/resources/webinars)
+
+Get Involved
+
+* [Forum](https://community.auth0.com/)
+* [Events](https://developer.auth0.com/events)
+* [Ambassador Program](https://auth0.com/ambassador-program)
+* [Auth0 Research Program](https://auth0.com/research-program)
+
+Company
+
+* [Our Customers](https://auth0.com/customers)
+* [Compliance - Ensuring privacy and security](https://auth0.com/security)
+* [Partners](https://auth0.com/partners)
+* [Careers We're hiring!](https://www.okta.com/company/careers/)
+* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
+
+Support Center
+
+* [Community](https://community.auth0.com/)
+* [Support](https://support.auth0.com/)
+* [Help](https://community.auth0.com/c/help/6)
+* [FAQs](https://community.auth0.com/c/faq/42)
+* [Auth0 Marketplace](https://marketplace.auth0.com)
+
+Learning
+
+* [Learn](https://auth0.com/learn)
+* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
+* [Blog](https://auth0.com/blog/)
+
+Platform
+
+* [Access Management](https://auth0.com/platform/access-management)
+* [Extensibility](https://auth0.com/platform/extensibility)
+* [Security](https://auth0.com/platform/login-security)
+* [User Management](https://auth0.com/platform/user-management)
+* [Authentication](https://auth0.com/platform/authentication)
+
+Features
+
+* [Universal Login](https://auth0.com/features/universal-login)
+* [Single Sign On](https://auth0.com/features/single-sign-on)
+* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
+* [Actions](https://auth0.com/features/actions)
+* [Machine to Machine](https://auth0.com/features/machine-to-machine)
+* [Passwordless](https://auth0.com/features/passwordless)
+* [Breached Passwords](https://auth0.com/features/breached-passwords)
+
+© 2025 Okta, Inc. All Rights Reserved.
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+

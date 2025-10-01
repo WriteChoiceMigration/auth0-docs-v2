@@ -1,0 +1,239 @@
+---
+title: "Ajouter une fonctionnalité de connexion à votre application Blazor Server"
+permalink: "interactive"
+'description': "Ce guide explique comment intégrer Auth0 à n’importe quelle application Blazor Server, nouvelle ou existante, à l’aide de la trousse SDK Auth0.AspNetCore.Authentication."
+'og:title': "Ajouter une fonctionnalité de connexion à votre application Blazor Server"
+'og:description': "Ce guide explique comment intégrer Auth0 à n’importe quelle application Blazor Server, nouvelle ou existante, à l’aide de la trousse SDK Auth0.AspNetCore.Authentication."
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/asp.png"
+'twitter:title': "Ajouter une fonctionnalité de connexion à votre application Blazor Server"
+'twitter:description': "Ce guide explique comment intégrer Auth0 à n’importe quelle application Blazor Server, nouvelle ou existante, à l’aide de la trousse SDK Auth0.AspNetCore.Authentication."
+---
+
+[Skip to main content](#maincontent)
+
+​
+
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+---
+
+​
+
+[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+[##### Ajouter une fonctionnalité de connexion à votre application Blazor Server](#Ajouter une fonctionnalité de connexion à votre application Blazor Server)
+
+[View on Github](https://github.com/auth0-samples/auth0-aspnetcore-blazor-server-samples/tree/main/Quickstart/Sample) Log In & Download Sample
+
+1. [Quickstarts](/docs/fr-ca/quickstarts)
+3. [Regular Web App](/docs/fr-ca/quickstart/webapp)
+5. [ASP.NET Core Blazor Server](/docs/fr-ca/quickstart/webapp/aspnet-core-blazor-server/interactive)
+
+# 
+
+# Ajouter une fonctionnalité de connexion à votre application Blazor Server
+
+Auth0 vous permet d’ajouter rapidement l’authentification et de pouvoir accéder aux informations relatives au profil utilisateur dans votre application. Ce guide explique comment intégrer Auth0 à n’importe quelle application Blazor Server, nouvelle ou existante, à l’aide de la trousse SDK **Auth0.AspNetCore.Authentication**.
+
+[1
+
+## Configuration d’Auth0](#configuration-d-auth0)
+
+Pour utiliser les services Auth0, vous devez avoir une application installée dans Auth0 Dashboard. L’application Auth0 est l’endroit où vous allez configurer le fonctionnement de l’authentification pour le projet que vous développez.
+
+### Configurer une application
+
+Utilisez le sélecteur interactif pour créer une nouvelle application Auth0 ou sélectionner une application existante qui représente le projet avec lequel vous souhaitez effectuer l’intégration. Dans Auth0, il est attribué à chaque application un identifiant client unique alphanumérique que votre code d’application utilisera pour appeler les API Auth0 via la trousse SDK.
+
+Tous les paramètres que vous configurez à l’aide de ce démarrage rapide seront automatiquement mis à jour pour votre application dans le [Dashboard](https://manage.auth0.com/dashboard/us/auth0-dsepaid/), qui est l’endroit où vous pourrez gérer vos Applications à l’avenir.
+
+Si vous préférez explorer une configuration complète, consultez plutôt un exemple d’application.
+
+### Configuration des URL de rappel
+
+Une URL de rappel est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur authentification. Si elle n’est pas définie, les utilisateurs ne seront pas redirigés vers votre application après s’être connectés.
+
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+
+Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000``/callback`.
+
+</Callout>
+
+### Configuration des URL de déconnexion
+
+Une URL de déconnexion est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur déconnexion. Si elle n’est pas définie, les utilisateurs ne pourront pas se déconnecter de votre application et recevront un message d’erreur.
+
+<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+
+Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000`.
+
+</Callout>
+
+[2
+
+## Installer et configurer la trousse SDK](#installer-et-configurer-la-trousse-sdk)
+
+### Installer à partir de Nuget
+
+Pour intégrer Auth0 à Blazor Server vous pouvez utiliser notre trousse SDK en installant le [package Nuget](https://www.nuget.org/packages/Auth0.AspNetCore.Authentication/)`Auth0.AspNetCore.Authentication`dans votre application.
+
+### Configurer le logiciel médiateur
+
+Pour activer l’authentification dans votre application Blazor Server, utilisez le logiciel médiateur fourni par la trousse SDK. Allez dans le fichier `Program.cs` et appelez `builder.Services.AddAuth0WebAppAuthentication()` pour enregistrer le logiciel médiateur de la trousse SDK.
+
+Assurez-vous de configurer `Domain` et `ClientId`, car ce sont des champs requis pour garantir que la trousse SDK sache quel locataire Auth0 et quelle application utiliser.
+
+Assurez-vous d’avoir activé l’authentification et l’autorisation dans votre fichier `Program.cs`.
+
+[3
+
+## Connexion](#connexion)
+
+Pour permettre aux utilisateurs de se connecter à votre application Blazor Server, ajoutez un `LoginModel` à votre répertoire `Pages`.
+
+Dans le cadre de la méthode `OnGet` de `LoginModel`, appelez `HTTPContext.ChallengeAsync()` et passez `Auth0Constants.AuthenticationScheme` comme schéma d’authentification. Cela fera appel au gestionnaire d’authentification OIDC que notre trousse SDK enregistre en interne. Assurez-vous également d’indiquer les `authenticationProperties` correspondantes, que vous pouvez construire en utilisant `LoginAuthenticationPropertiesBuilder`.
+
+Après avoir appelé avec succès `HttpContext.ChallengeAsync()`, l’utilisateur est redirigé vers Auth0 et est connecté à la fois au logiciel médiateur OIDC et au logiciel médiateur de témoin après avoir été redirigé vers votre application. Cela permettra aux utilisateurs d’être authentifiés lors des requêtes suivantes.
+
+##### checkpoint.header
+
+Maintenant que vous avez configuré la fonction de connexion, lancez votre application pour vérifier que :
+
+* naviguer vers votre page `Login` vous redirigera vers Auth0,
+* saisir vos identifiants vous redirigera vers votre application.
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[4
+
+## Afficher le profil utilisateur](#afficher-le-profil-utilisateur)
+
+Une fois que le logiciel médiateur a réussi à récupérer les jetons auprès d’Auth0, il extrait les informations et les demandes de l’utilisateur du jeton d’ID et les met à disposition via `AuthenticationState`, que vous pouvez ajouter en tant que `CascadingParameter`.
+
+Vous pouvez créer une page de profil utilisateur personnalisée pour afficher le nom de l’utilisateur, ainsi que des demandes supplémentaires (comme le courriel et la photo), en récupérant les informations correspondantes à partir de la propriété `User` de `AuthenticationState` et en les visualisant à partir du code Blazor.
+
+##### checkpoint.header
+
+Maintenant que vous avez effectué la configuration pour afficher le profil utilisateur, lancez votre application pour vérifier que :
+
+* la navigation vers le point de terminaison contenant le profil après une connexion réussie permet d’afficher le profil utilisateur.
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[5
+
+## Déconnexion](#déconnexion)
+
+Déconnecter l’utilisateur de votre propre application peut se faire en appelant `HttpContext.SignOutAsync` avec le schéma d’authentification `CookieAuthenticationDefaults.AuthenticationScheme` à partir de la méthode `OnGet`de `LogoutModel`.
+
+En outre, si vous souhaitez également déconnecter l’utilisateur d’Auth0 (cette action peut également le déconnecter d’autres applications qui utilisent l’authentification unique), appelez `HttpContext.SignOutAsync` avec le schéma d’authentification `Auth0Constants.AuthenticationScheme` ainsi que l’`authenticationProperties` approprié qui peut être construit en utilisant `LogoutAuthenticationPropertiesBuilder`.
+
+##### checkpoint.header
+
+Maintenant que vous avez configuré la fonction de déconnexion, exécutez votre application pour vérifier que :
+
+* Naviguer vers votre page `Logout` garantira que l’utilisateur est déconnecté.
+* Lorsque vous vous déconnectez également d’Auth0, vous devriez être redirigé vers Auth0, puis immédiatement renvoyé vers votre propre application.
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+## Next Steps
+
+Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+
+This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+
+* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
+* [auth0-aspnetcore-authentication SDK](https://github.com/auth0/auth0-aspnetcore-authentication) - Explore the SDK used in this tutorial more fully
+* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/webapp/aspnet-core-blazor-server/interactive.md)
+
+<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
+
+Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+
+Sign Up
+
+Developers
+
+* [Developer Hub](https://developer.auth0.com/resources)
+* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
+* [Blog posts](https://auth0.com/blog/developers/)
+* [Videos](https://auth0.com/docs/videos)
+* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
+* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
+
+Documentation
+
+* [Articles](https://auth0.com/docs/articles)
+* [Quickstarts](https://auth0.com/docs/quickstarts)
+* [APIs](https://auth0.com/docs/api)
+* [SDK Libraries](https://auth0.com/docs/libraries)
+* [Blog](https://auth0.com/blog/)
+* [Reports](https://auth0.com/resources/ebooks)
+* [Webinars](https://auth0.com/resources/webinars)
+
+Get Involved
+
+* [Forum](https://community.auth0.com/)
+* [Events](https://developer.auth0.com/events)
+* [Ambassador Program](https://auth0.com/ambassador-program)
+* [Auth0 Research Program](https://auth0.com/research-program)
+
+Company
+
+* [Our Customers](https://auth0.com/customers)
+* [Compliance - Ensuring privacy and security](https://auth0.com/security)
+* [Partners](https://auth0.com/partners)
+* [Careers We're hiring!](https://www.okta.com/company/careers/)
+* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
+
+Support Center
+
+* [Community](https://community.auth0.com/)
+* [Support](https://support.auth0.com/)
+* [Help](https://community.auth0.com/c/help/6)
+* [FAQs](https://community.auth0.com/c/faq/42)
+* [Auth0 Marketplace](https://marketplace.auth0.com)
+
+Learning
+
+* [Learn](https://auth0.com/learn)
+* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
+* [Blog](https://auth0.com/blog/)
+
+Platform
+
+* [Access Management](https://auth0.com/platform/access-management)
+* [Extensibility](https://auth0.com/platform/extensibility)
+* [Security](https://auth0.com/platform/login-security)
+* [User Management](https://auth0.com/platform/user-management)
+* [Authentication](https://auth0.com/platform/authentication)
+
+Features
+
+* [Universal Login](https://auth0.com/features/universal-login)
+* [Single Sign On](https://auth0.com/features/single-sign-on)
+* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
+* [Actions](https://auth0.com/features/actions)
+* [Machine to Machine](https://auth0.com/features/machine-to-machine)
+* [Passwordless](https://auth0.com/features/passwordless)
+* [Breached Passwords](https://auth0.com/features/breached-passwords)
+
+© 2025 Okta, Inc. All Rights Reserved.
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+

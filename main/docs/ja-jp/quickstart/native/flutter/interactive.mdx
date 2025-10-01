@@ -1,0 +1,318 @@
+---
+title: "Flutterアプリケーションにログインを追加する"
+permalink: "interactive"
+'description': "このガイドでは、FlutterアプリにAuth0 Flutter SDKを使ってAuth0を統合する方法を説明します。"
+'og:title': "Flutterアプリケーションにログインを追加する"
+'og:description': "このガイドでは、FlutterアプリにAuth0 Flutter SDKを使ってAuth0を統合する方法を説明します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/flutter.jpeg"
+'twitter:title': "Flutterアプリケーションにログインを追加する"
+'twitter:description': "このガイドでは、FlutterアプリにAuth0 Flutter SDKを使ってAuth0を統合する方法を説明します。"
+---
+
+[Skip to main content](#maincontent)
+
+​
+
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+---
+
+​
+
+[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+
+[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+
+[##### Flutterアプリケーションにログインを追加する](#Flutterアプリケーションにログインを追加する)
+
+[View on Github](https://github.com/auth0-samples/auth0-flutter-samples/tree/main/sample) Log In & Download Sample
+
+1. [Quickstarts](/docs/ja-jp/quickstarts)
+3. [Native/Mobile App](/docs/ja-jp/quickstart/native)
+5. [Flutter](/docs/ja-jp/quickstart/native/flutter/interactive)
+
+# 
+
+# Flutterアプリケーションにログインを追加する
+
+Auth0を使用すると、アプリケーションに手軽に認証を追加して、ユーザープロファイル情報にアクセスできます。このガイドでは、Flutterアプリに[Auth0 Flutter SDK](https://github.com/auth0/auth0-flutter)を使ってAuth0を統合する方法を説明します。
+
+<Note>
+
+Flutter SDKは現在、Android、iOS、macOS版のFlutterアプリのみに対応しています。
+
+</Note>
+
+このクイックスタートでは、すでに[Flutter](https://flutter.dev/)アプリが問題なく作動しているものとします。そうでない場合は、[Flutter「入門」ガイド](https://docs.flutter.dev/get-started/install)をチェックして、シンプルなアプリの始め方をご確認ください。
+
+[Flutterコマンドラインツール](https://docs.flutter.dev/reference/flutter-cli)の知識も必要になります。
+
+[1
+
+## Auth0を構成する](#auth0を構成する)
+
+Auth0のサービスを利用するには、Auth0 Dashboadに設定済みのアプリケーションがある必要があります。Auth0アプリケーションは、プロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
+
+### Auth0アプリケーションを構成する
+
+対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、既存の**ネイティブ**のAuth0アプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0 APIを呼び出す際に使用されます。
+
+このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/dashboard/us/auth0-dsepaid/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
+
+完了済みの構成を見てみたい場合は、サンプルアプリをご覧ください。
+
+### Callback URLとログアウトURLを構成する
+
+Callback URLとログアウトURLは、ユーザーをアプリにリダイレクトで戻すために、Auth0が呼び出すURLです。 Auth0は、ユーザーを認証した後にCallback URLを呼び出し、セッションのクッキーを削除した後にログアウトURLを呼び出します。Callback URLとログアウトURLを設定しないと、ユーザーはアプリにログインやログアウトが行えなくなり、エラーが発生します。
+
+プラットフォームに合わせて、Callback URLとログアウトURLに以下の値を設定します。
+
+<Note>
+
+Androidでは、`SCHEME`プレースホルダーの値は`https`や他のカスタムスキームでも構いません。`https`スキームでは、[Androidアプリリンク](https://auth0.com/docs/get-started/applications/enable-android-app-links-support)を有効にする必要があります。
+
+iOS 17.4以降とmacOS 14.4以降では、ユニバーサルリンク（`https`スキーム）をCallback URLとログアウトURLに使うことができます。有効にすると、SDKは、iOS/macOSの古いバージョンではカスタムURLスキームにフォールバックして、アプリの[バンドル識別子](https://developer.apple.com/documentation/appstoreconnectapi/bundle_ids)を使用します。**この機能にはXcode 15.3以降と有料のApple Developerアカウントが必要です**。
+
+</Note>
+
+#### Android
+
+`SCHEME://{yourDomain}/android/YOUR_PACKAGE_NAME/callback`
+
+#### iOS
+
+`https://{yourDomain}/ios/YOUR_BUNDLE_IDENTIFIER/callback,`
+
+`YOUR_BUNDLE_IDENTIFIER://{yourDomain}/ios/YOUR_BUNDLE_IDENTIFIER/callback`
+
+#### macOS
+
+`https://{yourDomain}/macos/YOUR_BUNDLE_IDENTIFIER/callback,`
+
+`YOUR_BUNDLE_IDENTIFIER://{yourDomain}/macos/YOUR_BUNDLE_IDENTIFIER/callback`
+
+たとえば、iOSのバンドル識別子が`com.example.MyApp`でAuth0ドメインが`example.us.auth0.com`の場合には、次の値になります：
+
+`https://example.us.auth0.com/ios/com.example.MyApp/callback,`
+
+`com.example.MyApp://example.us.auth0.com/ios/com.example.MyApp/callback`
+
+[2
+
+## Auth0 Flutter SDKをインストールする](#auth0-flutter-sdkをインストールする)
+
+Auth0 Flutter SDKをプロジェクトに追加します：
+
+`flutter pub add auth0_flutter`
+
+[3
+
+## Androidを構成する](#androidを構成する)
+
+Androidプラットフォームが開発対象でない場合には、この手順をスキップしてください。
+
+SDKにはマニフェストのプレースホルダーが必要です。Auth0は内部でプレースホルダーを使用して、認証のCallback URLを捉える`intent-filter`を定義します。Auth0テナントのドメインとCallback URLスキームを設定する必要があります。
+
+[サンプル](https://github.com/auth0-samples/auth0-flutter-samples/tree/main/sample/android)では、次のプレースホルダーを使用します：
+
+* `auth0Domain`：Auth0テナントのドメインです。通常、Auth0 Dashboardにある**アプリケーションの設定**の**［Domain（ドメイン）］**フィールドで確認できます。カスタムドメインを使用している場合には、この値をカスタムドメインの値に設定してください。
+* `auth0Scheme`：使用するスキームです。カスタムスキーム、または、[Androidアプリリンク](https://auth0.com/docs/applications/enable-android-app-links)を利用したい場合はhttpsになります。この値の設定に関する詳細情報は、[Auth0.Android SDK README](https://github.com/auth0/Auth0.Android#a-note-about-app-deep-linking)をお読みください。
+
+<Note>
+
+アクティビティーに特別な`intent-filter`を宣言する必要はありません。これは、マニフェストのプレースホルダーをAuth0**ドメイン**と**スキーム**の値で定義したからです。リダイレクトはライブラリーによって処理されます。
+
+</Note>
+
+Android Studio内で**Sync Project with Gradle Files**を実行し、変更内容を適用します。
+
+[4
+
+## iOS/macOSを構成する](#ios-macosを構成する)
+
+iOSまたはmacOSプラットフォームが開発対象でない場合には、この手順をスキップしてください。
+
+<Warning>
+
+この手順では、有料のApple Developerアカウントが必要です。Callback URLおよびログアウトURLとしてユニバーサルリンクを使用する必要があります。代わりにカスタムのURLスキームを使用する場合はこの手順をスキップしてください。
+
+</Warning>
+
+### チームIDとバンドル識別子を構成する
+
+Auth0アプリケーションの[設定ページ](https://manage.auth0.com/#/applications/%7ByourClientId%7D/settings)に移動して最後までスクロールし、 **［Advanced Settings（詳細設定）］>［Device Settings（デバイス設定）］**を開きます。**［iOS］**セクションで**［Team ID（チームID）］**に[Apple Team ID](https://developer.apple.com/help/account/manage-your-team/locate-your-team-id/)を、**［App ID（アプリID）］**にアプリのバンドル識別子を設定します。
+
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/7wetuICumueyqt6dbB32ro/34a7981c2cee8a14cdcd01e75df1e50c/IOS_Settings_-_Japanese.png)</Frame>
+
+これで、アプリがAuth0テナントの`apple-app-site-association`ファイルに追加されます。
+
+### 関連ドメインの機能を追加する
+
+`open ios/Runner.xcworkspace`（macOSの場合には`open macos/Runner.xcworkspace`）を実行し、Xcodeでアプリを開きます。**Runner**ターゲット設定の**［Signing & Capabilities（署名と機能）］**[タブ](https://developer.apple.com/documentation/xcode/adding-capabilities-to-your-app#Add-a-capability)に移動し、**［+ Capability（＋機能）］**ボタンを押します。それから**［Associated Domains（関連ドメイン）］**を選択します。
+
+<Frame>![null](/images/ja-jp/cdy7uua7fh8z/3GO76kXynaieKs5CSj3UTp/1cc577b56d00bc3bad877e31b848c1ec/ios-xcode-capabilities.png)</Frame>
+
+次に、以下の[エントリー](https://developer.apple.com/documentation/xcode/configuring-an-associated-domain#Define-a-service-and-its-associated-domain)を**［Associated Domains（関連ドメイン）］**の下に追加します。
+
+`webcredentials:{yourDomain}`
+
+カスタムドメインがある場合は、Auth0ドメインの代わりに、設定ページにあるカスタムドメインを使用してください。
+
+<Note>
+
+関連ドメインが動作するためには、**iOSシミュレーター用に構築されている場合でも**、アプリが自分のチーム証明書で署名されている必要があります。Apple Teamには必ず、Auth0アプリケーションの設定ページで構成されたチームIDのものを使用してください。
+
+</Note>
+
+[5
+
+## アプリケーションにログインを追加する](#アプリケーションにログインを追加する)
+
+アプリに認証をセットアップするには、ユニバーサルログインが最も手軽な方法です。最良のエクスペリエンス、高い安全性、幅広い機能を活用するためにも、ユニバーサルログインの使用をお勧めします。
+
+`Auth0`クラスを使用して、Auth0のユニバーサルログインをFlutterアプリに統合します。`webAuthentication().login()`を使用して、ユーザーをAuth0のユニバーサルログインページにリダイレクトします。これは`Future`であるため、ユーザートークンの取得を待ち合わせる必要があります。
+
+**Android**：カスタムスキームを使用している場合には、このスキームをログインメソッドに渡して、SDKが適切にログインページへ誘導してから戻せるようにします：
+
+`await auth0.webAuthentication(scheme: 'YOUR CUSTOM SCHEME').login();`
+
+ユーザーがログインすると、アプリへリダイレクトされます。その後、このユーザーのIDとアクセストークンにアクセスできるようになります。
+
+##### checkpoint.header
+
+`webAuthentication().login()`を呼び出してアプリにユーザーをログインするボタンをアプリに追加します。認証のためにAuth0へリダイレクトされてから、アプリケーションに戻されることを確認します。
+
+`login`を呼び出した結果、トークンにアクセスできることを確認します
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[6
+
+## アプリケーションにログアウトを追加する](#アプリケーションにログアウトを追加する)
+
+ユーザーをログアウトさせるには、Auth0 Flutter SDKの`webAuthentication().logout()`を呼び出してログインセッションをクリアし、ユーザーをAuth0のログアウトエンドポイントにリダイレクトします。Auth0からのログアウトについて詳しい情報をお読みください。
+
+**Android**：カスタムスキームを使用している場合には、このスキームをログアウトメソッドに渡して、SDKがアプリを適切に戻せるようにします：
+
+`await auth0.webAuthentication(scheme: 'YOUR CUSTOM SCHEME').logout();`
+
+##### checkpoint.header
+
+アプリに`webAuthentication().logout()`を呼び出して、ユーザーをアプリからログアウトさせるボタンを追加します。ボタンを選択し、Flutterアプリからログアウトエンドポイントにリダイレクトされ、再び戻されることを確認してください。アプリケーションにはログインされていないはずです。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+[7
+
+## ユーザープロファイル情報を表示する](#ユーザープロファイル情報を表示する)
+
+`webAuthentication().login()`を呼び出すと、ユーザープロファイルが自動的にユーザープロファイルプロパティを取得します。ログイン手順から返されたオブジェクトには、すべてのユーザープロファイルプロパティのある`user`プロパティが含まれ、これらはIDトークンをデコードすることで入力されます。
+
+##### checkpoint.header
+
+ログインして、結果の`user`プロパティを調査します。`email`や`name`など、現在のユーザーのプロファイル情報を確認します。
+
+checkpoint.itWorked checkpoint.somethingNotRight
+
+## Next Steps
+
+Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+
+This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+
+* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
+* [auth0-flutter SDK](https://www.github.com/auth0/auth0-flutter/) - Explore the SDK used in this tutorial more fully
+* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+* [Configure other identity providers](/docs/ja-jp/identityproviders)
+* [Enable multifactor authentication](/docs/ja-jp/multifactor-authentication)
+* [Learn about attack protection](/docs/ja-jp/attack-protection)
+* [Learn about Actions](/docs/ja-jp/customize/actions)
+
+Did it work?
+
+Yes No
+
+Any suggestion or typo?
+
+[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/native/flutter/interactive.md)
+
+<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
+
+Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
+
+Sign Up
+
+Developers
+
+* [Developer Hub](https://developer.auth0.com/resources)
+* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
+* [Blog posts](https://auth0.com/blog/developers/)
+* [Videos](https://auth0.com/docs/videos)
+* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
+* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
+
+Documentation
+
+* [Articles](https://auth0.com/docs/articles)
+* [Quickstarts](https://auth0.com/docs/quickstarts)
+* [APIs](https://auth0.com/docs/api)
+* [SDK Libraries](https://auth0.com/docs/libraries)
+* [Blog](https://auth0.com/blog/)
+* [Reports](https://auth0.com/resources/ebooks)
+* [Webinars](https://auth0.com/resources/webinars)
+
+Get Involved
+
+* [Forum](https://community.auth0.com/)
+* [Events](https://developer.auth0.com/events)
+* [Ambassador Program](https://auth0.com/ambassador-program)
+* [Auth0 Research Program](https://auth0.com/research-program)
+
+Company
+
+* [Our Customers](https://auth0.com/customers)
+* [Compliance - Ensuring privacy and security](https://auth0.com/security)
+* [Partners](https://auth0.com/partners)
+* [Careers We're hiring!](https://www.okta.com/company/careers/)
+* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
+
+Support Center
+
+* [Community](https://community.auth0.com/)
+* [Support](https://support.auth0.com/)
+* [Help](https://community.auth0.com/c/help/6)
+* [FAQs](https://community.auth0.com/c/faq/42)
+* [Auth0 Marketplace](https://marketplace.auth0.com)
+
+Learning
+
+* [Learn](https://auth0.com/learn)
+* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
+* [Blog](https://auth0.com/blog/)
+
+Platform
+
+* [Access Management](https://auth0.com/platform/access-management)
+* [Extensibility](https://auth0.com/platform/extensibility)
+* [Security](https://auth0.com/platform/login-security)
+* [User Management](https://auth0.com/platform/user-management)
+* [Authentication](https://auth0.com/platform/authentication)
+
+Features
+
+* [Universal Login](https://auth0.com/features/universal-login)
+* [Single Sign On](https://auth0.com/features/single-sign-on)
+* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
+* [Actions](https://auth0.com/features/actions)
+* [Machine to Machine](https://auth0.com/features/machine-to-machine)
+* [Passwordless](https://auth0.com/features/passwordless)
+* [Breached Passwords](https://auth0.com/features/breached-passwords)
+
+© 2025 Okta, Inc. All Rights Reserved.
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+
+[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
+

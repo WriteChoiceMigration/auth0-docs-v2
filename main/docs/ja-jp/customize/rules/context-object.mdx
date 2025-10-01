@@ -1,0 +1,197 @@
+---
+title: "ルールのコンテキストオブジェクトのプロパティ"
+permalink: "context-object"
+'description': "ユーザーのIPアドレス、アプリケーション、および位置情報に関する情報を保管する、ルールのコンテキストオブジェクトのプロパティについて説明します。"
+'og:title': "ルールのコンテキストオブジェクトのプロパティ"
+'og:description': "ユーザーのIPアドレス、アプリケーション、および位置情報に関する情報を保管する、ルールのコンテキストオブジェクトのプロパティについて説明します。"
+'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
+'twitter:title': "ルールのコンテキストオブジェクトのプロパティ"
+'twitter:description': "ユーザーのIPアドレス、アプリケーション、および位置情報に関する情報を保管する、ルールのコンテキストオブジェクトのプロパティについて説明します。"
+---
+
+<Warning>
+
+RulesとHooksのサポート終了（EOL）日は**2026年11月18日**であり、**2023年10月16**日の時点で作成された新しいテナントは使用できなくなります。Hooksが有効な既存のテナントは、サポート終了までHooksを利用できます。
+
+今後はActionsに移行して、Auth0の機能を拡張することを強くお勧めします。Actionsを使用すると、豊富な情報やインラインドキュメント、パブリック`npm`パッケージにアクセスして、外部統合を使って全体的な拡張エクスペリエンスを強化することができます。Actionsの詳細については、「[Auth0 Actionsの仕組みを理解する](/docs/ja-jp/customize/actions/actions-overview)」をお読みください。
+
+当社では、移行の参考資料として、[RulesからActionsへの移行](/docs/ja-jp/customize/actions/migrate/migrate-from-rules-to-actions)と[HooksからActionsへの移行](/docs/ja-jp/customize/actions/migrate/migrate-from-hooks-to-actions)に関するガイドを提供しています。また、専用の「[Actionsへの移行](https://auth0.com/extensibility/movetoactions)」ページでは、機能の比較や[Actionsのデモ](https://www.youtube.com/watch?v=UesFSY1klrI)、その他のリソースを掲載して、円滑な移行をサポートしています。
+
+RulesとHooksの廃止の詳細については、当社のブログ記事「[RulesとHooksの提供終了について](https://auth0.com/blog/preparing-for-rules-and-hooks-end-of-life/)」をお読みください。
+
+</Warning>
+
+`context`オブジェクトには、ユーザーのIPアドレスやアプリケーション、位置情報など、実行中の認証トランザクションに関するコンテキスト情報が保管されます。
+
+ルール内のコンテキストオブジェクトを使用してトークンの内容を変更すると、すべてのルールの実行が終わった後でトークンに反映されます。アプリケーションに多要素認証やユーザーの同意も必要な場合には、トークンに変更を反映する前に、ユーザーに確認を促します。
+
+## プロパティ
+
+`context`オブジェクトには以下のプロパティが利用可能です。
+
+<table class="table">
+<thead>
+<tr>
+<th>プロパティ</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`context.tenant`</td>
+<td>テナント名を含む文字列。</td>
+</tr>
+<tr>
+<td>`context.clientID`</td>
+<td>ユーザーがログインしているアプリケーションのクライアントID。</td>
+</tr>
+<tr>
+<td>`context.clientName`</td>
+<td>アプリケーションの名前（Dashboardで定義された通り）。</td>
+</tr>
+<tr>
+<td>`context.clientMetadata`</td>
+<td>別のアプリケーションプロパティを保持するためのオブジェクト。そのキーと値は文字列になります。</td>
+</tr>
+<tr>
+<td>`context.connectionID`</td>
+<td>接続の一意IDを含む文字列。</td>
+</tr>
+<tr>
+<td>`context.connection`</td>
+<td>ユーザーの認証に使用される接続名（例：`twitter`または`some-g-suite-domain`）</td>
+</tr>
+<tr>
+<td>`context.connectionStrategy`</td>
+<td>接続のタイプ。`connectionStrategy` === `connection`のソーシャル接続用。エンタープライズ接続では、`waad`（Microsoft Entra ID）、`ad`（Active Directory/LDAP）、`auth0`（データベース接続）などです。</td>
+</tr>
+<tr>
+<td>`context.connectionOptions`</td>
+<td>接続で定義されたオプションを示すオブジェクトです。`connectionOptions.tenant_domain`は、エンタープライズ接続を使用する際に認証に使われるドメインに含まれる文字列です。<br/> `connectionOptions.domain_aliases`は、プライマリドメインの他に登録されたエイリアスとして任意のドメインを含む配列です（`connectionOptions.tenant_domain`プロパティに指定された通り）。</td>
+</tr>
+<tr>
+<td>`context.connectionMetadata`</td>
+<td>接続で定義されたメタデータを示すオブジェクト。そのキーと値は文字列になります。</td>
+</tr>
+<tr>
+<td>`context.samlConfiguration`</td>
+<td><dfn id="react-containers-DefinitionTooltip-0"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">SAML</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>とWS-Fedのエンドポイントの動作を制御するオブジェクト。高度なクレームマッピングとトークンのエンリッチメントに役立ちます（`samlp`と`wsfed`プロトコルのみ可能です）。</td>
+</tr>
+<tr>
+<td>`context.protocol`</td>
+<td>認証プロトコル。取り得る値は次のとおりです。<ul>
+<li>`oidc-basic-profile`：最も使用されるWebベースのログイン</li>
+<li>`oidc-implicit-profile`：モバイルデバイスとシングルページアプリで使用されます</li>
+<li>`oauth2-device-code`：<a href="/docs/ja-jp/authorization/flows/device-authorization-flow">デバイス認可フロー</a></li>
+<li>を使うトランザクション`oauth2-resource-owner`：通常、データベース接続に使用されるユーザー/パスワードログイン</li>
+<li>`oauth2-resource-owner-jwt-bearer`：ユーザーの秘密鍵で署名されたBearer JWTを使用したログイン</li>
+<li>`oauth2-password`：パスワード交換を使用したログイン</li>
+<li>`oauth2-refresh-token`：リフレッシュトークン交換を使用したトークンのリフレッシュ</li>
+<li>`samlp`：SaaSアプリで使用されるSAMLプロトコル</li>
+<li>`wsfed`：Office365などのMicrosoft製品で使用されるWS-Federation</li>
+<li>`wstrust-usernamemixed`：CRMとOffice365で使用されるWS-trustユーザー/パスワードログイン</li>
+<li>`delegation`：<a href="/docs/ja-jp/api/authentication#delegation">Delegationエンドポイントを呼び出すとき</a></li>
+<li>`redirect-callback`：リダイレクトルールが再開されたとき</li></ul></td>
+</tr>
+<tr>
+<td>`context.riskAssessment`</td>
+<td>高リスクのログイン試行評価の指定スコア（低、中、高、普通）を含むオブジェクト。「<a href="/docs/ja-jp/login/mfa/adaptive-mfa/adaptive-mfa-rule-actions">ルールでAdaptive MFAをカスタマイズする</a>」をご覧ください。</td>
+</tr>
+<tr>
+<td>`context.stats`</td>
+<td>`stats.loginsCount`のような特定ユーザー統計を含むオブジェクト。`stats`オブジェクトの一部として返されたすべてのカウンター変数は、 <a href="/docs/ja-jp/login/configure-silent-authentication">サイレント認証</a>（`prompt=none`の場合）では増加しないことに注意してください。カウンター変数が増加する一方で、ルールまたは一連のルールが実行されないシナリオも存在します。これは、成功したcross-origin認証の後に失敗したトークン要求がある場合などです。</td>
+</tr>
+<tr>
+<td>`context.sso`</td>
+<td>このオブジェクトは、<dfn id="react-containers-DefinitionTooltip-1"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">シングルサインオン（SSO）</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>トランザクション（可能な場合）についての情報を含みます<ul>
+<li>`with_auth0`：`［Use Auth0 instead of the IdP to do Single Sign-on（IdPの代わりにAuth0をシングルサインオンに使用）］`設定が有効（旧テナントのみ）になっているアプリケーションにユーザーがSSOでサインインするとき。</li>
+<li>`with_dbconn`：データベース接続からログインしたユーザーが行うSSOログイン。</li>
+<li>`current_clients`：SSOを使用したクライアントID。</li></ul></td>
+</tr>
+<tr>
+<td>`context.accessToken`</td>
+<td><dfn id="react-containers-DefinitionTooltip-2"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">アクセストークン</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>で定義されたオプションを表示するオブジェクト。アクセストークンに<a href="/docs/ja-jp/get-started/apis/scopes/sample-use-cases-scopes-and-claims#add-custom-claims-to-a-token">カスタムされた名前空間のクレームを追加する</a>オブジェクトとして使用できます。 `context.accessToken.scope`は <a href="/docs/ja-jp/rules/examples#modify-scope-of-access-token">アクセストークンの返されたスコープを変更する</a>ために使用することができます。提供された場合、これは文字列形式の権限を含む配列です。カスタムクレームは、すべてのルールが実行された後にアクセストークンに含められます。</td>
+</tr>
+<tr>
+<td>`context.idToken`</td>
+<td><a href="/docs/ja-jp/security/tokens/id-tokens">IDトークン</a>で定義されたオプションを表示するオブジェクト。IDトークンに、カスタムされた<a href="/docs/ja-jp/security/tokens/json-web-tokens/create-namespaced-custom-claims">名前空間</a>のクレームを追加する際に使用されます。カスタムクレームは、すべてのルールが実行された後にIDトークンに含められます。</td>
+</tr>
+<tr>
+<td>`context.multifactor`</td>
+<td><a href="/docs/ja-jp/mfa">コンテキストに応じたMFAの実装</a>で使用される多要素設定を表示するオブジェクト。</td>
+</tr>
+<tr>
+<td>`context.redirect`</td>
+<td><a href="/docs/ja-jp/rules/redirect-users#how-to-implement-a-redirect">ルールからユーザーのリダイレクトを実装する</a>際に使用されるオブジェクト。</td>
+</tr>
+<tr>
+<td>`context.sessionID`</td>
+<td>認証セッションの内部ID。認証要求で、`prompt=none`が使用されている場合のみ、値は維持されます。注意：セッションIDは、他のフローでルールが実行された<strong>後</strong>に変わることがあるため、`context.sessionID`で可能な値は、ユーザーが受け取る新しいセッションIDと一致しないことがあります。このため、この値は、`prompt=none`が使用されるときのみ、意味を持ちます。</td>
+</tr>
+<tr>
+<td>`context.request`</td>
+<td>要求の便利な情報を含むオブジェクト。これは、`undefined`にも設定できます。次のプロパティを含みます：<ul>
+<li>`userAgent`：ログインしようとしているアプリケーションのユーザーエージェント。</li>
+<li>`ip`：ユーザーがログインしようとしている元のIPアドレス。IPv6アドレスはパブリックエンドポイントで公開しています（例：travel0.us.auth0.com）。IPv6をサポートするマシンから要求が届いた場合、これにはIPv6アドレスが含まれます。手動でIPアドレスを操作する場合は、<a href="https://www.npmjs.com/package/ipaddr.js/v/1.9.0">ipaddr.js@1.9.0 library</a>の使用をお勧めします。</li>
+<li>`hostname`：認証フローに使用されているホスト名。</li>
+<li>`query`：アプリケーションから送られたログイントランザクションのクエリ文字列を含むオブジェクト。</li>
+<li>`body`：`oauth2-resource-owner`、`oauth2-resource-owner-jwt-bearer`または`wstrust-usernamemixed`プロトコルで使用されるログイントランザクションにおけるPOST要求のボディ。</li>
+<li>`geoip`：地理的IP情報を含むオブジェクト。次のプロパティを含みます：<ul>
+<li>`country_code`：IPアドレスに関連付けられた2文字の国コード。</li>
+<li>`country_code3`：IPアドレスに関連付けられた3文字の国コード。</li>
+<li>`country_name`：IPアドレスに関連付けられた国名。</li>
+<li>`city_name`：IPアドレスに関連付けられた市または町名。</li>
+<li>`latitude`：IPアドレスに関連付けられた緯度。</li>
+<li>`longitude`：IPアドレスに関連付けられた経度。</li>
+<li>`time_zone`：IPアドレスに関連付けられたタイムゾーン。</li>
+<li>`continent_code`：IPアドレスに関連付けられた2文字の大陸コード。</li>
+<li>`subdivision_code`：最上位のサブディビジョン/地域のISO 3166-2コード。</li>
+<li>`subdivision_name`：このサブディビジョン/地域の英語名。</li></ul></li></ul></td>
+</tr>
+<tr>
+<td>`context.primaryUser`</td>
+<td>ユーザー用プライマリアカウントの一意のユーザーID。様々なIDプロバイダーから<a href="/docs/ja-jp/users/user-account-linking#automatic-account-linking">ユーザーアカウントをリンクする</a>際に使用されます。</td>
+</tr>
+<tr>
+<td>`context.authentication`</td>
+<td>次のプロパティの認証トランザクションに関連する情報を含むオブジェクト：<br/><br/>
+`methods`：セッション中にユーザーが完了した認証メソッドを含むオブジェクトの配列。たとえば、ユーザーがMFAの前に完了したパスワードベースの認証には次のメソッドがあります：<br/>
+<div id="portal-code-block-0"><style data-emotion="css i3pbo" data-react-universal-portal="">.css-i3pbo{margin-bottom:24px;}</style><style data-emotion="css 1ler0" data-react-universal-portal="">.css-1ler0{margin-bottom:24px;}</style><div class="MuiBox-root css-1ler0" data-react-universal-portal=""><style data-emotion="css 18zbu0o">.css-18zbu0o{position:relative;}.css-18zbu0o .show-scroll{max-height:500px;overflow:scroll;}.css-18zbu0o button.copy-button{position:absolute;right:0.5em;top:0.5em;}.css-18zbu0o pre.code-highlight-prism{border:0;}.css-18zbu0o code.code-highlight-prism{color:#FFFFFF;}.css-18zbu0o .token.keyword{color:#B9E0CB;}.css-18zbu0o .token.property,.css-18zbu0o .token.constant,.css-18zbu0o .token.symbol,.css-18zbu0o .token.deleted{color:#B9E0CB;}.css-18zbu0o .token.selector,.css-18zbu0o .token.string,.css-18zbu0o .token.char,.css-18zbu0o .token.builtin,.css-18zbu0o .token.inserted{color:#bcbcff;}.css-18zbu0o .token.boolean,.css-18zbu0o .token.number{color:#bcbcff;}.css-18zbu0o .token.class-name,.css-18zbu0o .token.attr-name,.css-18zbu0o .token .punctuation{color:#DCD1FC;}.css-18zbu0o .token.attr-value,.css-18zbu0o .token.tag,.css-18zbu0o .token.script .punctuation,.css-18zbu0o .token.atrule{color:#bcbcff;}.css-18zbu0o .token.function{color:#FFFFFF;}.css-18zbu0o .token.regex,.css-18zbu0o .token.important{color:#DCD1FC;}.css-18zbu0o .token.namespace{opacity:1;}.css-18zbu0o .line-highlight{background:rgba(85, 85, 85, 0.2);border-bottom:0.5px solid rgba(255, 255, 255, 0.25);border-top:0.5px solid rgba(255, 255, 255, 0.25);}.css-18zbu0o .line-numbers{font-family:Roboto Mono,Menlo,Monaco,Consolas,Courier New,monospace;font-size:0.875rem;line-height:1.25rem;letter-spacing:0.15px;font-weight:400;-webkit-font-smoothing:subpixel-antialiased;}.css-18zbu0o .line-numbers .line-numbers-rows{border-right:none;color:#5a5f66;}.css-18zbu0o :not(pre)>code[class*="language-"],.css-18zbu0o pre[class*="language-"]{background:#1E1E1E;}.css-18zbu0o pre[class*="language-"]{margin:0;}.css-18zbu0o .token.package:before,.css-18zbu0o .token.package:after{display:none;}.css-18zbu0o .token.package{background:none;border:none;}</style><div class="css-18zbu0o"><pre class="code-highlight-prism show-scroll language-json line-numbers linkable-line-numbers"><code class="code-highlight-prism show-scroll language-json" style="font-family:unset">[
+  {
+    "name"： "pwd",
+    "timestamp"： 1434454643024
+  },
+  {
+    "name"： "mfa",
+    "timestamp"： 1534454643881
+  }
+]`</pre><style data-emotion="css re1tye">.css-re1tye{color:#BCBAFF;border:none;background-color:none;background:none;}</style><style data-emotion="css 1brrap6">.css-1brrap6{padding:0;border-radius:4px;-webkit-transition:background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;color:#BCBAFF;border:none;background-color:none;background:none;}.css-1brrap6:focus,.css-1brrap6.Mui-focusVisible{box-shadow:rgba(63, 89, 228, 0.25) 0px 0px 0px 0.25em;}.css-1brrap6.Mui-disabled{background-color:#F1F1F1;color:#686868;}.css-1brrap6>svg:first-child{height:1em;width:1em;}</style><style data-emotion="css 1t8h97s">.css-1t8h97s{text-align:center;-webkit-flex:0 0 auto;-ms-flex:0 0 auto;flex:0 0 auto;font-size:1.5rem;padding:8px;border-radius:50%;overflow:visible;color:rgba(0, 0, 0, 0.54);-webkit-transition:background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;color:#3F59E4;font-size:1rem;height:2.125rem;width:2.125rem;color:#3F59E4;border-style:solid;border-width:1px;color:#3F59E4;border-color:#3F59E4;padding:0;border-radius:4px;-webkit-transition:background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;color:#BCBAFF;border:none;background-color:none;background:none;}.css-1t8h97s:hover{background-color:rgba(0, 0, 0, 0.04);}@media (hover: none){.css-1t8h97s:hover{background-color:transparent;}}.css-1t8h97s:hover{background-color:rgba(63, 89, 228, 0.04);}@media (hover: none){.css-1t8h97s:hover{background-color:transparent;}}.css-1t8h97s.Mui-disabled{background-color:transparent;color:rgba(0, 0, 0, 0.26);}.css-1t8h97s.Mui-disabled,.css-1t8h97s:disabled{color:#8E8E8E;background-color:#E8E8E8;border-color:#D7D7D7;}.css-1t8h97s:hover,.css-1t8h97s.Mui-hover{color:#3449BA;background-color:#EEF0FD;}.css-1t8h97s:active,.css-1t8h97s.Mui-active{color:#263588;background-color:#E4E7FB;}.css-1t8h97s:hover,.css-1t8h97s.Mui-hover{background-color:#EEF0FD;border-color:#3F59E4;}.css-1t8h97s:active,.css-1t8h97s.Mui-active{background-color:#E4E7FB;border-color:#3F59E4;}.css-1t8h97s:focus,.css-1t8h97s.Mui-focusVisible{box-shadow:rgba(63, 89, 228, 0.25) 0px 0px 0px 0.25em;}.css-1t8h97s.Mui-disabled{background-color:#F1F1F1;color:#686868;}.css-1t8h97s>svg:first-child{height:1em;width:1em;}</style><style data-emotion="css juxxc7">.css-juxxc7{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;position:relative;box-sizing:border-box;-webkit-tap-highlight-color:transparent;background-color:transparent;outline:0;border:0;margin:0;border-radius:0;padding:0;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;vertical-align:middle;-moz-appearance:none;-webkit-appearance:none;-webkit-text-decoration:none;text-decoration:none;color:inherit;text-align:center;-webkit-flex:0 0 auto;-ms-flex:0 0 auto;flex:0 0 auto;font-size:1.5rem;padding:8px;border-radius:50%;overflow:visible;color:rgba(0, 0, 0, 0.54);-webkit-transition:background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;color:#3F59E4;font-size:1rem;height:2.125rem;width:2.125rem;color:#3F59E4;border-style:solid;border-width:1px;color:#3F59E4;border-color:#3F59E4;padding:0;border-radius:4px;-webkit-transition:background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;color:#BCBAFF;border:none;background-color:none;background:none;}.css-juxxc7::-moz-focus-inner{border-style:none;}.css-juxxc7.Mui-disabled{pointer-events:none;cursor:default;}@media print{.css-juxxc7{-webkit-print-color-adjust:exact;color-adjust:exact;}}.css-juxxc7:hover{background-color:rgba(0, 0, 0, 0.04);}@media (hover: none){.css-juxxc7:hover{background-color:transparent;}}.css-juxxc7:hover{background-color:rgba(63, 89, 228, 0.04);}@media (hover: none){.css-juxxc7:hover{background-color:transparent;}}.css-juxxc7.Mui-disabled{background-color:transparent;color:rgba(0, 0, 0, 0.26);}.css-juxxc7.Mui-disabled,.css-juxxc7:disabled{color:#8E8E8E;background-color:#E8E8E8;border-color:#D7D7D7;}.css-juxxc7:hover,.css-juxxc7.Mui-hover{color:#3449BA;background-color:#EEF0FD;}.css-juxxc7:active,.css-juxxc7.Mui-active{color:#263588;background-color:#E4E7FB;}.css-juxxc7:hover,.css-juxxc7.Mui-hover{background-color:#EEF0FD;border-color:#3F59E4;}.css-juxxc7:active,.css-juxxc7.Mui-active{background-color:#E4E7FB;border-color:#3F59E4;}.css-juxxc7:focus,.css-juxxc7.Mui-focusVisible{box-shadow:rgba(63, 89, 228, 0.25) 0px 0px 0px 0.25em;}.css-juxxc7.Mui-disabled{background-color:#F1F1F1;color:#686868;}.css-juxxc7>svg:first-child{height:1em;width:1em;}</style><button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeMedium copy-button css-juxxc7" tabindex="0" type="button" variant="outlined"><svg class="css-0" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><rect height="13" rx="2" ry="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><style data-emotion="css 3tbxyb">.css-3tbxyb{position:relative;gap:12px;margin-top:16px;}</style><style data-emotion="css lqmrhz">.css-lqmrhz{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:baseline;-webkit-box-align:baseline;-ms-flex-align:baseline;align-items:baseline;-webkit-box-pack:end;-ms-flex-pack:end;-webkit-justify-content:flex-end;justify-content:flex-end;position:relative;gap:12px;margin-top:16px;}</style><div class="MuiBox-root css-lqmrhz"><style data-emotion="css 1pmssyl">.css-1pmssyl{margin:0;font-family:Inter var,Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Helvetica,Arial,sans-serif;font-weight:400;font-size:0.875rem;line-height:1.57143;letter-spacing:0;}</style><p class="MuiTypography-root MuiTypography-body2 css-1pmssyl"></p><style data-emotion="css v9we1n">.css-v9we1n{grid-template-columns:none;grid-auto-columns:min-content;grid-auto-flow:column;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}@media (min-width:0px){.css-v9we1n{grid-template-columns:none;}}@media (min-width:600px){.css-v9we1n{grid-template-columns:none;}}@media (min-width:960px){.css-v9we1n{grid-template-columns:none;}}</style><style data-emotion="css 1wl17lu">.css-1wl17lu{display:grid;gap:0px;grid-template-columns:none;grid-auto-columns:min-content;grid-auto-flow:column;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}@media (min-width:0px){.css-1wl17lu{grid-template-columns:minmax(0,1fr);}}@media (min-width:600px){.css-1wl17lu{grid-template-columns:minmax(0,1fr);}}@media (min-width:960px){.css-1wl17lu{grid-template-columns:repeat(2, minmax(0,1fr));}}@media (min-width:0px){.css-1wl17lu{grid-template-columns:none;}}@media (min-width:600px){.css-1wl17lu{grid-template-columns:none;}}@media (min-width:960px){.css-1wl17lu{grid-template-columns:none;}}</style><div class="css-1wl17lu"><style data-emotion="css 1c1xxt8">.css-1c1xxt8{padding:0px 8px;}.css-1c1xxt8:focus{box-shadow:none;}</style><style data-emotion="css kea6zk">.css-kea6zk{padding:0px 8px;}.css-kea6zk:focus{box-shadow:none;}</style><style data-emotion="css dtxjki">.css-dtxjki{font-family:Inter var,Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Helvetica,Arial,sans-serif;font-weight:500;font-size:0.875rem;line-height:1.57143;text-transform:capitalize;letter-spacing:0;min-width:64px;padding:6px 16px;border-radius:4px;-webkit-transition:background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;box-shadow:none;padding:6px 12px;color:#191919;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;white-space:nowrap;min-width:unset;font-size:0.875rem;background-color:transparent;color:#191919;padding:5px 12px;padding:3px 10px;color:#3F59E4;padding:0px 8px;}.css-dtxjki:hover{-webkit-text-decoration:none;text-decoration:none;background-color:rgba(25, 25, 25, 0.04);}@media (hover: none){.css-dtxjki:hover{background-color:transparent;}}.css-dtxjki.Mui-disabled{color:rgba(0, 0, 0, 0.26);}.css-dtxjki:hover{box-shadow:none;}.css-dtxjki.Mui-focusVisible{box-shadow:none;}.css-dtxjki:active{box-shadow:none;}.css-dtxjki.Mui-disabled{box-shadow:none;}.css-dtxjki.Mui-disabled,.css-dtxjki:disabled{color:#8E8E8E;background-color:#E8E8E8;border-color:#D7D7D7;}.css-dtxjki:focus,.css-dtxjki.Mui-focusVisible{box-shadow:rgba(63, 89, 228, 0.25) 0px 0px 0px 0.25em;}.css-dtxjki:hover,.css-dtxjki.Mui-hover{color:#3449BA;background-color:#EEF0FD;}.css-dtxjki:active,.css-dtxjki.Mui-active{color:#263588;background-color:#E4E7FB;}.css-dtxjki:focus{box-shadow:none;}</style><style data-emotion="css 1spzyzx">.css-1spzyzx{display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;position:relative;box-sizing:border-box;-webkit-tap-highlight-color:transparent;background-color:transparent;outline:0;border:0;margin:0;border-radius:0;padding:0;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;vertical-align:middle;-moz-appearance:none;-webkit-appearance:none;-webkit-text-decoration:none;text-decoration:none;color:inherit;font-family:Inter var,Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Helvetica,Arial,sans-serif;font-weight:500;font-size:0.875rem;line-height:1.57143;text-transform:capitalize;letter-spacing:0;min-width:64px;padding:6px 16px;border-radius:4px;-webkit-transition:background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;box-shadow:none;padding:6px 12px;color:#191919;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;white-space:nowrap;min-width:unset;font-size:0.875rem;background-color:transparent;color:#191919;padding:5px 12px;padding:3px 10px;color:#3F59E4;padding:0px 8px;}.css-1spzyzx::-moz-focus-inner{border-style:none;}.css-1spzyzx.Mui-disabled{pointer-events:none;cursor:default;}@media print{.css-1spzyzx{-webkit-print-color-adjust:exact;color-adjust:exact;}}.css-1spzyzx:hover{-webkit-text-decoration:none;text-decoration:none;background-color:rgba(25, 25, 25, 0.04);}@media (hover: none){.css-1spzyzx:hover{background-color:transparent;}}.css-1spzyzx.Mui-disabled{color:rgba(0, 0, 0, 0.26);}.css-1spzyzx:hover{box-shadow:none;}.css-1spzyzx.Mui-focusVisible{box-shadow:none;}.css-1spzyzx:active{box-shadow:none;}.css-1spzyzx.Mui-disabled{box-shadow:none;}.css-1spzyzx.Mui-disabled,.css-1spzyzx:disabled{color:#8E8E8E;background-color:#E8E8E8;border-color:#D7D7D7;}.css-1spzyzx:focus,.css-1spzyzx.Mui-focusVisible{box-shadow:rgba(63, 89, 228, 0.25) 0px 0px 0px 0.25em;}.css-1spzyzx:hover,.css-1spzyzx.Mui-hover{color:#3449BA;background-color:#EEF0FD;}.css-1spzyzx:active,.css-1spzyzx.Mui-active{color:#263588;background-color:#E4E7FB;}.css-1spzyzx:focus{box-shadow:none;}</style><button class="MuiButton-root MuiButton-link MuiButton-linkPrimary MuiButton-sizeSmall MuiButton-linkSizeSmall MuiButton-disableElevation MuiButtonBase-root css-1spzyzx" tabindex="0" type="button">Yes </button><span>/</span><button class="MuiButton-root MuiButton-link MuiButton-linkPrimary MuiButton-sizeSmall MuiButton-linkSizeSmall MuiButton-disableElevation MuiButtonBase-root css-1spzyzx" tabindex="0" type="button">No </button></div></div></div></div>
+<br/>
+メソッドオブジェクトは次のプロパティを含みます：<ul>
+<li>`name`：完了した認証メソッドの名前を表示する文字列。次の値の1つである可能性があります（将来的に他の値にも対応する可能性があります）：<br/><ul>
+<li>`federated`： ソーシャルまたはエンタープライズ接続がユーザーの認証に使用されました</li>
+<li>`pwd`：データベース接続がユーザーの認証に使用されました</li>
+<li>`sms`：<dfn id="react-containers-DefinitionTooltip-3"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">パスワードレス</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>のSMS接続がユーザーの認証に使用されました</li>
+<li>`email`：パスワードレスのメール接続がユーザーの認証に使用されました</li>
+<li>`mfa`：ユーザーが多要素認証を完了しました</li>
+</ul></li>
+<li>`timestamp`：認証メソッドが実行されたUNIXエポック時間（秒単位）を示す整数</li></ul><a href="https://github.com/auth0/rules/blob/master/src/rules/require-mfa-once-per-session.js">セッションルールごとに1回のMFAを要求する</a>で`context.authentication.methods`プロパティの使用例をご覧ください。</td>
+</tr>
+<tr>
+<td>`context.authorization`</td>
+<td>次のプロパティの認可トランザクションに関連する情報を含むオブジェクト：<ul>
+<li>`roles`：ユーザーに割り当てられた <dfn id="react-containers-DefinitionTooltip-4"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">ロール</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>の名前を含む文字列の配列。`context.authorization.roles`プロパティを使ってトークンにロールを追加する使用例は、<a href="/docs/ja-jp/authorization/authorization-policies/sample-use-cases-rules-with-authorization#add-user-roles-to-tokens">サンプルユースケース：認可を使ったルール</a>でご覧ください。</li></ul></td>
+</tr>
+<tr>
+<td>`context.organization`</td>
+<td>組織に関連した情報を含むオブジェクト。次のプロパティを含みます：<ul>
+<li>`id`：ユーザーがログインしている組織のIDを含む文字列。</li><li>`name`：組織名を含む文字列（<dfn id="react-containers-DefinitionTooltip-5"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">Auth0 Dashboard</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn>に定義されている通り）。</li><li>`metadata`：別の組織プロパティを含む、文字列キー/値のペアのディクショナリー。</li></ul></td>
+</tr>
+</tbody>
+</table>
+
+## もっと詳しく
+
+* [ルールをデバッグする](/docs/ja-jp/customize/rules/debug-rules)
+* [ルールのユーザーオブジェクトプロパティ](/docs/ja-jp/customize/rules/user-object-in-rules)
+* [「サンプルユースケース」の「スコープとクレーム」](/docs/ja-jp/get-started/apis/scopes/sample-use-cases-scopes-and-claims)
