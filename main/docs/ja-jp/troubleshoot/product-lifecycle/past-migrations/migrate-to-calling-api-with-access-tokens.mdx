@@ -11,7 +11,7 @@ permalink: "migrate-to-calling-api-with-access-tokens"
 
 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>エンドポイントの呼び出しにIDトークンを使用することは非推奨となります。今後はアクセストークンを使用しなければなりません。この移行の猶予期間は、**2018年3月31日** に開始しました。
 
-アクセストークンへの移行が完了したら、Dashboardで**［Allow <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">ID Tokens</Tooltip> for Management API v2 Authentication（Management API v2認証にIDトークンを許可する）］** を無効にします。
+アクセストークンへの移行が完了したら、Dashboardで **［Allow <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">ID Tokens</Tooltip> for Management API v2 Authentication（Management API v2認証にIDトークンを許可する）］** を無効にします。
 
 以下のいずれかのエンドポイントを呼び出すためにIDトークンを使用する場合、この移行による影響を受けます。これらのエンドポイントは、通常のアクセストークンを受け入れられるようになりました。エンドポイントの動作にその他の変更はありません。要求と応答のスキーマは同じままで、認可に使用するトークンの更新だけが必要です。
 
@@ -137,7 +137,7 @@ Auth0は、前述のエンドポイントについてトークンを取得する
 
 以下の例では、`GET User by ID`エンドポイントを使用して、ログインユーザーの完全なプロファイル情報を取得します。そのために、まず、暗黙的付与を使用してユーザーを認証し、トークンを取得します。以下は、IDトークンを取得し、それを使用してエンドポイントを呼び出す、以前の方法の実装例です。
 
-codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
+
 
 ```javascript lines
 https://{yourDomain}/authorize?
@@ -151,7 +151,7 @@ https://{yourDomain}/authorize?
 
 以下は、アクセストークンを取得する新しい方法の例です。
 
-codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
+
 
 ```javascript lines
 https://{yourDomain}/authorize?
@@ -194,7 +194,7 @@ Management APIにアクセスできるアクセストークンを取得するに
 
 以下の例では、`GET User by ID`エンドポイントを使用して、ログインユーザーの完全なプロファイル情報を取得します。まず、パスワード交換の付与タイプを使ってユーザーを認証してから、トークンを取得します。以下は、IDトークンを取得する（そして、それを使用してエンドポイントを呼び出す）以前の方法の実装例です。
 
-codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
+
 
 ```javascript lines
 POST https://{yourDomain}/oauth/token
@@ -211,7 +211,7 @@ POST https://{yourDomain}/oauth/token
 
 以下は、アクセストークンを取得する新しい方法の例です。
 
-codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
+
 
 ```javascript lines
 POST https://{yourDomain}/oauth/token
@@ -242,7 +242,7 @@ Management APIへのアクセスとユーザーの管理にauth0.jsを使用す�
 
 以下の例は、以前の方法です。
 
-codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
+
 
 ```javascript lines
 // get an ID Token
@@ -262,7 +262,7 @@ codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
 この例は、新しい方法です。
 
-codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
+
 
 ```javascript lines
 // get an Access Token

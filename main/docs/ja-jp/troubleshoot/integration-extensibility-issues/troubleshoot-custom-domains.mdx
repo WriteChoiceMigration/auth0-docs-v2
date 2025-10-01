@@ -11,6 +11,8 @@ permalink: "troubleshoot-custom-domains"
 
 カスタムドメインに関する一般的な問題については次のビデオをご覧ください。また、特定のシナリオのトラブルシューティング手順については、以下のセクションを参照してください。
 
+<iframe width="100%" height="316" src="https://www.youtube.com/embed/f6fkOkS1RFA" title="Custom Domain Issues" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## カスタムドメインが検証待ちのままである
 
 DNSが伝播するまでに最大48時間かかる場合があります。
@@ -32,7 +34,7 @@ Auth0では、絶対に必要な場合を除き、CNAMEフラット化をオフ�
 
 </Callout>
 
-CNAMEフラット化は、DNSレコードの処理方法により、Auth0の検証および証明書の更新プロセスに影響します。カスタムドメインを設定した後、CloudfareでCNAMEフラット化を有効にしても、証明書の更新は**［not prevent（妨げられません）］** 。
+CNAMEフラット化は、DNSレコードの処理方法により、Auth0の検証および証明書の更新プロセスに影響します。カスタムドメインを設定した後、CloudfareでCNAMEフラット化を有効にしても、証明書の更新は **not prevent（妨げられません）］** 。
 
 Cloudflareで管理しているすべてのサブドメインに対してCNAMEフラット化を有効にし、特定のサブドメインをAuth0のカスタムドメインとして構成する必要がある場合は、Auth0用のサブドメインを別のDNSプロバイダーに委任することを検討してください。詳細については、Cloudflareドキュメントの[「Cloudflareの外部にサブドメインを委任」](https://support.cloudflare.com/hc/en-us/articles/360021357131-Delegating-Subdomains-Outside-of-Cloudflare)を参照してください。外部に委任すると、Auth0用のサブドメインを除くすべてのサブドメインでCNAMEフラット化を使用できるようになります。
 
@@ -46,7 +48,7 @@ Cloudflareで管理しているすべてのサブドメインに対してCNAME�
 
 同様に、[Auth0 Management API](/docs/ja-jp/api/management/v2)の呼び出しでカスタムドメインを使用すると、同じ理由でエラーが発生します。
 
-これを修正するには、アプリで代わりに`audience=https://{yourOriginalAuth0Domain}/userinfo`を使用する必要があります。アプリケーションの**［Advanced Settings（詳細設定）］** の**［OAuth2］** タブでアプリケーションが**［OIDC-Conformant（OIDC準拠）］** としてフラグ付けされている場合は、この`audience=[...]/userinfo`パラメータを完全に削除することもできます。
+これを修正するには、アプリで代わりに`audience=https://{yourOriginalAuth0Domain}/userinfo`を使用する必要があります。アプリケーションの **Advanced Settings（詳細設定）］** の **OAuth2］** タブでアプリケーションが **OIDC-Conformant（OIDC準拠）］** としてフラグ付けされている場合は、この`audience=[...]/userinfo`パラメータを完全に削除することもできます。
 
 ## Internet Explorerに関連するエラー
 
@@ -63,7 +65,7 @@ Auth0ドメインとアプリドメインの両方が同じ信頼済みゾーン
 1. **Internet Options>Security** へ移動します。
 2. **［Local Intranet Zone（ローカル イントラネット ゾーン）］** タブを選択し、Sites>Advancedに移動します。ドメインを追加します。
 3. **［Security（セキュリティ）］** タブに戻り、適切なゾーンが選択されていることを確認します。
-4. **［Custom Level（レベルのカスタマイズ）］** をクリックし、**［Miscellaneous（その他）］** セクションで**［Access data sources across domains（ドメイン間のアクセス データ ソース）］** を探します。**［Enable（有効化）］** の横にあるラジオボタンをクリックします。
+4. **［Custom Level（レベルのカスタマイズ）］** をクリックし、**Miscellaneous（その他）］** セクションで **Access data sources across domains（ドメイン間のアクセス データ ソース）］** を探します。**Enable（有効化）］** の横にあるラジオボタンをクリックします。
 
 あるいは、[Auth0 ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)を実装することで、クロスオリジン認証への依存を排除​​することもできます。
 

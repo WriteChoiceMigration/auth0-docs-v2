@@ -233,16 +233,18 @@ exports.onExecutePostLogin = async (event, api) => {
 };
 ```
 
-以下の例は、オーディエンスがAuth0 APIでない場合に返されるカスタムクレーム付きの応答を示しています。
+以下の例は、オーディエンスがAuth0 APIでない場合に返されるカスタムクレーム付きの応答を示しています。以下の例は、オーディエンスがAuth0 APIでない場合に返されるカスタムクレーム付きの応答を示しています。
 
 ``` lines
 -- A resource owner password flow 
 POST https://{yourTenant}.auth0.com/oauth/token
 
 grant_type:password
-username:***password:** *
-client_id:***client_secret:** *
-audience:https://{yourApi}.com -- Note the audience, that is a custom API
+username:***
+password:***
+client_id:***
+client_secret:***
+audience:https://{yourTenant}.auth0.com/api/v2/ -- This is an Auth0 audience 
 scope:openid profile
 ```
 
@@ -274,8 +276,10 @@ scope:openid profile
 POST https://{yourTenant}.auth0.com/oauth/token
 
 grant_type:password
-username:***password:** *
-client_id:***client_secret:** *
+username:***
+password:***
+client_id:***
+client_secret:***
 audience:https://{yourTenant}.auth0.com/api/v2/ -- This is an Auth0 audience 
 scope:openid profile
 ```
@@ -685,4 +689,4 @@ Auth0 Rulesと属性マッピングを使用したSAML2アドオンおよびWeb�
 </Warning>
 
 1. [［Auth0 Dashboard］>［Tenant Settings（テナント設定）］>［Advanced（詳細設定）］](https://manage.auth0.com/dashboard/#/tenant/advanced)に移動して、**［Migrations（移行）］** を探します。
-2. トグルで**［Custom claims must be namespaced（カスタムクレームは名前空間ありでなければならない）］** を無効にします。
+2. トグルで **［Custom claims must be namespaced（カスタムクレームは名前空間ありでなければならない）］** を無効にします。
