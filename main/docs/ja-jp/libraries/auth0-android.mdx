@@ -25,7 +25,7 @@ SDKをプロジェクトに追加します。ライブラリーはAuth0のAuthen
 
 アプリの`build.gradle`依存関係セクションで、以下を追加します。
 
-``` lines
+```kotlin lines
 dependencies {
   // Add the Auth0 Android SDK
   implementation 'com.auth0.android:auth0:2.+'
@@ -42,7 +42,7 @@ Android Studioのプロンプトを使って同期させるか、コマンドラ
 
 `android`セクションで、AndroidとKotlinのプラグインのそれぞれに対して、Java 8バイトコードをターゲットにするようにします。
 
-``` lines
+```kotlin lines
 android {
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
@@ -64,7 +64,7 @@ android {
 
 ## ユニバーサルログインを構成する
 
-まず、[［Dashboard］>［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)の順に移動し、編集するアプリケーションの名前をクリックします。**［Allowed Callback URLs（許可されたコールバックURL）］**で、URLが次の形式であることを確認します：
+まず、[［Dashboard］>［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)の順に移動し、編集するアプリケーションの名前をクリックします。**［Allowed Callback URLs（許可されたコールバックURL）］** で、URLが次の形式であることを確認します：
 `https://YOUR_DOMAIN/android/{YOUR_APP_PACKAGE_NAME}/callback`
 
 次に、`{YOUR_APP_PACKAGE_NAME}`を実際のアプリケーションのパッケージ名に置き換えます。これは`app/build.gradle`ファイルに`applicationId`値としてあります。

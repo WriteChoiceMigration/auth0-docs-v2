@@ -55,13 +55,13 @@ Xcodeで以下のメニュー項目を開きます：
 
 **［File（ファイル）］ > ［Add Packages...（パッケージの追加）］**
 
-**［Search or Enter Package URL（パッケージURLを検索または入力）］**検索ボックスに次のURLを入力します。
+**［Search or Enter Package URL（パッケージURLを検索または入力）］** 検索ボックスに次のURLを入力します。
 
 ``` lines
 https://github.com/auth0/Auth0.swift
 ```
 
-次に、依存ルールを選択して**［Add Package（パッケージを追加）］**を押します。
+次に、依存ルールを選択して **［Add Package（パッケージを追加）］** を押します。
 
 #### Cocoapods
 
@@ -85,9 +85,9 @@ github "auth0/Auth0.swift" ~> 2.0
 
 ### SDKを構成する
 
-[Auth0 Dashboard](https://manage.auth0.com/#/applications/)に移動し、新しい**［Native（ネイティブ）］**アプリケーションを作成します。
+[Auth0 Dashboard](https://manage.auth0.com/#/applications/)に移動し、新しい **［Native（ネイティブ）］** アプリケーションを作成します。
 
-Auth0.swiftはAuth0と通信するためにAuth0アプリケーションの**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Client ID</Tooltip>（クライアントID）］**と**［Domain（ドメイン）］**を必要とします。これらの詳細はAuth0アプリケーションの設定ページで確認できます[カスタムドメイン](/docs/ja-jp/customize/custom-domains)を使用している場合は、設定ページの値ではなく、カスタムドメインの値を使用してください。
+Auth0.swiftはAuth0と通信するためにAuth0アプリケーションの **［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Client ID</Tooltip>（クライアントID）］** と **［Domain（ドメイン）］** を必要とします。これらの詳細はAuth0アプリケーションの設定ページで確認できます[カスタムドメイン](/docs/ja-jp/customize/custom-domains)を使用している場合は、設定ページの値ではなく、カスタムドメインの値を使用してください。
 
 #### クライアントIDとドメインをplistで設定する
 
@@ -138,9 +138,9 @@ Auth0
 
 コールバックURLとログアウトURLは、Auth0がアプリケーションにリダイレクトするために呼び出すURLです。Auth0は、ユーザー認証後にコールバックURLを呼び出し、セッションCookieを削除した後にログアウトURLを呼び出します。
 
-コールバックURLとログアウトURLは操作できるため、Auth0アプリケーションの設定ページにある**［Allowed Callback URLs（許可されているコールバックURL）］**と**［Allowed Logout URLs（許可されているログアウトURL）］**のフィールドに使用するURLを追加する必要があります。これにより、Auth0はこれらのURLを有効なものと認識できるようになります。コールバックURLとログアウトURLを設定しないと、ユーザーはアプリケーションへのログインやログアウトが行えなくなり、エラーが発生します。
+コールバックURLとログアウトURLは操作できるため、Auth0アプリケーションの設定ページにある **［Allowed Callback URLs（許可されているコールバックURL）］** と **［Allowed Logout URLs（許可されているログアウトURL）］** のフィールドに使用するURLを追加する必要があります。これにより、Auth0はこれらのURLを有効なものと認識できるようになります。コールバックURLとログアウトURLを設定しないと、ユーザーはアプリケーションへのログインやログアウトが行えなくなり、エラーが発生します。
 
-[Auth0アプリケーション](https://manage.auth0.com/#/applications/)の設定ページを開き、アプリケーションのプラットフォームに応じて、対応するURLを**［Allowed Callback URLs（許可されているコールバックURL）］**と**［Allowed Logout URLs（許可されているログアウトURL）］**に追加します。[カスタムドメイン](/docs/ja-jp/customize/custom-domains)を使用している場合は、設定ページの値ではなく、`{yourAuth0Domain}`をカスタムドメインの値に置き換えてください。
+[Auth0アプリケーション](https://manage.auth0.com/#/applications/)の設定ページを開き、アプリケーションのプラットフォームに応じて、対応するURLを **［Allowed Callback URLs（許可されているコールバックURL）］** と **［Allowed Logout URLs（許可されているログアウトURL）］** に追加します。[カスタムドメイン](/docs/ja-jp/customize/custom-domains)を使用している場合は、設定ページの値ではなく、`{yourAuth0Domain}`をカスタムドメインの値に置き換えてください。
 
 ##### iOS
 
@@ -168,7 +168,7 @@ com.example.MyApp://example.us.auth0.com/ios/com.example.MyApp/callback
 
 #### カスタムURLスキームを設定する
 
-Xcodeで、アプリターゲット設定の**［Info（情報）］**タブを開きます。**［URL Types（URLタイプ）］**セクションで**＋**ボタンをクリックして、新しいエントリを追加します。そこで、**［Identifier（識別子）］**フィールドに`auth0`と入力し、**［URL Schemes（URLスキーム）］**フィールドに`$(PRODUCT_BUNDLE_IDENTIFIER)`と入力します。
+Xcodeで、アプリターゲット設定の **［Info（情報）］** タブを開きます。**［URL Types（URLタイプ）］** セクションで ＋ ボタンをクリックして、新しいエントリを追加します。そこで、 **［Identifier（識別子）］** フィールドに`auth0`と入力し、 **［URL Schemes（URLスキーム）］** フィールドに`$(PRODUCT_BUNDLE_IDENTIFIER)`と入力します。
 
 これにより、バンドル識別子がカスタムURLスキームとして登録され、コールバックURLとログアウトURLがアプリに到達できるようになります。
 
@@ -180,7 +180,7 @@ Xcodeで、アプリターゲット設定の**［Info（情報）］**タブを�
 import Auth0
 ```
 
-それから**［Login（ログイン）］**ボタンのアクションで[ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)ページを提示します。
+それから **［Login（ログイン）］** ボタンのアクションで[ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)ページを提示します。
 
 ```swift lines
 Auth0
@@ -226,7 +226,7 @@ Auth0
 
 ユーザーをログアウトさせるには、ユニバーサルログインセッションのCookieをクリアし、アプリケーションからユーザーの資格情報を削除します。
 
-**［Logout（ログアウト）］**ボタンのアクションで`clearSession()`メソッドを呼び出します。セッションCookieがクリアされたら、[ユーザーの資格情報を削除します](https://github.com/auth0/Auth0.swift/blob/master/EXAMPLES.md#clear-stored-credentials)。
+**［Logout（ログアウト）］** ボタンのアクションで`clearSession()`メソッドを呼び出します。セッションCookieがクリアされたら、[ユーザーの資格情報を削除します](https://github.com/auth0/Auth0.swift/blob/master/EXAMPLES.md#clear-stored-credentials)。
 
 ```swift lines
 Auth0

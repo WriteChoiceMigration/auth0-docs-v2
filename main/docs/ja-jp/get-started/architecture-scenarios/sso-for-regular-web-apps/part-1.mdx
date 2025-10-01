@@ -33,9 +33,12 @@ Auth0では、消費者向けのWeb製品（OAuth 2.0、OAuth 1.0、OpenID）と
 
 **OpenID Connect**は、OAuth 2.0ファミリーの仕様に基づいた認証プロトコルです。OAuth 2.0プロトコルを介して配信されるシンプルなJSON IDトークン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">JWT</Tooltip>）を使用します。
 
-### OAuthとOpenID Connect（OIDC）
+<Info>
+    ### OAuthとOpenID Connect（OIDC）
 
 OAuth 2.0とOpenID Connect（OIDC）はよく同じものとして捉えられますが、これは間違いです。__OAuth 2.0__は、1つのWebサイト（消費者またはアプリケーション）を認可させるプロトコルで、別のWebサイト（リソースサーバーまたはプロバイダー）からあなたのデータにアクセスできます。たとえば、Webサイトを認可して、Dropboxアカウントのいくつかのファイルにアクセスしたいとします。WebサイトがDropboxにリダイレクトさせ、ファイルへのアクセスを提供するべきかどうかを聞きます。同意する場合、WebサイトはDropboxのファイルにアクセスできるように認可されます。本質的に、OAuth 2.0はリソースアクセスと共有に関連しています。一方で、__OpenID Connect__は、OAuth 2.0プロトコル上に構築されたシンプルなIDレイヤーです。一度に複数サイトへのログインが可能になります。OIDCを使用してWebサイトにログインするたびに、自分のOpenIDサイトにリダイレクトされ、そこでログインすると元のWebサイトに戻されます。本質的に、OIDCはユーザー認証と関係があります。
+
+</Info>
 
 **SAML**は、信頼できる当事者間の認証と認可の両方を提供するXMLベースのプロトコルです。
 
@@ -57,17 +60,23 @@ OpenID Connectは、認証のために複数のフローをサポートします
 
 <Frame>![undefined](/images/ja-jp/cdy7uua7fh8z/5qO4QJH0YW34apsypLXnIk/47d10e05826be4c544bfc3985fa8301b/authz-code-flow.png)</Frame>
 
-### フォームPOST応答モード
+<Info>
+    ### フォームPOST応答モード
 
 別の方法としては、__OAuth 2.0 Form Post Response Mode__に従って`response_type=id_token&response_mode=form_post`を使用することもできます。`response_type=id_token`の要求パラメータのため、応答には認可コードではなくIDトークンが直接含まれています。一方、`response_mode=form_post`はIDトークンを残りの認可応答パラメータと共にHTMLフォーム値としてエンコードし、ユーザーエージェントで自動的に送信されます。これにより、最適化された認証フロー（コードとIDトークンを交換する必要なし）を持つことができますが、アプリを実装するために使用しているテクノロジーがこれをサポートしていることをご確認ください（ASP .NET Core ミドルウェアはサポートしています)。詳細は、[「OAuth 2.0フォームPOST応答モードの仕様」](https://openid.net/specs/oauth-v2-form-post-response-mode-1_0.html)をご覧ください。
 
-**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">ID Token</Tooltip>（IDトークン）］**（コードサンプルでは通常`id_token`と呼ばれます）は、IDデータを含む**JSON Webトークン（JWT）**です。これはアプリケーションによって使用され、ユーザーの名前、メールなどのユーザー情報を取得するために使用され、通常はUI表示に使用されます。
+</Info>
 
-### トークンについての詳細
+**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">ID Token</Tooltip>（IDトークン）］**（コードサンプルでは通常`id_token`と呼ばれます）は、IDデータを含む**JSON Webトークン（JWT）** です。これはアプリケーションによって使用され、ユーザーの名前、メールなどのユーザー情報を取得するために使用され、通常はUI表示に使用されます。
+
+<Info>
+    ### トークンについての詳細
 
 トークンは、トークンベースの認証で使用される英数字の文字列です。ユーザーはユーザー名とパスワードで認証し、引き換えにそこから使用できるトークンを取得できるようになります。トークンの有効期間は限られています。
 
 __JSON Webトークン（JWTs）__は、[JSON Webトークンスタンダード](https://tools.ietf.org/html/rfc7519)に準拠するトークンで、クレーム形成のIDについての情報を含みます。自己完結型であるため、受信者はサーバーを呼び出してトークンを検証する必要がありません。JWTはシークレット（__HMAC__アルゴリズムの）または__RSA__を使用した公開鍵/秘密鍵のペアを使用して署名することができます。JWTについての詳細は[こちら](/docs/ja-jp/tokens/concepts/jwts)です。IDトークン（JWT）は、業界基準（IETF [RFC 7519](https://tools.ietf.org/html/rfc7519)）に準拠しており、ヘッダー、ボディ、署名の3部構成です。- ヘッダーは、トークンのタイプとトークンのコンテンツに使用されるハッシュ化アルゴリズムを含みます。- ボディは、ペイロードとも呼ばれ、ユーザーについてのIDクレームを含みます。トークンの発行者、トークンのサブジェクト（クレームの対象）、発行時刻などの登録済み名を持つクレームがあります。その他の名前のクレームを追加することができますが、JWTをURLのサイズ制限内に保つために注意する必要があります。- 署名は、JWTの受信者によって使用され、JWTに含まれる情報の整合性を検証するために署名を使用します。
+
+</Info>
 
 ### IDトークンの検証方法
 

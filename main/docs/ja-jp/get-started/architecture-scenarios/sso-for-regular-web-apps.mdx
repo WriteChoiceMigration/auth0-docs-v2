@@ -11,7 +11,8 @@ permalink: "sso-for-regular-web-apps"
 
 この例ではExampleCoという架空の会社のためにウェブアプリケーションを作成します。当該のアプリは、ExampleCoの従業員と請負業者によって用いられるものとします。従業員は既存の企業ディレクトリ（アクティブディレクトリ）を用いる一方、請負業者は別のユーザーストアで管理されます。
 
-### TL;DR
+<Info>
+  ### TL;DR
 
 * Auth0は認証と認可にOAuth 2.0と<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OpenID Connect（OIDC）</Tooltip>のオープン標準をサポートしています（[「使用するプロトコル」](/docs/ja-jp/get-started/architecture-scenarios/sso-for-regular-web-apps/part-1#which-protocol-to-use)を参照）
 * OIDCがいくつかの異なる認可フローをサポートする中で、Webアプリケーションに最適なのは認可コードフローです（[「認証フロー」](/docs/ja-jp/get-started/architecture-scenarios/sso-for-regular-web-apps/part-1#authentication-flow)を参照）
@@ -21,6 +22,8 @@ permalink: "sso-for-regular-web-apps"
 * Webアプリケーションは、ユーザーのログインを継続して追跡するために、セッションの状態を管理する必要があります。この他にも、Auth0とIDプロバイダーはセッション情報を管理しています（[「セッションの管理」](/docs/ja-jp/get-started/architecture-scenarios/sso-for-regular-web-apps/part-3#session-management)を参照してください）。
 * それとは反対に、ユーザーをログアウトさせることにも、3つのレイヤーでセッションを管理することが関与しています（[「ユーザーのログアウト」](/docs/ja-jp/get-started/architecture-scenarios/sso-for-regular-web-apps/part-3#user-logout)を参照してください）。
 * アクセス制御はAuth0認可拡張機能を使って管理することができます（[「アクセス制御」](/docs/ja-jp/get-started/architecture-scenarios/sso-for-regular-web-apps/part-3#access-control)を参照してください）。
+
+</Info>
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -42,9 +45,12 @@ ExampleCoは、簡易的に運用を開始し、従業員からのフィード�
 
 アプリケーションは、ログインしているユーザーにのみが利用できるものである必要があります。各ユーザーにはロールが設けられ、このロールに基づき、特定の操作を実行でき、特定のデータを閲覧できるようにします。
 
-### 認証と認可
+<Info>
+  ### 認証と認可
 
 ExampleCo社はユーザーをそれぞれ__認証__および__認可__したいと考えています。認証はIDに関連しており、ユーザーが主張する身元が実際に彼ら自身であることを検証することです。認可は、ユーザーがどのリソースにアクセスできるかと、それらのリソースをどのように使用できるかを決定することに関するものです。
+
+</Info>
 
 ExampleCoのタイムシートアプリでは、2つのロールを設ける必要があります：ユーザーと管理者：
 

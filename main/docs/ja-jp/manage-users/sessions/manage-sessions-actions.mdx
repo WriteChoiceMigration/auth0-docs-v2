@@ -14,7 +14,7 @@ permalink: "manage-sessions-actions"
 これを容易にするために、ログイン後アクションには以下の2つの重要なオブジェクトがあります。
 
 * **event.session**：一意の`id`、`created_at`、`expires_at`、`idle_expires_at`、`updated_at`の日付、`clients`、`authentication_at`の他にも、`ASN`、`IP`や`User_agent`などの`device`情報を含む、関連情報を提供します。
-* **api.session：**セッションを取り消すか、`expiry`の日付を変更することで、既存のセッションを管理できます。
+* **api.session：** セッションを取り消すか、`expiry`の日付を変更することで、既存のセッションを管理できます。
 
 `event.session`と`api.session`オブジェクトは両方共に、authorization codeフロー、暗黙的フロー、デバイスコードフローを含む、インタラクティブなウェブベースのフローと、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip>および<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">WS-Fed</Tooltip>をサポートします。
 
@@ -29,7 +29,7 @@ permalink: "manage-sessions-actions"
 
 ## Actionsでセッションを取り消す
 
-ログイン後の**api.session.revoke(reason, options)**メソッドを使用すると、トランザクションに関連するリスクに対処することができます。このメソッドには、取り消されたトランザクションにバインドされているリフレッシュトークンを保存できるオプションが含まれています。
+ログイン後の **api.session.revoke(reason, options)** メソッドを使用すると、トランザクションに関連するリスクに対処することができます。このメソッドには、取り消されたトランザクションにバインドされているリフレッシュトークンを保存できるオプションが含まれています。
 
 セッションを無効にするだけでなく、このメソッドは`session-revoked`の[OIDCバックチャネルログアウトイニシエーター](/docs/ja-jp/authenticate/login/logout/back-channel-logout/oidc-back-channel-logout-initiators)も開始し、現在のセッションにバインドされているすべてのアプリケーションからユーザーをログアウトさせ、テナントログに[session_revoked](/docs/ja-jp/deploy-monitor/logs/log-event-type-codes)イベントを記録します。
 
@@ -59,8 +59,8 @@ permalink: "manage-sessions-actions"
 
 セッションの[有効期限日](/docs/ja-jp/manage-users/sessions/session-lifetime-limits)を変更するには、以下のポストログインメソッドを使用します。
 
-* **api.session.setExpiresAt(absolute)**を使用すると、特定のセッションに新しい絶対的な（後からログインが必要な）セッション有効期限を定義できます。
-* **api.session.setIdleExpiresAt(idle)**を使用すると、特定のセッションに新しい非アクティブタイムアウトの日付を設定できます。
+* **api.session.setExpiresAt(absolute)** を使用すると、特定のセッションに新しい絶対的な（後からログインが必要な）セッション有効期限を定義できます。
+* **api.session.setIdleExpiresAt(idle)** を使用すると、特定のセッションに新しい非アクティブタイムアウトの日付を設定できます。
 
 これらのメソッドを使用すると、以下を基に、セッションのライフタイムと非アクティブポリシーを動的にカスタマイズすることができます。
 

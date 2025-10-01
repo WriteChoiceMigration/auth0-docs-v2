@@ -38,25 +38,25 @@ client_id=some_third_party_client
 
 ## スコープの説明
 
-デフォルトでは、同意ページは、スコープの名前を使ってユーザーの同意を求めます。下の図のように、スコープ名を**action:resource_name**形式で定義します。
+デフォルトでは、同意ページは、スコープの名前を使ってユーザーの同意を求めます。下の図のように、スコープ名を **action:resource_name** 形式で定義します。
 
 <Frame>![認可 - ユーザーの同意とアプリケーション - 同意スコープ](/images/ja-jp/cdy7uua7fh8z/3Z4Ofbj5yF7eg5cLfcauh9/304828f6a825bb01c5aeb3a7c8d1915f/Blog_API_Permissions.png)</Frame>
 
-同意ページは、同じリソースに対するスコープをグループにまとめ、そのリソースに対するアクションを1行に表示します。たとえば上記の構成では、**Posts: read and write your posts（投稿：あなたの投稿の読み取りと書き出し）**と表示されます。
+同意ページは、同じリソースに対するスコープをグループにまとめ、そのリソースに対するアクションを1行に表示します。たとえば上記の構成では、 **Posts: read and write your posts（投稿：あなたの投稿の読み取りと書き出し）** と表示されます。
 
-代わりに**［Description（説明）］**フィールドを表示したい場合は、テナントの**use_scope_descriptions_for_consent**を**true**に設定します。これは、そのテナント上のすべてのAPIの同意プロンプトに影響します。
+代わりに **［Description（説明）］** フィールドを表示したい場合は、テナントの **use_scope_descriptions_for_consent** を **true** に設定します。これは、そのテナント上のすべてのAPIの同意プロンプトに影響します。
 
-**use_scope_descriptions_for_consent**フラグを設定するには、APIに適切な呼び出しをする必要があります。
+**use_scope_descriptions_for_consent** フラグを設定するには、APIに適切な呼び出しをする必要があります。
 
 <CodeGroup>
 ```bash cURL lines
 curl --request PATCH \
---url 'https://{yourDomain}/api/v2/tenants/settings' \
---header 'authorization: Bearer API2_ACCESS_TOKEN' \
---header 'cache-control: no-cache' \
---header 'content-type: application/json' \
---data '{ "flags": { "use_scope_descriptions_for_consent": true } }'
-``` lines
+  --url 'https://{yourDomain}/api/v2/tenants/settings' \
+  --header 'authorization: Bearer API2_ACCESS_TOKEN' \
+  --header 'cache-control: no-cache' \
+  --header 'content-type: application/json' \
+  --data '{ "flags": { "use_scope_descriptions_for_consent": true } }'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/tenants/settings");
 var request = new RestRequest(Method.PATCH);
@@ -67,119 +67,145 @@ request.AddParameter("application/json", "{ \"flags\": { \"use_scope_description
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/tenants/settings"
-payload := strings.NewReader("{ \"flags\": { \"use_scope_descriptions_for_consent\": true } }")
-req, _ := http.NewRequest("PATCH", url, payload)
-req.Header.Add("content-type", "application/json")
-req.Header.Add("authorization", "Bearer API2_ACCESS_TOKEN")
-req.Header.Add("cache-control", "no-cache")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/tenants/settings"
+
+	payload := strings.NewReader("{ \"flags\": { \"use_scope_descriptions_for_consent\": true } }")
+
+	req, _ := http.NewRequest("PATCH", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer API2_ACCESS_TOKEN")
+	req.Header.Add("cache-control", "no-cache")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
 HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/settings")
-.header("content-type", "application/json")
-.header("authorization", "Bearer API2_ACCESS_TOKEN")
-.header("cache-control", "no-cache")
-.body("{ \"flags\": { \"use_scope_descriptions_for_consent\": true } }")
-.asString();
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer API2_ACCESS_TOKEN")
+  .header("cache-control", "no-cache")
+  .body("{ \"flags\": { \"use_scope_descriptions_for_consent\": true } }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'PATCH',
-url: 'https://{yourDomain}/api/v2/tenants/settings',
-headers: {
-'content-type': 'application/json',
-authorization: 'Bearer API2_ACCESS_TOKEN',
-'cache-control': 'no-cache'
-},
-data: {flags: {use_scope_descriptions_for_consent: true}}
+  method: 'PATCH',
+  url: 'https://{yourDomain}/api/v2/tenants/settings',
+  headers: {
+    'content-type': 'application/json',
+    authorization: 'Bearer API2_ACCESS_TOKEN',
+    'cache-control': 'no-cache'
+  },
+  data: {flags: {use_scope_descriptions_for_consent: true}}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json",
-@"authorization": @"Bearer API2_ACCESS_TOKEN",
-@"cache-control": @"no-cache" };
-NSDictionary \*parameters = @{ @"flags": @{ @"use_scope_descriptions_for_consent": @YES } };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/tenants/settings"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/json",
+                           @"authorization": @"Bearer API2_ACCESS_TOKEN",
+                           @"cache-control": @"no-cache" };
+NSDictionary *parameters = @{ @"flags": @{ @"use_scope_descriptions_for_consent": @YES } };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/tenants/settings"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"PATCH"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/tenants/settings",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PATCH",
-CURLOPT_POSTFIELDS => "{ \"flags\": { \"use_scope_descriptions_for_consent\": true } }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer API2_ACCESS_TOKEN",
-"cache-control: no-cache",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/tenants/settings",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PATCH",
+  CURLOPT_POSTFIELDS => "{ \"flags\": { \"use_scope_descriptions_for_consent\": true } }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer API2_ACCESS_TOKEN",
+    "cache-control: no-cache",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"flags\": { \"use_scope_descriptions_for_consent\": true } }"
+
 headers = {
-'content-type': "application/json",
-'authorization': "Bearer API2_ACCESS_TOKEN",
-'cache-control': "no-cache"
-}
+    'content-type': "application/json",
+    'authorization': "Bearer API2_ACCESS_TOKEN",
+    'cache-control': "no-cache"
+    }
+
 conn.request("PATCH", "/{yourDomain}/api/v2/tenants/settings", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -187,42 +213,51 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/tenants/settings")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Patch.new(url)
 request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer API2_ACCESS_TOKEN'
 request["cache-control"] = 'no-cache'
 request.body = "{ \"flags\": { \"use_scope_descriptions_for_consent\": true } }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"content-type": "application/json",
-"authorization": "Bearer API2_ACCESS_TOKEN",
-"cache-control": "no-cache"
+  "content-type": "application/json",
+  "authorization": "Bearer API2_ACCESS_TOKEN",
+  "cache-control": "no-cache"
 ]
 let parameters = ["flags": ["use_scope_descriptions_for_consent": true]] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/tenants/settings")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "PATCH"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -240,7 +275,7 @@ Location: https://fabrikam.com/contoso_social#
 
 ## ファーストパーティアプリケーションに対して同意をスキップする
 
-ファーストパーティアプリケーションは、同意ダイアログをスキップできますが、これはユーザーの代わりにアクセスしようとしているAPIの**［Allow Skipping User Consent（ユーザー同意のスキップの許可）］**オプションが有効になっている場合にのみ可能です。
+ファーストパーティアプリケーションは、同意ダイアログをスキップできますが、これはユーザーの代わりにアクセスしようとしているAPIの **［Allow Skipping User Consent（ユーザー同意のスキップの許可）］** オプションが有効になっている場合にのみ可能です。
 
 <Card title="ユーザーの同意とアプリケーション">
 
@@ -248,7 +283,7 @@ Location: https://fabrikam.com/contoso_social#
 
 `127.0.0.1 myapp.example`
 
-同様に、「`localhost`」がアプリケーションの**Allowed Callback URLs（許可されているコールバックURL）**設定（[［Dashboard］>［Applications（アプリケーション）］>［Settings（設定）］](https://manage.auth0.com/#/applications/{yourClientId}/settings)）にあるいずれかのドメインに含まれている場合、（ファーストパーティーアプリケーションであっても）同意はスキップできません。必ず、**Allowed Callback URLs（許可されているコールバックURL）**を更新して、アプリケーションに構成したコールバックURLと更新後のドメインマッピングが一致するようにしてください。
+同様に、「`localhost`」がアプリケーションの **Allowed Callback URLs（許可されているコールバックURL）** 設定（[［Dashboard］>［Applications（アプリケーション）］>［Settings（設定）］](https://manage.auth0.com/#/applications/{yourClientId}/settings)）にあるいずれかのドメインに含まれている場合、（ファーストパーティーアプリケーションであっても）同意はスキップできません。必ず、 **Allowed Callback URLs（許可されているコールバックURL）** を更新して、アプリケーションに構成したコールバックURLと更新後のドメインマッピングが一致するようにしてください。
 
 </Card>
 
@@ -261,8 +296,8 @@ Location: https://fabrikam.com/contoso_social#
 [リソース所有者のパスワードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/resource-owner-password-flow)を使うときは、同意ダイアログは使用されません。ユーザーが直接アプリケーションにパスワードを入力し、これがアプリケーションに対してユーザーアカウントへのフルアクセスを付与したことと同じになるためです。
 
 1. [［Auth0 Dashboard］>［User Management（ユーザー管理］>［Users（ユーザー）］](https://manage.auth0.com/#/users)に移動し、同意を取り消すユーザーをクリックします。
-2. **［Authorized Application（認可アプリケーション）］**タブをクリックします。
-3. 該当するアプリケーションの横にある**［Revoke（取り消し）］**をクリックします。
+2. **［Authorized Application（認可アプリケーション）］** タブをクリックします。
+3. 該当するアプリケーションの横にある **［Revoke（取り消し）］** をクリックします。
 
 ## パスワードベースのフロー
 
