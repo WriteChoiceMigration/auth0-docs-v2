@@ -7,279 +7,233 @@ permalink: "interactive"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/python.png"
 'twitter:title': "Ajouter une fonctionnalité de connexion à votre application Django"
 'twitter:description': "Ce guide explique comment intégrer Auth0 à une application Python Django, à l’aide de la trousse SDK Authlib."
+sidebarTitle: Django
 ---
 
-[Skip to main content](#maincontent)
+import { Recipe, Content, Section, SideMenu, SideMenuSectionItem, SignUpForm , CodeGroup } from "/snippets/recipe.jsx";
+import { LoggedInForm } from "/snippets/Login.jsx";
+import HTML from "/snippets/quickstart/webapp/django/templates-index.html.mdx";
+import Settings from "/snippets/quickstart/webapp/django/settings.py.mdx";
+import Urls from "/snippets/quickstart/webapp/django/urls.py.mdx";
+import Views from "/snippets/quickstart/webapp/django/views.py.mdx";
+import Views2 from "/snippets/quickstart/webapp/django/views.py2.mdx";
 
-​
+export const sections = [
+  { id: "configuration-d-auth0", title: "Configuration d’Auth0" },
+  { id: "installer-les-dépendances", title: "Installer les dépendances" },
+  { id: "configurez-votre-fichier-env-", title: "Configurez votre fichier .env." },
+  { id: "création-d-une-application", title: "Création d’une application" },
+  { id: "mettre-à-jour-settings-py", title: "Mettre à jour settings.py" },
+  { id: "configurez-votre-application", title: "Configurez votre application" },
+  { id: "configurer-vos-gestionnaires-de-route", title: "Configurer vos gestionnaires de route" },
+  { id: "enregistrer-vos-routes", title: "Enregistrer vos routes" },
+  { id: "ajouter-des-modèles", title: "Ajouter des modèles" },
+  { id: "exécuter-votre-application", title: "Exécuter votre application" }
+]
 
-[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+<Recipe>
+  <Content>
+    Auth0 vous permet d’ajouter l’authentification et de pouvoir accéder aux informations relatives au profil de l’utilisateur dans votre application. Ce guide explique comment intégrer Auth0 à une application Python [Django](https://www.djangoproject.com/), à l’aide de la trousse SDK [Authlib](https://authlib.org/).
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      <Section id={sections[0].id} title={sections[0].title} stepNumber="1">
+      Pour utiliser les services Auth0, vous devez avoir une application installée dans Auth0 Dashboard. L’application Auth0 est l’endroit où vous allez configurer le fonctionnement de l’authentification pour le projet que vous développez.
 
----
+      ### Configurer une application
 
-​
+      Utilisez le sélecteur interactif pour créer une nouvelle application Auth0 ou sélectionner une application existante qui représente le projet avec lequel vous souhaitez effectuer l’intégration. Dans Auth0, chaque application se voit attribuer un identifiant client unique alphanumérique que votre code d’application utilisera pour appeler les API Auth0 via la trousse SDK.
 
-[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+      Tous les paramètres que vous configurez à l’aide de ce guide de démarrage rapide seront automatiquement mis à jour pour votre application dans le [Tableau de bord](https://manage.auth0.com/dashboard/us/auth0-dsepaid/), qui est l’endroit où vous pourrez gérer vos applications à l’avenir.
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      Si vous préférez explorer une configuration complète, consultez plutôt un exemple d’application.
 
-[##### Ajouter une fonctionnalité de connexion à votre application Django](#Ajouter une fonctionnalité de connexion à votre application Django)
+      ### Configurer les URL de rappel
 
-[View on Github](https://github.com/auth0-samples/auth0-django-web-app/tree/master/01-Login) Log In & Download Sample
+      Une URL de rappel est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur authentification. Si elle n’est pas définie, les utilisateurs ne seront pas redirigés vers votre application après s’être connectés.
 
-1. [Quickstarts](/docs/fr-ca/quickstarts)
-3. [Regular Web App](/docs/fr-ca/quickstart/webapp)
-5. [Django](/docs/fr-ca/quickstart/webapp/django/interactive)
+      <Info>
+      Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000``/callback`.
+      </Info>
 
-# 
+      ### Configuration des URL de déconnexion
 
-# Ajouter une fonctionnalité de connexion à votre application Django
+      Une URL de déconnexion est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur déconnexion. Si elle n’est pas définie, les utilisateurs ne pourront pas se déconnecter de votre application et recevront un message d’erreur.
 
-Auth0 vous permet d’ajouter l’authentification et de pouvoir accéder aux informations relatives au profil de l’utilisateur dans votre application. Ce guide explique comment intégrer Auth0 à une application Python [Django](https://www.djangoproject.com/), à l’aide de la trousse SDK [Authlib](https://authlib.org/).
+      <Info>
+      Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000`.
+      </Info>
+      </Section>
 
-[1
+      <Section id={sections[1].id} title={sections[1].title} stepNumber="2">
+      Pour cette intégration, vous ajouterez plusieurs dépendances de bibliothèque, telles qu’Authlib. Créez un fichier `requirements.txt` dans votre répertoire de projet et incluez ce qui suit :
 
-## Configuration d’Auth0](#configuration-d-auth0)
+      ```
+      authlib ~= 1.0
+      django ~= 4.0
+      python-dotenv ~= 0.19
+      requests ~= 2.27
+      ```
 
-Pour utiliser les services Auth0, vous devez avoir une application installée dans Auth0 Dashboard. L’application Auth0 est l’endroit où vous allez configurer le fonctionnement de l’authentification pour le projet que vous développez.
+      Exécutez la commande suivante depuis votre interface système pour accéder à ces dépendances :
 
-### Configurer une application
+      `pip install -r requirements.txt`
+      </Section>
 
-Utilisez le sélecteur interactif pour créer une nouvelle application Auth0 ou sélectionner une application existante qui représente le projet avec lequel vous souhaitez effectuer l’intégration. Dans Auth0, chaque application se voit attribuer un identifiant client unique alphanumérique que votre code d’application utilisera pour appeler les API Auth0 via la trousse SDK.
+      <Section id={sections[2].id} title={sections[2].title} stepNumber="3">
+      Ensuite, créez un fichier `.env` dans votre répertoire de projet. Ce fichier contiendra les clés de vos clients et d’autres détails de configuration.
 
-Tous les paramètres que vous configurez à l’aide de ce guide de démarrage rapide seront automatiquement mis à jour pour votre application dans le [Tableau de bord](https://manage.auth0.com/dashboard/us/auth0-dsepaid/), qui est l’endroit où vous pourrez gérer vos applications à l’avenir.
+      ```
+      AUTH0_CLIENT_ID={yourClientId}
+      AUTH0_CLIENT_SECRET={yourClientSecret}
+      AUTH0_DOMAIN={yourDomain}
+      ```
+      </Section>
 
-Si vous préférez explorer une configuration complète, consultez plutôt un exemple d’application.
+      <Section id={sections[3].id} title={sections[3].title} stepNumber="4">
+      Si vous avez déjà une application Django installée, passez à l’étape suivante. Pour un nouveau projet d’application, exécutez la commande suivante :
 
-### Configurer les URL de rappel
+      `django-admin startproject webappexample`
 
-Une URL de rappel est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur authentification. Si elle n’est pas définie, les utilisateurs ne seront pas redirigés vers votre application après s’être connectés.
+      Placez-vous dans le nouveau dossier du projet :
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      `cd webappexample`
+      </Section>
 
-Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000``/callback`.
+      <Section id={sections[4].id} title={sections[4].title} stepNumber="5">
+      Ouvrez le fichier `webappexample/settings.py` pour examiner les valeurs `.env`.
 
-</Callout>
+      En haut du fichier, ajoutez les importations `os` et `dotenv`.
 
-### Configuration des URL de déconnexion
+      Ensuite, sous la définition `BASE_DIR`, ajoutez la variable `TEMPLATE_DIR`.
 
-Une URL de déconnexion est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur déconnexion. Si elle n’est pas définie, les utilisateurs ne pourront pas se déconnecter de votre application et recevront un message d’erreur.
+      Ensuite, trouvez la variable `TEMPLATES` et mettez à jour la valeur `DIRS` pour y ajouter notre chaîne `TEMPLATE_DIR`. Cette action détermine le chemin des fichiers modèles, que vous créerez à une étape future. Ne modifiez aucun autre élément de ce tableau.
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      À la fin de ce fichier, ajoutez le code pour charger la configuration d’Auth0.
+      </Section>
 
-Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000`.
+      <Section id={sections[5].id} title={sections[5].title} stepNumber="6">
+      Pour commencer à créer votre application, ouvrez le fichier `webappexample/views.py` dans votre IDE.
+
+      Importez toutes les bibliothèques nécessaires à votre application.
 
-</Callout>
-
-[2
-
-## Installer les dépendances](#installer-les-dépendances)
-
-Pour cette intégration, vous ajouterez plusieurs dépendances de bibliothèque, telles qu’Authlib. Créez un fichier `requirements.txt` dans votre répertoire de projet et incluez ce qui suit :
-
-``` lines
-authlib ~= 1.0
-django ~= 4.0
-python-dotenv ~= 0.19
-requests ~= 2.27
-```
-
-Exécutez la commande suivante depuis votre interface système pour accéder à ces dépendances :
-
-`pip install -r requirements.txt`
-
-[3
-
-## Configurez votre fichier .env.](#configurez-votre-fichier-env-)
-
-Ensuite, créez un fichier `.env` dans votre répertoire de projet. Ce fichier contiendra les clés de vos clients et d’autres détails de configuration.
-
-``` lines
-AUTH0_CLIENT_ID={yourClientId}
-AUTH0_CLIENT_SECRET={yourClientSecret}
-AUTH0_DOMAIN={yourDomain}
-```
-
-[4
-
-## Création d’une application](#création-d-une-application)
-
-Si vous avez déjà une application Django installée, passez à l’étape suivante. Pour un nouveau projet d’application, exécutez la commande suivante :
-
-`django-admin startproject webappexample`
-
-Placez-vous dans le nouveau dossier du projet :
-
-`cd webappexample`
-
-[5
-
-## Mettre à jour settings.py](#mettre-à-jour-settings-py)
-
-Ouvrez le fichier `webappexample/settings.py` pour examiner les valeurs `.env`.
-
-En haut du fichier, ajoutez les importations `os` et `dotenv`.
-
-Ensuite, sous la définition `BASE_DIR`, ajoutez la variable `TEMPLATE_DIR`.
-
-Ensuite, trouvez la variable `TEMPLATES` et mettez à jour la valeur `DIRS` pour y ajouter notre chaîne `TEMPLATE_DIR`. Cette action détermine le chemin des fichiers modèles, que vous créerez à une étape future. Ne modifiez aucun autre élément de ce tableau.
-
-À la fin de ce fichier, ajoutez le code pour charger la configuration d’Auth0.
-
-[6
-
-## Configurez votre application](#configurez-votre-application)
-
-Pour commencer à créer votre application, ouvrez le fichier `webappexample/views.py` dans votre IDE.
-
-Importez toutes les bibliothèques nécessaires à votre application.
-
-Vous pouvez maintenant configurer Authlib pour gérer l’authentification de votre application avec Auth0.
-
-Découvrez les options de configuration possibles pour la méthode Authlib’s OAuth `register()` à partir de [leur documentation.](https://docs.authlib.org/en/latest/client/frameworks.html#using-oauth-2-0-to-log-in)
-
-[7
-
-## Configurer vos gestionnaires de route](#configurer-vos-gestionnaires-de-route)
-
-Dans cet exemple, vous allez ajouter quatre routes pour votre application : connexion, callback, déconnexion et index.
-
-* `login` – Lorsque les visiteurs de votre application se rendent sur la route `/login` ils seront redirigés vers Auth0 pour commencer le processus d’authentification.
-* `callback` – Après la connexion de vos utilisateurs à Auth0, ceux-ci reviendront à votre application à la route `/callback`. Cette route enregistre la session de l’utilisateur et permet de ne plus avoir à se reconnecter lorsqu’il revient.
-* `logout` – La route `/logout` permet aux utilisateurs de se déconnecter de votre application. Cette route efface la session de l’utilisateur dans votre application et redirige vers le point de terminaison de déconnexion d’Auth0 pour s’assurer que la session n’est plus enregistrée. Ensuite, l’application redirige l’utilisateur vers votre route d’accueil.
-* `index` – La route d’accueil affichera les détails de l’utilisateur authentifié ou permettra aux visiteurs de se connecter.
-
-[8
-
-## Enregistrer vos routes](#enregistrer-vos-routes)
-
-Remplacez le contenu de votre fichier `webappexample/urls.py` par le code à droite pour vous connecter à ces nouvelles routes.
-
-Cela dirigera les routes `/login`, `/callback`, `/logout` et `/` vers les gestionnaires appropriés.
-
-[9
-
-## Ajouter des modèles](#ajouter-des-modèles)
-
-Vous allez ensuite créer un fichier modèle utilisé dans la route de la page d’accueil.
-
-Créez un nouveau sous-répertoire dans le dossier `webappexample` nommé `templates`, et créez un fichier `index.html`.
-
-Le fichier `index.html` contiendra un code modèle pour afficher les informations de l’utilisateur s’il est connecté, ou pour lui présenter un bouton de connexion s’il ne l’est pas.
-
-[10
-
-## Exécuter votre application](#exécuter-votre-application)
-
-Vous êtes prêts à exécuter votre application! À partir de votre Directory de projet, ouvrez un interface et utilisez :
-
-``` lines
-python3 manage.py migrate
-python3 manage.py runserver 3000
-```
-
-Votre application devrait maintenant être prête à s’ouvrir à partir de votre navigateur à l’adresse [http://localhost:3000](http://localhost:3000).
-
-##### checkpoint.header
-
-Visitez [http://localhost:3000](http://localhost:3000/) pour des raisons de vérification. Un bouton de connexion devrait vous permettre de vous connecter à Auth0, puis de revenir à votre application pour consulter les informations relatives à votre profil.
-
-checkpoint.itWorked checkpoint.somethingNotRight
-
-## Next Steps
-
-Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
-
-This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
-
-* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
-* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
-
-Did it work?
-
-Yes No
-
-Any suggestion or typo?
-
-[Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/webapp/django/interactive.md)
-
-<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
-
-Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
-
-Sign Up
-
-Developers
-
-* [Developer Hub](https://developer.auth0.com/resources)
-* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
-* [Blog posts](https://auth0.com/blog/developers/)
-* [Videos](https://auth0.com/docs/videos)
-* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
-* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
-
-Documentation
-
-* [Articles](https://auth0.com/docs/articles)
-* [Quickstarts](https://auth0.com/docs/quickstarts)
-* [APIs](https://auth0.com/docs/api)
-* [SDK Libraries](https://auth0.com/docs/libraries)
-* [Blog](https://auth0.com/blog/)
-* [Reports](https://auth0.com/resources/ebooks)
-* [Webinars](https://auth0.com/resources/webinars)
-
-Get Involved
-
-* [Forum](https://community.auth0.com/)
-* [Events](https://developer.auth0.com/events)
-* [Ambassador Program](https://auth0.com/ambassador-program)
-* [Auth0 Research Program](https://auth0.com/research-program)
-
-Company
-
-* [Our Customers](https://auth0.com/customers)
-* [Compliance - Ensuring privacy and security](https://auth0.com/security)
-* [Partners](https://auth0.com/partners)
-* [Careers We're hiring!](https://www.okta.com/company/careers/)
-* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
-
-Support Center
-
-* [Community](https://community.auth0.com/)
-* [Support](https://support.auth0.com/)
-* [Help](https://community.auth0.com/c/help/6)
-* [FAQs](https://community.auth0.com/c/faq/42)
-* [Auth0 Marketplace](https://marketplace.auth0.com)
-
-Learning
-
-* [Learn](https://auth0.com/learn)
-* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
-* [Blog](https://auth0.com/blog/)
-
-Platform
-
-* [Access Management](https://auth0.com/platform/access-management)
-* [Extensibility](https://auth0.com/platform/extensibility)
-* [Security](https://auth0.com/platform/login-security)
-* [User Management](https://auth0.com/platform/user-management)
-* [Authentication](https://auth0.com/platform/authentication)
-
-Features
-
-* [Universal Login](https://auth0.com/features/universal-login)
-* [Single Sign On](https://auth0.com/features/single-sign-on)
-* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
-* [Actions](https://auth0.com/features/actions)
-* [Machine to Machine](https://auth0.com/features/machine-to-machine)
-* [Passwordless](https://auth0.com/features/passwordless)
-* [Breached Passwords](https://auth0.com/features/breached-passwords)
-
-© 2025 Okta, Inc. All Rights Reserved.
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
+      Vous pouvez maintenant configurer Authlib pour gérer l’authentification de votre application avec Auth0.
+
+      Découvrez les options de configuration possibles pour la méthode Authlib’s OAuth `register()` à partir de [leur documentation.](https://docs.authlib.org/en/latest/client/frameworks.html#using-oauth-2-0-to-log-in)
+      </Section>
+
+      <Section id={sections[6].id} title={sections[6].title} stepNumber="7">
+      Dans cet exemple, vous allez ajouter quatre routes pour votre application : connexion, callback, déconnexion et index.
+
+      - `login` – Lorsque les visiteurs de votre application se rendent sur la route `/login` ils seront redirigés vers Auth0 pour commencer le processus d’authentification.
+      - `callback` – Après la connexion de vos utilisateurs à Auth0, ceux-ci reviendront à votre application à la route `/callback`. Cette route enregistre la session de l’utilisateur et permet de ne plus avoir à se reconnecter lorsqu’il revient.
+      - `logout` – La route `/logout` permet aux utilisateurs de se déconnecter de votre application. Cette route efface la session de l’utilisateur dans votre application et redirige vers le point de terminaison de déconnexion d’Auth0 pour s’assurer que la session n’est plus enregistrée. Ensuite, l’application redirige l’utilisateur vers votre route d’accueil.
+      - `index` – La route d’accueil affichera les détails de l’utilisateur authentifié ou permettra aux visiteurs de se connecter.
+      </Section>
+
+      <Section id={sections[7].id} title={sections[7].title} stepNumber="8">
+      Remplacez le contenu de votre fichier `webappexample/urls.py` par le code à droite pour vous connecter à ces nouvelles routes.
+
+      Cela dirigera les routes `/login`, `/callback`, `/logout` et `/` vers les gestionnaires appropriés.
+      </Section>
+
+      <Section id={sections[8].id} title={sections[8].title} stepNumber="9">
+      Vous allez ensuite créer un fichier modèle utilisé dans la route de la page d’accueil.
+
+      Créez un nouveau sous-répertoire dans le dossier `webappexample` nommé `templates`, et créez un fichier `index.html`.
+
+      Le fichier `index.html` contiendra un code modèle pour afficher les informations de l’utilisateur s’il est connecté, ou pour lui présenter un bouton de connexion s’il ne l’est pas.
+      </Section>
+
+      <Section id={sections[9].id} title={sections[9].title} stepNumber="10">
+      Vous êtes prêts à exécuter votre application! À partir de votre Directory de projet, ouvrez un interface et utilisez :
+
+      ```
+      python3 manage.py migrate
+      python3 manage.py runserver 3000
+      ```
+
+      Votre application devrait maintenant être prête à s’ouvrir à partir de votre navigateur à l’adresse `http://localhost:3000`.
+
+      <Note>
+      ##### Point de contrôle
+      Visitez [http://localhost:3000](http://localhost:3000/) pour des raisons de vérification. Un bouton de connexion devrait vous permettre de vous connecter à Auth0, puis de revenir à votre application pour consulter les informations relatives à votre profil.
+      </Note>
+      </Section>
+
+    ## Étapes suivantes
+
+    Beau travail! Si vous en êtes arrivé là, vous devriez avoir la connexion, la déconnexion et les informations de profil utilisateur actives dans votre application.
+
+    Cela conclut notre tutoriel de démarrage rapide, mais il y a tellement plus à explorer. Pour en savoir plus sur ce que vous pouvez faire avec Auth0, consultez :
+
+    *   [Auth0 Dashboard](https://manage.auth0.com/#) : apprenez à configurer et gérer votre locataire et vos applications Auth0
+    *   [Auth0 Marketplace](https://marketplace.auth0.com/) : découvrez des intégrations que vous pouvez activer pour étendre les fonctionnalités d’Auth0
+  </Content>
+
+  <SideMenu sections={sections}>
+      <SideMenuSectionItem id={sections[0].id}>
+        <SignUpForm />
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[1].id}>
+        <SignUpForm />
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[2].id}>
+        <SignUpForm />
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[3].id}>
+        <SignUpForm />
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[4].id}>
+        <CodeGroup>
+          <HTML/>
+          <Settings/>
+          <Urls/>
+          <Views/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[5].id}>
+        <CodeGroup>
+          <Views/>
+          <HTML/>
+          <Settings/>
+          <Urls/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[6].id}>
+        <CodeGroup>
+          <Views2/>
+          <HTML/>
+          <Settings/>
+          <Urls/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[7].id}>
+        <CodeGroup>
+          <Urls/>
+          <HTML/>
+          <Settings/>
+          <Views/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[8].id}>
+        <CodeGroup>
+          <HTML/>
+          <Settings/>
+          <Urls/>
+          <Views/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[9].id}>
+        <SignUpForm />
+      </SideMenuSectionItem>
+
+    </SideMenu>
+</Recipe>
