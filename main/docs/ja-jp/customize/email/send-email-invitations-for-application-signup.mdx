@@ -43,11 +43,11 @@ Organizationメンバーの招待は、この記事にあるユーザー招待�
 1. [Management APIエンドポイント](https://auth0.com/docs/api/management/v2#!/Tickets/post_password_change)に`user_id`またはメールと`connection_id`を使用してユーザーを指定します。
 2. リダイレクトによってユーザーを送信する場所を指定します。`result_url`パラメーターは、ユーザーがパスワードを設定した後にアプリケーションがユーザーに送信するリダイレクトの場所です。この場合、`result_url`はアプリのログインページでなければなりません。詳細については、「[ログイン後にユーザーをリダイレクトする](https://auth0.com/docs/authenticate/login/redirect-users-after-login)」をお読みください。以下に示す`client_id`パラメーターを使用することもできます。顧客がメールを確認すると、クライアントのデフォルトのログインURIにリダイレクトされます。
 3. 招待リンクの有効期間を指定します。`ttl_sec`パラメーターを使用して、招待リンクがアクティブな期間を設定します。`ttl_sec`パラメーターは、関連するセキュリティ上の懸念事項に合わせて調整する必要があります。リンクは1回限りの使用であるため、ユーザーがパスワードを設定すると、再利用される危険性はありません。
-4. メールアドレスを確認します。登録済みのメールアカウントに送信する場合は、`mark_email_as_verified`パラメーターを`true`に設定します。メールアカウントが登録されていない場合には、メール検証を`true`に設定**しないでください**。このエンドポイントの要求が成功すると、チケットURLを返します。このURLを使用してユーザーの招待を作成します。
+4. メールアドレスを確認します。登録済みのメールアカウントに送信する場合は、`mark_email_as_verified`パラメーターを`true`に設定します。メールアカウントが登録されていない場合には、メール検証を`true`に設定 **しないでください** 。このエンドポイントの要求が成功すると、チケットURLを返します。このURLを使用してユーザーの招待を作成します。
 
 詳細については、「[デフォルトのログインルートを構成する](/docs/ja-jp/authenticate/login/auth0-universal-login/configure-default-login-routes)」をお読みください。
 
-```json lines
+```bash lines
 curl -- request POST \
   --url 'https://{yourAuth0Tenant}/api/v2/tickets/password-change' \
   --header "Content-Type: application/json" \
@@ -60,13 +60,13 @@ curl -- request POST \
 
 パラメーターを追加して、設定パスワードワークフローUIを指定します。例：
 
-```html lines
+```http lines
 #type=invite
 ```
 
 パラメーターを追加してターゲットアプリを識別します。例：
 
-```html lines
+```http lines
 #app=AppName
 ```
 
@@ -80,7 +80,7 @@ curl -- request POST \
 
 たとえば、招待するユーザーを作成するときに、このユーザーアカウントが招待されたことを示すプロパティを`user.app_metadata`に追加することができます。さらに、メールテンプレートでこのプロパティをチェックできます。
 
-```javascript lines
+```liquid lines
 {% if user.app_metadata.invitedToMyApp == true %}
   // user invitation email
 {% else %}

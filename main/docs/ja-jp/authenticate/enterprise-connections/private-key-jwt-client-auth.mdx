@@ -100,23 +100,23 @@ If your custom OIDC connection uses an IdP that does not advertise support for b
 <Tabs><Tab title="New Connection">
 
 1. On your Auth0 Dashboard, navigate to [Authentication > Enterprise](https://manage.auth0.com/#/connections/enterprise).
-2. Next to **OpenID Connect** or **Okta Workforce**, select **Create**.
+2. Next to **OpenID Connect** or **Okta Workforce** , select **Create** .
 3. In the **General** section, provide details for your new connection, including its name and discovery URL.
 4. Configure the following fields to enable Private Key JWT:
 
-   * Set **Communication Channel** to **Back Channel**.
-   * Set **Authentication Method** to **Private Key JWT**.
+   * Set **Communication Channel** to **Back Channel** .
+   * Set **Authentication Method** to **Private Key JWT** .
 5. Select **Create** to save your new connection.
 
 </Tab><Tab title="Existing Connection">
 
 1. On your Auth0 Dashboard, navigate to [Authentication > Enterprise](https://manage.auth0.com/#/connections/enterprise).
-2. Next to **OpenID Connect** or **Okta Workforce**, select **Browse**.
+2. Next to **OpenID Connect** or **Okta Workforce** , select **Browse** .
 3. Choose the appropriate connection. Then, access its **Credentials** tab.
-4. Under **Authentication Settings**, configure the following:
+4. Under **Authentication Settings** , configure the following:
 
-   * Set **Communication Channel** to **Back Channel**.
-   * Set **Authentication Method** to **Private Key JWT**.
+   * Set **Communication Channel** to **Back Channel** .
+   * Set **Authentication Method** to **Private Key JWT** .
 5. Select **Save** at the bottom of the screen.
 6. On the confirmation popup, select **Change** to implement your modifications.
 
@@ -143,18 +143,18 @@ To create a new OIDC connection that uses Private Key JWT Client Authentication,
 </tr>
 <tr>
 <td>`token_endpoint_auth_method`</td>
-<td>Set this property to `private_key_jwt`. <br/><br/> <strong>Notes:</strong><ul><li> By default, this property is set to `client_secret_post`. </li><li>Errors may occur if this property is set to a value other than `private_key_jwt` or `client_secret_post`.</li></ul></td>
+<td>Set this property to `private_key_jwt`. <br/><br/> <b>Notes:</b><ul><li> By default, this property is set to `client_secret_post`. </li><li>Errors may occur if this property is set to a value other than `private_key_jwt` or `client_secret_post`.</li></ul></td>
 </tr>
 <tr>
 <td>`token_endpoint_auth_signing_alg`</td>
-<td>Set this property to `RS256`. <br/><br/> <strong>Notes:</strong> <ul><li>This feature does not currently support additional algorithms.</li><li>Omitting this property will default its value to `RS256`.</li></ul></td>
+<td>Set this property to `RS256`. <br/><br/> <b>Notes:</b> <ul><li>This feature does not currently support additional algorithms.</li><li>Omitting this property will default its value to `RS256`.</li></ul></td>
 </tr>
 </tbody>
 </table>
 
 **Example POST call**
 
-```json lines
+```js lines
 POST /api2/connections
 
 {
@@ -192,7 +192,7 @@ To modify an existing OIDC connection to use Private Key JWT Client Authenticati
 
 **Example PATCH call**
 
-```json lines
+```js lines
 PATCH /api2/connections/{id}
 
 {
@@ -218,7 +218,7 @@ accordion.expand_all/accordion.collapse_all
 To retrieve signing keys through the Auth0 Dashboard:
 
 1. Navigate to [Authentication > Enterprise](https://manage.auth0.com/#/connections/enterprise).
-2. Next to **OpenID Connect** or **Okta Workforce**, select **Browse**.
+2. Next to **OpenID Connect** or **Okta Workforce** , select **Browse** .
 3. Choose the appropriate connection. Then, access its **Credentials** tab.
 4. Locate the **Credentials** section and select the **Download** icon next to the appropriate signing key.
 
@@ -236,13 +236,13 @@ Use of this endpoint requires the `read:connections_keys` scope.
 
 **Example GET call**
 
-```json lines
+```js lines
 GET /api2/connections/{id}/keys
 ```
 
 **Example response**
 
-```json lines
+```js lines expandable
 {
     cert: "-----BEGIN CERTIFICATE-----
 MIIDDTCCAfWgAwIBAgIJP...Ek=
@@ -295,7 +295,7 @@ Some identity providers allow public keys for private_key_jwt to be provided in 
 
 If public keys have been generated for a connection, you can retrieve them by adding the following URI to your IdP configuration:
 
-```json lines
+```http wrap lines
 https://{auth0 domain}/oauth/connection/{connection name}/.well-known/jwks.json
 ```
 
@@ -320,9 +320,9 @@ accordion.expand_all/accordion.collapse_all
 To rotate your signing keys through the Auth0 Dashboard:
 
 1. Navigate to [Authentication > Enterprise](https://manage.auth0.com/#/connections/enterprise).
-2. Next to **OpenID Connect** or **Okta Workforce**, select **Browse**.
+2. Next to **OpenID Connect** or **Okta Workforce** , select **Browse** .
 3. Choose the appropriate connection. Then, access its **Credentials** tab.
-4. In the **Credentials** section, select **Rotate Keys**.
+4. In the **Credentials** section, select **Rotate Keys** .
 5. On the popup, select **Save** to confirm the rotation.
 
 After rotation, any in-flight JWTs signed with the previous key immediately become inactive and may fail verification with your IdP.
@@ -339,7 +339,7 @@ Use of this endpoint requires both `create:connections_keys` and `update:connect
 
 </Warning>
 
-```json lines
+```js lines
 POST /v2/connections/{id}/keys/rotate
 ```
 
@@ -351,9 +351,9 @@ After rotation, any in-flight JWTs signed with the previous key immediately beco
 
 On your OIDC or Okta Workforce connection, your signing keys are assigned one of the following statuses:
 
-* **Current**: The signing key currently in use for the application.
-* **Next**: The next signing key to use for the application after the current key is revoked.
-* **Previous**: An expired or otherwise revoked signing key that is no longer in use.
+* **Current** : The signing key currently in use for the application.
+* **Next** : The next signing key to use for the application after the current key is revoked.
+* **Previous** : An expired or otherwise revoked signing key that is no longer in use.
 
 When Private Key JWT Client Authentication is first enabled for a connection, only a `current` and `next` keypair is generated. A key is only marked as `previous` after rotation occurs.
 

@@ -13,17 +13,17 @@ permalink: "delegated-administration-access-hook"
 
 フィルターフックの詳細については、「[委任管理：フィルターフック](/docs/ja-jp/customize/extensions/delegated-administration-extension/delegated-administration-hooks/delegated-administration-filter-hook)」をお読みください。
 
-**［Access Hook（アクセスフック）**では、現在のユーザーが特定のユーザーを読み取り、削除、ブロック、ブロック解除、または更新することができるかどうかを判定できます。
+**［Access Hook（アクセスフック）** では、現在のユーザーが特定のユーザーを読み取り、削除、ブロック、ブロック解除、または更新することができるかどうかを判定できます。
 
 ## フックコントラクト
 
-* **ctx**：コンテキストオブジェクト。
+* **ctx** ：コンテキストオブジェクト。
 
-  + **payload**：ペイロードオブジェクト。
+  + **payload** ：ペイロードオブジェクト。
 
-    - **action**：実行されている現在のアクション（**delete:user**など）。
-    - **user**：アクションが実行されているユーザー。
-* **callback(error)**：アクセスが拒否された場合にエラーを返すことができるコールバック。
+    - **action** ：実行されている現在のアクション（ **delete:user** など）。
+    - **user** ：アクションが実行されているユーザー。
+* **callback(error)** ：アクセスが拒否された場合にエラーを返すことができるコールバック。
 
 ## 使用例
 
@@ -60,7 +60,7 @@ function(ctx, callback) {
 
 このフックが構成されていないと、現在のユーザーはすべてのユーザーにアクセスすることができます。
 
-フックは以下のアクション名（**ctx.payload.action**の値として使用して設定）をサポートします。
+フックは以下のアクション名（ **ctx.payload.action** の値として使用して設定）をサポートします。
 
 * read:user
 * delete:user

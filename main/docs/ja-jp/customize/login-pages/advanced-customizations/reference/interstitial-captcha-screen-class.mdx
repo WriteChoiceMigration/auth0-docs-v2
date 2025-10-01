@@ -10,14 +10,10 @@ permalink: "interstitial-captcha-screen-class"
 ---
 
 インタースティシャルCAPTCHA画面クラスは[Identifier First認証](/docs/ja-jp/authenticate/login/auth0-universal-login/identifier-first)フローの一部で、テナント設定を基に表示されます。詳細については、「[ボット検知](/docs/ja-jp/secure/attack-protection/bot-detection)」を参照してください。
-
-|  |
-| --- |
-| Interstitial Captcha |
-
+InterstitialCaptcha
+<Frame>![](/images/ja-jp/cdy7uua7fh8z/1n9ZbMP9c4qTNrzszeLAuC/b1b28392eadddd645bc03722a5239e04/InterstitialCaptcha.png)</Frame>
 インタースティシャルCAPTCHA画面クラスのインポートとインスタンス化
-
-```javascript lines
+```js lines
 import InterstitialCaptcha from "@auth0/auth0-acul-js/interstitial-captcha";
 const interstitialCaptcha = new InterstitialCaptcha();
 
@@ -36,7 +32,7 @@ interstitialCaptcha.screenData();
 
 <Tabs><Tab title="branding">
 
-```javascript lines
+```ts lines expandable
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -71,7 +67,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```javascript lines
+```ts lines
 interface client {
   description: null | string;
   id: string;
@@ -83,7 +79,7 @@ interface client {
 
 </Tab><Tab title="organization">
 
-```javascript lines
+```ts lines
 interface organization {
   branding: null | {
     colors?: {
@@ -102,7 +98,7 @@ interface organization {
 
 </Tab><Tab title="prompt">
 
-```javascript lines
+```ts lines
 interface prompt{
   name: string;
 }
@@ -110,7 +106,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```javascript lines
+```ts lines expandable
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -142,7 +138,7 @@ interface PhonePrefix {
 
 </Tab><Tab title="tenant">
 
-```javascript lines
+```ts lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -153,7 +149,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```javascript lines
+```ts lines expandable
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -186,7 +182,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```javascript lines
+```ts lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -206,7 +202,7 @@ interface untrustedData {
 
 </Tab><Tab title="user">
 
-```javascript lines
+```ts lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -242,7 +238,7 @@ ShortEntity<Key>: {
 
 このメソッドはCAPTCHA返答を検証し、ユーザーを次のステップに誘導します。
 
-```javascript lines
+```js lines
 interstitialCaptchaManager.submitCaptcha({
   captcha: <CaptchaCodeResponse>
 });
@@ -250,10 +246,10 @@ interstitialCaptchaManager.submitCaptcha({
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong></th>
-<th><strong>タイプ</strong></th>
-<th><strong>必須か否か</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b></th>
+<th><b>タイプ</b></th>
+<th><b>必須か否か</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>

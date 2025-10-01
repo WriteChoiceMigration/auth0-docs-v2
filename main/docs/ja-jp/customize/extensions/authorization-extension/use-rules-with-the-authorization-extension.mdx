@@ -54,7 +54,7 @@ function (user, context, callback) {
 }
 ```
 
-このルールは、認可拡張ルールの**［after（後）］**に実行する必要があります。これを確実に行うには、認可拡張ルールの下に配置してください。
+このルールは、認可拡張ルールの **［after（後）］** に実行する必要があります。これを確実に行うには、認可拡張ルールの下に配置してください。
 
 `/authorize`エンドポイントを呼び出すとき、またはLockを構成するときは、`groups`、`permissions`、および/または`roles`を指定して、`scope`に必要な情報を指定する必要があります。
 
@@ -68,15 +68,15 @@ function (user, context, callback) {
 
 ロールを使用してアプリのメタデータを設定できます。ロールとは、特定の機能セットを作成するためにグループ化された権限のグループです。この手順は、セットアップしたルールがどのアプリに対してアクションを実行するかを認識できるように、アプリに「タグ付け」することと考えることができます。
 
-1. `context.clientMetadata`フィールドを `required_roles`で設定するには、[Auth0 Dashboard> Applications>Applications](https://manage.auth0.com/#/applications)で作業するアプリケーションを選択します。これにより、アプリケーションの**［Settings（設定）］**が表示されます。下にスクロールして、ページの下部にある**［Show Advanced Settings（詳細設定を表示）］**を選択します。
-2. **［Application Metadata（アプリケーションメタデータ）］**の下に、**［Key（キー）］**を `required_roles`に設定する項目を追加し、**［Value（値）］**フィールドにロールをコンマ区切り形式でリストします。フィールドを追加するには、**［+ Add（+ 追加）］**を選択します。
-3. 終わったら、**［Save Changes（変更を保存）］**を選択します。これで、このアプリケーションからログインすると、`context.clientMetadata`に、入力したロール値の文字列を含む`required_roles`が表示されます。
+1. `context.clientMetadata`フィールドを `required_roles`で設定するには、[Auth0 Dashboard> Applications>Applications](https://manage.auth0.com/#/applications)で作業するアプリケーションを選択します。これにより、アプリケーションの **［Settings（設定）］** が表示されます。下にスクロールして、ページの下部にある **［Show Advanced Settings（詳細設定を表示）］** を選択します。
+2. **［Application Metadata（アプリケーションメタデータ）］** の下に、 **［Key（キー）］** を `required_roles`に設定する項目を追加し、 **［Value（値）］** フィールドにロールをコンマ区切り形式でリストします。フィールドを追加するには、 **［+ Add（+ 追加）］** を選択します。
+3. 終わったら、 **［Save Changes（変更を保存）］** を選択します。これで、このアプリケーションからログインすると、`context.clientMetadata`に、入力したロール値の文字列を含む`required_roles`が表示されます。
 
 ### ルールを適用するアプリロールを作成する
 
 各アプリにロールが関連付けられたので、コンテキスト内でこのアプリ情報を使用してルール実行を作成できます。
 
-1. このルールを作成する前に、**［Token Contents（トークンコンテンツ）］**の下の**［Roles（ロール）］**を有効にし、認可拡張ルールを公開します。
+1. このルールを作成する前に、 **［Token Contents（トークンコンテンツ）］** の下の **［Roles（ロール）］** を有効にし、認可拡張ルールを公開します。
 2. このルールを追加し、生成された「auth0-authorization-extension」ルールの後にリストされていることを確認します。
 3. `required_roles`を設定したら、次の本文を持つ新しい[ルール](https://manage.auth0.com/#/rules)を作成します：
 

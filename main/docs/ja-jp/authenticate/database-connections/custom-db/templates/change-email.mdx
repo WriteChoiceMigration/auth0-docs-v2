@@ -36,15 +36,15 @@ changeEmail関数は以下を行います。
 
 `changeEmail`関数は、4つのパラメーターを受け取り、`コールバック`関数を返します。
 
-```javascript lines
+```js lines
 changeEmail(email, newEmail, verified, callback): function
 ```
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong></th>
-<th><strong>タイプ</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b></th>
+<th><b>タイプ</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -75,7 +75,7 @@ changeEmail(email, newEmail, verified, callback): function
 
 これは疑似JavaScriptを使った例で、どのようにすれば`changeEmail`関数を実装できるかがわかります。
 
-```javascript lines
+```javascript lines expandable
 function (email, newEmail, verified, callback) {
   // Prepare the API call
   let options = {
@@ -101,6 +101,7 @@ function (email, newEmail, verified, callback) {
     // Return `true` value in callback if operation succeeded
     return callback(null, true);
   });
+}
 ```
 
 ## コールバック関数
@@ -109,16 +110,16 @@ function (email, newEmail, verified, callback) {
 
 ### 定義
 
-```javascript lines
+```js lines
 callback(error, operationResult): function
 ```
 
 <table class="table"><thead>
 <tr>
-<th><strong>パラメーター</strong></th>
-<th><strong>タイプ</strong></th>
-<th><strong>必須</strong></th>
-<th><strong>説明</strong></th>
+<th><b>パラメーター</b></th>
+<th><b>タイプ</b></th>
+<th><b>必須</b></th>
+<th><b>説明</b></th>
 </tr>
 </thead>
 <tbody>
@@ -141,7 +142,7 @@ callback(error, operationResult): function
 
 メールアドレス変更操作が成功した場合、`callback`関数を返し、`error`パラメーターには`null`を、`operationResult`パラメーターには`true`を渡します。
 
-```javascript lines
+```js lines
 return callback(null, true);
 ```
 
@@ -149,7 +150,7 @@ return callback(null, true);
 
 メールアドレス変更操作が失敗した場合、`callback`関数を返し、`error`パラメーターには`null`を、`operationResult`パラメーターには`false`を渡します。
 
-```javascript lines
+```js lines
 return callback(null, false);
 ```
 
@@ -157,7 +158,7 @@ return callback(null, false);
 
 エラーが発生した場合は、`callback`関数を返し、`error`パラメーターに関連するエラー情報を渡します。
 
-```javascript lines
+```js lines
 return callback(new Error("My custom error message."));
 ```
 

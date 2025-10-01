@@ -40,7 +40,7 @@ Windows PowerShellを使って、以下の2つのコマンドを実行します�
 AddRelyingParty "urn:auth0:{yourTenant}" "https://{yourDomain}/login/callback"
 ```
 
-統合を自動化するために、スクリプトは[ADFS PowerShell SnapIn](http://technet.microsoft.com/en-us/library/adfs2-powershell-basics.aspx)を使って**<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Relying Party</Tooltip>**を作成し、構成します。Relyin Partyは認証されたユーザーについて、**email**、**upn**、**given name**、**surname**のクレームを発行します。
+統合を自動化するために、スクリプトは[ADFS PowerShell SnapIn](http://technet.microsoft.com/en-us/library/adfs2-powershell-basics.aspx)を使って **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Relying Party</Tooltip>** を作成し、構成します。Relyin Partyは認証されたユーザーについて、**email**、**upn**、**given name**、**surname** のクレームを発行します。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -79,20 +79,20 @@ Set-ADFSRelyingPartyTrust –TargetName $realm –IssuanceAuthorizationRules $rS
 ## 手動でのセットアップ手順1：Relying Party Trustを追加する
 
 1. ADFS管理コンソールを開きます。
-2. コンソールの右にある**［Add Relying Party Trust（証明書利用者の信頼を追加）］**をクリックします。\*
-3. **［Start（開始）］**をクリックします。
-4. **［Enter data about the relying party manually（証明書利用者についてのデータを手動で入力する）］**を選択して**［Next（次へ）］**をクリックします。
-5. 名前（`{yourAppName}`など）を入力して**［Next（次へ）］**をクリックします。
-6. デフォルト（`ADFS 2.0 profile`）を使用して**［Next（次へ）］**をクリックします。
-7. デフォルト（`no encryption certificate`）を使用して**［Next（次へ）］**をクリックします。
-8. **［Enable support for the WS-Federation...（WS-Federationのサポートを有効にする...）］**を選択して、テキストボックスに次の値を入力します：
+2. コンソールの右にある **［Add Relying Party Trust（証明書利用者の信頼を追加）］** をクリックします。\*
+3. **［Start（開始）］** をクリックします。
+4. **［Enter data about the relying party manually（証明書利用者についてのデータを手動で入力する）］** を選択して **［Next（次へ）］** をクリックします。
+5. 名前（`{yourAppName}`など）を入力して **［Next（次へ）］** をクリックします。
+6. デフォルト（`ADFS 2.0 profile`）を使用して **［Next（次へ）］** をクリックします。
+7. デフォルト（`no encryption certificate`）を使用して **［Next（次へ）］** をクリックします。
+8. **［Enable support for the WS-Federation...（WS-Federationのサポートを有効にする...）］** を選択して、テキストボックスに次の値を入力します：
    `https://{yourDomain}/login/callback`（[カスタムドメイン](/docs/ja-jp/customize/custom-domains)を使用している場合には`https://<YOUR CUSTOM DOMAIN>/login/callback`）
-9. **［Next（次へ）］**をクリックします。
+9. **［Next（次へ）］** をクリックします。
 10. Relying Party Trust identifier（証明書利用者信頼の識別子）に次の値を追加します：
     `urn:auth0:{yourTenant}`
-11. **［Add（追加）］**をクリックしてから、**［Next（次へ）］**をクリックします。
-12. ［`Permit all users...`（すべてのユーザーを許可する...）］をデフォルトのままにして、**［Next（次へ）］**をクリックします。
-13. **［Next（次へ）］**をクリックしてから、**［Close（閉じる）］**をクリックします。
+11. **［Add（追加）］** をクリックしてから、**［Next（次へ）］** をクリックします。
+12. ［`Permit all users...`（すべてのユーザーを許可する...）］をデフォルトのままにして、**［Next（次へ）］** をクリックします。
+13. **［Next（次へ）］** をクリックしてから、**［Close（閉じる）］** をクリックします。
 
 ## 手動でのセットアップ手順2：クレーム発行ポリシールールを追加する
 
@@ -106,22 +106,22 @@ Set-ADFSRelyingPartyTrust –TargetName $realm –IssuanceAuthorizationRules $rS
    </thead>
    <tbody>
    <tr>
-   <td>コンソールの右側の［操作］パネルで、作成した証明書利用者信頼を見つけます。その下の**［クレーム発行ポリシーの編集］**をクリックします。</td>
+   <td>コンソールの右側の［操作］パネルで、作成した証明書利用者信頼を見つけます。その下の **［クレーム発行ポリシーの編集］** をクリックします。</td>
    <td>
-   コンソールツリーのADFSの下にある**［証明書利用者信頼］
+   コンソールツリーのADFSの下にある **［証明書利用者信頼］
    <strong>
    をクリックします。コンソールの右側で、作成した証明書利用者信頼を見つけます。右クリックして、
    </strong>
-   ［クレーム発行ポリシーの編集］**をクリックします。
+   ［クレーム発行ポリシーの編集］** をクリックします。
    </td>
    </tr>
    </tbody>
    </table>
-2. ［Edit Claim Issuance Policy（クレーム発行ポリシーの編集）］ウィンドウで［Issuance Transform Rules（発行変換ルール）］の下にある**［Add Rule...（ルールの追加...）］**をクリックします。
+2. ［Edit Claim Issuance Policy（クレーム発行ポリシーの編集）］ウィンドウで［Issuance Transform Rules（発行変換ルール）］の下にある **［Add Rule...（ルールの追加...）］** をクリックします。
 3. デフォルトの［`Send LDAP Attributes as Claims`（LDAP属性をクレームとして送信）］はそのままにします。
 4. ルールに分かりやすい名前を入力します。
-5. ［Attribute Store（属性ストア）］に**［Active Directory（Entra　ID）］**を選択します。
-6. ［`Mapping of LDAP attributes to outgoing claim types`（LDAP属性を送信クレームタイプにマッピング）］に以下のマッピングを選択して、**［Finish（終了）］**をクリックします。
+5. ［Attribute Store（属性ストア）］に **［Active Directory（Entra　ID）］** を選択します。
+6. ［`Mapping of LDAP attributes to outgoing claim types`（LDAP属性を送信クレームタイプにマッピング）］に以下のマッピングを選択して、**［Finish（終了）］** をクリックします。
 
    <table class="table"><thead>
    <tr>
@@ -157,12 +157,12 @@ Set-ADFSRelyingPartyTrust –TargetName $realm –IssuanceAuthorizationRules $rS
 
 前の手順にあるマッピングは最もよく使われるものですが、ユーザー情報に関する他のLDAP属性が必要な場合には、クレームのマッピングを追加することができます。
 
-1. 前の手順でウィンドウを閉じてしまった場合には、作成したRelying Party Trustのコンテキストメニューから**［Edit Claim Rules（クレームルールの編集）］**を選択して、ルールを編集します。
+1. 前の手順でウィンドウを閉じてしまった場合には、作成したRelying Party Trustのコンテキストメニューから **［Edit Claim Rules（クレームルールの編集）］** を選択して、ルールを編集します。
 2. LDAP属性のそれぞれに追加の行を作成します。左の列で属性を選択して、右の列でクレームタイプを選択します。
 3. 使いたいクレームタイプが見つからない場合には、以下のいずれかを行います。
 
    1. 新しいクレームの[名前空間修飾名](/docs/ja-jp/secure/tokens/json-web-tokens/create-custom-claims)（例：`http://schemas.xmlsoap.org/ws/2005/05/identity/claims/department`）を入力する
-   2. 新しいクレームタイプを登録（ADFS管理コンソールで**［ADFS］>［Services（サービス）］>［Claim Descriptions（クレームの説明）］**を選択）して、マッピングにあるクレーム名を使用する。Auth0はユーザープロファイルの属性名として、クレームタイプの名前部分（例：`http://schemas.xmlsoap.org/ws/2005/05/identity/claims/department`の`department`）を使用します。
+   2. 新しいクレームタイプを登録（ADFS管理コンソールで **［ADFS］>［Services（サービス）］>［Claim Descriptions（クレームの説明）］** を選択）して、マッピングにあるクレーム名を使用する。Auth0はユーザープロファイルの属性名として、クレームタイプの名前部分（例：`http://schemas.xmlsoap.org/ws/2005/05/identity/claims/department`の`department`）を使用します。
 
 ## 次の手順
 

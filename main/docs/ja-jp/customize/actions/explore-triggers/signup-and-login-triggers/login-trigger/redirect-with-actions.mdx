@@ -93,7 +93,7 @@ exports.onContinuePostLogin = async (event, api) => {
 
 データを外部サイトに渡す場合は、そのデータを署名済みの[JWT](/docs/ja-jp/secure/tokens/json-web-tokens)でエンコードすることをお勧めします。そうすれば、アプリケーションは送信中にデータが改ざんされていないことを確信できます。Actionsでは`api.redirect.encodeToken`および`api.redirect.sendUserTo`関数を使用してこれを実行できます。
 
-```javascript lines
+```javascript lines expandable
 /**
 * @param {Event} event - Details about the user and the context in which they are logging in.
 * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
@@ -260,7 +260,7 @@ exports.onContinuePostLogin = async (event, api) => {
 
 以下の例では、カスタム認証方法を返す契機を決めるために、既存のレコードのタイムスタンプを照合します。
 
-```javascript lines
+```javascript lines expandable
 const CUSTOM_METHOD_URL = "https://path.to.prompt";
 const PROMPT_TTL = 1000 * 60 * 60 * 24; // 24h
 
