@@ -80,11 +80,11 @@ Utilisez le point de terminaison de <Tooltip data-tooltip-id="react-containers-D
 <CodeGroup>
 ```bash cURL lines
 curl --request PATCH \
---url 'https://{yourDomain}/api/v2/tenants/settings' \
---header 'authorization: Bearer {mgmtApiAccessToken}' \
---header 'content-type: application/json' \
---data '{"error_page": {"html": "", "show_log_link":false, "url": "http://www.example.com"}}'
-``` lines
+  --url 'https://{yourDomain}/api/v2/tenants/settings' \
+  --header 'authorization: Bearer {mgmtApiAccessToken}' \
+  --header 'content-type: application/json' \
+  --data '{"error_page": {"html": "", "show_log_link":false, "url": "http://www.example.com"}}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/tenants/settings");
 var request = new RestRequest(Method.PATCH);
@@ -94,113 +94,139 @@ request.AddParameter("application/json", "{\"error_page\": {\"html\": \"\", \"sh
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/tenants/settings"
-payload := strings.NewReader("{\"error_page\": {\"html\": \"\", \"show_log_link\":false, \"url\": \"http://www.example.com\"}}")
-req, _ := http.NewRequest("PATCH", url, payload)
-req.Header.Add("authorization", "Bearer {mgmtApiAccessToken}")
-req.Header.Add("content-type", "application/json")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/tenants/settings"
+
+	payload := strings.NewReader("{\"error_page\": {\"html\": \"\", \"show_log_link\":false, \"url\": \"http://www.example.com\"}}")
+
+	req, _ := http.NewRequest("PATCH", url, payload)
+
+	req.Header.Add("authorization", "Bearer {mgmtApiAccessToken}")
+	req.Header.Add("content-type", "application/json")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/tenants/settings")
-.header("authorization", "Bearer {mgmtApiAccessToken}")
-.header("content-type", "application/json")
-.body("{\"error_page\": {\"html\": \"\", \"show_log_link\":false, \"url\": \"http://www.example.com\"}}")
-.asString();
+HttpResponse<String> response = Unirest.patch("https://{yourDomain}/api/v2/tenants/settings")
+  .header("authorization", "Bearer {mgmtApiAccessToken}")
+  .header("content-type", "application/json")
+  .body("{\"error_page\": {\"html\": \"\", \"show_log_link\":false, \"url\": \"http://www.example.com\"}}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'PATCH',
-url: 'https://{yourDomain}/api/v2/tenants/settings',
-headers: {
-authorization: 'Bearer {mgmtApiAccessToken}',
-'content-type': 'application/json'
-},
-data: {error_page: {html: '', show_log_link: false, url: 'http://www.example.com'}}
+  method: 'PATCH',
+  url: 'https://{yourDomain}/api/v2/tenants/settings',
+  headers: {
+    authorization: 'Bearer {mgmtApiAccessToken}',
+    'content-type': 'application/json'
+  },
+  data: {error_page: {html: '', show_log_link: false, url: 'http://www.example.com'}}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {mgmtApiAccessToken}",
-@"content-type": @"application/json" };
-NSDictionary \*parameters = @{ @"error_page": @{ @"html": @"", @"show_log_link": @NO, @"url": @"http://www.example.com" } };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/tenants/settings"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {mgmtApiAccessToken}",
+                           @"content-type": @"application/json" };
+NSDictionary *parameters = @{ @"error_page": @{ @"html": @"", @"show_log_link": @NO, @"url": @"http://www.example.com" } };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/tenants/settings"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"PATCH"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/tenants/settings",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PATCH",
-CURLOPT_POSTFIELDS => "{\"error_page\": {\"html\": \"\", \"show_log_link\":false, \"url\": \"http://www.example.com\"}}",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {mgmtApiAccessToken}",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/tenants/settings",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PATCH",
+  CURLOPT_POSTFIELDS => "{\"error_page\": {\"html\": \"\", \"show_log_link\":false, \"url\": \"http://www.example.com\"}}",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {mgmtApiAccessToken}",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{\"error_page\": {\"html\": \"\", \"show_log_link\":false, \"url\": \"http://www.example.com\"}}"
+
 headers = {
-'authorization': "Bearer {mgmtApiAccessToken}",
-'content-type': "application/json"
-}
+    'authorization': "Bearer {mgmtApiAccessToken}",
+    'content-type': "application/json"
+    }
+
 conn.request("PATCH", "/{yourDomain}/api/v2/tenants/settings", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -208,44 +234,53 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/tenants/settings")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Patch.new(url)
 request["authorization"] = 'Bearer {mgmtApiAccessToken}'
 request["content-type"] = 'application/json'
 request.body = "{\"error_page\": {\"html\": \"\", \"show_log_link\":false, \"url\": \"http://www.example.com\"}}"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"authorization": "Bearer {mgmtApiAccessToken}",
-"content-type": "application/json"
+  "authorization": "Bearer {mgmtApiAccessToken}",
+  "content-type": "application/json"
 ]
 let parameters = ["error_page": [
-"html": "",
-"show_log_link": false,
-"url": "http://www.example.com"
-]] as [String : Any]
+    "html": "",
+    "show_log_link": false,
+    "url": "http://www.example.com"
+  ]] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/tenants/settings")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "PATCH"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -294,15 +329,11 @@ Vous pouvez utiliser la syntaxe Liquid pour inclure les variables suivantes :
 <CodeGroup>
 ```bash cURL lines
 curl --request PATCH \
---url https://login.auth0.com/api/v2/tenants/settings \
---header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
---header 'content-type: application/json' \
---data '{"error_page": {"html": "
-
-# {{error | escape }} {{error_description | escape }} This error was generated {{'\''now'\'' | date: '\''%Y %h'\''}}.
-
-", "show_log_link": false, "url": ""}}'
-``` lines
+  --url https://login.auth0.com/api/v2/tenants/settings \
+  --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
+  --header 'content-type: application/json' \
+  --data '{"error_page": {"html": "<h1>{{error | escape }} {{error_description | escape }} This error was generated {{'\''now'\'' | date: '\''%Y %h'\''}}.</h1>", "show_log_link": false, "url": ""}}'
+```
 ```csharp C# lines
 var client = new RestClient("https://login.auth0.com/api/v2/tenants/settings");
 var request = new RestRequest(Method.PATCH);
@@ -316,143 +347,145 @@ request.AddParameter("application/json", "{\"error_page\": {\"html\": \"
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://login.auth0.com/api/v2/tenants/settings"
-payload := strings.NewReader("{\"error_page\": {\"html\": \"
 
-# {{error | escape }} {{error_description | escape }} This error was generated {{'now' | date: '%Y %h'}}.
+	url := "https://login.auth0.com/api/v2/tenants/settings"
 
-\", \"show_log_link\": false, \"url\": \"\"}}")
-req, _ := http.NewRequest("PATCH", url, payload)
-req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
-req.Header.Add("content-type", "application/json")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+	payload := strings.NewReader("{\"error_page\": {\"html\": \"<h1>{{error | escape }} {{error_description | escape }} This error was generated {{'now' | date: '%Y %h'}}.</h1>\", \"show_log_link\": false, \"url\": \"\"}}")
+
+	req, _ := http.NewRequest("PATCH", url, payload)
+
+	req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+	req.Header.Add("content-type", "application/json")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.patch("https://login.auth0.com/api/v2/tenants/settings")
-.header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
-.header("content-type", "application/json")
-.body("{\"error_page\": {\"html\": \"
-
-# {{error | escape }} {{error_description | escape }} This error was generated {{'now' | date: '%Y %h'}}.
-
-\", \"show_log_link\": false, \"url\": \"\"}}")
-.asString();
+HttpResponse<String> response = Unirest.patch("https://login.auth0.com/api/v2/tenants/settings")
+  .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+  .header("content-type", "application/json")
+  .body("{\"error_page\": {\"html\": \"<h1>{{error | escape }} {{error_description | escape }} This error was generated {{'now' | date: '%Y %h'}}.</h1>\", \"show_log_link\": false, \"url\": \"\"}}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'PATCH',
-url: 'https://login.auth0.com/api/v2/tenants/settings',
-headers: {
-authorization: 'Bearer MGMT_API_ACCESS_TOKEN',
-'content-type': 'application/json'
-},
-data: {
-error_page: {
-html: '
-
-# {{error | escape }} {{error_description | escape }} This error was generated {{\'now\' | date: \'%Y %h\'}}.
-
-',
-show_log_link: false,
-url: ''
-}
-}
+  method: 'PATCH',
+  url: 'https://login.auth0.com/api/v2/tenants/settings',
+  headers: {
+    authorization: 'Bearer MGMT_API_ACCESS_TOKEN',
+    'content-type': 'application/json'
+  },
+  data: {
+    error_page: {
+      html: '<h1>{{error | escape }} {{error_description | escape }} This error was generated {{\'now\' | date: \'%Y %h\'}}.</h1>',
+      show_log_link: false,
+      url: ''
+    }
+  }
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
-@"content-type": @"application/json" };
-NSDictionary \*parameters = @{ @"error_page": @{ @"html": @"
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
 
-# {{error | escape }} {{error_description | escape }} This error was generated {{'now' | date: '%Y %h'}}.
+NSDictionary *headers = @{ @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
+                           @"content-type": @"application/json" };
+NSDictionary *parameters = @{ @"error_page": @{ @"html": @"<h1>{{error | escape }} {{error_description | escape }} This error was generated {{'now' | date: '%Y %h'}}.</h1>", @"show_log_link": @NO, @"url": @"" } };
 
-", @"show_log_link": @NO, @"url": @"" } };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://login.auth0.com/api/v2/tenants/settings"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://login.auth0.com/api/v2/tenants/settings"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"PATCH"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://login.auth0.com/api/v2/tenants/settings",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PATCH",
-CURLOPT_POSTFIELDS => "{\"error_page\": {\"html\": \"
-
-# {{error | escape }} {{error_description | escape }} This error was generated {{'now' | date: '%Y %h'}}.
-
-\", \"show_log_link\": false, \"url\": \"\"}}",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer MGMT_API_ACCESS_TOKEN",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://login.auth0.com/api/v2/tenants/settings",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PATCH",
+  CURLOPT_POSTFIELDS => "{\"error_page\": {\"html\": \"<h1>{{error | escape }} {{error_description | escape }} This error was generated {{'now' | date: '%Y %h'}}.</h1>\", \"show_log_link\": false, \"url\": \"\"}}",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer MGMT_API_ACCESS_TOKEN",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("login.auth0.com")
-payload = "{\"error_page\": {\"html\": \"
 
-# {{error | escape }} {{error_description | escape }} This error was generated {{'now' | date: '%Y %h'}}.
+payload = "{\"error_page\": {\"html\": \"<h1>{{error | escape }} {{error_description | escape }} This error was generated {{'now' | date: '%Y %h'}}.</h1>\", \"show_log_link\": false, \"url\": \"\"}}"
 
-\", \"show_log_link\": false, \"url\": \"\"}}"
 headers = {
-'authorization': "Bearer MGMT_API_ACCESS_TOKEN",
-'content-type': "application/json"
-}
+    'authorization': "Bearer MGMT_API_ACCESS_TOKEN",
+    'content-type': "application/json"
+    }
+
 conn.request("PATCH", "/api/v2/tenants/settings", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -460,52 +493,53 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://login.auth0.com/api/v2/tenants/settings")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Patch.new(url)
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 request["content-type"] = 'application/json'
-request.body = "{\"error_page\": {\"html\": \"
+request.body = "{\"error_page\": {\"html\": \"<h1>{{error | escape }} {{error_description | escape }} This error was generated {{'now' | date: '%Y %h'}}.</h1>\", \"show_log_link\": false, \"url\": \"\"}}"
 
-# {{error | escape }} {{error_description | escape }} This error was generated {{'now' | date: '%Y %h'}}.
-
-\", \"show_log_link\": false, \"url\": \"\"}}"
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"authorization": "Bearer MGMT_API_ACCESS_TOKEN",
-"content-type": "application/json"
+  "authorization": "Bearer MGMT_API_ACCESS_TOKEN",
+  "content-type": "application/json"
 ]
 let parameters = ["error_page": [
-"html": "
+    "html": "<h1>{{error | escape }} {{error_description | escape }} This error was generated {{'now' | date: '%Y %h'}}.</h1>",
+    "show_log_link": false,
+    "url": ""
+  ]] as [String : Any]
 
-# {{error | escape }} {{error_description | escape }} This error was generated {{'now' | date: '%Y %h'}}.
-
-",
-"show_log_link": false,
-"url": ""
-]] as [String : Any]
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://login.auth0.com/api/v2/tenants/settings")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "PATCH"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
