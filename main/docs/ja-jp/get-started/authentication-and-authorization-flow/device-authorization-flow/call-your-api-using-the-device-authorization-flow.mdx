@@ -26,11 +26,11 @@ Auth0を使用すると、以下を使ってアプリでデバイス認可フロ
 * 制限事項（下記）を確認して、デバイス認可フローが実装に適しているかどうかを確認してください。
 * [Auth0にアプリケーションを登録します](/docs/ja-jp/get-started/auth0-overview/create-applications/native-apps)。
 
-  + **［Application Type（アプリケーションタイプ）］** として**［Native（ネイティブ）］** を選択します。
+  + **［Application Type（アプリケーションタイプ）］** として **［Native（ネイティブ）］** を選択します。
   + 必要な場合は、**［Allowed Web Origins（許可されたWebオリジン）］** を設定します。これを使用して、ローカル開発のオリジンとしてlocalhostを許可したり、CORSの対象となるアーキテクチャ（例：HTML5+JS）を持つ特定のTVソフトウェアの許可されたオリジンを設定したりできます。ほとんどのアプリケーションはこの設定は使用しません。
-  + **［OIDC Conformant（OIDC準拠）］** トグルが有効になっていることを確認します。この設定は[［Dashboard］](https://manage.auth0.com/#)の**［Applications（アプリケーション）］>［Application（アプリケーション）］>［Advanced Settings（アプリケーション設定）］>［OAuth］** にあります。
-  + アプリケーションの**［Grant Types（付与タイプ）］** に**［Device Code（デバイスコード）］** が含まれていることを確認します。詳細については、「[付与タイプを更新する](/docs/ja-jp/get-started/applications/update-grant-types)」をお読みください。
-  + アプリケーションがリフレッシュトークンを使用できるようにするには、アプリケーションの**［Grant Types（付与タイプ）］** に**［Refresh Token（リフレッシュトークン）］** が含まれていることを確認します。詳細については、「[付与タイプを更新する](/docs/ja-jp/get-started/applications/update-grant-types)」をお読みください。リフレッシュトークンの詳細については、「[リフレッシュトークン](/docs/ja-jp/secure/tokens/refresh-tokens)」をお読みください。
+  + **［OIDC Conformant（OIDC準拠）］** トグルが有効になっていることを確認します。この設定は[［Dashboard］](https://manage.auth0.com/#)の **［Applications（アプリケーション）］>［Application（アプリケーション）］>［Advanced Settings（アプリケーション設定）］>［OAuth］** にあります。
+  + アプリケーションの **［Grant Types（付与タイプ）］** に **［Device Code（デバイスコード）］** が含まれていることを確認します。詳細については、「[付与タイプを更新する](/docs/ja-jp/get-started/applications/update-grant-types)」をお読みください。
+  + アプリケーションがリフレッシュトークンを使用できるようにするには、アプリケーションの **［Grant Types（付与タイプ）］** に **［Refresh Token（リフレッシュトークン）］** が含まれていることを確認します。詳細については、「[付与タイプを更新する](/docs/ja-jp/get-started/applications/update-grant-types)」をお読みください。リフレッシュトークンの詳細については、「[リフレッシュトークン](/docs/ja-jp/secure/tokens/refresh-tokens)」をお読みください。
 * アプリケーションに少なくとも次の1つの接続をセットアップして有効にします：[データベース接続](/docs/ja-jp/get-started/applications/set-up-database-connections)、[ソーシャル接続](/docs/ja-jp/authenticate/identity-providers/social-identity-providers)
 * [APIをAuth0に登録します](/docs/ja-jp/architecture-scenarios/mobile-api/part-2#create-the-api)。
 
@@ -62,12 +62,12 @@ Auth0を使用すると、以下を使ってアプリでデバイス認可フロ
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/oauth/device/code' \
---header 'content-type: application/x-www-form-urlencoded' \
---data 'client_id={yourClientId}' \
---data 'scope={scope}' \
---data 'audience={audience}'
-``` lines
+  --url 'https://{yourDomain}/oauth/device/code' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'client_id={yourClientId}' \
+  --data 'scope={scope}' \
+  --data 'audience={audience}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/device/code");
 var request = new RestRequest(Method.POST);
@@ -76,104 +76,130 @@ request.AddParameter("application/x-www-form-urlencoded", "client_id={yourClient
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/oauth/device/code"
-payload := strings.NewReader("client_id={yourClientId}&scope=%7Bscope%7D&audience=%7Baudience%7D")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "application/x-www-form-urlencoded")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/oauth/device/code"
+
+	payload := strings.NewReader("client_id={yourClientId}&scope=%7Bscope%7D&audience=%7Baudience%7D")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/x-www-form-urlencoded")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/device/code")
-.header("content-type", "application/x-www-form-urlencoded")
-.body("client_id={yourClientId}&scope=%7Bscope%7D&audience=%7Baudience%7D")
-.asString();
+  .header("content-type", "application/x-www-form-urlencoded")
+  .body("client_id={yourClientId}&scope=%7Bscope%7D&audience=%7Baudience%7D")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/oauth/device/code',
-headers: {'content-type': 'application/x-www-form-urlencoded'},
-data: {client_id: '{yourClientId}', scope: '{scope}', audience: '{audience}'}
+  method: 'POST',
+  url: 'https://{yourDomain}/oauth/device/code',
+  headers: {'content-type': 'application/x-www-form-urlencoded'},
+  data: {client_id: '{yourClientId}', scope: '{scope}', audience: '{audience}'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
-NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"client_id={yourClientId}" dataUsingEncoding:NSUTF8StringEncoding]];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
+
+NSMutableData *postData = [[NSMutableData alloc] initWithData:[@"client_id={yourClientId}" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&scope={scope}" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&audience={audience}" dataUsingEncoding:NSUTF8StringEncoding]];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/device/code"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/device/code"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/oauth/device/code",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "client_id={yourClientId}&scope=%7Bscope%7D&audience=%7Baudience%7D",
-CURLOPT_HTTPHEADER => [
-"content-type: application/x-www-form-urlencoded"
-],
+  CURLOPT_URL => "https://{yourDomain}/oauth/device/code",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "client_id={yourClientId}&scope=%7Bscope%7D&audience=%7Baudience%7D",
+  CURLOPT_HTTPHEADER => [
+    "content-type: application/x-www-form-urlencoded"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "client_id={yourClientId}&scope=%7Bscope%7D&audience=%7Baudience%7D"
+
 headers = { 'content-type': "application/x-www-form-urlencoded" }
+
 conn.request("POST", "/{yourDomain}/oauth/device/code", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -181,37 +207,46 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/oauth/device/code")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "client_id={yourClientId}&scope=%7Bscope%7D&audience=%7Baudience%7D"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = ["content-type": "application/x-www-form-urlencoded"]
+
 let postData = NSMutableData(data: "client_id={yourClientId}".data(using: String.Encoding.utf8)!)
 postData.append("&scope={scope}".data(using: String.Encoding.utf8)!)
 postData.append("&audience={audience}".data(using: String.Encoding.utf8)!)
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/device/code")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -319,12 +354,12 @@ CLIをビルドする際は、この手順をスキップし、`verification_uri
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/oauth/token' \
---header 'content-type: application/x-www-form-urlencoded' \
---data grant_type=urn:ietf:params:oauth:grant-type:device_code \
---data 'device_code={yourDeviceCode}' \
---data 'client_id={yourClientId}'
-``` lines
+  --url 'https://{yourDomain}/oauth/token' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data grant_type=urn:ietf:params:oauth:grant-type:device_code \
+  --data 'device_code={yourDeviceCode}' \
+  --data 'client_id={yourClientId}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
@@ -333,108 +368,134 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=urn%3Aietf
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/oauth/token"
-payload := strings.NewReader("grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=%7ByourDeviceCode%7D&client_id={yourClientId}")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "application/x-www-form-urlencoded")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/oauth/token"
+
+	payload := strings.NewReader("grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=%7ByourDeviceCode%7D&client_id={yourClientId}")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/x-www-form-urlencoded")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
-.header("content-type", "application/x-www-form-urlencoded")
-.body("grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=%7ByourDeviceCode%7D&client_id={yourClientId}")
-.asString();
+  .header("content-type", "application/x-www-form-urlencoded")
+  .body("grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=%7ByourDeviceCode%7D&client_id={yourClientId}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/oauth/token',
-headers: {'content-type': 'application/x-www-form-urlencoded'},
-data: new URLSearchParams({
-grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
-device_code: '{yourDeviceCode}',
-client_id: '{yourClientId}'
-})
+  method: 'POST',
+  url: 'https://{yourDomain}/oauth/token',
+  headers: {'content-type': 'application/x-www-form-urlencoded'},
+  data: new URLSearchParams({
+    grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
+    device_code: '{yourDeviceCode}',
+    client_id: '{yourClientId}'
+  })
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
-NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=urn:ietf:params:oauth:grant-type:device_code" dataUsingEncoding:NSUTF8StringEncoding]];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
+
+NSMutableData *postData = [[NSMutableData alloc] initWithData:[@"grant_type=urn:ietf:params:oauth:grant-type:device_code" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&device_code={yourDeviceCode}" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&client_id={yourClientId}" dataUsingEncoding:NSUTF8StringEncoding]];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/oauth/token",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=%7ByourDeviceCode%7D&client_id={yourClientId}",
-CURLOPT_HTTPHEADER => [
-"content-type: application/x-www-form-urlencoded"
-],
+  CURLOPT_URL => "https://{yourDomain}/oauth/token",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=%7ByourDeviceCode%7D&client_id={yourClientId}",
+  CURLOPT_HTTPHEADER => [
+    "content-type: application/x-www-form-urlencoded"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=%7ByourDeviceCode%7D&client_id={yourClientId}"
+
 headers = { 'content-type': "application/x-www-form-urlencoded" }
+
 conn.request("POST", "/{yourDomain}/oauth/token", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -442,37 +503,46 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/oauth/token")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code&device_code=%7ByourDeviceCode%7D&client_id={yourClientId}"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = ["content-type": "application/x-www-form-urlencoded"]
+
 let postData = NSMutableData(data: "grant_type=urn:ietf:params:oauth:grant-type:device_code".data(using: String.Encoding.utf8)!)
 postData.append("&device_code={yourDeviceCode}".data(using: String.Encoding.utf8)!)
 postData.append("&client_id={yourClientId}".data(using: String.Encoding.utf8)!)
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/token")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -631,10 +701,10 @@ APIを呼び出すには、アプリケーションは、取得したアクセ�
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
---url https://myapi.com/api \
---header 'authorization: Bearer ACCESS_TOKEN' \
---header 'content-type: application/json'
-``` lines
+  --url https://myapi.com/api \
+  --header 'authorization: Bearer ACCESS_TOKEN' \
+  --header 'content-type: application/json'
+```
 ```csharp C# lines
 var client = new RestClient("https://myapi.com/api");
 var request = new RestRequest(Method.GET);
@@ -643,101 +713,124 @@ request.AddHeader("authorization", "Bearer ACCESS_TOKEN");
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://myapi.com/api"
-req, _ := http.NewRequest("GET", url, nil)
-req.Header.Add("content-type", "application/json")
-req.Header.Add("authorization", "Bearer ACCESS_TOKEN")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://myapi.com/api"
+
+	req, _ := http.NewRequest("GET", url, nil)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer ACCESS_TOKEN")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
 HttpResponse response = Unirest.get("https://myapi.com/api")
-.header("content-type", "application/json")
-.header("authorization", "Bearer ACCESS_TOKEN")
-.asString();
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer ACCESS_TOKEN")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'GET',
-url: 'https://myapi.com/api',
-headers: {'content-type': 'application/json', authorization: 'Bearer ACCESS_TOKEN'}
+  method: 'GET',
+  url: 'https://myapi.com/api',
+  headers: {'content-type': 'application/json', authorization: 'Bearer ACCESS_TOKEN'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json",
-@"authorization": @"Bearer ACCESS_TOKEN" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://myapi.com/api"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/json",
+                           @"authorization": @"Bearer ACCESS_TOKEN" };
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://myapi.com/api"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
 [request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://myapi.com/api",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "GET",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer ACCESS_TOKEN",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://myapi.com/api",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer ACCESS_TOKEN",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("myapi.com")
+
 headers = {
-'content-type': "application/json",
-'authorization': "Bearer ACCESS_TOKEN"
-}
+    'content-type': "application/json",
+    'authorization': "Bearer ACCESS_TOKEN"
+    }
+
 conn.request("GET", "/api", headers=headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -745,36 +838,44 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://myapi.com/api")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Get.new(url)
 request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer ACCESS_TOKEN'
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = [
-"content-type": "application/json",
-"authorization": "Bearer ACCESS_TOKEN"
+  "content-type": "application/json",
+  "authorization": "Bearer ACCESS_TOKEN"
 ]
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://myapi.com/api")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "GET"
 request.allHTTPHeaderFields = headers
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -795,13 +896,13 @@ dataTask.resume()
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/oauth/token' \
---header 'content-type: application/x-www-form-urlencoded' \
---data grant_type=refresh_token \
---data 'client_id={yourClientId}' \
---data 'client_secret={yourClientSecret}' \
---data 'refresh_token={yourRefreshToken}'
-``` lines
+  --url 'https://{yourDomain}/oauth/token' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data grant_type=refresh_token \
+  --data 'client_id={yourClientId}' \
+  --data 'client_secret={yourClientSecret}' \
+  --data 'refresh_token={yourRefreshToken}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
@@ -810,110 +911,136 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=refresh_to
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/oauth/token"
-payload := strings.NewReader("grant_type=refresh_token&client_id={yourClientId}&client_secret={yourClientSecret}&refresh_token=%7ByourRefreshToken%7D")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "application/x-www-form-urlencoded")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/oauth/token"
+
+	payload := strings.NewReader("grant_type=refresh_token&client_id={yourClientId}&client_secret={yourClientSecret}&refresh_token=%7ByourRefreshToken%7D")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/x-www-form-urlencoded")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
 HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
-.header("content-type", "application/x-www-form-urlencoded")
-.body("grant_type=refresh_token&client_id={yourClientId}&client_secret={yourClientSecret}&refresh_token=%7ByourRefreshToken%7D")
-.asString();
+  .header("content-type", "application/x-www-form-urlencoded")
+  .body("grant_type=refresh_token&client_id={yourClientId}&client_secret={yourClientSecret}&refresh_token=%7ByourRefreshToken%7D")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/oauth/token',
-headers: {'content-type': 'application/x-www-form-urlencoded'},
-data: new URLSearchParams({
-grant_type: 'refresh_token',
-client_id: '{yourClientId}',
-client_secret: '{yourClientSecret}',
-refresh_token: '{yourRefreshToken}'
-})
+  method: 'POST',
+  url: 'https://{yourDomain}/oauth/token',
+  headers: {'content-type': 'application/x-www-form-urlencoded'},
+  data: new URLSearchParams({
+    grant_type: 'refresh_token',
+    client_id: '{yourClientId}',
+    client_secret: '{yourClientSecret}',
+    refresh_token: '{yourRefreshToken}'
+  })
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
-NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=refresh_token" dataUsingEncoding:NSUTF8StringEncoding]];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
+
+NSMutableData *postData = [[NSMutableData alloc] initWithData:[@"grant_type=refresh_token" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&client_id={yourClientId}" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&client_secret={yourClientSecret}" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&refresh_token={yourRefreshToken}" dataUsingEncoding:NSUTF8StringEncoding]];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/oauth/token",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "grant_type=refresh_token&client_id={yourClientId}&client_secret={yourClientSecret}&refresh_token=%7ByourRefreshToken%7D",
-CURLOPT_HTTPHEADER => [
-"content-type: application/x-www-form-urlencoded"
-],
+  CURLOPT_URL => "https://{yourDomain}/oauth/token",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "grant_type=refresh_token&client_id={yourClientId}&client_secret={yourClientSecret}&refresh_token=%7ByourRefreshToken%7D",
+  CURLOPT_HTTPHEADER => [
+    "content-type: application/x-www-form-urlencoded"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "grant_type=refresh_token&client_id={yourClientId}&client_secret={yourClientSecret}&refresh_token=%7ByourRefreshToken%7D"
+
 headers = { 'content-type': "application/x-www-form-urlencoded" }
+
 conn.request("POST", "/{yourDomain}/oauth/token", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -921,38 +1048,47 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/oauth/token")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=refresh_token&client_id={yourClientId}&client_secret={yourClientSecret}&refresh_token=%7ByourRefreshToken%7D"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = ["content-type": "application/x-www-form-urlencoded"]
+
 let postData = NSMutableData(data: "grant_type=refresh_token".data(using: String.Encoding.utf8)!)
 postData.append("&client_id={yourClientId}".data(using: String.Encoding.utf8)!)
 postData.append("&client_secret={yourClientSecret}".data(using: String.Encoding.utf8)!)
 postData.append("&refresh_token={yourRefreshToken}".data(using: String.Encoding.utf8)!)
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/token")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -1078,8 +1214,8 @@ function (user, context, callback) {
 デバイス認可フローを使用するには、デバイスが次の要件を満たす必要があります。
 
 * [カスタムドメイン](/docs/ja-jp/customize/custom-domains)の使用にServer Name Indication（SNI）をサポートしている
-* [Auth0アプリケーションタイプ](/docs/ja-jp/get-started/applications)が**［Native（ネイティブ）］** である
-* [トークンエンドポイントの認証方法](/docs/ja-jp/get-started/applications/application-settings)が**［None（なし）］** に設定されている
+* [Auth0アプリケーションタイプ](/docs/ja-jp/get-started/applications)が **［Native（ネイティブ）］** である
+* [トークンエンドポイントの認証方法](/docs/ja-jp/get-started/applications/application-settings)が **［None（なし）］** に設定されている
 * [OIDCに準拠](/docs/ja-jp/get-started/applications/application-settings)している
 * [動的クライアント登録（Dynamic Client Registration）](/docs/ja-jp/get-started/applications/dynamic-client-registration)で作成されていない
 

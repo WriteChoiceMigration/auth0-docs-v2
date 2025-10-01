@@ -32,9 +32,12 @@ permalink: "authorization"
 
 Auth0は、特定の条件に基づき、アプリケーションまたはAPIのアクセス制限をサポートしています。特定のシナリオでは、`UnauthorizedError`を返すRuleを作成する必要があります。たとえば、ユーザーが誤った時間にアプリケーションまたはAPIへのアクセスを試みたとき（こちらの[例](/docs/ja-jp/authorization/sample-use-cases-rules-with-authorization#allow-access-only-on-weekdays-for-a-specific-application)を参照）や、ユーザーの`app_metadata`に適切なクレームが含まれていない場合です。[OpenID Connect（OIDC）](/docs/ja-jp/authenticate/protocols/openid-connect-protocol)を使ったアプリケーションの場合は、これによって、アクセス認可に使用される[IDトークン](/docs/ja-jp/secure/tokens/id-tokens)の割り当てが妨げられます。同様に、APIの場合、この[例](/docs/ja-jp/authorization/sample-use-cases-rules-with-authorization#deny-access-to-anyone-calling-an-api)で説明されているように、OAuth2[アクセストークン](/docs/ja-jp/secure/tokens/access-tokens)（APIの呼び出しに使用）の割り当てが妨げられる可能性があります。
 
-### ベストプラクティス
+<Info>
+    ### ベストプラクティス
 
 メインでは、Auth0の顧客がアプリケーションの認証に使用する業界標準のプロトコルとして、[「OIDC」](/docs/ja-jp/protocols/oidc)が最も一般的に使用されていることがわかりました。また、[OAuth2](/docs/ja-jp/protocols/oauth2)が委任されたプロトコルで作成されたとしても、アプリケーションと共有セッションを持たないAPIが存在する場合に、第一のアプリケーション内で一般的に使用されていることがわかりました。
+
+</Info>
 
 Auth0は、アプリケーションが制限を適用できるように、必要な情報を提供することもできます。[アプリケーションレベルの統合](#application-integration)では、Auth0を使用すると、[カスタムクレーム](#id-token-claims)をIDトークンに追加できます。アプリケーションはこれを検証し、ポリシー適用に使用できます。この場合、アプリケーションが適用を判断するのに必要な情報を決める必要があります。アプリケーションではなくAPIで判断する必要がある場合は、おそらくIDトークンの代わりにアクセストークンを使用する必要があります。詳細については、このまま読み進めてください。
 
@@ -46,9 +49,12 @@ IDトークンやアクセストークンにどのデータを含めるかを決
 
 [APIレベルの統合](#api-integration)の場合、Auth0は、[カスタムクレーム](#access-token-claims)と[スコープ](#access-token-scopes)の再構成を、両方ともアクセストークンのコンテキスト内でサポートしています。この場合も、APIがアクセスを判断するのに必要な情報を決める必要があります。APIは、アクセストークンの内容を検証してこれを適用する必要があります。
 
-### ベストプラクティス
+<Info>
+    ### ベストプラクティス
 
 カスタムクレームまたはスコープを通じて許可を使用するべきかどうかを決定する際に、スコープの性質と目的を理解する必要があります。読みやすく、トピックについて理解を深めるためのおすすめ［ブログ記事］（https://auth0.com/blog/on-the-nature-of-oauth2-scopes/）をご覧ください。
+
+</Info>
 
 ## アプリケーション統合
 
@@ -58,9 +64,12 @@ IDトークンやアクセストークンにどのデータを含めるかを決
 
 Auth0ではRuleの拡張性を利用して、たとえばユーザーの[メタデータ](/docs/ja-jp/manage-users/user-accounts/metadata)コンテンツに基づき、簡単に[IDトークンにカスタムクレームを追加](/docs/ja-jp/scopes/sample-use-cases-scopes-and-claims#add-custom-claims-to-a-token)することができます。次に、アプリケーションは必要なクレームのIDトークンを検証し、必要に応じて特定の機能性へのアクセスを許可または拒否することができます。Ruleを利用したカスタムクレームの追加プロセスは合理化されているものの、Ruleエンジンには柔軟性があってカスタムコードを書き込むことができるため、意図しない悪影響を与えることもあるので注意してください。この拡張性機能を使用する際は、常に、[ルールのベストプラクティス](/docs/ja-jp/rules-best-practices)のガイダンスに従って作業することが重要です。
 
-### ベストプラクティス
+<Info>
+    ### ベストプラクティス
 
 カスタムクレームの追加を検討している場合は、ユーザーの[`app_metadata`](/docs/ja-jp/users/concepts/overview-user-metadata)の一部としてクレームに含める必要のあるアクセス制御データを保管することをお勧めします。まず第一に、これによりデータを取得するために外部のAPIを呼び出す必要がなくなります。外部APIの呼び出しはログインシーケンスのパフォーマンスと拡張性に悪影響を与える可能性があります。第二に、`app_metadata`はユーザーによって直接変更「できない」ため、ユーザーが自身のメタデータを変更してアクセス制御の制限を回避することはできません。また、[「メタデータのベストプラクティス」](/docs/ja-jp/architecture-scenarios/b2c/profile-management#metadata)のガイダンスもご確認ください。
+
+</Info>
 
 ### IDトークンのスコープ
 
@@ -96,17 +105,23 @@ OAuth2は、特にサードパーティのアクセスを念頭に置いて設�
 
 IDトークンの場合と同様に、Auth0のRule拡張性を利用して、[カスタムクレームをアクセストークンに追加](/docs/ja-jp/scopes/sample-use-cases-scopes-and-claims#add-custom-claims-to-a-token)できます。その後、APIは必要なクレームのアクセストークンを検証し、必要に応じて特定の機能性へのアクセスを許可または拒否することができます。
 
-### ベストプラクティス
+<Info>
+    ### ベストプラクティス
 
-カスタムクレームの追加を検討している場合は、ユーザーの[`app_metadata`](/docs/ja-jp/users/concepts/overview-user-metadata)の一部としてクレームに含める必要のあるアクセス制御データを保管することをお勧めします。まず第一に、これによりデータを取得するために外部のAPIを呼び出す必要がなくなります。外部APIの呼び出しはパフォーマンスと拡張性に悪影響を与える可能性があります。第二に、`app_metadata`はユーザーによって直接変更「できない」ため、ユーザーが自身のメタデータを変更してアクセス制御の制限を回避することはできません。また、[「メタデータのベストプラクティス」](/docs/ja-jp/architecture-scenarios/b2c/profile-management#metadata)のガイダンスもご確認ください。
+ほとんどの新しい認証フレームワークは、Auth0などの認可サーバーにリダイレクトするためのミドルウェアをサポートしています。選択する際には、以下の点を考慮してください。[`app_metadata`](/docs/ja-jp/users/concepts/overview-user-metadata)の一部としてクレームに含める必要のあるアクセス制御データを保管することをお勧めします。まず第一に、これによりデータを取得するために外部のAPIを呼び出す必要がなくなります。外部APIの呼び出しはパフォーマンスと拡張性に悪影響を与える可能性があります。第二に、`app_metadata`はユーザーによって直接変更「できない」ため、ユーザーが自身のメタデータを変更してアクセス制御の制限を回避することはできません。また、[「メタデータのベストプラクティス」](/docs/ja-jp/architecture-scenarios/b2c/profile-management#metadata)のガイダンスもご確認ください。
+
+</Info>
 
 ### アクセストークンのスコープ
 
 [OAuth2スコープ](/docs/ja-jp/get-started/apis/scopes/api-scopes)は通常、APIがユーザーに代わって実行できるアクションを決定できるメカニズムとして使用されます。スコープはAPIごとに追加でき、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>で、またはAuth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を通じて[特定のアクセス許可を定義](/docs/ja-jp/get-started/apis/add-api-permissions)します。また、スコープはAuth0の拡張性を介して操作することもできます（この[例](/docs/ja-jp/architecture-scenarios/spa-api/part-2#create-a-rule-to-validate-token-scopes)のように、Rule経由など）。アプリケーションがAPIにアクセスするために要求するスコープは、アプリケーションが使用するためにユーザーがアクセス許可を与える必要がある機能性に応じて選ぶ必要があります。要求されたスコープが認可されると、アクセストークンで返され、[そのAPIによって検証](/docs/ja-jp/secure/tokens/access-tokens/validate-access-tokens)できるようになります。良い例が、ログインにソーシャルプロバイダーを使用しているアプリケーションにログインする場面です。ソーシャルプロバイダーのAPIは、ユーザーが自分に代わってアプリケーションにアイテムを投稿させるかどうかをアプリケーションが指定することを求めます。これによって、ユーザーはこの要求を許可または拒否できます。この例は、ユーザーがアプリケーションにアクセス許可を委任する方法を示しています。ユーザーロールに基づいてアクセスを制限するAPIとは異なり、別の方法で処理する必要があります。
 
-### ベストプラクティス
+<Info>
+    ### ベストプラクティス
 
 Auth0の拡張性を通じて完全にアクセストークンスコープを操作できる能力を持っているとしても、セキュリティのベストプラクティスとして、消去するのは認可されていないスコープのみにし、要求されていないスコープの追加は避けるべきです。
+
+</Info>
 
 スコープは、ユーザーのアクセス許可を適用する方法としてよく使用されますが、[この方法で使用すると問題が発生する](https://auth0.com/blog/on-the-nature-of-oauth2-scopes/)状況もあります。そのため、スコープは本来の目的（つまり、アプリケーションへのアクセス許可の委任）に使用し、ロールベースまたはその他のアクセス制御のシナリオには[カスタムクレーム](#access-token-claims)を使用することをお勧めします。
 
@@ -133,9 +148,12 @@ APIを呼び出すために、ユーザー対話型セッションのないア�
 * 一部のAPIレイヤーがユーザーの関与なしに、またはユーザートークンの有効期限が切れた後に、他のAPIレイヤーと通信する必要がある、特定のマイクロサービスアーキテクチャ。
 * ユーザーが認証される前に（Auth0テナントのルールまたはカスタムDBスクリプトから）呼び出される必要がある、権限付きのAPI
 
-### ベストプラクティス
+<Info>
+    ### ベストプラクティス
 
 今までは特別な「サービスアカウント」を作成することでこのようなケースに対応してきました。つまり、非対話的なユースケースに対応するサービスのために構成されたユーザー名とパスワードを持つユーザーのことです。さまざまな理由から、このアプローチは現在は推奨されていません。最新のベストプラクティスは、[OAuth 2.0クライアント資格情報付与](/docs/ja-jp/flows/concepts/client-credentials)を使用することです。
+
+</Info>
 
 ## プロジェクト計画ガイド
 

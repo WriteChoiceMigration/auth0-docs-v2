@@ -27,7 +27,7 @@ Auth0 Dashboardを使用して組織の動作を定義するには、以下を�
 1. [［Auth0 Dashboard］>［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)に移動して、組織を構成したいアプリケーションを選択します。
 2. **［Organizations（組織）］** ビューを選択して、適切な設定を構成します。
 
-   <table class="table"><thead>
+<table class="table"><thead>
 <tr>
 <th><strong>フィールド</strong></th>
 <th><strong>説明</strong></th>
@@ -54,14 +54,16 @@ Auth0 Dashboardを使用して組織の動作を定義するには、以下を�
 [クライアント更新エンドポイント](/docs/ja-jp/api/management/v2#!/Clients/patch_clients_by_id)に`PATCH`呼び出しを行います。`client_id`、`mgmt_api_access_token`、`organization_usage`、および`organization_require_behavior`のプレースホルダーをそれぞれクライアントID、Management APIのアクセストークン、組織の使用オプション、組織の動作オプションに置き換えます。
 
 <CodeGroup>
+
 ```bash cURL lines
 curl --request PATCH \
---url 'https://{yourDomain}/api/v2/clients/CLIENT_ID' \
---header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
---header 'cache-control: no-cache' \
---header 'content-type: application/json' \
---data '{ "organization_usage": "ORG_USAGE", "organization_require_behavior": "ORG_REQUIRE_BEHAVIOR" }'
-``` lines
+  --url 'https://{yourDomain}/api/v2/clients/CLIENT_ID' \
+  --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
+  --header 'cache-control: no-cache' \
+  --header 'content-type: application/json' \
+  --data '{ "organization_usage": "ORG_USAGE", "organization_require_behavior": "ORG_REQUIRE_BEHAVIOR" }'
+```
+
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/clients/CLIENT_ID");
 var request = new RestRequest(Method.PATCH);
@@ -72,123 +74,152 @@ request.AddParameter("application/json", "{ \"organization_usage\": \"ORG_USAGE\
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/clients/CLIENT_ID"
-payload := strings.NewReader("{ \"organization_usage\": \"ORG_USAGE\", \"organization_require_behavior\": \"ORG_REQUIRE_BEHAVIOR\" }")
-req, _ := http.NewRequest("PATCH", url, payload)
-req.Header.Add("content-type", "application/json")
-req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
-req.Header.Add("cache-control", "no-cache")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/clients/CLIENT_ID"
+
+	payload := strings.NewReader("{ \"organization_usage\": \"ORG_USAGE\", \"organization_require_behavior\": \"ORG_REQUIRE_BEHAVIOR\" }")
+
+	req, _ := http.NewRequest("PATCH", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+	req.Header.Add("cache-control", "no-cache")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
+
 ```java Java lines
-HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/clients/CLIENT_ID")
-.header("content-type", "application/json")
-.header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
-.header("cache-control", "no-cache")
-.body("{ \"organization_usage\": \"ORG_USAGE\", \"organization_require_behavior\": \"ORG_REQUIRE_BEHAVIOR\" }")
-.asString();
+HttpResponse<String> response = Unirest.patch("https://{yourDomain}/api/v2/clients/CLIENT_ID")
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+  .header("cache-control", "no-cache")
+  .body("{ \"organization_usage\": \"ORG_USAGE\", \"organization_require_behavior\": \"ORG_REQUIRE_BEHAVIOR\" }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'PATCH',
-url: 'https://{yourDomain}/api/v2/clients/CLIENT_ID',
-headers: {
-'content-type': 'application/json',
-authorization: 'Bearer MGMT_API_ACCESS_TOKEN',
-'cache-control': 'no-cache'
-},
-data: {
-organization_usage: 'ORG_USAGE',
-organization_require_behavior: 'ORG_REQUIRE_BEHAVIOR'
-}
+  method: 'PATCH',
+  url: 'https://{yourDomain}/api/v2/clients/CLIENT_ID',
+  headers: {
+    'content-type': 'application/json',
+    authorization: 'Bearer MGMT_API_ACCESS_TOKEN',
+    'cache-control': 'no-cache'
+  },
+  data: {
+    organization_usage: 'ORG_USAGE',
+    organization_require_behavior: 'ORG_REQUIRE_BEHAVIOR'
+  }
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json",
-@"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
-@"cache-control": @"no-cache" };
-NSDictionary \*parameters = @{ @"organization_usage": @"ORG_USAGE",
-@"organization_require_behavior": @"ORG_REQUIRE_BEHAVIOR" };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/clients/CLIENT_ID"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/json",
+                           @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
+                           @"cache-control": @"no-cache" };
+NSDictionary *parameters = @{ @"organization_usage": @"ORG_USAGE",
+                              @"organization_require_behavior": @"ORG_REQUIRE_BEHAVIOR" };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/clients/CLIENT_ID"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"PATCH"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/clients/CLIENT_ID",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PATCH",
-CURLOPT_POSTFIELDS => "{ \"organization_usage\": \"ORG_USAGE\", \"organization_require_behavior\": \"ORG_REQUIRE_BEHAVIOR\" }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer MGMT_API_ACCESS_TOKEN",
-"cache-control: no-cache",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/clients/CLIENT_ID",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PATCH",
+  CURLOPT_POSTFIELDS => "{ \"organization_usage\": \"ORG_USAGE\", \"organization_require_behavior\": \"ORG_REQUIRE_BEHAVIOR\" }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer MGMT_API_ACCESS_TOKEN",
+    "cache-control: no-cache",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
+
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"organization_usage\": \"ORG_USAGE\", \"organization_require_behavior\": \"ORG_REQUIRE_BEHAVIOR\" }"
+
 headers = {
-'content-type': "application/json",
-'authorization': "Bearer MGMT_API_ACCESS_TOKEN",
-'cache-control': "no-cache"
-}
+    'content-type': "application/json",
+    'authorization': "Bearer MGMT_API_ACCESS_TOKEN",
+    'cache-control': "no-cache"
+    }
+
 conn.request("PATCH", "/{yourDomain}/api/v2/clients/CLIENT_ID", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -196,47 +227,58 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/clients/CLIENT_ID")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Patch.new(url)
 request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 request["cache-control"] = 'no-cache'
 request.body = "{ \"organization_usage\": \"ORG_USAGE\", \"organization_require_behavior\": \"ORG_REQUIRE_BEHAVIOR\" }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"content-type": "application/json",
-"authorization": "Bearer MGMT_API_ACCESS_TOKEN",
-"cache-control": "no-cache"
+  "content-type": "application/json",
+  "authorization": "Bearer MGMT_API_ACCESS_TOKEN",
+  "cache-control": "no-cache"
 ]
 let parameters = [
-"organization_usage": "ORG_USAGE",
-"organization_require_behavior": "ORG_REQUIRE_BEHAVIOR"
+  "organization_usage": "ORG_USAGE",
+  "organization_require_behavior": "ORG_REQUIRE_BEHAVIOR"
 ] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/clients/CLIENT_ID")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "PATCH"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
+
 </CodeGroup>
 
 <table class="table"><thead>

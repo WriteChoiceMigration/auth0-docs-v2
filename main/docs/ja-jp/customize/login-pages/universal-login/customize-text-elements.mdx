@@ -23,8 +23,8 @@ permalink: "customize-text-elements"
 
 Dashboardを使用して、ユニバーサルログインのテキストプロンプトをカスタマイズできます。
 
-1. Dashboardの[**［Branding（ブランディング）］ > ［Universal Login（ユニバーサルログイン）］ > ［Advanced Options（高度なオプション）］** ](https://manage.auth0.com/#/custom_text)に進み、**［Custom Text（テキストのカスタム）］** を選択します。
-2. 編集したい**［Prompt（プロンプト）］** と**［Screen（画面）］** を選択し、希望の変更を行います。右側に公開プレビューが表示されます。
+1. Dashboardの[**［Branding（ブランディング）］ > ［Universal Login（ユニバーサルログイン）］ > ［Advanced Options（高度なオプション）］**](https://manage.auth0.com/#/custom_text)に進み、**［Custom Text（テキストのカスタム）］** を選択します。
+2. 編集したい **［Prompt（プロンプト）］** と **［Screen（画面）］** を選択し、希望の変更を行います。右側に公開プレビューが表示されます。
 3. 変更を運用環境に反映させたい際は、**［Save Changes（変更の保存）］** を選択します。
 
 </Tab><Tab title="Management APIの使用">
@@ -51,11 +51,11 @@ Management APIの[指定プロンプトにカスタムテキスト設定](https:
 <CodeGroup>
 ```bash cURL lines
 curl --request PUT \
---url 'https://{yourDomain}/api/v2/prompts/login/custom-text/en' \
---header 'authorization: Bearer {yourMgmtApiAccessToken}' \
---header 'content-type: application/json' \
---data '{ "login": { "description": "Login to ACME'\''s Website" } }'
-``` lines
+  --url 'https://{yourDomain}/api/v2/prompts/login/custom-text/en' \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
+  --header 'content-type: application/json' \
+  --data '{ "login": { "description": "Login to ACME'\''s Website" } }'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/prompts/login/custom-text/en");
 var request = new RestRequest(Method.PUT);
@@ -65,113 +65,141 @@ request.AddParameter("application/json", "{ \"login\": { \"description\": \"Logi
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/prompts/login/custom-text/en"
-payload := strings.NewReader("{ \"login\": { \"description\": \"Login to ACME's Website\" } }")
-req, _ := http.NewRequest("PUT", url, payload)
-req.Header.Add("content-type", "application/json")
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/prompts/login/custom-text/en"
+
+	payload := strings.NewReader("{ \"login\": { \"description\": \"Login to ACME's Website\" } }")
+
+	req, _ := http.NewRequest("PUT", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+
+
+```
 ```java Java lines
-HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/prompts/login/custom-text/en")
-.header("content-type", "application/json")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.body("{ \"login\": { \"description\": \"Login to ACME's Website\" } }")
-.asString();
+HttpResponse<String> response = Unirest.put("https://{yourDomain}/api/v2/prompts/login/custom-text/en")
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .body("{ \"login\": { \"description\": \"Login to ACME's Website\" } }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'PUT',
-url: 'https://{yourDomain}/api/v2/prompts/login/custom-text/en',
-headers: {
-'content-type': 'application/json',
-authorization: 'Bearer {yourMgmtApiAccessToken}'
-},
-data: {login: {description: 'Login to ACME\'s Website'}}
+  method: 'PUT',
+  url: 'https://{yourDomain}/api/v2/prompts/login/custom-text/en',
+  headers: {
+    'content-type': 'application/json',
+    authorization: 'Bearer {yourMgmtApiAccessToken}'
+  },
+  data: {login: {description: 'Login to ACME\'s Website'}}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json",
-@"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-NSDictionary \*parameters = @{ @"login": @{ @"description": @"Login to ACME's Website" } };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/prompts/login/custom-text/en"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/json",
+                           @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+NSDictionary *parameters = @{ @"login": @{ @"description": @"Login to ACME's Website" } };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/prompts/login/custom-text/en"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"PUT"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/prompts/login/custom-text/en",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PUT",
-CURLOPT_POSTFIELDS => "{ \"login\": { \"description\": \"Login to ACME's Website\" } }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/prompts/login/custom-text/en",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PUT",
+  CURLOPT_POSTFIELDS => "{ \"login\": { \"description\": \"Login to ACME's Website\" } }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"login\": { \"description\": \"Login to ACME's Website\" } }"
+
 headers = {
-'content-type': "application/json",
-'authorization': "Bearer {yourMgmtApiAccessToken}"
-}
+    'content-type': "application/json",
+    'authorization': "Bearer {yourMgmtApiAccessToken}"
+    }
+
 conn.request("PUT", "/{yourDomain}/api/v2/prompts/login/custom-text/en", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -179,40 +207,49 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/prompts/login/custom-text/en")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Put.new(url)
 request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request.body = "{ \"login\": { \"description\": \"Login to ACME's Website\" } }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"content-type": "application/json",
-"authorization": "Bearer {yourMgmtApiAccessToken}"
+  "content-type": "application/json",
+  "authorization": "Bearer {yourMgmtApiAccessToken}"
 ]
 let parameters = ["login": ["description": "Login to ACME's Website"]] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/prompts/login/custom-text/en")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "PUT"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -224,11 +261,11 @@ dataTask.resume()
 <CodeGroup>
 ```bash cURL lines
 curl --request PUT \
---url 'https://{yourDomain}/api/v2/prompts/login/custom-text/en' \
---header 'authorization: Bearer {yourMgmtApiAccessToken}' \
---header 'content-type: application/json' \
---data '{}'
-``` lines
+  --url 'https://{yourDomain}/api/v2/prompts/login/custom-text/en' \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
+  --header 'content-type: application/json' \
+  --data '{}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/prompts/login/custom-text/en");
 var request = new RestRequest(Method.PUT);
@@ -238,113 +275,139 @@ request.AddParameter("application/json", "{}", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/prompts/login/custom-text/en"
-payload := strings.NewReader("{}")
-req, _ := http.NewRequest("PUT", url, payload)
-req.Header.Add("content-type", "application/json")
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/prompts/login/custom-text/en"
+
+	payload := strings.NewReader("{}")
+
+	req, _ := http.NewRequest("PUT", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/prompts/login/custom-text/en")
-.header("content-type", "application/json")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.body("{}")
-.asString();
+HttpResponse<String> response = Unirest.put("https://{yourDomain}/api/v2/prompts/login/custom-text/en")
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .body("{}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'PUT',
-url: 'https://{yourDomain}/api/v2/prompts/login/custom-text/en',
-headers: {
-'content-type': 'application/json',
-authorization: 'Bearer {yourMgmtApiAccessToken}'
-},
-data: {}
+  method: 'PUT',
+  url: 'https://{yourDomain}/api/v2/prompts/login/custom-text/en',
+  headers: {
+    'content-type': 'application/json',
+    authorization: 'Bearer {yourMgmtApiAccessToken}'
+  },
+  data: {}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json",
-@"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-NSDictionary \*parameters = @{ };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/prompts/login/custom-text/en"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/json",
+                           @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+NSDictionary *parameters = @{  };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/prompts/login/custom-text/en"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"PUT"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/prompts/login/custom-text/en",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PUT",
-CURLOPT_POSTFIELDS => "{}",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/prompts/login/custom-text/en",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PUT",
+  CURLOPT_POSTFIELDS => "{}",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{}"
+
 headers = {
-'content-type': "application/json",
-'authorization': "Bearer {yourMgmtApiAccessToken}"
-}
+    'content-type': "application/json",
+    'authorization': "Bearer {yourMgmtApiAccessToken}"
+    }
+
 conn.request("PUT", "/{yourDomain}/api/v2/prompts/login/custom-text/en", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -352,40 +415,49 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/prompts/login/custom-text/en")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Put.new(url)
 request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request.body = "{}"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"content-type": "application/json",
-"authorization": "Bearer {yourMgmtApiAccessToken}"
+  "content-type": "application/json",
+  "authorization": "Bearer {yourMgmtApiAccessToken}"
 ]
 let parameters = [] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/prompts/login/custom-text/en")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "PUT"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -3246,7 +3318,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：mfa-webauthn-platform-enrollment
 
-<Frame>![mfa-webauthn-enrollmentの参考スクリーンショット](/docs/ja-jp/media/articles/universal-login/text-customization/mfa-webauth-platform-enrollment.png)</Frame>
+<Frame>![mfa-webauthn-enrollment reference screenshot](/docs/media/articles/universal-login/text-customization/mfa-webauth-platform-enrollment.png)</Frame>
 
 <table class="table"><thead>
 <tr>
@@ -5082,7 +5154,7 @@ accordion.expand_all/accordion.collapse_all
 
 ## スクリーン：phone-identifier-challenge
 
-<Frame>![phone-identifier-challengeの参考スクリーンショット](https://cdn2.auth0.com/docs/1.14567.0/media/articles/universal-login/text-customization/phone-identifier-challenge.png)</Frame>
+<Frame>![phone-identifier-challenge reference screenshot](https://cdn2.auth0.com/docs/1.14516.0/media/articles/universal-login/text-customization/phone-identifier-challenge.png)</Frame>
 
 <table class="table"><thead>
 <tr>

@@ -19,7 +19,7 @@ permalink: "view-signing-certificates"
 
    <Frame>![Dashboard テナントの設定 署名鍵タブ](/images/ja-jp/cdy7uua7fh8z/7r8t3EGctFmvkCgPrU0i2R/502f133ec9528c3bc8b73fa49a159d8a/Tenant_Settings_-_Signing_Keys.png)</Frame>
 
-2. **［Rotation Settings（ローテーション設定）］** セクションから、**［List of Valid Keys（有効な鍵のリスト）］** と**［List of Revoked Keys（取り消された鍵のリスト）］** を見つけます。
+2. **［Rotation Settings（ローテーション設定）］ ** セクションから、**［List of Valid Keys（有効な鍵のリスト）］** と **［List of Revoked Keys（取り消された鍵のリスト）］** を見つけます。
 
    1. **［List of Valid Keys（有効な鍵のリスト）］** セクションには、テナントで現在使用されている署名鍵に加えて、署名鍵のローテーションで次に使用される署名鍵がリストされています。以前に署名鍵をローテーションしたことがある場合には、以前に使用されていた署名鍵もリストに含まれます。
    2. **［List of Revoked Keys（取り消された鍵のリスト）］** セクションには、テナントで最近取り消された3つの署名鍵がリストされます。
@@ -39,7 +39,7 @@ permalink: "view-signing-certificates"
 #### 署名アルゴリズムにHS256を使用している場合
 
 1. [［Dashboard］ > ［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)に移動し、アプリケーションの名前を選択すると表示されます。
-2. **［Basic Information（基本情報）］** の下に、クライアントシークレットに対する**［Client Secret（クライアントシークレット）］** フィールドを見つけてください。
+2. **［Basic Information（基本情報）］** の下に、クライアントシークレットに対する **［Client Secret（クライアントシークレット）］** フィールドを見つけてください。
 
    <Frame>![Dashboard アプリケーション アプリケーション設定タブ 基本情報](/images/ja-jp/cdy7uua7fh8z/2GPUw7BODYuYYH3658Upz3/e7a6df376f8bd58c2bec78ebb28d5dcd/App_Settings_-_Basic_Info.png)</Frame>
 
@@ -52,9 +52,9 @@ permalink: "view-signing-certificates"
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
---url 'https://{yourDomain}/api/v2/keys/signing' \
---header 'authorization: Bearer {yourMgmtApiAccessToken}'
-``` lines
+   --url 'https://{yourDomain}/api/v2/keys/signing' \
+   --header 'authorization: Bearer {yourMgmtApiAccessToken}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/keys/signing");
 var request = new RestRequest(Method.GET);
@@ -64,92 +64,115 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/keys/signing"
-req, _ := http.NewRequest("GET", url, nil)
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/keys/signing"
+
+	req, _ := http.NewRequest("GET", url, nil)
+
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/keys/signing")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.asString();
+   .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+   .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'GET',
-url: 'https://{yourDomain}/api/v2/keys/signing',
-headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'}
+  method: 'GET',
+  url: 'https://{yourDomain}/api/v2/keys/signing',
+  headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/keys/signing"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/keys/signing"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
 [request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/keys/signing",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "GET",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/keys/signing",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
+
 conn.request("GET", "/{yourDomain}/api/v2/keys/signing", headers=headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -157,32 +180,40 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/keys/signing")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/keys/signing")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "GET"
 request.allHTTPHeaderFields = headers
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -208,9 +239,9 @@ dataTask.resume()
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
---url 'https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D' \
---header 'authorization: Bearer {yourMgmtApiAccessToken}'
-``` lines
+   --url 'https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D' \
+   --header 'authorization: Bearer {yourMgmtApiAccessToken}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D");
 var request = new RestRequest(Method.GET);
@@ -220,92 +251,115 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D"
-req, _ := http.NewRequest("GET", url, nil)
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D"
+
+	req, _ := http.NewRequest("GET", url, nil)
+
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
 HttpResponse response = Unirest.get("https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.asString();
+   .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+   .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'GET',
-url: 'https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D',
-headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'}
+  method: 'GET',
+  url: 'https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D',
+  headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
 [request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "GET",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
+
 conn.request("GET", "/{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D", headers=headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -313,32 +367,40 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "GET"
 request.allHTTPHeaderFields = headers
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>

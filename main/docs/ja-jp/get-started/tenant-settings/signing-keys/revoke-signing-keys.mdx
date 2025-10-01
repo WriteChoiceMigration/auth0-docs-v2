@@ -27,8 +27,8 @@ permalink: "revoke-signing-keys"
 ### 以前に使用していた署名鍵を取り消す
 
 1. [［Dashboard］ > ［Settings（設定）］ > ［Signing Keys（署名鍵）］](https://manage.auth0.com/#/tenant/signing_keys)に移動します。
-2. **［List of Valid Keys（有効な鍵のリスト）］** セクションで、**［Previously Used（以前に使用していた）］** 鍵に移動し、詳細オプション（(**「...」** ）メニューから**［Revoke Key（鍵を取り消す）］** を選択します。**［List of Valid Keys（有効な鍵のリスト）］** セクションには、テナントで現在使用されている署名鍵に加えて、署名鍵のローテーションで次に使用される署名鍵がリストされています。以前に署名鍵をローテーションしたことがある場合には、以前に使用されていた署名鍵もリストに含まれます。**［List of Revoked Keys（取り消された鍵のリスト）］** セクションには、テナントで最近取り消された3つの署名鍵がリストされます。
-3. **［Revoke（取り消す）］** を選択して確認します。
+2. **［List of Valid Keys（有効な鍵のリスト）］** セクションで、**［Previously Used（以前に使用していた）］** 鍵に移動し、詳細オプション（(**「...」**）メニューから **［Revoke Key（鍵を取り消す）］** を選択します。**［List of Valid Keys（有効な鍵のリスト）］** セクションには、テナントで現在使用されている署名鍵に加えて、署名鍵のローテーションで次に使用される署名鍵がリストされています。以前に署名鍵をローテーションしたことがある場合には、以前に使用されていた署名鍵もリストに含まれます。**［List of Revoked Keys（取り消された鍵のリスト）］** セクションには、テナントで最近取り消された3つの署名鍵がリストされます。
+3. **［Revoke（取り消す）］**を選択して確認します。
 
 ### 署名鍵をローテーションして取り消す
 
@@ -48,11 +48,11 @@ permalink: "revoke-signing-keys"
 2. [鍵のIDでアプリケーションの署名鍵取り消し](/docs/ja-jp/api/management/v2#!/Keys/put_signing_keys)エンドポイントに`PUT`呼び出しを行います。`{yourKeyId}`と`{yourMgmtApiAccessToken}`のプレースホルダーの値を、それぞれ署名鍵IDとManagement APIのアクセストークンに置き換えてください。
 
    <CodeGroup>
-```bash cURL lines
+   ```bash cURL lines
    curl --request PUT \
-   --url 'https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke' \
-   --header 'authorization: Bearer {yourMgmtApiAccessToken}'
-   ``` lines
+      --url 'https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke' \
+      --header 'authorization: Bearer {yourMgmtApiAccessToken}'
+   ```
    ```csharp C# lines
    var client = new RestClient("https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke");
    var request = new RestRequest(Method.PUT);
@@ -62,64 +62,79 @@ permalink: "revoke-signing-keys"
 
    ```go Go lines
    package main
+
    import (
-   "fmt"
-   "net/http"
-   "io/ioutil"
+      "fmt"
+      "net/http"
+      "io/ioutil"
    )
+
    func main() {
-   url := "https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke"
-   req, _ := http.NewRequest("PUT", url, nil)
-   req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-   res, _ := http.DefaultClient.Do(req)
-   defer res.Body.Close()
-   body, _ := ioutil.ReadAll(res.Body)
-   fmt.Println(res)
-   fmt.Println(string(body))
+
+      url := "https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke"
+
+      req, _ := http.NewRequest("PUT", url, nil)
+
+      req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+      res, _ := http.DefaultClient.Do(req)
+
+      defer res.Body.Close()
+      body, _ := ioutil.ReadAll(res.Body)
+
+      fmt.Println(res)
+      fmt.Println(string(body))
+
    }
-   ``` lines
+   ```
    ```java Java lines
    HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke")
-   .header("authorization", "Bearer {yourMgmtApiAccessToken}")
-   .asString();
+      .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+      .asString();
    ```
 
    ```javascript Node.JS lines
    var axios = require("axios").default;
+
    var options = {
    method: 'PUT',
    url: 'https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke',
    headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'}
    };
+
    axios.request(options).then(function (response) {
    console.log(response.data);
    }).catch(function (error) {
    console.error(error);
    });
-   ``` lines
+   ```
    ```obj-c Obj-C lines
-   #import 
-   NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-   NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke"]
-   cachePolicy:NSURLRequestUseProtocolCachePolicy
-   timeoutInterval:10.0];
+   #import <Foundation/Foundation.h>
+
+   NSDictionary *headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+
+   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke"]
+                                                         cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                      timeoutInterval:10.0];
    [request setHTTPMethod:@"PUT"];
    [request setAllHTTPHeaderFields:headers];
-   NSURLSession \*session = [NSURLSession sharedSession];
-   NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-   completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-   if (error) {
-   NSLog(@"%@", error);
-   } else {
-   NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-   NSLog(@"%@", httpResponse);
-   }
-   }];
+
+   NSURLSession *session = [NSURLSession sharedSession];
+   NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                   if (error) {
+                                                      NSLog(@"%@", error);
+                                                   } else {
+                                                      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                      NSLog(@"%@", httpResponse);
+                                                   }
+                                             }];
    [dataTask resume];
    ```
 
    ```php PHP lines
    $curl = curl_init();
+
    curl_setopt_array($curl, [
    CURLOPT_URL => "https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke",
    CURLOPT_RETURNTRANSFER => true,
@@ -129,25 +144,33 @@ permalink: "revoke-signing-keys"
    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
    CURLOPT_CUSTOMREQUEST => "PUT",
    CURLOPT_HTTPHEADER => [
-   "authorization: Bearer {yourMgmtApiAccessToken}"
+      "authorization: Bearer {yourMgmtApiAccessToken}"
    ],
    ]);
+
    $response = curl_exec($curl);
    $err = curl_error($curl);
+
    curl_close($curl);
+
    if ($err) {
    echo "cURL Error #:" . $err;
    } else {
    echo $response;
    }
-   ``` lines
+   ```
    ```python Python lines
    import http.client
+
    conn = http.client.HTTPSConnection("")
+
    headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
+
    conn.request("PUT", "/{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke", headers=headers)
+
    res = conn.getresponse()
    data = res.read()
+
    print(data.decode("utf-8"))
    ```
 
@@ -155,53 +178,61 @@ permalink: "revoke-signing-keys"
    require 'uri'
    require 'net/http'
    require 'openssl'
+
    url = URI("https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke")
+
    http = Net::HTTP.new(url.host, url.port)
    http.use_ssl = true
    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
    request = Net::HTTP::Put.new(url)
    request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
+
    response = http.request(request)
    puts response.read_body
-   ``` lines
+   ```
    ```swift Swift lines
    import Foundation
+
    let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
+
    let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/keys/signing/%7ByourKeyId%7D/revoke")! as URL,
-   cachePolicy: .useProtocolCachePolicy,
-   timeoutInterval: 10.0)
+                                          cachePolicy: .useProtocolCachePolicy,
+                                       timeoutInterval: 10.0)
    request.httpMethod = "PUT"
    request.allHTTPHeaderFields = headers
+
    let session = URLSession.shared
    let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
    if (error != nil) {
-   print(error)
+      print(error)
    } else {
-   let httpResponse = response as? HTTPURLResponse
-   print(httpResponse)
+      let httpResponse = response as? HTTPURLResponse
+      print(httpResponse)
    }
    })
+
    dataTask.resume()
    ```
-</CodeGroup>
+   </CodeGroup>
 
    <table class="table"><thead>
-<tr>
-<th>値</th>
-<th>説明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>`YOUR_KEY_ID`</td>
-<td>取り消す署名鍵のID。署名鍵IDを見つける方法については、「<a href="https://auth0.com/docs/ja-jp/tokens/guides/locate-jwks">JSON Web鍵セットを見つける</a>」を参照してください。</td>
-</tr>
-<tr>
-<td>`MGMT_API_ACCESS_TOKEN`</td>
-<td>スコープ`update:signing_keys`を持つ<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th>値</th>
+   <th>説明</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td>`YOUR_KEY_ID`</td>
+   <td>取り消す署名鍵のID。署名鍵IDを見つける方法については、「<a href="https://auth0.com/docs/ja-jp/tokens/guides/locate-jwks">JSON Web鍵セットを見つける</a>」を参照してください。</td>
+   </tr>
+   <tr>
+   <td>`MGMT_API_ACCESS_TOKEN`</td>
+   <td>スコープ`update:signing_keys`を持つ<a href="https://auth0.com/docs/ja-jp/api/management/v2/tokens">Management APIのアクセストークン</a>。</td>
+   </tr>
+   </tbody>
+   </table>
 
 ## もっと詳しく
 

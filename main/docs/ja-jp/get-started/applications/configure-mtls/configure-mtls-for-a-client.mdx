@@ -18,7 +18,7 @@ Auth0 Dashboardを使用して、クライアントに対するmTLSを構成し�
 1. [［Auth0 Dashboard］ > ［Applications（アプリケーション）］ > ［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)に移動します。
 2. mTLSで使用したいアプリケーションを選択するか、または[新しいアプリケーションを作成](/docs/ja-jp/get-started/auth0-overview/create-applications)します。
 3. **［Credentials（資格情報）］** タブを選択します。
-4. 必要な**［Authentication Method（認証方法）］** を選択します。どちらも使用できます：
+4. 必要な **［Authentication Method（認証方法）］** を選択します。どちらも使用できます：
 
    * [自己署名付き証明書](/docs/ja-jp/customize/custom-domains/self-managed-certificates)のあるmTLS
    * 認証局署名の証明書のあるmTLS
@@ -74,8 +74,8 @@ curlまたはWgetを使用する場合、PEM証明書をAuth0に渡す前にJSON
 
 新しいクライアントを作成するには、以下のペイロードを使用して[`/clients`](https://auth0.com/docs/api/management/v2/clients/post-clients)エンドポイントにPOST呼び出しを行います。
 
-* `$client_name`**：**新しいクライアントの名前
-* `$credential_name`**：**公開鍵の名前
+* `$client_name`：新しいクライアントの名前
+* `$credential_name`：公開鍵の名前
 * `$credential_certificate`：前の手順で生成された`$certificate_pem`の内容
 
 ```json lines
@@ -131,7 +131,7 @@ Auth0は応答で資格情報IDを返し、これをクライアントで資格�
 
 詳細については、[クライアント資格情報作成](https://auth0.com/docs/api/management/v2/clients/post-credentials)APIのドキュメントを参照してください。
 
-##### クライアントに資格情報を関連付けて、`token_endpoint_auth_method`を無効にする
+**クライアントに資格情報を関連付けて、** `token_endpoint_auth_method` **を無効にする**
 
 アップロードされた資格情報は、自動的にクライアント認証に有効化されません。クライアントの新しい自己署名証明書を使用するように、クライアント認証を更新する必要があります。
 
@@ -169,8 +169,8 @@ CA署名証明書には、識別情報に識別名（DN）の概念が埋め込�
 
 クライアントを作成するには、[`/clients`](https://auth0.com/docs/api/management/v2/clients/post-clients)エンドポイントのPOSTを呼び出しに以下のペイロードを使用します。
 
-* `$client_name`**：**新しいクライアントの名前
-* `$credential_name`**：**公開鍵の名前
+* `$client_name`：新しいクライアントの名前
+* `$credential_name`：公開鍵の名前
 * `$credential_certificate`：CAが生成した`$certificate_pem`の内容
 
 ```json lines
@@ -273,7 +273,7 @@ curl --location --request POST 'https://$tenant/api/v2/clients/$client_id/creden
 
 詳細については、[クライアント資格情報作成](https://auth0.com/docs/api/management/v2/clients/post-credentials)APIのドキュメントを参照してください。
 
-##### クライアントに資格情報を関連付けて、`token_endpoint_auth_method`を無効にする
+**クライアントに資格情報を関連付けて、** `token_endpoint_auth_method` **を無効にする**
 
 これで資格情報は作成しましたが、まだ資格情報をクライアントと関連付けていません。
 

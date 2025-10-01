@@ -29,7 +29,7 @@ JWEを使用するためにAPIを構成する前に、[RSA鍵ペアを生成す�
 
 <Tabs><Tab title="Auth0 Dashboard">
 
-[Auth0 Dashboard](https://manage.auth0.com/)を使用して、APIに対するJWEを構成します。まず、APIに対して、**［Token Settings（トークン設定）］** の下にある**JSON Web Encryption（JWE）** を有効にします。
+[Auth0 Dashboard](https://manage.auth0.com/)を使用して、APIに対するJWEを構成します。まず、APIに対して、**［Token Settings（トークン設定）］** の下にある ** JSON Web Encryption（JWE）** を有効にします。
 
 <Frame>![](/images/ja-jp/cdy7uua7fh8z/5xHKQ3rKN7DZogzD5qFDLp/659332982d4f8c26cd1e1a55c0dce1d2/API_-_Token_Settings.png)</Frame>
 
@@ -70,7 +70,14 @@ curl -X POST --location "https://{domain}/api/v2/resource-servers" \
 
 次のテーブルでは、異なるパラメーターの意味について説明します。
 
-| **パラメーター** | **必須？** | **説明** | | -- | -- | -- | | `apiName` | 必須 | 新しいAPIの名前。| | `apiIdentifier` | 必須 | APIの一意のID。これはトークンオーディエンスとして使用されます。 | | `credentialName` | 任意 | 公開鍵の名前。| | `pem` | 必須 | PEM形式で暗号化された公開鍵。 | | `alg` | 必須 | 暗号化アルゴリズムは、`RSA-OAEP-256`、`RSA-OAEP-384`、`RSA-OAEP-512`のいずれかである必要があります。 | | `kid` | 任意 | JWEトークンの`kid`ヘッダーへの書き込みに使用されるID。これは、キーのローテーション中の暗号化に使用されるキーの識別に使用することができます。
+| **パラメーター** | **必須？** | **説明** | 
+| -- | -- | -- | 
+| `apiName` | 必須 | 新しいAPIの名前。|
+| `apiIdentifier` | 必須 | APIの一意のID。これはトークンオーディエンスとして使用されます。 | 
+| `credentialName` | 任意 | 公開鍵の名前。| 
+| `pem` | 必須 | PEM形式で暗号化された公開鍵。 | 
+| `alg` | 必須 | 暗号化アルゴリズムは、`RSA-OAEP-256`、`RSA-OAEP-384`、`RSA-OAEP-512`のいずれかである必要があります。 | 
+| `kid` | 任意 | JWEトークンの`kid`ヘッダーへの書き込みに使用されるID。これは、キーのローテーション中の暗号化に使用されるキーの識別に使用することができます。
 
 応答には、リソースサーバーを一意に識別する`id`プロパティを含みます。また、応答には、資格情報の識別に使用できる、生成された`thumbprint_sha256`フィールドも含みます。Auth0は最初の作成後（この場合、PEM）に、キーマテリアルを返しません。
 

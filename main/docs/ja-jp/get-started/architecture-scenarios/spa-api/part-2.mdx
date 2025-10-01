@@ -60,7 +60,7 @@ Autho0には、アプリケーションの種類が4つあります。
 
 次に、すでに定義済みのスコープ（`read:timesheets`、`create:timesheets`、`delete:timesheets`、`approve:timesheets`）に従って、必要なアクセス許可を定義する必要があります。
 
-認可拡張機能で**［Permissions（アクセス許可）］** タブをクリックし、**［Create Permission（アクセス許可の作成）］** ボタンをクリックします。
+認可拡張機能で **［Permissions（アクセス許可）］** タブをクリックし、**［Create Permission（アクセス許可の作成）］** ボタンをクリックします。
 
 ダイアログで、各アクセス許可の詳細を指定します。
 
@@ -76,7 +76,7 @@ Autho0には、アプリケーションの種類が4つあります。
 
 **［Roles（ロール）］** タブで、**［Create Role（ロールの作成）］** ボタンをクリックし、**［Timesheets SPA（タイムシートSPA）］** アプリケーションを選択します。
 
-**［Name（名前）］** と**［Description（説明）］** を`Employee`に設定し、`delete:timesheets`、`create:timesheets`、および`read:timesheets`のアクセス許可を選択します。**［Save（保存）］** をクリックします。
+**［Name（名前）］** と **［Description（説明）］** を`Employee`に設定し、`delete:timesheets`、`create:timesheets`、および`read:timesheets`のアクセス許可を選択します。**［Save（保存）］** をクリックします。
 
 次に、同じ手順で`Manager`ロールを作成し、すべてのアクセス許可が選択されていることを確認します。
 
@@ -84,7 +84,7 @@ Autho0には、アプリケーションの種類が4つあります。
 
 すべてのユーザーを`Manager`または`Employee`ロールに割り当てる必要があります。
 
-認可拡張機能の**［Users（ユーザー）］** タブに移動し、ユーザーを選択します。
+認可拡張機能の **［Users（ユーザー）］** タブに移動し、ユーザーを選択します。
 
 ユーザー情報画面で、**［Roles（ロール）］** タブに移動します。**［Add Role to User（ユーザーにロールを追加）］** ボタンをクリックし、適切なロールを選択します。
 
@@ -100,7 +100,7 @@ Autho0には、アプリケーションの種類が4つあります。
 
 このプロセスの最後のステップでは、ユーザーに割り当てられたアクセス許可に基づいて、アクセストークンに含まれるスコープが有効であることを確認するルールを作成します。ユーザーに無効なすべてのスコープは必ず、アクセストークンから削除します。
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>で、**［Rules（ルール）］** タブに移動します。認可拡張機能によって作成されたルールが表示されているはずです。**［Create Role（ルールの作成）］** ボタンをクリックし、**［Empty Rule（空のルール）］** テンプレートを選択します。このルールに「**<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Access Token</Tooltip> Scopes（アクセストークンスのコープ）** 」のような名前を付けて、そのルールに次のコードを指定することができます。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>で、**［Rules（ルール）］** タブに移動します。認可拡張機能によって作成されたルールが表示されているはずです。**［Create Role（ルールの作成）］** ボタンをクリックし、**［Empty Rule（空のルール）］** テンプレートを選択します。このルールに「**<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Access Token</Tooltip> Scopes（アクセストークンスのコープ）**」のような名前を付けて、そのルールに次のコードを指定することができます。
 
 ```javascript lines
 function (user, context, callback) {

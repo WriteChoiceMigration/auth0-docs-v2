@@ -31,7 +31,7 @@ Auth0 Dashboardを使用して、新しいアプリケーションを作成す�
 
 #### `private_key_jwt`に対する新しいアプリケーションの構成
 
-1. [**［Auth0 Dashboard］ > ［Applications（アプリケーション）］ > ［Application（アプリケーション）］** ](https://manage.auth0.com/#/applications)に移動します。
+1. [**［Auth0 Dashboard］ > ［Applications（アプリケーション）］ > ［Application（アプリケーション）］**](https://manage.auth0.com/#/applications)に移動します。
 2. **［Create Application（アプリケーションの作成）］** を選択します。
 3. アプリケーションタイプを選択します。
 4. アプリケーション設定の下にある、**［Credentials（資格情報）］** タブを選択します。
@@ -158,11 +158,12 @@ curl --location --request POST 'https://{domain}/api/v2/clients' \
 </tbody>
 </table>
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+
 
 公開鍵のPEMは、Auth0に渡す前にJSONでエスケープ処理する必要があります。この例では、以下を渡す必要があります：
 
-`-----BEGIN PUBLIC KEY-----
+```
+-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA53VzmIVVZZWyNm266l82
 mnoDc9g/snXklax5kChEhqK/WnTUvuXP4Gd4THj8rchxgUGKXd4PF3SUcKyn/qPm
 Tet0idVHk2PwP//FOVgYo5Lb04js0pgZkbyB/WjuMp1w+yMuSn0NYAP7Q9U7DfTb
@@ -170,9 +171,10 @@ jmox8OQt4tCB4m7UrJghGqT8jkPyZO/Ka6/XsyjTYPOUL3t3PD7JShVAgo1mAY6g
 Sr4SORywIiuHsg+59ad7MXGy78LirhtqAcDECKF7VZpxMuEjMLg3o2yzNUeWI2Mg
 IF+t0HbO1E387fvLcuSyai1yWbSr1PXyiB2aXyDpbD4u7d3ux4ahU2opH11lBqvx
 +wIDAQAB
------END PUBLIC KEY-----`
+-----END PUBLIC KEY-----
+```
 
-</Callout>
+
 
 応答には、`client_id`プロパティを含み、アプリケーションをリソースサーバーに紐づけます。また、応答には、資格情報のために作成した生成`kid`を含みます。これはのちほど、`client_assertion`を生成するために使用します。
 
@@ -196,7 +198,7 @@ private_key_jwtを構成した後では、クライアントシークレット�
 
 </Warning>
 
-##### 資格情報リソースの作成
+#### 資格情報リソースの作成
 
 キーペアを生成したら、資格情報リソースを作成します。Management APIの[`/clients`](https://auth0.com/docs/api/management/v2#!/Clients/post_clients)エンドポイントに次のPOST要求をします。
 
@@ -213,7 +215,15 @@ curl --location --request POST 'https://{domain}/api/v2/clients/{clientId}/crede
 }'
 ```
 
-| パラメーター | 説明 | | ---------- | ---------- | |`algorithm`| アサーションの署名に使用するアルゴリズム。サポート値はRS256、RS384、PS256です。指定されていない場合、アルゴリズムのデフォルトはRS256です。| |`clientId`| 更新されるアプリケーションのID。| |`credentialName`| 公開鍵の名前。| |`managementApiAccessToken`| `create:credentials`スコープを持つ［Management APIのアクセストークン］（/secure/tokens/access-tokens/management-api-access-tokens）。| |`pem`| PEM形式でエンコードされた公開鍵またはx.509証明書。| |`expires_at`| 任意。ISO 8601形式の資格情報の有効期限です。例えば、`2020-08-20T19:10:06.299Z`です。有効期限が過ぎると、資格情報は無効になります。| |`parse_expiry_from_cert`| 任意。証明書を指定されたときにAuth0が構造解析をする有効期限のブール値を示します。証明書が指定されない場合、Auth0はエラーを返します。また、`parse_expiry_from_cert`と`expires_at`は相互排他的です。その場合、Auth0はエラーを返します。|
+| パラメーター | 説明 | 
+| ---------- | ---------- | 
+|`algorithm`| アサーションの署名に使用するアルゴリズム。サポート値はRS256、RS384、PS256です。指定されていない場合、アルゴリズムのデフォルトはRS256です。| 
+|`clientId`| 更新されるアプリケーションのID。| 
+|`credentialName`| 公開鍵の名前。| 
+|`managementApiAccessToken`| `create:credentials`スコープを持つ［Management APIのアクセストークン］（/secure/tokens/access-tokens/management-api-access-tokens）。| 
+|`pem`| PEM形式でエンコードされた公開鍵またはx.509証明書。| 
+|`expires_at`| 任意。ISO 8601形式の資格情報の有効期限です。例えば、`2020-08-20T19:10:06.299Z`です。有効期限が過ぎると、資格情報は無効になります。| 
+|`parse_expiry_from_cert`| 任意。証明書を指定されたときにAuth0が構造解析をする有効期限のブール値を示します。証明書が指定されない場合、Auth0はエラーを返します。また、`parse_expiry_from_cert`と`expires_at`は相互排他的です。その場合、Auth0はエラーを返します。|
 
 ::: ::: 注意 公開鍵
 PEM公開鍵は、Auth0に渡す前にJSON-escapedである必要があります。この例では、渡す必要のあるコンテンツは次の通りです：
@@ -234,7 +244,7 @@ IF+t0HbO1E387fvLcuSyai1yWbSr1PXyiB2aXyDpbD4u7d3ux4ahU2opH11lBqvx
 
 資格情報IDが応答を返します。次のステップにIDを使用します。
 
-##### 資格情報の関連付け
+#### 資格情報の関連付け
 
 資格情報を作成したら、それをアプリケーションに関連付けます。`private_key_jwt`を使用した認証中に、アプリケーションはこれらの資格情報を使用します。
 
@@ -343,7 +353,11 @@ curl --location --request PATCH 'https://{domain}/api/v2/clients/{clientId}/cred
    }'
 ```
 
-| パラメーター | 説明 | | ---------- | ---------- | |`managementApiAccessToken`|  `update:credentials`スコープを持つManagement APIのアクセストークン。| |`clientId`| 更新したいクライアント。| |`expires_at`|ISO 8601形式の資格情報の有効期限。たとえば、`2020-08-20T19:10:06.299Z`です。|
+| パラメーター | 説明 | 
+| ---------- | ---------- | 
+|`managementApiAccessToken`|  `update:credentials`スコープを持つManagement APIのアクセストークン。| 
+|`clientId`| 更新したいクライアント。| 
+|`expires_at`|ISO 8601形式の資格情報の有効期限。たとえば、`2020-08-20T19:10:06.299Z`です。|
 
 更新できる唯一のフィールドは`expires_at`フィールドです。残りの属性は不変で、変更するには資格情報をローテーションする必要があります。
 
