@@ -41,25 +41,25 @@ permalink: "migrate-to-paginated-queries"
 1. `page`および`per_page`パラメーターを提供して、影響を受けるエンドポイントへの呼び出しすべてを置き換えます。
 
    <table class="table"><thead>
-<tr>
-<th>パラメーター</th>
-<th>タイプ</th>
-<th>説明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>`page`</td>
-<td>整数</td>
-<td>返される結果のページインデックス。最初のページは0になります。</td>
-</tr>
-<tr>
-<td>`per_page`</td>
-<td>整数</td>
-<td>1ページあたりの結果件数。このパラメーターが送信されない場合、ページ分割は無効になります。</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th>パラメーター</th>
+   <th>タイプ</th>
+   <th>説明</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td>`page`</td>
+   <td>整数</td>
+   <td>返される結果のページインデックス。最初のページは0になります。</td>
+   </tr>
+   <tr>
+   <td>`per_page`</td>
+   <td>整数</td>
+   <td>1ページあたりの結果件数。このパラメーターが送信されない場合、ページ分割は無効になります。</td>
+   </tr>
+   </tbody>
+   </table>
 2. テナントログに廃止通知が表示されないことを確認します。要求が50個より多くのアイテムを返しているかどうか確認します。`details.size_exceeded`フィールドを見て、`true`になっているか確認します。
 
    1. 以下のログクエリを使用して、複数の結果でページネーションオプションなしで呼び出しすべてを返します。
@@ -75,7 +75,7 @@ permalink: "migrate-to-paginated-queries"
 旧バージョンの[Auth0拡張機能](/docs/ja-jp/customize/extensions)およびカスタムの拡張機能を、ページネーションクエリのみ実行するようにするために、最新バージョンに更新する必要があるかもしれません。
 
 1. 拡張機能URLに一致するIDのクライアントについて、廃止通知があるかテナントログを確認してください。その場合、その拡張機能を更新する必要があります。
-2. [［Dashboard］ > ［Extensions（拡張機能）］](https://manage.auth0.com/#/extensions)に移動し、**［Installed Extensions（インストール済みの拡張機能）］** を選択して、拡張機能の**［Update（更新）］** リンクがあれば、それをクリックしてください。
+2. [［Dashboard］ > ［Extensions（拡張機能）］](https://manage.auth0.com/#/extensions)に移動し、**［Installed Extensions（インストール済みの拡張機能）］** を選択して、拡張機能の **［Update（更新）］** リンクがあれば、それをクリックしてください。
 
 ### Deploy CLIツールの更新
 
