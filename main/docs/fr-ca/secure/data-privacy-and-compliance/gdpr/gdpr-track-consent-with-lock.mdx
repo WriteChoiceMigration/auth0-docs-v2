@@ -93,7 +93,7 @@ Cela concerne les connexions par bases de données et les connexions par réseau
 5. Cette option oblige les utilisateurs à accepter les conditions avant de s’inscrire, mais elle ne définit aucune métadonnée. Pour enregistrer la sélection de l’utilisateur dans la propriété de métadonnée `consentGiven`, [créez une nouvelle action](/docs/fr-ca/customize/actions/write-your-first-action). Saisissez un **Nom** descriptif pour votre Action (par exemple, `Set consent flag upon signup`), sélectionnez le déclencheur `Login / Post Login` car vous allez ajouter l’Action au flux de connexion, puis sélectionnez **Créer**.
 6. L’écran suivant présente l’éditeur de code des actions. Copiez le code JavaScript suivant à l’intérieur et sélectionnez **Enregistrer le brouillon** pour enregistrer vos modifications :
 
-   ```text lines
+   ```javascript lines
    exports.onExecutePostLogin = async (event, api) => {
      const { consentGiven } = event.user.user_metadata || {};
 
@@ -166,7 +166,7 @@ Pour des raisons de simplicité, nous utiliserons un [exemple de formulaire de 
    * **Valeur** : `your-consent-form-url.com` (veillez à fournir l’URL de votre formulaire de consentement accessible publiquement).
 3. Copiez le code JavaScript suivant dans l’éditeur de code des actions, puis sélectionnez **Enregistrer le brouillon** pour enregistrer vos modifications :
 
-   ```text lines
+   ```javascript lines
    exports.onExecutePostLogin = async (event, api) => {
        const { consentGiven } = event.user.user_metadata || {};
 
