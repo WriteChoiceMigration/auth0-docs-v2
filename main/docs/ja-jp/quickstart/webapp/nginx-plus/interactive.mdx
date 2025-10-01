@@ -7,213 +7,174 @@ permalink: "interactive"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/nginx-plus.png"
 'twitter:title': "NGINX Plus"
 'twitter:description': "このチュートリアルでは、nginx-openid-connectモジュールを使用して、NGINXサーバーに認証と認可を追加する方法について説明します。"
+mode: wide
 ---
 
-[Skip to main content](#maincontent)
-
-​
-
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
-
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
-
----
-
-​
-
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
-
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
-
-[##### NGINX Plus](#NGINX Plus)
-
-1. [Quickstarts](/docs/ja-jp/quickstarts)
-3. [Regular Web App](/docs/ja-jp/quickstart/webapp)
-5. [NGINX Plus](/docs/ja-jp/quickstart/webapp/nginx-plus/interactive)
-
-# 
-
-# NGINX Plus
-
-このチュートリアルでは、nginx-openid-connectモジュールを使用して、NGINXサーバーに認証と認可を追加する方法について説明します。 ログインして、アカウント用に構成された例を参考にこのクイックタートに従うことをお勧めします。
-
-[1
-
-## システム要件](#システム要件)
-
-このチュートリアルとシードプロジェクトは次を使用してテストが完了しています：
-
-* NGINX Plus R24
-
-[2
-
-## nginx-plus-module-njsモジュールをインストールして有効にする](#nginx-plus-module-njsモジュールをインストールして有効にする)
-
-まず、NGINX Plusに`nginx-plus-module-njs`モジュールをインストールする必要があります。
-
-動的モジュールのインストールガイドに従って、ホストOSにパッケージをインストールします。
-
-`yum`パッケージ管理ツールを使用しているLinuxディストリビューションでは、soのようなモジュールをインストールすることができます：
-
-`sudo yum install nginx-plus-module-njs jq`
-
-インストールしたら、それをNGINXに有効化する必要があります。次の行を`/etc/nginx/nginx.conf`ファイルの最上部近くに追加してください：
-
-`load_module modules/ngx_http_js_module.so;`
-
-[3
-
-## nginx-openid-connectテンプレートリポジトリを確認する](#nginx-openid-connectテンプレートリポジトリを確認する)
-
-`nginx-openid-connect`リポジトリをクローンします。このリポジトリにはテンプレート構成があります。
-
-`git clone https://github.com/nginxinc/nginx-openid-connect`
-
-[4
-
-## Auth0アプリケーションの詳細でNGINXを構成する](#auth0アプリケーションの詳細でnginxを構成する)
-
-nginx-openid-connectフォルダーにあるconfigure.shスクリプトを実行して、テンプレートの構成にAuth0アプリケーションの詳細を入力します。
-
-``` lines
-./configure.sh --auth_jwt_key request \
---client_id {yourClientId} \
---pkce_enable \
-https://{yourDomain}/.well-known/openid-configuration
-```
-
-次に、[テナントのログアウトURL](/docs/ja-jp/api/authentication#auth0-logout)を`openid_connect_configuration.conf`ファイルに追加します。
-
-[5
-
-## トークンとJWKSエンドポイントにAccept-Encodingヘッダーを構成する](#トークンとjwksエンドポイントにaccept-encodingヘッダーを構成する)
-
-`openid_connect.server_conf`ファイルに`Accept-Encoding`ヘッダーを追加して、 `gzip`に値を設定します。
-
-[6
-
-## OpenID Connect構成ファイルをコピーする](#openid-connect構成ファイルをコピーする)
-
-4つの構成ファイルを`conf.d`フォルダーにコピーします。
-
-``` lines
-sudo cp openid_connect.js \ 
-frontend.conf \
-openid_connect_configuration.conf \
-openid_connect.server_conf /etc/nginx/conf.d
-```
-
-[7
-
-## Auth0のアプリケーション設定を構成する](#auth0のアプリケーション設定を構成する)
-
-Auth0 Dashboardで以下を行います。
-
-1. **［Applications（アプリケーション）］** > **［Applications（アプリケーション）］**に移動し、リストからアプリケーションを選択します。
-2. **［Settings（設定）］**ビューに切り替えます。
-3. **［Application URI（アプリケーションURI）］**セクションの**［Allowed Callback URLs（許可されているコールバックURL）］**にhttps://{yourDomain}/_codexchを追加します。
-4. **［Credentials（資格情報）］**ビューに切り替えます。
-
-**［Application Authentication（アプリケーション認証）］**セクションで、**認証方法**を［None（なし）］に設定します。
-
-[8
-
-## アップストリームアプリケーションにヘッダーを渡す](#アップストリームアプリケーションにヘッダーを渡す)
-
-IDトークン（JWT）からの追加のヘッダーを`/etc/nginx/conf.d/frontend.conf`ファイルでアップストリームの対象に追加します。
-
-## Next Steps
-
-Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
-
-This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
-
-* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
-* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
-
-Did it work?
-
-Yes No
-
-Any suggestion or typo?
-
-[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/webapp/nginx-plus/interactive.md)
-
-<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
-
-Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
-
-Sign Up
-
-Developers
-
-* [Developer Hub](https://developer.auth0.com/resources)
-* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
-* [Blog posts](https://auth0.com/blog/developers/)
-* [Videos](https://auth0.com/docs/videos)
-* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
-* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
-
-Documentation
-
-* [Articles](https://auth0.com/docs/articles)
-* [Quickstarts](https://auth0.com/docs/quickstarts)
-* [APIs](https://auth0.com/docs/api)
-* [SDK Libraries](https://auth0.com/docs/libraries)
-* [Blog](https://auth0.com/blog/)
-* [Reports](https://auth0.com/resources/ebooks)
-* [Webinars](https://auth0.com/resources/webinars)
-
-Get Involved
-
-* [Forum](https://community.auth0.com/)
-* [Events](https://developer.auth0.com/events)
-* [Ambassador Program](https://auth0.com/ambassador-program)
-* [Auth0 Research Program](https://auth0.com/research-program)
-
-Company
-
-* [Our Customers](https://auth0.com/customers)
-* [Compliance - Ensuring privacy and security](https://auth0.com/security)
-* [Partners](https://auth0.com/partners)
-* [Careers We're hiring!](https://www.okta.com/company/careers/)
-* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
-
-Support Center
-
-* [Community](https://community.auth0.com/)
-* [Support](https://support.auth0.com/)
-* [Help](https://community.auth0.com/c/help/6)
-* [FAQs](https://community.auth0.com/c/faq/42)
-* [Auth0 Marketplace](https://marketplace.auth0.com)
-
-Learning
-
-* [Learn](https://auth0.com/learn)
-* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
-* [Blog](https://auth0.com/blog/)
-
-Platform
-
-* [Access Management](https://auth0.com/platform/access-management)
-* [Extensibility](https://auth0.com/platform/extensibility)
-* [Security](https://auth0.com/platform/login-security)
-* [User Management](https://auth0.com/platform/user-management)
-* [Authentication](https://auth0.com/platform/authentication)
-
-Features
-
-* [Universal Login](https://auth0.com/features/universal-login)
-* [Single Sign On](https://auth0.com/features/single-sign-on)
-* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
-* [Actions](https://auth0.com/features/actions)
-* [Machine to Machine](https://auth0.com/features/machine-to-machine)
-* [Passwordless](https://auth0.com/features/passwordless)
-* [Breached Passwords](https://auth0.com/features/breached-passwords)
-
-© 2025 Okta, Inc. All Rights Reserved.
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
+import { Recipe, Content, Section, SideMenu, SideMenuSectionItem, SignUpForm } from "/snippets/recipe.jsx";
+import { LoggedInForm } from "/snippets/Login.jsx";
+import Nginx from "/snippets/quickstart/webapp/nginx-plus/nginx.conf.mdx";
+import OpenidConnectionConfiguration from "/snippets/quickstart/webapp/nginx-plus/openid_connection_configuration.conf.mdx";
+import OpenidConnect from "/snippets/quickstart/webapp/nginx-plus/openid_connect.server_conf.mdx";
+import Frontend from "/snippets/quickstart/webapp/nginx-plus/frontend.conf.mdx";
+
+export const sections = [
+  { id: "システム要件", title: "システム要件" },
+  { id: "nginx-plus-module-njsモジュールをインストールして有効にする", title: "nginx-plus-module-njsモジュールをインストールして有効にする" },
+  { id: "nginx-openid-connectテンプレートリポジトリを確認する", title: "nginx-openid-connectテンプレートリポジトリを確認する" },
+  { id: "auth0アプリケーションの詳細でnginxを構成する", title: "Auth0アプリケーションの詳細でNGINXを構成する" },
+  { id: "トークンとjwksエンドポイントにaccept-encodingヘッダーを構成する", title: "トークンとJWKSエンドポイントにAccept-Encodingヘッダーを構成する" },
+  { id: "openid-connect構成ファイルをコピーする", title: "OpenID Connect構成ファイルをコピーする" },
+  { id: "auth0のアプリケーション設定を構成する", title: "Auth0のアプリケーション設定を構成する" },
+  { id: "アップストリームアプリケーションにヘッダーを渡す", title: "アップストリームアプリケーションにヘッダーを渡す" }
+]
+
+<Recipe>
+  <Content>
+    このチュートリアルでは、nginx-openid-connectモジュールを使用して、NGINXサーバーに認証と認可を追加する方法について説明します。
+        ログインして、アカウント用に構成された例を参考にこのクイックタートに従うことをお勧めします。
+
+    <Section id={sections[0].id} title={sections[0].title} stepNumber="1">
+      このチュートリアルとシードプロジェクトは次を使用してテストが完了しています：
+
+      - NGINX Plus R24
+    </Section>
+
+    <Section id={sections[1].id} title={sections[1].title} stepNumber="2">
+      まず、NGINX Plusに`nginx-plus-module-njs`モジュールをインストールする必要があります。
+
+      動的モジュールのインストールガイドに従って、ホストOSにパッケージをインストールします。
+
+      `yum`パッケージ管理ツールを使用しているLinuxディストリビューションでは、soのようなモジュールをインストールすることができます：
+
+      ```sh lines
+      sudo yum install nginx-plus-module-njs jq
+      ```
+
+      インストールしたら、それをNGINXに有効化する必要があります。次の行を`/etc/nginx/nginx.conf`ファイルの最上部近くに追加してください：
+
+      ```sh lines
+      load_module modules/ngx_http_js_module.so;
+      ```
+    </Section>
+
+    <Section id={sections[2].id} title={sections[2].title} stepNumber="3">
+      `nginx-openid-connect`リポジトリをクローンします。このリポジトリにはテンプレート構成があります。
+
+      ```sh lines
+      git clone https://github.com/nginxinc/nginx-openid-connect
+      ```
+    </Section>
+
+    <Section id={sections[3].id} title={sections[3].title} stepNumber="4">
+      nginx-openid-connectフォルダーにあるconfigure.shスクリプトを実行して、テンプレートの構成にAuth0アプリケーションの詳細を入力します。
+
+      ```sh lines
+      ./configure.sh --auth_jwt_key request \
+      --client_id {yourClientId} \
+      --pkce_enable \
+      https://{yourDomain}/.well-known/openid-configuration
+      ```
+
+      
+
+      次に、[テナントのログアウトURL](https://auth0.com/docs/api/authentication#auth0-logout)を`openid_connect_configuration.conf`ファイルに追加します。
+    </Section>
+
+    <Section id={sections[4].id} title={sections[4].title} stepNumber="5">
+      `openid_connect.server_conf`ファイルに`Accept-Encoding`ヘッダーを追加して、 `gzip`に値を設定します。
+    </Section>
+
+    <Section id={sections[5].id} title={sections[5].title} stepNumber="6">
+      4つの構成ファイルを`conf.d`フォルダーにコピーします。
+
+      ```sh lines
+      sudo cp openid_connect.js \ 
+      frontend.conf \
+      openid_connect_configuration.conf \
+      openid_connect.server_conf /etc/nginx/conf.d
+      ```
+
+      
+    </Section>
+
+    <Section id={sections[6].id} title={sections[6].title} stepNumber="7">
+      Auth0 Dashboardで以下を行います。
+
+      1. **［Applications（アプリケーション）］** > **［Applications（アプリケーション）］**に移動し、リストからアプリケーションを選択します。
+      2. **［Settings（設定）］**ビューに切り替えます。
+      3. **［Application URI（アプリケーションURI）］**セクションの**［Allowed Callback
+                  URLs（許可されているコールバックURL）］**にhttps://{yourDomain}/_codexchを追加します。
+      4. **［Credentials（資格情報）］**ビューに切り替えます。
+
+      **［Application Authentication（アプリケーション認証）］**セクションで、**認証方法**を［None（なし）］に設定します。
+    </Section>
+
+    <Section id={sections[7].id} title={sections[7].title} stepNumber="8">
+      IDトークン（JWT）からの追加のヘッダーを`/etc/nginx/conf.d/frontend.conf`ファイルでアップストリームの対象に追加します。
+    </Section>
+
+    ## 次のステップ
+
+    成功です！ここまで来れば、アプリケーションにログイン、ログアウト、ユーザープロファイル情報が備わっているはずです。
+
+    これでクイックスタートチュートリアルは終了ですが、機能はまだまだたくさんあります。Auth0でできることについて詳しくは、以下をご覧ください。
+
+    *   [Auth0 Dashboard](https://manage.auth0.com/#) - Auth0のテナントやアプリケーションを構成して管理する方法について説明します
+    *   [Auth0 Marketplace](https://marketplace.auth0.com/) - Auth0の機能性を拡張できる各種の統合を見つけられます
+  </Content>
+
+  <SideMenu sections={sections}>
+    <SideMenuSectionItem id={sections[0].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[1].id}>
+      <CodeGroup>
+        <Nginx/>
+        <OpenidConnectionConfiguration/>
+        <OpenidConnect/>
+        <Frontend/>
+      </CodeGroup>
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[2].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[3].id}>
+      <CodeGroup>
+        <OpenidConnectionConfiguration/>
+        <Nginx/>
+        <OpenidConnect/>
+        <Frontend/>
+      </CodeGroup>
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[4].id}>
+      <CodeGroup>
+        <OpenidConnect/>
+        <Nginx/>
+        <OpenidConnectionConfiguration/>
+        <Frontend/>
+      </CodeGroup>
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[5].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[6].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
+
+    <SideMenuSectionItem id={sections[7].id}>
+      <CodeGroup>
+        <Frontend/>
+        <Nginx/>
+        <OpenidConnectionConfiguration/>
+        <OpenidConnect/>
+      </CodeGroup>
+    </SideMenuSectionItem>
+
+  </SideMenu>
+</Recipe>

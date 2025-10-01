@@ -28,10 +28,10 @@ You can create an event stream using either AWS EventBridge or webhooks. The sec
 
 Event streams can either be provisioned using the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 dashboard</Tooltip> or the [Auth0 Management API](/docs/ja-jp/api/management/v2). If using the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>, before you can set up an event stream, you need to create a machine-to-machine (M2M) application and authenticate with a Management API token. For more information, review [Management API Access Tokens](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens).
 
-1. Navigate to [Dashboard > Applications > Applications](https://manage.auth0.com/#/applications) and select **Create Application**.
-2. Enter a descriptive name for your application and choose **Machine to Machine Applications**. Then, select **Create**.
-3. Select the API you want to call from your application. In this case, use the **Auth0 Management API**.
-4. Choose the permissions that you want to be issued as part of your application's access token, then select **Authorize**. For testing purposes, select:
+1. Navigate to [Dashboard > Applications > Applications](https://manage.auth0.com/#/applications) and select **Create Application** .
+2. Enter a descriptive name for your application and choose **Machine to Machine Applications** . Then, select **Create** .
+3. Select the API you want to call from your application. In this case, use the **Auth0 Management API** .
+4. Choose the permissions that you want to be issued as part of your application's access token, then select **Authorize** . For testing purposes, select:
 
    * `read:event_streams`
    * `create:event_streams`
@@ -40,7 +40,7 @@ Event streams can either be provisioned using the <Tooltip data-tooltip-id="reac
    * `read:event_deliveries`
    * `update:event_deliveries`
    * `create:users`
-5. Navigate to the **Settings** tab to gather your **Client ID**, **Client Secret**, and **Domain**.
+5. Navigate to the **Settings** tab to gather your **Client ID** , **Client Secret** , and **Domain** .
 6. Review [Get Management API Access Tokens](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-production) to retrieve and store your access token.
 
 ## AWS EventBridge
@@ -68,7 +68,7 @@ Before setting up an event stream, you need to identify the [event types](/docs/
 
 This example uses the Auth0 CLI to create an event stream that subscribes to the `user.created` event, which triggers whenever a new user is registered in your tenant.
 
-``` lines
+```bash wrap lines
 auth0 events create --name ng-demo-eventbridge --type eventbridge --subscriptions "user.created" --configuration '{"aws_account_id":"<your-aws-account-id>","aws_region":"<your-aws-region>"}'
 ```
 
@@ -101,9 +101,9 @@ If successful, this call returns the following JSON with your event stream `id`.
 
 To create an event stream in the Auth0 Dashboard using AWS EventBridge:
 
-1. Navigate to **Auth0 Dashboard** > **Event Streams (Early)**.
-2. Select **+Create Event Stream**.
-3. From the list of stream types, select **AWS EventBridge**. This will open the configuration form for your new EventBridge stream.
+1. Navigate to **Auth0 Dashboard** > **Event Streams (Early)** .
+2. Select **+Create Event Stream** .
+3. From the list of stream types, select **AWS EventBridge** . This will open the configuration form for your new EventBridge stream.
 4. **Configure Stream Details:** In the configuration form, you will need to provide the following information:
 
    * **Stream Name:**
@@ -150,7 +150,7 @@ Ensure you have the following installed to properly write your webhook handler:
 2. Install `dotenv` to your root directory to use a `.env` file for storing environment variables.
 3. Create a `webhook.js` fle to receive the `user.created` event and store it in a database.
 
-   ```javascript lines
+   ```javascript lines expandable
    const express = require('express');
    const app = express();
 
@@ -232,7 +232,7 @@ Ensure you have the following installed to properly write your webhook handler:
    
 4. In the root of your project, create a `.env` file and add your API token using:
 
-   ``` lines
+   ```bash lines
    API_TOKEN=`openssl rand -hex 32`
    echo "API_TOKEN=$API_TOKEN" > .env
    ```
@@ -242,7 +242,7 @@ Ensure you have the following installed to properly write your webhook handler:
    
 5. Start your server:
 
-   ``` lines
+   ```bash lines
    node webhook.js
    ```
 
@@ -251,7 +251,7 @@ Ensure you have the following installed to properly write your webhook handler:
    
 6. To test the Webhook, expose your webhook handler using a tool like ngrok:
 
-   ``` lines
+   ```bash lines
    ngrok http 3000
    ```
 
@@ -261,7 +261,7 @@ Ensure you have the following installed to properly write your webhook handler:
 
    This provides a public URL for your local webhook handler, for example:
 
-   ``` lines
+   ```bash lines
    http://localhost:3000
    ```
 
@@ -279,7 +279,7 @@ Before setting up an event stream, you need to identify the [event types](/docs/
 
 This example uses the Auth0 CLI to create an event stream that subscribes to the `user.created` event, which triggers whenever a new user is registered in your tenant. The event data is then forwarded to a webhook endpoint for further processing.
 
-``` lines
+```bash lines
 source .env # Make sure you are in the webhook directory where you created your .env file
 WEBHOOK_URL="<ngrok URL>/webhook"
 
@@ -316,7 +316,7 @@ If successful, this returns the following JSON with your event stream `id`. New 
 
 After you create an event stream, you can verify that the event stream exists using the following command:
 
-``` lines
+```bash lines
 auth0 events show <EVENT_STREAM_ID>
 ```
 
@@ -324,9 +324,9 @@ auth0 events show <EVENT_STREAM_ID>
 
 To create an event stream in the Auth0 Dashboard using AWS EventBridge:
 
-1. Navigate to **Auth0 Dashboard** > **Event Streams (Early)**.
-2. Select **+Create Event Stream**.
-3. From the list of stream types, select **Webhook**. This will open the configuration form for your new webhook stream.
+1. Navigate to **Auth0 Dashboard** > **Event Streams (Early)** .
+2. Select **+Create Event Stream** .
+3. From the list of stream types, select **Webhook** . This will open the configuration form for your new webhook stream.
 4. **Configure Stream Details:** In the configuration form, you will need to provide the following information:
 
    * **Stream Name:**
@@ -342,7 +342,7 @@ Your new event stream is now created, and Auth0 can begin publishing the selecte
 
 </Tab></Tabs>
 
-After the stream is active, you can test the event stream. For more information, review [**Event Testing, Observability, and Failure Recovery**](/docs/ja-jp/customize/events/event-testing-observability-and-failure-recovery).
+After the stream is active, you can test the event stream. For more information, review [**Event Testing, Observability, and Failure Recovery** ](/docs/ja-jp/customize/events/event-testing-observability-and-failure-recovery).
 
 ## もっと詳しく
 

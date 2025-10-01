@@ -13,9 +13,9 @@ permalink: "configure-auth0-saml-identity-provider"
 
 ## Auth0サポートを組み込んだSSO統合
 
-1. [Dashboard>Applications>SSO Integrations](https://manage.auth0.com/#/externalapps)に移動して、**［Create SSO Integration（SSO統合の作成）］**を選択します。
-2. SSO IDプロバイダー統合を選択します。次の画面で**［Continue（続行）］**をクリックします。
-3. 選択したプロバイダーの必要な詳細を入力し、**［Save（保存）］**をクリックします。
+1. [Dashboard>Applications>SSO Integrations](https://manage.auth0.com/#/externalapps)に移動して、 **［Create SSO Integration（SSO統合の作成）］** を選択します。
+2. SSO IDプロバイダー統合を選択します。次の画面で **［Continue（続行）］** をクリックします。
+3. 選択したプロバイダーの必要な詳細を入力し、 **［Save（保存）］** をクリックします。
 
 チュートリアルビューには、選択した統合に固有の追加の構成手順が表示されます。
 
@@ -47,19 +47,19 @@ Auth0ダッシュボードで、SAML2 Webアプリアドオンを使用してSAM
 
 ### サービスプロバイダーからアプリケーションコールバックURLを取得する
 
-サービスプロバイダーからSAML認証アサーションを送信するURLを取得します。これは、**［Assertion Consumer Service URL（アサーションコンシューマーサービスURL）］**、**［Post-back URL（ポストバックURL）］**、または**［Callback URL（コールバックURL ）］**と呼ばれることもあります。
+サービスプロバイダーからSAML認証アサーションを送信するURLを取得します。これは、 **［Assertion Consumer Service URL（アサーションコンシューマーサービスURL）］** 、 **［Post-back URL（ポストバックURL）］** 、または **［Callback URL（コールバックURL ）］** と呼ばれることもあります。
 
 ### Auth0でSAML SSOを構成する
 
 1. [Dashboard>Applications> Applications](https://manage.auth0.com/#/applications)に移動し、新しいアプリケーションを作成するか、構築するアプリケーションの名前をクリックします。
-2. **［Settings（設定）］**ページの下までスクロールし、**［Advanced Settings（詳細設定）］**をクリックします。
-3. **［Certificates（証明書）］**タブを選択し、**［Download Certificates（証明書のダウンロード）］**をクリックして、**`PEM`**形式を選択します。証明書は`{yourTenant}.pem`というファイルにダウンロードされます。このファイルを保存します。サービスプロバイダーを構成するときにアップロードする必要があります。
+2. **［Settings（設定）］** ページの下までスクロールし、 **［Advanced Settings（詳細設定）］** をクリックします。
+3. **［Certificates（証明書）］** タブを選択し、 **［Download Certificates（証明書のダウンロード）］** をクリックして、 **`PEM`** 形式を選択します。証明書は`{yourTenant}.pem`というファイルにダウンロードされます。このファイルを保存します。サービスプロバイダーを構成するときにアップロードする必要があります。
 
    <Frame>![Dashboard - アプリケーション - 高度な設定 - 証明書タブ](/images/ja-jp/cdy7uua7fh8z/5eB167clrfOiBEtyrMOtkn/421d091708adf74f5ba9b8a450fb824c/Applications_-_Advanced_-_Certificates.png)</Frame>
 
-4. **［Endpoints（エンドポイント）］**タブを選択し、**［SAML Protocol URL（SAMLプロトコルURL）］** を見つけます。コピーして保存します。サービスプロバイダーに提供する必要があります。
-5. 一番上までスクロールして、**［Addons（アドオン）］**タブを選択します。
-6. **［SAML2 Web App（SAML2 Webアプリ）］**の切り替えを有効にします。
+4. **［Endpoints（エンドポイント）］** タブを選択し、 **［SAML Protocol URL（SAMLプロトコルURL）］** を見つけます。コピーして保存します。サービスプロバイダーに提供する必要があります。
+5. 一番上までスクロールして、 **［Addons（アドオン）］** タブを選択します。
+6. **［SAML2 Web App（SAML2 Webアプリ）］** の切り替えを有効にします。
 
    <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -67,7 +67,7 @@ Auth0ダッシュボードで、SAML2 Webアプリアドオンを使用してSAM
 
    </Callout>
 
-7. **［Settings（設定）］**タブで、Auth0がユーザーを認証した後に SAMLアサーションを送信するサービスプロバイダー（またはアプリケーション）からの**［Application Callback（アプリケーションコールバックURL）］**を入力します。これはアサーションコンシューマサービス（ACS）のURLです。
+7. **［Settings（設定）］** タブで、Auth0がユーザーを認証した後に SAMLアサーションを送信するサービスプロバイダー（またはアプリケーション）からの **［Application Callback（アプリケーションコールバックURL）］** を入力します。これはアサーションコンシューマサービス（ACS）のURLです。
 
    <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 設定タブ](/images/ja-jp/cdy7uua7fh8z/6dJgYkcOgMZ73HVTkAWt1x/0126f55506d82cfd73d0bcb7ebd6fa9f/2025-02-27_14-00-16.png)</Frame>
 
@@ -79,28 +79,28 @@ Auth0ダッシュボードで、SAML2 Webアプリアドオンを使用してSAM
 
    </Warning>
 
-8. タブの最後までスクロールし、**［Enable（有効）］**をクリックします。
-9. サービスプロバイダーがSAML要求で複数のACS URLを送信する場合は、アプリケーションの**［Settings（設定）］**タブに移動し、**［Allowed Callback URLs（許可されたコールバック URL）］**を見つけて追加することで、それらを許可リストに追加する必要があります。
+8. タブの最後までスクロールし、 **［Enable（有効）］** をクリックします。
+9. サービスプロバイダーがSAML要求で複数のACS URLを送信する場合は、アプリケーションの **［Settings（設定）］** タブに移動し、 **［Allowed Callback URLs（許可されたコールバック URL）］** を見つけて追加することで、それらを許可リストに追加する必要があります。
 
 ### サービスプロバイダーでSAML SSOを構成する
 
-1. サービスプロバイダーアプリケーションを構成するために必要な情報を表示するには、SAMLアドオンの**［Usage（使用法）］**タブに移動します。
+1. サービスプロバイダーアプリケーションを構成するために必要な情報を表示するには、SAMLアドオンの **［Usage（使用法）］** タブに移動します。
 
    <Frame>![Dashboard アプリケーション アプリケーションアドオンタブ SAML2 Webアプリ 使用状況タブ](/images/ja-jp/cdy7uua7fh8z/3T90BDpyTXFUWDp1JkncBU/20060887bf494416b5831075fd4fce13/2025-01-28_10-16-30.png)</Frame>
 
-2. **［Identity Provider Metadata（IDプロバイダーメタデータ）］**を見つけて、**［Download（ダウンロード）］**をクリックしてメタデータファイルをダウンロードします。サービスプロバイダーに情報を追加して、Auth0にSAMLベースの認証要求を送信する方法を知らせます。ここで提供される手順は一般的なものです。サービスプロバイダーで適切な画面とフィールドを見つける必要があります。
+2. **［Identity Provider Metadata（IDプロバイダーメタデータ）］** を見つけて、 **［Download（ダウンロード）］** をクリックしてメタデータファイルをダウンロードします。サービスプロバイダーに情報を追加して、Auth0にSAMLベースの認証要求を送信する方法を知らせます。ここで提供される手順は一般的なものです。サービスプロバイダーで適切な画面とフィールドを見つける必要があります。
 
-* サービスプロバイダーがメタデータファイルのアップロードをサポートしている場合は、SAML2 Webアドオンの**［Usage（使用状況）］**タブで取得したメタデータURLを指定します。
-* サービスプロバイダーがメタデータファイルのアップロードをサポートしていない場合は、SAMLアドオンの**［Usage（使用状況）］**ビューの情報を使用して、手動で設定を構成します。
+* サービスプロバイダーがメタデータファイルのアップロードをサポートしている場合は、SAML2 Webアドオンの **［Usage（使用状況）］** タブで取得したメタデータURLを指定します。
+* サービスプロバイダーがメタデータファイルのアップロードをサポートしていない場合は、SAMLアドオンの **［Usage（使用状況）］** ビューの情報を使用して、手動で設定を構成します。
 
-  + ログインURLには、サービス プロバイダーがSAML認証要求を送信するURLである**［Identity Provider Login（IDプロバイダーログインURL）］**を使用します。
+  + ログインURLには、サービス プロバイダーがSAML認証要求を送信するURLである **［Identity Provider Login（IDプロバイダーログインURL）］** を使用します。
   + カスタムドメインがある場合は、Auth0ドメインではなく、カスタムドメインベースのURLを使用します。この形式のURLを使用する代わりに：
     `https://{yourTenant}.auth0.com/samlp/CLIENTID?connection=Username-Password-Authentication`
     この形式のURLを使用します：
     `https://{yourCustomDomain}/samlp/CLIENTID?connection=Username-Password-Authentication`.
   + [［Organizations（組織）］](/docs/ja-jp/manage-users/organizations)を使用している場合は、クエリ文字列に`organization`パラメータとして組織IDを指定することにより、ユーザーを特定の組織のログインプロンプトに誘導できます。オプションで、`connection`パラメータを含めて接続を指定することもできます。例：`https://{yourTenant}.auth0.com/samlp/CLIENTID?connection=Acme-Saml-Connection&organization=org_123456789`
-  + サービスプロバイダーにログアウトURLのフィールドもある場合は、**［Identity Provider Login URL（IDプロバイダーログインURL）］**を再度入力します。ログインとログアウトはどちらも同じURLで処理されます。
-* SAMLアドオンの**［Usage（使用状況）］**ビューから証明書をダウンロードし、サービスプロバイダーに提供します。この証明書は、Auth0からサービスプロバイダーに送信される SAML認証アサーションの署名を検証するために使用されます。サービスプロバイダーが**［Issuer（発行者）］**を要求した場合は、SAMLアドオンの**［Usage（使用状況）］**ビューから発行者を取得することもできます。
+  + サービスプロバイダーにログアウトURLのフィールドもある場合は、 **［Identity Provider Login URL（IDプロバイダーログインURL）］** を再度入力します。ログインとログアウトはどちらも同じURLで処理されます。
+* SAMLアドオンの **［Usage（使用状況）］** ビューから証明書をダウンロードし、サービスプロバイダーに提供します。この証明書は、Auth0からサービスプロバイダーに送信される SAML認証アサーションの署名を検証するために使用されます。サービスプロバイダーが **［Issuer（発行者）］** を要求した場合は、SAMLアドオンの **［Usage（使用状況）］** ビューから発行者を取得することもできます。
 
 ### 構成をテストする
 

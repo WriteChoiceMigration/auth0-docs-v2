@@ -39,7 +39,7 @@ SAML2アドオンの使用では、空のマッピングオブジェクトがデ
 
 そのため、IdPが送信するSAML応答は以下になります。
 
-``` lines
+```xml lines
 <samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" ID="_e30cb5f29249a82846eb" InResponseTo="_e33996d83f953ce46225185b3a1c0ad8" Version="2.0" IssueInstant="2021-11-03T21:34:42.493Z" Destination="https://example-dev-tenant.us.auth0.com/login/callback">
 ...
        <saml:AttributeStatement xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -64,7 +64,7 @@ SAML2アドオンの使用では、空のマッピングオブジェクトがデ
 
 SAML2アドオンのマッピングオブジェクトを以下のように構成します。
 
-``` lines
+```json lines
 "mappings": {
    "fav_genre": "http://schemas.auth0.com/books"
  }
@@ -72,7 +72,7 @@ SAML2アドオンのマッピングオブジェクトを以下のように構成
 
 このマッピングでは、以下のような応答になります。
 
-``` lines
+```xml lines
 <samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" ID="_e30cb5f29249a82846eb" InResponseTo="_e33996d83f953ce46225185b3a1c0ad8" Version="2.0" IssueInstant="2021-11-03T21:34:42.493Z" Destination="https://example-dev-tenant.us.auth0.com/login/callback">
 ...
        <saml:AttributeStatement xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -95,7 +95,7 @@ SAML応答を複数の属性に同じ値でマッピングしなければなら�
 
 SAML2アドオンのマッピングオブジェクトを以下のように構成します。
 
-``` lines
+```json lines
 "mappings": {
    "fav_genre": [
      "http://schemas.auth0.com/movies",
@@ -107,7 +107,7 @@ SAML2アドオンのマッピングオブジェクトを以下のように構成
 
 このマッピングでは、以下のような応答になります。
 
-``` lines
+```xml lines
 <samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" ID="_e30cb5f29249a82846eb" InResponseTo="_e33996d83f953ce46225185b3a1c0ad8" Version="2.0" IssueInstant="2021-11-03T21:34:42.493Z" Destination="https://example-dev-tenant.us.auth0.com/login/callback">
 ...
        <saml:AttributeStatement xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">

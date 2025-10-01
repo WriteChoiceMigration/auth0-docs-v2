@@ -21,11 +21,9 @@ permalink: "deploy-and-host-advanced-customizations"
 
 以下を`vite.config.ts`という名前の新しいファイルに追加します。
 
-accordion.expand_all/accordion.collapse_all
-
 <Accordion title="vite.config.ts config">
 
-```javascript lines
+```jsx lines expandable
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
@@ -89,11 +87,11 @@ export default defineConfig({
 
 `scripts/build.ts`を作成してViteのビルドを実行します。
 
-accordion.expand_all/accordion.collapse_all
+
 
 <Accordion title="Viteを実行するscripts/build.ts">
 
-```javascript lines
+```jsx lines
 import { build } from 'vite';
 async function buildScreens() {
   try {
@@ -113,11 +111,11 @@ buildScreens();
 
 S3バケットとCloudFrontディストリビューションを作成します。
 
-accordion.expand_all/accordion.collapse_all
+
 
 <Accordion title="S3バケットを作成する">
 
-```powershell lines
+```bash lines
 #Create bucket
 
 aws s3 mb s3://your-acul-assets --region us-east-1
@@ -140,11 +138,11 @@ aws cloudfront create-distribution \
 
 ### Auth0にCORSを構成する
 
-accordion.expand_all/accordion.collapse_all
+
 
 <Accordion title="Auth0にCORSを構成する">
 
-```javascript lines
+```json lines
 {
   "CORSRules": [{
     "AllowedHeaders": ["*"],
@@ -164,11 +162,11 @@ accordion.expand_all/accordion.collapse_all
 
 AWSのデプロイメントに`scripts/deploy.ts`を作成します。
 
-accordion.expand_all/accordion.collapse_all
+
 
 <Accordion title="scripts/deploy.tsを作成する">
 
-```javascript lines
+```jsx lines expandable
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { CloudFrontClient, CreateInvalidationCommand } from '@aws-sdk/client-cloudfront';
 import { readFileSync } from 'fs';
@@ -228,11 +226,11 @@ deploy().catch(console.error);
 
 `.github/workflows/deploy.yml`を作成します。
 
-accordion.expand_all/accordion.collapse_all
+
 
 <Accordion title="GitHub Actionsのワークフローをセットアップ">
 
-```javascript lines
+```yaml lines expandable
 name: Deploy ACUL Screens
 
 on:

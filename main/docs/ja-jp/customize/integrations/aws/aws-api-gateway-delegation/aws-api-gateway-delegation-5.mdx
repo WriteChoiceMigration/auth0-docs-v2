@@ -68,11 +68,11 @@ AWS Lambdaコンソールは、ブラウザーコンソールでNode.jsコード
 
 以下のシードプロジェクトには、更新されたAWS Lambda関数に必要なコードが含まれています。
 
-<%= include('../../../_includes/_package', {
+{/* <%= include('../../../_includes/_package', {
 org: 'auth0',
 repo: 'auth0-aws',
 path: 'examples/api-gateway/lambda'
-}) %>
+}) %> */}
 
 シードプロジェクト内には、以下の2つのカスタムJavaScriptファイルがあります。
 
@@ -93,7 +93,7 @@ env.AUTH0_SECRET='{yourAuth0Secret}';
 module.exports = env;
 ```
 
-ファイルのあるディレクトリから**npm install**を実行して、内容をZIP形式で圧縮し（`index.js`は必ずZIPのルート）、Lambda関数の`PurchasePet`が使えるようにアップロードします。これをテストすると、JWTがメッセージの本文にないため、認証が失敗します。
+ファイルのあるディレクトリから **npm install** を実行して、内容をZIP形式で圧縮し（`index.js`は必ずZIPのルート）、Lambda関数の`PurchasePet`が使えるようにアップロードします。これをテストすると、JWTがメッセージの本文にないため、認証が失敗します。
 
 `index.js`でロジックを確認します。60行目辺りのロジックではトークンが検証して解読され、購入ロジックで使われるID情報が含まれた、デコードされた情報が抽出されています。
 

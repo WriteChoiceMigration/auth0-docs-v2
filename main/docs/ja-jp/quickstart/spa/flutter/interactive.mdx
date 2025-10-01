@@ -7,279 +7,199 @@ permalink: "interactive"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/img/share-image.png"
 'twitter:title': "Flutterアプリケーションにログインを追加する"
 'twitter:description': "このガイドでは、FlutterアプリケーションにAuth0 Flutter SDKを使ってAuth0を統合する方法を説明します。"
+sidebarTitle: Flutter
+mode: wide
 ---
 
-[Skip to main content](#maincontent)
+import { Recipe, Content, Section, SideMenu, SideMenuSectionItem, SignUpForm } from "/snippets/recipe.jsx";
+import { LoggedInForm } from "/snippets/Login.jsx";
+import MainView from "/snippets/quickstart/spa/flutter/main_view.mdx"
+import ProfileView from "/snippets/quickstart/spa/flutter/profile_view.mdx"
 
-​
+export const sections = [
+  { id: "auth0を構成する", title: "Auth0を構成する" },
+  { id: "auth0-flutter-sdkをインストールする", title: "Auth0 Flutter SDKをインストールする" },
+  { id: "アプリケーションにログインを追加する", title: "アプリケーションにログインを追加する" },
+  { id: "アプリケーションにログアウトを追加する", title: "アプリケーションにログアウトを追加する" },
+  { id: "ユーザープロファイル情報を表示する", title: "ユーザープロファイル情報を表示する" }
+]
 
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+<Recipe>
+  <Content>
+    Auth0を使用すると、アプリケーションに手軽に認証を追加して、ユーザープロファイル情報にアクセスすることができます。このガイドでは、Flutterアプリケーションに[Auth0 Flutter
+          SDK](https://github.com/auth0/auth0-flutter)を使ってAuth0を統合する方法を説明します。
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+    <Info>
+    Flutter SDKは現在、Android、iOS、またはWebプラットフォームで実行されるFlutterアプリケーションのみに対応しています。
+    </Info>
 
----
+    このクイックスタートでは、すでに[Flutter](https://flutter.dev/)アプリケーションが問題なく作動しているものとします。そうでない場合は、[Flutter「入門」ガイド](https://docs.flutter.dev/get-started/install)をチェックして、シンプルなアプリの始め方を確認してください。
 
-​
+    [Flutterコマンドラインツール](https://docs.flutter.dev/reference/flutter-cli)の知識も必要になります。
 
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+    <Section id={sections[0].id} title={sections[0].title} stepNumber="1">
+      Auth0にサインアップすると、新しいアプリケーションが作成されたか、あるいは既に作成していた可能性があります。Auth0と通信するためのアプリケーションに関する詳細が必要になります。これらの詳細は、Auth0
+            Dashboardの[アプリケーションの設定](https://manage.auth0.com/#/applications)セクションで入手することができます。
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      <Frame>
+        <img src="/images/ja-jp/cdy7uua7fh8z/6SC7KnyzCyO8cwXQfril1X/c0d6756c28de0ddcbe938307e529d47a/client_settings.png" />
+      </Frame>
 
-[##### Flutterアプリケーションにログインを追加する](#Flutterアプリケーションにログインを追加する)
+      <Info>
+      ネイティブまたはシングルページアプリケーションでデフォルトのアプリを使用する場合は、**［Token Endpoint Authentication
+                        Method（トークンエンドポイント認証方法）］**を`None`に更新し、**［Application
+                        Type（アプリケーションタイプ）］**を`SPA`または`Native`に設定していることを確認します。
+      </Info>
 
-[View on Github](https://github.com/auth0-samples/auth0-flutter-samples/tree/main/sample) Log In & Download Sample
+      必要な情報は以下のとおりです。
 
-1. [Quickstarts](/docs/ja-jp/quickstarts)
-3. [Single Page App](/docs/ja-jp/quickstart/spa)
-5. [Flutter (Web)](/docs/ja-jp/quickstart/spa/flutter/interactive)
+      - **Domain（ドメイン）**
+      - **Client ID（クライアントID）**
 
-# 
+      <Info>
+      このページの上部からサンプルをダウンロードする場合、これらの詳細は入力されています。
+      </Info>
 
-# Flutterアプリケーションにログインを追加する
+      ### Callback URLを構成する
 
-Auth0を使用すると、アプリケーションに手軽に認証を追加して、ユーザープロファイル情報にアクセスすることができます。このガイドでは、Flutterアプリケーションに[Auth0 Flutter SDK](https://github.com/auth0/auth0-flutter)を使ってAuth0を統合する方法を説明します。
+      Callback URLとは、Auth0によって認証後のユーザーをリダイレクトするアプリケーション内URLです。アプリのCallback URLは、[アプリケーションの設定](https://manage.auth0.com/#/applications)で**［Allowed Callback
+              URLs（許可されているコールバックURL）］**フィールドに追加される必要があります。このフィールドが設定されていない場合、ユーザーはアプリケーションにログインできず、エラーが返されます。
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      <Info>
+      このページの上部からダウンロードしたサンプルプロジェクトに沿って進めている場合には、**［Allowed Callback
+                        URLs（許可されているコールバックURL）］**に`http://localhost:3000`を設定します。
+      </Info>
 
-Flutter SDKは現在、Android、iOS、またはWebプラットフォームで実行されるFlutterアプリケーションのみに対応しています。
+      ### ログアウトURLを構成する
 
-</Callout>
+      ログアウトURLとは、ユーザーが認可サーバーからログアウトした後にAuth0が戻ることができるアプリケーション内URLです。これは、`returnTo`クエリパラメーターで指定されています。アプリのログアウトURLは、[アプリケーションの設定](https://manage.auth0.com/#/applications)で**［Allowed Logout
+              URLs（許可されているログアウトURL）］**フィールドに追加される必要があります。このフィールドが設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーが返されます。
 
-このクイックスタートでは、すでに[Flutter](https://flutter.dev/)アプリケーションが問題なく作動しているものとします。そうでない場合は、[Flutter「入門」ガイド](https://docs.flutter.dev/get-started/install)をチェックして、シンプルなアプリの始め方を確認してください。
+      <Info>
+      このページの上部からダウンロードしたサンプルプロジェクトに沿って進めている場合には、**［Allowed Logout
+                        URLs（許可されているログアウトURL）］**フィールドに追加する必要があるログアウトURLは`http://localhost:3000`です。
+      </Info>
 
-[Flutterコマンドラインツール](https://docs.flutter.dev/reference/flutter-cli)の知識も必要になります。
+      ### 許可されているWebオリジンを構成する
 
-[1
+      アプリのURLを[アプリケーションの設定](https://manage.auth0.com/#/applications/%7ByourClientId%7D/settings)で**［Allowed Web
+              Origins（許可されているWebオリジン）］**フィールドに追加する必要があります。ここでアプリケーションURLを登録しないと、アプリケーションは認証トークンを暗黙でリフレッシュできず、ユーザーがアプリケーションを再び訪問した時、またはページを再読み込みした時にログアウトした状態になってしまいます。
 
-## Auth0を構成する](#auth0を構成する)
+      <Info>
+      このページの上部からダウンロードしたサンプルプロジェクトに沿って進めている場合には、**［Allowed Web
+                        Origins（許可されているWebオリジン）］**を`http://localhost:3000`に設定します。
+      </Info>
+    </Section>
 
-Auth0にサインアップすると、新しいアプリケーションが作成されたか、あるいは既に作成していた可能性があります。Auth0と通信するためのアプリケーションに関する詳細が必要になります。これらの詳細は、Auth0 Dashboardの[アプリケーションの設定](https://manage.auth0.com/#/applications)セクションで入手することができます。
+    <Section id={sections[1].id} title={sections[1].title} stepNumber="2">
+      Auth0 Flutter SDKをプロジェクトに追加します：
 
-<Frame>![null](/images/ja-jp/cdy7uua7fh8z/6SC7KnyzCyO8cwXQfril1X/d19b92723640171d9d6945e197d4e193/My_App_-_Settings_-_Japanese.png)</Frame>
+      ```bash
+      flutter pub add auth0_flutter
+      ```
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      以下のスクリプトタグを`index.html`ページに追加します：
 
-ネイティブまたはシングルページアプリケーションでデフォルトのアプリを使用する場合は、**［Token Endpoint Authentication Method（トークンエンドポイント認証方法）］**を`None`に更新し、**［Application Type（アプリケーションタイプ）］**を`SPA`または`Native`に設定していることを確認します。
+      ```html
+      <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js" defer></script>
+      ```
+    </Section>
 
-</Callout>
+    <Section id={sections[2].id} title={sections[2].title} stepNumber="3">
+      アプリに認証をセットアップするには、[ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)が最も手軽な方法です。最良のエクスペリエンス、高い安全性、幅広い機能を活用するためにも、ユニバーサルログインの使用をお勧めします。
 
-必要な情報は以下のとおりです。
+      `Auth0Web`クラスを使用して、Auth0のユニバーサルログインをFlutter
+            Webアプリに統合します。`loginWithRedirect()`を使用して、ユーザーをAuth0のユニバーサルログインページにリダイレクトします。
 
-* **Domain（ドメイン）**
-* **Client ID（クライアントID）**
+      <Info>
+      通常、`redirectUrl`パラメーターを`loginWithRedirect`に指定する必要があります。この操作を省くと、Auth0はデフォルトで構成されていない、[デフォルトのログインルート](/docs/ja-jp/authenticate/login/auth0-universal-login/configure-default-login-routes)を使用することになります。
+      </Info>
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      ユーザーはログインすると、リダイレクトでアプリケーションに戻されます。次に、起動中に`onLoad`を呼び出し、付与された資格情報を処理することで、このユーザーのIDとアクセストークンにアクセスすることができます。
 
-このページの上部からサンプルをダウンロードする場合、これらの詳細は入力されています。
+      ```js
+      auth0.onLoad().then((final credentials) => setState(() {
+      // Handle or store credentials here
 
-</Callout>
+      _credentials = credentials;
 
-### Callback URLを構成する
+      }));
+      ```
 
-Callback URLとは、Auth0によって認証後のユーザーをリダイレクトするアプリケーション内URLです。アプリのCallback URLは、[アプリケーションの設定](https://manage.auth0.com/#/applications)で**［Allowed Callback URLs（許可されているコールバックURL）］**フィールドに追加される必要があります。このフィールドが設定されていない場合、ユーザーはアプリケーションにログインできず、エラーが返されます。
+      <Note>
+      ##### チェックポイント
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      `loginWithRedirect()`を呼び出してアプリにユーザーをログインするボタンをアプリに追加します。認証のためにAuth0へリダイレクトされてから、アプリケーションに戻されることを確認します。
 
-このページの上部からダウンロードしたサンプルプロジェクトに沿って進めている場合には、**［Allowed Callback URLs（許可されているコールバックURL）］**に`http://localhost:3000`を設定します。
+      `onLoad`を呼び出した結果、`credentials`にアクセスできることと、IDとアクセストークンにアクセスできることを確認します。
+      </Note>
+    </Section>
 
-</Callout>
+    <Section id={sections[3].id} title={sections[3].title} stepNumber="4">
+      ユーザーをログアウトさせるには、Auth0 Flutter SDKの`logout()`を呼び出してログインセッションをクリアし、ユーザーをAuth0のログアウトエンドポイントにリダイレクトします。[Auth0からのログアウトについて詳しい情報をお読みください](/docs/ja-jp/authenticate/login/logout)。
 
-### ログアウトURLを構成する
+      <Info>
+      通常、`logout`を呼び出すときに`returnToUrl`を指定しますが、そうしない場合、Auth0は [［Allowed Logout URLs（許可されているログアウトURL）］リストの最初のURLにデフォルトで指定されます](/docs/ja-jp/authenticate/login/logout/redirect-users-after-logout)。
+      </Info>
 
-ログアウトURLとは、ユーザーが認可サーバーからログアウトした後にAuth0が戻ることができるアプリケーション内URLです。これは、`returnTo`クエリパラメーターで指定されています。アプリのログアウトURLは、[アプリケーションの設定](https://manage.auth0.com/#/applications)で**［Allowed Logout URLs（許可されているログアウトURL）］**フィールドに追加される必要があります。このフィールドが設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーが返されます。
+      <Note>
+      ##### チェックポイント
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      `logout()`を呼び出し、ユーザーをアプリケーションからログアウトするアプリにボタンを追加します。このボタンを選択すると、Flutterアプリがログアウトエンドポイントにリダイレクトしてからもう一度戻ることを確認します。アプリケーションにはログインされていないはずです。
+      </Note>
+    </Section>
 
-このページの上部からダウンロードしたサンプルプロジェクトに沿って進めている場合には、**［Allowed Logout URLs（許可されているログアウトURL）］**フィールドに追加する必要があるログアウトURLは`http://localhost:3000`です。
+    <Section id={sections[4].id} title={sections[4].title} stepNumber="5">
+      ユーザープロファイルは、ページが読み込まれるとユーザープロファイルプロパティを自動的に取得し、アプリケーション起動中に`onLoad`を呼び出すことでアクセス・保存することができます。`onLoad`から返されたオブジェクトには、すべてのユーザープロファイルプロパティのある`user`プロパティが含まれています。これらはIDトークンをデコードすることで内部で入力されます。
 
-</Callout>
+      <Note>
+      ##### チェックポイント
 
-### 許可されているWebオリジンを構成する
+      ログインして、結果の`user`プロパティを調査します。`email`や`name`など、現在のユーザーのプロファイル情報を確認します。
+      </Note>
+    </Section>
 
-アプリのURLを[アプリケーションの設定](https://manage.auth0.com/#/applications/%7ByourClientId%7D/settings)で**［Allowed Web Origins（許可されているWebオリジン）］**フィールドに追加する必要があります。ここでアプリケーションURLを登録しないと、アプリケーションは認証トークンを暗黙でリフレッシュできず、ユーザーがアプリケーションを再び訪問した時、またはページを再読み込みした時にログアウトした状態になってしまいます。
+    ## 次のステップ
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+    成功です！ここまで来れば、アプリケーションにログイン、ログアウト、ユーザープロファイル情報が備わっているはずです。
 
-このページの上部からダウンロードしたサンプルプロジェクトに沿って進めている場合には、**［Allowed Web Origins（許可されているWebオリジン）］**を`http://localhost:3000`に設定します。
+    これでクイックスタートチュートリアルは終了ですが、機能はまだまだたくさんあります。Auth0でできることについて詳しくは、以下をご覧ください。
 
-</Callout>
+    *   [Auth0 Dashboard](https://manage.auth0.com/#) - Auth0のテナントやアプリケーションを構成して管理する方法について説明します
+    *   [auth0-flutter SDK](https://www.github.com/auth0/auth0-flutter/) - このチュートリアルで使用されているSDKをより詳しく説明します
+    *   [Auth0 Marketplace](https://marketplace.auth0.com/) - Auth0の機能性を拡張できる各種の統合を見つけられます
+    *   [Configure other identity providers](/docs/ja-jp/identityproviders)
+    *   [Enable multifactor authentication](/docs/ja-jp/multifactor-authentication)
+    *   [Learn about attack protection](/docs/ja-jp/attack-protection)
+    *   [Learn about Actions](/docs/ja-jp/customize/actions)
+  </Content>
 
-[2
+  <SideMenu sections={sections}>
+    <SideMenuSectionItem id={sections[0].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
 
-## Auth0 Flutter SDKをインストールする](#auth0-flutter-sdkをインストールする)
+    <SideMenuSectionItem id={sections[1].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
 
-Auth0 Flutter SDKをプロジェクトに追加します：
+    <SideMenuSectionItem id={sections[2].id}>
+      <CodeGroup>
+        <MainView/>
+        <ProfileView/>
+      </CodeGroup>
+    </SideMenuSectionItem>
 
-```javascript lines
-flutter pub add auth0_flutter
-```
+    <SideMenuSectionItem id={sections[3].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
 
-以下のスクリプトタグを`index.html`ページに追加します：
+    <SideMenuSectionItem id={sections[4].id}>
+      <CodeGroup>
+        <MainView/>
+        <ProfileView/>
+      </CodeGroup>
+    </SideMenuSectionItem>
 
-```javascript lines
-<script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js" defer></script>
-```
-
-[3
-
-## アプリケーションにログインを追加する](#アプリケーションにログインを追加する)
-
-アプリに認証をセットアップするには、[ユニバーサルログイン](https://auth0.com/docs/authenticate/login/auth0-universal-login)が最も手軽な方法です。最良のエクスペリエンス、高い安全性、幅広い機能を活用するためにも、ユニバーサルログインの使用をお勧めします。
-
-`Auth0Web`クラスを使用して、Auth0のユニバーサルログインをFlutter Webアプリに統合します。`loginWithRedirect()`を使用して、ユーザーをAuth0のユニバーサルログインページにリダイレクトします。
-
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
-
-通常、`redirectUrl`パラメーターを`loginWithRedirect`に指定する必要があります。この操作を省くと、Auth0はデフォルトで構成されていない、[デフォルトのログインルート](https://auth0.com/docs/authenticate/login/auth0-universal-login/configure-default-login-routes)を使用することになります。
-
-</Callout>
-
-ユーザーはログインすると、リダイレクトでアプリケーションに戻されます。次に、起動中に`onLoad`を呼び出し、付与された資格情報を処理することで、このユーザーのIDとアクセストークンにアクセスすることができます。
-
-```javascript lines
-auth0.onLoad().then((final credentials) => setState(() {
-// Handle or store credentials here
-
-_credentials = credentials;
-
-}));
-```
-
-##### checkpoint.header
-
-`loginWithRedirect()`を呼び出してアプリにユーザーをログインするボタンをアプリに追加します。認証のためにAuth0へリダイレクトされてから、アプリケーションに戻されることを確認します。
-
-`onLoad`を呼び出した結果、`credentials`にアクセスできることと、IDとアクセストークンにアクセスできることを確認します。
-
-checkpoint.itWorked checkpoint.somethingNotRight
-
-[4
-
-## アプリケーションにログアウトを追加する](#アプリケーションにログアウトを追加する)
-
-ユーザーをログアウトさせるには、Auth0 Flutter SDKの`logout()`を呼び出してログインセッションをクリアし、ユーザーをAuth0のログアウトエンドポイントにリダイレクトします。[Auth0からのログアウトについて詳しい情報をお読みください](https://auth0.com/docs/authenticate/login/logout)。
-
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
-
-通常、`logout`を呼び出すときに`returnToUrl`を指定しますが、そうしない場合、Auth0は [［Allowed Logout URLs（許可されているログアウトURL）］リストの最初のURLにデフォルトで指定されます](https://auth0.com/docs/authenticate/login/logout/redirect-users-after-logout)。
-
-</Callout>
-
-##### checkpoint.header
-
-`logout()`を呼び出し、ユーザーをアプリケーションからログアウトするアプリにボタンを追加します。このボタンを選択すると、Flutterアプリがログアウトエンドポイントにリダイレクトしてからもう一度戻ることを確認します。アプリケーションにはログインされていないはずです。
-
-checkpoint.itWorked checkpoint.somethingNotRight
-
-[5
-
-## ユーザープロファイル情報を表示する](#ユーザープロファイル情報を表示する)
-
-ユーザープロファイルは、ページが読み込まれるとユーザープロファイルプロパティを自動的に取得し、アプリケーション起動中に`onLoad`を呼び出すことでアクセス・保存することができます。`onLoad`から返されたオブジェクトには、すべてのユーザープロファイルプロパティのある`user`プロパティが含まれています。これらはIDトークンをデコードすることで内部で入力されます。
-
-##### checkpoint.header
-
-ログインして、結果の`user`プロパティを調査します。`email`や`name`など、現在のユーザーのプロファイル情報を確認します。
-
-checkpoint.itWorked checkpoint.somethingNotRight
-
-## Next Steps
-
-Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
-
-This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
-
-* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
-* [auth0-flutter SDK](https://www.github.com/auth0/auth0-flutter/) - Explore the SDK used in this tutorial more fully
-* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
-* [Configure other identity providers](/docs/ja-jp/identityproviders)
-* [Enable multifactor authentication](/docs/ja-jp/multifactor-authentication)
-* [Learn about attack protection](/docs/ja-jp/attack-protection)
-* [Learn about Actions](/docs/ja-jp/customize/actions)
-
-Did it work?
-
-Yes No
-
-Any suggestion or typo?
-
-[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/spa/flutter/interactive.md)
-
-<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
-
-Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
-
-Sign Up
-
-Developers
-
-* [Developer Hub](https://developer.auth0.com/resources)
-* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
-* [Blog posts](https://auth0.com/blog/developers/)
-* [Videos](https://auth0.com/docs/videos)
-* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
-* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
-
-Documentation
-
-* [Articles](https://auth0.com/docs/articles)
-* [Quickstarts](https://auth0.com/docs/quickstarts)
-* [APIs](https://auth0.com/docs/api)
-* [SDK Libraries](https://auth0.com/docs/libraries)
-* [Blog](https://auth0.com/blog/)
-* [Reports](https://auth0.com/resources/ebooks)
-* [Webinars](https://auth0.com/resources/webinars)
-
-Get Involved
-
-* [Forum](https://community.auth0.com/)
-* [Events](https://developer.auth0.com/events)
-* [Ambassador Program](https://auth0.com/ambassador-program)
-* [Auth0 Research Program](https://auth0.com/research-program)
-
-Company
-
-* [Our Customers](https://auth0.com/customers)
-* [Compliance - Ensuring privacy and security](https://auth0.com/security)
-* [Partners](https://auth0.com/partners)
-* [Careers We're hiring!](https://www.okta.com/company/careers/)
-* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
-
-Support Center
-
-* [Community](https://community.auth0.com/)
-* [Support](https://support.auth0.com/)
-* [Help](https://community.auth0.com/c/help/6)
-* [FAQs](https://community.auth0.com/c/faq/42)
-* [Auth0 Marketplace](https://marketplace.auth0.com)
-
-Learning
-
-* [Learn](https://auth0.com/learn)
-* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
-* [Blog](https://auth0.com/blog/)
-
-Platform
-
-* [Access Management](https://auth0.com/platform/access-management)
-* [Extensibility](https://auth0.com/platform/extensibility)
-* [Security](https://auth0.com/platform/login-security)
-* [User Management](https://auth0.com/platform/user-management)
-* [Authentication](https://auth0.com/platform/authentication)
-
-Features
-
-* [Universal Login](https://auth0.com/features/universal-login)
-* [Single Sign On](https://auth0.com/features/single-sign-on)
-* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
-* [Actions](https://auth0.com/features/actions)
-* [Machine to Machine](https://auth0.com/features/machine-to-machine)
-* [Passwordless](https://auth0.com/features/passwordless)
-* [Breached Passwords](https://auth0.com/features/breached-passwords)
-
-© 2025 Okta, Inc. All Rights Reserved.
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
+  </SideMenu>
+</Recipe>

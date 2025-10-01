@@ -7,291 +7,207 @@ permalink: "interactive"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/react.png"
 'twitter:title': "Expoアプリケーションにログインを追加する"
 'twitter:description': "このガイドでは、ExpoアプリケーションにAuth0 React Native SDKを使ってAuth0を統合し、認証の追加とユーザープロファイル情報の表示を行う方法について説明します。"
+sidebarTitle: Expo
 ---
 
-[Skip to main content](#maincontent)
+import { Recipe, Content, Section, SideMenu, SideMenuSectionItem, SignUpForm , CodeGroup } from "/snippets/recipe.jsx";
+import { LoggedInForm } from "/snippets/Login.jsx";
+import App from "/snippets/quickstart/native/react-native-expo/App.js.mdx";
+import App2 from "/snippets/quickstart/native/react-native-expo/App.js2.mdx";
+import App3 from "/snippets/quickstart/native/react-native-expo/App.js3.mdx";
+import App4 from "/snippets/quickstart/native/react-native-expo/App.js4.mdx";
+import App5 from "/snippets/quickstart/native/react-native-expo/App.js5.mdx";
+import App6 from "/snippets/quickstart/native/react-native-expo/App.js6.mdx";
 
-​
+export const sections = [
+  { id: "auth0を構成する", title: "Auth0を構成する" },
+  { id: "依存関係をインストールする", title: "依存関係をインストールする" },
+  { id: "auth0構成プラグインをセットアップする", title: "Auth0構成プラグインをセットアップする" },
+  { id: "ネイティブソースコードを生成する", title: "ネイティブソースコードを生成する" },
+  { id: "auth0providerコンポーネントを構成する", title: "Auth0Providerコンポーネントを構成する" },
+  { id: "アプリケーションにログインを追加する", title: "アプリケーションにログインを追加する" },
+  { id: "アプリケーションにログアウトを追加する", title: "アプリケーションにログアウトを追加する" },
+  { id: "ユーザープロファイル情報を表示する", title: "ユーザープロファイル情報を表示する" }
+]
 
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+<Recipe>
+  <Content>
+    このクイックスタートは、Expoフレームワーク用です。React NativeアプリケーションにAuth0を統合するには、「React Nativeクイックスタート」を参照してください。
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+    <Warning>
+    このSDKは「Expo Go」アプリと互換性がありません。互換性があるのはカスタム開発クライアントとEASビルドのみです。
+    </Warning>
 
----
+      <Section id={sections[0].id} title={sections[0].title} stepNumber="1">
+      Auth0のサービスを利用するには、Auth0 Dashboadに設定済みのアプリケーションがある必要があります。Auth0アプリケーションは、プロジェクトに認証を構成する場所です。
 
-​
+      ### アプリケーションを構成する
 
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+      対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0 APIを呼び出す際に使用されます。
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
 
-[##### Expoアプリケーションにログインを追加する](#Expoアプリケーションにログインを追加する)
+      完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
 
-[View on Github](https://github.com/auth0-samples/auth0-react-native-sample/tree/master/00-Login) Log In & Download Sample
+      ### Callback URLとログアウトURLを構成する
 
-1. [Quickstarts](/docs/ja-jp/quickstarts)
-3. [Native/Mobile App](/docs/ja-jp/quickstart/native)
-5. [Expo](/docs/ja-jp/quickstart/native/react-native-expo/interactive)
+      Auth0はCallback URLとログアウトURLを呼び出して、ユーザーをアプリケーションにリダイレクトで戻します。Auth0は、ユーザーを認証した後にCallback URLを呼び出し、セッションのクッキーを削除した後にログアウトURLを呼び出します。Callback URLとログアウトURLを設定しないと、ユーザーはアプリにログインやログアウトが行えなくなり、アプリケーションにエラーが発生します。
 
-# 
+      アプリのプラットフォームに合わせて、対応するURLを**Callback URL**と**ログアウトURL**に追加します。カスタムドメインを使っている場合は、Auth0テナントのドメインではなく、カスタムドメインの値を使用してください。
 
-# Expoアプリケーションにログインを追加する
+      #### iOS
 
-このクイックスタートは、Expoフレームワーク用です。React NativeアプリケーションにAuth0を統合するには、「React Nativeクイックスタート」を参照してください。
+      `BUNDLE_IDENTIFIER.auth0://{yourDomain}/ios/BUNDLE_IDENTIFIER/callback`
 
-<Warning>
+      #### Android
 
-このSDKは「Expo Go」アプリと互換性がありません。互換性があるのはカスタム開発クライアントとEASビルドのみです。
+      `PACKAGE_NAME.auth0://{yourDomain}/android/PACKAGE_NAME/callback`
 
-</Warning>
+      <Info>
+      サンプルプロジェクトに沿って進めている場合には、次の値を使用します：
 
-[1
+      - iOS：`com.auth0samples.auth0://{yourDomain}/ios/com.auth0samples/callback`
+      - Android：`com.auth0samples.auth0://{yourDomain}/android/com.auth0samples/callback`
+      </Info>
+      </Section>
 
-## Auth0を構成する](#auth0を構成する)
+      <Section id={sections[1].id} title={sections[1].title} stepNumber="2">
+      このセクションでは、React Native Auth0モジュールをインストールする方法について説明します。
 
-Auth0のサービスを利用するには、Auth0 Dashboadに設定済みのアプリケーションがある必要があります。Auth0アプリケーションは、プロジェクトに認証を構成する場所です。
+      <Info>
+      React Nativeの追加情報については、[公式ドキュメント](https://facebook.github.io/react-native/)を参照してください。
+      </Info>
 
-### アプリケーションを構成する
+      ### Yarn
 
-対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0 APIを呼び出す際に使用されます。
+      `yarn add react-native-auth0`
 
-このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
+      <Info>
+      `yarn`の詳細については、[公式ドキュメント](https://yarnpkg.com/en/docs)を確認してください。
+      </Info>
 
-完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
+      ### npm
 
-### Callback URLとログアウトURLを構成する
+      `npm install react-native-auth0 --save`
+      </Section>
 
-Auth0はCallback URLとログアウトURLを呼び出して、ユーザーをアプリケーションにリダイレクトで戻します。Auth0は、ユーザーを認証した後にCallback URLを呼び出し、セッションのクッキーを削除した後にログアウトURLを呼び出します。Callback URLとログアウトURLを設定しないと、ユーザーはアプリにログインやログアウトが行えなくなり、アプリケーションにエラーが発生します。
+      <Section id={sections[2].id} title={sections[2].title} stepNumber="3">
+      Auth0パッケージはカスタムネイティブコードを実行し、これはビルド時に構成しておく必要があります。これを実現するには、[Expo構成プラグイン](https://docs.expo.dev/guides/config-plugins/)を使用します。
 
-アプリのプラットフォームに合わせて、対応するURLを**Callback URL**と**ログアウトURL**に追加します。カスタムドメインを使っている場合は、Auth0テナントのドメインではなく、カスタムドメインの値を使用してください。
+      `react-native-auth0`プラグインが[Expo構成](https://docs.expo.dev/workflow/configuration/)に追加されます。
+      </Section>
 
-#### iOS
+      <Section id={sections[3].id} title={sections[3].title} stepNumber="4">
+      上記の構成を設定するには、ネイティブコードを生成する必要があります。これを行うには、次のコマンドを実行します：
 
-`BUNDLE_IDENTIFIER.auth0://{yourDomain}/ios/BUNDLE_IDENTIFIER/callback`
+      `expo prebuild`
 
-#### Android
+      Expoの構成に存在しない場合には、[Androidパッケージ](https://github.com/expo/fyi/blob/main/android-package.md)と[iOSバンドル識別子](https://github.com/expo/fyi/blob/main/bundle-identifier.md)の提供が促されます。
 
-`PACKAGE_NAME.auth0://{yourDomain}/android/PACKAGE_NAME/callback`
+      ```
+      ? What would you like your Android package name to be? > com.auth0samples # or your desired package name
+      ? What would you like your iOS bundle identifier to be? > com.auth0samples # or your desired bundle identifier
+      ```
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      これらの値は、Callback URLとログアウトURLの設定に使用されます。
+      </Section>
 
-サンプルプロジェクトに沿って進めている場合には、次の値を使用します：
+      <Section id={sections[4].id} title={sections[4].title} stepNumber="5">
+      `useAuth0`フックはReact Contextに依存して状態を管理します。このコンテキストは`Auth0Provider`コンポーネントが提供します。
 
-* iOS：`com.auth0samples.auth0://{yourDomain}/ios/com.auth0samples/callback`
-* Android：`com.auth0samples.auth0://{yourDomain}/android/com.auth0samples/callback`
+      `react-native-auth0`パッケージから`useAuth0`フックと`Auth0Provider`コンポーネントをインポートします：
 
-</Callout>
+      ```js
+      import {useAuth0, Auth0Provider} from 'react-native-auth0';
+      ```
 
-[2
+      SDKが正しく機能するためには、アプリケーションを`Auth0Provider`コンポーネントでラップし、次のプロパティを設定しなければなりません：
 
-## 依存関係をインストールする](#依存関係をインストールする)
+      - `domain`：Auth0テナントのドメインです。通常、Auth0 Dashboardにある**アプリケーションの設定**の**［Domain（ドメイン）］**フィールドで確認できます。カスタムドメインを使用している場合には、この値をカスタムドメインの値に設定してください。
+      - `clientId`：このクイックスタートで前にセットアップした、Auth0アプリケーションのクライアントIDです。これは、Auth0 Dashboardにある**アプリケーションの設定**の**［Client ID（クライアントID）］**フィールドで確認できます。
 
-このセクションでは、React Native Auth0モジュールをインストールする方法について説明します。
+      <Note>
+      ##### チェックポイント
+      Auth0Providerコンポーネントが構成されました。アプリケーションを実行して次の点を確認します：
+      SDKが正しく初期化している
+      アプリケーションがAuth0に関連したエラーを投入していない
+      </Note>
+      </Section>
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      <Section id={sections[5].id} title={sections[5].title} stepNumber="6">
+      ユーザーを認証するには、`useAuth0`フックが提供する`authorize`メソッドを呼び出します。これは、認証のためにユーザーをAuth0のユニバーサルログインページへリダイレクトし、アプリへ戻します。
 
-React Nativeの追加情報については、[公式ドキュメント](https://facebook.github.io/react-native/)を参照してください。
+      ユーザーのログインが成功したことを確認するには、フックの提供する`user`プロパティが`null`でないことを確認してください。
 
-</Callout>
+      <Note>
+      ##### チェックポイント
+      クリックでauthorizeを呼び出すボタンコンポーネントを追加します。ログインページにリダイレクトされてから、アプリケーションに戻されることを確認します。
+      </Note>
+      </Section>
 
-### Yarn
+      <Section id={sections[6].id} title={sections[6].title} stepNumber="7">
+      ユーザーをログアウトさせるには、`clearSession`を呼び出して、ユーザーをAuth0のログアウトエンドポイントにリダイレクトします。そうすると、ユーザーのセッションが認可サーバーから削除され、ユーザーがアプリケーションからログアウトされます。
 
-`yarn add react-native-auth0`
+      <Note>
+      ##### チェックポイント
+      clearSessionを呼び出すログアウトボタンを追加して、Auth0のログアウトエンドポイントにリダイレクトされ、再び戻されることを確認してください。アプリケーションにはログインされていないはずです。
+      </Note>
+      </Section>
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      <Section id={sections[7].id} title={sections[7].title} stepNumber="8">
+      `useAuth0`フックは、認証済みユーザーの情報を含む`user`オブジェクトを公開します。これを使用すれば、認証済みユーザーについてデコードされたユーザープロファイル情報に、[IDトークン](/docs/ja-jp/secure/tokens/id-tokens)からアクセスできます。
 
-`yarn`の詳細については、[公式ドキュメント](https://yarnpkg.com/en/docs)を確認してください。
+      ユーザーが認証されていない場合、このプロパティは`null`になります。
 
-</Callout>
+      <Note>
+      ##### チェックポイント
+      ログインして、結果のuserプロパティを調査します。emailやnameなど、現在のユーザーのプロファイル情報を確認します。
+      </Note>
+      </Section>
 
-### npm
+    ## 次のステップ
 
-`npm install react-native-auth0 --save`
+    成功です！ここまで来れば、アプリケーションにログイン、ログアウト、ユーザープロファイル情報が備わっているはずです。
 
-[3
+    これでクイックスタートチュートリアルは終了ですが、機能はまだまだたくさんあります。Auth0でできることについて詳しくは、以下をご覧ください。
 
-## Auth0構成プラグインをセットアップする](#auth0構成プラグインをセットアップする)
+    *   [Auth0 Dashboard](https://manage.auth0.com/#) - Auth0のテナントやアプリケーションを構成して管理する方法について説明します
+    *   [react-native-auth0 SDK](https://github.com/auth0/react-native-auth0) - このチュートリアルで使用されているSDKをより詳しく説明します
+    *   [Auth0 Marketplace](https://marketplace.auth0.com/) - Auth0の機能性を拡張できる各種の統合を見つけられます
+  </Content>
 
-Auth0パッケージはカスタムネイティブコードを実行し、これはビルド時に構成しておく必要があります。これを実現するには、[Expo構成プラグイン](https://docs.expo.dev/guides/config-plugins/)を使用します。
+  <SideMenu sections={sections}>
+      <SideMenuSectionItem id={sections[0].id}>
+        <SignUpForm />
+      </SideMenuSectionItem>
 
-`react-native-auth0`プラグインが[Expo構成](https://docs.expo.dev/workflow/configuration/)に追加されます。
+      <SideMenuSectionItem id={sections[1].id}>
+        <SignUpForm />
+      </SideMenuSectionItem>
 
-[4
+      <SideMenuSectionItem id={sections[2].id}>
+        <App />
+      </SideMenuSectionItem>
 
-## ネイティブソースコードを生成する](#ネイティブソースコードを生成する)
+      <SideMenuSectionItem id={sections[3].id}>
+        <App2 />
+      </SideMenuSectionItem>
 
-上記の構成を設定するには、ネイティブコードを生成する必要があります。これを行うには、次のコマンドを実行します：
+      <SideMenuSectionItem id={sections[4].id}>
+        <App3 />
+      </SideMenuSectionItem>
 
-`expo prebuild`
+      <SideMenuSectionItem id={sections[5].id}>
+        <App4 />
+      </SideMenuSectionItem>
 
-Expoの構成に存在しない場合には、[Androidパッケージ](https://github.com/expo/fyi/blob/main/android-package.md)と[iOSバンドル識別子](https://github.com/expo/fyi/blob/main/bundle-identifier.md)の提供が促されます。
+      <SideMenuSectionItem id={sections[6].id}>
+        <App5 />
+      </SideMenuSectionItem>
 
-``` lines
-? What would you like your Android package name to be? > com.auth0samples # or your desired package name
-? What would you like your iOS bundle identifier to be? > com.auth0samples # or your desired bundle identifier
-```
+      <SideMenuSectionItem id={sections[7].id}>
+        <App6 />
+      </SideMenuSectionItem>
 
-これらの値は、Callback URLとログアウトURLの設定に使用されます。
-
-[5
-
-## Auth0Providerコンポーネントを構成する](#auth0providerコンポーネントを構成する)
-
-`useAuth0`フックはReact Contextに依存して状態を管理します。このコンテキストは`Auth0Provider`コンポーネントが提供します。
-
-`react-native-auth0`パッケージから`useAuth0`フックと`Auth0Provider`コンポーネントをインポートします：
-
-```javascript lines
-import {useAuth0, Auth0Provider} from 'react-native-auth0';
-```
-
-SDKが正しく機能するためには、アプリケーションを`Auth0Provider`コンポーネントでラップし、次のプロパティを設定しなければなりません：
-
-* `domain`：Auth0テナントのドメインです。通常、Auth0 Dashboardにある**アプリケーションの設定**の**［Domain（ドメイン）］**フィールドで確認できます。カスタムドメインを使用している場合には、この値をカスタムドメインの値に設定してください。
-* `clientId`：このクイックスタートで前にセットアップした、Auth0アプリケーションのクライアントIDです。これは、Auth0 Dashboardにある**アプリケーションの設定**の**［Client ID（クライアントID）］**フィールドで確認できます。
-
-##### checkpoint.header
-
-`Auth0Provider`コンポーネントが構成されました。アプリケーションを実行して次の点を確認します：
-
-* SDKが正しく初期化している
-* アプリケーションがAuth0に関連したエラーを投入していない
-
-checkpoint.itWorked checkpoint.somethingNotRight
-
-[6
-
-## アプリケーションにログインを追加する](#アプリケーションにログインを追加する)
-
-ユーザーを認証するには、`useAuth0`フックが提供する`authorize`メソッドを呼び出します。これは、認証のためにユーザーをAuth0のユニバーサルログインページへリダイレクトし、アプリへ戻します。
-
-ユーザーのログインが成功したことを確認するには、フックの提供する`user`プロパティが`null`でないことを確認してください。
-
-##### checkpoint.header
-
-クリックで`authorize`を呼び出すボタンコンポーネントを追加します。ログインページにリダイレクトされてから、アプリケーションに戻されることを確認します。
-
-checkpoint.itWorked checkpoint.somethingNotRight
-
-[7
-
-## アプリケーションにログアウトを追加する](#アプリケーションにログアウトを追加する)
-
-ユーザーをログアウトさせるには、`clearSession`を呼び出して、ユーザーをAuth0のログアウトエンドポイントにリダイレクトします。そうすると、ユーザーのセッションが認可サーバーから削除され、ユーザーがアプリケーションからログアウトされます。
-
-##### checkpoint.header
-
-`clearSession`を呼び出すログアウトボタンを追加して、Auth0のログアウトエンドポイントにリダイレクトされ、再び戻されることを確認してください。アプリケーションにはログインされていないはずです。
-
-checkpoint.itWorked checkpoint.somethingNotRight
-
-[8
-
-## ユーザープロファイル情報を表示する](#ユーザープロファイル情報を表示する)
-
-`useAuth0`フックは、認証済みユーザーの情報を含む`user`オブジェクトを公開します。これを使用すれば、認証済みユーザーについてデコードされたユーザープロファイル情報に、[IDトークン](https://auth0.com/docs/secure/tokens/id-tokens)からアクセスできます。
-
-ユーザーが認証されていない場合、このプロパティは`null`になります。
-
-##### checkpoint.header
-
-ログインして、結果の`user`プロパティを調査します。`email`や`name`など、現在のユーザーのプロファイル情報を確認します。
-
-checkpoint.itWorked checkpoint.somethingNotRight
-
-## Next Steps
-
-Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
-
-This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
-
-* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
-* [react-native-auth0 SDK](https://github.com/auth0/react-native-auth0) - Explore the SDK used in this tutorial more fully
-* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
-
-Did it work?
-
-Yes No
-
-Any suggestion or typo?
-
-[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/native/react-native-expo/interactive.md)
-
-<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
-
-Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
-
-Sign Up
-
-Developers
-
-* [Developer Hub](https://developer.auth0.com/resources)
-* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
-* [Blog posts](https://auth0.com/blog/developers/)
-* [Videos](https://auth0.com/docs/videos)
-* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
-* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
-
-Documentation
-
-* [Articles](https://auth0.com/docs/articles)
-* [Quickstarts](https://auth0.com/docs/quickstarts)
-* [APIs](https://auth0.com/docs/api)
-* [SDK Libraries](https://auth0.com/docs/libraries)
-* [Blog](https://auth0.com/blog/)
-* [Reports](https://auth0.com/resources/ebooks)
-* [Webinars](https://auth0.com/resources/webinars)
-
-Get Involved
-
-* [Forum](https://community.auth0.com/)
-* [Events](https://developer.auth0.com/events)
-* [Ambassador Program](https://auth0.com/ambassador-program)
-* [Auth0 Research Program](https://auth0.com/research-program)
-
-Company
-
-* [Our Customers](https://auth0.com/customers)
-* [Compliance - Ensuring privacy and security](https://auth0.com/security)
-* [Partners](https://auth0.com/partners)
-* [Careers We're hiring!](https://www.okta.com/company/careers/)
-* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
-
-Support Center
-
-* [Community](https://community.auth0.com/)
-* [Support](https://support.auth0.com/)
-* [Help](https://community.auth0.com/c/help/6)
-* [FAQs](https://community.auth0.com/c/faq/42)
-* [Auth0 Marketplace](https://marketplace.auth0.com)
-
-Learning
-
-* [Learn](https://auth0.com/learn)
-* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
-* [Blog](https://auth0.com/blog/)
-
-Platform
-
-* [Access Management](https://auth0.com/platform/access-management)
-* [Extensibility](https://auth0.com/platform/extensibility)
-* [Security](https://auth0.com/platform/login-security)
-* [User Management](https://auth0.com/platform/user-management)
-* [Authentication](https://auth0.com/platform/authentication)
-
-Features
-
-* [Universal Login](https://auth0.com/features/universal-login)
-* [Single Sign On](https://auth0.com/features/single-sign-on)
-* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
-* [Actions](https://auth0.com/features/actions)
-* [Machine to Machine](https://auth0.com/features/machine-to-machine)
-* [Passwordless](https://auth0.com/features/passwordless)
-* [Breached Passwords](https://auth0.com/features/breached-passwords)
-
-© 2025 Okta, Inc. All Rights Reserved.
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
+    </SideMenu>
+</Recipe>

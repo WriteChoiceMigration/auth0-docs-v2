@@ -7,251 +7,178 @@ permalink: "interactive"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/python.png"
 'twitter:title': "Python Flaskアプリケーションにログインを追加する"
 'twitter:description': "このガイドでは、Python FlaskアプリケーションにAuthlib SDKを使ってAuth0を統合する方法を説明します。"
+sidebarTitle: Python
+mode: wide
 ---
 
-[Skip to main content](#maincontent)
+import { Recipe, Content, Section, SideMenu, SideMenuSectionItem, SignUpForm } from "/snippets/recipe.jsx";
+import { LoggedInForm } from "/snippets/Login.jsx";
+import Server from "/snippets/quickstart/webapp/python/server.py.mdx";
+import Home from "/snippets/quickstart/webapp/python/home.html.mdx";
 
-​
+export const sections = [
+  { id: "auth0を構成する", title: "Auth0を構成する" },
+  { id: "依存関係をインストールする", title: "依存関係をインストールする" },
+  { id: "envファイルを構成する", title: ".envファイルを構成する" },
+  { id: "アプリケーションをセットアップする", title: "アプリケーションをセットアップする" },
+  { id: "ルートをセットアップする", title: "ルートをセットアップする" },
+  { id: "テンプレートを追加する", title: "テンプレートを追加する" },
+  { id: "アプリケーションを実行する", title: "アプリケーションを実行する" }
+]
 
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+<Recipe>
+  <Content>
+    Auth0を使用すると、アプリケーションに認証を追加して、ユーザープロファイル情報にアクセスすることができます。このガイドでは、Python [Flask](https://flask.palletsprojects.com/)アプリケーションに[Authlib](https://authlib.org/) SDKを使ってAuth0を統合する方法を説明します。
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+    <Section id={sections[0].id} title={sections[0].title} stepNumber="1">
+      Auth0のサービスを利用するには、Auth0 Dashboadでセットアップしたアプリケーションが必要です。Auth0アプリケーションは、開発中のプロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
 
----
+      ### アプリケーションを構成する
 
-​
+      対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0
+            APIを呼び出す際に使用されます。
 
-[Articles](/docs/ja-jp/articles)[Quickstarts](/docs/ja-jp/quickstarts)[Auth0 APIs](/docs/ja-jp/api)[SDKs](/docs/ja-jp/libraries)
+      このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/#/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      代わりに完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
 
-[##### Python Flaskアプリケーションにログインを追加する](#Python Flaskアプリケーションにログインを追加する)
+      ### Callback URLを構成する
 
-[View on Github](https://github.com/auth0-samples/auth0-python-web-app/tree/master/01-Login) Log In & Download Sample
+      Callback URLとは、Auth0がユーザーを認証後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはログイン後にアプリケーションに戻りません。
 
-1. [Quickstarts](/docs/ja-jp/quickstarts)
-3. [Regular Web App](/docs/ja-jp/quickstart/webapp)
-5. [Python](/docs/ja-jp/quickstart/webapp/python/interactive)
+      <Info>
+      サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000/callback`に設定してください。
+      </Info>
 
-# 
+      ### ログアウトURLを構成する
 
-# Python Flaskアプリケーションにログインを追加する
+      ログアウトURLとは、Auth0がユーザーをログアウト後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーを受け取ります。
 
-Auth0を使用すると、アプリケーションに認証を追加して、ユーザープロファイル情報にアクセスすることができます。このガイドでは、Python [Flask](https://flask.palletsprojects.com/)アプリケーションに[Authlib](https://authlib.org/) SDKを使ってAuth0を統合する方法を説明します。
+      <Info>
+      サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+      </Info>
+    </Section>
 
-[1
+    <Section id={sections[1].id} title={sections[1].title} stepNumber="2">
+      プロジェクトディレクトリに`requirements.txt`ファイルを作成します：
 
-## Auth0を構成する](#auth0を構成する)
+      ```txt lines
+      # 📁 requirements.txt -----
+      flask>=2.0.3
+      python-dotenv>=0.19.2
+      authlib>=1.0
+      requests>=2.27.1
+      ```
 
-Auth0のサービスを利用するには、Auth0 Dashboadでセットアップしたアプリケーションが必要です。Auth0アプリケーションは、開発中のプロジェクトに対してどのように認証が動作して欲しいかを構成する場所です。
+      シェルから以下のコマンドを実行し、プロジェクトで依存関係が利用できるようにします：
 
-### アプリケーションを構成する
+      ```bash lines
+      pip install -r requirements.txt
+      ```
 
-対話型のセレクターを使ってAuth0アプリケーションを新規作成するか、統合したいプロジェクトを表す既存のアプリケーションを選択します。Auth0のすべてのアプリケーションには英数字からなる一意のクライアントIDが割り当てられており、アプリケーションのコードがSDKを通じてAuth0 APIを呼び出す際に使用されます。
+    </Section>
 
-このクイックスタートを使って構成されたすべての設定は、[Dashboard](https://manage.auth0.com/#/)のアプリケーションを自動更新します。今後、アプリケーションの管理もDashboardで行えます。
+    <Section id={sections[2].id} title={sections[2].title} stepNumber="3">
+      次に、プロジェクトのディレクトリに`.env`ファイルを作成します。このファイルにはクライアントキーやその他の構成情報が含まれます。
 
-代わりに完了済みの構成を見てみたい場合は、サンプルアプリケーションをご覧ください。
+      ```env lines
+      # 📁 .env -----
+      AUTH0_CLIENT_ID=mz9iNEIo2PHu7oeh8QRt19ndTyyCIgai
+      AUTH0_CLIENT_SECRET=yLTW7npKO4g1HHsCENiZbOaHHXLmhVefJxdNnXcyhOBOomZ2tgjJjSC2pMK7Swvr
+      AUTH0_DOMAIN=dev-gja8kxz4ndtex3rq.us.auth0.com
+      APP_SECRET_KEY=
+      ```
 
-### Callback URLを構成する
+      - シェルから`openssl rand -hex 32`を使って、`APP_SECRET_KEY`の文字列を生成します。
+    </Section>
 
-Callback URLとは、Auth0がユーザーを認証後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはログイン後にアプリケーションに戻りません。
+    <Section id={sections[3].id} title={sections[3].title} stepNumber="4">
+      次に、アプリケーションをセットアップします。プロジェクトディレクトリで`server.py`ファイルを作成します。このファイルにはアプリケーションロジックが含まれます。
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      アプリケーションに必要なすべてのライブラリーをインポートします。
 
-サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000/callback`に設定してください。
+      前の手順で作成した構成`.env`ファイルを読み込みます。
 
-</Callout>
+      Auth0でアプリケーションの認証を処理するためにAuthlibを構成します。AuthlibのOAuth `register()`メソッドで使用できる構成オプションの詳細については、[Authlibのドキュメント](https://docs.authlib.org/en/latest/client/frameworks.html#using-oauth-2-0-to-log-in)
+    </Section>
 
-### ログアウトURLを構成する
+    <Section id={sections[4].id} title={sections[4].title} stepNumber="5">
+      この例では、アプリケーションにlogin、callback、logout、homeの4つのルートを追加します。
 
-ログアウトURLとは、Auth0がユーザーをログアウト後にリダイレクトするアプリケーション内URLです。設定されていない場合、ユーザーはアプリケーションからログアウトできず、エラーを受け取ります。
+      アプリ訪問者が`/login`ルートにアクセスすると、アプリケーションはユーザーをAuth0ログインページに遷移します。
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      ユーザーがAuth0でログインした後、アプリケーションはユーザーを`/callback`ルートに遷移します。このルートはユーザーのためにセッションを保存し、戻ってきた時に再度ログインする必要性を回避します。
 
-サンプルプロジェクトに沿って進めている場合は、`http://localhost:3000`に設定してください。
+      `/logout`ルートは、ユーザーをアプリケーションからサインアウトさせます。アプリのユーザーセッションを消去し、Auth0ログアウトエンドポイントにリダイレクトして、セッションがもう保存されていないことを保証します。その後、アプリケーションはユーザーをホームルートにリダイレクトします。
 
-</Callout>
+      `/`ホームルートは認証されたユーザーの詳細を表示したり、訪問者のサインインを許可したりします。
+    </Section>
 
-[2
+    <Section id={sections[5].id} title={sections[5].title} stepNumber="6">
+      次に、（`render_template()`の呼び出し中に）ホームルートで使用されるテンプレートファイルを作成します。
 
-## 依存関係をインストールする](#依存関係をインストールする)
+      `templates`という名前のプロジェクトフォルダーに新しいサブディレクトリを作成し、ディレクトリに`home.html`を作成します。コンテンツを右から対象ファイルに貼り付けます。
+    </Section>
 
-プロジェクトディレクトリに`requirements.txt`ファイルを作成します：
+    <Section id={sections[6].id} title={sections[6].title} stepNumber="7">
+      アプリケーションを実行するには、プロジェクトディレクトリのルートに移動し、ターミナルを開きます。次のコマンドを実行します：
 
-```powershell lines
-# 📁 requirements.txt -----
-flask>=2.0.3
-python-dotenv>=0.19.2
-authlib>=1.0
-requests>=2.27.1
-```
+      ```bash lines
+      python3 server.py
+      ```
 
-シェルから以下のコマンドを実行し、プロジェクトで依存関係が利用できるようにします：
+      <Note>
+      ##### チェックポイント
 
-```powershell lines
-pip install -r requirements.txt
-```
+      検証するには[http://localhost:3000](http://localhost:3000/)を訪問します。ログインのためにAuth0へルートするログインボタンがあり、ログイン後アプリケーションに戻るとプロファイル情報を確認できます。
+      </Note>
+    </Section>
 
-[3
+    ## 次のステップ
 
-## .envファイルを構成する](#-envファイルを構成する)
+    成功です！ここまで来れば、アプリケーションにログイン、ログアウト、ユーザープロファイル情報が備わっているはずです。
 
-次に、プロジェクトのディレクトリに`.env`ファイルを作成します。このファイルにはクライアントキーやその他の構成情報が含まれます。
+    これでクイックスタートチュートリアルは終了ですが、機能はまだまだたくさんあります。Auth0でできることについて詳しくは、以下をご覧ください。
 
-``` lines
-# 📁 .env -----
-AUTH0_CLIENT_ID={yourClientId}
-AUTH0_CLIENT_SECRET={yourClientSecret}
-AUTH0_DOMAIN={yourDomain}
-APP_SECRET_KEY=
-```
+    *   [Auth0 Dashboard](https://manage.auth0.com/#) - Auth0のテナントやアプリケーションを構成して管理する方法について説明します
+    *   [auth0-python SDK](https://github.com/auth0/auth0-python) - このチュートリアルで使用されているSDKをより詳しく説明します
+    *   [Auth0 Marketplace](https://marketplace.auth0.com/) - Auth0の機能性を拡張できる各種の統合を見つけられます
+  </Content>
 
-* シェルから`openssl rand -hex 32`を使って、`APP_SECRET_KEY`の文字列を生成します。
+  <SideMenu sections={sections}>
+    <SideMenuSectionItem id={sections[0].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
 
-[4
+    <SideMenuSectionItem id={sections[1].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
 
-## アプリケーションをセットアップする](#アプリケーションをセットアップする)
+    <SideMenuSectionItem id={sections[2].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
 
-次に、アプリケーションをセットアップします。プロジェクトディレクトリで`server.py`ファイルを作成します。このファイルにはアプリケーションロジックが含まれます。
+    <SideMenuSectionItem id={sections[3].id}>
+      <CodeGroup>
+        <Home/>
+        <Server/>
+      </CodeGroup>
+    </SideMenuSectionItem>
 
-アプリケーションに必要なすべてのライブラリーをインポートします。
+    <SideMenuSectionItem id={sections[4].id}>
+      <CodeGroup>
+        <Server/>
+        <Home/>
+      </CodeGroup>
+    </SideMenuSectionItem>
 
-前の手順で作成した構成`.env`ファイルを読み込みます。
+    <SideMenuSectionItem id={sections[5].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
 
-Auth0でアプリケーションの認証を処理するためにAuthlibを構成します。AuthlibのOAuth `register()`メソッドで使用できる構成オプションの詳細については、[Authlibのドキュメント](https://docs.authlib.org/en/latest/client/frameworks.html#using-oauth-2-0-to-log-in)
+    <SideMenuSectionItem id={sections[6].id}>
+      <SignUpForm />
+    </SideMenuSectionItem>
 
-[5
-
-## ルートをセットアップする](#ルートをセットアップする)
-
-この例では、アプリケーションにlogin、callback、logout、homeの4つのルートを追加します。
-
-アプリ訪問者が`/login`ルートにアクセスすると、アプリケーションはユーザーをAuth0ログインページに遷移します。
-
-ユーザーがAuth0でログインした後、アプリケーションはユーザーを`/callback`ルートに遷移します。このルートはユーザーのためにセッションを保存し、戻ってきた時に再度ログインする必要性を回避します。
-
-`/logout`ルートは、ユーザーをアプリケーションからサインアウトさせます。アプリのユーザーセッションを消去し、Auth0ログアウトエンドポイントにリダイレクトして、セッションがもう保存されていないことを保証します。その後、アプリケーションはユーザーをホームルートにリダイレクトします。
-
-`/`ホームルートは認証されたユーザーの詳細を表示したり、訪問者のサインインを許可したりします。
-
-[6
-
-## テンプレートを追加する](#テンプレートを追加する)
-
-次に、（`render_template()`の呼び出し中に）ホームルートで使用されるテンプレートファイルを作成します。
-
-`templates`という名前のプロジェクトフォルダーに新しいサブディレクトリを作成し、ディレクトリに`home.html`を作成します。コンテンツを右から対象ファイルに貼り付けます。
-
-[7
-
-## アプリケーションを実行する](#アプリケーションを実行する)
-
-アプリケーションを実行するには、プロジェクトディレクトリのルートに移動し、ターミナルを開きます。次のコマンドを実行します：
-
-```python lines
-python3 server.py
-```
-
-##### checkpoint.header
-
-検証するには[http://localhost:3000](http://localhost:3000/)を訪問します。ログインのためにAuth0へルートするログインボタンがあり、ログイン後アプリケーションに戻るとプロファイル情報を確認できます。
-
-checkpoint.itWorked checkpoint.somethingNotRight
-
-## Next Steps
-
-Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
-
-This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
-
-* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
-* [auth0-python SDK](https://github.com/auth0/auth0-python) - Explore the SDK used in this tutorial more fully
-* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
-
-Did it work?
-
-Yes No
-
-Any suggestion or typo?
-
-[Edit on GitHub](https://github.com/auth0/docs/edit/master/ja-jp/articles/quickstart/webapp/python/interactive.md)
-
-<Frame>![Sign Up](/docs/ja-jp/img/quickstarts/action_hero_dashboard.svg)</Frame>
-
-Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
-
-Sign Up
-
-Developers
-
-* [Developer Hub](https://developer.auth0.com/resources)
-* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
-* [Blog posts](https://auth0.com/blog/developers/)
-* [Videos](https://auth0.com/docs/videos)
-* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
-* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
-
-Documentation
-
-* [Articles](https://auth0.com/docs/articles)
-* [Quickstarts](https://auth0.com/docs/quickstarts)
-* [APIs](https://auth0.com/docs/api)
-* [SDK Libraries](https://auth0.com/docs/libraries)
-* [Blog](https://auth0.com/blog/)
-* [Reports](https://auth0.com/resources/ebooks)
-* [Webinars](https://auth0.com/resources/webinars)
-
-Get Involved
-
-* [Forum](https://community.auth0.com/)
-* [Events](https://developer.auth0.com/events)
-* [Ambassador Program](https://auth0.com/ambassador-program)
-* [Auth0 Research Program](https://auth0.com/research-program)
-
-Company
-
-* [Our Customers](https://auth0.com/customers)
-* [Compliance - Ensuring privacy and security](https://auth0.com/security)
-* [Partners](https://auth0.com/partners)
-* [Careers We're hiring!](https://www.okta.com/company/careers/)
-* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
-
-Support Center
-
-* [Community](https://community.auth0.com/)
-* [Support](https://support.auth0.com/)
-* [Help](https://community.auth0.com/c/help/6)
-* [FAQs](https://community.auth0.com/c/faq/42)
-* [Auth0 Marketplace](https://marketplace.auth0.com)
-
-Learning
-
-* [Learn](https://auth0.com/learn)
-* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
-* [Blog](https://auth0.com/blog/)
-
-Platform
-
-* [Access Management](https://auth0.com/platform/access-management)
-* [Extensibility](https://auth0.com/platform/extensibility)
-* [Security](https://auth0.com/platform/login-security)
-* [User Management](https://auth0.com/platform/user-management)
-* [Authentication](https://auth0.com/platform/authentication)
-
-Features
-
-* [Universal Login](https://auth0.com/features/universal-login)
-* [Single Sign On](https://auth0.com/features/single-sign-on)
-* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
-* [Actions](https://auth0.com/features/actions)
-* [Machine to Machine](https://auth0.com/features/machine-to-machine)
-* [Passwordless](https://auth0.com/features/passwordless)
-* [Breached Passwords](https://auth0.com/features/breached-passwords)
-
-© 2025 Okta, Inc. All Rights Reserved.
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
+  </SideMenu>
+</Recipe>
