@@ -62,142 +62,155 @@ Lorsque l’utilisateur démarre l’application de l’appareil et souhaite l�
 Pour obtenir le code de l’appareil, votre application doit appeler le [Authorize endpoint (Point de terminaison d’autorisation)](/docs/fr-ca/api/authentication#-post-oauth-device-code-) d’Authentication API du flux d’autorisation de l’appareil :
 
 <CodeGroup>
-```bash cURL lines
-curl --request post \
---url 'https://{yourDomain}/oauth/device/code' \
---header 'content-type: application/x-www-form-urlencoded'
-``` lines
-```csharp C# lines
-var client = new RestClient("https://{yourDomain}/oauth/device/code");
-var request = new RestRequest(Method.POST);
-request.AddHeader("content-type", "application/x-www-form-urlencoded");
-IRestResponse response = client.Execute(request);
-```
+      ```bash cURL lines
+      curl --request post \
+        --url 'https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code' \
+        --header 'content-type: application/x-www-form-urlencoded'
+      ```
+      ```csharp C# lines
+      var client = new RestClient("https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code");
+      var request = new RestRequest(Method.POST);
+      request.AddHeader("content-type", "application/x-www-form-urlencoded");
+      IRestResponse response = client.Execute(request);
+      ```
 
-```go Go lines
-package main
-import (
-"fmt"
-"net/http"
-"io/ioutil"
-)
-func main() {
-url := "https://{yourDomain}/oauth/device/code"
-req, _ := http.NewRequest("post", url, nil)
-req.Header.Add("content-type", "application/x-www-form-urlencoded")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
-}
-``` lines
-```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/oauth/device/code")
-.header("content-type", "application/x-www-form-urlencoded")
-.asString();
-```
+      ```go Go lines 
+      package main
+      import (
+      "fmt"
+      "net/http"
+      "io/ioutil"
+      )
+      func main() {
+      url := "https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code"
+      req, _ := http.NewRequest("post", url, nil)
+      req.Header.Add("content-type", "application/x-www-form-urlencoded")
+      res, _ := http.DefaultClient.Do(req)
+      defer res.Body.Close()
+      body, _ := ioutil.ReadAll(res.Body)
+      fmt.Println(res)
+      fmt.Println(string(body))
+      }
+      ```
+      ```java Java lines
+      HttpResponse<String> response = Unirest.post("https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code")
+        .header("content-type", "application/x-www-form-urlencoded")
+        .asString();
+      ```
+      ```javascript Node.JS lines
+      var axios = require("axios").default;
+      var options = {
+      method: 'post',
+      url: 'https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code',
+      headers: {'content-type': 'application/x-www-form-urlencoded'}
+      };
+      axios.request(options).then(function (response) {
+      console.log(response.data);
+      }).catch(function (error) {
+      console.error(error);
+      });
+      ```
+      ```obj-c Obj-C lines 
+      #import <Foundation/Foundation.h>
+      NSDictionary *headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
+      NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code"]
+                                                        cachePolicy:NSURLRequestUseProtocolCachePolicy
 
-```javascript Node.JS lines
-var axios = require("axios").default;
-var options = {
-method: 'post',
-url: 'https://{yourDomain}/oauth/device/code',
-headers: {'content-type': 'application/x-www-form-urlencoded'}
-};
-axios.request(options).then(function (response) {
-console.log(response.data);
-}).catch(function (error) {
-console.error(error);
-});
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/device/code"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
-[request setHTTPMethod:@"post"];
-[request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
-[dataTask resume];
-```
+                                                    timeoutInterval:10.0];
 
-```php PHP lines
-$curl = curl_init();
-curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/oauth/device/code",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "post",
-CURLOPT_HTTPHEADER => [
-"content-type: application/x-www-form-urlencoded"
-],
-]);
-$response = curl_exec($curl);
-$err = curl_error($curl);
-curl_close($curl);
-if ($err) {
-echo "cURL Error #:" . $err;
-} else {
-echo $response;
-}
-``` lines
-```python Python lines
-import http.client
-conn = http.client.HTTPSConnection("")
-headers = { 'content-type': "application/x-www-form-urlencoded" }
-conn.request("post", "/{yourDomain}/oauth/device/code", headers=headers)
-res = conn.getresponse()
-data = res.read()
-print(data.decode("utf-8"))
-```
+      [request setHTTPMethod:@"post"];
+      [request setAllHTTPHeaderFields:headers];
+      NSURLSession *session = [NSURLSession sharedSession];
+      NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                              completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 
-```ruby Ruby lines
-require 'uri'
-require 'net/http'
-require 'openssl'
-url = URI("https://{yourDomain}/oauth/device/code")
-http = Net::HTTP.new(url.host, url.port)
-http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-request = Net::HTTP::Post.new(url)
-request["content-type"] = 'application/x-www-form-urlencoded'
-response = http.request(request)
-puts response.read_body
-``` lines
-```swift Swift lines
-import Foundation
-let headers = ["content-type": "application/x-www-form-urlencoded"]
-let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/device/code")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
-request.httpMethod = "post"
-request.allHTTPHeaderFields = headers
-let session = URLSession.shared
-let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
-})
-dataTask.resume()
-```
-</CodeGroup>
+                                                  if (error) {
+
+                                                      NSLog(@&quot;%@&quot;, error);
+
+                                                  } else {
+
+                                                      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+
+                                                      NSLog(@&quot;%@&quot;, httpResponse);
+
+                                                  }
+
+                                              }];
+
+      [dataTask resume];
+      ```
+      ```php PHP lines 
+      $curl = curl_init();
+      curl_setopt_array($curl, [
+      CURLOPT_URL => "https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code",
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "post",
+      CURLOPT_HTTPHEADER => [
+      &quot;content-type: application/x-www-form-urlencoded&quot;
+
+      ],
+      ]);
+      $response = curl_exec($curl);
+      $err = curl_error($curl);
+      curl_close($curl);
+      if ($err) {
+      echo "cURL Error #:" . $err;
+      } else {
+      echo $response;
+      }
+      ```
+      ```python Python lines
+      import http.client
+      conn = http.client.HTTPSConnection("")
+      headers = { 'content-type': "application/x-www-form-urlencoded" }
+      conn.request("post", "/dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code", headers=headers)
+      res = conn.getresponse()
+      data = res.read()
+      print(data.decode("utf-8"))
+      ```
+      ```ruby Ruby lines
+      require 'uri'
+      require 'net/http'
+      require 'openssl'
+      url = URI("https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code")
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      request = Net::HTTP::Post.new(url)
+      request["content-type"] = 'application/x-www-form-urlencoded'
+      response = http.request(request)
+      puts response.read_body
+      ```
+      ```swift Swift lines 
+      import Foundation
+      let headers = ["content-type": "application/x-www-form-urlencoded"]
+      let request = NSMutableURLRequest(url: NSURL(string: "https://dev-gja8kxz4ndtex3rq.us.auth0.com/oauth/device/code")! as URL,
+                                          cachePolicy: .useProtocolCachePolicy,
+
+                                      timeoutInterval: 10.0)
+
+      request.httpMethod = "post"
+      request.allHTTPHeaderFields = headers
+      let session = URLSession.shared
+      let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+      if (error != nil) {
+      print(error)
+
+      } else {
+      let httpResponse = response as? HTTPURLResponse
+
+      print(httpResponse)
+
+      }
+      })
+      dataTask.resume()
+      ```
+      </CodeGroup>
 
 [3
 

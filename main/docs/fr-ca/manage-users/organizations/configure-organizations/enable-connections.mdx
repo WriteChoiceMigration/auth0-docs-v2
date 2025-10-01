@@ -82,14 +82,16 @@ Effectuez un appel `POST` au point de terminaison `Créer des connexions pour un
 * **Pour les connexions Enterprise seulement**: Remplacez `{showAsButtonOption}` avec `true` ou `false` par rapport à votre choix de bouton de connexion.
 
 <CodeGroup>
+
 ```bash cURL lines
 curl --request POST \
---url https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections \
---header 'authorization: Bearer {yourMgmtApiAccessToken}' \
---header 'cache-control: no-cache' \
---header 'content-type: application/json' \
---data '{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }'
-``` lines
+  --url https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
+  --header 'cache-control: no-cache' \
+  --header 'content-type: application/json' \
+  --data '{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }'
+```
+
 ```csharp C# lines
 var client = new RestClient("https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections");
 var request = new RestRequest(Method.POST);
@@ -100,118 +102,147 @@ request.AddParameter("application/json", "{ \"connection_id\": \"{connectionId}\
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections"
-payload := strings.NewReader("{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "application/json")
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-req.Header.Add("cache-control", "no-cache")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections"
+
+	payload := strings.NewReader("{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+	req.Header.Add("cache-control", "no-cache")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
+
 ```java Java lines
-HttpResponse response = Unirest.post("https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections")
-.header("content-type", "application/json")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.header("cache-control", "no-cache")
-.body("{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }")
-.asString();
+HttpResponse<String> response = Unirest.post("https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections")
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .header("cache-control", "no-cache")
+  .body("{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections',
-headers: {
-'content-type': 'application/json',
-authorization: 'Bearer {yourMgmtApiAccessToken}',
-'cache-control': 'no-cache'
-},
-data: '{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }'
+  method: 'POST',
+  url: 'https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections',
+  headers: {
+    'content-type': 'application/json',
+    authorization: 'Bearer {yourMgmtApiAccessToken}',
+    'cache-control': 'no-cache'
+  },
+  data: '{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }'
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json",
-@"authorization": @"Bearer {yourMgmtApiAccessToken}",
-@"cache-control": @"no-cache" };
-NSData \*postData = [[NSData alloc] initWithData:[@"{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }" dataUsingEncoding:NSUTF8StringEncoding]];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/json",
+                           @"authorization": @"Bearer {yourMgmtApiAccessToken}",
+                           @"cache-control": @"no-cache" };
+
+NSData *postData = [[NSData alloc] initWithData:[@"{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }" dataUsingEncoding:NSUTF8StringEncoding]];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}",
-"cache-control: no-cache",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}",
+    "cache-control: no-cache",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
+
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }"
+
 headers = {
-'content-type': "application/json",
-'authorization': "Bearer {yourMgmtApiAccessToken}",
-'cache-control': "no-cache"
-}
+    'content-type': "application/json",
+    'authorization': "Bearer {yourMgmtApiAccessToken}",
+    'cache-control': "no-cache"
+    }
+
 conn.request("POST", "%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -219,43 +250,54 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request["cache-control"] = 'no-cache'
 request.body = "{ \"connection_id\": \"{connectionId}\", \"assign_membership_on_login\": \"{assignMembershipOption}\",\"is_signup_enabled\",\"{isSignupEnabled}\", \"show_as_button\": \"{showAsButtonOption}\" }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"content-type": "application/json",
-"authorization": "Bearer {yourMgmtApiAccessToken}",
-"cache-control": "no-cache"
+  "content-type": "application/json",
+  "authorization": "Bearer {yourMgmtApiAccessToken}",
+  "cache-control": "no-cache"
 ]
+
 let postData = NSData(data: "{ "connection_id": "{connectionId}", "assign_membership_on_login": "{assignMembershipOption}","is_signup_enabled","{isSignupEnabled}", "show_as_button": "{showAsButtonOption}" }".data(using: String.Encoding.utf8)!)
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourAuth0Domain%7D/api/v2/organizations/%7BorgId%7D/enabled_connections")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
+
 </CodeGroup>
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">

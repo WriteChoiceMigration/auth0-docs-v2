@@ -72,19 +72,19 @@ You can create a new custom domain by sending a `POST` request to the `/api/v2/c
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/api/v2/custom-domains' \
---header 'accept: application/json' \
---header 'authorization: Bearer {yourMgmtApiAccessToken}' \
---header 'content-type: application/json' \
---data '{
-"domain": "your.example-custom-domain.com",
-"type": "auth0_managed_certs",
-"tls_policy": "recommended",
-"custom_client_ip_header": "true-client-ip",
-"domain_metadata": {
-"environment": "development"}
+  --url 'https://{yourDomain}/api/v2/custom-domains' \
+  --header 'accept: application/json' \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
+  --header 'content-type: application/json' \
+  --data '{ 
+ "domain": "your.example-custom-domain.com", 
+ "type": "auth0_managed_certs", 
+ "tls_policy": "recommended", 
+ "custom_client_ip_header": "true-client-ip", 
+ "domain_metadata": {
+    "environment": "development"} 
 }'
-``` lines
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/custom-domains");
 var request = new RestRequest(Method.POST);
@@ -95,129 +95,155 @@ request.AddParameter("application/json", "{ \n \"domain\": \"your.example-custom
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/custom-domains"
-payload := strings.NewReader("{ \n \"domain\": \"your.example-custom-domain.com\", \n \"type\": \"auth0_managed_certs\", \n \"tls_policy\": \"recommended\", \n \"custom_client_ip_header\": \"true-client-ip\", \n \"domain_metadata\": {\n \"environment\": \"development\"} \n}")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-req.Header.Add("content-type", "application/json")
-req.Header.Add("accept", "application/json")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/custom-domains"
+
+	payload := strings.NewReader("{ \n \"domain\": \"your.example-custom-domain.com\", \n \"type\": \"auth0_managed_certs\", \n \"tls_policy\": \"recommended\", \n \"custom_client_ip_header\": \"true-client-ip\", \n \"domain_metadata\": {\n    \"environment\": \"development\"} \n}")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("accept", "application/json")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/custom-domains")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.header("content-type", "application/json")
-.header("accept", "application/json")
-.body("{ \n \"domain\": \"your.example-custom-domain.com\", \n \"type\": \"auth0_managed_certs\", \n \"tls_policy\": \"recommended\", \n \"custom_client_ip_header\": \"true-client-ip\", \n \"domain_metadata\": {\n \"environment\": \"development\"} \n}")
-.asString();
+HttpResponse<String> response = Unirest.post("https://{yourDomain}/api/v2/custom-domains")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .header("content-type", "application/json")
+  .header("accept", "application/json")
+  .body("{ \n \"domain\": \"your.example-custom-domain.com\", \n \"type\": \"auth0_managed_certs\", \n \"tls_policy\": \"recommended\", \n \"custom_client_ip_header\": \"true-client-ip\", \n \"domain_metadata\": {\n    \"environment\": \"development\"} \n}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/api/v2/custom-domains',
-headers: {
-authorization: 'Bearer {yourMgmtApiAccessToken}',
-'content-type': 'application/json',
-accept: 'application/json'
-},
-data: {
-domain: 'your.example-custom-domain.com',
-type: 'auth0_managed_certs',
-tls_policy: 'recommended',
-custom_client_ip_header: 'true-client-ip',
-domain_metadata: {environment: 'development'}
-}
+  method: 'POST',
+  url: 'https://{yourDomain}/api/v2/custom-domains',
+  headers: {
+    authorization: 'Bearer {yourMgmtApiAccessToken}',
+    'content-type': 'application/json',
+    accept: 'application/json'
+  },
+  data: {
+    domain: 'your.example-custom-domain.com',
+    type: 'auth0_managed_certs',
+    tls_policy: 'recommended',
+    custom_client_ip_header: 'true-client-ip',
+    domain_metadata: {environment: 'development'}
+  }
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}",
-@"content-type": @"application/json",
-@"accept": @"application/json" };
-NSDictionary \*parameters = @{ @"domain": @"your.example-custom-domain.com",
-@"type": @"auth0_managed_certs",
-@"tls_policy": @"recommended",
-@"custom_client_ip_header": @"true-client-ip",
-@"domain_metadata": @{ @"environment": @"development" } };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/custom-domains"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}",
+                           @"content-type": @"application/json",
+                           @"accept": @"application/json" };
+NSDictionary *parameters = @{ @"domain": @"your.example-custom-domain.com",
+                              @"type": @"auth0_managed_certs",
+                              @"tls_policy": @"recommended",
+                              @"custom_client_ip_header": @"true-client-ip",
+                              @"domain_metadata": @{ @"environment": @"development" } };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/custom-domains"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/custom-domains",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{ \n \"domain\": \"your.example-custom-domain.com\", \n \"type\": \"auth0_managed_certs\", \n \"tls_policy\": \"recommended\", \n \"custom_client_ip_header\": \"true-client-ip\", \n \"domain_metadata\": {\n \"environment\": \"development\"} \n}",
-CURLOPT_HTTPHEADER => [
-"accept: application/json",
-"authorization: Bearer {yourMgmtApiAccessToken}",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/custom-domains",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{ \n \"domain\": \"your.example-custom-domain.com\", \n \"type\": \"auth0_managed_certs\", \n \"tls_policy\": \"recommended\", \n \"custom_client_ip_header\": \"true-client-ip\", \n \"domain_metadata\": {\n    \"environment\": \"development\"} \n}",
+  CURLOPT_HTTPHEADER => [
+    "accept: application/json",
+    "authorization: Bearer {yourMgmtApiAccessToken}",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
-payload = "{ \n \"domain\": \"your.example-custom-domain.com\", \n \"type\": \"auth0_managed_certs\", \n \"tls_policy\": \"recommended\", \n \"custom_client_ip_header\": \"true-client-ip\", \n \"domain_metadata\": {\n \"environment\": \"development\"} \n}"
+
+payload = "{ \n \"domain\": \"your.example-custom-domain.com\", \n \"type\": \"auth0_managed_certs\", \n \"tls_policy\": \"recommended\", \n \"custom_client_ip_header\": \"true-client-ip\", \n \"domain_metadata\": {\n    \"environment\": \"development\"} \n}"
+
 headers = {
-'authorization': "Bearer {yourMgmtApiAccessToken}",
-'content-type': "application/json",
-'accept': "application/json"
-}
+    'authorization': "Bearer {yourMgmtApiAccessToken}",
+    'content-type': "application/json",
+    'accept': "application/json"
+    }
+
 conn.request("POST", "/{yourDomain}/api/v2/custom-domains", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -225,48 +251,57 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/custom-domains")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request["content-type"] = 'application/json'
 request["accept"] = 'application/json'
-request.body = "{ \n \"domain\": \"your.example-custom-domain.com\", \n \"type\": \"auth0_managed_certs\", \n \"tls_policy\": \"recommended\", \n \"custom_client_ip_header\": \"true-client-ip\", \n \"domain_metadata\": {\n \"environment\": \"development\"} \n}"
+request.body = "{ \n \"domain\": \"your.example-custom-domain.com\", \n \"type\": \"auth0_managed_certs\", \n \"tls_policy\": \"recommended\", \n \"custom_client_ip_header\": \"true-client-ip\", \n \"domain_metadata\": {\n    \"environment\": \"development\"} \n}"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"authorization": "Bearer {yourMgmtApiAccessToken}",
-"content-type": "application/json",
-"accept": "application/json"
+  "authorization": "Bearer {yourMgmtApiAccessToken}",
+  "content-type": "application/json",
+  "accept": "application/json"
 ]
 let parameters = [
-"domain": "your.example-custom-domain.com",
-"type": "auth0_managed_certs",
-"tls_policy": "recommended",
-"custom_client_ip_header": "true-client-ip",
-"domain_metadata": ["environment": "development"]
+  "domain": "your.example-custom-domain.com",
+  "type": "auth0_managed_certs",
+  "tls_policy": "recommended",
+  "custom_client_ip_header": "true-client-ip",
+  "domain_metadata": ["environment": "development"]
 ] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/custom-domains")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>

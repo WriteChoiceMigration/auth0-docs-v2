@@ -182,12 +182,12 @@ Faites un appel `POST` au [point de terminaison Créer une connexion](/docs/fr-c
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/api/v2/connections' \
---header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
---header 'cache-control: no-cache' \
---header 'content-type: application/json' \
---data '{ "strategy": "samlp", "name": "CONNECTION_NAME", "options": { "signInEndpoint": "SIGN_IN_ENDPOINT_URL", "signOutEndpoint": "SIGN_OUT_ENDPOINT_URL", "signatureAlgorithm": "rsa-sha256", "digestAlgorithm": "sha256", "fieldsMap": {}, "signingCert": "BASE64_SIGNING_CERT" } }'
-``` lines
+  --url 'https://{yourDomain}/api/v2/connections' \
+  --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
+  --header 'cache-control: no-cache' \
+  --header 'content-type: application/json' \
+  --data '{ "strategy": "samlp", "name": "CONNECTION_NAME", "options": { "signInEndpoint": "SIGN_IN_ENDPOINT_URL", "signOutEndpoint": "SIGN_OUT_ENDPOINT_URL", "signatureAlgorithm": "rsa-sha256", "digestAlgorithm": "sha256", "fieldsMap": {}, "signingCert": "BASE64_SIGNING_CERT" } }'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections");
 var request = new RestRequest(Method.POST);
@@ -198,132 +198,158 @@ request.AddParameter("application/json", "{ \"strategy\": \"samlp\", \"name\": \
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/connections"
-payload := strings.NewReader("{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"signInEndpoint\": \"SIGN_IN_ENDPOINT_URL\", \"signOutEndpoint\": \"SIGN_OUT_ENDPOINT_URL\", \"signatureAlgorithm\": \"rsa-sha256\", \"digestAlgorithm\": \"sha256\", \"fieldsMap\": {}, \"signingCert\": \"BASE64_SIGNING_CERT\" } }")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "application/json")
-req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
-req.Header.Add("cache-control", "no-cache")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/connections"
+
+	payload := strings.NewReader("{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"signInEndpoint\": \"SIGN_IN_ENDPOINT_URL\", \"signOutEndpoint\": \"SIGN_OUT_ENDPOINT_URL\", \"signatureAlgorithm\": \"rsa-sha256\", \"digestAlgorithm\": \"sha256\", \"fieldsMap\": {}, \"signingCert\": \"BASE64_SIGNING_CERT\" } }")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+	req.Header.Add("cache-control", "no-cache")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/connections")
-.header("content-type", "application/json")
-.header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
-.header("cache-control", "no-cache")
-.body("{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"signInEndpoint\": \"SIGN_IN_ENDPOINT_URL\", \"signOutEndpoint\": \"SIGN_OUT_ENDPOINT_URL\", \"signatureAlgorithm\": \"rsa-sha256\", \"digestAlgorithm\": \"sha256\", \"fieldsMap\": {}, \"signingCert\": \"BASE64_SIGNING_CERT\" } }")
-.asString();
+HttpResponse<String> response = Unirest.post("https://{yourDomain}/api/v2/connections")
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+  .header("cache-control", "no-cache")
+  .body("{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"signInEndpoint\": \"SIGN_IN_ENDPOINT_URL\", \"signOutEndpoint\": \"SIGN_OUT_ENDPOINT_URL\", \"signatureAlgorithm\": \"rsa-sha256\", \"digestAlgorithm\": \"sha256\", \"fieldsMap\": {}, \"signingCert\": \"BASE64_SIGNING_CERT\" } }")
+  .asString();
 ```
 
-```javascript Node.JS lines
+```javascript Node.JS lines expandable
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/api/v2/connections',
-headers: {
-'content-type': 'application/json',
-authorization: 'Bearer MGMT_API_ACCESS_TOKEN',
-'cache-control': 'no-cache'
-},
-data: {
-strategy: 'samlp',
-name: 'CONNECTION_NAME',
-options: {
-signInEndpoint: 'SIGN_IN_ENDPOINT_URL',
-signOutEndpoint: 'SIGN_OUT_ENDPOINT_URL',
-signatureAlgorithm: 'rsa-sha256',
-digestAlgorithm: 'sha256',
-fieldsMap: {},
-signingCert: 'BASE64_SIGNING_CERT'
-}
-}
+  method: 'POST',
+  url: 'https://{yourDomain}/api/v2/connections',
+  headers: {
+    'content-type': 'application/json',
+    authorization: 'Bearer MGMT_API_ACCESS_TOKEN',
+    'cache-control': 'no-cache'
+  },
+  data: {
+    strategy: 'samlp',
+    name: 'CONNECTION_NAME',
+    options: {
+      signInEndpoint: 'SIGN_IN_ENDPOINT_URL',
+      signOutEndpoint: 'SIGN_OUT_ENDPOINT_URL',
+      signatureAlgorithm: 'rsa-sha256',
+      digestAlgorithm: 'sha256',
+      fieldsMap: {},
+      signingCert: 'BASE64_SIGNING_CERT'
+    }
+  }
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json",
-@"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
-@"cache-control": @"no-cache" };
-NSDictionary \*parameters = @{ @"strategy": @"samlp",
-@"name": @"CONNECTION_NAME",
-@"options": @{ @"signInEndpoint": @"SIGN_IN_ENDPOINT_URL", @"signOutEndpoint": @"SIGN_OUT_ENDPOINT_URL", @"signatureAlgorithm": @"rsa-sha256", @"digestAlgorithm": @"sha256", @"fieldsMap": @{ }, @"signingCert": @"BASE64_SIGNING_CERT" } };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/connections"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/json",
+                           @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
+                           @"cache-control": @"no-cache" };
+NSDictionary *parameters = @{ @"strategy": @"samlp",
+                              @"name": @"CONNECTION_NAME",
+                              @"options": @{ @"signInEndpoint": @"SIGN_IN_ENDPOINT_URL", @"signOutEndpoint": @"SIGN_OUT_ENDPOINT_URL", @"signatureAlgorithm": @"rsa-sha256", @"digestAlgorithm": @"sha256", @"fieldsMap": @{  }, @"signingCert": @"BASE64_SIGNING_CERT" } };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/connections"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/connections",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"signInEndpoint\": \"SIGN_IN_ENDPOINT_URL\", \"signOutEndpoint\": \"SIGN_OUT_ENDPOINT_URL\", \"signatureAlgorithm\": \"rsa-sha256\", \"digestAlgorithm\": \"sha256\", \"fieldsMap\": {}, \"signingCert\": \"BASE64_SIGNING_CERT\" } }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer MGMT_API_ACCESS_TOKEN",
-"cache-control: no-cache",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/connections",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"signInEndpoint\": \"SIGN_IN_ENDPOINT_URL\", \"signOutEndpoint\": \"SIGN_OUT_ENDPOINT_URL\", \"signatureAlgorithm\": \"rsa-sha256\", \"digestAlgorithm\": \"sha256\", \"fieldsMap\": {}, \"signingCert\": \"BASE64_SIGNING_CERT\" } }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer MGMT_API_ACCESS_TOKEN",
+    "cache-control: no-cache",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"signInEndpoint\": \"SIGN_IN_ENDPOINT_URL\", \"signOutEndpoint\": \"SIGN_OUT_ENDPOINT_URL\", \"signatureAlgorithm\": \"rsa-sha256\", \"digestAlgorithm\": \"sha256\", \"fieldsMap\": {}, \"signingCert\": \"BASE64_SIGNING_CERT\" } }"
+
 headers = {
-'content-type': "application/json",
-'authorization': "Bearer MGMT_API_ACCESS_TOKEN",
-'cache-control': "no-cache"
-}
+    'content-type': "application/json",
+    'authorization': "Bearer MGMT_API_ACCESS_TOKEN",
+    'cache-control': "no-cache"
+    }
+
 conn.request("POST", "/{yourDomain}/api/v2/connections", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -331,53 +357,62 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/connections")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 request["cache-control"] = 'no-cache'
 request.body = "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"signInEndpoint\": \"SIGN_IN_ENDPOINT_URL\", \"signOutEndpoint\": \"SIGN_OUT_ENDPOINT_URL\", \"signatureAlgorithm\": \"rsa-sha256\", \"digestAlgorithm\": \"sha256\", \"fieldsMap\": {}, \"signingCert\": \"BASE64_SIGNING_CERT\" } }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"content-type": "application/json",
-"authorization": "Bearer MGMT_API_ACCESS_TOKEN",
-"cache-control": "no-cache"
+  "content-type": "application/json",
+  "authorization": "Bearer MGMT_API_ACCESS_TOKEN",
+  "cache-control": "no-cache"
 ]
 let parameters = [
-"strategy": "samlp",
-"name": "CONNECTION_NAME",
-"options": [
-"signInEndpoint": "SIGN_IN_ENDPOINT_URL",
-"signOutEndpoint": "SIGN_OUT_ENDPOINT_URL",
-"signatureAlgorithm": "rsa-sha256",
-"digestAlgorithm": "sha256",
-"fieldsMap": [],
-"signingCert": "BASE64_SIGNING_CERT"
-]
+  "strategy": "samlp",
+  "name": "CONNECTION_NAME",
+  "options": [
+    "signInEndpoint": "SIGN_IN_ENDPOINT_URL",
+    "signOutEndpoint": "SIGN_OUT_ENDPOINT_URL",
+    "signatureAlgorithm": "rsa-sha256",
+    "digestAlgorithm": "sha256",
+    "fieldsMap": [],
+    "signingCert": "BASE64_SIGNING_CERT"
+  ]
 ] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/connections")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -442,143 +477,169 @@ Utilisez l’option `metadataXml` pour fournir le contenu du document :
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/api/v2/connections' \
---header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
---header 'cache-control: no-cache' \
---header 'content-type: application/json' \
---data '{ "strategy": "samlp", "name": "CONNECTION_NAME", "options": { "metadataXml": "..." } }'
-``` lines
+  --url 'https://{yourDomain}/api/v2/connections' \
+  --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
+  --header 'cache-control: no-cache' \
+  --header 'content-type: application/json' \
+  --data '{ "strategy": "samlp", "name": "CONNECTION_NAME", "options": { "metadataXml": "<EntityDescriptor entityID='\''urn:saml-idp'\'' xmlns='\''urn:oasis:names:tc:SAML:2.0:metadata'\''>...</EntityDescriptor>" } }'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections");
 var request = new RestRequest(Method.POST);
 request.AddHeader("content-type", "application/json");
 request.AddHeader("authorization", "Bearer MGMT_API_ACCESS_TOKEN");
 request.AddHeader("cache-control", "no-cache");
-request.AddParameter("application/json", "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataXml\": \"...\" } }", ParameterType.RequestBody);
+request.AddParameter("application/json", "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataXml\": \"<EntityDescriptor entityID='urn:saml-idp' xmlns='urn:oasis:names:tc:SAML:2.0:metadata'>...</EntityDescriptor>\" } }", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/connections"
-payload := strings.NewReader("{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataXml\": \"...\" } }")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "application/json")
-req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
-req.Header.Add("cache-control", "no-cache")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/connections"
+
+	payload := strings.NewReader("{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataXml\": \"<EntityDescriptor entityID='urn:saml-idp' xmlns='urn:oasis:names:tc:SAML:2.0:metadata'>...</EntityDescriptor>\" } }")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+	req.Header.Add("cache-control", "no-cache")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/connections")
-.header("content-type", "application/json")
-.header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
-.header("cache-control", "no-cache")
-.body("{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataXml\": \"...\" } }")
-.asString();
+HttpResponse<String> response = Unirest.post("https://{yourDomain}/api/v2/connections")
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+  .header("cache-control", "no-cache")
+  .body("{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataXml\": \"<EntityDescriptor entityID='urn:saml-idp' xmlns='urn:oasis:names:tc:SAML:2.0:metadata'>...</EntityDescriptor>\" } }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/api/v2/connections',
-headers: {
-'content-type': 'application/json',
-authorization: 'Bearer MGMT_API_ACCESS_TOKEN',
-'cache-control': 'no-cache'
-},
-data: {
-strategy: 'samlp',
-name: 'CONNECTION_NAME',
-options: {
-metadataXml: '...'
-}
-}
+  method: 'POST',
+  url: 'https://{yourDomain}/api/v2/connections',
+  headers: {
+    'content-type': 'application/json',
+    authorization: 'Bearer MGMT_API_ACCESS_TOKEN',
+    'cache-control': 'no-cache'
+  },
+  data: {
+    strategy: 'samlp',
+    name: 'CONNECTION_NAME',
+    options: {
+      metadataXml: '<EntityDescriptor entityID=\'urn:saml-idp\' xmlns=\'urn:oasis:names:tc:SAML:2.0:metadata\'>...</EntityDescriptor>'
+    }
+  }
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json",
-@"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
-@"cache-control": @"no-cache" };
-NSDictionary \*parameters = @{ @"strategy": @"samlp",
-@"name": @"CONNECTION_NAME",
-@"options": @{ @"metadataXml": @"..." } };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/connections"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/json",
+                           @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
+                           @"cache-control": @"no-cache" };
+NSDictionary *parameters = @{ @"strategy": @"samlp",
+                              @"name": @"CONNECTION_NAME",
+                              @"options": @{ @"metadataXml": @"<EntityDescriptor entityID='urn:saml-idp' xmlns='urn:oasis:names:tc:SAML:2.0:metadata'>...</EntityDescriptor>" } };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/connections"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/connections",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataXml\": \"...\" } }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer MGMT_API_ACCESS_TOKEN",
-"cache-control: no-cache",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/connections",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataXml\": \"<EntityDescriptor entityID='urn:saml-idp' xmlns='urn:oasis:names:tc:SAML:2.0:metadata'>...</EntityDescriptor>\" } }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer MGMT_API_ACCESS_TOKEN",
+    "cache-control: no-cache",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
-import http.client
+iimport http.client
+
 conn = http.client.HTTPSConnection("")
-payload = "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataXml\": \"...\" } }"
+
+payload = "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataXml\": \"<EntityDescriptor entityID='urn:saml-idp' xmlns='urn:oasis:names:tc:SAML:2.0:metadata'>...</EntityDescriptor>\" } }"
+
 headers = {
-'content-type': "application/json",
-'authorization': "Bearer MGMT_API_ACCESS_TOKEN",
-'cache-control': "no-cache"
-}
+    'content-type': "application/json",
+    'authorization': "Bearer MGMT_API_ACCESS_TOKEN",
+    'cache-control': "no-cache"
+    }
+
 conn.request("POST", "/{yourDomain}/api/v2/connections", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -586,46 +647,55 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/connections")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 request["cache-control"] = 'no-cache'
-request.body = "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataXml\": \"...\" } }"
+request.body = "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataXml\": \"<EntityDescriptor entityID='urn:saml-idp' xmlns='urn:oasis:names:tc:SAML:2.0:metadata'>...</EntityDescriptor>\" } }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"content-type": "application/json",
-"authorization": "Bearer MGMT_API_ACCESS_TOKEN",
-"cache-control": "no-cache"
+  "content-type": "application/json",
+  "authorization": "Bearer MGMT_API_ACCESS_TOKEN",
+  "cache-control": "no-cache"
 ]
 let parameters = [
-"strategy": "samlp",
-"name": "CONNECTION_NAME",
-"options": ["metadataXml": "..."]
+  "strategy": "samlp",
+  "name": "CONNECTION_NAME",
+  "options": ["metadataXml": "<EntityDescriptor entityID='urn:saml-idp' xmlns='urn:oasis:names:tc:SAML:2.0:metadata'>...</EntityDescriptor>"]
 ] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/connections")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -637,12 +707,12 @@ Utilisez l’option `metadataUrl` pour fournir l’URL du document :
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/api/v2/connections' \
---header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
---header 'cache-control: no-cache' \
---header 'content-type: application/json' \
---data '{ "strategy": "samlp", "name": "CONNECTION_NAME", "options": { "metadataUrl": "https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX" } }'
-``` lines
+  --url 'https://{yourDomain}/api/v2/connections' \
+  --header 'authorization: Bearer MGMT_API_ACCESS_TOKEN' \
+  --header 'cache-control: no-cache' \
+  --header 'content-type: application/json' \
+  --data '{ "strategy": "samlp", "name": "CONNECTION_NAME", "options": { "metadataUrl": "https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX" } }'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/connections");
 var request = new RestRequest(Method.POST);
@@ -653,127 +723,153 @@ request.AddParameter("application/json", "{ \"strategy\": \"samlp\", \"name\": \
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/connections"
-payload := strings.NewReader("{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataUrl\": \"https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX\" } }")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "application/json")
-req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
-req.Header.Add("cache-control", "no-cache")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/connections"
+
+	payload := strings.NewReader("{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataUrl\": \"https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX\" } }")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+	req.Header.Add("cache-control", "no-cache")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/connections")
-.header("content-type", "application/json")
-.header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
-.header("cache-control", "no-cache")
-.body("{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataUrl\": \"https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX\" } }")
-.asString();
+HttpResponse<String> response = Unirest.post("https://{yourDomain}/api/v2/connections")
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer MGMT_API_ACCESS_TOKEN")
+  .header("cache-control", "no-cache")
+  .body("{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataUrl\": \"https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX\" } }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/api/v2/connections',
-headers: {
-'content-type': 'application/json',
-authorization: 'Bearer MGMT_API_ACCESS_TOKEN',
-'cache-control': 'no-cache'
-},
-data: {
-strategy: 'samlp',
-name: 'CONNECTION_NAME',
-options: {
-metadataUrl: 'https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX'
-}
-}
+  method: 'POST',
+  url: 'https://{yourDomain}/api/v2/connections',
+  headers: {
+    'content-type': 'application/json',
+    authorization: 'Bearer MGMT_API_ACCESS_TOKEN',
+    'cache-control': 'no-cache'
+  },
+  data: {
+    strategy: 'samlp',
+    name: 'CONNECTION_NAME',
+    options: {
+      metadataUrl: 'https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX'
+    }
+  }
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json",
-@"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
-@"cache-control": @"no-cache" };
-NSDictionary \*parameters = @{ @"strategy": @"samlp",
-@"name": @"CONNECTION_NAME",
-@"options": @{ @"metadataUrl": @"https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX" } };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/connections"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/json",
+                           @"authorization": @"Bearer MGMT_API_ACCESS_TOKEN",
+                           @"cache-control": @"no-cache" };
+NSDictionary *parameters = @{ @"strategy": @"samlp",
+                              @"name": @"CONNECTION_NAME",
+                              @"options": @{ @"metadataUrl": @"https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX" } };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/connections"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/connections",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataUrl\": \"https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX\" } }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer MGMT_API_ACCESS_TOKEN",
-"cache-control: no-cache",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/connections",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataUrl\": \"https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX\" } }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer MGMT_API_ACCESS_TOKEN",
+    "cache-control: no-cache",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataUrl\": \"https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX\" } }"
+
 headers = {
-'content-type': "application/json",
-'authorization': "Bearer MGMT_API_ACCESS_TOKEN",
-'cache-control': "no-cache"
-}
+    'content-type': "application/json",
+    'authorization': "Bearer MGMT_API_ACCESS_TOKEN",
+    'cache-control': "no-cache"
+    }
+
 conn.request("POST", "/{yourDomain}/api/v2/connections", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -781,46 +877,55 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/connections")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer MGMT_API_ACCESS_TOKEN'
 request["cache-control"] = 'no-cache'
 request.body = "{ \"strategy\": \"samlp\", \"name\": \"CONNECTION_NAME\", \"options\": { \"metadataUrl\": \"https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX\" } }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"content-type": "application/json",
-"authorization": "Bearer MGMT_API_ACCESS_TOKEN",
-"cache-control": "no-cache"
+  "content-type": "application/json",
+  "authorization": "Bearer MGMT_API_ACCESS_TOKEN",
+  "cache-control": "no-cache"
 ]
 let parameters = [
-"strategy": "samlp",
-"name": "CONNECTION_NAME",
-"options": ["metadataUrl": "https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX"]
+  "strategy": "samlp",
+  "name": "CONNECTION_NAME",
+  "options": ["metadataUrl": "https://saml-idp/samlp/metadata/uarlU13n63e0feZNJxOCNZ1To3a9H7jX"]
 ] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/connections")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>

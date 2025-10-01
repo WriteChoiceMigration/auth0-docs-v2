@@ -78,9 +78,9 @@ Pour obtenir une liste des authentifiants pour un utilisateur, vous pouvez appel
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
---url 'https://{yourDomain}/mfa/authenticators' \
---header 'authorization: Bearer MFA_TOKEN'
-``` lines
+  --url 'https://{yourDomain}/mfa/authenticators' \
+  --header 'authorization: Bearer MFA_TOKEN'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/mfa/authenticators");
 var request = new RestRequest(Method.GET);
@@ -90,92 +90,115 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/mfa/authenticators"
-req, _ := http.NewRequest("GET", url, nil)
-req.Header.Add("authorization", "Bearer MFA_TOKEN")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/mfa/authenticators"
+
+	req, _ := http.NewRequest("GET", url, nil)
+
+	req.Header.Add("authorization", "Bearer MFA_TOKEN")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.get("https://{yourDomain}/mfa/authenticators")
-.header("authorization", "Bearer MFA_TOKEN")
-.asString();
+HttpResponse<String> response = Unirest.get("https://{yourDomain}/mfa/authenticators")
+  .header("authorization", "Bearer MFA_TOKEN")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'GET',
-url: 'https://{yourDomain}/mfa/authenticators',
-headers: {authorization: 'Bearer MFA_TOKEN'}
+  method: 'GET',
+  url: 'https://{yourDomain}/mfa/authenticators',
+  headers: {authorization: 'Bearer MFA_TOKEN'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer MFA_TOKEN" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/mfa/authenticators"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer MFA_TOKEN" };
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/mfa/authenticators"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
 [request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/mfa/authenticators",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "GET",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer MFA_TOKEN"
-],
+  CURLOPT_URL => "https://{yourDomain}/mfa/authenticators",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer MFA_TOKEN"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 headers = { 'authorization': "Bearer MFA_TOKEN" }
+
 conn.request("GET", "/{yourDomain}/mfa/authenticators", headers=headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -183,32 +206,40 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/mfa/authenticators")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer MFA_TOKEN'
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["authorization": "Bearer MFA_TOKEN"]
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/mfa/authenticators")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "GET"
 request.allHTTPHeaderFields = headers
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -283,9 +314,9 @@ Si un `mfa_token` a été utilisé pour répertorier les authentifiants, les uti
 <CodeGroup>
 ```bash cURL lines
 curl --request DELETE \
---url 'https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID' \
---header 'authorization: Bearer ACCESS_TOKEN'
-``` lines
+  --url 'https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID' \
+  --header 'authorization: Bearer ACCESS_TOKEN'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID");
 var request = new RestRequest(Method.DELETE);
@@ -295,92 +326,115 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID"
-req, _ := http.NewRequest("DELETE", url, nil)
-req.Header.Add("authorization", "Bearer ACCESS_TOKEN")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID"
+
+	req, _ := http.NewRequest("DELETE", url, nil)
+
+	req.Header.Add("authorization", "Bearer ACCESS_TOKEN")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.delete("https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID")
-.header("authorization", "Bearer ACCESS_TOKEN")
-.asString();
+HttpResponse<String> response = Unirest.delete("https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID")
+  .header("authorization", "Bearer ACCESS_TOKEN")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'DELETE',
-url: 'https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID',
-headers: {authorization: 'Bearer ACCESS_TOKEN'}
+  method: 'DELETE',
+  url: 'https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID',
+  headers: {authorization: 'Bearer ACCESS_TOKEN'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer ACCESS_TOKEN" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer ACCESS_TOKEN" };
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"DELETE"];
 [request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "DELETE",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer ACCESS_TOKEN"
-],
+  CURLOPT_URL => "https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "DELETE",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer ACCESS_TOKEN"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 headers = { 'authorization': "Bearer ACCESS_TOKEN" }
+
 conn.request("DELETE", "/{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID", headers=headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -388,32 +442,40 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer ACCESS_TOKEN'
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["authorization": "Bearer ACCESS_TOKEN"]
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/mfa/authenticators/AUTHENTICATOR_ID")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "DELETE"
 request.allHTTPHeaderFields = headers
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -431,9 +493,9 @@ Pour supprimer un code de récupération et en générer un nouveau, obtenez un 
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration' \
---header 'authorization: Bearer MANAGEMENT_API_TOKEN'
-``` lines
+  --url 'https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration' \
+  --header 'authorization: Bearer MANAGEMENT_API_TOKEN'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration");
 var request = new RestRequest(Method.POST);
@@ -443,92 +505,115 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration"
-req, _ := http.NewRequest("POST", url, nil)
-req.Header.Add("authorization", "Bearer MANAGEMENT_API_TOKEN")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration"
+
+	req, _ := http.NewRequest("POST", url, nil)
+
+	req.Header.Add("authorization", "Bearer MANAGEMENT_API_TOKEN")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration")
-.header("authorization", "Bearer MANAGEMENT_API_TOKEN")
-.asString();
+HttpResponse<String> response = Unirest.post("https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration")
+  .header("authorization", "Bearer MANAGEMENT_API_TOKEN")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration',
-headers: {authorization: 'Bearer MANAGEMENT_API_TOKEN'}
+  method: 'POST',
+  url: 'https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration',
+  headers: {authorization: 'Bearer MANAGEMENT_API_TOKEN'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer MANAGEMENT_API_TOKEN" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer MANAGEMENT_API_TOKEN" };
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer MANAGEMENT_API_TOKEN"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer MANAGEMENT_API_TOKEN"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 headers = { 'authorization': "Bearer MANAGEMENT_API_TOKEN" }
+
 conn.request("POST", "/{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration", headers=headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -536,32 +621,40 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["authorization"] = 'Bearer MANAGEMENT_API_TOKEN'
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["authorization": "Bearer MANAGEMENT_API_TOKEN"]
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users/USER_ID/recovery-code-regeneration")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
