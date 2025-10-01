@@ -123,7 +123,87 @@ export const SideMenuSectionItem = ({ id, children }) => {
   );
 };
 
-export const SignUpForm = () => {
+export const SignUpForm = ({ lang }) => {
+  if (lang === "ja") {
+    return (
+      <div className="flex flex-col gap-2 items-center h-full">
+        <img
+          noZoom
+          src="/docs/img/quickstarts/action_hero_dashboard.svg"
+          alt="Sign up for an Auth0 account"
+          style={{
+            width: "250px",
+            height: "250px",
+          }}
+        />
+        <span
+          className="text-center"
+          style={{
+            width: "400px",
+          }}
+        >
+          独自のテナントに直接統合するには、{" "}
+          <a href="https://auth0.com/signup" target="_blank" rel="noopener noreferrer">
+            Auth0アカウント
+          </a>{" "}
+          にサインアップするか、既存のアカウントに{" "}
+          <span className="font-semibold text-primary cursor-pointer" onClick={() => console.log("log in")}>
+            ログイン
+          </span>{" "}
+          してください。
+        </span>
+        <button
+          onClick={() => console.log("sign up")}
+          className="bg-primary dark:bg-primary-light text-white px-4 py-2 rounded-md mt-4 font-medium"
+          style={{
+            width: "140px",
+          }}
+        >
+          サインアップ
+        </button>
+      </div>
+    );
+  }
+  if (lang === "fr") {
+    return (
+      <div className="flex flex-col gap-2 items-center h-full">
+        <img
+          noZoom
+          src="/docs/img/quickstarts/action_hero_dashboard.svg"
+          alt="Sign up for an Auth0 account"
+          style={{
+            width: "250px",
+            height: "250px",
+          }}
+        />
+        <span
+          className="text-center"
+          style={{
+            width: "400px",
+          }}
+        >
+          Créez un{" "}
+          <a href="https://auth0.com/signup" target="_blank" rel="noopener noreferrer">
+            compte Auth0
+          </a>{" "}
+          ou{" "}
+          <span className="font-semibold text-primary cursor-pointer" onClick={() => console.log("log in")}>
+            connectez-vous
+          </span>{" "}
+          à votre compte existant pour effectuer une intégration directement avec votre propre locataire.
+        </span>
+        <button
+          onClick={() => console.log("sign up")}
+          className="bg-primary dark:bg-primary-light text-white px-4 py-2 rounded-md mt-4 font-medium"
+          style={{
+            width: "140px",
+          }}
+        >
+          Inscription
+        </button>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col gap-2 items-center h-full">
       <img
