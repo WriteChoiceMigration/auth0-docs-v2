@@ -13,7 +13,7 @@ permalink: "part-2"
 
 ## アプリケーション
 
-Auth0の構成部分は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>でタイムシートアプリを**アプリケーション**として登録するところから始まります。アプリケーションは、リソース所有者（エンドユーザー）に代わって保護されたリソースへの要求を行います。
+Auth0の構成部分は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>でタイムシートアプリを**アプリケーション** として登録するところから始まります。アプリケーションは、リソース所有者（エンドユーザー）に代わって保護されたリソースへの要求を行います。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -23,11 +23,11 @@ Auth0の構成部分は、<Tooltip data-tooltip-id="react-containers-DefinitionT
 
 Auth0におけるアプリケーションの主な特徴は以下のとおりです。
 
-* **Name（名前）**：アプリケーションの正式名称。これは、ポータル、メール、ログなどでアプリケーションを識別するために使用されます。
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Client ID</Tooltip>（クライアント ID）**（読み取り専用）：アプリケーションに一意の識別子。これは、Auth0で認証を設定する際に、アプリケーションで使用されるIDです。自動生成された英数字の文字列です。
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Client secret</Tooltip>（クライアントシークレット）**（読み取り専用）：トークンの署名と検証に使用される文字列で、それらのトークンはさまざまな認証フローで使用されます。自動生成され、機密として扱わなければなりません。
-* **Domain（ドメイン）**：Auth0アカウントに割り当てられたドメイン名。ドメインの形式は、`{account-name}.auth0.com`または`{account-name}.{location}.auth0.com`（例：`ExampleCo.auth0.com`）です。
-* **Callback URL**：ユーザーが認証後にリダイレクトされるURL。
+* **Name（名前）** ：アプリケーションの正式名称。これは、ポータル、メール、ログなどでアプリケーションを識別するために使用されます。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Client ID</Tooltip>（クライアント ID）** （読み取り専用）：アプリケーションに一意の識別子。これは、Auth0で認証を設定する際に、アプリケーションで使用されるIDです。自動生成された英数字の文字列です。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Client secret</Tooltip>（クライアントシークレット）** （読み取り専用）：トークンの署名と検証に使用される文字列で、それらのトークンはさまざまな認証フローで使用されます。自動生成され、機密として扱わなければなりません。
+* **Domain（ドメイン）** ：Auth0アカウントに割り当てられたドメイン名。ドメインの形式は、`{account-name}.auth0.com`または`{account-name}.{location}.auth0.com`（例：`ExampleCo.auth0.com`）です。
+* **Callback URL** ：ユーザーが認証後にリダイレクトされるURL。
 
 ### アプリケーションを作成する
 
@@ -35,9 +35,9 @@ ExampleCoのシナリオにあるのは、1つのアプリケーション（タ�
 
 データベース接続を登録するには、[ダッシュボード](https://manage.auth0.com/#)に移動し、サイドナビゲーションで[［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)を選択します。
 
-**［+ Create Application (アプリケーションの作成）］**ボタンをクリックします。アプリケーションの名前と種類が求められます。アプリケーションの名前を「`Timesheet-App`」とし、アプリケーションの種類に［`Regular Web Applications`（通常のWebアプリケーション）］を選択します。
+**［+ Create Application (アプリケーションの作成）］** ボタンをクリックします。アプリケーションの名前と種類が求められます。アプリケーションの名前を「`Timesheet-App`」とし、アプリケーションの種類に［`Regular Web Applications`（通常のWebアプリケーション）］を選択します。
 
-**［Create（作成）］**をクリックすると、[［Quick Start（クイックスタート）］ビュー](https://manage.auth0.com/#/applications/YOUR_CLIENT_ID/quickstart)に移動します。ここでは、アプリの構築に使う予定の技術を選択できます。選択すると、それに関連したクイックスタートガイドが表示されます。
+**［Create（作成）］** をクリックすると、[［Quick Start（クイックスタート）］ビュー](https://manage.auth0.com/#/applications/YOUR_CLIENT_ID/quickstart)に移動します。ここでは、アプリの構築に使う予定の技術を選択できます。選択すると、それに関連したクイックスタートガイドが表示されます。
 
 そ例外にも、以下のビューを使用できます。
 
@@ -47,13 +47,13 @@ ExampleCoのシナリオにあるのは、1つのアプリケーション（タ�
 
 ### Callback URLを構成する
 
-**［Allowed Callback URLs（許可されているCallback URL）］**フィールドには、Auth0がユーザーの認証後にリダイレクトするURLが含まれています。このリダイレクトにより、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OpenID</Tooltip> Connect（OIDC）の認証プロセスが完了します。複数の有効なURLを指定するには、カンマで区切って指定します「`*.google.com`」のように、サブドメインのワイルドカードとして「\*」記号を使用することができます。プロトコル（`http://`または`https://`）を指定してください。指定しないと、場合によってはコールバックが失敗します。
+**［Allowed Callback URLs（許可されているCallback URL）］** フィールドには、Auth0がユーザーの認証後にリダイレクトするURLが含まれています。このリダイレクトにより、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OpenID</Tooltip> Connect（OIDC）の認証プロセスが完了します。複数の有効なURLを指定するには、カンマで区切って指定します「`*.google.com`」のように、サブドメインのワイルドカードとして「\*」記号を使用することができます。プロトコル（`http://`または`https://`）を指定してください。指定しないと、場合によってはコールバックが失敗します。
 
-サンプルプロジェクトのCallback URLは、「`http://localhost:5000/signin-auth0`」です。このサンプルを使用する場合は、この値を**［Allowed Callback URLs（許可されているコールバックURL）］**フィールドに設定します。そうでない場合は、アプリケーションの導入に選択したURLを追加します。
+サンプルプロジェクトのCallback URLは、「`http://localhost:5000/signin-auth0`」です。このサンプルを使用する場合は、この値を**［Allowed Callback URLs（許可されているコールバックURL）］** フィールドに設定します。そうでない場合は、アプリケーションの導入に選択したURLを追加します。
 
 ## 接続
 
-次のステップでは、Webアプリで認証に使用されるIDプロバイダーを構成します。各IDはAuth0にある**接続**へのマップを提供します。各アプリケーションには少なくとも1つの接続が必要です。それぞれの接続は複数のアプリケーションで使用することができます。
+次のステップでは、Webアプリで認証に使用されるIDプロバイダーを構成します。各IDはAuth0にある**接続** へのマップを提供します。各アプリケーションには少なくとも1つの接続が必要です。それぞれの接続は複数のアプリケーションで使用することができます。
 
 ExampleCoでは、2つの接続を構成する必要があります。1つは社内従業員用のActive Directory接続で、もう1つは外部関係者用のデータベース接続です。
 
@@ -68,9 +68,9 @@ Auth0は、多様なプロトコルとIDプロバイダーをサポートしま�
 
 データベース接続を登録するには、以下の手順に従います。
 
-1. [Dashboard](https://manage.auth0.com/#)から**［Authentication（認証）］>［Database（データベース）］**に移動します。
-2. **［+ Create DB Connection（+ DB接続の作成）］**を選択します。プロンプトに接続名を入力し、必要であれば追加の要件を構成します。
-3. 内容が正しいことを確認してから、**［Create（作成）］**を選択します。
+1. [Dashboard](https://manage.auth0.com/#)から**［Authentication（認証）］>［Database（データベース）］** に移動します。
+2. **［+ Create DB Connection（+ DB接続の作成）］** を選択します。プロンプトに接続名を入力し、必要であれば追加の要件を構成します。
+3. 内容が正しいことを確認してから、**［Create（作成）］** を選択します。
 
 データベース接続を作成したら、その接続にアプリケーションを有効化する必要があります。ユーザーがその接続を使ってアプリケーションにアクセスできるように、接続にアプリケーションを有効化しなければなりません。アプリケーションを有効にするには、新しい接続の［Applications（アプリケーション）］タブに移動して、その接続の使用が必要なアプリケーションのそれぞれについて、トグルを有効に設定します。
 
@@ -78,7 +78,7 @@ Auth0は、多様なプロトコルとIDプロバイダーをサポートしま�
 
 ### Active Directory/LDAP接続を作成する
 
-次に、Active Directory/LDAP接続を構成します。[Auth0 Dashboard](https://manage.auth0.com/#)から**［Authentication（認証）］>［Enterprise（エンタープライズ）］**に移動します。
+次に、Active Directory/LDAP接続を構成します。[Auth0 Dashboard](https://manage.auth0.com/#)から**［Authentication（認証）］>［Enterprise（エンタープライズ）］** に移動します。
 
 そこでAD/LDAP接続を作成し、ADコネクターをインストールする必要があります。詳細は以下のドキュメントをご覧ください。
 

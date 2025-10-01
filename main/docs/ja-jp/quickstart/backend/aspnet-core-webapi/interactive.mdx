@@ -38,13 +38,13 @@ export const sections = [
     Auth0にあるAPIはそれぞれAPI識別子を使って構成され、アプリケーションのコードはAPI識別子をオーディエンスとしてアクセストークンを検証します。
 
     <Info>
-    **Auth0を初めてご利用ですか？**Auth0の仕組みと、OAuth 2.0フレームワークを用いたAPI認証と認可の実装について説明します。
+    **Auth0を初めてご利用ですか？** Auth0の仕組みと、OAuth 2.0フレームワークを用いたAPI認証と認可の実装について説明します。
     </Info>
 
       <Section id={sections[0].id} title={sections[0].title} stepNumber="1">
       アクセス許可は、ユーザーの代わりに、提供されたアクセストークンを使ってどのようにしてリソースにアクセスできるのかを定義できるようにします。たとえば、ユーザーがマネージャーアクセスレベルを持つ場合には、`messages`リソースに対して読み取りアクセスを付与し、管理者アクセスレベルを持つ場合には、書き込みアクセスを付与することができます。
 
-      Auth0 Dashboardの[［API］](https://manage.auth0.com/#/apis)セクションにある**［Permissions（権限）］**ビューで使用可能なアクセス許可を定義することができます。以下の例では`read:messages`スコープを使用します。
+      Auth0 Dashboardの[［API］](https://manage.auth0.com/#/apis)セクションにある**［Permissions（権限）］** ビューで使用可能なアクセス許可を定義することができます。以下の例では`read:messages`スコープを使用します。
 
       <Frame>![［Auth0 Dashboard］>［Applications（アプリケーション）］>［APIs］>［Specific API（特定のAPI］>［Permissions（権限）］タブ](/images/ja-jp/cdy7uua7fh8z/1s3Yp5zqJiKiSWqbPSezNO/acef814282795bef6921535f044f96e9/Quickstarts_API.png)</Frame>
       </Section>
@@ -61,7 +61,7 @@ export const sections = [
       アプリケーションの`Program.cs`ファイルを構成して、認証ミドルウェアをセットアップします：
 
       1. `AddAuthentication`メソッドを呼び出して、認証サービスを登録します。`JwtBearerDefaults.AuthenticationScheme`をデフォルトのスキームとして構成します。
-      2. `AddJwtBearer`メソッドを呼び出して、JWTベアラー認証スキームを登録します。Auth0ドメインをオーソリティ、Auth0 API識別子をオーディエンスとして構成し、Auth0ドメインとAPI識別子がアプリケーションの**appsettings.json**ファイル内で設定されていることを確認します。
+      2. `AddJwtBearer`メソッドを呼び出して、JWTベアラー認証スキームを登録します。Auth0ドメインをオーソリティ、Auth0 API識別子をオーディエンスとして構成し、Auth0ドメインとAPI識別子がアプリケーションの**appsettings.json** ファイル内で設定されていることを確認します。
 
          OPEN|INFO
          場合によっては、アクセストークンに`sub`クレームが含まれないことがあります。この場合には、`User.Identity.Name`が`null`になります。別のクレームを`User.Identity.Name`にマッピングしたい場合には、それを`AddJwtBearer()`への呼び出しの中で`options.TokenValidationParameters`に追加します。
@@ -100,9 +100,9 @@ export const sections = [
 
       コマンドラインツールや他のサービスなど、ユーザーが資格情報を入力しないものからAPIを呼び出す際には、[OAuthクライアントの資格情報フロー](https://auth0.com/docs/api/authentication#client-credentials)を使用します。そのためには、[マシンツーマシンアプリケーション](https://manage.auth0.com/#/applications)を登録し、要求内で以下の値を渡します。
 
-      - **クライアントID**を`client_id`パラメーターとして渡す。
-      - **クライアントシークレット**を`client_secret`パラメーターとして渡す。
-      - **API 識別子**（このクイックスタートで以前にミドルウェアの構成に使用したのと同じ値）を`audience`パラメーターとして渡す。
+      - **クライアントID** を`client_id`パラメーターとして渡す。
+      - **クライアントシークレット** を`client_secret`パラメーターとして渡す。
+      - **API 識別子** （このクイックスタートで以前にミドルウェアの構成に使用したのと同じ値）を`audience`パラメーターとして渡す。
 
       <Info>
       マシンツーマシンアプリケーションにクライアントIDとクライアントシークレットを取得する詳細については、アプリケーションの設定をお読みください。
@@ -262,7 +262,7 @@ export const sections = [
 
       ### セキュリティ保護されたエンドポイントを呼び出す
 
-      取得したアクセストークン使用すると、セキュリティ保護されたAPIエンドポイントを呼び出すことができます。セキュリティ保護されたエンドポイントを呼び出す際には、アクセストークンをベアラートークンとして要求の**認可**ヘッダーに含める必要があります。たとえば、`/api/private`エンドポイントに要求を送信することができます：
+      取得したアクセストークン使用すると、セキュリティ保護されたAPIエンドポイントを呼び出すことができます。セキュリティ保護されたエンドポイントを呼び出す際には、アクセストークンをベアラートークンとして要求の**認可** ヘッダーに含める必要があります。たとえば、`/api/private`エンドポイントに要求を送信することができます：
 
       <CodeGroup>
       ```sh cURL lines

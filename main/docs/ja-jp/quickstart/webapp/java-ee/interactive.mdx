@@ -86,11 +86,11 @@ export const sections = [
 
       Java EEアプリケーションをAuth0と統合するには、以下の依存関係を追加します。
 
-      - **javax.javaee-api**：Java EE 8を使ってアプリケーションを作成するために必要なJava EE 8
+      - **javax.javaee-api** ：Java EE 8を使ってアプリケーションを作成するために必要なJava EE 8
                 APIです。実際の統合はアプリケーションコンテナーが提供するため、WARファイルに含める必要はありません。
-      - **javax.security.enterprise**：EEアプリケーションでセキュリティ上の懸念に対処できるようにするJava EE 8 Security
+      - **javax.security.enterprise** ：EEアプリケーションでセキュリティ上の懸念に対処できるようにするJava EE 8 Security
                 APIです。`javax.javaee-api`の依存関係と同様に、統合はアプリケーションコンテナーが提供するため、WARファイルには含まれません。
-      - **auth0-java-mvc-commons**：[Auth0 Java MVC SDK](https://github.com/auth0/auth0-java-mvc-common)は、サーバー側のMVC
+      - **auth0-java-mvc-commons** ：[Auth0 Java MVC SDK](https://github.com/auth0/auth0-java-mvc-common)は、サーバー側のMVC
                 WebアプリケーションにAuth0とJavaを使用できるようにします。これは、アプリケーションがAuth0を使ったユーザー認証で呼び出すべき認可URLを生成します。
 
       Mavenを使用している場合は、次の依存関係を`pom.xml`に追加します：
@@ -134,7 +134,7 @@ export const sections = [
       Java
             EEアプリケーションは、Auth0アプリケーションを使ってユーザーを認証するために、いくつかの情報を必要とします。この情報の保管にはデプロイメント記述子である`web.xml`ファイルを使用できますが、別の安全な場所に保管することもできます。
 
-      この情報は、ユーザーがアプリケーションにログインできるように、**auth0-java-mvc-commons**ライブラリーを構成するために使用されます。ライブラリーとその構成オプションについては、ライブラリーの[README](https://github.com/auth0/auth0-java-mvc-common/blob/master/README.md)を参照してください。
+      この情報は、ユーザーがアプリケーションにログインできるように、**auth0-java-mvc-commons** ライブラリーを構成するために使用されます。ライブラリーとその構成オプションについては、ライブラリーの[README](https://github.com/auth0/auth0-java-mvc-common/blob/master/README.md)を参照してください。
     </Section>
 
     <Section id={sections[3].id} title={sections[3].title} stepNumber="4">
@@ -238,14 +238,14 @@ export const sections = [
       これらのすべてを使用する`HttpAuthenticationMechanism`インターフェイスを実装する前に、Beanを作成して、Auth0 Java MVC
             SDKにある構成済みの`AuthenticationController`インスタンスが提供されるようにします。`AuthenticationController`はユーザーがログインする認可URLの構築と、ユーザーを認証するトークン交換の処理に使用されます。
 
-      - Auth0アプリケーションに**RS256署名アルゴリズム**（新しいAuth0アプリケーション作成時のデフォルト）の使用が構成されている場合には、`JwkProvider`を構成して、トークン署名の検証に使われる公開鍵を取得するようにします。その他の構成オプションについては、[jwks-rsa-javaレポジトリ](https://github.com/auth0/jwks-rsa-java)を参照してください。
-      - Auth0アプリケーションに**HS256署名アルゴリズム**の使用が構成されている場合には、`JwkProvider`を構成する必要はありません。
+      - Auth0アプリケーションに**RS256署名アルゴリズム** （新しいAuth0アプリケーション作成時のデフォルト）の使用が構成されている場合には、`JwkProvider`を構成して、トークン署名の検証に使われる公開鍵を取得するようにします。その他の構成オプションについては、[jwks-rsa-javaレポジトリ](https://github.com/auth0/jwks-rsa-java)を参照してください。
+      - Auth0アプリケーションに**HS256署名アルゴリズム** の使用が構成されている場合には、`JwkProvider`を構成する必要はありません。
 
       <Info>
       使用可能な署名アルゴリズムについては、[こちらのドキュメント](/docs/ja-jp/tokens/concepts/signing-algorithms)を参照してください。
       </Info>
 
-      以下のサンプルは、**RS256署名アルゴリズム**の使用に`AuthenticationController`をどのように構成するのかを示しています。
+      以下のサンプルは、**RS256署名アルゴリズム** の使用に`AuthenticationController`をどのように構成するのかを示しています。
 
       ```java lines
       // src/main/java/com/auth0/example/security/Auth0AuthenticationProvider.java
@@ -440,9 +440,9 @@ export const sections = [
       mvnw.cmd clean wildfly:run
       ```
 
-      使用しているブラウザーで`http:``//localhost:3000`をポイントします。**ログイン**リンクを使用して、Auth0テナントにログインまたはサインアップします。
+      使用しているブラウザーで`http:``//localhost:3000`をポイントします。**ログイン** リンクを使用して、Auth0テナントにログインまたはサインアップします。
 
-      ログインに成功すると、ユーザーのプロフィール画像とログインリンクのあるドロップダウンメニューが表示されます。**プロファイル**リンクをクリックすると、ユーザーのプロファイルページを表示することができます。ドロップダウンメニューにある**ログアウト**リンクをクリックすると、ログアウトできます。
+      ログインに成功すると、ユーザーのプロフィール画像とログインリンクのあるドロップダウンメニューが表示されます。**プロファイル** リンクをクリックすると、ユーザーのプロファイルページを表示することができます。ドロップダウンメニューにある**ログアウト** リンクをクリックすると、ログアウトできます。
     </Section>
 
     ## 次のステップ

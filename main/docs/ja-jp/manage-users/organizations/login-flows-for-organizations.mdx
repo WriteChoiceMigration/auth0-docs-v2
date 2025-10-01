@@ -17,27 +17,27 @@ permalink: "login-flows-for-organizations"
 
 <Frame>![](/images/ja-jp/cdy7uua7fh8z/Rz0i0zgIY7Yugx8M3D7pw/e1de8b84066d50709fee397dbe18e008/2025-01-24_13-47-13.png)</Frame>
 
-消費者向けに明示的に設計されたアプリケーション（NetflixやSpotifyなど）では、Organization管理は必要**ない**可能性があります。**個人**を選択すると、ユーザーはアプリケーションに直接ログインし、Organizationのコンテキストは提供されません。
+消費者向けに明示的に設計されたアプリケーション（NetflixやSpotifyなど）では、Organization管理は必要**ない** 可能性があります。**個人** を選択すると、ユーザーはアプリケーションに直接ログインし、Organizationのコンテキストは提供されません。
 
-B2BまたはSaaSアプリケーション（SlackやJiraなど）は**ビジネスユーザー**によってより適切に提供されるため、エンドユーザーはAuth0 Organizationのコンテキストでのみアプリケーションにアクセスできます。複数のOrganizationに所属するユーザーは、ログインフローの後にOrganization Pickerに誘導され、参加した最初の20の組織が表示されます。
+B2BまたはSaaSアプリケーション（SlackやJiraなど）は**ビジネスユーザー** によってより適切に提供されるため、エンドユーザーはAuth0 Organizationのコンテキストでのみアプリケーションにアクセスできます。複数のOrganizationに所属するユーザーは、ログインフローの後にOrganization Pickerに誘導され、参加した最初の20の組織が表示されます。
 
 <Frame>![](/images/ja-jp/cdy7uua7fh8z/3b6s5amCEjFyRTKWkTrFZI/ae9cd3bcbd55d299d7bdddfb8747ea0b/image4.png)</Frame>
 
-エンドユーザーがアプリケーションで個人アカウントとビジネスアカウントの両方を保持する可能性がある場合は、**[Both（両方）]**を選択します。たとえば、Githubでは、個人用と業務用の両方のコードリポジトリが保存されることがよくあります。
+エンドユーザーがアプリケーションで個人アカウントとビジネスアカウントの両方を保持する可能性がある場合は、**[Both（両方）]** を選択します。たとえば、Githubでは、個人用と業務用の両方のコードリポジトリが保存されることがよくあります。
 
 アプリケーションのユーザータイプは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>（上記参照）または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を通じて構成できます。具体的には、[クライアント更新](/docs/ja-jp/api/management/v2/clients/patch-clients-by-id)エンドポイントの`organization_usage`パラメーターを使用して、適切なユーザータイプを設定します。両方の方法の詳細については、「[Organizationの動作を定義する](/docs/ja-jp/manage-users/organizations/configure-organizations/define-organization-behavior)」を参照してください。
 
 #### アプリケーションのログインフローを構成する
 
-**［Business Users（ビジネスユーザー）］**または**［Both（両方）］**を選択した後、ユーザーがアプリケーションにログインする際のエクスペリエンスをさらにカスタマイズできます。
+**［Business Users（ビジネスユーザー）］** または**［Both（両方）］** を選択した後、ユーザーがアプリケーションにログインする際のエクスペリエンスをさらにカスタマイズできます。
 
 <Frame>![](/images/ja-jp/cdy7uua7fh8z/3e18zLZ8dPeXBohvBLpKAU/9626e0c79543c3b6ba122e5bf92abb85/Login_Flow_-_Prompt_-_Japanese.png)</Frame>
 
-ほとんどの組織では、**［Prompt for Credentials（資格情報の入力を求める）］**を選択してから、[［Identifier First Authentication（Identifier First認証）］](/docs/ja-jp/authenticate/login/auth0-universal-login/identifier-first)を有効にする必要があります。ユーザーがログインしようとしているOrganizationがすでにわかっている場合は、**プロンプトなし**オプションと[Organizationを用いたカスタム開発](/docs/ja-jp/manage-users/organizations/custom-development)を使用すると、アプリでブランド化されカスタマイズされたログインフローを維持できます。管理者は、**［Prompt for Organization（Organizationの入力を求める）］**トグルを有効にして、ユーザーがログインするOrganizationを特定するように要求することで、エンドユーザーエクスペリエンスをさらに調整できます。
+ほとんどの組織では、**［Prompt for Credentials（資格情報の入力を求める）］** を選択してから、[［Identifier First Authentication（Identifier First認証）］](/docs/ja-jp/authenticate/login/auth0-universal-login/identifier-first)を有効にする必要があります。ユーザーがログインしようとしているOrganizationがすでにわかっている場合は、**プロンプトなし** オプションと[Organizationを用いたカスタム開発](/docs/ja-jp/manage-users/organizations/custom-development)を使用すると、アプリでブランド化されカスタマイズされたログインフローを維持できます。管理者は、**［Prompt for Organization（Organizationの入力を求める）］** トグルを有効にして、ユーザーがログインするOrganizationを特定するように要求することで、エンドユーザーエクスペリエンスをさらに調整できます。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-**注意**：［Prompt for Credentials（資格情報を求める）］を選択した場合でも、必要に応じて、ユーザーに対し、[特定のOrganizationのログインプロンプトでログイン](/docs/ja-jp/manage-users/organizations/custom-development#i-want-users-to-log-in-to-a-specified-organization)するよう指示できます。
+**注意** ：［Prompt for Credentials（資格情報を求める）］を選択した場合でも、必要に応じて、ユーザーに対し、[特定のOrganizationのログインプロンプトでログイン](/docs/ja-jp/manage-users/organizations/custom-development#i-want-users-to-log-in-to-a-specified-organization)するよう指示できます。
 
 </Callout>
 
@@ -67,6 +67,6 @@ Management APIを使用して、識別子優先認証を構成できます。具
 
 自動メンバーシップは通常、[Organizationのログインプロンプトを使用してユーザーをログインするように指示する](/docs/ja-jp/manage-users/organizations/custom-development)ことでトリガーされます。これにより、ユーザーに代わって接続と組織のパラメーターを渡すことができます。ログイン前にユーザーの希望する組織を判別できない場合、資格情報のプロンプトフローは、自動メンバーシップが構成されている唯一の組織にメンバーシップを付与します。
 
-ただし、ユーザーをログインに送信する前に、ユーザーの希望する組織を判別できないシナリオもあります。この場合、前述の資格情報の入力を求めるフローを使用できますが、自動メンバーシップが有効化されている組織に対してこの接続が有効な接続として設定されている**組織が1つだけある**場合にのみ、ユーザーに組織のメンバーシップが付与されることに注意してください。
+ただし、ユーザーをログインに送信する前に、ユーザーの希望する組織を判別できないシナリオもあります。この場合、前述の資格情報の入力を求めるフローを使用できますが、自動メンバーシップが有効化されている組織に対してこの接続が有効な接続として設定されている**組織が1つだけある** 場合にのみ、ユーザーに組織のメンバーシップが付与されることに注意してください。
 
 自動メンバーシップを構成するには、Management APIを使用できます。具体的には、[[Modify an organization’s connection（組織の接続エンドポイントを変更する）]](https://auth0.com/docs/api/management/v2/organizations/patch-enabled-connections-by-connection-id)の`assign_membership_on_login`パラメータを使用します。

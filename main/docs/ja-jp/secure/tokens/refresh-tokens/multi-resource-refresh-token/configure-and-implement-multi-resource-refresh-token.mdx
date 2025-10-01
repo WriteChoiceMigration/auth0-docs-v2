@@ -560,11 +560,11 @@ exports.onExecutePostLogin = async (event, api) => {
 
 MRRT acts as an extension of the original authentication, not a replacement. When exchanging a refresh token, Auth0 evaluates the exchange request using the following logic:
 
-* **If the audience parameter is omitted**, Auth0 returns an access token with the original audience and any of its additional scopes configured in the MRRT policy.
-* **If a new audience parameter is specified**, Auth0 verifies that the audience is included in the MRRT policy and returns an access token for the new audience with its configured scopes.
-* **If the scope parameter is omitted**, Auth0 combines all allowed scopes from the original request and the MRRT policy.
-* **If a new scope parameter is specified**, Auth0 validates the requested scopes and returns an access token with the scopes included in the MRTT policy. Invalid or unauthorized scopes requested are silently ignored.
-* **If the audience parameter is the same as from the original request**, Auth0 applies the MRRT policy and returns an access token for the audience with all MRRT configured scopes and original authentication scopes.
+* **If the audience parameter is omitted** , Auth0 returns an access token with the original audience and any of its additional scopes configured in the MRRT policy.
+* **If a new audience parameter is specified** , Auth0 verifies that the audience is included in the MRRT policy and returns an access token for the new audience with its configured scopes.
+* **If the scope parameter is omitted** , Auth0 combines all allowed scopes from the original request and the MRRT policy.
+* **If a new scope parameter is specified** , Auth0 validates the requested scopes and returns an access token with the scopes included in the MRTT policy. Invalid or unauthorized scopes requested are silently ignored.
+* **If the audience parameter is the same as from the original request** , Auth0 applies the MRRT policy and returns an access token for the audience with all MRRT configured scopes and original authentication scopes.
 
 MRRT allows you to extend user access to new APIs without issuing new refresh tokens or requiring user login again.
 

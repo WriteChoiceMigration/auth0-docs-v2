@@ -11,7 +11,7 @@ permalink: "rules-security-best-practices"
 
 <Warning>
 
-RulesとHooksのサポート終了（EOL）日は**2026年11月18日**であり、**2023年10月16**日の時点で作成された新しいテナントは使用できなくなります。Hooksが有効な既存のテナントは、サポート終了までHooksを利用できます。
+RulesとHooksのサポート終了（EOL）日は**2026年11月18日** であり、**2023年10月16** 日の時点で作成された新しいテナントは使用できなくなります。Hooksが有効な既存のテナントは、サポート終了までHooksを利用できます。
 
 今後はActionsに移行して、Auth0の機能を拡張することを強くお勧めします。Actionsを使用すると、豊富な情報やインラインドキュメント、パブリック`npm`パッケージにアクセスして、外部統合を使って全体的な拡張エクスペリエンスを強化することができます。Actionsの詳細については、「[Auth0 Actionsの仕組みを理解する](/docs/ja-jp/customize/actions/actions-overview)」をお読みください。
 
@@ -74,7 +74,7 @@ function (user, context, callback) {
 `const emailSplit = user.email.split('@');
 const userEmailDomain = emailSplit[emailSplit.length - 1].toLowerCase();`
 
-詳細については、[GitHub](https://github.com/auth0/rules/blob/master/src/rules/check-domains-against-connection-aliases.js)「[**ユーザーのメールドメインが構成されたドメインのルールテンプレートに一致するかどうか確認する**](https://github.com/auth0/rules/blob/master/src/rules/check-domains-against-connection-aliases.js)」を参照するか、[［Auth0 Dashboard］>［Auth Pipeline（Authパイプライン）］>［Rules（ルール）］](https://manage.auth0.com/#/rules/new)の順に移動し、**［Create（作成）］**を選択します。
+詳細については、[GitHub](https://github.com/auth0/rules/blob/master/src/rules/check-domains-against-connection-aliases.js)「[**ユーザーのメールドメインが構成されたドメインのルールテンプレートに一致するかどうか確認する** ](https://github.com/auth0/rules/blob/master/src/rules/check-domains-against-connection-aliases.js)」を参照するか、[［Auth0 Dashboard］>［Auth Pipeline（Authパイプライン）］>［Rules（ルール）］](https://manage.auth0.com/#/rules/new)の順に移動し、**［Create（作成）］** を選択します。
 
 ### 多要素認証のコンテキストに基づいたバイパス
 
@@ -84,9 +84,9 @@ const userEmailDomain = emailSplit[emailSplit.length - 1].toLowerCase();`
 
 推奨されるベストプラクティスとして、用意されているMFAを使用するときにコンテキストに基づいてバイパスを検討する場合、使用するべきオプションは`allowRememberBrowser`または`context.authentication`のみです。`allowRememberBrowser`を`true`に設定すると、MFAが定期的にしか求められないように、ボックスにチェックマークを入れることができます、その一方で、`context.authentication`を安全かつ正確に使用し、MFAが現在のブラウザーコンテキストで最後にいつ実行されたのかを特定することができます。用意されている指定されたルール（Require MFA once per session）で`context.authentication`のサンプルユースをいくつか閲覧することができます。
 
-* **Do not perform MFA bypass**：サイレント認証に関連する条件ロジックに基づく（`context.request.query.prompt === 'none'`など）
-* **Do not perform MFA bypass**：何らかの形態のデバイスフィンガープリンティングを使った条件ロジックに基づく（ここでは、`user.app_metadata.lastLoginDeviceFingerPrint === deviceFingerPrint`）
-* **Do not perform MFA bypass**：地理的場所を使った条件ロジックに基づく（ここでは、`user.app_metadata.last_location === context.request.geoip.country_code`）
+* **Do not perform MFA bypass** ：サイレント認証に関連する条件ロジックに基づく（`context.request.query.prompt === 'none'`など）
+* **Do not perform MFA bypass** ：何らかの形態のデバイスフィンガープリンティングを使った条件ロジックに基づく（ここでは、`user.app_metadata.lastLoginDeviceFingerPrint === deviceFingerPrint`）
+* **Do not perform MFA bypass** ：地理的場所を使った条件ロジックに基づく（ここでは、`user.app_metadata.last_location === context.request.geoip.country_code`）
 
 #### カスタムMFAプロバイダー使用時のコンテキストに基づいた確認
 

@@ -11,7 +11,7 @@ permalink: "sample-use-cases-rules-with-authorization"
 
 <Warning>
 
-RulesとHooksのサポート終了（EOL）日は**2026年11月18日**であり、**2023年10月16**日の時点で作成された新しいテナントは使用できなくなります。Hooksが有効な既存のテナントは、サポート終了までHooksを利用できます。
+RulesとHooksのサポート終了（EOL）日は**2026年11月18日** であり、**2023年10月16** 日の時点で作成された新しいテナントは使用できなくなります。Hooksが有効な既存のテナントは、サポート終了までHooksを利用できます。
 
 今後はActionsに移行して、Auth0の機能を拡張することを強くお勧めします。Actionsを使用すると、豊富な情報やインラインドキュメント、パブリック`npm`パッケージにアクセスして、外部統合を使って全体的な拡張エクスペリエンスを強化することができます。Actionsの詳細については、「[Auth0 Actionsの仕組みを理解する](/docs/ja-jp/customize/actions/actions-overview)」をお読みください。
 
@@ -66,7 +66,7 @@ function (user, context, callback) {
 
 ## APIを呼び出すユーザーすべてのアクセスを拒否する
 
-たとえば、APIを呼び出すユーザーのすべてに対して、アクセスを拒否したいとします。つまり、[［Dashboard］ > ［Applications（アプリケーション）］ > ［APIs］](https://manage.auth0.com/#/apis)の**APIオーディエンス**フィールドに記載されたAPIの`オーディエンス`の値に基づいてアクセスを拒否する必要があります。これを行うには、以下のルールを作成します。
+たとえば、APIを呼び出すユーザーのすべてに対して、アクセスを拒否したいとします。つまり、[［Dashboard］ > ［Applications（アプリケーション）］ > ［APIs］](https://manage.auth0.com/#/apis)の**APIオーディエンス** フィールドに記載されたAPIの`オーディエンス`の値に基づいてアクセスを拒否する必要があります。これを行うには、以下のルールを作成します。
 
 ```javascript lines
 function (user, context, callback) {
@@ -88,7 +88,7 @@ function (user, context, callback) {
 
 ## ユーザーのロールをトークンに追加する
 
-「Add Permissions in the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Access Token</Tooltip>（アクセストークンに許可を追加）」と一緒に[APIのRBACを有効にした場合](/docs/ja-jp/get-started/apis/enable-role-based-access-control-for-apis)（または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を介してRBACを有効にし、**［Token Dialect（トークンダイアレクト）］**を`access_token_authz`に設定した場合）、アクセストークンでユーザー権限を受け取ります。ユーザーのロールをトークンに追加するには、以下のルールを作成するときに`context.authorization`オブジェクトを使用します。
+「Add Permissions in the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Access Token</Tooltip>（アクセストークンに許可を追加）」と一緒に[APIのRBACを有効にした場合](/docs/ja-jp/get-started/apis/enable-role-based-access-control-for-apis)（または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を介してRBACを有効にし、**［Token Dialect（トークンダイアレクト）］** を`access_token_authz`に設定した場合）、アクセストークンでユーザー権限を受け取ります。ユーザーのロールをトークンに追加するには、以下のルールを作成するときに`context.authorization`オブジェクトを使用します。
 
 ```javascript lines
 function (user, context, callback) {

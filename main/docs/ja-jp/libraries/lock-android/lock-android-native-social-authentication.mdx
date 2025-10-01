@@ -11,7 +11,7 @@ permalink: "lock-android-native-social-authentication"
 
 ## ネイティブプロバイダー - Google
 
-**Lock**を使用してもしなくても、Google AuthProviderを利用してログインできます。[セットアップ](#setup)セクションの指示に従ってください。
+**Lock** を使用してもしなくても、Google AuthProviderを利用してログインできます。[セットアップ](#setup)セクションの指示に従ってください。
 
 [Lock-Google.Android](https://github.com/auth0/Lock-Google.Android)には、
 Android API 15以降とGoogle Play開発者サービス10以降が必要です。
@@ -31,24 +31,24 @@ Lock-Google[Maven Central](http://search.maven.org)と[JCenter](https://bintray.
 1. [Google開発者コンソール](https://console.developers.google.com/)に移動して新規プロジェクトを作成します。
 2. [OAuth同意画面](https://console.developers.google.com/apis/credentials/consent)に、最低でも有効な電子メールアドレスと名前を入力します。
 3. 左側のナビゲーションドロワーで、[［Credentials（資格情報）］](https://console.developers.google.com/apis/credentials)をクリックします。
-4. [［Create Credentials（資格情報を作成）］](https://console.developers.google.com/apis/credentials/oauthclient)ボタンをクリックし、**［OAuth client ID（OAuthクライアントID）］**を選択して新しい資格情報を作成します。次に、**［Web Application（ウェブアプリケーション）］**を選択し、「Auth0 Server Google-OAuth」などの名前を付けます。**［Authorized redirect URI（認可されたリダイレクトURI］**フィールドにCallback URL（`https://{yourDomain}/login/callback`など）を入力します。フィールドから離れる前に、必ずENTERキーを押し、［Create （作成）］ボタンをクリックします。`CLIENT ID（クライアントID）`と`CLIENT SECRET（クライアントシークレット）`は後で使うので、覚えておいてください。
-5. [［Create Credentials（資格情報を作成）］](https://console.developers.google.com/apis/credentials/oauthclient)ボタンをクリックし、**［OAuth client ID（OAuthクライアントID）］**を選択して新しい資格情報を作成します。次に、［**Android**］を選択し、「Auth0 Android Google-OAuth」などの名前を付けます。アプリケーションに署名するために使う証明書の**SHA-1**を取得して、最初のフィールドにそれを入力します。SHA-1の取得に関してヘルプが必要な場合は [この](#certificate-fingerprints)セクションを参照してください。最後に、最後のフィールドにAndroidアプリケーションの **パッケージ名**を入力し、［Create（作成）］ボタンをクリックします。`CLIENT ID（クライアントID）`は後で使うので、覚えておいてください。
+4. [［Create Credentials（資格情報を作成）］](https://console.developers.google.com/apis/credentials/oauthclient)ボタンをクリックし、**［OAuth client ID（OAuthクライアントID）］** を選択して新しい資格情報を作成します。次に、**［Web Application（ウェブアプリケーション）］** を選択し、「Auth0 Server Google-OAuth」などの名前を付けます。**［Authorized redirect URI（認可されたリダイレクトURI］** フィールドにCallback URL（`https://{yourDomain}/login/callback`など）を入力します。フィールドから離れる前に、必ずENTERキーを押し、［Create （作成）］ボタンをクリックします。`CLIENT ID（クライアントID）`と`CLIENT SECRET（クライアントシークレット）`は後で使うので、覚えておいてください。
+5. [［Create Credentials（資格情報を作成）］](https://console.developers.google.com/apis/credentials/oauthclient)ボタンをクリックし、**［OAuth client ID（OAuthクライアントID）］** を選択して新しい資格情報を作成します。次に、［**Android** ］を選択し、「Auth0 Android Google-OAuth」などの名前を付けます。アプリケーションに署名するために使う証明書の**SHA-1** を取得して、最初のフィールドにそれを入力します。SHA-1の取得に関してヘルプが必要な場合は [この](#certificate-fingerprints)セクションを参照してください。最後に、最後のフィールドにAndroidアプリケーションの **パッケージ名** を入力し、［Create（作成）］ボタンをクリックします。`CLIENT ID（クライアントID）`は後で使うので、覚えておいてください。
 
 #### Auth0 Dashboard
 
 1. Auth0 Dashboardに移動して[［Social Connections（ソーシャル接続）］](https://manage.auth0.com/#/connections/social)）をクリックします。
-2. **Google**をクリックするとダイアログが表示されます。
-3. 上記の**Google開発者コンソール**セクション手順4に従って取得した`CLIENT ID`値を［Client ID（クライアントID）］フィールドに入力します。
-4. 上記の**Google開発者コンソール**セクション手順4に従って取得した`CLIENT SECRET`値を［Client Secret（クライアントシークレット）］フィールドに入力します。
-5. 上記の**Google開発者コンソール**セクション手順4に従って取得した`CLIENT ID`値を［Allowed Mobile Client IDs（許可されるモバイルクライアントID）］フィールドに入力します。
+2. **Google** をクリックするとダイアログが表示されます。
+3. 上記の**Google開発者コンソール** セクション手順4に従って取得した`CLIENT ID`値を［Client ID（クライアントID）］フィールドに入力します。
+4. 上記の**Google開発者コンソール** セクション手順4に従って取得した`CLIENT SECRET`値を［Client Secret（クライアントシークレット）］フィールドに入力します。
+5. 上記の**Google開発者コンソール** セクション手順4に従って取得した`CLIENT ID`値を［Allowed Mobile Client IDs（許可されるモバイルクライアントID）］フィールドに入力します。
 6. ［Save（保存）］ボタンをクリックします。
 7. Auth0 Dashboardに移動して[［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)をクリックします。作成がまだの場合は、まずは作成してからアプリケーションの構成ページに移動します。
 8. ページの一番下にある［Show Advanced Settings（詳細設定を表示）］リンクをクリックして［Device Settings（デバイス設定）］タブに移動します。
-9. Androidのセクションで、［**Package Name（パッケージ名）］**フィールドにアプリケーションのパッケージ名を入力します。最後に、**［Key Hashes（鍵ハッシュ）］** フィールドにアプリケーションに署名する際に使うSHA-256を入力します。SHA-256の取得に関してヘルプが必要な場合は [この](#certificate-fingerprints)セクションを参照してください。［Save Changes（変更を保存）］ボタンをクリックします。
+9. Androidのセクションで、［**Package Name（パッケージ名）］** フィールドにアプリケーションのパッケージ名を入力します。最後に、**［Key Hashes（鍵ハッシュ）］** フィールドにアプリケーションに署名する際に使うSHA-256を入力します。SHA-256の取得に関してヘルプが必要な場合は [この](#certificate-fingerprints)セクションを参照してください。［Save Changes（変更を保存）］ボタンをクリックします。
 
 #### Androidアプリケーション
 
-1. Androidアプリケーションの中で、`res/strings.xml`ファイル内に新しい文字列リソースを作成します。「`google_server_client_id`」という名前を付けて、上記の**Google開発者コンソール**手順5で取得した`CLIENT_ID`を値に設定します。
+1. Androidアプリケーションの中で、`res/strings.xml`ファイル内に新しい文字列リソースを作成します。「`google_server_client_id`」という名前を付けて、上記の**Google開発者コンソール** 手順5で取得した`CLIENT_ID`を値に設定します。
 2. アプリケーションタグ内の`AndroidManifest.xml`ファイルにGoogle Play開発者サービスのバージョンメタデータを追加します。
 
    ``` lines
@@ -96,7 +96,7 @@ Google SDK設定についてヘルプが必要な場合は、Googleの「[Sign-I
 
 ### Lockを使用しない場合
 
-このプロバイダーを**Lock**なしで使用するつもりであれば、必ず`onActivityResult()`メソッドを上書きして、呼び出しをプロバイダーインスタンスにリダイレクトするようにしてください。最後に、「start」を呼び出して認証プロセスを開始します。
+このプロバイダーを**Lock** なしで使用するつもりであれば、必ず`onActivityResult()`メソッドを上書きして、呼び出しをプロバイダーインスタンスにリダイレクトするようにしてください。最後に、「start」を呼び出して認証プロセスを開始します。
 
 ```java lines
 // Define your own request codes
@@ -184,7 +184,7 @@ Google開発者コンソールで<Tooltip data-tooltip-id="react-containers-Defi
 
 ## ネイティブプロバイダー - Facebook
 
-FacebookAuthProviderを使って、**Lock**のあるなしにかかわらずログインすることができます。[セットアップ](#setup)セクションの指示に従ってください。
+FacebookAuthProviderを使って、**Lock** のあるなしにかかわらずログインすることができます。[セットアップ](#setup)セクションの指示に従ってください。
 
 [Lock-Facebook](https://github.com/auth0/Lock-Facebook.Android)では、Android API 15以降およびFacebook Android SDK 4.+が必要です。
 
@@ -201,27 +201,27 @@ Lock-Facebookは、[Maven Central](http://search.maven.org)および[JCenter](ht
 #### Facebook開発者コンソール
 
 1. [Facebook開発者コンソール](https://developers.facebook.com/)に移動して新たなアプリを作成します。［Android］を選んで、有効な名前を付けます。［Create new Facebook App ID（新しいFacebookアプリIDを作成）］をクリックします。
-2. アプリケーションの**パッケージ名**と、プロバイダーを使用する**アクティビティクラス**の名前を追加し、［Next（次へ）］ボタンをクリックします。
+2. アプリケーションの**パッケージ名** と、プロバイダーを使用する**アクティビティクラス** の名前を追加し、［Next（次へ）］ボタンをクリックします。
 3. アプリケーションの署名に使う証明書の**SHA-1** Base64エンコードされた鍵ハッシュを追加して、［Next（次へ）］ボタンをクリックします。SHA-1の取得に関してヘルプが必要な場合は [この](#certificate-fingerprints)セクションを参照してください。
 4. 最後に、ページの一番上までスクロールして［Skip Quickstart（クイックスタートを省略）］ボタンを押し、Facebookアプリのページに移動します。
 5. ページの一番上に、`APP ID`と`APP SECRET`値が表示されます。これらは後で必要になるので、保存しておきます。
-6. 左側にはナビゲーションドロワーがあります。［Settings（設定）］、次に［Basic（ベーシック）］の順にクリックします。**［Single Sign-On（シングルサインオン）］**のスイッチをオンにして、［Save（保存）］ボタンをクリックします。
-7. ［Settings（設定）］、［Advanced（詳細）］の順にクリックします。**［Native or desktop app?（ネイテイブアプリまたはデスクトップアプリ）］**のスイッチをオンにします。
+6. 左側にはナビゲーションドロワーがあります。［Settings（設定）］、次に［Basic（ベーシック）］の順にクリックします。**［Single Sign-On（シングルサインオン）］** のスイッチをオンにして、［Save（保存）］ボタンをクリックします。
+7. ［Settings（設定）］、［Advanced（詳細）］の順にクリックします。**［Native or desktop app?（ネイテイブアプリまたはデスクトップアプリ）］** のスイッチをオンにします。
 
 #### Auth0 dashboard
 
 1. Auth0 Dashboardに移動して[［Social Connections（ソーシャル接続）］](https://manage.auth0.com/#/connections/social)）をクリックします。
-2. **Facebook**をクリックするとダイアログが表示されます。
-3. ［App ID（アプリID）］フィールドに上記の**Facebook開発者コンソール**セクションの手順5で取得した`APP ID`値を入力します。
-4. ［App Secret（アプリシークレット）］フィールドに上記の**Facebook開発者コンソール**セクションの手順5で取得した`APP SECRET`値を入力します。
+2. **Facebook** をクリックするとダイアログが表示されます。
+3. ［App ID（アプリID）］フィールドに上記の**Facebook開発者コンソール** セクションの手順5で取得した`APP ID`値を入力します。
+4. ［App Secret（アプリシークレット）］フィールドに上記の**Facebook開発者コンソール** セクションの手順5で取得した`APP SECRET`値を入力します。
 5. ［Save（保存）］ボタンをクリックします。
 6. Auth0 Dashboardに移動して[［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)をクリックします。作成がまだの場合は、まずは作成してからアプリケーションの構成ページに移動します。
 7. ページの一番下にある［Show Advanced Settings（詳細設定を表示）］リンクをクリックして［Device Settings（デバイス設定）］タブに移動します。
-8. Androidのセクションで、［**Package Name（パッケージ名）］**フィールドにアプリケーションのパッケージ名を入力します。最後に、**［Key Hashes（鍵ハッシュ）］** フィールドにアプリケーションに署名する際に使うSHA-256を入力します。SHA-256の取得に関してヘルプが必要な場合は [この](#certificate-fingerprints)セクションを参照してください。［Save Changes（変更を保存）］ボタンをクリックします。
+8. Androidのセクションで、［**Package Name（パッケージ名）］** フィールドにアプリケーションのパッケージ名を入力します。最後に、**［Key Hashes（鍵ハッシュ）］** フィールドにアプリケーションに署名する際に使うSHA-256を入力します。SHA-256の取得に関してヘルプが必要な場合は [この](#certificate-fingerprints)セクションを参照してください。［Save Changes（変更を保存）］ボタンをクリックします。
 
 #### Androidアプリケーション
 
-1. Androidアプリケーションの中で、`res/strings.xml`ファイル内に新しい文字列リソースを作成します。`facebook_app_id`という名前を付け、**Facebook開発者コンソール**セクションの手順5で取得した`APP ID`値をセットします。
+1. Androidアプリケーションの中で、`res/strings.xml`ファイル内に新しい文字列リソースを作成します。`facebook_app_id`という名前を付け、**Facebook開発者コンソール** セクションの手順5で取得した`APP ID`値をセットします。
 2. アプリケーションタグ内の`FacebookActivity`と`facebook_app_id`メタデータを`AndroidManifest.xml`ファイルに追加します。
 
    ``` lines
@@ -274,7 +274,7 @@ Facebook SDKセットアップに関してヘルプが必要な場合は、Faceb
 
 ### Lockを使用しない場合
 
-このプロバイダーを**Lock**なしで使用するつもりであれば、必ず`onActivityResult()`メソッドを上書きして、呼び出しをプロバイダーインスタンスにリダイレクトするようにしてください。最後に、「start」を呼び出して認証プロセスを開始します。
+このプロバイダーを**Lock** なしで使用するつもりであれば、必ず`onActivityResult()`メソッドを上書きして、呼び出しをプロバイダーインスタンスにリダイレクトするようにしてください。最後に、「start」を呼び出して認証プロセスを開始します。
 
 ```java lines
 // Define your own request codes

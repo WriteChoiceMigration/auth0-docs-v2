@@ -11,7 +11,7 @@ permalink: "rules-anatomy-best-practices"
 
 <Warning>
 
-RulesとHooksのサポート終了（EOL）日は**2026年11月18日**であり、**2023年10月16**日の時点で作成された新しいテナントは使用できなくなります。Hooksが有効な既存のテナントは、サポート終了までHooksを利用できます。
+RulesとHooksのサポート終了（EOL）日は**2026年11月18日** であり、**2023年10月16** 日の時点で作成された新しいテナントは使用できなくなります。Hooksが有効な既存のテナントは、サポート終了までHooksを利用できます。
 
 今後はActionsに移行して、Auth0の機能を拡張することを強くお勧めします。Actionsを使用すると、豊富な情報やインラインドキュメント、パブリック`npm`パッケージにアクセスして、外部統合を使って全体的な拡張エクスペリエンスを強化することができます。Actionsの詳細については、「[Auth0 Actionsの仕組みを理解する](/docs/ja-jp/customize/actions/actions-overview)」をお読みください。
 
@@ -30,7 +30,7 @@ function (user, context, callback) {
     }
 ```
 
-関数宣言の末尾にセミコロンを追加**しない**でください。ルールの実行が中断されます。無名関数は、例外的なエラー条件の結果として生成されたコールスタックの解釈を困難にします。診断分析を容易にするため、簡潔で一意の命名規則を使用してください（例：`function MyRule1 (user, context, callback) {...}`）。詳細については、「[エラー処理のベストプラクティス](/docs/ja-jp/troubleshoot/error-handling-best-practices)」をお読みください。
+関数宣言の末尾にセミコロンを追加**しない** でください。ルールの実行が中断されます。無名関数は、例外的なエラー条件の結果として生成されたコールスタックの解釈を困難にします。診断分析を容易にするため、簡潔で一意の命名規則を使用してください（例：`function MyRule1 (user, context, callback) {...}`）。詳細については、「[エラー処理のベストプラクティス](/docs/ja-jp/troubleshoot/error-handling-best-practices)」をお読みください。
 
 ルールは、Auth0エンジン全体の一部を形成する、真正性のアーティファクト生成に関連するパイプラインで実行されます。パイプラインが実行されると、有効なすべてのルールがリストされている順序でパッケージ化され、1つのコードBlobとして送信され、Auth0のサーバーレスWebtaskとして実行されます。Auth0エンジン全体を確認するには、「[Auth0エンジンの内側。](https://cdn.auth0.com/blog/auth0-raises-100m-to-fuel-the-growth/inside-the-auth0-engine-high-res.jpg)」をダウンロードしてください。
 

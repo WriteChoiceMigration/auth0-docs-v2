@@ -21,23 +21,23 @@ Auth0では、開発・ステージング・運用環境を簡単にセットア
 
 新しいテナントを作成したら、必ず環境を指定してください。開発・ステージング・運用環境を区別するために、テナントにEnvironment（環境）タグを割り当てることができます。
 
-テナントが多目的な場合は、上位の環境を選択します。たとえば、開発と運用の両方に使用するテナントには、**Production（運用）**タグを付けます。
+テナントが多目的な場合は、上位の環境を選択します。たとえば、開発と運用の両方に使用するテナントには、**Production（運用）** タグを付けます。
 
 1. テナントにEnvironment （環境）タグを付けるには、[［Dashboard］>［Settings（設定）］>［General（一般設定）］](https://manage.auth0.com/#/tenant/general)に移動します。
 
    <Frame>![Dashboard テナントの設定 一般設定タブ](/images/ja-jp/cdy7uua7fh8z/4okToiwlkNQBxwr8QGE3Rs/440d2aa39a898799edd43316486a130a/Basic_Settings_-_JP.png)</Frame>
 
-2. **［Assign Environment Tag（環境タグの割り当て）］**で、テナントの環境を**［Development（開発）］**、**［Staging（ステージング）］**または**［Production（運用）］**に指定します。
+2. **［Assign Environment Tag（環境タグの割り当て）］** で、テナントの環境を**［Development（開発）］** 、**［Staging（ステージング）］** または**［Production（運用）］** に指定します。
 
    <Frame>![undefined](/images/ja-jp/cdy7uua7fh8z/27OH1jFXce97CSjk7TPeD7/1ee7cb22d4b19c9b10630c12ff4abcf5/Tenant_environment_tags.png)</Frame>
 
-3. 環境を選択したら、**［Save（保存）］**をクリックします。
+3. 環境を選択したら、**［Save（保存）］** をクリックします。
 
 ## 移行
 
 [Management API v2](/docs/ja-jp/api/management/v2)を使用すると、テナント間でアセット（[ルール](/docs/ja-jp/customize/rules)やデータベース[接続](/docs/ja-jp/connections)など）の移行を自動化することができます。
 
-構成を管理しやすくするために、構成値は[Dashboard](https://manage.auth0.com/#/rules)に保存して、**ルール**や**データベース接続**のスクリプトに埋め込むことは避けてください。
+構成を管理しやすくするために、構成値は[Dashboard](https://manage.auth0.com/#/rules)に保存して、**ルール** や**データベース接続** のスクリプトに埋め込むことは避けてください。
 
 たとえば、ログのURLを設定するとします。1つの方法は、ルールにハードコードすることです。
 
@@ -52,11 +52,11 @@ function(user, context, callback){
 
 開発から運用に移ってもコードを使い続けるためには、[［Rules（ルール）］](https://manage.auth0.com/#/rules)セクションの使用をお勧めします。ルールを作成していない場合は、ルールを作成する必要があります。（作成済みの場合は、ステップ4に進んでください。）
 
-1. **［Create Your First Rule（初めてルールを作成）］**をクリックします。
-2. **空のルール**テンプレートを選択します。
-3. 新しいルールの名前を入力し、**［Save（保存）］**をクリックします。
-4. [［Dashboard］>［Rules（ルール）］](https://manage.auth0.com/#/rules)に移動して、ページの終わりまでスクロールし、構成値を設定（この例ではキー名には`log_url`、値には`https://someurl/log`を使用）してから**［Create（作成）］**をクリックします。
-5. これでルールを書く準備ができました。作成したルールを編集し、コード領域に以下のコードを入力してから、**［Save（保存）］**をクリックします。
+1. **［Create Your First Rule（初めてルールを作成）］** をクリックします。
+2. **空のルール** テンプレートを選択します。
+3. 新しいルールの名前を入力し、**［Save（保存）］** をクリックします。
+4. [［Dashboard］>［Rules（ルール）］](https://manage.auth0.com/#/rules)に移動して、ページの終わりまでスクロールし、構成値を設定（この例ではキー名には`log_url`、値には`https://someurl/log`を使用）してから**［Create（作成）］** をクリックします。
+5. これでルールを書く準備ができました。作成したルールを編集し、コード領域に以下のコードを入力してから、**［Save（保存）］** をクリックします。
 
    ```javascript lines
    function(user, context, callback){

@@ -41,9 +41,9 @@ Webtaskコンテナーが再利用されるたびに、または、Webtaskコン
 
 ## カスタム データベース接続環境チェックリスト
 
-* データベースに、ユーザープロファイル属性を保管する **id**、**nickname**、**email**、**password** などのフィールドがあることを確認してください。Auth0のユーザープロファイルスキームと予想されるフィールドの詳細については、「[正規化されたユーザープロファイル](/docs/ja-jp/manage-users/user-accounts/user-profiles/normalized-user-profiles)」を参照してください。ユーザープロファイルを更新する方法については、「[データベースを使用してユーザープロファイルを更新する](/docs/ja-jp/manage-users/user-accounts/user-profiles/update-user-profiles-using-your-database)」をお読みください。
+* データベースに、ユーザープロファイル属性を保管する **id** 、**nickname** 、**email** 、**password** などのフィールドがあることを確認してください。Auth0のユーザープロファイルスキームと予想されるフィールドの詳細については、「[正規化されたユーザープロファイル](/docs/ja-jp/manage-users/user-accounts/user-profiles/normalized-user-profiles)」を参照してください。ユーザープロファイルを更新する方法については、「[データベースを使用してユーザープロファイルを更新する](/docs/ja-jp/manage-users/user-accounts/user-profiles/update-user-profiles-using-your-database)」をお読みください。
 * カスタムデータベース接続で返されるエラーは、トラブルシューティングのために使用できます。
-* 返されたユーザープロファイルにある`id`（または`user_id`）プロパティは、Auth0によってユーザーの識別に使用されます。複数のカスタムデータベース接続を使用している場合は、**user ID** の競合を避けるために、**すべてのカスタムデータベース接続にわたって** **id** 値が一意である必要があります。**id** の値には、接続名をプレフィックス（スペースは削除）として追加することをお勧めします。ユーザーIDの詳細については、「[ユーザーを識別する](/docs/ja-jp/manage-users/user-accounts/identify-users)」をお読みください。
+* 返されたユーザープロファイルにある`id`（または`user_id`）プロパティは、Auth0によってユーザーの識別に使用されます。複数のカスタムデータベース接続を使用している場合は、**user ID** の競合を避けるために、** すべてのカスタムデータベース接続にわたって** **id** 値が一意である必要があります。** id** の値には、接続名をプレフィックス（スペースは削除）として追加することをお勧めします。ユーザーIDの詳細については、「[ユーザーを識別する](/docs/ja-jp/manage-users/user-accounts/identify-users)」をお読みください。
 * Auth0でホストされるユーザーストアと比較すると、レイテンシは大きくなります。
 * データベースまたはサービスはAuth0サーバーからアクセスできなければなりません。ストアがファイアウォールの背後にある場合は、受信接続を構成してください。
 

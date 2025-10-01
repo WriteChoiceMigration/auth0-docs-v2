@@ -9,9 +9,9 @@ permalink: "migrate-to-calling-api-with-access-tokens"
 'twitter:description': "Management APIの資格情報としてのIDトークン使用の非推奨化と、構成をアクセストークンに移行する方法について説明します。"
 ---
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>エンドポイントの呼び出しにIDトークンを使用することは非推奨となります。今後はアクセストークンを使用しなければなりません。この移行の猶予期間は、**2018年3月31日**に開始しました。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>エンドポイントの呼び出しにIDトークンを使用することは非推奨となります。今後はアクセストークンを使用しなければなりません。この移行の猶予期間は、**2018年3月31日** に開始しました。
 
-アクセストークンへの移行が完了したら、Dashboardで**［Allow <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">ID Tokens</Tooltip> for Management API v2 Authentication（Management API v2認証にIDトークンを許可する）］**を無効にします。
+アクセストークンへの移行が完了したら、Dashboardで**［Allow <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">ID Tokens</Tooltip> for Management API v2 Authentication（Management API v2認証にIDトークンを許可する）］** を無効にします。
 
 以下のいずれかのエンドポイントを呼び出すためにIDトークンを使用する場合、この移行による影響を受けます。これらのエンドポイントは、通常のアクセストークンを受け入れられるようになりました。エンドポイントの動作にその他の変更はありません。要求と応答のスキーマは同じままで、認可に使用するトークンの更新だけが必要です。
 
@@ -127,9 +127,9 @@ Management APIで実行できるアクションは、アクセストークンに
 
 Auth0は、前述のエンドポイントについてトークンを取得する方法を変更しました。ユーザーの認証とトークンの取得方法にはいくつか種類があり、認証に使用するテクノロジーと<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">OAuth 2.0</Tooltip>フローによって異なります。
 
-* **ブラウザーで動作するSPA**：認可エンドポイントを使用する。
-* **サーバー、モバイルアプリ、サーバープロセスまたは信頼性の高いアプリで動作するWebアプリ**：トークンエンドポイントを使用する。
-* **クロス認証**：異なるドメインから要求が来る場合、ユーザー認証には埋め込みのロックまたはauth0.jsを使用する。
+* **ブラウザーで動作するSPA** ：認可エンドポイントを使用する。
+* **サーバー、モバイルアプリ、サーバープロセスまたは信頼性の高いアプリで動作するWebアプリ** ：トークンエンドポイントを使用する。
+* **クロス認証** ：異なるドメインから要求が来る場合、ユーザー認証には埋め込みのロックまたはauth0.jsを使用する。
 
 #### 認可エンドポイント
 
@@ -300,7 +300,7 @@ codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 * `Authorization`ヘッダーでアクセストークンを使用し、付与されたアクセス許可が`update:users`の場合、要求のボディにはセカンダリアカウントの`user_id`またはIDトークンのいずれかを送信できます。
 * `Authorization`ヘッダーでアクセストークンを使用し、付与されたアクセス許可が`update:current_user_metadata`の場合、要求のボディにはセカンダリアカウントのIDトークンのみ送信できます。次のような条件があります。
 
-  + IDトークンは`RS256`を使用して署名される必要があります（この値は、**［Dashboard］>［Applications（アプリケーション）］>［Application Settings（アプリケーションの設定）］>［Advanced Settings（高度な設定）］>［OAuth］**から設定できます）
+  + IDトークンは`RS256`を使用して署名される必要があります（この値は、**［Dashboard］>［Applications（アプリケーション）］>［Application Settings（アプリケーションの設定）］>［Advanced Settings（高度な設定）］>［OAuth］** から設定できます）
   + IDトークンの`aud`クレームは、アプリケーションを特定し、アクセストークンの`azp`クレームと同じ値でなければいけません。
 
 ## 制限

@@ -51,11 +51,11 @@ API用のフォルダーを作成しそこに移動して`npm init`を実行し�
 
 次に、依存関係を設定する必要があります。以下のモジュールを使用します。
 
-* **express**：このモジュールは[Express Webアプリケーションフレームワーク](https://expressjs.com/)を追加します。
-* **cors**:このモジュールは[CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)を有効にするためのサポートを追加します。これは、APIがWebブラウザ内の別のドメインで実行されるシングルページアプリケーションから呼び出されるために必要です。
-* **jwks-rsa**：このライブラリーは、JWKS（JSON Web Key Set）エンドポイントからRSA署名鍵を取得します。`expressJwtSecret`を使用すると<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JWT</Tooltip>ヘッダーの`kid`に基づいて`express-jwt`に正しい署名鍵を提供するシークレットプロバイダーを生成することができます。詳細については、「[node-jwks-rsa GitHubリポジトリ](https://github.com/auth0/node-jwks-rsa)」を参照してください。
-* **express-jwt**:このモジュールは、Node.jsアプリケーションでJWTトークンを使用してHTTP要求を認証します。JWTを使用した作業を容易にする、いくつかの機能が提供されています。詳細については「[express-jwt GitHubリポジトリ](https://github.com/auth0/express-jwt)」を参照してください。
-* **body-parser**:これはNode.js本文解析ミドルウェアです。やり取りが簡単なものとして、受信要求ストリームから本文全部を抽出し、`req.body`で公開します。詳細および代替については、「body-parser GitHubリポジトリ」を参照してください。
+* **express** ：このモジュールは[Express Webアプリケーションフレームワーク](https://expressjs.com/)を追加します。
+* **cors** :このモジュールは[CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)を有効にするためのサポートを追加します。これは、APIがWebブラウザ内の別のドメインで実行されるシングルページアプリケーションから呼び出されるために必要です。
+* **jwks-rsa** ：このライブラリーは、JWKS（JSON Web Key Set）エンドポイントからRSA署名鍵を取得します。`expressJwtSecret`を使用すると<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JWT</Tooltip>ヘッダーの`kid`に基づいて`express-jwt`に正しい署名鍵を提供するシークレットプロバイダーを生成することができます。詳細については、「[node-jwks-rsa GitHubリポジトリ](https://github.com/auth0/node-jwks-rsa)」を参照してください。
+* **express-jwt** :このモジュールは、Node.jsアプリケーションでJWTトークンを使用してHTTP要求を認証します。JWTを使用した作業を容易にする、いくつかの機能が提供されています。詳細については「[express-jwt GitHubリポジトリ](https://github.com/auth0/express-jwt)」を参照してください。
+* **body-parser** :これはNode.js本文解析ミドルウェアです。やり取りが簡単なものとして、受信要求ストリームから本文全部を抽出し、`req.body`で公開します。詳細および代替については、「body-parser GitHubリポジトリ」を参照してください。
 
 これらの依存関係をインストールするには、次を実行します。
 
@@ -172,7 +172,7 @@ npm install express-jwt-authz --save
 
 ここで`jwtAuthz (...)`への呼び出しをミドルウェアに追加して、特定のエンドポイントを実行するために、特定のスコープがJWTに含まれていることを確認します。
 
-追加の依存関係を追加します。**express-jwt-authz**ライブラリーはexpress-jwtと組み合わせて使用され、[JWT](https://auth0.com/docs/tokens/concepts/jwts)を検証し、目的のエンドポイントを呼び出すための正しい権限を持っていることを保証します。詳細については、[［express-jwt-authz GitHubリポジトリ］](https://github.com/auth0/express-jwt-authz)を参照してください。
+追加の依存関係を追加します。**express-jwt-authz** ライブラリーはexpress-jwtと組み合わせて使用され、[JWT](https://auth0.com/docs/tokens/concepts/jwts)を検証し、目的のエンドポイントを呼び出すための正しい権限を持っていることを保証します。詳細については、[［express-jwt-authz GitHubリポジトリ］](https://github.com/auth0/express-jwt-authz)を参照してください。
 
 以下はサンプル実装を示します（簡潔にするために一部のコードは省略しています）。
 
@@ -207,7 +207,7 @@ JWTの検証に使われる`express-jwt`ミドルウェアは、JWTに含まれ�
 
 ただし、タイムシートアプリケーションの場合は、ユーザーの電子メールアドレスを一意の識別子として使用します。
 
-最初に行う必要があるのは、ユーザーの電子メールアドレスをアクセストークンに追加するルールを作成することです。Dashboardの[［Rules section（ルールセクション）］](https://manage.auth0.com/#/rules%7D)に移動し、**［Create Rule（ルールの作成）］**ボタンをクリックします。
+最初に行う必要があるのは、ユーザーの電子メールアドレスをアクセストークンに追加するルールを作成することです。Dashboardの[［Rules section（ルールセクション）］](https://manage.auth0.com/#/rules%7D)に移動し、**［Create Rule（ルールの作成）］** ボタンをクリックします。
 
 わかりやすい名前をルールに付けます。たとえば、`［Add email to Access Token（アクセストークンにメールアドレスを追加）］`など。次に、ルールのコードとして次のコードを使用します。
 

@@ -71,13 +71,13 @@ export const sections = [
 
       ### 許可されているオリジンを構成する
 
-      ネイティブアプリケーションからAuth0へ要求を送信できるようにするには、[アプリケーションの設定](https://manage.auth0.com/#/applications/%7ByourClientId%7D/settings)で次の**許可されているオリジン**を設定します。
+      ネイティブアプリケーションからAuth0へ要求を送信できるようにするには、[アプリケーションの設定](https://manage.auth0.com/#/applications/%7ByourClientId%7D/settings)で次の**許可されているオリジン** を設定します。
 
       <Info>
       サンプルプロジェクトに沿って進めている場合、iOSとAndroidでそれぞれ`capacitor://localhost, http://localhost`を設定します。
       </Info>
 
-      最後に、アプリケーションの**［Application Type（アプリケーションタイプ）］**が**［Native（ネイティブ）］**になっていることを[アプリケーションの設定](https://manage.auth0.com/#/applications/%7ByourClientId%7D/settings)で必ず確認してください。
+      最後に、アプリケーションの**［Application Type（アプリケーションタイプ）］** が**［Native（ネイティブ）］** になっていることを[アプリケーションの設定](https://manage.auth0.com/#/applications/%7ByourClientId%7D/settings)で必ず確認してください。
       </Section>
 
       <Section id={sections[2].id} title={sections[2].title} stepNumber="3">
@@ -106,18 +106,18 @@ export const sections = [
 
       `createAuth0`コンポーザブルは以下の構成を取ります。
 
-      - `domain`：Auth0 Dashboardで作成したアプリケーションの**［Settings（設定）］**にある`domain`値、またはAuth0の[カスタムドメイン機能](http://localhost:3000/docs/custom-domains)を使用する場合のカスタムドメインです。
-      - `clientId`：Auth0 Dashboardで作成したアプリケーションの**［Settings（設定）］**にあるクライアントID値です。
+      - `domain`：Auth0 Dashboardで作成したアプリケーションの**［Settings（設定）］** にある`domain`値、またはAuth0の[カスタムドメイン機能](http://localhost:3000/docs/custom-domains)を使用する場合のカスタムドメインです。
+      - `clientId`：Auth0 Dashboardで作成したアプリケーションの**［Settings（設定）］** にあるクライアントID値です。
       - `useRefreshTokens`：AndroidまたはiOSでauth0-vueをIonicと使用するには、リフレッシュトークンを有効にする必要があります。
       - `useRefreshTokensFallback`：AndroidまたはiOSでauth0-vueをIonicと使用するには、iframeのフォールバックを無効にする必要があります。
       - `authorizationParams.redirect_uri`：Auth0で認証した後に、ユーザーをリダイレクトするURLです。
 
       <Warning>
-      アプリケーションの閉開後に認証を継続するには、SDKを構成する際に`cacheLocation`を`localstorage`に設定することをお勧めします。ただし、[localstorageにトークンを保管するリスク](/docs/ja-jp/libraries/auth0-single-page-app-sdk#change-storage-options)を理解してください。また、状況によってはlocalstorageのデータが思いがけず復元される可能性もあるため、Capacitorアプリ内では**一次的**なものとして扱ってください。[Capacitorドキュメントに記載のストレージに関するガイド](https://capacitorjs.com/docs/guides/storage#why-cant-i-just-use-localstorage-or-indexeddb)をお読みください。
+      アプリケーションの閉開後に認証を継続するには、SDKを構成する際に`cacheLocation`を`localstorage`に設定することをお勧めします。ただし、[localstorageにトークンを保管するリスク](/docs/ja-jp/libraries/auth0-single-page-app-sdk#change-storage-options)を理解してください。また、状況によってはlocalstorageのデータが思いがけず復元される可能性もあるため、Capacitorアプリ内では**一次的** なものとして扱ってください。[Capacitorドキュメントに記載のストレージに関するガイド](https://capacitorjs.com/docs/guides/storage#why-cant-i-just-use-localstorage-or-indexeddb)をお読みください。
 
       さらに、より安全で永続的なストレージの仕組みが要件である場合、SDKを使用すると、[カスタムのキャッシュを実装](https://github.com/auth0/auth0-spa-js/blob/master/EXAMPLES.md#creating-a-custom-cache)してトークンを保管することができます。
 
-      **注意**：[CapacitorのStorageプラグイン](https://capacitorjs.com/docs/apis/storage)は、iOSでは[UserDefaults](https://developer.apple.com/documentation/foundation/userdefaults)、Androidでは[SharedPreferences](https://developer.android.com/reference/android/content/SharedPreferences)によってバックアップされるため、トークンの保管に使用**しない**ことをお勧めします。これらのAPIを使って保管されたデータは暗号化されません。セキュリティで保護されることもなく、クラウドと同期される可能性があります。
+      **注意** ：[CapacitorのStorageプラグイン](https://capacitorjs.com/docs/apis/storage)は、iOSでは[UserDefaults](https://developer.apple.com/documentation/foundation/userdefaults)、Androidでは[SharedPreferences](https://developer.android.com/reference/android/content/SharedPreferences)によってバックアップされるため、トークンの保管に使用**しない** ことをお勧めします。これらのAPIを使って保管されたデータは暗号化されません。セキュリティで保護されることもなく、クラウドと同期される可能性があります。
       </Warning>
 
       <Note>
@@ -161,7 +161,7 @@ export const sections = [
 
       Auth0 SDKを使用してIonicとCapacitorで実現するには、以下を行います。
 
-      - アプリについて、ログアウト後にAuth0のリダイレクト先となるURLを構築します。これは、登録済みのカスタムスキームとAuth0ドメインを使ったURLです。これを、Auth0 Dashboardの**［Allowed Logout URLs（許可されているログアウトURL）］**の構成に追加します。
+      - アプリについて、ログアウト後にAuth0のリダイレクト先となるURLを構築します。これは、登録済みのカスタムスキームとAuth0ドメインを使ったURLです。これを、Auth0 Dashboardの**［Allowed Logout URLs（許可されているログアウトURL）］** の構成に追加します。
       - `logout`を呼び出し、`logoutParams.returnTo`パラメーターにリダイレクト先のURLを渡して、SDKからログアウトします。
       - CapacitorのBrowserプラグインを使用して`Browser.open`でURLを開くコールバックに、`openUrl`パラメーターを設定します。
 

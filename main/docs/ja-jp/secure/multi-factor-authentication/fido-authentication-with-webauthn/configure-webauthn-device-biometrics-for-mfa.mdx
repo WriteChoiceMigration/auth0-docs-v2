@@ -19,7 +19,7 @@ WebAuthn入門と、Auth0がWebAuthnをセキュリティキーと[デバイス�
 
 <Warning>
 
-カスタムドメインを設定する場合は、WebAuthnを運用環境でロールアウトする**前に**行ってください。カスタムドメインを設定・変更すると、以前に登録したユーザーが認証できなくなります。
+カスタムドメインを設定する場合は、WebAuthnを運用環境でロールアウトする**前に** 行ってください。カスタムドメインを設定・変更すると、以前に登録したユーザーが認証できなくなります。
 
 ユーザーの認証に使用するドメインを指定するには、[［Relying Party（証明書利用者）］](#configure-relying-party)設定を使用します。
 
@@ -27,7 +27,7 @@ WebAuthn入門と、Auth0がWebAuthnをセキュリティキーと[デバイス�
 
 ## Dashboardの使用
 
-[［Dashboard］>［Security（セキュリティ）］>［Multifactor Auth（多要素認証）］](https://manage.auth0.com/#/security/mfa)に移動して、**［WebAuthn with Device Biometrics（生体認証デバイスを使用したWebAuthn）］**を有効にします。唯一の要素を有効にすることはできないため、追加の要素を有効にする必要があります。
+[［Dashboard］>［Security（セキュリティ）］>［Multifactor Auth（多要素認証）］](https://manage.auth0.com/#/security/mfa)に移動して、**［WebAuthn with Device Biometrics（生体認証デバイスを使用したWebAuthn）］** を有効にします。唯一の要素を有効にすることはできないため、追加の要素を有効にする必要があります。
 
 ## 証明書利用者を構成する
 
@@ -53,15 +53,15 @@ Auth0で証明書利用者IDを指定できるのは、カスタムドメイン�
 
 ### WindowsおよびiOS 14.5以降
 
-WindowsおよびiOS 14.5以降では、WebAuthnプラットフォームauthenticatorは**operating system level（オペレーティング システム レベル）**で登録されます。ユーザーは1つのブラウザで登録し、任意のブラウザでログインできます。Auth0がユーザーのデバイスが登録されていることを検出すると、Face ID / Touch ID / Windows Hello で認証するオプションが表示されます。同じデバイスで登録した場合は、認証できるようになります。そうでない場合は失敗し、別の認証方法を使用する必要があります。
+WindowsおよびiOS 14.5以降では、WebAuthnプラットフォームauthenticatorは**operating system level（オペレーティング システム レベル）** で登録されます。ユーザーは1つのブラウザで登録し、任意のブラウザでログインできます。Auth0がユーザーのデバイスが登録されていることを検出すると、Face ID / Touch ID / Windows Hello で認証するオプションが表示されます。同じデバイスで登録した場合は、認証できるようになります。そうでない場合は失敗し、別の認証方法を使用する必要があります。
 
 ### macOS
 
-Macでは、WebAuthnプラットフォームauthenticatorは**［browser（ブラウザ）］**システムレベルで登録されます。ユーザーは、使用するブラウザごとにWebAuthnに登録するよう求められます。Auth0は、ユーザーがMac上のChromeから登録したことを検出すると、Mac上のChromeからログインするときにTouch IDで認証するオプションが表示されます。同じMacから登録した場合は、認証できます。そうでない場合は認証は失敗し、別の認証方法を使用する必要があります。同じMacのSafariから登録しようとすると、他の認証方法で<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>を完了するように求められ、その後Touch IDで**［prompted to enroll（登録するように求められます）］**。
+Macでは、WebAuthnプラットフォームauthenticatorは**［browser（ブラウザ）］** システムレベルで登録されます。ユーザーは、使用するブラウザごとにWebAuthnに登録するよう求められます。Auth0は、ユーザーがMac上のChromeから登録したことを検出すると、Mac上のChromeからログインするときにTouch IDで認証するオプションが表示されます。同じMacから登録した場合は、認証できます。そうでない場合は認証は失敗し、別の認証方法を使用する必要があります。同じMacのSafariから登録しようとすると、他の認証方法で<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>を完了するように求められ、その後Touch IDで**［prompted to enroll（登録するように求められます）］** 。
 
 ### Android
 
-Androidでは、**Chromeのみ**がWebAuthnプラットフォームauthenticatorsシステムをサポートしています。Auth0は、ユーザーがAndroidデバイスを登録していることを検出すると、Androidの指紋/顔認識で認証するオプションが表示されます。同じAndroidデバイスで登録した場合は、認証が可能になります。そうでない場合は失敗し、別の認証方法を使用する必要があります。
+Androidでは、**Chromeのみ** がWebAuthnプラットフォームauthenticatorsシステムをサポートしています。Auth0は、ユーザーがAndroidデバイスを登録していることを検出すると、Androidの指紋/顔認識で認証するオプションが表示されます。同じAndroidデバイスで登録した場合は、認証が可能になります。そうでない場合は失敗し、別の認証方法を使用する必要があります。
 
 ## デバイス対応
 

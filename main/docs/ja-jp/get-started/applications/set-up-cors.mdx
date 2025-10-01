@@ -11,8 +11,8 @@ permalink: "set-up-cors"
 
 <Card title="Before you start">
 
-* セキュリティ上の理由により、アプリケーションのオリジンURLが承認済みURLのリストに含まれている必要があります。アプリケーションの**Allowed Callback URLs（許可されているコールバックURL）**に追加されていない場合は、**Allowed Origins (CORS)（許可されているオリジン（CORS））**のリストに追加する必要があります。
-* **Allowed Web Origins（許可されているWebオリジン）**が、アプリケーションの**Settings（設定）**ビューで要求を行うドメインに設定されていることを確認してください。URLはサブドメインにワイルドカードを含めることができますが、ドメインURLの後に相対パスは使用できません。詳細については、「[サブドメインのプレースホルダー](https://auth0.com/docs/get-started/applications/wildcards-for-subdomains)」をお読みください。
+* セキュリティ上の理由により、アプリケーションのオリジンURLが承認済みURLのリストに含まれている必要があります。アプリケーションの**Allowed Callback URLs（許可されているコールバックURL）** に追加されていない場合は、**Allowed Origins (CORS)（許可されているオリジン（CORS））** のリストに追加する必要があります。
+* **Allowed Web Origins（許可されているWebオリジン）** が、アプリケーションの**Settings（設定）** ビューで要求を行うドメインに設定されていることを確認してください。URLはサブドメインにワイルドカードを含めることができますが、ドメインURLの後に相対パスは使用できません。詳細については、「[サブドメインのプレースホルダー](https://auth0.com/docs/get-started/applications/wildcards-for-subdomains)」をお読みください。
 * [カスタムドメイン](https://auth0.com/docs/customize/custom-domains)を有効化しない場合は、cross-origin認証のフォールバックとして、Auth0.jsを使う検証ページを作成する必要があります。
 
 </Card>
@@ -24,13 +24,13 @@ CORSは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip=""
 ## cross-origin認証を構成する
 
 1. [［Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)の順に移動し、アプリケーションの名前をクリックして表示します。
-2. **［Cross-Origin Authentication（Cross-Origin認証）］**で、**［Allow Cross-Origin Authentication（Cross-Origin認証を許可する）］**をオンに切り替えます。
-3. **［Allowed Origins (CORS)（許可されているオリジン（CORS））］**に、アプリケーションのオリジンURLを入力します。オリジンについての詳細は、[Mozilla MDN Web Docs の「Origin」](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin)をご覧ください。
-4. **［Save Changes（変更を保存）］**をクリックします。
+2. **［Cross-Origin Authentication（Cross-Origin認証）］** で、**［Allow Cross-Origin Authentication（Cross-Origin認証を許可する）］** をオンに切り替えます。
+3. **［Allowed Origins (CORS)（許可されているオリジン（CORS））］** に、アプリケーションのオリジンURLを入力します。オリジンについての詳細は、[Mozilla MDN Web Docs の「Origin」](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin)をご覧ください。
+4. **［Save Changes（変更を保存）］** をクリックします。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-アプリケーションにCORSを使う必要がない場合は、**［Allow Cross-Origin Authentication（cross-origin認証を許可する）］**が無効であることを確認してください。
+アプリケーションにCORSを使う必要がない場合は、**［Allow Cross-Origin Authentication（cross-origin認証を許可する）］** が無効であることを確認してください。
 
 </Callout>
 
@@ -44,7 +44,7 @@ Chrome、Opera、Safariなど、サポートされていないブラウザーで
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-**Safari**の構成では、「サイト越えトラッキングを防ぐ」設定として[インテリジェントトラッキング防止機能](https://webkit.org/blog/7675/intelligent-tracking-prevention/)が使用されています。その結果、残念ながら認証にサードパーティクッキーを役立てることもできなくなります。ここで、[トークンの更新](https://auth0.com/docs/api-auth/token-renewal-in-safari)に及ぶ影響の一例をご紹介します。
+**Safari** の構成では、「サイト越えトラッキングを防ぐ」設定として[インテリジェントトラッキング防止機能](https://webkit.org/blog/7675/intelligent-tracking-prevention/)が使用されています。その結果、残念ながら認証にサードパーティクッキーを役立てることもできなくなります。ここで、[トークンの更新](https://auth0.com/docs/api-auth/token-renewal-in-safari)に及ぶ影響の一例をご紹介します。
 
 </Callout>
 
@@ -73,7 +73,7 @@ Chrome、Opera、Safariなど、サポートされていないブラウザーで
 
    サードパーティのクッキーが利用できない場合、Auth0.jsは異なるcross-origin検証フローを呼び出すためにiframeをレンダリングします。
 2. [［Dashboard］>［Applications（アプリケーション）］>［Applications（アプリケーション）］](https://manage.auth0.com/#/applications)の順に移動し、アプリケーションを選択して表示します。
-3. **［Cross-Origin Authentication（Cross-Origin認証）］**で、作成したコールバックページのURLを「**Cross-Origin Verification Fallback URL（Cross-Origin検証URL）** 」フィールドに追加します。
+3. **［Cross-Origin Authentication（Cross-Origin認証）］** で、作成したコールバックページのURLを「**Cross-Origin Verification Fallback URL（Cross-Origin検証URL）** 」フィールドに追加します。
 
    <Warning>
 
@@ -81,7 +81,7 @@ Chrome、Opera、Safariなど、サポートされていないブラウザーで
 
    </Warning>
 
-4. **［Save Changes（変更を保存）］**をクリックします。
+4. **［Save Changes（変更を保存）］** をクリックします。
 
 詳細については、[GitHubのcross-origin認証サンプル](https://github.com/auth0/lock/blob/master/support/callback-cross-auth.html)をご覧ください。
 

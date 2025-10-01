@@ -22,9 +22,9 @@ permalink: "configure-push-notifications-for-mfa"
 
 Guardianからプッシュ通知を受け取るには、まずGuardianのデフォルトのSNS設定を上書きする必要があります。その後、AndroidとiOS用のプッシュ通知を構成することができます。
 
-1. Auth0 Dashboardから、[［Security（セキュリティ）］>［Multi-factor Auth（多要素認証）］](https://manage.auth0.com/#/security/mfa)に移動し、**［Push via Auth0 Guardian（Auth0 Guardian経由でプッシュ）］**を選択します。メソッドが非アクティブの場合は、右上にあるトグルで有効にします。
-2. **［Custom（カスタム）］**を選択し、追加設定を表示します。
-3. ［Push Notification Service（プッシュ通知サービス）］セクションで**［Amazon SNS］**を選択します。
+1. Auth0 Dashboardから、[［Security（セキュリティ）］>［Multi-factor Auth（多要素認証）］](https://manage.auth0.com/#/security/mfa)に移動し、**［Push via Auth0 Guardian（Auth0 Guardian経由でプッシュ）］** を選択します。メソッドが非アクティブの場合は、右上にあるトグルで有効にします。
+2. **［Custom（カスタム）］** を選択し、追加設定を表示します。
+3. ［Push Notification Service（プッシュ通知サービス）］セクションで**［Amazon SNS］** を選択します。
 
 <Frame>![［Auth0 Dashboard］ > ［Security（セキュリティ）］ > ［Multi-factor Auth（多要素認証）］ > ［Guardian］ > ［Custom（カスタム）］ > ［Amazon SNS］](/images/ja-jp/cdy7uua7fh8z/6PKSyH99GJ2CalJoG38sfZ/43644347942a224b271008b358afde0c/2025-01-27_11-22-59.png)</Frame>
 
@@ -51,7 +51,7 @@ Guardianからプッシュ通知を受け取るには、まずGuardianのデフ�
 </tr>
 </tbody>
 </table>
-2. **［Save（保存）］**を選択して変更を完了します。
+2. **［Save（保存）］** を選択して変更を完了します。
 
 ## FCMを使用してAndroid用のプッシュ通知を構成する
 
@@ -60,8 +60,8 @@ Guardianからプッシュ通知を受け取るには、まずGuardianのデフ�
 Auth0 DashboardでAndroidのプッシュ通知を構成するには、まずFCMサーバーの資格情報を取得します。詳細については、Googleの「[Firebaseドキュメント](https://firebase.google.com/docs/admin/setup#initialize-sdk)」を参照してください。
 
 1. Firebaseコンソールに移動し、該当プロジェクトを選択します。
-2. **［Settings（設定）］**メニューを開き、**［Service Accounts（サービスアカウント）］**を選択してください。
-3. **［Generate New Private Key（新しい秘密鍵を生成）］**を選択すると、資格情報ファイルをダウンロードすることができます。
+2. **［Settings（設定）］** メニューを開き、**［Service Accounts（サービスアカウント）］** を選択してください。
+3. **［Generate New Private Key（新しい秘密鍵を生成）］** を選択すると、資格情報ファイルをダウンロードすることができます。
 
 資格情報を取得したあと、Auth0 Dashboardでプッシュ通知を構成することができます。
 
@@ -69,8 +69,8 @@ Auth0 DashboardでAndroidのプッシュ通知を構成するには、まずFCM�
 
 資格情報を取得したあと、Auth0 DashboardからAndroidのプッシュ通知を構成することができます。
 
-1. [［Security（セキュリティ）］ > ［Multi-factor Auth（多要素認証）］](https://manage.auth0.com/#/guardian)に移動し、**［Push Notification using Auth0 Guardian（Auth0 Guardianを使ったプッシュ通知）］**を選択します。
-2. ［Push Notification App（プッシュ通知アプリ）］セクションから、**［Custom（カスタム）］**を選択し、追加設定を取得します。
+1. [［Security（セキュリティ）］ > ［Multi-factor Auth（多要素認証）］](https://manage.auth0.com/#/guardian)に移動し、**［Push Notification using Auth0 Guardian（Auth0 Guardianを使ったプッシュ通知）］** を選択します。
+2. ［Push Notification App（プッシュ通知アプリ）］セクションから、**［Custom（カスタム）］** を選択し、追加設定を取得します。
 3. ［Android App Configuration（Androidアプリ構成）］セクションで次の設定を行います。
 
    <table class="table"><thead>
@@ -94,7 +94,7 @@ Auth0 DashboardでAndroidのプッシュ通知を構成するには、まずFCM�
 </tr>
 </tbody>
 </table>
-4. **［Save（保存）］**を選択して、変更を完了します。
+4. **［Save（保存）］** を選択して、変更を完了します。
 
 </Tab></Tabs>
 
@@ -106,7 +106,7 @@ Auth0 DashboardでiOSのプッシュ通知を構成するには、まずAPN証�
 
 1. Apple開発者アカウントから[新しいAPN証明書](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns#2947597)を生成します。
 2. 証明書を自分のデバイスにインストールします。
-3. キーチェーンアクセスで、**Apple Sandboxプッシュサービス：｛Appld｝**証明書を見つけます。
+3. キーチェーンアクセスで、**Apple Sandboxプッシュサービス：｛Appld｝** 証明書を見つけます。
 4. パスワードを入力せずP12ファイルへ証明書と関連秘密鍵をエクスポートします（デフォルト名：`Certificates.p12`）。
 5. RC2の代わりにTriple DESを使用してP12ファイルを生成するには、
 
@@ -128,8 +128,8 @@ Auth0 DashboardでiOSのプッシュ通知を構成するには、まずAPN証�
 
 資格情報を取得したあと、Auth0 DashboardからiOSのプッシュ通知を構成することができます。
 
-1. [［Security（セキュリティ）］ > ［Multi-factor Auth（多要素認証）］](https://manage.auth0.com/#/guardian)に移動し、**［Push Notification using Auth0 Guardian（Auth0 Guardianを使ったプッシュ通知）］**を選択します。
-2. ［Push Notification App（プッシュ通知アプリ）］セクションから、**［Custom（カスタム）］**を選択し、追加設定を取得します。
+1. [［Security（セキュリティ）］ > ［Multi-factor Auth（多要素認証）］](https://manage.auth0.com/#/guardian)に移動し、**［Push Notification using Auth0 Guardian（Auth0 Guardianを使ったプッシュ通知）］** を選択します。
+2. ［Push Notification App（プッシュ通知アプリ）］セクションから、**［Custom（カスタム）］** を選択し、追加設定を取得します。
 3. ［iOS App Configuration（iOSアプリ構成）］セクションで次の設定を行います。
 
    <table class="table"><thead>
@@ -161,7 +161,7 @@ Auth0 DashboardでiOSのプッシュ通知を構成するには、まずAPN証�
 </tr>
 </tbody>
 </table>
-4. **［Save（保存）］**を選択して、変更を完了します。
+4. **［Save（保存）］** を選択して、変更を完了します。
 
 </Tab></Tabs>
 

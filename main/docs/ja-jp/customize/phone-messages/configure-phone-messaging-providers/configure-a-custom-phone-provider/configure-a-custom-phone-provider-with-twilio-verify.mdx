@@ -25,9 +25,9 @@ Twilio Verifyサービスは[Twilio Console](https://www.twilio.com/console/veri
 
 ## カスタム電話プロバイダーをTwilio Verifyと接続する
 
-1. Auth0 Dashboardで[［Branding（ブランディング）］>［Phone Provider（電話プロバイダー）］](https://manage.auth0.com/dashboard/#/phone/templates/phone/provider)に移動して、**［Phone Message Provider（電話メッセージプロバイダー）］**ページを開きます。
-2. **［Phone Provider（電話プロバイダー）］**に**［Custom（カスタム）］**を選択します。
-3. **［Provider Configuration（プロバイダー構成）］**の下に次のサンプルコードを追加して、Twilio APIがユーザーの電話番号にメッセージを送信できるようにします。
+1. Auth0 Dashboardで[［Branding（ブランディング）］>［Phone Provider（電話プロバイダー）］](https://manage.auth0.com/dashboard/#/phone/templates/phone/provider)に移動して、**［Phone Message Provider（電話メッセージプロバイダー）］** ページを開きます。
+2. **［Phone Provider（電話プロバイダー）］** に**［Custom（カスタム）］** を選択します。
+3. **［Provider Configuration（プロバイダー構成）］** の下に次のサンプルコードを追加して、Twilio APIがユーザーの電話番号にメッセージを送信できるようにします。
 
 ```javascript lines
 /**
@@ -59,17 +59,17 @@ exports.onExecuteCustomPhoneProvider = async (event, api) => {
 };
 ```
 
-3. **［鍵］**アイコンをクリックして、**［Secrets（シークレット）］**メニューを開きます。Twilio Verifyサービス設定から以下の値を追加します。
+3. **［鍵］** アイコンをクリックして、**［Secrets（シークレット）］** メニューを開きます。Twilio Verifyサービス設定から以下の値を追加します。
 
 * TWILIO_ACCOUNT_SID
 * TWILIO_AUTH_TOKEN
 * TWILIO_VERIFY_SID
 
-4. Twilioヘルパーライブラリーを読み込むには、**［Dependency（依存関係）］**アイコンをクリックします。そして、**［Add Dependency（依存関係の追加）］**ボタンをクリックします。**［Add Dependency（依存関係の追加）］**ポップアップウィンドウが開いたら、以下を入力します。
+4. Twilioヘルパーライブラリーを読み込むには、**［Dependency（依存関係）］** アイコンをクリックします。そして、**［Add Dependency（依存関係の追加）］** ボタンをクリックします。**［Add Dependency（依存関係の追加）］** ポップアップウィンドウが開いたら、以下を入力します。
 
-* **［Name（名前）］：**Twilio
-* **［Version（バージョン）］：**最新（自動入力されるはずです）
+* **［Name（名前）］：** Twilio
+* **［Version（バージョン）］：** 最新（自動入力されるはずです）
 
-**［Create（作成）］**クリックすると、Auth0がTwilioヘルパーライブラリーを探して最新バージョンを読み込みます。
+**［Create（作成）］** クリックすると、Auth0がTwilioヘルパーライブラリーを探して最新バージョンを読み込みます。
 
-5. **［Save（保存）］**をクリックします。**［Save（保存）］**をクリックすると、アクションが自動的に保存されてデプロイされます。運用環境で使い始める前に、カスタム電話プロバイダーをテストするには、**［Send Test Message（テストメッセージの送信）］**をクリックします。
+5. **［Save（保存）］** をクリックします。**［Save（保存）］** をクリックすると、アクションが自動的に保存されてデプロイされます。運用環境で使い始める前に、カスタム電話プロバイダーをテストするには、**［Send Test Message（テストメッセージの送信）］** をクリックします。

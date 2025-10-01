@@ -9,7 +9,7 @@ permalink: "logout-return-to"
 'twitter:description': "2021年12月1日付でログアウトの動作が変更され、ログアウトの実行中にIDプロバイダーから/login/callbackに渡されるreturnToクエリパラメーターを使用する代わりに、Auth0ログアウトAPIに渡されるURIにユーザーを常にリダイレクトするようになりました。"
 ---
 
-**2021年12月1日**にログアウトの動作が変更され、ログアウトの実行中にIDプロバイダーから`/login/callback`に渡される`returnTo`クエリパラメーターを使用する代わりに、Auth0ログアウトAPIに渡されるURIにユーザーを常にリダイレクトするようになりました。使用されるURIは、セッションのログアウト要求で呼び出されるAPIによって異なります。
+**2021年12月1日** にログアウトの動作が変更され、ログアウトの実行中にIDプロバイダーから`/login/callback`に渡される`returnTo`クエリパラメーターを使用する代わりに、Auth0ログアウトAPIに渡されるURIにユーザーを常にリダイレクトするようになりました。使用されるURIは、セッションのログアウト要求で呼び出されるAPIによって異なります。
 
 * `https://{yourDomain}/logout`：Auth0は`returnTo`パラメーターを使用します
 * `https://{yourDomain}/v2/logout?federated`：Auth0は`returnTo`パラメーターを使用します
@@ -25,7 +25,7 @@ permalink: "logout-return-to"
 * `https://{yourDomain}/wsfed/{yourClientId}?wa=wsignout1.0`：`wreply`クエリを使用して、[WS-FedプロトコルでAuth0からログアウト](/docs/ja-jp/authenticate/protocols/ws-fed-protocol)
 * `https://{yourDomain}/login/callback`：`returnTo`クエリパラメーターを使用する場合
 
-以下の使用パターンに依存しているテナントは、**2021年12月1日**以降、希望のリダイレクトURIにリダイレクトできなくなります。
+以下の使用パターンに依存しているテナントは、**2021年12月1日** 以降、希望のリダイレクトURIにリダイレクトできなくなります。
 
 1. アプリケーションがログアウトURLを指定するのに、`/v2/logout or /wsfed/{yourClient}?wa=wsignout1.0`を先に呼び出すことなく、`/login/callback?returnTo`を呼び出す
 2. IDプロバイダーが`/login/callback?returnTo`の呼び出しに指定する`returnTo`値が、以前の`/v2/logout`または`/wsfed/{yourClientId}`への呼び出しで提供された元の値と異なる
@@ -47,11 +47,11 @@ permalink: "logout-return-to"
 
 ### 移行を確認する
 
-アプリケーションを移行して、廃止された使用パターンに依存していないことを確認したら、**2021年12月1日**までの任意のタイミングで廃止された動作を無効化し、変更を確認します。
+アプリケーションを移行して、廃止された使用パターンに依存していないことを確認したら、**2021年12月1日** までの任意のタイミングで廃止された動作を無効化し、変更を確認します。
 
-1. [［Auth0 Dashboard］>［Tenant Settings（テナントの設定）］>［Advanced（詳細設定）］](https://manage.auth0.com/#/tenant/advanced)に移動して、**［Migrations（移行）］**セクションを見つけます。
-2. **［Unvalidated redirects from /login/callback（/login/callbackからの未検証のリダイレクト）］**スイッチを無効に設定します。このスイッチをオフにすると、廃止された動作がテナントで無効となり、使用を防ぐことができます。
+1. [［Auth0 Dashboard］>［Tenant Settings（テナントの設定）］>［Advanced（詳細設定）］](https://manage.auth0.com/#/tenant/advanced)に移動して、**［Migrations（移行）］** セクションを見つけます。
+2. **［Unvalidated redirects from /login/callback（/login/callbackからの未検証のリダイレクト）］** スイッチを無効に設定します。このスイッチをオフにすると、廃止された動作がテナントで無効となり、使用を防ぐことができます。
 
 このスイッチを無効にした後で、ログアウトURLへのリダイレクトが期待どおりに動作しない場合には、アプリケーションが廃止された動作にまだ依存していることを示しています。
 
-移行が運用環境で正常に動作し、確認できた場合には、このスイッチをオフにしたままにできます。これで、廃止された機能は今後使用されなくなります。**2021年12月1日**付で、Auth0は廃止された動作とそれに関連するスイッチを完全に削除します。
+移行が運用環境で正常に動作し、確認できた場合には、このスイッチをオフにしたままにできます。これで、廃止された機能は今後使用されなくなります。**2021年12月1日** 付で、Auth0は廃止された動作とそれに関連するスイッチを完全に削除します。

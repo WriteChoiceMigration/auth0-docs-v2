@@ -9,7 +9,7 @@ permalink: "2019-01-10-rules"
 'twitter:description': "不適切なカスタムルールコードによって認証フローに脆弱性が生じるケースについて。"
 ---
 
-**公開日**：2019年1月10日
+**公開日** ：2019年1月10日
 
 ## 概要
 
@@ -116,9 +116,9 @@ function (user, context, callback) {
 
 ### 対策
 
-**サイレント認証のシナリオに該当する場合**は、`prompt === 'none'`に基づく条件ロジックを削除してください。これにより、サイレント認証呼び出しのたびに、セッションステータスの確認のため多要素認証をトリガーするようになります。
+**サイレント認証のシナリオに該当する場合** は、`prompt === 'none'`に基づく条件ロジックを削除してください。これにより、サイレント認証呼び出しのたびに、セッションステータスの確認のため多要素認証をトリガーするようになります。
 
-**リダイレクトを伴うサイレント認証のシナリオに該当する場合**は、`prompt === 'none'`に基づく条件ロジックを削除して、Auth0がサポートしている多要素認証プロバイダーに切り替えてください。
+**リダイレクトを伴うサイレント認証のシナリオに該当する場合** は、`prompt === 'none'`に基づく条件ロジックを削除して、Auth0がサポートしている多要素認証プロバイダーに切り替えてください。
 
 ユーザーに頻繁にMFAを求めないようにするには、`allowRememberBrowser`パラメーターをtrueに設定します。これにより、チェックボックスを選択したエンドユーザーは30日おきにしか多要素認証を求められなくなります。例：
 
@@ -131,7 +131,7 @@ context.multi-factor = {
 
 頻繁な多要素認証を省くために、チェックボックスを選択するようエンドユーザーに通知することを推奨します。
 
-**MFAをスキップする不適切な検証を使ったルールに該当する場合**は、適切な検証を使用するか、MFAの例外を完全に廃止するか、上記の`allowRememberBrowser`の構成オプションを使用してください。
+**MFAをスキップする不適切な検証を使ったルールに該当する場合** は、適切な検証を使用するか、MFAの例外を完全に廃止するか、上記の`allowRememberBrowser`の構成オプションを使用してください。
 
 ### この更新はユーザーに影響を与えますか？
 
@@ -158,7 +158,7 @@ context.multi-factor = {
 
 `const emailSplit = user.email.split('@'); const userEmailDomain = emailSplit[emailSplit.length - 1].toLowerCase();`
 
-詳しくは、[「接続エイリアスに照らしてドメインを確認する」ルールテンプレート](https://github.com/auth0/rules/blob/master/src/rules/check-domains-against-connection-aliases.js)を参照してください。または、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>の**［Rules（ルール）］**セクションで「**Check if user email domain matches configured domain（ユーザーのメールドメインが構成済みドメインと一致するかを確認する）**」という名前のルールテンプレートをご覧ください。
+詳しくは、[「接続エイリアスに照らしてドメインを確認する」ルールテンプレート](https://github.com/auth0/rules/blob/master/src/rules/check-domains-against-connection-aliases.js)を参照してください。または、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>の**［Rules（ルール）］** セクションで「**Check if user email domain matches configured domain（ユーザーのメールドメインが構成済みドメインと一致するかを確認する）** 」という名前のルールテンプレートをご覧ください。
 
 ### この更新はユーザーに影響を与えますか？
 
@@ -190,7 +190,7 @@ request.post({
 
 各要求に紐づけられている`id_token`や`access_token`が公開される可能性があるため、ルールを修正して、コンテキストオブジェクト全体をrequestbinに送信しないようにする必要があります。代わりに、コンテキストオブジェクトから、より機密性の低い、属性のサブセットを送信するようにします。
 
-詳細については、[「Requestbin」のルールテンプレート](https://github.com/auth0/rules/blob/master/src/rules/requestbin.js)を参照してください。または、Auth0 Dashboardの**［Rules（ルール）］**セクションで、**［Dump rule variables to RequestBin（ルール変数をRequestBinにダンプする）］**という名前のルールテンプレートをご覧ください。
+詳細については、[「Requestbin」のルールテンプレート](https://github.com/auth0/rules/blob/master/src/rules/requestbin.js)を参照してください。または、Auth0 Dashboardの**［Rules（ルール）］** セクションで、**［Dump rule variables to RequestBin（ルール変数をRequestBinにダンプする）］** という名前のルールテンプレートをご覧ください。
 
 また、Auth0では、外部サービスに情報を送信することなくルールをデバッグする、組み込みの方法も提供しています。
 
@@ -294,7 +294,7 @@ function (user, context, callback) {
 
 ### 対策
 
-Auth0 Dashboardのメインの**［Rules（ルール）］**セクションにある**［Settings（設定）］**領域に機密性の高い値を配置し、次を使ってルールでアクセスします。
+Auth0 Dashboardのメインの**［Rules（ルール）］** セクションにある**［Settings（設定）］** 領域に機密性の高い値を配置し、次を使ってルールでアクセスします。
 
 `const myApiKey = configuration.myApiKey;`
 

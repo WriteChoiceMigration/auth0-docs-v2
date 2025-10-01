@@ -17,8 +17,8 @@ permalink: "manage-refresh-tokens-actions"
 
 リフレッシュトークンに[アクション](/docs/ja-jp/customize/actions)を使用すると、認証後のリスク検出と応答機能を構成して、アプリケーションとユーザーを侵害されたリフレッシュトークンから保護することができます。[リフレッシュトークンの有効期限](/docs/ja-jp/secure/tokens/refresh-tokens/configure-refresh-token-expiration)を動的にカスタマイズすることもできます。
 
-* **event.refresh_token**：`creation`、`expiry dates`、`associated clients`、`resource servers`、`device`のコンテキストなどの関連情報と、ブラウザーベースのフローに`session_id`を提供します。
-* **api.refreshToken**：セッションを取り消すか、有効期限日を変更することで、既存のリフレッシュトークンを管理することができます。
+* **event.refresh_token** ：`creation`、`expiry dates`、`associated clients`、`resource servers`、`device`のコンテキストなどの関連情報と、ブラウザーベースのフローに`session_id`を提供します。
+* **api.refreshToken** ：セッションを取り消すか、有効期限日を変更することで、既存のリフレッシュトークンを管理することができます。
 
 これを容易にするために、ログイン後のアクションには以下の2つの重要なオブジェクトがあります。
 
@@ -37,7 +37,7 @@ event.refresh_tokenとapi.refreshTokenオブジェクトは両方とも、[リ�
 
 ### イベントログの取り消しを監視する
 
-ポストログインの**api.refreshToken.revoke(reason)**メソッドを使用すると、トランザクションに関したリスクに対処することができます。このメソッドでは以下を行うことができます。
+ポストログインの**api.refreshToken.revoke(reason)** メソッドを使用すると、トランザクションに関したリスクに対処することができます。このメソッドでは以下を行うことができます。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -56,8 +56,8 @@ event.refresh_tokenとapi.refreshTokenオブジェクトは両方とも、[リ�
 
 リフレッシュトークンが以前に認証されたセッションにバインドされている場合、ログには、`session_id`属性に認証済みセッションへの参照が含まれます。
 
-* **api.refreshToken.setExpiresAt(Date)**は、特定のリフレッシュトークンに新しい絶対ライフタイムを定義できるようにします。
-* **api.refreshToken.setIdleExpiresAt(Date)**は、特定のリフレッシュトークンに新しい非アクティブタイムアウトを設定できるようにします。
+* **api.refreshToken.setExpiresAt(Date)** は、特定のリフレッシュトークンに新しい絶対ライフタイムを定義できるようにします。
+* **api.refreshToken.setIdleExpiresAt(Date)** は、特定のリフレッシュトークンに新しい非アクティブタイムアウトを設定できるようにします。
 * 特定ユーザーのグループメンバーシップまたはプロファイル
 * リスク評価
 * アクションの実行中に使用できる他の動的条件

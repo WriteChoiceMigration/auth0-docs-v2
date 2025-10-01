@@ -36,13 +36,13 @@ export const sections = [
     それぞれのAuth0 APIにはAPI識別子があり、アプリケーションにアクセストークンの検証で使用されます。
 
     <Info>
-    **Auth0を初めてご利用ですか？**Auth0の仕組みと、OAuth 2.0フレームワークを用いたAPI認証と認可の実装について説明します。
+    **Auth0を初めてご利用ですか？** Auth0の仕組みと、OAuth 2.0フレームワークを用いたAPI認証と認可の実装について説明します。
     </Info>
 
       <Section id={sections[0].id} title={sections[0].title} stepNumber="1">
       アクセス許可は、ユーザーの代わりに、提供されたアクセストークンを使ってどのようにしてリソースにアクセスできるのかを定義できるようにします。たとえば、ユーザーがマネージャーアクセスレベルを持つ場合には、`messages`リソースに対して読み取りアクセスを付与し、管理者アクセスレベルを持つ場合には、書き込みアクセスを付与することができます。
 
-      Auth0 Dashboardの[［API］](https://manage.auth0.com/#/apis)セクションにある**［Permissions（権限）］**ビューで使用可能なアクセス許可を定義することができます。以下の例では`read:messages`スコープを使用します。
+      Auth0 Dashboardの[［API］](https://manage.auth0.com/#/apis)セクションにある**［Permissions（権限）］** ビューで使用可能なアクセス許可を定義することができます。以下の例では`read:messages`スコープを使用します。
 
       <Frame>![［Auth0 Dashboard］>［Applications（アプリケーション）］>［APIs］>［Specific API（特定のAPI］>［Permissions（権限）］タブ](/images/ja-jp/cdy7uua7fh8z/1s3Yp5zqJiKiSWqbPSezNO/acef814282795bef6921535f044f96e9/Quickstarts_API.png)</Frame>
       </Section>
@@ -74,7 +74,7 @@ export const sections = [
       </Section>
 
       <Section id={sections[4].id} title={sections[4].title} stepNumber="5">
-      JWTミドルウェアは、要求に含まれたアクセストークンが有効であることを検証しますが、現時点では、トークンが要求されたリソースへのアクセスに十分な**scope**を持っているのかを確認する手段はありません。
+      JWTミドルウェアは、要求に含まれたアクセストークンが有効であることを検証しますが、現時点では、トークンが要求されたリソースへのアクセスに十分な**scope** を持っているのかを確認する手段はありません。
 
       `System.Web.Http.AuthorizeAttribute`を継承する`ScopeAuthorizeAttribute`という名前のクラスを作成してください。この属性はAuth0テナントが発行した`scope`クレームが存在することを確認し、存在する場合には、`scope`クレームが要求されたスコープを含んでいることを確認します。
       </Section>

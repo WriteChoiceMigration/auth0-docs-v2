@@ -33,7 +33,7 @@ permalink: "tenant-hostname-migration"
 
    1. ログで「`type:depnote AND description:ignore*request*host*header*`」を検索し、どのアプリケーションが影響を受けて移行する必要があるのかを記載した廃止通知を見つけます。ログエントリには影響を受けるアプリケーションのIDと以下のメッセージが含まれています。
       `Ignore request Host header: This feature is being deprecated. Please see https://auth0.com/docs/ja-jp/product-lifecycle/deprecations-and-migrations``/tenant-hostname-migration.`（要求のHostヘッダーを無視してください。この機能は廃止されました。）
-   2. ログの**Details > Raw**セクションを見つけます。ここでは、更新するアプリケーションの`client_id`、またはプロビジョニングエンドポイントの場合は`connection_id`を識別できます。
+   2. ログの**Details > Raw** セクションを見つけます。ここでは、更新するアプリケーションの`client_id`、またはプロビジョニングエンドポイントの場合は`connection_id`を識別できます。
 
       <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -53,7 +53,7 @@ permalink: "tenant-hostname-migration"
 アプリケーションを移行し、未検証のホスト名を設定したら、2022年6月9日または2022年9月9日より前の任意の時点で廃止の動作を無効にして変更を確認します。
 
 1. [［Dashboard］>［Tenant Settings（テナント設定）］>［Advanced（詳細設定）］>［Migration（移行）］](https://manage.auth0.com/#/tenant/advanced)に移動します。
-2. **［Ignore request Host header（要求ホストヘッダーを無視）］** トグルを無効にします**。**このトグルを無効にすると、テナントの検証が強制され、移行が完了します。
+2. **［Ignore request Host header（要求ホストヘッダーを無視）］** トグルを無効にします** 。**このトグルを無効にすると、テナントの検証が強制され、移行が完了します。
 
 このトグルを無効にした後にホスト名の確認が期待どおりに機能しない場合は、`client_id`または`connection_id`に関連付けられているドメインテナントとテナントが同じではないことを示す4xxエラーが表示されます。
 

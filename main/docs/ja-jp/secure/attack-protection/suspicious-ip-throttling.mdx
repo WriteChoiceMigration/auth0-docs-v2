@@ -49,8 +49,8 @@ Auth0では、不審なIPのスロットリングを無効化しないことを�
 
 1. [［Dashboard］>［Security（セキュリティ）］>［Attack Protection（攻撃防御）］](https://manage.auth0.com/#/security/attack-protection)に移動し、**［Suspicious IP Throttling（不審なIPスロットリング）］** を選択します。
 2. **［Response （応答）］** セクションを見つけます。
-3. **［Block Settings（ブロック設定）］** セクションで、**［Limit high-velocity traffic targeting too many accounts（多数のアカウントをターゲットとする高速トラフィックを制限する）］** を有効にして、ログインまたはサインアップしきい値を超えるIPアドレスからのトラフィックを制限します。
-4. **［Notifications（通知）］** セクションで、**［Send notification to account administrator（アカウント管理者に通知を送信する）］** を有効にして、IP アドレスがログインまたはサインアップしきい値を超えたときにテナント管理者に自動的にメールを送信します。
+3. **［Block Settings（ブロック設定）］** セクションで、** ［Limit high-velocity traffic targeting too many accounts（多数のアカウントをターゲットとする高速トラフィックを制限する）］** を有効にして、ログインまたはサインアップしきい値を超えるIPアドレスからのトラフィックを制限します。
+4. **［Notifications（通知）］** セクションで、** ［Send notification to account administrator（アカウント管理者に通知を送信する）］** を有効にして、IP アドレスがログインまたはサインアップしきい値を超えたときにテナント管理者に自動的にメールを送信します。
 5. **［Save（保存）］** を選択します。
 
 ## スロットリングの制限値とレートを設定する
@@ -70,13 +70,13 @@ Auth0では、不審なIPのスロットリングをカスタマイズできま�
 3. **［Suspicious IP Thresholds（不審なIPしきい値）］** で **［カスタム（Custom）］** を選択します。
 4. **［Login Threshold（ログインしきい値）］** 設定を構成します。
 
-   * **最大試行回数**:1つのIPアドレスが失敗できるログイン試行回数（1日当たり）を入力します。この値を超えるとAuth0にブロックされます。
-   * **スロットリングレート**:新しいログイントークンを付与するレートを入力します。
+   * **最大試行回数** :1つのIPアドレスが失敗できるログイン試行回数（1日当たり）を入力します。この値を超えるとAuth0にブロックされます。
+   * **スロットリングレート** :新しいログイントークンを付与するレートを入力します。
 5. **［Signup Threshold（サインアップしきい値）］** 設定を構成します。
 
-   * **最大試行回数**:：1つのIPアドレスからのサインアップ試行回数（1分当たり）を入力します。この値を超えるとAuth0にブロックされます。
-   * **スロットリングレート**:：新しいサインアップトークンを付与するレートを入力します。
-6. **［Save（保存）］**を選択します。
+   * **最大試行回数** :：1つのIPアドレスからのサインアップ試行回数（1分当たり）を入力します。この値を超えるとAuth0にブロックされます。
+   * **スロットリングレート** :：新しいサインアップトークンを付与するレートを入力します。
+6. **［Save（保存）］** を選択します。
 
 ### 不審なIPのスロットリングの仕組み
 
@@ -102,8 +102,8 @@ Auth0は、1分間にサインアップ試行の合計回数が多すぎるIPア
 
 不審なIPのスロットリングは、ユーザーのIPアドレスに応じて行われるため、次のようなユースケースではさらなる設定が必要になります。
 
-* **アプリケーションのバックエンドからリソース所有者のパスワード付与を使用している**:この呼び出しでは、ユーザーのIPアドレスが取得されませんが、不審なIPのスロットリングを正常に機能させるために、要求の一部としてユーザーのIPアドレスを送信するようアプリケーションを設定することができます。[リソース所有者のパスワードフローと攻撃防御のよくある不具合を回避するサーバーからユーザーのIPアドレスを送信します](/docs/ja-jp/get-started/authentication-and-authorization-flow/resource-owner-password-flow/avoid-common-issues-with-resource-owner-password-flow-and-attack-protection)を参照:。
-* **同一のIPアドレスから多数のユーザーを認証**:複数のユーザーが1つのプロキシを経由すると、制限回数に達してアクセス制限を引き起こしがちです。そのようなプロキシの場合、IPとCIDRレンジをAllowListに含めれば、不意のアクセス制限を防げます。[リソース所有者のパスワードフローと攻撃防御のよくある不具合を回避するIPアドレスを信頼するようにアプリケーションを構成します](/docs/ja-jp/get-started/authentication-and-authorization-flow/resource-owner-password-flow/avoid-common-issues-with-resource-owner-password-flow-and-attack-protection)を参照:。
+* **アプリケーションのバックエンドからリソース所有者のパスワード付与を使用している** :この呼び出しでは、ユーザーのIPアドレスが取得されませんが、不審なIPのスロットリングを正常に機能させるために、要求の一部としてユーザーのIPアドレスを送信するようアプリケーションを設定することができます。[リソース所有者のパスワードフローと攻撃防御のよくある不具合を回避するサーバーからユーザーのIPアドレスを送信します](/docs/ja-jp/get-started/authentication-and-authorization-flow/resource-owner-password-flow/avoid-common-issues-with-resource-owner-password-flow-and-attack-protection)を参照:。
+* **同一のIPアドレスから多数のユーザーを認証** :複数のユーザーが1つのプロキシを経由すると、制限回数に達してアクセス制限を引き起こしがちです。そのようなプロキシの場合、IPとCIDRレンジをAllowListに含めれば、不意のアクセス制限を防げます。[リソース所有者のパスワードフローと攻撃防御のよくある不具合を回避するIPアドレスを信頼するようにアプリケーションを構成します](/docs/ja-jp/get-started/authentication-and-authorization-flow/resource-owner-password-flow/avoid-common-issues-with-resource-owner-password-flow-and-attack-protection)を参照:。
 
 ## もっと詳しく
 

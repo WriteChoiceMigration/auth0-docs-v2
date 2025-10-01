@@ -38,15 +38,15 @@ client_id=some_third_party_client
 
 ## スコープの説明
 
-デフォルトでは、同意ページは、スコープの名前を使ってユーザーの同意を求めます。下の図のように、スコープ名を**action:resource_name**形式で定義します。
+デフォルトでは、同意ページは、スコープの名前を使ってユーザーの同意を求めます。下の図のように、スコープ名を**action:resource_name** 形式で定義します。
 
 <Frame>![認可 - ユーザーの同意とアプリケーション - 同意スコープ](/images/ja-jp/cdy7uua7fh8z/3Z4Ofbj5yF7eg5cLfcauh9/304828f6a825bb01c5aeb3a7c8d1915f/Blog_API_Permissions.png)</Frame>
 
-同意ページは、同じリソースに対するスコープをグループにまとめ、そのリソースに対するアクションを1行に表示します。たとえば上記の構成では、**Posts: read and write your posts（投稿：あなたの投稿の読み取りと書き出し）**と表示されます。
+同意ページは、同じリソースに対するスコープをグループにまとめ、そのリソースに対するアクションを1行に表示します。たとえば上記の構成では、**Posts: read and write your posts（投稿：あなたの投稿の読み取りと書き出し）** と表示されます。
 
-代わりに**［Description（説明）］**フィールドを表示したい場合は、テナントの**use_scope_descriptions_for_consent**を**true**に設定します。これは、そのテナント上のすべてのAPIの同意プロンプトに影響します。
+代わりに**［Description（説明）］** フィールドを表示したい場合は、テナントの**use_scope_descriptions_for_consent** を**true** に設定します。これは、そのテナント上のすべてのAPIの同意プロンプトに影響します。
 
-**use_scope_descriptions_for_consent**フラグを設定するには、APIに適切な呼び出しをする必要があります。
+**use_scope_descriptions_for_consent** フラグを設定するには、APIに適切な呼び出しをする必要があります。
 
 <CodeGroup>
 ```bash cURL lines
@@ -240,7 +240,7 @@ Location: https://fabrikam.com/contoso_social#
 
 ## ファーストパーティアプリケーションに対して同意をスキップする
 
-ファーストパーティアプリケーションは、同意ダイアログをスキップできますが、これはユーザーの代わりにアクセスしようとしているAPIの**［Allow Skipping User Consent（ユーザー同意のスキップの許可）］**オプションが有効になっている場合にのみ可能です。
+ファーストパーティアプリケーションは、同意ダイアログをスキップできますが、これはユーザーの代わりにアクセスしようとしているAPIの**［Allow Skipping User Consent（ユーザー同意のスキップの許可）］** オプションが有効になっている場合にのみ可能です。
 
 <Card title="ユーザーの同意とアプリケーション">
 
@@ -248,7 +248,7 @@ Location: https://fabrikam.com/contoso_social#
 
 `127.0.0.1 myapp.example`
 
-同様に、「`localhost`」がアプリケーションの**Allowed Callback URLs（許可されているコールバックURL）**設定（[［Dashboard］>［Applications（アプリケーション）］>［Settings（設定）］](https://manage.auth0.com/#/applications/{yourClientId}/settings)）にあるいずれかのドメインに含まれている場合、（ファーストパーティーアプリケーションであっても）同意はスキップできません。必ず、**Allowed Callback URLs（許可されているコールバックURL）**を更新して、アプリケーションに構成したコールバックURLと更新後のドメインマッピングが一致するようにしてください。
+同様に、「`localhost`」がアプリケーションの**Allowed Callback URLs（許可されているコールバックURL）** 設定（[［Dashboard］>［Applications（アプリケーション）］>［Settings（設定）］](https://manage.auth0.com/#/applications/{yourClientId}/settings)）にあるいずれかのドメインに含まれている場合、（ファーストパーティーアプリケーションであっても）同意はスキップできません。必ず、**Allowed Callback URLs（許可されているコールバックURL）** を更新して、アプリケーションに構成したコールバックURLと更新後のドメインマッピングが一致するようにしてください。
 
 </Card>
 
@@ -261,8 +261,8 @@ Location: https://fabrikam.com/contoso_social#
 [リソース所有者のパスワードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/resource-owner-password-flow)を使うときは、同意ダイアログは使用されません。ユーザーが直接アプリケーションにパスワードを入力し、これがアプリケーションに対してユーザーアカウントへのフルアクセスを付与したことと同じになるためです。
 
 1. [［Auth0 Dashboard］>［User Management（ユーザー管理］>［Users（ユーザー）］](https://manage.auth0.com/#/users)に移動し、同意を取り消すユーザーをクリックします。
-2. **［Authorized Application（認可アプリケーション）］**タブをクリックします。
-3. 該当するアプリケーションの横にある**［Revoke（取り消し）］**をクリックします。
+2. **［Authorized Application（認可アプリケーション）］** タブをクリックします。
+3. 該当するアプリケーションの横にある**［Revoke（取り消し）］** をクリックします。
 
 ## パスワードベースのフロー
 

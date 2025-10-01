@@ -74,7 +74,7 @@ SPAが異なるドメインにある複数のAPIを呼び出す場合、アク�
   + [認可コードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow)
   + [Proof Key for Code Exchange（PKCE）を使った認可コードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce)
 * SPAのバックエンドがAPI呼び出しを処理できない場合、モバイルアプリケーションのようにトークンをSPAのバックエンドに保存しますが、SPAはAPIへの要求を行うためにバックエンドからトークンを取得する必要があります。バックエンドとSPAの間で、トークンをバックエンドからSPAへ安全に転送するためのプロトコルを確立する必要があります。
-* 対応するバックエンドサーバーが**ない**SPAの場合、ログイン時に新しいトークンを要求し、それらをメモリ内に保存しますが、永続的に保存しないようにします。APIの呼び出しを行うには、SPAがトークンのインメモリコピーを使用します。
+* 対応するバックエンドサーバーが**ない** SPAの場合、ログイン時に新しいトークンを要求し、それらをメモリ内に保存しますが、永続的に保存しないようにします。APIの呼び出しを行うには、SPAがトークンのインメモリコピーを使用します。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -96,7 +96,7 @@ Web Workersを使用できない場合、Auth0では、代わりに[JavaScript�
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
-ブラウザーのメモリ内に保管する方法では、ページの更新やブラウザーのタブ間で永続**しません**。
+ブラウザーのメモリ内に保管する方法では、ページの更新やブラウザーのタブ間で永続**しません** 。
 
 </Callout>
 
@@ -110,7 +110,7 @@ Web Workersを使用できない場合、Auth0では、代わりに[JavaScript�
 
 </Warning>
 
-SPAが暗黙的（代わりにPKCEを使用した認証コードフローの使用を推奨）またはハイブリッドフローを使用している場合、セキュリティリスクを軽減するために、絶対トークン有効期限を短縮できます。これにより、反映されたXSS攻撃の影響が軽減されます（ただし、永続的な攻撃の影響は軽減されません）。有効期限を短縮するには、**ダッシュボード > API > Settings（設定） > Token Expiration For Browser Flows (Seconds)（ブラウザーフローのトークン有効期限切れ（秒））**に移動します。
+SPAが暗黙的（代わりにPKCEを使用した認証コードフローの使用を推奨）またはハイブリッドフローを使用している場合、セキュリティリスクを軽減するために、絶対トークン有効期限を短縮できます。これにより、反映されたXSS攻撃の影響が軽減されます（ただし、永続的な攻撃の影響は軽減されません）。有効期限を短縮するには、**ダッシュボード > API > Settings（設定） > Token Expiration For Browser Flows (Seconds)（ブラウザーフローのトークン有効期限切れ（秒））** に移動します。
 
 ドメイン外のソースから含まれるサードパーティJavaScriptコードの量を必要最小限に減らします（jQuery、Bootstrap、Google Analytics へのリンクなど）。サードパーティのJSコードを減らすと、XSS脆弱性の可能性が減ります。可能な場合は、サードパーティスクリプトで[サブリソース整合性（SRI）](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity)チェックを実行して、取得されたリソースが予期しない操作なしで配信されていることを確認すると、より安全になります。
 

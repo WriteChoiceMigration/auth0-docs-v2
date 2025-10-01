@@ -26,7 +26,7 @@ permalink: "link-user-accounts-with-access-tokens-migration"
 * `Authorization`ヘッダーでアクセストークンを使用し、付与されたアクセス許可が`update:current_user_metadata`の場合、要求のボディにはセカンダリアカウントのIDトークンのみ送信できます。
 * 要求の本文でセカンダリアカウントのIDトークンを送信する場合（上記2つのポイントで紹介したユースケース）、以下のような条件があります。
 
-  + IDトークンは`RS256`を使用して署名される必要があります（この値は、**［Dashboard］>［Clients（クライアント）］>［Client Settings（クライアントの設定）］>［Advanced Settings（高度な設定）］>［OAuth］**から設定できます。
+  + IDトークンは`RS256`を使用して署名される必要があります（この値は、**［Dashboard］>［Clients（クライアント）］>［Client Settings（クライアントの設定）］>［Advanced Settings（高度な設定）］>［OAuth］** から設定できます。
   + IDトークンの`aud`クレームは、クライアントを特定し、アクセストークンの`azp`クレームと同じ値でなければいけません。
 * `Authorization`ヘッダーでアカウントのリンクを解除する目的です。代わりにアクセストークンを使用しなければなりません。
 
@@ -83,7 +83,7 @@ permalink: "link-user-accounts-with-access-tokens-migration"
 [IDエンドポイント](/docs/ja-jp/api/management/v2/#!/Users/post_identities)にリンクするアカウントへのすべての呼び出しを確認し、上記の脆弱なフローを利用する呼び出しを更新します。呼び出しを更新する方法には、次のようなものがあります。
 
 * **クライアント側/ユーザー開始のリンクシナリオ:** クライアント側のリンク シナリオの場合、`update:current_user_identities`スコープのアクセス トークンを使用してIdentitiesエンドポイントへの呼び出しを行い、ペイロード（`link_with`）でセカンダリ アカウントの ID トークンを提供します。IDトークンは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OAuth</Tooltip>/OIDC準拠のフローを通じて取得しなければなりません。
-* **サーバー側リンクシナリオ**:サーバー側リンクシナリオの場合は、`update:users`スコープのアクセス トークンを使用してIdentitiesエンドポイントへの呼び出しを行い、ペイロードでセカンダリ アカウントの`user_id`を指定します。
+* **サーバー側リンクシナリオ** :サーバー側リンクシナリオの場合は、`update:users`スコープのアクセス トークンを使用してIdentitiesエンドポイントへの呼び出しを行い、ペイロードでセカンダリ アカウントの`user_id`を指定します。
 
 詳細については、[ユーザーアカウントのリンク](/docs/ja-jp/manage-users/user-accounts/user-account-linking/link-user-accounts)を参照してください。
 

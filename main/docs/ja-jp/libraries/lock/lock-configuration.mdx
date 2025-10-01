@@ -467,11 +467,11 @@ var options = {
 
 ### rememberLastLogin {Boolean}
 
-前回使用したアカウントで素早くログインできる画面を表示するかどうかを決定します。シングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SSO</Tooltip>）データを要求し、**［Last time you signed in with（前回サインインに使用したとき）］**のメッセージを有効にします。デフォルトは`true`です。この情報はユーザーのAuth0セッションから取得されるため、この機能はユーザーのAuth0セッション（設定可能）が有効である限り有効です。
+前回使用したアカウントで素早くログインできる画面を表示するかどうかを決定します。シングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SSO</Tooltip>）データを要求し、**［Last time you signed in with（前回サインインに使用したとき）］** のメッセージを有効にします。デフォルトは`true`です。この情報はユーザーのAuth0セッションから取得されるため、この機能はユーザーのAuth0セッション（設定可能）が有効である限り有効です。
 
 `rememberLastLogin: false`
 
-新規テナントでは[自動的にシームレスSSOが有効になります](/docs/ja-jp/get-started/tenant-settings/enable-sso-for-legacy-tenants)。これを有効にすると、`rememberLastLogin`オプションは関係なくなります。有効なセッションがある場合は、ユニバーサルログインページは一切表示されないためです。シームレスSSOを使用すると、ユーザーは一度ログインするだけで、構築されたアプリケーションやサードパーティ製アプリを移動する際に認証情報を再入力する必要がなくなります。認証がシームレスに進むので、シームレスSSOの使用を強く推奨します。ユーザーがログインしていない場合は、想定通りログイン画面にリダイレクトされます。さらに、以下の状況では、**［Last time you signed in with（前回サインインに使用したとき）］**のメッセージは利用できなくなります。
+新規テナントでは[自動的にシームレスSSOが有効になります](/docs/ja-jp/get-started/tenant-settings/enable-sso-for-legacy-tenants)。これを有効にすると、`rememberLastLogin`オプションは関係なくなります。有効なセッションがある場合は、ユニバーサルログインページは一切表示されないためです。シームレスSSOを使用すると、ユーザーは一度ログインするだけで、構築されたアプリケーションやサードパーティ製アプリを移動する際に認証情報を再入力する必要がなくなります。認証がシームレスに進むので、シームレスSSOの使用を強く推奨します。ユーザーがログインしていない場合は、想定通りログイン画面にリダイレクトされます。さらに、以下の状況では、**［Last time you signed in with（前回サインインに使用したとき）］** のメッセージは利用できなくなります。
 
 * [パスワードレス認証](/docs/ja-jp/connections/passwordless)を使用して確立されたセッションで、[ホストされたログインページ](/docs/ja-jp/authenticate/login/auth0-universal-login)でLockを使用した
 * `responseType: code`の[埋め込み型ログインシナリオ](/docs/ja-jp/authenticate/login/universal-vs-embedded-login)でLockを使用した（通常のWebアプリで使用される[認証コードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow)を示します）
@@ -712,7 +712,7 @@ var options = {
 };
 ```
 
-`responseType`が`code`に設定されている場合、Lockは絶対に**［Last time you logged in with（前回ログインしたとき）］**のメッセージを表示せず、常にユーザーに認証情報の入力を求めます。
+`responseType`が`code`に設定されている場合、Lockは絶対に**［Last time you logged in with（前回ログインしたとき）］** のメッセージを表示せず、常にユーザーに認証情報の入力を求めます。
 
 ## sso {Boolean}
 
@@ -766,7 +766,7 @@ var options = {
 }
 ```
 
-`validator`を指定しない場合、textフィールドは**必須**になります。textフィールドをオプションにする場合は、常に`true`を返すバリデーターを使用してください。
+`validator`を指定しない場合、textフィールドは**必須** になります。textフィールドをオプションにする場合は、常に`true`を返すバリデーターを使用してください。
 
 ```javascript lines
 var options = {
@@ -892,7 +892,7 @@ var options = {
 
 `false`に設定すると、ログイン画面のログインタブとサインアップのタブが非表示になり、サインアップ画面にアクセスできなくなります。デフォルトは`true`です。データベース接続でサインアップが無効になっている場合、または作成スクリプトのないカスタムデータベースを使用している場合は、サインアップ画面は使用できなくなることに注意してください。
 
-また、このオプションはクライアント側の外観**のみ**を制御するものであり、特定の匿名訪問者からの新規サインアップを完全に阻止するものではないことに注意してください。新規ユーザーのサインアップを完全に防止したい場合は、ダッシュボードの接続設定で**サインアップを無効にする**オプションを使用する必要があります。
+また、このオプションはクライアント側の外観**のみ** を制御するものであり、特定の匿名訪問者からの新規サインアップを完全に阻止するものではないことに注意してください。新規ユーザーのサインアップを完全に防止したい場合は、ダッシュボードの接続設定で**サインアップを無効にする** オプションを使用する必要があります。
 
 `allowSignUp: false`
 
@@ -1006,7 +1006,7 @@ Auth0が提供する翻訳の言語ソースURLを上書きします。デフォ
 
 使用時に、ユーザー名情報に基づいて使用する接続を選択できるようにする拡張ポイントを指定します。
 
-パラメーターには`username`、`context`、`callback`があります。コールバックは、`{type:'database', name:'connection name'}`のようなオブジェクトを期待します。**これはデータベース接続にのみ有効です。**このリゾルバーはフォームの`onSubmit`イベントで実行されるため、シンプルかつ高速に保つように注意してください。
+パラメーターには`username`、`context`、`callback`があります。コールバックは、`{type:'database', name:'connection name'}`のようなオブジェクトを期待します。**これはデータベース接続にのみ有効です。** このリゾルバーはフォームの`onSubmit`イベントで実行されるため、シンプルかつ高速に保つように注意してください。
 
 これはベータ機能です。バグを見つけた場合は、GitHubの[issue](https://github.com/auth0/lock/issues/new)を作成してください。
 

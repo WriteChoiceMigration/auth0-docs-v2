@@ -15,13 +15,13 @@ permalink: "dynamic-client-registration"
 
 <Warning>
 
-Auth0は**オープンな動的登録**をサポートしています。つまり、この機能を有効にすると、**誰でも**トークンなしでテナント内にアプリケーションを作成できるようになります。
+Auth0は**オープンな動的登録** をサポートしています。つまり、この機能を有効にすると、**誰でも** トークンなしでテナント内にアプリケーションを作成できるようになります。
 
 </Warning>
 
 デフォルトで、動的なアプリケーション登録はすべてのテナントで無効になっています。これを変更するには、テナントの設定で`enable_dynamic_client_registration`フラグを`true`に設定する必要があります。
 
-このためには、[［Dashboard］>［Settings（設定）］>［Advanced（詳細）］](https://manage.auth0.com/#/tenant/advanced)の順に移動し、**［OIDC Dynamic Application Registration（OIDCの動的なアプリケーション登録）］**を有効にします。
+このためには、[［Dashboard］>［Settings（設定）］>［Advanced（詳細）］](https://manage.auth0.com/#/tenant/advanced)の順に移動し、**［OIDC Dynamic Application Registration（OIDCの動的なアプリケーション登録）］** を有効にします。
 
 または、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip> [`/Tenant/patch_settings`](/docs/ja-jp/api/management/v2#!/Tenants/patch_settings)エンドポイントを使用してこのフラグを更新することができます。
 
@@ -212,7 +212,7 @@ dataTask.resume()
 
 ### アプリケーションの登録を
 
-Auth0でアプリケーションを動的に登録するには、HTTP `POST`メッセージをアプリケーション登録エンドポイント`https://{yourDomain}/oidc/register`に送信する必要があります。Auth0は**Open Dynamic Registration（オープンな動的登録）**に対応しており、エンドポイントはアクセストークンなしに登録要求を受け入れます。
+Auth0でアプリケーションを動的に登録するには、HTTP `POST`メッセージをアプリケーション登録エンドポイント`https://{yourDomain}/oidc/register`に送信する必要があります。Auth0は**Open Dynamic Registration（オープンな動的登録）** に対応しており、エンドポイントはアクセストークンなしに登録要求を受け入れます。
 
 「`My Dynamic application`」という名前で、コールバックURLが`https://application.example.com/callback`と`https://application.example.com/callback2`に指定されているアプリケーションを作成するには、以下のスニペットを使用します。
 
@@ -381,8 +381,8 @@ dataTask.resume()
 
 ここでは、
 
-* **client_name**：作成するDynamic Application（動的アプリケーション）の名前
-* **redirect_uris**（必須）：Auth0が認証フローの終了時に呼び出すのに有効であるとみなすURLの配列
+* **client_name** ：作成するDynamic Application（動的アプリケーション）の名前
+* **redirect_uris** （必須）：Auth0が認証フローの終了時に呼び出すのに有効であるとみなすURLの配列
 
 または、`token_endpoint_auth_method`の値を設定することができます。これは、`none`または`client_secret_post`（デフォルト値）のいずれかで指定します。SPAを作成する場合、要求のペイロードで`token_endpoint_auth_method: none`を使用します。
 
@@ -405,9 +405,9 @@ Content-Type: application/json
 
 ここでは、
 
-* **client_id**：一意のクライアント識別子。アプリケーションでAuth0を使用するよう構成するときに使用するIDです。これはシステムで生成され、変更することはできません。
-* **client_secret**：英数字の64ビットのクライアントシークレット。Authentication API [`/token`](/docs/ja-jp/api/authentication#get-token)への認証と、IDトークンの検証にアプリケーションで使用される値です。
-* **client_secret_expires_at**：`client_secret`が期限切れする時刻。Auth0では、この値は常にゼロ（`0`）で、アプリケーションが期限切れになることはありません。
+* **client_id** ：一意のクライアント識別子。アプリケーションでAuth0を使用するよう構成するときに使用するIDです。これはシステムで生成され、変更することはできません。
+* **client_secret** ：英数字の64ビットのクライアントシークレット。Authentication API [`/token`](/docs/ja-jp/api/authentication#get-token)への認証と、IDトークンの検証にアプリケーションで使用される値です。
+* **client_secret_expires_at** ：`client_secret`が期限切れする時刻。Auth0では、この値は常にゼロ（`0`）で、アプリケーションが期限切れになることはありません。
 
 クライアントIDとクライアントシークレットは、認証および認証フローの実行に最も重要な要素であるため、メモしておいてください。詳細については、「[認証フローと認可フロー](/docs/ja-jp/get-started/authentication-and-authorization-flow)」をお読みください。
 
@@ -434,13 +434,13 @@ https://{yourDomain}/authorize?
 
 ここでは、
 
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">audience</Tooltip>**（任意）：アプリケーションがユーザーに代わってアクセスを要求しているターゲットAPI。APIアクセスが必要な場合、このパラメーターを設定します。
-* **scope**（任意）：認可を要求したいスコープ。スペースで区切る必要があります。ユーザーの[標準OIDCスコープ](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)（`profile`や`email`など）、名前空間の形式に準拠しなければならないカスタムクレーム、またはターゲットAPIでサポートされているスコープ（`read:contacts`など）を要求することができます。APIアクセスが必要な場合、このパラメーターを設定します。詳細については、「[APIスコープ](/docs/ja-jp/get-started/apis/scopes/api-scopes)」をお読みください。
-* **response_type**：応答タイプ。暗黙的な付与の場合、`token`または`id_token token`を使用することができます。これで、フローの終了時に受け取るトークンの種類が指定されます。`token`を使用してアクセストークンのみを取得するか、`id_token token`を使用してIDトークンとアクセストークンの両方を取得します。
-* **client_id**：アプリケーションのクライアントID
-* **redirect_uri**：認可がユーザーによって付与された後、認可サーバー（Auth0）がユーザーエージェント（ブラウザー）をリダイレクトするURL。アクセストークン（および任意でIDトークン）は、このURLのハッシュフラグメントで使用することができます。このURLは、アプリケーションの**［Application Settings（アプリケーション設定）］**で有効なコールバックURLとして指定される必要があります。
-* **state**：アプリケーションにリダイレクトするときに認可サーバーに含まれる初期要求にアプリケーションが追加する不透明な値。この値は、CSRF攻撃を防ぐためににアプリケーションで使用される必要があります。
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">nonce</Tooltip>**：Auth0からのIDトークンの要求に含まれる文字列値で、トークンのリプレイ攻撃を防ぐのに使用されます。`response_type=id_token token`に必要です。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">audience</Tooltip>** （任意）：アプリケーションがユーザーに代わってアクセスを要求しているターゲットAPI。APIアクセスが必要な場合、このパラメーターを設定します。
+* **scope** （任意）：認可を要求したいスコープ。スペースで区切る必要があります。ユーザーの[標準OIDCスコープ](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)（`profile`や`email`など）、名前空間の形式に準拠しなければならないカスタムクレーム、またはターゲットAPIでサポートされているスコープ（`read:contacts`など）を要求することができます。APIアクセスが必要な場合、このパラメーターを設定します。詳細については、「[APIスコープ](/docs/ja-jp/get-started/apis/scopes/api-scopes)」をお読みください。
+* **response_type** ：応答タイプ。暗黙的な付与の場合、`token`または`id_token token`を使用することができます。これで、フローの終了時に受け取るトークンの種類が指定されます。`token`を使用してアクセストークンのみを取得するか、`id_token token`を使用してIDトークンとアクセストークンの両方を取得します。
+* **client_id** ：アプリケーションのクライアントID
+* **redirect_uri** ：認可がユーザーによって付与された後、認可サーバー（Auth0）がユーザーエージェント（ブラウザー）をリダイレクトするURL。アクセストークン（および任意でIDトークン）は、このURLのハッシュフラグメントで使用することができます。このURLは、アプリケーションの**［Application Settings（アプリケーション設定）］** で有効なコールバックURLとして指定される必要があります。
+* **state** ：アプリケーションにリダイレクトするときに認可サーバーに含まれる初期要求にアプリケーションが追加する不透明な値。この値は、CSRF攻撃を防ぐためににアプリケーションで使用される必要があります。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">nonce</Tooltip>** ：Auth0からのIDトークンの要求に含まれる文字列値で、トークンのリプレイ攻撃を防ぐのに使用されます。`response_type=id_token token`に必要です。
 
 例：
 
@@ -450,7 +450,7 @@ https://{yourDomain}/authorize?
 </a>
 ```
 
-この呼び出しによってユーザーはAuth0にリダイレクトされ、認証に成功すると、アプリケーションに戻ります（具体的には**redirect_uri**にリダイレクトされます）。
+この呼び出しによってユーザーはAuth0にリダイレクトされ、認証に成功すると、アプリケーションに戻ります（具体的には**redirect_uri** にリダイレクトされます）。
 
 APIアクセスを必要とする場合は、認証後にURLのハッシュフラグメントからアクセストークンを抽出し、これを使ってAPIへのを呼び出しを行う必要があります。そのためには、アクセストークンをHTTP要求の`Authorization`ヘッダーで`Bearer`トークンとして渡します。
 

@@ -11,7 +11,7 @@ permalink: "rules-execution-best-practices"
 
 <Warning>
 
-RulesとHooksのサポート終了（EOL）日は**2026年11月18日**であり、**2023年10月16**日の時点で作成された新しいテナントは使用できなくなります。Hooksが有効な既存のテナントは、サポート終了までHooksを利用できます。
+RulesとHooksのサポート終了（EOL）日は**2026年11月18日** であり、**2023年10月16** 日の時点で作成された新しいテナントは使用できなくなります。Hooksが有効な既存のテナントは、サポート終了までHooksを利用できます。
 
 今後はActionsに移行して、Auth0の機能を拡張することを強くお勧めします。Actionsを使用すると、豊富な情報やインラインドキュメント、パブリック`npm`パッケージにアクセスして、外部統合を使って全体的な拡張エクスペリエンスを強化することができます。Actionsの詳細については、「[Auth0 Actionsの仕組みを理解する](/docs/ja-jp/customize/actions/actions-overview)」をお読みください。
 
@@ -21,9 +21,9 @@ RulesとHooksの廃止の詳細については、当社のブログ記事「[Rul
 
 </Warning>
 
-各ルールは、定義された順序で呼び出されるJavaScript関数として実行されます。次のルールは、前のルールが完了するまで実行されません。さらに、ルールパイプラインは、ユーザー資格情報を含むワークフローに対してのみ実行されます。ルールパイプラインは、[クライアントの資格情報フロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/client-credentials-flow)中には実行**されません**。ルールに類似する機能が必要な場合、`credentials-exchange`トリガーの[マシンツーマシンフロー](/docs/ja-jp/customize/actions/explore-triggers/machine-to-machine-trigger)の[アクション](/docs/ja-jp/customize/actions)で代用することができます。
+各ルールは、定義された順序で呼び出されるJavaScript関数として実行されます。次のルールは、前のルールが完了するまで実行されません。さらに、ルールパイプラインは、ユーザー資格情報を含むワークフローに対してのみ実行されます。ルールパイプラインは、[クライアントの資格情報フロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/client-credentials-flow)中には実行**されません** 。ルールに類似する機能が必要な場合、`credentials-exchange`トリガーの[マシンツーマシンフロー](/docs/ja-jp/customize/actions/explore-triggers/machine-to-machine-trigger)の[アクション](/docs/ja-jp/customize/actions)で代用することができます。
 
-パイプラインの用語では、ルールはルールに提供された`callback`関数が呼び出されたときに完了します。関数の呼び出しに失敗すると、パイプラインの実行は停止し、最終的にはエラーが返されます。各ルールは、`callback`関数を1回**だけ**呼び出す必要があります。
+パイプラインの用語では、ルールはルールに提供された`callback`関数が呼び出されたときに完了します。関数の呼び出しに失敗すると、パイプラインの実行は停止し、最終的にはエラーが返されます。各ルールは、`callback`関数を1回**だけ** 呼び出す必要があります。
 
 ルールの実行はJavaScriptの非同期な性質に対応しており、[`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)オブジェクトなどのコンストラクトを使用することができます。非同期処理は、非同期操作の完了を待つ間、パイプラインを事実上一時停止することになります。Auth0サーバーレスWebtaskコンテナーには通常、約20秒の実行制限があり、その後コンテナはリサイクルできます。この制限によってコンテナーがリサイクルされると、一時停止されているかどうかに関係なく、パイプラインが途中で終了され、最終的には認証エラーが返されます（`global`オブジェクトもリセットされる可能性があります）。
 
@@ -75,7 +75,7 @@ switch (context.protocol) {
     } break;
 ```
 
-コンテキストバイパスロジックを使用して多要素認証チェックを行う場合は、ベストプラクティスを確認することを強くお勧めします。たとえば、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>の使用が`context.request.query.prompt==='none'`を前提としている場合、**重大なセキュリティ上の欠陥**が表面化する可能性があります。さらに、`context`オブジェクトの内容は**セキュリティ上重要**なため、オブジェクトを外部またはサードパーティのサービスに直接渡さ**ない**でください。
+コンテキストバイパスロジックを使用して多要素認証チェックを行う場合は、ベストプラクティスを確認することを強くお勧めします。たとえば、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>の使用が`context.request.query.prompt==='none'`を前提としている場合、**重大なセキュリティ上の欠陥** が表面化する可能性があります。さらに、`context`オブジェクトの内容は**セキュリティ上重要** なため、オブジェクトを外部またはサードパーティのサービスに直接渡さ**ない** でください。
 
 ### リダイレクト
 
@@ -95,7 +95,7 @@ Auth0を使用すると、ユーザーから情報を収集できる任意のURL
 
 独自のホスト型ユーザーインターフェイスへのリダイレクトは、パイプラインが完了する前に実行され、`context.clientID`コンテキストごとに1回トリガーできます。リダイレクトは、本番環境で実行される場合にのみHTTPSを使用し、一般的なセキュリティの脅威を軽減するために追加のパラメーターを最小限に抑える必要があります。Auth0が提供する`state`が、提供される唯一のパラメーターであることが望ましいです。
 
-リダイレクトされると、独自のホスト型ユーザーインターフェイスは、ユーザー認証されたコンテキストで実行され、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>によって信頼性アーティファクトを取得します。これらのアーティファクト（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">OpenID</Tooltip> Connect（OIDC）のIDトークンや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OAuth 2.0</Tooltip>のアクセストークンなど）を取得するには、リダイレクトをトリガーしたものでは**ない**`context.clientID`コンテキストを使用します。これを行うには、`/authorize`エンドポイントにリダイレクトします。たとえば、SPAの場合は、サイレント認証を使用します。これにより、すべてのルールが再度実行される新しいパイプラインが作成され、ルール内の`context`オブジェクトを使用して条件付き処理を実行できます。
+リダイレクトされると、独自のホスト型ユーザーインターフェイスは、ユーザー認証されたコンテキストで実行され、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>によって信頼性アーティファクトを取得します。これらのアーティファクト（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">OpenID</Tooltip> Connect（OIDC）のIDトークンや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OAuth 2.0</Tooltip>のアクセストークンなど）を取得するには、リダイレクトをトリガーしたものでは**ない** `context.clientID`コンテキストを使用します。これを行うには、`/authorize`エンドポイントにリダイレクトします。たとえば、SPAの場合は、サイレント認証を使用します。これにより、すべてのルールが再度実行される新しいパイプラインが作成され、ルール内の`context`オブジェクトを使用して条件付き処理を実行できます。
 
 実行する処理が完了すると、`/continue`エンドポイントを介してユーザーをAuth0にリダイレクトし（提供された`state`を指定）、パイプラインの実行が続行されます。これにより、すべてのルールが現在のパイプライン内で再度実行され、ルール内の`context`オブジェクトを使用して条件付き処理チェックを実行できます。
 

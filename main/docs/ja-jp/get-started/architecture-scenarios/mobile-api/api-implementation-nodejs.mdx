@@ -53,11 +53,11 @@ API用のフォルダを作成し、そこに移動して`npm init`を実行し�
 
 次に、以下のモジュールで依存関係を設定します。
 
-* **express**：このモジュールは[Express Webアプリケーションフレームワーク](https://expressjs.com/)を追加します。
-* **cors**：このモジュールは[CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)を有効にするためのサポートを追加します。これは、APIがWebブラウザー内の別のドメインで実行されるシングルページアプリケーションから呼び出されるために必要です。
-* **jwks-rsa**：このライブラリーは、JWKS（JSON Web Key Set）エンドポイントからRSA署名鍵を取得します。`expressJwtSecret`を使用すると、JWTヘッダーの`kid`に基づいて`express-jwt`に正しい署名鍵を提供するシークレットプロバイダーを生成することができます。詳細については、「[node-jwks-rsa GitHubリポジトリ](https://github.com/auth0/node-jwks-rsa)」を参照してください。
-* **express-jwt**：このモジュールは、Node.jsアプリケーションでJWTトークンを使用してHTTP要求を認証します。JWTを使用した作業を容易にする、いくつかの機能が提供されています。詳細については、「[express-jwt GitHubリポジトリ](https://github.com/auth0/express-jwt)」を参照してください。
-* **body-parser**：これはNode.jsボディ解析ミドルウェアです。受信した要求ストリームのボディ部分全体を抽出し、それを`req.body`上でインターフェイスしやすいものとして公開します。
+* **express** ：このモジュールは[Express Webアプリケーションフレームワーク](https://expressjs.com/)を追加します。
+* **cors** ：このモジュールは[CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)を有効にするためのサポートを追加します。これは、APIがWebブラウザー内の別のドメインで実行されるシングルページアプリケーションから呼び出されるために必要です。
+* **jwks-rsa** ：このライブラリーは、JWKS（JSON Web Key Set）エンドポイントからRSA署名鍵を取得します。`expressJwtSecret`を使用すると、JWTヘッダーの`kid`に基づいて`express-jwt`に正しい署名鍵を提供するシークレットプロバイダーを生成することができます。詳細については、「[node-jwks-rsa GitHubリポジトリ](https://github.com/auth0/node-jwks-rsa)」を参照してください。
+* **express-jwt** ：このモジュールは、Node.jsアプリケーションでJWTトークンを使用してHTTP要求を認証します。JWTを使用した作業を容易にする、いくつかの機能が提供されています。詳細については、「[express-jwt GitHubリポジトリ](https://github.com/auth0/express-jwt)」を参照してください。
+* **body-parser** ：これはNode.jsボディ解析ミドルウェアです。受信した要求ストリームのボディ部分全体を抽出し、それを`req.body`上でインターフェイスしやすいものとして公開します。
 
 これらの依存関係をインストールするには、次を実行します。
 
@@ -178,7 +178,7 @@ npm install express-jwt-authz --save
 
 ここで`jwtAuthz (...)`への呼び出しをミドルウェアに追加して、特定のエンドポイントを実行するために、特定のスコープがJWTに含まれていることを確認します。
 
-依存関係を追加します。**express-jwt-authz**ライブラリーはexpress-jwtと組み合わせて使用され、[JWT](https://auth0.com/docs/tokens/concepts/jwts)を検証し、目的のエンドポイントを呼び出すための正しい権限を持っていることを保証します。詳細については、「[express-jwt-authz GitHubリポジトリ](https://github.com/auth0/express-jwt-authz)」を参照してください。
+依存関係を追加します。**express-jwt-authz** ライブラリーはexpress-jwtと組み合わせて使用され、[JWT](https://auth0.com/docs/tokens/concepts/jwts)を検証し、目的のエンドポイントを呼び出すための正しい権限を持っていることを保証します。詳細については、「[express-jwt-authz GitHubリポジトリ](https://github.com/auth0/express-jwt-authz)」を参照してください。
 
 以下はサンプル実装を示します（簡潔にするために一部のコードは省略しています)。
 
@@ -217,9 +217,9 @@ JWTの検証に使われる`express-jwt`ミドルウェアは、JWTに含まれ�
 
 まず、アクセストークンにユーザーのメールアドレスを追加する[アクションを新規作成](/docs/ja-jp/customize/actions/write-your-first-action)します。
 
-1. [［Auth0 Dashboard］ > ［Actions（アクション）］ > ［Library（ライブラリー）］](https://manage.auth0.com/#/actions/library)に移動し、**［Build Custom（カスタム作成）］**を選択します。
-2. アクションの説明的な**［Name（名前）］**を入力し（たとえば、`Add email to access token`）、**［Login / Post-Login（ログイン/ログイン後）］**トリガー、**［Create（作成）］**の順に選択します。
-3. Actionsコードエディターを見つけて、次のJavaScriptコードをコピーし、**［Save Draft（下書きを保存）］**を選択して変更を保存します。
+1. [［Auth0 Dashboard］ > ［Actions（アクション）］ > ［Library（ライブラリー）］](https://manage.auth0.com/#/actions/library)に移動し、**［Build Custom（カスタム作成）］** を選択します。
+2. アクションの説明的な**［Name（名前）］** を入力し（たとえば、`Add email to access token`）、**［Login / Post-Login（ログイン/ログイン後）］** トリガー、**［Create（作成）］** の順に選択します。
+3. Actionsコードエディターを見つけて、次のJavaScriptコードをコピーし、**［Save Draft（下書きを保存）］** を選択して変更を保存します。
 
    ``` lines
    exports.onExecutePostLogin = async (event, api) => {
@@ -238,8 +238,8 @@ JWTの検証に使われる`express-jwt`ミドルウェアは、JWTに含まれ�
 
    </Callout>
 
-4. Actionsコードエディタのサイドバーから［Test（テスト）］(再生アイコン)を選択し、**［Run（実行）］**を選択して[コードをテスト](/docs/ja-jp/customize/actions/test-actions)します。
-5. アクションを公開する準備ができたら、**［Deploy（デプロイ）］**を選択します。
+4. Actionsコードエディタのサイドバーから［Test（テスト）］(再生アイコン)を選択し、**［Run（実行）］** を選択して[コードをテスト](/docs/ja-jp/customize/actions/test-actions)します。
+5. アクションを公開する準備ができたら、**［Deploy（デプロイ）］** を選択します。
 
 ##### ログインフローにアクションを追加する
 
