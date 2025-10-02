@@ -71,15 +71,29 @@ Be aware that this call will **overwrite any existing configurations** you have 
 <CodeGroup>
 ```bash cURL lines
 curl --request PUT \
---url 'https://{yourDomain}/api/v2/branding/templates/universal-login' \
---header 'authorization: Bearer MANAGEMENT_API_TOKEN' \
---header 'content-type: text/html' \
---data '
-
-{%- auth0:head -%}
-{%- auth0:widget -%}
-'
-``` lines
+  --url 'https://{yourDomain}/api/v2/branding/templates/universal-login' \
+  --header 'authorization: Bearer MANAGEMENT_API_TOKEN' \
+  --header 'content-type: text/html' \
+  --data '<!DOCTYPE html>
+<html>
+<head>{%- auth0:head -%}</head>
+<body class='\''_widget-auto-layout'\''>{%- auth0:widget -%}</body>
+<script>
+  function updateSelectedLanguage() {
+    const selectElement = document.getElementById('\''language'\'');
+    const selectedValue = selectElement.value;
+    const options = selectElement.options;
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].value === selectedValue) {
+        options[i].selected = true;
+      } else {
+        options[i].selected = false;
+      }
+    }
+    document.getElementById('\''changeLanguage'\'').click();
+  }
+</script>'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/branding/templates/universal-login");
 var request = new RestRequest(Method.PUT);
@@ -90,118 +104,153 @@ request.AddParameter("text/html", "
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/branding/templates/universal-login"
-payload := strings.NewReader("
-\n\n{%- auth0:head -%}\n{%- auth0:widget -%}\n")
-req, _ := http.NewRequest("PUT", url, payload)
-req.Header.Add("content-type", "text/html")
-req.Header.Add("authorization", "Bearer MANAGEMENT_API_TOKEN")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/branding/templates/universal-login"
+
+	payload := strings.NewReader("<!DOCTYPE html>\n<html>\n<head>{%- auth0:head -%}</head>\n<body class='_widget-auto-layout'>{%- auth0:widget -%}</body>\n<script>\n  function updateSelectedLanguage() {\n    const selectElement = document.getElementById('language');\n    const selectedValue = selectElement.value;\n    const options = selectElement.options;\n    for (let i = 0; i < options.length; i++) {\n      if (options[i].value === selectedValue) {\n        options[i].selected = true;\n      } else {\n        options[i].selected = false;\n      }\n    }\n    document.getElementById('changeLanguage').click();\n  }\n</script>")
+
+	req, _ := http.NewRequest("PUT", url, payload)
+
+	req.Header.Add("content-type", "text/html")
+	req.Header.Add("authorization", "Bearer MANAGEMENT_API_TOKEN")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/branding/templates/universal-login")
-.header("content-type", "text/html")
-.header("authorization", "Bearer MANAGEMENT_API_TOKEN")
-.body("
-\n\n{%- auth0:head -%}\n{%- auth0:widget -%}\n")
-.asString();
+HttpResponse<String> response = Unirest.put("https://{yourDomain}/api/v2/branding/templates/universal-login")
+  .header("content-type", "text/html")
+  .header("authorization", "Bearer MANAGEMENT_API_TOKEN")
+  .body("<!DOCTYPE html>\n<html>\n<head>{%- auth0:head -%}</head>\n<body class='_widget-auto-layout'>{%- auth0:widget -%}</body>\n<script>\n  function updateSelectedLanguage() {\n    const selectElement = document.getElementById('language');\n    const selectedValue = selectElement.value;\n    const options = selectElement.options;\n    for (let i = 0; i < options.length; i++) {\n      if (options[i].value === selectedValue) {\n        options[i].selected = true;\n      } else {\n        options[i].selected = false;\n      }\n    }\n    document.getElementById('changeLanguage').click();\n  }\n</script>")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
-var options = {
-method: 'PUT',
-url: 'https://{yourDomain}/api/v2/branding/templates/universal-login',
-headers: {'content-type': 'text/html', authorization: 'Bearer MANAGEMENT_API_TOKEN'},
-data: '
-\n\n{%- auth0:head -%}\n{%- auth0:widget -%}\n'
-};
-axios.request(options).then(function (response) {
-console.log(response.data);
-}).catch(function (error) {
-console.error(error);
-});
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"text/html",
-@"authorization": @"Bearer MANAGEMENT_API_TOKEN" };
-NSData \*postData = [[NSData alloc] initWithData:[@"
 
-{%- auth0:head -%}
-{%- auth0:widget -%}
-" dataUsingEncoding:NSUTF8StringEncoding]];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/branding/templates/universal-login"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+var options = {
+  method: 'PUT',
+  url: 'https://{yourDomain}/api/v2/branding/templates/universal-login',
+  headers: {'content-type': 'text/html', authorization: 'Bearer MANAGEMENT_API_TOKEN'},
+  data: '<!DOCTYPE html>\n<html>\n<head>{%- auth0:head -%}</head>\n<body class=\'_widget-auto-layout\'>{%- auth0:widget -%}</body>\n<script>\n  function updateSelectedLanguage() {\n    const selectElement = document.getElementById(\'language\');\n    const selectedValue = selectElement.value;\n    const options = selectElement.options;\n    for (let i = 0; i < options.length; i++) {\n      if (options[i].value === selectedValue) {\n        options[i].selected = true;\n      } else {\n        options[i].selected = false;\n      }\n    }\n    document.getElementById(\'changeLanguage\').click();\n  }\n</script>'
+};
+
+axios.request(options).then(function (response) {
+  console.log(response.data);
+}).catch(function (error) {
+  console.error(error);
+});
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"text/html",
+                           @"authorization": @"Bearer MANAGEMENT_API_TOKEN" };
+
+NSData *postData = [[NSData alloc] initWithData:[@"<!DOCTYPE html>
+<html>
+<head>{%- auth0:head -%}</head>
+<body class='_widget-auto-layout'>{%- auth0:widget -%}</body>
+<script>
+  function updateSelectedLanguage() {
+    const selectElement = document.getElementById('language');
+    const selectedValue = selectElement.value;
+    const options = selectElement.options;
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].value === selectedValue) {
+        options[i].selected = true;
+      } else {
+        options[i].selected = false;
+      }
+    }
+    document.getElementById('changeLanguage').click();
+  }
+</script>" dataUsingEncoding:NSUTF8StringEncoding]];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/branding/templates/universal-login"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"PUT"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/branding/templates/universal-login",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PUT",
-CURLOPT_POSTFIELDS => "
-\n\n{%- auth0:head -%}\n{%- auth0:widget -%}\n",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer MANAGEMENT_API_TOKEN",
-"content-type: text/html"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/branding/templates/universal-login",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PUT",
+  CURLOPT_POSTFIELDS => "<!DOCTYPE html>\n<html>\n<head>{%- auth0:head -%}</head>\n<body class='_widget-auto-layout'>{%- auth0:widget -%}</body>\n<script>\n  function updateSelectedLanguage() {\n    const selectElement = document.getElementById('language');\n    const selectedValue = selectElement.value;\n    const options = selectElement.options;\n    for (let i = 0; i < options.length; i++) {\n      if (options[i].value === selectedValue) {\n        options[i].selected = true;\n      } else {\n        options[i].selected = false;\n      }\n    }\n    document.getElementById('changeLanguage').click();\n  }\n</script>",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer MANAGEMENT_API_TOKEN",
+    "content-type: text/html"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
-payload = "
-\n\n{%- auth0:head -%}\n{%- auth0:widget -%}\n"
+
+payload = "<!DOCTYPE html>\n<html>\n<head>{%- auth0:head -%}</head>\n<body class='_widget-auto-layout'>{%- auth0:widget -%}</body>\n<script>\n  function updateSelectedLanguage() {\n    const selectElement = document.getElementById('language');\n    const selectedValue = selectElement.value;\n    const options = selectElement.options;\n    for (let i = 0; i < options.length; i++) {\n      if (options[i].value === selectedValue) {\n        options[i].selected = true;\n      } else {\n        options[i].selected = false;\n      }\n    }\n    document.getElementById('changeLanguage').click();\n  }\n</script>"
+
 headers = {
-'content-type': "text/html",
-'authorization': "Bearer MANAGEMENT_API_TOKEN"
-}
+    'content-type': "text/html",
+    'authorization': "Bearer MANAGEMENT_API_TOKEN"
+    }
+
 conn.request("PUT", "/{yourDomain}/api/v2/branding/templates/universal-login", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -209,44 +258,66 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/branding/templates/universal-login")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Put.new(url)
 request["content-type"] = 'text/html'
 request["authorization"] = 'Bearer MANAGEMENT_API_TOKEN'
-request.body = "
-\n\n{%- auth0:head -%}\n{%- auth0:widget -%}\n"
+request.body = "<!DOCTYPE html>\n<html>\n<head>{%- auth0:head -%}</head>\n<body class='_widget-auto-layout'>{%- auth0:widget -%}</body>\n<script>\n  function updateSelectedLanguage() {\n    const selectElement = document.getElementById('language');\n    const selectedValue = selectElement.value;\n    const options = selectElement.options;\n    for (let i = 0; i < options.length; i++) {\n      if (options[i].value === selectedValue) {\n        options[i].selected = true;\n      } else {\n        options[i].selected = false;\n      }\n    }\n    document.getElementById('changeLanguage').click();\n  }\n</script>"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
-let headers = [
-"content-type": "text/html",
-"authorization": "Bearer MANAGEMENT_API_TOKEN"
-]
-let postData = NSData(data: "
 
-{%- auth0:head -%}
-{%- auth0:widget -%}
-".data(using: String.Encoding.utf8)!)
+let headers = [
+  "content-type": "text/html",
+  "authorization": "Bearer MANAGEMENT_API_TOKEN"
+]
+
+let postData = NSData(data: "<!DOCTYPE html>
+<html>
+<head>{%- auth0:head -%}</head>
+<body class='_widget-auto-layout'>{%- auth0:widget -%}</body>
+<script>
+  function updateSelectedLanguage() {
+    const selectElement = document.getElementById('language');
+    const selectedValue = selectElement.value;
+    const options = selectElement.options;
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].value === selectedValue) {
+        options[i].selected = true;
+      } else {
+        options[i].selected = false;
+      }
+    }
+    document.getElementById('changeLanguage').click();
+  }
+</script>".data(using: String.Encoding.utf8)!)
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/branding/templates/universal-login")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "PUT"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -303,164 +374,158 @@ To add language selection to the `signup` prompt, use the [Set partials for a pr
 <CodeGroup>
 ```bash cURL lines
 curl --request PUT \
---url 'https://{yourDomain}/api/v2/prompts/signup/partials' \
---header 'authorization: Bearer {mgmtApiToken}' \
---header 'content-type: application/json' \
---data '{
-"signup": {
-"form-content-start": "
-
-Preferred LanguageEnglishFrenchSpanish
-
-"
-}
+  --url 'https://{yourDomain}/api/v2/prompts/signup/partials' \
+  --header 'authorization: Bearer {mgmtApiToken}' \
+  --header 'content-type: application/json' \
+  --data '{
+    "signup": {
+        "form-content-start": "<div class=\"ulp-field\"><label for=\"language\">Preferred Language</label><select name=\"language\"id=\"language\"  onchange=updateSelectedLanguage()><option></option><option value=\"en\" {% if locale == \"en\" %}selected{% endif %}>English</option><option value=\"fr\" {% if locale == \"fr\" %}selected{% endif %}>French</option><option value=\"es\" {% if locale == \"es\" %}selected{% endif %}>Spanish</option></select></div><input type=\"hidden\" name=\"persist\" value=\"session\"/><input name=\"action\" id=\"changeLanguage\" type=\"submit\" value=\"change-language\" style=\"display:none\" formnovalidate/>"
+    }
 }'
-``` lines
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/prompts/signup/partials");
 var request = new RestRequest(Method.PUT);
 request.AddHeader("content-type", "application/json");
 request.AddHeader("authorization", "Bearer {mgmtApiToken}");
-request.AddParameter("application/json", "{\n \"signup\": {\n \"form-content-start\": \"
-
-Preferred LanguageEnglishFrenchSpanish
-
-\"\n }\n}", ParameterType.RequestBody);
+request.AddParameter("application/json", "{\n    \"signup\": {\n        \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n    }\n}", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/prompts/signup/partials"
-payload := strings.NewReader("{\n \"signup\": {\n \"form-content-start\": \"
 
-Preferred LanguageEnglishFrenchSpanish
+	url := "https://{yourDomain}/api/v2/prompts/signup/partials"
 
-\"\n }\n}")
-req, _ := http.NewRequest("PUT", url, payload)
-req.Header.Add("content-type", "application/json")
-req.Header.Add("authorization", "Bearer {mgmtApiToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+	payload := strings.NewReader("{\n    \"signup\": {\n        \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n    }\n}")
+
+	req, _ := http.NewRequest("PUT", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer {mgmtApiToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/prompts/signup/partials")
-.header("content-type", "application/json")
-.header("authorization", "Bearer {mgmtApiToken}")
-.body("{\n \"signup\": {\n \"form-content-start\": \"
-
-Preferred LanguageEnglishFrenchSpanish
-
-\"\n }\n}")
-.asString();
+HttpResponse<String> response = Unirest.put("https://{yourDomain}/api/v2/prompts/signup/partials")
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer {mgmtApiToken}")
+  .body("{\n    \"signup\": {\n        \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n    }\n}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'PUT',
-url: 'https://{yourDomain}/api/v2/prompts/signup/partials',
-headers: {'content-type': 'application/json', authorization: 'Bearer {mgmtApiToken}'},
-data: {
-signup: {
-'form-content-start': '
-
-Preferred LanguageEnglishFrenchSpanish
-
-'
-}
-}
+  method: 'PUT',
+  url: 'https://{yourDomain}/api/v2/prompts/signup/partials',
+  headers: {'content-type': 'application/json', authorization: 'Bearer {mgmtApiToken}'},
+  data: {
+    signup: {
+      'form-content-start': '<div class="ulp-field"><label for="language">Preferred Language</label><select name="language"id="language"  onchange=updateSelectedLanguage()><option></option><option value="en" {% if locale == "en" %}selected{% endif %}>English</option><option value="fr" {% if locale == "fr" %}selected{% endif %}>French</option><option value="es" {% if locale == "es" %}selected{% endif %}>Spanish</option></select></div><input type="hidden" name="persist" value="session"/><input name="action" id="changeLanguage" type="submit" value="change-language" style="display:none" formnovalidate/>'
+    }
+  }
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json",
-@"authorization": @"Bearer {mgmtApiToken}" };
-NSDictionary \*parameters = @{ @"signup": @{ @"form-content-start": @"
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
 
-Preferred LanguageEnglishFrenchSpanish
+NSDictionary *headers = @{ @"content-type": @"application/json",
+                           @"authorization": @"Bearer {mgmtApiToken}" };
+NSDictionary *parameters = @{ @"signup": @{ @"form-content-start": @"<div class=\"ulp-field\"><label for=\"language\">Preferred Language</label><select name=\"language\"id=\"language\"  onchange=updateSelectedLanguage()><option></option><option value=\"en\" {% if locale == \"en\" %}selected{% endif %}>English</option><option value=\"fr\" {% if locale == \"fr\" %}selected{% endif %}>French</option><option value=\"es\" {% if locale == \"es\" %}selected{% endif %}>Spanish</option></select></div><input type=\"hidden\" name=\"persist\" value=\"session\"/><input name=\"action\" id=\"changeLanguage\" type=\"submit\" value=\"change-language\" style=\"display:none\" formnovalidate/>" } };
 
-" } };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/prompts/signup/partials"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/prompts/signup/partials"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"PUT"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/prompts/signup/partials",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PUT",
-CURLOPT_POSTFIELDS => "{\n \"signup\": {\n \"form-content-start\": \"
-
-Preferred LanguageEnglishFrenchSpanish
-
-\"\n }\n}",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {mgmtApiToken}",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/prompts/signup/partials",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PUT",
+  CURLOPT_POSTFIELDS => "{\n    \"signup\": {\n        \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n    }\n}",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {mgmtApiToken}",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
-payload = "{\n \"signup\": {\n \"form-content-start\": \"
 
-Preferred LanguageEnglishFrenchSpanish
+payload = "{\n    \"signup\": {\n        \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n    }\n}"
 
-\"\n }\n}"
 headers = {
-'content-type': "application/json",
-'authorization': "Bearer {mgmtApiToken}"
-}
+    'content-type': "application/json",
+    'authorization': "Bearer {mgmtApiToken}"
+    }
+
 conn.request("PUT", "/{yourDomain}/api/v2/prompts/signup/partials", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -468,48 +533,49 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/prompts/signup/partials")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Put.new(url)
 request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer {mgmtApiToken}'
-request.body = "{\n \"signup\": {\n \"form-content-start\": \"
+request.body = "{\n    \"signup\": {\n        \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n    }\n}"
 
-Preferred LanguageEnglishFrenchSpanish
-
-\"\n }\n}"
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"content-type": "application/json",
-"authorization": "Bearer {mgmtApiToken}"
+  "content-type": "application/json",
+  "authorization": "Bearer {mgmtApiToken}"
 ]
-let parameters = ["signup": ["form-content-start": "
+let parameters = ["signup": ["form-content-start": "<div class=\"ulp-field\"><label for=\"language\">Preferred Language</label><select name=\"language\"id=\"language\"  onchange=updateSelectedLanguage()><option></option><option value=\"en\" {% if locale == \"en\" %}selected{% endif %}>English</option><option value=\"fr\" {% if locale == \"fr\" %}selected{% endif %}>French</option><option value=\"es\" {% if locale == \"es\" %}selected{% endif %}>Spanish</option></select></div><input type=\"hidden\" name=\"persist\" value=\"session\"/><input name=\"action\" id=\"changeLanguage\" type=\"submit\" value=\"change-language\" style=\"display:none\" formnovalidate/>"]] as [String : Any]
 
-Preferred LanguageEnglishFrenchSpanish
-
-"]] as [String : Any]
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/prompts/signup/partials")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "PUT"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -523,164 +589,158 @@ To add language selection to the `login-id` prompt, use the [Set partials for a 
 <CodeGroup>
 ```bash cURL lines
 curl --request PUT \
---url 'https://{yourDomain}/api/v2/prompts/login-id/partials' \
---header 'authorization: Bearer {mgmtApiToken}' \
---header 'content-type: application/json' \
---data '{
-"login-id": {
-"form-content-start": "
-
-Preferred LanguageEnglishFrenchSpanish
-
-"
-}
+  --url 'https://{yourDomain}/api/v2/prompts/login-id/partials' \
+  --header 'authorization: Bearer {mgmtApiToken}' \
+  --header 'content-type: application/json' \
+  --data '{
+    "login-id": {
+        "form-content-start": "<div class=\"ulp-field\"><label for=\"language\">Preferred Language</label><select name=\"language\"id=\"language\"  onchange=updateSelectedLanguage()><option></option><option value=\"en\" {% if locale == \"en\" %}selected{% endif %}>English</option><option value=\"fr\" {% if locale == \"fr\" %}selected{% endif %}>French</option><option value=\"es\" {% if locale == \"es\" %}selected{% endif %}>Spanish</option></select></div><input type=\"hidden\" name=\"persist\" value=\"session\"/><input name=\"action\" id=\"changeLanguage\" type=\"submit\" value=\"change-language\" style=\"display:none\" formnovalidate/>"
+    }
 }'
-``` lines
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/prompts/login-id/partials");
 var request = new RestRequest(Method.PUT);
 request.AddHeader("content-type", "application/json");
 request.AddHeader("authorization", "Bearer {mgmtApiToken}");
-request.AddParameter("application/json", "{\n \"login-id\": {\n \"form-content-start\": \"
-
-Preferred LanguageEnglishFrenchSpanish
-
-\"\n }\n}", ParameterType.RequestBody);
+request.AddParameter("application/json", "{\n    \"login-id\": {\n        \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n    }\n}", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/prompts/login-id/partials"
-payload := strings.NewReader("{\n \"login-id\": {\n \"form-content-start\": \"
 
-Preferred LanguageEnglishFrenchSpanish
+	url := "https://{yourDomain}/api/v2/prompts/login-id/partials"
 
-\"\n }\n}")
-req, _ := http.NewRequest("PUT", url, payload)
-req.Header.Add("content-type", "application/json")
-req.Header.Add("authorization", "Bearer {mgmtApiToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+	payload := strings.NewReader("{\n    \"login-id\": {\n        \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n    }\n}")
+
+	req, _ := http.NewRequest("PUT", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer {mgmtApiToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/prompts/login-id/partials")
-.header("content-type", "application/json")
-.header("authorization", "Bearer {mgmtApiToken}")
-.body("{\n \"login-id\": {\n \"form-content-start\": \"
-
-Preferred LanguageEnglishFrenchSpanish
-
-\"\n }\n}")
-.asString();
+HttpResponse<String> response = Unirest.put("https://{yourDomain}/api/v2/prompts/login-id/partials")
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer {mgmtApiToken}")
+  .body("{\n    \"login-id\": {\n        \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n    }\n}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'PUT',
-url: 'https://{yourDomain}/api/v2/prompts/login-id/partials',
-headers: {'content-type': 'application/json', authorization: 'Bearer {mgmtApiToken}'},
-data: {
-'login-id': {
-'form-content-start': '
-
-Preferred LanguageEnglishFrenchSpanish
-
-'
-}
-}
+  method: 'PUT',
+  url: 'https://{yourDomain}/api/v2/prompts/login-id/partials',
+  headers: {'content-type': 'application/json', authorization: 'Bearer {mgmtApiToken}'},
+  data: {
+    'login-id': {
+      'form-content-start': '<div class="ulp-field"><label for="language">Preferred Language</label><select name="language"id="language"  onchange=updateSelectedLanguage()><option></option><option value="en" {% if locale == "en" %}selected{% endif %}>English</option><option value="fr" {% if locale == "fr" %}selected{% endif %}>French</option><option value="es" {% if locale == "es" %}selected{% endif %}>Spanish</option></select></div><input type="hidden" name="persist" value="session"/><input name="action" id="changeLanguage" type="submit" value="change-language" style="display:none" formnovalidate/>'
+    }
+  }
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json",
-@"authorization": @"Bearer {mgmtApiToken}" };
-NSDictionary \*parameters = @{ @"login-id": @{ @"form-content-start": @"
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
 
-Preferred LanguageEnglishFrenchSpanish
+NSDictionary *headers = @{ @"content-type": @"application/json",
+                           @"authorization": @"Bearer {mgmtApiToken}" };
+NSDictionary *parameters = @{ @"login-id": @{ @"form-content-start": @"<div class=\"ulp-field\"><label for=\"language\">Preferred Language</label><select name=\"language\"id=\"language\"  onchange=updateSelectedLanguage()><option></option><option value=\"en\" {% if locale == \"en\" %}selected{% endif %}>English</option><option value=\"fr\" {% if locale == \"fr\" %}selected{% endif %}>French</option><option value=\"es\" {% if locale == \"es\" %}selected{% endif %}>Spanish</option></select></div><input type=\"hidden\" name=\"persist\" value=\"session\"/><input name=\"action\" id=\"changeLanguage\" type=\"submit\" value=\"change-language\" style=\"display:none\" formnovalidate/>" } };
 
-" } };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/prompts/login-id/partials"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/prompts/login-id/partials"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"PUT"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/prompts/login-id/partials",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PUT",
-CURLOPT_POSTFIELDS => "{\n \"login-id\": {\n \"form-content-start\": \"
-
-Preferred LanguageEnglishFrenchSpanish
-
-\"\n }\n}",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {mgmtApiToken}",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/prompts/login-id/partials",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PUT",
+  CURLOPT_POSTFIELDS => "{\n    \"login-id\": {\n        \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n    }\n}",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {mgmtApiToken}",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
-payload = "{\n \"login-id\": {\n \"form-content-start\": \"
 
-Preferred LanguageEnglishFrenchSpanish
+payload = "{\n    \"login-id\": {\n        \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n    }\n}"
 
-\"\n }\n}"
 headers = {
-'content-type': "application/json",
-'authorization': "Bearer {mgmtApiToken}"
-}
+    'content-type': "application/json",
+    'authorization': "Bearer {mgmtApiToken}"
+    }
+
 conn.request("PUT", "/{yourDomain}/api/v2/prompts/login-id/partials", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -688,48 +748,49 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/prompts/login-id/partials")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Put.new(url)
 request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer {mgmtApiToken}'
-request.body = "{\n \"login-id\": {\n \"form-content-start\": \"
+request.body = "{\n    \"login-id\": {\n        \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n    }\n}"
 
-Preferred LanguageEnglishFrenchSpanish
-
-\"\n }\n}"
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"content-type": "application/json",
-"authorization": "Bearer {mgmtApiToken}"
+  "content-type": "application/json",
+  "authorization": "Bearer {mgmtApiToken}"
 ]
-let parameters = ["login-id": ["form-content-start": "
+let parameters = ["login-id": ["form-content-start": "<div class=\"ulp-field\"><label for=\"language\">Preferred Language</label><select name=\"language\"id=\"language\"  onchange=updateSelectedLanguage()><option></option><option value=\"en\" {% if locale == \"en\" %}selected{% endif %}>English</option><option value=\"fr\" {% if locale == \"fr\" %}selected{% endif %}>French</option><option value=\"es\" {% if locale == \"es\" %}selected{% endif %}>Spanish</option></select></div><input type=\"hidden\" name=\"persist\" value=\"session\"/><input name=\"action\" id=\"changeLanguage\" type=\"submit\" value=\"change-language\" style=\"display:none\" formnovalidate/>"]] as [String : Any]
 
-Preferred LanguageEnglishFrenchSpanish
-
-"]] as [String : Any]
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/prompts/login-id/partials")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "PUT"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -743,164 +804,158 @@ To add language selection to the `login-passwordless-email-code` prompt, use the
 <CodeGroup>
 ```bash cURL lines
 curl --request PUT \
---url 'https://{yourDomain}/api/v2/prompts/login-passwordless/partials' \
---header 'authorization: Bearer {mgmtApiToken}' \
---header 'content-type: application/json' \
---data '{
-"login-passwordless-email-code": {
-"form-content-start": "
-
-Preferred LanguageEnglishFrenchSpanish
-
-"
-}
+  --url 'https://{yourDomain}/api/v2/prompts/login-passwordless/partials' \
+  --header 'authorization: Bearer {mgmtApiToken}' \
+  --header 'content-type: application/json' \
+  --data '{
+    "login-passwordless-email-code": {
+      "form-content-start": "<div class=\"ulp-field\"><label for=\"language\">Preferred Language</label><select name=\"language\"id=\"language\"  onchange=updateSelectedLanguage()><option></option><option value=\"en\" {% if locale == \"en\" %}selected{% endif %}>English</option><option value=\"fr\" {% if locale == \"fr\" %}selected{% endif %}>French</option><option value=\"es\" {% if locale == \"es\" %}selected{% endif %}>Spanish</option></select></div><input type=\"hidden\" name=\"persist\" value=\"session\"/><input name=\"action\" id=\"changeLanguage\" type=\"submit\" value=\"change-language\" style=\"display:none\" formnovalidate/>"
+  }
 }'
-``` lines
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/prompts/login-passwordless/partials");
 var request = new RestRequest(Method.PUT);
 request.AddHeader("content-type", "application/json");
 request.AddHeader("authorization", "Bearer {mgmtApiToken}");
-request.AddParameter("application/json", "{\n \"login-passwordless-email-code\": {\n \"form-content-start\": \"
-
-Preferred LanguageEnglishFrenchSpanish
-
-\"\n }\n}", ParameterType.RequestBody);
+request.AddParameter("application/json", "{\n    \"login-passwordless-email-code\": {\n      \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n  }\n}", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/prompts/login-passwordless/partials"
-payload := strings.NewReader("{\n \"login-passwordless-email-code\": {\n \"form-content-start\": \"
 
-Preferred LanguageEnglishFrenchSpanish
+	url := "https://{yourDomain}/api/v2/prompts/login-passwordless/partials"
 
-\"\n }\n}")
-req, _ := http.NewRequest("PUT", url, payload)
-req.Header.Add("content-type", "application/json")
-req.Header.Add("authorization", "Bearer {mgmtApiToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+	payload := strings.NewReader("{\n    \"login-passwordless-email-code\": {\n      \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n  }\n}")
+
+	req, _ := http.NewRequest("PUT", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("authorization", "Bearer {mgmtApiToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.put("https://{yourDomain}/api/v2/prompts/login-passwordless/partials")
-.header("content-type", "application/json")
-.header("authorization", "Bearer {mgmtApiToken}")
-.body("{\n \"login-passwordless-email-code\": {\n \"form-content-start\": \"
-
-Preferred LanguageEnglishFrenchSpanish
-
-\"\n }\n}")
-.asString();
+HttpResponse<String> response = Unirest.put("https://{yourDomain}/api/v2/prompts/login-passwordless/partials")
+  .header("content-type", "application/json")
+  .header("authorization", "Bearer {mgmtApiToken}")
+  .body("{\n    \"login-passwordless-email-code\": {\n      \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n  }\n}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'PUT',
-url: 'https://{yourDomain}/api/v2/prompts/login-passwordless/partials',
-headers: {'content-type': 'application/json', authorization: 'Bearer {mgmtApiToken}'},
-data: {
-'login-passwordless-email-code': {
-'form-content-start': '
-
-Preferred LanguageEnglishFrenchSpanish
-
-'
-}
-}
+  method: 'PUT',
+  url: 'https://{yourDomain}/api/v2/prompts/login-passwordless/partials',
+  headers: {'content-type': 'application/json', authorization: 'Bearer {mgmtApiToken}'},
+  data: {
+    'login-passwordless-email-code': {
+      'form-content-start': '<div class="ulp-field"><label for="language">Preferred Language</label><select name="language"id="language"  onchange=updateSelectedLanguage()><option></option><option value="en" {% if locale == "en" %}selected{% endif %}>English</option><option value="fr" {% if locale == "fr" %}selected{% endif %}>French</option><option value="es" {% if locale == "es" %}selected{% endif %}>Spanish</option></select></div><input type="hidden" name="persist" value="session"/><input name="action" id="changeLanguage" type="submit" value="change-language" style="display:none" formnovalidate/>'
+    }
+  }
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json",
-@"authorization": @"Bearer {mgmtApiToken}" };
-NSDictionary \*parameters = @{ @"login-passwordless-email-code": @{ @"form-content-start": @"
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
 
-Preferred LanguageEnglishFrenchSpanish
+NSDictionary *headers = @{ @"content-type": @"application/json",
+                           @"authorization": @"Bearer {mgmtApiToken}" };
+NSDictionary *parameters = @{ @"login-passwordless-email-code": @{ @"form-content-start": @"<div class=\"ulp-field\"><label for=\"language\">Preferred Language</label><select name=\"language\"id=\"language\"  onchange=updateSelectedLanguage()><option></option><option value=\"en\" {% if locale == \"en\" %}selected{% endif %}>English</option><option value=\"fr\" {% if locale == \"fr\" %}selected{% endif %}>French</option><option value=\"es\" {% if locale == \"es\" %}selected{% endif %}>Spanish</option></select></div><input type=\"hidden\" name=\"persist\" value=\"session\"/><input name=\"action\" id=\"changeLanguage\" type=\"submit\" value=\"change-language\" style=\"display:none\" formnovalidate/>" } };
 
-" } };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/prompts/login-passwordless/partials"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/prompts/login-passwordless/partials"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"PUT"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/prompts/login-passwordless/partials",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PUT",
-CURLOPT_POSTFIELDS => "{\n \"login-passwordless-email-code\": {\n \"form-content-start\": \"
-
-Preferred LanguageEnglishFrenchSpanish
-
-\"\n }\n}",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {mgmtApiToken}",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/prompts/login-passwordless/partials",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PUT",
+  CURLOPT_POSTFIELDS => "{\n    \"login-passwordless-email-code\": {\n      \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n  }\n}",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {mgmtApiToken}",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
-payload = "{\n \"login-passwordless-email-code\": {\n \"form-content-start\": \"
 
-Preferred LanguageEnglishFrenchSpanish
+payload = "{\n    \"login-passwordless-email-code\": {\n      \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n  }\n}"
 
-\"\n }\n}"
 headers = {
-'content-type': "application/json",
-'authorization': "Bearer {mgmtApiToken}"
-}
+    'content-type': "application/json",
+    'authorization': "Bearer {mgmtApiToken}"
+    }
+
 conn.request("PUT", "/{yourDomain}/api/v2/prompts/login-passwordless/partials", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -908,48 +963,49 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/prompts/login-passwordless/partials")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Put.new(url)
 request["content-type"] = 'application/json'
 request["authorization"] = 'Bearer {mgmtApiToken}'
-request.body = "{\n \"login-passwordless-email-code\": {\n \"form-content-start\": \"
+request.body = "{\n    \"login-passwordless-email-code\": {\n      \"form-content-start\": \"<div class=\\\"ulp-field\\\"><label for=\\\"language\\\">Preferred Language</label><select name=\\\"language\\\"id=\\\"language\\\"  onchange=updateSelectedLanguage()><option></option><option value=\\\"en\\\" {% if locale == \\\"en\\\" %}selected{% endif %}>English</option><option value=\\\"fr\\\" {% if locale == \\\"fr\\\" %}selected{% endif %}>French</option><option value=\\\"es\\\" {% if locale == \\\"es\\\" %}selected{% endif %}>Spanish</option></select></div><input type=\\\"hidden\\\" name=\\\"persist\\\" value=\\\"session\\\"/><input name=\\\"action\\\" id=\\\"changeLanguage\\\" type=\\\"submit\\\" value=\\\"change-language\\\" style=\\\"display:none\\\" formnovalidate/>\"\n  }\n}"
 
-Preferred LanguageEnglishFrenchSpanish
-
-\"\n }\n}"
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"content-type": "application/json",
-"authorization": "Bearer {mgmtApiToken}"
+  "content-type": "application/json",
+  "authorization": "Bearer {mgmtApiToken}"
 ]
-let parameters = ["login-passwordless-email-code": ["form-content-start": "
+let parameters = ["login-passwordless-email-code": ["form-content-start": "<div class=\"ulp-field\"><label for=\"language\">Preferred Language</label><select name=\"language\"id=\"language\"  onchange=updateSelectedLanguage()><option></option><option value=\"en\" {% if locale == \"en\" %}selected{% endif %}>English</option><option value=\"fr\" {% if locale == \"fr\" %}selected{% endif %}>French</option><option value=\"es\" {% if locale == \"es\" %}selected{% endif %}>Spanish</option></select></div><input type=\"hidden\" name=\"persist\" value=\"session\"/><input name=\"action\" id=\"changeLanguage\" type=\"submit\" value=\"change-language\" style=\"display:none\" formnovalidate/>"]] as [String : Any]
 
-Preferred LanguageEnglishFrenchSpanish
-
-"]] as [String : Any]
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/prompts/login-passwordless/partials")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "PUT"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
