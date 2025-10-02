@@ -20,15 +20,15 @@ After implementing this feature for a specific prompt, a language selection menu
 
 Before you can implement flexible language selection, ensure the following requirements are met:
 
-* Use [Universal Login](/docs/authenticate/login/auth0-universal-login).
+* Use [Universal Login](/docs/fr-ca/authenticate/login/auth0-universal-login).
 
   + This feature is not available for custom login pages.
-* Configure a [custom domain](/docs/customize/custom-domains).
+* Configure a [custom domain](/docs/fr-ca/customize/custom-domains).
 * Enable the languages you plan to add to your prompts in your Auth0 tenant.
 
   + On the Auth0 Dashboard, navigate to [Settings > General > Languages](https://manage.auth0.com/#/tenant/general) and enable one or more desired languages.
 
-    - For more information, review [Universal Login Internationalization](/docs/customize/internationalization-and-localization/universal-login-internationalization).
+    - For more information, review [Universal Login Internationalization](/docs/fr-ca/customize/internationalization-and-localization/universal-login-internationalization).
 
 ## Implement flexible language selection
 
@@ -39,7 +39,7 @@ Setting up flexible language selection includes two primary steps:
 
 ### Prepare your Universal Login page template
 
-To get started, add the following script to your [Universal Login page template](/docs/customize/login-pages/universal-login/customize-templates) to facilitate language selection.
+To get started, add the following script to your [Universal Login page template](/docs/fr-ca/customize/login-pages/universal-login/customize-templates) to facilitate language selection.
 
 ```html lines
 <script>
@@ -343,19 +343,19 @@ To add language selection to a specific prompt, use the Auth0 <Tooltip tip="Mana
 </thead>
 <tbody>
 <tr>
-<td><code>language</code></td>
+<td>`language`</td>
 <td>Required.<br/><br/>One or more languages to include in the language selection menu displayed to users.</td>
-<td><code>es</code>,<code>fr</code>,<code>en</code></td>
+<td>`es`,`fr`,`en`</td>
 </tr>
 <tr>
-<td><code>persist</code></td>
+<td>`persist`</td>
 <td>Required.<br/><br/>Determines whether the language should persist across the session.</td>
-<td><code>session</code></td>
+<td>`session`</td>
 </tr>
 <tr>
-<td><code>action</code></td>
+<td>`action`</td>
 <td>Optional.<br/><br/>Use this parameter in situations where you want users to be able to update their language without advancing the prompt.<br/><br/>If the value is provided, the form is <strong>not</strong> automatically submitted when a user changes their language. Otherwise, the prompt automatically advances when a different language is selected.</td>
-<td><code>change-language</code></td>
+<td>`change-language`</td>
 </tr>
 </tbody>
 </table>
@@ -590,7 +590,7 @@ dataTask.resume()
 
 <Accordion title="Login Prompt: Identifier First">
 
-To add language selection to the `login-id` prompt, use the [Set partials for a prompt](https://auth0.com/docs/api/management/v2/prompts/put-partials) endpoint:
+To add language selection to the `login-id` prompt, use the [Set partials for a prompt](/docs/fr-ca/api/management/v2/prompts/put-partials) endpoint:
 
 <CodeGroup>
 ```bash cURL lines
@@ -805,7 +805,7 @@ dataTask.resume()
 
 <Accordion title="Login Prompt: Passwordless (Email)">
 
-To add language selection to the `login-passwordless-email-code` prompt, use the [Set partials for a prompt](https://auth0.com/docs/api/management/v2/prompts/put-partials) endpoint:
+To add language selection to the `login-passwordless-email-code` prompt, use the [Set partials for a prompt](/docs/fr-ca/api/management/v2/prompts/put-partials) endpoint:
 
 <CodeGroup>
 ```bash cURL lines
