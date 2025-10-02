@@ -7,279 +7,325 @@ permalink: "interactive"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/golang.png"
 'twitter:title': "Ajouter une fonctionnalité de connexion à votre application Go"
 'twitter:description': "Ce guide explique comment intégrer Auth0 à n’importe quelle application Web Go, nouvelle ou existante."
+sidebarTitle: Go
 ---
 
-[Skip to main content](#maincontent)
+import { Recipe, Content, Section, SideMenu, SideMenuSectionItem, SignUpForm } from "/snippets/recipe.jsx";
+import { LoggedInForm } from "/snippets/Login.jsx";
+import Auth from "/snippets/quickstart/webapp/golang/auth.go.mdx";
+import Callback from "/snippets/quickstart/webapp/golang/callback.go.mdx";
+import Env from "/snippets/quickstart/webapp/golang/.env.mdx";
+import Go from "/snippets/quickstart/webapp/golang/go.mod.mdx";
+import Isauthenticated from "/snippets/quickstart/webapp/golang/isAuthenticated.go.mdx";
+import Login from "/snippets/quickstart/webapp/golang/login.go.mdx";
+import Logout from "/snippets/quickstart/webapp/golang/logout.go.mdx";
+import Main from "/snippets/quickstart/webapp/golang/main.go.mdx";
+import Router from "/snippets/quickstart/webapp/golang/router.go.mdx";
+import User from "/snippets/quickstart/webapp/golang/user.go.mdx";
 
-​
+export const sections = [
+  { id: "configuration-d-auth0", title: "Configuration d’Auth0" },
+  { id: "installer-les-dépendances", title: "Installer les dépendances" },
+  { id: "configurer-les-variables-d-environnement", title: "Configurer les variables d’environnement" },
+  { id: "configurez-les-packages-oauth2-et-openid-connect", title: "Configurez les packages OAuth2 et OpenID Connect" },
+  { id: "configurer-vos-routes-d-application", title: "Configurer vos routes d’application" },
+  { id: "ajouter-une-fonctionnalité-de-connexion-à-votre-application", title: "Ajouter une fonctionnalité de connexion à votre application" },
+  { id: "gérer-le-rappel-d-authentification", title: "Gérer le rappel d’authentification" },
+  { id: "afficher-les-informations-du-profil-utilisateur", title: "Afficher les informations du profil utilisateur" },
+  { id: "ajouter-une-fonctionnalité-de-déconnexion-à-votre-application", title: "Ajouter une fonctionnalité de déconnexion à votre application" },
+  { id: "protéger-les-routes", title: "Protéger les routes" },
+  { id: "lancer-votre-application", title: "Lancer votre application" }
+]
 
-[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+<Recipe>
+  <Content>
+    Auth0 vous permet d’ajouter l’authentification et de pouvoir accéder aux informations relatives au profil de l’utilisateur dans votre application. Ce guide explique comment intégrer Auth0 à n’importe quelle application Web Go, nouvelle ou existante.
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      <Section id={sections[0].id} title={sections[0].title} stepNumber="1">
+      Pour utiliser les services Auth0, vous devez avoir une application installée dans Auth0 Dashboard. L’application Auth0 est l’endroit où vous allez configurer le fonctionnement de l’authentification pour le projet que vous développez.
 
----
+      ### Configurer une application
 
-​
+      Utilisez le sélecteur interactif pour créer une nouvelle application Auth0 ou sélectionner une application existante qui représente le projet avec lequel vous souhaitez effectuer l’intégration. Dans Auth0, chaque application se voit attribuer un identifiant client unique alphanumérique que votre code d’application utilisera pour appeler les API Auth0 via la trousse SDK.
 
-[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+      Tous les paramètres que vous configurez à l’aide de ce guide de démarrage rapide seront automatiquement mis à jour pour votre application dans le [Tableau de bord](https://manage.auth0.com/dashboard/us/auth0-dsepaid/), qui est l’endroit où vous pourrez gérer vos applications à l’avenir.
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      Si vous préférez explorer une configuration complète, consultez plutôt un exemple d’application.
 
-[##### Ajouter une fonctionnalité de connexion à votre application Go](#Ajouter une fonctionnalité de connexion à votre application Go)
+      ### Configuration des URL de rappel
 
-[View on Github](https://github.com/auth0-samples/auth0-golang-web-app/tree/master/01-Login) Log In & Download Sample
+      Une URL de rappel est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur authentification. Si elle n’est pas définie, les utilisateurs ne seront pas redirigés vers votre application après s’être connectés.
 
-1. [Quickstarts](/docs/fr-ca/quickstarts)
-3. [Regular Web App](/docs/fr-ca/quickstart/webapp)
-5. [Go](/docs/fr-ca/quickstart/webapp/golang/interactive)
+      <Info>
+      Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000``/callback`.
+      </Info>
 
-# 
+      ### Configuration des URL de déconnexion
 
-# Ajouter une fonctionnalité de connexion à votre application Go
+      Une URL de déconnexion est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur déconnexion. Si elle n’est pas définie, les utilisateurs ne pourront pas se déconnecter de votre application et recevront un message d’erreur.
 
-Auth0 vous permet d’ajouter l’authentification et de pouvoir accéder aux informations relatives au profil de l’utilisateur dans votre application. Ce guide explique comment intégrer Auth0 à n’importe quelle application Web Go, nouvelle ou existante.
+      <Info>
+      Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000`.
+      </Info>
+      </Section>
 
-[1
+      <Section id={sections[1].id} title={sections[1].title} stepNumber="2">
+      Créez un fichier `go.mod` pour lister toutes les dépendances de votre application.
 
-## Configuration d’Auth0](#configuration-d-auth0)
+      Pour intégrer Auth0 dans une application Go, ajoutez les packages `coreos/go-oidc/v3` et `x/oauth2`.
 
-Pour utiliser les services Auth0, vous devez avoir une application installée dans Auth0 Dashboard. L’application Auth0 est l’endroit où vous allez configurer le fonctionnement de l’authentification pour le projet que vous développez.
+      En plus des packages OIDC et OAuth2, ajoutez `joho/godotenv`, `gin-gonic/gin`, et `gin-contrib/sessions`.
 
-### Configurer une application
+      <Info>
+      Cet exemple utilise `gin` pour le routage, mais vous pouvez utiliser le routeur de votre choix.
+      </Info>
 
-Utilisez le sélecteur interactif pour créer une nouvelle application Auth0 ou sélectionner une application existante qui représente le projet avec lequel vous souhaitez effectuer l’intégration. Dans Auth0, chaque application se voit attribuer un identifiant client unique alphanumérique que votre code d’application utilisera pour appeler les API Auth0 via la trousse SDK.
+      Enregistrez le fichier `go.mod` avec les dépendances nécessaires et installez-les en utilisant la commande suivante dans votre terminal :
 
-Tous les paramètres que vous configurez à l’aide de ce guide de démarrage rapide seront automatiquement mis à jour pour votre application dans le [Tableau de bord](https://manage.auth0.com/dashboard/us/auth0-dsepaid/), qui est l’endroit où vous pourrez gérer vos applications à l’avenir.
+      `go mod download`
+      </Section>
 
-Si vous préférez explorer une configuration complète, consultez plutôt un exemple d’application.
+      <Section id={sections[2].id} title={sections[2].title} stepNumber="3">
+      Vous devez définir les variables d’environnement suivantes dans `.env` à la racine de votre répertoire de projet :
 
-### Configuration des URL de rappel
+      - **AUTH0\_DOMAIN** : Le domaine de votre locataire Auth0. Trouvez votre domaine Auth0 dans Auth0 Dashboard sous les paramètres de votre application dans le champ Domain (Domaine). Pour les domaines personnalisés, définissez-le plutôt sur la valeur de votre domaine personnalisé.
+      - **AUTH0\_CLIENT\_ID** : L’identificateur de l’application Auth0 que vous avez configurée précédemment dans ce guide rapide. Vous le trouverez dans Auth0 Dashboard sous les paramètres de votre application dans le champ Client ID (Identificateur client).
+      - **AUTH0\_CLIENT\_SECRET** : Le secret de l’application Auth0 que vous avez configurée précédemment dans ce guide rapide. Vous le trouverez dans Auth0 Dashboard, sous les paramètres de votre application dans le champ Client Secret (Secret client).
+      - **AUTH0\_CALLBACK\_URL** : L’URL utilisée par Auth0 pour rediriger l’utilisateur après une authentification réussie.
+      </Section>
 
-Une URL de rappel est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur authentification. Si elle n’est pas définie, les utilisateurs ne seront pas redirigés vers votre application après s’être connectés.
+      <Section id={sections[3].id} title={sections[3].title} stepNumber="4">
+      Ensuite, configurez les packages OAuth2 et OpenID Connect
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      Créez un fichier nommé `auth.go` dans le dossier `platform/authenticator`. Dans ce package, créez une méthode pour configurer et renvoyer les clients [OAuth2](https://godoc.org/golang.org/x/oauth2) et [OIDC](https://godoc.org/github.com/coreos/go-oidc), et une autre pour vérifier un jeton d’ID.
+      </Section>
 
-Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000``/callback`.
+      <Section id={sections[4].id} title={sections[4].title} stepNumber="5">
+      Créez un fichier nommé `router.go` dans le dossier `platform/router`. Dans ce package, créez une méthode pour configurer et renvoyer nos routes en utilisant [github.com/gin-gonic/gin](https://github.com/gin-gonic/gin). Vous passerez une instance de `Authenticator` à la méthode pour l’utiliser avec les gestionnaires `login (connexion)` et `callback (rappel)`.
+      </Section>
 
-</Callout>
+      <Section id={sections[5].id} title={sections[5].title} stepNumber="6">
+      Pour que l’utilisateur s’authentifie, nous devons créer une fonction gestionnaire pour traiter la route`/login`.
 
-### Configuration des URL de déconnexion
+      Créez un fichier nommé `login.go` dans le dossier `web/app/login` et ajoutez une fonction `Handler`. Lors de l’exécution du gestionnaire, l’utilisateur sera redirigé vers Auth0 où il pourra saisir ses identifiants.
 
-Une URL de déconnexion est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur déconnexion. Si elle n’est pas définie, les utilisateurs ne pourront pas se déconnecter de votre application et recevront un message d’erreur.
+      Pour appeler la route `/login` ajoutez un lien vers `/login` dans le modèle `home.html` situé dans le directory `web/template`.
+      </Section>
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      <Section id={sections[6].id} title={sections[6].title} stepNumber="7">
+      Une fois que les utilisateurs se sont authentifiés en utilisant la page de connexion universelle d’Auth0, ils reviendront à l’application à la route `/callback`.
 
-Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000`.
+      Créez un fichier nommé `callback.go` dans le dossier `web/app/callback` et ajoutez une fonction `Handler`.
 
-</Callout>
+      Ce gestionnaire prendra la chaîne de requête `code` fournie par Auth0 et l’échangera contre un jeton d’ID et un jeton d’accès.
 
-[2
+      Si le jeton d’ID est valide, il stockera les informations de profil et le jeton d’accès dans la session. Les informations de profil sont basées sur les demandes contenues dans le jeton d’ID. Le stockage de session permet à l’application d’accéder à ces informations selon les besoins.
+      </Section>
 
-## Installer les dépendances](#installer-les-dépendances)
+      <Section id={sections[7].id} title={sections[7].title} stepNumber="8">
+      Maintenant que vos utilisateurs peuvent se connecter, vous voulez probablement pouvoir récupérer et utiliser les informations de profil associées aux utilisateurs authentifiés.
 
-Créez un fichier `go.mod` pour lister toutes les dépendances de votre application.
+      Vous pouvez accéder à ces informations de profil, telles que leur pseudonyme ou leur photo de profil, à partir du `profile` qui a été sauvegardé dans la session précédemment.
 
-Pour intégrer Auth0 dans une application Go, ajoutez les packages `coreos/go-oidc/v3` et `x/oauth2`.
-
-En plus des packages OIDC et OAuth2, ajoutez `joho/godotenv`, `gin-gonic/gin`, et `gin-contrib/sessions`.
-
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
-
-Cet exemple utilise `gin` pour le routage, mais vous pouvez utiliser le routeur de votre choix.
-
-</Callout>
-
-Enregistrez le fichier `go.mod` avec les dépendances nécessaires et installez-les en utilisant la commande suivante dans votre terminal :
-
-`go mod download`
-
-[3
-
-## Configurer les variables d’environnement](#configurer-les-variables-d-environnement)
-
-Vous devez définir les variables d’environnement suivantes dans `.env` à la racine de votre répertoire de projet :
-
-* **AUTH0_DOMAIN** : Le domaine de votre locataire Auth0. Trouvez votre domaine Auth0 dans Auth0 Dashboard sous les paramètres de votre application dans le champ Domain (Domaine). Pour les domaines personnalisés, définissez-le plutôt sur la valeur de votre domaine personnalisé.
-* **AUTH0_CLIENT_ID** : L’identificateur de l’application Auth0 que vous avez configurée précédemment dans ce guide rapide. Vous le trouverez dans Auth0 Dashboard sous les paramètres de votre application dans le champ Client ID (Identificateur client).
-* **AUTH0_CLIENT_SECRET** : Le secret de l’application Auth0 que vous avez configurée précédemment dans ce guide rapide. Vous le trouverez dans Auth0 Dashboard, sous les paramètres de votre application dans le champ Client Secret (Secret client).
-* **AUTH0_CALLBACK_URL** : L’URL utilisée par Auth0 pour rediriger l’utilisateur après une authentification réussie.
-
-[4
-
-## Configurez les packages OAuth2 et OpenID Connect](#configurez-les-packages-oauth2-et-openid-connect)
-
-Ensuite, configurez les packages OAuth2 et OpenID Connect
-
-Créez un fichier nommé `auth.go` dans le dossier `platform/authenticator`. Dans ce package, créez une méthode pour configurer et renvoyer les clients [OAuth2](https://godoc.org/golang.org/x/oauth2) et [OIDC](https://godoc.org/github.com/coreos/go-oidc), et une autre pour vérifier un jeton d’ID.
-
-[5
-
-## Configurer vos routes d’application](#configurer-vos-routes-d-application)
-
-Créez un fichier nommé `router.go` dans le dossier `platform/router`. Dans ce package, créez une méthode pour configurer et renvoyer nos routes en utilisant [github.com/gin-gonic/gin](https://github.com/gin-gonic/gin). Vous passerez une instance de `Authenticator` à la méthode pour l’utiliser avec les gestionnaires `login (connexion)` et `callback (rappel)`.
-
-[6
-
-## Ajouter une fonctionnalité de connexion à votre application](#ajouter-une-fonctionnalité-de-connexion-à-votre-application)
-
-Pour que l’utilisateur s’authentifie, nous devons créer une fonction gestionnaire pour traiter la route`/login`.
-
-Créez un fichier nommé `login.go` dans le dossier `web/app/login` et ajoutez une fonction `Handler`. Lors de l’exécution du gestionnaire, l’utilisateur sera redirigé vers Auth0 où il pourra saisir ses identifiants.
-
-Pour appeler la route `/login` ajoutez un lien vers `/login` dans le modèle `home.html` situé dans le directory `web/template`.
-
-[7
-
-## Gérer le rappel d’authentification](#gérer-le-rappel-d-authentification)
-
-Une fois que les utilisateurs se sont authentifiés en utilisant la page de connexion universelle d’Auth0, ils reviendront à l’application à la route `/callback`.
-
-Créez un fichier nommé `callback.go` dans le dossier `web/app/callback` et ajoutez une fonction `Handler`.
-
-Ce gestionnaire prendra la chaîne de requête `code` fournie par Auth0 et l’échangera contre un jeton d’ID et un jeton d’accès.
-
-Si le jeton d’ID est valide, il stockera les informations de profil et le jeton d’accès dans la session. Les informations de profil sont basées sur les demandes contenues dans le jeton d’ID. Le stockage de session permet à l’application d’accéder à ces informations selon les besoins.
-
-[8
-
-## Afficher les informations du profil utilisateur](#afficher-les-informations-du-profil-utilisateur)
-
-Maintenant que vos utilisateurs peuvent se connecter, vous voulez probablement pouvoir récupérer et utiliser les informations de profil associées aux utilisateurs authentifiés.
-
-Vous pouvez accéder à ces informations de profil, telles que leur pseudonyme ou leur photo de profil, à partir du `profile` qui a été sauvegardé dans la session précédemment.
-
-Créez un gestionnaire pour le point de terminaison `/user` dans `web/app/user/user.go` et renvoyez le fichier HTML correspondant. Comme le `profile` passe à `ctx.HTML()`, vous pouvez accéder aux informations de profil, telles que `picture` et `nickname` à l’intérieur de ce même fichier HTML.
-
-Un exemple de fichier HTML de ce type pourrait ressembler à l’exemple ci-dessous, mais vous pouvez récupérer n’importe quelle information de profil, y compris des demandes personnalisées.
-
-[9
-
-## Ajouter une fonctionnalité de déconnexion à votre application](#ajouter-une-fonctionnalité-de-déconnexion-à-votre-application)
-
-Pour déconnecter l’utilisateur, effacez les données de la session et redirigez l’utilisateur vers le point de terminaison de déconnexion Auth0. Vous trouverez plus d’informations à ce sujet dans la [documentation sur la déconnexion](https://auth0.com/docs/logout).
-
-Créez un fichier nommé `logout.go` dans le dossier `web/app/logout`, et ajoutez la fonction `Handler` pour rediriger l’utilisateur vers le point de terminaison de déconnexion Auth0.
-
-L’URL `returnTo` doit figurer dans la liste des URL de déconnexion autorisées de la section des paramètres de l’application. Pour plus d’informations, consultez [Rediriger les utilisateurs après la déconnexion](https://auth0.com/docs/logout/guides/redirect-users-after-logout).
-
-Créez un fichier nommé `user.js` dans le dossier `web/static/js`, et ajoutez le code pour supprimer le témoin d’un utilisateur connecté.
-
-[10
-
-## Protéger les routes](#protéger-les-routes)
-
-La pratique recommandée veut que certaines routes ne soient accessibles qu’aux utilisateurs authentifiés. Lorsque des utilisateurs non authentifiés essaient d’accéder à des routes protégées, votre application devrait les rediriger.
-
-Dans ce cas, vous devez mettre en œuvre un intergiciel pour accéder à la requête HTTP. La fonction d’intergiciel détermine si la requête doit être dirigée vers le gestionnaire de point de terminaison ou si elle doit être bloquée.
-
-Créez un fichier nommé `isAuthenticated.go` dans `platform/middleware` et ajoutez une fonction qui vérifie si l’utilisateur est authentifié ou non, en fonction de la clé de session de `profile`. Si l’utilisateur n’est pas authentifié, l’intergiciel le redirigera vers la racine de l’application.
-
-L’intergiciel créé, nous pouvons le configurer pour toute route nécessitant une authentification en l’ajoutant au routeur.
-
-[11
-
-## Lancer votre application](#lancer-votre-application)
-
-L’authentificateur et le routeur configurés, nous pouvons connecter les éléments à l’aide du point d’entrée de notre application. Dans `main.go`, créez une instance de l’authentificateur et du routeur, qui reçoit l’instance de l’authentificateur.
-
-Si vous utilisez un fichier `.env` , vous devez appeler `godotenv.Load()` au tout début de la fonction `main()`.
-
-Lancez votre application en utilisant la commande suivante dans votre terminal :
-
-`go run main.go`
-
-## Next Steps
-
-Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
-
-This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
-
-* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
-* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
-
-Did it work?
-
-Yes No
-
-Any suggestion or typo?
-
-[Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/webapp/golang/interactive.md)
-
-<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
-
-Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
-
-Sign Up
-
-Developers
-
-* [Developer Hub](https://developer.auth0.com/resources)
-* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
-* [Blog posts](https://auth0.com/blog/developers/)
-* [Videos](https://auth0.com/docs/videos)
-* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
-* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
-
-Documentation
-
-* [Articles](https://auth0.com/docs/articles)
-* [Quickstarts](https://auth0.com/docs/quickstarts)
-* [APIs](https://auth0.com/docs/api)
-* [SDK Libraries](https://auth0.com/docs/libraries)
-* [Blog](https://auth0.com/blog/)
-* [Reports](https://auth0.com/resources/ebooks)
-* [Webinars](https://auth0.com/resources/webinars)
-
-Get Involved
-
-* [Forum](https://community.auth0.com/)
-* [Events](https://developer.auth0.com/events)
-* [Ambassador Program](https://auth0.com/ambassador-program)
-* [Auth0 Research Program](https://auth0.com/research-program)
-
-Company
-
-* [Our Customers](https://auth0.com/customers)
-* [Compliance - Ensuring privacy and security](https://auth0.com/security)
-* [Partners](https://auth0.com/partners)
-* [Careers We're hiring!](https://www.okta.com/company/careers/)
-* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
-
-Support Center
-
-* [Community](https://community.auth0.com/)
-* [Support](https://support.auth0.com/)
-* [Help](https://community.auth0.com/c/help/6)
-* [FAQs](https://community.auth0.com/c/faq/42)
-* [Auth0 Marketplace](https://marketplace.auth0.com)
-
-Learning
-
-* [Learn](https://auth0.com/learn)
-* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
-* [Blog](https://auth0.com/blog/)
-
-Platform
-
-* [Access Management](https://auth0.com/platform/access-management)
-* [Extensibility](https://auth0.com/platform/extensibility)
-* [Security](https://auth0.com/platform/login-security)
-* [User Management](https://auth0.com/platform/user-management)
-* [Authentication](https://auth0.com/platform/authentication)
-
-Features
-
-* [Universal Login](https://auth0.com/features/universal-login)
-* [Single Sign On](https://auth0.com/features/single-sign-on)
-* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
-* [Actions](https://auth0.com/features/actions)
-* [Machine to Machine](https://auth0.com/features/machine-to-machine)
-* [Passwordless](https://auth0.com/features/passwordless)
-* [Breached Passwords](https://auth0.com/features/breached-passwords)
-
-© 2025 Okta, Inc. All Rights Reserved.
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
+      Créez un gestionnaire pour le point de terminaison `/user` dans `web/app/user/user.go` et renvoyez le fichier HTML correspondant. Comme le `profile` passe à `ctx.HTML()`, vous pouvez accéder aux informations de profil, telles que `picture` et `nickname` à l’intérieur de ce même fichier HTML.
+
+      Un exemple de fichier HTML de ce type pourrait ressembler à l’exemple ci-dessous, mais vous pouvez récupérer n’importe quelle information de profil, y compris des demandes personnalisées.
+      </Section>
+
+      <Section id={sections[8].id} title={sections[8].title} stepNumber="9">
+      Pour déconnecter l’utilisateur, effacez les données de la session et redirigez l’utilisateur vers le point de terminaison de déconnexion Auth0. Vous trouverez plus d’informations à ce sujet dans la [documentation sur la déconnexion](https://auth0.com/docs/logout).
+
+      Créez un fichier nommé `logout.go` dans le dossier `web/app/logout`, et ajoutez la fonction `Handler` pour rediriger l’utilisateur vers le point de terminaison de déconnexion Auth0.
+
+      L’URL `returnTo` doit figurer dans la liste des URL de déconnexion autorisées de la section des paramètres de l’application. Pour plus d’informations, consultez [Rediriger les utilisateurs après la déconnexion](https://auth0.com/docs/logout/guides/redirect-users-after-logout).
+
+      Créez un fichier nommé `user.js` dans le dossier `web/static/js`, et ajoutez le code pour supprimer le témoin d’un utilisateur connecté.
+      </Section>
+
+      <Section id={sections[9].id} title={sections[9].title} stepNumber="10">
+      La pratique recommandée veut que certaines routes ne soient accessibles qu’aux utilisateurs authentifiés. Lorsque des utilisateurs non authentifiés essaient d’accéder à des routes protégées, votre application devrait les rediriger.
+
+      Dans ce cas, vous devez mettre en œuvre un intergiciel pour accéder à la requête HTTP. La fonction d’intergiciel détermine si la requête doit être dirigée vers le gestionnaire de point de terminaison ou si elle doit être bloquée.
+
+      Créez un fichier nommé `isAuthenticated.go` dans `platform/middleware` et ajoutez une fonction qui vérifie si l’utilisateur est authentifié ou non, en fonction de la clé de session de `profile`. Si l’utilisateur n’est pas authentifié, l’intergiciel le redirigera vers la racine de l’application.
+
+      L’intergiciel créé, nous pouvons le configurer pour toute route nécessitant une authentification en l’ajoutant au routeur.
+      </Section>
+
+      <Section id={sections[10].id} title={sections[10].title} stepNumber="11">
+      L’authentificateur et le routeur configurés, nous pouvons connecter les éléments à l’aide du point d’entrée de notre application. Dans `main.go`, créez une instance de l’authentificateur et du routeur, qui reçoit l’instance de l’authentificateur.
+
+      Si vous utilisez un fichier `.env` , vous devez appeler `godotenv.Load()` au tout début de la fonction `main()`.
+
+      Lancez votre application en utilisant la commande suivante dans votre terminal :
+
+      `go run main.go`
+      </Section>
+
+    ## Étapes suivantes
+
+    Beau travail! Si vous en êtes arrivé là, vous devriez avoir la connexion, la déconnexion et les informations de profil utilisateur actives dans votre application.
+
+    Cela conclut notre tutoriel de démarrage rapide, mais il y a tellement plus à explorer. Pour en savoir plus sur ce que vous pouvez faire avec Auth0, consultez :
+
+    *   [Auth0 Dashboard](https://manage.auth0.com/#) : apprenez à configurer et gérer votre locataire et vos applications Auth0
+    *   [Auth0 Marketplace](https://marketplace.auth0.com/) : découvrez des intégrations que vous pouvez activer pour étendre les fonctionnalités d’Auth0
+  </Content>
+
+  <SideMenu sections={sections}>
+      <SideMenuSectionItem id={sections[0].id}>
+        <SignUpForm lang="fr"/>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[1].id}>
+        <CodeGroup>
+          <User/>
+          <Auth/>
+          <Callback/>
+          <Env/>
+          <Go/>
+          <Isauthenticated/>
+          <Login/>
+          <Logout/>
+          <Main/>
+          <Router/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[2].id}>
+        <CodeGroup>
+          <Env/>
+          <Auth/>
+          <Callback/>
+          <Go/>
+          <Isauthenticated/>
+          <Login/>
+          <Logout/>
+          <Main/>
+          <Router/>
+          <User/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[3].id}>
+        <CodeGroup>
+          <Auth/>
+          <Callback/>
+          <Env/>
+          <Go/>
+          <Isauthenticated/>
+          <Login/>
+          <Logout/>
+          <Main/>
+          <Router/>
+          <User/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[4].id}>
+        <CodeGroup>
+          <Router/>
+          <Auth/>
+          <Callback/>
+          <Env/>
+          <Go/>
+          <Isauthenticated/>
+          <Login/>
+          <Logout/>
+          <Main/>
+          <User/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[5].id}>
+        <CodeGroup>
+          <Login/>
+          <Auth/>
+          <Callback/>
+          <Env/>
+          <Go/>
+          <Isauthenticated/>
+          <Logout/>
+          <Main/>
+          <Router/>
+          <User/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[6].id}>
+        <CodeGroup>
+          <Callback/>
+          <Auth/>
+          <Env/>
+          <Go/>
+          <Isauthenticated/>
+          <Login/>
+          <Logout/>
+          <Main/>
+          <Router/>
+          <User/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[7].id}>
+        <CodeGroup>
+          <User/>
+          <Auth/>
+          <Callback/>
+          <Env/>
+          <Go/>
+          <Isauthenticated/>
+          <Login/>
+          <Logout/>
+          <Main/>
+          <Router/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[8].id}>
+        <CodeGroup>
+          <Logout/>
+          <Auth/>
+          <Callback/>
+          <Env/>
+          <Go/>
+          <Isauthenticated/>
+          <Login/>
+          <Main/>
+          <Router/>
+          <User/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[9].id}>
+        <CodeGroup>
+          <Isauthenticated/>
+          <Auth/>
+          <Callback/>
+          <Env/>
+          <Go/>
+          <Login/>
+          <Logout/>
+          <Main/>
+          <Router/>
+          <User/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+      <SideMenuSectionItem id={sections[10].id}>
+        <CodeGroup>
+          <Main/>
+          <Auth/>
+          <Callback/>
+          <Env/>
+          <Go/>
+          <Isauthenticated/>
+          <Login/>
+          <Logout/>
+          <Router/>
+          <User/>
+        </CodeGroup>
+      </SideMenuSectionItem>
+
+    </SideMenu>
+</Recipe>

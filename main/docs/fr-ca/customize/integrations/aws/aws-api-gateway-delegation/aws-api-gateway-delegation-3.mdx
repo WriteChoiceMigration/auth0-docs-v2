@@ -57,7 +57,7 @@ Vous pouvez exploiter la fonctionnalité de délégation d’Auth0 pour obtenir 
 
 Mettez à jour `pets/login/login.js` comme suit afin d’obtenir un jeton de délégation AWS à partir du jeton d’identité après une connexion réussie avec `auth.signin`. Veuillez noter que tout utilisateur non connecté utilisant une connexion sociale est traité comme un administrateur. Plus tard, nous coderons un deuxième rôle et montrerons de meilleures façons d’appliquer la sélection de rôle.
 
-```javascript lines
+```js lines expandable
 auth.signin(params, function(profile, token) {
   //Set user as admin if they did not use a social login.
   profile.isAdmin = !profile.identities[0].isSocial;
@@ -112,7 +112,7 @@ Copiez les fichiers mis à jour dans votre groupe S3 pour votre site Web.
 
 En option, vous pouvez définir un point d’arrêt dans le navigateur à `store.set(’awstoken’, delegation.Credentials);`. Lorsque vous vous déconnectez et vous vous reconnectez, inspectez `delegation.Credentials` quand vous arrivez au point d’arrêt. Vous constaterez des valeurs familières comme AccessKeyId et SecretAccessKey :
 
-```javascript lines
+```js lines
 {
     AccessKeyId: "ASIAJB...BNQ",
     SecretAccessKey: "vS+b6...2Noav",

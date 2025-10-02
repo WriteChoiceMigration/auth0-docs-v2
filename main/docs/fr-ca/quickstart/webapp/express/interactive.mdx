@@ -7,217 +7,119 @@ permalink: "interactive"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/node.png"
 'twitter:title': "Ajouter une fonctionnalité de connexion à votre application Express"
 'twitter:description': "Ce guide explique comment intégrer Auth0, ajouter la connexion utilisateur, la déconnexion et un profil à une application Node.js Express en utilisant la trousse SDK Express OpenID Connect."
+sidebarTitle: Express
 ---
 
-[Skip to main content](#maincontent)
+import { Recipe, Content, Section, SideMenu, SideMenuSectionItem, SignUpForm } from "/snippets/recipe.jsx";
+import { LoggedInForm } from "/snippets/Login.jsx";
+import Server from "/snippets/quickstart/webapp/express/server.js.mdx";
+import Server2 from "/snippets/quickstart/webapp/express/server.js2.mdx";
 
-​
+export const sections = [
+  { id: "configuration-d-auth0", title: "Configuration d’Auth0" },
+  { id: "installer-la-trousse-sdk-express-openid-connect", title: "Installer la trousse SDK Express OpenID Connect" },
+  { id: "afficher-le-profil-utilisateur", title: "Afficher le profil utilisateur" }
+]
 
-[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+<Recipe>
+  <Content>
+    Auth0 vous permet d’ajouter rapidement l’authentification à presque tous les types d’application. Ce guide explique comment intégrer Auth0, ajouter la connexion utilisateur, la déconnexion et un profil à une application Node.js Express en utilisant la trousse SDK Express OpenID Connect.
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      <Section id={sections[0].id} title={sections[0].title} stepNumber="1">
+      Pour utiliser les services Auth0, vous devez avoir une application installée dans Auth0 Dashboard. L’application Auth0 est l’endroit où vous allez configurer le fonctionnement de l’authentification pour le projet que vous développez.
 
----
+      ### Configurer une application
 
-​
+      Utilisez le sélecteur interactif pour créer une nouvelle application Auth0 ou sélectionner une application existante qui représente le projet avec lequel vous souhaitez effectuer l’intégration. Dans Auth0, chaque application se voit attribuer un identifiant client unique alphanumérique que votre code d’application utilisera pour appeler les API Auth0 via la trousse SDK.
 
-[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+      Tous les paramètres que vous configurez à l’aide de ce guide de démarrage rapide seront automatiquement mis à jour pour votre application dans le [Tableau de bord](https://manage.auth0.com/#/), qui est l’endroit où vous pourrez gérer vos applications à l’avenir.
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      Si vous préférez explorer une configuration complète, consultez plutôt un exemple d’application.
 
-[##### Ajouter une fonctionnalité de connexion à votre application Express](#Ajouter une fonctionnalité de connexion à votre application Express)
+      ### Configurer les URL de rappel
 
-[View on Github](https://github.com/auth0-samples/auth0-express-webapp-sample/tree/master/01-Login) Log In & Download Sample
+      Une URL de rappel est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur authentification. Si elle n’est pas définie, les utilisateurs ne seront pas redirigés vers votre application après s’être connectés.
 
-1. [Quickstarts](/docs/fr-ca/quickstarts)
-3. [Regular Web App](/docs/fr-ca/quickstart/webapp)
-5. [Express](/docs/fr-ca/quickstart/webapp/express/interactive)
+      <Info>
+      Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000``/callback`.
+      </Info>
 
-# 
+      ### Configuration des URL de déconnexion
 
-# Ajouter une fonctionnalité de connexion à votre application Express
+      Une URL de déconnexion est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur déconnexion. Si elle n’est pas définie, les utilisateurs ne pourront pas se déconnecter de votre application et recevront un message d’erreur.
 
-Auth0 vous permet d’ajouter rapidement l’authentification à presque tous les types d’application. Ce guide explique comment intégrer Auth0, ajouter la connexion utilisateur, la déconnexion et un profil à une application Node.js Express en utilisant la trousse SDK Express OpenID Connect.
+      <Info>
+      Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000/logout`.
+      </Info>
+      </Section>
 
-[1
+      <Section id={sections[1].id} title={sections[1].title} stepNumber="2">
+      Votre application aura besoin du package [`express-openid-connect`](https://github.com/auth0/express-openid-connect), qui est une trousse SDK conforme à l’OIDC maintenue par Auth0 pour Express.
 
-## Configuration d’Auth0](#configuration-d-auth0)
+      Installez la trousse SDK Express OpenID Connect en exécutant les commandes suivantes dans votre terminal :
 
-Pour utiliser les services Auth0, vous devez avoir une application installée dans Auth0 Dashboard. L’application Auth0 est l’endroit où vous allez configurer le fonctionnement de l’authentification pour le projet que vous développez.
-
-### Configurer une application
-
-Utilisez le sélecteur interactif pour créer une nouvelle application Auth0 ou sélectionner une application existante qui représente le projet avec lequel vous souhaitez effectuer l’intégration. Dans Auth0, chaque application se voit attribuer un identifiant client unique alphanumérique que votre code d’application utilisera pour appeler les API Auth0 via la trousse SDK.
-
-Tous les paramètres que vous configurez à l’aide de ce guide de démarrage rapide seront automatiquement mis à jour pour votre application dans le [Tableau de bord](https://manage.auth0.com/#/), qui est l’endroit où vous pourrez gérer vos applications à l’avenir.
-
-Si vous préférez explorer une configuration complète, consultez plutôt un exemple d’application.
-
-### Configurer les URL de rappel
-
-Une URL de rappel est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur authentification. Si elle n’est pas définie, les utilisateurs ne seront pas redirigés vers votre application après s’être connectés.
-
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
-
-Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000``/callback`.
-
-</Callout>
-
-### Configuration des URL de déconnexion
-
-Une URL de déconnexion est une URL intégrée dans votre application vers laquelle vous souhaitez qu’Auth0 redirige les utilisateurs après leur déconnexion. Si elle n’est pas définie, les utilisateurs ne pourront pas se déconnecter de votre application et recevront un message d’erreur.
-
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
-
-Si vous suivez notre exemple de projet, définissez cette URL comme suit : `http://localhost:3000/logout`.
-
-</Callout>
-
-[2
-
-## Installer la trousse SDK Express OpenID Connect](#installer-la-trousse-sdk-express-openid-connect)
-
-Votre application aura besoin du package [`express-openid-connect`](https://github.com/auth0/express-openid-connect), qui est une trousse SDK conforme à l’OIDC maintenue par Auth0 pour Express.
-
-Installez la trousse SDK Express OpenID Connect en exécutant les commandes suivantes dans votre terminal :
-
-```sh lines
+      ```
       cd <your-project-directory>
       npm install express-openid-connect
       ```
 
-### Configurer le routeur
+      ### Configurer le routeur
 
-La bibliothèque Express OpenID Connect fournit le routeur `auth` afin de joindre des routes d’authentification à votre application. Vous devez configurer le routeur avec les clés de configuration suivantes :
+      La bibliothèque Express OpenID Connect fournit le routeur `auth` afin de joindre des routes d’authentification à votre application. Vous devez configurer le routeur avec les clés de configuration suivantes :
 
-* `authRequired` - Vérifie si l’authentification est requise pour toutes les routes.
-* `auth0Logout` - Utilise la fonctionnalité de déconnexion d’Auth0.
-* `baseURL` - L’URL où l’application est hébergée.
-* `secret` - Une chaîne longue et aléatoire.
-* `issuerBaseURL` - Le domaine sous forme d’URL sécurisée trouvé dans vos [Paramètres d’application](https://manage.auth0.com/#/applications/%7ByourClientId%7D/settings).
-* `clientID` - L’ID client trouvé dans vos [Paramètres d’application](https://manage.auth0.com/#/applications/%7ByourClientId%7D/settings).
+      - `authRequired` - Vérifie si l’authentification est requise pour toutes les routes.
+      - `auth0Logout` - Utilise la fonctionnalité de déconnexion d’Auth0.
+      - `baseURL` - L’URL où l’application est hébergée.
+      - `secret` - Une chaîne longue et aléatoire.
+      - `issuerBaseURL` - Le domaine sous forme d’URL sécurisée trouvé dans vos [Paramètres d’application](https://manage.auth0.com/#/applications/%7ByourClientId%7D/settings).
+      - `clientID` - L’ID client trouvé dans vos [Paramètres d’application](https://manage.auth0.com/#/applications/%7ByourClientId%7D/settings).
 
-Pour des options de configuration supplémentaires, consultez la [documentation API](https://auth0.github.io/express-openid-connect).
+      Pour des options de configuration supplémentaires, consultez la [documentation API](https://auth0.github.io/express-openid-connect).
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      <Info>
+      Vous pouvez générer une chaîne appropriée pour`LONG\_RANDOM\_STRING` en utilisant `openssl rand -hex 32` dans la ligne de commande.
+      </Info>
 
-Vous pouvez générer une chaîne appropriée pour`LONG_RANDOM_STRING` en utilisant `openssl rand -hex 32` dans la ligne de commande.
+      <Note>
+      ##### Point de contrôle
+      Un utilisateur peut désormais se connecter à votre application en visitant la route `/login` fournie par la bibliothèque. Si vous exécutez votre projet sur `localhost:3000`, ce lien sera [`http://localhost:3000/login`](http://localhost:3000/login).
+      </Note>
+      </Section>
 
-</Callout>
+      <Section id={sections[2].id} title={sections[2].title} stepNumber="3">
+      Pour afficher le profil utilisateur, votre application doit fournir une route protégée.
 
-##### checkpoint.header
+      Ajoutez le logiciel médiateur `requiresAuth` pour les routes qui nécessitent une authentification. Toute route utilisant ce logiciel médiateur vérifiera s’il existe une session utilisateur valide et, si ce n’est pas le cas, redirigera l’utilisateur vers la page de connexion.
 
-Un utilisateur peut désormais se connecter à votre application en visitant la route `/login` fournie par la bibliothèque. Si vous exécutez votre projet sur `localhost:3000`, ce lien sera [`http://localhost:3000/login`](http://localhost:3000/login).
+      <Note>
+      ##### Point de contrôle
+      Un utilisateur peut se déconnecter de votre application en visitant la route `/logout` fournie par la bibliothèque. Si vous exécutez votre projet sur `localhost:3000`, ce lien sera [`http://localhost:3000/logout`](http://localhost:3000/logout).
+      </Note>
+      </Section>
 
-checkpoint.itWorked checkpoint.somethingNotRight
+    ## Étapes suivantes
 
-[3
+    Beau travail! Si vous en êtes arrivé là, vous devriez avoir la connexion, la déconnexion et les informations de profil utilisateur actives dans votre application.
 
-## Afficher le profil utilisateur](#afficher-le-profil-utilisateur)
+    Cela conclut notre tutoriel de démarrage rapide, mais il y a tellement plus à explorer. Pour en savoir plus sur ce que vous pouvez faire avec Auth0, consultez :
 
-Pour afficher le profil utilisateur, votre application doit fournir une route protégée.
+    *   [Auth0 Dashboard](https://manage.auth0.com/#) : apprenez à configurer et gérer votre locataire et vos applications Auth0
+    *   [Trousse SDK express-openid-connect](https://github.com/auth0/express-openid-connect) : explorez en détail la trousse SDK utilisée dans ce tutoriel
+    *   [Auth0 Marketplace](https://marketplace.auth0.com/) : découvrez des intégrations que vous pouvez activer pour étendre les fonctionnalités d’Auth0
+  </Content>
 
-Ajoutez le logiciel médiateur `requiresAuth` pour les routes qui nécessitent une authentification. Toute route utilisant ce logiciel médiateur vérifiera s’il existe une session utilisateur valide et, si ce n’est pas le cas, redirigera l’utilisateur vers la page de connexion.
+  <SideMenu sections={sections}>
+      <SideMenuSectionItem id={sections[0].id}>
+        <SignUpForm lang="fr"/>
+      </SideMenuSectionItem>
 
-##### checkpoint.header
+      <SideMenuSectionItem id={sections[1].id}>
+        <Server />
+      </SideMenuSectionItem>
 
-Un utilisateur peut se déconnecter de votre application en visitant la route `/logout` fournie par la bibliothèque. Si vous exécutez votre projet sur `localhost:3000`, ce lien sera [`http://localhost:3000/logout`](http://localhost:3000/logout).
+      <SideMenuSectionItem id={sections[2].id}>
+        <Server2 />
+      </SideMenuSectionItem>
 
-checkpoint.itWorked checkpoint.somethingNotRight
-
-## Next Steps
-
-Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
-
-This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
-
-* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
-* [express-openid-connect SDK](https://github.com/auth0/express-openid-connect) - Explore the SDK used in this tutorial more fully
-* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
-
-Did it work?
-
-Yes No
-
-Any suggestion or typo?
-
-[Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/webapp/express/interactive.md)
-
-<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
-
-Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
-
-Sign Up
-
-Developers
-
-* [Developer Hub](https://developer.auth0.com/resources)
-* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
-* [Blog posts](https://auth0.com/blog/developers/)
-* [Videos](https://auth0.com/docs/videos)
-* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
-* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
-
-Documentation
-
-* [Articles](https://auth0.com/docs/articles)
-* [Quickstarts](https://auth0.com/docs/quickstarts)
-* [APIs](https://auth0.com/docs/api)
-* [SDK Libraries](https://auth0.com/docs/libraries)
-* [Blog](https://auth0.com/blog/)
-* [Reports](https://auth0.com/resources/ebooks)
-* [Webinars](https://auth0.com/resources/webinars)
-
-Get Involved
-
-* [Forum](https://community.auth0.com/)
-* [Events](https://developer.auth0.com/events)
-* [Ambassador Program](https://auth0.com/ambassador-program)
-* [Auth0 Research Program](https://auth0.com/research-program)
-
-Company
-
-* [Our Customers](https://auth0.com/customers)
-* [Compliance - Ensuring privacy and security](https://auth0.com/security)
-* [Partners](https://auth0.com/partners)
-* [Careers We're hiring!](https://www.okta.com/company/careers/)
-* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
-
-Support Center
-
-* [Community](https://community.auth0.com/)
-* [Support](https://support.auth0.com/)
-* [Help](https://community.auth0.com/c/help/6)
-* [FAQs](https://community.auth0.com/c/faq/42)
-* [Auth0 Marketplace](https://marketplace.auth0.com)
-
-Learning
-
-* [Learn](https://auth0.com/learn)
-* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
-* [Blog](https://auth0.com/blog/)
-
-Platform
-
-* [Access Management](https://auth0.com/platform/access-management)
-* [Extensibility](https://auth0.com/platform/extensibility)
-* [Security](https://auth0.com/platform/login-security)
-* [User Management](https://auth0.com/platform/user-management)
-* [Authentication](https://auth0.com/platform/authentication)
-
-Features
-
-* [Universal Login](https://auth0.com/features/universal-login)
-* [Single Sign On](https://auth0.com/features/single-sign-on)
-* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
-* [Actions](https://auth0.com/features/actions)
-* [Machine to Machine](https://auth0.com/features/machine-to-machine)
-* [Passwordless](https://auth0.com/features/passwordless)
-* [Breached Passwords](https://auth0.com/features/breached-passwords)
-
-© 2025 Okta, Inc. All Rights Reserved.
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
+    </SideMenu>
+</Recipe>

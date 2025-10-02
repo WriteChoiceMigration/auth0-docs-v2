@@ -9,7 +9,7 @@ permalink: "configure-inbound-scim"
 'twitter:description': "Aperçu de la configuration du SCIM entrant pour les connexions d’entreprise"
 ---
 
-<Card title="Before you start">
+<Card title="Avant de commencer">
 
 Pour utiliser cette fonction, votre plan Auth0 ou votre accord personnalisé doit inclure les connexions d’entreprise. Pour en savoir plus, lisez [Page de tarification d’Auth0](https://auth0.com/pricing).
 
@@ -153,12 +153,14 @@ Les attributs utilisateur du SCIM définis dans les sections [3.1, 4.1 et 4.3
 
 Ces attributs SCIM peuvent être mappés sur la [racine](/docs/fr-ca/manage-users/user-accounts/user-profiles/root-attributes) Auth0 et les attributs de [métadonnées](/docs/fr-ca/manage-users/user-accounts/metadata/metadata-fields-data) du profil utilisateur.
 
-|Remarques|
-|---|--|
-|Mappage injectif| Un attribut Auth0 sélectionné ne peut être mappé qu’à un seul attribut SCIM.|
-|mappage d’attributs racine Lors du mappage vers des attributs [racine](https://auth0.com/docs/manage-users/user-accounts/user-profiles/root-attributes), notez que seuls les attributs racine répertoriés dans [attributs du profil utilisateur](https://auth0.com/docs/manage-users/user-accounts/user-profiles/user-profile-structure#user-profile-attributes) peuvent être recherchés à l’aide d’une requête SCIM. Si vous avez besoin qu’un attribut qui ne figure pas dans cette liste puisse faire l’objet d’une recherche, placez-le dans app_metadata.|
-|Mappage d’attributs de métadonnées| L’utilisation de user_metadata est autorisée, mais généralement déconseillée pour les attributs synchronisés, car elle est destinée à stocker des attributs qui peuvent être modifiés directement par l’utilisateur final. Utilisez à la place les attributs app_metadata ou racine.|
-|Comportement de l’attribut Blocked (Bloqué)| Le mappage vers l’attribut Blocked (Bloqué) Auth0 a un comportement spécial lorsqu’il est mappé à l’attribut actif SCIM. Lorsque l’élément active contient une valeur true ou false , Auth0 inverse la valeur et définit l’attribut Blocked (Bloqué) Auth0 sur false ou true, respectivement.|
+| Remarques |
+|-----------|
+| Mappage injectif | Un attribut Auth0 sélectionné ne peut être mappé qu’à un seul attribut SCIM. |
+| Mappage d’attributs racine | Lors du mappage vers des attributs racine, notez que seuls les attributs racine répertoriés dans attributs du profil utilisateur peuvent être recherchés à l’aide d’une requête SCIM. Si vous avez besoin qu’un attribut qui ne figure pas dans cette liste puisse faire l’objet d’une recherche, placez-le dans app_metadata. |
+| Mappage d’attributs de métadonnées | L’utilisation de user_metadata est autorisée, mais généralement déconseillée pour les attributs synchronisés, car elle est destinée à stocker des attributs qui peuvent être modifiés directement par l’utilisateur final. Utilisez à la place les attributs app_metadata ou racine. |
+| Comportement de l’attribut Blocked (Bloqué) | Le mappage vers l’attribut Blocked (Bloqué) Auth0 a un comportement spécial lorsqu’il est mappé à l’attribut actif SCIM. Lorsque l’élément active contient une valeur true ou false, Auth0 inverse la valeur et définit l’attribut Blocked (Bloqué) Auth0 sur false ou true, respectivement. |
+
+
 
 Auth0 vous permet également de fournir des attributs à l’aide de SCIM parallèlement aux attributs fournis lors de la connexion. Pour plus d’informations, reportez-vous à la section **Synchroniser des attributs supplémentaires lors de la connexion** ci-dessous.
 

@@ -43,7 +43,7 @@ Ajoutez une méthode OPTIONS pour la ressource `purchase`, comme indiqué préc�
 
 Créez une nouvelle fonction AWS Lambda pour l’achat d’un animal de compagnie appelé `PetPurchase`, ce qui ajoute les attributs `isSold` et `soldTo` à un animal de compagnie comme suit :
 
-```javascript lines
+```javascript lines expandable
 var AWS = require('aws-sdk');
 var DOC = require('dynamodb-doc');
 var dynamo = new DOC.DynamoDB();
@@ -103,7 +103,7 @@ Une fois que vous avez défini la fonction Lambda, [ajouter une méthode POST à
 
 Testez la méthode de passerelle API en fournissant les éléments suivants comme message d’entrée :
 
-```javascript lines
+```json lines
 {
     "petId": 1,
     "userName": "fred flintstone"
@@ -112,7 +112,7 @@ Testez la méthode de passerelle API en fournissant les éléments suivants comm
 
 Dans la réponse du test, vous devriez voir que l’animal de compagnie avec l’ID 1 est maintenant vendu à Fred Flintstone :
 
-```javascript lines
+```json lines
 [
   {
     "id": 1,
@@ -133,7 +133,7 @@ Pour sécuriser votre API, suivez le même processus que pour ajouter un nouveau
 
 L’ARN de la méthode que vous sécuriserez dans la politique IAM devrait ressembler à ceci :
 
-``` lines
+```bash wrap lines
 arn:aws:execute-api:us-east-1:your-accountid:your-api-id/*/pets/purchase
 ```
 
@@ -181,7 +181,7 @@ Dans le fichier `pets/login/login.js`, modifier les valeurs de `role` et de `pri
 
 Pour tester cette fonctionnalité, vous pouvez masquer temporairement la touche Supprimer dans l’interface utilisateur en supprimant `ng-show="isAdmin"` dans `/pets/home/home.html` :
 
-```html lines
+```html wrap lines
 <button ng-show="isAdmin" class="btn delete-btn" ng-click="removePet(pet.id)">remove</button>
 ```
 
@@ -229,7 +229,7 @@ Vous ajouterez une règle qui vérifiera si le rôle demandé par l’utilisateu
 2. Choisissez le modèle **Règle vide**
 3. Nommez la règle **AWS Pets** (ou quelque chose de similaire), puis remplissez le corps de la règle avec ce qui suit JavaScript code :
 
-   ```javascript lines
+   ```javascript lines expandable
    function (user, context, callback) {
      if(context.clientID === '{yourClientId}') {
        var socialRoleInfo = {

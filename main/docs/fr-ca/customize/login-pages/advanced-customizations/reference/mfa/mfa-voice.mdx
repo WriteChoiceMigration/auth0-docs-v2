@@ -17,7 +17,7 @@ The <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</
 
 Import and instantiate the MFA Voice Challenge screen class:
 
-```javascript lines
+```js lines
 import MfaVoiceChallenge from '@auth0/auth0-acul-js/mfa-voice-challenge';
 const mfaVoiceChallenge = new MfaVoiceChallenge();
 ```
@@ -28,7 +28,7 @@ The MFA Voice Challenge screen class properties are:
 
 <Tabs><Tab title="image de marque">
 
-```javascript lines
+```ts lines expandable
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -63,7 +63,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```javascript lines
+```ts lines
 interface client {
   description: null | string;
   id: string;
@@ -75,7 +75,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```javascript lines
+```ts lines
 interface organization {
   branding: null | {
     colors?: {
@@ -94,7 +94,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```javascript lines
+```ts lines
 interface prompt{
   name: string;
 }
@@ -102,7 +102,7 @@ interface prompt{
 
 </Tab><Tab title="screen">
 
-```javascript lines
+```ts lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -127,7 +127,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```javascript lines
+```ts lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -138,7 +138,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```javascript lines
+```ts lines expandable
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -171,7 +171,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```javascript lines
+```ts lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -191,7 +191,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```javascript lines
+```ts lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -227,7 +227,7 @@ The MFA Voice Challenge screen class methods are:
 
 This method continues the voice challenge flow.
 
-```javascript lines
+```js lines
 import MfaVoiceChallenge from '@auth0/auth0-acul-js/mfa-voice-challenge';
 const mfaVoiceChallenge = new MfaVoiceChallenge();
 
@@ -314,7 +314,7 @@ The MFA Voice Enrollment screen class provides methods associated with the mfa-v
 
 Import and instantiate the MFA Voice Enrollment screen class:
 
-```javascript lines
+```js lines
 import MfaVoiceEnrollment from '@auth0/auth0-acul-js/mfa-voice-enrollment';
 const mfaVoiceEnrollment = new MfaVoiceEnrollment();
 ```
@@ -325,7 +325,7 @@ The MFA Voice Enrollment screen class properties are:
 
 <Tabs><Tab title="image de marque">
 
-```javascript lines
+```ts lines expandable
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -360,7 +360,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```javascript lines
+```ts lines
 interface client {
   description: null | string;
   id: string;
@@ -372,7 +372,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```javascript lines
+```ts lines
 interface organization {
   branding: null | {
     colors?: {
@@ -391,7 +391,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```javascript lines
+```ts lines
 interface prompt{
   name: string;
 }
@@ -399,7 +399,7 @@ interface prompt{
 
 </Tab><Tab title="écran">
 
-```javascript lines
+```ts lines expandable
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -446,7 +446,7 @@ interface PasskeyCreate {
 
 </Tab><Tab title="locataire">
 
-```javascript lines
+```ts lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -457,7 +457,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```javascript lines
+```ts lines expandable
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -490,7 +490,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```javascript lines
+```ts lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -510,7 +510,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```javascript lines
+```ts lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -546,7 +546,7 @@ The MFA Voice Enrollment screen class methods are:
 
 This method continues the enrollment process.
 
-```javascript lines
+```js lines
 import MfaVoiceEnrollment from '@auth0/auth0-acul-js/mfa-voice-enrollment';
 const mfaVoiceEnrollment = new MfaVoiceEnrollment();
 
@@ -584,7 +584,7 @@ mfaVoiceEnrollment.continue({
 
 This method allows users to pick their country code.
 
-```javascript lines
+```js lines
 import MfaVoiceEnrollment from '@auth0/auth0-acul-js/mfa-voice-enrollment';
 const mfaVoiceEnrollment = new MfaVoiceEnrollment();
 
@@ -596,7 +596,7 @@ mfaVoiceEnrollment.selectPhoneCountryCode();
 
 This method asks users to try SMS if they already tried voice, or vice versa.
 
-```javascript lines
+```js lines
 import MfaVoiceEnrollment from '@auth0/auth0-acul-js/mfa-voice-enrollment';
 const mfaVoiceEnrollment = new MfaVoiceEnrollment();
 

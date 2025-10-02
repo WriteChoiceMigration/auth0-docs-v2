@@ -17,7 +17,7 @@ La classe d’écran Défi-réponse de la <Tooltip data-tooltip-id="react-conta
 
 Importez et instanciez la classe d’écran Défi-réponse de la MFA par courriel:
 
-```javascript lines
+```js lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 const mfaEmailChallengeManager = new MfaEmailChallenge();
 
@@ -39,7 +39,7 @@ Propriétés de la classe d’écran Défi-réponse de la MFA par courriel :
 
 <Tabs><Tab title="image de marque">
 
-```javascript lines
+```ts lines expandable
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -74,7 +74,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```javascript lines
+```ts lines
 interface client {
   description: null | string;
   id: string;
@@ -86,7 +86,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```javascript lines
+```ts lines
 interface organization {
   branding: null | {
     colors?: {
@@ -105,7 +105,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```javascript lines
+```ts lines
 interface prompt{
   name: string;
 }
@@ -113,7 +113,7 @@ interface prompt{
 
 </Tab><Tab title="écran">
 
-```javascript lines
+```ts lines
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -138,7 +138,7 @@ interface CaptchaContext {
 
 </Tab><Tab title="locataire">
 
-```javascript lines
+```ts lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -149,7 +149,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```javascript lines
+```ts lines expandable
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -182,7 +182,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```javascript lines
+```ts lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -202,7 +202,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```javascript lines
+```ts lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -238,7 +238,7 @@ Méthodes de la classe d’écran Défi-réponse de la MFA par courriel :
 
 Cette méthode continue le défi-réponse par courriel à l’aide du code fourni.
 
-```javascript lines
+```js lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 
 const mfaEmailChallenge = new MfaEmailChallenge();
@@ -282,7 +282,7 @@ await mfaEmailChallenge.continue({
 
 Cette méthode permet à l’utilisateur de sélectionner d’autres adresses courriel, le cas échéant.
 
-```javascript lines
+```js lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 
 const mfaEmailChallenge = new MfaEmailChallenge();
@@ -311,7 +311,7 @@ await mfaEmailChallenge.pickEmail();
 
 Cette méthode renvoie le code courriel.
 
-```javascript lines
+```js lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 
 const mfaEmailChallenge = new MfaEmailChallenge();
@@ -340,7 +340,7 @@ await mfaEmailChallenge.resendCode();
 
 Cette méthode permet à l’utilisateur de sélectionner une autre option de MFA.
 
-```javascript lines
+```js lines
 import MfaEmailChallenge from '@auth0/auth0-acul-js/mfa-email-challenge';
 
 const mfaEmailChallenge = new MfaEmailChallenge();
@@ -373,7 +373,7 @@ La classe d’écran Liste d’adresses courriel MFA permet aux utilisateurs de
 
 Importez et instanciez la classe d’écran Liste d’adresses courriel MFA :
 
-```javascript lines
+```js lines
 import MfaEmailList from '@auth0/auth0-acul-js/mfa-email-list';
 const mfaEmailList = new MfaEmailList();
 
@@ -393,7 +393,7 @@ Propriétés de la classe d’écran Liste d’adresses courriel MFA :
 
 <Tabs><Tab title="image de marque">
 
-```javascript lines
+```ts lines expandable
 interface branding {
   settings: null | BrandingSettings;
   themes: null | BrandingThemes;
@@ -428,7 +428,7 @@ interface BrandingThemes {
 
 </Tab><Tab title="client">
 
-```javascript lines
+```ts lines
 interface client {
   description: null | string;
   id: string;
@@ -440,7 +440,7 @@ interface client {
 
 </Tab><Tab title="organisation">
 
-```javascript lines
+```ts lines
 interface organization {
   branding: null | {
     colors?: {
@@ -459,7 +459,7 @@ interface organization {
 
 </Tab><Tab title="invite">
 
-```javascript lines
+```ts lines
 interface prompt{
   name: string;
 }
@@ -467,7 +467,7 @@ interface prompt{
 
 </Tab><Tab title="écran">
 
-```javascript lines
+```ts lines expandable
 interface screen {
   captcha: null | CaptchaContext;
   captchaImage: null | string;
@@ -514,7 +514,7 @@ interface PasskeyCreate {
 
 </Tab><Tab title="locataire">
 
-```javascript lines
+```ts lines
 interface tenant {
   enabledFactors: null | string[];
   enabledLocales: null | string[];
@@ -525,7 +525,7 @@ interface tenant {
 
 </Tab><Tab title="transaction">
 
-```javascript lines
+```ts lines expandable
 interface transaction {
   alternateConnections: null | (Connection | EnterpriseConnection)[];
   connectionStrategy: null | string;
@@ -558,7 +558,7 @@ interface EnterpriseConnection {
 
 </Tab><Tab title="untrustedData">
 
-```javascript lines
+```ts lines
 interface untrustedData {
   authorizationParams: null | {
     login_hint?: string;
@@ -578,7 +578,7 @@ interface untrustedData {
 
 </Tab><Tab title="utilisateur">
 
-```javascript lines
+```ts lines
 interface user {
   appMetadata: null | {[key: string]: string;};
   email: null | string;
@@ -614,7 +614,7 @@ Méthodes de la classe d’écran Liste d’adresses courriel MFA :
 
 Cette méthode permet à l’utilisateur d’aller à l’écran précédent.
 
-```javascript lines
+```js lines
 import MfaEmailList from '@auth0/auth0-acul-js/mfa-email-list';
 
 const mfaEmailList = new MfaEmailList();
@@ -643,7 +643,7 @@ await mfaEmailList.goBack();
 
 Cette méthode permet à l’utilisateur d’effectuer une sélection dans la liste des adresses courriel inscrites.
 
-```javascript lines
+```js lines
 import MfaEmailList from '@auth0/auth0-acul-js/mfa-email-list';
 
 const mfaEmailList = new MfaEmailList();

@@ -91,7 +91,7 @@ Cela fonctionne **uniquement** pour les connexions de base de données (nous u
    
 10. Modifiez la fonction d’inscription pour définir les métadonnées. Notez que nous définissons la valeur des métadonnées sur une chaîne avec la valeur `true` et non sur une valeur booléenne, et que nous utilisons `toString` pour convertir le nombre en chaîne. Cela est dû à une restriction du point de terminaison[**Signup** endpoint d’Authentication API](/docs/fr-ca/api/authentication#signup) qui n’accepte que des chaînes comme valeurs.
 
-    ```text lines
+    ```
     //code reducted for simplicity
         webAuth.redirect.signupAndLogin({
           connection: databaseConnection,
@@ -556,7 +556,7 @@ Vous devrez héberger ce formulaire, et l’URL de ce formulaire devra être acc
 1. Ajoutez la règle de redirection. Accédez à [Auth0 Dashboard > Auth Pipeline (Pipeline Auth) > Rules (Règles)](https://manage.auth0.com/#/rules), et cliquez sur **Create Rule (Créer une règle)**. Dans **Rules Templates (Modèles de règles)**, sélectionnez **empty rule (règle vide)**. Changez le nom de la règle par défaut de `règle vide` à quelque chose de descriptif (par exemple, `Rediriger vers le formulaire de consentement`.
 2. Ajoutez le code JavaScript suivant dans l’éditeur de scripts, puis sélectionnez **Save (Enregistrer)** vos modifications.
 
-   ```js lines
+   ``` lines
    exports.onExecutePostLogin = async (event, api) => {
        const { consentGiven } = event.user.user_metadata || {};
 

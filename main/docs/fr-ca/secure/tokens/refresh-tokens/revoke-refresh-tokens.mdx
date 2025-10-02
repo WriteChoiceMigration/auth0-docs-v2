@@ -318,34 +318,34 @@ Pour révoquer un jeton d’actualisation à l’aide d’Auth0 Management API, 
 
 ```json lines
 GET https://{yourDomain}/api/v2/device-credentials?
-    type=refresh_token
-    &client_id=
-    &user_id=
-  
-  {
-    "Authorization":   "Bearer {your_access_token}"
-  }
+      type=refresh_token
+      &client_id=
+      &user_id=
+    
+    {
+      "Authorization":   "Bearer {your_access_token}"
+    }
 ```
 
 Le corps de la réponse:
 
 ```json lines
 [
-    {
-  "id": "dcr_dFJiaAxbEroQ5xxx",
-  "device_name": "my-device" // the value of 'device' provided in the /authorize call when creating the token
-    }
-  ]
+      {
+    "id": "dcr_dFJiaAxbEroQ5xxx",
+    "device_name": "my-device" // the value of 'device' provided in the /authorize call when creating the token
+      }
+    ]
 ```
 
 Pour révoquer un jeton d’actualisation, appelez le point de terminaison `/api/v2/device-credentials` avec un jeton d’accès contenant la permission `delete:device_credentials` et la valeur de l’ID obtenu plus haut :
 
-```json lines
+```javascript lines
 DELETE https://{yourDomain}/api/v2/device-credentials/{id}
-
-{
-  "Authorization":   "Bearer {your_access_token}"
-}
+    
+    {
+      "Authorization":   "Bearer {your_access_token}"
+    }
 ```
 
 La réponse sera `HTTP 204: The credential no longer exists`.

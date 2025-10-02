@@ -57,7 +57,7 @@ Veuillez noter que l’appel à `Enable-Auth0` peut être adapté à :
 
 L’exemple suivant ajoute également la demande de Rôle au mappage de demandes et autorise l’authentification Windows :
 
-``` lines
+```powershell lines
 Enable-Auth0
   -auth0Domain:"fabrikam.auth0.com"
   -clientId:"bOFty3tWgpijnwMcltysNFqHgO1ziz1I"
@@ -89,7 +89,7 @@ Veuillez noter que vous pouvez adapter l’appel à `Enable-Auth0` pour :
 
 L’exemple suivant ajoute également la demande de Rôle au mappage de demandes et autorise l’authentification Windows :
 
-``` lines
+```powershell lines
 Enable-Auth0
   -auth0Domain:"fabrikam.auth0.com"
   -clientId:"bOFty3tWgpijnwMcltysNFqHgO1ziz1I"
@@ -115,13 +115,13 @@ Une façon de procéder consiste à utiliser jQuery pour modifier le gadget logi
 
 Vous devez ajouter une référence à jQuery en haut de la `<body>` section de la page de connexion personnalisée.
 
-```html lines
+```html wrap lines
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 ```
 
 Avant d’appeler `lock.show()`, ajoutez le code pour modifier le DOM HTML qui ajoute le lien.
 
-```javascript lines
+```javascript lines expandable
 // construct Lock
 // var lock = ...
 [...]
@@ -150,9 +150,9 @@ if (sharepointClientIDs.indexOf(config.clientID) >= 0) {
     }
 
     $('.auth0-lock-tabs-container') 
-    .after('<div><p class="auth0-lock-alternative">' + 
+    .after('<div><p class="auth0-lock-alternative" style="padding:5px 0;">' + 
       '<a class="auth0-lock-alternative-link" ' + 
-      'href="/docs/fr-ca/'+ windowsAuthURL + '">' + 
+      'href="/docs/'+ windowsAuthURL + '">' + 
       'Login with Windows Authentication!!!</a>' + 
       '</p><p><span>or</span></p></div>').attr('href','https://nowhere');
   });
@@ -211,7 +211,7 @@ Elle ajoutera une demande sortante supplémentaire `http://schemas.microsoft.com
 
 Lors de l’installation du fournisseur de revendications, nous devons autoriser la transmission de la demande de Rôle à SharePoint, en l’ajoutant à la liste de mappage des demandes :
 
-``` lines
+```powershell lines
 Enable-Auth0
   -auth0Domain:"fabrikam.auth0.com"
   ...
@@ -227,7 +227,7 @@ Par défaut, un utilisateur n’aura pas accès au site.
 
 Désormais, au lieu d’ajouter cet utilisateur spécifique à un groupe SharePoint (par ex. : Contributeurs) nous pouvons maintenant ajouter un **Rôle** à un groupe SharePoint. Voici un exemple de script PowerShell qui montre comment ajouter des membres « Fabrikam HR » au groupe Contributeurs :
 
-```bash lines
+```powershell lines
 $webName = "http://fabrikam-sp"
 $groupName = "Contributors"
 $roleClaim = "Fabrikam HR"
@@ -250,7 +250,7 @@ Par défaut, SharePoint est capable de synchroniser les informations de profil u
 
 Une première approche consisterait à créer une tâche de minuterie qui s’exécute toutes les quelques heures, interroge le point de terminaison des utilisateurs d’Auth0 et synchronise les informations de profil pour ces utilisateurs.
 
-```csharp lines
+```csharp lines expandable
 using System;
 
 using Microsoft.SharePoint;

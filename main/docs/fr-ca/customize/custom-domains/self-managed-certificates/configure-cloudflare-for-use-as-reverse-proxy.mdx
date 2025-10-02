@@ -49,45 +49,45 @@ Pour configurer Cloudflare en tant que proxy inverse, vous devrez créer un enre
 2. Dans le tableau de bord de Cloudflare de la zone cible, [créez un enregistrement CNAME](https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-dns-records/#create-dns-records) avec les paramètres suivants :
 
    <table class="table"><thead>
-<tr>
-<th><strong>Paramètre</strong></th>
-<th><strong>Valeur</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Nom</td>
-<td>Le nom de domaine personnalisé.</td>
-</tr>
-<tr>
-<td>Cible</td>
-<td>La valeur <strong>Origin Domain Name</strong> enregistrée plus tôt.</td>
-</tr>
-<tr>
-<td>État de proxy</td>
-<td>`Proxied`</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th><strong>Paramètre</strong></th>
+   <th><strong>Valeur</strong></th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Nom</td>
+   <td>Le nom de domaine personnalisé.</td>
+   </tr>
+   <tr>
+   <td>Cible</td>
+   <td>La valeur <strong>Origin Domain Name</strong> enregistrée plus tôt.</td>
+   </tr>
+   <tr>
+   <td>État de proxy</td>
+   <td>`Proxied`</td>
+   </tr>
+   </tbody>
+   </table>
 3. [Créez une règle de page](https://support.cloudflare.com/hc/en-us/articles/200172336-Creating-Page-Rules) pour toutes les URL sous le domaine personnalisé choisi, avec les paramètres suivants :
 
    <table class="table"><thead>
-<tr>
-<th><strong>Paramètre</strong></th>
-<th><strong>Valeur</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Remplacement d’en-tête de l’hôte</td>
-<td>La valeur <strong>Origin Domain Name</strong> enregistrée plus tôt.</td>
-</tr>
-<tr>
-<td>True-Client-IP</td>
-<td>`Enable`</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th><strong>Paramètre</strong></th>
+   <th><strong>Valeur</strong></th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Remplacement d’en-tête de l’hôte</td>
+   <td>La valeur <strong>Origin Domain Name</strong> enregistrée plus tôt.</td>
+   </tr>
+   <tr>
+   <td>True-Client-IP</td>
+   <td>`Enable`</td>
+   </tr>
+   </tbody>
+   </table>
 4. [Créer une règle Transform](https://developers.cloudflare.com/rules/transform/request-header-modification/create-dashboard/) :
 
    1. Passez à la vue **Modifier l’en-tête de demande**.
@@ -96,22 +96,22 @@ Pour configurer Cloudflare en tant que proxy inverse, vous devrez créer un enre
    4. Sous Modifier l’en-tête de demande, sélectionnez **Définir comme statique**, puis définissez les champs suivants :
 
       <table class="table"><thead>
-<tr>
-<th><strong>Champ</strong></th>
-<th><strong>Valeur</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Nom de l’en-tête</td>
-<td>`cname-api-key`</td>
-</tr>
-<tr>
-<td>Valeur</td>
-<td>La valeur <strong>cname-api-key</strong> enregistrée plus tôt.</td>
-</tr>
-</tbody>
-</table>
+      <tr>
+      <th><strong>Champ</strong></th>
+      <th><strong>Valeur</strong></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Nom de l’en-tête</td>
+      <td>`cname-api-key`</td>
+      </tr>
+      <tr>
+      <td>Valeur</td>
+      <td>La valeur <strong>cname-api-key</strong> enregistrée plus tôt.</td>
+      </tr>
+      </tbody>
+      </table>
 5. Vérifiez que [Toujours utiliser HTTPS](https://developers.cloudflare.com/ssl/edge-certificates/additional-options/always-use-https/) est activé et que le [mode de chiffrement](https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/) est défini, au moins sur **Complet** pour le domaine personnalisé de votre choix.
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">

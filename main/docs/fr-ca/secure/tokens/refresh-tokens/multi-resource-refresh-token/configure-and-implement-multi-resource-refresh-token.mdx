@@ -581,7 +581,7 @@ To learn more, read [Auth0 Swift SDK](https://github.com/auth0/Auth0.swift/blob/
 
 If you are using the Auth0 Android SDK, you can exchange the refresh token using the following code:
 
-```swift lines
+```javascript lines
 credentialsManager.getApiCredentials(
     audience = "https://example.com/me", scope = " create:me:authentication_methods",
     callback = object : Callback<APICredentials, CredentialsManagerException> {
@@ -615,7 +615,7 @@ Using MRRT with [Actions](/docs/fr-ca/customize/actions) allows you to configure
 
 You can use the `event.client.refresh_token.policies` object to evaluate the application's audience and scope, when issuing or exchanging a refresh token, and to ensure precise control over API access and scopes.
 
-```js lines
+```javascript lines
 exports.onExecutePostLogin = async (event, api) => {
   // return the list of allowed APIs in the client
   const allowedAPIsInTheClient = event.client.refresh_token?.policies;
@@ -662,8 +662,8 @@ A refresh token exchange using the same audience and no scopes would result in a
 
 ```json lines
 {
-  "aud": "https://api.example.com",
-  "scope": "openid profile read:messages write:messages"
+"aud": "https://api.example.com"  
+"scope": "openid profile read:messages write:messages"
 }
 ```
 
