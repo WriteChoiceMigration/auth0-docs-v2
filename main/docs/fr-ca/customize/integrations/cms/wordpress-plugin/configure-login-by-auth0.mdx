@@ -55,7 +55,8 @@ Veillez à faire correspondre le protocole de votre site (HTTP ou HTTPS) et à u
 
 ### Autoriser l’application pour Management API
 
-Pour que votre site WordPress puisse effectuer certaines actions au nom de votre locataire Auth0, vous devrez autoriser l’application créée ci-dessus à accéder à <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>. Ce n’est pas nécessaire, mais cela permettra de récupérer les données complètes de l’utilisateur lors de la connexion (y compris `user_metadata` et `app_metadata`), des modifications de courriel et de mot de passe pour les utilisateurs, et de renvoyer la vérification du courriel lorsque des courriels vérifiés sont requis.
+Pour que votre site WordPress puisse effectuer certaines actions au nom de votre locataire Auth0, vous devrez autoriser l’application créée ci-dessus à accéder à <Tooltip href="/docs/fr-ca/glossary?term=management-api" tip="Management API
+Un produit permettant aux clients d’effectuer des tâches administratives." cta="Voir le glossaire">Management API</Tooltip>. Ce n’est pas nécessaire, mais cela permettra de récupérer les données complètes de l’utilisateur lors de la connexion (y compris `user_metadata` et `app_metadata`), des modifications de courriel et de mot de passe pour les utilisateurs, et de renvoyer la vérification du courriel lorsque des courriels vérifiés sont requis.
 
 1. Assurez-vous que votre application permet l’autorisation des Informations d’identification du client (étape 10 de la section ci-dessus).
 2. Naviguez vers [Tableau de bord Auth0 > Applications > API](https://manage.auth0.com/#/apis).
@@ -95,7 +96,8 @@ Les constantes PHP sont définies comme suit :
 
 Le nom de la constante par défaut doit être `AUTH0_ENV_` suivi du nom de l'option à remplacer en majuscules (le préfixe peut être modifié avec le filtre `auth0_settings_constant_prefix`. Pour en savoir plus, consultez [Extension de la connexion par Auth0 WordPress Plugiciel](/docs/fr-ca/customize/integrations/cms/wordpress-plugin/extend-login-by-auth0)). Toutes les options du plugiciel peuvent être remplacées et leurs clés peuvent être trouvées dans la méthode `WP_Auth0_Options::defaults()`. Pour voir les options possibles, consultez [WordPress Auth0 Lock Options dans notre dépôt GitHub](https://github.com/auth0/wp-auth0/blob/master/lib/WP_Auth0_Lock.php).
 
-**Remarque :** La valeur `migration_token` est générée par le plugiciel lorsque la migration de l’utilisateur est activée. S’il y a déjà une valeur dans l’admin, assurez-vous de définir la constante à la même valeur. Si cette valeur doit être modifiée, elle doit également l’être dans les scripts personnalisés pour la connexion à la base de données utilisée dans le <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>.
+**Remarque :** La valeur `migration_token` est générée par le plugiciel lorsque la migration de l’utilisateur est activée. S’il y a déjà une valeur dans l’admin, assurez-vous de définir la constante à la même valeur. Si cette valeur doit être modifiée, elle doit également l’être dans les scripts personnalisés pour la connexion à la base de données utilisée dans le <Tooltip href="/docs/fr-ca/glossary?term=auth0-dashboard" tip="Auth0 Dashboard
+Principal produit d’Auth0 pour configurer vos services." cta="Voir le glossaire">Auth0 Dashboard</Tooltip>.
 
 Le champ de paramètres change son affichage en fonction de cette nouvelle valeur et affiche la constante utilisée comme référence. Cette valeur sera utilisée partout dans le plugiciel automatiquement.
 
@@ -111,7 +113,9 @@ Tous les sites d’un réseau WordPress multi-site utiliseront la même valeur c
 * **Domaine personnalisé** : Le domaine personnalisé pour votre locataire, si configuré. Pour en savoir plus, veuillez consulter [Domaines personnalisés](/docs/fr-ca/customize/custom-domains). Le nom de l’option est `custom_domain`.
 * **ID client** : L’ID client copié à partir des paramètres de l’application dans votre tableau de bord. Le nom de l’option est `client_id`.
 * **Secret client**  : Le secret client copié à partir des paramètres de l’application dans votre tableau de bord. Le nom de l’option est `client_secret`.
-* **Algorithme de signature <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">JWT</Tooltip>** L’algorithme utilisé pour signer les jetons à partir de l’onglet Paramètres avancés de l’application, <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OAuth</Tooltip>; par défaut est RS256. Le nom de l’option est `client_signing_algorithm`.
+* **Algorithme de signature <Tooltip href="/docs/fr-ca/glossary?term=json-web-token" tip="Jeton Web JSON (JWT)
+Format standard de jeton d’ID (et souvent de jeton d’accès) utilisé pour représenter en toute sécurité des demandes entre deux parties." cta="Voir le glossaire">JWT</Tooltip>** L’algorithme utilisé pour signer les jetons à partir de l’onglet Paramètres avancés de l’application, <Tooltip href="/docs/fr-ca/glossary?term=oath2" tip="OAuth 2.0
+Cadre d’applications d’autorisation qui définit les protocoles d’autorisation et les flux de production." cta="Voir le glossaire">OAuth</Tooltip>; par défaut est RS256. Le nom de l’option est `client_signing_algorithm`.
 * **Temps de cache JWKS (en minutes)** : Combien de temps les informations JWKS doivent être stockées lorsque l’on utilise l’Algorithme de signature RS256 JWT. Le nom de l’option est `cache_expiration`.
 * **Formulaire de connexion original sur wp-login.php** : Fournit des moyens d’accéder ou de bloquer la page de connexion WordPress principale. Le nom de l’option est `wordpress_login_enabled`. Le nom de l’option de code de la page de connexion est `wle_code`.
 
@@ -123,7 +127,8 @@ Tous les sites d’un réseau WordPress multi-site utiliseront la même valeur c
 
 ### Caractéristiques
 
-* **Page de connexion universelle** : Redirige la page `wp-login.php` vers la page de connexion universelle pour l’authentification unique <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">SSO</Tooltip> en utilisant toutes les connexions actives pour cette application. Le nom de l’option est `auto_login`.
+* **Page de connexion universelle** : Redirige la page `wp-login.php` vers la page de connexion universelle pour l’authentification unique <Tooltip href="/docs/fr-ca/glossary?term=single-sign-on" tip="Authentification unique (SSO)
+Service qui, après qu’un utilisateur se soit connecté à une application, le connecte automatiquement à d’autres applications." cta="Voir le glossaire">SSO</Tooltip> en utilisant toutes les connexions actives pour cette application. Le nom de l’option est `auto_login`.
 * **Méthode de connexion automatique** : Une seule connexion active à utiliser pour l’authentification lorsque la **Page de connexion universelle** est activée. Laisser ce champ vide pour afficher toutes les connexions actives sur la page de connexion universelle. Le nom de l’option est `auto_login_method`.
 * **Déconnexion Auth0** : Activez cette option pour vous déconnecter de Auth0 lorsque vous vous déconnectez de WordPress. Le nom de l’option est `singlelogout`.
 * **Remplacer les avatars WordPress** : Force WordPress à utiliser les avatars Auth0. Le nom de l’option est `override_wp_avatars`.

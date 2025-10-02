@@ -15,7 +15,8 @@ L’authentification CIBA est actuellement en accès anticipé. Pour activer l�
 
 </Callout>
 
-Le flux d’authentification par voie de retour initié par le client (CIBA) est une norme <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OpenID</Tooltip> Foundation pour un flux d’authentification découplé. Il permet aux développeurs de créer des flux d’authentification où l’utilisateur ne se connecte pas directement sur l’appareil qui reçoit l’ID ou les jetons d’accès, ou sur l’appareil de consommation, mais sur un appareil d’authentification distinct.
+Le flux d’authentification par voie de retour initié par le client (CIBA) est une norme <Tooltip href="/docs/fr-ca/glossary?term=openid" tip="OpenID
+Norme ouverte d’authentification qui permet aux applications de vérifier l’identité des utilisateurs sans avoir à collecter leurs informations de connexion." cta="Voir le glossaire">OpenID</Tooltip> Foundation pour un flux d’authentification découplé. Il permet aux développeurs de créer des flux d’authentification où l’utilisateur ne se connecte pas directement sur l’appareil qui reçoit l’ID ou les jetons d’accès, ou sur l’appareil de consommation, mais sur un appareil d’authentification distinct.
 
 ## Cas d’utilisation
 
@@ -29,7 +30,8 @@ Utiliser le flux CIBA pour les cas d’utilisation suivants :
 
 Le flux CIBA ne s’appuie pas sur une application client qui redirige l’utilisateur via le navigateur pour effectuer le processus de connexion/authentification. Au lieu de cela, l’application client appelle directement le fournisseur OpenID via une demande par voie de retour pour initier le flux d’authentification.
 
-Le flux CIBA ne crée ni ne met à jour une autorisation. Par conséquent, si l’application client demande une permission en question via le flux CIBA, elle ne sera pas stockée comme autorisation si l’utilisateur y consent. Cela signifie que si configuré, un flux d’authentification différent (type d’autorisation) demandant la même permission(s) doit demander à l’utilisateur de nouveau le consentement <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OAuth</Tooltip>.
+Le flux CIBA ne crée ni ne met à jour une autorisation. Par conséquent, si l’application client demande une permission en question via le flux CIBA, elle ne sera pas stockée comme autorisation si l’utilisateur y consent. Cela signifie que si configuré, un flux d’authentification différent (type d’autorisation) demandant la même permission(s) doit demander à l’utilisateur de nouveau le consentement <Tooltip href="/docs/fr-ca/glossary?term=oath2" tip="OAuth 2.0
+Cadre d’applications d’autorisation qui définit les protocoles d’autorisation et les flux de production." cta="Voir le glossaire">OAuth</Tooltip>.
 
 Étant donné que le flux CIBA n’a pas de sessions, c.-à-d. témoins du navigateur, l’utilisateur n’a pas besoin d’être authentifié avant un défi CIBA. S’ils ont déjà été authentifiés avant un défi CIBA, leur session existante n’est pas affectée.
 

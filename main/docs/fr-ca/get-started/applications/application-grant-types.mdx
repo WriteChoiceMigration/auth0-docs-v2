@@ -19,8 +19,10 @@ Par ailleurs, si vous souhaitez sécuriser une application côté client, telle 
 
 Différents types d’autorisations sont valables lors de l’enregistrement d’applications. Ils peuvent être classés dans les catégories suivantes :
 
-* **Autorisations conformes aux spécifications** : Autorisations définies par des spécifications externes et conformes à celles-ci, telles que <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OpenID</Tooltip> Connect (OIDC).
-* **Auth0 extension grants** (Autorisations d’extension Auth0) : Autorisations spécifiques à Auth0 conformes au [OAuth extension mechanism](https://tools.ietf.org/html/rfc6749#section-4.5) (mécanisme d’extension d’<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OAuth</Tooltip>) afin de prendre en charge des clients supplémentaires ou d’établir une passerelle entre OAuth et d’autres cadres d’applications de confiance.
+* **Autorisations conformes aux spécifications** : Autorisations définies par des spécifications externes et conformes à celles-ci, telles que <Tooltip href="/docs/fr-ca/glossary?term=openid" tip="OpenID
+Norme ouverte d’authentification qui permet aux applications de vérifier l’identité des utilisateurs sans avoir à collecter leurs informations de connexion." cta="Voir le glossaire">OpenID</Tooltip> Connect (OIDC).
+* **Auth0 extension grants** (Autorisations d’extension Auth0) : Autorisations spécifiques à Auth0 conformes au [OAuth extension mechanism](https://tools.ietf.org/html/rfc6749#section-4.5) (mécanisme d’extension d’<Tooltip href="/docs/fr-ca/glossary?term=oath2" tip="OAuth 2.0
+Cadre d’applications d’autorisation qui définit les protocoles d’autorisation et les flux de production." cta="Voir le glossaire">OAuth</Tooltip>) afin de prendre en charge des clients supplémentaires ou d’établir une passerelle entre OAuth et d’autres cadres d’applications de confiance.
 * **Autorisations héritées Auth0** : Types d’autorisation traditionnelles prises en charge pour les clients hérités uniquement. Si vous êtes un client hérité, nous vous recommandons vivement de passer à une solution plus sûre.
 
 ## Types d’autorisations disponibles
@@ -126,7 +128,8 @@ Lorsqu’une application native ou une application à page unique (Single-Page A
 
 Les applications natives peuvent également utiliser le type d’autorisation `device_code`.
 
-Les applications publiques ne peuvent pas utiliser le type d’autorisation `client_credentials`. Pour utiliser ce type d’autorisation, vous devez configurer l’application de manière à ce qu’elle soit privée plutôt que publique. Utilisez le point de terminaison de l’Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Management API</Tooltip> [Mettre à jour un client](https://auth0.com/docs/api/management/v2#!/Clients/patch_clients_by_id) pour définir `token_endpoint_auth_method` sur `client_secret_post,``client_secret_basic`, ou `private_key_jwt`. Pour en savoir plus, consultez [Identifiants de l’application](/docs/fr-ca/secure/application-credentials).
+Les applications publiques ne peuvent pas utiliser le type d’autorisation `client_credentials`. Pour utiliser ce type d’autorisation, vous devez configurer l’application de manière à ce qu’elle soit privée plutôt que publique. Utilisez le point de terminaison de l’Auth0 <Tooltip href="/docs/fr-ca/glossary?term=management-api" tip="Management API
+Un produit permettant aux clients d’effectuer des tâches administratives." cta="Voir le glossaire">Management API</Tooltip> [Mettre à jour un client](https://auth0.com/docs/api/management/v2#!/Clients/patch_clients_by_id) pour définir `token_endpoint_auth_method` sur `client_secret_post,``client_secret_basic`, ou `private_key_jwt`. Pour en savoir plus, consultez [Identifiants de l’application](/docs/fr-ca/secure/application-credentials).
 
 ### Applications privées
 
@@ -147,7 +150,8 @@ Les applications de confiance de première partie ont les mêmes `grant_types` a
 * `http://auth0.com/oauth/grant-type/mfa-otp`
 * `http://auth0.com/oauth/grant-type/mfa-recovery-code`
 
-Si vous utilisez le Dashboard pour activer ou désactiver ces types d’autorisation, sachez que tous les types d’autorisation par mot de passe et <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">MFA</Tooltip> sont activés lorsque vous ajoutez le type d’autorisation `Password` ou `MFA` à votre application. Vous ne pouvez pas les sélectionner individuellement.
+Si vous utilisez le Dashboard pour activer ou désactiver ces types d’autorisation, sachez que tous les types d’autorisation par mot de passe et <Tooltip href="/docs/fr-ca/glossary?term=multifactor-authentication" tip="Authentification multifacteur (MFA)
+Processus d’authentification de l’utilisateur qui utilise un facteur en plus du nom d’utilisateur et du mot de passe, tel qu’un code par SMS." cta="Voir le glossaire">MFA</Tooltip> sont activés lorsque vous ajoutez le type d’autorisation `Password` ou `MFA` à votre application. Vous ne pouvez pas les sélectionner individuellement.
 
 ## En savoir plus
 

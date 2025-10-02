@@ -62,7 +62,8 @@ Si vous utilisez un code, votre application devra vous demander ce code, puis vo
 
 Si vous implémentez une connexion sans mot de passe pour des applications natives ou des applications Web classiques, vous devez utiliser le point de terminaison `/oauth/token` pour échanger le code OTP contre des jetons d’authentification. Vous ne pouvez pas utiliser ce point de terminaison à partir d’applications à page unique.
 
-Pour y parvenir, vous devez d’abord activer l’autorisation **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Passwordless</Tooltip> OTP (OTP Sans mot de passe)** dans [Auth0 Dashboard > Applications > Applications](https://manage.auth0.com/#/applications) dans les réglages de votre application, sous **Advanced Settings (Réglages avancés)** > **Grant Types (Types d’autorisations)**.
+Pour y parvenir, vous devez d’abord activer l’autorisation **<Tooltip href="/docs/fr-ca/glossary?term=passwordless" tip="Sans mot de passe
+Forme d’authentification qui ne repose pas sur un mot de passe comme premier facteur." cta="Voir le glossaire">Passwordless</Tooltip> OTP (OTP Sans mot de passe)** dans [Auth0 Dashboard > Applications > Applications](https://manage.auth0.com/#/applications) dans les réglages de votre application, sous **Advanced Settings (Réglages avancés)** > **Grant Types (Types d’autorisations)**.
 
 L’utilisateur recevra le code OTP et votre application native ou Web le lui demandera. Lorsque l’utilisateur saisit le code, vous pouvez terminer le flux d’authentification en appelant le point de terminaison `/oauth/token` avec les paramètres suivants :
 

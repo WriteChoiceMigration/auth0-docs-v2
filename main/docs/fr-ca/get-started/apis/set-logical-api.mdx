@@ -9,7 +9,8 @@ permalink: "set-logical-api"
 'twitter:description': "Comment utiliser une API logique unique dans Auth0 pour représenter et contrôler l’accès à plusieurs API."
 ---
 
-Si vous avez plusieurs implémentations d’API distinctes qui font toutes logiquement partie de la même API, vous pouvez simplifier votre processus d’autorisation en les représentant avec une API logique unique dans <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>. Cela vous permet de mettre en œuvre un seul flux d’autorisation, tout en contrôlant l’accès aux API individuelles en leur attribuant les permissions appropriées.
+Si vous avez plusieurs implémentations d’API distinctes qui font toutes logiquement partie de la même API, vous pouvez simplifier votre processus d’autorisation en les représentant avec une API logique unique dans <Tooltip href="/docs/fr-ca/glossary?term=auth0-dashboard" tip="Auth0 Dashboard
+Principal produit d’Auth0 pour configurer vos services." cta="Voir le glossaire">Auth0 Dashboard</Tooltip>. Cela vous permet de mettre en œuvre un seul flux d’autorisation, tout en contrôlant l’accès aux API individuelles en leur attribuant les permissions appropriées.
 
 Les sections suivantes décrivent comment utiliser et représenter plusieurs API en tant que serveur de ressources unique dans Auth0. Nous utiliserons l’exemple d’application suivant dans les exemples. L’exemple d’application utilise une architecture de microservices et contient :
 
@@ -120,7 +121,8 @@ Dans notre exemple, après avoir réussi à vous connecter, vous verrez des bout
 
 ### Mettre en œuvre la déconnexion unique (SLO) ou l’authentification unique (SSO).
 
-Dans certains scénarios multi-applications où la déconnexion unique est souhaitée (c’est-à-dire qu’un utilisateur se déconnectant d’une application doit également être déconnecté des autres applications), une application peut être configurée pour interroger périodiquement Auth0 en utilisant `checkSession()` pour voir si une session existe. Si la session n’existe pas, vous pouvez alors déconnecter l’utilisateur de l’application. La même méthode d’interrogation peut être mise en place pour une authentification silencieuse dans un scénario d’authentification unique (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>).
+Dans certains scénarios multi-applications où la déconnexion unique est souhaitée (c’est-à-dire qu’un utilisateur se déconnectant d’une application doit également être déconnecté des autres applications), une application peut être configurée pour interroger périodiquement Auth0 en utilisant `checkSession()` pour voir si une session existe. Si la session n’existe pas, vous pouvez alors déconnecter l’utilisateur de l’application. La même méthode d’interrogation peut être mise en place pour une authentification silencieuse dans un scénario d’authentification unique (<Tooltip href="/docs/fr-ca/glossary?term=single-sign-on" tip="Authentification unique (SSO)
+Service qui, après qu’un utilisateur se soit connecté à une application, le connecte automatiquement à d’autres applications." cta="Voir le glossaire">SSO</Tooltip>).
 
 L’intervalle d’interrogation entre les vérifications de `checkSession()` devrait être d’au moins 15 minutes entre chaque appel pour éviter tout problème ultérieur lié à la limite anti-attaques de cet appel.
 

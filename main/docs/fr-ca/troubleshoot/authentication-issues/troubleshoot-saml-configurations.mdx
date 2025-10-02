@@ -11,7 +11,9 @@ permalink: "troubleshoot-saml-configurations"
 
 Lors du dépannage, il est important de comprendre votre configuration.
 
-* **Auth0 sert-il de fournisseur de services <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip> (SP), de fournisseur d’identité SAML (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">IdP</Tooltip>) ou les deux?**
+* **Auth0 sert-il de fournisseur de services <Tooltip href="/docs/fr-ca/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language (SAML)
+Protocole normalisé permettant à deux parties d’échanger des informations d’authentification sans mot de passe." cta="Voir le glossaire">SAML</Tooltip> (SP), de fournisseur d’identité SAML (<Tooltip href="/docs/fr-ca/glossary?term=idp" tip="Fournisseur d’identité (IdP)
+Service de stockage et de gestion des identités numériques." cta="Voir le glossaire">IdP</Tooltip>) ou les deux?**
 
   Le SP redirige les utilisateurs vers une autre destination pour l’authentification. L’IdP authentifie l’utilisateur en lui demandant de se connecter et en validant les informations fournies. Si votre application redirige l’utilisateur vers Auth0 pour l’authentification via SAML, alors Auth0 est l’IdP. Si Auth0 redirige les utilisateurs via une connexion vers un IdP distant via SAML, alors Auth0 est le SP de l’IdP distant. Auth0 peut agir comme fournisseur de services (SP), fournisseur d’identité (IdP), ou les deux.
 * **Votre flux d’authentification utilise-t-il un modèle initié par le SP, un modèle initié par l’IdP, ou les deux?**
@@ -43,7 +45,8 @@ Lors du dépannage, nous recommandons de commencer par rassembler des informatio
 * Vérifiez si JavaScript et les témoins sont activés dans le navigateur.
 * Vérifiez que la touche de verrouillage des majuscules est désactivée.
 * Si l’utilisateur utilise un appareil mobile, vérifiez s’il y a des logiciels susceptibles d’impacter l’authentification et/ou l’autorisation (par exemple, ne pas exécuter certains types de logiciels requis).
-* Vérifiez si l’utilisateur peut accéder à certaines des URL clés de l’application, comme l'authentification unique (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SSO</Tooltip>) de l’URL de l’IdP (indiquant un problème de connectivité réseau).
+* Vérifiez si l’utilisateur peut accéder à certaines des URL clés de l’application, comme l'authentification unique (<Tooltip href="/docs/fr-ca/glossary?term=single-sign-on" tip="Authentification unique (SSO)
+Service qui, après qu’un utilisateur se soit connecté à une application, le connecte automatiquement à d’autres applications." cta="Voir le glossaire">SSO</Tooltip>) de l’URL de l’IdP (indiquant un problème de connectivité réseau).
 
 ## Dépannage d’Auth0 en tant que fournisseur de services
 
@@ -152,7 +155,8 @@ Assurez-vous que le fournisseur d’identité envoie la valeur `audience` correc
 
 #### Protocole incorrect spécifié
 
-Une erreur courante consiste à spécifier le protocole de réponse incorrect dans l’onglet initié par l’IdP. Le protocole de réponse est celui utilisé entre Auth0 et l’application (et non le fournisseur d’identité distant) Par exemple, si vous définissez cette valeur sur **SAML** alors que votre application attend **Openidentifiant Connect** ou **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">WS-Fed</Tooltip>** cela entraîne des erreurs en raison d’une mauvaise configuration.
+Une erreur courante consiste à spécifier le protocole de réponse incorrect dans l’onglet initié par l’IdP. Le protocole de réponse est celui utilisé entre Auth0 et l’application (et non le fournisseur d’identité distant) Par exemple, si vous définissez cette valeur sur **SAML** alors que votre application attend **Openidentifiant Connect** ou **<Tooltip href="/docs/fr-ca/glossary?term=ws-fed" tip="Web Service Federation (WS-Fed)
+Protocole de gestion des identités des utilisateurs à travers les domaines." cta="Voir le glossaire">WS-Fed</Tooltip>** cela entraîne des erreurs en raison d’une mauvaise configuration.
 
 1. Naviguez vers [Auth0 Dashboard; Authentification; Entreprise](https://manage.auth0.com/#/connections/enterprise), et sélectionnez un type de connexion.
 2. Sélectionnez le nom de votre connexion.
@@ -423,7 +427,8 @@ Dans ce cas, l’utilisateur se connecte à l’IdP avec succès, mais un évén
 Dans ce cas, l’utilisateur se connecte à l’IdP avec succès, un événement de connexion réussi s’affiche dans les journaux d’Auth0, mais les attributs du profil de l’utilisateur ne sont pas corrects. Si l’utilisateur :
 
 * Semble se connecter avec succès.
-* Les pages Journaux et Utilisateurs dans <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Auth0 Dashboard</Tooltip> devraient afficher les événements de connexion réussie.
+* Les pages Journaux et Utilisateurs dans <Tooltip href="/docs/fr-ca/glossary?term=auth0-dashboard" tip="Auth0 Dashboard
+Principal produit d’Auth0 pour configurer vos services." cta="Voir le glossaire">Auth0 Dashboard</Tooltip> devraient afficher les événements de connexion réussie.
 
 La prochaine étape consiste à vérifier que le profil de l’utilisateur contient les attributs de profil utilisateur nécessaires.
 

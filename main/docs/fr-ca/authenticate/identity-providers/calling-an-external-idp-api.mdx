@@ -9,7 +9,8 @@ permalink: "calling-an-external-idp-api"
 'twitter:description': "Décrit comment appeler l’API d’un fournisseur d’identité externe."
 ---
 
-Lorsque vous authentifiez avec succès un utilisateur auprès d’un fournisseur d’identité externe (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>), tel que Facebook ou GitHub, l’IdP inclut souvent un jeton d’accès dans le profil utilisateur qu’il renvoie à Auth0.
+Lorsque vous authentifiez avec succès un utilisateur auprès d’un fournisseur d’identité externe (<Tooltip href="/docs/fr-ca/glossary?term=idp" tip="Fournisseur d’identité (IdP)
+Service de stockage et de gestion des identités numériques." cta="Voir le glossaire">IdP</Tooltip>), tel que Facebook ou GitHub, l’IdP inclut souvent un jeton d’accès dans le profil utilisateur qu’il renvoie à Auth0.
 
 Vous pouvez récupérer et utiliser ce jeton pour appeler l’API de l’IdP.
 
@@ -28,7 +29,8 @@ La procédure à suivre diffère selon que votre code s’exécute dans le syst�
 
 Lorsque vous authentifiez un utilisateur, l’IdP inclut souvent un jeton d’accès dans le profil utilisateur qu’il renvoie à Auth0.
 
-Pour des raisons de sécurité et de conformité, Auth0 n’envoie pas ce jeton à votre application dans le cadre du profil utilisateur. Pour l’obtenir, vous devez accéder à <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip> d’Auth0 et récupérer le profil complet de l’utilisateur.
+Pour des raisons de sécurité et de conformité, Auth0 n’envoie pas ce jeton à votre application dans le cadre du profil utilisateur. Pour l’obtenir, vous devez accéder à <Tooltip href="/docs/fr-ca/glossary?term=management-api" tip="Management API
+Un produit permettant aux clients d’effectuer des tâches administratives." cta="Voir le glossaire">Management API</Tooltip> d’Auth0 et récupérer le profil complet de l’utilisateur.
 
 1. Obtenez un jeton d’accès qui vous permet d’appeler la [Management API d’Auth0](/docs/fr-ca/api/management/v2).
 2. Appelez le point de terminaison [Obtenir les utilisateurs selon leurs ID](/docs/fr-ca/api/management/v2#!/Users/get_users_by_id) du Management API d’Auth0 à l’aide du jeton d’accès obtenu à la première étape. Ce point final renvoie le profil complet de l’utilisateur, qui contient le jeton d’accès à l’IdP.

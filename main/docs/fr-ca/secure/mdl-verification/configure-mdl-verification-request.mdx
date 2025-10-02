@@ -33,14 +33,19 @@ If you want to embed the mDL Verification API to use inside your application, yo
 
 For a Next.js application, edit the **.env.local** file and set the corresponding values:
 
-* `AUTH0_DOMAIN`: The **Domain** specified under the application’s BasicInformation in <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>. Defines the Application performing the Verification Request.
+* `AUTH0_DOMAIN`: The **Domain** specified under the application’s BasicInformation in <Tooltip href="/docs/fr-ca/glossary?term=auth0-dashboard" tip="Auth0 Dashboard
+Principal produit d’Auth0 pour configurer vos services." cta="Voir le glossaire">Auth0 Dashboard</Tooltip>. Defines the Application performing the Verification Request.
 * `PROTOCOL`: The **protocol** determines the method used for interacting with the wallet.
 * `TEMPLATE_ID`: The **Template ID** from the template you created.
-* `VERIFICATION_BEARER_TOKEN`: The **Verification Bearer Token** that is generated based on your <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Client ID</Tooltip>, <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Client Secret</Tooltip>, <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Audience</Tooltip>, and Grant Type that allows your application to call the Verification Service.
+* `VERIFICATION_BEARER_TOKEN`: The **Verification Bearer Token** that is generated based on your <Tooltip href="/docs/fr-ca/glossary?term=client-id" tip="ID client
+Identifiant attribué par Auth0 à votre ressource enregistrée." cta="Voir le glossaire">Client ID</Tooltip>, <Tooltip href="/docs/fr-ca/glossary?term=client-secret" tip="Secret client
+Secret utilisé par un client (application) pour s’authentifier auprès du serveur d’autorisation; il ne doit être connu que du client et du serveur d’autorisation et doit être suffisamment aléatoire pour ne pas être deviné." cta="Voir le glossaire">Client Secret</Tooltip>, <Tooltip href="/docs/fr-ca/glossary?term=audience" tip="Audience
+Identifiant unique de 'audience d’un jeton émis. Appelé aud dans un jeton, sa valeur contient l’identifiant soit d’une application (Client ID) pour un jeton d’ID, soit d’une API (API Identifier) pour un jeton d’accès." cta="Voir le glossaire">Audience</Tooltip>, and Grant Type that allows your application to call the Verification Service.
 
 ### Verification Template
 
-The Verification Template defines the fields you want to request from a user’s digital wallet, including mDL claims. The Verification Template is part of the first call to the mDL Verification API. You can create the Verification Template using the Auth0 Dashboard or <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Management API</Tooltip>. Currently, Auth0 only supports the mDoc credential type. An mDoc is a binary data object for representing a driver’s license as defined in Annex A of the [ISO/IEC TS 18013-7:2024](https://www.iso.org/standard/82772.html) standard.
+The Verification Template defines the fields you want to request from a user’s digital wallet, including mDL claims. The Verification Template is part of the first call to the mDL Verification API. You can create the Verification Template using the Auth0 Dashboard or <Tooltip href="/docs/fr-ca/glossary?term=management-api" tip="Management API
+Un produit permettant aux clients d’effectuer des tâches administratives." cta="Voir le glossaire">Management API</Tooltip>. Currently, Auth0 only supports the mDoc credential type. An mDoc is a binary data object for representing a driver’s license as defined in Annex A of the [ISO/IEC TS 18013-7:2024](https://www.iso.org/standard/82772.html) standard.
 
 <Warning>
 
@@ -50,7 +55,8 @@ You should only request verification data that is essential for your business pu
 
 #### mDL claims
 
-Claims, which are different from <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">JWT</Tooltip> claims, are specific to the mDL Verifiable Credential. The claims are attributes associated with the user that could be sensitive, personally identifiable information (PII).
+Claims, which are different from <Tooltip href="/docs/fr-ca/glossary?term=json-web-token" tip="Jeton Web JSON (JWT)
+Format standard de jeton d’ID (et souvent de jeton d’accès) utilisé pour représenter en toute sécurité des demandes entre deux parties." cta="Voir le glossaire">JWT</Tooltip> claims, are specific to the mDL Verifiable Credential. The claims are attributes associated with the user that could be sensitive, personally identifiable information (PII).
 
 You can request the following claims:
 

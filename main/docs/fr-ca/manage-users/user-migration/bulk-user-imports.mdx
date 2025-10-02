@@ -23,7 +23,8 @@ Avant de lancer la tâche d’importation des utilisateurs :
 
 * Configurez une connexion de base de données dans laquelle importer les utilisateurs et activez-la pour au moins une application.
 * Assurez- vous que, si vous importez des mots de passe, ceux-ci sont hachés à l’aide de l’un des algorithmes pris en charge. Les utilisateurs dont les mots de passe sont hachés au moyen d’algorithmes non pris en charge devront réinitialiser leur mot de passe lorsqu’ils se connecteront pour la première fois après l’importation en lot.
-* Si vous importez des inscriptions à la <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>, assurez-vous qu’il s’agit d’un type pris en charge : `email`, `phone`, ou`totp`.
+* Si vous importez des inscriptions à la <Tooltip href="/docs/fr-ca/glossary?term=multifactor-authentication" tip="Authentification multifacteur (MFA)
+Processus d’authentification de l’utilisateur qui utilise un facteur en plus du nom d’utilisateur et du mot de passe, tel qu’un code par SMS." cta="Voir le glossaire">MFA</Tooltip>, assurez-vous qu’il s’agit d’un type pris en charge : `email`, `phone`, ou`totp`.
 * [Obtenir un jeton de Management API](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens) pour les requêtes de points de terminaison des tâches.
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
@@ -48,7 +49,8 @@ La limite de la taille des fichiers pour une importation en bloc est de 500 Ko.
 
 ## Requête d’importation d’utilisateurs en lots
 
-Pour lancer un travail d’importation d’utilisateurs en lots, faites une requête `POST` au point de terminaison [Créer une tâche d’importation d’utilisateurs](https://auth0.com/docs/api/management/v2#!/Jobs/post_users_imports). Veillez à remplacer les valeurs fictives `MGMT_API_ACCESS_TOKEN`, `USERS_IMPORT_FILE.json`, `CONNECTION_ID` et `EXTERNAL_ID` par votre jeton d’accès de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>, le fichier JSON des utilisateurs, le [connection ID](/docs/fr-ca/authenticate/identity-providers/locate-the-connection-id) à la base de données et l’ID externe, respectivement.
+Pour lancer un travail d’importation d’utilisateurs en lots, faites une requête `POST` au point de terminaison [Créer une tâche d’importation d’utilisateurs](https://auth0.com/docs/api/management/v2#!/Jobs/post_users_imports). Veillez à remplacer les valeurs fictives `MGMT_API_ACCESS_TOKEN`, `USERS_IMPORT_FILE.json`, `CONNECTION_ID` et `EXTERNAL_ID` par votre jeton d’accès de <Tooltip href="/docs/fr-ca/glossary?term=management-api" tip="Management API
+Un produit permettant aux clients d’effectuer des tâches administratives." cta="Voir le glossaire">Management API</Tooltip>, le fichier JSON des utilisateurs, le [connection ID](/docs/fr-ca/authenticate/identity-providers/locate-the-connection-id) à la base de données et l’ID externe, respectivement.
 
 <CodeGroup>
 ```bash cURL lines

@@ -17,7 +17,9 @@ Native to Web SSO is currently available in Early Access. To use this feature, y
 
 ## Configure Native to Web SSO
 
-To use Native to Web <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Single Sign-On</Tooltip> (SSO), configure your native and web (Single Page App or Regular Web App) to create and manage sessions with the Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>.
+To use Native to Web <Tooltip href="/docs/fr-ca/glossary?term=single-sign-on" tip="Authentification unique (SSO)
+Service qui, après qu’un utilisateur se soit connecté à une application, le connecte automatiquement à d’autres applications." cta="Voir le glossaire">Single Sign-On</Tooltip> (SSO), configure your native and web (Single Page App or Regular Web App) to create and manage sessions with the Auth0 <Tooltip href="/docs/fr-ca/glossary?term=management-api" tip="Management API
+Un produit permettant aux clients d’effectuer des tâches administratives." cta="Voir le glossaire">Management API</Tooltip>.
 
 You need an [access token](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens) to use the Management API or Auth0 CLI.
 
@@ -60,9 +62,11 @@ For existing applications, make a `PATCH` call to the [Update a Client](https://
 
 Once a user is authenticated, Auth0 returns an [Access token](/docs/fr-ca/secure/tokens/access-tokens), and [ID token](/docs/fr-ca/secure/tokens/id-tokens), and (optionally) a [Refresh token](/docs/fr-ca/secure/tokens/refresh-tokens).
 
-You can configure your native application to exchange a <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">refresh token</Tooltip> for a Session Transfer Token. If your web application does not support cookie injection, your native application also needs to configure your web application’s **Login URI** to inject the Session Transfer Token as a URI parameter.
+You can configure your native application to exchange a <Tooltip href="/docs/fr-ca/glossary?term=refresh-token" tip="Jeton d’actualisation
+Jeton utilisé pour obtenir un jeton d’accès renouvelé sans obliger les utilisateurs à se connecter à nouveau." cta="Voir le glossaire">refresh token</Tooltip> for a Session Transfer Token. If your web application does not support cookie injection, your native application also needs to configure your web application’s **Login URI** to inject the Session Transfer Token as a URI parameter.
 
-* Update your native application using your Management API <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Access Token</Tooltip> with the [Update a Client](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) endpoint:
+* Update your native application using your Management API <Tooltip href="/docs/fr-ca/glossary?term=access-token" tip="Jeton d’accès
+Identifiant d’autorisation, sous la forme d’une chaîne opaque ou d’un JWT, utilisé pour accéder à une API." cta="Voir le glossaire">Access Token</Tooltip> with the [Update a Client](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) endpoint:
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
@@ -221,7 +225,8 @@ If your web application using WebView or browser supports cookie injection, you 
 
 * Add the session_transfer_token into a cookie.
 * Open the web application using WebView or browser.
-* Log the web application to your Auth0 tenant or <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Custom Domain</Tooltip>. As the `session_transfer_token` is included in the cookie, the user is not prompted for first-factor authentication.
+* Log the web application to your Auth0 tenant or <Tooltip href="/docs/fr-ca/glossary?term=custom-domain" tip="Domaine personnalisé
+Domaine tiers avec un nom spécialisé ou reflétant votre marque." cta="Voir le glossaire">Custom Domain</Tooltip>. As the `session_transfer_token` is included in the cookie, the user is not prompted for first-factor authentication.
 
 ```html lines
 curl --cookie auth0_session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN
@@ -594,7 +599,10 @@ app.use((req, res, next) => {
 
 ##### SAML and WS-Federation
 
-If your web application uses <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">SAML</Tooltip> or <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-6" tip="">WS-Fed</Tooltip> service provider and Auth0 as the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-7" tip="">IdP</Tooltip>, you can send the `session_transfer_token` as an URL parameter to the Auth0 `/authorize` endpoint and the `redirect_uri` is the SAML or WS-Fed sign-in URL.
+If your web application uses <Tooltip href="/docs/fr-ca/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language (SAML)
+Protocole normalisé permettant à deux parties d’échanger des informations d’authentification sans mot de passe." cta="Voir le glossaire">SAML</Tooltip> or <Tooltip href="/docs/fr-ca/glossary?term=ws-fed" tip="Web Service Federation (WS-Fed)
+Protocole de gestion des identités des utilisateurs à travers les domaines." cta="Voir le glossaire">WS-Fed</Tooltip> service provider and Auth0 as the <Tooltip href="/docs/fr-ca/glossary?term=idp" tip="Fournisseur d’identité (IdP)
+Service de stockage et de gestion des identités numériques." cta="Voir le glossaire">IdP</Tooltip>, you can send the `session_transfer_token` as an URL parameter to the Auth0 `/authorize` endpoint and the `redirect_uri` is the SAML or WS-Fed sign-in URL.
 
 <CodeGroup>
 ```bash cURL lines

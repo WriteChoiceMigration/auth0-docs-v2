@@ -15,9 +15,14 @@ Sender constraining tokens using Demonstrating Proof-of-Possession (DPoP) is cur
 
 </Warning>
 
-Sender constraining is an <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OAuth 2.0</Tooltip> and <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OpenID</Tooltip> Connect (OIDC) security mechanism that cryptographically binds access and <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">refresh tokens</Tooltip> to the application that requested them, preventing token theft and misuse.
+Sender constraining is an <Tooltip href="/docs/fr-ca/glossary?term=oath2" tip="OAuth 2.0
+Cadre d’applications d’autorisation qui définit les protocoles d’autorisation et les flux de production." cta="Voir le glossaire">OAuth 2.0</Tooltip> and <Tooltip href="/docs/fr-ca/glossary?term=openid" tip="OpenID
+Norme ouverte d’authentification qui permet aux applications de vérifier l’identité des utilisateurs sans avoir à collecter leurs informations de connexion." cta="Voir le glossaire">OpenID</Tooltip> Connect (OIDC) security mechanism that cryptographically binds access and <Tooltip href="/docs/fr-ca/glossary?term=refresh-token" tip="Jeton d’actualisation
+Jeton utilisé pour obtenir un jeton d’accès renouvelé sans obliger les utilisateurs à se connecter à nouveau." cta="Voir le glossaire">refresh tokens</Tooltip> to the application that requested them, preventing token theft and misuse.
 
-Traditionally, OAuth 2.0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">access tokens</Tooltip> are bearer tokens, which means whoever “bears” or possesses the token can use it. If a bearer token is stolen or leaked, an attacker can present it to a <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">resource server</Tooltip> (API) and gain unauthorized access by impersonating the legitimate client application or user.
+Traditionally, OAuth 2.0 <Tooltip href="/docs/fr-ca/glossary?term=access-token" tip="Jeton d’accès
+Identifiant d’autorisation, sous la forme d’une chaîne opaque ou d’un JWT, utilisé pour accéder à une API." cta="Voir le glossaire">access tokens</Tooltip> are bearer tokens, which means whoever “bears” or possesses the token can use it. If a bearer token is stolen or leaked, an attacker can present it to a <Tooltip href="/docs/fr-ca/glossary?term=resource-server" tip="Serveur de ressources
+Serveur hébergeant des ressources protégées. Les serveurs de ressources traitent les requêtes pour des ressources sécurisées et y répondent." cta="Voir le glossaire">resource server</Tooltip> (API) and gain unauthorized access by impersonating the legitimate client application or user.
 
 Sender constraining ensures that the client application presenting the access token to a resource server is the valid owner of the access token. If the client application is not the valid owner of the access token, then the resource server rejects the API request.
 

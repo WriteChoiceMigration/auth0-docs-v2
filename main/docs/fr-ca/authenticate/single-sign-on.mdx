@@ -9,7 +9,8 @@ permalink: "single-sign-on"
 'twitter:description': "Découvre l’authentification unique (SSO) et son fonctionnement."
 ---
 
-L’authentification unique (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SSO</Tooltip>) se produit lorsque l’utilisateur se connecte à une application et est ensuite automatiquement connecté à d’autres applications, indépendamment de la plateforme, de la technologie ou du domaine utilisés par l’utilisateur. L’utilisateur se connecte une seule fois, d’où le nom de la fonctionnalité (authentification unique).
+L’authentification unique (<Tooltip href="/docs/fr-ca/glossary?term=single-sign-on" tip="Authentification unique (SSO)
+Service qui, après qu’un utilisateur se soit connecté à une application, le connecte automatiquement à d’autres applications." cta="Voir le glossaire">SSO</Tooltip>) se produit lorsque l’utilisateur se connecte à une application et est ensuite automatiquement connecté à d’autres applications, indépendamment de la plateforme, de la technologie ou du domaine utilisés par l’utilisateur. L’utilisateur se connecte une seule fois, d’où le nom de la fonctionnalité (authentification unique).
 
 Par exemple, si vous vous connectez à un service Google tel que Gmail, vous êtes automatiquement authentifié sur YouTube, AdSense, Google Analytics et d’autres applications Google. De même, si vous vous déconnectez de votre application Gmail ou d’autres applications Google, la déconnexion s’effectue sur toutes les applications. Cette opération est connue sous le nom de Déconnexion unique.
 
@@ -22,8 +23,11 @@ Lorsque les utilisateurs accèdent à un domaine qui nécessite une authentifica
 L’authentification unique et la déconnexion unique sont possibles grâce à l’utilisation de [sessions](/docs/fr-ca/manage-users/sessions). Il peut y avoir jusqu’à trois sessions différentes pour un utilisateur avec la SSO :
 
 * Session locale maintenue par l’application,
-* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Serveur d’autorisations :</Tooltip>, si l’authentification unique (SSO) est activée
-* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Fournisseur d’identité (IdP)</Tooltip>, si l’utilisateur choisit de se connecter via un fournisseur d’identité (tel que Google, Facebook ou un fournisseur d’identité <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">SAML</Tooltip> d’entreprise)
+* <Tooltip href="/docs/fr-ca/glossary?term=authorization-server" tip="Serveur d’autorisations :
+Serveur centralisé qui contribue à définir les limites de l’accès d’un utilisateur. Par exemple, votre serveur d’autorisations peut contrôler les données, les tâches et les fonctionnalités accessibles à un utilisateur. Un serveur d’autorisation ne sert pas à authentifier les utilisateurs. Cette tâche incombe au serveur d’authentification, qui est chargé de vérifier l’identité d’un utilisateur." cta="Voir le glossaire">Serveur d’autorisations :</Tooltip>, si l’authentification unique (SSO) est activée
+* <Tooltip href="/docs/fr-ca/glossary?term=idp" tip="Fournisseur d’identité (IdP)
+Service de stockage et de gestion des identités numériques." cta="Voir le glossaire">Fournisseur d’identité (IdP)</Tooltip>, si l’utilisateur choisit de se connecter via un fournisseur d’identité (tel que Google, Facebook ou un fournisseur d’identité <Tooltip href="/docs/fr-ca/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language (SAML)
+Protocole normalisé permettant à deux parties d’échanger des informations d’authentification sans mot de passe." cta="Voir le glossaire">SAML</Tooltip> d’entreprise)
 
 Avec l’authentification unique (SSO), un domaine central effectue l’authentification puis partage la session avec d’autres domaines. La manière dont une session est partagée peut différer entre les protocoles SSO, mais le concept général reste le même.
 
@@ -69,7 +73,8 @@ Vous pouvez vérifier l’état SSO d’un utilisateur depuis une application fa
 
 ### SAML et WS-Federation
 
-Le Security Assertion Markup Language (SAML) et le Web Services Federation (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">WS-Fed</Tooltip>) sont deux [protocoles](/docs/fr-ca/authenticate/protocols) largement utilisés dans les implémentations de SSO. SAML et WS-Fed échangent tous deux des données d’autorisation et d’authentification au format XML. Les principales parties de cet échange sont l’utilisateur, le fournisseur d’identité et le fournisseur de services.
+Le Security Assertion Markup Language (SAML) et le Web Services Federation (<Tooltip href="/docs/fr-ca/glossary?term=ws-fed" tip="Web Service Federation (WS-Fed)
+Protocole de gestion des identités des utilisateurs à travers les domaines." cta="Voir le glossaire">WS-Fed</Tooltip>) sont deux [protocoles](/docs/fr-ca/authenticate/protocols) largement utilisés dans les implémentations de SSO. SAML et WS-Fed échangent tous deux des données d’autorisation et d’authentification au format XML. Les principales parties de cet échange sont l’utilisateur, le fournisseur d’identité et le fournisseur de services.
 
 Avec SAML et WS-Fed :
 
@@ -79,7 +84,9 @@ Avec SAML et WS-Fed :
 
 ### OpenID Connect
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">OpenID</Tooltip> Connect (OIDC) est un protocole d’authentification couramment utilisé dans les implémentations d’authentification unique (SSO) orientées vers le consommateur. Le protocole OIDC gère l’authentification via des jetons Web JSON (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-6" tip="">JWT</Tooltip>) et un fournisseur d’identité central.
+<Tooltip href="/docs/fr-ca/glossary?term=openid" tip="OpenID
+Norme ouverte d’authentification qui permet aux applications de vérifier l’identité des utilisateurs sans avoir à collecter leurs informations de connexion." cta="Voir le glossaire">OpenID</Tooltip> Connect (OIDC) est un protocole d’authentification couramment utilisé dans les implémentations d’authentification unique (SSO) orientées vers le consommateur. Le protocole OIDC gère l’authentification via des jetons Web JSON (<Tooltip href="/docs/fr-ca/glossary?term=json-web-token" tip="Jeton Web JSON (JWT)
+Format standard de jeton d’ID (et souvent de jeton d’accès) utilisé pour représenter en toute sécurité des demandes entre deux parties." cta="Voir le glossaire">JWT</Tooltip>) et un fournisseur d’identité central.
 
 Avec OIDC :
 
@@ -107,7 +114,8 @@ L’authentification unique (SSO) initiée par le fournisseur de services (SP) d
 
 ## Authentification unique (SSO) initiée par le fournisseur d’identité
 
-En ce qui concerne la [SSO initiée par le fournisseur d’identité](/docs/fr-ca/authenticate/single-sign-on/outbound-single-sign-on), un fournisseur d’identité tiers (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-7" tip="">IdP</Tooltip>) est le fournisseur de la SSO.
+En ce qui concerne la [SSO initiée par le fournisseur d’identité](/docs/fr-ca/authenticate/single-sign-on/outbound-single-sign-on), un fournisseur d’identité tiers (<Tooltip href="/docs/fr-ca/glossary?term=idp" tip="Fournisseur d’identité (IdP)
+Service de stockage et de gestion des identités numériques." cta="Voir le glossaire">IdP</Tooltip>) est le fournisseur de la SSO.
 
 Lorsqu’un utilisateur se connecte à une application :
 

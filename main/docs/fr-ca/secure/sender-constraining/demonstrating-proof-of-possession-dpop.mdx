@@ -15,7 +15,9 @@ Sender constraining tokens using Demonstrating Proof-of-Possession (DPoP) is cur
 
 </Warning>
 
-Demonstrating Proof-of-Possession (DPoP) is an [OAuth 2.0 framework extension](https://datatracker.ietf.org/doc/draft-ietf-oauth-dpop/) that binds or [sender constrains](/docs/fr-ca/secure/sender-constraining) <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">access tokens</Tooltip> using asymmetric cryptography and <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">JSON Web Tokens</Tooltip> (JWTs) at the application layer. DPoP ensures that only the client application that requested the access token, which possesses the private key, can use it. This prevents the misuse of stolen tokens.
+Demonstrating Proof-of-Possession (DPoP) is an [OAuth 2.0 framework extension](https://datatracker.ietf.org/doc/draft-ietf-oauth-dpop/) that binds or [sender constrains](/docs/fr-ca/secure/sender-constraining) <Tooltip href="/docs/fr-ca/glossary?term=access-token" tip="Jeton d’accès
+Identifiant d’autorisation, sous la forme d’une chaîne opaque ou d’un JWT, utilisé pour accéder à une API." cta="Voir le glossaire">access tokens</Tooltip> using asymmetric cryptography and <Tooltip href="/docs/fr-ca/glossary?term=json-web-token" tip="Jeton Web JSON (JWT)
+Format standard de jeton d’ID (et souvent de jeton d’accès) utilisé pour représenter en toute sécurité des demandes entre deux parties." cta="Voir le glossaire">JSON Web Tokens</Tooltip> (JWTs) at the application layer. DPoP ensures that only the client application that requested the access token, which possesses the private key, can use it. This prevents the misuse of stolen tokens.
 
 DPoP uses a public/private key to create a DPoP Proof as a signed JSON Web Token (JWT). The DPoP Proof contains:
 
@@ -24,16 +26,20 @@ DPoP uses a public/private key to create a DPoP Proof as a signed JSON Web Token
 * A signature created using the client’s private key.
 * A unique ID (`jti`) for replay prevention.
 * For every API request, a base64url-encoded SHA-256 hash (`ath`) of the access token.
-* Optional: For <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">public clients</Tooltip>, a `nonce` claim to ensure the client application recently generated the DPoP Proof JWT.
+* Optional: For <Tooltip href="/docs/fr-ca/glossary?term=public-client" tip="Client public
+Client (application) qui ne peut pas détenir les identifiants en toute sécurité. Exemples : une application native de bureau ou mobile et une application web côté client basée sur JavaScript (telle qu’une application à page unique (SPA))." cta="Voir le glossaire">public clients</Tooltip>, a `nonce` claim to ensure the client application recently generated the DPoP Proof JWT.
 
-The client application sends the DPoP Proof JWT in an access token request to the Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Authorization Server</Tooltip>. After the Auth0 Authorization Server validates the DPoP Proof JWT, it binds the issued access token to the client’s public key.
+The client application sends the DPoP Proof JWT in an access token request to the Auth0 <Tooltip href="/docs/fr-ca/glossary?term=authorization-server" tip="Serveur d’autorisations :
+Serveur centralisé qui contribue à définir les limites de l’accès d’un utilisateur. Par exemple, votre serveur d’autorisations peut contrôler les données, les tâches et les fonctionnalités accessibles à un utilisateur. Un serveur d’autorisation ne sert pas à authentifier les utilisateurs. Cette tâche incombe au serveur d’authentification, qui est chargé de vérifier l’identité d’un utilisateur." cta="Voir le glossaire">Authorization Server</Tooltip>. After the Auth0 Authorization Server validates the DPoP Proof JWT, it binds the issued access token to the client’s public key.
 
 ## Common use cases
 
 Learn about some common DPoP use cases:
 
-* **Single Page Applications (SPAs) and mobile applications:** As public clients, SPAs and mobile applications lack a trusted, confidential environment like a backend server to securely store <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">client secrets</Tooltip>, which makes them vulnerable to token theft. DPoP addresses this security vulnerability by binding access tokens to the client application’s public key, creating a DPoP Proof JWT. The client application signs the DPoP Proof JWT with its private key and sends in an authorization request. The Auth0 Authorization Server validates the DPoP Proof JWT, and, if valid, binds the issued access token to the client’s public key.
-* **Third-party API integrations:** If an AI agent integrated with your client application calls a third-party API on the user’s behalf using a DPoP Proof JWT, then the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">resource server</Tooltip> can cryptographically validate that the request is coming from the AI agent and not an unauthorized third party.
+* **Single Page Applications (SPAs) and mobile applications:** As public clients, SPAs and mobile applications lack a trusted, confidential environment like a backend server to securely store <Tooltip href="/docs/fr-ca/glossary?term=client-secret" tip="Secret client
+Secret utilisé par un client (application) pour s’authentifier auprès du serveur d’autorisation; il ne doit être connu que du client et du serveur d’autorisation et doit être suffisamment aléatoire pour ne pas être deviné." cta="Voir le glossaire">client secrets</Tooltip>, which makes them vulnerable to token theft. DPoP addresses this security vulnerability by binding access tokens to the client application’s public key, creating a DPoP Proof JWT. The client application signs the DPoP Proof JWT with its private key and sends in an authorization request. The Auth0 Authorization Server validates the DPoP Proof JWT, and, if valid, binds the issued access token to the client’s public key.
+* **Third-party API integrations:** If an AI agent integrated with your client application calls a third-party API on the user’s behalf using a DPoP Proof JWT, then the <Tooltip href="/docs/fr-ca/glossary?term=resource-server" tip="Serveur de ressources
+Serveur hébergeant des ressources protégées. Les serveurs de ressources traitent les requêtes pour des ressources sécurisées et y répondent." cta="Voir le glossaire">resource server</Tooltip> can cryptographically validate that the request is coming from the AI agent and not an unauthorized third party.
 
 ## Supported application grant types
 
@@ -285,7 +291,8 @@ console.log('Initial token request result:', result);
 
 ### Public clients
 
-If a public client, such as a single-page application (SPA) or mobile app, requests a DPoP-bound access token, you won’t have a client secret or other client authentication parameters. In this case, Auth0 requires your DPoP HTTP header to have a <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-6" tip="">nonce</Tooltip> value to ensure the client application recently generated the DPoP Proof JWT.
+If a public client, such as a single-page application (SPA) or mobile app, requests a DPoP-bound access token, you won’t have a client secret or other client authentication parameters. In this case, Auth0 requires your DPoP HTTP header to have a <Tooltip href="/docs/fr-ca/glossary?term=nonce" tip="Nombre aléatoire
+Nombre arbitraire émis une fois dans un protocole d’authentification pour détecter et prévenir les attaques par réinsertion." cta="Voir le glossaire">nonce</Tooltip> value to ensure the client application recently generated the DPoP Proof JWT.
 
 If a public client makes a `/token` request and doesn’t include a `nonce` value in the DPoP HTTP header, Auth0 responds with an `HTTP 400` code and an error message like the following:
 
@@ -507,14 +514,16 @@ console.log('User info result:', await userInfoResponse.json());
 
 ## Step 6: Handle token refresh with DPoP
 
-When your DPoP-bound access token expires, you can use a <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-7" tip="">refresh token</Tooltip> to get a new one. A refresh token request requires a DPoP Proof JWT generated using the same key pair used in the original token request.
+When your DPoP-bound access token expires, you can use a <Tooltip href="/docs/fr-ca/glossary?term=refresh-token" tip="Jeton d’actualisation
+Jeton utilisé pour obtenir un jeton d’accès renouvelé sans obliger les utilisateurs à se connecter à nouveau." cta="Voir le glossaire">refresh token</Tooltip> to get a new one. A refresh token request requires a DPoP Proof JWT generated using the same key pair used in the original token request.
 
 The following describes the refresh token flow with DPop in Auth0:
 
 The client application:
 
 * Makes a refresh token request to the Auth0 Authorization Server’s `/token` endpoint.
-* Generates a DPoP Proof JWT for the refresh token request (similar to [Step 2](#step-2-client-application-creates-a-dpop-proof-jwt), with `htm` as `POST` and `htu` as the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-8" tip="">token endpoint</Tooltip> URI).
+* Generates a DPoP Proof JWT for the refresh token request (similar to [Step 2](#step-2-client-application-creates-a-dpop-proof-jwt), with `htm` as `POST` and `htu` as the <Tooltip href="/docs/fr-ca/glossary?term=token-endpoint" tip="Point de terminaison de jeton
+Point de terminaison sur le serveur d’autorisations utilisé pour demander des jetons de manière programmatique." cta="Voir le glossaire">token endpoint</Tooltip> URI).
 * Includes the DPoP Proof JWT in the `DPoP` HTTP header.
 
 The Auth0 Authorization Server:
@@ -528,7 +537,8 @@ When implementing DPoP in your client applications, consider the following:
 * **Private key security:** The security of your DPoP implementation depends on the security of your client's private key, so you must protect it from unauthorized access. Private keys should be generated and stored in a hardware-backed medium and marked as non-exportable.
 * **Replay protection (****`jti`** **and** **`dpop-nonce`****):** The `jti` claim in the DPoP Proof JWT helps prevent replay attacks for protected resources, such as the [`/userinfo`](/docs/fr-ca/api/authentication/user-profile/get-user-info) endpoint. The Auth0 Authorization Server currently does not check `jti` reuse on the `/userinfo` endpoint. The Auth0 Authorization Server issues a `DPoP-Nonce` HTTP header in its response, which public clients must include as a `nonce` claim in subsequent DPoP Proof JWTs for enhanced replay protection.
 * **Error handling:** You are responsible for implementing logic to handle DPoP-specific errors from the Auth0 Authorization Server or resource server, such as `invalid_dpop_proof` or `use_dpop_nonce`.
-* **Client types:** Use DPoP for public clients, such as Single Page Applications (SPAs) or mobile apps that cannot securely store a client secret. For <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-9" tip="">confidential clients</Tooltip>, such as backend services with client secrets, DPoP adds a layer of security, but they already have other sender-constraining mechanisms.
+* **Client types:** Use DPoP for public clients, such as Single Page Applications (SPAs) or mobile apps that cannot securely store a client secret. For <Tooltip href="/docs/fr-ca/glossary?term=confidential-client" tip="Client confidentiel
+Un client (application) qui peut conserver des identifiants en toute sécurité en utilisant un serveur dorsal de confiance. Les exemples incluent une application web avec un système dorsal sécurisé et une application machine-machine (M-M)." cta="Voir le glossaire">confidential clients</Tooltip>, such as backend services with client secrets, DPoP adds a layer of security, but they already have other sender-constraining mechanisms.
 * **Performance:** Because generating and signing DPoP Proof JWTs for every API call adds a small overhead, ensure your client application’s cryptographic operations are efficient.
 * **Key rotation:** Implement a strategy for rotating your DPoP key pairs for enhanced security. Make sure you use the same key pair for the same session.
 * **Persistence:** For client applications that need to maintain a session and reuse DPoP-bound access tokens, such as long-lived SPAs, securely persist and retrieve the original generated key pair across application reloads. If a new key pair is generated or a different key pair is used, the DPoP-bound access token becomes invalid, as it is cryptographically tied to the public key of the original pair. You can persist the key pair, for example, in a browser's `IndexedDB` or a mobile app's secure storage.

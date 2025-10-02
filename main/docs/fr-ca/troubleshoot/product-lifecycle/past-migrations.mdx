@@ -25,7 +25,8 @@ L’accès pour consulter les [Tickets d’abonnement](/docs/fr-ca/troubleshoot/
 
 **Fin de vie** : 5 février 2024
 
-Les liens de réinitialisation du mot de passe et de vérification par courriel ne seront plus enregistrés dans les journaux des locataires. Ces liens peuvent être récupérés à partir de la réponse à la demande de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip> de réinitialisation du mot de passe ou de la vérification par courriel.
+Les liens de réinitialisation du mot de passe et de vérification par courriel ne seront plus enregistrés dans les journaux des locataires. Ces liens peuvent être récupérés à partir de la réponse à la demande de <Tooltip href="/docs/fr-ca/glossary?term=management-api" tip="Management API
+Un produit permettant aux clients d’effectuer des tâches administratives." cta="Voir le glossaire">Management API</Tooltip> de réinitialisation du mot de passe ou de la vérification par courriel.
 
 ## Réduction du délai d’expiration maximum pour les transactions de connexion
 
@@ -123,14 +124,16 @@ Pour des détails sur la mise en œuvre des deux méthodes de pagination, consul
 
 **‌‌Fin de vie** :‌‌ 30 janvier 2023 (nuage public), 18 avril 2023 (nuage privé)
 
-À compter du 30 janvier 2023 dans le nuage public et du 18 avril 2023 dans le nuage privé, Auth0 permettra l’ajout de demandes personnalisées et sans espace de noms aux jetons <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">JWT</Tooltip> à l’aide d’Auth0 Actions et dans les réponses du point de terminaison `/userinfo` de Authentication API. Auparavant, Auth0 autorisait les demandes avec espace de noms sur les jetons d’accès et d’ID au moyen d’un code d’extensibilité ([Règles](https://auth0.com/docs/customize/rules) / [Crochets](https://auth0.com/docs/customize/hooks) / [Actions](https://auth0.com/docs/customize/actions)). La migration vers des demandes personnalisées permet d’ajouter des demandes personnalisées privées et sans espace de noms et des demandes de profil utilisateur OIDC aux jetons d’accès; les jetons d’ID prennent actuellement en charge les demandes de profil utilisateur et prendront également en charge les demandes personnalisées privées et sans espace de noms. Ces demandes seront également ajoutées à la réponse `/userinfo` Auth0. Pour commencer la migration, lisez le [Guide de migration des demandes personnalisées](https://auth0.com/docs/troubleshoot/product-lifecycle/deprecations-and-migrations/custom-claims-migration).
+À compter du 30 janvier 2023 dans le nuage public et du 18 avril 2023 dans le nuage privé, Auth0 permettra l’ajout de demandes personnalisées et sans espace de noms aux jetons <Tooltip href="/docs/fr-ca/glossary?term=json-web-token" tip="Jeton Web JSON (JWT)
+Format standard de jeton d’ID (et souvent de jeton d’accès) utilisé pour représenter en toute sécurité des demandes entre deux parties." cta="Voir le glossaire">JWT</Tooltip> à l’aide d’Auth0 Actions et dans les réponses du point de terminaison `/userinfo` de Authentication API. Auparavant, Auth0 autorisait les demandes avec espace de noms sur les jetons d’accès et d’ID au moyen d’un code d’extensibilité ([Règles](https://auth0.com/docs/customize/rules) / [Crochets](https://auth0.com/docs/customize/hooks) / [Actions](https://auth0.com/docs/customize/actions)). La migration vers des demandes personnalisées permet d’ajouter des demandes personnalisées privées et sans espace de noms et des demandes de profil utilisateur OIDC aux jetons d’accès; les jetons d’ID prennent actuellement en charge les demandes de profil utilisateur et prendront également en charge les demandes personnalisées privées et sans espace de noms. Ces demandes seront également ajoutées à la réponse `/userinfo` Auth0. Pour commencer la migration, lisez le [Guide de migration des demandes personnalisées](https://auth0.com/docs/troubleshoot/product-lifecycle/deprecations-and-migrations/custom-claims-migration).
 
 Si votre locataire exécute du code d’extensibilité ([Règles](https://auth0.com/docs/customize/rules) / [Crochets](https://auth0.com/docs/customize/hooks) / [Actions](https://auth0.com/docs/customize/actions)) qui tente de définir des demandes personnalisées, sans espace de noms, qui sont ignorées jusqu’à cette obsolescence, ces demandes commenceront alors à apparaître dans les jetons et la réponse `/userinfo`. Nous vous recommandons de revoir votre configuration et les journaux Auth0.
 
 Avec l’ajout des demandes privées sans espaces de noms, Auth0 impose les restrictions suivantes, qui pourraient potentiellement affecter votre locataire :‌‌
 
 * Auth0 a restreint la charge utile des demandes personnalisées (100 Ko max.).
-* Auth0 a restreint la personnalisation/modification des demandes <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">OPENID</Tooltip> standard ou des demandes utilisées par Auth0 en interne.
+* Auth0 a restreint la personnalisation/modification des demandes <Tooltip href="/docs/fr-ca/glossary?term=openid" tip="OpenID
+Norme ouverte d’authentification qui permet aux applications de vérifier l’identité des utilisateurs sans avoir à collecter leurs informations de connexion." cta="Voir le glossaire">OPENID</Tooltip> standard ou des demandes utilisées par Auth0 en interne.
 * À l’avenir, Auth0 pourra restreindre l’utilisation d’autres demandes non incluses dans la liste ci-dessus. Dans ces cas, les clients seront informés dans un délai raisonnable pour migrer.
 * Auth0 a restreint la création de demandes personnalisées privées et sans espace de noms pour les jetons d’accès avec un public Auth0, à l’exception du point de terminaison `/userinfo`.
 * Seules les demandes de profil utilisateur l’OIDC précises peuvent être ajoutées aux jetons d’accès.
@@ -486,7 +489,8 @@ Vous êtes concerné si vous utilisez Lock (hébergé par notre CDN) en Europe o
 
 ## Migration des règles d’échange de jetons sans mot de passe et d’actualisation
 
-Le 31 mai 2017, dans le cadre des initiatives d’Auth0 en matière d’amélioration de la qualité, nous avons ajouté la possibilité d’exécuter des règles pendant l’échange d’octroi de mot de passe de propriétaire de ressource <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OAuth</Tooltip> 2.0 (l’échange de mot de passe) et l’échange de jeton d’actualisation.
+Le 31 mai 2017, dans le cadre des initiatives d’Auth0 en matière d’amélioration de la qualité, nous avons ajouté la possibilité d’exécuter des règles pendant l’échange d’octroi de mot de passe de propriétaire de ressource <Tooltip href="/docs/fr-ca/glossary?term=oath2" tip="OAuth 2.0
+Cadre d’applications d’autorisation qui définit les protocoles d’autorisation et les flux de production." cta="Voir le glossaire">OAuth</Tooltip> 2.0 (l’échange de mot de passe) et l’échange de jeton d’actualisation.
 
 ### Caractéristiques affectées
 
@@ -499,7 +503,8 @@ Vous pouvez ajouter une logique à vos règles pour qu’elle modifient leur com
 * `‌‌oauth2-password` indique un échange de mot de passe (et password-realm)
 * `‌‌oauth2-refresh-token` indique un échange de jetons d’actualisation
 
-Si vous souhaitez activer le nouveau comportement sur ce locataire pour tester la date d’activation obligatoire, connectez-vous à [Dashboard](https://manage.auth0.com/#) et activez la bascule **Run Rules on Password and <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Refresh Token</Tooltip> Exchanges (Exécuter des règles sur les échanges de mots de passe et de jetons d’actualisation)** dans  [Tenant Settings (Paramètres du locataire) > Advanced (Avancés)](https://manage.auth0.com/#/tenant/advanced).
+Si vous souhaitez activer le nouveau comportement sur ce locataire pour tester la date d’activation obligatoire, connectez-vous à [Dashboard](https://manage.auth0.com/#) et activez la bascule **Run Rules on Password and <Tooltip href="/docs/fr-ca/glossary?term=refresh-token" tip="Jeton d’actualisation
+Jeton utilisé pour obtenir un jeton d’accès renouvelé sans obliger les utilisateurs à se connecter à nouveau." cta="Voir le glossaire">Refresh Token</Tooltip> Exchanges (Exécuter des règles sur les échanges de mots de passe et de jetons d’actualisation)** dans  [Tenant Settings (Paramètres du locataire) > Advanced (Avancés)](https://manage.auth0.com/#/tenant/advanced).
 
 ## Suppression de la liaison des comptes
 

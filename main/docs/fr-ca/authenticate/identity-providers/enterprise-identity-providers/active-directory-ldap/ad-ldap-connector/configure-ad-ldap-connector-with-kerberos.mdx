@@ -25,7 +25,8 @@ Lorsque l’authentification Kerberos est activée, l’adresse IP du serveur e
 
 ## Flux d’authentification
 
-Selon l’emplacement des utilisateurs, le flux d’authentification sera différent lorsque les plages d’adresses IP sont définies. En prenant Fabrikam comme exemple, puisqu’il utilise la version SaaS d’Auth0, ils ont configuré, dans la connexion, leur adresse IP publique (`24.12.34.56/32`). Les utilisateurs se connectant depuis l’intérieur du bâtiment proviendront tous de l’adresse IP `24.12.34.56` (tel que configuré sur la connexion). Lors de leur authentification, les utilisateurs peuvent suivre le flux natif AD/LDAP et profiter d’une expérience <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SSO</Tooltip> fluide.
+Selon l’emplacement des utilisateurs, le flux d’authentification sera différent lorsque les plages d’adresses IP sont définies. En prenant Fabrikam comme exemple, puisqu’il utilise la version SaaS d’Auth0, ils ont configuré, dans la connexion, leur adresse IP publique (`24.12.34.56/32`). Les utilisateurs se connectant depuis l’intérieur du bâtiment proviendront tous de l’adresse IP `24.12.34.56` (tel que configuré sur la connexion). Lors de leur authentification, les utilisateurs peuvent suivre le flux natif AD/LDAP et profiter d’une expérience <Tooltip href="/docs/fr-ca/glossary?term=single-sign-on" tip="Authentification unique (SSO)
+Service qui, après qu’un utilisateur se soit connecté à une application, le connecte automatiquement à d’autres applications." cta="Voir le glossaire">SSO</Tooltip> fluide.
 
 Pour que cela fonctionne, le réseau doit autoriser les utilisateurs à se connecter au connecteur AD/LDAP à partir du port configuré dans le fichier `config.json`. Dans des déploiements haute disponibilité du connecteur, l’adresse à laquelle les utilisateurs se connecteront est celle de l’équilibreur de charge réseau, situé devant toutes les instances du connecteur.
 
@@ -45,7 +46,8 @@ La détection des plages d’adresses IP dans une connexion AD/LDAP et l’uti
 
 </Callout>
 
-Lorsque qu’une application utilise Lock 10 ou 11 sur la page de connexion hébergée par Auth0 (généralement pour les protocoles <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>/WS-Federation et les intégrations à authentification unique), un bouton permet aux utilisateurs de s’authentifier au moyen de « l’authentification Windows ».
+Lorsque qu’une application utilise Lock 10 ou 11 sur la page de connexion hébergée par Auth0 (généralement pour les protocoles <Tooltip href="/docs/fr-ca/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language (SAML)
+Protocole normalisé permettant à deux parties d’échanger des informations d’authentification sans mot de passe." cta="Voir le glossaire">SAML</Tooltip>/WS-Federation et les intégrations à authentification unique), un bouton permet aux utilisateurs de s’authentifier au moyen de « l’authentification Windows ».
 
 Dans certaines situations, il peut être nécessaire de connecter automatiquement l’utilisateur si Kerberos est possible (en fonction de l’adresse IP de l’utilisateur final). Les modifications suivantes peuvent être apportées à la page de connexion Auth0 afin de permettre cette connexion automatique lorsque Kerberos est possible :
 

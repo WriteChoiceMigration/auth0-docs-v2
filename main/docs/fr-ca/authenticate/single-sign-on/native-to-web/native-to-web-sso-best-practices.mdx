@@ -15,7 +15,8 @@ Native to Web SSO is currently available in Early Access. To use this feature, y
 
 </Warning>
 
-For best results when implementing Native to Web <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SSO</Tooltip>, Auth0 recommends adhering to the best practices compiled below. These guidelines can help ensure session integrity:
+For best results when implementing Native to Web <Tooltip href="/docs/fr-ca/glossary?term=single-sign-on" tip="Authentification unique (SSO)
+Service qui, après qu’un utilisateur se soit connecté à une application, le connecte automatiquement à d’autres applications." cta="Voir le glossaire">SSO</Tooltip>, Auth0 recommends adhering to the best practices compiled below. These guidelines can help ensure session integrity:
 
 ## Use Post Login Actions to limit session lifetime
 
@@ -46,11 +47,13 @@ Send the `session_transfer_token` to the web application using a secure, HTTPOnl
 
 ## Avoid issuing refresh tokens to web apps unless necessary
 
-Only enable [`allow_refresh_token`](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) for web applications that truly need long-lived tokens. In most cases, short-lived <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">access tokens</Tooltip> combined with silent authentication are sufficient and safer in browser contexts.
+Only enable [`allow_refresh_token`](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) for web applications that truly need long-lived tokens. In most cases, short-lived <Tooltip href="/docs/fr-ca/glossary?term=access-token" tip="Jeton d’accès
+Identifiant d’autorisation, sous la forme d’une chaîne opaque ou d’un JWT, utilisé pour accéder à une API." cta="Voir le glossaire">access tokens</Tooltip> combined with silent authentication are sufficient and safer in browser contexts.
 
 ## Enable Allow Refresh Tokens when appropriate to set the refresh tokens as “online”
 
-To avoid orphaned credentials and prevent <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">refresh tokens</Tooltip> from lingering after logout, use the [`allow_refresh_token`](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) setting to ensure refresh tokens issued via Native to Web SSO are bound to the session that issued them. If the session is revoked or expires, the refresh token is automatically invalidated.
+To avoid orphaned credentials and prevent <Tooltip href="/docs/fr-ca/glossary?term=refresh-token" tip="Jeton d’actualisation
+Jeton utilisé pour obtenir un jeton d’accès renouvelé sans obliger les utilisateurs à se connecter à nouveau." cta="Voir le glossaire">refresh tokens</Tooltip> from lingering after logout, use the [`allow_refresh_token`](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) setting to ensure refresh tokens issued via Native to Web SSO are bound to the session that issued them. If the session is revoked or expires, the refresh token is automatically invalidated.
 
 ## Enable enforce cascade revocation
 

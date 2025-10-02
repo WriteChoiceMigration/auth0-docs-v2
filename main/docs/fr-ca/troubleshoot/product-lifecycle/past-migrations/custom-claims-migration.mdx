@@ -9,7 +9,8 @@ permalink: "custom-claims-migration"
 'twitter:description': "Décrit comment migrer des demandes personnalisées héritées avec espace de noms vers les demandes personnalisées."
 ---
 
-À partir du 28 juillet 2022, Auth0 permettra d’ajouter des demandes personnalisées privées, sans espace de nommage, aux jetons d’accès et d’ID. Ces mêmes demandes ont également été ajoutées à la réponse du [point de terminaison `/userinfo`](https://auth0.com/docs/api/authentication#get-user-info). Pour en savoir plus sur les types de demandes <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JWT</Tooltip>, consultez [Demandes de jetons Web JSON](/docs/fr-ca/secure/tokens/json-web-tokens/json-web-token-claims).
+À partir du 28 juillet 2022, Auth0 permettra d’ajouter des demandes personnalisées privées, sans espace de nommage, aux jetons d’accès et d’ID. Ces mêmes demandes ont également été ajoutées à la réponse du [point de terminaison `/userinfo`](https://auth0.com/docs/api/authentication#get-user-info). Pour en savoir plus sur les types de demandes <Tooltip href="/docs/fr-ca/glossary?term=json-web-token" tip="Jeton Web JSON (JWT)
+Format standard de jeton d’ID (et souvent de jeton d’accès) utilisé pour représenter en toute sécurité des demandes entre deux parties." cta="Voir le glossaire">JWT</Tooltip>, consultez [Demandes de jetons Web JSON](/docs/fr-ca/secure/tokens/json-web-tokens/json-web-token-claims).
 
 <Warning>
 
@@ -37,7 +38,8 @@ exports.onExecutePostLogin = async (event, api) => {
 
 ## Flux affectés
 
-Tous les flux <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OpenID</Tooltip> Connect (OIDC) pris en charge par Auth0 sont concernés par cette migration. Pour consulter la liste des flux, lisez [Flux d’authentification et d’autorisation](/docs/fr-ca/get-started/authentication-and-authorization-flow).
+Tous les flux <Tooltip href="/docs/fr-ca/glossary?term=openid" tip="OpenID
+Norme ouverte d’authentification qui permet aux applications de vérifier l’identité des utilisateurs sans avoir à collecter leurs informations de connexion." cta="Voir le glossaire">OpenID</Tooltip> Connect (OIDC) pris en charge par Auth0 sont concernés par cette migration. Pour consulter la liste des flux, lisez [Flux d’authentification et d’autorisation](/docs/fr-ca/get-started/authentication-and-authorization-flow).
 
 Les fonctionnalités suivantes sont également affectées :
 
@@ -390,7 +392,9 @@ De la même manière que les règles Auth0 permettent de modifier l’objet util
 
 Cependant, en utilisant des demandes personnalisées, Auth0 privilégie la demande qui a été définie sur l’`objet context.idToken`.
 
-Ce changement a un impact sur les règles d'Auth0 qui définissent `app_metadata` et `user_metadata` via `context.id_token` (en leur assignant des objets) et qui, en même temps, utilisent ces champs dans le mappage d’attributs pour le module complémentaire <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">SAML</Tooltip> ou le protocole <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Web Service Federation</Tooltip> (WS-Fed).
+Ce changement a un impact sur les règles d'Auth0 qui définissent `app_metadata` et `user_metadata` via `context.id_token` (en leur assignant des objets) et qui, en même temps, utilisent ces champs dans le mappage d’attributs pour le module complémentaire <Tooltip href="/docs/fr-ca/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language (SAML)
+Protocole normalisé permettant à deux parties d’échanger des informations d’authentification sans mot de passe." cta="Voir le glossaire">SAML</Tooltip> ou le protocole <Tooltip href="/docs/fr-ca/glossary?term=ws-fed" tip="Web Service Federation (WS-Fed)
+Protocole de gestion des identités des utilisateurs à travers les domaines." cta="Voir le glossaire">Web Service Federation</Tooltip> (WS-Fed).
 
 Exemple 1 : Auth0 ignore le mappage d’attributs lorsque `context.idToken.app_metadata` est défini avec un objet vide.
 

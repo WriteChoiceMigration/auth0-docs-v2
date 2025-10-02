@@ -981,7 +981,8 @@ Cette section décrit des exemples de cas d’utilisation et des exemples de cod
 
 ### Cas d’utilisation : migration transparente vers Auth0
 
-GearUp possède une application mobile utilisée par des millions de personnes et souhaite moderniser sa solution d’identité. C’est pourquoi l’entreprise a décidé de passer à Auth0. Cependant, elle souhaite éviter de forcer les utilisateurs à se réauthentifier lors de la migration depuis leur ancien fournisseur d’identité (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">IdP</Tooltip>), car cela complique l’expérience utilisateur.
+GearUp possède une application mobile utilisée par des millions de personnes et souhaite moderniser sa solution d’identité. C’est pourquoi l’entreprise a décidé de passer à Auth0. Cependant, elle souhaite éviter de forcer les utilisateurs à se réauthentifier lors de la migration depuis leur ancien fournisseur d’identité (<Tooltip href="/docs/fr-ca/glossary?term=idp" tip="Fournisseur d’identité (IdP)
+Service de stockage et de gestion des identités numériques." cta="Voir le glossaire">IdP</Tooltip>), car cela complique l’expérience utilisateur.
 
 Pour résoudre ce problème et limiter les risques, GearUp procède à une migration progressive. Pour chaque utilisateur, l’entreprise souhaite échanger le jeton d’actualisation de son ancien fournisseur d’identité contre un jeton d’accès Auth0, un jeton d’actualisation et un ensemble de jetons d’ID. Cela permet à l’application d’utiliser Auth0 comme fournisseur d’identité pour cet utilisateur en toute transparence, et d’utiliser les API GearUp avec les jetons émis par Auth0. Une fois l’échange effectué pour tous les utilisateurs, l’application sera entièrement migrée et l’ancien fournisseur d’identité pourra être déconnecté, sans répercussions sur les utilisateurs finaux ni sur l’activité de GearUp.
 
@@ -1134,7 +1135,8 @@ exports.onExecuteCustomTokenExchange = async (event, api) => {
 };
 ```
 
-Voir [Exemples de code](#code-samples) pour un exemple plus détaillé sur la façon de valider en toute sécurité les <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">JWT</Tooltip>.
+Voir [Exemples de code](#code-samples) pour un exemple plus détaillé sur la façon de valider en toute sécurité les <Tooltip href="/docs/fr-ca/glossary?term=json-web-token" tip="Jeton Web JSON (JWT)
+Format standard de jeton d’ID (et souvent de jeton d’accès) utilisé pour représenter en toute sécurité des demandes entre deux parties." cta="Voir le glossaire">JWT</Tooltip>.
 
 ### Cas d’utilisation : obtenir des jetons Auth0 pour une autre audience
 
@@ -1530,7 +1532,8 @@ Il s’agit d’une fonctionnalité en accès anticipé, qui comporte donc certa
 Les fonctionnalités suivantes ne sont pas prises en charge (ou ne fonctionneront pas correctement) avec l’échange de jetons personnalisé en accès anticipé :
 
 * Organizations
-* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">MFA</Tooltip> : les commandes `api.authentication.challengeWith()` et `api.multifactor.enable()` des actions de post-connexion ne sont pas encore prises en charge par l’échange de jetons personnalisé et entraîneront l’échec de la transaction avec une erreur irrécupérable. De même, les transactions échoueront également lorsque l’authentification multifacteur est configurée comme stratégie de locataire.
+* <Tooltip href="/docs/fr-ca/glossary?term=multifactor-authentication" tip="Authentification multifacteur (MFA)
+Processus d’authentification de l’utilisateur qui utilise un facteur en plus du nom d’utilisateur et du mot de passe, tel qu’un code par SMS." cta="Voir le glossaire">MFA</Tooltip> : les commandes `api.authentication.challengeWith()` et `api.multifactor.enable()` des actions de post-connexion ne sont pas encore prises en charge par l’échange de jetons personnalisé et entraîneront l’échec de la transaction avec une erreur irrécupérable. De même, les transactions échoueront également lorsque l’authentification multifacteur est configurée comme stratégie de locataire.
 * Connexions de base de données personnalisées
 * Prise en charge donnée de l’usurpation d’identité (p. ex., jeton d’acteur et demande d’acteur)
 * Clients tiers et non conformes à l’OIDC

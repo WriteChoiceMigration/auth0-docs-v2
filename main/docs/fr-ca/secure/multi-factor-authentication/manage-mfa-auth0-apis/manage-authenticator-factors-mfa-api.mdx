@@ -15,7 +15,8 @@ permalink: "manage-authenticator-factors-mfa-api"
 
 </Card>
 
-Auth0 fournit plusieurs [Points de terminaison API](/docs/fr-ca/api/authentication#multi-factor-authentication) pour vous aider à gérer les authentifiants que vous utilisez avec une application pour l’authentification multifacteur (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>). Vous pouvez utiliser ces points de terminaison pour créer une interface utilisateur complète permettant aux utilisateurs de gérer leurs facteurs d’authentification.
+Auth0 fournit plusieurs [Points de terminaison API](/docs/fr-ca/api/authentication#multi-factor-authentication) pour vous aider à gérer les authentifiants que vous utilisez avec une application pour l’authentification multifacteur (<Tooltip href="/docs/fr-ca/glossary?term=multifactor-authentication" tip="Authentification multifacteur (MFA)
+Processus d’authentification de l’utilisateur qui utilise un facteur en plus du nom d’utilisateur et du mot de passe, tel qu’un code par SMS." cta="Voir le glossaire">MFA</Tooltip>). Vous pouvez utiliser ces points de terminaison pour créer une interface utilisateur complète permettant aux utilisateurs de gérer leurs facteurs d’authentification.
 
 ## Obtention des jetons d’accès API MFA
 
@@ -39,7 +40,8 @@ Auth0 recommande que les administrateurs de locataire  [créent une action](http
 
 ### Octroi par mot de passe du propriétaire de la ressource
 
-Si vous utilisez la méthode de la Subvention du Propriétaire de la Ressource (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Resource Owner</Tooltip> Password Grant/ROPG), vous disposez de 3 options :
+Si vous utilisez la méthode de la Subvention du Propriétaire de la Ressource (<Tooltip href="/docs/fr-ca/glossary?term=resource-owner" tip="Propriétaire de ressources
+Entité (telle qu’un utilisateur ou une application) capable d’accorder l’accès à une ressource protégée." cta="Voir le glossaire">Resource Owner</Tooltip> Password Grant/ROPG), vous disposez de 3 options :
 
 * Lors de la connexion, faites appel à l'audience `https://{yourDomain}/mfa/` et utilisez un [jeton d’actualisation](/docs/fr-ca/secure/tokens/refresh-tokens) pour l’actualiser plus tard.
 * Si vous devez répertorier et supprimer des authentifiants, demandez à l’utilisateur de [s’authentifier à nouveau](/docs/fr-ca/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa) avec `/oauth/token`, en spécifiant l'audience `https://{yourDomain}/mfa/`. Les utilisateurs devront effectuer une authentification multifacteur avant de pouvoir répertorier et/ou supprimer les facteurs d’authentification.
@@ -484,7 +486,8 @@ Si l’authentifiant a été supprimé, une réponse 204 est renvoyée.
 
 Lorsque vous supprimez un authentifiant, les actions suivantes ont lieu selon le type d’authentifiant :
 
-Pour supprimer un code de récupération et en générer un nouveau, obtenez un [Jeton d’accès à Management API](https://auth0.com/docs/api/management/v2/tokens) Autho et utiliser <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Management API</Tooltip> [Point de terminaison de régénération du code de récupération](https://auth0.com/docs/api/management/v2/#!/Users/post_recovery_code_regeneration).
+Pour supprimer un code de récupération et en générer un nouveau, obtenez un [Jeton d’accès à Management API](https://auth0.com/docs/api/management/v2/tokens) Autho et utiliser <Tooltip href="/docs/fr-ca/glossary?term=management-api" tip="Management API
+Un produit permettant aux clients d’effectuer des tâches administratives." cta="Voir le glossaire">Management API</Tooltip> [Point de terminaison de régénération du code de récupération](https://auth0.com/docs/api/management/v2/#!/Users/post_recovery_code_regeneration).
 
 ## Régénérer des codes de récupération
 

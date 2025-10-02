@@ -9,7 +9,8 @@ permalink: "sharepoint-2010-2013"
 'twitter:description': "Comment intégrer SharePoint 2010/2013, y compris la configuration, le dépannage, l’accès aux journaux et les étapes suivantes."
 ---
 
-Auth0 peut aider à simplifier radicalement le processus d’authentification pour SharePoint. Dans ce didacticiel, vous apprendrez à ajouter l’authentification unique (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SSO</Tooltip>) à Sharepoint à l’aide d’Auth0. Vos utilisateurs pourront se connecter en utilisant n’importe lequel de nos [fournisseurs d’identité sociale](/docs/fr-ca/connections/identity-providers-social) (Facebook, X, Github, etc.), [fournisseurs d’entreprise](/docs/fr-ca/connections/identity-providers-enterprise) (LDAP, Entra, ADFS, etc.) ou avec un nom d’utilisateur et un mot de passe.
+Auth0 peut aider à simplifier radicalement le processus d’authentification pour SharePoint. Dans ce didacticiel, vous apprendrez à ajouter l’authentification unique (<Tooltip href="/docs/fr-ca/glossary?term=single-sign-on" tip="Authentification unique (SSO)
+Service qui, après qu’un utilisateur se soit connecté à une application, le connecte automatiquement à d’autres applications." cta="Voir le glossaire">SSO</Tooltip>) à Sharepoint à l’aide d’Auth0. Vos utilisateurs pourront se connecter en utilisant n’importe lequel de nos [fournisseurs d’identité sociale](/docs/fr-ca/connections/identity-providers-social) (Facebook, X, Github, etc.), [fournisseurs d’entreprise](/docs/fr-ca/connections/identity-providers-enterprise) (LDAP, Entra, ADFS, etc.) ou avec un nom d’utilisateur et un mot de passe.
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -187,7 +188,8 @@ Prenons Entra ID comme exemple. Dans cet Directory dans le nuage, les utilisateu
 
 Lorsque David se connecte à l’aide de son compte Entra ID (et que l’attribut Security Groups [Groupes de sécurité] est activé pour cette connexion), les appartenances aux groupes seront stockées dans l’attribut `groups` du profil de l’utilisateur.
 
-Si nous voulons rendre ces groupes disponibles en tant que Rôles dans SharePoint, nous devrons élaborer une [Rule (Règle)](https://manage.auth0.com/#/rules) qui ajoute ceci à la configuration <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>. Cette règle ne s’exécutera que pour l’application nommée **Fabrikam Intranet (SharePoint) (Intranet de Fabrikam)**.
+Si nous voulons rendre ces groupes disponibles en tant que Rôles dans SharePoint, nous devrons élaborer une [Rule (Règle)](https://manage.auth0.com/#/rules) qui ajoute ceci à la configuration <Tooltip href="/docs/fr-ca/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language (SAML)
+Protocole normalisé permettant à deux parties d’échanger des informations d’authentification sans mot de passe." cta="Voir le glossaire">SAML</Tooltip>. Cette règle ne s’exécutera que pour l’application nommée **Fabrikam Intranet (SharePoint) (Intranet de Fabrikam)**.
 
 ```javascript lines
 function (user, context, callback) {

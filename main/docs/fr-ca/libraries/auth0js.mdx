@@ -347,7 +347,8 @@ Le paramètre `state` est une valeur opaque qu’Auth0 vous renverra. Cette mét
 
 ### Authentification unique avec authentification intégrée
 
-Les applications avec connexion intégrée doivent remplir deux critères afin de bénéficier de l’Authentification unique (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SSO</Tooltip>).
+Les applications avec connexion intégrée doivent remplir deux critères afin de bénéficier de l’Authentification unique (<Tooltip href="/docs/fr-ca/glossary?term=single-sign-on" tip="Authentification unique (SSO)
+Service qui, après qu’un utilisateur se soit connecté à une application, le connecte automatiquement à d’autres applications." cta="Voir le glossaire">SSO</Tooltip>).
 
 1. Les deux applications tentant d’utiliser la SSO doivent être des applications de première partie. La SSO avec des applications tierces ne fonctionnera pas.
 2. Elles doivent utiliser des domaines personnalisés et avoir à la fois les applications qui souhaitent bénéficier de la SSO et le locataire Auth0 sur le même domaine. Traditionnellement, les domaines Auth0 sont au format `foo.auth0.com`, mais les domaines personnalisés vous permettent d’utiliser le même domaine pour chacune des applications en question, ainsi que pour votre client Auth0, ce qui évite le risque d’attaques CSRF (Cross-Site Request Forgery).
@@ -356,7 +357,8 @@ Nous recommandons d’utiliser une connexion universelle au lieu de configurer l
 
 ## Connexion sans mot de passe
 
-L’authentification sans mot de passe permet aux utilisateurs de se connecter en recevant un mot de passe à usage unique (OTP) par courriel ou SMS. Ce processus demande que vous lanciez le processus <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Passwordless</Tooltip>, produisant et envoyant un code à l’utilisateur, (ou un code avec un lien), suivi en acceptant les authentifiants par la méthode de vérification. Ce pourrait survenir sous la forme d’une écran de connexion qui demande leur (courriel ou numéro de téléphone) et le code que vous venez de leur envoyer. Ce pourrait également être mis en place sous la forme d’un lien Sans mot de passe avec un code envoyé à l’utilisateur. Ils n’auraient qu’à cliquer sur le lien dans leur couriel et ils atteindraient votre point de terminaison, pour alors vérifier ces données automatiquement à l’aide la même méthode de vérification (sans entrée manuelle de code de la part de l’utilisateur).
+L’authentification sans mot de passe permet aux utilisateurs de se connecter en recevant un mot de passe à usage unique (OTP) par courriel ou SMS. Ce processus demande que vous lanciez le processus <Tooltip href="/docs/fr-ca/glossary?term=passwordless" tip="Sans mot de passe
+Forme d’authentification qui ne repose pas sur un mot de passe comme premier facteur." cta="Voir le glossaire">Passwordless</Tooltip>, produisant et envoyant un code à l’utilisateur, (ou un code avec un lien), suivi en acceptant les authentifiants par la méthode de vérification. Ce pourrait survenir sous la forme d’une écran de connexion qui demande leur (courriel ou numéro de téléphone) et le code que vous venez de leur envoyer. Ce pourrait également être mis en place sous la forme d’un lien Sans mot de passe avec un code envoyé à l’utilisateur. Ils n’auraient qu’à cliquer sur le lien dans leur couriel et ils atteindraient votre point de terminaison, pour alors vérifier ces données automatiquement à l’aide la même méthode de vérification (sans entrée manuelle de code de la part de l’utilisateur).
 
 De manière à pouvoir utiliser l’authentification sans mot de passe, vous devrez initialiser auth0.js avec un `redirectUri` et définir le `responseType : ’token’`.
 
@@ -551,13 +553,15 @@ Comme indiqué ci-dessus, la méthode `client.userInfo` peut être appelée en t
 }
 ```
 
-Vous pouvez maintenant faire quelque chose d’autre avec cette information, selon les besoins de votre application, tel que d’acquérir l’ensemble des informations de profil de l’utilisateur dans <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-6" tip="">Management API</Tooltip>, tel que décrit ci-dessous.
+Vous pouvez maintenant faire quelque chose d’autre avec cette information, selon les besoins de votre application, tel que d’acquérir l’ensemble des informations de profil de l’utilisateur dans <Tooltip href="/docs/fr-ca/glossary?term=management-api" tip="Management API
+Un produit permettant aux clients d’effectuer des tâches administratives." cta="Voir le glossaire">Management API</Tooltip>, tel que décrit ci-dessous.
 
 ## Utilisation des nombres aléatoires
 
 Par défaut (et si `responseType` contient `id_token`), `auth0.js` génère un `nonce` aléatoire lorsque vous appelez `webAuth.authorize`, le stocke localement, et l’extrait dans `webAuth.parseHash`. Le comportement par défaut devrait fonctionner dans la majorité des cas, mains certains cas exigent au développeur de contrôler le `nonce`.
 Si vous souhaitez utiliser un `nonce` généré par le développeur, vous devez le fournir en tant qu’option à `webAuth.authorize` et `webAuth.parseHash`.
-`webAuth.authorize({<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-7" tip="">nonce</Tooltip>: ’1234’, responseType: ’token id_token’});
+`webAuth.authorize({<Tooltip href="/docs/fr-ca/glossary?term=nonce" tip="Nombre aléatoire
+Nombre arbitraire émis une fois dans un protocole d’authentification pour détecter et prévenir les attaques par réinsertion." cta="Voir le glossaire">nonce</Tooltip>: ’1234’, responseType: ’token id_token’});
 webAuth.parseHash({nonce: ’1234’}, callback);`
 
 Si vous appelez `webAuth.checkSession` au lieu de `webAuth.authorize`, il vous suffit de définir votre `nonce` personnalisé en tant qu’option de `checkSession` :

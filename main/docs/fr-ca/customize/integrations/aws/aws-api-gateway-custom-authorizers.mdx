@@ -33,13 +33,16 @@ Pour en savoir plus sur les algorithmes de signature, lisez [Algorithmes de sign
 
 ## Fonctionnement des autorisateurs personnalisés de la passerelle API
 
-[Selon Amazon](http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html), un autorisateur personnalisé de passerelle API est une « fonction Lambda que vous fournissez pour contrôler l’accès à votre API à l’aide de stratégies d’authentification par jeton du porteur, telles que <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OAuth</Tooltip> ou <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SAML</Tooltip> ».
+[Selon Amazon](http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html), un autorisateur personnalisé de passerelle API est une « fonction Lambda que vous fournissez pour contrôler l’accès à votre API à l’aide de stratégies d’authentification par jeton du porteur, telles que <Tooltip href="/docs/fr-ca/glossary?term=oath2" tip="OAuth 2.0
+Cadre d’applications d’autorisation qui définit les protocoles d’autorisation et les flux de production." cta="Voir le glossaire">OAuth</Tooltip> ou <Tooltip href="/docs/fr-ca/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language (SAML)
+Protocole normalisé permettant à deux parties d’échanger des informations d’authentification sans mot de passe." cta="Voir le glossaire">SAML</Tooltip> ».
 
 Chaque fois qu’une personne (ou un programme) tente d’appeler votre API, la passerelle API vérifie si un autorisateur personnalisé est configuré pour l’API.
 
 S’**il existe un autorisateur personnalisé pour l’API**, la passerelle API appelle l’autorisateur personnalisé et fournit le jeton d’autorisation extrait de l’en-tête de la demande reçue.
 
-Vous pouvez utiliser l'autorisateur personnalisé pour mettre en œuvre différents types de stratégies d'autorisation, y compris la vérification <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">JWT</Tooltip>, pour renvoyer des politiques IAM autorisant la demande. Si la politique renvoyée n'est pas valide ou si les autorisations sont refusées, l'appel à l'API échoue.
+Vous pouvez utiliser l'autorisateur personnalisé pour mettre en œuvre différents types de stratégies d'autorisation, y compris la vérification <Tooltip href="/docs/fr-ca/glossary?term=json-web-token" tip="Jeton Web JSON (JWT)
+Format standard de jeton d’ID (et souvent de jeton d’accès) utilisé pour représenter en toute sécurité des demandes entre deux parties." cta="Voir le glossaire">JWT</Tooltip>, pour renvoyer des politiques IAM autorisant la demande. Si la politique renvoyée n'est pas valide ou si les autorisations sont refusées, l'appel à l'API échoue.
 
 Dans le cas d’une politique valide, l’API met en cache la politique renvoyée, l’associe au jeton entrant et l’utilise pour la demande actuelle et les demandes suivantes. Vous pouvez configurer la durée pendant laquelle la politique est mise en cache. La valeur par défaut est `300` secondes et la durée maximale de mise en cache est `3600` secondes (vous pouvez également fixer la valeur à 0 pour désactiver la mise en cache).
 

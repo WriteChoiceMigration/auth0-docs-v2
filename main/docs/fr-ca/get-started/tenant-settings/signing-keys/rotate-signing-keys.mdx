@@ -17,7 +17,8 @@ Auth0 vous recommande d’exécuter d’abord la rotation des clés de connexion
 
 </Warning>
 
-Bien qu’Auth0 n’utilise qu’une seule clé de connexion à la fois, le document de découverte <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OpenID</Tooltip> Connect (OIDC) de votre locataire contient en permanence différentes clés. Le document de découverte OIDC inclura systématiquement la clé actuelle et la clé suivante, et il peut également inclure la clé précédente si cette dernière n’a pas encore été révoquée. Pour offrir une expérience transparente en cas d’urgence, votre application doit pouvoir utiliser n’importe laquelle des clés spécifiées dans le document. Pour en savoir plus sur les documents de découverte OpenID Connect, consultez [Localiser les ensembles de clés JSON Web](/docs/fr-ca/secure/tokens/json-web-tokens/locate-json-web-key-sets).
+Bien qu’Auth0 n’utilise qu’une seule clé de connexion à la fois, le document de découverte <Tooltip href="/docs/fr-ca/glossary?term=openid" tip="OpenID
+Norme ouverte d’authentification qui permet aux applications de vérifier l’identité des utilisateurs sans avoir à collecter leurs informations de connexion." cta="Voir le glossaire">OpenID</Tooltip> Connect (OIDC) de votre locataire contient en permanence différentes clés. Le document de découverte OIDC inclura systématiquement la clé actuelle et la clé suivante, et il peut également inclure la clé précédente si cette dernière n’a pas encore été révoquée. Pour offrir une expérience transparente en cas d’urgence, votre application doit pouvoir utiliser n’importe laquelle des clés spécifiées dans le document. Pour en savoir plus sur les documents de découverte OpenID Connect, consultez [Localiser les ensembles de clés JSON Web](/docs/fr-ca/secure/tokens/json-web-tokens/locate-json-web-key-sets).
 
 <Warning>
 
@@ -25,7 +26,9 @@ Pour vous donner le temps de mettre à jour votre application avec la nouvelle c
 
 </Warning>
 
-Vous pouvez faire pivoter la clé de connexion de l’application de votre locataire à l’aide de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip> ou de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Management API</Tooltip> Auth0.
+Vous pouvez faire pivoter la clé de connexion de l’application de votre locataire à l’aide de <Tooltip href="/docs/fr-ca/glossary?term=auth0-dashboard" tip="Auth0 Dashboard
+Principal produit d’Auth0 pour configurer vos services." cta="Voir le glossaire">Auth0 Dashboard</Tooltip> ou de <Tooltip href="/docs/fr-ca/glossary?term=management-api" tip="Management API
+Un produit permettant aux clients d’effectuer des tâches administratives." cta="Voir le glossaire">Management API</Tooltip> Auth0.
 
 ## Utiliser le Dashboard
 
@@ -234,7 +237,9 @@ La plupart des logiciels médiateurs et des passerelles API utilisent le point d
 
 ### Applications Web standard
 
-Lors de la rotation de la clé de connexion dans Auth0, vous devrez coordonner la reconfiguration de vos applications qui utilisent <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">WS-Fed</Tooltip> ou <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">SAML</Tooltip>. Cela se produit généralement lorsque vous téléversez le nouveau certificat public ou que vous reconfigurez l’application en saisissant l’URL des métadonnées WS-Fed/SAMLURL. Cela modifiera la clé JWKS, qui est utilisée par les applications pour valider les jetons. Assurez-vous que votre implémentation ne suppose pas que les clés JWKS ne sont pas modifiées.
+Lors de la rotation de la clé de connexion dans Auth0, vous devrez coordonner la reconfiguration de vos applications qui utilisent <Tooltip href="/docs/fr-ca/glossary?term=ws-fed" tip="Web Service Federation (WS-Fed)
+Protocole de gestion des identités des utilisateurs à travers les domaines." cta="Voir le glossaire">WS-Fed</Tooltip> ou <Tooltip href="/docs/fr-ca/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language (SAML)
+Protocole normalisé permettant à deux parties d’échanger des informations d’authentification sans mot de passe." cta="Voir le glossaire">SAML</Tooltip>. Cela se produit généralement lorsque vous téléversez le nouveau certificat public ou que vous reconfigurez l’application en saisissant l’URL des métadonnées WS-Fed/SAMLURL. Cela modifiera la clé JWKS, qui est utilisée par les applications pour valider les jetons. Assurez-vous que votre implémentation ne suppose pas que les clés JWKS ne sont pas modifiées.
 
 ## En savoir plus
 

@@ -16,7 +16,10 @@ permalink: "configure-single-sign-on-for-auth0-dashboard"
 
 </Card>
 
-Vous pouvez configurer Auth0 pour qu’il autorise les [membres locataires](/docs/fr-ca/get-started/manage-dashboard-access) à utiliser votre propre [fournisseur d’identité Enterprise](/docs/fr-ca/authenticate/identity-providers/enterprise-identity-providers) (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>) pour s’authentifier auprès de <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip> via l’authentification unique (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SSO</Tooltip>).
+Vous pouvez configurer Auth0 pour qu’il autorise les [membres locataires](/docs/fr-ca/get-started/manage-dashboard-access) à utiliser votre propre [fournisseur d’identité Enterprise](/docs/fr-ca/authenticate/identity-providers/enterprise-identity-providers) (<Tooltip href="/docs/fr-ca/glossary?term=idp" tip="Fournisseur d’identité (IdP)
+Service de stockage et de gestion des identités numériques." cta="Voir le glossaire">IdP</Tooltip>) pour s’authentifier auprès de <Tooltip href="/docs/fr-ca/glossary?term=auth0-dashboard" tip="Auth0 Dashboard
+Principal produit d’Auth0 pour configurer vos services." cta="Voir le glossaire">Auth0 Dashboard</Tooltip> via l’authentification unique (<Tooltip href="/docs/fr-ca/glossary?term=single-sign-on" tip="Authentification unique (SSO)
+Service qui, après qu’un utilisateur se soit connecté à une application, le connecte automatiquement à d’autres applications." cta="Voir le glossaire">SSO</Tooltip>).
 
 ## Fonctionnement
 
@@ -41,9 +44,11 @@ Avant toute configuration de la SSO pour le Dashboard, veuillez réfléchir à c
 
 * La SSO ne peut pas se limiter à des locataires spécifiques.
 * La SSO ne prend pas en charge les flux d’authentification initiés par IdP.
-* Les invitations de membres locataires ne peuvent ni être automatisées, ni être envoyées en masse avec Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Management API</Tooltip>.
+* Les invitations de membres locataires ne peuvent ni être automatisées, ni être envoyées en masse avec Auth0 <Tooltip href="/docs/fr-ca/glossary?term=management-api" tip="Management API
+Un produit permettant aux clients d’effectuer des tâches administratives." cta="Voir le glossaire">Management API</Tooltip>.
 * L’accès des membres locataires ne peut pas être géré par vos appartenances au groupe IdP.
-* La <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">MFA</Tooltip> ne peut pas être appliquée à tous les membres d’un locataire.
+* La <Tooltip href="/docs/fr-ca/glossary?term=multifactor-authentication" tip="Authentification multifacteur (MFA)
+Processus d’authentification de l’utilisateur qui utilise un facteur en plus du nom d’utilisateur et du mot de passe, tel qu’un code par SMS." cta="Voir le glossaire">MFA</Tooltip> ne peut pas être appliquée à tous les membres d’un locataire.
 
 ### Considérations
 
@@ -174,7 +179,8 @@ D’autres étapes de configuration sont nécessaires, selon l’IdP et le proto
 
 #### Google (SAML)
 
-Auth0 prend en charge la configuration de SSO pour le Dashboard avec un IdP <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">SAML</Tooltip> Google, mais nous recommandons de diriger les utilisateurs vers une méthode d’authentification de type Google.
+Auth0 prend en charge la configuration de SSO pour le Dashboard avec un IdP <Tooltip href="/docs/fr-ca/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language (SAML)
+Protocole normalisé permettant à deux parties d’échanger des informations d’authentification sans mot de passe." cta="Voir le glossaire">SAML</Tooltip> Google, mais nous recommandons de diriger les utilisateurs vers une méthode d’authentification de type Google.
 
 Lorsque qu’un utiisateur se connecte à l’IdP Google SAML, Auth0 lui crée une nouvelle identité utilisateur (autre que son identité d’utilisateur Google existante), ce qui pourrait prêter à confusion.
 
@@ -361,7 +367,8 @@ Si vous utilisez Auth0 Teams avec votre locataire Enterprise, vous pouvez impose
 
 ### Activer Home Realm Discovery (facultatif)
 
-Si vous utilisez <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-6" tip="">Universal Login</Tooltip> (Connexion universelle) ou Classic Login (Connexion classique), vous pouvez demander à activer HRD afin que la page de connexion reconnaisse le domaine de l’adresse courriel que saisit le membre locataire, puis dirige celui-ci vers la nouvelle connexion SSO.
+Si vous utilisez <Tooltip href="/docs/fr-ca/glossary?term=universal-login" tip="Connexion universelle
+Votre application redirige l’utilisateur vers la connexion universelle, hébergée sur le serveur d’autorisation d’Auth0, pour vérifier son identité." cta="Voir le glossaire">Universal Login</Tooltip> (Connexion universelle) ou Classic Login (Connexion classique), vous pouvez demander à activer HRD afin que la page de connexion reconnaisse le domaine de l’adresse courriel que saisit le membre locataire, puis dirige celui-ci vers la nouvelle connexion SSO.
 
 #### Quand activer HRD
 

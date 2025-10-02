@@ -67,9 +67,12 @@ When invoking the Credentials Manager from Android, the native application shoul
 
 ### Configure Auth0
 
-The Sign in with Google flow leverages the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OAuth 2.0</Tooltip> Token Exchange, which occurs between Auth0 and your Android application.
+The Sign in with Google flow leverages the <Tooltip href="/docs/fr-ca/glossary?term=oath2" tip="OAuth 2.0
+Cadre d’applications d’autorisation qui définit les protocoles d’autorisation et les flux de production." cta="Voir le glossaire">OAuth 2.0</Tooltip> Token Exchange, which occurs between Auth0 and your Android application.
 
-After creating your credentials in the Google Cloud Console, you can enable Sign in with Google using the Credential Manager for Android. To do so, update your application through either the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip> or the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Management API</Tooltip>.
+After creating your credentials in the Google Cloud Console, you can enable Sign in with Google using the Credential Manager for Android. To do so, update your application through either the <Tooltip href="/docs/fr-ca/glossary?term=auth0-dashboard" tip="Auth0 Dashboard
+Principal produit d’Auth0 pour configurer vos services." cta="Voir le glossaire">Auth0 Dashboard</Tooltip> or the <Tooltip href="/docs/fr-ca/glossary?term=management-api" tip="Management API
+Un produit permettant aux clients d’effectuer des tâches administratives." cta="Voir le glossaire">Management API</Tooltip>.
 
 <Tabs><Tab title="Auth0 Dashboard">
 
@@ -169,7 +172,8 @@ when (creds) {
 
 ## Additional authentication scenarios
 
-While the current Google implementation does not offer clear guidance for enterprise federation and additional <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">multi-factor authentication</Tooltip> (MFA) challenges, you can accommodate these capabilities by transitioning to the web experience.
+While the current Google implementation does not offer clear guidance for enterprise federation and additional <Tooltip href="/docs/fr-ca/glossary?term=multifactor-authentication" tip="Authentification multifacteur (MFA)
+Processus d’authentification de l’utilisateur qui utilise un facteur en plus du nom d’utilisateur et du mot de passe, tel qu’un code par SMS." cta="Voir le glossaire">multi-factor authentication</Tooltip> (MFA) challenges, you can accommodate these capabilities by transitioning to the web experience.
 
 ### Enterprise federation
 
@@ -177,7 +181,9 @@ Auth0 supports enterprise federation, which allows you to connect external [ente
 
 If you require the use of enterprise federation, redirecting the user to the web-based flow is recommended, instead of relying on the `id_token` as demonstrated in previous examples.
 
-To do so, decode the Google <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">JWT</Tooltip> token and pass the `email` provided in the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">ID token</Tooltip> as a `login_hint`. This prevents the end user from having to re-enter their email address in the web flow.
+To do so, decode the Google <Tooltip href="/docs/fr-ca/glossary?term=json-web-token" tip="Jeton Web JSON (JWT)
+Format standard de jeton d’ID (et souvent de jeton d’accès) utilisé pour représenter en toute sécurité des demandes entre deux parties." cta="Voir le glossaire">JWT</Tooltip> token and pass the `email` provided in the <Tooltip href="/docs/fr-ca/glossary?term=id-token" tip="Jeton d’ID
+Identifiant conçu pour le client lui-même, et non pour l’accès à une ressource." cta="Voir le glossaire">ID token</Tooltip> as a `login_hint`. This prevents the end user from having to re-enter their email address in the web flow.
 
 ``` lines
 if (error.isAccessDenied && reason == "Enterprise Domain") {

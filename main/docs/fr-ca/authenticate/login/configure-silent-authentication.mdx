@@ -9,7 +9,8 @@ permalink: "configure-silent-authentication"
 'twitter:description': "Découvrez comment garder les utilisateurs connectés à votre application à l’aide de l’authentification silencieuse."
 ---
 
-Le [protocole OpenID Connect](/docs/fr-ca/authenticate/protocols/openid-connect-protocol) prend en charge un paramètre `prompt=none` sur la demande d’authentification qui permet aux applications d’indiquer que le serveur d’autorisation ne doit afficher aucune interaction utilisateur (telle que l’authentification, le consentement ou la <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>). Auth0 renverra soit la réponse demandée à l’application, soit une erreur si l’utilisateur n’est pas déjà authentifié ou si un type de consentement ou d’invite est requis avant de continuer.
+Le [protocole OpenID Connect](/docs/fr-ca/authenticate/protocols/openid-connect-protocol) prend en charge un paramètre `prompt=none` sur la demande d’authentification qui permet aux applications d’indiquer que le serveur d’autorisation ne doit afficher aucune interaction utilisateur (telle que l’authentification, le consentement ou la <Tooltip href="/docs/fr-ca/glossary?term=multifactor-authentication" tip="Authentification multifacteur (MFA)
+Processus d’authentification de l’utilisateur qui utilise un facteur en plus du nom d’utilisateur et du mot de passe, tel qu’un code par SMS." cta="Voir le glossaire">MFA</Tooltip>). Auth0 renverra soit la réponse demandée à l’application, soit une erreur si l’utilisateur n’est pas déjà authentifié ou si un type de consentement ou d’invite est requis avant de continuer.
 
 L’utilisation du [flux implicite](/docs/fr-ca/get-started/authentication-and-authorization-flow/implicit-flow-with-form-post) dans les applications Web monopages soulève des problèmes de sécurité qui doivent être résolus par des mesures correctives explicites. Vous pouvez utiliser le [Flux de code d’autorisation avec PKCE](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce) en conjonction avec l’authentification silencieuse pour renouveler les sessions dans les applications Web monopages.
 
@@ -64,7 +65,8 @@ Cette réponse est indiscernable d’une connexion effectuée directement sans l
 
 ### Réponses d’erreur
 
-Si l’utilisateur n’est pas connecté via l’authentification unique (<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>) ou si sa session SSO a expiré, Auth0 le redirigera vers la `redirection_uri` (URL de rappel) en affichant une erreur :
+Si l’utilisateur n’est pas connecté via l’authentification unique (<Tooltip href="/docs/fr-ca/glossary?term=single-sign-on" tip="Authentification unique (SSO)
+Service qui, après qu’un utilisateur se soit connecté à une application, le connecte automatiquement à d’autres applications." cta="Voir le glossaire">SSO</Tooltip>) ou si sa session SSO a expiré, Auth0 le redirigera vers la `redirection_uri` (URL de rappel) en affichant une erreur :
 
 ``` lines
 GET https://your_callback_url/
