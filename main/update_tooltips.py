@@ -22,14 +22,14 @@ def load_tooltip_data(json_path):
 def find_mdx_files(directory):
     """Recursively find all .mdx files in the directory."""
     mdx_files = []
-    for root, dirs, files in os.walk(directory):
+    for root, _, files in os.walk(directory):
         for file in files:
             if file.endswith(".mdx"):
                 mdx_files.append(os.path.join(root, file))
     return mdx_files
 
 
-def update_tooltips(content, tooltip_map):
+def update_tooltips(content, tooltip_map, lang="fr-ca"):
     """Update Tooltip components in the content."""
     replacement_count = 0
 
@@ -52,8 +52,20 @@ def update_tooltips(content, tooltip_map):
             and tooltip_info.get("tooltip_text")
         ):
             replacement_count += 1
+            # Transform the href URL
+            # From: https://auth0.com/docs/glossary?term=...
+            # To: /docs/{lang}/glossary?term=...
+            original_href = tooltip_info["href"]
+            if "auth0.com/docs/" in original_href:
+                transformed_href = original_href.replace(
+                    "https://auth0.com/docs/", f"/docs/{lang}/"
+                )
+            else:
+                transformed_href = original_href
+
             # Return the updated Tooltip component with href, tip, and cta
-            return f'<Tooltip data-tooltip-id="{tooltip_info["id"]}" href="{tooltip_info["href"]}" tip="{tooltip_info["tooltip_text"]}" cta="用語集の表示">{inner_text}</Tooltip>'
+            tip_text = tooltip_info["tooltip_text"]
+            return f'<Tooltip href="{transformed_href}" tip="{tip_text}" cta="Voir le glossaire">{inner_text}</Tooltip>'
 
         # If no match found, return original
         return match.group(0)
@@ -66,8 +78,9 @@ def update_tooltips(content, tooltip_map):
 def main():
     """Main execution function."""
     script_dir = Path(__file__).parent
-    docs_dir = script_dir / "docs" / "ja-jp"
+    docs_dir = script_dir / "docs" / "fr-ca"
     json_path = script_dir / "tooltip_content.json"
+    lang = "fr-ca"  # Language code for URL transformation
 
     print("Loading tooltip data...")
     tooltip_map = load_tooltip_data(json_path)
@@ -84,7 +97,7 @@ def main():
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
 
-        updated_content, count = update_tooltips(content, tooltip_map)
+        updated_content, count = update_tooltips(content, tooltip_map, lang)
 
         if count > 0:
             with open(file_path, "w", encoding="utf-8") as f:

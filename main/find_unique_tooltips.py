@@ -15,7 +15,7 @@ def find_tooltip_content(text):
     tooltips = []
 
     # Pattern to match <Tooltip>content</Tooltip>
-    pattern1 = r'<Tooltip([^>]*)>(.*?)</Tooltip>'
+    pattern1 = r"<Tooltip([^>]*)>(.*?)</Tooltip>"
     matches1 = re.finditer(pattern1, text, re.DOTALL)
     for match in matches1:
         attrs = match.group(1)
@@ -25,13 +25,10 @@ def find_tooltip_content(text):
         id_match = re.search(r'id=["\'](.*?)["\']', attrs)
         tooltip_id = id_match.group(1) if id_match else None
 
-        tooltips.append({
-            'content': content,
-            'id': tooltip_id
-        })
+        tooltips.append({"content": content, "id": tooltip_id})
 
     # Pattern to match self-closing <Tooltip ... /> with content or tip prop
-    pattern2 = r'<Tooltip\s+([^>]*?)/>'
+    pattern2 = r"<Tooltip\s+([^>]*?)/>"
     matches2 = re.finditer(pattern2, text, re.DOTALL)
     for match in matches2:
         attrs = match.group(1)
@@ -45,10 +42,7 @@ def find_tooltip_content(text):
         tooltip_id = id_match.group(1) if id_match else None
 
         if content:
-            tooltips.append({
-                'content': content,
-                'id': tooltip_id
-            })
+            tooltips.append({"content": content, "id": tooltip_id})
 
     return tooltips
 
@@ -58,25 +52,25 @@ def scan_directory(directory):
     tooltip_map = OrderedDict()  # {tooltip_content: {'file': path, 'id': id}}
 
     # Find all .mdx files
-    mdx_files = list(Path(directory).rglob('*.mdx'))
+    mdx_files = list(Path(directory).rglob("*.mdx"))
 
     for file_path in sorted(mdx_files):
         try:
-            with open(file_path, 'r', encoding='utf-8') as f:
+            with open(file_path, "r", encoding="utf-8") as f:
                 content = f.read()
 
             tooltips = find_tooltip_content(content)
 
             for tooltip in tooltips:
-                tooltip_content = tooltip['content']
-                tooltip_id = tooltip['id']
+                tooltip_content = tooltip["content"]
+                tooltip_id = tooltip["id"]
 
                 # Only store first occurrence of each unique tooltip content
                 if tooltip_content and tooltip_content not in tooltip_map:
                     relative_path = file_path.relative_to(Path(directory).parent)
                     tooltip_map[tooltip_content] = {
-                        'file': str(relative_path),
-                        'id': tooltip_id
+                        "file": str(relative_path),
+                        "id": tooltip_id,
                     }
 
         except Exception as e:
@@ -86,8 +80,8 @@ def scan_directory(directory):
 
 
 def main():
-    directory = '/home/raeder/mintlify/auth0-docs-v2/main/docs/ja-jp'
-    output_file = '/home/raeder/mintlify/auth0-docs-v2/main/tooltip_report.json'
+    directory = "/home/raeder/mintlify/auth0-docs-v2/main/docs/fr-ca"
+    output_file = "/home/raeder/mintlify/auth0-docs-v2/main/tooltip_report.json"
 
     print("Scanning for Tooltip components in Japanese MDX files...\n")
 
@@ -99,27 +93,20 @@ def main():
 
     # Convert to list format for JSON
     tooltips_list = [
-        {
-            "content": content,
-            "id": info['id'],
-            "file": info['file']
-        }
+        {"content": content, "id": info["id"], "file": info["file"]}
         for content, info in tooltip_map.items()
     ]
 
     # Create report structure
-    report = {
-        "total_unique_tooltips": len(tooltips_list),
-        "tooltips": tooltips_list
-    }
+    report = {"total_unique_tooltips": len(tooltips_list), "tooltips": tooltips_list}
 
     # Write to JSON file
-    with open(output_file, 'w', encoding='utf-8') as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2, ensure_ascii=False)
 
     print(f"Found {len(tooltips_list)} unique tooltip(s)")
     print(f"Report saved to: {output_file}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
