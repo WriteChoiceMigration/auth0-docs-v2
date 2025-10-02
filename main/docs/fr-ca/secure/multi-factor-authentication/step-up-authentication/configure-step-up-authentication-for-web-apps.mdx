@@ -28,30 +28,30 @@ Si un utilisateur tente d’accéder à une page restreinte et que le jeton indi
 3. Valider les demandes suivantes :
 
    <table class="table"><thead>
-<tr>
-<th>Demande</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>`exp`</td>
-<td>Expiration du jeton</td>
-</tr>
-<tr>
-<td>`iss`</td>
-<td>Émetteur de jetons</td>
-</tr>
-<tr>
-<td>`aud`</td>
-<td>Destinataire prévu du jeton</td>
-</tr>
-<tr>
-<td>`amr`</td>
-<td>Si `amr` n’existe pas dans la charge utile ou ne contient pas la valeur `mfa`, l’utilisateur ne s’est pas connecté avec la MFA. Si `amr` existe dans la charge utile et contient la valeur `mfa`, l’utilisateur s’est connecté avec la MFA.</td>
-</tr>
-</tbody>
-</table>
+    <tr>
+    <th>Demande</th>
+    <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>`exp`</td>
+    <td>Expiration du jeton</td>
+    </tr>
+    <tr>
+    <td>`iss`</td>
+    <td>Émetteur de jetons</td>
+    </tr>
+    <tr>
+    <td>`aud`</td>
+    <td>Destinataire prévu du jeton</td>
+    </tr>
+    <tr>
+    <td>`amr`</td>
+    <td>Si `amr` n’existe pas dans la charge utile ou ne contient pas la valeur `mfa`, l’utilisateur ne s’est pas connecté avec la MFA. Si `amr` existe dans la charge utile et contient la valeur `mfa`, l’utilisateur s’est connecté avec la MFA.</td>
+    </tr>
+    </tbody>
+    </table>
 
 #### Exceptions aux demandes AMR
 
@@ -64,7 +64,7 @@ Dans les exemples ci-dessous, vous pouvez comparer les valeurs potentielles cont
 
 ### Exemple : Valeurs avec MFA
 
-
+codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
 ```json lines
 {
@@ -108,7 +108,7 @@ Pour ce scénario, vous devez configurer les éléments suivants dans le tableau
 
 Créer une action qui demande à l’utilisateur de s’authentifier par MFA lorsque l’application Web le demande. Rendez-vous dans le [Tableau de bord > Actions > Flux](https://manage.auth0.com/#/actions/flows), et créez une action qui comporte le contenu suivant :
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
  const CLIENTS_WITH_MFA = ['REPLACE_WITH_YOUR_CLIENT_ID'];
  // run only for the specified clients
@@ -132,7 +132,7 @@ Configurer l’application pour vérifier que l’utilisateur s’est authentifi
 
 L’application Web dans ce scénario utilise le [flux de code d’autorisation](/docs/fr-ca/get-started/authentication-and-authorization-flow/authorization-code-flow) pour l’authentification, la requête est donc la suivante :
 
-``` lines
+```http lines
 https://{yourDomain}/authorize?
         audience=https://{yourDomain}/userinfo&
         scope=openid&

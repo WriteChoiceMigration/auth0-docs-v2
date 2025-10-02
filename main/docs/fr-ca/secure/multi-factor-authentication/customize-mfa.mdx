@@ -103,7 +103,7 @@ Les options `guardian` et `google-authenticator` sont des paramètres anciens qu
 
 Définir le `provider (fournisseur)` sur une option particulière remplace manuellement les options activés/désactivés dans le tableau de bord. Vous pouvez utiliser l’action suivante pour inciter l’utilisateur à s’enregistrer dans Duo même si d’autres facteurs sont activés dans le tableau de bord :
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
     // Forcing the provider to Duo programmatically
     api.multifactor.enable('duo')
@@ -126,7 +126,7 @@ Pour en savoir plus, lisez la section « Politique » dans [Facteurs d’authe
 
 Vous pouvez personnaliser l’authentification multifacteur (MFA) pour qu’elle ne se déclenche que lorsque les utilisateurs se connectent à certaines applications.
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
 	const CLIENTS_WITH_MFA = [
 		'{yourClientId1}', 
@@ -144,7 +144,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 Vous pouvez personnaliser l’authentification multifacteur (MFA) pour qu’elle ne se déclenche que pour les utilisateurs désignés pour utiliser la MFA.
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   if (event.user.user_metadata && event.user.user_metadata.use_mfa) {
     api.multifactor.enable('duo', { allowRememberBrowser: false });
@@ -156,7 +156,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 Dans certaines situations, vous pourriez ne pas vouloir demander à l’utilisateur d’avoir recours à la MFA chaque fois qu’il se connecte à partir du même navigateur. Vous pouvez modifier ce comportement en utilisant la propriété `allowRememberBrowser` :
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {  
   api.multifactor.enable('any', { allowRememberBrowser: false });
 }
@@ -195,7 +195,7 @@ Dans les cas où un utilisateur perd un appareil de confiance, vous pouvez deman
 
 En supposant que l’accès au réseau spécifié des adresses IP internes soit bien contrôlé, vous pouvez également demander à Auth0 d’exiger la MFA uniquement pour les utilisateurs dont les requêtes proviennent de l’extérieur du réseau d’entreprise :
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const ipaddr = require('ipaddr.js@1.9.0');
   const corp_network = '192.168.1.134/26';
@@ -211,7 +211,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 Si vos utilisateurs signalent des déconnexions fréquentes, il est possible que vous ayez besoin de contourner les demandes de jetons d’actualisation lors de l’utilisation de la MFA. Vous pouvez modifier le comportement par défaut à l’aide d’un filtre Action sur la propriété d’objet `event.transaction.protocol`.
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   if (event.transaction.protocol !== 'oauth2-refresh-token') {
     // MFA-related commands here

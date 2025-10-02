@@ -77,22 +77,75 @@ Consultez les exemples ci-dessous pour découvrir comment l’authentification m
 
 Le tableau suivant décrit les scénarios à haut risque qui entraînent un `low` pointage de confiance :
 
-**État de l’utilisateur** | **Friction de connexion souhaitée** | **Politique d’inscription souhaitée** | **Mise en œuvre** |
-| -- | -- | -- | -- | -- | -- |
-| Inscrit dans MFA | Ne pas exiger le MFA | S.O. (utilisateur déjà inscrit) | Utiliser une action pour contourner le MFA |
-| Non inscrit dans MFA | Exiger une vérification par courriel | Passer l’inscription (ne pas collecter d’authentifiants additionnels) | Comportement par défaut (aucune action liée à MFA) |
-| Inscrit dans MFA | Ne pas exiger d’authentifiants additionnels | Ne pas utiliser d’action liée à MFA) |
-|Non inscrit à MFA | Exiger la vérification du courriel | Exiger l’inscription à MFA (collecter des authentifiants supplémentaires) | Utiliser une action pour forcer l’inscription à MFA (modèle disponible) |
+<table class="table"><thead>
+<tr>
+<th><strong>État de l'utilisateur</strong></th>
+<th><strong>Friction de connexion souhaitée</strong></th>
+<th><strong>Politique d'inscription souhaitée</strong></th>
+<th><strong>Mise en œuvre</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inscrit dans MFA</td>
+<td>Ne pas exiger le MFA</td>
+<td>S.O. (utilisateur déjà inscrit)</td>
+<td>Utiliser une action pour contourner le MFA</td>
+</tr>
+<tr>
+<td>Non inscrit dans MFA</td>
+<td>Exiger une vérification par courriel</td>
+<td>Passer l'inscription (ne pas collecter d'authentifiants additionnels)</td>
+<td>Comportement par défaut (aucune action liée à MFA)</td>
+</tr>
+<tr>
+<td>Inscrit dans MFA</td>
+<td>Ne pas exiger d'authentifiants additionnels</td>
+<td>Ne pas utiliser d'action liée à MFA)</td>
+<td></td>
+</tr>
+<tr>
+<td>Non inscrit à MFA</td>
+<td>Exiger la vérification du courriel</td>
+<td>Exiger l'inscription à MFA (collecter des authentifiants supplémentaires)</td>
+<td>Utiliser une action pour forcer l'inscription à MFA (modèle disponible)</td>
+</tr>
+</tbody>
+</table>
 
 #### Exemples de scénarios à haut risque et à forte confiance
 
 Le tableau suivant décrit les scénarios à faible risque qui entraînent un pointage `high` de confiance :
 
-| **État de l’utilisateur** | **Friction de connexion souhaitée** | **Politique d’inscription souhaitée** | **Mise en œuvre** |
-| -- | -- | | -- | | -- |
-| Inscrit à l’authentification MFA | Pas de friction | S.O. (utilisateur déjà inscrit) | Comportement par défaut (pas d’action liée à l’AMF) |
-| Pas inscrit à la MFA | Pas de friction | Sauter l’inscription (ne pas collecter d’authentifiants supplémentaires) | Comportement par défaut (pas d’action liée à la MFA) |
-| Pas inscrit à la MFA | Pas de friction | Exiger l’inscription à l’AMF (collecter un authentifiant supplémentaire) | Utiliser une action pour forcer l’inscription à la MFA (modèle disponible) |
+<table class="table"><thead>
+<tr>
+<th><strong>État de l'utilisateur</strong></th>
+<th><strong>Friction de connexion souhaitée</strong></th>
+<th><strong>Politique d'inscription souhaitée</strong></th>
+<th><strong>Mise en œuvre</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inscrit à l'authentification MFA</td>
+<td>Pas de friction</td>
+<td>S.O. (utilisateur déjà inscrit)</td>
+<td>Comportement par défaut (pas d'action liée à l'AMF)</td>
+</tr>
+<tr>
+<td>Pas inscrit à la MFA</td>
+<td>Pas de friction</td>
+<td>Sauter l'inscription (ne pas collecter d'authentifiants supplémentaires)</td>
+<td>Comportement par défaut (pas d'action liée à la MFA)</td>
+</tr>
+<tr>
+<td>Pas inscrit à la MFA</td>
+<td>Pas de friction</td>
+<td>Exiger l'inscription à l'AMF (collecter un authentifiant supplémentaire)</td>
+<td>Utiliser une action pour forcer l'inscription à la MFA (modèle disponible)</td>
+</tr>
+</tbody>
+</table>
 
 ### Objet riskAssessment
 
@@ -128,7 +181,7 @@ L’objet `riskAssessment` contient le pointage de confiance total, les informat
 </tbody>
 </table>
 
-```javascript lines
+```js lines expandable
 exports.onExecutePostLogin = async (event, api) => {
   if (event.authentication && event.authentication.riskAssessment) {
     event.authentication.riskAssessment = {
@@ -360,12 +413,41 @@ L’évaluation `UntrustedIP` détermine si l’adresse IP de l’utilisateur e
 
 Si la valeur de la propriété du `code` d’évaluation `UntrustedIP` est égale à `found_on_deny_list`, l’objet `details` est présent et contient les propriétés suivantes :
 
-| **Property** | **Description** | **Type** | **Possible values** |
-| -- | -- | -- | | -- |
-| `ip` | Adresse IP de l’appareil. | Toute adresse IPv4 ou IPv6 valide. |
-| `matches` | Masque de sous-réseau auquel appartient l’adresse IP. | Chaîne de caractères - Tout masque de sous-réseau IPv4 ou IPv6 valide. |
-| `source` | Nom de la source de renseignements sur les menaces pour la liste de refus. | chaîne de caractères | Tout texte valide. |
-| `category` | Catégorie indiquant pourquoi l’adresse IP n’est pas fiable. | Chaîne de caractères | `abuse`, `anonymizer`, `datacenter`, `reputation`, `unroutable` |
+<table class="table"><thead>
+<tr>
+<th><strong>Property</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Possible values</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`ip`</td>
+<td>Adresse IP de l'appareil.</td>
+<td>string</td>
+<td>Toute adresse IPv4 ou IPv6 valide.</td>
+</tr>
+<tr>
+<td>`matches`</td>
+<td>Masque de sous-réseau auquel appartient l'adresse IP.</td>
+<td>string</td>
+<td>Tout masque de sous-réseau IPv4 ou IPv6 valide.</td>
+</tr>
+<tr>
+<td>`source`</td>
+<td>Nom de la source de renseignements sur les menaces pour la liste de refus.</td>
+<td>string</td>
+<td>Tout texte valide.</td>
+</tr>
+<tr>
+<td>`category`</td>
+<td>Catégorie indiquant pourquoi l'adresse IP n'est pas fiable.</td>
+<td>string</td>
+<td>`abuse`, `anonymizer`, `datacenter`, `reputation`, `unroutable`</td>
+</tr>
+</tbody>
+</table>
 
 ##### Propriété de catégorie d’objet détails d’évaluation UntrustedIP
 
@@ -536,7 +618,7 @@ Auth0 propose deux modèles d’actions basés sur l’authentification multifac
 
 Ce modèle fournit un exemple et un point de départ sur la manière de créer un flux commercial personnalisé en utilisant des évaluations de risques individuelles.
 
-```javascript lines
+```javascript lines expandable
 /**
 * Handler that will be called during the execution of a PostLogin flow.
 *
@@ -605,7 +687,7 @@ Voici quelques suggestions sur la manière de créer des actions personnalisées
 
 Évaluez la propriété `RiskAssessment.confidence`, puis comparez-la aux constantes `high`, `medium` ou `low` :
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const riskIsMedium = riskAssessment && riskAssessment.confidence === 'medium';
@@ -622,7 +704,7 @@ Les pointages de confiance sont des valeurs discrètes (et non comprises dans un
 
 Utilisez plusieurs conditions pour combiner logiquement tous les pointages de confiance que vous souhaitez gérer. Par exemple, si vous souhaitez savoir quand le pointage de confiance est plus élevé que `low`, vérifiez s’il est égale à `medium` ou à `high` :
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const riskIsMediumOrHigh = riskAssessment && 
@@ -641,7 +723,7 @@ L’objet `riskAssessment` est enregistré dans vos journaux de locataire. Vous 
 
 Vous pouvez afficher l’objet `riskAssessment` et signaler les résultats à un autre endroit. Par exemple, vous pouvez envoyer un courriel ou sauvegarder un enregistrement dans une base de données externe.
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const riskIsLow = riskAssessment && riskAssessment.confidence === 'low';
@@ -656,7 +738,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 Utilisez l’objet [assessments](#assessments-object) pour accéder aux détails des évaluations individuelles, y compris la propriété du `code` :
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const { ImpossibleTravel } = riskAssessment && riskAssessment.assessments;
@@ -679,7 +761,7 @@ Utilisez l’objet [assessments](#assessments-object) pour accéder aux détails
 
 Empêchez la transaction de connexion de se terminer en renvoyant la fonction de rappel avec un objet `UnauthorizedError` comme [paramètre d’erreur](/docs/fr-ca/troubleshoot/error-handling-best-practices). L’objet `UnauthorizedError` définit toujours `error` sur `unauthorized`, mais vous pouvez personnaliser le`error_message` :
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   const { riskAssessment } = event.authentication || {};
   const { ImpossibleTravel } = riskAssessment && riskAssessment.assessments;

@@ -235,7 +235,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 L’exemple ci-dessous vous montre la réponse renvoyée avec des demandes personnalisées si l’audience n’est pas une API Auth0 :
 
-``` lines
+```text lines
 -- A resource owner password flow 
 POST https://{yourTenant}.auth0.com/oauth/token
 
@@ -271,7 +271,7 @@ scope:openid profile
 
 L’exemple ci-dessous vous montre la réponse renvoyée avec des demandes personnalisées qui n’ont pas été ajoutées avec une audience de l’API Auth0 :
 
-``` lines
+```text lines
 -- A resource owner password flow 
 POST https://{yourTenant}.auth0.com/oauth/token
 
@@ -416,7 +416,7 @@ function (user, context, callback) {
 
 Réponse SAML avant la migration :
 
-``` lines
+```xml lines
 <samlp:Response>
     (...)
     <saml:Assertion>
@@ -439,7 +439,7 @@ Réponse SAML avant la migration :
 
 Réponse SAML avec le comportement mis à jour :
 
-``` lines
+```xml lines
 <samlp:Response>
     (...)
     <saml:Assertion>
@@ -476,7 +476,7 @@ function (user, context, callback) {
 
 Réponse SAML avant la migration :
 
-``` lines
+```xml lines
 <samlp:Response>
     (...)
     <saml:Assertion>
@@ -504,7 +504,7 @@ Réponse SAML avant la migration :
 
 Réponse SAML avec le comportement mis à jour :
 
-``` lines
+```xml lines
 <samlp:Response>
     (...)
     <saml:Assertion>
@@ -564,7 +564,7 @@ exports.onExecutePostLogin = async (event, api) => {
 };
 ```
 
-``` lines
+```text lines
 -- a call to /userinfo 
 GET https://{yourTenant}.auth0.com/userinfo
 Authorization: Bearer {yourAccessToken}
@@ -592,7 +592,7 @@ Vérifiez d’abord les avis de dépréciation dans les journaux de vos locatair
 
 Vérifiez d’abord les avis de dépréciation dans les journaux de vos locataires afin de déterminer si votre locataire est concerné par la migration.
 
-```json lines
+```json lines expandable
 {
   "date": "2022-06-28T08:12:52.084Z",
   "type": "depnote",
@@ -651,7 +651,7 @@ Si vous définissez des demandes `app_metadata` ou `user_metadata` sur l’objet
   
 * Si vous utilisez le module complémentaire SAML2 ou le mappage d’attributs du protocole Ws-Fed (Web Service Federation Protocol), évitez de définir des demandes `app_metadata` ou `user_metadata` sur l’objet `context.idToken`. Remplacez ces demandes par des demandes avec espace de nom lorsque c’est possible :
 
-  ``` lines
+  ```js lines
   context.idToken['https://mydomain.com/app_metadata'] = {
     my_claim: 'my claim'
   };
@@ -662,7 +662,7 @@ Si vous définissez des demandes `app_metadata` ou `user_metadata` sur l’objet
   
 * Utilisez une condition sur le protocole actuel ou sur le client actuel pour exclure les déclarations définissant `app_metadata` ou `user_metadata` lorsque le protocole est `samlp` ou `wsfed`.
 
-  ``` lines
+  ```js lines
   if (!['samlp', 'wsfed'].includes(context.protocol)) {
       context.idToken.app_metadata = {
         claim_set_via_id_token: "This is a claim which was set via context.idToken"

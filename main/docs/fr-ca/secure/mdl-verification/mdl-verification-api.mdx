@@ -35,16 +35,25 @@ The response includes a verification ID along with an engagement URI for engagin
 
 ### Body parameters
 
-* **`protocol`**: String. Required
+{/* <ParamField path="param" type="string" required>
+  An example of a parameter field
+</ParamField> */}
 
+<ParamField path="protocol" type="string" required>
   Engagement protocols define the methods your application uses for interacting with the wallet. We currently support:
+  <ul>
+    <li>
+      `mdoc/webapi/draft-2023-03-29`: Uses an MDoc URI as defined in  [ISO/IEC DTS 18013-7](https://www.iso.org/standard/82772.html) for communication.
+    </li>
+    <li>
+      `mdoc/webapi/v1.0`: Uses an MDoc URI as defined in  [ISO/IEC DTS 18013-7](https://www.iso.org/standard/82772.html) for communication.
+    </li>
+  </ul>
+</ParamField>
 
-  + `mdoc/webapi/draft-2023-03-29`: Uses an MDoc URI as defined in  [ISO/IEC DTS 18013-7](https://www.iso.org/standard/82772.html) for communication.
-  + `mdoc/webapi/v1.0`: Uses an MDoc URI as defined in  [ISO/IEC DTS 18013-7](https://www.iso.org/standard/82772.html) for communication.
-
-* **`template_id`**: String. Required
-
+<ParamField path="template_id" type="string" required>
   The ID references a pre-configured template. This simplifies the request by using pre-defined claim requirements.
+</ParamField>
 
 ### Response schema
 
@@ -59,7 +68,11 @@ The response includes a verification ID along with an engagement URI for engagin
 <tr>
 <td>`201`</td>
 <td>`application/json`</td>
-<td><ul><li> <b>`verification_id`</b>String <p> Verification ID <a href="https://www.npmjs.com/package/short-uuid">(UUIDv4)</a> as received from the verification initiation. This ID is used for subsequent interactions with the verification API, such as polling for status.</p></li><li><b>`engagement`</b>String <p> MDoc URI for the Web API protocol. This URI should be presented to the user to initiate the wallet interaction using the protocols. It conforms to the structure defined in <a href="https://www.iso.org/standard/82772.html">ISO/IEC DTS 18013-7 (Annex 4)</a></p></li></ul></td>
+<td><ParamField path="verification_id" type="string">
+  Verification ID <a href="https://www.npmjs.com/package/short-uuid">(UUIDv4)</a> as received from the verification initiation. This ID is used for subsequent interactions with the verification API, such as polling for status.
+</ParamField><ParamField path="engagement" type="string">
+  MDoc URI for the Web API protocol. This URI should be presented to the user to initiate the wallet interaction using the protocols. It conforms to the structure defined in <a href="https://www.iso.org/standard/82772.html">ISO/IEC DTS 18013-7 (Annex 4)</a>
+</ParamField></td>
 </tr>
 </tbody>
 </table>
@@ -121,9 +134,13 @@ This endpoint retrieves the status and, if available, the claims of a given veri
 
 ### Path parameters
 
-`verification_id`: String. Required
-
-* Verification ID [(UUIDv4)](https://www.npmjs.com/package/short-uuid) as received from the verification initiation. This ID is used for subsequent interactions with the Mobile Driver's License Verification API, such as polling for status.
+<ParamField path="verification_id" type="string" required>
+  <ul>
+    <li>
+  Verification ID [(UUIDv4)](https://www.npmjs.com/package/short-uuid) as received from the verification initiation. This ID is used for subsequent interactions with the Mobile Driver's License Verification API, such as polling for status.
+    </li>
+  </ul>
+</ParamField>
 
 ### Response schemas
 

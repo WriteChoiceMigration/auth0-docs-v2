@@ -35,7 +35,7 @@ Guardian est disponible sur [Maven Central](http://search.maven.org/) et [JCente
 
 Guardian est la portion centrale de la trousse SDK. Vous devrez créer une instance de cette classe pour l’URL de votre locataire spécifique.
 
-```javascript lines
+```java lines
 Uri url = Uri.parse("https://<tenant>.<region>.auth0.com");
 
 Guardian guardian = new Guardian.Builder()
@@ -45,7 +45,7 @@ Guardian guardian = new Guardian.Builder()
 
 ou
 
-```javascript lines
+```java lines
 String domain = "<tenant>.<region>.auth0.com";
 
 Guardian guardian = new Guardian.Builder()
@@ -59,7 +59,7 @@ Le lien entre le deuxième facteur (une instance de votre application sur un app
 
 Vous pouvez créer une inscription à l’aide de la fonction `Guardian.enroll`, mais vous devrez d’abord créer une nouvelle paire de clés RSA pour celle-ci. La clé privée sera utilisée pour signer les demandes d’autorisation ou de rejet d’une connexion. La clé publique sera envoyée pendant le processus d’inscription afin que le serveur puisse vérifier la signature de la demande par la suite.
 
-```javascript lines
+```java lines
 KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
 keyPairGenerator.initialize(2048); // you MUST use at least 2048 bit keys
 KeyPair keyPair = keyPairGenerator.generateKeyPair();
@@ -67,7 +67,7 @@ KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
 Ensuite, obtenez les informations d’inscription en balayant le code QR de Guardian et utilisez-le pour inscrire le compte :
 
-```javascript lines
+```java lines
 Uri enrollmentUriFromQr = ...; // the URI obtained from a Guardian QR code
 
 CurrentDevice device = new CurrentDevice(context, "fcmToken", "deviceName");
@@ -79,7 +79,7 @@ Enrollment enrollment = guardian
 
 Vous pouvez également exécuter la requête dans un thread en arrière-plan :
 
-```javascript lines
+```java lines
 guardian
     .enroll(enrollmentUriFromQr, device, keyPair)
     .start(new Callback<Enrollment> {
@@ -119,7 +119,7 @@ Vous devez fournir les données suivantes :
 
 Pour désactiver la MFA, vous pouvez supprimer l’inscription :
 
-```javascript lines
+```java lines
 guardian
     .delete(enrollment)
     .execute(); // or start(new Callback<> ...)
@@ -148,7 +148,7 @@ public void onMessageReceived(RemoteMessage message) {
 
 Une fois que vous disposez de l’instance de notification, vous pouvez utiliser la méthode `Allow (Autoriser)` pour approuver la demande d’authentification. Vous aurez également besoin de l’inscription que vous avez obtenue précédemment. S’il y a plusieurs inscriptions, assurez-vous d’utiliser celle qui a le même `id` que la notification (la propriété `enrollmentId`).
 
-```javascript lines
+```java lines
 guardian
     .allow(notification, enrollment)
     .execute(); // or start(new Callback<> ...)
@@ -158,7 +158,7 @@ guardian
 
 Pour refuser une demande d’authentification, utilisez plutôt  `reject (rejeter)`. Vous pouvez également ajouter un motif facultatif de rejet, qui sera disponible dans les journaux de Guardian.
 
-```javascript lines
+```java lines
 guardian
     .reject(notification, enrollment) // or reject(notification, enrollment, reason)
     .execute(); // or start(new Callback<> ...)
@@ -196,7 +196,7 @@ Premièrement, ajoutez la classe `LoginCodeGenerator`  à votre projet. Ensuite,
 
 **Java**
 
-```java lines
+```java lines expandable
 public class LoginCodeGenerator {
 
    private static final int TOTP_LENGTH = 6;
@@ -230,7 +230,7 @@ public class LoginCodeGenerator {
 
 **Kotlin**
 
-```kotlin lines
+```kotlin lines expandable
 class LoginCodeGenerator {
 
    fun getCode(copiedCode: String): String {

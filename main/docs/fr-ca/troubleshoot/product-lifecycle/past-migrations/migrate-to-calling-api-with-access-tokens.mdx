@@ -83,9 +83,9 @@ Dans cette section, nous allons utiliser un exemple pour montrer les différence
 
 Dans l’exemple ci-dessous, vous utilisez le point de terminaison `GET User by ID (Obtenir l’utilisateur par identifiant)` pour récupérer les informations de profil complètes de l’utilisateur connecté. Pour ce faire, nous allons d’abord authentifier l’utilisateur à l’aide de l’octroi implicite et récupérer le(s) jeton(s). Vous pouvez voir ci-dessous une implémentation de l’ancienne approche qui obtient un jeton d’ID et l’utilise ensuite pour appeler le point de terminaison.
 
+codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-
-```javascript lines
+```http lines
 https://{yourDomain}/authorize?
       scope=openid
       &response_type=id_token
@@ -97,9 +97,9 @@ https://{yourDomain}/authorize?
 
 Dans l’exemple ci-dessous, vous pouvez voir la nouvelle approche qui obtient un jeton d’accès.
 
+codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-
-```javascript lines
+```http lines
 https://{yourDomain}/authorize?
       audience=https://{yourDomain}/api/v2/
       &scope=read:current_user
@@ -118,7 +118,7 @@ Pour obtenir un jeton d’accès permettant d’accéder à Management API :
 
 Si vous décodez le jeton d’accès reçu et examinez son contenu, vous verrez ce qui suit :
 
-```javascript lines
+```json lines
 {
       "iss": "https://{yourDomain}/",
       "sub": "auth0|5a620d29a840170a9ef43672",
@@ -140,9 +140,9 @@ Dans cette section, nous allons utiliser un exemple pour montrer les différence
 
 Dans l’exemple ci-dessous, vous souhaitez utiliser le point de terminaison `GET User by ID` pour récupérer les informations de profil complètes de l’utilisateur connecté. Tout d’abord, authentifiez l’utilisateur à l’aide de l’octroi Password Exchange (Échange de mot passe), puis récupérez le(s) jeton(s). Vous pouvez voir ci-dessous une implémentation de l’ancienne approche qui obtient un jeton d’ID (et l’utilise ensuite pour appeler le point de terminaison).
 
+codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-
-```javascript lines
+```json lines
 POST https://{yourDomain}/oauth/token
     Content-Type: application/x-www-form-urlencoded
     {
@@ -157,9 +157,9 @@ POST https://{yourDomain}/oauth/token
 
 Dans l’exemple ci-dessous, vous pouvez voir la nouvelle approche qui obtient également un jeton d’accès.
 
+codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-
-```javascript lines
+```json lines
 POST https://{yourDomain}/oauth/token
     Content-Type: application/x-www-form-urlencoded
     {
@@ -188,7 +188,7 @@ Si vous utilisez auth0.js pour accéder à Management API et gérer vos utilisat
 
 Dans l’exemple ci-dessous, vous pouvez voir l’ancienne approche.
 
-
+codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
 ```javascript lines
 // get an ID Token
@@ -208,7 +208,7 @@ Dans l’exemple ci-dessous, vous pouvez voir l’ancienne approche.
 
 Dans cet exemple, vous pouvez voir la nouvelle approche.
 
-
+codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
 ```javascript lines
 // get an Access Token

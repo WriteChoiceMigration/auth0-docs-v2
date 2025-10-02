@@ -21,7 +21,7 @@ La limite de la taille des fichiers pour une importation en bloc est de 500 Ko.
 
 Le schéma JSON suivant décrit les utilisateurs valides :
 
-```json lines
+```json lines expandable
 {
   "type": "object",
 	"properties": {
@@ -532,7 +532,7 @@ L’objet `user.custom_password_hash` possède les propriétés suivantes :
 
 Pendant le processus d’importation en bloc, vous pouvez mettre à jour le `Mot de passe haché personnalisé` si l’utilisateur ne s’est pas connecté en utilisant le `custom_password_hash.` initialement importé. Vous pouvez, par exemple, envoyer deux fois le fichier JSON ci-dessous au point de terminaison[`/api/v2/jobs/users-imports`](https://auth0.com/docs/api/management/v2?_ga=2.169020323.346193905.1601302257-746691936.1587131255#!/Jobs/post_users_imports) avec des valeurs différentes pour `custom_password_hash`. Au deuxième envoi, attribuez la valeur `upsert` à l’indicateur `true`.
 
-```javascript lines
+```json lines
 [
     {
     	"user_id": "2000",
@@ -760,7 +760,7 @@ Un fichier dont le contenu est le suivant est valide :
 
 Quelques exemples d’utilisateurs avec des hachages fournis :
 
-```json lines
+```json lines expandable
 [
     {
         "email": "antoinette@contoso.com",
@@ -886,7 +886,7 @@ Comme vous vous en doutez, le tableau `user.mfa_factors` vous permet de fournir 
 
 Quelques exemples d’utilisateurs utilisant des facteurs MFA :
 
-```json lines
+```json lines expandable
 [
     {
         "email": "antoinette@contoso.com",

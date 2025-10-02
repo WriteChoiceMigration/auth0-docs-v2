@@ -43,7 +43,7 @@ Les règles d'Auth0 prennent en charge les variables d’environnement, accessib
 
 Les conteneurs Webtask sans serveur Auth0 sont approvisionnés à partir d’une banque associée à chaque locataire Auth0. Chaque instance de conteneur met à disposition l’objet `global`, accessible dans toutes les règles qui s’exécutent dans l’instance de conteneur. L’objet `global` agit comme une variable globale et peut être utilisé pour définir des informations, ou même pour définir des fonctions qui peuvent être utilisées dans toutes les règles (qui s’exécutent dans le conteneur), quelle que soit l’instance du pipeline :
 
-```javascript lines
+```js lines
 global.tokenVerify = global.tokenVerify || function(token, secret) {
       /* The 'jwt.verify' function is synchronous, however wrapping with a promise
       * provides for better error management and integration within the logic

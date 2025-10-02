@@ -24,8 +24,8 @@ Le guide de démarrage rapide vous guidera à travers la création d’une API 
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
-  --url 'https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO'
-```
+--url 'https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO'
+``` 
 ```csharp C# lines
 var client = new RestClient("https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO");
 var request = new RestRequest(Method.GET);
@@ -34,104 +34,84 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
-
 import (
-	"fmt"
-	"net/http"
-	"io/ioutil"
+"fmt"
+"net/http"
+"io/ioutil"
 )
-
 func main() {
-
-	url := "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO"
-
-	req, _ := http.NewRequest("GET", url, nil)
-
-	res, _ := http.DefaultClient.Do(req)
-
-	defer res.Body.Close()
-	body, _ := ioutil.ReadAll(res.Body)
-
-	fmt.Println(res)
-	fmt.Println(string(body))
-
+url := "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO"
+req, _ := http.NewRequest("GET", url, nil)
+res, _ := http.DefaultClient.Do(req)
+defer res.Body.Close()
+body, _ := ioutil.ReadAll(res.Body)
+fmt.Println(res)
+fmt.Println(string(body))
 }
 ```
 ```java Java lines
-HttpResponse<String> response = Unirest.get("https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO")
-  .asString();
+HttpResponse response = Unirest.get("https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO")
+.asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
-
 var options = {
-  method: 'GET',
-  url: 'https://%7ByourGceProject%7D.appspot.com/airportName',
-  params: {iataCode: 'SFO'}
+method: 'GET',
+url: 'https://%7ByourGceProject%7D.appspot.com/airportName',
+params: {iataCode: 'SFO'}
 };
-
 axios.request(options).then(function (response) {
-  console.log(response.data);
+console.log(response.data);
 }).catch(function (error) {
-  console.error(error);
+console.error(error);
 });
 ```
 ```obj-c Obj-C lines
-#import <Foundation/Foundation.h>
-
-NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO"]
-                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                   timeoutInterval:10.0];
+#import 
+NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO"]
+cachePolicy:NSURLRequestUseProtocolCachePolicy
+timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
-
-NSURLSession *session = [NSURLSession sharedSession];
-NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                if (error) {
-                                                    NSLog(@"%@", error);
-                                                } else {
-                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-                                                    NSLog(@"%@", httpResponse);
-                                                }
-                                            }];
+NSURLSession \*session = [NSURLSession sharedSession];
+NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
+completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
+if (error) {
+NSLog(@"%@", error);
+} else {
+NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
+NSLog(@"%@", httpResponse);
+}
+}];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
-
 curl_setopt_array($curl, [
-  CURLOPT_URL => "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
+CURLOPT_URL => "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO",
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_ENCODING => "",
+CURLOPT_MAXREDIRS => 10,
+CURLOPT_TIMEOUT => 30,
+CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+CURLOPT_CUSTOMREQUEST => "GET",
 ]);
-
 $response = curl_exec($curl);
 $err = curl_error($curl);
-
 curl_close($curl);
-
 if ($err) {
-  echo "cURL Error #:" . $err;
+echo "cURL Error #:" . $err;
 } else {
-  echo $response;
+echo $response;
 }
 ```
 ```python Python lines
 import http.client
-
 conn = http.client.HTTPSConnection("")
-
 conn.request("GET", "%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO")
-
 res = conn.getresponse()
 data = res.read()
-
 print(data.decode("utf-8"))
 ```
 
@@ -139,36 +119,29 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
-
 url = URI("https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO")
-
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
 request = Net::HTTP::Get.new(url)
-
 response = http.request(request)
 puts response.read_body
 ```
 ```swift Swift lines
 import Foundation
-
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO")! as URL,
-                                        cachePolicy: .useProtocolCachePolicy,
-                                    timeoutInterval: 10.0)
+cachePolicy: .useProtocolCachePolicy,
+timeoutInterval: 10.0)
 request.httpMethod = "GET"
-
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-  if (error != nil) {
-    print(error)
-  } else {
-    let httpResponse = response as? HTTPURLResponse
-    print(httpResponse)
-  }
+if (error != nil) {
+print(error)
+} else {
+let httpResponse = response as? HTTPURLResponse
+print(httpResponse)
+}
 })
-
 dataTask.resume()
 ```
 </CodeGroup>
@@ -223,7 +196,7 @@ Ouvrez le fichier de configuration et ajoutez une nouvelle section `securityDefi
 </tbody>
 </table>
 
-
+codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
 ```yaml lines
 securityDefinitions:
@@ -267,9 +240,9 @@ Dans l’exemple ci-dessus, le champ `security` indique au proxy GCE que notre c
 
 Après la mise à jour de la configuration OpenAPI, elle devrait ressembler à ceci :
 
+codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-
-```yaml lines expandable
+```yaml lines
 ---
 swagger: "2.0"
 info:
@@ -325,7 +298,7 @@ Une fois que vous avez redéployé l’API, appelez à nouveau l’API sans séc
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
-  --url 'https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO'
+--url 'https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO'
 ```
 ```csharp C# lines
 var client = new RestClient("https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO");
@@ -335,104 +308,84 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
-
 import (
-	"fmt"
-	"net/http"
-	"io/ioutil"
+"fmt"
+"net/http"
+"io/ioutil"
 )
-
 func main() {
-
-	url := "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO"
-
-	req, _ := http.NewRequest("GET", url, nil)
-
-	res, _ := http.DefaultClient.Do(req)
-
-	defer res.Body.Close()
-	body, _ := ioutil.ReadAll(res.Body)
-
-	fmt.Println(res)
-	fmt.Println(string(body))
-
+url := "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO"
+req, _ := http.NewRequest("GET", url, nil)
+res, _ := http.DefaultClient.Do(req)
+defer res.Body.Close()
+body, _ := ioutil.ReadAll(res.Body)
+fmt.Println(res)
+fmt.Println(string(body))
 }
 ```
 ```java Java lines
-HttpResponse<String> response = Unirest.get("https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO")
-  .asString();
+HttpResponse response = Unirest.get("https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO")
+.asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
-
 var options = {
-  method: 'GET',
-  url: 'https://%7ByourGceProject%7D.appspot.com/airportName',
-  params: {iataCode: 'SFO'}
+method: 'GET',
+url: 'https://%7ByourGceProject%7D.appspot.com/airportName',
+params: {iataCode: 'SFO'}
 };
-
 axios.request(options).then(function (response) {
-  console.log(response.data);
+console.log(response.data);
 }).catch(function (error) {
-  console.error(error);
+console.error(error);
 });
 ```
 ```obj-c Obj-C lines
-#import <Foundation/Foundation.h>
-
-NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO"]
-                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                   timeoutInterval:10.0];
+#import 
+NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO"]
+cachePolicy:NSURLRequestUseProtocolCachePolicy
+timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
-
-NSURLSession *session = [NSURLSession sharedSession];
-NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                if (error) {
-                                                    NSLog(@"%@", error);
-                                                } else {
-                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-                                                    NSLog(@"%@", httpResponse);
-                                                }
-                                            }];
+NSURLSession \*session = [NSURLSession sharedSession];
+NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
+completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
+if (error) {
+NSLog(@"%@", error);
+} else {
+NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
+NSLog(@"%@", httpResponse);
+}
+}];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
-
 curl_setopt_array($curl, [
-  CURLOPT_URL => "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
+CURLOPT_URL => "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO",
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_ENCODING => "",
+CURLOPT_MAXREDIRS => 10,
+CURLOPT_TIMEOUT => 30,
+CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+CURLOPT_CUSTOMREQUEST => "GET",
 ]);
-
 $response = curl_exec($curl);
 $err = curl_error($curl);
-
 curl_close($curl);
-
 if ($err) {
-  echo "cURL Error #:" . $err;
+echo "cURL Error #:" . $err;
 } else {
-  echo $response;
+echo $response;
 }
 ```
 ```python Python lines
 import http.client
-
 conn = http.client.HTTPSConnection("")
-
 conn.request("GET", "%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO")
-
 res = conn.getresponse()
 data = res.read()
-
 print(data.decode("utf-8"))
 ```
 
@@ -440,36 +393,29 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
-
 url = URI("https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO")
-
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
 request = Net::HTTP::Get.new(url)
-
 response = http.request(request)
 puts response.read_body
 ```
 ```swift Swift lines
 import Foundation
-
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO")! as URL,
-                                        cachePolicy: .useProtocolCachePolicy,
-                                    timeoutInterval: 10.0)
+cachePolicy: .useProtocolCachePolicy,
+timeoutInterval: 10.0)
 request.httpMethod = "GET"
-
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-  if (error != nil) {
-    print(error)
-  } else {
-    let httpResponse = response as? HTTPURLResponse
-    print(httpResponse)
-  }
+if (error != nil) {
+print(error)
+} else {
+let httpResponse = response as? HTTPURLResponse
+print(httpResponse)
+}
 })
-
 dataTask.resume()
 ```
 </CodeGroup>
@@ -499,8 +445,8 @@ Effectuez une demande `GET` à votre API avec un en-tête d’autorisation du `B
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
-  --url 'https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO' \
-  --header 'authorization: Bearer {accessToken}'
+--url 'https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO' \
+--header 'authorization: Bearer {accessToken}'
 ```
 ```csharp C# lines
 var client = new RestClient("https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO");
@@ -511,116 +457,93 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
-
 import (
-	"fmt"
-	"net/http"
-	"io/ioutil"
+"fmt"
+"net/http"
+"io/ioutil"
 )
-
 func main() {
-
-	url := "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO"
-
-	req, _ := http.NewRequest("GET", url, nil)
-
-	req.Header.Add("authorization", "Bearer {accessToken}")
-
-	res, _ := http.DefaultClient.Do(req)
-
-	defer res.Body.Close()
-	body, _ := ioutil.ReadAll(res.Body)
-
-	fmt.Println(res)
-	fmt.Println(string(body))
-
+url := "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO"
+req, _ := http.NewRequest("GET", url, nil)
+req.Header.Add("authorization", "Bearer {accessToken}")
+res, _ := http.DefaultClient.Do(req)
+defer res.Body.Close()
+body, _ := ioutil.ReadAll(res.Body)
+fmt.Println(res)
+fmt.Println(string(body))
 }
 ```
 ```java Java lines
-HttpResponse<String> response = Unirest.get("https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO")
-  .header("authorization", "Bearer {accessToken}")
-  .asString();
+HttpResponse response = Unirest.get("https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO")
+.header("authorization", "Bearer {accessToken}")
+.asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
-
 var options = {
-  method: 'GET',
-  url: 'https://%7ByourGceProject%7D.appspot.com/airportName',
-  params: {iataCode: 'SFO'},
-  headers: {authorization: 'Bearer {accessToken}'}
+method: 'GET',
+url: 'https://%7ByourGceProject%7D.appspot.com/airportName',
+params: {iataCode: 'SFO'},
+headers: {authorization: 'Bearer {accessToken}'}
 };
-
 axios.request(options).then(function (response) {
-  console.log(response.data);
+console.log(response.data);
 }).catch(function (error) {
-  console.error(error);
+console.error(error);
 });
 ```
 ```obj-c Obj-C lines
-#import <Foundation/Foundation.h>
-
-NSDictionary *headers = @{ @"authorization": @"Bearer {accessToken}" };
-
-NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO"]
-                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                   timeoutInterval:10.0];
+#import 
+NSDictionary \*headers = @{ @"authorization": @"Bearer {accessToken}" };
+NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO"]
+cachePolicy:NSURLRequestUseProtocolCachePolicy
+timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
 [request setAllHTTPHeaderFields:headers];
-
-NSURLSession *session = [NSURLSession sharedSession];
-NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                if (error) {
-                                                    NSLog(@"%@", error);
-                                                } else {
-                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-                                                    NSLog(@"%@", httpResponse);
-                                                }
-                                            }];
+NSURLSession \*session = [NSURLSession sharedSession];
+NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
+completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
+if (error) {
+NSLog(@"%@", error);
+} else {
+NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
+NSLog(@"%@", httpResponse);
+}
+}];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
-
 curl_setopt_array($curl, [
-  CURLOPT_URL => "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
-  CURLOPT_HTTPHEADER => [
-    "authorization: Bearer {accessToken}"
-  ],
+CURLOPT_URL => "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO",
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_ENCODING => "",
+CURLOPT_MAXREDIRS => 10,
+CURLOPT_TIMEOUT => 30,
+CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+CURLOPT_CUSTOMREQUEST => "GET",
+CURLOPT_HTTPHEADER => [
+"authorization: Bearer {accessToken}"
+],
 ]);
-
 $response = curl_exec($curl);
 $err = curl_error($curl);
-
 curl_close($curl);
-
 if ($err) {
-  echo "cURL Error #:" . $err;
+echo "cURL Error #:" . $err;
 } else {
-  echo $response;
+echo $response;
 }
 ```
 ```python Python lines
 import http.client
-
 conn = http.client.HTTPSConnection("")
-
 headers = { 'authorization': "Bearer {accessToken}" }
-
 conn.request("GET", "%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO", headers=headers)
-
 res = conn.getresponse()
 data = res.read()
-
 print(data.decode("utf-8"))
 ```
 
@@ -628,40 +551,32 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
-
 url = URI("https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO")
-
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
 request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {accessToken}'
-
 response = http.request(request)
 puts response.read_body
 ```
 ```swift Swift lines
 import Foundation
-
 let headers = ["authorization": "Bearer {accessToken}"]
-
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourGceProject%7D.appspot.com/airportName?iataCode=SFO")! as URL,
-                                        cachePolicy: .useProtocolCachePolicy,
-                                    timeoutInterval: 10.0)
+cachePolicy: .useProtocolCachePolicy,
+timeoutInterval: 10.0)
 request.httpMethod = "GET"
 request.allHTTPHeaderFields = headers
-
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-  if (error != nil) {
-    print(error)
-  } else {
-    let httpResponse = response as? HTTPURLResponse
-    print(httpResponse)
-  }
+if (error != nil) {
+print(error)
+} else {
+let httpResponse = response as? HTTPURLResponse
+print(httpResponse)
+}
 })
-
 dataTask.resume()
 ```
 </CodeGroup>

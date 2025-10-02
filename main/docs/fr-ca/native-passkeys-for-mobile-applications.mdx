@@ -91,7 +91,7 @@ Si l’utilisateur fournit un identifiant qui existe déjà, il est recommandé 
    * Par défaut, le courriel est l’identifiant requis. Si vous avez activé [Identifiants flexibles](/docs/fr-ca/authenticate/database-connections/activate-and-configure-attributes-for-flexible-identifiers) pour votre connexion de base de données, vous pouvez utiliser une combinaison de `email`, `phone_number`, ou `username` à la place. Ces options peuvent être obligatoires ou facultatives et doivent correspondre à votre configuration d’identificateur flexible.
    </Callout>
 
-   ``` lines
+   ```text lines
    POST /passkey/register
    Content-Type: application/json
 
@@ -110,7 +110,7 @@ Si l’utilisateur fournit un identifiant qui existe déjà, il est recommandé 
    
 3. En réponse, Auth0 renvoie [PublicKeyCredentialCreationOptions](https://www.w3.org/TR/webauthn-3/#dictdef-publickeycredentialcreationoptions) avec un identifiant `auth_session` :
 
-   ``` lines
+   ```text lines expandable
    HTTP/1.1 200 OK
    Content-Type: application/json
 
@@ -150,7 +150,7 @@ Si l’utilisateur fournit un identifiant qui existe déjà, il est recommandé 
    * Consultez la [documentation d’enregistrement iOS](https://developer.apple.com/documentation/authenticationservices/supporting-passkeys#Register-a-new-account-on-a-service).
 5. Votre application utilise ensuite les identifiants obtenus lors du processus d’enregistrement, y compris les détails `authn_response`, pour appeler le point de terminaison [Jeton](/docs/fr-ca/native-passkeys-api#authenticate-new-user) :
 
-   ``` lines
+   ```text lines
    POST /oauth/token
    Content-Type: application/json
 
@@ -179,7 +179,7 @@ Si l’utilisateur fournit un identifiant qui existe déjà, il est recommandé 
    
 6. Auth0 crée un nouveau compte utilisateur et renvoie les jetons demandés pour compléter le flux :
 
-   ``` lines
+   ```text lines
    HTTP/1.1 200 OK
    Content-Type: application/json
 
@@ -210,7 +210,7 @@ Un utilisateur existant lance le flux de connexion par clé d’identification l
 
    </Callout>
 
-   ``` lines
+   ```text lines
    POST /passkey/challenge
    Content-Type: application/json
 
@@ -225,7 +225,7 @@ Un utilisateur existant lance le flux de connexion par clé d’identification l
    
 2. En réponse, Auth0 renvoie [PublicKeyCredentialRequestOptions](https://www.w3.org/TR/webauthn-3/#dictdef-publickeycredentialrequestoptions) avec l’objet `auth_session` pour continuer le flux dans votre application :
 
-   ``` lines
+   ```text lines
    HTTP/1.1 200 OK
    Content-Type: application/json
 
@@ -249,7 +249,7 @@ Un utilisateur existant lance le flux de connexion par clé d’identification l
    * Consultez la [documentation de connexion iOS](https://developer.apple.com/documentation/authenticationservices/supporting-passkeys#Connect-to-a-service-with-an-existing-account).
 4. Votre application utilise ensuite les identifiants obtenus lors du processus de connexion, y compris les détails `authn_response`, pour appeler le point de terminaison[Jeton](/docs/fr-ca/native-passkeys-api#authenticate-existing-user) :
 
-   ``` lines
+   ```text lines
    POST /oauth/token
    Content-Type: application/json
 
@@ -280,7 +280,7 @@ Un utilisateur existant lance le flux de connexion par clé d’identification l
    
 5. Auth0 authentifie les identifiants de connexion et renvoie les jetons demandés pour compléter le flux :
 
-   ``` lines
+   ```text lines
    HTTP/1.1 200 OK
    Content-Type: application/json
 

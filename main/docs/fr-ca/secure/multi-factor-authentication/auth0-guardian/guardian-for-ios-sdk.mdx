@@ -22,7 +22,7 @@ permalink: "guardian-for-ios-sdk"
 
 Guardian.swift est disponible sur [CocoaPods](http://cocoapods.org). Pour l’installer, ajoutez la ligne suivante à votre podfile :
 
-``` lines
+```bash lines
 pod 'Guardian', '~> 1.1.0'
 ```
 
@@ -30,7 +30,7 @@ pod 'Guardian', '~> 1.1.0'
 
 Ajoutez cette ligne à votre cartfile :
 
-``` lines
+```bash lines
 github "auth0/Guardian.swift" ~> 1.1.0
 ```
 
@@ -114,7 +114,7 @@ let signingKey = try DataRSAPrivateKey.new()
 
 Cette clé n’existe qu’en mémoire, mais vous pouvez obtenir sa représentation `Data` et la stocker en toute sécurité, par exemple dans une SQLiteDB chiffrée.
 
-```swift lines
+```javascript lines
 // Store data
 let data = signingKey.data
 // perform the storage
@@ -125,13 +125,13 @@ let loadedKey = try DataRSAPrivateKey(data: data)
 
 Si vous voulez simplement la stocker dans le trousseau d’iOS :
 
-```swift lines
+```swift wrap lines
 let signingKey = try KeychainRSAPrivateKey.new(with: "com.myapp.mytag")
 ```
 
 Dans l’exemple ci-dessus, une clé est créée et stockée automatiquement sous la balise fournie. Si vous souhaitez la récupérer, vous pouvez utiliser la balise :
 
-```swift lines
+```swift wrap lines
 let signingKey = try KeychainRSAPrivateKey(tag: "com.myapp.mytag")
 ```
 
@@ -247,7 +247,7 @@ Vous pouvez connecter une ressource à partir du Auth0 Dashboard ou de la trouss
    
 2. Créez un générateur de code.
 
-   ``` lines
+   ```swift lines
    let codeGenerator = try Guardian.totp(
 
       base32Secret: enrollmentCode,  // Enrollment code entered by user
@@ -262,7 +262,7 @@ Vous pouvez connecter une ressource à partir du Auth0 Dashboard ou de la trouss
    
 3. Récupérez le code généré.
 
-   ``` lines
+   ```swift lines
    codeGenerator.code()
    ```
 

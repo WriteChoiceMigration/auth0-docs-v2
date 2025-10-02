@@ -94,13 +94,13 @@ Cette erreur se produit lorsque l’attribut `InResponseTo` dans la réponse SAM
 
 Si votre locataire utilise un domaine personnalisé, vous pourriez avoir une incohérence si le flux de connexion commence sur le domaine personnalisé et se termine sur le domaine canonique. Par exemple, l’utilisateur commence sur le domaine personnalisé :
 
-``` lines
+```http wrap lines
 https://auth.{yourDomain}.com/authorize?client_id=abc123&redirect_uri=https://jwt.io&response_type=code&scope=openid&audience=https://example.com&connection=mysamlconnection
 ```
 
 Mais le fournisseur d’identité est configuré pour renvoyer la réponse SAML à l’URL ACS sur le domaine canonique :
 
-``` lines
+```http lines
 https://{yourTenant}.auth0.com/login/callback
 ```
 
@@ -510,7 +510,7 @@ Dans ce cas, l’utilisateur se connecte à l’IdP avec succès, un événement
       2. Cliquez sur **Create Rule (Créer des règles)** et, sur la page suivante, choisissez le modèle **Change your SAML configuration (Modifier votre configuration SAML)** .
       3. Dans l’éditeur de règles, supprimez les commentaire des lignes que vous souhaitez utiliser. Utilisez les lignes 9 à 17 dans le modèle pour mapper les attributs selon vos besoins. Vous pouvez également ajouter des lignes pour mettre en œuvre des mappages. Le côté gauche de chaque ligne précise l’identifiant de l’attribut dans l’assertion. Le côté droit de chaque ligne fait référence à l’attribut du profil utilisateur Auth0 dont la valeur sera utilisée pour remplir l’assertion sortante envoyée à l’application.
 
-         ```
+         ```text lines
          //context.samlConfiguration.mappings = {    
              // "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier":      "user_id",    
              // "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress":        "email",    

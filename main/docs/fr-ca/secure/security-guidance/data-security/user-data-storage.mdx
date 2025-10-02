@@ -80,9 +80,9 @@ pour enregistrer les modifications dans la base de données, l’application app
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
---url https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id \
---header 'authorization: Bearer {yourIdToken}'
-``` lines
+  --url https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id \
+  --header 'authorization: Bearer {yourIdToken}'
+```
 ```csharp C# lines
 var client = new RestClient("https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id");
 var request = new RestRequest(Method.GET);
@@ -92,92 +92,115 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id"
-req, _ := http.NewRequest("GET", url, nil)
-req.Header.Add("authorization", "Bearer {yourIdToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id"
+
+	req, _ := http.NewRequest("GET", url, nil)
+
+	req.Header.Add("authorization", "Bearer {yourIdToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.get("https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id")
-.header("authorization", "Bearer {yourIdToken}")
-.asString();
+HttpResponse<String> response = Unirest.get("https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id")
+  .header("authorization", "Bearer {yourIdToken}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'GET',
-url: 'https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id',
-headers: {authorization: 'Bearer {yourIdToken}'}
+  method: 'GET',
+  url: 'https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id',
+  headers: {authorization: 'Bearer {yourIdToken}'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourIdToken}" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourIdToken}" };
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
 [request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "GET",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourIdToken}"
-],
+  CURLOPT_URL => "https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourIdToken}"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 headers = { 'authorization': "Bearer {yourIdToken}" }
+
 conn.request("GET", "%7ByourAccount%7D.auth0.com/api/v2/users/user_id", headers=headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -185,32 +208,40 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourIdToken}'
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["authorization": "Bearer {yourIdToken}"]
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourAccount%7D.auth0.com/api/v2/users/user_id")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "GET"
 request.allHTTPHeaderFields = headers
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -220,11 +251,11 @@ cet appel est suivi d’un appel au point de terminaison [Mettre à jour un util
 <CodeGroup>
 ```bash cURL lines
 curl --request PATCH \
---url 'https://{yourDomain}/api/v2/users/user_id' \
---header 'authorization: Bearer {yourAccessToken}' \
---header 'content-type: application/json' \
---data '{"user_metadata": {"displayName": "J-vald3z"}'
-``` lines
+  --url 'https://{yourDomain}/api/v2/users/user_id' \
+  --header 'authorization: Bearer {yourAccessToken}' \
+  --header 'content-type: application/json' \
+  --data '{"user_metadata": {"displayName": "J-vald3z"}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/api/v2/users/user_id");
 var request = new RestRequest(Method.PATCH);
@@ -234,109 +265,135 @@ request.AddParameter("application/json", "{\"user_metadata\": {\"displayName\": 
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/users/user_id"
-payload := strings.NewReader("{\"user_metadata\": {\"displayName\": \"J-vald3z\"}")
-req, _ := http.NewRequest("PATCH", url, payload)
-req.Header.Add("authorization", "Bearer {yourAccessToken}")
-req.Header.Add("content-type", "application/json")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/api/v2/users/user_id"
+
+	payload := strings.NewReader("{\"user_metadata\": {\"displayName\": \"J-vald3z\"}")
+
+	req, _ := http.NewRequest("PATCH", url, payload)
+
+	req.Header.Add("authorization", "Bearer {yourAccessToken}")
+	req.Header.Add("content-type", "application/json")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/users/user_id")
-.header("authorization", "Bearer {yourAccessToken}")
-.header("content-type", "application/json")
-.body("{\"user_metadata\": {\"displayName\": \"J-vald3z\"}")
-.asString();
+HttpResponse<String> response = Unirest.patch("https://{yourDomain}/api/v2/users/user_id")
+  .header("authorization", "Bearer {yourAccessToken}")
+  .header("content-type", "application/json")
+  .body("{\"user_metadata\": {\"displayName\": \"J-vald3z\"}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'PATCH',
-url: 'https://{yourDomain}/api/v2/users/user_id',
-headers: {authorization: 'Bearer {yourAccessToken}', 'content-type': 'application/json'},
-data: '{"user_metadata": {"displayName": "J-vald3z"}'
+  method: 'PATCH',
+  url: 'https://{yourDomain}/api/v2/users/user_id',
+  headers: {authorization: 'Bearer {yourAccessToken}', 'content-type': 'application/json'},
+  data: '{"user_metadata": {"displayName": "J-vald3z"}'
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourAccessToken}",
-@"content-type": @"application/json" };
-NSData \*postData = [[NSData alloc] initWithData:[@"{"user_metadata": {"displayName": "J-vald3z"}" dataUsingEncoding:NSUTF8StringEncoding]];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users/user_id"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourAccessToken}",
+                           @"content-type": @"application/json" };
+
+NSData *postData = [[NSData alloc] initWithData:[@"{"user_metadata": {"displayName": "J-vald3z"}" dataUsingEncoding:NSUTF8StringEncoding]];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/users/user_id"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"PATCH"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/users/user_id",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PATCH",
-CURLOPT_POSTFIELDS => "{\"user_metadata\": {\"displayName\": \"J-vald3z\"}",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourAccessToken}",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/api/v2/users/user_id",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PATCH",
+  CURLOPT_POSTFIELDS => "{\"user_metadata\": {\"displayName\": \"J-vald3z\"}",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourAccessToken}",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{\"user_metadata\": {\"displayName\": \"J-vald3z\"}"
+
 headers = {
-'authorization': "Bearer {yourAccessToken}",
-'content-type': "application/json"
-}
+    'authorization': "Bearer {yourAccessToken}",
+    'content-type': "application/json"
+    }
+
 conn.request("PATCH", "/{yourDomain}/api/v2/users/user_id", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -344,39 +401,48 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/api/v2/users/user_id")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Patch.new(url)
 request["authorization"] = 'Bearer {yourAccessToken}'
 request["content-type"] = 'application/json'
 request.body = "{\"user_metadata\": {\"displayName\": \"J-vald3z\"}"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"authorization": "Bearer {yourAccessToken}",
-"content-type": "application/json"
+  "authorization": "Bearer {yourAccessToken}",
+  "content-type": "application/json"
 ]
+
 let postData = NSData(data: "{"user_metadata": {"displayName": "J-vald3z"}".data(using: String.Encoding.utf8)!)
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/users/user_id")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "PATCH"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -391,7 +457,7 @@ Utilisez des [rules](/docs/fr-ca/customize/rules) pour mettre en place des autor
 
 La première règle envoie une demande à notre API Node, qui interroge ensuite la base de données connectée à Heroku pour vérifier le nombre de lectures de la liste de lecture de l’utilisateur. Si le nombre est égal ou supérieur à 100, nous attribuons la valeur `playlist_editor` au tableau `roles` dans `app_metadata`.
 
-```javascript lines
+```javascript lines expandable
 function (user, context, callback) {
 
   var request = require('request');

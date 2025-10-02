@@ -9,7 +9,7 @@ permalink: "manage-authentication-methods-with-management-api"
 'twitter:description': "Découvrez comment utiliser Management API Auth0 pour gérer les méthodes d’authentification MFA pour vos utilisateurs."
 ---
 
-<Card title="Avant de commencer">
+<Card title="Before you start">
 
 * Configurez une [application machine-machine (M-M)](/docs/fr-ca/get-started/auth0-overview/create-applications/machine-to-machine-apps) et [accordez-lui l’accès à Auth0 Management API](/docs/fr-ca/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-production) avec les permissions suivantes :
 
@@ -37,9 +37,9 @@ La requête suivante renvoie une liste de toutes les méthodes d’authentificat
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
---url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
---header 'authorization: Bearer {yourMgmtApiAccessToken}'
-``` lines
+  --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}'
+```
 ```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods");
 var request = new RestRequest(Method.GET);
@@ -49,92 +49,115 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"
-req, _ := http.NewRequest("GET", url, nil)
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"
+
+	req, _ := http.NewRequest("GET", url, nil)
+
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.get("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.asString();
+HttpResponse<String> response = Unirest.get("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'GET',
-url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods',
-headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'}
+  method: 'GET',
+  url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods',
+  headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
 [request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "GET",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}"
-],
+  CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
+
 conn.request("GET", "%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods", headers=headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -142,32 +165,40 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "GET"
 request.allHTTPHeaderFields = headers
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -201,9 +232,9 @@ La requête suivante renvoie une seule méthode d’authentification pour un uti
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
---url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D \
---header 'authorization: Bearer {yourMgmtApiAccessToken}'
-``` lines
+  --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}'
+```
 ```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D");
 var request = new RestRequest(Method.GET);
@@ -213,92 +244,115 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D"
-req, _ := http.NewRequest("GET", url, nil)
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D"
+
+	req, _ := http.NewRequest("GET", url, nil)
+
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.get("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.asString();
+HttpResponse<String> response = Unirest.get("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'GET',
-url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D',
-headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'}
+  method: 'GET',
+  url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D',
+  headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
 [request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "GET",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}"
-],
+  CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
+
 conn.request("GET", "%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D", headers=headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -306,32 +360,40 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "GET"
 request.allHTTPHeaderFields = headers
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -373,10 +435,10 @@ La demande suivante crée une méthode d’authentification par SMS pour un uti
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
---header 'authorization: Bearer {yourMgmtApiAccessToken}' \
---data '{ "type": "phone", "name": "SMS", "phone_number": "+00000000000" }'
-``` lines
+  --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
+  --data '{ "type": "phone", "name": "SMS", "phone_number": "+00000000000" }'
+```
 ```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods");
 var request = new RestRequest(Method.POST);
@@ -385,105 +447,131 @@ request.AddParameter("undefined", "{ \"type\": \"phone\", \"name\": \"SMS\", \"p
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"
-payload := strings.NewReader("{ \"type\": \"phone\", \"name\": \"SMS\", \"phone_number\": \"+00000000000\" }")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"
+
+	payload := strings.NewReader("{ \"type\": \"phone\", \"name\": \"SMS\", \"phone_number\": \"+00000000000\" }")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.post("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.body("{ \"type\": \"phone\", \"name\": \"SMS\", \"phone_number\": \"+00000000000\" }")
-.asString();
+HttpResponse<String> response = Unirest.post("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .body("{ \"type\": \"phone\", \"name\": \"SMS\", \"phone_number\": \"+00000000000\" }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods',
-headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'},
-data: {type: 'phone', name: 'SMS', phone_number: '+00000000000'}
+  method: 'POST',
+  url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods',
+  headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'},
+  data: {type: 'phone', name: 'SMS', phone_number: '+00000000000'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-NSDictionary \*parameters = @{ @"type": @"phone",
-@"name": @"SMS",
-@"phone_number": @"+00000000000" };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+NSDictionary *parameters = @{ @"type": @"phone",
+                              @"name": @"SMS",
+                              @"phone_number": @"+00000000000" };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{ \"type\": \"phone\", \"name\": \"SMS\", \"phone_number\": \"+00000000000\" }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}"
-],
+  CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{ \"type\": \"phone\", \"name\": \"SMS\", \"phone_number\": \"+00000000000\" }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"type\": \"phone\", \"name\": \"SMS\", \"phone_number\": \"+00000000000\" }"
+
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
+
 conn.request("POST", "%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -491,40 +579,49 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request.body = "{ \"type\": \"phone\", \"name\": \"SMS\", \"phone_number\": \"+00000000000\" }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let parameters = [
-"type": "phone",
-"name": "SMS",
-"phone_number": "+00000000000"
+  "type": "phone",
+  "name": "SMS",
+  "phone_number": "+00000000000"
 ] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -554,10 +651,10 @@ La requête suivante crée une méthode d’authentification par courriel pour u
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
---header 'authorization: Bearer {yourMgmtApiAccessToken}' \
---data '{ "type": "email", "name": "Email Factor", "email": "user@example.com" }'
-``` lines
+  --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
+  --data '{ "type": "email", "name": "Email Factor", "email": "user@example.com" }'
+```
 ```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods");
 var request = new RestRequest(Method.POST);
@@ -566,105 +663,131 @@ request.AddParameter("undefined", "{ \"type\": \"email\", \"name\": \"Email Fact
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"
-payload := strings.NewReader("{ \"type\": \"email\", \"name\": \"Email Factor\", \"email\": \"user@example.com\" }")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"
+
+	payload := strings.NewReader("{ \"type\": \"email\", \"name\": \"Email Factor\", \"email\": \"user@example.com\" }")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.post("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.body("{ \"type\": \"email\", \"name\": \"Email Factor\", \"email\": \"user@example.com\" }")
-.asString();
+HttpResponse<String> response = Unirest.post("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .body("{ \"type\": \"email\", \"name\": \"Email Factor\", \"email\": \"user@example.com\" }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods',
-headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'},
-data: {type: 'email', name: 'Email Factor', email: 'user@example.com'}
+  method: 'POST',
+  url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods',
+  headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'},
+  data: {type: 'email', name: 'Email Factor', email: 'user@example.com'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-NSDictionary \*parameters = @{ @"type": @"email",
-@"name": @"Email Factor",
-@"email": @"user@example.com" };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+NSDictionary *parameters = @{ @"type": @"email",
+                              @"name": @"Email Factor",
+                              @"email": @"user@example.com" };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{ \"type\": \"email\", \"name\": \"Email Factor\", \"email\": \"user@example.com\" }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}"
-],
+  CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{ \"type\": \"email\", \"name\": \"Email Factor\", \"email\": \"user@example.com\" }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"type\": \"email\", \"name\": \"Email Factor\", \"email\": \"user@example.com\" }"
+
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
+
 conn.request("POST", "%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -672,40 +795,49 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request.body = "{ \"type\": \"email\", \"name\": \"Email Factor\", \"email\": \"user@example.com\" }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let parameters = [
-"type": "email",
-"name": "Email Factor",
-"email": "user@example.com"
+  "type": "email",
+  "name": "Email Factor",
+  "email": "user@example.com"
 ] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -735,10 +867,10 @@ La demande suivante crée une méthode d’authentification OTP pour un utilisa
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
---header 'authorization: Bearer {yourMgmtApiAccessToken}' \
---data '{ "type": "totp", "name": "OTP Application", "totp_secret": "{yourSecret}" }'
-``` lines
+  --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
+  --data '{ "type": "totp", "name": "OTP Application", "totp_secret": "{yourSecret}" }'
+```
 ```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods");
 var request = new RestRequest(Method.POST);
@@ -747,105 +879,131 @@ request.AddParameter("undefined", "{ \"type\": \"totp\", \"name\": \"OTP Applica
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"
-payload := strings.NewReader("{ \"type\": \"totp\", \"name\": \"OTP Application\", \"totp_secret\": \"{yourSecret}\" }")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"
+
+	payload := strings.NewReader("{ \"type\": \"totp\", \"name\": \"OTP Application\", \"totp_secret\": \"{yourSecret}\" }")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.post("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.body("{ \"type\": \"totp\", \"name\": \"OTP Application\", \"totp_secret\": \"{yourSecret}\" }")
-.asString();
+HttpResponse<String> response = Unirest.post("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .body("{ \"type\": \"totp\", \"name\": \"OTP Application\", \"totp_secret\": \"{yourSecret}\" }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods',
-headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'},
-data: {type: 'totp', name: 'OTP Application', totp_secret: '{yourSecret}'}
+  method: 'POST',
+  url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods',
+  headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'},
+  data: {type: 'totp', name: 'OTP Application', totp_secret: '{yourSecret}'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-NSDictionary \*parameters = @{ @"type": @"totp",
-@"name": @"OTP Application",
-@"totp_secret": @"{yourSecret}" };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+NSDictionary *parameters = @{ @"type": @"totp",
+                              @"name": @"OTP Application",
+                              @"totp_secret": @"{yourSecret}" };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{ \"type\": \"totp\", \"name\": \"OTP Application\", \"totp_secret\": \"{yourSecret}\" }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}"
-],
+  CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{ \"type\": \"totp\", \"name\": \"OTP Application\", \"totp_secret\": \"{yourSecret}\" }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"type\": \"totp\", \"name\": \"OTP Application\", \"totp_secret\": \"{yourSecret}\" }"
+
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
+
 conn.request("POST", "%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -853,40 +1011,49 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request.body = "{ \"type\": \"totp\", \"name\": \"OTP Application\", \"totp_secret\": \"{yourSecret}\" }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let parameters = [
-"type": "totp",
-"name": "OTP Application",
-"totp_secret": "{yourSecret}"
+  "type": "totp",
+  "name": "OTP Application",
+  "totp_secret": "{yourSecret}"
 ] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -916,10 +1083,10 @@ La requête suivante crée une méthode d’authentification WebAuthn avec clés
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
---header 'authorization: Bearer {yourMgmtApiAccessToken}' \
---data '{ "type": "webauthn_roaming", "name": "WebAuthn with security keys", "public_key": "{yourPublicKey}", "key_id": "{yourKeyId}", "relying_party_identifier": "{yourDomain}" }'
-``` lines
+  --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
+  --data '{ "type": "webauthn_roaming", "name": "WebAuthn with security keys", "public_key": "{yourPublicKey}", "key_id": "{yourKeyId}", "relying_party_identifier": "{yourDomain}" }'
+```
 ```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods");
 var request = new RestRequest(Method.POST);
@@ -928,113 +1095,139 @@ request.AddParameter("undefined", "{ \"type\": \"webauthn_roaming\", \"name\": \
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"
-payload := strings.NewReader("{ \"type\": \"webauthn_roaming\", \"name\": \"WebAuthn with security keys\", \"public_key\": \"{yourPublicKey}\", \"key_id\": \"{yourKeyId}\", \"relying_party_identifier\": \"{yourDomain}\" }")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"
+
+	payload := strings.NewReader("{ \"type\": \"webauthn_roaming\", \"name\": \"WebAuthn with security keys\", \"public_key\": \"{yourPublicKey}\", \"key_id\": \"{yourKeyId}\", \"relying_party_identifier\": \"{yourDomain}\" }")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.post("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.body("{ \"type\": \"webauthn_roaming\", \"name\": \"WebAuthn with security keys\", \"public_key\": \"{yourPublicKey}\", \"key_id\": \"{yourKeyId}\", \"relying_party_identifier\": \"{yourDomain}\" }")
-.asString();
+HttpResponse<String> response = Unirest.post("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .body("{ \"type\": \"webauthn_roaming\", \"name\": \"WebAuthn with security keys\", \"public_key\": \"{yourPublicKey}\", \"key_id\": \"{yourKeyId}\", \"relying_party_identifier\": \"{yourDomain}\" }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods',
-headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'},
-data: {
-type: 'webauthn_roaming',
-name: 'WebAuthn with security keys',
-public_key: '{yourPublicKey}',
-key_id: '{yourKeyId}',
-relying_party_identifier: '{yourDomain}'
-}
+  method: 'POST',
+  url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods',
+  headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'},
+  data: {
+    type: 'webauthn_roaming',
+    name: 'WebAuthn with security keys',
+    public_key: '{yourPublicKey}',
+    key_id: '{yourKeyId}',
+    relying_party_identifier: '{yourDomain}'
+  }
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-NSDictionary \*parameters = @{ @"type": @"webauthn_roaming",
-@"name": @"WebAuthn with security keys",
-@"public_key": @"{yourPublicKey}",
-@"key_id": @"{yourKeyId}",
-@"relying_party_identifier": @"{yourDomain}" };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+NSDictionary *parameters = @{ @"type": @"webauthn_roaming",
+                              @"name": @"WebAuthn with security keys",
+                              @"public_key": @"{yourPublicKey}",
+                              @"key_id": @"{yourKeyId}",
+                              @"relying_party_identifier": @"{yourDomain}" };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{ \"type\": \"webauthn_roaming\", \"name\": \"WebAuthn with security keys\", \"public_key\": \"{yourPublicKey}\", \"key_id\": \"{yourKeyId}\", \"relying_party_identifier\": \"{yourDomain}\" }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}"
-],
+  CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{ \"type\": \"webauthn_roaming\", \"name\": \"WebAuthn with security keys\", \"public_key\": \"{yourPublicKey}\", \"key_id\": \"{yourKeyId}\", \"relying_party_identifier\": \"{yourDomain}\" }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"type\": \"webauthn_roaming\", \"name\": \"WebAuthn with security keys\", \"public_key\": \"{yourPublicKey}\", \"key_id\": \"{yourKeyId}\", \"relying_party_identifier\": \"{yourDomain}\" }"
+
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
+
 conn.request("POST", "%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -1042,42 +1235,51 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request.body = "{ \"type\": \"webauthn_roaming\", \"name\": \"WebAuthn with security keys\", \"public_key\": \"{yourPublicKey}\", \"key_id\": \"{yourKeyId}\", \"relying_party_identifier\": \"{yourDomain}\" }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let parameters = [
-"type": "webauthn_roaming",
-"name": "WebAuthn with security keys",
-"public_key": "{yourPublicKey}",
-"key_id": "{yourKeyId}",
-"relying_party_identifier": "{yourDomain}"
+  "type": "webauthn_roaming",
+  "name": "WebAuthn with security keys",
+  "public_key": "{yourPublicKey}",
+  "key_id": "{yourKeyId}",
+  "relying_party_identifier": "{yourDomain}"
 ] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -1111,10 +1313,10 @@ La requête suivante remplace toutes les méthodes d’authentification existant
 <CodeGroup>
 ```bash cURL lines
 curl --request PUT \
---url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
---header 'authorization: Bearer {yourMgmtApiAccessToken}' \
---data '[{ "type": "phone", "preferred_authentication_method": "sms", "phone_number": "+00000000000", "name": "SMS" }]'
-``` lines
+  --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
+  --data '[{ "type": "phone", "preferred_authentication_method": "sms", "phone_number": "+00000000000", "name": "SMS" }]'
+```
 ```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods");
 var request = new RestRequest(Method.PUT);
@@ -1123,110 +1325,136 @@ request.AddParameter("undefined", "[{ \"type\": \"phone\", \"preferred_authentic
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"
-payload := strings.NewReader("[{ \"type\": \"phone\", \"preferred_authentication_method\": \"sms\", \"phone_number\": \"+00000000000\", \"name\": \"SMS\" }]")
-req, _ := http.NewRequest("PUT", url, payload)
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"
+
+	payload := strings.NewReader("[{ \"type\": \"phone\", \"preferred_authentication_method\": \"sms\", \"phone_number\": \"+00000000000\", \"name\": \"SMS\" }]")
+
+	req, _ := http.NewRequest("PUT", url, payload)
+
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.put("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.body("[{ \"type\": \"phone\", \"preferred_authentication_method\": \"sms\", \"phone_number\": \"+00000000000\", \"name\": \"SMS\" }]")
-.asString();
+HttpResponse<String> response = Unirest.put("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .body("[{ \"type\": \"phone\", \"preferred_authentication_method\": \"sms\", \"phone_number\": \"+00000000000\", \"name\": \"SMS\" }]")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'PUT',
-url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods',
-headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'},
-data: [
-{
-type: 'phone',
-preferred_authentication_method: 'sms',
-phone_number: '+00000000000',
-name: 'SMS'
-}
-]
+  method: 'PUT',
+  url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods',
+  headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'},
+  data: [
+    {
+      type: 'phone',
+      preferred_authentication_method: 'sms',
+      phone_number: '+00000000000',
+      name: 'SMS'
+    }
+  ]
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-NSDictionary \*parameters = @[ @{ @"type": @"phone", @"preferred_authentication_method": @"sms", @"phone_number": @"+00000000000", @"name": @"SMS" } ];
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+NSDictionary *parameters = @[ @{ @"type": @"phone", @"preferred_authentication_method": @"sms", @"phone_number": @"+00000000000", @"name": @"SMS" } ];
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"PUT"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PUT",
-CURLOPT_POSTFIELDS => "[{ \"type\": \"phone\", \"preferred_authentication_method\": \"sms\", \"phone_number\": \"+00000000000\", \"name\": \"SMS\" }]",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}"
-],
+  CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PUT",
+  CURLOPT_POSTFIELDS => "[{ \"type\": \"phone\", \"preferred_authentication_method\": \"sms\", \"phone_number\": \"+00000000000\", \"name\": \"SMS\" }]",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "[{ \"type\": \"phone\", \"preferred_authentication_method\": \"sms\", \"phone_number\": \"+00000000000\", \"name\": \"SMS\" }]"
+
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
+
 conn.request("PUT", "%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -1234,43 +1462,52 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Put.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request.body = "[{ \"type\": \"phone\", \"preferred_authentication_method\": \"sms\", \"phone_number\": \"+00000000000\", \"name\": \"SMS\" }]"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let parameters = [
-[
-"type": "phone",
-"preferred_authentication_method": "sms",
-"phone_number": "+00000000000",
-"name": "SMS"
-]
+  [
+    "type": "phone",
+    "preferred_authentication_method": "sms",
+    "phone_number": "+00000000000",
+    "name": "SMS"
+  ]
 ] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "PUT"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -1311,10 +1548,10 @@ La requête suivante met à jour une méthode d’authentification unique pour u
 <CodeGroup>
 ```bash cURL lines
 curl --request PATCH \
---url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D \
---header 'authorization: Bearer {yourMgmtApiAccessToken}' \
---data '{ "name": "Mobile SMS" }'
-``` lines
+  --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}' \
+  --data '{ "name": "Mobile SMS" }'
+```
 ```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D");
 var request = new RestRequest(Method.PATCH);
@@ -1323,103 +1560,129 @@ request.AddParameter("undefined", "{ \"name\": \"Mobile SMS\" }", ParameterType.
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D"
-payload := strings.NewReader("{ \"name\": \"Mobile SMS\" }")
-req, _ := http.NewRequest("PATCH", url, payload)
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D"
+
+	payload := strings.NewReader("{ \"name\": \"Mobile SMS\" }")
+
+	req, _ := http.NewRequest("PATCH", url, payload)
+
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.patch("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.body("{ \"name\": \"Mobile SMS\" }")
-.asString();
+HttpResponse<String> response = Unirest.patch("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .body("{ \"name\": \"Mobile SMS\" }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'PATCH',
-url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D',
-headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'},
-data: {name: 'Mobile SMS'}
+  method: 'PATCH',
+  url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D',
+  headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'},
+  data: {name: 'Mobile SMS'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-NSDictionary \*parameters = @{ @"name": @"Mobile SMS" };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+NSDictionary *parameters = @{ @"name": @"Mobile SMS" };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"PATCH"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PATCH",
-CURLOPT_POSTFIELDS => "{ \"name\": \"Mobile SMS\" }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}"
-],
+  CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PATCH",
+  CURLOPT_POSTFIELDS => "{ \"name\": \"Mobile SMS\" }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"name\": \"Mobile SMS\" }"
+
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
+
 conn.request("PATCH", "%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -1427,36 +1690,45 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Patch.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
 request.body = "{ \"name\": \"Mobile SMS\" }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
 let parameters = ["name": "Mobile SMS"] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "PATCH"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -1496,9 +1768,9 @@ La requête suivante supprime toutes les méthodes d’authentification pour un 
 <CodeGroup>
 ```bash cURL lines
 curl --request DELETE \
---url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
---header 'authorization: Bearer {yourMgmtApiAccessToken}'
-``` lines
+  --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}'
+```
 ```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods");
 var request = new RestRequest(Method.DELETE);
@@ -1508,92 +1780,115 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"
-req, _ := http.NewRequest("DELETE", url, nil)
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"
+
+	req, _ := http.NewRequest("DELETE", url, nil)
+
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.delete("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.asString();
+HttpResponse<String> response = Unirest.delete("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'DELETE',
-url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods',
-headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'}
+  method: 'DELETE',
+  url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods',
+  headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"DELETE"];
 [request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "DELETE",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}"
-],
+  CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "DELETE",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
+
 conn.request("DELETE", "%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods", headers=headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -1601,32 +1896,40 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "DELETE"
 request.allHTTPHeaderFields = headers
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -1646,9 +1949,9 @@ La requête suivante supprime une méthode d’authentification unique pour un u
 <CodeGroup>
 ```bash cURL lines
 curl --request DELETE \
---url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D \
---header 'authorization: Bearer {yourMgmtApiAccessToken}'
-``` lines
+  --url https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D \
+  --header 'authorization: Bearer {yourMgmtApiAccessToken}'
+```
 ```csharp C# lines
 var client = new RestClient("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D");
 var request = new RestRequest(Method.DELETE);
@@ -1658,92 +1961,115 @@ IRestResponse response = client.Execute(request);
 
 ```go Go lines
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D"
-req, _ := http.NewRequest("DELETE", url, nil)
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D"
+
+	req, _ := http.NewRequest("DELETE", url, nil)
+
+	req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.delete("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.asString();
+HttpResponse<String> response = Unirest.delete("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")
+  .header("authorization", "Bearer {yourMgmtApiAccessToken}")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'DELETE',
-url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D',
-headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'}
+  method: 'DELETE',
+  url: 'https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D',
+  headers: {authorization: 'Bearer {yourMgmtApiAccessToken}'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}" };
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"DELETE"];
 [request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "DELETE",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}"
-],
+  CURLOPT_URL => "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "DELETE",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer {yourMgmtApiAccessToken}"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 headers = { 'authorization': "Bearer {yourMgmtApiAccessToken}" }
+
 conn.request("DELETE", "%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D", headers=headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -1751,32 +2077,40 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Delete.new(url)
 request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["authorization": "Bearer {yourMgmtApiAccessToken}"]
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://%7ByourDomain%7D/api/v2/users/%7BuserId%7D/authentication-methods/%7BauthenticationMethodId%7D")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "DELETE"
 request.allHTTPHeaderFields = headers
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
