@@ -39,7 +39,7 @@ permalink: "token-best-practices"
 * [リソース所有者のパスワードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/resource-owner-password-flow)
 * [デバイス認可フロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/device-authorization-flow)
 
-APIへのオフラインアクセスを制限すると（[［Auth0 Dashboard］>［Applications（アプリケーション）］>［APIs（API）］>［Settings（設定）］](https://manage.auth0.com/#/apis)の**［Allow Offline Access（オフラインアクセスを許可する）］** スイッチを介して構成されるセーフガード）、要求に`offline_access`スコープが含まれていても、APIのリフレッシュトークンは返されません。
+APIへのオフラインアクセスを制限すると（[［Auth0 Dashboard］>［Applications（アプリケーション）］>［APIs（API）］>［Settings（設定）］](https://manage.auth0.com/#/apis)の **［Allow Offline Access（オフラインアクセスを許可する）］** スイッチを介して構成されるセーフガード）、要求に`offline_access`スコープが含まれていても、APIのリフレッシュトークンは返されません。
 
 ルールはリフレッシュトークンの交換で実行されます。特別なロジックを実行するには、ルール内の`context.protocol`プロパティを確認してください。値が`oauth2-refresh-token`の場合、ルールは交換中に実行されます。
 
@@ -92,7 +92,7 @@ Auth0では、有効なリフレッシュトークンの数をユーザーあた
 * **RS256（SHA-256を持つRSA署名）** ：公開鍵暗号方式で、公開鍵と秘密鍵の2つがあり、後者は秘密にしておかなくてはなりません。署名の生成に使う秘密鍵は、Auth0が持っていて、JWTのコンシューマーは、Auth0が提供するメタデータエンドポイントから公開鍵を取得し[JWT署名の検証](/docs/ja-jp/secure/tokens/json-web-tokens/validate-json-web-tokens)に使用します。
 * **HS256（SHA-256を持つHMAC）** ：共通鍵暗号方式で、非公開の秘密鍵が1つあるのみです。両当事者がこの鍵を共有します。同じ鍵が署名の生成と検証に使用されるので、鍵が解読されないように細心の注意を払う必要があります。この秘密鍵（シークレット）は、アプリケーション（**クライアントシークレット** ）またはAPI（**署名シークレット** ）を登録してHS256署名アルゴリズムを選択すると作成されます。
 
-最も安全で、当社が推奨するのは**RS256** の使用です。理由は：
+最も安全で、当社が推奨するのは **RS256** の使用です。理由は：
 
 * RS256では、秘密鍵の所有者（Auth0）のみがトークンに署名できる一方、誰でも公開鍵を使ってトークンの有効性を確認できます。
 * RS256では、複数のオーディエンスに有効なトークンを要求できます。

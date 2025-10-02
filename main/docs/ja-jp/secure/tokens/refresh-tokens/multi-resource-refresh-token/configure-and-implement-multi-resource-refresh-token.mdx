@@ -52,162 +52,161 @@ For existing applications, make a PATCH call to the [Update a Client](/docs/ja-j
 
 <CodeGroup>
 ```bash cURL lines
-curl --request PATCH \
---url 'https://{yourDomain}/api/v2/clients//{yourClientId}' \
---header 'authorization: Bearer {yourMgmtApiAccessToken}' \
---header 'content-type: application/json' \
---data '{
-"refresh_token": {
-"expiration_type": "expiring",
-"rotation_type": "rotating",
-"token_lifetime": 31557600,
-"idle_token_lifetime": 2592000,
-"leeway": 0,
-"infinite_token_lifetime": false,
-"infinite_idle_token_lifetime": false,
-"policies": [
-{
-"audience": "https://api.example.com",
-"scope": ["read:data"]
-},
-{
-"audience": "https://billing.example.com",
-"scope": ["read:billing"]
-}
-]
-}
-}'
-``` lines
+curl --request POST \
+  --url 'https://{yourDomain}/oauth/token' \
+  --header 'authorization: Basic {yourApplicationCredentials}' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data grant_type=refresh_token \
+  --data 'client_id={yourClientId}' \
+  --data 'refresh_token={yourRefreshToken}'
+```
 ```csharp C# lines
-var client = new RestClient("https://{yourDomain}/api/v2/clients//{yourClientId}");
-var request = new RestRequest(Method.PATCH);
-request.AddHeader("authorization", "Bearer {yourMgmtApiAccessToken}");
-request.AddHeader("content-type", "application/json");
-request.AddParameter("application/json", "{\n \"refresh_token\": {\n \"expiration_type\": \"expiring\",\n \"rotation_type\": \"rotating\",\n \"token_lifetime\": 31557600,\n \"idle_token_lifetime\": 2592000,\n \"leeway\": 0,\n \"infinite_token_lifetime\": false,\n \"infinite_idle_token_lifetime\": false,\n \"policies\": [\n {\n \"audience\": \"https://api.example.com\",\n \"scope\": [\"read:data\"]\n },\n {\n \"audience\": \"https://billing.example.com\",\n \"scope\": [\"read:billing\"]\n }\n ]\n }\n}", ParameterType.RequestBody);
+var client = new RestClient("https://{yourDomain}/oauth/token");
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/x-www-form-urlencoded");
+request.AddHeader("authorization", "Basic {yourApplicationCredentials}");
+request.AddParameter("application/x-www-form-urlencoded", "grant_type=refresh_token&client_id={yourClientId}&refresh_token=%7ByourRefreshToken%7D", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/api/v2/clients//{yourClientId}"
-payload := strings.NewReader("{\n \"refresh_token\": {\n \"expiration_type\": \"expiring\",\n \"rotation_type\": \"rotating\",\n \"token_lifetime\": 31557600,\n \"idle_token_lifetime\": 2592000,\n \"leeway\": 0,\n \"infinite_token_lifetime\": false,\n \"infinite_idle_token_lifetime\": false,\n \"policies\": [\n {\n \"audience\": \"https://api.example.com\",\n \"scope\": [\"read:data\"]\n },\n {\n \"audience\": \"https://billing.example.com\",\n \"scope\": [\"read:billing\"]\n }\n ]\n }\n}")
-req, _ := http.NewRequest("PATCH", url, payload)
-req.Header.Add("authorization", "Bearer {yourMgmtApiAccessToken}")
-req.Header.Add("content-type", "application/json")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/oauth/token"
+
+	payload := strings.NewReader("grant_type=refresh_token&client_id={yourClientId}&refresh_token=%7ByourRefreshToken%7D")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/x-www-form-urlencoded")
+	req.Header.Add("authorization", "Basic {yourApplicationCredentials}")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.patch("https://{yourDomain}/api/v2/clients//{yourClientId}")
-.header("authorization", "Bearer {yourMgmtApiAccessToken}")
-.header("content-type", "application/json")
-.body("{\n \"refresh_token\": {\n \"expiration_type\": \"expiring\",\n \"rotation_type\": \"rotating\",\n \"token_lifetime\": 31557600,\n \"idle_token_lifetime\": 2592000,\n \"leeway\": 0,\n \"infinite_token_lifetime\": false,\n \"infinite_idle_token_lifetime\": false,\n \"policies\": [\n {\n \"audience\": \"https://api.example.com\",\n \"scope\": [\"read:data\"]\n },\n {\n \"audience\": \"https://billing.example.com\",\n \"scope\": [\"read:billing\"]\n }\n ]\n }\n}")
-.asString();
+HttpResponse<String> response = Unirest.post("https://{yourDomain}/oauth/token")
+  .header("content-type", "application/x-www-form-urlencoded")
+  .header("authorization", "Basic {yourApplicationCredentials}")
+  .body("grant_type=refresh_token&client_id={yourClientId}&refresh_token=%7ByourRefreshToken%7D")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'PATCH',
-url: 'https://{yourDomain}/api/v2/clients//{yourClientId}',
-headers: {
-authorization: 'Bearer {yourMgmtApiAccessToken}',
-'content-type': 'application/json'
-},
-data: {
-refresh_token: {
-expiration_type: 'expiring',
-rotation_type: 'rotating',
-token_lifetime: 31557600,
-idle_token_lifetime: 2592000,
-leeway: 0,
-infinite_token_lifetime: false,
-infinite_idle_token_lifetime: false,
-policies: [
-{audience: 'https://api.example.com', scope: ['read:data']},
-{audience: 'https://billing.example.com', scope: ['read:billing']}
-]
-}
-}
+  method: 'POST',
+  url: 'https://{yourDomain}/oauth/token',
+  headers: {
+    'content-type': 'application/x-www-form-urlencoded',
+    authorization: 'Basic {yourApplicationCredentials}'
+  },
+  data: new URLSearchParams({
+    grant_type: 'refresh_token',
+    client_id: '{yourClientId}',
+    refresh_token: '{yourRefreshToken}'
+  })
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer {yourMgmtApiAccessToken}",
-@"content-type": @"application/json" };
-NSDictionary \*parameters = @{ @"refresh_token": @{ @"expiration_type": @"expiring", @"rotation_type": @"rotating", @"token_lifetime": @31557600, @"idle_token_lifetime": @2592000, @"leeway": @0, @"infinite_token_lifetime": @NO, @"infinite_idle_token_lifetime": @NO, @"policies": @[ @{ @"audience": @"https://api.example.com", @"scope": @[ @"read:data" ] }, @{ @"audience": @"https://billing.example.com", @"scope": @[ @"read:billing" ] } ] } };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/api/v2/clients//{yourClientId}"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
-[request setHTTPMethod:@"PATCH"];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/x-www-form-urlencoded",
+                           @"authorization": @"Basic {yourApplicationCredentials}" };
+
+NSMutableData *postData = [[NSMutableData alloc] initWithData:[@"grant_type=refresh_token" dataUsingEncoding:NSUTF8StringEncoding]];
+[postData appendData:[@"&client_id={yourClientId}" dataUsingEncoding:NSUTF8StringEncoding]];
+[postData appendData:[@"&refresh_token={yourRefreshToken}" dataUsingEncoding:NSUTF8StringEncoding]];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
+[request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/api/v2/clients//{yourClientId}",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "PATCH",
-CURLOPT_POSTFIELDS => "{\n \"refresh_token\": {\n \"expiration_type\": \"expiring\",\n \"rotation_type\": \"rotating\",\n \"token_lifetime\": 31557600,\n \"idle_token_lifetime\": 2592000,\n \"leeway\": 0,\n \"infinite_token_lifetime\": false,\n \"infinite_idle_token_lifetime\": false,\n \"policies\": [\n {\n \"audience\": \"https://api.example.com\",\n \"scope\": [\"read:data\"]\n },\n {\n \"audience\": \"https://billing.example.com\",\n \"scope\": [\"read:billing\"]\n }\n ]\n }\n}",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer {yourMgmtApiAccessToken}",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/oauth/token",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "grant_type=refresh_token&client_id={yourClientId}&refresh_token=%7ByourRefreshToken%7D",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Basic {yourApplicationCredentials}",
+    "content-type: application/x-www-form-urlencoded"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
-payload = "{\n \"refresh_token\": {\n \"expiration_type\": \"expiring\",\n \"rotation_type\": \"rotating\",\n \"token_lifetime\": 31557600,\n \"idle_token_lifetime\": 2592000,\n \"leeway\": 0,\n \"infinite_token_lifetime\": false,\n \"infinite_idle_token_lifetime\": false,\n \"policies\": [\n {\n \"audience\": \"https://api.example.com\",\n \"scope\": [\"read:data\"]\n },\n {\n \"audience\": \"https://billing.example.com\",\n \"scope\": [\"read:billing\"]\n }\n ]\n }\n}"
+
+payload = "grant_type=refresh_token&client_id={yourClientId}&refresh_token=%7ByourRefreshToken%7D"
+
 headers = {
-'authorization': "Bearer {yourMgmtApiAccessToken}",
-'content-type': "application/json"
-}
-conn.request("PATCH", "/{yourDomain}/api/v2/clients//{yourClientId}", payload, headers)
+    'content-type': "application/x-www-form-urlencoded",
+    'authorization': "Basic {yourApplicationCredentials}"
+    }
+
+conn.request("POST", "/{yourDomain}/oauth/token", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -215,58 +214,50 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
-url = URI("https://{yourDomain}/api/v2/clients//{yourClientId}")
+
+url = URI("https://{yourDomain}/oauth/token")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-request = Net::HTTP::Patch.new(url)
-request["authorization"] = 'Bearer {yourMgmtApiAccessToken}'
-request["content-type"] = 'application/json'
-request.body = "{\n \"refresh_token\": {\n \"expiration_type\": \"expiring\",\n \"rotation_type\": \"rotating\",\n \"token_lifetime\": 31557600,\n \"idle_token_lifetime\": 2592000,\n \"leeway\": 0,\n \"infinite_token_lifetime\": false,\n \"infinite_idle_token_lifetime\": false,\n \"policies\": [\n {\n \"audience\": \"https://api.example.com\",\n \"scope\": [\"read:data\"]\n },\n {\n \"audience\": \"https://billing.example.com\",\n \"scope\": [\"read:billing\"]\n }\n ]\n }\n}"
+
+request = Net::HTTP::Post.new(url)
+request["content-type"] = 'application/x-www-form-urlencoded'
+request["authorization"] = 'Basic {yourApplicationCredentials}'
+request.body = "grant_type=refresh_token&client_id={yourClientId}&refresh_token=%7ByourRefreshToken%7D"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"authorization": "Bearer {yourMgmtApiAccessToken}",
-"content-type": "application/json"
+  "content-type": "application/x-www-form-urlencoded",
+  "authorization": "Basic {yourApplicationCredentials}"
 ]
-let parameters = ["refresh_token": [
-"expiration_type": "expiring",
-"rotation_type": "rotating",
-"token_lifetime": 31557600,
-"idle_token_lifetime": 2592000,
-"leeway": 0,
-"infinite_token_lifetime": false,
-"infinite_idle_token_lifetime": false,
-"policies": [
-[
-"audience": "https://api.example.com",
-"scope": ["read:data"]
-],
-[
-"audience": "https://billing.example.com",
-"scope": ["read:billing"]
-]
-]
-]] as [String : Any]
-let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
-let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/api/v2/clients//{yourClientId}")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
-request.httpMethod = "PATCH"
+
+let postData = NSMutableData(data: "grant_type=refresh_token".data(using: String.Encoding.utf8)!)
+postData.append("&client_id={yourClientId}".data(using: String.Encoding.utf8)!)
+postData.append("&refresh_token={yourRefreshToken}".data(using: String.Encoding.utf8)!)
+
+let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/token")! as URL,
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -319,131 +310,151 @@ Once the refresh token is issued, you can request access tokens for any API and 
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/oauth/token' \
---header 'content-type: application/json' \
---data '{
-"grant_type": "refresh_token",
-"client_id": "{yourClientId}",
-"refresh_token": "${refreshToken}",
-"audience": "https://billing.example.com",
-"scope": "read:billing write:billing"
-}'
-``` lines
+  --url 'https://{yourDomain}/oauth/token' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data grant_type=refresh_token \
+  --data 'client_id={yourClientId}' \
+  --data 'client_secret={yourClientSecret}' \
+  --data 'refresh_token={yourRefreshToken}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
-request.AddHeader("content-type", "application/json");
-request.AddParameter("application/json", "{\n \"grant_type\": \"refresh_token\",\n \"client_id\": \"{yourClientId}\",\n \"refresh_token\": \"${refreshToken}\",\n \"audience\": \"https://billing.example.com\",\n \"scope\": \"read:billing write:billing\"\n}", ParameterType.RequestBody);
+request.AddHeader("content-type", "application/x-www-form-urlencoded");
+request.AddParameter("application/x-www-form-urlencoded", "grant_type=refresh_token&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&refresh_token=%7ByourRefreshToken%7D", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/oauth/token"
-payload := strings.NewReader("{\n \"grant_type\": \"refresh_token\",\n \"client_id\": \"{yourClientId}\",\n \"refresh_token\": \"${refreshToken}\",\n \"audience\": \"https://billing.example.com\",\n \"scope\": \"read:billing write:billing\"\n}")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "application/json")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/oauth/token"
+
+	payload := strings.NewReader("grant_type=refresh_token&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&refresh_token=%7ByourRefreshToken%7D")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/x-www-form-urlencoded")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
-.header("content-type", "application/json")
-.body("{\n \"grant_type\": \"refresh_token\",\n \"client_id\": \"{yourClientId}\",\n \"refresh_token\": \"${refreshToken}\",\n \"audience\": \"https://billing.example.com\",\n \"scope\": \"read:billing write:billing\"\n}")
-.asString();
+HttpResponse<String> response = Unirest.post("https://{yourDomain}/oauth/token")
+  .header("content-type", "application/x-www-form-urlencoded")
+  .body("grant_type=refresh_token&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&refresh_token=%7ByourRefreshToken%7D")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/oauth/token',
-headers: {'content-type': 'application/json'},
-data: {
-grant_type: 'refresh_token',
-client_id: '{yourClientId}',
-refresh_token: '${refreshToken}',
-audience: 'https://billing.example.com',
-scope: 'read:billing write:billing'
-}
+  method: 'POST',
+  url: 'https://{yourDomain}/oauth/token',
+  headers: {'content-type': 'application/x-www-form-urlencoded'},
+  data: new URLSearchParams({
+    grant_type: 'refresh_token',
+    client_id: '{yourClientId}',
+    client_secret: '{yourClientSecret}',
+    refresh_token: '{yourRefreshToken}'
+  })
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json" };
-NSDictionary \*parameters = @{ @"grant_type": @"refresh_token",
-@"client_id": @"{yourClientId}",
-@"refresh_token": @"${refreshToken}",
-@"audience": @"https://billing.example.com",
-@"scope": @"read:billing write:billing" };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
+
+NSMutableData *postData = [[NSMutableData alloc] initWithData:[@"grant_type=refresh_token" dataUsingEncoding:NSUTF8StringEncoding]];
+[postData appendData:[@"&client_id={yourClientId}" dataUsingEncoding:NSUTF8StringEncoding]];
+[postData appendData:[@"&client_secret={yourClientSecret}" dataUsingEncoding:NSUTF8StringEncoding]];
+[postData appendData:[@"&refresh_token={yourRefreshToken}" dataUsingEncoding:NSUTF8StringEncoding]];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/oauth/token",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{\n \"grant_type\": \"refresh_token\",\n \"client_id\": \"{yourClientId}\",\n \"refresh_token\": \"${refreshToken}\",\n \"audience\": \"https://billing.example.com\",\n \"scope\": \"read:billing write:billing\"\n}",
-CURLOPT_HTTPHEADER => [
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/oauth/token",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "grant_type=refresh_token&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&refresh_token=%7ByourRefreshToken%7D",
+  CURLOPT_HTTPHEADER => [
+    "content-type: application/x-www-form-urlencoded"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
-payload = "{\n \"grant_type\": \"refresh_token\",\n \"client_id\": \"{yourClientId}\",\n \"refresh_token\": \"${refreshToken}\",\n \"audience\": \"https://billing.example.com\",\n \"scope\": \"read:billing write:billing\"\n}"
-headers = { 'content-type': "application/json" }
+
+payload = "grant_type=refresh_token&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&refresh_token=%7ByourRefreshToken%7D"
+
+headers = { 'content-type': "application/x-www-form-urlencoded" }
+
 conn.request("POST", "/{yourDomain}/oauth/token", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -451,42 +462,47 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/oauth/token")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
-request["content-type"] = 'application/json'
-request.body = "{\n \"grant_type\": \"refresh_token\",\n \"client_id\": \"{yourClientId}\",\n \"refresh_token\": \"${refreshToken}\",\n \"audience\": \"https://billing.example.com\",\n \"scope\": \"read:billing write:billing\"\n}"
+request["content-type"] = 'application/x-www-form-urlencoded'
+request.body = "grant_type=refresh_token&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&refresh_token=%7ByourRefreshToken%7D"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
-let headers = ["content-type": "application/json"]
-let parameters = [
-"grant_type": "refresh_token",
-"client_id": "{yourClientId}",
-"refresh_token": "${refreshToken}",
-"audience": "https://billing.example.com",
-"scope": "read:billing write:billing"
-] as [String : Any]
-let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
+let headers = ["content-type": "application/x-www-form-urlencoded"]
+
+let postData = NSMutableData(data: "grant_type=refresh_token".data(using: String.Encoding.utf8)!)
+postData.append("&client_id={yourClientId}".data(using: String.Encoding.utf8)!)
+postData.append("&client_secret={yourClientSecret}".data(using: String.Encoding.utf8)!)
+postData.append("&refresh_token={yourRefreshToken}".data(using: String.Encoding.utf8)!)
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/token")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
