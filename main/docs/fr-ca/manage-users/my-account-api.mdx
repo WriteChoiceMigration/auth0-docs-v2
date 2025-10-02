@@ -131,131 +131,154 @@ The My Account API supports the following scopes:
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
---url 'https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F'
-``` lines
+  --url 'https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F");
 var request = new RestRequest(Method.GET);
 IRestResponse response = client.Execute(request);
 ```
-
 ```go Go lines
 package main
-import (
-"fmt"
-"net/http"
-"io/ioutil"
-)
-func main() {
-url := "https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F"
-req, _ := http.NewRequest("GET", url, nil)
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
-}
-``` lines
-```java Java lines
-HttpResponse response = Unirest.get("https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F")
-.asString();
-```
 
+import (
+	"fmt"
+	"net/http"
+	"io/ioutil"
+)
+
+func main() {
+
+	url := "https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F"
+
+	req, _ := http.NewRequest("GET", url, nil)
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
+}
+```
+```java Java lines
+HttpResponse<String> response = Unirest.get("https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F")
+  .asString();
+```
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'GET',
-url: 'https://{yourDomain}/authorize',
-params: {
-response_type: 'code',
-client_id: '{yourClientId}',
-redirect_uri: '{yourRedirectUri}',
-scope: 'create:me:authentication_methods',
-offline_access: '',
-audience: 'https://{yourDomain}/me/'
-}
+  method: 'GET',
+  url: 'https://{yourDomain}/authorize',
+  params: {
+    response_type: 'code',
+    client_id: '{yourClientId}',
+    redirect_uri: '{yourRedirectUri}',
+    scope: 'create:me:authentication_methods',
+    offline_access: '',
+    audience: 'https://{yourDomain}/me/'
+  }
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
-
 ```php PHP lines
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_URL => "https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 conn.request("GET", "/{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F")
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
-
 ```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Get.new(url)
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/authorize?response_type=code&client_id={yourClientId}&redirect_uri=%7ByourRedirectUri%7D&scope=create%3Ame%3Aauthentication_methods&offline_access=&audience=https%3A%2F%2F{yourDomain}%2Fme%2F")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "GET"
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -265,10 +288,10 @@ dataTask.resume()
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/oauth/token' \
---header 'content-type: application/json' \
---data '{"grant_type": "authorization_code","client_id": "{yourClientId}","client_secret": "{yourClientId}","code": "{yourAuthorizationCode}","redirect_uri": "{yourRedirectUri}","audience": "{yourAudience}","scope": "create:me:authentication_methods","offline_access": ""}'
-``` lines
+  --url 'https://{yourDomain}/oauth/token' \
+  --header 'content-type: application/json' \
+  --data '{"grant_type": "authorization_code","client_id": "{yourClientId}","client_secret": "{yourClientId}","code": "{yourAuthorizationCode}","redirect_uri": "{yourRedirectUri}","audience": "{yourAudience}","scope": "create:me:authentication_methods","offline_access": ""}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
@@ -276,166 +299,197 @@ request.AddHeader("content-type", "application/json");
 request.AddParameter("application/json", "{\"grant_type\": \"authorization_code\",\"client_id\": \"{yourClientId}\",\"client_secret\": \"{yourClientId}\",\"code\": \"{yourAuthorizationCode}\",\"redirect_uri\": \"{yourRedirectUri}\",\"audience\": \"{yourAudience}\",\"scope\": \"create:me:authentication_methods\",\"offline_access\": \"\"}", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 ```
-
-```go Go lines
+```go Go lines expandable
 package main
-import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
-)
-func main() {
-url := "https://{yourDomain}/oauth/token"
-payload := strings.NewReader("{\"grant_type\": \"authorization_code\",\"client_id\": \"{yourClientId}\",\"client_secret\": \"{yourClientId}\",\"code\": \"{yourAuthorizationCode}\",\"redirect_uri\": \"{yourRedirectUri}\",\"audience\": \"{yourAudience}\",\"scope\": \"create:me:authentication_methods\",\"offline_access\": \"\"}")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "application/json")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
-}
-``` lines
-```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
-.header("content-type", "application/json")
-.body("{\"grant_type\": \"authorization_code\",\"client_id\": \"{yourClientId}\",\"client_secret\": \"{yourClientId}\",\"code\": \"{yourAuthorizationCode}\",\"redirect_uri\": \"{yourRedirectUri}\",\"audience\": \"{yourAudience}\",\"scope\": \"create:me:authentication_methods\",\"offline_access\": \"\"}")
-.asString();
-```
 
+import (
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
+)
+
+func main() {
+
+	url := "https://{yourDomain}/oauth/token"
+
+	payload := strings.NewReader("{\"grant_type\": \"authorization_code\",\"client_id\": \"{yourClientId}\",\"client_secret\": \"{yourClientId}\",\"code\": \"{yourAuthorizationCode}\",\"redirect_uri\": \"{yourRedirectUri}\",\"audience\": \"{yourAudience}\",\"scope\": \"create:me:authentication_methods\",\"offline_access\": \"\"}")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
+}
+```
+```java Java lines
+HttpResponse<String> response = Unirest.post("https://{yourDomain}/oauth/token")
+  .header("content-type", "application/json")
+  .body("{\"grant_type\": \"authorization_code\",\"client_id\": \"{yourClientId}\",\"client_secret\": \"{yourClientId}\",\"code\": \"{yourAuthorizationCode}\",\"redirect_uri\": \"{yourRedirectUri}\",\"audience\": \"{yourAudience}\",\"scope\": \"create:me:authentication_methods\",\"offline_access\": \"\"}")
+  .asString();
+```
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/oauth/token',
-headers: {'content-type': 'application/json'},
-data: {
-grant_type: 'authorization_code',
-client_id: '{yourClientId}',
-client_secret: '{yourClientId}',
-code: '{yourAuthorizationCode}',
-redirect_uri: '{yourRedirectUri}',
-audience: '{yourAudience}',
-scope: 'create:me:authentication_methods',
-offline_access: ''
-}
+  method: 'POST',
+  url: 'https://{yourDomain}/oauth/token',
+  headers: {'content-type': 'application/json'},
+  data: {
+    grant_type: 'authorization_code',
+    client_id: '{yourClientId}',
+    client_secret: '{yourClientId}',
+    code: '{yourAuthorizationCode}',
+    redirect_uri: '{yourRedirectUri}',
+    audience: '{yourAudience}',
+    scope: 'create:me:authentication_methods',
+    offline_access: ''
+  }
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json" };
-NSDictionary \*parameters = @{ @"grant_type": @"authorization_code",
-@"client_id": @"{yourClientId}",
-@"client_secret": @"{yourClientId}",
-@"code": @"{yourAuthorizationCode}",
-@"redirect_uri": @"{yourRedirectUri}",
-@"audience": @"{yourAudience}",
-@"scope": @"create:me:authentication_methods",
-@"offline_access": @"" };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/json" };
+NSDictionary *parameters = @{ @"grant_type": @"authorization_code",
+                              @"client_id": @"{yourClientId}",
+                              @"client_secret": @"{yourClientId}",
+                              @"code": @"{yourAuthorizationCode}",
+                              @"redirect_uri": @"{yourRedirectUri}",
+                              @"audience": @"{yourAudience}",
+                              @"scope": @"create:me:authentication_methods",
+                              @"offline_access": @"" };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
-
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/oauth/token",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{\"grant_type\": \"authorization_code\",\"client_id\": \"{yourClientId}\",\"client_secret\": \"{yourClientId}\",\"code\": \"{yourAuthorizationCode}\",\"redirect_uri\": \"{yourRedirectUri}\",\"audience\": \"{yourAudience}\",\"scope\": \"create:me:authentication_methods\",\"offline_access\": \"\"}",
-CURLOPT_HTTPHEADER => [
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/oauth/token",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{\"grant_type\": \"authorization_code\",\"client_id\": \"{yourClientId}\",\"client_secret\": \"{yourClientId}\",\"code\": \"{yourAuthorizationCode}\",\"redirect_uri\": \"{yourRedirectUri}\",\"audience\": \"{yourAudience}\",\"scope\": \"create:me:authentication_methods\",\"offline_access\": \"\"}",
+  CURLOPT_HTTPHEADER => [
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{\"grant_type\": \"authorization_code\",\"client_id\": \"{yourClientId}\",\"client_secret\": \"{yourClientId}\",\"code\": \"{yourAuthorizationCode}\",\"redirect_uri\": \"{yourRedirectUri}\",\"audience\": \"{yourAudience}\",\"scope\": \"create:me:authentication_methods\",\"offline_access\": \"\"}"
+
 headers = { 'content-type': "application/json" }
+
 conn.request("POST", "/{yourDomain}/oauth/token", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
-
 ```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/oauth/token")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
 request.body = "{\"grant_type\": \"authorization_code\",\"client_id\": \"{yourClientId}\",\"client_secret\": \"{yourClientId}\",\"code\": \"{yourAuthorizationCode}\",\"redirect_uri\": \"{yourRedirectUri}\",\"audience\": \"{yourAudience}\",\"scope\": \"create:me:authentication_methods\",\"offline_access\": \"\"}"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = ["content-type": "application/json"]
 let parameters = [
-"grant_type": "authorization_code",
-"client_id": "{yourClientId}",
-"client_secret": "{yourClientId}",
-"code": "{yourAuthorizationCode}",
-"redirect_uri": "{yourRedirectUri}",
-"audience": "{yourAudience}",
-"scope": "create:me:authentication_methods",
-"offline_access": ""
+  "grant_type": "authorization_code",
+  "client_id": "{yourClientId}",
+  "client_secret": "{yourClientId}",
+  "code": "{yourAuthorizationCode}",
+  "redirect_uri": "{yourRedirectUri}",
+  "audience": "{yourAudience}",
+  "scope": "create:me:authentication_methods",
+  "offline_access": ""
 ] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/token")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -447,10 +501,10 @@ dataTask.resume()
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/passkey/challenge' \
---header 'content-type: application/json' \
---data '{"client_id": "{yourDomain}"}'
-``` lines
+  --url 'https://{yourDomain}/passkey/challenge' \
+  --header 'content-type: application/json' \
+  --data '{"client_id": "{yourDomain}"}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/passkey/challenge");
 var request = new RestRequest(Method.POST);
@@ -458,141 +512,172 @@ request.AddHeader("content-type", "application/json");
 request.AddParameter("application/json", "{\"client_id\": \"{yourDomain}\"}", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 ```
-
-```go Go lines
+```go Go lines expandable
 package main
-import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
-)
-func main() {
-url := "https://{yourDomain}/passkey/challenge"
-payload := strings.NewReader("{\"client_id\": \"{yourDomain}\"}")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "application/json")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
-}
-``` lines
-```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/passkey/challenge")
-.header("content-type", "application/json")
-.body("{\"client_id\": \"{yourDomain}\"}")
-.asString();
-```
 
+import (
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
+)
+
+func main() {
+
+	url := "https://{yourDomain}/passkey/challenge"
+
+	payload := strings.NewReader("{\"client_id\": \"{yourDomain}\"}")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
+}
+```
+```java Java lines
+HttpResponse<String> response = Unirest.post("https://{yourDomain}/passkey/challenge")
+  .header("content-type", "application/json")
+  .body("{\"client_id\": \"{yourDomain}\"}")
+  .asString();
+```
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/passkey/challenge',
-headers: {'content-type': 'application/json'},
-data: {client_id: '{yourDomain}'}
+  method: 'POST',
+  url: 'https://{yourDomain}/passkey/challenge',
+  headers: {'content-type': 'application/json'},
+  data: {client_id: '{yourDomain}'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json" };
-NSDictionary \*parameters = @{ @"client_id": @"{yourDomain}" };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/passkey/challenge"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/json" };
+NSDictionary *parameters = @{ @"client_id": @"{yourDomain}" };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/passkey/challenge"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
-
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/passkey/challenge",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{\"client_id\": \"{yourDomain}\"}",
-CURLOPT_HTTPHEADER => [
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/passkey/challenge",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{\"client_id\": \"{yourDomain}\"}",
+  CURLOPT_HTTPHEADER => [
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{\"client_id\": \"{yourDomain}\"}"
+
 headers = { 'content-type': "application/json" }
+
 conn.request("POST", "/{yourDomain}/passkey/challenge", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
-
 ```ruby Ruby lines
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/passkey/challenge")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
 request.body = "{\"client_id\": \"{yourDomain}\"}"
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["content-type": "application/json"]
 let parameters = ["client_id": "{yourDomain}"] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/passkey/challenge")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -602,10 +687,10 @@ dataTask.resume()
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/oauth/token' \
---header 'content-type: application/json' \
---data '{ "grant_type": "urn:okta:params:oauth:grant-type:webauthn", "client_id": "{yourClientId}", "scope": "create:me:authentication_methods offline_access", "audience": "https://{yourDomain}/me/" "auth_session": "{sessionIdFromTheFirstRequest}", "authn_response": "{authenticatorResponse}"}'
-``` lines
+  --url 'https://{yourDomain}/oauth/token' \
+  --header 'content-type: application/json' \
+  --data '{  "grant_type": "urn:okta:params:oauth:grant-type:webauthn",  "client_id": "{yourClientId}",  "scope": "create:me:authentication_methods offline_access",  "audience": "https://{yourDomain}/me/"  "auth_session": "{sessionIdFromTheFirstRequest}",  "authn_response": "{authenticatorResponse}"}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
@@ -613,139 +698,170 @@ request.AddHeader("content-type", "application/json");
 request.AddParameter("application/json", "{ \"grant_type\": \"urn:okta:params:oauth:grant-type:webauthn\", \"client_id\": \"{yourClientId}\", \"scope\": \"create:me:authentication_methods offline_access\", \"audience\": \"https://{yourDomain}/me/\" \"auth_session\": \"{sessionIdFromTheFirstRequest}\", \"authn_response\": \"{authenticatorResponse}\"}", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 ```
-
-```go Go lines
+```go Go lines expandable
 package main
-import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
-)
-func main() {
-url := "https://{yourDomain}/oauth/token"
-payload := strings.NewReader("{ \"grant_type\": \"urn:okta:params:oauth:grant-type:webauthn\", \"client_id\": \"{yourClientId}\", \"scope\": \"create:me:authentication_methods offline_access\", \"audience\": \"https://{yourDomain}/me/\" \"auth_session\": \"{sessionIdFromTheFirstRequest}\", \"authn_response\": \"{authenticatorResponse}\"}")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "application/json")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
-}
-``` lines
-```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
-.header("content-type", "application/json")
-.body("{ \"grant_type\": \"urn:okta:params:oauth:grant-type:webauthn\", \"client_id\": \"{yourClientId}\", \"scope\": \"create:me:authentication_methods offline_access\", \"audience\": \"https://{yourDomain}/me/\" \"auth_session\": \"{sessionIdFromTheFirstRequest}\", \"authn_response\": \"{authenticatorResponse}\"}")
-.asString();
-```
 
+import (
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
+)
+
+func main() {
+
+	url := "https://{yourDomain}/oauth/token"
+
+	payload := strings.NewReader("{  \"grant_type\": \"urn:okta:params:oauth:grant-type:webauthn\",  \"client_id\": \"{yourClientId}\",  \"scope\": \"create:me:authentication_methods offline_access\",  \"audience\": \"https://{yourDomain}/me/\"  \"auth_session\": \"{sessionIdFromTheFirstRequest}\",  \"authn_response\": \"{authenticatorResponse}\"}")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/json")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
+}
+```
+```java Java lines
+HttpResponse<String> response = Unirest.post("https://{yourDomain}/oauth/token")
+  .header("content-type", "application/json")
+  .body("{  \"grant_type\": \"urn:okta:params:oauth:grant-type:webauthn\",  \"client_id\": \"{yourClientId}\",  \"scope\": \"create:me:authentication_methods offline_access\",  \"audience\": \"https://{yourDomain}/me/\"  \"auth_session\": \"{sessionIdFromTheFirstRequest}\",  \"authn_response\": \"{authenticatorResponse}\"}")
+  .asString();
+```
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/oauth/token',
-headers: {'content-type': 'application/json'},
-data: '{ "grant_type": "urn:okta:params:oauth:grant-type:webauthn", "client_id": "{yourClientId}", "scope": "create:me:authentication_methods offline_access", "audience": "https://{yourDomain}/me/" "auth_session": "{sessionIdFromTheFirstRequest}", "authn_response": "{authenticatorResponse}"}'
+  method: 'POST',
+  url: 'https://{yourDomain}/oauth/token',
+  headers: {'content-type': 'application/json'},
+  data: '{  "grant_type": "urn:okta:params:oauth:grant-type:webauthn",  "client_id": "{yourClientId}",  "scope": "create:me:authentication_methods offline_access",  "audience": "https://{yourDomain}/me/"  "auth_session": "{sessionIdFromTheFirstRequest}",  "authn_response": "{authenticatorResponse}"}'
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/json" };
-NSData \*postData = [[NSData alloc] initWithData:[@"{ "grant_type": "urn:okta:params:oauth:grant-type:webauthn", "client_id": "{yourClientId}", "scope": "create:me:authentication_methods offline_access", "audience": "https://{yourDomain}/me/" "auth_session": "{sessionIdFromTheFirstRequest}", "authn_response": "{authenticatorResponse}"}" dataUsingEncoding:NSUTF8StringEncoding]];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/json" };
+
+NSData *postData = [[NSData alloc] initWithData:[@"{  "grant_type": "urn:okta:params:oauth:grant-type:webauthn",  "client_id": "{yourClientId}",  "scope": "create:me:authentication_methods offline_access",  "audience": "https://{yourDomain}/me/"  "auth_session": "{sessionIdFromTheFirstRequest}",  "authn_response": "{authenticatorResponse}"}" dataUsingEncoding:NSUTF8StringEncoding]];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
-
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/oauth/token",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{ \"grant_type\": \"urn:okta:params:oauth:grant-type:webauthn\", \"client_id\": \"{yourClientId}\", \"scope\": \"create:me:authentication_methods offline_access\", \"audience\": \"https://{yourDomain}/me/\" \"auth_session\": \"{sessionIdFromTheFirstRequest}\", \"authn_response\": \"{authenticatorResponse}\"}",
-CURLOPT_HTTPHEADER => [
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/oauth/token",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{  \"grant_type\": \"urn:okta:params:oauth:grant-type:webauthn\",  \"client_id\": \"{yourClientId}\",  \"scope\": \"create:me:authentication_methods offline_access\",  \"audience\": \"https://{yourDomain}/me/\"  \"auth_session\": \"{sessionIdFromTheFirstRequest}\",  \"authn_response\": \"{authenticatorResponse}\"}",
+  CURLOPT_HTTPHEADER => [
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
-payload = "{ \"grant_type\": \"urn:okta:params:oauth:grant-type:webauthn\", \"client_id\": \"{yourClientId}\", \"scope\": \"create:me:authentication_methods offline_access\", \"audience\": \"https://{yourDomain}/me/\" \"auth_session\": \"{sessionIdFromTheFirstRequest}\", \"authn_response\": \"{authenticatorResponse}\"}"
+
+payload = "{  \"grant_type\": \"urn:okta:params:oauth:grant-type:webauthn\",  \"client_id\": \"{yourClientId}\",  \"scope\": \"create:me:authentication_methods offline_access\",  \"audience\": \"https://{yourDomain}/me/\"  \"auth_session\": \"{sessionIdFromTheFirstRequest}\",  \"authn_response\": \"{authenticatorResponse}\"}"
+
 headers = { 'content-type': "application/json" }
+
 conn.request("POST", "/{yourDomain}/oauth/token", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
-
 ```ruby Ruby lines
-require 'uri'
+rrequire 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/oauth/token")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/json'
-request.body = "{ \"grant_type\": \"urn:okta:params:oauth:grant-type:webauthn\", \"client_id\": \"{yourClientId}\", \"scope\": \"create:me:authentication_methods offline_access\", \"audience\": \"https://{yourDomain}/me/\" \"auth_session\": \"{sessionIdFromTheFirstRequest}\", \"authn_response\": \"{authenticatorResponse}\"}"
+request.body = "{  \"grant_type\": \"urn:okta:params:oauth:grant-type:webauthn\",  \"client_id\": \"{yourClientId}\",  \"scope\": \"create:me:authentication_methods offline_access\",  \"audience\": \"https://{yourDomain}/me/\"  \"auth_session\": \"{sessionIdFromTheFirstRequest}\",  \"authn_response\": \"{authenticatorResponse}\"}"
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = ["content-type": "application/json"]
-let postData = NSData(data: "{ "grant_type": "urn:okta:params:oauth:grant-type:webauthn", "client_id": "{yourClientId}", "scope": "create:me:authentication_methods offline_access", "audience": "https://{yourDomain}/me/" "auth_session": "{sessionIdFromTheFirstRequest}", "authn_response": "{authenticatorResponse}"}".data(using: String.Encoding.utf8)!)
+
+let postData = NSData(data: "{  "grant_type": "urn:okta:params:oauth:grant-type:webauthn",  "client_id": "{yourClientId}",  "scope": "create:me:authentication_methods offline_access",  "audience": "https://{yourDomain}/me/"  "auth_session": "{sessionIdFromTheFirstRequest}",  "authn_response": "{authenticatorResponse}"}".data(using: String.Encoding.utf8)!)
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/token")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
