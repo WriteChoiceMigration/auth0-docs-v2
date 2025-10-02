@@ -26,25 +26,25 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
 2. 回復コードで認証します。回復コードでOAuthトークンエンドポイントを呼び出し、認証して、新しい回復コードを生成します。以下のパラメーターを指定する必要があります。
 
    <table class="table"><thead>
-<tr>
-<th>パラメーター</th>
-<th>値</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>`grant_type`</td>
-<td>`http://auth0.com/oauth/grant-type/mfa-recovery-code`</td>
-</tr>
-<tr>
-<td>`recovery_code`</td>
-<td>ユーザーによって提供された回復コード。</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th>パラメーター</th>
+   <th>値</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td>`grant_type`</td>
+   <td>`http://auth0.com/oauth/grant-type/mfa-recovery-code`</td>
+   </tr>
+   <tr>
+   <td>`recovery_code`</td>
+   <td>ユーザーによって提供された回復コード。</td>
+   </tr>
+   </tbody>
+   </table>
 
    <CodeGroup>
-```bash cURL lines
+   ```bash cURL lines
    curl --request POST \
    --url 'https://{yourDomain}/oauth/token' \
    --header 'content-type: application/x-www-form-urlencoded' \
@@ -53,7 +53,7 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
    --data 'client_secret={yourClientSecret}' \
    --data 'mfa_token={mfaToken}' \
    --data 'recovery_code={recoveryCode}'
-   ``` lines
+   ```
    ```csharp C# lines
    var client = new RestClient("https://{yourDomain}/oauth/token");
    var request = new RestRequest(Method.POST);
@@ -62,28 +62,38 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
    IRestResponse response = client.Execute(request);
    ```
 
-   ```go Go lines
+   ```go Go lines expandable
    package main
+
    import (
-   "fmt"
-   "strings"
-   "net/http"
-   "io/ioutil"
+      "fmt"
+      "strings"
+      "net/http"
+      "io/ioutil"
    )
+
    func main() {
-   url := "https://{yourDomain}/oauth/token"
-   payload := strings.NewReader("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-recovery-code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&recovery_code=%7BrecoveryCode%7D")
-   req, _ := http.NewRequest("POST", url, payload)
-   req.Header.Add("content-type", "application/x-www-form-urlencoded")
-   res, _ := http.DefaultClient.Do(req)
-   defer res.Body.Close()
-   body, _ := ioutil.ReadAll(res.Body)
-   fmt.Println(res)
-   fmt.Println(string(body))
+
+      url := "https://{yourDomain}/oauth/token"
+
+      payload := strings.NewReader("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-recovery-code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&recovery_code=%7BrecoveryCode%7D")
+
+      req, _ := http.NewRequest("POST", url, payload)
+
+      req.Header.Add("content-type", "application/x-www-form-urlencoded")
+
+      res, _ := http.DefaultClient.Do(req)
+
+      defer res.Body.Close()
+      body, _ := ioutil.ReadAll(res.Body)
+
+      fmt.Println(res)
+      fmt.Println(string(body))
+
    }
-   ``` lines
+   ```
    ```java Java lines
-   HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
+   HttpResponse<String> response = Unirest.post("https://{yourDomain}/oauth/token")
    .header("content-type", "application/x-www-form-urlencoded")
    .body("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-recovery-code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&recovery_code=%7BrecoveryCode%7D")
    .asString();
@@ -91,53 +101,60 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
 
    ```javascript Node.JS lines
    var axios = require("axios").default;
+
    var options = {
    method: 'POST',
    url: 'https://{yourDomain}/oauth/token',
    headers: {'content-type': 'application/x-www-form-urlencoded'},
    data: new URLSearchParams({
-   grant_type: 'http://auth0.com/oauth/grant-type/mfa-recovery-code',
-   client_id: '{yourClientId}',
-   client_secret: '{yourClientSecret}',
-   mfa_token: '{mfaToken}',
-   recovery_code: '{recoveryCode}'
+      grant_type: 'http://auth0.com/oauth/grant-type/mfa-recovery-code',
+      client_id: '{yourClientId}',
+      client_secret: '{yourClientSecret}',
+      mfa_token: '{mfaToken}',
+      recovery_code: '{recoveryCode}'
    })
    };
+
    axios.request(options).then(function (response) {
    console.log(response.data);
    }).catch(function (error) {
    console.error(error);
    });
-   ``` lines
-   ```obj-c Obj-C lines
-   #import 
-   NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
-   NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=http://auth0.com/oauth/grant-type/mfa-recovery-code" dataUsingEncoding:NSUTF8StringEncoding]];
+   ```
+   ```obj-c Obj-C lines expandable
+   #import <Foundation/Foundation.h>
+
+   NSDictionary *headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
+
+   NSMutableData *postData = [[NSMutableData alloc] initWithData:[@"grant_type=http://auth0.com/oauth/grant-type/mfa-recovery-code" dataUsingEncoding:NSUTF8StringEncoding]];
    [postData appendData:[@"&client_id={yourClientId}" dataUsingEncoding:NSUTF8StringEncoding]];
    [postData appendData:[@"&client_secret={yourClientSecret}" dataUsingEncoding:NSUTF8StringEncoding]];
    [postData appendData:[@"&mfa_token={mfaToken}" dataUsingEncoding:NSUTF8StringEncoding]];
    [postData appendData:[@"&recovery_code={recoveryCode}" dataUsingEncoding:NSUTF8StringEncoding]];
-   NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
-   cachePolicy:NSURLRequestUseProtocolCachePolicy
-   timeoutInterval:10.0];
+
+   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
+                                                         cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                      timeoutInterval:10.0];
    [request setHTTPMethod:@"POST"];
    [request setAllHTTPHeaderFields:headers];
    [request setHTTPBody:postData];
-   NSURLSession \*session = [NSURLSession sharedSession];
-   NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-   completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-   if (error) {
-   NSLog(@"%@", error);
-   } else {
-   NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-   NSLog(@"%@", httpResponse);
-   }
-   }];
+
+   NSURLSession *session = [NSURLSession sharedSession];
+   NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                   if (error) {
+                                                      NSLog(@"%@", error);
+                                                   } else {
+                                                      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                      NSLog(@"%@", httpResponse);
+                                                   }
+                                             }];
    [dataTask resume];
    ```
 
-   ```php PHP lines
+   ```php PHP lines expandable
    $curl = curl_init();
+
    curl_setopt_array($curl, [
    CURLOPT_URL => "https://{yourDomain}/oauth/token",
    CURLOPT_RETURNTRANSFER => true,
@@ -148,26 +165,35 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
    CURLOPT_CUSTOMREQUEST => "POST",
    CURLOPT_POSTFIELDS => "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-recovery-code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&recovery_code=%7BrecoveryCode%7D",
    CURLOPT_HTTPHEADER => [
-   "content-type: application/x-www-form-urlencoded"
+      "content-type: application/x-www-form-urlencoded"
    ],
    ]);
+
    $response = curl_exec($curl);
    $err = curl_error($curl);
+
    curl_close($curl);
+
    if ($err) {
    echo "cURL Error #:" . $err;
    } else {
    echo $response;
    }
-   ``` lines
+   ```
    ```python Python lines
    import http.client
+
    conn = http.client.HTTPSConnection("")
+
    payload = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-recovery-code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&recovery_code=%7BrecoveryCode%7D"
+
    headers = { 'content-type': "application/x-www-form-urlencoded" }
+
    conn.request("POST", "/{yourDomain}/oauth/token", payload, headers)
+
    res = conn.getresponse()
    data = res.read()
+
    print(data.decode("utf-8"))
    ```
 
@@ -175,42 +201,51 @@ MFA APIを使用して回復コードでユーザーが認証できるように�
    require 'uri'
    require 'net/http'
    require 'openssl'
+
    url = URI("https://{yourDomain}/oauth/token")
+
    http = Net::HTTP.new(url.host, url.port)
    http.use_ssl = true
    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
    request = Net::HTTP::Post.new(url)
    request["content-type"] = 'application/x-www-form-urlencoded'
    request.body = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-recovery-code&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&recovery_code=%7BrecoveryCode%7D"
+
    response = http.request(request)
    puts response.read_body
-   ``` lines
-   ```swift Swift lines
+   ```
+   ```swift Swift lines expandable
    import Foundation
+
    let headers = ["content-type": "application/x-www-form-urlencoded"]
+
    let postData = NSMutableData(data: "grant_type=http://auth0.com/oauth/grant-type/mfa-recovery-code".data(using: String.Encoding.utf8)!)
    postData.append("&client_id={yourClientId}".data(using: String.Encoding.utf8)!)
    postData.append("&client_secret={yourClientSecret}".data(using: String.Encoding.utf8)!)
    postData.append("&mfa_token={mfaToken}".data(using: String.Encoding.utf8)!)
    postData.append("&recovery_code={recoveryCode}".data(using: String.Encoding.utf8)!)
+
    let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/token")! as URL,
-   cachePolicy: .useProtocolCachePolicy,
-   timeoutInterval: 10.0)
+                                          cachePolicy: .useProtocolCachePolicy,
+                                       timeoutInterval: 10.0)
    request.httpMethod = "POST"
    request.allHTTPHeaderFields = headers
    request.httpBody = postData as Data
+
    let session = URLSession.shared
    let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
    if (error != nil) {
-   print(error)
+      print(error)
    } else {
-   let httpResponse = response as? HTTPURLResponse
-   print(httpResponse)
+      let httpResponse = response as? HTTPURLResponse
+      print(httpResponse)
    }
    })
+
    dataTask.resume()
    ```
-</CodeGroup>
+   </CodeGroup>
 
 3. 回復コードを保存するようにユーザーに求めます。呼び出しに成功した場合は、認証トークンと新しい回復コードを受け取ります。
 

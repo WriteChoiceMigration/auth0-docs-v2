@@ -35,11 +35,11 @@ OTPで登録するには、`authenticator_types`パラメーターを`[otp]`に�
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/mfa/associate' \
---header 'authorization: Bearer MFA_TOKEN' \
---header 'content-type: application/json' \
---data '{ "authenticator_types": ["otp"] }'
-``` lines
+  --url 'https://{yourDomain}/mfa/associate' \
+  --header 'authorization: Bearer MFA_TOKEN' \
+  --header 'content-type: application/json' \
+  --data '{ "authenticator_types": ["otp"] }'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/mfa/associate");
 var request = new RestRequest(Method.POST);
@@ -49,110 +49,137 @@ request.AddParameter("application/json", "{ \"authenticator_types\": [\"otp\"] }
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/mfa/associate"
-payload := strings.NewReader("{ \"authenticator_types\": [\"otp\"] }")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("authorization", "Bearer MFA_TOKEN")
-req.Header.Add("content-type", "application/json")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/mfa/associate"
+
+	payload := strings.NewReader("{ \"authenticator_types\": [\"otp\"] }")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("authorization", "Bearer MFA_TOKEN")
+	req.Header.Add("content-type", "application/json")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/mfa/associate")
-.header("authorization", "Bearer MFA_TOKEN")
-.header("content-type", "application/json")
-.body("{ \"authenticator_types\": [\"otp\"] }")
-.asString();
+HttpResponse<String> response = Unirest.post("https://{yourDomain}/mfa/associate")
+  .header("authorization", "Bearer MFA_TOKEN")
+  .header("content-type", "application/json")
+  .body("{ \"authenticator_types\": [\"otp\"] }")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/mfa/associate',
-headers: {authorization: 'Bearer MFA_TOKEN', 'content-type': 'application/json'},
-data: {authenticator_types: ['otp']}
+  method: 'POST',
+  url: 'https://{yourDomain}/mfa/associate',
+  headers: {authorization: 'Bearer MFA_TOKEN', 'content-type': 'application/json'},
+  data: {authenticator_types: ['otp']}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer MFA_TOKEN",
-@"content-type": @"application/json" };
-NSDictionary \*parameters = @{ @"authenticator_types": @[ @"otp" ] };
-NSData \*postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/mfa/associate"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer MFA_TOKEN",
+                           @"content-type": @"application/json" };
+NSDictionary *parameters = @{ @"authenticator_types": @[ @"otp" ] };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/mfa/associate"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/mfa/associate",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "{ \"authenticator_types\": [\"otp\"] }",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer MFA_TOKEN",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/mfa/associate",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{ \"authenticator_types\": [\"otp\"] }",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer MFA_TOKEN",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+}
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "{ \"authenticator_types\": [\"otp\"] }"
+
 headers = {
-'authorization': "Bearer MFA_TOKEN",
-'content-type': "application/json"
-}
+    'authorization': "Bearer MFA_TOKEN",
+    'content-type': "application/json"
+    }
+
 conn.request("POST", "/{yourDomain}/mfa/associate", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -160,40 +187,49 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/mfa/associate")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["authorization"] = 'Bearer MFA_TOKEN'
 request["content-type"] = 'application/json'
 request.body = "{ \"authenticator_types\": [\"otp\"] }"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = [
-"authorization": "Bearer MFA_TOKEN",
-"content-type": "application/json"
+  "authorization": "Bearer MFA_TOKEN",
+  "content-type": "application/json"
 ]
 let parameters = ["authenticator_types": ["otp"]] as [String : Any]
+
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/mfa/associate")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -222,14 +258,14 @@ dataTask.resume()
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/oauth/token' \
---header 'content-type: application/x-www-form-urlencoded' \
---data grant_type=http://auth0.com/oauth/grant-type/mfa-otp \
---data 'client_id={yourClientId}' \
---data 'mfa_token={mfaToken}' \
---data 'client_secret={yourClientSecret}' \
---data 'otp={userOtpCode}'
-``` lines
+  --url 'https://{yourDomain}/oauth/token' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data grant_type=http://auth0.com/oauth/grant-type/mfa-otp \
+  --data 'client_id={yourClientId}' \
+  --data 'mfa_token={mfaToken}' \
+  --data 'client_secret={yourClientSecret}' \
+  --data 'otp={userOtpCode}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
@@ -238,112 +274,138 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=http%3A%2F
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/oauth/token"
-payload := strings.NewReader("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&mfa_token=%7BmfaToken%7D&client_secret=%7ByourClientSecret%7D&otp=%7BuserOtpCode%7D")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "application/x-www-form-urlencoded")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/oauth/token"
+
+	payload := strings.NewReader("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&mfa_token=%7BmfaToken%7D&client_secret=%7ByourClientSecret%7D&otp=%7BuserOtpCode%7D")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/x-www-form-urlencoded")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
-.header("content-type", "application/x-www-form-urlencoded")
-.body("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&mfa_token=%7BmfaToken%7D&client_secret=%7ByourClientSecret%7D&otp=%7BuserOtpCode%7D")
-.asString();
+HttpResponse<String> response = Unirest.post("https://{yourDomain}/oauth/token")
+  .header("content-type", "application/x-www-form-urlencoded")
+  .body("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&mfa_token=%7BmfaToken%7D&client_secret=%7ByourClientSecret%7D&otp=%7BuserOtpCode%7D")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/oauth/token',
-headers: {'content-type': 'application/x-www-form-urlencoded'},
-data: new URLSearchParams({
-grant_type: 'http://auth0.com/oauth/grant-type/mfa-otp',
-client_id: '{yourClientId}',
-mfa_token: '{mfaToken}',
-client_secret: '{yourClientSecret}',
-otp: '{userOtpCode}'
-})
+  method: 'POST',
+  url: 'https://{yourDomain}/oauth/token',
+  headers: {'content-type': 'application/x-www-form-urlencoded'},
+  data: new URLSearchParams({
+    grant_type: 'http://auth0.com/oauth/grant-type/mfa-otp',
+    client_id: '{yourClientId}',
+    mfa_token: '{mfaToken}',
+    client_secret: '{yourClientSecret}',
+    otp: '{userOtpCode}'
+  })
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
-NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=http://auth0.com/oauth/grant-type/mfa-otp" dataUsingEncoding:NSUTF8StringEncoding]];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
+
+NSMutableData *postData = [[NSMutableData alloc] initWithData:[@"grant_type=http://auth0.com/oauth/grant-type/mfa-otp" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&client_id={yourClientId}" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&mfa_token={mfaToken}" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&client_secret={yourClientSecret}" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&otp={userOtpCode}" dataUsingEncoding:NSUTF8StringEncoding]];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/oauth/token",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&mfa_token=%7BmfaToken%7D&client_secret=%7ByourClientSecret%7D&otp=%7BuserOtpCode%7D",
-CURLOPT_HTTPHEADER => [
-"content-type: application/x-www-form-urlencoded"
-],
+  CURLOPT_URL => "https://{yourDomain}/oauth/token",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&mfa_token=%7BmfaToken%7D&client_secret=%7ByourClientSecret%7D&otp=%7BuserOtpCode%7D",
+  CURLOPT_HTTPHEADER => [
+    "content-type: application/x-www-form-urlencoded"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&mfa_token=%7BmfaToken%7D&client_secret=%7ByourClientSecret%7D&otp=%7BuserOtpCode%7D"
+
 headers = { 'content-type': "application/x-www-form-urlencoded" }
+
 conn.request("POST", "/{yourDomain}/oauth/token", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -351,39 +413,48 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/oauth/token")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&mfa_token=%7BmfaToken%7D&client_secret=%7ByourClientSecret%7D&otp=%7BuserOtpCode%7D"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = ["content-type": "application/x-www-form-urlencoded"]
+
 let postData = NSMutableData(data: "grant_type=http://auth0.com/oauth/grant-type/mfa-otp".data(using: String.Encoding.utf8)!)
 postData.append("&client_id={yourClientId}".data(using: String.Encoding.utf8)!)
 postData.append("&mfa_token={mfaToken}".data(using: String.Encoding.utf8)!)
 postData.append("&client_secret={yourClientSecret}".data(using: String.Encoding.utf8)!)
 postData.append("&otp={userOtpCode}".data(using: String.Encoding.utf8)!)
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/token")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -417,10 +488,10 @@ MFA Authenticatorエンドポイントを呼び出すことで、Authenticator�
 <CodeGroup>
 ```bash cURL lines
 curl --request GET \
---url 'https://{yourDomain}/mfa/authenticators' \
---header 'authorization: Bearer MFA_TOKEN' \
---header 'content-type: application/json'
-``` lines
+  --url 'https://{yourDomain}/mfa/authenticators' \
+  --header 'authorization: Bearer MFA_TOKEN' \
+  --header 'content-type: application/json'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/mfa/authenticators");
 var request = new RestRequest(Method.GET);
@@ -429,101 +500,124 @@ request.AddHeader("content-type", "application/json");
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/mfa/authenticators"
-req, _ := http.NewRequest("GET", url, nil)
-req.Header.Add("authorization", "Bearer MFA_TOKEN")
-req.Header.Add("content-type", "application/json")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/mfa/authenticators"
+
+	req, _ := http.NewRequest("GET", url, nil)
+
+	req.Header.Add("authorization", "Bearer MFA_TOKEN")
+	req.Header.Add("content-type", "application/json")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.get("https://{yourDomain}/mfa/authenticators")
-.header("authorization", "Bearer MFA_TOKEN")
-.header("content-type", "application/json")
-.asString();
+HttpResponse<String> response = Unirest.get("https://{yourDomain}/mfa/authenticators")
+  .header("authorization", "Bearer MFA_TOKEN")
+  .header("content-type", "application/json")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'GET',
-url: 'https://{yourDomain}/mfa/authenticators',
-headers: {authorization: 'Bearer MFA_TOKEN', 'content-type': 'application/json'}
+  method: 'GET',
+  url: 'https://{yourDomain}/mfa/authenticators',
+  headers: {authorization: 'Bearer MFA_TOKEN', 'content-type': 'application/json'}
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
+```
 ```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"authorization": @"Bearer MFA_TOKEN",
-@"content-type": @"application/json" };
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/mfa/authenticators"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"authorization": @"Bearer MFA_TOKEN",
+                           @"content-type": @"application/json" };
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/mfa/authenticators"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"GET"];
 [request setAllHTTPHeaderFields:headers];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/mfa/authenticators",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "GET",
-CURLOPT_HTTPHEADER => [
-"authorization: Bearer MFA_TOKEN",
-"content-type: application/json"
-],
+  CURLOPT_URL => "https://{yourDomain}/mfa/authenticators",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => [
+    "authorization: Bearer MFA_TOKEN",
+    "content-type: application/json"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 headers = {
-'authorization': "Bearer MFA_TOKEN",
-'content-type': "application/json"
-}
+    'authorization': "Bearer MFA_TOKEN",
+    'content-type': "application/json"
+    }
+
 conn.request("GET", "/{yourDomain}/mfa/authenticators", headers=headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -531,36 +625,44 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/mfa/authenticators")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Get.new(url)
 request["authorization"] = 'Bearer MFA_TOKEN'
 request["content-type"] = 'application/json'
+
 response = http.request(request)
 puts response.read_body
-``` lines
+```
 ```swift Swift lines
 import Foundation
+
 let headers = [
-"authorization": "Bearer MFA_TOKEN",
-"content-type": "application/json"
+  "authorization": "Bearer MFA_TOKEN",
+  "content-type": "application/json"
 ]
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/mfa/authenticators")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "GET"
 request.allHTTPHeaderFields = headers
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>
@@ -591,14 +693,14 @@ OAuth0トークンエンドポイントを使用して、`otp`パラメーター
 <CodeGroup>
 ```bash cURL lines
 curl --request POST \
---url 'https://{yourDomain}/oauth/token' \
---header 'content-type: application/x-www-form-urlencoded' \
---data grant_type=http://auth0.com/oauth/grant-type/mfa-otp \
---data 'client_id={yourClientId}' \
---data 'client_secret={yourClientSecret}' \
---data 'mfa_token={mfaToken}' \
---data 'otp={userOtpCode}'
-``` lines
+  --url 'https://{yourDomain}/oauth/token' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data grant_type=http://auth0.com/oauth/grant-type/mfa-otp \
+  --data 'client_id={yourClientId}' \
+  --data 'client_secret={yourClientSecret}' \
+  --data 'mfa_token={mfaToken}' \
+  --data 'otp={userOtpCode}'
+```
 ```csharp C# lines
 var client = new RestClient("https://{yourDomain}/oauth/token");
 var request = new RestRequest(Method.POST);
@@ -607,112 +709,138 @@ request.AddParameter("application/x-www-form-urlencoded", "grant_type=http%3A%2F
 IRestResponse response = client.Execute(request);
 ```
 
-```go Go lines
+```go Go lines expandable
 package main
+
 import (
-"fmt"
-"strings"
-"net/http"
-"io/ioutil"
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
 )
+
 func main() {
-url := "https://{yourDomain}/oauth/token"
-payload := strings.NewReader("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&otp=%7BuserOtpCode%7D")
-req, _ := http.NewRequest("POST", url, payload)
-req.Header.Add("content-type", "application/x-www-form-urlencoded")
-res, _ := http.DefaultClient.Do(req)
-defer res.Body.Close()
-body, _ := ioutil.ReadAll(res.Body)
-fmt.Println(res)
-fmt.Println(string(body))
+
+	url := "https://{yourDomain}/oauth/token"
+
+	payload := strings.NewReader("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&otp=%7BuserOtpCode%7D")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("content-type", "application/x-www-form-urlencoded")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
 }
-``` lines
+```
 ```java Java lines
-HttpResponse response = Unirest.post("https://{yourDomain}/oauth/token")
-.header("content-type", "application/x-www-form-urlencoded")
-.body("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&otp=%7BuserOtpCode%7D")
-.asString();
+HttpResponse<String> response = Unirest.post("https://{yourDomain}/oauth/token")
+  .header("content-type", "application/x-www-form-urlencoded")
+  .body("grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&otp=%7BuserOtpCode%7D")
+  .asString();
 ```
 
 ```javascript Node.JS lines
 var axios = require("axios").default;
+
 var options = {
-method: 'POST',
-url: 'https://{yourDomain}/oauth/token',
-headers: {'content-type': 'application/x-www-form-urlencoded'},
-data: new URLSearchParams({
-grant_type: 'http://auth0.com/oauth/grant-type/mfa-otp',
-client_id: '{yourClientId}',
-client_secret: '{yourClientSecret}',
-mfa_token: '{mfaToken}',
-otp: '{userOtpCode}'
-})
+  method: 'POST',
+  url: 'https://{yourDomain}/oauth/token',
+  headers: {'content-type': 'application/x-www-form-urlencoded'},
+  data: new URLSearchParams({
+    grant_type: 'http://auth0.com/oauth/grant-type/mfa-otp',
+    client_id: '{yourClientId}',
+    client_secret: '{yourClientSecret}',
+    mfa_token: '{mfaToken}',
+    otp: '{userOtpCode}'
+  })
 };
+
 axios.request(options).then(function (response) {
-console.log(response.data);
+  console.log(response.data);
 }).catch(function (error) {
-console.error(error);
+  console.error(error);
 });
-``` lines
-```obj-c Obj-C lines
-#import 
-NSDictionary \*headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
-NSMutableData \*postData = [[NSMutableData alloc] initWithData:[@"grant_type=http://auth0.com/oauth/grant-type/mfa-otp" dataUsingEncoding:NSUTF8StringEncoding]];
+```
+```obj-c Obj-C lines expandable
+#import <Foundation/Foundation.h>
+
+NSDictionary *headers = @{ @"content-type": @"application/x-www-form-urlencoded" };
+
+NSMutableData *postData = [[NSMutableData alloc] initWithData:[@"grant_type=http://auth0.com/oauth/grant-type/mfa-otp" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&client_id={yourClientId}" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&client_secret={yourClientSecret}" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&mfa_token={mfaToken}" dataUsingEncoding:NSUTF8StringEncoding]];
 [postData appendData:[@"&otp={userOtpCode}" dataUsingEncoding:NSUTF8StringEncoding]];
-NSMutableURLRequest \*request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
-cachePolicy:NSURLRequestUseProtocolCachePolicy
-timeoutInterval:10.0];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://{yourDomain}/oauth/token"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
 [request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
-NSURLSession \*session = [NSURLSession sharedSession];
-NSURLSessionDataTask \*dataTask = [session dataTaskWithRequest:request
-completionHandler:^(NSData \*data, NSURLResponse \*response, NSError \*error) {
-if (error) {
-NSLog(@"%@", error);
-} else {
-NSHTTPURLResponse \*httpResponse = (NSHTTPURLResponse \*) response;
-NSLog(@"%@", httpResponse);
-}
-}];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
 [dataTask resume];
 ```
 
-```php PHP lines
+```php PHP lines expandable
 $curl = curl_init();
+
 curl_setopt_array($curl, [
-CURLOPT_URL => "https://{yourDomain}/oauth/token",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "POST",
-CURLOPT_POSTFIELDS => "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&otp=%7BuserOtpCode%7D",
-CURLOPT_HTTPHEADER => [
-"content-type: application/x-www-form-urlencoded"
-],
+  CURLOPT_URL => "https://{yourDomain}/oauth/token",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&otp=%7BuserOtpCode%7D",
+  CURLOPT_HTTPHEADER => [
+    "content-type: application/x-www-form-urlencoded"
+  ],
 ]);
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
+
 curl_close($curl);
+
 if ($err) {
-echo "cURL Error #:" . $err;
+  echo "cURL Error #:" . $err;
 } else {
-echo $response;
+  echo $response;
 }
-``` lines
+```
 ```python Python lines
 import http.client
+
 conn = http.client.HTTPSConnection("")
+
 payload = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&otp=%7BuserOtpCode%7D"
+
 headers = { 'content-type': "application/x-www-form-urlencoded" }
+
 conn.request("POST", "/{yourDomain}/oauth/token", payload, headers)
+
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))
 ```
 
@@ -720,39 +848,48 @@ print(data.decode("utf-8"))
 require 'uri'
 require 'net/http'
 require 'openssl'
+
 url = URI("https://{yourDomain}/oauth/token")
+
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
 request = Net::HTTP::Post.new(url)
 request["content-type"] = 'application/x-www-form-urlencoded'
 request.body = "grant_type=http%3A%2F%2Fauth0.com%2Foauth%2Fgrant-type%2Fmfa-otp&client_id={yourClientId}&client_secret=%7ByourClientSecret%7D&mfa_token=%7BmfaToken%7D&otp=%7BuserOtpCode%7D"
+
 response = http.request(request)
 puts response.read_body
-``` lines
-```swift Swift lines
+```
+```swift Swift lines expandable
 import Foundation
+
 let headers = ["content-type": "application/x-www-form-urlencoded"]
+
 let postData = NSMutableData(data: "grant_type=http://auth0.com/oauth/grant-type/mfa-otp".data(using: String.Encoding.utf8)!)
 postData.append("&client_id={yourClientId}".data(using: String.Encoding.utf8)!)
 postData.append("&client_secret={yourClientSecret}".data(using: String.Encoding.utf8)!)
 postData.append("&mfa_token={mfaToken}".data(using: String.Encoding.utf8)!)
 postData.append("&otp={userOtpCode}".data(using: String.Encoding.utf8)!)
+
 let request = NSMutableURLRequest(url: NSURL(string: "https://{yourDomain}/oauth/token")! as URL,
-cachePolicy: .useProtocolCachePolicy,
-timeoutInterval: 10.0)
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
 request.httpMethod = "POST"
 request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
+
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-if (error != nil) {
-print(error)
-} else {
-let httpResponse = response as? HTTPURLResponse
-print(httpResponse)
-}
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
 })
+
 dataTask.resume()
 ```
 </CodeGroup>

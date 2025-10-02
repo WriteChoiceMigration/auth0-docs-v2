@@ -42,7 +42,7 @@ Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Man
 `update:encryption_keys`
 ``</td>
 <td>
-           ユーザーはManagement APIの<a api="" auth0.com="" docs="" https:="" ja-jp="" keys="" management="" post-encryption-rekey="" v2="">Rekey</a>エンドポイントを使用して、Auth0テナントのキー階層のローテーションと再暗号化を行うことができます。
+           ユーザーはManagement APIの [Rekey]() エンドポイントを使用して、Auth0テナントのキー階層のローテーションと再暗号化を行うことができます。
           </td>
 </tr>
 </tbody>
@@ -106,39 +106,12 @@ Auth0のアプリケーションレイヤーで、Auth0はエンベロープ暗�
 
 Auth0のエンベロープ暗号化階層は以下のキーで構成されており、それぞれが各自の上にあるキーを使って暗号化されます。以下のテーブルは、キー階層をまとめたものです。
 
-<table class="table">
-<thead>
-<tr>
-<th><b>キー</b></th>
-<th><b>アルゴリズム</b></th>
-<th><b>ストレージ</b></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>環境のルートキー</td>
-<td> <p>RSA 2048 OAEP（Azure上のAuth0）</p>
-<p>AES-256-GCM（AWS上のAuth0）</p>
-</td>
-<td>FIPS 140-2 L3ハードウェアのセキュリティモジュール</td>
-</tr>
-<tr>
-<td>テナントのマスターキー</td>
-<td>AES-256-GCM</td>
-<td>Auth0 KMSデータベース</td>
-</tr>
-<tr>
-<td>名前空間キー</td>
-<td>AES-256-GCM</td>
-<td>Auth0 KMSデータベース</td>
-</tr>
-<tr>
-<td>データ暗号化キー</td>
-<td>AES-256-GCM</td>
-<td>データの隣りに保管</td>
-</tr>
-</tbody>
-</table>
+| **キー** | **アルゴリズム** | **ストレージ** |
+| :--- | :--- | :--- |
+| 環境のルートキー | RSA 2048 OAEP（Azure上のAuth0）<br/>AES-256-GCM（AWS上のAuth0） | FIPS 140-2 L3ハードウェアのセキュリティモジュール |
+| テナントのマスターキー | AES-256-GCM | Auth0 KMSデータベース |
+| 名前空間キー | AES-256-GCM | Auth0 KMSデータベース |
+| データ暗号化キー | AES-256-GCM | データの隣りに保管 |
 
 環境ルートキーは階層の上部を表し、テナントマスターキーがAuth0の外部で公開または改ざんされるのを防ぐために、テナントマスターキーをラップします。
 
