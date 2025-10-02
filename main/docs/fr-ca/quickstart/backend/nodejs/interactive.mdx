@@ -7,106 +7,79 @@ permalink: "interactive"
 'og:image': "https://cdn2.auth0.com/docs/1.14567.0/media/platforms/node.png"
 'twitter:title': "Ajouter une autorisation à votre application API Express.js"
 'twitter:description': "Ce guide explique comment intégrer Auth0 à n’importe quelle application API Express.js, nouvelle ou existante, en utilisant le package express-oauth2-jwt-bearer."
+sidebarTitle: Node (Express) API
 ---
 
-[Skip to main content](#maincontent)
+import { Recipe, Content, Section, SideMenu, SideMenuSectionItem, SignUpForm } from "/snippets/recipe.jsx";
+import { LoggedInForm } from "/snippets/Login.jsx";
+import Server from "/snippets/quickstart/backend/nodejs/server.js.mdx";
+import Server2 from "/snippets/quickstart/backend/nodejs/server.js2.mdx";
 
-​
+export const sections = [
+  { id: "définir-les-autorisations", title: "Définir les autorisations" },
+  { id: "installer-les-dépendances", title: "Installer les dépendances" },
+  { id: "configurer-l-intergiciel", title: "Configurer l’intergiciel" },
+  { id: "protéger-les-points-de-terminaison-des-api", title: "Protéger les points de terminaison des API" }
+]
 
-[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+<Recipe>
+  <Content>
+    Ce guide explique comment intégrer Auth0 à n’importe quelle application API Express.js, nouvelle ou existante, en utilisant le package `express-oauth2-jwt-bearer`.
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+    Si vous n’avez pas encore créé d’API dans votre Auth0 Dashboard, utilisez le sélecteur interactif pour créer une nouvelle API Auth0 ou sélectionner une API existante pour votre projet.
 
----
+    Pour configurer votre première API via Auth0 Dashboard, consultez [notre guide de démarrage](https://auth0.com/docs/get-started/auth0-overview/set-up-apis). Chaque API Auth0 utilise l’identificateur API, dont votre application a besoin pour valider le jeton d’accès.
 
-​
+    <Info>
+    **Vous ne connaissez pas Auth0?** Découvrez [Auth0](https://auth0.com/docs/overview) et [l’implémentation de l’authentification et de l’autorisation d’API](https://auth0.com/docs/api-auth) en utilisant le cadre d’applications OAuth 2.0.
+    </Info>
 
-[Articles](/docs/fr-ca/articles)[Quickstarts](/docs/fr-ca/quickstarts)[Auth0 APIs](/docs/fr-ca/api)[SDKs](/docs/fr-ca/libraries)
+      <Section id={sections[0].id} title={sections[0].title} stepNumber="1">
+      Les autorisations vous permettent de définir comment les ressources peuvent être accessibles au nom de l’utilisateur avec un jeton d’accès donné. Par exemple, vous pouvez choisir d’accorder un accès en lecture à la ressource `messages` si les utilisateurs ont le niveau d’accès gestionnaire et un accès en écriture à cette ressource s’ils ont le niveau d’accès administrateur.
 
-[Contact sales](https://auth0.com/get-started?place=header&type=button&text=talk%20to%20sales) Log InSign Up
+      Vous pouvez définir les autorisations autorisées dans la vue **Permissions (Autorisations)** de la section [API](https://manage.auth0.com/#/apis) d’Auth0 Dashboard.
 
-[##### Ajouter une autorisation à votre application API Express.js](#Ajouter une autorisation à votre application API Express.js)
+      <Frame>![null](/images/fr-ca/cdy7uua7fh8z/5EnGfdqLVZ8fuIxbUn7gm1/41998b8778fe7ad02b23131643b5ba95/Quickstarts_API_-_Permissions.png)</Frame>
 
-[View on Github](https://github.com/auth0-samples/auth0-express-api-samples/tree/master/01-Authorization-RS256) Log In & Download Sample
+      <Info>
+      Cet exemple utilise la permission `read:messages`.
+      </Info>
+      </Section>
 
-1. [Docs](/docs/fr-ca/fr-ca)
-3. [Quickstarts](/docs/fr-ca/quickstarts)
-5. [Backend/API](/docs/fr-ca/quickstart/backend)
-7. [Node (Express) API](/docs/fr-ca/quickstart/backend/nodejs/interactive)
+      <Section id={sections[1].id} title={sections[1].title} stepNumber="2">
+      Tout d’abord, installez la trousse SDK avec `npm`.
 
-# 
+      ```bash
+      npm install --save express-oauth2-jwt-bearer
+      ```
+      </Section>
 
-# Ajouter une autorisation à votre application API Express.js
+      <Section id={sections[2].id} title={sections[2].title} stepNumber="3">
+      Configurez `express-oauth2-jwt-bearer` avec votre domaine et votre identificateur API.
 
-Ce guide explique comment intégrer Auth0 à n’importe quelle application API Express.js, nouvelle ou existante, en utilisant le package `express-oauth2-jwt-bearer`.
+      L’intergiciel `checkJwt` présenté à droite vérifie si le jeton d’accès de l’utilisateur inclus dans la demande est valide. Si le jeton n’est pas valide, l’utilisateur reçoit une erreur « 401 Authorization » (Autorisation 401) lorsqu’il tente d’accéder aux points de terminaison.
 
-Si vous n’avez pas encore créé d’API dans votre Auth0 Dashboard, utilisez le sélecteur interactif pour créer une nouvelle API Auth0 ou sélectionner une API existante pour votre projet.
+      L’intergiciel ne vérifie pas si le jeton dispose d’une permission suffisante pour accéder aux ressources demandées.
+      </Section>
 
-Pour configurer votre première API via Auth0 Dashboard, consultez [notre guide de démarrage](https://auth0.com/docs/get-started/auth0-overview/set-up-apis). Chaque API Auth0 utilise l’identificateur API, dont votre application a besoin pour valider le jeton d’accès.
+      <Section id={sections[3].id} title={sections[3].title} stepNumber="4">
+      Pour protéger une route individuelle en exigeant un JWT valide, configurez la route avec le logiciel médiateur `checkJwt` développé à partir de `express-oauth2-jwt-bearer`.
 
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
+      Vous pouvez configurer des routes individuelles pour qu’elles recherchent une permission particulière. Pour ce faire, configurez un autre logiciel médiateur avec la méthode `requiresScope`. Fournissez les permissions requises et appliquez le logiciel médiateur à toutes les routes auxquelles vous souhaitez ajouter une autorisation.
 
-**Vous ne connaissez pas Auth0?** Découvrez [Auth0](https://auth0.com/docs/overview) et [l’implémentation de l’authentification et de l’autorisation d’API](https://auth0.com/docs/api-auth) en utilisant le cadre d’applications OAuth 2.0.
+      Transmettez les logiciels médiateurs `checkJwt` et `requiredScopes` à la route que vous souhaitez protéger.
 
-</Callout>
+      Dans cette configuration, seuls les jetons d’accès avec la permission `read:messages` peuvent accéder au point de terminaison.
 
-[1
+      ### Faire un appel à votre API
 
-## Définir les autorisations](#définir-les-autorisations)
+      Pour appeler votre API, vous avez besoin d’un jeton d’accès. Vous pouvez obtenir un jeton d’accès à des fins de test dans la vue **Test** dans vos [API settings (Paramètres API)](https://manage.auth0.com/#/apis).
 
-Les autorisations vous permettent de définir comment les ressources peuvent être accessibles au nom de l’utilisateur avec un jeton d’accès donné. Par exemple, vous pouvez choisir d’accorder un accès en lecture à la ressource `messages` si les utilisateurs ont le niveau d’accès gestionnaire et un accès en écriture à cette ressource s’ils ont le niveau d’accès administrateur.
+      <Frame>![null](/images/fr-ca/cdy7uua7fh8z/5HUMcKGXoNOvdJNXFI73oi/46c9a2dff462708e855bc1073e601f80/Tokens_-_French.png)</Frame>
 
-Vous pouvez définir les autorisations autorisées dans la vue **Permissions (Autorisations)** de la section [API](https://manage.auth0.com/#/apis) d’Auth0 Dashboard.
+      Fournir le Jeton d’accès comme un en-tête `Authorization` dans vos demandes.
 
-<Frame>![null](/images/fr-ca/cdy7uua7fh8z/5EnGfdqLVZ8fuIxbUn7gm1/41998b8778fe7ad02b23131643b5ba95/Quickstarts_API_-_Permissions.png)</Frame>
-
-<Callout icon="file-lines" color="#0EA5E9" iconType="regular">
-
-Cet exemple utilise la permission `read:messages`.
-
-</Callout>
-
-[2
-
-## Installer les dépendances](#installer-les-dépendances)
-
-Tout d’abord, installez la trousse SDK avec `npm`.
-
-```powershell lines
-npm install --save express-oauth2-jwt-bearer
-```
-
-[3
-
-## Configurer l’intergiciel](#configurer-l-intergiciel)
-
-Configurez `express-oauth2-jwt-bearer` avec votre domaine et votre identificateur API.
-
-L’intergiciel `checkJwt` présenté à droite vérifie si le jeton d’accès de l’utilisateur inclus dans la demande est valide. Si le jeton n’est pas valide, l’utilisateur reçoit une erreur « 401 Authorization » (Autorisation 401) lorsqu’il tente d’accéder aux points de terminaison.
-
-L’intergiciel ne vérifie pas si le jeton dispose d’une permission suffisante pour accéder aux ressources demandées.
-
-[4
-
-## Protéger les points de terminaison des API](#protéger-les-points-de-terminaison-des-api)
-
-Pour protéger une route individuelle en exigeant un JWT valide, configurez la route avec le logiciel médiateur `checkJwt` développé à partir de `express-oauth2-jwt-bearer`.
-
-Vous pouvez configurer des routes individuelles pour qu’elles recherchent une permission particulière. Pour ce faire, configurez un autre logiciel médiateur avec la méthode `requiresScope`. Fournissez les permissions requises et appliquez le logiciel médiateur à toutes les routes auxquelles vous souhaitez ajouter une autorisation.
-
-Transmettez les logiciels médiateurs `checkJwt` et `requiredScopes` à la route que vous souhaitez protéger.
-
-Dans cette configuration, seuls les jetons d’accès avec la permission `read:messages` peuvent accéder au point de terminaison.
-
-### Faire un appel à votre API
-
-Pour appeler votre API, vous avez besoin d’un jeton d’accès. Vous pouvez obtenir un jeton d’accès à des fins de test dans la vue **Test** dans vos [API settings (Paramètres API)](https://manage.auth0.com/#/apis).
-
-<Frame>![null](/images/fr-ca/cdy7uua7fh8z/5HUMcKGXoNOvdJNXFI73oi/46c9a2dff462708e855bc1073e601f80/Tokens_-_French.png)</Frame>
-
-Fournir le Jeton d’accès comme un en-tête `Authorization` dans vos demandes.
-
-<CodeGroup>
+      <CodeGroup>
       ```bash cURL lines
       curl --request get \
       --url 'http:///%7ByourDomain%7D/api_path' \
@@ -268,109 +241,43 @@ Fournir le Jeton d’accès comme un en-tête `Authorization` dans vos demandes.
       ```
       </CodeGroup>
 
-##### checkpoint.header
 
-Maintenant que vous avez configuré votre application, exécutez-la pour vérifier que :
+      <Note>
+      ##### Point de contrôle
+      Maintenant que vous avez configuré votre application, exécutez-la pour vérifier que :
+      `GET /api/public` est disponible pour les demandes non authentifiées.
+      `GET /api/private` est disponible pour les demandes authentifiées.
+      `GET /api/private-scoped` est disponible pour les demandes authentifiées contenant un jeton d’accès avec la permission `read:messages`.
+      </Note>
+      </Section>
 
-* `GET /api/public` est disponible pour les demandes non authentifiées.
-* `GET /api/private` est disponible pour les demandes authentifiées.
-* `GET /api/private-scoped` est disponible pour les demandes authentifiées contenant un jeton d’accès avec la permission `read:messages`.
+    ## Étapes suivantes
 
-checkpoint.itWorked checkpoint.somethingNotRight
+    Beau travail! Si vous en êtes arrivé là, vous devriez avoir la connexion, la déconnexion et les informations de profil utilisateur actives dans votre application.
 
-## Next Steps
+    Cela conclut notre tutoriel de démarrage rapide, mais il y a tellement plus à explorer. Pour en savoir plus sur ce que vous pouvez faire avec Auth0, consultez :
 
-Excellent work! If you made it this far, you should now have login, logout, and user profile information running in your application.
+    *   [Auth0 Dashboard](https://manage.auth0.com/#) : apprenez à configurer et gérer votre locataire et vos applications Auth0
+    *   [Trousse SDK express-oauth2-jwt-bearer](https://github.com/auth0/node-oauth2-jwt-bearer/tree/main/packages/express-oauth2-jwt-bearer) : explorez en détail la trousse SDK utilisée dans ce tutoriel
+    *   [Auth0 Marketplace](https://marketplace.auth0.com/) : découvrez des intégrations que vous pouvez activer pour étendre les fonctionnalités d’Auth0
+  </Content>
 
-This concludes our quickstart tutorial, but there is so much more to explore. To learn more about what you can do with Auth0, check out:
+  <SideMenu sections={sections}>
+      <SideMenuSectionItem id={sections[0].id}>
+        <SignUpForm lang="fr"/>
+      </SideMenuSectionItem>
 
-* [Auth0 Dashboard](https://manage.auth0.com/#) - Learn how to configure and manage your Auth0 tenant and applications
-* [express-oauth2-jwt-bearer SDK](https://github.com/auth0/node-oauth2-jwt-bearer/tree/main/packages/express-oauth2-jwt-bearer) - Explore the SDK used in this tutorial more fully
-* [Auth0 Marketplace](https://marketplace.auth0.com/) - Discover integrations you can enable to extend Auth0’s functionality
+      <SideMenuSectionItem id={sections[1].id}>
+        <SignUpForm lang="fr"/>
+      </SideMenuSectionItem>
 
-Did it work?
+      <SideMenuSectionItem id={sections[2].id}>
+        <Server />
+      </SideMenuSectionItem>
 
-Yes No
+      <SideMenuSectionItem id={sections[3].id}>
+        <Server2 />
+      </SideMenuSectionItem>
 
-Any suggestion or typo?
-
-[Edit on GitHub](https://github.com/auth0/docs/edit/master/fr-ca/articles/quickstart/backend/nodejs/interactive.md)
-
-<Frame>![Sign Up](/docs/fr-ca/img/quickstarts/action_hero_dashboard.svg)</Frame>
-
-Sign up for an Auth0 account or log in to your existing account to integrate directly with your own tenant.
-
-Sign Up
-
-Developers
-
-* [Developer Hub](https://developer.auth0.com/resources)
-* [Code Samples and Guides](https://developer.auth0.com/resources/code-samples)
-* [Blog posts](https://auth0.com/blog/developers/)
-* [Videos](https://auth0.com/docs/videos)
-* [Identity Unlocked - Podcasts](https://identityunlocked.auth0.com/public/49/Identity,-Unlocked.--bed7fada)
-* [Zero Index Newsletter](https://developer.auth0.com/newsletter)
-
-Documentation
-
-* [Articles](https://auth0.com/docs/articles)
-* [Quickstarts](https://auth0.com/docs/quickstarts)
-* [APIs](https://auth0.com/docs/api)
-* [SDK Libraries](https://auth0.com/docs/libraries)
-* [Blog](https://auth0.com/blog/)
-* [Reports](https://auth0.com/resources/ebooks)
-* [Webinars](https://auth0.com/resources/webinars)
-
-Get Involved
-
-* [Forum](https://community.auth0.com/)
-* [Events](https://developer.auth0.com/events)
-* [Ambassador Program](https://auth0.com/ambassador-program)
-* [Auth0 Research Program](https://auth0.com/research-program)
-
-Company
-
-* [Our Customers](https://auth0.com/customers)
-* [Compliance - Ensuring privacy and security](https://auth0.com/security)
-* [Partners](https://auth0.com/partners)
-* [Careers We're hiring!](https://www.okta.com/company/careers/)
-* [Okta + Auth0](https://www.okta.com/okta-and-auth0/)
-
-Support Center
-
-* [Community](https://community.auth0.com/)
-* [Support](https://support.auth0.com/)
-* [Help](https://community.auth0.com/c/help/6)
-* [FAQs](https://community.auth0.com/c/faq/42)
-* [Auth0 Marketplace](https://marketplace.auth0.com)
-
-Learning
-
-* [Learn](https://auth0.com/learn)
-* [Intro to IAM (CIAM)](https://auth0.com/intro-to-iam)
-* [Blog](https://auth0.com/blog/)
-
-Platform
-
-* [Access Management](https://auth0.com/platform/access-management)
-* [Extensibility](https://auth0.com/platform/extensibility)
-* [Security](https://auth0.com/platform/login-security)
-* [User Management](https://auth0.com/platform/user-management)
-* [Authentication](https://auth0.com/platform/authentication)
-
-Features
-
-* [Universal Login](https://auth0.com/features/universal-login)
-* [Single Sign On](https://auth0.com/features/single-sign-on)
-* [Multifactor Authentication](https://auth0.com/features/multifactor-authentication)
-* [Actions](https://auth0.com/features/actions)
-* [Machine to Machine](https://auth0.com/features/machine-to-machine)
-* [Passwordless](https://auth0.com/features/passwordless)
-* [Breached Passwords](https://auth0.com/features/breached-passwords)
-
-© 2025 Okta, Inc. All Rights Reserved.
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
-[Status](https://status.auth0.com) • [Legal](https://www.okta.com/agreements/) • [Privacy](https://auth0.com/privacy) • [Terms](https://auth0.com/web-terms) • [Your Privacy Choices](https://auth0.com/your-privacy-choices)<Frame>![](https://cdn.auth0.com/website/footer/ccpa.svg)</Frame>
-
+    </SideMenu>
+</Recipe>
