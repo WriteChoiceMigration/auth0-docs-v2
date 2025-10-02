@@ -2,8 +2,7 @@
 import json
 import os
 import urllib.request
-from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urlparse, quote
 
 
 def download_images():
@@ -35,12 +34,17 @@ def download_images():
                 # Create directory if it doesn't exist
                 os.makedirs(os.path.dirname(local_path), exist_ok=True)
 
+                # URL encode the path for the request while keeping the domain intact
+                # Reconstruct URL with proper encoding
+                encoded_path = "/".join(quote(part, safe="") for part in parsed.path.lstrip("/").split("/"))
+                encoded_url = f"{parsed.scheme}://{parsed.netloc}/{encoded_path}"
+
                 # Download the image
                 print(f"Downloading: {url}")
                 print(f"Saving to: {local_path}")
 
-                urllib.request.urlretrieve(url, local_path)
-                print(f"✓ Successfully downloaded")
+                urllib.request.urlretrieve(encoded_url, local_path)
+                print("Successfully downloaded")
 
             except Exception as e:
                 print(f"✗ Error downloading {url}: {e}")
