@@ -59,7 +59,7 @@ Assurez-vous de définir les valeurs correctes pour les valeurs `AUTH0_OFFICE365
 
 Dans le code, vous verrez également que la règle attendra environ 15 secondes après la fourniture de l’utilisateur. En effet, il faut quelques secondes avant que l’utilisateur fourni soit disponible pour Office 365.
 
-```javascript lines
+```javascript lines expandable
 function (user, context, callback) {
   // Require the Node.js packages that we are going to use.
   // Check this website for a complete list of the packages available:
@@ -273,7 +273,7 @@ La manière la plus simple pour vos utilisateurs externes de s’authentifier es
 
 Vous devez rediriger vos utilisateurs vers l’URL suivante (par exemple, en utilisant un « lien intelligent » comme `https://office.travel0.com`) :
 
-``` lines
+```http wrap lines
 https://{yourDomain}/login?client=AUTH0_OFFICE365_CLIENT_ID&protocol=wsfed&state=&redirect_uri=&
 ```
 
@@ -285,7 +285,7 @@ Dans cet exemple, Travel0 a activé quelques comptes sociaux et une connexion de
 
 Certaines implémentations peuvent nécessiter des liens profonds (par exemple, vers SharePoint Online). Dans ce cas, un lien intelligent doit être créé, à partir de la page de connexion à Office 365 :
 
-``` lines
+```http wrap lines
 https://login.microsoftonline.com/login.srf?wa=wsignin1.0&whr={yourCustomDomain}&wreply={deepLink}
 ```
 
@@ -295,7 +295,7 @@ Le paramètre `DEEP_LINK` doit être une URL codée dans Office 365 (par exempl
 
 URL d’exemple :
 
-``` lines
+```http wrap lines
 https://login.microsoftonline.com/login.srf?wa=wsignin1.0&whr=travel0.com&wreply=https%3A%2F%2Ftravel0%2Esharepoint%2Ecom
 ```
 

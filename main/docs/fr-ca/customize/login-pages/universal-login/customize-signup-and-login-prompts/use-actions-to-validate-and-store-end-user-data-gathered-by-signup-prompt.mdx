@@ -20,7 +20,7 @@ Vous pouvez utiliser la [Personnalisation de l’invite d’inscription](/docs/f
 
 Utilisez la [Management API](https://auth0.com/docs/api/management/v2/prompts/put-custom-text-by-language) pour insérer un champ personnalisé dans une invite à l’aide de l’un des [Points d’entrée](https://auth0.com/docs/sign-up-prompt-customizations#-signup-prompt-entry-points). Cet exemple ajoute le contenu suivant au point d’insertion `ulp-container-form-content-start` :
 
-``` lines
+```html lines
 <div class="ulp-field">
   <label for="first-name">First Name</label>
   <input type="text" name="ulp-first-name" id="first-name">
@@ -39,7 +39,7 @@ Vous pouvez créer une action d’inscription personnalisée en allant sur [**Ac
 
 Dans l’éditeur de code, mettez à jour le gestionnaire `onExecutePreUserRegistration` :
 
-``` lines
+```js lines
 exports.onExecutePreUserRegistration = async (event, api) => {
   const firstName = event.request.body['ulp-first-name'];
   api.user.setUserMetadata("firstName", firstName);
@@ -48,7 +48,7 @@ exports.onExecutePreUserRegistration = async (event, api) => {
 
 En option, vous pouvez valider l’entrée de l’utilisateur et envoyer une erreur de validation en appelant la méthode `api.validation.error`, puis déployer l’action :
 
-``` lines
+```js lines
 exports.onExecutePreUserRegistration = async (event, api) => {
   const firstName = event.request.body['ulp-first-name'];
   if(!firstName) {
