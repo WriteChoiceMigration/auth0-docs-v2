@@ -28,7 +28,7 @@ Pour connaître les solutions possibles, consultez [Migration des utilisateurs d
 
 Cela est généralement dû au fait que le serveur est réglé sur une heure incorrecte. Si le message d’erreur indique « used too early » (utilisé trop tôt), cela signifie que l’heure de votre serveur est réglée sur le futur. S’il indique que le jeton a expiré, c’est que l’heure du serveur est réglée trop loin dans le passé. Une différence de temps entre deux serveurs est courante. Générez le résultat de la commande `echo date(DateTime::ISO8601)` en PHP sur votre serveur et comparez le résultat, y compris les secondes, à l’heure UTC actuelle. Si l’heure de votre serveur est décalée de plus de 60 secondes (la marge par défaut) par rapport à l’heure UTC, vous devrez définir une marge plus longue pour tenir compte de l’asymétrie de l’horloge de votre serveur. Vous pouvez coller le code ci-dessous dans le fichier `functions.php` de votre thème ou à tout autre endroit où il sera exécuté après le chargement du plugiciel et avant l’exécution du appel de connexion :
 
-```php lines
+```js wrap lines
 add_filter( 'auth0_jwt_leeway', function( $default_leeway ) { return 120; } );
 ```
 
@@ -110,7 +110,7 @@ Cela est généralement dû à une page mise en cache après la connexion. Consu
 
 C’est parce que l’URL de rappel n’a pas été ajoutée à la Liste blanche. Essayez d’ajouter ce code au filtre `my_forcelogin_whitelist` :
 
-```php lines
+```javascript lines
 function wp_auth0_forcelogin_whitelist( $whitelist ) {
   if ( ! empty( $_GET['auth0'] ) ) {
     $whitelist[] = site_url($_SERVER['REQUEST_URI']);

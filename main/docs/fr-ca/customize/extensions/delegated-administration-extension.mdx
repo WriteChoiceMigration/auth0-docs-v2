@@ -102,7 +102,7 @@ Lorsque vous travaillez avec des rôles, nous vous recommandons d’utiliser l�
 2. [Attribuer manuellement des rôles DAE à un utilisateur](/docs/fr-ca/manage-users/access-control/configure-core-rbac/rbac-users/assign-roles-to-users).
 3. Ajoutez des rôles d’utilisateur à l’espace de noms DAE dans le jeton d’ID à l’aide des [actions](/docs/fr-ca/customize/actions)**:**
 
-   ``` lines
+   ```javascript
    exports.onExecutePostLogin = async (event, api) => {
      const namespace = `https://{yourTenant}/auth0-delegated-admin`;
      if (event.client.client_id === 'CLIENT_ID' && event.authorization) {

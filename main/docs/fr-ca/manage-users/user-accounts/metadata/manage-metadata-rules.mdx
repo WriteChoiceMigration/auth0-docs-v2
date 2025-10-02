@@ -67,7 +67,7 @@ Pour pouvoir modifier les attributs `name`, `nickname`, `given_name`, `family_na
 
 En utilisant l’exemple de métadonnées ci-dessus, vous pouvez vous référer à des éléments précis de l’ensemble de données dans des [règles d'Auth0](/docs/fr-ca/customize/rules) ou via un appel à [Management API](/docs/fr-ca/users/guides/manage-user-metadata) comme suit :
 
-```javascript lines
+```js lines
 console.log(user.email); // "jane.doe@example.com"
 console.log(user.user_metadata.hobby); // "surfing"
 console.log(user.app_metadata.plan); // "full"
@@ -210,7 +210,7 @@ Il en résulte la représentation JSON suivante des informations du profil utili
 
 Pour réduire le temps de traitement de la règle, vous pouvez mettre à jour les `app_metadata` et les `user_metadata` dans la même règle :
 
-```javascript lines
+```javascript lines expandable
 function(user, context, callback){
 
   var q = require('q');

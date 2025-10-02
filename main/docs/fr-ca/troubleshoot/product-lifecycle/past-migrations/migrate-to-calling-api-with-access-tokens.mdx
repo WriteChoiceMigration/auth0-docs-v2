@@ -85,7 +85,7 @@ Dans l’exemple ci-dessous, vous utilisez le point de terminaison `GET User by 
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript lines
+```http lines
 https://{yourDomain}/authorize?
       scope=openid
       &response_type=id_token
@@ -99,7 +99,7 @@ Dans l’exemple ci-dessous, vous pouvez voir la nouvelle approche qui obtient u
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript lines
+```http lines
 https://{yourDomain}/authorize?
       audience=https://{yourDomain}/api/v2/
       &scope=read:current_user
@@ -118,7 +118,7 @@ Pour obtenir un jeton d’accès permettant d’accéder à Management API :
 
 Si vous décodez le jeton d’accès reçu et examinez son contenu, vous verrez ce qui suit :
 
-```javascript lines
+```json lines
 {
       "iss": "https://{yourDomain}/",
       "sub": "auth0|5a620d29a840170a9ef43672",
@@ -142,7 +142,7 @@ Dans l’exemple ci-dessous, vous souhaitez utiliser le point de terminaison `GE
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript lines
+```json lines
 POST https://{yourDomain}/oauth/token
     Content-Type: application/x-www-form-urlencoded
     {
@@ -159,7 +159,7 @@ Dans l’exemple ci-dessous, vous pouvez voir la nouvelle approche qui obtient �
 
 codeblockOld.header.login.logInButton codeblockOld.header.login.configureSnippet
 
-```javascript lines
+```json lines
 POST https://{yourDomain}/oauth/token
     Content-Type: application/x-www-form-urlencoded
     {

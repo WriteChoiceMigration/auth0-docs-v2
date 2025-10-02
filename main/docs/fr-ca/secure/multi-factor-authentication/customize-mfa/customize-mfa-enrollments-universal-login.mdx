@@ -35,9 +35,9 @@ Les flux d’inscription personnalisés prennent en charge les facteurs suivants
 * `push-notification`
 * `téléphone`
 
-  + `méthode préférée : voix`
-  + `méthode préférée : sms`
-  + `méthode préférée : les deux`
+  * `méthode préférée : voix`
+  * `méthode préférée : sms`
+  * `méthode préférée : les deux`
 * `webauthn-platform`
 * `webauthn-roaming`
 
@@ -66,7 +66,7 @@ Grâce à ces commandes, vous pouvez tirer parti des éléments suivants :
 
 Pour illustrer ces flux, considérons l’exemple suivant :
 
-```javascript lines
+```javascript lines expandable
 // Action 1
 
 exports.onExecutePostLogin = async (event, api) => {
@@ -215,7 +215,7 @@ Si vous ou vos utilisateurs remarquez un comportement inattendu, consultez les j
 <tr>
 <td>Un utilisateur est invité à s’inscrire avec un facteur particulier. Cependant, le facteur demandé répond à l’une des conditions suivantes :<br/><ul><li>Le facteur n’est pas activé dans votre locataire.</li><li>Le facteur n’est pas pris en charge par le navigateur de l’utilisateur.</li><li>L’utilisateur s’est déjà inscrit au facteur demandé.</li></ul>Dans ce scénario, l’utilisateur peut compléter le flux si des facteurs de remplacement sont possibles.</td>
 <td>w</td>
-<td>Une inscription MFA est utilisée dans une action post-connexion, mais le facteur demandé ${factor.name} n’est pas correctement configuré. Activer le facteur demandé et s’assurer que l’utilisateur n’est pas déjà inscrit avec ce facteur.</td>
+<td>Une inscription MFA est utilisée dans une action post-connexion, mais le facteur demandé `${factor.name}` n’est pas correctement configuré. Activer le facteur demandé et s’assurer que l’utilisateur n’est pas déjà inscrit avec ce facteur.</td>
 </tr>
 <tr>
 <td>Un utilisateur est invité à s’inscrire avec un ou plusieurs facteurs, mais les facteurs fournis ne peuvent pas être utilisés pour l’inscription. Dans ce cas, l’utilisateur ne peut pas terminer le flux.</td>

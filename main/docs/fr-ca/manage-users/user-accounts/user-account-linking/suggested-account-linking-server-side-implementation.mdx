@@ -20,7 +20,7 @@ Vous pouvez trouver la source complète de cet exemple d’application sur [GitH
 
    Vous pouvez obtenir le profil utilisateur et la liste des utilisateurs ayant le même courriel vérifié.
 
-   ``` lines
+   ```javascript lines expandable
    router.get("/", async (req, res) => {
      const { sub, email_verified } = req.openid.user;
      //fetch user profile containing the user_metadata and app_metadata properties
@@ -90,7 +90,7 @@ Vous pouvez trouver la source complète de cet exemple d’application sur [GitH
 
    L’extrait de code suivant montre comment vérifier et fusionner les métadonnées :
 
-   ```javascript lines
+   ```javascript lines expandable
    async function accountLink(req, res, next) {
    const {
      linking: { targetUserId },
@@ -135,7 +135,7 @@ Vous pouvez trouver la source complète de cet exemple d’application sur [GitH
 
 L’exemple suivant montre explicitement comment `user_metadata` et `app_metadata` du compte secondaire sont fusionnés dans le compte principal à l’aide de la [Trousse SDK Auth0 Node.js pour API V2](https://github.com/auth0/node-auth0).
 
-```javascript lines
+```javascript lines expandable
 /*
  * Recursively merges user_metadata and app_metadata from secondary into primary user.
  * Data of primary user takes preponderance.

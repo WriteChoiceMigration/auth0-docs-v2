@@ -16,26 +16,26 @@ Vous pouvez configurer les Services Web Amazon (AWS) pour l’authentification d
 1. Connectez-vous à AWS et accédez à la [Console IAM](https://console.aws.amazon.com/iam). À partir du menu de navigation de gauche, sélectionnez **Fournisseurs d’identités**. Cliquez sur **Créer un Fournisseur**. Établissez les paramètres suivants :
 
    <table class="table"><thead>
-<tr>
-<th>Paramètre</th>
-<th>Description et valeur de l’échantillon</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Type de fournisseur</td>
-<td>Le type de fournisseur. Défini comme <dfn id="react-containers-DefinitionTooltip-0"><span class="tooltip-portal-underlined-word" data-react-universal-portal="">`SAML`</span><style data-emotion="css 1lvvwdx" data-react-universal-portal="">.css-1lvvwdx{z-index:1500;pointer-events:none;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-1lvvwdx[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-1lvvwdx[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-1lvvwdx[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style><style data-emotion="css jrsr9g" data-react-universal-portal="">.css-jrsr9g{z-index:1500;pointer-events:none;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow{top:0;margin-top:-0.71em;}.css-jrsr9g[data-popper-placement*="bottom"] .MuiTooltip-arrow::before{transform-origin:0 100%;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow{bottom:0;margin-bottom:-0.71em;}.css-jrsr9g[data-popper-placement*="top"] .MuiTooltip-arrow::before{transform-origin:100% 0;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow{left:0;margin-left:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="right"] .MuiTooltip-arrow::before{transform-origin:100% 100%;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow{right:0;margin-right:-0.71em;height:1em;width:0.71em;}.css-jrsr9g[data-popper-placement*="left"] .MuiTooltip-arrow::before{transform-origin:0 0;}</style></dfn></td>
-</tr>
-<tr>
-<td>Nom du Fournisseur</td>
-<td>Un nom descriptif pour le fournisseur, tel que `auth0SamlProvider`</td>
-</tr>
-<tr>
-<td>Document de métadonnées</td>
-<td>Téléverser le fichier contenant les métadonnées Auth0, qui se trouve dans <strong>Dashboard (Tableau de bord) &gt; Applications (Applications) &gt; Application Settings (Paramètres d’application) &gt; Advanced Settings (Paramètres avancés) &gt; Endpoints (Points de terminaison) &gt; SAML Metadata (Métadonnées SAML) URL</strong></td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th>Paramètre</th>
+   <th>Description et valeur de l’échantillon</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Type de fournisseur</td>
+   <td>Le type de fournisseur. Défini comme <Tooltip tip="Security Assertion Markup Language (SAML) Protocole normalisé permettant à deux parties d’échanger des informations d’authentification sans mot de passe." cta="Voir le glossaire" href="/docs/glossary?term=security-assertion-markup-language">`SAML`</Tooltip></td>
+   </tr>
+   <tr>
+   <td>Nom du Fournisseur</td>
+   <td>Un nom descriptif pour le fournisseur, tel que `auth0SamlProvider`</td>
+   </tr>
+   <tr>
+   <td>Document de métadonnées</td>
+   <td>Téléverser le fichier contenant les métadonnées Auth0, qui se trouve dans <strong>Dashboard (Tableau de bord) &gt; Applications (Applications) &gt; Application Settings (Paramètres d’application) &gt; Advanced Settings (Paramètres avancés) &gt; Endpoints (Points de terminaison) &gt; SAML Metadata (Métadonnées SAML) URL</strong></td>
+   </tr>
+   </tbody>
+   </table>
 2. Cliquez sur **Prochaine étape**.
 3. Vérifiez vos paramètres et cliquez sur **Créer** si tout est correct.
 
@@ -46,26 +46,26 @@ Pour utiliser le fournisseur, vous devez créer un rôle IAM en utilisant le fou
 1. Dans la console IAM, accédez à [Rôles](https://console.aws.amazon.com/iam/home#/roles). Cliquez sur **Créer un rôle**. Vous serez redirigé vers la page **Confiance**. Indiquer **Saml 2.0 federation** sous **Sélectionner le type d’entité de confiance**. Fournir les valeurs suivantes :
 
    <table class="table"><thead>
-<tr>
-<th>Paramètre</th>
-<th>Valeur</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Fournisseur SAML</td>
-<td>Le nom de votre nouveau rôle</td>
-</tr>
-<tr>
-<td>Attribut</td>
-<td>`SAML:iss`</td>
-</tr>
-<tr>
-<td>Valeur</td>
-<td>`urn:{yourDomain}`</td>
-</tr>
-</tbody>
-</table>
+   <tr>
+   <th>Paramètre</th>
+   <th>Valeur</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Fournisseur SAML</td>
+   <td>Le nom de votre nouveau rôle</td>
+   </tr>
+   <tr>
+   <td>Attribut</td>
+   <td>`SAML:iss`</td>
+   </tr>
+   <tr>
+   <td>Valeur</td>
+   <td>`urn:{yourDomain}`</td>
+   </tr>
+   </tbody>
+   </table>
 2. Cliquez sur **Suivant : Autorisations** pour procéder.
 3. Vous devrez attacher des politiques d’autorisations à votre nouveau rôle. Vous y joignez une politique personnalisée. Pour en créer un, cliquez sur **Créer une politique**.
 4. Dans l’éditeur de **création de politique** qui s’ouvre, passez à l’onglet **JSON**. Ajoutez une politique personnalisée.

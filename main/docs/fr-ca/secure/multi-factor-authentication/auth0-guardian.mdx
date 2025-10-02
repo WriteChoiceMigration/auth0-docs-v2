@@ -55,9 +55,9 @@ Vous pouvez utiliser les OTP de deux manières principales :
 * En tant qu’option de repli pour les notifications poussées dans le cas où l’application Gardien Auth0 ou une autre application personnalisée ne reçoit pas de demande poussée.
 * Comme [défi-réponse MFA](/docs/fr-ca/secure/multi-factor-authentication/multi-factor-authentication-factors), si vous activez le facteur mot de passe à usage unique [dans votre locataire](https://manage.auth0.com/#/security/mfa).
 
-accordion.expand_all/accordion.collapse_all
 
-<Accordion title="Méthode de secours Utilisez les mots de passe à usage unique (OTP) en tant qu’option de secours aux notifications poussées">
+
+<Accordion title="Méthode de secours" description="Utilisez les mots de passe à usage unique (OTP) en tant qu’option de secours aux notifications poussées">
 
 Si un utilisateur ne reçoit pas de notification poussée via Gardien Auth0 ou d’une autre application personnalisée, il peut plutôt utiliser un OTP temporaire pour compléter le défi-réponse de la MFA.
 
@@ -74,7 +74,7 @@ Si un utilisateur ne reçoit pas de notification poussée via Gardien Auth0 ou d
 
 </Accordion>
 
-<Accordion title="Défi MFA Utiliser les OTP comme défi MFA">
+<Accordion title="Défi MFA" description="Utiliser les OTP comme défi MFA">
 
 Pour permettre aux utilisateurs de s’authentifier à l’aide de mots de passe à usage unique, vous devez activer **Mot de passe à usage unique** en tant que [facteur MFA](/docs/fr-ca/secure/multi-factor-authentication/multi-factor-authentication-factors) pour votre locataire. Une fois cette option activée, les utilisateurs peuvent répondre aux invites MFA à l’aide de mots de passe à usage unique lorsqu’ils se connectent via la connexion universelle. Pour activer les facteurs MFA, accédez à [Auth0 Dashboard > Sécurité > Authentification multifacteur](https://manage.auth0.com/#/security/mfa).
 
@@ -485,7 +485,7 @@ Vous pouvez [installer la trousse SDK Guardian](/docs/fr-ca/secure/multi-factor
 
 Pour activer Gardien Auth0 dans une Action, passez `guardian` comme paramètre `provider` lorsque vous activez l’authentification multifacteur (MFA) :
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
   api.multifactor.enable('guardian', { allowRememberBrowser: false });
 };
@@ -499,7 +499,7 @@ Ce modèle fournit un exemple et un point de départ pour déclencher l’authen
 
 Lors de la première connexion, l’utilisateur peut inscrire l’appareil. Consultez Activer l’authentification multifacteur (MFA) pour plus d’informations sur l’authentification multifacteur (MFA).
 
-```javascript lines
+```js lines
 exports.onExecutePostLogin = async (event, api) => {
 const groups = event.user.app_metadata.authorization.groups;
 const GROUPS_WITH_MFA = {
