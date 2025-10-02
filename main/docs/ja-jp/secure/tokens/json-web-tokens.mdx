@@ -9,13 +9,13 @@ permalink: "json-web-tokens"
 'twitter:description': "JSON Webトークン（JWT）とその使用方法について説明します。"
 ---
 
-「jot（ジョット）」と発音されるJSON Webトークン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JWT</Tooltip>）は、オープン標準（[RFC 7519](https://tools.ietf.org/html/rfc7519)）であり、JSONオブジェクトとして当事者間で情報を安全に送信するためのコンパクトで自己完結型の方法を定義しています。繰り返しになりますが、JWTは標準であり、すべてのJWTはトークンですが、すべてのトークンがJWTというわけではありません。
+「jot（ジョット）」と発音されるJSON Webトークン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" href="/docs/ja-jp/glossary?term=json-web-token" tip="JSON Web Token（JWT）: 二者間のクレームを安全に表現するために使用される標準IDトークン形式（および多くの場合、アクセストークン形式）。" cta="用語集の表示">JWT</Tooltip>）は、オープン標準（[RFC 7519](https://tools.ietf.org/html/rfc7519)）であり、JSONオブジェクトとして当事者間で情報を安全に送信するためのコンパクトで自己完結型の方法を定義しています。繰り返しになりますが、JWTは標準であり、すべてのJWTはトークンですが、すべてのトークンがJWTというわけではありません。
 
 JWTはサイズが比較的小さいため、URLやPOSTパラメーターを介して、またはHTTPヘッダー内から送信でき、すばやく伝送されます。データベースに複数回の問い合わせを行うことを避けるために、JWTにはエンティティに関するすべての必要な情報が含まれています。JWTの受信者も、トークンの検証のためにサーバーを呼び出す必要はありません。
 
 ## JWTのメリット
 
-単純なWebトークン（SWT）や<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>トークンと比較すると、JWTには次のような使用上のメリットがあります。
+単純なWebトークン（SWT）や<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip>トークンと比較すると、JWTには次のような使用上のメリットがあります。
 
 * **コンパクト** ：JSONはXMLよりも冗長性が低いため、エンコードされた場合、JWTはSAMLトークンよりもサイズが小さくなります。このため、HTMLやHTTP環境で渡すにはJWTが適しています。
 
@@ -30,7 +30,7 @@ JWTはサイズが比較的小さいため、URLやPOSTパラメーターを介�
 JWTはさまざまな方法で使用できます。
 
 * **認証** ：ユーザーが資格情報を使ってログインに成功すると、[IDトークン](/docs/ja-jp/secure/tokens/id-tokens)が返されます。[OpenID Connect（OIDC）の仕様](https://openid.net/specs/openid-connect-core-1_0.html#IDToken)によると、IDトークンは常にJWTです。
-* **認可** ：ユーザーがログインに成功すると、アプリケーションはそのユーザーに代わってルート、サービス、リソース（APIなど）へのアクセスを要求することがあります。そのためには、すべての要求でアクセストークンを渡す必要がありますが、これはJWTの形式である場合もあります。シングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SSO</Tooltip>）では、形式のオーバーヘッドが小さく、異なるドメイン間で簡単に使用できるという理由から、JWTが広く使用されています。
+* **認可** ：ユーザーがログインに成功すると、アプリケーションはそのユーザーに代わってルート、サービス、リソース（APIなど）へのアクセスを要求することがあります。そのためには、すべての要求でアクセストークンを渡す必要がありますが、これはJWTの形式である場合もあります。シングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=single-sign-on" tip="シングルサインオン（SSO）: ユーザーが1つのアプリケーションにログインした後、そのユーザーを他のアプリケーションに自動的にログインさせるサービス。" cta="用語集の表示">SSO</Tooltip>）では、形式のオーバーヘッドが小さく、異なるドメイン間で簡単に使用できるという理由から、JWTが広く使用されています。
 * **情報交換** ：JWTは署名が可能で、送信者が本人であることを確信できるため、当事者間で情報を安全に送信するのに適した方法です。さらに、JWTの構造自体からも、コンテンツが改ざんされていないことを確認できます。
 
 ## JWTの安全性

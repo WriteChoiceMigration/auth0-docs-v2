@@ -20,9 +20,9 @@ permalink: "access-tokens"
 
 </Card>
 
-トークンベースの認証では、アプリケーションによるAPIへのアクセスを許可するためにアクセストークンが使用されます。ユーザーが認証とアクセス認可に成功すると、アプリケーションはアクセストークンを受け取り、ターゲットのAPIを呼び出す際にそれを資格情報として渡します。渡されたトークンは、APIに、トークンの所持者がAPIへのアクセスを認可されていること、認可の際に付与された<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">スコープ</Tooltip> で指定されている特定のアクションの実行を認可されていることを知らせます。
+トークンベースの認証では、アプリケーションによるAPIへのアクセスを許可するためにアクセストークンが使用されます。ユーザーが認証とアクセス認可に成功すると、アプリケーションはアクセストークンを受け取り、ターゲットのAPIを呼び出す際にそれを資格情報として渡します。渡されたトークンは、APIに、トークンの所持者がAPIへのアクセスを認可されていること、認可の際に付与された<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=scope" tip="スコープ: オンラインリソースで事前に作成された情報を使用して、アプリケーションがユーザーに代わって実行できるアクションを決定するメカニズム。" cta="用語集の表示">スコープ</Tooltip> で指定されている特定のアクションの実行を認可されていることを知らせます。
 
-また、ユーザーに対してFacebookなどの<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">IDプロバイダー（IdP）</Tooltip>を介したログインを許可した場合、アプリケーションは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">IdP</Tooltip>発行の独自のアクセストークンによってIdPのAPIの呼び出しを許可されます。たとえば、ユーザーがFacebookを使用して認証する場合は、Facebook発行のアクセストークンを使ってFacebook Graph APIを呼び出します。これらのトークンは、IdPが制御するものであり、任意の形式で発行されます。詳細は、「[IDプロバイダーのアクセストークン](/docs/ja-jp/secure/tokens/access-tokens/identity-provider-access-tokens)」を参照してください。
+また、ユーザーに対してFacebookなどの<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IDプロバイダー（IdP）</Tooltip>を介したログインを許可した場合、アプリケーションは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IdP</Tooltip>発行の独自のアクセストークンによってIdPのAPIの呼び出しを許可されます。たとえば、ユーザーがFacebookを使用して認証する場合は、Facebook発行のアクセストークンを使ってFacebook Graph APIを呼び出します。これらのトークンは、IdPが制御するものであり、任意の形式で発行されます。詳細は、「[IDプロバイダーのアクセストークン](/docs/ja-jp/secure/tokens/access-tokens/identity-provider-access-tokens)」を参照してください。
 
 ## 不透明なアクセストークン
 
@@ -32,9 +32,9 @@ Auth0の場合、不透明トークンは、ユーザーのプロファイルを
 
 ## JWTアクセストークン
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">JSON Web Token</Tooltip>（JWT）のアクセストークンは、[JWT標準](https://tools.ietf.org/html/rfc7519)に準拠し、エンティティに関する情報をクレームの形で含みます。自己完結型であるため、受信者はサーバーを呼び出してトークンを検証する必要がありません。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=json-web-token" tip="JSON Web Token（JWT）: 二者間のクレームを安全に表現するために使用される標準IDトークン形式（および多くの場合、アクセストークン形式）。" cta="用語集の表示">JSON Web Token</Tooltip>（JWT）のアクセストークンは、[JWT標準](https://tools.ietf.org/html/rfc7519)に準拠し、エンティティに関する情報をクレームの形で含みます。自己完結型であるため、受信者はサーバーを呼び出してトークンを検証する必要がありません。
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Management API</Tooltip>のために発行されたアクセストークンと、Auth0に登録したカスタムAPIのために発行されたアクセストークンは、JWT標準に従います。つまり、基本構造が一般的な[JWT構造](/docs/ja-jp/secure/tokens/json-web-tokens/json-web-token-structure)に準拠し、トークン自体についてアサートされた標準の[JWTクレーム](/docs/ja-jp/secure/tokens/json-web-tokens/json-web-token-claims)を含みます。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>のために発行されたアクセストークンと、Auth0に登録したカスタムAPIのために発行されたアクセストークンは、JWT標準に従います。つまり、基本構造が一般的な[JWT構造](/docs/ja-jp/secure/tokens/json-web-tokens/json-web-token-structure)に準拠し、トークン自体についてアサートされた標準の[JWTクレーム](/docs/ja-jp/secure/tokens/json-web-tokens/json-web-token-claims)を含みます。
 
 ### Management APIのアクセストークン
 

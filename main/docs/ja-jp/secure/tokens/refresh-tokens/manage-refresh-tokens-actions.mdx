@@ -92,7 +92,7 @@ event.refresh_tokenとapi.refreshTokenオブジェクトは両方とも、[リ�
 
 [アクション](/docs/ja-jp/customize/actions)を使用すると、リスク検出を構成して、リフレッシュトークンを`api.refreshToken.revoke(reason)`メソッドとイベントオブジェクトを使って取り消すことができます。
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Adaptive MFA</Tooltip>の[アセスメント](https://auth0.com/docs/secure/multi-factor-authentication/adaptive-mfa/customize-adaptive-mfa#assessments-object)オブジェクトを使用すると、ユーザーがImpossibleTravelを示す場所からログインしているか判定し、そのトランザクションに関連付けられた現在のリフレッシュトークンを取り消すことができます。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" href="/docs/ja-jp/glossary?term=adaptive-multi-factor-authentication" tip="Adaptive Multifactor Authentication: ログイン試行が信頼性の低いログインであると判断された場合にのみ、ユーザーに対してトリガーされる多要素認証（MFA）。" cta="用語集の表示">Adaptive MFA</Tooltip>の[アセスメント](https://auth0.com/docs/secure/multi-factor-authentication/adaptive-mfa/customize-adaptive-mfa#assessments-object)オブジェクトを使用すると、ユーザーがImpossibleTravelを示す場所からログインしているか判定し、そのトランザクションに関連付けられた現在のリフレッシュトークンを取り消すことができます。
 
 * ユーザーの組織
 * ユーザーのAuth0接続
@@ -122,7 +122,7 @@ exports.onExecutePostLogin = async (event, api) => {
 * ユーザーの組織
 * ユーザーのAuth0接続
 * 「403 access_denied」のエラー応答を返す
-* 「<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Refresh token</Tooltip> revoked due to impossible travel（impossible travelによりトークンが取り消されました）」というエラーを発行する
+* 「<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=refresh-token" tip="リフレッシュトークン: ユーザーに再度ログインを強いることなく、更新されたアクセストークンを取得するために使用されるトークン。" cta="用語集の表示">Refresh token</Tooltip> revoked due to impossible travel（impossible travelによりトークンが取り消されました）」というエラーを発行する
 
 ```javascript lines
 exports.onExecutePostLogin = async (event, api) => {

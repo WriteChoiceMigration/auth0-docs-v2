@@ -9,7 +9,7 @@ permalink: "enroll-and-challenge-otp-authenticators"
 'twitter:description': "ワンタイムパスワード（OTP）を認証要素として独自のMFAフローを構築する方法を説明します。"
 ---
 
-Auth0は、[ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)を使用した組み込みの<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>登録と認証フローを提供します。ただし、独自のインターフェイスを作成したい場合は、[MFA API](/docs/ja-jp/secure/multi-factor-authentication/multi-factor-authentication-developer-resources/mfa-api)を使用することもできます。
+Auth0は、[ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)を使用した組み込みの<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=multifactor-authentication" tip="多要素認証（MFA）: ユーザー名とパスワードに加えて、SMS経由のコードなどの要素を使用するユーザー認証プロセス。" cta="用語集の表示">MFA</Tooltip>登録と認証フローを提供します。ただし、独自のインターフェイスを作成したい場合は、[MFA API](/docs/ja-jp/secure/multi-factor-authentication/multi-factor-authentication-developer-resources/mfa-api)を使用することもできます。
 
 ## 前提条件
 
@@ -253,7 +253,7 @@ dataTask.resume()
 
 登録を確定するには、エンドユーザーが、前のステップでGoogle AuthenticatorのようなOTP生成アプリケーションから取得したシークレットを入力する必要があります。このシークレットは、`barcode_uri`を使ってQRコードをスキャンするか、OTPアプリケーションで手動でシークレットコードを入力します。QRコードをスキャンできない場合（たとえば、モバイルデバイスから登録している、デスクトップ用OTPアプリケーションを使用しているなど）に備えて、シークレットをテキストで取得する方法を提供する必要があります。
 
-ユーザーがシークレットを入力したら、OTPアプリケーションが6桁のコードを表示し、これをユーザーがアプリケーションに入力します。そうすると、アプリケーションは`POST`要求を<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OAuth</Tooltip>トークンエンドポイントに対して実行し、これに`otp`値を含めます。
+ユーザーがシークレットを入力したら、OTPアプリケーションが6桁のコードを表示し、これをユーザーがアプリケーションに入力します。そうすると、アプリケーションは`POST`要求を<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=oath2" tip="OAuth 2.0: 認可プロトコルとワークフローを定義する認可フレームワーク。" cta="用語集の表示">OAuth</Tooltip>トークンエンドポイントに対して実行し、これに`otp`値を含めます。
 
 <CodeGroup>
 ```bash cURL lines

@@ -9,7 +9,7 @@ permalink: "custom-claims-migration"
 'twitter:description': "レガシーの名前空間のあるクレームからカスタムクレームへの移行について説明します。"
 ---
 
-Auth0では、2022年7月28日より、名前空間のないプライベートのカスタムクレームをアクセストークンとIDトークンに追加できるようになりました。これらのクレームは、[`/userinfo`エンドポイント](https://auth0.com/docs/api/authentication#get-user-info)の応答にも追加されます。<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JWT</Tooltip>クレームのタイプについては、「[JSON Web Tokenクレーム](/docs/ja-jp/secure/tokens/json-web-tokens/json-web-token-claims)」をお読みください。
+Auth0では、2022年7月28日より、名前空間のないプライベートのカスタムクレームをアクセストークンとIDトークンに追加できるようになりました。これらのクレームは、[`/userinfo`エンドポイント](https://auth0.com/docs/api/authentication#get-user-info)の応答にも追加されます。<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" href="/docs/ja-jp/glossary?term=json-web-token" tip="JSON Web Token（JWT）: 二者間のクレームを安全に表現するために使用される標準IDトークン形式（および多くの場合、アクセストークン形式）。" cta="用語集の表示">JWT</Tooltip>クレームのタイプについては、「[JSON Web Tokenクレーム](/docs/ja-jp/secure/tokens/json-web-tokens/json-web-token-claims)」をお読みください。
 
 <Warning>
 
@@ -37,7 +37,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 ## 影響を受けるフロー
 
-Auth0がサポートするすべての<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OpenID</Tooltip> Connect（OIDC）フローがこの移行の影響を受けます。フローの一覧は、「[認証および認可のフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow)」でお読みください。
+Auth0がサポートするすべての<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=openid" tip="OpenID: アプリケーションがログイン情報を収集および保存することなくにユーザーのIDを検証できるようにする認証用のオープン標準。" cta="用語集の表示">OpenID</Tooltip> Connect（OIDC）フローがこの移行の影響を受けます。フローの一覧は、「[認証および認可のフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow)」でお読みください。
 
 次の機能も影響を受けます。
 
@@ -390,7 +390,7 @@ Auth0 Rulesを使用してユーザーオブジェクトに変更を加える場
 
 ただし、カスタムクレームを使用する場合、Auth0は`context.idToken`オブジェクトに設定されたクレームを優先します。
 
-この変更は、`context.id_token`経由で`app_metadata`および`user_metadata`を設定する（それらにオブジェクトを割り当てる）と同時に、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SAML</Tooltip>アドオンまたはWebサービスフェデレーション（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">WS-Fed</Tooltip>）プロトコルの属性マッピングでこれらのフィールドを使用するAuth0 Rulesに影響を与えます。
+この変更は、`context.id_token`経由で`app_metadata`および`user_metadata`を設定する（それらにオブジェクトを割り当てる）と同時に、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip>アドオンまたはWebサービスフェデレーション（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=ws-fed" tip="Webサービスフェデレーション（WS-Fed）: ドメイン全体でユーザーIDを管理するためのプロトコル。" cta="用語集の表示">WS-Fed</Tooltip>）プロトコルの属性マッピングでこれらのフィールドを使用するAuth0 Rulesに影響を与えます。
 
 例1：Auth0は、`context.idToken.app_metadata`が空のオブジェクトで設定されている場合に属性マッピングを無視します。
 

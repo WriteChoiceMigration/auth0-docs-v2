@@ -9,7 +9,7 @@ permalink: "identity-provider-initiated-single-sign-on"
 'twitter:description': "SAML IDプロバイダー起点のシングルサインオン（SSO）を設定する方法について説明します。"
 ---
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip>フェデレーションをセットアップする手順の多くは、サービスプロバイダーによって開始されるシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>）から始まります。サービスプロバイダーは、認証の目的でユーザーをIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">IdP</Tooltip>）にリダイレクトします。このプロセスは、消費者向けのシナリオでよく使用されます。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip>フェデレーションをセットアップする手順の多くは、サービスプロバイダーによって開始されるシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=single-sign-on" tip="シングルサインオン（SSO）: ユーザーが1つのアプリケーションにログインした後、そのユーザーを他のアプリケーションに自動的にログインさせるサービス。" cta="用語集の表示">SSO</Tooltip>）から始まります。サービスプロバイダーは、認証の目的でユーザーをIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IdP</Tooltip>）にリダイレクトします。このプロセスは、消費者向けのシナリオでよく使用されます。
 
 ただし、エンタープライズのシナリオでは、サービスプロバイダーではなくIdPによってSSOが開始されることが一般的です。たとえば、エンタープライズは、ユーザーがポータルにサインオンした後に正しいアプリケーションに移動できるようにポータルをセットアップする場合があります。
 
@@ -21,7 +21,7 @@ IdP起点SSOを有効にする前に、必ずリスクについて理解して�
 
 ### OpenID ConnectのIdP起点フロー
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OpenID</Tooltip> Connect（OIDC）は、IdP起点フローの概念をサポートしていません。そのため、Auth0は、（SAML接続からの）SAML IdP起点フローをアプリケーションのOIDC応答に変換できる機能を提供しますが、OIDC/OAuth2プロトコルを適切に実装しているアプリケーションは要求されていない応答を拒否します。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=openid" tip="OpenID: アプリケーションがログイン情報を収集および保存することなくにユーザーのIDを検証できるようにする認証用のオープン標準。" cta="用語集の表示">OpenID</Tooltip> Connect（OIDC）は、IdP起点フローの概念をサポートしていません。そのため、Auth0は、（SAML接続からの）SAML IdP起点フローをアプリケーションのOIDC応答に変換できる機能を提供しますが、OIDC/OAuth2プロトコルを適切に実装しているアプリケーションは要求されていない応答を拒否します。
 
 OIDCアプリケーションを使用する場合、最良のオプションは、アプリケーションにログインエンドポイントを作成させることです。このエンドポイントの唯一の目的は、IdP（Auth0テナント）へのリダイレクトを開始することです。
 
@@ -121,7 +121,7 @@ _enableIdPInitiatedLogin: true
 
 ## 100に制限されているアプリケーションドロップダウンリスト
 
-IdP起点SSOでアプリケーションを **Default Application（デフォルトのアプリケーション）** として選択する場合で、かつそのアプリケーションがテナントのドロップダウンリストの最初の100個のアプリケーションに含まれていない場合は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Management API</Tooltip>を使用してそのアプリケーションを選択する必要があります。パッチを実行する必要があります。
+IdP起点SSOでアプリケーションを **Default Application（デフォルトのアプリケーション）** として選択する場合で、かつそのアプリケーションがテナントのドロップダウンリストの最初の100個のアプリケーションに含まれていない場合は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>を使用してそのアプリケーションを選択する必要があります。パッチを実行する必要があります。
 
 ```json lines
 {

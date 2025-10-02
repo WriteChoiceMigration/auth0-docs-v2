@@ -36,7 +36,7 @@ add_filter( 'auth0_jwt_leeway', function( $default_leeway ) { return 120; } );
 
 ## 「このアカウントに関連付けられているメールがありません」というエラーメッセージが表示され、ログインできない
 
-このエラーが発生した場合には、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>で **［Connections（接続）］>［Social（ソーシャル）］** を使用（それぞれのプロバイダーを展開）して、それぞれのプロバイダーにメールを要求していることを確認します。すべてのプロバイダーがユーザーのメールアドレスを返すとは限らないことに注意してください（例：X）。その場合には、Auth0 Dashboard（またはAPI）を通していつでもログイン済みのユーザーにメールアドレスを追加することができます。 **［Users（ユーザー）>［Edit（編集）］** を確認します。
+このエラーが発生した場合には、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=auth0-dashboard" tip="Auth0 Dashboard: サービスを構成するためのAuth0の主製品。" cta="用語集の表示">Auth0 Dashboard</Tooltip>で **［Connections（接続）］>［Social（ソーシャル）］** を使用（それぞれのプロバイダーを展開）して、それぞれのプロバイダーにメールを要求していることを確認します。すべてのプロバイダーがユーザーのメールアドレスを返すとは限らないことに注意してください（例：X）。その場合には、Auth0 Dashboard（またはAPI）を通していつでもログイン済みのユーザーにメールアドレスを追加することができます。 **［Users（ユーザー）>［Edit（編集）］** を確認します。
 
 `email_verified`フラグを提供しない接続（一部のエンタープライズ接続はこれを含めません）や、この検証を特定のソーシャル接続でスキップするには、［Skip Strategies（ストラテジーのスキップ）］フィールドに接続のストラテジーを追加します。このフィールドは **［wp-admin］** > **［Auth0］** > **［Settings（設定）］** > **［Advanced（詳細設定）］** で **［Require Verified Email（検証済みのメールを要求する］** スイッチの下にあります。
 
@@ -143,7 +143,7 @@ add_filter('v_forcelogin_whitelist', 'wp_auth0_forcelogin_whitelist', 10, 1);
 現在のバージョンのプラグインには、ユーザーをAuth0に自動移行する方法はありませんが、以下を行うことができます。
 
 * プラグインは2つのエンドポイントを公開して、カスタムデータベース接続を **Auth0へのインポート** モードでマークできるようにしています。エンドポイントの詳細については、「[データベースからの自動移行を構成する](/docs/ja-jp/connections/database/migrating)」をお読みください。[これらのプラグインスクリプトを使用](https://github.com/auth0/wp-auth0/blob/master/lib/WP_Auth0_CustomDBLib.php)して、接続をセットアップすることができます。
-* ユーザーデータをJSONファイルにエクスポートして、Auth0への一括インポートを行うためにアップロードします。移行後に初めてユーザーがAuth0を使ってログインするときには、パスワードをリセットする必要があります。これは、Auth0が移行中にAuth0がWordPressのパスワードを復号化できないためです。JSONファイルを生成する方法については、「[ユーザーを一括してインポートする](/docs/ja-jp/manage-users/user-migration/bulk-user-imports)」をお読みください。それから、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>の[ユーザーインポートエンドポイント](/docs/ja-jp/api/v2#!/Jobs/post_users_imports)を使用して、ファイルをアップロードする必要があります。
+* ユーザーデータをJSONファイルにエクスポートして、Auth0への一括インポートを行うためにアップロードします。移行後に初めてユーザーがAuth0を使ってログインするときには、パスワードをリセットする必要があります。これは、Auth0が移行中にAuth0がWordPressのパスワードを復号化できないためです。JSONファイルを生成する方法については、「[ユーザーを一括してインポートする](/docs/ja-jp/manage-users/user-migration/bulk-user-imports)」をお読みください。それから、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>の[ユーザーインポートエンドポイント](/docs/ja-jp/api/v2#!/Jobs/post_users_imports)を使用して、ファイルをアップロードする必要があります。
 * [このスクリプト](https://gist.github.com/glena/b31716e3c8fe48927be2)とWordPress XML RPCエンドポイントを使用して、カスタムデータベース接続で移行フローをセットアップします。移行フローの設定については、「[データベースからの自動移行を構成する](/docs/ja-jp/connections/database/migrating)」をお読みください。WordPress XML RPCエンドポイントの詳細については、[wordpress.orgに記載のXML-RPC対応](https://codex.wordpress.org/XML-RPC_Support)に関するドキュメントをお読みください。
 
 ## dictを設定するときにform_title設定が無視される

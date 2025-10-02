@@ -9,7 +9,7 @@ permalink: "sharepoint-2010-2013"
 'twitter:description': "SharePoint 2010/2013との統合方法。セットアップ、トラブルシューティング、ログへのアクセス、今後の手順などの情報が記載されています。"
 ---
 
-Auth0は、SharePointの認証プロセスを大幅に簡素化するのに役立ちます。このチュートリアルでは、Auth0を使用してSharePointにシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SSO</Tooltip>）を追加する方法を学びます。ユーザーは、任意の[ソーシャルアイデンティティプロバイダー](/docs/ja-jp/connections/identity-providers-social)（Facebook、X、GitHubなど）、[エンタープライズプロバイダー](/docs/ja-jp/connections/identity-providers-enterprise)（LDAP、Active Directory、ADFSなど）、またはユーザー名とパスワードを使用してログインできるようになります。
+Auth0は、SharePointの認証プロセスを大幅に簡素化するのに役立ちます。このチュートリアルでは、Auth0を使用してSharePointにシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=single-sign-on" tip="シングルサインオン（SSO）: ユーザーが1つのアプリケーションにログインした後、そのユーザーを他のアプリケーションに自動的にログインさせるサービス。" cta="用語集の表示">SSO</Tooltip>）を追加する方法を学びます。ユーザーは、任意の[ソーシャルアイデンティティプロバイダー](/docs/ja-jp/connections/identity-providers-social)（Facebook、X、GitHubなど）、[エンタープライズプロバイダー](/docs/ja-jp/connections/identity-providers-enterprise)（LDAP、Active Directory、ADFSなど）、またはユーザー名とパスワードを使用してログインできるようになります。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -187,7 +187,7 @@ Auth0から渡されるクレームは、SharePointの認可にも利用でき�
 
 田中さんがAzure ADアカウントを使用してログインすると（その接続でSecurity Groups属性が有効になっている場合）、グループメンバーシップ情報がユーザープロファイルの`groups`属性に保存されます。
 
-これらのグループをSharePointのロールとして利用できるようにするためには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>設定にこれを追加する[ルール](https://manage.auth0.com/#/rules)を作成する必要があります。このルールは、 **Fabrikam Intranet (SharePoint)** という名前のアプリケーションに対してのみ実行されます。
+これらのグループをSharePointのロールとして利用できるようにするためには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip>設定にこれを追加する[ルール](https://manage.auth0.com/#/rules)を作成する必要があります。このルールは、 **Fabrikam Intranet (SharePoint)** という名前のアプリケーションに対してのみ実行されます。
 
 ```javascript lines
 function (user, context, callback) {

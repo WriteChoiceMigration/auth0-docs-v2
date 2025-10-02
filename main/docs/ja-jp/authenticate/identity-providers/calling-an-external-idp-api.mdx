@@ -9,7 +9,7 @@ permalink: "calling-an-external-idp-api"
 'twitter:description': "外部IDプロバイダーAPIを呼び出す方法について説明します。"
 ---
 
-FacebookやGitHubなどの外部IDプロバイダー(<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>)でユーザーを正常に認証すると、多くの場合、IdPはAuth0に返すユーザープロファイルにアクセストークンを含めます。
+FacebookやGitHubなどの外部IDプロバイダー(<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IdP</Tooltip>)でユーザーを正常に認証すると、多くの場合、IdPはAuth0に返すユーザープロファイルにアクセストークンを含めます。
 
 このトークンを取得して使用し、IdPのAPIを呼び出すことができます。
 
@@ -28,7 +28,7 @@ FacebookやGitHubなどの外部IDプロバイダー(<Tooltip data-tooltip-id="r
 
 ユーザーを認証すると、IdPは通常、Auth0に返すユーザープロファイルにアクセストークンを含めます。
 
-セキュリティとコンプライアンス上の理由から、Auth0はこのトークンをユーザープロファイルの一部としてアプリに送信しません。これを取得するには、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>にアクセスして、ユーザーの完全なプロファイルを取得する必要があります。
+セキュリティとコンプライアンス上の理由から、Auth0はこのトークンをユーザープロファイルの一部としてアプリに送信しません。これを取得するには、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>にアクセスして、ユーザーの完全なプロファイルを取得する必要があります。
 
 1. [［Auth0 Management API］](/docs/ja-jp/api/management/v2)を呼び出すためのアクセストークンを取得します。
 2. ステップ1で取得したアクセストークンを使用して、Auth0 Management APIの[［Get Users by ID endpoint（IDエンドポイントによるユーザー取得）］](/docs/ja-jp/api/management/v2#!/Users/get_users_by_id)を呼び出します。このエンドポイントは、IdPアクセストークンを含む完全なユーザープロファイルを返します。
@@ -318,7 +318,7 @@ IDプロバイダーアクセストークンの特定のスコープを要求す
 
 フロントエンドアプリを使用する場合、フロントエンドアプリは **資格情報を安全に保持できない** パブリックアプリケーションであるため、IdP APIを呼び出すプロセスはバックエンドプロセスとは異なります。SPAコードは表示および変更でき、ネイティブ/モバイルアプリは逆コンパイルおよび検査できるため、秘密鍵やパスワードなどの機密情報を保持することはできません。
 
-具体的には、バックエンドプロセスの最初のステップで`/oauth/token`を呼び出すために使用するマシンツーマシンアプリケーションの **［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Client Secret</Tooltip>（クライアントシークレット）］** を安全に保持できません。
+具体的には、バックエンドプロセスの最初のステップで`/oauth/token`を呼び出すために使用するマシンツーマシンアプリケーションの **［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=client-secret" tip="クライアントシークレット: クライアント（アプリケーション）が認可サーバーで認証するために使用するシークレット。これはクライアントと認可サーバーだけが知っているものであり、推測できないように十分にランダムである必要があります。" cta="用語集の表示">Client Secret</Tooltip>（クライアントシークレット）］** を安全に保持できません。
 
 代わりに、バックエンドのプロキシを構築し、それをAPIとしてアプリケーションに公開する必要があります。
 

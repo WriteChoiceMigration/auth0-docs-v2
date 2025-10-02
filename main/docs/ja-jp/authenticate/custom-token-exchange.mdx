@@ -41,7 +41,7 @@ permalink: "custom-token-exchange"
 
 ### アプリケーション
 
-カスタムトークン交換を使用するには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を使用して[新しいアプリケーションを作成](/docs/ja-jp/get-started/auth0-overview/create-applications)する必要があります。カスタムトークン交換には、複数のアプリケーションを作成して使用できます。
+カスタムトークン交換を使用するには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=auth0-dashboard" tip="Auth0 Dashboard: サービスを構成するためのAuth0の主製品。" cta="用語集の表示">Auth0 Dashboard</Tooltip>または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>を使用して[新しいアプリケーションを作成](/docs/ja-jp/get-started/auth0-overview/create-applications)する必要があります。カスタムトークン交換には、複数のアプリケーションを作成して使用できます。
 
 新しいアプリケーションを作成するには以下を行います。
 
@@ -266,7 +266,7 @@ exports.onExecuteCustomTokenExchange = async (event, api) => {
 
 #### api.authentication.setUserByConnection(connection_name, user_profile, options)
 
-ユーザーとそのユーザーに関するプロファイル属性を指定の接続内で設定します。これは、ユーザーがこの接続にログインし、指定されたユーザープロファイルをフェデレーション<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">IdP</Tooltip>が返すことと同等です。ユーザーが存在しない場合にこの操作がユーザーを作成するか、そして、提供されたユーザープロファイル属性を使ってプロファイルを更新するかを構成できます。
+ユーザーとそのユーザーに関するプロファイル属性を指定の接続内で設定します。これは、ユーザーがこの接続にログインし、指定されたユーザープロファイルをフェデレーション<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IdP</Tooltip>が返すことと同等です。ユーザーが存在しない場合にこの操作がユーザーを作成するか、そして、提供されたユーザープロファイル属性を使ってプロファイルを更新するかを構成できます。
 
 ユーザーが`setUserByConnection()`を通してログインするたびに、ログイン回数が加算されます。このメソッドはユーザーがブロックされていると失敗します。
 
@@ -1138,7 +1138,7 @@ exports.onExecuteCustomTokenExchange = async (event, api) => {
 };
 ```
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">JWT</Tooltip>を安全に検証する方法の詳しい例については、「[サンプルコード](#code-samples)」をお読みください。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" href="/docs/ja-jp/glossary?term=json-web-token" tip="JSON Web Token（JWT）: 二者間のクレームを安全に表現するために使用される標準IDトークン形式（および多くの場合、アクセストークン形式）。" cta="用語集の表示">JWT</Tooltip>を安全に検証する方法の詳しい例については、「[サンプルコード](#code-samples)」をお読みください。
 
 ### ユースケース：別のオーディエンスのAuth0トークンを取得する
 
@@ -1534,7 +1534,7 @@ async function refreshAccessToken(refreshToken, clientSecret) {
 早期アクセス版のカスタムトークン交換は以下の機能には対応していません（または正しく動作しません）。
 
 * Organizations
-* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">MFA</Tooltip>：ログイン後アクションの`api.authentication.challengeWith()`および`api.multifactor.enable()`コマンドはカスタムトークン交換に未対応であるため、トランザクションが回復不可能なエラーで失敗します。同様に、テナントのポリシーとしてMFAが構成されている場合にも、トランザクションが失敗します。
+* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=multifactor-authentication" tip="多要素認証（MFA）: ユーザー名とパスワードに加えて、SMS経由のコードなどの要素を使用するユーザー認証プロセス。" cta="用語集の表示">MFA</Tooltip>：ログイン後アクションの`api.authentication.challengeWith()`および`api.multifactor.enable()`コマンドはカスタムトークン交換に未対応であるため、トランザクションが回復不可能なエラーで失敗します。同様に、テナントのポリシーとしてMFAが構成されている場合にも、トランザクションが失敗します。
 * カスタムデータベース接続
 * 特有のなりすまし対応（アクタートークンやアクタークレームなど）
 * サードパーティやOIDC非準拠のクライアント

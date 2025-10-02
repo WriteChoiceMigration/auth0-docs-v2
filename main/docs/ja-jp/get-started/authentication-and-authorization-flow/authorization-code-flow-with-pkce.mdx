@@ -23,14 +23,14 @@ permalink: "authorization-code-flow-with-pkce"
 
 **ネイティブアプリ**
 
-* アプリが <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">クライアントシークレット</Tooltip>を安全に保管できません。アプリを逆コンパイルすると、クライアントシークレットが暴露されます。クライアントシークレットはアプリにバインドされるものであり、すべてのユーザーとデバイスについても同様です。
-* カスタムURLスキームを利用して、リダイレクト（「MyApp://」など）をキャプチャできる可能性があるため、悪意のあるアプリケーションが <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">認可コード</Tooltip> を <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">認可サーバー</Tooltip>から取得できる可能性があります。
+* アプリが <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=client-secret" tip="クライアントシークレット: クライアント（アプリケーション）が認可サーバーで認証するために使用するシークレット。これはクライアントと認可サーバーだけが知っているものであり、推測できないように十分にランダムである必要があります。" cta="用語集の表示">クライアントシークレット</Tooltip>を安全に保管できません。アプリを逆コンパイルすると、クライアントシークレットが暴露されます。クライアントシークレットはアプリにバインドされるものであり、すべてのユーザーとデバイスについても同様です。
+* カスタムURLスキームを利用して、リダイレクト（「MyApp://」など）をキャプチャできる可能性があるため、悪意のあるアプリケーションが <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">認可コード</Tooltip> を <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=authorization-server" tip="認可サーバー: ユーザーによるアクセスの限界を定義するために使用される集中管理型サーバー。たとえば、認可サーバーは、ユーザーが利用できるデータ、タスク、機能を制御できます。" cta="用語集の表示">認可サーバー</Tooltip>から取得できる可能性があります。
 
 **シングルページアプリ**
 
 * ブラウザーがソース全体を使用できるため、クライアントシークレットを安全に保管できません。
 
-これらの状況を踏まえて、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OAuth 2.0</Tooltip>は認可コードフローにProof Key for Code Exchange（PKCE）を活用した1つのバージョンを提供しています（[OAuth 2.0 RFC 7636](https://tools.ietf.org/html/rfc7636)に定義）。
+これらの状況を踏まえて、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=oath2" tip="OAuth 2.0: 認可プロトコルとワークフローを定義する認可フレームワーク。" cta="用語集の表示">OAuth 2.0</Tooltip>は認可コードフローにProof Key for Code Exchange（PKCE）を活用した1つのバージョンを提供しています（[OAuth 2.0 RFC 7636](https://tools.ietf.org/html/rfc7636)に定義）。
 
 PKCEで拡張された認可コードフローではCode Verifierと呼ばれるシークレットを導入しました。このシークレットは、認可サーバーが検証したアプリケーションを呼び出すことによって作成されます。また、アプリを呼び出すと、Code VerifierからCode Challengeと呼ばれる変換値が作成され、この値がHTTPSで認可コードを取得するために送信されます。これで、悪意のある攻撃者が傍受できるのは認可コードだけとなり、Code Verifierがないため、それをトークンと交換できなくなります。
 

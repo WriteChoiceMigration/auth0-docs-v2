@@ -9,7 +9,7 @@ permalink: "authentication"
 'twitter:description': "B2CのIAM実装で認証が行われる仕組みについて説明します。"
 ---
 
-ユーザーにサービスを提供するためには、ユーザーが誰なのかを識別する必要があります。この処理はユーザー認証と呼ばれます。ソーシャルメディアのアカウント、ユーザー名とパスワード、パスワードレスなど、ユーザー認証にはいくつかの方法があります。また、多要素認証（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>）を有効にして、ユーザーを認証する際に第一要素のみに依存しないことが推奨されています。
+ユーザーにサービスを提供するためには、ユーザーが誰なのかを識別する必要があります。この処理はユーザー認証と呼ばれます。ソーシャルメディアのアカウント、ユーザー名とパスワード、パスワードレスなど、ユーザー認証にはいくつかの方法があります。また、多要素認証（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=multifactor-authentication" tip="多要素認証（MFA）: ユーザー名とパスワードに加えて、SMS経由のコードなどの要素を使用するユーザー認証プロセス。" cta="用語集の表示">MFA</Tooltip>）を有効にして、ユーザーを認証する際に第一要素のみに依存しないことが推奨されています。
 
 <Info>
   ### ベストプラクティス
@@ -40,13 +40,13 @@ Auth0の[ユニバーサルログイン](#universal-login)は、サインイン�
 
 既存のレガシーIDストアがある場合には、「[ユーザーの移行](/docs/ja-jp/get-started/architecture-scenarios/business-to-consumer/provisioning)」も併せて参照してください。そのセクションには、安全性とセキュリティー保護の面で、Auth0が管理するIDストレージへ移行することの利点が説明されています。
 
-顧客向けのアプリケーションでは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OpenID</Tooltip> Connect（[OIDC](/docs/ja-jp/authenticate/protocols/openid-connect-protocol)）が最も広く使われている業界標準プロトコルであり、Auth0でも第一級オブジェクトの対応を提供しています。Auth0は、さまざまなアプリケーションを統合できるように、さまざまな方法に対応しています。[アプリケーションの統合](#application-integration)に関するセクションで必要な情報を確認し、よく理解したうえで選ぶことをお勧めします。
+顧客向けのアプリケーションでは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=openid" tip="OpenID: アプリケーションがログイン情報を収集および保存することなくにユーザーのIDを検証できるようにする認証用のオープン標準。" cta="用語集の表示">OpenID</Tooltip> Connect（[OIDC](/docs/ja-jp/authenticate/protocols/openid-connect-protocol)）が最も広く使われている業界標準プロトコルであり、Auth0でも第一級オブジェクトの対応を提供しています。Auth0は、さまざまなアプリケーションを統合できるように、さまざまな方法に対応しています。[アプリケーションの統合](#application-integration)に関するセクションで必要な情報を確認し、よく理解したうえで選ぶことをお勧めします。
 
 1つ以上のcronジョブ、レポートの生成機能、CI/CD（継続的インテグレーション/継続的デリバリー）システムなど、認証済みのユーザーが存在しないあらゆる状況で1つのAPIから別のAPIを呼び出す際には、ユーザーではなく、アプリケーションを認証する方法が必要になります。これは、1つの呼び出しでアプリケーションが認証（クライアントIDとシークレットを使用）されて認可されるという、1ステップのプロセスです。詳細については、「[マシンツーマシン（M2M）認可](/docs/ja-jp/get-started/architecture-scenarios/business-to-consumer/authorization)」に記載の認可処理ストリームを参照してください。
 
 ## ユニバーサルログイン
 
-システムにアプリケーションが複数存在するか、複数作成する予定の場合には、サインインエクスペリエンスを中央に集中させることが得策です。複数のアプリケーション間でシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SSO</Tooltip>）エクスペリエンスをシームレスするには、認証に一本化したユーザーのリダイレクト先を設けることが重要です。そうすることで、今後ソーシャル認証を追加したり、システムにサードパーティーのアプリケーションを追加したり、ユーザーに対するオプション（または要件）として多要素認証を追加したりする場合でも、ユーザーエクスペリエンスの一貫性が保たれます。また、ユーザーエクスペリエンスを向上させるために、開発をほとんど行うことなく新しい機能を活用できようになります。
+システムにアプリケーションが複数存在するか、複数作成する予定の場合には、サインインエクスペリエンスを中央に集中させることが得策です。複数のアプリケーション間でシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=single-sign-on" tip="シングルサインオン（SSO）: ユーザーが1つのアプリケーションにログインした後、そのユーザーを他のアプリケーションに自動的にログインさせるサービス。" cta="用語集の表示">SSO</Tooltip>）エクスペリエンスをシームレスするには、認証に一本化したユーザーのリダイレクト先を設けることが重要です。そうすることで、今後ソーシャル認証を追加したり、システムにサードパーティーのアプリケーションを追加したり、ユーザーに対するオプション（または要件）として多要素認証を追加したりする場合でも、ユーザーエクスペリエンスの一貫性が保たれます。また、ユーザーエクスペリエンスを向上させるために、開発をほとんど行うことなく新しい機能を活用できようになります。
 
 <Info>
   ### ベストプラクティス
@@ -122,7 +122,7 @@ Management APIへの呼び出しには[Auth0レート制限ポリシー](https:/
   * 機密クライアント、非機密クライアント、またはその両方のサポート
   * [検出エンドポイント](https://auth0.com/docs/ja-jp/get-started/applications/configure-applications-with-oidc-discovery 「OIDC Discoveryでアプリケーションを構成する」）または明示的なインラインを使った構成のサポート
   * 有効期限、署名、クレーム、およびスコープを含むトークン検証のサポート
-  * 必要であれば、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">リフレッシュトークン</Tooltip>のサポート
+  * 必要であれば、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=refresh-token" tip="リフレッシュトークン: ユーザーに再度ログインを強いることなく、更新されたアクセストークンを取得するために使用されるトークン。" cta="用語集の表示">リフレッシュトークン</Tooltip>のサポート
 
 </Info>
 
@@ -167,10 +167,10 @@ Auth0では異常の検出を水面下で行っており、お客様の製品に
 
 ## レガシーシステムを使ったSSO
 
-大規模な再編成では、すべてのアプリケーションを一度に更新することが常に可能（または現実的）だとは限りません。実際に、Auth0との統合に関して推奨されるベストプラクティスは、繰り返し（反復的に）更新する方法で計画することです。アプリケーションがすでにシングルサインオン（SSO）を利用し、レガシーシステムがOIDCや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">SAML</Tooltip>などのプロトコルに対応していて、Auth0と統合しながらもSSOを引き続き提供したい場合には、以下の2つのオプションがあります。
+大規模な再編成では、すべてのアプリケーションを一度に更新することが常に可能（または現実的）だとは限りません。実際に、Auth0との統合に関して推奨されるベストプラクティスは、繰り返し（反復的に）更新する方法で計画することです。アプリケーションがすでにシングルサインオン（SSO）を利用し、レガシーシステムがOIDCや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip>などのプロトコルに対応していて、Auth0と統合しながらもSSOを引き続き提供したい場合には、以下の2つのオプションがあります。
 
 * レガシーのSSOシステムに既存のIDプロバイダーを更新して、ログイン（[SAML](/docs/ja-jp/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider)を使うなど）はAuth0にリダイレクトする
-* ログインでは、Auth0がレガシーのSSOシステムにリダイレクトする。これには、レガシーシステムをAuth0で<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">IdP</Tooltip>として構成（[SAML](/docs/ja-jp/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-service-provider)または[OIDC](/docs/ja-jp/connections/identity-providers-social)を使用）する必要があります。
+* ログインでは、Auth0がレガシーのSSOシステムにリダイレクトする。これには、レガシーシステムをAuth0で<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IdP</Tooltip>として構成（[SAML](/docs/ja-jp/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-service-provider)または[OIDC](/docs/ja-jp/connections/identity-providers-social)を使用）する必要があります。
 
 <Info>
   ### ベストプラクティス

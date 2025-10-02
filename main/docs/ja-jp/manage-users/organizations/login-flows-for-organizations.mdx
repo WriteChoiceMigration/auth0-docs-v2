@@ -25,7 +25,7 @@ B2BまたはSaaSアプリケーション（SlackやJiraなど）は**ビジネ�
 
 エンドユーザーがアプリケーションで個人アカウントとビジネスアカウントの両方を保持する可能性がある場合は、**[Both（両方）]** を選択します。たとえば、Githubでは、個人用と業務用の両方のコードリポジトリが保存されることがよくあります。
 
-アプリケーションのユーザータイプは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>（上記参照）または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を通じて構成できます。具体的には、[クライアント更新](/docs/ja-jp/api/management/v2/clients/patch-clients-by-id)エンドポイントの`organization_usage`パラメーターを使用して、適切なユーザータイプを設定します。両方の方法の詳細については、「[Organizationの動作を定義する](/docs/ja-jp/manage-users/organizations/configure-organizations/define-organization-behavior)」を参照してください。
+アプリケーションのユーザータイプは、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=auth0-dashboard" tip="Auth0 Dashboard: サービスを構成するためのAuth0の主製品。" cta="用語集の表示">Auth0 Dashboard</Tooltip>（上記参照）または<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>を通じて構成できます。具体的には、[クライアント更新](/docs/ja-jp/api/management/v2/clients/patch-clients-by-id)エンドポイントの`organization_usage`パラメーターを使用して、適切なユーザータイプを設定します。両方の方法の詳細については、「[Organizationの動作を定義する](/docs/ja-jp/manage-users/organizations/configure-organizations/define-organization-behavior)」を参照してください。
 
 #### アプリケーションのログインフローを構成する
 
@@ -49,7 +49,7 @@ B2BまたはSaaSアプリケーション（SlackやJiraなど）は**ビジネ�
 
 <Frame>![](/images/ja-jp/cdy7uua7fh8z/1vyoeNqhRmqP3iYP58X59Y/e52a1788430b0b734785d2238541bd32/image2.png)</Frame>
 
-このフローでは、ユーザーのメールドメインがエンタープライズ接続のIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">IdP</Tooltip>）ドメインと一致しない場合に、1つのAuth0[データベース接続](/docs/ja-jp/authenticate/database-connections/custom-db)をフォールバックとして使用できます。ユーザーには、組織のログインプロンプトではなくアプリケーションのログインプロンプトが表示され、[アプリケーションで有効になっている接続](/docs/ja-jp/get-started/applications/update-application-connections)がユーザーに表示されます。
+このフローでは、ユーザーのメールドメインがエンタープライズ接続のIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IdP</Tooltip>）ドメインと一致しない場合に、1つのAuth0[データベース接続](/docs/ja-jp/authenticate/database-connections/custom-db)をフォールバックとして使用できます。ユーザーには、組織のログインプロンプトではなくアプリケーションのログインプロンプトが表示され、[アプリケーションで有効になっている接続](/docs/ja-jp/get-started/applications/update-application-connections)がユーザーに表示されます。
 
 ユーザーがメールアドレスを入力すると、Auth0は、このアプリケーションで有効になっているエンタープライズ接続 **と** Organizationsで有効になっているすべてのエンタープライズ接続とを照合します。一致が見つかった場合、ユーザーは関連付けられているIdPで認証するように指示されます。一致が見つからない場合、パスワードフィールドが表示されます。
 

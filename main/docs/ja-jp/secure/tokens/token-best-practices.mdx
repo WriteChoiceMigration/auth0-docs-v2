@@ -22,11 +22,11 @@ permalink: "token-best-practices"
 
 通常、シングルページアプリ（React・Vue・AngularJS + Nodeなど）、ネイティブモバイルアプリ（iOS・Androidなど）とWeb API（Node・Ruby・ASP.NETやその混合）には、トークンベースの認証が最も適しています。サーバー側のWebアプリケーションでは、伝統的にクッキーベースの認証が使用されてきました。
 
-トークンを用いた認証は一般的に、ユーザーの認証時にトークンを生成して、そのトークンを後続する各API要求の`認証`ヘッダーで設定することで実装されます。このトークンには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JSON Web Token</Tooltip>など、標準的なものを使用して、ほとんどのプラットフォームにライブラリーがあり、独自のクリプトを作成しなくてもいいようにします。
+トークンを用いた認証は一般的に、ユーザーの認証時にトークンを生成して、そのトークンを後続する各API要求の`認証`ヘッダーで設定することで実装されます。このトークンには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=json-web-token" tip="JSON Web Token（JWT）: 二者間のクレームを安全に表現するために使用される標準IDトークン形式（および多くの場合、アクセストークン形式）。" cta="用語集の表示">JSON Web Token</Tooltip>など、標準的なものを使用して、ほとんどのプラットフォームにライブラリーがあり、独自のクリプトを作成しなくてもいいようにします。
 
 どちらの方法でも、ユーザーから同じ量の情報を取得することができます。これは、（Lock、JavaScriptライブラリ、またはプレーンリンクを使って）ログイン要求で送信される`scope`パラメーターによって制御されます。`scope`は、`.signin({scope:'openid name email'})`メソッドのパラメーターで、ログイン要求ではクエリ文字列の一部になります。
 
-デフォルトでは、トークンが大きくなるのを避けるため、トークンベースの認証では`scope=openid`を使用します。標準の<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">OpenID</Tooltip> Connect（OIDC）クレームは、トークンにスコープ値として追加することにより、制御することができます。`scope=openid name email family_name address phone_number`が例として挙げられます。詳細については、openid.netの「[標準クレーム](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)」を参照してください。
+デフォルトでは、トークンが大きくなるのを避けるため、トークンベースの認証では`scope=openid`を使用します。標準の<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=openid" tip="OpenID: アプリケーションがログイン情報を収集および保存することなくにユーザーのIDを検証できるようにする認証用のオープン標準。" cta="用語集の表示">OpenID</Tooltip> Connect（OIDC）クレームは、トークンにスコープ値として追加することにより、制御することができます。`scope=openid name email family_name address phone_number`が例として挙げられます。詳細については、openid.netの「[標準クレーム](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)」を参照してください。
 
 トークンを用いた認証とCookieを用いた認証は組み合わせて使用することができます。WebアプリとAPIが同じドメインから提供される場合には、Cookieだけでも十分機能するためめ、トークンを用いた認証は必要ない可能性があります。必要であれば、当社からWebアプリフローでJWTを返すこともできます。提供しているSDKはそれぞれ動作が異なります。APIを（既存のCookieを使用するのではなく）JavaScriptから呼び出したい場合には、トークンの送信と保管を扱えるように、Web WorkersやJavaScriptのクロージャを使ってアクセストークンを設定する必要があります。詳細については、「[トークンのストレージ](/docs/ja-jp/secure/security-guidance/data-security/token-storage)」ページのブラウザのインメモリシナリオのセクションをお読みください。
 
@@ -55,7 +55,7 @@ Auth0では、有効なリフレッシュトークンの数をユーザーあた
 
 #### 自動テスト
 
-リフレッシュトークンは自動テストによって蓄積され、通常はテストが実行されている間に使用されます。制限の対象となるトークンが蓄積されるのを防ぐために、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Management API</Tooltip>を使って不要なリフレッシュトークンを削除することができます。
+リフレッシュトークンは自動テストによって蓄積され、通常はテストが実行されている間に使用されます。制限の対象となるトークンが蓄積されるのを防ぐために、Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>を使って不要なリフレッシュトークンを削除することができます。
 
 1. Management APIを使って[ユーザーを作成します](https://auth0.com/docs/api/management/v2#!/Users/post_users)。テストではこのユーザーを使用します。
 2. 応答は`user_id`を返します。後で行うテスト中はこのIDを継続して使用します。

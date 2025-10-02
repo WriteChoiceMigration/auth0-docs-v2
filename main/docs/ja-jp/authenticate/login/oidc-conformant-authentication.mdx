@@ -11,7 +11,7 @@ permalink: "oidc-conformant-authentication"
 
 Auth0は[認定OpenID Connect (OIDC)プロバイダー](http://openid.net/certification/)です。Auth0 では、セキュリティと標準ベースの相互運用性を向上させる取り組みの一環として、[OIDC仕様](http://openid.net/specs/openid-connect-core-1_0.html)に厳密に準拠した認証フローにのみ新しい機能を展開しています。
 
-OIDC準拠パイプラインとレガシーパイプラインの違いを説明し、既存のアプリケーションを適応させる方法について説明します。[OAuth 2.0認可フレームワーク](/docs/ja-jp/authenticate/protocols/oauth)を使用してアプリケーションでAuth0統合を管理する開発者および/またはIT管理者の場合。この情報は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip>またはWSフェデレーションを使用している場合には適用されません。すべての認証フローは、特定の言語またはライブラリ実装のコンテキストではなく、HTTP要求を通じて記述されます。
+OIDC準拠パイプラインとレガシーパイプラインの違いを説明し、既存のアプリケーションを適応させる方法について説明します。[OAuth 2.0認可フレームワーク](/docs/ja-jp/authenticate/protocols/oauth)を使用してアプリケーションでAuth0統合を管理する開発者および/またはIT管理者の場合。この情報は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip>またはWSフェデレーションを使用している場合には適用されません。すべての認証フローは、特定の言語またはライブラリ実装のコンテキストではなく、HTTP要求を通じて記述されます。
 
 すべての新機能はOIDC準拠のパイプラインのみを対象としており、すべてのレガシーAuth0 SDKバージョンは非推奨となり、新機能や重大でないセキュリティ問題に対する更新は受信されず、最終的には廃止されます。さらに、本ガイド以外のすべてのドキュメント、ライブラリ、および例は、OIDC準拠のパイプラインにのみ適用されます。このため、近い将来に新しい機能や機能を活用する必要がない場合でも、OIDC準拠のパイプラインを採用することを強くお勧めします。
 
@@ -37,7 +37,7 @@ OIDC Conformant（OIDC準拠）設定を手動で無効にすることはでき�
 2. **［Advanced Settings（詳細設定）］** にスクロールし、 **OAuth** タブに進みます。
 3. **［OIDC Conformant（OIDC準拠）］** トグルスイッチを有効にし、 **［Save Changes（変更を保存）］** をクリックします。
 
-認証要求ごとにOIDC準拠のパイプラインを使用する必要があり、アプリケーションが<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">JWT</Tooltip>アクセストークンを使用してAPIを呼び出す必要がある場合は、`audience`パラメーターを使用して[`/social`](/docs/ja-jp/api/authentication#social)エンドポイントへの要求を開始します。
+認証要求ごとにOIDC準拠のパイプラインを使用する必要があり、アプリケーションが<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" href="/docs/ja-jp/glossary?term=json-web-token" tip="JSON Web Token（JWT）: 二者間のクレームを安全に表現するために使用される標準IDトークン形式（および多くの場合、アクセストークン形式）。" cta="用語集の表示">JWT</Tooltip>アクセストークンを使用してAPIを呼び出す必要がある場合は、`audience`パラメーターを使用して[`/social`](/docs/ja-jp/api/authentication#social)エンドポイントへの要求を開始します。
 
 認証要求ごとにOIDC準拠のパイプラインを使用する必要があり、アプリケーションがAPIを呼び出す必要がない場合は、次の`audience`パラメーターを使用します。
 
@@ -103,7 +103,7 @@ OIDC準拠パイプラインを有効にすると、従来のパイプライン�
 
 ### シングルサインオン（SSO）
 
-* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SSO</Tooltip>はAuth0ログインページからのみ実行できるため、ユニバーサルログインを使用してください。
+* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=single-sign-on" tip="シングルサインオン（SSO）: ユーザーが1つのアプリケーションにログインした後、そのユーザーを他のアプリケーションに自動的にログインさせるサービス。" cta="用語集の表示">SSO</Tooltip>はAuth0ログインページからのみ実行できるため、ユニバーサルログインを使用してください。
 * ユーザーがSSO経由でログインしているかどうかを確認するには、サイレント認証を使用してください。詳細は、「[サイレント認証を構成する](/docs/ja-jp/authenticate/login/configure-silent-authentication)」をお読みください。
 * **廃止** ：`/ssodata`エンドポイントおよび`Lock/auth0.js`の`getSSOData()`メソッド。
 

@@ -23,7 +23,7 @@ Auth0のRBAC機能から提供された情報をIDトークンに（手動で適
 
 </Callout>
 
-* 共有リソースサービスへの公開アクセスを提供するAPIは通常、アクセス制御メカニズムによって保護されます。このため、Auth0には認可ベアラートークンまたは<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OAuth</Tooltip> 2[アクセストークン](/docs/ja-jp/secure/tokens/access-tokens)を作成する機能が備わっており、これでユーザー認可情報をAPIに伝えることができます。通常は、Auth0の[Role-Based Access Control (RBAC)](/docs/ja-jp/manage-users/access-control/configure-core-rbac)を使用して1つ以上の[メンバーシップが割り当てられたロール](/docs/ja-jp/manage-users/organizations/configure-organizations/add-member-roles)を適用するか、[ルール](/docs/ja-jp/customize/rules)拡張を介してカスタムクレームを追加することで実行されます。Auth0のRBAC機能を活用して、アクセストークンの`スコープ`クレームを自動的に調整することもできます。APIはこの情報を使って適切なレベルのアクセス制御を適用し、ユーザーについての情報を追加で検索することなく、ポリシールールを適用できるようにします。
+* 共有リソースサービスへの公開アクセスを提供するAPIは通常、アクセス制御メカニズムによって保護されます。このため、Auth0には認可ベアラートークンまたは<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=oath2" tip="OAuth 2.0: 認可プロトコルとワークフローを定義する認可フレームワーク。" cta="用語集の表示">OAuth</Tooltip> 2[アクセストークン](/docs/ja-jp/secure/tokens/access-tokens)を作成する機能が備わっており、これでユーザー認可情報をAPIに伝えることができます。通常は、Auth0の[Role-Based Access Control (RBAC)](/docs/ja-jp/manage-users/access-control/configure-core-rbac)を使用して1つ以上の[メンバーシップが割り当てられたロール](/docs/ja-jp/manage-users/organizations/configure-organizations/add-member-roles)を適用するか、[ルール](/docs/ja-jp/customize/rules)拡張を介してカスタムクレームを追加することで実行されます。Auth0のRBAC機能を活用して、アクセストークンの`スコープ`クレームを自動的に調整することもできます。APIはこの情報を使って適切なレベルのアクセス制御を適用し、ユーザーについての情報を追加で検索することなく、ポリシールールを適用できるようにします。
 * Auth0テナントでアプリケーションレベルのポリシーを実装したい場合には、広範囲のアプリケーションやリソースサービス（API）にポリシーを適用できるようになります。個別に変更する必要はありません。これを実装するには通常、[ルール](/docs/ja-jp/customize/rules)拡張を使用します。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
@@ -46,7 +46,7 @@ context.idToken['http://travel0.net/multifactor'] = context.multifactor;
 
 ### SAMLアサーション
 
-Auth0 Organizations（組織）機能は 、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>対応のアプリケーションには対応していませんが、アップストリームのIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">IdP</Tooltip>）が生成したSAMLアサーションを構成して、ダウンストリームで使用されるIDトークンに標準やカスタムのクレームを追加することはできます。たとえば、以下のように、SAMLエンタープライズ接続にあるマッピングセクションを定義することができます。
+Auth0 Organizations（組織）機能は 、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip>対応のアプリケーションには対応していませんが、アップストリームのIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IdP</Tooltip>）が生成したSAMLアサーションを構成して、ダウンストリームで使用されるIDトークンに標準やカスタムのクレームを追加することはできます。たとえば、以下のように、SAMLエンタープライズ接続にあるマッピングセクションを定義することができます。
 
 ```json lines
 { 
@@ -120,7 +120,7 @@ Auth0組織機能は、Auth0テナントに関連する[認可コア](/docs/ja-j
 一方で、大体のポリシーは中央管理で適用することができます。たとえば、Auth0テナントの場合、すべてのアプリケーションやAPIに同じ制約を適用しなくてもいいように、ルールを実装できるような状況もあります。それらの状況には以下が挙げられます。
 
 * 特定のIPアドレスからのユーザーアクセスを阻止する
-* Contextual <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">MFA</Tooltip>や<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Adaptive MFA</Tooltip>に固有の要件を実装する
+* Contextual <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=multifactor-authentication" tip="多要素認証（MFA）: ユーザー名とパスワードに加えて、SMS経由のコードなどの要素を使用するユーザー認証プロセス。" cta="用語集の表示">MFA</Tooltip>や<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" href="/docs/ja-jp/glossary?term=adaptive-multi-factor-authentication" tip="Adaptive Multifactor Authentication: ログイン試行が信頼性の低いログインであると判断された場合にのみ、ユーザーに対してトリガーされる多要素認証（MFA）。" cta="用語集の表示">Adaptive MFA</Tooltip>に固有の要件を実装する
 * メールアドレスが確認されたユーザーのみにログインを制限する
 * 特定のAPIオーディエンスへのアクセスを制限する。これによって、ユーザーがアクセストークンを取得できるAPIオーディエンスが限られるか、ユーザーがオーディエンスからアクセストークンを取得できる状況が制限される。このとき、各組織にカスタムAPIオーディエンスを作成している場合には、認証しているユーザーの組織がAPIオーディエンスの組織と一致していることを、ルールで保証しなくてはなりません。
 

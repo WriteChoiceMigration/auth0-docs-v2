@@ -9,14 +9,14 @@ permalink: "which-oauth-2-0-flow-should-i-use"
 'twitter:description': "ユースケースに合わせて適切なOAuth 2.0フローを判断する方法について説明します。"
 ---
 
-[OAuth 2.0の認可フレームワーク](/docs/ja-jp/authenticate/protocols/oauth)は、複数の異なるフロー（または付与）をサポートしています。 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">フロー</Tooltip>はアクセストークンを取得する方法です。ユースケースに合ったものがどれかを判断する場合、主に[アプリケーションタイプ](/docs/ja-jp/get-started/applications)に左右されますが、クライアントへの信頼度やユーザーに届けたいエクスペリエンスといった、他の要因も重要になります。
+[OAuth 2.0の認可フレームワーク](/docs/ja-jp/authenticate/protocols/oauth)は、複数の異なるフロー（または付与）をサポートしています。 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=flow" tip="フロー: アクションを使用して拡張できるプロセス。各フローはそれぞれ1つ以上のトリガーで構成され、Auth0手順の単一ポイント中に情報が移動する論理パイプラインを表します。" cta="用語集の表示">フロー</Tooltip>はアクセストークンを取得する方法です。ユースケースに合ったものがどれかを判断する場合、主に[アプリケーションタイプ](/docs/ja-jp/get-started/applications)に左右されますが、クライアントへの信頼度やユーザーに届けたいエクスペリエンスといった、他の要因も重要になります。
 
 ## OAuth 2.0の用語
 
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Resource Owner</Tooltip>（リソース所有者）** ：保護されたリソースへのアクセス権を付与できるエンティティ。大抵の場合、エンドユーザーです。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=resource-owner" tip="リソース所有者: 保護されたリソースへのアクセスを許可できるエンティティ（ユーザーやアプリケーションなど）。" cta="用語集の表示">Resource Owner</Tooltip>（リソース所有者）** ：保護されたリソースへのアクセス権を付与できるエンティティ。大抵の場合、エンドユーザーです。
 * **Client （クライアント）** ：リソース所有者の代わりに保護されたリソースへのアクセス権を要求するアプリケーション。
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Resource Server</Tooltip>（リソースサーバー）** ：保護されたリソースをホストするサーバー。アクセスしたいAPIのことです。
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Authorization Server</Tooltip>（認可サーバー）** ：リソース所有者を認証し、適切な認可を得た後にアクセストークンを発行するサーバー。この例では、Auth0です。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=resource-server" tip="リソースサーバー: 保護されたリソースをホストするサーバー。リソースサーバーは保護されたリソースの要求を受け入れ、応答します。" cta="用語集の表示">Resource Server</Tooltip>（リソースサーバー）** ：保護されたリソースをホストするサーバー。アクセスしたいAPIのことです。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" href="/docs/ja-jp/glossary?term=authorization-server" tip="認可サーバー: ユーザーによるアクセスの限界を定義するために使用される集中管理型サーバー。たとえば、認可サーバーは、ユーザーが利用できるデータ、タスク、機能を制御できます。" cta="用語集の表示">Authorization Server</Tooltip>（認可サーバー）** ：リソース所有者を認証し、適切な認可を得た後にアクセストークンを発行するサーバー。この例では、Auth0です。
 * **User Agent（ユーザーエージェント）** ：リソース所有者がクライアント（ブラウザーやネイティブアプリケーションなど）を操作するのに使用するエージェント。
 
 ## クライアントはリソース所有者ですか？
@@ -70,7 +70,7 @@ SPAにアクセストークンが必要ないのであれば、フォームPOST�
 
 </Callout>
 
-クライアントが開始するバックチャネル認証フロー（CIBA）は、[OpenID Connect](https://openid.net/developers/how-connect-works/)に対する代替の認証フローを実装する<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">OpenID</Tooltip> Foundationの標準です。CIBAは次の点で標準のOpenID Connectフローと異なります。
+クライアントが開始するバックチャネル認証フロー（CIBA）は、[OpenID Connect](https://openid.net/developers/how-connect-works/)に対する代替の認証フローを実装する<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=openid" tip="OpenID: アプリケーションがログイン情報を収集および保存することなくにユーザーのIDを検証できるようにする認証用のオープン標準。" cta="用語集の表示">OpenID</Tooltip> Foundationの標準です。CIBAは次の点で標準のOpenID Connectフローと異なります。
 
 * クライアントアプリケーションがエンドユーザーに代わって認証プロセスを開始する。
 * ブラウザーにユーザーインタラクションが不要である。

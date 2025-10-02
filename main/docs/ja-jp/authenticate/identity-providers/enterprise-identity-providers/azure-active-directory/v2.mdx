@@ -123,7 +123,7 @@ Entra IDディレクトリが2つ以上ある場合は、Auth0で使用したい
 
 ### Auth0でエンタープライズ接続を作成する
 
-Auth0でMicrosoft Entra IDエンタープライズ接続を作成して構成します。Microsoft Azureポータルでアプリをセットアップする際に、 **［Application (client) ID（アプリケーション（クライアント）ID）］** と **［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Client secret</Tooltip>（クライアントシークレット）］** が生成されていることを確認してください。
+Auth0でMicrosoft Entra IDエンタープライズ接続を作成して構成します。Microsoft Azureポータルでアプリをセットアップする際に、 **［Application (client) ID（アプリケーション（クライアント）ID）］** と **［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=client-secret" tip="クライアントシークレット: クライアント（アプリケーション）が認可サーバーで認証するために使用するシークレット。これはクライアントと認可サーバーだけが知っているものであり、推測できないように十分にランダムである必要があります。" cta="用語集の表示">Client secret</Tooltip>（クライアントシークレット）］** が生成されていることを確認してください。
 
 1. [［Auth0 Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)に移動し、 **［Microsoft Entra ID］** を見つけ、その［`+`］を選択します。
 
@@ -262,7 +262,7 @@ Auth0でMicrosoft Entra IDエンタープライズ接続を作成して構成し
 
 この問題を解決するには、登録したEntra IDアプリで **［Supported account types（サポートされているアカウントの種類）］** を変更してみてください。Microsoft Entra IDアプリの認証設定で、適切なマルチテナントオプションが選択されていることを確認します。次のようなマルチテナントオプションがあります： **任意の組織ディレクトリ内のアカウント（任意のMicrosoft Entra IDディレクトリ - マルチテナント）**
 
-**ユーザーがログインしようとすると、「invalid_request; failed to obtain <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">access token</Tooltip>（アクセストークンの取得失敗）」というメッセージを受け取ります。**
+**ユーザーがログインしようとすると、「invalid_request; failed to obtain <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=access-token" tip="アクセストークン: APIへのアクセスに使用される、不透明な文字列またはJWT形式の認可資格情報。" cta="用語集の表示">access token</Tooltip>（アクセストークンの取得失敗）」というメッセージを受け取ります。**
 
 このエラーが起きる理由として最も可能性が高いのは、Microsoft Entra IDの **クライアントシークレット** が無効か期限切れであることです。この問題を解決するには、Microsoft Entra IDでアプリ用に新しい **クライアントシークレット** を生成し、Auth0で構成されたエンタープライズ接続で **クライアントシークレット** を更新します。
 

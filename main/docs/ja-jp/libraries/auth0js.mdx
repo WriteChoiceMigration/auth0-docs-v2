@@ -346,7 +346,7 @@ var url = webAuth.client.buildAuthorizeUrl({
 
 ### シングルサインオンと埋め込み認証
 
-埋め込みログインのあるアプリがシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>）を使用するには、2つの条件を満たす必要があります。
+埋め込みログインのあるアプリがシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=single-sign-on" tip="シングルサインオン（SSO）: ユーザーが1つのアプリケーションにログインした後、そのユーザーを他のアプリケーションに自動的にログインさせるサービス。" cta="用語集の表示">SSO</Tooltip>）を使用するには、2つの条件を満たす必要があります。
 
 1. SSOを行おうとするアプリケーションの両方が、ファーストパーティーのアプリケーションでなくてはなりません。サードパーティーのアプリケーションではSSOが動作しません。
 2. カスタムドメインを使用していること、SSOを実装しようとしているアプリケーションとAuth0テナントが同じドメインにあることが必要です。従来、Auth0ドメインの形式は`foo.auth0.com`ですが、カスタムドメインを使用すると、該当するすべてのアプリケーションとAuth0テナントに同じドメインを使用してCSRF攻撃のリスクを回避できます。
@@ -549,13 +549,13 @@ webAuth.parseHash({ hash: window.location.hash }, function(err, authResult) {
 }
 ```
 
-この情報を使って、アプリケーションのニーズに合わせ、何らかの処理を行うことができます。1つの例として、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Management API</Tooltip>を使ってユーザーの全プロファイル情報を取得する方法をご紹介します。
+この情報を使って、アプリケーションのニーズに合わせ、何らかの処理を行うことができます。1つの例として、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>を使ってユーザーの全プロファイル情報を取得する方法をご紹介します。
 
 ## nonceの使用
 
 デフォルトでは（および`responseType`に`id_token`が含まれている場合）、`auth0.js`は`webAuth.authorize`を呼び出す時にランダムな`nonce`を生成し、これをローカルストレージに保存し、それを`webAuth.parseHash`で取り出します。このデフォルトの動作はほとんどのケースに適していますが、場合によっては開発者が`nonce`を管理しなければならないこともあります。
 開発者が生成した`nonce`を使用する場合、`webAuth.authorize`と`webAuth.parseHash`の両方にオプションとしてこれを提供する必要があります。
-`webAuth.authorize({<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">nonce</Tooltip>:'1234', responseType:'token id_token'});
+`webAuth.authorize({<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=nonce" tip="Nonce: リプレイ攻撃を検出および防止するために、認証プロトコルで1回だけ発行される任意の数値。" cta="用語集の表示">nonce</Tooltip>:'1234', responseType:'token id_token'});
 webAuth.parseHash({nonce:'1234'}, callback);`
 
 `webAuth.authorize`の代わりに`webAuth.checkSession`を呼び出す場合は、`checkSession`のオプションとしてカスタム`nonce`のみを指定する必要があります。

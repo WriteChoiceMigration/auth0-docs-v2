@@ -125,7 +125,7 @@ IDトークンの場合と同様に、Auth0のRule拡張性を利用して、[�
 
 ### アクセストークンのスコープ
 
-[OAuth2スコープ](/docs/ja-jp/get-started/apis/scopes/api-scopes)は通常、APIがユーザーに代わって実行できるアクションを決定できるメカニズムとして使用されます。スコープはAPIごとに追加でき、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>で、またはAuth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>を通じて[特定のアクセス許可を定義](/docs/ja-jp/get-started/apis/add-api-permissions)します。また、スコープはAuth0の拡張性を介して操作することもできます（この[例](/docs/ja-jp/architecture-scenarios/spa-api/part-2#create-a-rule-to-validate-token-scopes)のように、Rule経由など）。アプリケーションがAPIにアクセスするために要求するスコープは、アプリケーションが使用するためにユーザーがアクセス許可を与える必要がある機能性に依存する必要があります。要求されたスコープが認可されると、アクセストークンで返され、[そのAPIによって検証](/docs/ja-jp/secure/tokens/access-tokens/validate-access-tokens)できるようになります。良い例が、ログインにソーシャルプロバイダーを使用しているアプリケーションにログインする場面です。ソーシャルプロバイダーのAPIは、ユーザーが自分に代わってアプリケーションにアイテムを投稿させるかどうかをアプリケーションが指定することを求めます。これによって、ユーザーはこの要求を許可または拒否できます。この例は、ユーザーがアプリケーションにアクセス許可を委任する方法を示しています。ユーザーロールに基づいてアクセスを制限するAPIとは異なり、別の方法で処理する必要があります。
+[OAuth2スコープ](/docs/ja-jp/get-started/apis/scopes/api-scopes)は通常、APIがユーザーに代わって実行できるアクションを決定できるメカニズムとして使用されます。スコープはAPIごとに追加でき、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=auth0-dashboard" tip="Auth0 Dashboard: サービスを構成するためのAuth0の主製品。" cta="用語集の表示">Auth0 Dashboard</Tooltip>で、またはAuth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>を通じて[特定のアクセス許可を定義](/docs/ja-jp/get-started/apis/add-api-permissions)します。また、スコープはAuth0の拡張性を介して操作することもできます（この[例](/docs/ja-jp/architecture-scenarios/spa-api/part-2#create-a-rule-to-validate-token-scopes)のように、Rule経由など）。アプリケーションがAPIにアクセスするために要求するスコープは、アプリケーションが使用するためにユーザーがアクセス許可を与える必要がある機能性に依存する必要があります。要求されたスコープが認可されると、アクセストークンで返され、[そのAPIによって検証](/docs/ja-jp/secure/tokens/access-tokens/validate-access-tokens)できるようになります。良い例が、ログインにソーシャルプロバイダーを使用しているアプリケーションにログインする場面です。ソーシャルプロバイダーのAPIは、ユーザーが自分に代わってアプリケーションにアイテムを投稿させるかどうかをアプリケーションが指定することを求めます。これによって、ユーザーはこの要求を許可または拒否できます。この例は、ユーザーがアプリケーションにアクセス許可を委任する方法を示しています。ユーザーロールに基づいてアクセスを制限するAPIとは異なり、別の方法で処理する必要があります。
 
 <Info>
     ### ベストプラクティス
@@ -144,7 +144,7 @@ Auth0の拡張性を通じて完全にアクセストークンスコープを操
 * ユーザーまたはオブジェクトの属性（ユーザーの`manager`やオブジェクトの`marketing`など）
 * ユーザーとオブジェクト間の関係（親フォルダーに対して表示アクセス権を持つユーザーは、その子フォルダーに対する表示アクセス権も持つなど）
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">FGA</Tooltip>を使用すると、認可モデルを作成して、ユーザーのアクセス権を決定するために必要な関係性を判断できます。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=fine-grained-auth" tip="Fine-grained Authorization（FGA）: 個々のユーザーが特定のオブジェクトまたはリソースにアクセスできるようにするAuth0製品。" cta="用語集の表示">FGA</Tooltip>を使用すると、認可モデルを作成して、ユーザーのアクセス権を決定するために必要な関係性を判断できます。
 
 ## Role Based Access Control（RBAC）
 
@@ -154,7 +154,7 @@ RBACのコア機能は、多くの複数Organizationのシナリオで使用で�
 
 ## マシンツーマシン（M2M）アプリケーション
 
-APIを呼び出すために、ユーザー対話型セッションのないアプリケーションでアクセストークンを取得する必要があるシナリオは少なくありません。このようなシナリオでは、ユーザーではなくクライアントを認証しなければならず、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OAuth</Tooltip> 2では、これを簡単に達成できる[クライアント資格情報](/docs/ja-jp/get-started/authentication-and-authorization-flow/client-credentials-flow)付与タイプを提供しています。これが必要な一般的な例：
+APIを呼び出すために、ユーザー対話型セッションのないアプリケーションでアクセストークンを取得する必要があるシナリオは少なくありません。このようなシナリオでは、ユーザーではなくクライアントを認証しなければならず、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=oath2" tip="OAuth 2.0: 認可プロトコルとワークフローを定義する認可フレームワーク。" cta="用語集の表示">OAuth</Tooltip> 2では、これを簡単に達成できる[クライアント資格情報](/docs/ja-jp/get-started/authentication-and-authorization-flow/client-credentials-flow)付与タイプを提供しています。これが必要な一般的な例：
 
 * APIと通信する必要があるcronジョブまたはその他のサービス（たとえば、毎日レポートを生成して管理者にメールで送信する必要がある場合）。
 * 特権アクセスをサポートする個別のAPI（たとえば、APIがユーザーの目に直接触れることがなく、バックエンドでのみ稼働する場合）。

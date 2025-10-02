@@ -33,13 +33,13 @@ API GatewayはLambda関数の前にサービスレイヤーを追加すること
 
 ## API Gatewayのカスタムオーソライザーの仕組み
 
-[Amazonによると](http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html)、API Gatewayのカスタムオーソライザーは、「<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OAuth</Tooltip>や<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>などのベアラートークン認証戦略を使用してAPIへのアクセスを制御するために提供するLambda関数」です。
+[Amazonによると](http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html)、API Gatewayのカスタムオーソライザーは、「<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=oath2" tip="OAuth 2.0: 認可プロトコルとワークフローを定義する認可フレームワーク。" cta="用語集の表示">OAuth</Tooltip>や<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip>などのベアラートークン認証戦略を使用してAPIへのアクセスを制御するために提供するLambda関数」です。
 
 誰か（または何らかのプログラム）がAPIを呼び出そうとするたびに、API GatewayはそのAPI用に構成されたカスタムオーソライザーがあるかどうかを確認します。
 
 **APIのカスタムオーソライザーがある**場合は、API Gatewayがカスタムオーソライザーを呼び出し、受け取った要求ヘッダーから抽出した認可トークンを提供します。
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">JWT</Tooltip>検証を含むさまざまなタイプの認可戦略を実装して、要求を認可するIAMポリシーを返すことができます。返されたポリシーが無効か、アクセス許可が拒否された場合は、API呼び出しは失敗です。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" href="/docs/ja-jp/glossary?term=json-web-token" tip="JSON Web Token（JWT）: 二者間のクレームを安全に表現するために使用される標準IDトークン形式（および多くの場合、アクセストークン形式）。" cta="用語集の表示">JWT</Tooltip>検証を含むさまざまなタイプの認可戦略を実装して、要求を認可するIAMポリシーを返すことができます。返されたポリシーが無効か、アクセス許可が拒否された場合は、API呼び出しは失敗です。
 
 ポリシーが有効な場合は、APIが返されたポリシーをキャッシュし、それを受信トークンと関連付けて、現在および後続の要求に使用します。ポリシーがキャッシュされる時間は構成できます。デフォルト値は`300`秒で、キャッシュの最大の長さは`3600`秒です（この値は0に設定してキャッシュを無効化することも可能です）。
 

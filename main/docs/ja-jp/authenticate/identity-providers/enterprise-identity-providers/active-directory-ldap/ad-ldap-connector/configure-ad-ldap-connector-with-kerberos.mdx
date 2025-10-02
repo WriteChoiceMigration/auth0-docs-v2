@@ -25,7 +25,7 @@ Kerberos認証が有効な場合、ADコネクターが稼働しているサー�
 
 ## 認証フロー
 
-ユーザーの場所に応じて、認証フローはIP範囲が設定されるときと異なります。Fabrikamを例として見てみましょう。これは、SaaSバージョンのAuth0を使用するため、接続にパブリックIPアドレス（`24.12.34.56/32`）を構成しました。建物内から接続しているすべてのユーザーの発信元は、（接続で構成されているように）`24.12.34.56`です。認証する場合、ユーザーはAD/LDAPのネイティブフローに従い、シームレスな<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SSO</Tooltip>エクスペリエンスを実現することができます。
+ユーザーの場所に応じて、認証フローはIP範囲が設定されるときと異なります。Fabrikamを例として見てみましょう。これは、SaaSバージョンのAuth0を使用するため、接続にパブリックIPアドレス（`24.12.34.56/32`）を構成しました。建物内から接続しているすべてのユーザーの発信元は、（接続で構成されているように）`24.12.34.56`です。認証する場合、ユーザーはAD/LDAPのネイティブフローに従い、シームレスな<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=single-sign-on" tip="シングルサインオン（SSO）: ユーザーが1つのアプリケーションにログインした後、そのユーザーを他のアプリケーションに自動的にログインさせるサービス。" cta="用語集の表示">SSO</Tooltip>エクスペリエンスを実現することができます。
 
 これが機能するには、ネットワークでユーザーが`config.json`コネクターの高可用性デプロイメントでは、ユーザーの接続先アドレスはすべてのコネクターインスタンスの前にあるネットワークロードバランサーです。
 
@@ -45,7 +45,7 @@ AD/LDAP接続でIP範囲を検出し、ロックでそれらの範囲を使用�
 
 </Callout>
 
-アプリケーションがAuth0でホストされるログインページ内でLock 10または11を使用している（通常、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SAML</Tooltip>/<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">WS-Fed</Tooltip>プロトコルとシングルサインオン（SSO）統合に使用される）場合、「Windows認証」を使用してユーザーが認証することができるボタンが表示されます。
+アプリケーションがAuth0でホストされるログインページ内でLock 10または11を使用している（通常、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip>/<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=ws-fed" tip="Webサービスフェデレーション（WS-Fed）: ドメイン全体でユーザーIDを管理するためのプロトコル。" cta="用語集の表示">WS-Fed</Tooltip>プロトコルとシングルサインオン（SSO）統合に使用される）場合、「Windows認証」を使用してユーザーが認証することができるボタンが表示されます。
 
 （エンドユーザーのIPアドレスに基づいて）Kerberosを使用できる場合は、ユーザーの自動サインインが必要になることもあります。Kerberosを使用できる場合にユーザーを自動的にサインインするために、以下の変更をAuth0のログインページに追加することができます。
 

@@ -15,7 +15,7 @@ permalink: "part-3"
 
 ## ユーザーログイン
 
-Auth0には、アプリケーションのログインコンポーネントとして機能するLockウィジェットがあるため、独自のログイン画面を実装する必要がありません。Lockウィジェットは、データベース接続であれ、ソーシャル接続であれ、エンタープライズ接続であれ、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>内で構成したすべての接続とシームレスに統合します。
+Auth0には、アプリケーションのログインコンポーネントとして機能するLockウィジェットがあるため、独自のログイン画面を実装する必要がありません。Lockウィジェットは、データベース接続であれ、ソーシャル接続であれ、エンタープライズ接続であれ、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=auth0-dashboard" tip="Auth0 Dashboard: サービスを構成するためのAuth0の主製品。" cta="用語集の表示">Auth0 Dashboard</Tooltip>内で構成したすべての接続とシームレスに統合します。
 
 WebアプリケーションとAuth0を使用してログイン画面を実装する方法には、いくつかの異なる方法があります。
 
@@ -29,7 +29,7 @@ WebアプリケーションとAuth0を使用してログイン画面を実装す
 
 Lockではデフォルトで、ログイン可能なすべての接続が表示されます。複数のオプションから適切なIDプロバイダーを選択することを、「ホーム領域検出（HRD）」と呼びます。今回の事例では、オプションはActive Directory（会社の従業員向け）で認証するか、データベース接続（社外の請負業者向け）にメール/パスワードを使用するかのいずれかとなります。
 
-しかし、ユーザーがIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">IdP</Tooltip>）を選択する必要がある最初のステップを省略し、毎回IdPをたずねるのではなく、システムがこれを特定するようにしたい場合があります。Lockには以下のオプションがあります。
+しかし、ユーザーがIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IdP</Tooltip>）を選択する必要がある最初のステップを省略し、毎回IdPをたずねるのではなく、システムがこれを特定するようにしたい場合があります。Lockには以下のオプションがあります。
 
 * **プログラムによってIdPを特定する** ：Auth0で認証トランザクションを開始する際に、オプションで`connection`パラメーターを送信することができます。この値は、Dashboardで定義されている任意の接続に直接マッピングしています。`/authorize`エンドポイントを呼び出してホストされたLockを使用する場合、接続名を含む`connection`クエリ文字列パラメーターを渡すことができます。あるいは埋め込まれたLockを使用している場合は、`auth0.show({connections:['{yourConnection}']});`と記述するだけなので簡単です。
 

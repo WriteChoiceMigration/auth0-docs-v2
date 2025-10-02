@@ -9,7 +9,7 @@ permalink: "max-age-reauthentication"
 'twitter:description': "指定の間隔内に再認証が行われたことを証明書利用者が確実に確認できる方法として、max_age認証パラメーターを使用する方法について説明します。"
 ---
 
-`prompt=login`の仕組みは、ユーザーのエージェント（ブラウザー）から渡されるパラメーターを取り除くだけで動作不能にできます。これは証明書利用者（RP）が以下のようなものを表示したい場合に、UXヒントを<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OpenID</Tooltip>プロバイダー（OP）に提供するためだけに使用されるべきです：
+`prompt=login`の仕組みは、ユーザーのエージェント（ブラウザー）から渡されるパラメーターを取り除くだけで動作不能にできます。これは証明書利用者（RP）が以下のようなものを表示したい場合に、UXヒントを<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=openid" tip="OpenID: アプリケーションがログイン情報を収集および保存することなくにユーザーのIDを検証できるようにする認証用のオープン標準。" cta="用語集の表示">OpenID</Tooltip>プロバイダー（OP）に提供するためだけに使用されるべきです：
 
 **「Joshさん、こんにちは。お客様ではありませんか？こちらをクリックしてください。」**
 
@@ -87,7 +87,7 @@ ASが返す信頼されたIDドキュメントには、 **最終ログインの�
 
 定義にある最後の文章が最も重要な部分です。RPが`max_age`を要求した場合、RPに`auth_time`クレームを渡す必要があります。つまり、`max_age`の用途には以下の2つがあります。
 
-* **セッションのフレッシュネスを指定する** ：アプリがユーザーに1日1回の再認証を要求する場合には、`max_age`に値を指定すると、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>セッションの有効期間を長くすることができます。これは秒単位で定義します。
+* **セッションのフレッシュネスを指定する** ：アプリがユーザーに1日1回の再認証を要求する場合には、`max_age`に値を指定すると、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=single-sign-on" tip="シングルサインオン（SSO）: ユーザーが1つのアプリケーションにログインした後、そのユーザーを他のアプリケーションに自動的にログインさせるサービス。" cta="用語集の表示">SSO</Tooltip>セッションの有効期間を長くすることができます。これは秒単位で定義します。
 * **即座の再認証を強制する** ：アプリがユーザーにアクセス前の再認証を要求する場合には、`max_age`パラメーターの値を0に設定すると、ASが新たにログインを強制します。
 
 下の図はこの要件を説明したものです。

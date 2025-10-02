@@ -9,9 +9,9 @@ permalink: "user-authorization-with-ciba"
 'twitter:description': "Learn how to use Rich Authorization Requests with the Client-Initiated Backchannel Flow. "
 ---
 
-[Client-Initiated Backchannel Authentication (CIBA)](/docs/ja-jp/get-started/authentication-and-authorization-flow/client-initiated-backchannel-authentication-flow) is an <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">OAuth 2.0</Tooltip> specification that allows a client application to initiate an authentication and/or <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">authorization flow</Tooltip> without requiring direct user interaction on the initiating application. [Rich Authorization Requests (RAR)](/docs/ja-jp/get-started/apis/configure-rich-authorization-requests) is an OAuth 2.0 extension that allows client applications to request for more complex permissions beyond standard OAuth 2.0 scopes in an authorization request.
+[Client-Initiated Backchannel Authentication (CIBA)](/docs/ja-jp/get-started/authentication-and-authorization-flow/client-initiated-backchannel-authentication-flow) is an <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=oath2" tip="OAuth 2.0: 認可プロトコルとワークフローを定義する認可フレームワーク。" cta="用語集の表示">OAuth 2.0</Tooltip> specification that allows a client application to initiate an authentication and/or <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=authorization-flow" tip="認可フロー: OAuth 2.0フレームワークで指定されている認可付与（またはワークフロー）。" cta="用語集の表示">authorization flow</Tooltip> without requiring direct user interaction on the initiating application. [Rich Authorization Requests (RAR)](/docs/ja-jp/get-started/apis/configure-rich-authorization-requests) is an OAuth 2.0 extension that allows client applications to request for more complex permissions beyond standard OAuth 2.0 scopes in an authorization request.
 
-You can use CIBA with RAR to pass <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">fine-grained authorization</Tooltip> data to the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">authorization server</Tooltip> in a backchannel request. The `authorization_details` parameter contains details about the request that you can customize in a consent prompt to show the user.
+You can use CIBA with RAR to pass <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=fine-grained-auth" tip="Fine-grained Authorization（FGA）: 個々のユーザーが特定のオブジェクトまたはリソースにアクセスできるようにするAuth0製品。" cta="用語集の表示">fine-grained authorization</Tooltip> data to the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" href="/docs/ja-jp/glossary?term=authorization-server" tip="認可サーバー: ユーザーによるアクセスの限界を定義するために使用される集中管理型サーバー。たとえば、認可サーバーは、ユーザーが利用できるデータ、タスク、機能を制御できます。" cta="用語集の表示">authorization server</Tooltip> in a backchannel request. The `authorization_details` parameter contains details about the request that you can customize in a consent prompt to show the user.
 
 ## Common use cases
 
@@ -46,14 +46,14 @@ The sequence diagram defines two actors: an authorizing user and an initiating u
 To initiate a CIBA push request using Auth0, you must complete the following prerequisites:
 
 * Integrate your custom mobile application with the [Guardian SDK](/docs/ja-jp/secure/multi-factor-authentication/auth0-guardian#enroll-in-push-notifications). To learn more, read [Configure Client-Initiated Backchannel Authentication](/docs/ja-jp/get-started/applications/configure-client-initiated-backchannel-authentication).
-* [Enroll the authorizing user in MFA using push notifications via the Guardian SDK](/docs/ja-jp/secure/multi-factor-authentication/auth0-guardian#enroll-in-push-notifications). To verify in the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Auth0 Dashboard</Tooltip>, navigate to **User Management > Users** and click on the user:
+* [Enroll the authorizing user in MFA using push notifications via the Guardian SDK](/docs/ja-jp/secure/multi-factor-authentication/auth0-guardian#enroll-in-push-notifications). To verify in the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=auth0-dashboard" tip="Auth0 Dashboard: サービスを構成するためのAuth0の主製品。" cta="用語集の表示">Auth0 Dashboard</Tooltip>, navigate to **User Management > Users** and click on the user:
 
 <Frame>![](/images/ja-jp/cdy7uua7fh8z/21qtk4F1cOQHMpbXxXYu75/51ba9c5fd1457ffee3f73893acf3c97f/Screenshot_2025-01-13_at_4.13.44_PM.png)</Frame>
 
-If you have set <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">Multi-factor Authentication</Tooltip> as always required for your tenant, users are prompted to enroll for MFA at their next login. You can also use [Actions](https://auth0.com/blog/using-actions-to-customize-your-mfa-factors/) to prompt for MFA enrollment.
+If you have set <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" href="/docs/ja-jp/glossary?term=multifactor-authentication" tip="多要素認証（MFA）: ユーザー名とパスワードに加えて、SMS経由のコードなどの要素を使用するユーザー認証プロセス。" cta="用語集の表示">Multi-factor Authentication</Tooltip> as always required for your tenant, users are prompted to enroll for MFA at their next login. You can also use [Actions](https://auth0.com/blog/using-actions-to-customize-your-mfa-factors/) to prompt for MFA enrollment.
 
 * [Configure Client-Initiated Backchannel Authentication](/docs/ja-jp/get-started/applications/configure-client-initiated-backchannel-authentication) for your tenant and application.
-* [Configure Rich Authorization Requests](/docs/ja-jp/get-started/apis/configure-rich-authorization-requests) for your <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-6" tip="">resource server</Tooltip>, which includes registering your `authorization_details` types.
+* [Configure Rich Authorization Requests](/docs/ja-jp/get-started/apis/configure-rich-authorization-requests) for your <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-6" href="/docs/ja-jp/glossary?term=resource-server" tip="リソースサーバー: 保護されたリソースをホストするサーバー。リソースサーバーは保護されたリソースの要求を受け入れ、応答します。" cta="用語集の表示">resource server</Tooltip>, which includes registering your `authorization_details` types.
 
 ### Step 1: Client application initiates a CIBA request
 
@@ -411,7 +411,7 @@ If the user rejects the push request, Auth0 returns an error response like the f
 }
 ```
 
-If the user approves the push request, Auth0 returns an <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-7" tip="">access token</Tooltip> with the `authorization_details` like the following to the client application:
+If the user approves the push request, Auth0 returns an <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=access-token" tip="アクセストークン: APIへのアクセスに使用される、不透明な文字列またはJWT形式の認可資格情報。" cta="用語集の表示">access token</Tooltip> with the `authorization_details` like the following to the client application:
 
 ```json lines
 {

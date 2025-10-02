@@ -173,13 +173,13 @@ Auth0のメールにカスタムドメインを使用したい場合には、こ
 
 ## ソーシャルIDプロバイダーを構成する
 
-ソーシャルIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">IdP</Tooltip>）でカスタムドメインを使用したい場合には、IdPの［Authorized Redirect URIs（認可されているリダイレクトURI）］リストにカスタムドメイン（`https://login.northwind.com/login/callback`など）を含めて更新する必要があります。
+ソーシャルIDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IdP</Tooltip>）でカスタムドメインを使用したい場合には、IdPの［Authorized Redirect URIs（認可されているリダイレクトURI）］リストにカスタムドメイン（`https://login.northwind.com/login/callback`など）を含めて更新する必要があります。
 
 カスタムドメインには[Auth0の開発者キー](/docs/ja-jp/authenticate/identity-providers/social-identity-providers/devkeys)は使用できません。
 
 ## Google Workspace接続を構成する
 
-Google Workspace接続でカスタムドメインを使用したい場合には、［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OAuth</Tooltip> Client Settings（OAuthクライアント設定）］の［Authorized Redirect URIs（認可されているリダイレクトURI）］リストを更新する必要があります。Google Developer Consoleで **［Credentials（資格情報）］** に移動し、使用しているOAuthクライアントをリストから選択すると、クライアントIDやシークレットなどのフィールドを含む設定ページが表示されます。 **［Authorized redirect URIs（認可されているリダイレクトURI）］** フィールドにURLを追加します。URLには`https://<YOUR-CUSTOM-DOMAIN>/login/callback`の形式でカスタムドメイン（`https://login.northwind.com/login/callback`など）を含めます。
+Google Workspace接続でカスタムドメインを使用したい場合には、［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=oath2" tip="OAuth 2.0: 認可プロトコルとワークフローを定義する認可フレームワーク。" cta="用語集の表示">OAuth</Tooltip> Client Settings（OAuthクライアント設定）］の［Authorized Redirect URIs（認可されているリダイレクトURI）］リストを更新する必要があります。Google Developer Consoleで **［Credentials（資格情報）］** に移動し、使用しているOAuthクライアントをリストから選択すると、クライアントIDやシークレットなどのフィールドを含む設定ページが表示されます。 **［Authorized redirect URIs（認可されているリダイレクトURI）］** フィールドにURLを追加します。URLには`https://<YOUR-CUSTOM-DOMAIN>/login/callback`の形式でカスタムドメイン（`https://login.northwind.com/login/callback`など）を含めます。
 
 ## API
 
@@ -193,7 +193,7 @@ Auth0はトークンを発行するのに、トークンの取得に使用した
 
 すべての要求（トークン取得や実際のAPI呼び出し）には同じドメインを使用する必要があります。カスタムドメインを通して取得したトークンは、その同じカスタムドメインでAuth0 APIに使用されなければなりません。
 
-また、カスタムドメインを用いた認証フローを使って、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Management API</Tooltip>へのアクセスにアクセストークンを要求する場合には、そのカスタムドメインでManagement APIを呼び出す必要があります。
+また、カスタムドメインを用いた認証フローを使って、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>へのアクセスにアクセストークンを要求する場合には、そのカスタムドメインでManagement APIを呼び出す必要があります。
 
 ```json lines
 POST https://mycustomdomain.com/oauth/token
@@ -213,7 +213,7 @@ Authorization: Bearer <access_token>
 
 ##### カスタムAPI
 
-Auth0でカスタムドメインを使ってAPIにアクセストークンを発行する場合には、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">JWT</Tooltip>の発行者をカスタムドメインに照らし合わせて検証しなければなりません。たとえば、[express-jwt](https://github.com/auth0/express-jwt)ミドルウェアの使用では、以下の変更を行う必要があります。
+Auth0でカスタムドメインを使ってAPIにアクセストークンを発行する場合には、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" href="/docs/ja-jp/glossary?term=json-web-token" tip="JSON Web Token（JWT）: 二者間のクレームを安全に表現するために使用される標準IDトークン形式（および多くの場合、アクセストークン形式）。" cta="用語集の表示">JWT</Tooltip>の発行者をカスタムドメインに照らし合わせて検証しなければなりません。たとえば、[express-jwt](https://github.com/auth0/express-jwt)ミドルウェアの使用では、以下の変更を行う必要があります。
 
 ```js lines
 app.use(jwt({
@@ -224,7 +224,7 @@ app.use(jwt({
 
 ## SAML IDプロバイダーを構成する
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-6" tip="">SAML</Tooltip> IDプロバイダー（IdP）でカスタムドメインを使用する場合には、IDプロバイダーで **Assertion Consumer Service（ACS）のURL** を更新する必要があります。これは、IdPでの対応に合わせて、以下のいずれかの方法で実行できます。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip> IDプロバイダー（IdP）でカスタムドメインを使用する場合には、IDプロバイダーで **Assertion Consumer Service（ACS）のURL** を更新する必要があります。これは、IdPでの対応に合わせて、以下のいずれかの方法で実行できます。
 
 1. サービスプロバイダーのメタデータをAuth0から`https://<YOUR-CUSTOM-DOMAIN>/samlp/metadata?connection=<YOUR-CONNECTION-NAME>`を使って取得します。これには、更新済みのACS URLが含まれています。そして、IdPの設定でこの値を手動で更新します。IdPに対するこの変更は、アプリケーションでカスタムドメインの使用を始めるのと同時に行わなければなりません。構成するべきIdPが複数ある場合には、これが問題となる可能性があります。
 2. IdPに対応があれば、この要件を満たすのに、署名付きの要求を使用することができます。
@@ -250,7 +250,7 @@ IdP起点の認証フローがある場合には、その実行に使用され�
 
 ## WS-Fedアプリケーションを構成する
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-7" tip="">WS-Fed</Tooltip>でカスタムドメインを使用したい（Auth0がIdPである）場合には、Auth0からの新しいIDプロバイダーメタデータでサービスプロバイダーを更新する必要があります。カスタムドメインが更新されたメタデータは、`https://<YOUR-CUSTOM-DOMAIN>/wsfed/FederationMetadata/2007-06/FederationMetadata.xml`から取得することができます。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=ws-fed" tip="Webサービスフェデレーション（WS-Fed）: ドメイン全体でユーザーIDを管理するためのプロトコル。" cta="用語集の表示">WS-Fed</Tooltip>でカスタムドメインを使用したい（Auth0がIdPである）場合には、Auth0からの新しいIDプロバイダーメタデータでサービスプロバイダーを更新する必要があります。カスタムドメインが更新されたメタデータは、`https://<YOUR-CUSTOM-DOMAIN>/wsfed/FederationMetadata/2007-06/FederationMetadata.xml`から取得することができます。
 
 ## Azure AD接続を構成する
 

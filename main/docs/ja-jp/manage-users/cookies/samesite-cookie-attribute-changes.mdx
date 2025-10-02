@@ -12,7 +12,7 @@ permalink: "samesite-cookie-attribute-changes"
 認証とセッションの維持に使用されるCookieは、属性を設定することで保護できます。Auth0は、次の目的でCookieを使用します。
 
 * `form_post`を使用したOIDC Enterprise
-* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip> HTTP-POSTバインディング
+* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip> HTTP-POSTバインディング
 * Webメッセージ（別名`checkSession`）
 
 ## SameSite属性
@@ -145,4 +145,4 @@ permalink: "samesite-cookie-attribute-changes"
 
 * [サポートされていないブラウザ](https://www.chromium.org/updates/same-site/incompatible-clients)のリストを確認します。
 * Auth0 とやり取りするときに`response_mode=form_post`を使用する場合は、アプリケーションで`SameSite=none`を使用するように設定します（Chromeは`localhost`の場合でも例外を設けないことに注意してください）
-* `SameSite`属性が`None`に等しい場合は、Cookieをセキュアとして設定します。そうでない場合、ブラウザによって拒否されます。コールバックURLにHTTPを使用する場合、そのようなCookieを使用して認証要求のstate/<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">nonce</Tooltip>をバインドすると、コールバックURLが壊れます。したがって、HTTPSを使用するか、`SameSite=lax`に設定する必要があります。
+* `SameSite`属性が`None`に等しい場合は、Cookieをセキュアとして設定します。そうでない場合、ブラウザによって拒否されます。コールバックURLにHTTPを使用する場合、そのようなCookieを使用して認証要求のstate/<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=nonce" tip="Nonce: リプレイ攻撃を検出および防止するために、認証プロトコルで1回だけ発行される任意の数値。" cta="用語集の表示">nonce</Tooltip>をバインドすると、コールバックURLが壊れます。したがって、HTTPSを使用するか、`SameSite=lax`に設定する必要があります。

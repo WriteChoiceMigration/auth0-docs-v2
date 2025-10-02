@@ -155,7 +155,7 @@ Auth0Mosca.prototype.authorizeSubscribe = function() {
 module.exports = Auth0Mosca;
 ```
 
-`authenticateWithCredentials`は[OAuth2リソース所有者のパスワード資格情報付与](/docs/ja-jp/authenticate/protocols)を使って、ブローカーおよびブローカーへのすべての接続を認証します。`publisher`または`subscriber`が **CONNECT** メッセージをブローカーに送信するたびに、`authenticate`関数が呼び出されます。この関数でAuth0エンドポイントを呼び出し、デバイスの`username`/`password`を転送します。Auth0は、これをアカウントストア（コード内の最初の`request.post`）と比較して検証します。検証に成功した場合、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">JSON Web Token</Tooltip>（JWT）を検証および解析してデバイスのプロファイルを取得し、`subscriber`または`publisher`を表す`client`オブジェクトに追加します。これは、`jwt.verify`呼び出しで行われます。
+`authenticateWithCredentials`は[OAuth2リソース所有者のパスワード資格情報付与](/docs/ja-jp/authenticate/protocols)を使って、ブローカーおよびブローカーへのすべての接続を認証します。`publisher`または`subscriber`が **CONNECT** メッセージをブローカーに送信するたびに、`authenticate`関数が呼び出されます。この関数でAuth0エンドポイントを呼び出し、デバイスの`username`/`password`を転送します。Auth0は、これをアカウントストア（コード内の最初の`request.post`）と比較して検証します。検証に成功した場合、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=json-web-token" tip="JSON Web Token（JWT）: 二者間のクレームを安全に表現するために使用される標準IDトークン形式（および多くの場合、アクセストークン形式）。" cta="用語集の表示">JSON Web Token</Tooltip>（JWT）を検証および解析してデバイスのプロファイルを取得し、`subscriber`または`publisher`を表す`client`オブジェクトに追加します。これは、`jwt.verify`呼び出しで行われます。
 
 慣例により、ブローカーに接続されたデバイスはすべて、Auth0にアカウントがあります。
 

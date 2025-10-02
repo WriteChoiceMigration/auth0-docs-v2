@@ -25,7 +25,7 @@ permalink: "logout"
 * ログアウト完了後、ユーザーはどこにリダイレクトされるべきか？
 * ユーザーがログアウトプロセスをトリガーしない場合、セッションをどれくらいの間継続したいか？
 * エンドユーザーは1つのアプリケーションセッションからログアウトする際に、すべてのアプリケーションセッションからログアウトする必要があるか？
-* 組織の<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">IdP</Tooltip>を使用したセッションもログアウト時に終了する必要があるか？
+* 組織の<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IdP</Tooltip>を使用したセッションもログアウト時に終了する必要があるか？
 
 ユーザーのログイン時に作成できるセッションには様々なタイプがあることを考えると、ログアウトにもいくつかのタイプが考えられます。ローカルアプリケーションログアウトはアプリケーションとのセッションを終了しますが、一方でAuth0ログアウトは[Auth0セッションを終了します](https://auth0.com/docs/logout/guides/logout-auth0)。独自のIｄPを使用している組織の場合、[フェデレーションログアウト](#federated-logout)戦略を検討し、適宜実装することをお勧めします。グローバルまたは[シングルログアウト](https://auth0.com/docs/logout/guides/logout-applications)（SLO）はAuth0セッションを終了するだけでなく、Auth0セッションを使うアプリケーションにログアウト要求/通知を送信します。
 
@@ -41,7 +41,7 @@ permalink: "logout"
 
 ## ログアウト後のユーザーの送信先
 
-ユーザーはログアウト後、任意の特定の場所にリダイレクトされます。この場所は**ログアウトのリダイレクトURL** として指定され、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>を介して[パラメーターとして定義する](https://auth0.com/docs/logout/guides/redirect-users-after-logout)ことができます。
+ユーザーはログアウト後、任意の特定の場所にリダイレクトされます。この場所は**ログアウトのリダイレクトURL** として指定され、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=auth0-dashboard" tip="Auth0 Dashboard: サービスを構成するためのAuth0の主製品。" cta="用語集の表示">Auth0 Dashboard</Tooltip>を介して[パラメーターとして定義する](https://auth0.com/docs/logout/guides/redirect-users-after-logout)ことができます。
 
 ログアウト後のユーザーのリダイレクトに使用するURLは、オープンリダイレクトのセキュリティ脆弱性を軽減するために、[Dashboardで許可リストに登録する](https://auth0.com/docs/logout#redirect-users-after-logout)必要があります。テナントまたはアプリケーションレベルで許可リストに登録することができます。
 
@@ -74,7 +74,7 @@ SLOは、システムを複雑にし、開発・メンテナンスの手間を�
 
 </Info>
 
-これは、シングルログアウトの最も簡単なアプローチです。各アプリケーションは、ユーザーがシステムを使用できる時間を短く、たとえば5～10分に設定します。ユーザーが実行する各アクションで有効期限が切れた場合、新しいトークンの取得のために、Auth0へのリダイレクト（通常のWebアプリ）、または[サイレント認証](/docs/ja-jp/authenticate/login/configure-silent-authentication)（クライアント側のシングルページアプリケーション）が使用されます。通常、新しいトークンはシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SSO</Tooltip>）セッションにより、サイレントに発行されます。しかし、ログアウト後は、SSOセッションが削除されるため、すべてのアプリケーションで新しいトークンをサイレントに取得することはできなくなり、ユーザーは資格情報を再入力しなければなりません。
+これは、シングルログアウトの最も簡単なアプローチです。各アプリケーションは、ユーザーがシステムを使用できる時間を短く、たとえば5～10分に設定します。ユーザーが実行する各アクションで有効期限が切れた場合、新しいトークンの取得のために、Auth0へのリダイレクト（通常のWebアプリ）、または[サイレント認証](/docs/ja-jp/authenticate/login/configure-silent-authentication)（クライアント側のシングルページアプリケーション）が使用されます。通常、新しいトークンはシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=single-sign-on" tip="シングルサインオン（SSO）: ユーザーが1つのアプリケーションにログインした後、そのユーザーを他のアプリケーションに自動的にログインさせるサービス。" cta="用語集の表示">SSO</Tooltip>）セッションにより、サイレントに発行されます。しかし、ログアウト後は、SSOセッションが削除されるため、すべてのアプリケーションで新しいトークンをサイレントに取得することはできなくなり、ユーザーは資格情報を再入力しなければなりません。
 
 <Warning>
 

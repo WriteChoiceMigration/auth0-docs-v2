@@ -17,7 +17,7 @@ Native to Web SSO is currently available in Early Access. To use this feature, y
 
 ## Configure Native to Web SSO
 
-To use Native to Web <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Single Sign-On</Tooltip> (SSO), configure your native and web (Single Page App or Regular Web App) to create and manage sessions with the Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>.
+To use Native to Web <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=single-sign-on" tip="シングルサインオン（SSO）: ユーザーが1つのアプリケーションにログインした後、そのユーザーを他のアプリケーションに自動的にログインさせるサービス。" cta="用語集の表示">Single Sign-On</Tooltip> (SSO), configure your native and web (Single Page App or Regular Web App) to create and manage sessions with the Auth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>.
 
 You need an [access token](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens) to use the Management API or Auth0 CLI.
 
@@ -60,9 +60,9 @@ For existing applications, make a `PATCH` call to the [Update a Client](https://
 
 Once a user is authenticated, Auth0 returns an [Access token](/docs/ja-jp/secure/tokens/access-tokens), and [ID token](/docs/ja-jp/secure/tokens/id-tokens), and (optionally) a [Refresh token](/docs/ja-jp/secure/tokens/refresh-tokens).
 
-You can configure your native application to exchange a <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">refresh token</Tooltip> for a Session Transfer Token. If your web application does not support cookie injection, your native application also needs to configure your web application’s **Login URI** to inject the Session Transfer Token as a URI parameter.
+You can configure your native application to exchange a <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=refresh-token" tip="リフレッシュトークン: ユーザーに再度ログインを強いることなく、更新されたアクセストークンを取得するために使用されるトークン。" cta="用語集の表示">refresh token</Tooltip> for a Session Transfer Token. If your web application does not support cookie injection, your native application also needs to configure your web application’s **Login URI** to inject the Session Transfer Token as a URI parameter.
 
-* Update your native application using your Management API <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Access Token</Tooltip> with the [Update a Client](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) endpoint:
+* Update your native application using your Management API <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" href="/docs/ja-jp/glossary?term=access-token" tip="アクセストークン: APIへのアクセスに使用される、不透明な文字列またはJWT形式の認可資格情報。" cta="用語集の表示">Access Token</Tooltip> with the [Update a Client](https://auth0.com/docs/api/management/v2/clients/patch-clients-by-id) endpoint:
 
 
 
@@ -221,7 +221,7 @@ If your web application using WebView or browser supports cookie injection, you 
 
 * Add the session_transfer_token into a cookie.
 * Open the web application using WebView or browser.
-* Log the web application to your Auth0 tenant or <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Custom Domain</Tooltip>. As the `session_transfer_token` is included in the cookie, the user is not prompted for first-factor authentication.
+* Log the web application to your Auth0 tenant or <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" href="/docs/ja-jp/glossary?term=custom-domain" tip="カスタムドメイン: 特殊な名前、またはバニティ名を持つサードパーティのドメイン。" cta="用語集の表示">Custom Domain</Tooltip>. As the `session_transfer_token` is included in the cookie, the user is not prompted for first-factor authentication.
 
 ```bash cURL lines
 curl --cookie auth0_session_transfer_token=YOUR_SESSION_TRANSFER_TOKEN
@@ -594,7 +594,7 @@ app.use((req, res, next) => {
 
 ##### SAML and WS-Federation
 
-If your web application uses <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">SAML</Tooltip> or <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-6" tip="">WS-Fed</Tooltip> service provider and Auth0 as the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-7" tip="">IdP</Tooltip>, you can send the `session_transfer_token` as an URL parameter to the Auth0 `/authorize` endpoint and the `redirect_uri` is the SAML or WS-Fed sign-in URL.
+If your web application uses <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip> or <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=ws-fed" tip="Webサービスフェデレーション（WS-Fed）: ドメイン全体でユーザーIDを管理するためのプロトコル。" cta="用語集の表示">WS-Fed</Tooltip> service provider and Auth0 as the <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IdP</Tooltip>, you can send the `session_transfer_token` as an URL parameter to the Auth0 `/authorize` endpoint and the `redirect_uri` is the SAML or WS-Fed sign-in URL.
 
 <CodeGroup>
 ```bash cURL lines

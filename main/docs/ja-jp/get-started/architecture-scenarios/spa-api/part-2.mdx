@@ -19,7 +19,7 @@ APIについて、以下の詳細を入力するよう求められます。
 
 * **［Name（名前）］** ：APIのフレンドリー名。いずれの機能にも影響しません。
 * **［Identifier（識別子）］** ：APIに一意の識別子。URLの使用を推奨していますが、公開されたURLである必要はありません。Auth0がこのAPIを呼び出すことはありません。この値は後から変更することはできません。
-* **［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Signing Algorithm</Tooltip>（署名アルゴリズム）］** ：トークンの署名に使用するアルゴリズム。使用可能な値は`HS256`と`RS256`です。RS256を選択すると、トークンはテナントの秘密鍵で署名されます。署名アルゴリズムの詳細については、「[署名アルゴリズム](/docs/ja-jp/get-started/applications/signing-algorithms)」を参照してください。
+* **［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" href="/docs/ja-jp/glossary?term=signing-algorithm" tip="署名アルゴリズム: トークンが改ざんされないように、トークンにデジタル署名するためのアルゴリズム。" cta="用語集の表示">Signing Algorithm</Tooltip>（署名アルゴリズム）］** ：トークンの署名に使用するアルゴリズム。使用可能な値は`HS256`と`RS256`です。RS256を選択すると、トークンはテナントの秘密鍵で署名されます。署名アルゴリズムの詳細については、「[署名アルゴリズム](/docs/ja-jp/get-started/applications/signing-algorithms)」を参照してください。
 
 <Frame>![Dashboard -アプリケーション API - APIの作成 - ポップアップ](/images/ja-jp/cdy7uua7fh8z/4kIH4BQc4vDel2zhJ6lwCE/5fc39d821df752269175fa5e47440419/Create_API_form.png)</Frame>
 
@@ -100,7 +100,7 @@ Autho0には、アプリケーションの種類が4つあります。
 
 このプロセスの最後のステップでは、ユーザーに割り当てられたアクセス許可に基づいて、アクセストークンに含まれるスコープが有効であることを確認するルールを作成します。ユーザーに無効なすべてのスコープは必ず、アクセストークンから削除します。
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>で、**［Rules（ルール）］** タブに移動します。認可拡張機能によって作成されたルールが表示されているはずです。**［Create Role（ルールの作成）］** ボタンをクリックし、**［Empty Rule（空のルール）］** テンプレートを選択します。このルールに「**<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Access Token</Tooltip> Scopes（アクセストークンスのコープ）**」のような名前を付けて、そのルールに次のコードを指定することができます。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=auth0-dashboard" tip="Auth0 Dashboard: サービスを構成するためのAuth0の主製品。" cta="用語集の表示">Auth0 Dashboard</Tooltip>で、**［Rules（ルール）］** タブに移動します。認可拡張機能によって作成されたルールが表示されているはずです。**［Create Role（ルールの作成）］** ボタンをクリックし、**［Empty Rule（空のルール）］** テンプレートを選択します。このルールに「**<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" href="/docs/ja-jp/glossary?term=access-token" tip="アクセストークン: APIへのアクセスに使用される、不透明な文字列またはJWT形式の認可資格情報。" cta="用語集の表示">Access Token</Tooltip> Scopes（アクセストークンスのコープ）**」のような名前を付けて、そのルールに次のコードを指定することができます。
 
 ```javascript lines
 function (user, context, callback) {

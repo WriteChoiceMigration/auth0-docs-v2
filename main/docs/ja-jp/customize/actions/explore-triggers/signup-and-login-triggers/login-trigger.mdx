@@ -66,7 +66,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 ### APIを呼び出すユーザーのすべてにアクセスを拒否する
 
-たとえば、APIを呼び出すユーザーのすべてに対して、アクセスを拒否したいとします。この場合は、[［Dashboard］>［Applications（アプリケーション）］>［APIs］](https://manage.auth0.com/#/apis)の **［API <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Audience</Tooltip>（APIオーディエンス）］** フィールドにあるAPIのオーディエンスの値に基づいてアクセスを拒否する必要があります。これを行うには、以下のアクションを作成します。
+たとえば、APIを呼び出すユーザーのすべてに対して、アクセスを拒否したいとします。この場合は、[［Dashboard］>［Applications（アプリケーション）］>［APIs］](https://manage.auth0.com/#/apis)の **［API <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=audience" tip="オーディエンス: 発行されたトークンに対するオーディエンスを表す一意の識別子。トークンでaudという名前が付けられ、その値にはIDトークンの場合はアプリケーション（Client ID）、アクセストークンの場合はAPI（API Identifier）のいずれかのIDが含まれます。" cta="用語集の表示">Audience</Tooltip>（APIオーディエンス）］** フィールドにあるAPIのオーディエンスの値に基づいてアクセスを拒否する必要があります。これを行うには、以下のアクションを作成します。
 
 ```javascript lines
 /**
@@ -100,7 +100,7 @@ exports.onExecutePostLogin = async (event, api) => {
 ```
 
 * カスタムクレームには特定の用語を含めることができないため、URI形式の名前空間クレームの使用を強くお勧めします。詳細については、[カスタムクレームに関する当社のドキュメント](/docs/ja-jp/secure/tokens/json-web-tokens/create-custom-claims)を参照してください。
-* 要求元のアプリケーションに返される<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">JWT</Tooltip>は、トリガー処理の終わりに作成され、署名されます。最終の署名済みJWTはアクションでは処理できません。
+* 要求元のアプリケーションに返される<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" href="/docs/ja-jp/glossary?term=json-web-token" tip="JSON Web Token（JWT）: 二者間のクレームを安全に表現するために使用される標準IDトークン形式（および多くの場合、アクセストークン形式）。" cta="用語集の表示">JWT</Tooltip>は、トリガー処理の終わりに作成され、署名されます。最終の署名済みJWTはアクションでは処理できません。
 
 ### ユーザープロファイルを充実させる
 
@@ -120,7 +120,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 ### カスタムMFAポリシーを適用する
 
-ログイン後のアクションを使用すると、アプリケーションのニーズに応じて、ユーザーの<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">MFA</Tooltip>を動的に要求できます。
+ログイン後のアクションを使用すると、アプリケーションのニーズに応じて、ユーザーの<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=multifactor-authentication" tip="多要素認証（MFA）: ユーザー名とパスワードに加えて、SMS経由のコードなどの要素を使用するユーザー認証プロセス。" cta="用語集の表示">MFA</Tooltip>を動的に要求できます。
 
 ```javascript lines
 /**

@@ -55,7 +55,7 @@ Auth0テナントはWordPressサイトからのログイン要求を受け入れ
 
 ### Management APIでアプリケーションを認可する
 
-WordPressがAuth0テナントの代わりに特定のアクションを実行するために、先ほど作成したアプリケーションが<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>にアクセスできるように認可しなければなりません。これは必須ではありませんが、ログイン時に完全なユーザーデータ（`user_metadata`と`app_metadata`を含む）を取得し、ユーザーのメールとパスワードを変更し、確認済みメールが必要な場合にメール検証を再送信することが可能になります。
+WordPressがAuth0テナントの代わりに特定のアクションを実行するために、先ほど作成したアプリケーションが<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>にアクセスできるように認可しなければなりません。これは必須ではありませんが、ログイン時に完全なユーザーデータ（`user_metadata`と`app_metadata`を含む）を取得し、ユーザーのメールとパスワードを変更し、確認済みメールが必要な場合にメール検証を再送信することが可能になります。
 
 1. アプリケーションがクライアント資格情報の付与を許可していることを確認してください（上記の手順10）。
 2. [［Auth0 Dashboard］>［アプリケーション］ > ［APIs］](https://manage.auth0.com/#/apis)に移動します。
@@ -95,7 +95,7 @@ PHP定数は次のように定義されます。
 
 デフォルトの定数名は`AUTH0_ENV_`で、その後に上書きするオプション名をすべて大文字でつなげます（プレフィックスは`auth0_settings_constant_prefix`フィルターで変更できます。詳細は、「[Login by Auth0 WordPressログインを拡張する](/docs/ja-jp/customize/integrations/cms/wordpress-plugin/extend-login-by-auth0)」をお読みください）。すべてのプラグインオプションは上書きすることができ、そのキーは`WP_Auth0_Options::defaults()`メソッドで確認できます。利用可能なオプションは、[当社GitHubリポジトリのWordPress Auth0ロックオプション](https://github.com/auth0/wp-auth0/blob/master/lib/WP_Auth0_Lock.php)をご覧ください。
 
-**注意：** `migration_token`の値は、ユーザー移行が有効な場合にプラグインによって生成されます。管理画面にすでに値がある場合は、必ず定数を同じ値に設定してください。その値を変更する必要がある場合は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Auth0 Dashboard</Tooltip>で使用されているデータベース接続のカスタムスクリプトでも変更しなければなりません。
+**注意：** `migration_token`の値は、ユーザー移行が有効な場合にプラグインによって生成されます。管理画面にすでに値がある場合は、必ず定数を同じ値に設定してください。その値を変更する必要がある場合は、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=auth0-dashboard" tip="Auth0 Dashboard: サービスを構成するためのAuth0の主製品。" cta="用語集の表示">Auth0 Dashboard</Tooltip>で使用されているデータベース接続のカスタムスクリプトでも変更しなければなりません。
 
 設定フィールドの表示は、この新しい値に基づいて変更され、使用されている定数を参照用に表示します。この値は自動的にプラグイン全体で使用されるようになります。
 
@@ -108,10 +108,10 @@ WordPressマルチサイトネットワークにあるすべてのサイトが�
 ### 基本
 
 * **Domain（ドメイン）：** ダッシュボードのアプリケーション設定からコピーされたドメイン。オプション名は`domain`です。
-* **カスタムドメイン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Custom Domain</Tooltip>）：** テナントのカスタムドメイン（設定されている場合）。詳細については、「[カスタムドメイン](/docs/ja-jp/customize/custom-domains)」をお読みください。オプション名は`custom_domain`です。
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Client ID</Tooltip>（クライアントID）：** ダッシュボードのアプリケーション設定からコピーされたクライアントID。オプション名は`client_id`です。
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">Client Secret</Tooltip>（クライアントシークレット）：** ダッシュボードのアプリケーション設定からコピーされたクライアントシークレット。オプション名は`client_secret`です。
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">JWT</Tooltip> Signature Algorithm（JWT署名アルゴリズム）：** ［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-6" tip="">OAuth</Tooltip>］タブの［Advanced Application Settings（アプリケーションの高度な設定）］からコピーされた、トークンの署名に使用されるアルゴリズムで、デフォルト値は「RS256」です。オプション名は`client_signing_algorithm`です。
+* **カスタムドメイン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" href="/docs/ja-jp/glossary?term=custom-domain" tip="カスタムドメイン: 特殊な名前、またはバニティ名を持つサードパーティのドメイン。" cta="用語集の表示">Custom Domain</Tooltip>）：** テナントのカスタムドメイン（設定されている場合）。詳細については、「[カスタムドメイン](/docs/ja-jp/customize/custom-domains)」をお読みください。オプション名は`custom_domain`です。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" href="/docs/ja-jp/glossary?term=client-id" tip="クライアントID: Auth0から登録されたリソースに与えられる識別値。" cta="用語集の表示">Client ID</Tooltip>（クライアントID）：** ダッシュボードのアプリケーション設定からコピーされたクライアントID。オプション名は`client_id`です。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=client-secret" tip="クライアントシークレット: クライアント（アプリケーション）が認可サーバーで認証するために使用するシークレット。これはクライアントと認可サーバーだけが知っているものであり、推測できないように十分にランダムである必要があります。" cta="用語集の表示">Client Secret</Tooltip>（クライアントシークレット）：** ダッシュボードのアプリケーション設定からコピーされたクライアントシークレット。オプション名は`client_secret`です。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" href="/docs/ja-jp/glossary?term=json-web-token" tip="JSON Web Token（JWT）: 二者間のクレームを安全に表現するために使用される標準IDトークン形式（および多くの場合、アクセストークン形式）。" cta="用語集の表示">JWT</Tooltip> Signature Algorithm（JWT署名アルゴリズム）：** ［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=oath2" tip="OAuth 2.0: 認可プロトコルとワークフローを定義する認可フレームワーク。" cta="用語集の表示">OAuth</Tooltip>］タブの［Advanced Application Settings（アプリケーションの高度な設定）］からコピーされた、トークンの署名に使用されるアルゴリズムで、デフォルト値は「RS256」です。オプション名は`client_signing_algorithm`です。
 * **JWKS Cache Time (in minutes)（JWKSキャッシュ時間（分））：** RS256のJWT署名アルゴリズムを使用中にJWKS情報を保存すべき時間。オプション名は`cache_expiration`です。
 * **Original Login Form on wp-login.php（wp-login.phpのオリジナルログインフォーム）：** WordPressコアログインページにアクセスする方法を提供したりブロックしたりします。オプション名は`wordpress_login_enabled`です。ログインページコードのオプション名は`wle_code`です。
 
@@ -123,7 +123,7 @@ WordPressマルチサイトネットワークにあるすべてのサイトが�
 
 ### 機能
 
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-7" tip="">Universal Login</Tooltip> Page（ユニバーサルログインページ）：** `wp-login.php`ページをユニバーサルログインページにリダイレクトして、このアプリケーションのすべてのアクティブな接続を使用してシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-8" tip="">SSO</Tooltip>）認証ができるようにします。オプション名は`auto_login`です。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=universal-login" tip="ユニバーサルログイン: アプリケーションは、Auth0の認可サーバーでホストされているユニバーサルログインにリダイレクトして、ユーザーのアイデンティティを確認します。" cta="用語集の表示">Universal Login</Tooltip> Page（ユニバーサルログインページ）：** `wp-login.php`ページをユニバーサルログインページにリダイレクトして、このアプリケーションのすべてのアクティブな接続を使用してシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=single-sign-on" tip="シングルサインオン（SSO）: ユーザーが1つのアプリケーションにログインした後、そのユーザーを他のアプリケーションに自動的にログインさせるサービス。" cta="用語集の表示">SSO</Tooltip>）認証ができるようにします。オプション名は`auto_login`です。
 * **Auto Login Method（自動ログインメソッド）：* *** ［Universal Login Page（ユニバーサルログインページ）］** が有効になっている場合に認証に使用される、単一のアクティブな接続です。ユニバーサルログインページにすべてのアクティブな接続を表示するには、ここを空欄にしておきます。オプション名は`auto_login_method`です。
 * **Auth0 Logout（Auth0ログアウト）：** WordPressからログアウトするときにAuth0からもログアウトする場合は、このオプションを有効にします。オプション名は`singlelogout`です。
 * **Override WordPress Avatars（WordPressアバターをオーバーライド）：** WordPressにAuth0のアバターを使用させます。オプション名は`override_wp_avatars`です。
@@ -132,7 +132,7 @@ WordPressマルチサイトネットワークにあるすべてのサイトが�
 
 以下のオプションはユニバーサルログインページには影響しません（カスタマイズオプションの詳細は、「[Auth0ユニバーサルログイン](/docs/ja-jp/authenticate/login/auth0-universal-login)」をお読みください）。
 
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-9" tip="">Passwordless</Tooltip> Login（パスワードレスログイン）：** すべての埋め込みAuth0ログインフォームでパスワードレスログインを有効にする場合にこのオプションを有効にします。パスワードレス接続はAuth0 Dashboardで管理され、このアプリケーションでパスワードレスログインを機能させるには、少なくとも1つがアクティブで有効化されている必要があります。オプション名は`passwordless_enabled`です。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=passwordless" tip="パスワードレス: 最初の要素としてパスワードに依存しない認証の形式。" cta="用語集の表示">Passwordless</Tooltip> Login（パスワードレスログイン）：** すべての埋め込みAuth0ログインフォームでパスワードレスログインを有効にする場合にこのオプションを有効にします。パスワードレス接続はAuth0 Dashboardで管理され、このアプリケーションでパスワードレスログインを機能させるには、少なくとも1つがアクティブで有効化されている必要があります。オプション名は`passwordless_enabled`です。
 * **Icon URL（アイコンURL）：** 埋め込みAuth0ログインフォームの上にアイコンを設定します。オプション名は`icon_url`です。
 * **Form Title（フォームタイトル）：** 埋め込みAuth0ログインフォームのタイトルを設定します。オプション名は`form_title`です。
 * **Enable Gravatar Integration（Gravatar統合を有効化）：** ユーザーが自身のメールアドレスを入力すると、関連付けられているGravatarの写真が埋め込みAuth0ログインフォームに表示されます。オプション名は`gravatar`です。

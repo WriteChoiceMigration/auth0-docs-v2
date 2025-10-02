@@ -72,7 +72,7 @@ Auth0製品は以下を目標に構築されています。
 
 #### Auth0 API
 
-Auth0はAuthentication APIや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Management API</Tooltip>などのAPIを公開して維持し、それぞれにはAPIの仕様や関連アーティファクトを基に、Auth0と顧客間の契約が定義されています。Auth0はIETFやOIDCなどの機関による規格に従っており、それらの規格は標準が存在しない中で広く認知されています。また、ベストプラクティスを忠実に守って専用のAPIを開発しています。
+Auth0はAuthentication APIや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>などのAPIを公開して維持し、それぞれにはAPIの仕様や関連アーティファクトを基に、Auth0と顧客間の契約が定義されています。Auth0はIETFやOIDCなどの機関による規格に従っており、それらの規格は標準が存在しない中で広く認知されています。また、ベストプラクティスを忠実に守って専用のAPIを開発しています。
 
 これらのAPIに対する変更は、後方互換や後方非互換にかかわらず、機能性や安全性、または性能の理由から時には必要になります。
 
@@ -83,7 +83,7 @@ Auth0はAuthentication APIや<Tooltip data-tooltip-id="react-containers-Definiti
 非破壊的な変更の例には以下が含まれます。
 
 * **不透明な文字列** ：不透明な文字列（トークンやIDなど）の形式やサイズが変更されることがあります。クライアントは固定のサイズや形式を想定してはいけません。不透明な文字列の最大サイズが4096文字を超えることはありません。
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">JWT</Tooltip>のサイズ** ：<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">OAuth</Tooltip>の仕様（RFC6749）はJWT資格情報のサイズを定義していません。Auth0が発行するJWTはサイズが一様でない可能性があるため、クライアントは特定のサイズを想定してはいけません。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" href="/docs/ja-jp/glossary?term=json-web-token" tip="JSON Web Token（JWT）: 二者間のクレームを安全に表現するために使用される標準IDトークン形式（および多くの場合、アクセストークン形式）。" cta="用語集の表示">JWT</Tooltip>のサイズ** ：<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=oath2" tip="OAuth 2.0: 認可プロトコルとワークフローを定義する認可フレームワーク。" cta="用語集の表示">OAuth</Tooltip>の仕様（RFC6749）はJWT資格情報のサイズを定義していません。Auth0が発行するJWTはサイズが一様でない可能性があるため、クライアントは特定のサイズを想定してはいけません。
 * **認可コードのサイズ** ：OAuthの仕様に従って、クライアントは認可コードのサイズが一様ではないことを予期しなければなりません。
 * **認識されない応答パラメーター** ：クライアントは認識されない応答パラメーターを無視しなければなりません。そうすることで、Auth0は現在の機能性に影響を与えることなく、新しい機能を追加することができます。
 * **新しいリソース、フィールド、ヘッダーまたはスコープ** ：新しいAPIリソース、フィールド、ヘッダーまたはスコープの追加は、それらの要素を認識または使用しない既存のクライアントには影響しません。

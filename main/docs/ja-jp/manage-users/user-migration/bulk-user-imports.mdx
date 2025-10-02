@@ -23,7 +23,7 @@ permalink: "bulk-user-imports"
 
 * データベース接続をユーザーのインポートに構成して、少なくとも1つのアプリケーションに有効化します。
 * パスワードをインポートする場合には、対応しているアルゴリズムの1つを使ってパスワードがハッシュ化されていることを確認します。ユーザーのパスワードが非対応のアルゴリズムでハッシュ化されている場合には、一括インポート後に初回のログインでユーザーがパスワードをリセットする必要があります。
-* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>の登録をインポートする場合には、対応している`email`、`phone`または`totp`のタイプであることを確認します。
+* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=multifactor-authentication" tip="多要素認証（MFA）: ユーザー名とパスワードに加えて、SMS経由のコードなどの要素を使用するユーザー認証プロセス。" cta="用語集の表示">MFA</Tooltip>の登録をインポートする場合には、対応している`email`、`phone`または`totp`のタイプであることを確認します。
 * ジョブエンドポイントの要求に、[Management APIトークンを取得](/docs/ja-jp/secure/tokens/access-tokens/management-api-access-tokens)します。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
@@ -36,7 +36,7 @@ Auth0テナントからエクスポートしたファイルを使用する場合
 
 ## ユーザーのJSONファイルを作成する
 
-Auth0にインポートしたいユーザーデータを含むJSONファイルを作成します。ユーザーデータをJSONファイルにエクスポートする方法は、既存のユーザーデータベースによって異なります。<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>のエンドポイントはJSONファイルを期待します。そのため、`fs.readFileSync`ではなく、`fs.createReadStream`を使用する必要があります。エンドポイントは、JSONファイルではなく、パイプで連結された読み出しストリームを期待します。
+Auth0にインポートしたいユーザーデータを含むJSONファイルを作成します。ユーザーデータをJSONファイルにエクスポートする方法は、既存のユーザーデータベースによって異なります。<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>のエンドポイントはJSONファイルを期待します。そのため、`fs.readFileSync`ではなく、`fs.createReadStream`を使用する必要があります。エンドポイントは、JSONファイルではなく、パイプで連結された読み出しストリームを期待します。
 
 JSONファイルのスキーマと例については、「[一括インポートのデータベーススキーマと例](/docs/ja-jp/manage-users/user-migration/bulk-user-import-database-schema-and-examples)」をお読みください。
 

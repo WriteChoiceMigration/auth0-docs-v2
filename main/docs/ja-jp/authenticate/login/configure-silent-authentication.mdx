@@ -9,7 +9,7 @@ permalink: "configure-silent-authentication"
 'twitter:description': "サイレント認証を使用してユーザーがアプリケーションにログインしたままにする方法を説明します。"
 ---
 
-[OpenID Connectのプロトコル](/docs/ja-jp/authenticate/protocols/openid-connect-protocol)は、認証要求の`prompt=none`パラメーターをサポートしているので、アプリケーションは、認証サーバーにユーザーとのやりとり（認証や承諾、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">MFA</Tooltip>など）を一切表示しないよう指示できます。Auth0は要求された応答をアプリケーションに返すか、ユーザーがまだ認証されていない場合や、処理を進める前に何らかの同意やプロンプトが必要な場合はエラーを返します。
+[OpenID Connectのプロトコル](/docs/ja-jp/authenticate/protocols/openid-connect-protocol)は、認証要求の`prompt=none`パラメーターをサポートしているので、アプリケーションは、認証サーバーにユーザーとのやりとり（認証や承諾、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=multifactor-authentication" tip="多要素認証（MFA）: ユーザー名とパスワードに加えて、SMS経由のコードなどの要素を使用するユーザー認証プロセス。" cta="用語集の表示">MFA</Tooltip>など）を一切表示しないよう指示できます。Auth0は要求された応答をアプリケーションに返すか、ユーザーがまだ認証されていない場合や、処理を進める前に何らかの同意やプロンプトが必要な場合はエラーを返します。
 
 SPAで[暗黙フロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/implicit-flow-with-form-post)を使用すると、明示的な緩和策を必要とするセキュリティ上の課題につながります。[PKCEを使った認可コードフロー](/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce)をサイレント認証と組み合わせて使用することで、SPAのセッションを更新できます。
 
@@ -64,7 +64,7 @@ GET {https://yourApp/callback}
 
 ### エラーの応答
 
-ユーザーがシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">SSO</Tooltip>）経由でログインしていなかった場合、またはSSOセッションが期限切れとなっていた場合、Auth0は次のように、指定された`redirect_uri`（コールバックURL）にエラーとともにリダイレクトします。
+ユーザーがシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=single-sign-on" tip="シングルサインオン（SSO）: ユーザーが1つのアプリケーションにログインした後、そのユーザーを他のアプリケーションに自動的にログインさせるサービス。" cta="用語集の表示">SSO</Tooltip>）経由でログインしていなかった場合、またはSSOセッションが期限切れとなっていた場合、Auth0は次のように、指定された`redirect_uri`（コールバックURL）にエラーとともにリダイレクトします。
 
 ```json lines
 GET https://your_callback_url/
@@ -124,7 +124,7 @@ Safariブラウザーに関する他の重要な制限事項や回避方法に�
 
 ### エラーの応答
 
-`web_message`通信の実行中にタイムアウトが発生したことを示す`timeout`エラー応答を受信することがあります。このエラーは通常、クロスオリジン認証へのフォールバックと関連しています。解決するには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">Auth0 Dashboard</Tooltip>を使用して、サイレント認証を実行したいすべてのURLを、アプリケーションの **［Allowed Web Origins（許可されているWebオリジン）］** フィールドに追加してください。
+`web_message`通信の実行中にタイムアウトが発生したことを示す`timeout`エラー応答を受信することがあります。このエラーは通常、クロスオリジン認証へのフォールバックと関連しています。解決するには、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=auth0-dashboard" tip="Auth0 Dashboard: サービスを構成するためのAuth0の主製品。" cta="用語集の表示">Auth0 Dashboard</Tooltip>を使用して、サイレント認証を実行したいすべてのURLを、アプリケーションの **［Allowed Web Origins（許可されているWebオリジン）］** フィールドに追加してください。
 
 ## checkSession()でポーリングする
 

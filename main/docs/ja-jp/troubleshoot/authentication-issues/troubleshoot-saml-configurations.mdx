@@ -11,7 +11,7 @@ permalink: "troubleshoot-saml-configurations"
 
 トラブルシューティングでは、構成を理解することが大切です。
 
-* **Auth0は<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip>サービスプロバイダー（SP）ですか、SAML IDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">IdP</Tooltip>）ですか、それともその両方ですか？**
+* **Auth0は<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip>サービスプロバイダー（SP）ですか、SAML IDプロバイダー（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IdP</Tooltip>）ですか、それともその両方ですか？**
 
   SPは認証のためにユーザーをどこかにリダイレクトします。IdPは、ユーザーにログインを求め、入力された情報を検証して、ユーザーを認証します。アプリケーションがSAMLで認証するためにユーザーをAuth0にリダイレクトするのであれば、Auth0はIdPです。Auth0がリモートIdPへの接続を使ってユーザーをSAMLでリダイレクトするのであれば、Auth0はリモートIdPに対するSPです。Auth0はSP、IdPまたはその両方の役割を果たすことができます。
 * **認証フローが使用するのは、SP起点のモデルですか、IdP起点のモデルですか、それともその両方ですか？**
@@ -43,7 +43,7 @@ permalink: "troubleshoot-saml-configurations"
 * ブラウザーでJavaScriptとクッキーが有効化されているかを確認します。
 * CapsLockキーが解除されていることを確認します。
 * ユーザーがモバイルデバイスを使用している場合には、認証や認可に影響を与えるソフトウェアがあるか（何らかの必須ソフトウェアが実行されていないなど）を確認します。
-* IdPのシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SSO</Tooltip>）URLなど、アプリの主要なURLにユーザーがアクセスできる（ネットワーク接続の問題を示唆している）かを確認します。
+* IdPのシングルサインオン（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=single-sign-on" tip="シングルサインオン（SSO）: ユーザーが1つのアプリケーションにログインした後、そのユーザーを他のアプリケーションに自動的にログインさせるサービス。" cta="用語集の表示">SSO</Tooltip>）URLなど、アプリの主要なURLにユーザーがアクセスできる（ネットワーク接続の問題を示唆している）かを確認します。
 
 ## サービスプロバイダーとしてのAuth0をトラブルシューティングする
 
@@ -152,7 +152,7 @@ IDプロバイダーがSAML応答で正しい`audience`値を送信すること�
 
 #### 不正なプロトコルが指定されました
 
-よくある間違いの1つに、IdP起点のタブで不正な応答プロトコルを指定するというものがあります。この応答プロトコルは、Auth0とアプリケーション（リモートIDプロバイダーではない）の間で使用されます。たとえば、この値を **SAML** に設定して、アプリケーションが **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">OpenID</Tooltip> Connect** または **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">WS-Fed</Tooltip>** を期待する場合には、不正な構成のためにエラーが発生します。
+よくある間違いの1つに、IdP起点のタブで不正な応答プロトコルを指定するというものがあります。この応答プロトコルは、Auth0とアプリケーション（リモートIDプロバイダーではない）の間で使用されます。たとえば、この値を **SAML** に設定して、アプリケーションが **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=openid" tip="OpenID: アプリケーションがログイン情報を収集および保存することなくにユーザーのIDを検証できるようにする認証用のオープン標準。" cta="用語集の表示">OpenID</Tooltip> Connect** または **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=ws-fed" tip="Webサービスフェデレーション（WS-Fed）: ドメイン全体でユーザーIDを管理するためのプロトコル。" cta="用語集の表示">WS-Fed</Tooltip>** を期待する場合には、不正な構成のためにエラーが発生します。
 
 1. [［Auth0 Dashboard］>［Authentication（認証）］>［Enterprise（エンタープライズ）］](https://manage.auth0.com/#/connections/enterprise)に移動し、接続タイプを選択します。
 2. 接続の名前を選択します。
@@ -376,7 +376,7 @@ SAMLログインのトラブルシューティングでは、主に4つの確認
 この場合、ユーザーはIdPに正常にログインし、Auth0ログにログイン成功のイベントが表示されますが、ユーザーのプロファイル属性が正しくありません。ユーザーについて以下が該当するかを確認します
 
 * ユーザーが正常にログインしているように見える
-* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">Auth0 Dashboard</Tooltip>の［Logs（ログ）］ページと［Users（ユーザー）］ページにログイン成功のイベントが表示されている
+* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=auth0-dashboard" tip="Auth0 Dashboard: サービスを構成するためのAuth0の主製品。" cta="用語集の表示">Auth0 Dashboard</Tooltip>の［Logs（ログ）］ページと［Users（ユーザー）］ページにログイン成功のイベントが表示されている
 
 これらが該当する場合には、ユーザーのプロファイルに必要なユーザープロファイル属性が含まれていることを確認します。
 

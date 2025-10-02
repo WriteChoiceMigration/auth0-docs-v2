@@ -23,7 +23,7 @@ APIが動き出したところで、セキュリティを追加する必要が�
 * Auth0の委任を設定して、AWS IAMのフェデレーション機能が利用できるようにする。
 * AWS IAMロールを使用するAWSアクセストークンを取得する。
 
-APIがセキュリティ保護されたら、サーバーレスのシングルページアプリケーション（SPA）を構築します。SPAは、どのユーザーにアクセスが許可されているかを決定するために、フェデレーションIDを使用します。AWS Gateway APIのAWS IAM統合、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">SAML</Tooltip>のAWS IAM IDフェデレーション、AWS向けのAuth0の委任を組み合わせることで、ソーシャルプロバイダーやエンタープライズ接続を含むさまざまなソースからのユーザーが、APIにアクセスできるようにすることができます。以下の図は、SAMLベースのIDプロバイダーと、Auth0のSAMLフェデレーションおよびAWS向け委任を使用したサンプルフローを示しています。
+APIがセキュリティ保護されたら、サーバーレスのシングルページアプリケーション（SPA）を構築します。SPAは、どのユーザーにアクセスが許可されているかを決定するために、フェデレーションIDを使用します。AWS Gateway APIのAWS IAM統合、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip>のAWS IAM IDフェデレーション、AWS向けのAuth0の委任を組み合わせることで、ソーシャルプロバイダーやエンタープライズ接続を含むさまざまなソースからのユーザーが、APIにアクセスできるようにすることができます。以下の図は、SAMLベースのIDプロバイダーと、Auth0のSAMLフェデレーションおよびAWS向け委任を使用したサンプルフローを示しています。
 
 このフローを実装する方法は2つあります。
 
@@ -51,7 +51,7 @@ APIキーの使用は、通常、以下に示されているようなサービ�
 
 AWSトークンと交換するSAMLトークンに対して、AWS IAMロールを指定することができます。そのIAMロールに付与された権限（IDプロバイダーを使用して設定）に応じて、受け取ったトークンも同じ許可を持つことになります。異なるSAMLトークンを発行し、それぞれに独自のAWS IAMロールを割り当てることで、ユーザーのアクセスレベルを制御することができます。
 
-たとえば、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">IDP</Tooltip>はグループメンバーシップ（例：Active Directoryの管理者）や認証ソース（例：データベース接続やFacebookなどのソーシャルプロバイダー）に基づいて、IAMロールを指定することができます。このアプローチを使用すると、AWS IAMを使用してセキュリティ保護されている場合に、Amazon API Gatewayのメソッドに対するユーザーアクセスを区別することができます。
+たとえば、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IDP</Tooltip>はグループメンバーシップ（例：Active Directoryの管理者）や認証ソース（例：データベース接続やFacebookなどのソーシャルプロバイダー）に基づいて、IAMロールを指定することができます。このアプローチを使用すると、AWS IAMを使用してセキュリティ保護されている場合に、Amazon API Gatewayのメソッドに対するユーザーアクセスを区別することができます。
 
 #### Auth0の設定
 

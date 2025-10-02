@@ -23,8 +23,8 @@ Dashboardの[［Applications（アプリケーション）］](https://manage.au
 
 * **Name（名前）**：アプリケーションの名前。編集可能で、ポータル、メール、ログなどに表示されます。
 * **Domain（ドメイン）**：Auth0のテナント名。これは、新しいAuth0テナントを作成する際に選択するもので、変更できません。別のドメインが必要な場合は、右上のメニューで **［+ Create Tenant（テナントの作成）］** を選択して、新しいテナントを登録する必要があります。
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Client ID</Tooltip>（クライアントID）**：アプリケーションに一意の識別子。Auth0で認証を構成する際に使用します。新しいアプリケーションを作成する際にシステムによって生成されるもので、変更できません。
-* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Client Secret</Tooltip>（クライアントシークレット）** ：認証フローでIDトークンに署名し、検証するため、また特定のAuth0 APIエンドポイントにアクセスするために使用される文字列。デフォルトでは値が非表示になっているため、表示するには **［Reveal Client Secret（クライアントシークレットを表示）］** ボックスを選択します。クライアントIDは公開情報とみなされますが、クライアントシークレットは **機密扱いとする必要があります** 。誰でもクライアントシークレットにアクセスできるとなると、トークンを発行して、本来アクセスできないはずのリソースにアクセスすることが可能になってしまうからです。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" href="/docs/ja-jp/glossary?term=client-id" tip="クライアントID: Auth0から登録されたリソースに与えられる識別値。" cta="用語集の表示">Client ID</Tooltip>（クライアントID）**：アプリケーションに一意の識別子。Auth0で認証を構成する際に使用します。新しいアプリケーションを作成する際にシステムによって生成されるもので、変更できません。
+* **<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=client-secret" tip="クライアントシークレット: クライアント（アプリケーション）が認可サーバーで認証するために使用するシークレット。これはクライアントと認可サーバーだけが知っているものであり、推測できないように十分にランダムである必要があります。" cta="用語集の表示">Client Secret</Tooltip>（クライアントシークレット）** ：認証フローでIDトークンに署名し、検証するため、また特定のAuth0 APIエンドポイントにアクセスするために使用される文字列。デフォルトでは値が非表示になっているため、表示するには **［Reveal Client Secret（クライアントシークレットを表示）］** ボックスを選択します。クライアントIDは公開情報とみなされますが、クライアントシークレットは **機密扱いとする必要があります** 。誰でもクライアントシークレットにアクセスできるとなると、トークンを発行して、本来アクセスできないはずのリソースにアクセスすることが可能になってしまうからです。
 * **Description（説明）**：アプリケーションの目的を自由テキスト形式で説明したもの。最大文字数は140文字です。
 
 ### アプリケーションのプロパティ
@@ -52,7 +52,7 @@ Dashboardの[［Applications（アプリケーション）］](https://manage.au
 
 ### IDトークン
 
-**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">ID Token</Tooltip>（IDトークン）］** セクションで、 **IDトークンの有効期限** （Auth0の`id_token`の期限が切れるまでの時間）を秒単位で入力します。デフォルトの値は、36000秒（10時間）です。
+**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=id-token" tip="IDトークン: リソースにアクセスするためのものではなく、クライアント自体を対象とした資格情報。" cta="用語集の表示">ID Token</Tooltip>（IDトークン）］** セクションで、 **IDトークンの有効期限** （Auth0の`id_token`の期限が切れるまでの時間）を秒単位で入力します。デフォルトの値は、36000秒（10時間）です。
 
 <Callout icon="file-lines" color="#0EA5E9" iconType="regular">
 
@@ -62,7 +62,7 @@ Dashboardの[［Applications（アプリケーション）］](https://manage.au
 
 ### リフレッシュトークンのローテーション
 
-**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">Refresh Token</Tooltip> Rotation（リフレッシュトークンのローテーション）］** セクションで、ローテーションを有効または無効に設定します。有効にすると、リフレッシュトークンを交換した結果として新しいリフレッシュトークンが発行され、既存のトークンが無効になります。そうすることで、トークンが漏洩した場合に、トークンの再利用が自動的に検知できます。また、**［Rotation Overlap Period（ローテーションのオーバーラップ期間）］** を秒単位で入力します。この期間は、再利用の自動検知をトリガーすることなく、同じ`refresh_token`を使って`access_token`を要求できる猶予期間です。詳細については、「[リフレッシュトークンのローテーション](/docs/ja-jp/secure/tokens/refresh-tokens/refresh-token-rotation)」をお読みください。
+**［<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" href="/docs/ja-jp/glossary?term=refresh-token" tip="リフレッシュトークン: ユーザーに再度ログインを強いることなく、更新されたアクセストークンを取得するために使用されるトークン。" cta="用語集の表示">Refresh Token</Tooltip> Rotation（リフレッシュトークンのローテーション）］** セクションで、ローテーションを有効または無効に設定します。有効にすると、リフレッシュトークンを交換した結果として新しいリフレッシュトークンが発行され、既存のトークンが無効になります。そうすることで、トークンが漏洩した場合に、トークンの再利用が自動的に検知できます。また、**［Rotation Overlap Period（ローテーションのオーバーラップ期間）］** を秒単位で入力します。この期間は、再利用の自動検知をトリガーすることなく、同じ`refresh_token`を使って`access_token`を要求できる猶予期間です。詳細については、「[リフレッシュトークンのローテーション](/docs/ja-jp/secure/tokens/refresh-tokens/refresh-token-rotation)」をお読みください。
 
 <Frame>![Dashboard アプリケーション アプリケーション設定タブ リフレッシュトークンのローテーション](/images/ja-jp/cdy7uua7fh8z/Rk6i8MUVWZG34P7K6aurb/2633d759038770c7cc6f82afff26d50f/2025-01-28_14-28-18.png)</Frame>
 
@@ -76,7 +76,7 @@ Dashboardの[［Applications（アプリケーション）］](https://manage.au
 
 **［Advanced Settings（高度な設定）］** セクションでは、以下のことができます。
 
-* アプリケーションメタデータ、デバイス、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">OAuth</Tooltip>、およびWS-Federationの設定を管理または追加する
+* アプリケーションメタデータ、デバイス、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=oath2" tip="OAuth 2.0: 認可プロトコルとワークフローを定義する認可フレームワーク。" cta="用語集の表示">OAuth</Tooltip>、およびWS-Federationの設定を管理または追加する
 * 証明書とトークンのエンドポイントに関する情報を取得する
 * アプリケーションの付与タイプを設定する
 
@@ -101,7 +101,7 @@ Dashboardの[［Applications（アプリケーション）］](https://manage.au
 
 * デフォルトでは、すべてのアプリ/APIが委任要求を行うことができますが、特定のアプリ/APIに対して明示的に権限を付与したい場合は、 **［Allowed Apps/APIs（許可されているアプリ/API）］** でこれを行うことができます。
 * **［Compliance Enforcement Level（準拠適合レベル）］** を使用して、準拠レベルを設定します。詳細については、「[FAPI準拠の構成](/docs/ja-jp/get-started/applications/configure-fapi-compliance)」を参照してください。
-* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-5" tip="">JSON Web Token</Tooltip>の署名に使用されるアルゴリズム（[**HS256**](https://en.wikipedia.org/wiki/Symmetric-key_algorithm)または[**RS256**](https://en.wikipedia.org/wiki/Public-key_cryptography)）を設定します。詳細については、「[JSON Web Tokenの署名アルゴリズム](/docs/ja-jp/get-started/applications/signing-algorithms)」をお読みください。`RS256`を選択すると（推奨）、トークンはテナントの秘密鍵で署名されます。
+* <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=json-web-token" tip="JSON Web Token（JWT）: 二者間のクレームを安全に表現するために使用される標準IDトークン形式（および多くの場合、アクセストークン形式）。" cta="用語集の表示">JSON Web Token</Tooltip>の署名に使用されるアルゴリズム（[**HS256**](https://en.wikipedia.org/wiki/Symmetric-key_algorithm)または[**RS256**](https://en.wikipedia.org/wiki/Public-key_cryptography)）を設定します。詳細については、「[JSON Web Tokenの署名アルゴリズム](/docs/ja-jp/get-started/applications/signing-algorithms)」をお読みください。`RS256`を選択すると（推奨）、トークンはテナントの秘密鍵で署名されます。
 * **［Trust Token Endopoint IP Header（トークンエンドポイントIPヘッダーを信頼）］** 設定を切り替えます。これを有効にすると、総当たり攻撃からトークンエンドポイントを保護するために、`auth0-forwarded-for`が信頼できるものとして、エンドユーザーのIP情報のソースに使用されます。この設定は、通常のWebアプリ、およびM2Mアプリでのみ使用できます。
 * スイッチを切り替えて、アプリケーションが **OIDC準拠** であるかどうかを指定します。OIDC準拠のフラグが付いたアプリケーションは、OIDC仕様に厳密に従います。
 
@@ -127,7 +127,7 @@ WS-Federation設定を管理または追加します。
 
 ### エンドポイント
 
-認可URLやメタデータURLなど、OAuthや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-6" tip="">SAML</Tooltip>、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-7" tip="">WS-Fed</Tooltip>のエンドポイント情報を表示します。
+認可URLやメタデータURLなど、OAuthや<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip>、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=ws-fed" tip="Webサービスフェデレーション（WS-Fed）: ドメイン全体でユーザーIDを管理するためのプロトコル。" cta="用語集の表示">WS-Fed</Tooltip>のエンドポイント情報を表示します。
 
 ## もっと詳しく
 

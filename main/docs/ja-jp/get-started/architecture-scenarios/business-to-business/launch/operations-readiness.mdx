@@ -40,7 +40,7 @@ Auth0および依存するサービス（ソーシャルプロバイダーなど
 
 ### ファイアウォール
 
-Auth0で実行するカスタムコード（アクション、ルール、フック、カスタムデータベーススクリプト）がネットワーク内のサービスを呼び出す場合、または、Auth0でオンプレミスSMTPプロバイダーを構成した場合は、[Auth0からのインバウンドトラフィック](/docs/ja-jp/secure/security-guidance/data-security/allowlist)を許可するようにファイアウォールを構成しなければならないことがあります。ファイヤーウォールを通過できるIPアドレスは各リージョンに特有で、ルール、フック、カスタムデータベーススクリプト、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" tip="">Auth0 Dashboard</Tooltip>のメールプロバイダー構成画面にリストがあります。
+Auth0で実行するカスタムコード（アクション、ルール、フック、カスタムデータベーススクリプト）がネットワーク内のサービスを呼び出す場合、または、Auth0でオンプレミスSMTPプロバイダーを構成した場合は、[Auth0からのインバウンドトラフィック](/docs/ja-jp/secure/security-guidance/data-security/allowlist)を許可するようにファイアウォールを構成しなければならないことがあります。ファイヤーウォールを通過できるIPアドレスは各リージョンに特有で、ルール、フック、カスタムデータベーススクリプト、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=auth0-dashboard" tip="Auth0 Dashboard: サービスを構成するためのAuth0の主製品。" cta="用語集の表示">Auth0 Dashboard</Tooltip>のメールプロバイダー構成画面にリストがあります。
 
 ## NTP
 
@@ -73,7 +73,7 @@ Auth0には、イベントのログを記録したり、異常なイベントの
 
 ### レート制限とその他のエラー
 
-Auth0は[レート制限の超過](/docs/ja-jp/troubleshoot/customer-support/operational-policies/rate-limit-policy)で報告されるエラーに一意のエラーコードを提供します。ログの自動スキャンを設定してレート制限エラーを確認し、ユーザーに影響が及ぶ前に、レート制限を超えそうなアクティビティに予見的に対処することが賢明です。Auth0は他のエラータイプのエラーコードも公開しており、[認証エラー](/docs/ja-jp/libraries/common-auth0-library-authentication-errors)やAuth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" tip="">Management API</Tooltip>呼び出し（Management APIのエラーコードは[Management API Explorer](/docs/ja-jp/api/management/v2)で呼び出しの下部に表示されます）について、ログを調べるのに役立ちます。
+Auth0は[レート制限の超過](/docs/ja-jp/troubleshoot/customer-support/operational-policies/rate-limit-policy)で報告されるエラーに一意のエラーコードを提供します。ログの自動スキャンを設定してレート制限エラーを確認し、ユーザーに影響が及ぶ前に、レート制限を超えそうなアクティビティに予見的に対処することが賢明です。Auth0は他のエラータイプのエラーコードも公開しており、[認証エラー](/docs/ja-jp/libraries/common-auth0-library-authentication-errors)やAuth0 <Tooltip data-tooltip-id="react-containers-DefinitionTooltip-0" href="/docs/ja-jp/glossary?term=management-api" tip="Management API: 顧客が管理タスクを実行できるようにするための製品。" cta="用語集の表示">Management API</Tooltip>呼び出し（Management APIのエラーコードは[Management API Explorer](/docs/ja-jp/api/management/v2)で呼び出しの下部に表示されます）について、ログを調べるのに役立ちます。
 
 <Info>
     ### ベストプラクティス
@@ -191,11 +191,11 @@ Auth0[データテナント復元ポリシー](/docs/ja-jp/troubleshoot/customer
 
 ### SAML接続
 
-<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" tip="">SAML</Tooltip>接続の場合、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-3" tip="">IdP</Tooltip>から証明書を取得し、Auth0 Dashboard内でIdP用にSAML接続へアップロードします。これらの証明書のいずれかが有効期限に近づくと、Auth0は有効期限が近づいていることを警告するメールをダッシュボード管理者に送信します。新しい証明書を取得し、接続構成画面を使用してアップロードすることができます。
+<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-1" href="/docs/ja-jp/glossary?term=security-assertion-markup-language" tip="Security Assertion Markup Language（SAML）: パスワードなしに二者間で認証情報を交換できる標準化プロトコル。" cta="用語集の表示">SAML</Tooltip>接続の場合、<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=idp" tip="IDプロバイダー（IdP）: デジタルIDを保存および管理するサービス。" cta="用語集の表示">IdP</Tooltip>から証明書を取得し、Auth0 Dashboard内でIdP用にSAML接続へアップロードします。これらの証明書のいずれかが有効期限に近づくと、Auth0は有効期限が近づいていることを警告するメールをダッシュボード管理者に送信します。新しい証明書を取得し、接続構成画面を使用してアップロードすることができます。
 
 ### WS-Fed接続
 
-Webサービスフェデレーション（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-4" tip="">WS-Fed</Tooltip>）接続の場合、ADFS URLを指定して接続を構成すると、変更があったときには日次更新によって反映されます。手動で更新をトリガーするには、Auth0 Dashboardの接続構成ページにアクセスしてSave（保存）します。リモートIdPで証明書が変更された場合、Auth0の更新は、これらのメカニズムによって、または同じ接続構成画面で新しいメタデータファイルをアップロードすることによって実施できます。
+Webサービスフェデレーション（<Tooltip data-tooltip-id="react-containers-DefinitionTooltip-2" href="/docs/ja-jp/glossary?term=ws-fed" tip="Webサービスフェデレーション（WS-Fed）: ドメイン全体でユーザーIDを管理するためのプロトコル。" cta="用語集の表示">WS-Fed</Tooltip>）接続の場合、ADFS URLを指定して接続を構成すると、変更があったときには日次更新によって反映されます。手動で更新をトリガーするには、Auth0 Dashboardの接続構成ページにアクセスしてSave（保存）します。リモートIdPで証明書が変更された場合、Auth0の更新は、これらのメカニズムによって、または同じ接続構成画面で新しいメタデータファイルをアップロードすることによって実施できます。
 
 ## 災害復旧/事業継続の計画
 
